@@ -1,0 +1,3503 @@
+{
+  "title": "Day-one island and the direct beach path",
+  "date": "2026-10-12",
+  "by": "codex:island-builder",
+  "caption": "Fuller greenery and matching neighbouring scenery from the forecourt through the residential court and market. A straight path now runs south from the fountain, splits the market into two halves, and reaches the beach.",
+  "result": [
+    "final-combined-forecourt-morning-south",
+    "budget-finish-plaza-morning-north",
+    "final-combined-shotengai-morning-west",
+    "route-finish-1366-sand"
+  ],
+  "sections": [
+    {
+      "title": "Original views",
+      "images": [
+        {
+          "id": "before-dorm_court-evening-east",
+          "image": "game3d/shots/island-day1/before/dorm_court-evening-east.png",
+          "caption": "dorm court evening east"
+        },
+        {
+          "id": "before-dorm_court-evening-north",
+          "image": "game3d/shots/island-day1/before/dorm_court-evening-north.png",
+          "caption": "dorm court evening north"
+        },
+        {
+          "id": "before-dorm_court-evening-phone",
+          "image": "game3d/shots/island-day1/before/dorm_court-evening-phone.png",
+          "caption": "dorm court evening phone"
+        },
+        {
+          "id": "before-dorm_court-evening-south",
+          "image": "game3d/shots/island-day1/before/dorm_court-evening-south.png",
+          "caption": "dorm court evening south"
+        },
+        {
+          "id": "before-dorm_court-evening-west",
+          "image": "game3d/shots/island-day1/before/dorm_court-evening-west.png",
+          "caption": "dorm court evening west"
+        },
+        {
+          "id": "before-dorm_court-morning-east",
+          "image": "game3d/shots/island-day1/before/dorm_court-morning-east.png",
+          "caption": "dorm court morning east"
+        },
+        {
+          "id": "before-dorm_court-morning-north",
+          "image": "game3d/shots/island-day1/before/dorm_court-morning-north.png",
+          "caption": "dorm court morning north"
+        },
+        {
+          "id": "before-dorm_court-morning-phone",
+          "image": "game3d/shots/island-day1/before/dorm_court-morning-phone.png",
+          "caption": "dorm court morning phone"
+        },
+        {
+          "id": "before-dorm_court-morning-south",
+          "image": "game3d/shots/island-day1/before/dorm_court-morning-south.png",
+          "caption": "dorm court morning south"
+        },
+        {
+          "id": "before-dorm_court-morning-west",
+          "image": "game3d/shots/island-day1/before/dorm_court-morning-west.png",
+          "caption": "dorm court morning west"
+        },
+        {
+          "id": "before-forecourt-evening-east",
+          "image": "game3d/shots/island-day1/before/forecourt-evening-east.png",
+          "caption": "forecourt evening east"
+        },
+        {
+          "id": "before-forecourt-evening-north",
+          "image": "game3d/shots/island-day1/before/forecourt-evening-north.png",
+          "caption": "forecourt evening north"
+        },
+        {
+          "id": "before-forecourt-evening-phone",
+          "image": "game3d/shots/island-day1/before/forecourt-evening-phone.png",
+          "caption": "forecourt evening phone"
+        },
+        {
+          "id": "before-forecourt-evening-south",
+          "image": "game3d/shots/island-day1/before/forecourt-evening-south.png",
+          "caption": "forecourt evening south"
+        },
+        {
+          "id": "before-forecourt-evening-west",
+          "image": "game3d/shots/island-day1/before/forecourt-evening-west.png",
+          "caption": "forecourt evening west"
+        },
+        {
+          "id": "before-forecourt-morning-east",
+          "image": "game3d/shots/island-day1/before/forecourt-morning-east.png",
+          "caption": "forecourt morning east"
+        },
+        {
+          "id": "before-forecourt-morning-north",
+          "image": "game3d/shots/island-day1/before/forecourt-morning-north.png",
+          "caption": "forecourt morning north"
+        },
+        {
+          "id": "before-forecourt-morning-phone",
+          "image": "game3d/shots/island-day1/before/forecourt-morning-phone.png",
+          "caption": "forecourt morning phone"
+        },
+        {
+          "id": "before-forecourt-morning-south",
+          "image": "game3d/shots/island-day1/before/forecourt-morning-south.png",
+          "caption": "forecourt morning south"
+        },
+        {
+          "id": "before-forecourt-morning-west",
+          "image": "game3d/shots/island-day1/before/forecourt-morning-west.png",
+          "caption": "forecourt morning west"
+        },
+        {
+          "id": "before-plaza-evening-east",
+          "image": "game3d/shots/island-day1/before/plaza-evening-east.png",
+          "caption": "plaza evening east"
+        },
+        {
+          "id": "before-plaza-evening-north",
+          "image": "game3d/shots/island-day1/before/plaza-evening-north.png",
+          "caption": "plaza evening north"
+        },
+        {
+          "id": "before-plaza-evening-phone",
+          "image": "game3d/shots/island-day1/before/plaza-evening-phone.png",
+          "caption": "plaza evening phone"
+        },
+        {
+          "id": "before-plaza-evening-south",
+          "image": "game3d/shots/island-day1/before/plaza-evening-south.png",
+          "caption": "plaza evening south"
+        },
+        {
+          "id": "before-plaza-evening-west",
+          "image": "game3d/shots/island-day1/before/plaza-evening-west.png",
+          "caption": "plaza evening west"
+        },
+        {
+          "id": "before-plaza-morning-east",
+          "image": "game3d/shots/island-day1/before/plaza-morning-east.png",
+          "caption": "plaza morning east"
+        },
+        {
+          "id": "before-plaza-morning-north",
+          "image": "game3d/shots/island-day1/before/plaza-morning-north.png",
+          "caption": "plaza morning north"
+        },
+        {
+          "id": "before-plaza-morning-phone",
+          "image": "game3d/shots/island-day1/before/plaza-morning-phone.png",
+          "caption": "plaza morning phone"
+        },
+        {
+          "id": "before-plaza-morning-south",
+          "image": "game3d/shots/island-day1/before/plaza-morning-south.png",
+          "caption": "plaza morning south"
+        },
+        {
+          "id": "before-plaza-morning-west",
+          "image": "game3d/shots/island-day1/before/plaza-morning-west.png",
+          "caption": "plaza morning west"
+        },
+        {
+          "id": "before-shotengai-evening-east",
+          "image": "game3d/shots/island-day1/before/shotengai-evening-east.png",
+          "caption": "shotengai evening east"
+        },
+        {
+          "id": "before-shotengai-evening-north",
+          "image": "game3d/shots/island-day1/before/shotengai-evening-north.png",
+          "caption": "shotengai evening north"
+        },
+        {
+          "id": "before-shotengai-evening-phone",
+          "image": "game3d/shots/island-day1/before/shotengai-evening-phone.png",
+          "caption": "shotengai evening phone"
+        },
+        {
+          "id": "before-shotengai-evening-south",
+          "image": "game3d/shots/island-day1/before/shotengai-evening-south.png",
+          "caption": "shotengai evening south"
+        },
+        {
+          "id": "before-shotengai-evening-west",
+          "image": "game3d/shots/island-day1/before/shotengai-evening-west.png",
+          "caption": "shotengai evening west"
+        },
+        {
+          "id": "before-shotengai-morning-east",
+          "image": "game3d/shots/island-day1/before/shotengai-morning-east.png",
+          "caption": "shotengai morning east"
+        },
+        {
+          "id": "before-shotengai-morning-north",
+          "image": "game3d/shots/island-day1/before/shotengai-morning-north.png",
+          "caption": "shotengai morning north"
+        },
+        {
+          "id": "before-shotengai-morning-phone",
+          "image": "game3d/shots/island-day1/before/shotengai-morning-phone.png",
+          "caption": "shotengai morning phone"
+        },
+        {
+          "id": "before-shotengai-morning-south",
+          "image": "game3d/shots/island-day1/before/shotengai-morning-south.png",
+          "caption": "shotengai morning south"
+        },
+        {
+          "id": "before-shotengai-morning-west",
+          "image": "game3d/shots/island-day1/before/shotengai-morning-west.png",
+          "caption": "shotengai morning west"
+        }
+      ]
+    },
+    {
+      "title": "First crown pass",
+      "images": [
+        {
+          "id": "crowns-forecourt-evening-east",
+          "image": "game3d/shots/island-day1/crowns/forecourt-evening-east.png",
+          "caption": "forecourt evening east"
+        },
+        {
+          "id": "crowns-forecourt-evening-north",
+          "image": "game3d/shots/island-day1/crowns/forecourt-evening-north.png",
+          "caption": "forecourt evening north"
+        },
+        {
+          "id": "crowns-forecourt-evening-phone",
+          "image": "game3d/shots/island-day1/crowns/forecourt-evening-phone.png",
+          "caption": "forecourt evening phone"
+        },
+        {
+          "id": "crowns-forecourt-evening-south",
+          "image": "game3d/shots/island-day1/crowns/forecourt-evening-south.png",
+          "caption": "forecourt evening south"
+        },
+        {
+          "id": "crowns-forecourt-evening-west",
+          "image": "game3d/shots/island-day1/crowns/forecourt-evening-west.png",
+          "caption": "forecourt evening west"
+        },
+        {
+          "id": "crowns-forecourt-morning-east",
+          "image": "game3d/shots/island-day1/crowns/forecourt-morning-east.png",
+          "caption": "forecourt morning east"
+        },
+        {
+          "id": "crowns-forecourt-morning-north",
+          "image": "game3d/shots/island-day1/crowns/forecourt-morning-north.png",
+          "caption": "forecourt morning north"
+        },
+        {
+          "id": "crowns-forecourt-morning-phone",
+          "image": "game3d/shots/island-day1/crowns/forecourt-morning-phone.png",
+          "caption": "forecourt morning phone"
+        },
+        {
+          "id": "crowns-forecourt-morning-south",
+          "image": "game3d/shots/island-day1/crowns/forecourt-morning-south.png",
+          "caption": "forecourt morning south"
+        },
+        {
+          "id": "crowns-forecourt-morning-west",
+          "image": "game3d/shots/island-day1/crowns/forecourt-morning-west.png",
+          "caption": "forecourt morning west"
+        },
+        {
+          "id": "crowns-plaza-evening-east",
+          "image": "game3d/shots/island-day1/crowns/plaza-evening-east.png",
+          "caption": "plaza evening east"
+        },
+        {
+          "id": "crowns-plaza-evening-north",
+          "image": "game3d/shots/island-day1/crowns/plaza-evening-north.png",
+          "caption": "plaza evening north"
+        },
+        {
+          "id": "crowns-plaza-evening-phone",
+          "image": "game3d/shots/island-day1/crowns/plaza-evening-phone.png",
+          "caption": "plaza evening phone"
+        },
+        {
+          "id": "crowns-plaza-evening-south",
+          "image": "game3d/shots/island-day1/crowns/plaza-evening-south.png",
+          "caption": "plaza evening south"
+        },
+        {
+          "id": "crowns-plaza-evening-west",
+          "image": "game3d/shots/island-day1/crowns/plaza-evening-west.png",
+          "caption": "plaza evening west"
+        },
+        {
+          "id": "crowns-plaza-morning-east",
+          "image": "game3d/shots/island-day1/crowns/plaza-morning-east.png",
+          "caption": "plaza morning east"
+        },
+        {
+          "id": "crowns-plaza-morning-north",
+          "image": "game3d/shots/island-day1/crowns/plaza-morning-north.png",
+          "caption": "plaza morning north"
+        },
+        {
+          "id": "crowns-plaza-morning-phone",
+          "image": "game3d/shots/island-day1/crowns/plaza-morning-phone.png",
+          "caption": "plaza morning phone"
+        },
+        {
+          "id": "crowns-plaza-morning-south",
+          "image": "game3d/shots/island-day1/crowns/plaza-morning-south.png",
+          "caption": "plaza morning south"
+        },
+        {
+          "id": "crowns-plaza-morning-west",
+          "image": "game3d/shots/island-day1/crowns/plaza-morning-west.png",
+          "caption": "plaza morning west"
+        }
+      ]
+    },
+    {
+      "title": "Neighbouring scenery",
+      "images": [
+        {
+          "id": "midground-dorm_court-evening-east",
+          "image": "game3d/shots/island-day1/midground/dorm_court-evening-east.png",
+          "caption": "dorm court evening east"
+        },
+        {
+          "id": "midground-dorm_court-evening-north",
+          "image": "game3d/shots/island-day1/midground/dorm_court-evening-north.png",
+          "caption": "dorm court evening north"
+        },
+        {
+          "id": "midground-dorm_court-evening-phone",
+          "image": "game3d/shots/island-day1/midground/dorm_court-evening-phone.png",
+          "caption": "dorm court evening phone"
+        },
+        {
+          "id": "midground-dorm_court-evening-south",
+          "image": "game3d/shots/island-day1/midground/dorm_court-evening-south.png",
+          "caption": "dorm court evening south"
+        },
+        {
+          "id": "midground-dorm_court-evening-west",
+          "image": "game3d/shots/island-day1/midground/dorm_court-evening-west.png",
+          "caption": "dorm court evening west"
+        },
+        {
+          "id": "midground-dorm_court-morning-east",
+          "image": "game3d/shots/island-day1/midground/dorm_court-morning-east.png",
+          "caption": "dorm court morning east"
+        },
+        {
+          "id": "midground-dorm_court-morning-north",
+          "image": "game3d/shots/island-day1/midground/dorm_court-morning-north.png",
+          "caption": "dorm court morning north"
+        },
+        {
+          "id": "midground-dorm_court-morning-phone",
+          "image": "game3d/shots/island-day1/midground/dorm_court-morning-phone.png",
+          "caption": "dorm court morning phone"
+        },
+        {
+          "id": "midground-dorm_court-morning-south",
+          "image": "game3d/shots/island-day1/midground/dorm_court-morning-south.png",
+          "caption": "dorm court morning south"
+        },
+        {
+          "id": "midground-dorm_court-morning-west",
+          "image": "game3d/shots/island-day1/midground/dorm_court-morning-west.png",
+          "caption": "dorm court morning west"
+        },
+        {
+          "id": "midground-forecourt-evening-east",
+          "image": "game3d/shots/island-day1/midground/forecourt-evening-east.png",
+          "caption": "forecourt evening east"
+        },
+        {
+          "id": "midground-forecourt-evening-north",
+          "image": "game3d/shots/island-day1/midground/forecourt-evening-north.png",
+          "caption": "forecourt evening north"
+        },
+        {
+          "id": "midground-forecourt-evening-phone",
+          "image": "game3d/shots/island-day1/midground/forecourt-evening-phone.png",
+          "caption": "forecourt evening phone"
+        },
+        {
+          "id": "midground-forecourt-evening-south",
+          "image": "game3d/shots/island-day1/midground/forecourt-evening-south.png",
+          "caption": "forecourt evening south"
+        },
+        {
+          "id": "midground-forecourt-evening-west",
+          "image": "game3d/shots/island-day1/midground/forecourt-evening-west.png",
+          "caption": "forecourt evening west"
+        },
+        {
+          "id": "midground-forecourt-morning-east",
+          "image": "game3d/shots/island-day1/midground/forecourt-morning-east.png",
+          "caption": "forecourt morning east"
+        },
+        {
+          "id": "midground-forecourt-morning-north",
+          "image": "game3d/shots/island-day1/midground/forecourt-morning-north.png",
+          "caption": "forecourt morning north"
+        },
+        {
+          "id": "midground-forecourt-morning-phone",
+          "image": "game3d/shots/island-day1/midground/forecourt-morning-phone.png",
+          "caption": "forecourt morning phone"
+        },
+        {
+          "id": "midground-forecourt-morning-south",
+          "image": "game3d/shots/island-day1/midground/forecourt-morning-south.png",
+          "caption": "forecourt morning south"
+        },
+        {
+          "id": "midground-forecourt-morning-west",
+          "image": "game3d/shots/island-day1/midground/forecourt-morning-west.png",
+          "caption": "forecourt morning west"
+        }
+      ]
+    },
+    {
+      "title": "Residential planting",
+      "images": [
+        {
+          "id": "residential-dorm_court-evening-east",
+          "image": "game3d/shots/island-day1/residential/dorm_court-evening-east.png",
+          "caption": "dorm court evening east"
+        },
+        {
+          "id": "residential-dorm_court-evening-north",
+          "image": "game3d/shots/island-day1/residential/dorm_court-evening-north.png",
+          "caption": "dorm court evening north"
+        },
+        {
+          "id": "residential-dorm_court-evening-phone",
+          "image": "game3d/shots/island-day1/residential/dorm_court-evening-phone.png",
+          "caption": "dorm court evening phone"
+        },
+        {
+          "id": "residential-dorm_court-evening-south",
+          "image": "game3d/shots/island-day1/residential/dorm_court-evening-south.png",
+          "caption": "dorm court evening south"
+        },
+        {
+          "id": "residential-dorm_court-evening-west",
+          "image": "game3d/shots/island-day1/residential/dorm_court-evening-west.png",
+          "caption": "dorm court evening west"
+        },
+        {
+          "id": "residential-dorm_court-morning-east",
+          "image": "game3d/shots/island-day1/residential/dorm_court-morning-east.png",
+          "caption": "dorm court morning east"
+        },
+        {
+          "id": "residential-dorm_court-morning-north",
+          "image": "game3d/shots/island-day1/residential/dorm_court-morning-north.png",
+          "caption": "dorm court morning north"
+        },
+        {
+          "id": "residential-dorm_court-morning-phone",
+          "image": "game3d/shots/island-day1/residential/dorm_court-morning-phone.png",
+          "caption": "dorm court morning phone"
+        },
+        {
+          "id": "residential-dorm_court-morning-south",
+          "image": "game3d/shots/island-day1/residential/dorm_court-morning-south.png",
+          "caption": "dorm court morning south"
+        },
+        {
+          "id": "residential-dorm_court-morning-west",
+          "image": "game3d/shots/island-day1/residential/dorm_court-morning-west.png",
+          "caption": "dorm court morning west"
+        }
+      ]
+    },
+    {
+      "title": "Ground and planting pass",
+      "images": [
+        {
+          "id": "finished-green-dorm_court-evening-east",
+          "image": "game3d/shots/island-day1/finished-green/dorm_court-evening-east.png",
+          "caption": "dorm court evening east"
+        },
+        {
+          "id": "finished-green-dorm_court-evening-north",
+          "image": "game3d/shots/island-day1/finished-green/dorm_court-evening-north.png",
+          "caption": "dorm court evening north"
+        },
+        {
+          "id": "finished-green-dorm_court-evening-phone",
+          "image": "game3d/shots/island-day1/finished-green/dorm_court-evening-phone.png",
+          "caption": "dorm court evening phone"
+        },
+        {
+          "id": "finished-green-dorm_court-evening-south",
+          "image": "game3d/shots/island-day1/finished-green/dorm_court-evening-south.png",
+          "caption": "dorm court evening south"
+        },
+        {
+          "id": "finished-green-dorm_court-evening-west",
+          "image": "game3d/shots/island-day1/finished-green/dorm_court-evening-west.png",
+          "caption": "dorm court evening west"
+        },
+        {
+          "id": "finished-green-dorm_court-morning-east",
+          "image": "game3d/shots/island-day1/finished-green/dorm_court-morning-east.png",
+          "caption": "dorm court morning east"
+        },
+        {
+          "id": "finished-green-dorm_court-morning-north",
+          "image": "game3d/shots/island-day1/finished-green/dorm_court-morning-north.png",
+          "caption": "dorm court morning north"
+        },
+        {
+          "id": "finished-green-dorm_court-morning-phone",
+          "image": "game3d/shots/island-day1/finished-green/dorm_court-morning-phone.png",
+          "caption": "dorm court morning phone"
+        },
+        {
+          "id": "finished-green-dorm_court-morning-south",
+          "image": "game3d/shots/island-day1/finished-green/dorm_court-morning-south.png",
+          "caption": "dorm court morning south"
+        },
+        {
+          "id": "finished-green-dorm_court-morning-west",
+          "image": "game3d/shots/island-day1/finished-green/dorm_court-morning-west.png",
+          "caption": "dorm court morning west"
+        },
+        {
+          "id": "finished-green-forecourt-evening-east",
+          "image": "game3d/shots/island-day1/finished-green/forecourt-evening-east.png",
+          "caption": "forecourt evening east"
+        },
+        {
+          "id": "finished-green-forecourt-evening-north",
+          "image": "game3d/shots/island-day1/finished-green/forecourt-evening-north.png",
+          "caption": "forecourt evening north"
+        },
+        {
+          "id": "finished-green-forecourt-evening-phone",
+          "image": "game3d/shots/island-day1/finished-green/forecourt-evening-phone.png",
+          "caption": "forecourt evening phone"
+        },
+        {
+          "id": "finished-green-forecourt-evening-south",
+          "image": "game3d/shots/island-day1/finished-green/forecourt-evening-south.png",
+          "caption": "forecourt evening south"
+        },
+        {
+          "id": "finished-green-forecourt-evening-west",
+          "image": "game3d/shots/island-day1/finished-green/forecourt-evening-west.png",
+          "caption": "forecourt evening west"
+        },
+        {
+          "id": "finished-green-forecourt-morning-east",
+          "image": "game3d/shots/island-day1/finished-green/forecourt-morning-east.png",
+          "caption": "forecourt morning east"
+        },
+        {
+          "id": "finished-green-forecourt-morning-north",
+          "image": "game3d/shots/island-day1/finished-green/forecourt-morning-north.png",
+          "caption": "forecourt morning north"
+        },
+        {
+          "id": "finished-green-forecourt-morning-phone",
+          "image": "game3d/shots/island-day1/finished-green/forecourt-morning-phone.png",
+          "caption": "forecourt morning phone"
+        },
+        {
+          "id": "finished-green-forecourt-morning-south",
+          "image": "game3d/shots/island-day1/finished-green/forecourt-morning-south.png",
+          "caption": "forecourt morning south"
+        },
+        {
+          "id": "finished-green-forecourt-morning-west",
+          "image": "game3d/shots/island-day1/finished-green/forecourt-morning-west.png",
+          "caption": "forecourt morning west"
+        },
+        {
+          "id": "finished-green-plaza-evening-east",
+          "image": "game3d/shots/island-day1/finished-green/plaza-evening-east.png",
+          "caption": "plaza evening east"
+        },
+        {
+          "id": "finished-green-plaza-evening-north",
+          "image": "game3d/shots/island-day1/finished-green/plaza-evening-north.png",
+          "caption": "plaza evening north"
+        },
+        {
+          "id": "finished-green-plaza-evening-phone",
+          "image": "game3d/shots/island-day1/finished-green/plaza-evening-phone.png",
+          "caption": "plaza evening phone"
+        },
+        {
+          "id": "finished-green-plaza-evening-south",
+          "image": "game3d/shots/island-day1/finished-green/plaza-evening-south.png",
+          "caption": "plaza evening south"
+        },
+        {
+          "id": "finished-green-plaza-evening-west",
+          "image": "game3d/shots/island-day1/finished-green/plaza-evening-west.png",
+          "caption": "plaza evening west"
+        },
+        {
+          "id": "finished-green-plaza-morning-east",
+          "image": "game3d/shots/island-day1/finished-green/plaza-morning-east.png",
+          "caption": "plaza morning east"
+        },
+        {
+          "id": "finished-green-plaza-morning-north",
+          "image": "game3d/shots/island-day1/finished-green/plaza-morning-north.png",
+          "caption": "plaza morning north"
+        },
+        {
+          "id": "finished-green-plaza-morning-phone",
+          "image": "game3d/shots/island-day1/finished-green/plaza-morning-phone.png",
+          "caption": "plaza morning phone"
+        },
+        {
+          "id": "finished-green-plaza-morning-south",
+          "image": "game3d/shots/island-day1/finished-green/plaza-morning-south.png",
+          "caption": "plaza morning south"
+        },
+        {
+          "id": "finished-green-plaza-morning-west",
+          "image": "game3d/shots/island-day1/finished-green/plaza-morning-west.png",
+          "caption": "plaza morning west"
+        }
+      ]
+    },
+    {
+      "title": "Smooth canopy pass",
+      "images": [
+        {
+          "id": "smooth-green-dorm_court-evening-east",
+          "image": "game3d/shots/island-day1/smooth-green/dorm_court-evening-east.png",
+          "caption": "dorm court evening east"
+        },
+        {
+          "id": "smooth-green-dorm_court-evening-north",
+          "image": "game3d/shots/island-day1/smooth-green/dorm_court-evening-north.png",
+          "caption": "dorm court evening north"
+        },
+        {
+          "id": "smooth-green-dorm_court-evening-phone",
+          "image": "game3d/shots/island-day1/smooth-green/dorm_court-evening-phone.png",
+          "caption": "dorm court evening phone"
+        },
+        {
+          "id": "smooth-green-dorm_court-evening-south",
+          "image": "game3d/shots/island-day1/smooth-green/dorm_court-evening-south.png",
+          "caption": "dorm court evening south"
+        },
+        {
+          "id": "smooth-green-dorm_court-evening-west",
+          "image": "game3d/shots/island-day1/smooth-green/dorm_court-evening-west.png",
+          "caption": "dorm court evening west"
+        },
+        {
+          "id": "smooth-green-dorm_court-morning-east",
+          "image": "game3d/shots/island-day1/smooth-green/dorm_court-morning-east.png",
+          "caption": "dorm court morning east"
+        },
+        {
+          "id": "smooth-green-dorm_court-morning-north",
+          "image": "game3d/shots/island-day1/smooth-green/dorm_court-morning-north.png",
+          "caption": "dorm court morning north"
+        },
+        {
+          "id": "smooth-green-dorm_court-morning-phone",
+          "image": "game3d/shots/island-day1/smooth-green/dorm_court-morning-phone.png",
+          "caption": "dorm court morning phone"
+        },
+        {
+          "id": "smooth-green-dorm_court-morning-south",
+          "image": "game3d/shots/island-day1/smooth-green/dorm_court-morning-south.png",
+          "caption": "dorm court morning south"
+        },
+        {
+          "id": "smooth-green-dorm_court-morning-west",
+          "image": "game3d/shots/island-day1/smooth-green/dorm_court-morning-west.png",
+          "caption": "dorm court morning west"
+        },
+        {
+          "id": "smooth-green-forecourt-evening-east",
+          "image": "game3d/shots/island-day1/smooth-green/forecourt-evening-east.png",
+          "caption": "forecourt evening east"
+        },
+        {
+          "id": "smooth-green-forecourt-evening-north",
+          "image": "game3d/shots/island-day1/smooth-green/forecourt-evening-north.png",
+          "caption": "forecourt evening north"
+        },
+        {
+          "id": "smooth-green-forecourt-evening-phone",
+          "image": "game3d/shots/island-day1/smooth-green/forecourt-evening-phone.png",
+          "caption": "forecourt evening phone"
+        },
+        {
+          "id": "smooth-green-forecourt-evening-south",
+          "image": "game3d/shots/island-day1/smooth-green/forecourt-evening-south.png",
+          "caption": "forecourt evening south"
+        },
+        {
+          "id": "smooth-green-forecourt-evening-west",
+          "image": "game3d/shots/island-day1/smooth-green/forecourt-evening-west.png",
+          "caption": "forecourt evening west"
+        },
+        {
+          "id": "smooth-green-forecourt-morning-east",
+          "image": "game3d/shots/island-day1/smooth-green/forecourt-morning-east.png",
+          "caption": "forecourt morning east"
+        },
+        {
+          "id": "smooth-green-forecourt-morning-north",
+          "image": "game3d/shots/island-day1/smooth-green/forecourt-morning-north.png",
+          "caption": "forecourt morning north"
+        },
+        {
+          "id": "smooth-green-forecourt-morning-phone",
+          "image": "game3d/shots/island-day1/smooth-green/forecourt-morning-phone.png",
+          "caption": "forecourt morning phone"
+        },
+        {
+          "id": "smooth-green-forecourt-morning-south",
+          "image": "game3d/shots/island-day1/smooth-green/forecourt-morning-south.png",
+          "caption": "forecourt morning south"
+        },
+        {
+          "id": "smooth-green-forecourt-morning-west",
+          "image": "game3d/shots/island-day1/smooth-green/forecourt-morning-west.png",
+          "caption": "forecourt morning west"
+        },
+        {
+          "id": "smooth-green-plaza-evening-east",
+          "image": "game3d/shots/island-day1/smooth-green/plaza-evening-east.png",
+          "caption": "plaza evening east"
+        },
+        {
+          "id": "smooth-green-plaza-evening-north",
+          "image": "game3d/shots/island-day1/smooth-green/plaza-evening-north.png",
+          "caption": "plaza evening north"
+        },
+        {
+          "id": "smooth-green-plaza-evening-phone",
+          "image": "game3d/shots/island-day1/smooth-green/plaza-evening-phone.png",
+          "caption": "plaza evening phone"
+        },
+        {
+          "id": "smooth-green-plaza-evening-south",
+          "image": "game3d/shots/island-day1/smooth-green/plaza-evening-south.png",
+          "caption": "plaza evening south"
+        },
+        {
+          "id": "smooth-green-plaza-evening-west",
+          "image": "game3d/shots/island-day1/smooth-green/plaza-evening-west.png",
+          "caption": "plaza evening west"
+        },
+        {
+          "id": "smooth-green-plaza-morning-east",
+          "image": "game3d/shots/island-day1/smooth-green/plaza-morning-east.png",
+          "caption": "plaza morning east"
+        },
+        {
+          "id": "smooth-green-plaza-morning-north",
+          "image": "game3d/shots/island-day1/smooth-green/plaza-morning-north.png",
+          "caption": "plaza morning north"
+        },
+        {
+          "id": "smooth-green-plaza-morning-phone",
+          "image": "game3d/shots/island-day1/smooth-green/plaza-morning-phone.png",
+          "caption": "plaza morning phone"
+        },
+        {
+          "id": "smooth-green-plaza-morning-south",
+          "image": "game3d/shots/island-day1/smooth-green/plaza-morning-south.png",
+          "caption": "plaza morning south"
+        },
+        {
+          "id": "smooth-green-plaza-morning-west",
+          "image": "game3d/shots/island-day1/smooth-green/plaza-morning-west.png",
+          "caption": "plaza morning west"
+        }
+      ]
+    },
+    {
+      "title": "Rounded canopy pass",
+      "images": [
+        {
+          "id": "round-green-dorm_court-evening-east",
+          "image": "game3d/shots/island-day1/round-green/dorm_court-evening-east.png",
+          "caption": "dorm court evening east"
+        },
+        {
+          "id": "round-green-dorm_court-evening-north",
+          "image": "game3d/shots/island-day1/round-green/dorm_court-evening-north.png",
+          "caption": "dorm court evening north"
+        },
+        {
+          "id": "round-green-dorm_court-evening-phone",
+          "image": "game3d/shots/island-day1/round-green/dorm_court-evening-phone.png",
+          "caption": "dorm court evening phone"
+        },
+        {
+          "id": "round-green-dorm_court-evening-south",
+          "image": "game3d/shots/island-day1/round-green/dorm_court-evening-south.png",
+          "caption": "dorm court evening south"
+        },
+        {
+          "id": "round-green-dorm_court-evening-west",
+          "image": "game3d/shots/island-day1/round-green/dorm_court-evening-west.png",
+          "caption": "dorm court evening west"
+        },
+        {
+          "id": "round-green-dorm_court-morning-east",
+          "image": "game3d/shots/island-day1/round-green/dorm_court-morning-east.png",
+          "caption": "dorm court morning east"
+        },
+        {
+          "id": "round-green-dorm_court-morning-north",
+          "image": "game3d/shots/island-day1/round-green/dorm_court-morning-north.png",
+          "caption": "dorm court morning north"
+        },
+        {
+          "id": "round-green-dorm_court-morning-phone",
+          "image": "game3d/shots/island-day1/round-green/dorm_court-morning-phone.png",
+          "caption": "dorm court morning phone"
+        },
+        {
+          "id": "round-green-dorm_court-morning-south",
+          "image": "game3d/shots/island-day1/round-green/dorm_court-morning-south.png",
+          "caption": "dorm court morning south"
+        },
+        {
+          "id": "round-green-dorm_court-morning-west",
+          "image": "game3d/shots/island-day1/round-green/dorm_court-morning-west.png",
+          "caption": "dorm court morning west"
+        },
+        {
+          "id": "round-green-forecourt-evening-east",
+          "image": "game3d/shots/island-day1/round-green/forecourt-evening-east.png",
+          "caption": "forecourt evening east"
+        },
+        {
+          "id": "round-green-forecourt-evening-north",
+          "image": "game3d/shots/island-day1/round-green/forecourt-evening-north.png",
+          "caption": "forecourt evening north"
+        },
+        {
+          "id": "round-green-forecourt-evening-phone",
+          "image": "game3d/shots/island-day1/round-green/forecourt-evening-phone.png",
+          "caption": "forecourt evening phone"
+        },
+        {
+          "id": "round-green-forecourt-evening-south",
+          "image": "game3d/shots/island-day1/round-green/forecourt-evening-south.png",
+          "caption": "forecourt evening south"
+        },
+        {
+          "id": "round-green-forecourt-evening-west",
+          "image": "game3d/shots/island-day1/round-green/forecourt-evening-west.png",
+          "caption": "forecourt evening west"
+        },
+        {
+          "id": "round-green-forecourt-morning-east",
+          "image": "game3d/shots/island-day1/round-green/forecourt-morning-east.png",
+          "caption": "forecourt morning east"
+        },
+        {
+          "id": "round-green-forecourt-morning-north",
+          "image": "game3d/shots/island-day1/round-green/forecourt-morning-north.png",
+          "caption": "forecourt morning north"
+        },
+        {
+          "id": "round-green-forecourt-morning-phone",
+          "image": "game3d/shots/island-day1/round-green/forecourt-morning-phone.png",
+          "caption": "forecourt morning phone"
+        },
+        {
+          "id": "round-green-forecourt-morning-south",
+          "image": "game3d/shots/island-day1/round-green/forecourt-morning-south.png",
+          "caption": "forecourt morning south"
+        },
+        {
+          "id": "round-green-forecourt-morning-west",
+          "image": "game3d/shots/island-day1/round-green/forecourt-morning-west.png",
+          "caption": "forecourt morning west"
+        },
+        {
+          "id": "round-green-plaza-evening-east",
+          "image": "game3d/shots/island-day1/round-green/plaza-evening-east.png",
+          "caption": "plaza evening east"
+        },
+        {
+          "id": "round-green-plaza-evening-north",
+          "image": "game3d/shots/island-day1/round-green/plaza-evening-north.png",
+          "caption": "plaza evening north"
+        },
+        {
+          "id": "round-green-plaza-evening-phone",
+          "image": "game3d/shots/island-day1/round-green/plaza-evening-phone.png",
+          "caption": "plaza evening phone"
+        },
+        {
+          "id": "round-green-plaza-evening-south",
+          "image": "game3d/shots/island-day1/round-green/plaza-evening-south.png",
+          "caption": "plaza evening south"
+        },
+        {
+          "id": "round-green-plaza-evening-west",
+          "image": "game3d/shots/island-day1/round-green/plaza-evening-west.png",
+          "caption": "plaza evening west"
+        },
+        {
+          "id": "round-green-plaza-morning-east",
+          "image": "game3d/shots/island-day1/round-green/plaza-morning-east.png",
+          "caption": "plaza morning east"
+        },
+        {
+          "id": "round-green-plaza-morning-north",
+          "image": "game3d/shots/island-day1/round-green/plaza-morning-north.png",
+          "caption": "plaza morning north"
+        },
+        {
+          "id": "round-green-plaza-morning-phone",
+          "image": "game3d/shots/island-day1/round-green/plaza-morning-phone.png",
+          "caption": "plaza morning phone"
+        },
+        {
+          "id": "round-green-plaza-morning-south",
+          "image": "game3d/shots/island-day1/round-green/plaza-morning-south.png",
+          "caption": "plaza morning south"
+        },
+        {
+          "id": "round-green-plaza-morning-west",
+          "image": "game3d/shots/island-day1/round-green/plaza-morning-west.png",
+          "caption": "plaza morning west"
+        }
+      ]
+    },
+    {
+      "title": "First complete landscape",
+      "images": [
+        {
+          "id": "final-green-dorm_court-evening-east",
+          "image": "game3d/shots/island-day1/final-green/dorm_court-evening-east.png",
+          "caption": "dorm court evening east"
+        },
+        {
+          "id": "final-green-dorm_court-evening-north",
+          "image": "game3d/shots/island-day1/final-green/dorm_court-evening-north.png",
+          "caption": "dorm court evening north"
+        },
+        {
+          "id": "final-green-dorm_court-evening-phone",
+          "image": "game3d/shots/island-day1/final-green/dorm_court-evening-phone.png",
+          "caption": "dorm court evening phone"
+        },
+        {
+          "id": "final-green-dorm_court-evening-south",
+          "image": "game3d/shots/island-day1/final-green/dorm_court-evening-south.png",
+          "caption": "dorm court evening south"
+        },
+        {
+          "id": "final-green-dorm_court-evening-west",
+          "image": "game3d/shots/island-day1/final-green/dorm_court-evening-west.png",
+          "caption": "dorm court evening west"
+        },
+        {
+          "id": "final-green-dorm_court-morning-east",
+          "image": "game3d/shots/island-day1/final-green/dorm_court-morning-east.png",
+          "caption": "dorm court morning east"
+        },
+        {
+          "id": "final-green-dorm_court-morning-north",
+          "image": "game3d/shots/island-day1/final-green/dorm_court-morning-north.png",
+          "caption": "dorm court morning north"
+        },
+        {
+          "id": "final-green-dorm_court-morning-phone",
+          "image": "game3d/shots/island-day1/final-green/dorm_court-morning-phone.png",
+          "caption": "dorm court morning phone"
+        },
+        {
+          "id": "final-green-dorm_court-morning-south",
+          "image": "game3d/shots/island-day1/final-green/dorm_court-morning-south.png",
+          "caption": "dorm court morning south"
+        },
+        {
+          "id": "final-green-dorm_court-morning-west",
+          "image": "game3d/shots/island-day1/final-green/dorm_court-morning-west.png",
+          "caption": "dorm court morning west"
+        },
+        {
+          "id": "final-green-forecourt-evening-east",
+          "image": "game3d/shots/island-day1/final-green/forecourt-evening-east.png",
+          "caption": "forecourt evening east"
+        },
+        {
+          "id": "final-green-forecourt-evening-north",
+          "image": "game3d/shots/island-day1/final-green/forecourt-evening-north.png",
+          "caption": "forecourt evening north"
+        },
+        {
+          "id": "final-green-forecourt-evening-phone",
+          "image": "game3d/shots/island-day1/final-green/forecourt-evening-phone.png",
+          "caption": "forecourt evening phone"
+        },
+        {
+          "id": "final-green-forecourt-evening-south",
+          "image": "game3d/shots/island-day1/final-green/forecourt-evening-south.png",
+          "caption": "forecourt evening south"
+        },
+        {
+          "id": "final-green-forecourt-evening-west",
+          "image": "game3d/shots/island-day1/final-green/forecourt-evening-west.png",
+          "caption": "forecourt evening west"
+        },
+        {
+          "id": "final-green-forecourt-morning-east",
+          "image": "game3d/shots/island-day1/final-green/forecourt-morning-east.png",
+          "caption": "forecourt morning east"
+        },
+        {
+          "id": "final-green-forecourt-morning-north",
+          "image": "game3d/shots/island-day1/final-green/forecourt-morning-north.png",
+          "caption": "forecourt morning north"
+        },
+        {
+          "id": "final-green-forecourt-morning-phone",
+          "image": "game3d/shots/island-day1/final-green/forecourt-morning-phone.png",
+          "caption": "forecourt morning phone"
+        },
+        {
+          "id": "final-green-forecourt-morning-south",
+          "image": "game3d/shots/island-day1/final-green/forecourt-morning-south.png",
+          "caption": "forecourt morning south"
+        },
+        {
+          "id": "final-green-forecourt-morning-west",
+          "image": "game3d/shots/island-day1/final-green/forecourt-morning-west.png",
+          "caption": "forecourt morning west"
+        },
+        {
+          "id": "final-green-plaza-evening-east",
+          "image": "game3d/shots/island-day1/final-green/plaza-evening-east.png",
+          "caption": "plaza evening east"
+        },
+        {
+          "id": "final-green-plaza-evening-north",
+          "image": "game3d/shots/island-day1/final-green/plaza-evening-north.png",
+          "caption": "plaza evening north"
+        },
+        {
+          "id": "final-green-plaza-evening-phone",
+          "image": "game3d/shots/island-day1/final-green/plaza-evening-phone.png",
+          "caption": "plaza evening phone"
+        },
+        {
+          "id": "final-green-plaza-evening-south",
+          "image": "game3d/shots/island-day1/final-green/plaza-evening-south.png",
+          "caption": "plaza evening south"
+        },
+        {
+          "id": "final-green-plaza-evening-west",
+          "image": "game3d/shots/island-day1/final-green/plaza-evening-west.png",
+          "caption": "plaza evening west"
+        },
+        {
+          "id": "final-green-plaza-morning-east",
+          "image": "game3d/shots/island-day1/final-green/plaza-morning-east.png",
+          "caption": "plaza morning east"
+        },
+        {
+          "id": "final-green-plaza-morning-north",
+          "image": "game3d/shots/island-day1/final-green/plaza-morning-north.png",
+          "caption": "plaza morning north"
+        },
+        {
+          "id": "final-green-plaza-morning-phone",
+          "image": "game3d/shots/island-day1/final-green/plaza-morning-phone.png",
+          "caption": "plaza morning phone"
+        },
+        {
+          "id": "final-green-plaza-morning-south",
+          "image": "game3d/shots/island-day1/final-green/plaza-morning-south.png",
+          "caption": "plaza morning south"
+        },
+        {
+          "id": "final-green-plaza-morning-west",
+          "image": "game3d/shots/island-day1/final-green/plaza-morning-west.png",
+          "caption": "plaza morning west"
+        },
+        {
+          "id": "final-green-shotengai-evening-east",
+          "image": "game3d/shots/island-day1/final-green/shotengai-evening-east.png",
+          "caption": "shotengai evening east"
+        },
+        {
+          "id": "final-green-shotengai-evening-north",
+          "image": "game3d/shots/island-day1/final-green/shotengai-evening-north.png",
+          "caption": "shotengai evening north"
+        },
+        {
+          "id": "final-green-shotengai-evening-phone",
+          "image": "game3d/shots/island-day1/final-green/shotengai-evening-phone.png",
+          "caption": "shotengai evening phone"
+        },
+        {
+          "id": "final-green-shotengai-evening-south",
+          "image": "game3d/shots/island-day1/final-green/shotengai-evening-south.png",
+          "caption": "shotengai evening south"
+        },
+        {
+          "id": "final-green-shotengai-evening-west",
+          "image": "game3d/shots/island-day1/final-green/shotengai-evening-west.png",
+          "caption": "shotengai evening west"
+        },
+        {
+          "id": "final-green-shotengai-morning-east",
+          "image": "game3d/shots/island-day1/final-green/shotengai-morning-east.png",
+          "caption": "shotengai morning east"
+        },
+        {
+          "id": "final-green-shotengai-morning-north",
+          "image": "game3d/shots/island-day1/final-green/shotengai-morning-north.png",
+          "caption": "shotengai morning north"
+        },
+        {
+          "id": "final-green-shotengai-morning-phone",
+          "image": "game3d/shots/island-day1/final-green/shotengai-morning-phone.png",
+          "caption": "shotengai morning phone"
+        },
+        {
+          "id": "final-green-shotengai-morning-south",
+          "image": "game3d/shots/island-day1/final-green/shotengai-morning-south.png",
+          "caption": "shotengai morning south"
+        },
+        {
+          "id": "final-green-shotengai-morning-west",
+          "image": "game3d/shots/island-day1/final-green/shotengai-morning-west.png",
+          "caption": "shotengai morning west"
+        }
+      ]
+    },
+    {
+      "title": "First crossing checks",
+      "images": [
+        {
+          "id": "final-route-1366-crossing-north",
+          "image": "game3d/shots/island-day1/final-route/1366-crossing-north.png",
+          "caption": "1366 crossing north"
+        },
+        {
+          "id": "final-route-1366-crossing",
+          "image": "game3d/shots/island-day1/final-route/1366-crossing.png",
+          "caption": "1366 crossing"
+        },
+        {
+          "id": "final-route-1366-market-entry",
+          "image": "game3d/shots/island-day1/final-route/1366-market-entry.png",
+          "caption": "1366 market entry"
+        },
+        {
+          "id": "final-route-1366-plaza-default",
+          "image": "game3d/shots/island-day1/final-route/1366-plaza-default.png",
+          "caption": "1366 plaza default"
+        },
+        {
+          "id": "final-route-1366-plaza-return",
+          "image": "game3d/shots/island-day1/final-route/1366-plaza-return.png",
+          "caption": "1366 plaza return"
+        },
+        {
+          "id": "final-route-1366-plaza-south",
+          "image": "game3d/shots/island-day1/final-route/1366-plaza-south.png",
+          "caption": "1366 plaza south"
+        },
+        {
+          "id": "final-route-1366-promenade",
+          "image": "game3d/shots/island-day1/final-route/1366-promenade.png",
+          "caption": "1366 promenade"
+        },
+        {
+          "id": "final-route-1366-sand",
+          "image": "game3d/shots/island-day1/final-route/1366-sand.png",
+          "caption": "1366 sand"
+        },
+        {
+          "id": "final-route-1366-stairs",
+          "image": "game3d/shots/island-day1/final-route/1366-stairs.png",
+          "caption": "1366 stairs"
+        },
+        {
+          "id": "final-route-390-crossing",
+          "image": "game3d/shots/island-day1/final-route/390-crossing.png",
+          "caption": "390 crossing"
+        },
+        {
+          "id": "final-route-390-market-entry",
+          "image": "game3d/shots/island-day1/final-route/390-market-entry.png",
+          "caption": "390 market entry"
+        },
+        {
+          "id": "final-route-390-plaza-default",
+          "image": "game3d/shots/island-day1/final-route/390-plaza-default.png",
+          "caption": "390 plaza default"
+        },
+        {
+          "id": "final-route-390-plaza-return",
+          "image": "game3d/shots/island-day1/final-route/390-plaza-return.png",
+          "caption": "390 plaza return"
+        },
+        {
+          "id": "final-route-390-plaza-south",
+          "image": "game3d/shots/island-day1/final-route/390-plaza-south.png",
+          "caption": "390 plaza south"
+        },
+        {
+          "id": "final-route-390-promenade",
+          "image": "game3d/shots/island-day1/final-route/390-promenade.png",
+          "caption": "390 promenade"
+        },
+        {
+          "id": "final-route-390-sand",
+          "image": "game3d/shots/island-day1/final-route/390-sand.png",
+          "caption": "390 sand"
+        },
+        {
+          "id": "final-route-390-stairs",
+          "image": "game3d/shots/island-day1/final-route/390-stairs.png",
+          "caption": "390 stairs"
+        }
+      ]
+    },
+    {
+      "title": "Leaf colour trial",
+      "images": [
+        {
+          "id": "closing-green-forecourt-evening-east",
+          "image": "game3d/shots/island-day1/closing-green/forecourt-evening-east.png",
+          "caption": "forecourt evening east"
+        },
+        {
+          "id": "closing-green-forecourt-evening-north",
+          "image": "game3d/shots/island-day1/closing-green/forecourt-evening-north.png",
+          "caption": "forecourt evening north"
+        },
+        {
+          "id": "closing-green-forecourt-evening-phone",
+          "image": "game3d/shots/island-day1/closing-green/forecourt-evening-phone.png",
+          "caption": "forecourt evening phone"
+        },
+        {
+          "id": "closing-green-forecourt-evening-south",
+          "image": "game3d/shots/island-day1/closing-green/forecourt-evening-south.png",
+          "caption": "forecourt evening south"
+        },
+        {
+          "id": "closing-green-forecourt-evening-west",
+          "image": "game3d/shots/island-day1/closing-green/forecourt-evening-west.png",
+          "caption": "forecourt evening west"
+        },
+        {
+          "id": "closing-green-forecourt-morning-east",
+          "image": "game3d/shots/island-day1/closing-green/forecourt-morning-east.png",
+          "caption": "forecourt morning east"
+        },
+        {
+          "id": "closing-green-forecourt-morning-north",
+          "image": "game3d/shots/island-day1/closing-green/forecourt-morning-north.png",
+          "caption": "forecourt morning north"
+        },
+        {
+          "id": "closing-green-forecourt-morning-phone",
+          "image": "game3d/shots/island-day1/closing-green/forecourt-morning-phone.png",
+          "caption": "forecourt morning phone"
+        },
+        {
+          "id": "closing-green-forecourt-morning-south",
+          "image": "game3d/shots/island-day1/closing-green/forecourt-morning-south.png",
+          "caption": "forecourt morning south"
+        },
+        {
+          "id": "closing-green-forecourt-morning-west",
+          "image": "game3d/shots/island-day1/closing-green/forecourt-morning-west.png",
+          "caption": "forecourt morning west"
+        },
+        {
+          "id": "closing-green-plaza-evening-east",
+          "image": "game3d/shots/island-day1/closing-green/plaza-evening-east.png",
+          "caption": "plaza evening east"
+        },
+        {
+          "id": "closing-green-plaza-evening-north",
+          "image": "game3d/shots/island-day1/closing-green/plaza-evening-north.png",
+          "caption": "plaza evening north"
+        },
+        {
+          "id": "closing-green-plaza-evening-phone",
+          "image": "game3d/shots/island-day1/closing-green/plaza-evening-phone.png",
+          "caption": "plaza evening phone"
+        },
+        {
+          "id": "closing-green-plaza-evening-south",
+          "image": "game3d/shots/island-day1/closing-green/plaza-evening-south.png",
+          "caption": "plaza evening south"
+        },
+        {
+          "id": "closing-green-plaza-evening-west",
+          "image": "game3d/shots/island-day1/closing-green/plaza-evening-west.png",
+          "caption": "plaza evening west"
+        },
+        {
+          "id": "closing-green-plaza-morning-east",
+          "image": "game3d/shots/island-day1/closing-green/plaza-morning-east.png",
+          "caption": "plaza morning east"
+        },
+        {
+          "id": "closing-green-plaza-morning-north",
+          "image": "game3d/shots/island-day1/closing-green/plaza-morning-north.png",
+          "caption": "plaza morning north"
+        },
+        {
+          "id": "closing-green-plaza-morning-phone",
+          "image": "game3d/shots/island-day1/closing-green/plaza-morning-phone.png",
+          "caption": "plaza morning phone"
+        },
+        {
+          "id": "closing-green-plaza-morning-south",
+          "image": "game3d/shots/island-day1/closing-green/plaza-morning-south.png",
+          "caption": "plaza morning south"
+        },
+        {
+          "id": "closing-green-plaza-morning-west",
+          "image": "game3d/shots/island-day1/closing-green/plaza-morning-west.png",
+          "caption": "plaza morning west"
+        }
+      ]
+    },
+    {
+      "title": "Softer leaf colour trial",
+      "images": [
+        {
+          "id": "soft-green-forecourt-evening-east",
+          "image": "game3d/shots/island-day1/soft-green/forecourt-evening-east.png",
+          "caption": "forecourt evening east"
+        },
+        {
+          "id": "soft-green-forecourt-evening-north",
+          "image": "game3d/shots/island-day1/soft-green/forecourt-evening-north.png",
+          "caption": "forecourt evening north"
+        },
+        {
+          "id": "soft-green-forecourt-evening-phone",
+          "image": "game3d/shots/island-day1/soft-green/forecourt-evening-phone.png",
+          "caption": "forecourt evening phone"
+        },
+        {
+          "id": "soft-green-forecourt-evening-south",
+          "image": "game3d/shots/island-day1/soft-green/forecourt-evening-south.png",
+          "caption": "forecourt evening south"
+        },
+        {
+          "id": "soft-green-forecourt-evening-west",
+          "image": "game3d/shots/island-day1/soft-green/forecourt-evening-west.png",
+          "caption": "forecourt evening west"
+        },
+        {
+          "id": "soft-green-forecourt-morning-east",
+          "image": "game3d/shots/island-day1/soft-green/forecourt-morning-east.png",
+          "caption": "forecourt morning east"
+        },
+        {
+          "id": "soft-green-forecourt-morning-north",
+          "image": "game3d/shots/island-day1/soft-green/forecourt-morning-north.png",
+          "caption": "forecourt morning north"
+        },
+        {
+          "id": "soft-green-forecourt-morning-phone",
+          "image": "game3d/shots/island-day1/soft-green/forecourt-morning-phone.png",
+          "caption": "forecourt morning phone"
+        },
+        {
+          "id": "soft-green-forecourt-morning-south",
+          "image": "game3d/shots/island-day1/soft-green/forecourt-morning-south.png",
+          "caption": "forecourt morning south"
+        },
+        {
+          "id": "soft-green-forecourt-morning-west",
+          "image": "game3d/shots/island-day1/soft-green/forecourt-morning-west.png",
+          "caption": "forecourt morning west"
+        },
+        {
+          "id": "soft-green-plaza-evening-east",
+          "image": "game3d/shots/island-day1/soft-green/plaza-evening-east.png",
+          "caption": "plaza evening east"
+        },
+        {
+          "id": "soft-green-plaza-evening-north",
+          "image": "game3d/shots/island-day1/soft-green/plaza-evening-north.png",
+          "caption": "plaza evening north"
+        },
+        {
+          "id": "soft-green-plaza-evening-phone",
+          "image": "game3d/shots/island-day1/soft-green/plaza-evening-phone.png",
+          "caption": "plaza evening phone"
+        },
+        {
+          "id": "soft-green-plaza-evening-south",
+          "image": "game3d/shots/island-day1/soft-green/plaza-evening-south.png",
+          "caption": "plaza evening south"
+        },
+        {
+          "id": "soft-green-plaza-evening-west",
+          "image": "game3d/shots/island-day1/soft-green/plaza-evening-west.png",
+          "caption": "plaza evening west"
+        },
+        {
+          "id": "soft-green-plaza-morning-east",
+          "image": "game3d/shots/island-day1/soft-green/plaza-morning-east.png",
+          "caption": "plaza morning east"
+        },
+        {
+          "id": "soft-green-plaza-morning-north",
+          "image": "game3d/shots/island-day1/soft-green/plaza-morning-north.png",
+          "caption": "plaza morning north"
+        },
+        {
+          "id": "soft-green-plaza-morning-phone",
+          "image": "game3d/shots/island-day1/soft-green/plaza-morning-phone.png",
+          "caption": "plaza morning phone"
+        },
+        {
+          "id": "soft-green-plaza-morning-south",
+          "image": "game3d/shots/island-day1/soft-green/plaza-morning-south.png",
+          "caption": "plaza morning south"
+        },
+        {
+          "id": "soft-green-plaza-morning-west",
+          "image": "game3d/shots/island-day1/soft-green/plaza-morning-west.png",
+          "caption": "plaza morning west"
+        }
+      ]
+    },
+    {
+      "title": "Middle-distance crown trial",
+      "images": [
+        {
+          "id": "rounded-middle-forecourt-evening-east",
+          "image": "game3d/shots/island-day1/rounded-middle/forecourt-evening-east.png",
+          "caption": "forecourt evening east"
+        },
+        {
+          "id": "rounded-middle-forecourt-evening-north",
+          "image": "game3d/shots/island-day1/rounded-middle/forecourt-evening-north.png",
+          "caption": "forecourt evening north"
+        },
+        {
+          "id": "rounded-middle-forecourt-evening-phone",
+          "image": "game3d/shots/island-day1/rounded-middle/forecourt-evening-phone.png",
+          "caption": "forecourt evening phone"
+        },
+        {
+          "id": "rounded-middle-forecourt-evening-south",
+          "image": "game3d/shots/island-day1/rounded-middle/forecourt-evening-south.png",
+          "caption": "forecourt evening south"
+        },
+        {
+          "id": "rounded-middle-forecourt-evening-west",
+          "image": "game3d/shots/island-day1/rounded-middle/forecourt-evening-west.png",
+          "caption": "forecourt evening west"
+        },
+        {
+          "id": "rounded-middle-forecourt-morning-east",
+          "image": "game3d/shots/island-day1/rounded-middle/forecourt-morning-east.png",
+          "caption": "forecourt morning east"
+        },
+        {
+          "id": "rounded-middle-forecourt-morning-north",
+          "image": "game3d/shots/island-day1/rounded-middle/forecourt-morning-north.png",
+          "caption": "forecourt morning north"
+        },
+        {
+          "id": "rounded-middle-forecourt-morning-phone",
+          "image": "game3d/shots/island-day1/rounded-middle/forecourt-morning-phone.png",
+          "caption": "forecourt morning phone"
+        },
+        {
+          "id": "rounded-middle-forecourt-morning-south",
+          "image": "game3d/shots/island-day1/rounded-middle/forecourt-morning-south.png",
+          "caption": "forecourt morning south"
+        },
+        {
+          "id": "rounded-middle-forecourt-morning-west",
+          "image": "game3d/shots/island-day1/rounded-middle/forecourt-morning-west.png",
+          "caption": "forecourt morning west"
+        },
+        {
+          "id": "rounded-middle-plaza-evening-east",
+          "image": "game3d/shots/island-day1/rounded-middle/plaza-evening-east.png",
+          "caption": "plaza evening east"
+        },
+        {
+          "id": "rounded-middle-plaza-evening-north",
+          "image": "game3d/shots/island-day1/rounded-middle/plaza-evening-north.png",
+          "caption": "plaza evening north"
+        },
+        {
+          "id": "rounded-middle-plaza-evening-phone",
+          "image": "game3d/shots/island-day1/rounded-middle/plaza-evening-phone.png",
+          "caption": "plaza evening phone"
+        },
+        {
+          "id": "rounded-middle-plaza-evening-south",
+          "image": "game3d/shots/island-day1/rounded-middle/plaza-evening-south.png",
+          "caption": "plaza evening south"
+        },
+        {
+          "id": "rounded-middle-plaza-evening-west",
+          "image": "game3d/shots/island-day1/rounded-middle/plaza-evening-west.png",
+          "caption": "plaza evening west"
+        },
+        {
+          "id": "rounded-middle-plaza-morning-east",
+          "image": "game3d/shots/island-day1/rounded-middle/plaza-morning-east.png",
+          "caption": "plaza morning east"
+        },
+        {
+          "id": "rounded-middle-plaza-morning-north",
+          "image": "game3d/shots/island-day1/rounded-middle/plaza-morning-north.png",
+          "caption": "plaza morning north"
+        },
+        {
+          "id": "rounded-middle-plaza-morning-phone",
+          "image": "game3d/shots/island-day1/rounded-middle/plaza-morning-phone.png",
+          "caption": "plaza morning phone"
+        },
+        {
+          "id": "rounded-middle-plaza-morning-south",
+          "image": "game3d/shots/island-day1/rounded-middle/plaza-morning-south.png",
+          "caption": "plaza morning south"
+        },
+        {
+          "id": "rounded-middle-plaza-morning-west",
+          "image": "game3d/shots/island-day1/rounded-middle/plaza-morning-west.png",
+          "caption": "plaza morning west"
+        }
+      ]
+    },
+    {
+      "title": "Combined world checks",
+      "images": [
+        {
+          "id": "final-world-dorm_court-evening-east",
+          "image": "game3d/shots/island-day1/final-world/dorm_court-evening-east.png",
+          "caption": "dorm court evening east"
+        },
+        {
+          "id": "final-world-dorm_court-evening-north",
+          "image": "game3d/shots/island-day1/final-world/dorm_court-evening-north.png",
+          "caption": "dorm court evening north"
+        },
+        {
+          "id": "final-world-dorm_court-evening-phone",
+          "image": "game3d/shots/island-day1/final-world/dorm_court-evening-phone.png",
+          "caption": "dorm court evening phone"
+        },
+        {
+          "id": "final-world-dorm_court-evening-south",
+          "image": "game3d/shots/island-day1/final-world/dorm_court-evening-south.png",
+          "caption": "dorm court evening south"
+        },
+        {
+          "id": "final-world-dorm_court-evening-west",
+          "image": "game3d/shots/island-day1/final-world/dorm_court-evening-west.png",
+          "caption": "dorm court evening west"
+        },
+        {
+          "id": "final-world-dorm_court-morning-east",
+          "image": "game3d/shots/island-day1/final-world/dorm_court-morning-east.png",
+          "caption": "dorm court morning east"
+        },
+        {
+          "id": "final-world-dorm_court-morning-north",
+          "image": "game3d/shots/island-day1/final-world/dorm_court-morning-north.png",
+          "caption": "dorm court morning north"
+        },
+        {
+          "id": "final-world-dorm_court-morning-phone",
+          "image": "game3d/shots/island-day1/final-world/dorm_court-morning-phone.png",
+          "caption": "dorm court morning phone"
+        },
+        {
+          "id": "final-world-dorm_court-morning-south",
+          "image": "game3d/shots/island-day1/final-world/dorm_court-morning-south.png",
+          "caption": "dorm court morning south"
+        },
+        {
+          "id": "final-world-dorm_court-morning-west",
+          "image": "game3d/shots/island-day1/final-world/dorm_court-morning-west.png",
+          "caption": "dorm court morning west"
+        },
+        {
+          "id": "final-world-forecourt-evening-east",
+          "image": "game3d/shots/island-day1/final-world/forecourt-evening-east.png",
+          "caption": "forecourt evening east"
+        },
+        {
+          "id": "final-world-forecourt-evening-north",
+          "image": "game3d/shots/island-day1/final-world/forecourt-evening-north.png",
+          "caption": "forecourt evening north"
+        },
+        {
+          "id": "final-world-forecourt-evening-phone",
+          "image": "game3d/shots/island-day1/final-world/forecourt-evening-phone.png",
+          "caption": "forecourt evening phone"
+        },
+        {
+          "id": "final-world-forecourt-evening-south",
+          "image": "game3d/shots/island-day1/final-world/forecourt-evening-south.png",
+          "caption": "forecourt evening south"
+        },
+        {
+          "id": "final-world-forecourt-evening-west",
+          "image": "game3d/shots/island-day1/final-world/forecourt-evening-west.png",
+          "caption": "forecourt evening west"
+        },
+        {
+          "id": "final-world-forecourt-morning-east",
+          "image": "game3d/shots/island-day1/final-world/forecourt-morning-east.png",
+          "caption": "forecourt morning east"
+        },
+        {
+          "id": "final-world-forecourt-morning-north",
+          "image": "game3d/shots/island-day1/final-world/forecourt-morning-north.png",
+          "caption": "forecourt morning north"
+        },
+        {
+          "id": "final-world-forecourt-morning-phone",
+          "image": "game3d/shots/island-day1/final-world/forecourt-morning-phone.png",
+          "caption": "forecourt morning phone"
+        },
+        {
+          "id": "final-world-forecourt-morning-south",
+          "image": "game3d/shots/island-day1/final-world/forecourt-morning-south.png",
+          "caption": "forecourt morning south"
+        },
+        {
+          "id": "final-world-forecourt-morning-west",
+          "image": "game3d/shots/island-day1/final-world/forecourt-morning-west.png",
+          "caption": "forecourt morning west"
+        },
+        {
+          "id": "final-world-plaza-evening-east",
+          "image": "game3d/shots/island-day1/final-world/plaza-evening-east.png",
+          "caption": "plaza evening east"
+        },
+        {
+          "id": "final-world-plaza-evening-north",
+          "image": "game3d/shots/island-day1/final-world/plaza-evening-north.png",
+          "caption": "plaza evening north"
+        },
+        {
+          "id": "final-world-plaza-evening-phone",
+          "image": "game3d/shots/island-day1/final-world/plaza-evening-phone.png",
+          "caption": "plaza evening phone"
+        },
+        {
+          "id": "final-world-plaza-evening-south",
+          "image": "game3d/shots/island-day1/final-world/plaza-evening-south.png",
+          "caption": "plaza evening south"
+        },
+        {
+          "id": "final-world-plaza-evening-west",
+          "image": "game3d/shots/island-day1/final-world/plaza-evening-west.png",
+          "caption": "plaza evening west"
+        },
+        {
+          "id": "final-world-plaza-morning-east",
+          "image": "game3d/shots/island-day1/final-world/plaza-morning-east.png",
+          "caption": "plaza morning east"
+        },
+        {
+          "id": "final-world-plaza-morning-north",
+          "image": "game3d/shots/island-day1/final-world/plaza-morning-north.png",
+          "caption": "plaza morning north"
+        },
+        {
+          "id": "final-world-plaza-morning-phone",
+          "image": "game3d/shots/island-day1/final-world/plaza-morning-phone.png",
+          "caption": "plaza morning phone"
+        },
+        {
+          "id": "final-world-plaza-morning-south",
+          "image": "game3d/shots/island-day1/final-world/plaza-morning-south.png",
+          "caption": "plaza morning south"
+        },
+        {
+          "id": "final-world-plaza-morning-west",
+          "image": "game3d/shots/island-day1/final-world/plaza-morning-west.png",
+          "caption": "plaza morning west"
+        },
+        {
+          "id": "final-world-shotengai-evening-east",
+          "image": "game3d/shots/island-day1/final-world/shotengai-evening-east.png",
+          "caption": "shotengai evening east"
+        },
+        {
+          "id": "final-world-shotengai-evening-north",
+          "image": "game3d/shots/island-day1/final-world/shotengai-evening-north.png",
+          "caption": "shotengai evening north"
+        },
+        {
+          "id": "final-world-shotengai-evening-phone",
+          "image": "game3d/shots/island-day1/final-world/shotengai-evening-phone.png",
+          "caption": "shotengai evening phone"
+        },
+        {
+          "id": "final-world-shotengai-evening-south",
+          "image": "game3d/shots/island-day1/final-world/shotengai-evening-south.png",
+          "caption": "shotengai evening south"
+        },
+        {
+          "id": "final-world-shotengai-evening-west",
+          "image": "game3d/shots/island-day1/final-world/shotengai-evening-west.png",
+          "caption": "shotengai evening west"
+        },
+        {
+          "id": "final-world-shotengai-morning-east",
+          "image": "game3d/shots/island-day1/final-world/shotengai-morning-east.png",
+          "caption": "shotengai morning east"
+        },
+        {
+          "id": "final-world-shotengai-morning-north",
+          "image": "game3d/shots/island-day1/final-world/shotengai-morning-north.png",
+          "caption": "shotengai morning north"
+        },
+        {
+          "id": "final-world-shotengai-morning-phone",
+          "image": "game3d/shots/island-day1/final-world/shotengai-morning-phone.png",
+          "caption": "shotengai morning phone"
+        },
+        {
+          "id": "final-world-shotengai-morning-south",
+          "image": "game3d/shots/island-day1/final-world/shotengai-morning-south.png",
+          "caption": "shotengai morning south"
+        },
+        {
+          "id": "final-world-shotengai-morning-west",
+          "image": "game3d/shots/island-day1/final-world/shotengai-morning-west.png",
+          "caption": "shotengai morning west"
+        }
+      ]
+    },
+    {
+      "title": "Broad leaf clusters",
+      "images": [
+        {
+          "id": "clustered-middle-forecourt-evening-east",
+          "image": "game3d/shots/island-day1/clustered-middle/forecourt-evening-east.png",
+          "caption": "forecourt evening east"
+        },
+        {
+          "id": "clustered-middle-forecourt-evening-north",
+          "image": "game3d/shots/island-day1/clustered-middle/forecourt-evening-north.png",
+          "caption": "forecourt evening north"
+        },
+        {
+          "id": "clustered-middle-forecourt-evening-phone",
+          "image": "game3d/shots/island-day1/clustered-middle/forecourt-evening-phone.png",
+          "caption": "forecourt evening phone"
+        },
+        {
+          "id": "clustered-middle-forecourt-evening-south",
+          "image": "game3d/shots/island-day1/clustered-middle/forecourt-evening-south.png",
+          "caption": "forecourt evening south"
+        },
+        {
+          "id": "clustered-middle-forecourt-evening-west",
+          "image": "game3d/shots/island-day1/clustered-middle/forecourt-evening-west.png",
+          "caption": "forecourt evening west"
+        },
+        {
+          "id": "clustered-middle-forecourt-morning-east",
+          "image": "game3d/shots/island-day1/clustered-middle/forecourt-morning-east.png",
+          "caption": "forecourt morning east"
+        },
+        {
+          "id": "clustered-middle-forecourt-morning-north",
+          "image": "game3d/shots/island-day1/clustered-middle/forecourt-morning-north.png",
+          "caption": "forecourt morning north"
+        },
+        {
+          "id": "clustered-middle-forecourt-morning-phone",
+          "image": "game3d/shots/island-day1/clustered-middle/forecourt-morning-phone.png",
+          "caption": "forecourt morning phone"
+        },
+        {
+          "id": "clustered-middle-forecourt-morning-south",
+          "image": "game3d/shots/island-day1/clustered-middle/forecourt-morning-south.png",
+          "caption": "forecourt morning south"
+        },
+        {
+          "id": "clustered-middle-forecourt-morning-west",
+          "image": "game3d/shots/island-day1/clustered-middle/forecourt-morning-west.png",
+          "caption": "forecourt morning west"
+        },
+        {
+          "id": "clustered-middle-plaza-evening-east",
+          "image": "game3d/shots/island-day1/clustered-middle/plaza-evening-east.png",
+          "caption": "plaza evening east"
+        },
+        {
+          "id": "clustered-middle-plaza-evening-north",
+          "image": "game3d/shots/island-day1/clustered-middle/plaza-evening-north.png",
+          "caption": "plaza evening north"
+        },
+        {
+          "id": "clustered-middle-plaza-evening-phone",
+          "image": "game3d/shots/island-day1/clustered-middle/plaza-evening-phone.png",
+          "caption": "plaza evening phone"
+        },
+        {
+          "id": "clustered-middle-plaza-evening-south",
+          "image": "game3d/shots/island-day1/clustered-middle/plaza-evening-south.png",
+          "caption": "plaza evening south"
+        },
+        {
+          "id": "clustered-middle-plaza-evening-west",
+          "image": "game3d/shots/island-day1/clustered-middle/plaza-evening-west.png",
+          "caption": "plaza evening west"
+        },
+        {
+          "id": "clustered-middle-plaza-morning-east",
+          "image": "game3d/shots/island-day1/clustered-middle/plaza-morning-east.png",
+          "caption": "plaza morning east"
+        },
+        {
+          "id": "clustered-middle-plaza-morning-north",
+          "image": "game3d/shots/island-day1/clustered-middle/plaza-morning-north.png",
+          "caption": "plaza morning north"
+        },
+        {
+          "id": "clustered-middle-plaza-morning-phone",
+          "image": "game3d/shots/island-day1/clustered-middle/plaza-morning-phone.png",
+          "caption": "plaza morning phone"
+        },
+        {
+          "id": "clustered-middle-plaza-morning-south",
+          "image": "game3d/shots/island-day1/clustered-middle/plaza-morning-south.png",
+          "caption": "plaza morning south"
+        },
+        {
+          "id": "clustered-middle-plaza-morning-west",
+          "image": "game3d/shots/island-day1/clustered-middle/plaza-morning-west.png",
+          "caption": "plaza morning west"
+        }
+      ]
+    },
+    {
+      "title": "Final distant crowns",
+      "images": [
+        {
+          "id": "scaled-middle-forecourt-evening-east",
+          "image": "game3d/shots/island-day1/scaled-middle/forecourt-evening-east.png",
+          "caption": "forecourt evening east"
+        },
+        {
+          "id": "scaled-middle-forecourt-evening-north",
+          "image": "game3d/shots/island-day1/scaled-middle/forecourt-evening-north.png",
+          "caption": "forecourt evening north"
+        },
+        {
+          "id": "scaled-middle-forecourt-evening-phone",
+          "image": "game3d/shots/island-day1/scaled-middle/forecourt-evening-phone.png",
+          "caption": "forecourt evening phone"
+        },
+        {
+          "id": "scaled-middle-forecourt-evening-south",
+          "image": "game3d/shots/island-day1/scaled-middle/forecourt-evening-south.png",
+          "caption": "forecourt evening south"
+        },
+        {
+          "id": "scaled-middle-forecourt-evening-west",
+          "image": "game3d/shots/island-day1/scaled-middle/forecourt-evening-west.png",
+          "caption": "forecourt evening west"
+        },
+        {
+          "id": "scaled-middle-forecourt-morning-east",
+          "image": "game3d/shots/island-day1/scaled-middle/forecourt-morning-east.png",
+          "caption": "forecourt morning east"
+        },
+        {
+          "id": "scaled-middle-forecourt-morning-north",
+          "image": "game3d/shots/island-day1/scaled-middle/forecourt-morning-north.png",
+          "caption": "forecourt morning north"
+        },
+        {
+          "id": "scaled-middle-forecourt-morning-phone",
+          "image": "game3d/shots/island-day1/scaled-middle/forecourt-morning-phone.png",
+          "caption": "forecourt morning phone"
+        },
+        {
+          "id": "scaled-middle-forecourt-morning-south",
+          "image": "game3d/shots/island-day1/scaled-middle/forecourt-morning-south.png",
+          "caption": "forecourt morning south"
+        },
+        {
+          "id": "scaled-middle-forecourt-morning-west",
+          "image": "game3d/shots/island-day1/scaled-middle/forecourt-morning-west.png",
+          "caption": "forecourt morning west"
+        },
+        {
+          "id": "scaled-middle-plaza-evening-east",
+          "image": "game3d/shots/island-day1/scaled-middle/plaza-evening-east.png",
+          "caption": "plaza evening east"
+        },
+        {
+          "id": "scaled-middle-plaza-evening-north",
+          "image": "game3d/shots/island-day1/scaled-middle/plaza-evening-north.png",
+          "caption": "plaza evening north"
+        },
+        {
+          "id": "scaled-middle-plaza-evening-phone",
+          "image": "game3d/shots/island-day1/scaled-middle/plaza-evening-phone.png",
+          "caption": "plaza evening phone"
+        },
+        {
+          "id": "scaled-middle-plaza-evening-south",
+          "image": "game3d/shots/island-day1/scaled-middle/plaza-evening-south.png",
+          "caption": "plaza evening south"
+        },
+        {
+          "id": "scaled-middle-plaza-evening-west",
+          "image": "game3d/shots/island-day1/scaled-middle/plaza-evening-west.png",
+          "caption": "plaza evening west"
+        },
+        {
+          "id": "scaled-middle-plaza-morning-east",
+          "image": "game3d/shots/island-day1/scaled-middle/plaza-morning-east.png",
+          "caption": "plaza morning east"
+        },
+        {
+          "id": "scaled-middle-plaza-morning-north",
+          "image": "game3d/shots/island-day1/scaled-middle/plaza-morning-north.png",
+          "caption": "plaza morning north"
+        },
+        {
+          "id": "scaled-middle-plaza-morning-phone",
+          "image": "game3d/shots/island-day1/scaled-middle/plaza-morning-phone.png",
+          "caption": "plaza morning phone"
+        },
+        {
+          "id": "scaled-middle-plaza-morning-south",
+          "image": "game3d/shots/island-day1/scaled-middle/plaza-morning-south.png",
+          "caption": "plaza morning south"
+        },
+        {
+          "id": "scaled-middle-plaza-morning-west",
+          "image": "game3d/shots/island-day1/scaled-middle/plaza-morning-west.png",
+          "caption": "plaza morning west"
+        }
+      ]
+    },
+    {
+      "title": "Plaza detail measurement",
+      "images": [
+        {
+          "id": "budget-probe-plaza-evening-east",
+          "image": "game3d/shots/island-day1/budget-probe/plaza-evening-east.png",
+          "caption": "plaza evening east"
+        },
+        {
+          "id": "budget-probe-plaza-evening-north",
+          "image": "game3d/shots/island-day1/budget-probe/plaza-evening-north.png",
+          "caption": "plaza evening north"
+        },
+        {
+          "id": "budget-probe-plaza-evening-phone",
+          "image": "game3d/shots/island-day1/budget-probe/plaza-evening-phone.png",
+          "caption": "plaza evening phone"
+        },
+        {
+          "id": "budget-probe-plaza-evening-south",
+          "image": "game3d/shots/island-day1/budget-probe/plaza-evening-south.png",
+          "caption": "plaza evening south"
+        },
+        {
+          "id": "budget-probe-plaza-evening-west",
+          "image": "game3d/shots/island-day1/budget-probe/plaza-evening-west.png",
+          "caption": "plaza evening west"
+        },
+        {
+          "id": "budget-probe-plaza-morning-east",
+          "image": "game3d/shots/island-day1/budget-probe/plaza-morning-east.png",
+          "caption": "plaza morning east"
+        },
+        {
+          "id": "budget-probe-plaza-morning-north",
+          "image": "game3d/shots/island-day1/budget-probe/plaza-morning-north.png",
+          "caption": "plaza morning north"
+        },
+        {
+          "id": "budget-probe-plaza-morning-phone",
+          "image": "game3d/shots/island-day1/budget-probe/plaza-morning-phone.png",
+          "caption": "plaza morning phone"
+        },
+        {
+          "id": "budget-probe-plaza-morning-south",
+          "image": "game3d/shots/island-day1/budget-probe/plaza-morning-south.png",
+          "caption": "plaza morning south"
+        },
+        {
+          "id": "budget-probe-plaza-morning-west",
+          "image": "game3d/shots/island-day1/budget-probe/plaza-morning-west.png",
+          "caption": "plaza morning west"
+        }
+      ]
+    },
+    {
+      "title": "Combined final views",
+      "images": [
+        {
+          "id": "final-combined-dorm_court-evening-east",
+          "image": "game3d/shots/island-day1/final-combined/dorm_court-evening-east.png",
+          "caption": "dorm court evening east"
+        },
+        {
+          "id": "final-combined-dorm_court-evening-north",
+          "image": "game3d/shots/island-day1/final-combined/dorm_court-evening-north.png",
+          "caption": "dorm court evening north"
+        },
+        {
+          "id": "final-combined-dorm_court-evening-phone",
+          "image": "game3d/shots/island-day1/final-combined/dorm_court-evening-phone.png",
+          "caption": "dorm court evening phone"
+        },
+        {
+          "id": "final-combined-dorm_court-evening-south",
+          "image": "game3d/shots/island-day1/final-combined/dorm_court-evening-south.png",
+          "caption": "dorm court evening south"
+        },
+        {
+          "id": "final-combined-dorm_court-evening-west",
+          "image": "game3d/shots/island-day1/final-combined/dorm_court-evening-west.png",
+          "caption": "dorm court evening west"
+        },
+        {
+          "id": "final-combined-dorm_court-morning-east",
+          "image": "game3d/shots/island-day1/final-combined/dorm_court-morning-east.png",
+          "caption": "dorm court morning east"
+        },
+        {
+          "id": "final-combined-dorm_court-morning-north",
+          "image": "game3d/shots/island-day1/final-combined/dorm_court-morning-north.png",
+          "caption": "dorm court morning north"
+        },
+        {
+          "id": "final-combined-dorm_court-morning-phone",
+          "image": "game3d/shots/island-day1/final-combined/dorm_court-morning-phone.png",
+          "caption": "dorm court morning phone"
+        },
+        {
+          "id": "final-combined-dorm_court-morning-south",
+          "image": "game3d/shots/island-day1/final-combined/dorm_court-morning-south.png",
+          "caption": "dorm court morning south"
+        },
+        {
+          "id": "final-combined-dorm_court-morning-west",
+          "image": "game3d/shots/island-day1/final-combined/dorm_court-morning-west.png",
+          "caption": "dorm court morning west"
+        },
+        {
+          "id": "final-combined-forecourt-evening-east",
+          "image": "game3d/shots/island-day1/final-combined/forecourt-evening-east.png",
+          "caption": "forecourt evening east"
+        },
+        {
+          "id": "final-combined-forecourt-evening-north",
+          "image": "game3d/shots/island-day1/final-combined/forecourt-evening-north.png",
+          "caption": "forecourt evening north"
+        },
+        {
+          "id": "final-combined-forecourt-evening-phone",
+          "image": "game3d/shots/island-day1/final-combined/forecourt-evening-phone.png",
+          "caption": "forecourt evening phone"
+        },
+        {
+          "id": "final-combined-forecourt-evening-south",
+          "image": "game3d/shots/island-day1/final-combined/forecourt-evening-south.png",
+          "caption": "forecourt evening south"
+        },
+        {
+          "id": "final-combined-forecourt-evening-west",
+          "image": "game3d/shots/island-day1/final-combined/forecourt-evening-west.png",
+          "caption": "forecourt evening west"
+        },
+        {
+          "id": "final-combined-forecourt-morning-east",
+          "image": "game3d/shots/island-day1/final-combined/forecourt-morning-east.png",
+          "caption": "forecourt morning east"
+        },
+        {
+          "id": "final-combined-forecourt-morning-north",
+          "image": "game3d/shots/island-day1/final-combined/forecourt-morning-north.png",
+          "caption": "forecourt morning north"
+        },
+        {
+          "id": "final-combined-forecourt-morning-phone",
+          "image": "game3d/shots/island-day1/final-combined/forecourt-morning-phone.png",
+          "caption": "forecourt morning phone"
+        },
+        {
+          "id": "final-combined-forecourt-morning-south",
+          "image": "game3d/shots/island-day1/final-combined/forecourt-morning-south.png",
+          "caption": "forecourt morning south"
+        },
+        {
+          "id": "final-combined-forecourt-morning-west",
+          "image": "game3d/shots/island-day1/final-combined/forecourt-morning-west.png",
+          "caption": "forecourt morning west"
+        },
+        {
+          "id": "final-combined-plaza-evening-east",
+          "image": "game3d/shots/island-day1/final-combined/plaza-evening-east.png",
+          "caption": "plaza evening east"
+        },
+        {
+          "id": "final-combined-plaza-evening-north",
+          "image": "game3d/shots/island-day1/final-combined/plaza-evening-north.png",
+          "caption": "plaza evening north"
+        },
+        {
+          "id": "final-combined-plaza-evening-phone",
+          "image": "game3d/shots/island-day1/final-combined/plaza-evening-phone.png",
+          "caption": "plaza evening phone"
+        },
+        {
+          "id": "final-combined-plaza-evening-south",
+          "image": "game3d/shots/island-day1/final-combined/plaza-evening-south.png",
+          "caption": "plaza evening south"
+        },
+        {
+          "id": "final-combined-plaza-evening-west",
+          "image": "game3d/shots/island-day1/final-combined/plaza-evening-west.png",
+          "caption": "plaza evening west"
+        },
+        {
+          "id": "final-combined-plaza-morning-east",
+          "image": "game3d/shots/island-day1/final-combined/plaza-morning-east.png",
+          "caption": "plaza morning east"
+        },
+        {
+          "id": "final-combined-plaza-morning-north",
+          "image": "game3d/shots/island-day1/final-combined/plaza-morning-north.png",
+          "caption": "plaza morning north"
+        },
+        {
+          "id": "final-combined-plaza-morning-phone",
+          "image": "game3d/shots/island-day1/final-combined/plaza-morning-phone.png",
+          "caption": "plaza morning phone"
+        },
+        {
+          "id": "final-combined-plaza-morning-south",
+          "image": "game3d/shots/island-day1/final-combined/plaza-morning-south.png",
+          "caption": "plaza morning south"
+        },
+        {
+          "id": "final-combined-plaza-morning-west",
+          "image": "game3d/shots/island-day1/final-combined/plaza-morning-west.png",
+          "caption": "plaza morning west"
+        },
+        {
+          "id": "final-combined-shotengai-evening-east",
+          "image": "game3d/shots/island-day1/final-combined/shotengai-evening-east.png",
+          "caption": "shotengai evening east"
+        },
+        {
+          "id": "final-combined-shotengai-evening-north",
+          "image": "game3d/shots/island-day1/final-combined/shotengai-evening-north.png",
+          "caption": "shotengai evening north"
+        },
+        {
+          "id": "final-combined-shotengai-evening-phone",
+          "image": "game3d/shots/island-day1/final-combined/shotengai-evening-phone.png",
+          "caption": "shotengai evening phone"
+        },
+        {
+          "id": "final-combined-shotengai-evening-south",
+          "image": "game3d/shots/island-day1/final-combined/shotengai-evening-south.png",
+          "caption": "shotengai evening south"
+        },
+        {
+          "id": "final-combined-shotengai-evening-west",
+          "image": "game3d/shots/island-day1/final-combined/shotengai-evening-west.png",
+          "caption": "shotengai evening west"
+        },
+        {
+          "id": "final-combined-shotengai-morning-east",
+          "image": "game3d/shots/island-day1/final-combined/shotengai-morning-east.png",
+          "caption": "shotengai morning east"
+        },
+        {
+          "id": "final-combined-shotengai-morning-north",
+          "image": "game3d/shots/island-day1/final-combined/shotengai-morning-north.png",
+          "caption": "shotengai morning north"
+        },
+        {
+          "id": "final-combined-shotengai-morning-phone",
+          "image": "game3d/shots/island-day1/final-combined/shotengai-morning-phone.png",
+          "caption": "shotengai morning phone"
+        },
+        {
+          "id": "final-combined-shotengai-morning-south",
+          "image": "game3d/shots/island-day1/final-combined/shotengai-morning-south.png",
+          "caption": "shotengai morning south"
+        },
+        {
+          "id": "final-combined-shotengai-morning-west",
+          "image": "game3d/shots/island-day1/final-combined/shotengai-morning-west.png",
+          "caption": "shotengai morning west"
+        }
+      ]
+    },
+    {
+      "title": "Final plaza views",
+      "images": [
+        {
+          "id": "budget-finish-plaza-evening-east",
+          "image": "game3d/shots/island-day1/budget-finish/plaza-evening-east.png",
+          "caption": "plaza evening east"
+        },
+        {
+          "id": "budget-finish-plaza-evening-north",
+          "image": "game3d/shots/island-day1/budget-finish/plaza-evening-north.png",
+          "caption": "plaza evening north"
+        },
+        {
+          "id": "budget-finish-plaza-evening-phone",
+          "image": "game3d/shots/island-day1/budget-finish/plaza-evening-phone.png",
+          "caption": "plaza evening phone"
+        },
+        {
+          "id": "budget-finish-plaza-evening-south",
+          "image": "game3d/shots/island-day1/budget-finish/plaza-evening-south.png",
+          "caption": "plaza evening south"
+        },
+        {
+          "id": "budget-finish-plaza-evening-west",
+          "image": "game3d/shots/island-day1/budget-finish/plaza-evening-west.png",
+          "caption": "plaza evening west"
+        },
+        {
+          "id": "budget-finish-plaza-morning-east",
+          "image": "game3d/shots/island-day1/budget-finish/plaza-morning-east.png",
+          "caption": "plaza morning east"
+        },
+        {
+          "id": "budget-finish-plaza-morning-north",
+          "image": "game3d/shots/island-day1/budget-finish/plaza-morning-north.png",
+          "caption": "plaza morning north"
+        },
+        {
+          "id": "budget-finish-plaza-morning-phone",
+          "image": "game3d/shots/island-day1/budget-finish/plaza-morning-phone.png",
+          "caption": "plaza morning phone"
+        },
+        {
+          "id": "budget-finish-plaza-morning-south",
+          "image": "game3d/shots/island-day1/budget-finish/plaza-morning-south.png",
+          "caption": "plaza morning south"
+        },
+        {
+          "id": "budget-finish-plaza-morning-west",
+          "image": "game3d/shots/island-day1/budget-finish/plaza-morning-west.png",
+          "caption": "plaza morning west"
+        }
+      ]
+    },
+    {
+      "title": "Final beach route checks",
+      "images": [
+        {
+          "id": "route-finish-1366-crossing-north",
+          "image": "game3d/shots/island-day1/route-finish/1366-crossing-north.png",
+          "caption": "1366 crossing north"
+        },
+        {
+          "id": "route-finish-1366-crossing",
+          "image": "game3d/shots/island-day1/route-finish/1366-crossing.png",
+          "caption": "1366 crossing"
+        },
+        {
+          "id": "route-finish-1366-entry-look-east",
+          "image": "game3d/shots/island-day1/route-finish/1366-entry-look-east.png",
+          "caption": "1366 entry look east"
+        },
+        {
+          "id": "route-finish-1366-entry-look-fountain",
+          "image": "game3d/shots/island-day1/route-finish/1366-entry-look-fountain.png",
+          "caption": "1366 entry look fountain"
+        },
+        {
+          "id": "route-finish-1366-entry-look-shore",
+          "image": "game3d/shots/island-day1/route-finish/1366-entry-look-shore.png",
+          "caption": "1366 entry look shore"
+        },
+        {
+          "id": "route-finish-1366-entry-look-west",
+          "image": "game3d/shots/island-day1/route-finish/1366-entry-look-west.png",
+          "caption": "1366 entry look west"
+        },
+        {
+          "id": "route-finish-1366-market-entry",
+          "image": "game3d/shots/island-day1/route-finish/1366-market-entry.png",
+          "caption": "1366 market entry"
+        },
+        {
+          "id": "route-finish-1366-plaza-default",
+          "image": "game3d/shots/island-day1/route-finish/1366-plaza-default.png",
+          "caption": "1366 plaza default"
+        },
+        {
+          "id": "route-finish-1366-plaza-return",
+          "image": "game3d/shots/island-day1/route-finish/1366-plaza-return.png",
+          "caption": "1366 plaza return"
+        },
+        {
+          "id": "route-finish-1366-plaza-south",
+          "image": "game3d/shots/island-day1/route-finish/1366-plaza-south.png",
+          "caption": "1366 plaza south"
+        },
+        {
+          "id": "route-finish-1366-promenade",
+          "image": "game3d/shots/island-day1/route-finish/1366-promenade.png",
+          "caption": "1366 promenade"
+        },
+        {
+          "id": "route-finish-1366-sand",
+          "image": "game3d/shots/island-day1/route-finish/1366-sand.png",
+          "caption": "1366 sand"
+        },
+        {
+          "id": "route-finish-1366-stairs",
+          "image": "game3d/shots/island-day1/route-finish/1366-stairs.png",
+          "caption": "1366 stairs"
+        },
+        {
+          "id": "route-finish-390-crossing",
+          "image": "game3d/shots/island-day1/route-finish/390-crossing.png",
+          "caption": "390 crossing"
+        },
+        {
+          "id": "route-finish-390-market-entry",
+          "image": "game3d/shots/island-day1/route-finish/390-market-entry.png",
+          "caption": "390 market entry"
+        },
+        {
+          "id": "route-finish-390-plaza-default",
+          "image": "game3d/shots/island-day1/route-finish/390-plaza-default.png",
+          "caption": "390 plaza default"
+        },
+        {
+          "id": "route-finish-390-plaza-return",
+          "image": "game3d/shots/island-day1/route-finish/390-plaza-return.png",
+          "caption": "390 plaza return"
+        },
+        {
+          "id": "route-finish-390-plaza-south",
+          "image": "game3d/shots/island-day1/route-finish/390-plaza-south.png",
+          "caption": "390 plaza south"
+        },
+        {
+          "id": "route-finish-390-promenade",
+          "image": "game3d/shots/island-day1/route-finish/390-promenade.png",
+          "caption": "390 promenade"
+        },
+        {
+          "id": "route-finish-390-sand",
+          "image": "game3d/shots/island-day1/route-finish/390-sand.png",
+          "caption": "390 sand"
+        },
+        {
+          "id": "route-finish-390-stairs",
+          "image": "game3d/shots/island-day1/route-finish/390-stairs.png",
+          "caption": "390 stairs"
+        }
+      ]
+    },
+    {
+      "title": "Independent player walkthrough",
+      "images": [
+        {
+          "id": "cold-player-desktop-boardwalk-end",
+          "image": "game3d/shots/island-day1/cold-player/desktop-boardwalk-end.png",
+          "caption": "desktop boardwalk end"
+        },
+        {
+          "id": "cold-player-desktop-first-line",
+          "image": "game3d/shots/island-day1/cold-player/desktop-first-line.png",
+          "caption": "desktop first line"
+        },
+        {
+          "id": "cold-player-desktop-first-talk",
+          "image": "game3d/shots/island-day1/cold-player/desktop-first-talk.png",
+          "caption": "desktop first talk"
+        },
+        {
+          "id": "cold-player-desktop-market-approach",
+          "image": "game3d/shots/island-day1/cold-player/desktop-market-approach.png",
+          "caption": "desktop market approach"
+        },
+        {
+          "id": "cold-player-desktop-market-entry",
+          "image": "game3d/shots/island-day1/cold-player/desktop-market-entry.png",
+          "caption": "desktop market entry"
+        },
+        {
+          "id": "cold-player-desktop-market-path-visible",
+          "image": "game3d/shots/island-day1/cold-player/desktop-market-path-visible.png",
+          "caption": "desktop market path visible"
+        },
+        {
+          "id": "cold-player-desktop-market-ready",
+          "image": "game3d/shots/island-day1/cold-player/desktop-market-ready.png",
+          "caption": "desktop market ready"
+        },
+        {
+          "id": "cold-player-desktop-opening-ready",
+          "image": "game3d/shots/island-day1/cold-player/desktop-opening-ready.png",
+          "caption": "desktop opening ready"
+        },
+        {
+          "id": "cold-player-desktop-opening",
+          "image": "game3d/shots/island-day1/cold-player/desktop-opening.png",
+          "caption": "desktop opening"
+        },
+        {
+          "id": "cold-player-desktop-plaza-exit-walk",
+          "image": "game3d/shots/island-day1/cold-player/desktop-plaza-exit-walk.png",
+          "caption": "desktop plaza exit walk"
+        },
+        {
+          "id": "cold-player-desktop-plaza-south-approach",
+          "image": "game3d/shots/island-day1/cold-player/desktop-plaza-south-approach.png",
+          "caption": "desktop plaza south approach"
+        },
+        {
+          "id": "cold-player-desktop-plaza",
+          "image": "game3d/shots/island-day1/cold-player/desktop-plaza.png",
+          "caption": "desktop plaza"
+        },
+        {
+          "id": "cold-player-desktop-return-crossing",
+          "image": "game3d/shots/island-day1/cold-player/desktop-return-crossing.png",
+          "caption": "desktop return crossing"
+        },
+        {
+          "id": "cold-player-desktop-return-plaza",
+          "image": "game3d/shots/island-day1/cold-player/desktop-return-plaza.png",
+          "caption": "desktop return plaza"
+        },
+        {
+          "id": "cold-player-desktop-seat-objective",
+          "image": "game3d/shots/island-day1/cold-player/desktop-seat-objective.png",
+          "caption": "desktop seat objective"
+        },
+        {
+          "id": "cold-player-desktop-shore-approach",
+          "image": "game3d/shots/island-day1/cold-player/desktop-shore-approach.png",
+          "caption": "desktop shore approach"
+        },
+        {
+          "id": "cold-player-desktop-south-road",
+          "image": "game3d/shots/island-day1/cold-player/desktop-south-road.png",
+          "caption": "desktop south road"
+        },
+        {
+          "id": "cold-player-desktop-talk-ready",
+          "image": "game3d/shots/island-day1/cold-player/desktop-talk-ready.png",
+          "caption": "desktop talk ready"
+        },
+        {
+          "id": "cold-player-desktop-title",
+          "image": "game3d/shots/island-day1/cold-player/desktop-title.png",
+          "caption": "desktop title"
+        },
+        {
+          "id": "cold-player-phone-beach-end-check",
+          "image": "game3d/shots/island-day1/cold-player/phone-beach-end-check.png",
+          "caption": "phone beach end check"
+        },
+        {
+          "id": "cold-player-phone-beach-sand",
+          "image": "game3d/shots/island-day1/cold-player/phone-beach-sand.png",
+          "caption": "phone beach sand"
+        },
+        {
+          "id": "cold-player-phone-boardwalk-end",
+          "image": "game3d/shots/island-day1/cold-player/phone-boardwalk-end.png",
+          "caption": "phone boardwalk end"
+        },
+        {
+          "id": "cold-player-phone-catch-ready",
+          "image": "game3d/shots/island-day1/cold-player/phone-catch-ready.png",
+          "caption": "phone catch ready"
+        },
+        {
+          "id": "cold-player-phone-catch",
+          "image": "game3d/shots/island-day1/cold-player/phone-catch.png",
+          "caption": "phone catch"
+        },
+        {
+          "id": "cold-player-phone-choice-ready",
+          "image": "game3d/shots/island-day1/cold-player/phone-choice-ready.png",
+          "caption": "phone choice ready"
+        },
+        {
+          "id": "cold-player-phone-dorm-court",
+          "image": "game3d/shots/island-day1/cold-player/phone-dorm-court.png",
+          "caption": "phone dorm court"
+        },
+        {
+          "id": "cold-player-phone-dorm-exit",
+          "image": "game3d/shots/island-day1/cold-player/phone-dorm-exit.png",
+          "caption": "phone dorm exit"
+        },
+        {
+          "id": "cold-player-phone-dorm-to-street",
+          "image": "game3d/shots/island-day1/cold-player/phone-dorm-to-street.png",
+          "caption": "phone dorm to street"
+        },
+        {
+          "id": "cold-player-phone-first-choice",
+          "image": "game3d/shots/island-day1/cold-player/phone-first-choice.png",
+          "caption": "phone first choice"
+        },
+        {
+          "id": "cold-player-phone-first-talk",
+          "image": "game3d/shots/island-day1/cold-player/phone-first-talk.png",
+          "caption": "phone first talk"
+        },
+        {
+          "id": "cold-player-phone-forecourt",
+          "image": "game3d/shots/island-day1/cold-player/phone-forecourt.png",
+          "caption": "phone forecourt"
+        },
+        {
+          "id": "cold-player-phone-lunchbox",
+          "image": "game3d/shots/island-day1/cold-player/phone-lunchbox.png",
+          "caption": "phone lunchbox"
+        },
+        {
+          "id": "cold-player-phone-map-plaza",
+          "image": "game3d/shots/island-day1/cold-player/phone-map-plaza.png",
+          "caption": "phone map plaza"
+        },
+        {
+          "id": "cold-player-phone-map-ready",
+          "image": "game3d/shots/island-day1/cold-player/phone-map-ready.png",
+          "caption": "phone map ready"
+        },
+        {
+          "id": "cold-player-phone-map",
+          "image": "game3d/shots/island-day1/cold-player/phone-map.png",
+          "caption": "phone map"
+        },
+        {
+          "id": "cold-player-phone-market-arrival",
+          "image": "game3d/shots/island-day1/cold-player/phone-market-arrival.png",
+          "caption": "phone market arrival"
+        },
+        {
+          "id": "cold-player-phone-market-crossing",
+          "image": "game3d/shots/island-day1/cold-player/phone-market-crossing.png",
+          "caption": "phone market crossing"
+        },
+        {
+          "id": "cold-player-phone-market-path",
+          "image": "game3d/shots/island-day1/cold-player/phone-market-path.png",
+          "caption": "phone market path"
+        },
+        {
+          "id": "cold-player-phone-market-reentry",
+          "image": "game3d/shots/island-day1/cold-player/phone-market-reentry.png",
+          "caption": "phone market reentry"
+        },
+        {
+          "id": "cold-player-phone-market-second-half",
+          "image": "game3d/shots/island-day1/cold-player/phone-market-second-half.png",
+          "caption": "phone market second half"
+        },
+        {
+          "id": "cold-player-phone-market-south",
+          "image": "game3d/shots/island-day1/cold-player/phone-market-south.png",
+          "caption": "phone market south"
+        },
+        {
+          "id": "cold-player-phone-next-line",
+          "image": "game3d/shots/island-day1/cold-player/phone-next-line.png",
+          "caption": "phone next line"
+        },
+        {
+          "id": "cold-player-phone-on-stairs",
+          "image": "game3d/shots/island-day1/cold-player/phone-on-stairs.png",
+          "caption": "phone on stairs"
+        },
+        {
+          "id": "cold-player-phone-onward-market",
+          "image": "game3d/shots/island-day1/cold-player/phone-onward-market.png",
+          "caption": "phone onward market"
+        },
+        {
+          "id": "cold-player-phone-opening",
+          "image": "game3d/shots/island-day1/cold-player/phone-opening.png",
+          "caption": "phone opening"
+        },
+        {
+          "id": "cold-player-phone-plaza-final",
+          "image": "game3d/shots/island-day1/cold-player/phone-plaza-final.png",
+          "caption": "phone plaza final"
+        },
+        {
+          "id": "cold-player-phone-plaza-south",
+          "image": "game3d/shots/island-day1/cold-player/phone-plaza-south.png",
+          "caption": "phone plaza south"
+        },
+        {
+          "id": "cold-player-phone-response",
+          "image": "game3d/shots/island-day1/cold-player/phone-response.png",
+          "caption": "phone response"
+        },
+        {
+          "id": "cold-player-phone-route-plaza",
+          "image": "game3d/shots/island-day1/cold-player/phone-route-plaza.png",
+          "caption": "phone route plaza"
+        },
+        {
+          "id": "cold-player-phone-route-state",
+          "image": "game3d/shots/island-day1/cold-player/phone-route-state.png",
+          "caption": "phone route state"
+        },
+        {
+          "id": "cold-player-phone-sand-access",
+          "image": "game3d/shots/island-day1/cold-player/phone-sand-access.png",
+          "caption": "phone sand access"
+        },
+        {
+          "id": "cold-player-phone-sand-step",
+          "image": "game3d/shots/island-day1/cold-player/phone-sand-step.png",
+          "caption": "phone sand step"
+        },
+        {
+          "id": "cold-player-phone-shore-route",
+          "image": "game3d/shots/island-day1/cold-player/phone-shore-route.png",
+          "caption": "phone shore route"
+        },
+        {
+          "id": "cold-player-phone-shore-stairs",
+          "image": "game3d/shots/island-day1/cold-player/phone-shore-stairs.png",
+          "caption": "phone shore stairs"
+        },
+        {
+          "id": "cold-player-phone-start",
+          "image": "game3d/shots/island-day1/cold-player/phone-start.png",
+          "caption": "phone start"
+        },
+        {
+          "id": "cold-player-phone-talk-ready",
+          "image": "game3d/shots/island-day1/cold-player/phone-talk-ready.png",
+          "caption": "phone talk ready"
+        },
+        {
+          "id": "cold-player-phone-title-ready",
+          "image": "game3d/shots/island-day1/cold-player/phone-title-ready.png",
+          "caption": "phone title ready"
+        },
+        {
+          "id": "cold-player-phone-title",
+          "image": "game3d/shots/island-day1/cold-player/phone-title.png",
+          "caption": "phone title"
+        },
+        {
+          "id": "cold-player-repair-desktop-plaza",
+          "image": "game3d/shots/island-day1/cold-player/repair-desktop-plaza.png",
+          "caption": "repair desktop plaza"
+        },
+        {
+          "id": "cold-player-repair-desktop-side-view-turn",
+          "image": "game3d/shots/island-day1/cold-player/repair-desktop-side-view-turn.png",
+          "caption": "repair desktop side view turn"
+        },
+        {
+          "id": "cold-player-repair-desktop-side-view",
+          "image": "game3d/shots/island-day1/cold-player/repair-desktop-side-view.png",
+          "caption": "repair desktop side view"
+        },
+        {
+          "id": "cold-player-repair-phone-back-to-fountain",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-back-to-fountain.png",
+          "caption": "repair phone back to fountain"
+        },
+        {
+          "id": "cold-player-repair-phone-boardwalk",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-boardwalk.png",
+          "caption": "repair phone boardwalk"
+        },
+        {
+          "id": "cold-player-repair-phone-fountain-return-ready",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-fountain-return-ready.png",
+          "caption": "repair phone fountain return ready"
+        },
+        {
+          "id": "cold-player-repair-phone-market-arrival",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-market-arrival.png",
+          "caption": "repair phone market arrival"
+        },
+        {
+          "id": "cold-player-repair-phone-market-ready",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-market-ready.png",
+          "caption": "repair phone market ready"
+        },
+        {
+          "id": "cold-player-repair-phone-market-south",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-market-south.png",
+          "caption": "repair phone market south"
+        },
+        {
+          "id": "cold-player-repair-phone-mat-foot",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-mat-foot.png",
+          "caption": "repair phone mat foot"
+        },
+        {
+          "id": "cold-player-repair-phone-onward",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-onward.png",
+          "caption": "repair phone onward"
+        },
+        {
+          "id": "cold-player-repair-phone-plaza",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-plaza.png",
+          "caption": "repair phone plaza"
+        },
+        {
+          "id": "cold-player-repair-phone-return-boardwalk",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-return-boardwalk.png",
+          "caption": "repair phone return boardwalk"
+        },
+        {
+          "id": "cold-player-repair-phone-return-market-middle",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-return-market-middle.png",
+          "caption": "repair phone return market middle"
+        },
+        {
+          "id": "cold-player-repair-phone-return-market-north",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-return-market-north.png",
+          "caption": "repair phone return market north"
+        },
+        {
+          "id": "cold-player-repair-phone-return-market-south",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-return-market-south.png",
+          "caption": "repair phone return market south"
+        },
+        {
+          "id": "cold-player-repair-phone-return-mat",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-return-mat.png",
+          "caption": "repair phone return mat"
+        },
+        {
+          "id": "cold-player-repair-phone-return-promenade",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-return-promenade.png",
+          "caption": "repair phone return promenade"
+        },
+        {
+          "id": "cold-player-repair-phone-return-seam-approach",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-return-seam-approach.png",
+          "caption": "repair phone return seam approach"
+        },
+        {
+          "id": "cold-player-repair-phone-return-seam",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-return-seam.png",
+          "caption": "repair phone return seam"
+        },
+        {
+          "id": "cold-player-repair-phone-return-stairs",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-return-stairs.png",
+          "caption": "repair phone return stairs"
+        },
+        {
+          "id": "cold-player-repair-phone-sand-ahead",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-sand-ahead.png",
+          "caption": "repair phone sand ahead"
+        },
+        {
+          "id": "cold-player-repair-phone-sand-left",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-sand-left.png",
+          "caption": "repair phone sand left"
+        },
+        {
+          "id": "cold-player-repair-phone-sand-return-centre",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-sand-return-centre.png",
+          "caption": "repair phone sand return centre"
+        },
+        {
+          "id": "cold-player-repair-phone-sand-right",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-sand-right.png",
+          "caption": "repair phone sand right"
+        },
+        {
+          "id": "cold-player-repair-phone-shore-mouth",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-shore-mouth.png",
+          "caption": "repair phone shore mouth"
+        },
+        {
+          "id": "cold-player-repair-phone-south-path",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-south-path.png",
+          "caption": "repair phone south path"
+        },
+        {
+          "id": "cold-player-repair-phone-stairs",
+          "image": "game3d/shots/island-day1/cold-player/repair-phone-stairs.png",
+          "caption": "repair phone stairs"
+        }
+      ]
+    },
+    {
+      "title": "Market route: repair phone",
+      "images": [
+        {
+          "id": "market-repair-phone-arrival-settled",
+          "image": "game3d/shots/market-route-539/repair-phone/arrival-settled.png",
+          "caption": "arrival settled"
+        },
+        {
+          "id": "market-repair-phone-dry-sand-left-0",
+          "image": "game3d/shots/market-route-539/repair-phone/dry-sand-left-0.png",
+          "caption": "dry sand left 0"
+        },
+        {
+          "id": "market-repair-phone-dry-sand-left-1",
+          "image": "game3d/shots/market-route-539/repair-phone/dry-sand-left-1.png",
+          "caption": "dry sand left 1"
+        },
+        {
+          "id": "market-repair-phone-dry-sand-left-2",
+          "image": "game3d/shots/market-route-539/repair-phone/dry-sand-left-2.png",
+          "caption": "dry sand left 2"
+        },
+        {
+          "id": "market-repair-phone-dry-sand-left-3",
+          "image": "game3d/shots/market-route-539/repair-phone/dry-sand-left-3.png",
+          "caption": "dry sand left 3"
+        },
+        {
+          "id": "market-repair-phone-dry-sand-left-4",
+          "image": "game3d/shots/market-route-539/repair-phone/dry-sand-left-4.png",
+          "caption": "dry sand left 4"
+        },
+        {
+          "id": "market-repair-phone-dry-sand-right-0",
+          "image": "game3d/shots/market-route-539/repair-phone/dry-sand-right-0.png",
+          "caption": "dry sand right 0"
+        },
+        {
+          "id": "market-repair-phone-dry-sand-right-1",
+          "image": "game3d/shots/market-route-539/repair-phone/dry-sand-right-1.png",
+          "caption": "dry sand right 1"
+        },
+        {
+          "id": "market-repair-phone-dry-sand-right-2",
+          "image": "game3d/shots/market-route-539/repair-phone/dry-sand-right-2.png",
+          "caption": "dry sand right 2"
+        },
+        {
+          "id": "market-repair-phone-market-arrival",
+          "image": "game3d/shots/market-route-539/repair-phone/market-arrival.png",
+          "caption": "market arrival"
+        },
+        {
+          "id": "market-repair-phone-mat-return-0",
+          "image": "game3d/shots/market-route-539/repair-phone/mat-return-0.png",
+          "caption": "mat return 0"
+        },
+        {
+          "id": "market-repair-phone-mat-return-1",
+          "image": "game3d/shots/market-route-539/repair-phone/mat-return-1.png",
+          "caption": "mat return 1"
+        },
+        {
+          "id": "market-repair-phone-north-return-0",
+          "image": "game3d/shots/market-route-539/repair-phone/north-return-0.png",
+          "caption": "north return 0"
+        },
+        {
+          "id": "market-repair-phone-north-return-1",
+          "image": "game3d/shots/market-route-539/repair-phone/north-return-1.png",
+          "caption": "north return 1"
+        },
+        {
+          "id": "market-repair-phone-north-return-10",
+          "image": "game3d/shots/market-route-539/repair-phone/north-return-10.png",
+          "caption": "north return 10"
+        },
+        {
+          "id": "market-repair-phone-north-return-11",
+          "image": "game3d/shots/market-route-539/repair-phone/north-return-11.png",
+          "caption": "north return 11"
+        },
+        {
+          "id": "market-repair-phone-north-return-12",
+          "image": "game3d/shots/market-route-539/repair-phone/north-return-12.png",
+          "caption": "north return 12"
+        },
+        {
+          "id": "market-repair-phone-north-return-2",
+          "image": "game3d/shots/market-route-539/repair-phone/north-return-2.png",
+          "caption": "north return 2"
+        },
+        {
+          "id": "market-repair-phone-north-return-3",
+          "image": "game3d/shots/market-route-539/repair-phone/north-return-3.png",
+          "caption": "north return 3"
+        },
+        {
+          "id": "market-repair-phone-north-return-4",
+          "image": "game3d/shots/market-route-539/repair-phone/north-return-4.png",
+          "caption": "north return 4"
+        },
+        {
+          "id": "market-repair-phone-north-return-5",
+          "image": "game3d/shots/market-route-539/repair-phone/north-return-5.png",
+          "caption": "north return 5"
+        },
+        {
+          "id": "market-repair-phone-north-return-6",
+          "image": "game3d/shots/market-route-539/repair-phone/north-return-6.png",
+          "caption": "north return 6"
+        },
+        {
+          "id": "market-repair-phone-north-return-7",
+          "image": "game3d/shots/market-route-539/repair-phone/north-return-7.png",
+          "caption": "north return 7"
+        },
+        {
+          "id": "market-repair-phone-north-return-8",
+          "image": "game3d/shots/market-route-539/repair-phone/north-return-8.png",
+          "caption": "north return 8"
+        },
+        {
+          "id": "market-repair-phone-north-return-9",
+          "image": "game3d/shots/market-route-539/repair-phone/north-return-9.png",
+          "caption": "north return 9"
+        },
+        {
+          "id": "market-repair-phone-onward-tap-1",
+          "image": "game3d/shots/market-route-539/repair-phone/onward-tap-1.png",
+          "caption": "onward tap 1"
+        },
+        {
+          "id": "market-repair-phone-onward-tap-2",
+          "image": "game3d/shots/market-route-539/repair-phone/onward-tap-2.png",
+          "caption": "onward tap 2"
+        },
+        {
+          "id": "market-repair-phone-plaza-approach-1",
+          "image": "game3d/shots/market-route-539/repair-phone/plaza-approach-1.png",
+          "caption": "plaza approach 1"
+        },
+        {
+          "id": "market-repair-phone-plaza-approach-2",
+          "image": "game3d/shots/market-route-539/repair-phone/plaza-approach-2.png",
+          "caption": "plaza approach 2"
+        },
+        {
+          "id": "market-repair-phone-plaza-return",
+          "image": "game3d/shots/market-route-539/repair-phone/plaza-return.png",
+          "caption": "plaza return"
+        },
+        {
+          "id": "market-repair-phone-shore-0",
+          "image": "game3d/shots/market-route-539/repair-phone/shore-0.png",
+          "caption": "shore 0"
+        },
+        {
+          "id": "market-repair-phone-shore-1",
+          "image": "game3d/shots/market-route-539/repair-phone/shore-1.png",
+          "caption": "shore 1"
+        },
+        {
+          "id": "market-repair-phone-shore-2",
+          "image": "game3d/shots/market-route-539/repair-phone/shore-2.png",
+          "caption": "shore 2"
+        },
+        {
+          "id": "market-repair-phone-shore-3",
+          "image": "game3d/shots/market-route-539/repair-phone/shore-3.png",
+          "caption": "shore 3"
+        },
+        {
+          "id": "market-repair-phone-shore-4",
+          "image": "game3d/shots/market-route-539/repair-phone/shore-4.png",
+          "caption": "shore 4"
+        },
+        {
+          "id": "market-repair-phone-shore-5",
+          "image": "game3d/shots/market-route-539/repair-phone/shore-5.png",
+          "caption": "shore 5"
+        },
+        {
+          "id": "market-repair-phone-shore-6",
+          "image": "game3d/shots/market-route-539/repair-phone/shore-6.png",
+          "caption": "shore 6"
+        },
+        {
+          "id": "market-repair-phone-shore-7",
+          "image": "game3d/shots/market-route-539/repair-phone/shore-7.png",
+          "caption": "shore 7"
+        },
+        {
+          "id": "market-repair-phone-start",
+          "image": "game3d/shots/market-route-539/repair-phone/start.png",
+          "caption": "start"
+        }
+      ]
+    },
+    {
+      "title": "Market route: repair route",
+      "images": [
+        {
+          "id": "market-repair-route-1366-crossing-north",
+          "image": "game3d/shots/market-route-539/repair-route/1366-crossing-north.png",
+          "caption": "1366 crossing north"
+        },
+        {
+          "id": "market-repair-route-1366-crossing",
+          "image": "game3d/shots/market-route-539/repair-route/1366-crossing.png",
+          "caption": "1366 crossing"
+        },
+        {
+          "id": "market-repair-route-1366-entry-look-east",
+          "image": "game3d/shots/market-route-539/repair-route/1366-entry-look-east.png",
+          "caption": "1366 entry look east"
+        },
+        {
+          "id": "market-repair-route-1366-entry-look-fountain",
+          "image": "game3d/shots/market-route-539/repair-route/1366-entry-look-fountain.png",
+          "caption": "1366 entry look fountain"
+        },
+        {
+          "id": "market-repair-route-1366-entry-look-shore",
+          "image": "game3d/shots/market-route-539/repair-route/1366-entry-look-shore.png",
+          "caption": "1366 entry look shore"
+        },
+        {
+          "id": "market-repair-route-1366-entry-look-west",
+          "image": "game3d/shots/market-route-539/repair-route/1366-entry-look-west.png",
+          "caption": "1366 entry look west"
+        },
+        {
+          "id": "market-repair-route-1366-market-entry",
+          "image": "game3d/shots/market-route-539/repair-route/1366-market-entry.png",
+          "caption": "1366 market entry"
+        },
+        {
+          "id": "market-repair-route-1366-plaza-default",
+          "image": "game3d/shots/market-route-539/repair-route/1366-plaza-default.png",
+          "caption": "1366 plaza default"
+        },
+        {
+          "id": "market-repair-route-1366-plaza-return",
+          "image": "game3d/shots/market-route-539/repair-route/1366-plaza-return.png",
+          "caption": "1366 plaza return"
+        },
+        {
+          "id": "market-repair-route-1366-plaza-south",
+          "image": "game3d/shots/market-route-539/repair-route/1366-plaza-south.png",
+          "caption": "1366 plaza south"
+        },
+        {
+          "id": "market-repair-route-1366-promenade",
+          "image": "game3d/shots/market-route-539/repair-route/1366-promenade.png",
+          "caption": "1366 promenade"
+        },
+        {
+          "id": "market-repair-route-1366-sand",
+          "image": "game3d/shots/market-route-539/repair-route/1366-sand.png",
+          "caption": "1366 sand"
+        },
+        {
+          "id": "market-repair-route-1366-stairs",
+          "image": "game3d/shots/market-route-539/repair-route/1366-stairs.png",
+          "caption": "1366 stairs"
+        },
+        {
+          "id": "market-repair-route-390-crossing",
+          "image": "game3d/shots/market-route-539/repair-route/390-crossing.png",
+          "caption": "390 crossing"
+        },
+        {
+          "id": "market-repair-route-390-market-entry",
+          "image": "game3d/shots/market-route-539/repair-route/390-market-entry.png",
+          "caption": "390 market entry"
+        },
+        {
+          "id": "market-repair-route-390-plaza-default",
+          "image": "game3d/shots/market-route-539/repair-route/390-plaza-default.png",
+          "caption": "390 plaza default"
+        },
+        {
+          "id": "market-repair-route-390-plaza-return",
+          "image": "game3d/shots/market-route-539/repair-route/390-plaza-return.png",
+          "caption": "390 plaza return"
+        },
+        {
+          "id": "market-repair-route-390-plaza-south",
+          "image": "game3d/shots/market-route-539/repair-route/390-plaza-south.png",
+          "caption": "390 plaza south"
+        },
+        {
+          "id": "market-repair-route-390-promenade",
+          "image": "game3d/shots/market-route-539/repair-route/390-promenade.png",
+          "caption": "390 promenade"
+        },
+        {
+          "id": "market-repair-route-390-sand",
+          "image": "game3d/shots/market-route-539/repair-route/390-sand.png",
+          "caption": "390 sand"
+        },
+        {
+          "id": "market-repair-route-390-stairs",
+          "image": "game3d/shots/market-route-539/repair-route/390-stairs.png",
+          "caption": "390 stairs"
+        }
+      ]
+    },
+    {
+      "title": "Market route: repair2",
+      "images": [
+        {
+          "id": "market-repair2-shotengai-evening-east",
+          "image": "game3d/shots/market-route-539/repair2/shotengai-evening-east.png",
+          "caption": "shotengai evening east"
+        },
+        {
+          "id": "market-repair2-shotengai-evening-north",
+          "image": "game3d/shots/market-route-539/repair2/shotengai-evening-north.png",
+          "caption": "shotengai evening north"
+        },
+        {
+          "id": "market-repair2-shotengai-evening-phone",
+          "image": "game3d/shots/market-route-539/repair2/shotengai-evening-phone.png",
+          "caption": "shotengai evening phone"
+        },
+        {
+          "id": "market-repair2-shotengai-evening-south",
+          "image": "game3d/shots/market-route-539/repair2/shotengai-evening-south.png",
+          "caption": "shotengai evening south"
+        },
+        {
+          "id": "market-repair2-shotengai-evening-west",
+          "image": "game3d/shots/market-route-539/repair2/shotengai-evening-west.png",
+          "caption": "shotengai evening west"
+        },
+        {
+          "id": "market-repair2-shotengai-morning-east",
+          "image": "game3d/shots/market-route-539/repair2/shotengai-morning-east.png",
+          "caption": "shotengai morning east"
+        },
+        {
+          "id": "market-repair2-shotengai-morning-north",
+          "image": "game3d/shots/market-route-539/repair2/shotengai-morning-north.png",
+          "caption": "shotengai morning north"
+        },
+        {
+          "id": "market-repair2-shotengai-morning-phone",
+          "image": "game3d/shots/market-route-539/repair2/shotengai-morning-phone.png",
+          "caption": "shotengai morning phone"
+        },
+        {
+          "id": "market-repair2-shotengai-morning-south",
+          "image": "game3d/shots/market-route-539/repair2/shotengai-morning-south.png",
+          "caption": "shotengai morning south"
+        },
+        {
+          "id": "market-repair2-shotengai-morning-west",
+          "image": "game3d/shots/market-route-539/repair2/shotengai-morning-west.png",
+          "caption": "shotengai morning west"
+        }
+      ]
+    },
+    {
+      "title": "Market route: repair2 phone",
+      "images": [
+        {
+          "id": "market-repair2-phone-arrival-settled",
+          "image": "game3d/shots/market-route-539/repair2-phone/arrival-settled.png",
+          "caption": "arrival settled"
+        },
+        {
+          "id": "market-repair2-phone-dry-sand-left-0",
+          "image": "game3d/shots/market-route-539/repair2-phone/dry-sand-left-0.png",
+          "caption": "dry sand left 0"
+        },
+        {
+          "id": "market-repair2-phone-dry-sand-left-1",
+          "image": "game3d/shots/market-route-539/repair2-phone/dry-sand-left-1.png",
+          "caption": "dry sand left 1"
+        },
+        {
+          "id": "market-repair2-phone-dry-sand-left-2",
+          "image": "game3d/shots/market-route-539/repair2-phone/dry-sand-left-2.png",
+          "caption": "dry sand left 2"
+        },
+        {
+          "id": "market-repair2-phone-dry-sand-left-3",
+          "image": "game3d/shots/market-route-539/repair2-phone/dry-sand-left-3.png",
+          "caption": "dry sand left 3"
+        },
+        {
+          "id": "market-repair2-phone-dry-sand-left-4",
+          "image": "game3d/shots/market-route-539/repair2-phone/dry-sand-left-4.png",
+          "caption": "dry sand left 4"
+        },
+        {
+          "id": "market-repair2-phone-dry-sand-right-0",
+          "image": "game3d/shots/market-route-539/repair2-phone/dry-sand-right-0.png",
+          "caption": "dry sand right 0"
+        },
+        {
+          "id": "market-repair2-phone-dry-sand-right-1",
+          "image": "game3d/shots/market-route-539/repair2-phone/dry-sand-right-1.png",
+          "caption": "dry sand right 1"
+        },
+        {
+          "id": "market-repair2-phone-dry-sand-right-2",
+          "image": "game3d/shots/market-route-539/repair2-phone/dry-sand-right-2.png",
+          "caption": "dry sand right 2"
+        },
+        {
+          "id": "market-repair2-phone-market-arrival",
+          "image": "game3d/shots/market-route-539/repair2-phone/market-arrival.png",
+          "caption": "market arrival"
+        },
+        {
+          "id": "market-repair2-phone-mat-return-0",
+          "image": "game3d/shots/market-route-539/repair2-phone/mat-return-0.png",
+          "caption": "mat return 0"
+        },
+        {
+          "id": "market-repair2-phone-mat-return-1",
+          "image": "game3d/shots/market-route-539/repair2-phone/mat-return-1.png",
+          "caption": "mat return 1"
+        },
+        {
+          "id": "market-repair2-phone-north-return-0",
+          "image": "game3d/shots/market-route-539/repair2-phone/north-return-0.png",
+          "caption": "north return 0"
+        },
+        {
+          "id": "market-repair2-phone-north-return-1",
+          "image": "game3d/shots/market-route-539/repair2-phone/north-return-1.png",
+          "caption": "north return 1"
+        },
+        {
+          "id": "market-repair2-phone-north-return-10",
+          "image": "game3d/shots/market-route-539/repair2-phone/north-return-10.png",
+          "caption": "north return 10"
+        },
+        {
+          "id": "market-repair2-phone-north-return-11",
+          "image": "game3d/shots/market-route-539/repair2-phone/north-return-11.png",
+          "caption": "north return 11"
+        },
+        {
+          "id": "market-repair2-phone-north-return-12",
+          "image": "game3d/shots/market-route-539/repair2-phone/north-return-12.png",
+          "caption": "north return 12"
+        },
+        {
+          "id": "market-repair2-phone-north-return-2",
+          "image": "game3d/shots/market-route-539/repair2-phone/north-return-2.png",
+          "caption": "north return 2"
+        },
+        {
+          "id": "market-repair2-phone-north-return-3",
+          "image": "game3d/shots/market-route-539/repair2-phone/north-return-3.png",
+          "caption": "north return 3"
+        },
+        {
+          "id": "market-repair2-phone-north-return-4",
+          "image": "game3d/shots/market-route-539/repair2-phone/north-return-4.png",
+          "caption": "north return 4"
+        },
+        {
+          "id": "market-repair2-phone-north-return-5",
+          "image": "game3d/shots/market-route-539/repair2-phone/north-return-5.png",
+          "caption": "north return 5"
+        },
+        {
+          "id": "market-repair2-phone-north-return-6",
+          "image": "game3d/shots/market-route-539/repair2-phone/north-return-6.png",
+          "caption": "north return 6"
+        },
+        {
+          "id": "market-repair2-phone-north-return-7",
+          "image": "game3d/shots/market-route-539/repair2-phone/north-return-7.png",
+          "caption": "north return 7"
+        },
+        {
+          "id": "market-repair2-phone-north-return-8",
+          "image": "game3d/shots/market-route-539/repair2-phone/north-return-8.png",
+          "caption": "north return 8"
+        },
+        {
+          "id": "market-repair2-phone-north-return-9",
+          "image": "game3d/shots/market-route-539/repair2-phone/north-return-9.png",
+          "caption": "north return 9"
+        },
+        {
+          "id": "market-repair2-phone-onward-tap-1",
+          "image": "game3d/shots/market-route-539/repair2-phone/onward-tap-1.png",
+          "caption": "onward tap 1"
+        },
+        {
+          "id": "market-repair2-phone-onward-tap-2",
+          "image": "game3d/shots/market-route-539/repair2-phone/onward-tap-2.png",
+          "caption": "onward tap 2"
+        },
+        {
+          "id": "market-repair2-phone-plaza-approach-1",
+          "image": "game3d/shots/market-route-539/repair2-phone/plaza-approach-1.png",
+          "caption": "plaza approach 1"
+        },
+        {
+          "id": "market-repair2-phone-plaza-approach-2",
+          "image": "game3d/shots/market-route-539/repair2-phone/plaza-approach-2.png",
+          "caption": "plaza approach 2"
+        },
+        {
+          "id": "market-repair2-phone-plaza-return",
+          "image": "game3d/shots/market-route-539/repair2-phone/plaza-return.png",
+          "caption": "plaza return"
+        },
+        {
+          "id": "market-repair2-phone-shore-0",
+          "image": "game3d/shots/market-route-539/repair2-phone/shore-0.png",
+          "caption": "shore 0"
+        },
+        {
+          "id": "market-repair2-phone-shore-1",
+          "image": "game3d/shots/market-route-539/repair2-phone/shore-1.png",
+          "caption": "shore 1"
+        },
+        {
+          "id": "market-repair2-phone-shore-2",
+          "image": "game3d/shots/market-route-539/repair2-phone/shore-2.png",
+          "caption": "shore 2"
+        },
+        {
+          "id": "market-repair2-phone-shore-3",
+          "image": "game3d/shots/market-route-539/repair2-phone/shore-3.png",
+          "caption": "shore 3"
+        },
+        {
+          "id": "market-repair2-phone-start",
+          "image": "game3d/shots/market-route-539/repair2-phone/start.png",
+          "caption": "start"
+        }
+      ]
+    },
+    {
+      "title": "Market route: repair2 route",
+      "images": [
+        {
+          "id": "market-repair2-route-1366-crossing-north",
+          "image": "game3d/shots/market-route-539/repair2-route/1366-crossing-north.png",
+          "caption": "1366 crossing north"
+        },
+        {
+          "id": "market-repair2-route-1366-crossing",
+          "image": "game3d/shots/market-route-539/repair2-route/1366-crossing.png",
+          "caption": "1366 crossing"
+        },
+        {
+          "id": "market-repair2-route-1366-entry-look-east",
+          "image": "game3d/shots/market-route-539/repair2-route/1366-entry-look-east.png",
+          "caption": "1366 entry look east"
+        },
+        {
+          "id": "market-repair2-route-1366-entry-look-fountain",
+          "image": "game3d/shots/market-route-539/repair2-route/1366-entry-look-fountain.png",
+          "caption": "1366 entry look fountain"
+        },
+        {
+          "id": "market-repair2-route-1366-entry-look-shore",
+          "image": "game3d/shots/market-route-539/repair2-route/1366-entry-look-shore.png",
+          "caption": "1366 entry look shore"
+        },
+        {
+          "id": "market-repair2-route-1366-entry-look-west",
+          "image": "game3d/shots/market-route-539/repair2-route/1366-entry-look-west.png",
+          "caption": "1366 entry look west"
+        },
+        {
+          "id": "market-repair2-route-1366-market-entry",
+          "image": "game3d/shots/market-route-539/repair2-route/1366-market-entry.png",
+          "caption": "1366 market entry"
+        },
+        {
+          "id": "market-repair2-route-1366-plaza-default",
+          "image": "game3d/shots/market-route-539/repair2-route/1366-plaza-default.png",
+          "caption": "1366 plaza default"
+        },
+        {
+          "id": "market-repair2-route-1366-plaza-return",
+          "image": "game3d/shots/market-route-539/repair2-route/1366-plaza-return.png",
+          "caption": "1366 plaza return"
+        },
+        {
+          "id": "market-repair2-route-1366-plaza-south",
+          "image": "game3d/shots/market-route-539/repair2-route/1366-plaza-south.png",
+          "caption": "1366 plaza south"
+        },
+        {
+          "id": "market-repair2-route-1366-promenade",
+          "image": "game3d/shots/market-route-539/repair2-route/1366-promenade.png",
+          "caption": "1366 promenade"
+        },
+        {
+          "id": "market-repair2-route-1366-sand",
+          "image": "game3d/shots/market-route-539/repair2-route/1366-sand.png",
+          "caption": "1366 sand"
+        },
+        {
+          "id": "market-repair2-route-1366-stairs",
+          "image": "game3d/shots/market-route-539/repair2-route/1366-stairs.png",
+          "caption": "1366 stairs"
+        },
+        {
+          "id": "market-repair2-route-390-crossing",
+          "image": "game3d/shots/market-route-539/repair2-route/390-crossing.png",
+          "caption": "390 crossing"
+        },
+        {
+          "id": "market-repair2-route-390-market-entry",
+          "image": "game3d/shots/market-route-539/repair2-route/390-market-entry.png",
+          "caption": "390 market entry"
+        },
+        {
+          "id": "market-repair2-route-390-plaza-default",
+          "image": "game3d/shots/market-route-539/repair2-route/390-plaza-default.png",
+          "caption": "390 plaza default"
+        },
+        {
+          "id": "market-repair2-route-390-plaza-return",
+          "image": "game3d/shots/market-route-539/repair2-route/390-plaza-return.png",
+          "caption": "390 plaza return"
+        },
+        {
+          "id": "market-repair2-route-390-plaza-south",
+          "image": "game3d/shots/market-route-539/repair2-route/390-plaza-south.png",
+          "caption": "390 plaza south"
+        },
+        {
+          "id": "market-repair2-route-390-promenade",
+          "image": "game3d/shots/market-route-539/repair2-route/390-promenade.png",
+          "caption": "390 promenade"
+        },
+        {
+          "id": "market-repair2-route-390-sand",
+          "image": "game3d/shots/market-route-539/repair2-route/390-sand.png",
+          "caption": "390 sand"
+        },
+        {
+          "id": "market-repair2-route-390-stairs",
+          "image": "game3d/shots/market-route-539/repair2-route/390-stairs.png",
+          "caption": "390 stairs"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play day one",
+      "href": "game3d/"
+    },
+    {
+      "label": "Independent walkthrough",
+      "href": "game3d/shots/island-day1/cold-player/report.md"
+    },
+    {
+      "label": "Visual review",
+      "href": "game3d/shots/island-day1/scaled-middle/visual-audit.md"
+    }
+  ]
+}
