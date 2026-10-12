@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { HF } from '../train/car.js';
+import { HF, LX, LZ } from '../train/car.js';
 import { cameraObstruction } from './obstruction.js';
 import { playerFraming } from './framing.js';
 import { userView } from './user-view.js';
@@ -102,7 +102,13 @@ export function followCamera(game, place) {
       desired.y += (2.8 + 3.6 * Math.sin(pitch)) * zoom;
       local.copy(desired);
       place.space.worldToLocal(local);
-      if (place.name === 'train') local.y = Math.min(local.y, HF - 0.17);
+      // Only the car has its low ceiling. The platform and covered walkway have a full-height roof.
+      if (
+        place.name === 'train' &&
+        ((Math.abs(player.position.x) < LX && Math.abs(player.position.z) < LZ) ||
+          (Math.abs(local.x) < LX && Math.abs(local.z) < LZ))
+      )
+        local.y = Math.min(local.y, HF - 0.17);
       for (const group of enclosures) {
         if (!group.visible || group.userData.followEnclosure.inside === false) continue;
         const ceiling = group.parent.localToWorld(

@@ -232,3 +232,16 @@ test('compressed first frame, obstruction jumps, material arrays and authored in
   framing.restore();root.visible=false;framing.update(3,1,241);framing.restore();assert.equal(root.visible,false);
   framing.reset();assert.equal(mesh.material,sources);assert.equal(root.visible,false);
 });
+
+// The train car has a deliberately low interior; its platform is an outdoor walking space.
+test('train roof height applies inside the car, but not along the platform or walkway', () => {
+  const {game,place,player,camera}=fixture(); place.name='train';
+  const follow=followCamera(game,place);
+  follow.aim(0,0); follow.update(); assert.ok(camera.position.y <= 1.28);
+  follow.restore(); player.position.set(-4.4,0,2.72); player.updateMatrixWorld(true);
+  follow.aim(-Math.PI/2,0); follow.update(); assert.ok(camera.position.y > 2.7);
+  follow.restore(); player.position.set(-6.5,0,3.28); player.updateMatrixWorld(true);
+  follow.update(); assert.ok(camera.position.y > 2.7);
+  follow.restore(); player.position.set(0,0,2.72); player.updateMatrixWorld(true);
+  follow.aim(0,0); follow.update(); assert.ok(camera.position.y <= 1.28, 'camera entering car stays below its roof');
+});

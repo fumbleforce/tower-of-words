@@ -10,6 +10,7 @@ import { Pass } from 'three/addons/postprocessing/Pass.js';
 import { SimplexNoise } from 'three/addons/math/SimplexNoise.js';
 import { buildWorld, SPEED } from '../train/world.js';
 import { buildRideIsland, startRunIn, runIn } from '../train/island.js';
+import { platformCanopy } from '../train/platform-canopy.js';
 import {
   buildCar,
   buildBellows,
@@ -289,9 +290,8 @@ export async function trainPlace(game) {
           cast: false,
         }),
       );
-    // canopy posts, benches and bins along the platform
+    // benches and bins along the platform
     for (let x = -12; x <= 12; x += 4) {
-      station.add(rbox(0.16, 1.9, 0.16, '#6b727d', { x, z: s * (edge + 2.35), r: 0.03 }));
       if (x % 8 === 0) {
         const bn = new THREE.Group();
         bn.add(
@@ -460,11 +460,7 @@ export async function trainPlace(game) {
     car.root.add(m);
     return m;
   });
-  // a canopy over each platform that only the sun sees, so the platforms sit in cool shade as in the reference
-  {
-    const sm = new THREE.MeshBasicMaterial({ color: '#000', colorWrite: false, depthWrite: false });
-    void sm;
-  }
+  const platformRoof = platformCanopy(station, PL, edge);
   // station signs: one on each platform, facing the camera side
   const signTex = textTexture(
     (g, W, H) => {
@@ -512,10 +508,10 @@ export async function trainPlace(game) {
   }
   // covered walkway to the company building, at the left end of the near platform (WALK_X)
   const walk = new THREE.Group();
-  // cutaway like everything else: posts, a low glass side and the sign, no roof over the player
+  // Full-height structure; the roof follows the platform cutaway policy.
   walk.add(
-    rbox(3.2, 0.1, 0.12, '#6b727d', { y: 1.72, z: 1.25, r: 0.03 }),
-    rbox(3.2, 0.1, 0.12, '#6b727d', { y: 1.72, z: -1.25, r: 0.03 }),
+    rbox(3.2, 0.1, 0.12, '#6b727d', { y: 3.3, z: 1.25, r: 0.03 }),
+    rbox(3.2, 0.1, 0.12, '#6b727d', { y: 3.3, z: -1.25, r: 0.03 }),
   );
   walk.add(
     rbox(3.0, 0.5, 0.04, '#c9d6de', {
@@ -531,7 +527,7 @@ export async function trainPlace(game) {
     [-1.5, 1.2],
     [1.5, 1.2],
   ])
-    walk.add(rbox(0.12, 1.75, 0.12, '#5b626d', { x: dx, z: dz, r: 0.02 }));
+    walk.add(rbox(0.12, 3.3, 0.12, '#5b626d', { x: dx, z: dz, r: 0.02 }));
   const wt = textTexture(
     (g, W, H) => {
       g.fillStyle = '#2c3a55';
@@ -552,13 +548,14 @@ export async function trainPlace(game) {
   walk.add(wp);
   walk.position.set(WALK_X, 0, edge + 1.9);
   station.add(walk);
+  const walkwayRoof = rbox(3.4, 0.12, 2.8, '#7f8e9d', { x: WALK_X, y: 3.3, z: edge + 1.9, r: 0.015 });
+  platformRoof.add(walkwayRoof);
   station.visible = false;
   const island = buildRideIsland(scene); // the island round the shed, sliding in with the station (train/island.js)
 
   const carDust = dust([-LX + 0.3, LX - 0.3, 0.15, 1.3, -LZ + 0.3, LZ - 0.3], 70, { opacity: 0.5, size: 0.024 });
   car.root.add(carDust);
 
-  // ---- Mio lives in the car ----
   const space = car.root;
   const nav = new Nav(-LX - 8, LX, -LZ, LZ + 3.2, 0.1);
   nav.R = 0.16;
@@ -1031,6 +1028,7 @@ export async function trainPlace(game) {
     camera,
     cam,
     space,
+    traversalRoots: [station],
     nav,
     sun,
     charScale: 1,
@@ -1054,6 +1052,7 @@ export async function trainPlace(game) {
     })(),
     beforeRender() {
       car.proxy.visible = !st.departing;
+      platformRoof.visible = !!game.followCamera?.active;
     },
     fit,
     layout,
@@ -1707,6 +1706,7 @@ export async function trainPlace(game) {
     pivot,
     car.cab,
     station,
+    platformRoof,
     island.root,
     ...neighbours.flatMap((n) => [n.pivot, n.bellows]),
     ...world.movers,

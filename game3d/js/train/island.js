@@ -29,6 +29,11 @@ import { coastLand } from '../scenes/island-west.js';
 import { TOWN } from '../scenes/town.js';
 import { drain } from '../perf/slice.js';
 import { SEA_Y, BEAM2_Z } from './world.js';
+import { stationModel, stationMesh, stationGlass, stationLighter } from '../scenes/station-model.js';
+import { finishStreet } from '../scenes/diorama/materials.js';
+import { campusFronts } from '../scenes/campus/fronts.js';
+import { blockSets, buildBlockSets, officeBlock, doorAt } from '../scenes/outdoor/block.js';
+import { WING, WING_DOOR } from '../scenes/forecourt/plan.js';
 
 const { scale: S, turn: TURN } = LAYOUT.CHUNKS.train;
 // an island point in the ride's frame, before the scale: the train place's own frame (its chunk's turn makes north +x,
@@ -84,6 +89,34 @@ export function buildRideIsland(scene) {
   root.scale.setScalar(1 / S);
   root.visible = false;
   scene.add(root);
+  // The station is close enough to touch from the platform view: use its real facade, not a skyline box.
+  if (stationModel()) {
+    const building = new THREE.Group();
+    for (const n of ['st_walls', 'st_stone', 'st_metal', ...(stationLighter() ? [] : ['st_fine'])])
+      building.add(stationMesh(n));
+    building.add(stationGlass('st_glass'));
+    // The same finished tower, print shop and bank seen from the campus, without indoor actors/lifecycle.
+    campusFronts(building);
+    const sets = blockSets(),
+      wing = LAYOUT.BUILDINGS.find((b) => b.id === 'head_office_wing');
+    officeBlock(sets, WING, {
+      storeys: wing.storeys,
+      fh: wing.floorH,
+      wall: TOWN.walls[wing.wall],
+      seed: 2,
+      doors: [
+        { face: 'w', at: WING_DOOR.at },
+        { face: 'e', at: doorAt(WING, 'e', WING[2] + 1.2).at, porch: false },
+      ],
+    });
+    buildBlockSets(sets, building);
+    finishStreet(building, stationLighter());
+    const origin = rideAt(...LAYOUT.toIsland('forecourt', 0, 0));
+    building.position.set(origin[0], 0, origin[1]);
+    building.rotation.y = -Math.PI / 2;
+    building.scale.setScalar(LAYOUT.CHUNKS.forecourt.scale);
+    root.add(building);
+  }
   const layout = {
     ...LAYOUT,
     CHUNKS: { ride: {} },
@@ -99,7 +132,7 @@ export function buildRideIsland(scene) {
       });
       const sky = yield* skylineSteps(root, 'ride', {
         layout,
-        skip: ['platform_shed'], // the train's own platforms
+        skip: ['platform_shed', ...(stationModel() ? ['station', 'head_office', 'head_office_wing', 'w3', 'b_h'] : [])], // the train's own platforms
         walk: [-90, DECK.z0, 30, DECK.z1], // the run in: nothing on the camera's side stands taller than its distance
         near: 30,
         far: 70,
