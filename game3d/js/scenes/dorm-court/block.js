@@ -205,7 +205,7 @@ export function ericBlock(root, { backdrop = false } = {}) {
       dir: 1,
     });
     parts.trim.push([0.04, 0.1, B.rz - B.z, B.rx - 0.01, y - 0.25, (B.z + B.rz) / 2]);
-    // The return's outer end faces the dorm street. Punched room windows and
+    // The return's outer end faces the dorm row. Punched room windows and
     // floor bands finish this visible end without adding a second open gallery.
     windowsZ(parts, y + 0.45, B.back + 0.4, B.rz - 0.4, 3, B.x1 + 0.012, 0.85, f + 2, 1);
     parts.trim.push([0.08, 0.085, B.rz - B.back, B.x1 + 0.018, y - 0.16, (B.back + B.rz) / 2]);

@@ -30,7 +30,7 @@ export function exteriorRoof(p, B, { detail = true } = {}) {
     detail,
   });
   // A low service tray joins the condensers to the stair house, away from the walk.
-  p.box('#b5beb9', B.rx - x - 1.5, 0.07, 0.09, (x + 1.5 + B.rx) / 2, y + 0.025, B.back + 0.18, { cast: false });
+  p.box('#b8bcba', B.rx - x - 1.5, 0.07, 0.09, (x + 1.5 + B.rx) / 2, y + 0.025, B.back + 0.18, { cast: false });
   p.box('#8d939b', 0.7, 0.22, 0.7, x + 1.6, y + 0.025, z + 0.75);
   p.box('#b3bec3', 0.75, 0.04, 0.75, x + 1.6, y + 0.245, z + 0.75, {
     cast: false,

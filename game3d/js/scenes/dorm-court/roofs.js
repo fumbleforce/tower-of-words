@@ -58,12 +58,12 @@ export function flatRoof(p, [x0, x1, z0, z1], y, { edges = 's', units = [], vent
 export function apartmentDeck(p, rect, y, { edges = 'nsew', wall = PARAPET, seams = true } = {}) {
   const [x0, x1, z0, z1] = rect;
   flatRoof(p, rect, y, { edges: '' });
-  p.box('#7a8580', x1 - x0 - 0.2, 0.015, z1 - z0 - 0.2, (x0 + x1) / 2, y + 0.006, (z0 + z1) / 2);
+  p.box('#7b7f7d', x1 - x0 - 0.2, 0.015, z1 - z0 - 0.2, (x0 + x1) / 2, y + 0.006, (z0 + z1) / 2);
   const F = faces(rect);
   for (const edge of edges) copedParapet(p, F[edge], y, wall);
   if (seams)
     for (let x = x0 + 1.6; x < x1 - 0.3; x += 1.6)
-      p.box('#68756f', 0.025, 0.004, z1 - z0 - 0.3, x, y + 0.022, (z0 + z1) / 2, { cast: false });
+      p.box('#6b6e6c', 0.025, 0.004, z1 - z0 - 0.3, x, y + 0.022, (z0 + z1) / 2, { cast: false });
   for (const x of [x0 + 0.3, x1 - 0.3])
     p.box('#4b5658', 0.14, 0.008, 0.14, x, y + 0.023, z0 + 0.27, {
       cast: false,
