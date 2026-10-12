@@ -47,6 +47,7 @@ import { seafrontSteps } from './outdoor/seafront.js';
 import { BAYS, SHOPS as NAMED_SHOPS } from './island-south.js';
 import { coastLand } from './island-west.js';
 import { MARKET_ROUTE as M } from './market-route.js';
+import { crossingPlanters } from './shotengai/crossing-planters.js';
 import { MAP_LAYER } from '../map/render.js';
 
 const { F, R, BASIN, LZ, HALF, LINK, CANTEEN, SHOPS, DOOR_X, TERRACE, TERRACE_S, building, onLane, inRect } = P;
@@ -137,6 +138,9 @@ export function* plazaSteps() {
     storeyH: building('shops_north').floorH,
     shops: NAMED_SHOPS, // the named shops' signs (island-south.js)
   });
+  const crossing = new Parts();
+  crossingPlanters(crossing, P.local);
+  crossing.build(root);
   yield;
   // the seafront behind the shop street, on the island map only (outdoor/seafront.js)
   const front = yield* seafrontSteps(root, { at: (x, z) => LAYOUT.toLocal(CHUNK, x, z), layer: MAP_LAYER });

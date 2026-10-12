@@ -80,7 +80,7 @@ export function dressVegetation(place, name, { phone = false } = {}) {
   root.add(group);
   const before = new Set(root.children);
   const leaves = dressFoliage(root, {
-    budget: 32000,
+    budget: name === 'plaza' ? 26000 : 32000,
     tileSize: 10,
     leafShadows: false,
     leafScale: 1.5,

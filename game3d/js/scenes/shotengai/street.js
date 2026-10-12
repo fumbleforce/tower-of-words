@@ -19,6 +19,7 @@ import * as P from './plan.js';
 import { crane } from './wares.js';
 import { displayKeep } from './shopfront-plan.js';
 import { frontCarts } from './front-carts.js';
+import { crossingPlanters } from './crossing-planters.js';
 
 const { BAYS, ROWS_Z } = S;
 const { ARCADE, SHOP_WALK, DORM_STREET, ROW_W, ROW_E } = P;
@@ -118,6 +119,7 @@ function aBoard(p, x, z, ry, { note = false } = {}) {
 export function* streetSteps(group, p, lights, signs) {
   yield* floor(group);
   const keep = displayKeep(P.DOORS);
+  keep.push(...crossingPlanters(p));
   // the doors, and what stands out in front of each named shop (kept clear of the door)
   for (const d of P.DOORS) door(p, signs, d);
   yield;

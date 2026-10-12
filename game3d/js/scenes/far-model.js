@@ -55,8 +55,21 @@ const GREENS = ['#4d6b47', '#43603f', '#57704c', '#4a6545'].map((h) => new THREE
 const CANOPY = new THREE.IcosahedronGeometry(1, 0).toNonIndexed();
 const NEAR_CANOPY = new THREE.SphereGeometry(1, 10, 5).toNonIndexed();
 const SIDE_CANOPY = new THREE.SphereGeometry(1, 8, 4).toNonIndexed();
-const CLOSE_CANOPY = new THREE.SphereGeometry(1, 16, 8).toNonIndexed();
-const CLOSE_SIDE = new THREE.SphereGeometry(1, 12, 6).toNonIndexed();
+function closeCrown(width, height) {
+  const g = new THREE.SphereGeometry(1, width, height),
+    p = g.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    const x = p.getX(i),
+      y = p.getY(i),
+      z = p.getZ(i);
+    const r = 1 + 0.055 * Math.sin(x * 9 + z * 7) * Math.sin(y * 8 - z * 3);
+    p.setXYZ(i, x * r, y * r, z * r);
+  }
+  g.computeVertexNormals();
+  return g.toNonIndexed();
+}
+const CLOSE_CANOPY = closeCrown(12, 6);
+const CLOSE_SIDE = closeCrown(10, 5);
 const TRUNK = new THREE.CylinderGeometry(0.62, 1, 1, 5, 1, true).translate(0, 0.5, 0).toNonIndexed();
 const BARK = new THREE.Color(LEAF.barkGrey);
 function put(b, geo, [sx, sy, sz], [x, y, z], color, turn = 0) {
@@ -198,7 +211,8 @@ export function* farModelSteps(
     // Past the full haze plus camera-arm margin, the entire crown is hidden. Spend those
     // triangles on round silhouettes in the exposed middle distance instead.
     if (d <= treesFrom || d > treesTo + t.r * 2 || ownTree(x, z)) continue;
-    tree(B, x, z, t.r, GREENS[t.c], t.s, d < Math.min(sideTo, 30), d < 45, d < 22);
+    const apparentDistance = d / t.r;
+    tree(B, x, z, t.r, GREENS[t.c], t.s, d < Math.min(sideTo, 30), apparentDistance < 40, apparentDistance < 25);
     nt++;
   }
   yield;
