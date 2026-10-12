@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import { withBrowserJob } from "../../tools/lib/browser-job.mjs";
 import { scopedRoute } from "../../tools/bible/check-scope.mjs";
+import { sampleFrames } from "./perf/place-measure.mjs";
 import { waitForGame } from "../test/support/wait-ready.mjs";
 const base = process.env.BASE || "game3d";
 const out =
@@ -10,6 +11,7 @@ const out =
   new URL("../shots/island-day1/forecourt-dead-ends/after/", import.meta.url)
     .pathname;
 const before = process.env.BEFORE === "1";
+const captureOnly = process.env.CAPTURE_ONLY === "1";
 fs.mkdirSync(out, { recursive: true });
 const errors = [],
   rows = [],
@@ -81,6 +83,7 @@ await withBrowserJob(
             ["west-end", [-3.55, -80.8], Math.PI],
             ["station-end", [-1.1, -78.95], Math.PI / 2],
             ["entry", [-5.1, -77.2], Math.PI],
+            ["feedback", [-5.11, -78.76], 2.8],
           ]) {
             await page.evaluate(
               ({ point, yaw, phone }) => {
@@ -93,21 +96,23 @@ await withBrowserJob(
               { point, yaw, phone },
             );
             await page.waitForTimeout(900);
+            const frame = await page.evaluate(sampleFrames, 5);
             const file = `${width}-${period}-${name}.png`;
             await page.screenshot({ path: `${out}/${file}` });
             rows.push(
               await page.evaluate(
-                ({ file }) => ({
+                ({ file, frame }) => ({
                   file,
                   position: globalThis.__game.player.root.position.toArray(),
-                  triangles: globalThis.__game.renderer.info.render.triangles,
+                  triangles: frame.tris,
+                  calls: frame.calls,
                 }),
-                { file },
+                { file, frame },
               ),
             );
           }
         }
-        if (!before) {
+        if (!before && !captureOnly) {
           const result = await page.evaluate(async () => {
             const g = globalThis.__game;
             const { local, PATHS, COVERED } =
@@ -137,20 +142,22 @@ await withBrowserJob(
             ].map(local);
             g.player.root.position.set(...[route[0][0], 0, route[0][1]]);
             g.walker.sync();
+            g.place.stationGarden.routine.resume();
             const reached = [];
             for (const target of route) {
               await g.walkTo(...target);
               let end = g.player.root.position;
               let error = Math.hypot(end.x - target[0], end.z - target[1]);
-              for (let retry = 0; error > 0.35 && retry < 10; retry++) {
+              // Let an ambient pedestrian pass before retapping an occupied floor point.
+              for (let retry = 0; error > 0.35 && retry < 24; retry++) {
                 await new Promise((resolve) =>
-                  globalThis.setTimeout(resolve, 150),
+                  globalThis.setTimeout(resolve, 500),
                 );
                 await g.walkTo(...target);
                 end = g.player.root.position;
                 error = Math.hypot(end.x - target[0], end.z - target[1]);
               }
-              reached.push({ target, error });
+              reached.push({ target, error, end: [end.x, end.z] });
             }
             return {
               reached,
@@ -183,7 +190,7 @@ await withBrowserJob(
 );
 fs.writeFileSync(
   `${out}/report.json`,
-  JSON.stringify({ before, rows, walks, errors }, null, 2),
+  JSON.stringify({ before, captureOnly, rows, walks, errors }, null, 2),
 );
 assert.deepEqual(errors, []);
 console.log(

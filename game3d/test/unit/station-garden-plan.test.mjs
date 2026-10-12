@@ -56,16 +56,21 @@ test('both entrances and both actual bench approaches form one walkable garden l
     assert.ok(nav.path(...points[0], ...seat.out)?.length);
   }
 });
-test('canonical covered approach is reachable but the station and platform remain excluded', () => {
+test('garden rest ends are reachable and the covered station approach stays excluded', () => {
   const start = garden.PATCHES[0];
+  for (const p of [
+    [-14.45, 20.8],
+    [-16.55, 23.7],
+  ]) {
+    assert.ok(nav.free(...garden.local(p)), p.join(','));
+    assert.ok(nav.path(...start, ...garden.local(p))?.length, p.join(','));
+  }
   for (const p of [
     [-14.45, 12.0],
     [-14.45, 16.6],
     [-27.8, 16.6],
-  ]) {
-    assert.ok(nav.path(...start, ...garden.local(p))?.length, p.join(','));
-  }
-  for (const p of [
+    [-21, 23.5],
+    [-14.45, 18.5],
     [-14.45, 10.9],
     [-28.6, 14.7],
     [-17, 20.0],
