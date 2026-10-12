@@ -626,7 +626,7 @@ export async function officePlace(game) {
   }
 
   const P = {
-    // colour grade (js/post.js): cool slate shadows, warm lamp highlights, a little lift so the basement isn't murky
+    // Cool shadows and warm lamps keep the basement readable.
     grade: {
       exposure: 1.12,
       temp: 0.03,
@@ -861,7 +861,6 @@ export async function officePlace(game) {
       }
       // 8:55 when the floor opens, ticking with game time; the stop command freezes it
       w.life.hands.userData.set(8 * 60 + 55 + st.clockT / 60, Math.floor(st.clockT));
-      // fans
       const fs = st.fan === 'wild' ? 30 : st.fan === 'on' ? 6 : 0;
       st.fanSpin += (fs - st.fanSpin) * Math.min(1, dt * 2);
       w.fanRotor.rotation.z += st.fanSpin * dt;
@@ -923,6 +922,7 @@ export async function officePlace(game) {
         await catWalk(game, w.tamaRig, p, { speed: 1.1, end: 'sit' });
       },
       chairRoll: async ({ to = 'my_seat' }) => {
+        P.seating?.stand({ persist: false });
         w.nav.unblock('chair');
         sfx('door');
         await pusher.roll(routeTo(w.myChair.position, to === 'my_seat' ? dS1.seat : game.posOf(to)), Math.PI);

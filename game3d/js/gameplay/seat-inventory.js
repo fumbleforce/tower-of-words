@@ -98,6 +98,7 @@ export function refreshSeat(place, seat) {
   facing.set(s.x + Math.sin(s.ry), s.top, s.z + Math.cos(s.ry)).applyMatrix4(matrix);
   const ry = Math.atan2(facing.x - x, facing.z - z);
   point.set(s.x, s.floor || 0, s.z).applyMatrix4(matrix);
+  if (Math.hypot(seat.x - x, seat.z - z) > 1e-5 || Math.abs(seat.ry - ry) > 1e-5) delete seat.out;
   Object.assign(seat, { x, z, top, ry, floor: point.y });
   return seat;
 }

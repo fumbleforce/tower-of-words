@@ -54,6 +54,9 @@ test('a story-owned rolling chair keeps its ID and follows the actual chair inst
   seatPoint(chair,0,0,.24);p.space.add(chair);
   const inventory=seatInventory(p), seat=inventory.get('my_seat');
   assert.equal(inventory.size,1);assert.equal(seat.x,5);
+  seat.out=[5,-.45];
+  chair.position.set(4.6,0,-1);chair.rotation.y=Math.PI;
+  refreshSeat(p,seat);assert.equal(seat.out,undefined);
   chair.position.set(0,0,0);chair.rotation.y=Math.PI;
   refreshSeat(p,seat);assert.equal(seat.x,0);assert.ok(Math.abs(seat.ry-Math.PI)<1e-6);
 });

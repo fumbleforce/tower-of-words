@@ -2,13 +2,19 @@
 import { seatInventory, seatExit, seatOccupied, seatVisible, refreshSeat } from './seat-inventory.js';
 import { addInteractOptions } from './interact-menu.js';
 import { save } from '../sim.js';
+import { characterHead, CHARACTER_SCALE } from '../character-scale.js';
 
 export function attachSeating(game, place) {
   const seats = seatInventory(place);
   const authored = new Set(Object.keys(place.things));
-  const current = () => (game.player.freeSeat?.place === place.name ? game.player.freeSeat : null);
+  const seatFor = (id) => seats.get(id) || (place.name === 'office' && id === 'my_chair' ? seats.get('my_seat') : null);
   const sittingOn = (s) =>
     game.player.seated && Math.hypot(game.player.root.position.x - s.x, game.player.root.position.z - s.z) < 0.18;
+  const current = () => {
+    const saved = game.player.freeSeat;
+    const seat = saved?.place === place.name && seats.get(saved.id);
+    return seat && sittingOn(seat) ? saved : null;
+  };
   const reserved = (s) => {
     const bagSeat = place.seats?.ferry_window_seat;
     return (
@@ -40,8 +46,7 @@ export function attachSeating(game, place) {
     if (!restoring) save(game);
     return true;
   };
-  const stand = ({ persist = true } = {}) => {
-    const saved = current();
+  const stand = ({ persist = true, saved = current() } = {}) => {
     if (!saved) return false;
     const seat = seats.get(saved.id);
     const out = (seat && seatExit(place, seat)) || saved.out;
@@ -57,31 +62,47 @@ export function attachSeating(game, place) {
     if (persist) save(game);
     return true;
   };
-  place.seating = { seats, sit, stand, available, reachable };
+  place.seating = { seats, seatFor, sit, stand, available, reachable };
   place.seats ||= {};
   for (const [id, s] of seats) {
     if (protectedSeat(s)) continue;
     s.out ||= seatExit(place, s);
     place.seats[id] ||= { x: s.x, z: s.z, top: s.top, ry: s.ry, out: s.out };
     const own = place.things[id];
-    if (own) continue;
+    const originalAnchor = own?.anchor;
+    const anchor = (v) => {
+      if (!sittingOn(s) && originalAnchor) return originalAnchor(v);
+      if (sittingOn(s)) {
+        (characterHead(game.player) || game.player.root).getWorldPosition(v);
+        v.y += 0.24 * CHARACTER_SCALE * game.player.root.scale.y;
+        return v;
+      }
+      return place.space.localToWorld(v.set(s.x, s.top + 0.25, s.z));
+    };
+    if (own) {
+      own.anchor = anchor;
+      continue;
+    }
     place.things[id] = {
       label: s.label || 'Chair',
       kind: 'thing',
       verb: 'Sit',
       pin: 'near',
       seatAction: true,
-      anchor: (v) => place.space.localToWorld(v.set(s.x, s.top + 0.25, s.z)),
+      anchor,
       spot: () => seatExit(place, s),
       face: () => [s.x, s.z],
       fixedSpot: true,
       pickBox: { w: 0.5, h: 0.55, bottom: s.top - 0.1 },
-      enabled: () => reachable(s) && !(place.name === 'office' && id === 'my_seat' && place.things.my_chair?.enabled()),
+      enabled: () =>
+        (!game.player.seated || sittingOn(s)) &&
+        reachable(s) &&
+        !(place.name === 'office' && id === 'my_seat' && place.things.my_chair?.enabled()),
     };
   }
   addInteractOptions((item, active) => {
     if (active !== game || game.place !== place) return null;
-    const s = seats.get(item.id) || (place.name === 'office' && item.id === 'my_chair' ? seats.get('my_seat') : null);
+    const s = seatFor(item.id);
     if (!s || protectedSeat(s) || !reachable(s)) return null;
     // The generic target already has Sit as its sole action. Only the seated state needs a different verb.
     if (sittingOn(s))
@@ -108,8 +129,7 @@ export function attachSeating(game, place) {
     const sitting = saved.world?.freeSeat;
     if (!sitting || sitting.place !== place.name) return;
     if (!sit(sitting.id, { restoring: true })) {
-      game.player.freeSeat = sitting;
-      stand({ persist: false });
+      stand({ persist: false, saved: sitting });
     }
   };
 }

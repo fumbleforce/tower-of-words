@@ -24,10 +24,21 @@ await withBrowserJob(`seating-${width}`, async browser => {
         P.seating.available(s);
         const before=[s.x,s.z];
         if(Math.hypot(s.x-5.5,s.z+1.3)>.01)throw Error('Optional seat is not on the actual away chair');
+        P.people.tama.root.visible=false;
+        const exit=P.things.my_chair.spot();
+        g.player.root.position.set(exit[0],0,exit[1]);g.walker.sync();
+        if(!P.seating.sit('my_seat'))throw Error('Cannot sit in vacated rolling chair');
+        g.player.seated=false;
+        if(P.snapshotState().freeSeat)throw Error('Scripted stand saved stale freeSeat');
+        g.player.seated=true;
+        g.player.root.position.x+=.5;
+        if(P.snapshotState().freeSeat)throw Error('Scripted movement saved stale freeSeat');
+        g.player.root.position.x-=.5;
         await P.hooks.chairRoll({to:'my_seat'});
+        if(g.player.seated||g.player.freeSeat)throw Error('Chair roll retained sitting state');
         P.seating.available(s);
         const authored=P.seats.my_seat;
-        if(Math.hypot(s.x-authored.x,s.z-authored.z)>.01)throw Error('Optional seat did not follow returned chair');
+        if(Math.hypot(s.x-s.source.position.x,s.z-s.source.position.z)>.001 || Math.hypot(s.x-authored.x,s.z-authored.z)>.05)throw Error('Optional seat did not follow returned chair: '+JSON.stringify({seat:[s.x,s.z],chair:s.source.position.toArray(),authored}));
         return {before,after:[s.x,s.z]};
       });
       console.log('PASS live rolling chair',width,JSON.stringify(moved));
@@ -67,7 +78,10 @@ await withBrowserJob(`seating-${width}`, async browser => {
         const old={p:npc.root.position.clone(),visible:npc.root.visible,seated:npc.seated};
         npc.root.position.set(s.x,s.floor,s.z); npc.root.visible=true; npc.seated=true;
         if(P.seating.available(s))throw Error('Occupied seat offered');
+        P.restoreState({world:state,flags:{}});
+        if(g.player.seated||g.player.freeSeat)throw Error('Occupied saved seat was restored');
         npc.root.position.copy(old.p);npc.root.visible=old.visible;npc.seated=old.seated;
+        P.restoreState({world:state,flags:{}});
       }
       return {rootY:p.y,top:s.top,exit:s.out||g.player.seatOut};
     });

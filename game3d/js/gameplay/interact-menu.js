@@ -161,8 +161,7 @@ export function runInteract(game, item, plan) {
   ];
   const glow = rows[0].story ? 0 : -1;
   game.beat(async () => {
-    if (item.face && !(game.player.seated && game.place.seating?.seats.has(item.id)))
-      game.walker.faceTo(...item.face());
+    if (item.face && !(game.player.seated && game.place.seating?.seatFor(item.id))) game.walker.faceTo(...item.face());
     const speaker = person ? game.runner.speaker(item.id) : { name: nameOf(game, item) };
     const pick = await game.ui.choose(speaker, '', chips, {
       whoId: person ? item.id : null,

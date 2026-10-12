@@ -163,7 +163,6 @@ function ceilingLamp(w = 0.9) {
   return g;
 }
 
-// ---------- more office parts ----------
 function plate(text, { w = 0.5, h = 0.16, bg = '#e9ebee', fg = '#2b3140', sub = '' } = {}) {
   const tex = textTexture(
     (g, W, H) => {
