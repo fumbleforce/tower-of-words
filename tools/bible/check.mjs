@@ -83,7 +83,8 @@ for (const site of SITES) {
   const routes = data.remote ? ['home', 'review', 'doc/reviews/README.md', 'showcase', 'doc/showcase/README.md', 'work', 'characters', ...itemRoutes] : ['home', 'characters', 'places', 'story', 'words', 'rules', 'art', 'audio', 'reviews', 'questions', 'sources', 'story-map', 'story-map/office/office:ticket',
     ...data.characters.map(c => 'character/' + c.id),
     'search/mio', 'search/copier', 'story/lunch', 'doc/docs/game/cast.md', 'doc/docs/game/stories/mio-train.md', 'doc/notes/RELATIONSHIPS.md', 'doc/notes/mini-stories.md', 'src/GUIDE.md:42',
-    ...data.story.legacy_docs.map(d => 'doc/' + d.path),
+    ...data.story.legacy_docs.filter(d => !d.archived).map(d => 'doc/' + d.path),
+    'archive/legacy/proto2/gallery/index.html', 'doc/notes/history/offline-archive.md',
     'review', 'doc/reviews/README.md', 'showcase', 'doc/showcase/README.md', 'work',
     ...itemRoutes];
   if (site.priv) routes.push('rewards');

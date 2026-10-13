@@ -39,6 +39,13 @@ def rel(p):
     return os.path.relpath(p, ROOT)
 
 
+def archived(path):
+    """Known retired paths are citations into the offline backup, never live sources."""
+    return bool(path) and (path.startswith(('legacy/', 'art/pixel/', 'tools/pixellab/'))
+        or path in ('notes/directions.md', 'notes/island-slice-plan.md', 'notes/map-design.md')
+        or (path.startswith('art/island/') and path != 'art/island/island-map-4-topdown.png'))
+
+
 def exists(p):
     return bool(p) and os.path.exists(os.path.join(ROOT, p))
 
@@ -66,6 +73,8 @@ def source(spec):
     if 'island/private/user' in path:
         raise SystemExit('refusing a source in island/private/user')
     out = {'path': path, 'label': path}
+    if archived(path):
+        return {**out, 'archived': True}
     if not exists(path):
         warn(f'missing source file: {path}')
         return out
@@ -110,15 +119,17 @@ def quotes(lst):
 
 
 def image(p, label='', status='draft'):
-    if not exists(p):
+    if not exists(p) and not archived(p):
         warn(f'missing image: {p}')
-    return {'src': p, 'label': label, 's': status}
+    return {'src': p, 'label': label, 's': status, 'archived': archived(p)}
 
 
 # ---------------------------------------------------------------- markdown helpers
 
 def legacy_note(path):
     """Historical notes are optional in a clean public checkout."""
+    if archived(path):
+        return []
     if not exists(path):
         warn(f'optional historical note missing: {path}; legacy section left empty')
         return []
@@ -136,7 +147,8 @@ def md_section(path, heading):
                     break
                 body.append(m)
             return '\n'.join(body).strip(), i + 1
-    warn(f'section not found: {path} {heading}')
+    if not archived(path):
+        warn(f'section not found: {path} {heading}')
     return '', None
 
 
@@ -270,6 +282,12 @@ def reviews(notes):
     pages += [k for k in notes if not k.startswith('http') and k not in pages]
     out = []
     for r in pages:
+        if archived(r):
+            what, status, note = (list(notes.get(r, [])) + ['', '', ''])[:3]
+            out.append({'path': r, 'title': what or r, 'what': what, 'status': status or 'legacy',
+                        'note': note, 'date': '', 'where': 'offline archive', 'group': 'legacy',
+                        'area': '/'.join(r.split('/')[:2]), 'archived': True})
+            continue
         if not exists(r):
             warn(f'review page missing: {r}')
             continue
@@ -335,9 +353,9 @@ def build():
             o['model'] = {**m, 'exists': exists(m['dir']), 'src': source(m.get('src'))}
         for k in ('decisions', 'facts', 'rejected', 'legacy'):
             o[k] = facts(c.get(k), where)
-        o['history'] = [{'label': l, 'path': p, 's': s, 'exists': exists(p)} for l, p, s in c.get('history', [])]
+        o['history'] = [{'label': l, 'path': p, 's': s, 'exists': exists(p), 'archived': archived(p)} for l, p, s in c.get('history', [])]
         for h in o['history']:
-            if not h['exists']:
+            if not h['exists'] and not h['archived']:
                 warn(f'missing history page {h["path"]}')
         pr = []
         if cid == 'emi':
@@ -377,9 +395,9 @@ def build():
 
     S = F['story']
     story = {'legacy': facts(S['legacy']),
-             'legacy_docs': [{'title': d['title'], 'path': d['doc'], 'exists': exists(d['doc'])} for d in S['legacy_docs']]}
+             'legacy_docs': [{'title': d['title'], 'path': d['doc'], 'exists': exists(d['doc']), 'archived': archived(d['doc'])} for d in S['legacy_docs']]}
     for d in story['legacy_docs']:
-        if not d['exists']:
+        if not d['exists'] and not d['archived']:
             warn(f'missing legacy doc {d["path"]}')
 
     rules = [{'group': g['group'], 'quotes': quotes(g['quotes'])} for g in F['rules']]

@@ -27,7 +27,9 @@ let D = null, P = null, L = null, LIVE = null, INDEX = null, WORK = null;
 
 const $ = (s, el = document) => el.querySelector(s);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const url = (p) => /^https?:/.test(p) ? p : ROOT + p.split('/').map(encodeURIComponent).join('/');
+const archived = (p) => /^(legacy\/|art\/pixel\/|tools\/pixellab\/)/.test(p) || /^(notes\/(directions|island-slice-plan|map-design)\.md)$/.test(p) || (p.startsWith('art/island/') && p !== 'art/island/island-map-4-topdown.png');
+const archiveHref = (p) => '#archive/' + p;
+const url = (p) => archived(p) ? archiveHref(p) : /^https?:/.test(p) ? p : ROOT + p.split('/').map(encodeURIComponent).join('/');
 const STATUS_LABEL = { approved: 'approved', draft: 'draft', rejected: 'rejected', decided: 'decided', open: 'open', review: 'under review', legacy: 'legacy', live: 'live' };
 const clean = (t) => String(t || '').replace(/\s*[—–]\s*/g, ': ');
 const chip = (s) => s ? `<span class="st ${esc(s)}">${esc(STATUS_LABEL[s] || s)}</span>` : '';
@@ -36,6 +38,7 @@ const sum = (o) => Object.values(o || {}).reduce((a, b) => a + b, 0);
 
 function srcHref(src) {
   if (!src || !src.path) return null;
+  if (archived(src.path)) return archiveHref(src.path);
   if (/^https?:/.test(src.path)) return src.path;
   if (/\.(html?|webp|png|jpg|wav|mp3)$/.test(src.path)) return url(src.path);
   return `#src/${src.path}${src.line ? ':' + src.line : ''}`;
@@ -52,6 +55,7 @@ function docHref(h) {
   if (/^https?:|^#/.test(h)) return h;
   const p = h.split('#')[0];
   let full = new URL(p, 'http://x/' + MDBASE).pathname.slice(1);
+  if (archived(full)) return archiveHref(full);
   if (full === 'docs/game/stories/') return '#stories';
   if (/\/$/.test(full)) return url(full);
   const st = L && L.stories && L.stories.find((x) => x.file === full);
@@ -173,6 +177,7 @@ function list(block) {
 
 // ------------------------------------------------------------------ images and lightbox
 function img(src, alt, cls = '', attrs = '') {
+  if (archived(src)) return `<a class="${esc(cls)} missing-pic" href="${esc(archiveHref(src))}">archived picture: ${esc(alt)}</a>`;
   if (L.missing && L.missing.has(src)) return `<span class="${esc(cls)} missing-pic" title="${esc(src)} is not on this machine">picture missing</span>`;
   return `<img src="${esc(url(src))}" alt="${esc(alt)}" loading="lazy" decoding="async" class="${cls}" data-lb="${esc(url(src))}" data-cap="${esc(alt)}" ${attrs}>`;
 }
@@ -499,7 +504,7 @@ function pageStory() {
     <p class="muted small">Written by the design agents. Nothing in them is approved or built; day one comes first.</p>
     <div class="list">${docs.map(([p, t]) => `<div><span><a href="#doc/${esc(p)}">${esc(t)}</a></span><span>${chip('draft')} <span class="src">${esc(p)}</span></span></div>`).join('')}</div>
     <div class="livefoot">${liveTag('notes/walkthrough/', 'file list live')}</div>
-    ${legacyBox('Earlier versions of the story', factRows(D.story.legacy) + `<h3>Documents</h3><div class="list">${D.story.legacy_docs.map((d) => `<div><a href="#doc/${esc(d.path)}">${esc(d.title)}</a><span class="src">${esc(d.path)}</span></div>`).join('')}</div>`)}
+    ${legacyBox('Earlier versions of the story', factRows(D.story.legacy) + `<h3>Documents</h3><div class="list">${D.story.legacy_docs.map((d) => `<div><a href="${esc(archived(d.path) ? archiveHref(d.path) : '#doc/' + d.path)}">${esc(d.title)}</a><span class="src">${esc(d.path)}</span></div>`).join('')}</div>`)}
   </div>`;
 }
 async function pageStoryline(id) {
@@ -567,7 +572,7 @@ function pageAudio() {
 let RV = { status: 'all' };
 function reviewTable(rows) {
   return `<div class="tablewrap"><table class="t"><thead><tr><th>Page</th><th>What it is</th><th>Date</th><th>Status</th><th class="hide-phone">Where</th></tr></thead><tbody>
-    ${rows.map((r) => `<tr><td><a href="${/\.md$/.test(r.path) ? '#doc/' + esc(r.path) : esc(url(r.path))}"><b>${esc(clean(r.title))}</b></a><div class="src block">${esc(r.path)}</div></td>
+    ${rows.map((r) => `<tr><td><a href="${esc(archived(r.path) ? archiveHref(r.path) : /\.md$/.test(r.path) ? '#doc/' + r.path : url(r.path))}"><b>${esc(clean(r.title))}</b></a><div class="src block">${esc(r.path)}</div></td>
       <td>${inline(r.what)}${r.note ? `<div class="muted" style="font-size:12.5px">${inline(r.note)}</div>` : ''}</td>
       <td style="white-space:nowrap">${esc(r.date)}</td><td>${chip(r.status)}</td><td class="muted hide-phone" style="font-size:12.5px">${esc(r.where)}</td></tr>`).join('')}
   </tbody></table></div>`;
@@ -577,7 +582,7 @@ function pageReviews() {
   const leg = D.reviews.filter((r) => r.group === 'legacy');
   const priv = P ? P.pages : [];
   return `<div class="page"><h1>Review pages</h1>
-    <p class="lede">Pages and candidate sheets for the game as it is now, newest first. Everything from the VN, the island slice, the MVP and the pixel and low-poly experiments is under Legacy, at its legacy/ path.</p>
+    <p class="lede">Pages and candidate sheets for the game as it is now, newest first. Everything from the VN, the island slice, the MVP and the pixel and low-poly experiments is under Legacy, in the local offline archive. Historical links show where to find each file.</p>
     <div class="filters" data-f="status">${['all', 'open', 'decided'].map((s) => `<button class="${RV.status === s ? 'on' : ''}" data-v="${s}">${s}</button>`).join('')}</div>
     ${reviewTable(cur)}
     ${legacyBox('Review pages from earlier versions', reviewTable(leg), leg.length)}
@@ -644,7 +649,11 @@ function pageRewards() {
     <h2>Group scenes</h2>${rewardCards(P.group)}</div>`;
 }
 
+function pageArchive(path) {
+  return `<div class="page"><div class="crumbs">History</div><h1>Archived file</h1><p>This file belongs to an earlier game prototype. It is preserved in the local backup:</p><p class="src">${esc(path)}</p><p><a href="#doc/notes/history/offline-archive.md">Where to find the archive</a></p></div>`;
+}
 async function pageDoc(path) {
+  if (archived(path)) return pageArchive(path);
   const r = await fetch(url(path)); if (!r.ok) return notFound();
   const t = await r.text();
   const draft = /^notes\//.test(path) && !/^notes\/(PRODUCTION|VISUAL_QA|PERF)\.md$/.test(path);
@@ -655,6 +664,7 @@ async function pageDoc(path) {
 }
 async function pageSrc(spec) {
   const m = spec.match(/^(.*?)(?::(\d+))?$/); const path = m[1], line = +m[2] || 0;
+  if (archived(path)) return pageArchive(path);
   const r = await fetch(url(path)); if (!r.ok) return notFound();
   const lines = (await r.text()).split('\n');
   const isMd = /\.md$/.test(path);
@@ -1054,6 +1064,7 @@ async function route() {
     case 'sources': html = pageSources(); break;
     case 'rewards': html = pageRewards(); break;
     case 'search': html = pageSearch(arg); break;
+    case 'archive': html = pageArchive(arg); break;
     case 'doc': html = await pageDoc(arg); break;
     case 'src': html = await pageSrc(arg); break;
     default: html = notFound();
@@ -1120,7 +1131,7 @@ async function init() {
   JSON.stringify(D).replace(/"q":true,"s":"[a-z]+","src":\{"path":"([^"]+)"/g, (m, path) => quoted.add(path));
   if (P) JSON.stringify(P).replace(/"q":true,"s":"[a-z]+","src":\{"path":"([^"]+)"/g, (m, path) => quoted.add(path));
   D.characters.forEach((c) => c.walkthrough && quoted.add(c.walkthrough));
-  L = await LIVE.loadLive(ROOT, D.snapshot, [...quoted].filter((x) => !/^https?:/.test(x)));
+  L = await LIVE.loadLive(ROOT, D.snapshot, [...quoted].filter((x) => !/^https?:/.test(x) && !archived(x)));
   if (P) document.querySelector('.brand span').innerHTML = '<span class="priv">private</span>';
   L.reloadWork().then(renderNav);  // GitHub issues can take a second; the nav's stuck count follows when they arrive
   start();

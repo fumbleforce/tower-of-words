@@ -14,6 +14,6 @@ A 3D RPG about a Western IT engineer at a giant Japanese company, where Japanese
 
 ## Legacy
 
-`legacy/` holds everything that is no longer active: the first prototypes (`proto/`, `proto2/` review pages), the MVP (`mvp/`), side experiments (`side/`), the old visual novel (`game/`), the quiz app that used to live in the root, and the Godot island slice (`island/`). It is kept for reference only. Nothing in it is approved or used by the game.
+Earlier Godot, visual novel and pixel prototypes are preserved outside the active checkout. See the [offline archive locator](notes/history/offline-archive.md) for their original paths and backup location.
 
 `island/private/` stays where it is. It is git-ignored and private; see `island/PRIVATE.md`.

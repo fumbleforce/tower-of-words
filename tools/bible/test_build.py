@@ -35,7 +35,7 @@ class OptionalHistoricalNotesTest(unittest.TestCase):
         private.assert_called_once_with([])
         output = json.loads(Path(self.build.PUB_OUT).read_text(encoding='utf-8'))
         self.assertEqual([row['items'] for row in output['questions']['legacy_lists']], [[], [], []])
-        for name in ('mini-stories', 'island-slice-plan', 'map-design'):
+        for name in ('mini-stories',):
             self.assertTrue(any(f'optional historical note missing: notes/{name}.md' in warning
                                 for warning in self.build.WARN))
         self.assertFalse((self.root / 'island').exists())
@@ -47,6 +47,13 @@ class OptionalHistoricalNotesTest(unittest.TestCase):
             encoding='utf-8')
         self.assertEqual(self.build.mini_arcs()['mio'][0]['md'], 'Old arc text.')
         self.assertEqual(self.build.numbered('notes/mini-stories.md', 'Open questions')[0]['t'], 'Old question?')
+        self.assertEqual(self.build.WARN, [])
+
+    def test_retired_sources_have_archive_metadata_without_access(self):
+        with patch.object(self.build, 'exists', side_effect=AssertionError('archive must not be read')):
+            source = self.build.source('legacy/proto2/gallery/index.html ~ old approval')
+            self.assertTrue(source['archived'])
+            self.assertEqual(self.build.legacy_note('notes/map-design.md'), [])
         self.assertEqual(self.build.WARN, [])
 
     def test_required_facts_are_still_required(self):

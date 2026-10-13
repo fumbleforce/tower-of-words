@@ -1,13 +1,12 @@
-"""Tokenise the game's Japanese lines and write data/lang/lines.json.
+"""Tokenise the game's Japanese lines and write tools/lang/data/lines.json.
 
-Sources: legacy/game/data/script.js (via extract_script.mjs) and notes/day1-draft.md.
+Source: a draft supplied with --draft, or notes/day1-draft.md.
 Usage (venv): ~/ai/lang/.venv/bin/python tools/lang/annotate.py [--review out.txt] [--text "日本語"]
 """
 import argparse
 import json
 import os
 import re
-import subprocess
 
 from common import JA_RE, OUT, ROOT, has_kanji, kata2hira
 from tokens import Tokenizer, detect_grammar, public, strip_markup
@@ -77,25 +76,16 @@ def draft_lines(path=DRAFT):
                         kind, jps = 'sign', [m.group(1)]
         for jp in jps:
             if jp and JA_RE.search(jp):
-                item = {'src': f'day1-draft.md:{scene}:{no}', 'kind': kind, 'text': jp, 'line': no, 'scene': scene}
+                item = {'src': f'{os.path.basename(path)}:{scene}:{no}', 'kind': kind, 'text': jp, 'line': no, 'scene': scene}
                 if is_option and choices:
                     item['choice'] = choices[-1][1]
                 out.append(item)
     return out
 
 
-def script_lines():
-    js = subprocess.run(['node', os.path.join(os.path.dirname(__file__), 'extract_script.mjs')],
-                        capture_output=True, text=True, check=True).stdout
-    out = []
-    for x in json.loads(js):
-        text, author = strip_markup(x['markup'])
-        out.append({'src': x['src'], 'kind': x['kind'], 'text': text, 'author': author})
-    return out
-
-
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument('--draft', default=DRAFT, help='draft Markdown to annotate')
     ap.add_argument('--review', help='write a human-readable dump for checking readings')
     ap.add_argument('--text', help='annotate one line and print it')
     args = ap.parse_args()
@@ -104,7 +94,7 @@ def main():
         toks = tk.annotate(args.text)
         print(json.dumps({'t': [public(t) for t in toks], 'g': detect_grammar(toks)}, ensure_ascii=False, indent=1))
         return
-    items = script_lines() + draft_lines()
+    items = draft_lines(args.draft)
     lines = {}
     mismatches = []
     for it in items:
@@ -143,7 +133,7 @@ def main():
                             'id JMdict id (see words.json), p part of speech, fu furigana parts [[text, reading]] (empty reading for kana parts), '
                             'num for counters, en for names}; g = grammar point ids (grammar.json).',
                    'lines': lines}, f, ensure_ascii=False, separators=(',', ':'))
-    print(f'{len(lines)} lines annotated -> data/lang/lines.json')
+    print(f'{len(lines)} lines annotated -> tools/lang/data/lines.json')
     print(f'{len(mismatches)} author-ruby mismatches')
     for m in mismatches:
         print('  ', m)

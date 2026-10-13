@@ -159,12 +159,6 @@
       "context": "efc86065636eccde464b85803b86aa821e9ad35ab59edd2ab53d8c34dace793f"
     },
     {
-      "file": "tools/lang/extract_script.mjs",
-      "ruleId": "no-unused-vars",
-      "message": "'id' is assigned a value but never used.",
-      "context": "e7891eb00e6b0d3e163f69a8573b393e556775f09b0fe5205f18d097b7f5d532"
-    },
-    {
       "file": "tools/slice_voices.mjs",
       "ruleId": "no-unused-vars",
       "message": "'R2' is assigned a value but never used.",

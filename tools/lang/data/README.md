@@ -1,5 +1,7 @@
 # Language data
 
+These language-tool dictionaries and reference annotations were retained when the earlier game prototypes moved to the offline archive. Their current home is `tools/lang/data/`. They are used by `tools/lang/`; the current game uses its own language modules.
+
 Runtime data for the adaptive learning model (three tracks: vocabulary, grammar, letters). Built by the scripts in `tools/lang/`. Don't edit the generated files by hand; fix the source or `tools/lang/overrides.json` and rebuild.
 
 ## Files
@@ -24,7 +26,7 @@ Python venv: `~/ai/lang/.venv` (Python 3.12, fugashi, unidic-lite, wordfreq, jac
 
 - `build.sh`: runs everything below in order.
 - `fetch.sh`: downloads the raw sources into `tools/lang/raw/` (gitignored).
-- `annotate.py`: tokenises the script and the draft into `lines.json`. `--text "日本語"` annotates one line; `--review file` writes a readable dump for checking. It also compares its readings with the ruby in `script.js` and prints mismatches.
+- `annotate.py`: tokenises the supplied `--draft path` (default `notes/day1-draft.md`) into `lines.json`. `--text "日本語"` annotates one line; `--review file` writes a readable dump for checking. The retired VN script extractor is preserved in the offline archive.
 - `build_data.py`: builds `words.json` and `kanji.json`. Frequency comes from wordfreq's Japanese list, lemmatised with unidic and summed per JMdict entry.
 - `build_kana.py`: `kana.json` and `romaji.js`.
 - `pacing.py`: per line, the length and what is new for a profile (words, grammar, kanji with a reading), with flags for the day-1 budgets. `--profile jorgen`, `--draft path`, `--md out.md`, `--json out.json`.
