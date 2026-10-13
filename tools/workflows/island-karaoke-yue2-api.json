@@ -1,0 +1,127 @@
+{
+ "1": {
+  "class_type": "CheckpointLoaderSimple",
+  "inputs": {
+   "ckpt_name": "yue2_3b_int8_convrot.safetensors"
+  }
+ },
+ "2": {
+  "class_type": "YuE2GenerateABC",
+  "inputs": {
+   "clip": [
+    "1",
+    1
+   ],
+   "style": "anime opening, j-pop, j-rock, female vocal, bright clear voice, energetic, uplifting, electric guitar, synthesizer, driving drums, bass, 175 bpm",
+   "lyrics": "[intro]\n\n[verse]\n起きろ、起きろ\n朝だ、もう八時\n早くしろ\n電車が来る\n\n[pre-chorus]\n走れ、走れ\n前を見ろ\n止まるな、今は\n行け！\n\n[chorus]\n光れ、光れ\n朝の空に\n来い、明日\n君の声で\n\n[bridge]\n立て、もう一回\n昨日は、忘れろ\n泣くな、歌え\n声を出せ\n\n[chorus]\n光れ、光れ\n朝も、夜も\n来い、明日\n行け！\n\n[outro]",
+   "seed": 175001,
+   "mode": "full",
+   "max_abc_tokens": 8192,
+   "temperature": 0.7,
+   "top_p": 0.9,
+   "top_k": 30,
+   "repetition_penalty": 1.005,
+   "penalty_window": 100
+  }
+ },
+ "P": {
+  "class_type": "PreviewAny",
+  "inputs": {
+   "source": [
+    "2",
+    0
+   ]
+  }
+ },
+ "3": {
+  "class_type": "YuE2GenerateMusic",
+  "inputs": {
+   "clip": [
+    "1",
+    1
+   ],
+   "style": "anime opening, j-pop, j-rock, female vocal, bright clear voice, energetic, uplifting, electric guitar, synthesizer, driving drums, bass, 175 bpm",
+   "lyrics": "[intro]\n\n[verse]\n起きろ、起きろ\n朝だ、もう八時\n早くしろ\n電車が来る\n\n[pre-chorus]\n走れ、走れ\n前を見ろ\n止まるな、今は\n行け！\n\n[chorus]\n光れ、光れ\n朝の空に\n来い、明日\n君の声で\n\n[bridge]\n立て、もう一回\n昨日は、忘れろ\n泣くな、歌え\n声を出せ\n\n[chorus]\n光れ、光れ\n朝も、夜も\n来い、明日\n行け！\n\n[outro]",
+   "abc": [
+    "2",
+    0
+   ],
+   "seed": 175001,
+   "mode": "full",
+   "max_duration": 85.0,
+   "temperature": 1.0,
+   "top_p": 0.95,
+   "top_k": 100,
+   "repetition_penalty": 1.2
+  }
+ },
+ "4": {
+  "class_type": "ConditioningZeroOut",
+  "inputs": {
+   "conditioning": [
+    "3",
+    0
+   ]
+  }
+ },
+ "5": {
+  "class_type": "EmptyYuE2LatentAudio",
+  "inputs": {
+   "seconds": [
+    "3",
+    1
+   ],
+   "batch_size": 1
+  }
+ },
+ "6": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "positive": [
+    "3",
+    0
+   ],
+   "negative": [
+    "4",
+    0
+   ],
+   "latent_image": [
+    "5",
+    0
+   ],
+   "seed": 175001,
+   "steps": 32,
+   "cfg": 1.0,
+   "sampler_name": "dpm_2",
+   "scheduler": "sgm_uniform",
+   "denoise": 1.0
+  }
+ },
+ "7": {
+  "class_type": "VAEDecodeAudio",
+  "inputs": {
+   "samples": [
+    "6",
+    0
+   ],
+   "vae": [
+    "1",
+    2
+   ]
+  }
+ },
+ "8": {
+  "class_type": "SaveAudio",
+  "inputs": {
+   "audio": [
+    "7",
+    0
+   ],
+   "filename_prefix": "island/okiro"
+  }
+ }
+}

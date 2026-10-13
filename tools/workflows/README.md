@@ -12,6 +12,16 @@ Open ComfyUI at http://127.0.0.1:8188 (start it with `~/ai/start-comfy.sh`). Loa
 - `example-*.png`: drag in to get the exact settings that made them. Every PNG ComfyUI saves carries its workflow.
 - `anima-outpaint.json`: RDBT outpaint for portraits cut by the frame edge (tools/reframe.py). Load a padded image and a mask (white = paint), Differential Diffusion on the model, masked latent, denoise 0.7. The padded image already has a rough crown drawn where hair was cut, so the model refines a shape instead of inventing one.
 
+## Reusable recipes and retained settings
+- `anima-outpaint-rei-rf-2105.json`: the saved Rei portrait outpaint settings. The shared `anima-outpaint.json` example keeps its existing Goro settings.
+- `anima-face-expression.json`: the saved face-expression workflow written by `tools/portrait_candidates.py`.
+- `island-face-inpaint-lllite.json`: masked face inpainting that preserves the base sprite's outfit, hair and glasses.
+- `island-outpaint-lllite.json`: sprite canvas extension with Anima LLLite.
+- `island-upscale-esrgan.json`: RealESRGAN anime upscaling.
+- `island-sfx-stable-audio-3-api.json` and `island-karaoke-yue2-api.json`: retained settings written by the current `tools/island_audio` sound generators.
+
+The old island scene trials and figure experiments are backed up outside the checkout at `../bk-jap/remaining-cleanup-20261013/source-recipes/`, with their original relative paths. That directory also holds the original version of this README. It is a local archive and is not included in a fresh clone.
+
 ## Video (image-to-video)
 - `video-wan22-portrait.json`: Wan 2.2 TI2V 5B, 704×896, 57 frames at 24 fps (~2.4 s). About 2 min on the 3080.
 - `video-wan22-scene.json`: Wan 2.2 TI2V 5B, 1280×704, 81 frames (~3.4 s). About 5 min.

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Neutral idle comparison</title>
+<script type="importmap">{"imports":{"three":"/game3d/vendor/three/three.module.js","three/addons/":"/game3d/vendor/"}}</script>
+<style>
+body { margin: 0; background: #eef0f3; color: #1d2230; font: 15px/1.45 system-ui, sans-serif; }
+h1,h2,p { margin: 16px; } p { max-width: 1000px; color: #526074; }
+section { padding: 1px 0 16px; background: #eef0f3; }
+.row { display: grid; grid-template-columns: repeat(4, 280px); gap: 8px; margin: 8px 16px; }
+figure { margin: 0; background: white; } canvas { width: 280px; height: 340px; display: block; }
+figcaption { padding: 6px 8px; font-size: 13px; }
+@media(max-width: 700px) { .row { grid-template-columns: repeat(2, minmax(0,1fr)); } canvas { width:100%; height:auto; } }
+</style></head><body>
+<h1>Neutral idle candidate</h1>
+<p>Same models, fixed root direction and camera. The candidate changes the standing pose and adds gentle breathing. Original animation files and game behavior are unchanged.</p>
+<p id="status">Loading comparison…</p><main id="out"></main>
+<script type="module">
+import * as THREE from 'three';
+import { loadLibrary, buildCharacter, SLOTS } from './recipe.js';
+
+// Staging: diagnostic standing pose, no story scene. Each figure stands on y=0,
+// height 1, facing +Z. Fixed camera at (0, .58, 3.3), 22-degree lens, aims at
+// (0, .5, 0). Full body and ground contact visible, plain backdrop behind it;
+// nothing behind the camera is shown. Light comes from upper camera-right.
+// Root stays fixed except explicitly labelled side/back views. No camera motion.
+try {
+  const lib = await loadLibrary();
+  lib.anims.neutral = 'candidates/idle-neutral.glb';
+  const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+  renderer.setPixelRatio(2); renderer.setSize(280, 340);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  const scene = new THREE.Scene(); scene.background = new THREE.Color('#e9ecf1');
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x9aa3b5, 2));
+  const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(1.2, 2.5, 2.2); scene.add(sun);
+  const floor = new THREE.Mesh(new THREE.CircleGeometry(.65, 48), new THREE.MeshLambertMaterial({ color: '#cfd5df' }));
+  floor.rotation.x = -Math.PI/2; floor.position.y = -.004; scene.add(floor);
+  const camera = new THREE.PerspectiveCamera(22, 280/340, .01, 50);
+  camera.position.set(0,.58,3.3); camera.lookAt(0,.5,0);
+  const out = document.querySelector('#out');
+  function pose(ch, clip, time) {
+    ch.mixer.stopAllAction(); ch.cur = null; ch.skeleton.pose();
+    const a = ch.actions[clip]; a.reset().setEffectiveTimeScale(1).setEffectiveWeight(1).play();
+    a.time = time; ch.cur = a; ch.update(0);
+  }
+  function shot(ch, caption, yaw=0) {
+    ch.root.rotation.y = yaw; scene.add(ch.root); ch.root.updateMatrixWorld(true);
+    ch.skeleton.update(); renderer.render(scene,camera);
+    const canvas = document.createElement('canvas'); canvas.width=560; canvas.height=680;
+    canvas.getContext('2d').drawImage(renderer.domElement,0,0);
+    const f=document.createElement('figure'), c=document.createElement('figcaption'); c.textContent=caption;
+    f.append(canvas,c); scene.remove(ch.root); return f;
+  }
+  for (const body of ['eric','mio']) {
+    const ch=await buildCharacter(lib,{body,parts:Object.fromEntries(SLOTS.map(s=>[s,`${body}-${s}`])),height:1});
+    const section=document.createElement('section'); section.id=body;
+    const title=document.createElement('h2'); title.textContent=body==='eric'?'Eric':'Mio'; section.append(title); out.append(section);
+    const row=()=>{ const r=document.createElement('div'); r.className='row'; section.append(r); return r; };
+    let r=row();
+    pose(ch,'idle',.4); r.append(shot(ch,'Current held idle, 0.4 s'));
+    pose(ch,'neutral',0); r.append(shot(ch,'Candidate, front'));
+    r.append(shot(ch,'Candidate, side',Math.PI/2)); r.append(shot(ch,'Candidate, back',Math.PI));
+    r=row();
+    for(const t of [0,1,2,3]) { pose(ch,'idle',t); r.append(shot(ch,`Source idle playing, ${t} s`)); }
+    r=row();
+    for(const t of [0,1,2,3]) { pose(ch,'neutral',t); r.append(shot(ch,`Candidate playing, ${t} s`)); }
+    r=row();
+    pose(ch,'neutral',1); ch.play('walk',.2);
+    ch.update(.1); r.append(shot(ch,'Candidate to walk, 0.1 s'));
+    ch.update(.2); r.append(shot(ch,'Candidate to walk, 0.3 s'));
+    pose(ch,'walk',.4); ch.play('neutral',.2);
+    ch.update(.1); r.append(shot(ch,'Walk to candidate, 0.1 s'));
+    ch.update(.2); r.append(shot(ch,'Walk to candidate, 0.3 s'));
+    ch.mixer.stopAllAction(); ch.mixer.uncacheRoot(ch.rig);
+    for(const m of Object.values(ch.meshes)) { m.geometry.dispose(); m.material.dispose(); }
+    ch.skeleton.dispose();
+  }
+  renderer.dispose();
+  document.querySelector('#status').textContent='Candidate for review. Check feet, hands against clothing, shoulders, and the transition frames. Fixed camera; no auto-turn.';
+  window.__done=true;
+} catch(error) { window.__err=error.stack || String(error); document.querySelector('#status').textContent=window.__err; }
+</script></body></html>
