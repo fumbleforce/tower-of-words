@@ -1,0 +1,34 @@
+{
+ "time": "2026-09-29T21:34:41.409Z",
+ "build": "0929-2050-3861e91",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "train",
+ "placeName": "Monorail",
+ "period": "early",
+ "periodName": "Early morning",
+ "date": "Thu 1 Oct",
+ "node": "",
+ "nodeStack": [],
+ "goal": "Talk to Mio again when you like.",
+ "line": null,
+ "typed": [],
+ "near": "Sleeping man",
+ "busy": false,
+ "player": {
+  "x": -2.17,
+  "y": 0,
+  "z": -0.25,
+  "heading": 1.57
+ },
+ "viewport": {
+  "width": 2048,
+  "height": 1053,
+  "dpr": 1.25,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-09-29T23:35:43+0200",
+ "folder": "notes/feedback-game/2026-09-29_233543",
+ "shot": true
+}

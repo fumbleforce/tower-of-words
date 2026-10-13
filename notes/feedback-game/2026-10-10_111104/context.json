@@ -1,0 +1,34 @@
+{
+ "time": "2026-10-10T09:10:25.844Z",
+ "build": "1010-0907-62c6c028a",
+ "url": "/game3d/?mc=carina",
+ "screen": "playing",
+ "place": "gate",
+ "placeName": "Head office lobby",
+ "period": "early",
+ "periodName": "Early morning",
+ "date": "Thu 1 Oct",
+ "node": "",
+ "nodeStack": [],
+ "goal": "Say good morning to the guard.",
+ "line": null,
+ "typed": [],
+ "near": "Monitor",
+ "busy": false,
+ "player": {
+  "x": 2.1,
+  "y": 0,
+  "z": 0.17,
+  "heading": 2.93
+ },
+ "viewport": {
+  "width": 2048,
+  "height": 1053,
+  "dpr": 1.25,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-10T11:11:04+0200",
+ "folder": "notes/feedback-game/2026-10-10_111104",
+ "shot": true
+}

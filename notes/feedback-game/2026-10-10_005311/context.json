@@ -1,0 +1,39 @@
+{
+ "time": "2026-10-09T22:51:58.687Z",
+ "build": "1009-2233-fc4f1f32",
+ "url": "/game3d/?anime=1&mc=carina",
+ "screen": "playing",
+ "place": "office",
+ "placeName": "IT support, B2",
+ "period": "evening",
+ "periodName": "After work",
+ "date": "Thu 1 Oct",
+ "node": "chat_emi",
+ "nodeStack": [
+  "chat_emi"
+ ],
+ "goal": "Take the lift up and walk home to the dorms.",
+ "line": {
+  "who": "",
+  "text": ""
+ },
+ "typed": [],
+ "near": "",
+ "busy": true,
+ "player": {
+  "x": -4.98,
+  "y": 0,
+  "z": 4.95,
+  "heading": -1.57
+ },
+ "viewport": {
+  "width": 1539,
+  "height": 877,
+  "dpr": 1.5,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-10T00:53:11+0200",
+ "folder": "notes/feedback-game/2026-10-10_005311",
+ "shot": true
+}

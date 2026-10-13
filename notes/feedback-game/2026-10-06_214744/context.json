@@ -1,0 +1,39 @@
+{
+ "time": "2026-10-06T19:47:08.906Z",
+ "build": "1006-1937-f32c4646",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "pool",
+ "placeName": "",
+ "period": "evening",
+ "periodName": "After work",
+ "date": "Sat 3 Oct",
+ "node": "club_swimming_sit",
+ "nodeStack": [
+  "club_swimming_sit"
+ ],
+ "goal": "The swimming club meets at the outdoor pool tonight. Or head home to sleep.",
+ "line": {
+  "who": "Emi",
+  "text": "Gym from next week, he says, and bring indoor shoes. They really do send you home without them."
+ },
+ "typed": [],
+ "near": "",
+ "busy": true,
+ "player": {
+  "x": 2.22,
+  "y": 0.14,
+  "z": -10.9,
+  "heading": 1.57
+ },
+ "viewport": {
+  "width": 2327,
+  "height": 1196,
+  "dpr": 1.100000023841858,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-06T21:47:44+0200",
+ "folder": "notes/feedback-game/2026-10-06_214744",
+ "shot": true
+}

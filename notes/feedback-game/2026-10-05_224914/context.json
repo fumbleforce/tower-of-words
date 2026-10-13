@@ -1,0 +1,39 @@
+{
+ "time": "2026-10-05T20:48:34.471Z",
+ "build": "1005-2047-39ec1223",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "dorms",
+ "placeName": "",
+ "period": "morning",
+ "periodName": "Morning at work",
+ "date": "Sat 3 Oct",
+ "node": "d3_chair",
+ "nodeStack": [
+  "d3_chair"
+ ],
+ "goal": "Read the club posters in the fountain plaza.",
+ "line": {
+  "who": "",
+  "text": "club posters are up by the fountain\nif you’re looking for something to do"
+ },
+ "typed": [],
+ "near": "",
+ "busy": true,
+ "player": {
+  "x": -0.72,
+  "y": 0.05,
+  "z": -2.17,
+  "heading": 2.84
+ },
+ "viewport": {
+  "width": 3200,
+  "height": 1645,
+  "dpr": 0.800000011920929,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-05T22:49:14+0200",
+ "folder": "notes/feedback-game/2026-10-05_224914",
+ "shot": true
+}

@@ -1,0 +1,39 @@
+{
+ "time": "2026-10-06T19:24:01.930Z",
+ "build": "1006-1339-39460262",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "shotengai",
+ "placeName": "",
+ "period": "evening",
+ "periodName": "After work",
+ "date": "Fri 2 Oct",
+ "node": "d2_supper",
+ "nodeStack": [
+  "d2_supper"
+ ],
+ "goal": "Join the others at the sea-facing bench.",
+ "line": {
+  "who": "Mr. Morisection chiefin Japanese",
+  "text": "It’s quieter by the sea than in a restaurant."
+ },
+ "typed": [],
+ "near": "",
+ "busy": true,
+ "player": {
+  "x": -11.6,
+  "y": 0.14,
+  "z": 1.9,
+  "heading": -1.57
+ },
+ "viewport": {
+  "width": 2327,
+  "height": 1196,
+  "dpr": 1.100000023841858,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-06T21:24:25+0200",
+ "folder": "notes/feedback-game/2026-10-06_212425",
+ "shot": true
+}

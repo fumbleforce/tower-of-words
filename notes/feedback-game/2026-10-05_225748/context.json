@@ -1,0 +1,39 @@
+{
+ "time": "2026-10-05T20:56:58.272Z",
+ "build": "1005-2047-39ec1223",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "gym",
+ "placeName": "",
+ "period": "morning",
+ "periodName": "Morning at work",
+ "date": "Sat 3 Oct",
+ "node": "d3_print",
+ "nodeStack": [
+  "d3_print"
+ ],
+ "goal": "Print today’s bookings at the gym printer.",
+ "line": {
+  "who": "Attendantin Japanese",
+  "text": "The last row is here too. That’s the whole sheet."
+ },
+ "typed": [],
+ "near": "",
+ "busy": true,
+ "player": {
+  "x": 6.4,
+  "y": 0,
+  "z": -3.1,
+  "heading": 0.05
+ },
+ "viewport": {
+  "width": 2560,
+  "height": 1316,
+  "dpr": 1,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-05T22:57:48+0200",
+ "folder": "notes/feedback-game/2026-10-05_225748",
+ "shot": true
+}

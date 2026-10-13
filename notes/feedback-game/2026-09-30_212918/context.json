@@ -1,0 +1,37 @@
+{
+ "time": "2026-09-30T19:28:51.901Z",
+ "build": "0930-1846-027eac05",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "dorms",
+ "placeName": "",
+ "period": "evening",
+ "periodName": "After work",
+ "date": "Thu 1 Oct",
+ "node": "home",
+ "nodeStack": [
+  "go_in",
+  "home"
+ ],
+ "goal": "",
+ "line": null,
+ "typed": [],
+ "near": "",
+ "busy": true,
+ "player": {
+  "x": -0.1,
+  "y": 0,
+  "z": -0.2,
+  "heading": 3.08
+ },
+ "viewport": {
+  "width": 2327,
+  "height": 1196,
+  "dpr": 1.100000023841858,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-09-30T21:29:18+0200",
+ "folder": "notes/feedback-game/2026-09-30_212918",
+ "shot": true
+}

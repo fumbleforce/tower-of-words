@@ -1,0 +1,39 @@
+{
+ "time": "2026-10-05T17:24:41.132Z",
+ "build": "1005-1717-50246043",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "gate",
+ "placeName": "Head office lobby",
+ "period": "early",
+ "periodName": "Early morning",
+ "date": "Thu 1 Oct",
+ "node": "bench_wait",
+ "nodeStack": [
+  "bench_wait"
+ ],
+ "goal": "Wait on the bench until nine.",
+ "line": {
+  "who": "",
+  "text": "8:52."
+ },
+ "typed": [],
+ "near": "",
+ "busy": true,
+ "player": {
+  "x": 3.6,
+  "y": 0.05,
+  "z": 1.15,
+  "heading": 0
+ },
+ "viewport": {
+  "width": 2252,
+  "height": 1645,
+  "dpr": 0.800000011920929,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-05T19:24:59+0200",
+ "folder": "notes/feedback-game/2026-10-05_192459",
+ "shot": true
+}

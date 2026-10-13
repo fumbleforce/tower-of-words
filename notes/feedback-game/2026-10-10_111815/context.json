@@ -1,0 +1,34 @@
+{
+ "time": "2026-10-10T09:17:55.300Z",
+ "build": "1010-0907-62c6c028a",
+ "url": "/game3d/?mc=carina",
+ "screen": "playing",
+ "place": "forecourt",
+ "placeName": "",
+ "period": "early",
+ "periodName": "Early morning",
+ "date": "Thu 1 Oct",
+ "node": "",
+ "nodeStack": [],
+ "goal": "Cross the forecourt and take the head-office lift to B2.",
+ "line": null,
+ "typed": [],
+ "near": "",
+ "busy": false,
+ "player": {
+  "x": 13.17,
+  "y": 0,
+  "z": 0.96,
+  "heading": -0.01
+ },
+ "viewport": {
+  "width": 2048,
+  "height": 1053,
+  "dpr": 1.25,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-10T11:18:15+0200",
+ "folder": "notes/feedback-game/2026-10-10_111815",
+ "shot": true
+}

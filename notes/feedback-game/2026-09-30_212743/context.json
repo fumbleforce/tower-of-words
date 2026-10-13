@@ -1,0 +1,39 @@
+{
+ "time": "2026-09-30T19:27:06.653Z",
+ "build": "0930-1846-027eac05",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "dorm_court",
+ "placeName": "",
+ "period": "evening",
+ "periodName": "After work",
+ "date": "Thu 1 Oct",
+ "node": "mailboxes",
+ "nodeStack": [
+  "mailboxes"
+ ],
+ "goal": "Room 203 is on 2F. The stairs are through the back.",
+ "line": {
+  "who": "",
+  "text": "エリック · erikku · Eric"
+ },
+ "typed": [],
+ "near": "",
+ "busy": true,
+ "player": {
+  "x": 0.15,
+  "y": 0,
+  "z": -2.21,
+  "heading": -2.21
+ },
+ "viewport": {
+  "width": 2327,
+  "height": 1196,
+  "dpr": 1.100000023841858,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-09-30T21:27:43+0200",
+ "folder": "notes/feedback-game/2026-09-30_212743",
+ "shot": true
+}

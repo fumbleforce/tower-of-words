@@ -1,0 +1,39 @@
+{
+ "time": "2026-09-30T19:00:22.589Z",
+ "build": "0930-1846-027eac05",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "gate",
+ "placeName": "Head office lobby",
+ "period": "early",
+ "periodName": "Early morning",
+ "date": "Thu 1 Oct",
+ "node": "word_say",
+ "nodeStack": [
+  "word_say"
+ ],
+ "goal": "The man is stuck. Help him, or get the guard.",
+ "line": {
+  "who": "Ericyou",
+  "text": "The train doors, and now this..."
+ },
+ "typed": [],
+ "near": "",
+ "busy": true,
+ "player": {
+  "x": 1.66,
+  "y": 0,
+  "z": 0.28,
+  "heading": -1.9
+ },
+ "viewport": {
+  "width": 2327,
+  "height": 1196,
+  "dpr": 1.100000023841858,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-09-30T21:01:05+0200",
+ "folder": "notes/feedback-game/2026-09-30_210105",
+ "shot": true
+}

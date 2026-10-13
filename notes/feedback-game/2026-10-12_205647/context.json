@@ -1,0 +1,34 @@
+{
+ "time": "2026-10-12T18:56:21.261Z",
+ "build": "1012-1814-1476aec86",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "train",
+ "placeName": "Monorail",
+ "period": "morning",
+ "periodName": "Morning at work",
+ "date": "Sat 3 Oct",
+ "node": "",
+ "nodeStack": [],
+ "goal": "Read the club posters in the fountain plaza.",
+ "line": null,
+ "typed": [],
+ "near": "Door test panel",
+ "busy": false,
+ "player": {
+  "x": -4.4,
+  "y": 0,
+  "z": 2.72,
+  "heading": -1.72
+ },
+ "viewport": {
+  "width": 1707,
+  "height": 877,
+  "dpr": 1.5,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-12T20:56:47+0200",
+ "folder": "notes/feedback-game/2026-10-12_205647",
+ "shot": true
+}

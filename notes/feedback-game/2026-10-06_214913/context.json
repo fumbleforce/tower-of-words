@@ -1,0 +1,34 @@
+{
+ "time": "2026-10-06T19:47:54.573Z",
+ "build": "1006-1937-f32c4646",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "pool",
+ "placeName": "",
+ "period": "evening",
+ "periodName": "After work",
+ "date": "Sat 3 Oct",
+ "node": "",
+ "nodeStack": [],
+ "goal": "Stay by the pool, or go home to room 203 when you want to sleep.",
+ "line": null,
+ "typed": [],
+ "near": "Emi",
+ "busy": false,
+ "player": {
+  "x": 2.82,
+  "y": 0,
+  "z": -11.4,
+  "heading": 2.06
+ },
+ "viewport": {
+  "width": 2327,
+  "height": 1196,
+  "dpr": 1.100000023841858,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-06T21:49:13+0200",
+ "folder": "notes/feedback-game/2026-10-06_214913",
+ "shot": true
+}

@@ -1,0 +1,34 @@
+{
+ "time": "2026-10-07T08:49:24.906Z",
+ "build": "1007-0845-377f6fed",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "dorms",
+ "placeName": "",
+ "period": "morning",
+ "periodName": "Morning at work",
+ "date": "Fri 2 Oct",
+ "node": "",
+ "nodeStack": [],
+ "goal": "Check the train doors at Honsha station.",
+ "line": null,
+ "typed": [],
+ "near": "Boxes",
+ "busy": false,
+ "player": {
+  "x": 0.24,
+  "y": 0,
+  "z": -1.02,
+  "heading": -2.86
+ },
+ "viewport": {
+  "width": 3200,
+  "height": 1691,
+  "dpr": 0.800000011920929,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-07T10:50:12+0200",
+ "folder": "notes/feedback-game/2026-10-07_105012",
+ "shot": true
+}

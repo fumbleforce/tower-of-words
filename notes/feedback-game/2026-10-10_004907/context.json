@@ -1,0 +1,39 @@
+{
+ "time": "2026-10-09T22:48:14.032Z",
+ "build": "1009-2233-fc4f1f32",
+ "url": "/game3d/?anime=1&mc=carina",
+ "screen": "playing",
+ "place": "office",
+ "placeName": "IT support, B2",
+ "period": "morning",
+ "periodName": "Morning at work",
+ "date": "Thu 1 Oct",
+ "node": "chair_push",
+ "nodeStack": [
+  "chair_push"
+ ],
+ "goal": "Get your chair back from the machine room.",
+ "line": {
+  "who": "Mioprogrammer",
+  "text": "Ah, that's your chair? Sorry. She comes with it, I think."
+ },
+ "typed": [],
+ "near": "",
+ "busy": true,
+ "player": {
+  "x": -0.28,
+  "y": 0,
+  "z": -2.4,
+  "heading": 1.15
+ },
+ "viewport": {
+  "width": 1539,
+  "height": 877,
+  "dpr": 1.5,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-10T00:49:07+0200",
+ "folder": "notes/feedback-game/2026-10-10_004907",
+ "shot": true
+}

@@ -1,0 +1,34 @@
+{
+ "time": "2026-10-09T19:03:40.416Z",
+ "build": "1009-1902-43afb073",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "train",
+ "placeName": "Monorail",
+ "period": "early",
+ "periodName": "Early morning",
+ "date": "Thu 1 Oct",
+ "node": "",
+ "nodeStack": [],
+ "goal": "",
+ "line": null,
+ "typed": [],
+ "near": "Woman with a laptop",
+ "busy": false,
+ "player": {
+  "x": 3.1,
+  "y": 0,
+  "z": -0.22,
+  "heading": 1.56
+ },
+ "viewport": {
+  "width": 1707,
+  "height": 902,
+  "dpr": 1.5,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-09T21:03:54+0200",
+ "folder": "notes/feedback-game/2026-10-09_210354",
+ "shot": true
+}

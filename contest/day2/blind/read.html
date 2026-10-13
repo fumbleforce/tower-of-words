@@ -1,0 +1,26 @@
+<!doctype html><html lang="en"><head><meta name="robots" content="noindex, nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Day 2 Writing Contest</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{--bg:#f4f5f7;--fg:#1c2230;--muted:#5d6678;--card:#fff;--line:#dde1e8;--accent:#1f7a70}
+@media (prefers-color-scheme:dark){:root{--bg:#12151c;--fg:#e4e7ee;--muted:#98a1b3;--card:#1a1f29;--line:#2a3140;--accent:#4cc2b2}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;z-index:1}
+header b{margin-right:8px}
+button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:8px;padding:6px 12px;cursor:pointer}
+button.on{border-color:var(--accent);color:var(--accent);font-weight:600}
+main{max-width:760px;margin:0 auto;padding:16px}
+article{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 24px 24px}
+h1{font-size:1.5em}h2{font-size:1.15em;margin-top:1.6em}blockquote{color:var(--muted);border-left:3px solid var(--line);margin-left:0;padding-left:12px}
+code{font-size:.92em}table{border-collapse:collapse}td,th{border:1px solid var(--line);padding:4px 8px}
+</style></head><body>
+<header><b>Day 2 contest</b><span id="w"></span><span id="s"></span></header>
+<main><article id="doc">Loading…</article></main>
+<script>
+const q=new URLSearchParams(location.search);let W=q.get('w')||'A',S=q.get('s')||'1';
+function btns(){w.innerHTML=['A','B'].map(x=>`<button class="${x==W?'on':''}" onclick="go('${x}',S)">Writer ${x}</button>`).join('');
+s.innerHTML=['1','2','3'].map(x=>`<button class="${x==S?'on':''}" onclick="go(W,'${x}')">Sub-plot ${x}</button>`).join('');}
+async function go(a,b){W=a;S=b;history.replaceState(null,'',`?w=${W}&s=${S}`);btns();
+const r=await fetch(`${W}/${S}.md`,{cache:'no-cache'});doc.innerHTML=marked.parse(await r.text());scrollTo(0,0);}
+go(W,S);
+</script></body></html>

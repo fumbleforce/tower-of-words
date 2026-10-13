@@ -1,0 +1,39 @@
+{
+ "time": "2026-10-05T20:55:38.350Z",
+ "build": "1005-2047-39ec1223",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "gym",
+ "placeName": "",
+ "period": "morning",
+ "periodName": "Morning at work",
+ "date": "Sat 3 Oct",
+ "node": "d3_booking",
+ "nodeStack": [
+  "d3_booking"
+ ],
+ "goal": "Read the club posters in the fountain plaza.",
+ "line": {
+  "who": "Attendantin Japanese",
+  "text": "The buttons do nothing. I need to print today’s bookings."
+ },
+ "typed": [],
+ "near": "",
+ "busy": true,
+ "player": {
+  "x": 4.71,
+  "y": 0,
+  "z": -2.85,
+  "heading": 0.06
+ },
+ "viewport": {
+  "width": 2560,
+  "height": 1316,
+  "dpr": 1,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-05T22:56:31+0200",
+ "folder": "notes/feedback-game/2026-10-05_225631",
+ "shot": true
+}

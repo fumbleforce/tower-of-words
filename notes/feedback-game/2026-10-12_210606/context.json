@@ -1,0 +1,39 @@
+{
+ "time": "2026-10-12T19:05:30.272Z",
+ "build": "1012-1814-1476aec86",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "ferry_terminal",
+ "placeName": "",
+ "period": "evening",
+ "periodName": "After work",
+ "date": "Sat 3 Oct",
+ "node": "seat_menu",
+ "nodeStack": [
+  "seat_menu"
+ ],
+ "goal": "",
+ "line": {
+  "who": "",
+  "text": "Good enough for me."
+ },
+ "typed": [],
+ "near": "",
+ "busy": true,
+ "player": {
+  "x": -4.55,
+  "y": 0.17,
+  "z": -5.8,
+  "heading": 0
+ },
+ "viewport": {
+  "width": 1707,
+  "height": 877,
+  "dpr": 1.5,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-12T21:06:06+0200",
+ "folder": "notes/feedback-game/2026-10-12_210606",
+ "shot": true
+}

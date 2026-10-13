@@ -1,0 +1,39 @@
+{
+ "time": "2026-10-12T18:55:35.681Z",
+ "build": "1012-1814-1476aec86",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "train",
+ "placeName": "Monorail",
+ "period": "morning",
+ "periodName": "Morning at work",
+ "date": "Sat 3 Oct",
+ "node": "d3_signoff_test",
+ "nodeStack": [
+  "d3_signoff_test"
+ ],
+ "goal": "",
+ "line": {
+  "who": "Ms. Mizuno",
+  "text": "あ、ぴろだれにヌツセんのぱばしほ。"
+ },
+ "typed": [],
+ "near": "",
+ "busy": true,
+ "player": {
+  "x": -4.55,
+  "y": 0,
+  "z": 2.35,
+  "heading": 2.16
+ },
+ "viewport": {
+  "width": 1707,
+  "height": 877,
+  "dpr": 1.5,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-12T20:55:49+0200",
+ "folder": "notes/feedback-game/2026-10-12_205549",
+ "shot": true
+}

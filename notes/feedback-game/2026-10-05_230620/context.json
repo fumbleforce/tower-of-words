@@ -1,0 +1,34 @@
+{
+ "time": "2026-10-05T21:06:10.700Z",
+ "build": "1005-2047-39ec1223",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "pool",
+ "placeName": "",
+ "period": "morning",
+ "periodName": "Morning at work",
+ "date": "Sat 3 Oct",
+ "node": "",
+ "nodeStack": [],
+ "goal": "Your time is free. Rest at the chair in room 203 when you want evening.",
+ "line": null,
+ "typed": [],
+ "near": "",
+ "busy": false,
+ "player": {
+  "x": 3.33,
+  "y": 0,
+  "z": -19.33,
+  "heading": -3.07
+ },
+ "viewport": {
+  "width": 2560,
+  "height": 1316,
+  "dpr": 1,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-05T23:06:20+0200",
+ "folder": "notes/feedback-game/2026-10-05_230620",
+ "shot": true
+}

@@ -1,0 +1,14 @@
+{
+ "1": "PASS (head small, crop zoom 1.5)",
+ "2": "PASS",
+ "3": "DRIFT: hair reads ash, not dark blond",
+ "4": "DRIFT: shirt reads teal, not light blue",
+ "5": "PASS (thin frame visible, not fully rimless)",
+ "6": "PASS",
+ "7": "DRIFT: hair reads light, not dark blond",
+ "8": "PASS",
+ "9": "DRIFT: hair reads pale pink",
+ "10": "PASS (head small, crop zoom 1.65)",
+ "11": "DRIFT: headroom 21 px (want 34)",
+ "12": "PASS"
+}

@@ -1,0 +1,36 @@
+- 00:18 running: forecourt chunk, overlap+Words UI fixes, click/soup/door fixes (from cold-player report). Landed tonight: door frame fix 9ecec65, opening check b2b9f50, heard-known test e6d6ea4. Pushed.
+- 00:52 landed b19b2dd (click-walk-use, soup to Mori, one-knock machine room door, Say menu, phone chips, summary footer); pushed. Stray pre-session style.css line move parked in scratchpad patch.
+- 00:55 feedback-game audit: only entry (door frame) already fixed; STATUS.md 4c01e4e. Started build.json untracking.
+- 00:57 idle (running: forecourt, overlaps/Words UI, build.json)
+- 01:03 forecourt chunk landed c7f3d4f + scanner fix; pushed. Next: plaza chunk.
+- 01:03 build.json untracked a741725 (pushed). Started plaza chunk. Running: plaza, overlaps/Words UI.
+- 01:17 overlaps + HUD buttons landed 0e3f34c (pushed). Running: plaza.
+- 01:18 idle (running: plaza chunk, dorm room)
+- 01:34 dorm room landed 7d63226 (pushed). Started dorm_court chunk. Codex asked for 3 dorm lines (C-0143).
+- 01:51 plaza chunk landed 1382043 (pushed); Codex wrote dorm lines 0c2b0f4. Running: dorm_court.
+- 01:57 queue done; started fix for intermittent train Eric/Mio overlap. Running: dorm_court, train overlap.
+- 02:00 dorm_court landed 7a6016c (pushed). Started: wire plaza->dorm_court + end-of-day walk home. Running: that, train overlap flake.
+- 02:18 idle (running: walk-home wiring, train overlap flake)
+- 02:41 train overlap flake fixed 83039d8 (walk clock tied to game loop; pushed). Running: walk-home wiring.
+- 02:45 walk home wired 3bed266 (pushed); day 1 complete end to end. Codex asked for review+detail pass (C-0144). Started: loading chip + summary photos.
+- 02:57 idle (running: loading chip+summary photos; Codex: review fix + outdoor detail pass)
+- 03:00 Codex detail pass + camera release fix 9a5a525 landing (plaza fountain basin, kerbs; forecourt calls 363->334).
+- 03:03 loading chip only when waiting + summary photos of all places 9397590 (pushed). Started: place-load hitches.
+- 03:18 idle (running: place-load hitches)
+- 03:30 place-load hitches fixed c298db0 (office preload 487ms -> none over 50ms; pushed). Queue empty.
+- 03:57 idle (running: shader warm-up)
+- 04:17 entry hitches (shader compiles) fixed 99068c7: office entry 217->50ms; pushed. New flake seen: Eric/commuter overlap at the lift on phone.
+- 04:18 idle (running: lift commuter overlap flake)
+- gate exit commuter overlap fixed d4d73c3 (pushed). Queue empty; no new agents.
+
+## Morning summary
+- Day 1 now runs start to end: train → station security room → forecourt → head office lift → B2 → evening → lift up → forecourt → plaza → dorm courtyard → Eric's room → summary (with photos of every place).
+- Fixed: train door bar (plus a check), opening freeze (plus a check), click walks then uses, soup for Mori, one-knock machine room door, model overlaps and collision, HUD buttons while a line is up, loading chip only when waiting, load stutter (487 ms → none), entry shader freezes (217 → 50 ms), two flaky overlaps.
+- Codex: detail pass on the plaza and forecourt, the camera fix, and the dorm lines; train-discoveries-1 is in Review.
+- Waiting in Review: day1-frames, train-discoveries-1.
+- 04:57 idle (queue empty, nothing running)
+- 05:18 idle
+- 05:57 idle
+- 06:18 idle
+- 06:57 idle
+- 07:18 idle

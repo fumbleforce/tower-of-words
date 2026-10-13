@@ -1,0 +1,39 @@
+{
+ "time": "2026-09-30T19:04:28.086Z",
+ "build": "0930-1846-027eac05",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "office",
+ "placeName": "IT support, B2",
+ "period": "morning",
+ "periodName": "Morning at work",
+ "date": "Thu 1 Oct",
+ "node": "office_in",
+ "nodeStack": [
+  "office_in"
+ ],
+ "goal": "",
+ "line": {
+  "who": "Mr. MoriIT support",
+  "text": "おはようございます (ohayō gozaimasu, good morning)。わぱルどソぼ。ITだどあえル、シへをは。"
+ },
+ "typed": [],
+ "near": "",
+ "busy": true,
+ "player": {
+  "x": -5.45,
+  "y": 0,
+  "z": -2.4,
+  "heading": 0
+ },
+ "viewport": {
+  "width": 2327,
+  "height": 1196,
+  "dpr": 1.100000023841858,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-09-30T21:04:46+0200",
+ "folder": "notes/feedback-game/2026-09-30_210446",
+ "shot": true
+}

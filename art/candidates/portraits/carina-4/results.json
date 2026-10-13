@@ -1,0 +1,116 @@
+{
+ "1": {
+  "name": "lob, centre part",
+  "style": "PASS",
+  "mark": "DRIFT: long straight, not a blunt lob",
+  "final": "carina4-01-blunt-lob-a2-final.webp",
+  "src": "carina4-01-blunt-lob-a2"
+ },
+ "2": {
+  "name": "layered shoulder-length",
+  "style": "PASS",
+  "mark": "PASS",
+  "final": "carina4-02-layered-a2-final.webp",
+  "src": "carina4-02-layered-a2"
+ },
+ "3": {
+  "name": "beach waves",
+  "style": "PASS",
+  "mark": "PASS (head small)",
+  "final": "carina4-03-beach-waves-a2-final.webp",
+  "src": "carina4-03-beach-waves-a2"
+ },
+ "4": {
+  "name": "sleek high-cheekbone type, centre part",
+  "style": "PASS",
+  "mark": "PASS",
+  "final": "carina4-04-sleek-middle-a-a1-final.webp",
+  "src": "carina4-04-sleek-middle-a-a1"
+ },
+ "5": {
+  "name": "curtain fringe",
+  "style": "PASS",
+  "mark": "DRIFT: no real bangs",
+  "final": "carina4-05-curtain-fringe-a2-final.webp",
+  "src": "carina4-05-curtain-fringe-a2"
+ },
+ "6": {
+  "name": "side-swept flip, glasses",
+  "style": "PASS",
+  "mark": "PASS",
+  "final": "carina4-06-side-swept-flip-a2-final.webp",
+  "src": "carina4-06-side-swept-flip-a2"
+ },
+ "7": {
+  "name": "shaggy cut",
+  "style": "PASS",
+  "mark": "DRIFT: soft waves, not shaggy",
+  "final": "carina4-07-shaggy-a1-final.webp",
+  "src": "carina4-07-shaggy-a1"
+ },
+ "8": {
+  "name": "sleek high-cheekbone type, bob behind ear",
+  "style": "PASS",
+  "mark": "PASS",
+  "final": "carina4-08-bob-behind-ear-a2-final.webp",
+  "src": "carina4-08-bob-behind-ear-a2"
+ },
+ "9": {
+  "name": "half-tied low pony, glasses",
+  "style": "PASS",
+  "mark": "PASS (head small)",
+  "final": "carina4-09-low-pony-glasses-a1-final.webp",
+  "src": "carina4-09-low-pony-glasses-a1"
+ },
+ "10": {
+  "name": "sleek high-cheekbone type, side part",
+  "style": "PASS",
+  "mark": "PASS",
+  "final": "carina4-10-sleek-side-b-a1-final.webp",
+  "src": "carina4-10-sleek-side-b-a1"
+ },
+ "11": {
+  "name": "sleek high-cheekbone type, lob",
+  "style": "PASS",
+  "mark": "PASS (head small)",
+  "final": "carina4-11-sleek-lob-c-a2-final.webp",
+  "src": "carina4-11-sleek-lob-c-a2"
+ },
+ "12": {
+  "name": "soft-curled sleek hair, glasses (free choice)",
+  "style": "PASS",
+  "mark": "PASS",
+  "final": "carina4-12-sleek-glasses-d-a2-final.webp",
+  "src": "carina4-12-sleek-glasses-d-a2"
+ },
+ "extras": [
+  [
+   "carina4-04-sleek-middle-a-s2-final.webp",
+   [
+    "4. extra seed 2",
+    "STYLE PASS | PASS"
+   ]
+  ],
+  [
+   "carina4-04-sleek-middle-a-s3.webp",
+   [
+    "4. extra seed 3",
+    "STYLE PASS | DRIFT: hair at top edge"
+   ]
+  ],
+  [
+   "carina4-08-bob-behind-ear-s2-final.webp",
+   [
+    "8. extra seed 2",
+    "STYLE PASS | PASS"
+   ]
+  ],
+  [
+   "carina4-08-bob-behind-ear-s3-final.webp",
+   [
+    "8. extra seed 3",
+    "STYLE PASS | PASS"
+   ]
+  ]
+ ]
+}

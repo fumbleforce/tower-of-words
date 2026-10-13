@@ -1,11 +1,8 @@
+Historical handoff preserved on 2026-10-13. Its task status, worktree paths and restart instructions describe the date below; check current Git and work issues before acting.
+
 # Handoff: state at 2026-09-29 morning (for a fresh start)
 
-Read GUIDE.md first. The game is game3d/ (day 1: train, gate and lobby, lift, B2 office). The local hub is `./start`, then http://127.0.0.1:8771/ (game, bible with the Review queue, the asset gallery, the notes).
-
-## Where things stand
-
-- **Live build:** 0928-2104-64a04d8. 58 local commits aren't pushed, because GitHub secret scanning blocks the push on a false positive: a 32-letter class name in game3d/vendor/transformers/transformers.min.js, commit 2ac4423. The file is gone from HEAD but still in history. Allow it at https://github.com/fumbleforce/tower-of-words/security/secret-scanning/unblock-secret/3JyYwvIygj8PLLOj0LJkQSF1m2h ("false positive"), then push with `game3d/tools/push.sh`.
-- **Weekly usage:** about 35% at 08:00 on 29 Sep; the week resets on 2 Oct at 07:00. tools/usage.py estimates it from local logs, calibrated with two /usage readings in tools/usage.json.
+Read GUIDE.md first. The game is game3d/ (day 1: train, gate and lobby, lift, B2 office). The local hub is `./start`, then [http://127.0.0.1:8771/](http://127.0.0.1:8771/) (game, bible with the Review queue, the asset gallery, the notes).
 
 ## Done and committed (local main)
 
@@ -57,37 +54,43 @@ Read GUIDE.md first. The game is game3d/ (day 1: train, gate and lobby, lift, B2
 ## Known broken or unfinished
 
 1. **Seating Eric on the gate bench (QA 22) is backed out** (306b7d3).
-   - The builder's H.sit/H.stand change caused the phone softlock at "Take the lift down to B2" (no goal marker).
-   - Without it, HEAD passes: phone in 64 s on the GPU.
-   - The last full checks, on cd66389, were phone, desktop social and desktop magic. All passed with 0 overlaps and 0 spins, and the movement check fails on any overlap again.
-   - Desktop hasn't been re-run on the newest HEAD.
-   - To redo: find why standing Eric up at the bench breaks the past_gate/gate_through step.
+
+- The builder's H.sit/H.stand change caused the phone softlock at "Take the lift down to B2" (no goal marker).
+- Without it, HEAD passes: phone in 64 s on the GPU.
+- The last full checks, on cd66389, were phone, desktop social and desktop magic. All passed with 0 overlaps and 0 spins, and the movement check fails on any overlap again.
+- Desktop hasn't been re-run on the newest HEAD.
+- To redo: find why standing Eric up at the bench breaks the past_gate/gate_through step.
+
 2. **Performance:** the perf pass is committed (e1ef56a, game3d/js/perf/batch.js) but not wired in yet.
-   - **Wiring needed in main.js:**
-     - add `import { optimizePlace } from './perf/batch.js';`
-     - in `prepare()`, after `place.name = name;`, add `optimizePlace(place, { game });`
-     - after the hoverRay line, add `hoverRay.layers.enable(31);`
-     - add js/perf/batch.js to build.json
-   - **Measured on the phone profile:**
-     - draw calls: train 1,643 → 692, gate 1,296 → 496, office 1,720 → 392
-     - fps: 70 → 105, 105 → 176, 69 → 142
-     - perf.mjs had been counting two frames, so the earlier figures in PERF.md were about double
-   - **Open:**
-     - a kitchen tray shows slight z-fighting when merged
-     - people's parts could be merged too
-     - the OutlinePass adds a pass
-     - still over the 250 budget
-     - `?nobatch` turns the pass off
-   - Details are in notes/PERF.md.
+
+- **Wiring needed in main.js:**
+  - add `import { optimizePlace } from './perf/batch.js';`
+  - in `prepare()`, after `place.name = name;`, add `optimizePlace(place, { game });`
+  - after the hoverRay line, add `hoverRay.layers.enable(31);`
+  - add js/perf/batch.js to build.json
+- **Measured on the phone profile:**
+  - draw calls: train 1,643 → 692, gate 1,296 → 496, office 1,720 → 392
+  - fps: 70 → 105, 105 → 176, 69 → 142
+  - perf.mjs had been counting two frames, so the earlier figures in PERF.md were about double
+- **Open:**
+  - a kitchen tray shows slight z-fighting when merged
+  - people's parts could be merged too
+  - the OutlinePass adds a pass
+  - still over the 250 budget
+  - `?nobatch` turns the pass off
+- Details are in notes/PERF.md.
+
 3. **QA round 1** (notes/QA-ROUND-1.md): about 20 of 31 items are fixed. Still open: 24 (props for the empty middle of the lobby and the copy room), 25 (one taught form per word), 31 (perf), and whatever round 2 finds. Nothing has been re-scored since the fixes.
 4. **Movement checks at human pace:**
-   - human.mjs at 1366 passes on cd66389, with no GAVE UP.
-   - At 390, the driver kept hitting the reader next to Mio. That's fixed in 87e4919, but the rerun at 390 hasn't been done.
-   - Known issues:
-     - step-aside can shift Eric up to about 1.4 m in a crowd
-     - QA 9: "Sit down" has no seat marked (story/world)
-   - not started: QA 24 (props for the lobby and copy room) and QA 25 (one taught form per word)
-     - the lift exit crossing is fixed in 29ae650; recheck it
+
+- human.mjs at 1366 passes on cd66389, with no GAVE UP.
+- At 390, the driver kept hitting the reader next to Mio. That's fixed in 87e4919, but the rerun at 390 hasn't been done.
+- Known issues:
+  - step-aside can shift Eric up to about 1.4 m in a crowd
+  - QA 9: "Sit down" has no seat marked (story/world)
+- not started: QA 24 (props for the lobby and copy room) and QA 25 (one taught form per word)
+  - the lift exit crossing is fixed in 29ae650; recheck it
+
 5. **bench_r's seat point** sits between two cushions (world data).
 
 ## Waiting on Jørgen (bible, Review)
@@ -103,6 +106,6 @@ Read GUIDE.md first. The game is game3d/ (day 1: train, gate and lobby, lift, B2
 ## Lessons from this run (for how to work next time)
 
 - **Test runs were the bottleneck.** Headless Chrome on software GL took 5–10 minutes a run through one browser lock, and agents queued for hours. Tests now use the GPU when its lock is free. Keep 2–3 agents at most, and give each a concrete deliverable and a deadline.
-- **Agents left polling loops running.** 41 `until …; sleep` loops were found after hours. Forbid them in every brief, and check `pgrep -fc "zsh -c"` at each heartbeat.
+- **Agents left polling loops running.** 41 `until …; sleep` loops were found after hours. Avoid loops that dont have wakeup calls and self-checks for problems after 3 turns.
 - **Heartbeats must check output,** meaning commits and test results, not just log status.
 - **The usage estimate** needs a fresh /usage reading each session.

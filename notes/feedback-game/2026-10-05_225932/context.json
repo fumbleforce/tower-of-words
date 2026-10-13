@@ -1,0 +1,34 @@
+{
+ "time": "2026-10-05T20:58:58.526Z",
+ "build": "1005-2047-39ec1223",
+ "url": "/game3d/",
+ "screen": "playing",
+ "place": "east_lane",
+ "placeName": "",
+ "period": "morning",
+ "periodName": "Morning at work",
+ "date": "Sat 3 Oct",
+ "node": "",
+ "nodeStack": [],
+ "goal": "Read the club posters in the fountain plaza.",
+ "line": null,
+ "typed": [],
+ "near": "",
+ "busy": false,
+ "player": {
+  "x": -9.26,
+  "y": 0,
+  "z": 0.19,
+  "heading": -1.9
+ },
+ "viewport": {
+  "width": 2560,
+  "height": 1316,
+  "dpr": 1,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-05T22:59:32+0200",
+ "folder": "notes/feedback-game/2026-10-05_225932",
+ "shot": true
+}
