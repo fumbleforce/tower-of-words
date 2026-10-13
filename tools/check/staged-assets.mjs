@@ -7,20 +7,26 @@ export const GENERATED_ASSET_LOCK_LIMIT = 16 * 1024 * 1024;
 export const GENERATED_ASSET_CATALOG = 'tools/assets/assets.json';
 export const GENERATED_ASSET_CATALOG_LIMIT = 8 * 1024 * 1024;
 const record = value => value !== null && typeof value === 'object' && !Array.isArray(value);
-function generatedLockPaths(bytes) {
-  assert(!bytes.includes(0), 'Asset lock contains binary data');
+function generatedJson(bytes, label) {
+  assert(!bytes.includes(0), `${label} contains binary data`);
   const source = bytes.toString('utf8');
-  assert(Buffer.from(source).equals(bytes), 'Asset lock is not valid UTF-8');
-  const lock = JSON.parse(source);
+  assert(Buffer.from(source).equals(bytes), `${label} is not valid UTF-8`);
+  return JSON.parse(source);
+}
+function publicRelativePath(file, label) {
+  const parts = file.split('/');
+  assert(file.isWellFormed() && file.length <= 4096 && !/[\\\x00-\x1f\x7f]/.test(file) && !/^[a-z]:/i.test(file)
+    && parts.every(part => part && !['.', '..', '.git', 'private'].includes(part.toLowerCase())),
+  `Unsafe ${label} path: ${file}`);
+}
+function generatedLockPaths(bytes) {
+  const lock = generatedJson(bytes, 'Asset lock');
   assert(record(lock) && Object.keys(lock).sort().join(',') === 'about,files', 'Invalid asset lock schema');
   assert(typeof lock.about === 'string' && lock.about.length > 0 && Buffer.byteLength(lock.about) <= 1024
     && !/[\x00-\x1f\x7f]/.test(lock.about), 'Invalid asset lock description');
   assert(record(lock.files), 'Invalid asset lock files');
   for (const [file, entry] of Object.entries(lock.files)) {
-    const parts = file.split('/');
-    assert(file.isWellFormed() && file.length <= 4096 && !/[\\\x00-\x1f\x7f]/.test(file) && !/^[a-z]:/i.test(file)
-      && parts.every(part => part && !['.', '..', '.git', 'private'].includes(part.toLowerCase())),
-    `Unsafe asset lock path: ${file}`);
+    publicRelativePath(file, 'asset lock');
     assert(record(entry) && Object.keys(entry).sort().join(',') === 'sha256,size,type', `Invalid asset lock record: ${file}`);
     assert(Number.isSafeInteger(entry.size) && entry.size >= 0, `Invalid asset lock size: ${file}`);
     assert(typeof entry.sha256 === 'string' && /^[a-f0-9]{64}$/.test(entry.sha256), `Invalid asset lock sha256: ${file}`);
@@ -43,7 +49,7 @@ export function checkStagedAssets(cwd, snapshot, { env = process.env } = {}) {
   assert(config.never === undefined || (Array.isArray(config.never) && config.never.every(value => typeof value === 'string')),
     'Invalid excluded asset paths');
   const entries = [];
-  let lockedPaths = [];
+  let lockedPaths = [], catalogPaths = [];
   for (const change of snapshot.changes) {
     assert(!change.file.split('/').includes('private'), 'Private paths cannot be committed');
     if (change.status === 'D') continue;
@@ -57,15 +63,15 @@ export function checkStagedAssets(cwd, snapshot, { env = process.env } = {}) {
     }
     if (change.file === GENERATED_ASSET_CATALOG) {
       const bytes = readStagedFile(cwd, snapshot, change.file, { env, maxBytes: GENERATED_ASSET_CATALOG_LIMIT });
-      assert(!bytes.includes(0), 'Asset catalog contains binary data');
-      const source = bytes.toString('utf8');
-      assert(Buffer.from(source).equals(bytes), 'Asset catalog is not valid UTF-8');
-      const catalog = JSON.parse(source);
+      const catalog = generatedJson(bytes, 'Asset catalog');
       assert(record(catalog) && Array.isArray(catalog.assets) && record(catalog.counts)
         && record(catalog.kinds) && Array.isArray(catalog.statuses), 'Invalid asset catalog schema');
       assert(catalog.assets.every(entry => record(entry) && typeof entry.id === 'string'
         && typeof entry.kind === 'string' && Array.isArray(entry.paths)
         && entry.paths.every(file => typeof file === 'string')), 'Invalid asset catalog entry');
+      // The producer owns unique ids and count totals; ids are labels, not filesystem paths.
+      catalogPaths = catalog.assets.flatMap(entry => entry.paths);
+      for (const file of catalogPaths) publicRelativePath(file, 'asset catalog');
       continue;
     }
     // Every unallowed text candidate fits the cap, so inspect all its bytes for NUL.
@@ -79,12 +85,15 @@ extensions={'.'+ext.lower() for ext in conf['binary_ext']}
 for p in data['lockedPaths']:
     if any(p.startswith(rule) if rule.endswith('/') else fnmatch.fnmatchcase(p, rule) for rule in conf.get('never', [])):
         failures.append(p+': excluded asset lock path')
+for p in data['catalogPaths']:
+    if any(p.startswith(rule) if rule.endswith('/') else fnmatch.fnmatchcase(p, rule) for rule in conf.get('never', [])):
+        failures.append(p+': excluded asset catalog path')
 for entry in data['entries']:
     p=entry['file']
     if any(p.startswith(rule) if rule.endswith('/') else fnmatch.fnmatchcase(p, rule) for rule in conf['commit_allow']): continue
     if entry['binary'] or os.path.splitext(p)[1].lower() in extensions: failures.append(p+': binary belongs in asset storage')
     elif entry['size']>cap: failures.append(p+': text exceeds staged size limit')
-print(json.dumps(failures[:20]))`], { cwd, env, input: JSON.stringify({ config, cap, entries, lockedPaths }),
+print(json.dumps(failures[:20]))`], { cwd, env, input: JSON.stringify({ config, cap, entries, lockedPaths, catalogPaths }),
     encoding: 'utf8', timeout: 10000, maxBuffer: 3 * 1024 * 1024 }));
   assert(!failures.length, failures.join('\n'));
 }
