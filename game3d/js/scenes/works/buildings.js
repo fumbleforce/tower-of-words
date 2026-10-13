@@ -75,10 +75,19 @@ function* plant(p, plain) {
     if (id === 'n') continue; // its back, never seen
     const n = Math.round(f.L / 2.2),
       bw = f.L / n;
-    for (let i = 0; i <= n; i++)
-      onFace(p, C.pier, f, i * bw - 0.2, i * bw + 0.2, 0, H, 0, 0.14, {
-        surf: 'concrete',
-      });
+    for (let i = 0; i <= n; i++) {
+      const a = i * bw - 0.2,
+        b = i * bw + 0.2;
+      const left = doorT - doorW / 2 - 0.04,
+        right = doorT + doorW / 2 + 0.04;
+      // The inset door exposes the old pier. Carry it over the lintel, never across the door leaves.
+      const parts =
+        id === 'e' && b > left && a < right
+          ? [[a, b, 2.42, H], ...(a < left ? [[a, left, 0, 2.42]] : []), ...(b > right ? [[right, b, 0, 2.42]] : [])]
+          : [[a, b, 0, H]];
+      for (const [from, to, low, high] of parts)
+        onFace(p, C.pier, f, from, to, low, high, 0, 0.14, { surf: 'concrete' });
+    }
     for (let i = 0; i < n; i++) {
       const [a, b] = [i * bw + 0.45, (i + 1) * bw - 0.45];
       if (id === 'e' && Math.abs((a + b) / 2 - (z1 - P.PLANT_DOOR.z)) < bw / 2) {
@@ -116,15 +125,7 @@ function* plant(p, plain) {
   onFace(p, C.base, f, t - w / 2 - 0.3, t + w / 2 + 0.3, 0, 0.12, 0, 0.7, {
     surf: 'concrete',
   }); // the step
-  plain.board(
-    'はつでんしょ',
-    'No.1 POWER PLANT',
-    '#5a5f66',
-    1.5,
-    0.48,
-    [x1 + 0.06, 1.75, P.PLANT_DOOR.z + w / 2 + 1.0],
-    Math.PI / 2,
-  );
+  plain.board('はつでんしょ', 'No.1 POWER PLANT', '#5a5f66', 1.5, 0.48, [x1 + 0.16, 3.15, P.PLANT_DOOR.z], Math.PI / 2);
   // ivy up the south-east corner; each clump 4 mm thicker than one of another green (clumps of one depth
   // overlapping in different greens flickered)
   for (let k = 0; k < 26; k++) {
@@ -229,6 +230,7 @@ function* shed(p, plain) {
   onFace(p, '#9aa3a2', f, dt - 0.18, dt + 0.18, 1.1, 1.17, -0.105, -0.055, WORKS_METAL);
   doorReveals(p, f, 6.4, 7.3, 0.3, 2.3);
   onFace(p, '#5b616b', f, 6.4, 7.3, 0.3, 2.3, -0.2, -0.12, WORKS_METAL);
+  onFace(p, '#abb4b7', f, 7.02, 7.16, 1.23, 1.27, -0.12, -0.04, { ...WORKS_METAL, cast: false });
   worksWindow(p, f, 7.6, 8.4, 1.4, 2.4, 4);
   plain.board('２', 'No.2', '#3e4a52', 0.7, 0.7, [x1 + 0.04, H - 0.9, cz], Math.PI / 2);
   yield;
@@ -265,6 +267,7 @@ function kiosk(p, plain) {
   // a door and a window on the yard
   doorReveals(p, F.s, 0.8, 1.7, 0, 2.05);
   onFace(p, '#5b616b', F.s, 0.8, 1.7, 0, 2.05, -0.2, -0.12, WORKS_METAL);
+  onFace(p, '#abb4b7', F.s, 1.42, 1.56, 1, 1.04, -0.12, -0.04, { ...WORKS_METAL, cast: false });
   worksWindow(p, F.s, 2.65, 4.35, 1.05, 1.95, 3);
   // the barrier at the apron's mouth, raised: its post and the arm up, red and white
   const bx = x0 + 0.2,

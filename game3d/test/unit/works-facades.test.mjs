@@ -202,6 +202,18 @@ test('factory gates and inset personnel doors remain physically closed', () => {
   }
 });
 
+test('plant piers clear the complete door opening below the lintel', () => {
+  const { p } = building('plant'),
+    solid = rays(p),
+    f = faces(P.PLANT).e;
+  const t = P.PLANT[3] - P.PLANT_DOOR.z;
+  for (const offset of [-0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6]) {
+    const hits = hit(solid, f, t + offset, 1.8, 0.6);
+    assert.ok(hits.length);
+    assert.ok(hits[0].distance >= 0.18, 'door surface is inset, with no concrete pier ahead of it');
+  }
+});
+
 test('untouched chimney and server-hall construction retain their original primitive geometry', () => {
   // Chimney and hall functions are unchanged from main d9ad811e; material keys reflect current shared finishes.
   assert.equal(fingerprint('chimney'), '86c1951096250bea01dd62c392d4bdb63d690b2a642ef1bb5b559147096986ca');
