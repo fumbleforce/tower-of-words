@@ -1,0 +1,358 @@
+{
+  "candidate": "kenji-outing",
+  "issue": 339,
+  "existing_local_branch": "wt/codex-kenji-outing",
+  "original_base_head": "ad07d1efa3e2b748f1cee3922e86120cbcdaa332",
+  "source_archive": ".git/codex-reviews/retired-candidates-20261010/kenji-outing/files.tar.gz",
+  "source_archive_sha256": "21b9eeaad1fe05aa48e04f6eaf68f70e66dd5545a2d6c46b652eccb13a8d5bdf",
+  "original_patch": ".git/codex-reviews/retired-candidates-20261010/kenji-outing/working.patch",
+  "original_patch_sha256": "5edd7eef4f5bd8bc465404a9d95dc0159e9837ae3fb7b6f5cf8414b450becb38",
+  "original_patch_bytes": 26640,
+  "tracked_patch_path_count": 22,
+  "all_tracked_patch_paths_in_source_snapshot": true,
+  "source_file_count": 42,
+  "source_bytes": 731431,
+  "files": [
+    {
+      "path": "docs/game/places.md",
+      "bytes": 234245,
+      "sha256": "79aafdb660be316deef8146d687a20b1bce75f55af69c85a411eaa3ba041b8ed"
+    },
+    {
+      "path": "docs/game/systems.md",
+      "bytes": 44852,
+      "sha256": "aac9e119577c84cda4a8e59a32465b3b563743cd54a282af1614acce21497fe4"
+    },
+    {
+      "path": "game3d/js/continue.js",
+      "bytes": 3580,
+      "sha256": "61aca0b5dbf59c43ab49b80c33fb7b04bf792afcaf5ec2bfb81cf68d69c139b6"
+    },
+    {
+      "path": "game3d/js/conversations/index.js",
+      "bytes": 2007,
+      "sha256": "0fb1f331f984f05429982a7f89980678ee13a4cf7d6757dc84a946011576af36"
+    },
+    {
+      "path": "game3d/js/narrative/engine-flags.js",
+      "bytes": 7122,
+      "sha256": "885b7bbc271099c261adef3bb9a8db3cb35ac01c81a3ca937fe8e4c3970afab2"
+    },
+    {
+      "path": "game3d/js/narrative/hooks.js",
+      "bytes": 724,
+      "sha256": "0e269aa4acec8583a4e0df52502f080e87a771b49c7800b4338773d60ed7b685"
+    },
+    {
+      "path": "game3d/js/outings/actor.js",
+      "bytes": 5358,
+      "sha256": "6a398ca5cc21a1aea37026c539675559f09a11da6c1ffb1a908dc519adf3c323"
+    },
+    {
+      "path": "game3d/js/outings/attachment.js",
+      "bytes": 2387,
+      "sha256": "d7aec632ba76d9785de721edd68e1216e87de62398abba7c8d64703d46aecd53"
+    },
+    {
+      "path": "game3d/js/outings/catalog.js",
+      "bytes": 389,
+      "sha256": "f136a6d6e0c451c5e6f4ee735e4e2a3b5594d6d4f902adab838545524f2820d8"
+    },
+    {
+      "path": "game3d/js/outings/follow.js",
+      "bytes": 4000,
+      "sha256": "8bcf0b5208ab0fcb48f9c7040faf3726471480bd4697a7adebf82b0f3dce0a03"
+    },
+    {
+      "path": "game3d/js/outings/index.js",
+      "bytes": 10706,
+      "sha256": "c28e805b6e1cdebf8481eceef806ef9f317c5ecabb67caf3281f573104e93965"
+    },
+    {
+      "path": "game3d/js/outings/model.js",
+      "bytes": 2797,
+      "sha256": "34583229f66d2cb70afbb2ad57aa97b24437fd7230021cc0011abf8c288202bf"
+    },
+    {
+      "path": "game3d/js/outings/parting.js",
+      "bytes": 1904,
+      "sha256": "66e3add5cb345255619409bbd60bad4a9e5a5f03589f1c17bdaa437923fd432f"
+    },
+    {
+      "path": "game3d/js/outings/seating.js",
+      "bytes": 5333,
+      "sha256": "5ca3da498ab483f28564a5e4d3726178337e43ae4fa959c7b7345f09321eabc3"
+    },
+    {
+      "path": "game3d/js/outings/stops.js",
+      "bytes": 5258,
+      "sha256": "d2ee6a739676bc51dea22d3e1c7018b7807301ade878723449761e8861720b7e"
+    },
+    {
+      "path": "game3d/js/places/catalog.js",
+      "bytes": 13525,
+      "sha256": "b3e513e83464e30aa09961de0016330020aa1157c252d0c9953a7f4ae4c80d91"
+    },
+    {
+      "path": "game3d/js/places/commons.js",
+      "bytes": 5680,
+      "sha256": "fc5f0e54000381a9d2caa300ccd10cbca73b22eaffa40210cd796762204b960e"
+    },
+    {
+      "path": "game3d/js/places/day-cast.js",
+      "bytes": 5986,
+      "sha256": "979179ab15f1d673e6fa2a413082585ed8d4bb50daa0744e1f4cfb09459d4d89"
+    },
+    {
+      "path": "game3d/js/places/day3/seats.js",
+      "bytes": 2100,
+      "sha256": "f5612cdcde8aa0a4706e25ee7fdd583e30b51a9e8c34c6e4529dce1357d134c5"
+    },
+    {
+      "path": "game3d/js/places/east-coast.js",
+      "bytes": 9027,
+      "sha256": "d414186d30edee7985314e29449141a7ae31fe9c4e1dd66f4bf8fb79675735b2"
+    },
+    {
+      "path": "game3d/js/places/east-lane.js",
+      "bytes": 8827,
+      "sha256": "7a65cc10bc930d308da7330abc84058533e4634a69e694f487bbf9c1edc94f05"
+    },
+    {
+      "path": "game3d/js/places/lifecycle.js",
+      "bytes": 12433,
+      "sha256": "4802a8df976211738e30f499af0d2a5745544027d00d3338a4dad52f3c67001d"
+    },
+    {
+      "path": "game3d/js/places/plaza.js",
+      "bytes": 9829,
+      "sha256": "20039ffa80de9c1ebcd0c1ae0770b8b2c7b0e16e15774083fd15b4ed50f85968"
+    },
+    {
+      "path": "game3d/js/places/shotengai.js",
+      "bytes": 11923,
+      "sha256": "a3704e2db17743fbd5115f93e1522b1483a100c45e3be3135cdcf9bd5708c0ce"
+    },
+    {
+      "path": "game3d/js/sim.js",
+      "bytes": 21463,
+      "sha256": "d56b2666c0a6cd8ea358544be36fad8a3ab46a853f350f282fa340401acd01f8"
+    },
+    {
+      "path": "game3d/shots/kenji-outing/branches/carina-transcripts.json",
+      "bytes": 43661,
+      "sha256": "2de39d26edf50ce41070fe23d522fb351284e7bf84c805565d06881247423e13",
+      "role": "Historical protagonist branch transcript for story/voice review; provenance only."
+    },
+    {
+      "path": "game3d/shots/kenji-outing/branches/eric-transcripts.json",
+      "bytes": 43557,
+      "sha256": "c1bc0024f53a82532a960d6c7087839dfe892bd70fed97f209832ab6fa1d5883",
+      "role": "Historical protagonist branch transcript for story/voice review; provenance only."
+    },
+    {
+      "path": "game3d/story/conversations/index.js",
+      "bytes": 796,
+      "sha256": "d32fb782a4b1c88bc7b91471ed6fa0d9a81ce072b6e05a484cdd7b70d229a49a"
+    },
+    {
+      "path": "game3d/story/conversations/outing.js",
+      "bytes": 10189,
+      "sha256": "06dbb5fb03e6553da7b34ebe33a23a2e53218abeaba2fd137ca958b5a844d909"
+    },
+    {
+      "path": "game3d/test/fixtures/declarations-before.json",
+      "bytes": 52117,
+      "sha256": "1b0c9911510c7ae5f97b68ad3f34efd3e06eedc0f7b9b780ff60b1e904fa93e7"
+    },
+    {
+      "path": "game3d/test/unit/outing-attachment.test.mjs",
+      "bytes": 3787,
+      "sha256": "f71fab1cca869e6a3f3e65918b5ce965d8a96f1c3b732489aa3ddce328c285a5"
+    },
+    {
+      "path": "game3d/test/unit/outing-controller.test.mjs",
+      "bytes": 14703,
+      "sha256": "ebf4d53a2532bcffe55b57e1474dc3274e50e227be301bd0daa585cff45ccca0"
+    },
+    {
+      "path": "game3d/test/unit/outing-lifecycle.test.mjs",
+      "bytes": 8288,
+      "sha256": "dfed0d5514f43f4d1a5ff706585798362fefc0409ac3682d201e540690100784"
+    },
+    {
+      "path": "game3d/test/unit/outing-model.test.mjs",
+      "bytes": 10295,
+      "sha256": "06c5593ead1e16234411cbb8ff0fdc6716b8dab36945e3876c06a6b49098c270"
+    },
+    {
+      "path": "game3d/test/unit/outing-staging.test.mjs",
+      "bytes": 11358,
+      "sha256": "a8219e875decf6275965f9e4da1eb36992260b00316fb76d8ac9453ca830d76b"
+    },
+    {
+      "path": "game3d/test/unit/save-restore.test.mjs",
+      "bytes": 23949,
+      "sha256": "0372f8076683aac4ffd829627e6d6b66da5d28d0423cf55621051aa7d80c1afd"
+    },
+    {
+      "path": "game3d/test/unit/structural-baseline.test.mjs",
+      "bytes": 7735,
+      "sha256": "a6649e58ba5fce674ecc4f45e8af5fcd42764c690f84639202355bb2b0cdba6a"
+    },
+    {
+      "path": "game3d/tools/outing-check.mjs",
+      "bytes": 32286,
+      "sha256": "b57dfa15a43900e4a777f36072b3f3b5e24d66d2cb32a8a0ab6c371d91b6c39c"
+    },
+    {
+      "path": "game3d/tools/outing-seat-contact.mjs",
+      "bytes": 2909,
+      "sha256": "900d8272a3b76043f2ecd35704d1c7383cad001d9606e18dc6fa094034c25ba3"
+    },
+    {
+      "path": "game3d/tools/outing-story-check.mjs",
+      "bytes": 10641,
+      "sha256": "3490c1091515e4ab6e061c069509ae0593b77edb9b5558ccd114ffb88846b011"
+    },
+    {
+      "path": "tools/check/module-budgets.json",
+      "bytes": 20459,
+      "sha256": "31e89b789a5acd65888f35a4ca050f675eb7235a81a4b220bf7ddd92c61dfa45"
+    },
+    {
+      "path": "tools/check/registrations.mjs",
+      "bytes": 3246,
+      "sha256": "462b7c95563b0c53f4733cb3f618abd0ce3993ae6667df7c5a132c73fb886f87"
+    }
+  ],
+  "excluded_original_artifacts": [
+    {
+      "path": "game3d/build.json",
+      "bytes": 25042,
+      "original_sha256": "201c56ca82c547a24ce072532e5af177e0829d9ef87b2588a84a76b4553e3f6a",
+      "reason": "Generated build identity/check data, not candidate source."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T21-59-23-562Z-309585/1366x860.png",
+      "bytes": 146032,
+      "original_sha256": "215fe4e8e689e8901efd621bacf24be4e914b12125e4aa9da13a068dddc16e60",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T21-59-23-562Z-309585/perf.json",
+      "bytes": 2850,
+      "original_sha256": "ba2598fbd2060cd97cf7851ee1ff6e905d04b67a653bc74ff2a0826fcc67972e",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T21-59-23-562Z-309585/result.json",
+      "bytes": 21831,
+      "original_sha256": "0d1dc6484a6e6601466d36976325064f6aec70aae4abd9b34b6cecd279145065",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T22-01-05-668Z-320910/390x844.png",
+      "bytes": 89476,
+      "original_sha256": "b47c579f7c2e02846ab48dd992084cd64babe9c1209dc981f1543e87e0473724",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T22-01-05-668Z-320910/perf.json",
+      "bytes": 2834,
+      "original_sha256": "242da5d752785bfd8e5ea7565cf56655466853291c015af99b1b1848737fbcdb",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T22-01-05-668Z-320910/result.json",
+      "bytes": 21884,
+      "original_sha256": "0e00c073f82174aaf1496674bc39af0c048ca27f3623c6b42074aaed1aa6140a",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T22-01-35-751Z-322241/1366x860.png",
+      "bytes": 144334,
+      "original_sha256": "dc4d41aa185c8ad6b7249a41b33510313097d2ae492c03f770c0337aba58175b",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T22-01-35-751Z-322241/perf.json",
+      "bytes": 2849,
+      "original_sha256": "a5214fba7eb63220dbc99d734d6d57eb2ec8b9a7d528439c6125c20d8c6a1404",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T22-01-35-751Z-322241/result.json",
+      "bytes": 21864,
+      "original_sha256": "1cc6b3e67ee29442138298b9f95434c49ac76be4b3db1258a72b0febee74547e",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T22-02-57-215Z-329820/390x844.png",
+      "bytes": 89763,
+      "original_sha256": "47fa10097ad42f3dbe8d46153fc1ce92e570aad03472734c6d6ec8b4571e5bb7",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T22-02-57-215Z-329820/perf.json",
+      "bytes": 2841,
+      "original_sha256": "811c6731e81961ae143194bd187e2257ba0b5c1380b4342a9b5bc70654b36482",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T22-02-57-215Z-329820/result.json",
+      "bytes": 21865,
+      "original_sha256": "81b13f34639c27e0d32c94f373bd889c4842d45821fa02fcbedfa61845e377e7",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "tools/__pycache__/comfy.cpython-314.pyc",
+      "bytes": 22728,
+      "original_sha256": "f0c132ce643d05a31512e5053d44f8f225ce886f7cfd625c60d05b45b05f233e",
+      "reason": "Python bytecode/cache, not candidate source."
+    },
+    {
+      "path": "tools/__pycache__/gpu_priority.cpython-314.pyc",
+      "bytes": 29572,
+      "original_sha256": "c39d490b5a6efe0951a76046a9d12d7fc84b22ee0d917ad0af2ca5789e56a2fa",
+      "reason": "Python bytecode/cache, not candidate source."
+    },
+    {
+      "path": "tools/assets/__pycache__/runtime_data.cpython-314.pyc",
+      "bytes": 6319,
+      "original_sha256": "1b36d3fd952d75a16096d9843a3a90760b420051d5ac1fc2379eb9976c50bb28",
+      "reason": "Python bytecode/cache, not candidate source."
+    }
+  ],
+  "package_root": "notes/recovery/kenji-outing/",
+  "external_requirements": [
+    "Reuses original-base game assets; no newly generated indispensable binary found in candidate tar. Original capture evidence excluded and remains in local archive. Story/voice/visual gates must be refreshed before integration."
+  ],
+  "normalized_member_validation": {
+    "duplicate_names": [],
+    "absolute_or_traversal_paths": [],
+    "symlink_hardlink_special_members": [],
+    "private_paths": []
+  },
+  "reconstruction_proof": {
+    "verification": "audit_refs independently verified original HEAD + original patch reconstructs every changed tracked source blob exactly; this audit verified every selected final tar file hash against original manifest.",
+    "tracked_source_blobs_verified": 22,
+    "new_public_source_or_metadata_files_preserved": 20,
+    "final_snapshot_is_byte_exact": true
+  },
+  "format_version": 1,
+  "status": "Draft source preservation only. Story review, voices and integration pending.",
+  "preservation_main_head": "b36fc403150f4593a42a228f30f884edc1260146",
+  "source_prefix": "source/",
+  "original_patch_filename": "original.patch",
+  "member_validation": {
+    "all_members_checked": 58,
+    "selected_regular_utf8_files": 42,
+    "duplicate_paths": 0,
+    "unsafe_paths": 0,
+    "private_paths": 0,
+    "special_members": 0
+  },
+  "recovery_note": "The original patch and exact final public source snapshots are preserved. Excluded capture/cache/build bytes remain in the original local archive. This package does not activate the candidate.",
+  "preservation_branch": "wt/codex-kenji-outing"
+}

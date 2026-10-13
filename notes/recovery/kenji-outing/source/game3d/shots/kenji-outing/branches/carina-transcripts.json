@@ -1,0 +1,1755 @@
+{
+  "scope": "Actual Runner and actual outing save model; physical hooks are controlled outcomes, not browser evidence.",
+  "source": {
+    "game3d/story/conversations/outing.js": "06dbb5fb03e6553da7b34ebe33a23a2e53218abeaba2fd137ca958b5a844d909",
+    "game3d/story/conversations/index.js": "d32fb782a4b1c88bc7b91471ed6fa0d9a81ce072b6e05a484cdd7b70d229a49a",
+    "game3d/js/conversations/index.js": "0fb1f331f984f05429982a7f89980678ee13a4cf7d6757dc84a946011576af36"
+  },
+  "records": [
+    {
+      "name": "invitation menu ",
+      "mc": "carina",
+      "transcript": [],
+      "menus": [
+        [
+          "Invite Kenji for a walk.",
+          "Talk about the arcade.",
+          "Maybe another time."
+        ]
+      ],
+      "actions": [],
+      "state": {
+        "status": "idle",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": false,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai"
+      }
+    },
+    {
+      "name": "invitation menu ikitai",
+      "mc": "carina",
+      "transcript": [],
+      "menus": [
+        [
+          "Invite Kenji for a walk.",
+          "Talk about the arcade.",
+          "Maybe another time."
+        ]
+      ],
+      "actions": [],
+      "state": {
+        "status": "idle",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": false,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai"
+      }
+    },
+    {
+      "name": "invitation menu isshoni",
+      "mc": "carina",
+      "transcript": [],
+      "menus": [
+        [
+          "Invite Kenji for a walk.",
+          "Talk about the arcade.",
+          "Maybe another time."
+        ]
+      ],
+      "actions": [],
+      "state": {
+        "status": "idle",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": false,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai"
+      }
+    },
+    {
+      "name": "invitation menu ikitai,isshoni",
+      "mc": "carina",
+      "transcript": [],
+      "menus": [
+        [
+          "Invite Kenji for a walk.",
+          "Try “I’d like to go together.”",
+          "Talk about the arcade.",
+          "Maybe another time."
+        ]
+      ],
+      "actions": [],
+      "state": {
+        "status": "idle",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": false,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai"
+      }
+    },
+    {
+      "name": "ordinary invitation unknown words",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Carina",
+          "text": "Want to come for a walk?",
+          "overheard": false
+        },
+        {
+          "speaker": "Kenji",
+          "text": "うん、行こう。どっち？",
+          "overheard": true
+        }
+      ],
+      "menus": [
+        [
+          "Invite Kenji for a walk.",
+          "Talk about the arcade.",
+          "Maybe another time."
+        ],
+        [
+          "Walk to the shop street together.",
+          "Walk to the seafront together.",
+          "Actually, another time."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "invite",
+          "failedPending": null
+        },
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji to the seafront bench. Chat with him to choose a stop."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "word invitation",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Carina",
+          "text": "{isshoni}……{ikitai}。",
+          "overheard": false
+        },
+        {
+          "speaker": "Kenji",
+          "text": "うん、{isshoni}行こう。",
+          "overheard": true
+        }
+      ],
+      "menus": [
+        [
+          "Invite Kenji for a walk.",
+          "Try “I’d like to go together.”",
+          "Talk about the arcade.",
+          "Maybe another time."
+        ],
+        [
+          "Walk to the shop street together.",
+          "Walk to the seafront together.",
+          "Actually, another time."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "invite"
+        },
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji to the shop street. Chat with him to choose a stop."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "busy invitation",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Carina",
+          "text": "Want to come for a walk?",
+          "overheard": false
+        },
+        {
+          "speaker": "Kenji",
+          "text": "ごめん、今はちょっと。またあとで。",
+          "overheard": true
+        },
+        {
+          "speaker": "Carina",
+          "text": "Okay, I'll ask you later.",
+          "overheard": false
+        }
+      ],
+      "menus": [
+        [
+          "Invite Kenji for a walk.",
+          "Talk about the arcade.",
+          "Maybe another time."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "invite",
+          "failedPending": null
+        }
+      ],
+      "state": {
+        "status": "idle",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": false,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_action_complete": false
+      }
+    },
+    {
+      "name": "busy resume",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Carina",
+          "text": "Want to carry on with our walk?",
+          "overheard": false
+        },
+        {
+          "speaker": "Kenji",
+          "text": "ごめん、今はちょっと。またあとで。",
+          "overheard": true
+        },
+        {
+          "speaker": "Carina",
+          "text": "Okay, I'll ask you later.",
+          "overheard": false
+        }
+      ],
+      "menus": [
+        [
+          "Continue our walk.",
+          "Talk about the arcade.",
+          "Maybe another time."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "resume",
+          "failedPending": null
+        }
+      ],
+      "state": {
+        "status": "paused",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_paused": true,
+        "outing_active": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_action_complete": false
+      }
+    },
+    {
+      "name": "resume keeps receipt",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Carina",
+          "text": "Want to carry on with our walk?",
+          "overheard": false
+        },
+        {
+          "speaker": "Kenji",
+          "text": "うん、行こう。",
+          "overheard": true
+        }
+      ],
+      "menus": [
+        [
+          "Continue our walk.",
+          "Talk about the arcade.",
+          "Maybe another time."
+        ],
+        [
+          "Walk to the shop street together.",
+          "Walk to the seafront together.",
+          "Actually, another time."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "resume",
+          "failedPending": null
+        },
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji to the seafront bench. Chat with him to choose a stop."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [
+          "arcade"
+        ],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_paused": false,
+        "state": {
+          "status": "paused",
+          "day": 3,
+          "period": "afternoon",
+          "stops": [
+            "arcade"
+          ]
+        },
+        "outing_active": true,
+        "outing_callback": "",
+        "outing_done_arcade": true,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "arcade context false",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Kenji",
+          "text": "あ、ゲームセンター。ちょっと見ていい？",
+          "overheard": true
+        },
+        {
+          "speaker": "Carina",
+          "text": "Sure. I'll have a look too.",
+          "overheard": false
+        }
+      ],
+      "menus": [
+        [
+          "Stop by the game centre together.",
+          "Buy a drink at the convenience store.",
+          "Head to the seafront.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ],
+        [
+          "Stay here a little longer.",
+          "Buy a drink at the convenience store.",
+          "Head to the seafront.",
+          "Keep walking together.",
+          "Let's split up here."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "arcade",
+          "failedPending": "arcade"
+        },
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji. Chat with him to stop or say goodbye."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [
+          "arcade"
+        ],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "kenji_arcade_talked": false,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": true,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_arcade_repeat": false,
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "arcade context true",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Kenji",
+          "text": "あ、ここ。前に話したゲームセンター。",
+          "overheard": true
+        },
+        {
+          "speaker": "Carina",
+          "text": "The crane game you were telling me about?",
+          "overheard": false
+        }
+      ],
+      "menus": [
+        [
+          "Stop by the game centre together.",
+          "Buy a drink at the convenience store.",
+          "Head to the seafront.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ],
+        [
+          "Stay here a little longer.",
+          "Buy a drink at the convenience store.",
+          "Head to the seafront.",
+          "Keep walking together.",
+          "Let's split up here."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "arcade",
+          "failedPending": "arcade"
+        },
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji. Chat with him to stop or say goodbye."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [
+          "arcade"
+        ],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "kenji_arcade_talked": true,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": true,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_arcade_repeat": false,
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "failed arcade arrival",
+      "mc": "carina",
+      "transcript": [],
+      "menus": [
+        [
+          "Stop by the game centre together.",
+          "Buy a drink at the convenience store.",
+          "Head to the seafront.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ],
+        [
+          "Try the game centre again.",
+          "Keep walking together."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "arcade",
+          "failedPending": "arcade"
+        },
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji. Chat with him to stop or say goodbye."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_arcade_repeat": false,
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "repeat arcade",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Kenji",
+          "text": "もう少し見る？",
+          "overheard": true
+        }
+      ],
+      "menus": [
+        [
+          "Stop by the game centre together.",
+          "Buy a drink at the convenience store.",
+          "Head to the seafront.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ],
+        [
+          "Stay here a little longer.",
+          "Buy a drink at the convenience store.",
+          "Head to the seafront.",
+          "Keep walking together.",
+          "Let's split up here."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "arcade",
+          "failedPending": "arcade"
+        },
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji. Chat with him to stop or say goodbye."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [
+          "arcade"
+        ],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "outing_done_arcade": true,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_arcade_repeat": true,
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "drink wait no purchase yet",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Carina",
+          "text": "I'm going to get a drink.",
+          "overheard": false
+        },
+        {
+          "speaker": "Kenji",
+          "text": "うん。ここで待ってるね。",
+          "overheard": true
+        }
+      ],
+      "menus": [
+        [
+          "Stop by the game centre together.",
+          "Buy a drink at the convenience store.",
+          "Head to the seafront.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "drink",
+          "failedPending": "drink"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Kenji is waiting outside the convenience store. Return here when you are ready."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_action_complete": true
+      }
+    },
+    {
+      "name": "closed shop",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Carina",
+          "text": "It's closed. Let's keep going.",
+          "overheard": false
+        }
+      ],
+      "menus": [
+        [
+          "Stop by the game centre together.",
+          "Buy a drink at the convenience store.",
+          "Head to the seafront.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji. Chat with him to stop or say goodbye."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 2,
+        "period": "afternoon",
+        "outing_active": true,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "coast sit successful",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Kenji",
+          "text": "あー、ちょっと休もう。",
+          "overheard": true
+        }
+      ],
+      "menus": [
+        [
+          "Sit on the seafront bench with Kenji.",
+          "Head to the shop street.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ],
+        [
+          "Stay on the bench a little longer.",
+          "Get up and keep walking.",
+          "I should get going."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "coast",
+          "failedPending": "coast"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Sit with Kenji. Chat with him when you want to get up."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [
+          "coast"
+        ],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "place": "east_coast",
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": true,
+        "outing_coast_repeat": false,
+        "outing_action_complete": true,
+        "outing_seated": true
+      }
+    },
+    {
+      "name": "coast unavailable",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Carina",
+          "text": "We can't sit here together. Let's keep walking.",
+          "overheard": false
+        }
+      ],
+      "menus": [
+        [
+          "Sit on the seafront bench with Kenji.",
+          "Head to the shop street.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "coast",
+          "failedPending": "coast"
+        },
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji. Chat with him to stop or say goodbye."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "place": "east_coast",
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "outing_coast_repeat": false,
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "restored seated controls",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Carina",
+          "text": "Shall we keep going?",
+          "overheard": false
+        },
+        {
+          "speaker": "Kenji",
+          "text": "うん、行こう。",
+          "overheard": true
+        }
+      ],
+      "menus": [
+        [
+          "Stay on the bench a little longer.",
+          "Get up and keep walking.",
+          "I should get going."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji. Chat with him to stop or say goodbye."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "outing_seated": false,
+        "place": "east_coast",
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "outing_action_complete": true
+      }
+    },
+    {
+      "name": "part before stop",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Carina",
+          "text": "I should get going. See you later.",
+          "overheard": false
+        },
+        {
+          "speaker": "Kenji",
+          "text": "うん、またね。",
+          "overheard": true
+        }
+      ],
+      "menus": [
+        [
+          "Stop by the game centre together.",
+          "Buy a drink at the convenience store.",
+          "Head to the seafront.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "finish",
+          "failedPending": null
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": ""
+        }
+      ],
+      "state": {
+        "status": "ended",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": false,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "callback arcade",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Carina",
+          "text": "Did you want to go into the game centre when we stopped there?",
+          "overheard": false
+        },
+        {
+          "speaker": "Kenji",
+          "text": "うん。でも、見てるだけでも面白いよ。",
+          "overheard": true
+        }
+      ],
+      "menus": [
+        [
+          "Invite Kenji for a walk.",
+          "Ask about stopping at the game centre.",
+          "Talk about the arcade.",
+          "Maybe another time."
+        ]
+      ],
+      "actions": [],
+      "state": {
+        "status": "idle",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": "arcade"
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_callback": "arcade",
+        "outing_active": false,
+        "outing_paused": false,
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai"
+      }
+    },
+    {
+      "name": "callback drink",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Carina",
+          "text": "Thanks for waiting while I got my drink.",
+          "overheard": false
+        },
+        {
+          "speaker": "Kenji",
+          "text": "うん。また行こうよ。",
+          "overheard": true
+        }
+      ],
+      "menus": [
+        [
+          "Invite Kenji for a walk.",
+          "Mention the drink stop.",
+          "Talk about the arcade.",
+          "Maybe another time."
+        ]
+      ],
+      "actions": [],
+      "state": {
+        "status": "idle",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": "drink"
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_callback": "drink",
+        "outing_active": false,
+        "outing_paused": false,
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai"
+      }
+    },
+    {
+      "name": "callback coast",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Carina",
+          "text": "I liked stopping at that bench with you.",
+          "overheard": false
+        },
+        {
+          "speaker": "Kenji",
+          "text": "うん。またあそこに座ろうよ。",
+          "overheard": true
+        }
+      ],
+      "menus": [
+        [
+          "Invite Kenji for a walk.",
+          "Tell him you liked the seafront stop.",
+          "Talk about the arcade.",
+          "Maybe another time."
+        ]
+      ],
+      "actions": [],
+      "state": {
+        "status": "idle",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": "coast"
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_callback": "coast",
+        "outing_active": false,
+        "outing_paused": false,
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai"
+      }
+    },
+    {
+      "name": "legacy arcade remains reachable",
+      "mc": "carina",
+      "transcript": [],
+      "menus": [
+        [
+          "Invite Kenji for a walk.",
+          "Talk about the arcade.",
+          "Maybe another time."
+        ],
+        [
+          "Where do you go after work?",
+          "Let him get back to what he was doing."
+        ]
+      ],
+      "actions": [],
+      "state": {
+        "status": "idle",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": false,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai"
+      }
+    },
+    {
+      "name": "waiting survives another Chat",
+      "mc": "carina",
+      "transcript": [],
+      "menus": [
+        [
+          "I'll head into the convenience store.",
+          "Keep walking together.",
+          "Let's split up here."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Enter the convenience store. Kenji is waiting outside."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "outing_waiting": true,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_action_complete": true
+      }
+    },
+    {
+      "name": "cancel waiting by walking",
+      "mc": "carina",
+      "transcript": [],
+      "menus": [
+        [
+          "I'll head into the convenience store.",
+          "Keep walking together.",
+          "Let's split up here."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji. Chat with him to stop or say goodbye."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "outing_waiting": true,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "repeat coast seating",
+      "mc": "carina",
+      "transcript": [],
+      "menus": [
+        [
+          "Sit on the seafront bench with Kenji.",
+          "Head to the shop street.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ],
+        [
+          "Stay on the bench a little longer.",
+          "Get up and keep walking.",
+          "I should get going."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "coast",
+          "failedPending": "coast"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Sit with Kenji. Chat with him when you want to get up."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [
+          "coast"
+        ],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "place": "east_coast",
+        "state": {
+          "status": "active",
+          "day": 3,
+          "period": "afternoon",
+          "stops": [
+            "coast"
+          ]
+        },
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": true,
+        "outing_coast_repeat": true,
+        "outing_action_complete": true,
+        "outing_seated": true
+      }
+    },
+    {
+      "name": "route controls plaza",
+      "mc": "carina",
+      "transcript": [],
+      "menus": [
+        [
+          "Head to the shop street.",
+          "Head to the seafront.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji. Chat with him to stop or say goodbye."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "place": "plaza",
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "route controls east_lane",
+      "mc": "carina",
+      "transcript": [],
+      "menus": [
+        [
+          "Head to the shop street.",
+          "Head to the seafront.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji. Chat with him to stop or say goodbye."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "place": "east_lane",
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "route controls dorm_commons",
+      "mc": "carina",
+      "transcript": [],
+      "menus": [
+        [
+          "Head to the shop street.",
+          "Head to the seafront.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji. Chat with him to stop or say goodbye."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "place": "dorm_commons",
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "old word topic remains available",
+      "mc": "carina",
+      "transcript": [],
+      "menus": [
+        [
+          "Invite Kenji for a walk.",
+          "Talk about the arcade.",
+          "Maybe another time."
+        ],
+        [
+          "Ask about the crane game.",
+          "How do you say “I want to go”?",
+          "Let him get back to what he was doing."
+        ]
+      ],
+      "actions": [],
+      "state": {
+        "status": "idle",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "kenji_arcade_talked": true,
+        "outing_active": false,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai"
+      }
+    },
+    {
+      "name": "failed drink returns to walking",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Carina",
+          "text": "I'm going to get a drink.",
+          "overheard": false
+        }
+      ],
+      "menus": [
+        [
+          "Stop by the game centre together.",
+          "Buy a drink at the convenience store.",
+          "Head to the seafront.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ],
+        [
+          "Try waiting at the store again.",
+          "Keep walking together."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "drink",
+          "failedPending": "drink"
+        },
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji. Chat with him to stop or say goodbye."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "failed departure returns to walking",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Carina",
+          "text": "I should get going. See you later.",
+          "overheard": false
+        },
+        {
+          "speaker": "Kenji",
+          "text": "うん、またね。",
+          "overheard": true
+        }
+      ],
+      "menus": [
+        [
+          "Stop by the game centre together.",
+          "Buy a drink at the convenience store.",
+          "Head to the seafront.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ],
+        [
+          "Let Kenji try to leave again.",
+          "Keep walking together."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "finish",
+          "failedPending": null
+        },
+        {
+          "do": "outing",
+          "state": "keepWalking"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Walk with Kenji. Chat with him to stop or say goodbye."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_arcade": false,
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_action_complete": true,
+        "outing_seated": false
+      }
+    },
+    {
+      "name": "repeat arcade stay",
+      "mc": "carina",
+      "transcript": [
+        {
+          "speaker": "Kenji",
+          "text": "もう少し見る？",
+          "overheard": true
+        }
+      ],
+      "menus": [
+        [
+          "Stop by the game centre together.",
+          "Buy a drink at the convenience store.",
+          "Head to the seafront.",
+          "Talk about the arcade.",
+          "Keep walking together.",
+          "Let's split up here."
+        ],
+        [
+          "Stay here a little longer.",
+          "Buy a drink at the convenience store.",
+          "Head to the seafront.",
+          "Keep walking together.",
+          "Let's split up here."
+        ]
+      ],
+      "actions": [
+        {
+          "do": "outing",
+          "state": "arcade",
+          "failedPending": "arcade"
+        },
+        {
+          "do": "outing",
+          "state": "goal",
+          "text": "Look around with Kenji. Chat with him when you want to move on."
+        }
+      ],
+      "state": {
+        "status": "active",
+        "day": 3,
+        "period": "afternoon",
+        "stops": [
+          "arcade"
+        ],
+        "pending": null,
+        "callback": null
+      },
+      "flags": {
+        "day": 3,
+        "period": "afternoon",
+        "outing_active": true,
+        "outing_done_arcade": true,
+        "outing_paused": false,
+        "outing_callback": "",
+        "outing_done_drink": false,
+        "outing_done_coast": false,
+        "place": "shotengai",
+        "outing_arcade_repeat": true,
+        "outing_action_complete": true
+      }
+    }
+  ]
+}

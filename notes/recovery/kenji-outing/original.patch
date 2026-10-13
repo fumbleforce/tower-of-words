@@ -1,0 +1,507 @@
+diff --git a/docs/game/places.md b/docs/game/places.md
+index 5e580219e..f94ac6e5e 100644
+--- a/docs/game/places.md
++++ b/docs/game/places.md
+@@ -471,6 +471,7 @@ None of the cast lives here yet.
+ | `canteen_worker` | After work only: carries the last chair over, then wipes down the next table east. Can be talked to whenever not walking; helping with the chair is the canteen table's. | – |
+ | `aoi` | Day 3, morning: at the notice board until her introduction (`d3_aoi_intro`). Label "Woman from the train", then "Aoi". | – |
+ | `tama` | Day 3, lunch: asleep in the seat bay's shade. Can be petted. | – |
++| `kenji` | Travelling companion in the isolated outing prototype; its unvoiced conversation candidate awaits review. | – |
+ 
+ The crowd ([systems.md](systems.md), The crowd):
+ 
+diff --git a/docs/game/systems.md b/docs/game/systems.md
+index 0e7b8a6d7..0e6bef583 100644
+--- a/docs/game/systems.md
++++ b/docs/game/systems.md
+@@ -254,3 +254,9 @@ The cart stores earlier output; Mio’s desk monitor shows only the live queue.
+ The lunch counter has a single canonical price table in `game3d/js/gameplay/canteen-meals.js`. A selected meal does not debit yen until its price has been shown and the player chooses to pay. Payment records one order receipt synchronously; collection, a resumed payment checkpoint and a second visit cannot charge it again. The tray stays a local physical entitlement rather than a Bag food item. Eating records completion after the visible bites; interruption preserves the unfinished meal. Returning the tray releases the entitlement for another deliberate order.
+ 
+ Normal departure and water use physically park a carried tray in its own counter bay. Interrupted travel has a receipt recovery fallback. Delivered and parked trays remain collectable without staff; an undelivered receipt waits for a visible worker during lunch, including after Continue in another period. A saved seated player returns to the actual chair, with the tray and action camera restored. Meals and water award no stats, bond or vocabulary. The optional dish followup uses the existing persistent heard-remark/known-word system, so either discovery order works.
++
++## Kenji outing prototype
++
++The selected [outing proposal](../../reviews/game-additions-1/review.json) has an isolated prototype with an unvoiced conversation candidate, pending story and release review. Chat with Kenji opens the optional invitation and preserves his earlier arcade topics. One travelling Kenji can follow through shotengai, plaza, east_lane, east_coast and dorm_commons. An already-met, visible and available Kenji can join on weekday evenings or weekends after early morning; scheduled club meetings take precedence. Leaving these places or changing the period pauses the walk, and a later eligible invitation can resume its completed stops.
++
++Arcade memory requires both characters to reach the existing frontage. Kenji waits outside the konbini, and shopping counts only after a new drink order is paid and collected. Coast memory requires both characters to occupy actual free adjacent bench seats. Save/Continue keeps the outing and companion pose; ending remembers the last completed stop, without awarding knowledge or relationship progress. Repeated stops repeat the physical action without another receipt. Outing side goals clear on pause or finish without clearing a replacement goal from another activity.
+diff --git a/game3d/js/continue.js b/game3d/js/continue.js
+index b38afa048..91536dcd7 100644
+--- a/game3d/js/continue.js
++++ b/game3d/js/continue.js
+@@ -39,6 +39,7 @@ export function createContinue(game, { enter, travel, startScene, PLACES }) {
+     ui.goal(saved.ui?.goal || '');
+     ui.sideGoal(saved.ui?.sideGoal || '');
+     game.hold = saved.ui?.hold || null;
++    await game.outing?.restored(saved);
+     game.busy = false;
+     game.saveEnabled = true;
+     const transition = saved.transition;
+diff --git a/game3d/js/conversations/index.js b/game3d/js/conversations/index.js
+index 12176e211..000a9a4df 100644
+--- a/game3d/js/conversations/index.js
++++ b/game3d/js/conversations/index.js
+@@ -28,7 +28,7 @@ export function topicFor(who, memory = conversationMemory, words = known, met =
+     return memory.ready('hamada_wednesday_booking', words)
+       ? { label: 'Ask about his karaoke booking', trigger: 'ask:kuroda-booking' }
+       : { label: 'Chat about his evenings', trigger: 'ask:kuroda' };
+-  if (who === 'kenji') return { label: 'Chat about the arcade', trigger: 'ask:kenji' };
++  if (who === 'kenji') return { label: 'Chat with Kenji', trigger: 'ask:kenji' };
+   if (who !== 'mori') return null;
+   return memory.ready('mori_return_norway', words)
+     ? { label: 'Ask about Norway', trigger: 'ask:mori' }
+diff --git a/game3d/js/narrative/engine-flags.js b/game3d/js/narrative/engine-flags.js
+index f71d0e68a..303867150 100644
+--- a/game3d/js/narrative/engine-flags.js
++++ b/game3d/js/narrative/engine-flags.js
+@@ -213,3 +213,21 @@ export function isEngineFlag(name) {
+     )
+   );
+ }
++
++ENGINE_WRITES['game3d/js/outings/index.js'] = {
++  exact: [
++    'outing_kenji',
++    'outing_stage',
++    'outing_active',
++    'outing_paused',
++    'outing_callback',
++    'outing_action_complete',
++    'outing_done_arcade',
++    'outing_done_drink',
++    'outing_done_coast',
++    'outing_seated',
++    'outing_waiting',
++    'outing_goal',
++  ],
++  prefix: [],
++};
+diff --git a/game3d/js/narrative/hooks.js b/game3d/js/narrative/hooks.js
+index 75705463c..722296dbc 100644
+--- a/game3d/js/narrative/hooks.js
++++ b/game3d/js/narrative/hooks.js
+@@ -49,5 +49,6 @@ export const GLOBAL_HOOKS = [
+   'ongoingGoal',
+   'artVisit',
+   'flavorFind',
++  'outing',
+   'sender',
+ ];
+diff --git a/game3d/js/places/catalog.js b/game3d/js/places/catalog.js
+index 0acce5b7e..fd8515db4 100644
+--- a/game3d/js/places/catalog.js
++++ b/game3d/js/places/catalog.js
+@@ -4,6 +4,7 @@ import { extendMondayCatalog } from './day5/catalog.js';
+ import { TRAIN_DETAILS } from './catalog-train.js';
+ import { SOUTH_HALF_DETAILS } from './catalog-south.js';
+ import { OFFICE_DETAILS } from './catalog-office.js';
++import { extendOutingCatalog } from '../outings/catalog.js';
+ // Labels and registration IDs shared by place factories and structural checks.
+ export const PLACE_DETAILS = {
+   ferry_terminal: {
+@@ -371,3 +372,7 @@ extendMondayCatalog(PLACE_DETAILS);
+ export const SHARED_THINGS = { mio: { label: 'Mio', kind: 'person' } };
+ 
+ extendOngoingCatalog(PLACE_DETAILS);
++
++// The outing actor is attached after the place factory returns.
++export const FACTORY_DETAILS = structuredClone(PLACE_DETAILS);
++extendOutingCatalog(PLACE_DETAILS);
+diff --git a/game3d/js/places/commons.js b/game3d/js/places/commons.js
+index 4570b4b51..72a81d992 100644
+--- a/game3d/js/places/commons.js
++++ b/game3d/js/places/commons.js
+@@ -77,6 +77,7 @@ export async function commonsPlace(game) {
+     sun: w.sun,
+     charScale: K,
+     start: d.in,
++    outingExit: { lane: d.out, edge: d.edge },
+     startFacing: Math.PI,
+     music: 'calm',
+     things,
+diff --git a/game3d/js/places/day-cast.js b/game3d/js/places/day-cast.js
+index a575dd699..d2d7663f8 100644
+--- a/game3d/js/places/day-cast.js
++++ b/game3d/js/places/day-cast.js
+@@ -24,6 +24,7 @@ export function dayCast(game, { root, K = 1, ids = [], have = {} }) {
+     own = new Set(); // the bodies made here (the others the place steps and shades itself)
+   // someone the place already has: where it keeps them is their home
+   function adopt(id, r) {
++    r = game.outing?.actor.scheduled(id, r, root) || r;
+     if (r.selfGait) r.cat = true; // (a cat: creatures/cat.js)
+     people[id] = r;
+     homes[id] = {
+diff --git a/game3d/js/places/day3/seats.js b/game3d/js/places/day3/seats.js
+index 356fd28e0..8177ababb 100644
+--- a/game3d/js/places/day3/seats.js
++++ b/game3d/js/places/day3/seats.js
+@@ -32,6 +32,7 @@ function benches(P) {
+   return out;
+ }
+ export const noteBenches = (P) => void benches(P); // before the draw-call pass merges them (places/lifecycle.js)
++export const benchSeats = (P) => benches(P).map((seat) => ({ ...seat }));
+ export function benchNear(P, [x, z], { skip = 0 } = {}) {
+   const sorted = [...benches(P)].sort((a, b) => Math.hypot(a.x - x, a.z - z) - Math.hypot(b.x - x, b.z - z));
+   return sorted[Math.min(skip, sorted.length - 1)] || null;
+diff --git a/game3d/js/places/east-coast.js b/game3d/js/places/east-coast.js
+index 941f6fac2..db5f9e00d 100644
+--- a/game3d/js/places/east-coast.js
++++ b/game3d/js/places/east-coast.js
+@@ -1,3 +1,4 @@
++import { conversationCamera } from './conversation-camera.js';
+ import * as THREE from 'three';
+ import { eastCoastSteps } from '../scenes/east-coast.js';
+ import { sliced } from '../perf/slice.js';
+@@ -109,6 +110,7 @@ export async function eastCoastPlace(game) {
+     sun: w.sun,
+     charScale: K,
+     start: w.in,
++    outingExit: { lane: w.in, edge: w.arriveEdge },
+     startFacing: Math.PI / 2,
+     music: 'calm',
+     grade: MORNING_GRADE,
+@@ -192,5 +194,8 @@ export async function eastCoastPlace(game) {
+     },
+   };
+   visit.install(P);
++  conversationCamera(game, P, {
++    kenji: { seated: true, yaw: 0.6, elev: 30, fov: 45, minDistance: 4, halfWidth: 1.15, height: 0.15 },
++  });
+   return P;
+ }
+diff --git a/game3d/js/places/east-lane.js b/game3d/js/places/east-lane.js
+index 72b8001bb..f241ee482 100644
+--- a/game3d/js/places/east-lane.js
++++ b/game3d/js/places/east-lane.js
+@@ -111,6 +111,7 @@ export async function eastLanePlace(game) {
+     sun: w.sun,
+     charScale: K,
+     start: w.in,
++    outingExit: { lane: w.in, edge: w.arriveEdge },
+     startFacing: Math.PI / 2,
+     music: 'calm',
+     grade: MORNING_GRADE,
+diff --git a/game3d/js/places/lifecycle.js b/game3d/js/places/lifecycle.js
+index a8409e77b..b1edb653c 100644
+--- a/game3d/js/places/lifecycle.js
++++ b/game3d/js/places/lifecycle.js
+@@ -29,6 +29,7 @@ import { liftPeople } from '../look/char-lift.js';
+ import { keepPublic } from '../travel/ways.js';
+ import { noteVisit } from '../travel/visited.js';
+ import { installFlavorFinds, attachFlavorFinds } from '../flavor-finds/index.js';
++import { installOuting, attachOuting } from '../outings/index.js';
+ 
+ const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
+ // places the draw-call pass (js/perf/batch.js) runs on
+@@ -69,6 +70,7 @@ export function createPlaceLifecycle(
+   installDay5(game);
+   installOngoing(game);
+   installFlavorFinds(game);
++  installOuting(game, { refreshMarkers: buildMarkers });
+   watchPlacePlugins(game);
+   // preparation runs a slice a frame while a place is being played, flat out while the player waits for it
+   setUrgent(() => !game.place || document.body.classList.contains('loading'));
+@@ -80,6 +82,7 @@ export function createPlaceLifecycle(
+         attachSunday(game, place, name);
+         attachMonday(game, place, name);
+         attachOngoing(game, place, name);
++        attachOuting(game, place, name);
+         assertPlaceRegistered(place, name, PLACE_DETAILS[name]);
+         place.name = name;
+         noteBenches(place); // its benches' seats, before the draw-call pass merges them (places/day3/seats.js)
+@@ -178,6 +181,7 @@ export function createPlaceLifecycle(
+     )
+       sim.period = place.defaultPeriod;
+     applySchedule(game, { instant: true });
++    game.outing?.enter(place, { resuming });
+     place.ambient?.enter(sim.period); // the crowd for this period, everyone at once (crowd/index.js)
+     ui.clock(sim.date, periodName(sim.period)); // a weekend's own names (sim.js periodName)
+     const music = place.music === 'night' ? 'calm' : place.music; // a night place by day (day 2's morning room)
+@@ -203,10 +207,11 @@ export function createPlaceLifecycle(
+       phase: arriving ? 'arriving' : 'leaving',
+       ...(fast ? { fast } : {}),
+     };
+-    save(game);
+     game.busy = true;
+     game.walker.locked = true;
+     document.body.classList.add('busy', 'trip');
++    await game.outing?.beforeTravel({ from: arriving ? fromName : game.place.name, to: name, fast, arriving });
++    save(game);
+     let built = false;
+     const ready = prepare(name).then((r) => ((built = true), r));
+     const tr = await game.runner.load('transitions');
+@@ -227,6 +232,7 @@ export function createPlaceLifecycle(
+       crossfade(snap);
+     }
+     await trips.arrive(game, game.place, slot);
++    game.outing?.afterTravel();
+     // a later day: a way out he arrives standing in (B2's lift, back up at the forecourt) waits until he steps out of
+     // it and back in, so a trip never turns straight round
+     if (sim.day > 1) {
+diff --git a/game3d/js/places/plaza.js b/game3d/js/places/plaza.js
+index 2c19cbb07..694dbfbe6 100644
+--- a/game3d/js/places/plaza.js
++++ b/game3d/js/places/plaza.js
+@@ -119,6 +119,7 @@ export async function plazaPlace(game) {
+     sun: w.sun,
+     charScale: K,
+     start: w.arriveIn,
++    outingExit: { lane: w.shopWalk, edge: w.shopEdge },
+     startFacing: w.arriveFace,
+     music: 'calm',
+     grade: MORNING_GRADE,
+diff --git a/game3d/js/places/shotengai.js b/game3d/js/places/shotengai.js
+index f1730c4be..fc9793140 100644
+--- a/game3d/js/places/shotengai.js
++++ b/game3d/js/places/shotengai.js
+@@ -135,6 +135,7 @@ export async function shotengaiPlace(game) {
+     sun: w.sun,
+     charScale: K,
+     start: w.in,
++    outingExit: { lane: [w.edge[0], w.edge[1] - 1.6], edge: w.edge },
+     startFacing: w.face,
+     music: 'calm',
+     grade: MORNING_GRADE,
+@@ -262,6 +263,12 @@ export async function shotengaiPlace(game) {
+   party.install(P);
+   garden.install(P);
+   conversationCamera(game, P, {
++    get kenji() {
++      const p = game.player.root.position,
++        frontage = P.things.game_centre.spot();
++      if (Math.hypot(p.x - frontage[0], p.z - frontage[1]) > 2.5 * K) return;
++      return { yaw: -2.65, elev: 42, fov: 55, minDistance: 3, halfWidth: 1.1, height: 0.25 };
++    },
+     station_worker: { yaw: -0.7, elev: 40, fov: 45, minDistance: 8, halfWidth: 2.3, height: 0.4 },
+     aoi: { yaw: -0.85, elev: 35, fov: 45, minDistance: 4.5, halfWidth: 1.0, height: 0.4 },
+     rei: { yaw: -2.15, elev: 35, fov: 45, minDistance: 4.5, halfWidth: 1.0, height: 0.4 },
+diff --git a/game3d/js/sim.js b/game3d/js/sim.js
+index e3b7d5898..d449788ea 100644
+--- a/game3d/js/sim.js
++++ b/game3d/js/sim.js
+@@ -2,11 +2,8 @@ import { flagKeys } from './narrative/engine-flags.js';
+ const ENGINE_KEYS = flagKeys('game3d/js/sim.js');
+ import { ITEMS } from './gameplay/items.js';
+ export { ITEMS } from './gameplay/items.js';
+-// Social-sim layer, data-driven so it can grow into the open world: the day clock and its periods, NPC
+-// schedules, ambient NPC-to-NPC moments, bonds (steps 0-5, points with caps, steps 3-5 gated on a scene),
+-// what people remember of Eric, gifts, and save/load. Day one uses it lightly. Data comes from the story files
+-// (story/FORMAT.md, "Sim data"), story/people.js (People panel text), js/bonds/cast.js (tastes, registers,
+-// relations) and js/bonds/day1.js (day 1's moments, by node name). The maths is js/bonds/model.js.
++// Clock, schedules, bonds, memories and save/load. Story data: story/FORMAT.md.
++// Bond rules live in bonds/model.js; cast and day-one moments in bonds/cast.js and bonds/day1.js.
+ import { flags, cond } from './narrative/state.js';
+ import { known, seen, WORDS, COMMANDS } from './lang.js';
+ import { ui, sfx } from './ui.js';
+@@ -123,9 +120,11 @@ export function newDay(game) {
+ // ---------- schedules: story `schedule: { who: { period: { at, sit, face, hide } } }` ----------
+ export function applySchedule(game, { instant = false } = {}) {
+   installSim(game);
++  game.outing?.syncClock();
+   const sch = game.story && game.story.schedule;
+   if (!sch) return;
+   for (const [who, per] of Object.entries(sch)) {
++    if (game.outing?.controls(who)) continue;
+     const e = per[sim.period] || per['*'];
+     if (!e) continue;
+     if (e.if && !cond(e.if)) continue;
+diff --git a/game3d/story/conversations/index.js b/game3d/story/conversations/index.js
+index 7a4e2954f..cff17cfa7 100644
+--- a/game3d/story/conversations/index.js
++++ b/game3d/story/conversations/index.js
+@@ -8,4 +8,32 @@ import REI from './rei.js';
+ import HAMADA from './hamada.js';
+ import MORI from './mori.js';
+ import KENJI from './kenji.js';
+-export default { on: { ...SENDER.on, ...MORI.on, ...KENJI.on, ...HAMADA.on, ...MIO.on, ...EMI.on, ...GUARD.on, ...KURO.on, ...AOI.on, ...REI.on }, nodes: { ...SENDER.nodes, ...MORI.nodes, ...KENJI.nodes, ...HAMADA.nodes, ...MIO.nodes, ...EMI.nodes, ...GUARD.nodes, ...KURO.nodes, ...AOI.nodes, ...REI.nodes } };
++import OUTING from './outing.js';
++export default {
++  on: {
++    ...SENDER.on,
++    ...MORI.on,
++    ...KENJI.on,
++    ...OUTING.on,
++    ...HAMADA.on,
++    ...MIO.on,
++    ...EMI.on,
++    ...GUARD.on,
++    ...KURO.on,
++    ...AOI.on,
++    ...REI.on,
++  },
++  nodes: {
++    ...SENDER.nodes,
++    ...MORI.nodes,
++    ...KENJI.nodes,
++    ...OUTING.nodes,
++    ...HAMADA.nodes,
++    ...MIO.nodes,
++    ...EMI.nodes,
++    ...GUARD.nodes,
++    ...KURO.nodes,
++    ...AOI.nodes,
++    ...REI.nodes,
++  },
++};
+diff --git a/game3d/test/fixtures/declarations-before.json b/game3d/test/fixtures/declarations-before.json
+index 5aaee73ef..e47490069 100644
+--- a/game3d/test/fixtures/declarations-before.json
++++ b/game3d/test/fixtures/declarations-before.json
+@@ -1200,6 +1200,10 @@
+           "label": "Amakawa Travel",
+           "kind": "thing",
+           "verb": "Go in"
++        },
++        "kenji": {
++          "label": "Kenji",
++          "kind": "person"
+         }
+       },
+       "spots": [
+@@ -1219,7 +1223,9 @@
+         "row_exit",
+         "north_exit"
+       ],
+-      "people": [],
++      "people": [
++        "kenji"
++      ],
+       "hooks": []
+     },
+     "east_coast": {
+@@ -1272,6 +1278,10 @@
+         "rei": {
+           "label": "Rei",
+           "kind": "person"
++        },
++        "kenji": {
++          "label": "Kenji",
++          "kind": "person"
+         }
+       },
+       "spots": [
+@@ -1298,7 +1308,8 @@
+         "aoi",
+         "kuro",
+         "tama",
+-        "rei"
++        "rei",
++        "kenji"
+       ],
+       "hooks": [
+         "coastVisit"
+@@ -2037,6 +2048,10 @@
+           "label": "Tama",
+           "verb": "Pet",
+           "kind": "person small"
++        },
++        "kenji": {
++          "label": "Kenji",
++          "kind": "person"
+         }
+       },
+       "spots": [
+@@ -2060,7 +2075,8 @@
+       "people": [
+         "canteen_worker",
+         "aoi",
+-        "tama"
++        "tama",
++        "kenji"
+       ],
+       "hooks": [
+         "canteenChair",
+diff --git a/game3d/test/unit/save-restore.test.mjs b/game3d/test/unit/save-restore.test.mjs
+index 8cc3f596d..3828796fa 100644
+--- a/game3d/test/unit/save-restore.test.mjs
++++ b/game3d/test/unit/save-restore.test.mjs
+@@ -439,3 +439,47 @@ test('legacy completed later-cast introductions recover met state and preserve p
+   S.restore(game, { v: 1, day: 3, period: 'morning', met: ['mio'], flags: {} });
+   for (const id of ['kuro', 'aoi', 'rei']) assert.equal(S.sim.met.has(id), false, 'another save does not inherit an introduction');
+ });
++
++test('outing ownership protects only its companion from schedules and expiry restores ordinary scheduling', () => {
++  const calls=[];
++  let active=true,expired=false;
++  game.outing={syncClock(){calls.push('clock');if(expired)active=false;},controls:who=>active&&who==='kenji'};
++  game.story={schedule:{kenji:{'*':{hide:true}},mori:{'*':{sit:'chair'}}}};
++  for(const who of ['kenji','mori'])game.place.people[who]={root:{visible:true,position:{x:1,z:2}}};
++  game.hooks.hide=({id})=>calls.push(['hide',id]);
++  game.place.placeSeated=(who,at)=>calls.push(['sit',who,at]);
++  S.applySchedule(game,{instant:true});
++  assert.deepEqual(calls,['clock',['sit','mori','chair']]);
++  calls.length=0;expired=true;
++  S.applySchedule(game,{instant:true});
++  assert.deepEqual(calls,['clock',['hide','kenji'],['sit','mori','chair']]);
++  calls.length=0;game.story={};
++  S.applySchedule(game);
++  assert.deepEqual(calls,['clock'],'expiry still runs in a place without authored schedules');
++});
++
++test('Continue reconciles an outing after saved flags and final later-day physical restoration', async () => {
++  const {createContinue}=await import('../../js/continue.js');
++  const events=[],saved={v:1,day:6,period:'evening',place:'shotengai',flags:{outing_fixture:'saved'},world:{companion:{x:3,z:4}},ui:{sideGoal:'Walk with Kenji.'}};
++  game.ui=Object.fromEntries(['refreshWords','refreshPeople','refreshBag','goal','sideGoal'].map(k=>[k,()=>events.push(k)]));
++  game.ui.sideGoal = text => { game.ui.sideText = text; events.push('sideGoal'); };
++  game.outing={restored(data){
++    assert.equal(data,saved);
++    assert.equal(flags.outing_fixture,'saved');
++    assert.deepEqual(game.place.pose,saved.world.companion);
++    assert.equal(events.filter(x=>x==='restore-physical').length,2);
++    assert.equal(game.ui.sideText, 'Walk with Kenji.');
++    game.ui.sideGoal(''); // Completing a saved departure clears the outing-owned goal.
++    events.push('outing-restored');
++  }};
++  game.hooks.ongoingSetup=async()=>{events.push('ongoing-setup');game.place.pose={x:99,z:99};};
++  const continueFrom=createContinue(game,{
++    enter:async()=>{game.place={name:'shotengai',people:{},restoreState(data){events.push('restore-physical');this.pose={...data.world.companion};}};flags.outing_fixture='schedule';},
++    travel(){assert.fail('unexpected transition');},PLACES:{},
++    startScene(){assert.ok(events.indexOf('outing-restored')>events.indexOf('ongoing-setup'));events.push('start');},
++  });
++  await continueFrom(saved);
++  assert.equal(game.ui.sideText, '');
++  assert.ok(events.indexOf('outing-restored')>events.indexOf('refreshWords'));
++  assert.ok(events.indexOf('outing-restored')<events.indexOf('start'));
++});
+diff --git a/game3d/test/unit/structural-baseline.test.mjs b/game3d/test/unit/structural-baseline.test.mjs
+index 781faaa99..c92373083 100644
+--- a/game3d/test/unit/structural-baseline.test.mjs
++++ b/game3d/test/unit/structural-baseline.test.mjs
+@@ -67,6 +67,7 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
+   for (const flag of ['sender_state', 'sender_offered', 'sender_partial', 'sender_compared', 'sender_delivered']) expected.engine.exact[flag] = ['game3d/js/investigations/sender/state.js'];
+   for (const flag of ['sender_action_ok', 'sender_available', 'sender_complaint_heard', 'sender_remark_heard', 'sender_failed', 'sender_wants_mori']) expected.engine.exact[flag] = ['game3d/js/investigations/sender/index.js'];
+   for (const flag of ['sender_action_ok', 'sender_available']) expected.engine.exact[flag].unshift('game3d/js/investigations/sender/hook.js');
++  for (const flag of ['outing_kenji', 'outing_stage', 'outing_active', 'outing_paused', 'outing_callback', 'outing_action_complete', 'outing_done_arcade', 'outing_done_drink', 'outing_done_coast', 'outing_seated', 'outing_waiting', 'outing_goal']) expected.engine.exact[flag] = ['game3d/js/outings/index.js'];
+   assert.deepEqual(plain, expected);
+ });
+ test('missing and unexpected runtime registrations fail before play', () => {
+diff --git a/tools/check/module-budgets.json b/tools/check/module-budgets.json
+index e6dc36f44..c603d7641 100644
+--- a/tools/check/module-budgets.json
++++ b/tools/check/module-budgets.json
+@@ -135,10 +135,10 @@
+       "reason": "Existing wall, window and edge geometry builders share showcase dimensions and materials. Stage 5 room-builder review will separate reusable trim construction from room composition."
+     },
+     "game3d/js/sim.js": {
+-      "lines": 555,
+-      "bytes": 21740,
++      "lines": 554,
++      "bytes": 21463,
+       "owner": "codex-tui",
+-      "review": "C-0076; 2026-10-03 C-0378 day 2: a new day's opening save resets the bonds' daily caps; 2026-10-04 C-0432 the People cards moved out to ui/people-view.js (ceiling lowered); 2026-10-04 the dialogue box controls: the backlog rides in the save (two lines in save/restore); C-0438 People panel text from story/people.js, #223 (ceiling lowered); 2026-10-05 #251: imports, game.mc and game.cast, the save mc and cast fields and their migration (mc.js, roles.js); 2026-10-05 #229 day 3: the place's day-3 bodies, hooks and setup registered (places/day3/), a few lines each; 2026-10-05 #262: period_* flags (period-flags.js) on a period change and a load, bond2_<id> at step 2 (four lines); 2026-10-05 People portraits: peopleHTML passes the face crop through (14 bytes); 2026-10-06 #261: the visited places in the save, one import, one save and one restore line (travel/visited.js); 2026-10-06 #294: restore saved People/story flag parity in saves/met.js (ceiling lowered)",
++      "review": "C-0076; 2026-10-03 C-0378 day 2: a new day's opening save resets the bonds' daily caps; 2026-10-04 C-0432 the People cards moved out to ui/people-view.js (ceiling lowered); 2026-10-04 the dialogue box controls: the backlog rides in the save (two lines in save/restore); C-0438 People panel text from story/people.js, #223 (ceiling lowered); 2026-10-05 #251: imports, game.mc and game.cast, the save mc and cast fields and their migration (mc.js, roles.js); 2026-10-05 #229 day 3: the place's day-3 bodies, hooks and setup registered (places/day3/), a few lines each; 2026-10-05 #262: period_* flags (period-flags.js) on a period change and a load, bond2_<id> at step 2 (four lines); 2026-10-05 People portraits: peopleHTML passes the face crop through (14 bytes); 2026-10-06 #261: the visited places in the save, one import, one save and one restore line (travel/visited.js); 2026-10-06 #294: restore saved People/story flag parity in saves/met.js (ceiling lowered); #339 companion schedule ownership, ceiling lowered",
+       "reason": "Existing simulation, save and relationship integration; retain compatibility while extracting state."
+     },
+     "game3d/js/speech.js": {
+diff --git a/tools/check/registrations.mjs b/tools/check/registrations.mjs
+index 3802b7615..4ad18ee4e 100644
+--- a/tools/check/registrations.mjs
++++ b/tools/check/registrations.mjs
+@@ -4,7 +4,7 @@ import fs from 'node:fs';
+ import { fileURLToPath } from 'node:url';
+ import { inspectPlaceSource, parseModule } from '../lib/place-source.mjs';
+ import { PLACE_FILES } from '../../game3d/js/places/definitions.js';
+-import { PLACE_DETAILS } from '../../game3d/js/places/catalog.js';
++import { FACTORY_DETAILS as PLACE_DETAILS } from '../../game3d/js/places/catalog.js';
+ 
+ export function checkRegistrations(read = file => fs.readFileSync(new URL('../../' + file, import.meta.url), 'utf8')) {
+   const factories = {};
