@@ -1,3 +1,4 @@
+import { Group } from 'three';
 import { PEOPLE, idle } from '../cast.js';
 import { blob } from '../engine.js';
 import { snapshotPeople, restorePeople, cancelSavedWalk } from '../places/saved-people.js';
@@ -6,6 +7,7 @@ import { standPose } from '../crowd/motion.js';
 import { freeNear } from '../movement/navigation.js';
 import { bodies } from '../movement/shared.js';
 import { COMPANION } from './catalog.js';
+import { outingSkin } from './skin.js';
 
 // Each place keeps its own resident; only the active place refers to the travelling rig.
 export function outingActor(game, { makeRig = PEOPLE.kenji, makeShadow = blob } = {}) {
@@ -16,15 +18,15 @@ export function outingActor(game, { makeRig = PEOPLE.kenji, makeShadow = blob } 
   rig.root.visible = false;
   rig.blob = makeShadow(0.55, 0.38);
   rig.blob.visible = false;
+  const skin = outingSkin(rig);
   let current = null;
 
   function attach(P) {
     if (records.has(P)) return;
-    // Registration requires a local person even where the schedule never puts Kenji.
+    // Registration needs a transform anchor where Kenji has no native resident, not another textured rig.
     let resident = P.people.kenji;
     if (!resident) {
-      resident = makeRig();
-      if (!resident.meshy || resident.chibi) resident.root.scale.multiplyScalar(P.charScale || 1);
+      resident = { root: new Group() };
       resident.root.visible = false;
       P.space.add(resident.root);
       P.people.kenji = resident;
@@ -58,6 +60,7 @@ export function outingActor(game, { makeRig = PEOPLE.kenji, makeShadow = blob } 
   }
 
   function release() {
+    skin(null);
     cancelSavedWalk(rig);
     stopGait(rig);
     rig.root.visible = rig.blob.visible = false;
@@ -106,6 +109,7 @@ export function outingActor(game, { makeRig = PEOPLE.kenji, makeShadow = blob } 
     if (resident.blob) resident.blob.visible = false;
     P.people.kenji = rig;
     P.things.kenji = record.companion;
+    skin(P.name);
     P.space.add(rig.root, rig.blob);
     rig.root.scale.copy(baseScale);
     if (!rig.meshy || rig.chibi) rig.root.scale.multiplyScalar(P.charScale || 1);

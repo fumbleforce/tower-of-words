@@ -83,6 +83,28 @@ test('travelling Kenji replaces one resident only and restores the exact local p
   assert.equal(Q.things.kenji.enabled(), false);
 });
 
+test('places without native Kenji keep only an empty registration anchor until he accompanies the player', () => {
+  const P = place(), game = { place: P, t: 0 };
+  let made = 0;
+  const actor = outingActor(game, { makeRig: () => { made++; return PEOPLE.kenji(); }, makeShadow: () => new THREE.Group() });
+  actor.attach(P);
+  const anchor = actor.resident(P);
+  assert.equal(made, 1, 'only the travelling rig is constructed');
+  assert.equal(anchor.root.children.length, 0, 'inactive destination holds no character meshes or textures');
+  assert.equal(anchor.root.visible, false);
+  assert.equal(P.things.kenji.enabled(), false, 'empty anchor cannot be selected');
+  actor.activate(P);
+  assert.equal(P.people.kenji, actor.rig);
+  assert.equal(actor.rig.root.parent, P.space);
+  assert.equal(actor.rig.root.visible, true);
+  actor.release();
+  assert.equal(P.people.kenji, anchor);
+  assert.equal(actor.rig.root.parent, null);
+  assert.equal(anchor.root.visible, false);
+  assert.equal(anchor.root.children.length, 0);
+  assert.equal(P.things.kenji.enabled(), false, 'released anchor cannot be selected');
+});
+
 test('repeated place changes reset codebuilt seated limbs and scale without accumulating either', () => {
   const P = place(1.6),
     Q = place(0.7),
@@ -247,6 +269,8 @@ test('real coast terrace benches are reached from free ends when the coastal wal
 
 test('lazy day schedules adopt their local resident when handed the travelling rig', () => {
   const P = place(), Q = place(), game = {place: P, t:0};
+  P.people.kenji=PEOPLE.kenji();Q.people.kenji=PEOPLE.kenji();
+  P.space.add(P.people.kenji.root);Q.space.add(Q.people.kenji.root);
   const actor = outingActor(game, {makeShadow:()=>new THREE.Group()});
   game.outing={actor};actor.attach(P);actor.attach(Q);
   const local=P.people.kenji, other=Q.people.kenji;
