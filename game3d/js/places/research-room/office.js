@@ -113,17 +113,19 @@ export function attachResearchOffice(game, P) {
     return true;
   }
   async function gripAt(job, s, edge, id) {
-    await job.wait(hands.move(s, grips.wrist(s, edge)));
-    await job.wait(game.wait(100));
-    let at = grips.contact(s);
-    if (at.distanceTo(new THREE.Vector3(...edge)) > 0.015) {
-      const correction = new THREE.Vector3(...edge).sub(at);
-      const wrist = localHand(s).add(correction).toArray();
-      await job.wait(hands.move(s, wrist, 0.25));
-      await job.wait(game.wait(100));
-      at = grips.contact(s);
+    const target = new THREE.Vector3(...edge);
+    for (let attempt = 0; attempt < 8; attempt++) {
+      const wrist = attempt
+        ? localHand(s)
+            .add(target.clone().sub(grips.contact(s)).multiplyScalar(0.5))
+            .toArray()
+        : grips.wrist(s, edge);
+      await job.wait(hands.move(s, wrist, attempt ? 0.16 : 0.55));
+      await job.wait(game.wait(80));
+      if (grips.contact(s).distanceTo(target) < 0.008) break;
     }
-    const gap = at.distanceTo(new THREE.Vector3(...edge));
+    const at = grips.contact(s),
+      gap = at.distanceTo(target);
     contacts.push({ id, gap, surface: at.toArray(), target: edge });
     if (gap > 0.025) throw Error('Rendered paper grip outside reach: ' + id + ' ' + gap);
   }
