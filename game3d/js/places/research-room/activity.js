@@ -1,3 +1,4 @@
+import { readingSeatMotion } from './seat-motion.js';
 import { bookTransfer } from './transfer.js';
 import { diningActions } from '../izakaya/actions.js';
 import { referenceHands } from './hands.js';
@@ -16,6 +17,7 @@ export function researchActivity(game, P, w) {
     camera = referenceCamera(game, P);
   const transfer = bookTransfer(game, P, w, hands, camera),
     state = readingState(flags, () => save(game));
+  const seating = readingSeatMotion(game);
   const copy = referenceCopy(game, P, hands, transfer);
   const blockedApproach = Symbol('Research approach blocked');
   let active = true;
@@ -29,7 +31,14 @@ export function researchActivity(game, P, w) {
         : { distance: 2.6, height: 0.45, yaw: 0.9, elev: 0.22 },
     );
   async function stand(job) {
-    if (game.player.seated) await job.wait(game.hooks.stand({ who: 'eric' }));
+    if (game.player.seated) await seating.stand(job);
+  }
+  async function sit(job, id) {
+    const seat = P.seats[id],
+      p = game.player;
+    if (p.seated && Math.hypot(p.root.position.x - seat.x, p.root.position.z - seat.z) < 0.03) return;
+    await approach(job, seat.out);
+    await seating.sit(job, seat);
   }
   async function approach(job, to) {
     await stand(job);
@@ -66,7 +75,7 @@ export function researchActivity(game, P, w) {
   async function putBack(job) {
     const current = state.read().active;
     if (!current) return;
-    await job.wait(game.hooks.sit({ who: 'eric', at: current.seat }));
+    await sit(job, current.seat);
     const prop = w.books.books[current.book].group;
     await transfer.take(job, prop, current.book);
     await shelf(job, current.book);
@@ -80,19 +89,18 @@ export function researchActivity(game, P, w) {
     if (current?.book === book && current.seat === seat) {
       const target = P.seats[seat],
         pos = game.player.root.position;
-      if (!game.player.seated || Math.hypot(pos.x - target.x, pos.z - target.z) > 0.03)
-        await job.wait(game.hooks.sit({ who: 'eric', at: seat }));
+      if (!game.player.seated || Math.hypot(pos.x - target.x, pos.z - target.z) > 0.03) await sit(job, seat);
       return;
     }
     const prop = w.books.books[book].group;
     if (current?.book === book) {
-      await job.wait(game.hooks.sit({ who: 'eric', at: current.seat }));
+      await sit(job, current.seat);
     } else {
       if (current) await putBack(job);
       await shelf(job, book);
     }
     await transfer.take(job, prop, book);
-    await job.wait(game.hooks.sit({ who: 'eric', at: seat }));
+    await sit(job, seat);
     await transfer.place(job, prop, TABLE_PAGES[seat], book, Math.PI - P.seats[seat].ry);
     state.act({ type: 'select', book, seat });
     sync();
@@ -116,6 +124,7 @@ export function researchActivity(game, P, w) {
     update(t) {
       const r = P.people.research_reader;
       r.readingIdle(t);
+      seating.update();
       hands.update();
       transfer.update();
     },
@@ -123,6 +132,7 @@ export function researchActivity(game, P, w) {
       active = false;
       actions.cancel();
       transfer.clear();
+      seating.clear();
       hands.release();
       hands.clear();
       camera.release();
@@ -193,7 +203,7 @@ export function researchActivity(game, P, w) {
               break;
             case 'markCopy':
               await copy.stow(job);
-              await hands.touch(job, game.player, [0.2, 0.71, -1.29], 'mark-copier');
+              await hands.touch(job, game.player, [0.2, 0.68, -1.22], 'mark-copier');
               state.act({ type: 'mark' });
               sync();
               frameReader();
@@ -206,7 +216,7 @@ export function researchActivity(game, P, w) {
             case 'sit': {
               const current = state.read().active;
               if (current) await select(job, current.book, a.seat);
-              else await job.wait(game.hooks.sit({ who: 'eric', at: a.seat }));
+              else await sit(job, a.seat);
               break;
             }
             case 'stand':

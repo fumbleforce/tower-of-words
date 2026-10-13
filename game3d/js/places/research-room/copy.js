@@ -48,10 +48,10 @@ export function referenceCopy(game, P, hands, transfer) {
         prop.visible = true;
         s.hand.attach(prop);
         await job.wait(game.wait(200));
+        await transfer.place(job, prop, at, 'owned-copy', 0, 'Left');
       } finally {
         hands.stop(s);
       }
-      await transfer.place(job, prop, at, 'owned-copy', 0, 'Left');
       P.space.attach(prop);
       prop.position.set(...at);
       prop.rotation.set(0, 0, 0);

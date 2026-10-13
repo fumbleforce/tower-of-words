@@ -17,6 +17,11 @@ try{
  await page.screenshot({path:`${out}/placing-before.png`});await page.evaluate(()=>globalThis.__game.travel('works',{fast:true}));
  await page.waitForTimeout(1200);
  const placing=await page.evaluate(async()=>{await globalThis.__placingBook;const p=globalThis.__placingRoom,b=p.space.getObjectByName('research-book:weather');return{hands:p.research.hands.active.size,parent:b.parent===p.space,position:b.position.toArray(),active:p.research.state.read().active};});
- checks.push({placing});assert.deepEqual(placing,{hands:0,parent:true,position:[3.12,.645,-.92],active:null});assert.deepEqual(errors,[]);await page.screenshot({path:`${out}/finished.png`});
+ checks.push({placing});assert.deepEqual(placing,{hands:0,parent:true,position:[3.12,.645,-.92],active:null});assert.deepEqual(errors,[]);
+ await page.evaluate(async()=>{const g=globalThis.__game;await g.travel('research_lab',{fast:true});g.busy=true;globalThis.__seatRoom=g.place;globalThis.__seatBook=g.place.research.act({state:'select',book:'weather',seat:'research_table_seat'});});
+ await page.waitForFunction(()=>{const g=globalThis.__game,p=g.player.root.position;return g.player.seated&&p.z<-.2&&p.z>-.8;},null,{timeout:90000});await page.screenshot({path:`${out}/settling-before.png`});
+ await page.evaluate(()=>globalThis.__game.travel('works',{fast:true}));const arrived=await page.evaluate(()=>globalThis.__game.player.root.position.toArray());await page.waitForTimeout(1200);
+ const settling=await page.evaluate(async()=>{await globalThis.__seatBook;const p=globalThis.__seatRoom,b=p.space.getObjectByName('research-book:weather');return{player:globalThis.__game.player.root.position.toArray(),hands:p.research.hands.active.size,parent:b.parent===p.space,position:b.position.toArray()};});checks.push({settling});assert.deepEqual(settling,{player:arrived,hands:0,parent:true,position:[3.12,.645,-.92]});assert.deepEqual(errors,[]);
+await page.screenshot({path:`${out}/finished.png`});
 }catch(error){checks.push({failure:error.stack});await page.screenshot({path:`${out}/failure.png`});throw error;}finally{fs.writeFileSync(`${out}/report.json`,JSON.stringify({checks,errors},null,2));await context.close();}
 },{gpuWaitMs: Number(process.env.GPU_WAIT || 1800) * 1000, timeoutMs:300000});

@@ -13,7 +13,7 @@ await withBrowserJob('research-room',async browser=>{
   await page.addInitScript(()=>globalThis.localStorage.setItem('amakawa-settings',JSON.stringify({v:2,textSpeed:'instant',voiceOn:false,privateMode:false})));
   const report={width,errors,requests,consoleErrors};
   try{
-   await waitForGame(page,60000,()=>page.goto(`${base}index.html?day=2&place=research_lab`),'play');
+   await waitForGame(page,60000,()=>page.goto(`${base}index.html?day=2&place=research_lab&mc=${width<700?'carina':'eric'}`),'play');
    await page.waitForFunction(()=>!globalThis.__game.busy);await settledResearchView(page);await page.waitForTimeout(1000);
    await page.screenshot({path:`${out}/${width}-room.png`});
    report.room=await page.evaluate(()=>({textures:[...globalThis.__game.place.space.getObjectsByProperty('type','Mesh')].filter(o=>o.name.startsWith('research-paper')).map(o=>({name:o.name,size:[o.material.map?.image?.naturalWidth,o.material.map?.image?.naturalHeight],complete:o.material.map?.image?.complete})),place:globalThis.__game.place.name,pos:globalThis.__game.player.root.position,things:Object.keys(globalThis.__game.place.things)}));

@@ -10,6 +10,7 @@ export function bookTransfer(game, P, w, hands, camera) {
     const x = id === 'owned-copy' ? 0.12 : 0.2,
       z = id === 'owned-copy' ? 0.125 : 0.22,
       y = id === 'owned-copy' ? 0 : 0.02;
+    if (id === 'owned-copy') return new THREE.Vector3(Math.sign(toward.x) * x, y, Math.sign(toward.z) * z);
     return Math.abs(toward.x / x) > Math.abs(toward.z / z)
       ? new THREE.Vector3(Math.sign(toward.x) * x, y, 0)
       : new THREE.Vector3(0, y, Math.sign(toward.z) * z);

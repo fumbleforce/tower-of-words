@@ -28,6 +28,7 @@ export function readingBooks(root) {
   for (const [id, ref] of Object.entries(REFERENCES)) {
     const group = new THREE.Group();
     group.name = `research-book:${id}`;
+    group.userData.noBatch = true; // These two volumes are picked up, turned and reparented.
     group.add(rbox(0.4, 0.034, 0.44, ref.color, { r: 0.005 }));
     group.add(rbox(0.376, 0.024, 0.415, '#ece7d6', { x: 0.006, y: 0.01, r: 0.002 }));
     const print = paperMesh(ref.pages[0], 0.355);
