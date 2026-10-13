@@ -40,8 +40,11 @@ export function outingSeatContact(game) {
         THREE.Mesh.prototype.raycast.call(mesh, ray, hits);
       });
     }
-    const surface = hits.map(hit => P.space.worldToLocal(hit.point.clone()).y).find(y => Math.abs(y - seat.top) < 0.04);
+    // Traversal order is not ray depth: the merged bench can contribute lower faces first.
+    // The sitter is supported by the highest seat surface in the sampled patch.
+    const surfaces = hits.map(hit => P.space.worldToLocal(hit.point.clone()).y).filter(y => Math.abs(y - seat.top) < 0.04);
+    const surface = surfaces.length ? Math.max(...surfaces) : undefined;
     if (!vertices || surface === undefined) throw Error('Missing rendered bench/body contact geometry: ' + JSON.stringify({ vertices, underside, seat, heights: hits.map(hit => P.space.worldToLocal(hit.point.clone()).y) }));
-    return { who: index ? 'kenji' : 'player', vertices, seat, surface, underside, gap: underside - surface };
+    return { surfaces: [...new Set(surfaces.map(y => +y.toFixed(6)))], who: index ? 'kenji' : 'player', vertices, seat, surface, underside, gap: underside - surface };
   });
 }

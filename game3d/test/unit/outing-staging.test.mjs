@@ -238,7 +238,10 @@ test('real coast terrace benches are reached from free ends when the coastal wal
   assert.equal(f.pending.length, 2);
   f.pending.forEach((resolve) => resolve());
   assert.equal(await sit, true);
-  for (const rig of [f.player, f.companion]) assert.ok(P.nav.free(...rig.seatOut, P.nav.R));
+  for (const rig of [f.player, f.companion]) {
+    assert.ok(P.nav.free(...rig.seatOut, P.nav.R));
+    assert.ok(rig.seatOut[1] < seats[0].z - 0.5, 'stand on paving behind the bench ends, away from coastal planting');
+  }
 });
 
 test('lazy day schedules adopt their local resident when handed the travelling rig', () => {
@@ -267,4 +270,14 @@ test('saved resident home retains the real seat approach across companion recons
   const home=JSON.parse(JSON.stringify(actor.home()));
   assert.equal(home.seated,true);assert.notDeepEqual(home.approach,[2,1]);
   actor.release();actor.activate(P);actor.restoreHome(home);assert.deepEqual(actor.home(),home);
+});
+
+test('paired seating uses rendered bench support instead of stale fallback seat height', async () => {
+  const f = seatingFixture();
+  const slat = new THREE.Mesh(new THREE.BoxGeometry(1.8, .04, .5), new THREE.MeshBasicMaterial());
+  slat.position.set(0, .282, .12); f.P.space.add(slat);
+  const sit = sitOutingPair(f.game, f.companion, f.seats, () => true, { walk: f.walk });
+  f.pending.forEach(resolve => resolve());
+  assert.equal(await sit, true);
+  for (const rig of [f.player, f.companion]) assert.ok(Math.abs(rig.root.position.y - .302) < .00001);
 });

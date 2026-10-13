@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import { benchSeats, before } from '../places/day3/seats.js';
 import { bodies, BODY } from '../movement/shared.js';
 import { walkRig } from '../movement/scripted.js';
@@ -54,6 +55,11 @@ function seatApproaches(game, companion, seats) {
     // Coastal walls can close the floor in front of a bench. Its outer ends remain usable.
     return [
       before(s, 0.85 * scale),
+      // Return to the paving behind each end, clear of the coastal planter's leaves.
+      ...[0.5, 0.65, 0.85].map((d) => [
+        s.x + (right[0] * side * d - Math.sin(s.ry) * 0.85) * scale,
+        s.z + (right[1] * side * d - Math.cos(s.ry) * 0.85) * scale,
+      ]),
       ...[0.5, 0.65, 0.85].map((d) => [s.x + right[0] * side * d * scale, s.z + right[1] * side * d * scale]),
       before(s, 1.4 * scale),
     ].filter((q) => {
@@ -94,6 +100,32 @@ export function cancelOutingSeats(game) {
   }
 }
 
+// The older bench metadata describes the fallback box seat. Imported slats can sit lower.
+// Resolve the actual support patch once per seating action, excluding the two people.
+function supportHeight(P, seat, rigs) {
+  P.space.updateWorldMatrix(true, true);
+  const roots = new Set(rigs.map((rig) => rig.root)),
+    meshes = [];
+  P.space.traverse((mesh) => {
+    if (!mesh.isMesh || !mesh.visible || mesh.material?.transparent) return;
+    for (let parent = mesh; parent; parent = parent.parent) if (roots.has(parent)) return;
+    meshes.push(mesh);
+  });
+  let top = -Infinity;
+  for (const dx of [-0.08, 0, 0.08])
+    for (const dz of [-0.08, 0, 0.08]) {
+      const origin = P.space.localToWorld(new THREE.Vector3(seat.x + dx, seat.top + 0.12, seat.z + dz));
+      const ray = new THREE.Raycaster(origin, new THREE.Vector3(0, -1, 0), 0, 0.24),
+        hits = [];
+      for (const mesh of meshes) THREE.Mesh.prototype.raycast.call(mesh, ray, hits);
+      for (const hit of hits) {
+        const y = P.space.worldToLocal(hit.point.clone()).y;
+        if (Math.abs(y - seat.top) < 0.04) top = Math.max(top, y);
+      }
+    }
+  return Number.isFinite(top) ? top : seat.top;
+}
+
 export async function sitOutingPair(game, companion, seats, valid, { walk = walkRig } = {}) {
   cancelOutingSeats(game);
   if (!valid() || !usableSeats(game, companion, seats)) return false;
@@ -127,7 +159,7 @@ export async function sitOutingPair(game, companion, seats, valid, { walk = walk
     if (!usableSeats(game, companion, seats)) return false;
     rigs.forEach((r, i) => {
       const s = seats[i];
-      benchSit(r, s.x, s.z, s.ry, s.top);
+      benchSit(r, s.x, s.z, s.ry, supportHeight(P, s, rigs));
       r.seatOut = [...approaches[i]];
     });
     game.walker.sync();

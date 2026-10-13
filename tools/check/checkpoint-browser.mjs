@@ -45,7 +45,7 @@ try {
         if (!scenario.legacy) await page.waitForFunction(() => window.__game.saveEnabled && !window.__game.busy);
         await page.evaluate(async ({ node, leaf, legacy }) => {
           const g = window.__game;
-          const { ui } = await import('/game3d/js/ui.js');
+          const { ui } = await import('./js/ui.js');
           ui.auto = false;
           // Speed only; the actual hooks, world, Runner and save functions remain in use.
           window.__checkpointSpeed = setInterval(() => {
@@ -67,7 +67,7 @@ try {
           return window.__game.runner.currentNode === leaf && !!window.__game.ui._advance;
         }, scenario.leaf, { timeout: 60000 });
         const resumed = await page.evaluate(async () => {
-          const g = window.__game, S = await import('/game3d/js/sim.js');
+          const g = window.__game, S = await import('./js/sim.js');
           return { trace: g.runner.trace, yen: S.sim.yen, inv: S.sim.inv, bonds: S.bonds.toJSON() };
         });
         assert.deepEqual(resumed.trace, [scenario.leaf], 'resume starts only the unfinished scene');
@@ -75,7 +75,7 @@ try {
         assert.deepEqual(resumed.inv, actual.inv);
         assert.deepEqual(resumed.bonds, actual.rel.bonds);
         await page.evaluate(async () => {
-          const g = window.__game, { ui } = await import('/game3d/js/ui.js');
+          const g = window.__game, { ui } = await import('./js/ui.js');
           ui.auto = true;
           window.__checkpointSpeed = setInterval(() => { if (g.busy) g.setHurry(true); ui._advance?.(); }, 30);
           ui._advance?.();

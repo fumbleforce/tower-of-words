@@ -485,7 +485,7 @@ None of the cast lives here yet.
 | `canteen_worker` | After work only: carries the last chair over, then wipes down the next table east. Can be talked to whenever not walking; helping with the chair is the canteen table's. | – |
 | `aoi` | Day 3, morning: at the notice board until her introduction (`d3_aoi_intro`). Label "Woman from the train", then "Aoi". | – |
 | `tama` | Day 3, lunch: asleep in the seat bay's shade. Can be petted. | – |
-| `kenji` | Travelling companion in the isolated outing prototype; its unvoiced conversation candidate awaits review. | – |
+| `kenji` | Travelling companion in the isolated outing prototype; its voiced conversation awaits release review. | – |
 
 The crowd ([systems.md](systems.md), The crowd):
 

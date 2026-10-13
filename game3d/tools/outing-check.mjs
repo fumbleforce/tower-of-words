@@ -113,6 +113,22 @@ await withBrowserJob(`outing-${stem}`, async browser => {
     await shot(name); console.log(name, value.place, value.outing.status, value.outing.stops.join(','));
     return value;
   }
+  async function seatProof() {
+    const contacts = await page.evaluate(async () => (await import('./tools/outing-seat-contact.mjs')).outingSeatContact(globalThis.__game));
+    report.push({ case: 'seat-support-side-view', contacts });
+    for (const contact of contacts) assert.ok(Math.abs(contact.gap) < .03, `${contact.who} rendered bench support`);
+    for (const yaw of [-Math.PI / 2, Math.PI / 2]) {
+      await page.evaluate(yaw => {
+        const g = globalThis.__game, P = g.place, a = g.player.root.position, b = g.outing.actor.rig.root.position;
+        globalThis.__outingProofClose = P.cam.close;
+        P.cam.closeOn([(a.x + b.x) / 2, (a.z + b.z) / 2], 1, .3);
+        P.cam.close.conversationShot = { who: 'kenji', yaw, elev: Math.PI / 4, fov: 50, minDistance: 3, halfWidth: 1.1, height: .3 };
+        P.cam.snap(a);
+      }, yaw);
+      await page.waitForTimeout(500); await shot(yaw < 0 ? 'seat-support-left' : 'seat-support-right');
+      await page.evaluate(() => { const g = globalThis.__game; g.place.cam.close = globalThis.__outingProofClose; delete globalThis.__outingProofClose; g.place.cam.snap(g.player.root.position); });
+    }
+  }
   async function use(id, destination, { departureOnly = false } = {}) {
     phase = `walk:${id}`; await ready();
     await page.evaluate(async id => {
@@ -274,6 +290,7 @@ await withBrowserJob(`outing-${stem}`, async browser => {
       await chat(); await finish([], 'Sit on the seafront bench with Kenji.');
       await pick('Sit on the seafront bench with Kenji.'); await finish([], 'Keep sitting with Kenji.');
       const bench = await checkpoint('ui-bench-controls'); assert.ok(bench.player.seated && bench.companion.seated);
+      if (process.env.SIDE_PROOF) await seatProof();
       await pick('Keep sitting with Kenji.'); await finish(); await ready();
       await chat(); await finish([], 'Get up and keep walking.'); await checkpoint('ui-bench-chat');
       assert.ok((await state()).player.seated, 'real bench Chat preserves sitting');
@@ -287,6 +304,7 @@ await withBrowserJob(`outing-${stem}`, async browser => {
       await chat(); await finish([], 'Sit on the seafront bench with Kenji.'); await checkpoint('ui-before-sit');
       await pick('Sit on the seafront bench with Kenji.'); await finish([], 'Keep sitting with Kenji.');
       const bench = await checkpoint('ui-bench-controls'); assert.ok(bench.player.seated && bench.companion.seated);
+      if (process.env.SIDE_PROOF) await seatProof();
       await pick('Keep sitting with Kenji.'); await finish(); await ready();
       await chat(); await finish([], 'Get up and keep walking.'); await checkpoint('ui-bench-chat');
       await pick('Get up and keep walking.'); await finish(); await ready();
@@ -349,6 +367,7 @@ await withBrowserJob(`outing-${stem}`, async browser => {
         report.push({ case: 'rendered-bench-contact', contacts: await page.evaluate(async () => (await import('./tools/outing-seat-contact.mjs')).outingSeatContact(globalThis.__game)) });
         if (mode === 'pausedseat') await page.evaluate(() => globalThis.__game.hooks.period({ to: 'afternoon' }));
         const before = await checkpoint('geometry-seated');
+        if (process.env.SIDE_PROOF && mode !== 'pausedseat') await seatProof();
         await continueSave('east_coast'); await ready(); const after = await checkpoint('geometry-continue');
         assert.ok(after.player.seated); assert.deepEqual(after.outing, before.outing);
         if (mode === 'pausedseat') assert.equal(after.companion.visible, false); else assert.ok(after.companion.seated);
