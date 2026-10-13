@@ -324,6 +324,17 @@ test('phone outing overview fits both standing bodies below the HUD without repl
  const point = root.getWorldPosition(new THREE.Vector3()); point.y += y; point.project(camera);
  assert.ok(Math.abs(point.x) < .86 && point.y < .35 && point.y > -.78);
  }
+ let snapped;
+ P.cam.release = function () { this.close = null; };
+ P.cam.snap = function (p) { snapped = this.wanted(p); };
+ game.busy = true; P.cam.close = { conversationShot: { who: 'kenji' } };
+ assert.equal(P.cam.outingStand(), true); assert.notEqual(snapped, ordinary, 'standing reframe works before input returns');
+ assert.equal(P.cam.wanted(playerRoot.position), ordinary, 'normal busy camera ownership restored after snap');
+ P.cam.close = { conversationShot: { who: 'mio' } }; snapped = null;
+ assert.equal(P.cam.outingStand(), false); assert.equal(snapped, null); assert.equal(P.cam.close.conversationShot.who, 'mio');
+ P.cam.close = null; P.camera.aspect = 1.5; assert.equal(P.cam.outingStand(), false);
+ P.camera.aspect = 390 / 844; game.transition = {}; assert.equal(P.cam.outingStand(), false);
+ game.transition = null; game.busy = false;
  companionRoot.position.x = 10; space.updateMatrixWorld(true);
  assert.equal(P.cam.wanted(playerRoot.position), ordinary);
  } finally { globalThis.window = previous; }

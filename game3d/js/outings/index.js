@@ -229,7 +229,8 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
     },
     stop,
     keepWalking() {
-      const leavingShop = stage().waiting || action === 'drink';
+      const leavingShop = stage().waiting || action === 'drink',
+        leavingSeats = game.player.seated && actor.rig.seated;
       cancelActions();
       game.standUp?.();
       const r = actor.rig;
@@ -246,6 +247,7 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
       write(model.cancelStop(state()));
       setStage({});
       if (leavingShop && (!game.ui?.sideText || game.ui.sideText === flags[KEYS.outing_goal])) goal(WALK_GOAL);
+      if (leavingSeats) game.place.cam?.outingStand?.();
       save(game);
     },
     syncClock() {

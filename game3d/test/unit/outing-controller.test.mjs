@@ -359,3 +359,15 @@ test('shop directions follow approach, entry, payment, collection and reunion wi
  }
  } finally { globalThis.document = previous; }
  });
+
+ test('paired seat exit requests its overview only after both people reach paving', () => {
+ const { outing, game, context } = setup(); outing.invite();
+ game.player.seated = true; context.rig.seated = true; context.rig.seatOut = [3, 4];
+ game.standUp = () => { game.player.seated = false; };
+ let snaps = 0; game.place.cam = { outingStand() {
+ assert.equal(game.player.seated, false); assert.equal(context.rig.seated, false);
+ assert.equal(context.rig.root.position.x, 3); assert.equal(context.rig.root.position.z, 4); snaps++;
+ } };
+ outing.keepWalking(); assert.equal(snaps, 1);
+ outing.keepWalking(); assert.equal(snaps, 1, 'ordinary walking never snaps');
+ });

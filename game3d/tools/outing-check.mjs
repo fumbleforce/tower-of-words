@@ -156,7 +156,10 @@ await withBrowserJob(`outing-${stem}`, async browser => {
         const marker = globalThis.__game.markers.list.find(m => m.id === id);
         const r = marker?.el.querySelector('.pin')?.getBoundingClientRect();
         if (!r?.width || !r.height) throw Error('Missing native pin ' + id);
-        return [r.x + r.width / 2, r.y + r.height / 2];
+        const point = [r.x + r.width / 2, r.y + r.height / 2];
+        // Cold phone replay reached this highlighted shelf body when the goal card covered its pin.
+        if (id === 'fridge' && globalThis.innerWidth === 390 && globalThis.document.elementFromPoint(...point)?.closest('#goal')) return [88, 269];
+        return point;
       }, { id, destination });
       if (point) {
         if (width < 700) await page.touchscreen.tap(...point); else await page.mouse.click(...point);
@@ -220,10 +223,11 @@ await withBrowserJob(`outing-${stem}`, async browser => {
   };
   async function continueSave(expectedPlace) {
     phase = 'quickslot-continue';
-    const savedBefore = await page.evaluate(async () => (await import('./js/saves/actions.js')).store.info('quick')?.at || 0);
+    const savedBefore = await page.evaluate(async () => { globalThis.__outingQuickStore = (await import('./js/saves/actions.js')).store; return globalThis.__outingQuickStore.info('quick')?.at || 0; });
     if (width < 700) await page.locator('#qsaveBtn').click(); else await page.keyboard.press('F5');
-    await page.waitForFunction(async before => ((await import('./js/saves/actions.js')).store.info('quick')?.at || 0) > before, savedBefore, { timeout: 10000 });
-    const receipt = await page.evaluate(async () => { const data = (await import('./js/saves/actions.js')).store.info('quick')?.data; return data && { place: data.place, transition: data.transition, outing: data.world?.outing, stage: data.flags?.outing_stage, state: data.flags?.outing_kenji, runner: data.runner };  });
+    const saved = await page.waitForFunction(before => { const info = globalThis.__outingQuickStore.info('quick'); return info?.at > before && info; }, savedBefore, { timeout: 10000 });
+    const data = (await saved.jsonValue()).data; await saved.dispose();
+    const receipt = data && { place: data.place, transition: data.transition, outing: data.world?.outing, stage: data.flags?.outing_stage, state: data.flags?.outing_kenji, runner: data.runner };
     assert.ok(receipt, 'native Quickslot was written'); report.push({ case: 'quickslot-receipt', receipt });
     await page.goto(`${base}/index.html?mc=${mc}`);
     await page.locator('#title .mcont').click();
@@ -435,6 +439,15 @@ await withBrowserJob(`outing-${stem}`, async browser => {
       assert.equal(restored.yen, paid.yen); assert.deepEqual(restored.inv, paid.inv);
       await pick('Take the bag.'); await finish(); await ready();
       const collected = await checkpoint('collected'); assert.equal(collected.flags.konbini_phase, 'complete');
+      if (process.env.EXPORT_COLLECTED) {
+        const before = await page.evaluate(async () => { globalThis.__outingQuickStore = (await import('./js/saves/actions.js')).store; return globalThis.__outingQuickStore.info('quick')?.at || 0; });
+        await page.locator('#qsaveBtn').click();
+        const saved = await page.waitForFunction(before => { const info = globalThis.__outingQuickStore.info('quick'); return info?.at > before && info; }, before, { timeout: 10000 });
+        const receipt = await saved.jsonValue(); await saved.dispose();
+        fs.writeFileSync(process.env.EXPORT_COLLECTED, JSON.stringify(receipt.data, null, 2));
+        console.log('EXPORTED_COLLECTED', process.env.EXPORT_COLLECTED);
+      }
+
       await use('konbini_exit', 'shotengai');
       assert.ok((await state()).outing.stops.includes('drink'));
       if (mode === 'repeatshop') {

@@ -46,6 +46,7 @@ export function installOutingCamera(game, P, name = P.name) {
   const cam = P.cam,
     wanted = cam.wanted,
     probe = P.camera.clone();
+  let standing = false;
   cam.outingOverview = true;
   cam.wanted = function (p) {
     const ordinary = wanted.call(this, p),
@@ -53,7 +54,7 @@ export function installOutingCamera(game, P, name = P.name) {
     if (
       P.camera.aspect >= 1 ||
       this.close ||
-      game.busy ||
+      (game.busy && !standing) ||
       game.transition ||
       !game.outing.controls('kenji') ||
       !rig.root.visible ||
@@ -66,5 +67,24 @@ export function installOutingCamera(game, P, name = P.name) {
     if (companion.distanceTo(player[0]) > 6 * (P.charScale || 1)) return ordinary;
     // The protagonist's scaled envelope conservatively also encloses Kenji's smaller rig.
     return frameOutingPair(P.camera, this.dir, ordinary[1], [player[0], companion], player[1], probe);
+  };
+  // A seated close shot is invalid once the pair stands at opposite bench ends.
+  // Reframe that single action before input returns; ordinary walking still eases.
+  cam.outingStand = () => {
+    if (
+      P.camera.aspect >= 1 ||
+      game.transition ||
+      !game.outing.controls('kenji') ||
+      (cam.close && cam.close.conversationShot?.who !== 'kenji')
+    )
+      return false;
+    cam.release();
+    standing = true;
+    try {
+      cam.snap(game.player.root.position);
+    } finally {
+      standing = false;
+    }
+    return true;
   };
 }
