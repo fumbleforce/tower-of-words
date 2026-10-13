@@ -186,7 +186,7 @@ export default {
       {
         do: 'outing',
         state: 'goal',
-        text: 'Kenji is waiting outside the convenience store. Return here when you are ready.',
+        text: 'Go to the convenience store entrance. Kenji is waiting there.',
       },
       ...release,
     ],

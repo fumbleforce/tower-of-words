@@ -1,7 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Group } from '../../vendor/three/three.module.js';
-import { attachOutingPlace, restoreOutingPlayer } from '../../js/outings/attachment.js';
+import { registerHooks } from 'node:module';
+const loader = registerHooks({ resolve(specifier, context, next) {
+  return specifier === 'three' ? next(new URL('../../vendor/three/three.module.js', import.meta.url).href, context) : next(specifier, context);
+} });
+const { attachOutingPlace, restoreOutingPlayer } = await import('../../js/outings/attachment.js');
+loader.deregister();
 
 function fixture() {
   const rig = () => ({ root: new Group(), seated: false, setState(state) { this.state = state; } });
@@ -68,4 +73,14 @@ test('clock-paused seated capsule survives native normalization without reactiva
   assert.deepEqual(player.root.position.toArray(), [-1.114, 0.1710657, 1.78]);
   player.seated = false;
   assert.equal(P.snapshotState().outing, undefined);
+});
+
+test('waiting highlights the shop entrance without dropping an existing door goal', () => {
+  const { game } = fixture(); let waiting = false, previous = false;
+  game.outing.shopDestination = () => waiting;
+  const P = { name: 'shotengai', things: { store_door: { goal: () => previous } } };
+  attachOutingPlace(game, P, P.name);
+  assert.equal(P.things.store_door.goal(), false);
+  waiting = true; assert.equal(P.things.store_door.goal(), true);
+  waiting = false; previous = true; assert.equal(P.things.store_door.goal(), true);
 });

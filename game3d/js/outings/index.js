@@ -16,6 +16,7 @@ import { standPose } from '../crowd/motion.js';
 import * as model from './model.js';
 
 const KEYS = flagKeys('game3d/js/outings/index.js');
+const SHOP_APPROACH = 'Kenji is heading to the convenience store. Meet him at the entrance.';
 export function installOuting(game, { refreshMarkers = () => {} } = {}) {
   if (game.outing) return;
   const actor = outingActor(game);
@@ -40,6 +41,32 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
   const goal = (text = '') => {
     if (text || game.ui?.sideText === flags[KEYS.outing_goal]) game.ui?.sideGoal(text);
     flags[KEYS.outing_goal] = text;
+  };
+  const shopGoal = (P) => {
+    const wait = stage();
+    const approaching = action && state().pending === 'drink' && !wait.waiting;
+    if (state().status !== 'active' || (!wait.waiting && !approaching)) return;
+    if (game.ui?.sideText && game.ui.sideText !== flags[KEYS.outing_goal]) return;
+    let text;
+    if (P.name === 'shotengai') {
+      const door = P.things?.store_door?.spot(),
+        player = game.player.root.position;
+      const arrived = door && Math.hypot(player.x - door[0], player.z - door[1]) < 1.3 * (P.charScale || 1);
+      text = approaching
+        ? SHOP_APPROACH
+        : arrived
+          ? 'Enter the convenience store. Kenji is waiting outside.'
+          : 'Go to the convenience store entrance. Kenji is waiting there.';
+    } else if (P.name === 'konbini') {
+      const fresh = flags.konbini_order_id > wait.order;
+      text =
+        fresh && flags.konbini_phase === 'complete'
+          ? 'Meet Kenji outside the convenience store.'
+          : fresh && flags.konbini_paid_id === flags.konbini_order_id && flags.konbini_phase === 'paid'
+            ? 'Take your bag, then meet Kenji outside.'
+            : 'Choose and buy a drink. Kenji is waiting outside.';
+    }
+    if (text && flags[KEYS.outing_goal] !== text) goal(text);
   };
   const setStage = (value) => {
     flags[KEYS.outing_stage] = value;
@@ -128,17 +155,24 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
       const token = ++epoch;
       follower.pause();
       action = true;
+      shopGoal(game.place);
       return token;
     },
     valid: (token) => token === epoch && state().status === 'active',
     end() {
       action = false;
+      if (!stage().waiting && game.ui?.sideText === SHOP_APPROACH)
+        goal('Walk with Kenji. Chat with him to stop or say goodbye.');
+      shopGoal(game.place);
       save(game);
     },
   });
   const api = (game.outing = {
     actor,
     state,
+    waiting: () => state().status === 'active' && !!stage().waiting,
+    shopDestination: () =>
+      state().status === 'active' && (!!stage().waiting || (action && state().pending === 'drink')),
     goal,
     available: () => model.canInvite(context()),
     controls: (who) =>
@@ -240,7 +274,10 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
         if (stage().collected) write(model.completeStop(state(), 'drink'));
         else write(model.cancelStop(state()));
         setStage({});
+        if (!game.ui?.sideText || game.ui.sideText === flags[KEYS.outing_goal])
+          goal('Walk with Kenji. Chat with him to stop or say goodbye.');
       }
+      shopGoal(game.place);
       follower.pause();
       save(game);
     },
@@ -306,6 +343,7 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
         flags.konbini_basket?.some((item) => ['milk', 'tea', 'coffee'].includes(item))
       )
         setStage({ ...wait, collected: true });
+      shopGoal(P);
       if (!api.accompanies(P.name)) return;
       actor.update();
       follower.update();

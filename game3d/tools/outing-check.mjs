@@ -418,6 +418,7 @@ await withBrowserJob(`outing-${stem}`, async browser => {
       report.push({ case: 'rendered-bench-contact', contacts });
       for (const contact of contacts) assert.ok(Math.abs(contact.gap) < .03, `${contact.who} rendered bench contact`);
       const seated = await checkpoint('coast-seated');
+      if (process.env.SIDE_PROOF) await seatProof();
       assert.ok(seated.player.seated && seated.companion.seated); assert.ok(seated.outing.stops.includes('coast'));
       await continueSave('east_coast'); await ready();
       const continued = await checkpoint('coast-continue');

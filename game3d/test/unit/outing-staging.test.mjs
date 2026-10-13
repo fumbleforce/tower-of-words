@@ -15,6 +15,7 @@ globalThis.location = { search: '' };
 const THREE = await import('../../vendor/three/three.module.js');
 const { outingActor } = await import('../../js/outings/actor.js');
 const { freeOutingSeats, sitOutingPair, cancelOutingSeats } = await import('../../js/outings/seating.js');
+const { frameOutingPair, installOutingCamera } = await import('../../js/outings/camera.js');
 const { dayCast } = await import('../../js/places/day-cast.js');
 const { PEOPLE } = await import('../../js/cast.js');
 const { benchSit } = await import('../../js/crowd/motion.js');
@@ -280,4 +281,27 @@ test('paired seating uses rendered bench support instead of stale fallback seat 
   f.pending.forEach(resolve => resolve());
   assert.equal(await sit, true);
   for (const rig of [f.player, f.companion]) assert.ok(Math.abs(rig.root.position.y - .302) < .00001);
+});
+
+test('phone outing overview fits both standing bodies below the HUD without replacing authored shots', () => {
+  const camera = new THREE.PerspectiveCamera(22, 390 / 844, .1, 200);
+  const dir = new THREE.Vector3(.3, .83, .47).normalize();
+  const feet = [new THREE.Vector3(-2.28, 0, .92), new THREE.Vector3(-.524, 0, .92)];
+  const body = [.45, 1.45], original = camera.position.clone();
+  const [target, distance] = frameOutingPair(camera, dir, 4, feet, body);
+  assert.ok(distance >= 4); assert.deepEqual(camera.position, original);
+  camera.position.copy(target).addScaledVector(dir, distance); camera.lookAt(target); camera.updateMatrixWorld();
+  for (const foot of feet) for (const y of [0, body[1]]) for (const x of [-body[0], body[0]]) {
+    const point = new THREE.Vector3(foot.x + x, y, foot.z).project(camera);
+    assert.ok(Math.abs(point.x) <= .861 && point.y <= .351 && point.y >= -.781);
+  }
+  const ordinary = [new THREE.Vector3(8, 9, 10), 7];
+  const P = { name: 'east_coast', camera, cam: { close: {}, wanted: () => ordinary } };
+  const game = { outing: { actor: { rig: { root: {} } }, controls: () => true } };
+  delete P.name; // Lifecycle attaches extensions before assigning the place name.
+  installOutingCamera(game, P, 'east_coast');
+  assert.equal(P.cam.outingOverview, true, 'overview installs before lifecycle assigns name');
+  assert.equal(P.cam.wanted(feet[0]), ordinary, 'dialogue/arrival shot remains in control');
+  P.cam.close = null; P.camera.aspect = 1.5;
+  assert.equal(P.cam.wanted(feet[0]), ordinary, 'desktop overview remains unchanged');
 });

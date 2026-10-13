@@ -1,5 +1,6 @@
 import { snapshotPeople, restorePeople } from '../places/saved-people.js';
 import { OUTING_PLACES } from './catalog.js';
+import { installOutingCamera } from './camera.js';
 
 // Bench coordinates deliberately sit inside furniture's walking obstacle. The native place's
 // walking-position repair must not replace the actual seated pose with its entrance spawn.
@@ -14,6 +15,13 @@ export function attachOutingPlace(game, P, name) {
   const outing = game.outing;
   if (!OUTING_PLACES.has(name) && name !== 'konbini') return;
   if (OUTING_PLACES.has(name)) outing.actor.attach(P);
+  installOutingCamera(game, P, name);
+  if (name === 'shotengai' && P.things?.store_door) {
+    const door = P.things.store_door,
+      previousGoal = door.goal;
+    door.goal = () =>
+      outing.shopDestination() || (typeof previousGoal === 'function' ? previousGoal() : !!previousGoal);
+  }
   const update = P.update,
     snapshot = P.snapshotState,
     restore = P.restoreState;

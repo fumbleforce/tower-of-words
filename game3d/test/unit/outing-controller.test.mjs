@@ -254,3 +254,50 @@ test('cancelled first arcade walk cannot reset the next scene walker', async () 
   assert.equal(outing.state().pending, null);
   assert.deepEqual(flags.outing_stage, {});
 });
+
+test('shop directions follow approach, entry, payment, collection and reunion without stealing another goal', async () => {
+  const { outing, game } = setup();
+  game.ui = { sideText: '', sideGoal(text) { this.sideText = text; } };
+  game.place.things.store_door = { spot: () => [4, 4] };
+  outing.invite(); await outing.stop('drink');
+  outing.update(game.place);
+  assert.equal(game.ui.sideText, 'Go to the convenience store entrance. Kenji is waiting there.');
+  game.player.root.position.set(4, 0, 4); outing.update(game.place);
+  assert.equal(game.ui.sideText, 'Enter the convenience store. Kenji is waiting outside.');
+  const street = game.place; game.place = { name: 'konbini' }; outing.update(game.place);
+  assert.equal(game.ui.sideText, 'Choose and buy a drink. Kenji is waiting outside.');
+  Object.assign(flags, { konbini_order_id: 1, konbini_paid_id: 1, konbini_phase: 'paid', konbini_basket: ['tea'] });
+  outing.update(game.place); assert.equal(game.ui.sideText, 'Take your bag, then meet Kenji outside.');
+  flags.konbini_phase = 'complete'; outing.update(game.place);
+  assert.equal(game.ui.sideText, 'Meet Kenji outside the convenience store.');
+  game.ui.sideText = 'A different activity.'; outing.update(game.place);
+  assert.equal(game.ui.sideText, 'A different activity.');
+  game.place = street; await outing.afterTravel();
+  assert.equal(game.ui.sideText, 'A different activity.', 'reunion also preserves the replacement goal');
+  assert.deepEqual(outing.state().stops, ['drink']); assert.equal(outing.waiting(), false);
+});
+
+ test('shop departure immediately presents its destination while Kenji is still walking', async () => {
+ const { outing, game, context } = setup();
+ game.ui = { sideText: '', sideGoal(text) { this.sideText = text; } };
+ outing.invite();
+ context.afterWalk = () => {
+   assert.equal(outing.waiting(), false);
+   assert.equal(outing.shopDestination(), true);
+   assert.equal(game.ui.sideText, 'Kenji is heading to the convenience store. Meet him at the entrance.');
+ };
+ await outing.stop('drink');
+ assert.equal(outing.shopDestination(), true);
+ outing.keepWalking(); assert.equal(outing.shopDestination(), false);
+ });
+
+ test('failed shop arrival removes the departure cue and marker without stealing a replacement goal', async () => {
+ const { outing, game, context } = setup();
+ game.ui = { sideText: '', sideGoal(text) { this.sideText = text; } };
+ outing.invite(); context.blocked = true;
+ assert.equal(await outing.stop('drink'), false);
+ assert.equal(outing.shopDestination(), false);
+ assert.equal(game.ui.sideText, 'Walk with Kenji. Chat with him to stop or say goodbye.');
+ context.afterWalk = () => { game.ui.sideText = 'Another activity.'; };
+ await outing.stop('drink'); assert.equal(game.ui.sideText, 'Another activity.');
+ });

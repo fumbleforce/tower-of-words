@@ -1,6 +1,6 @@
 // Capture saves written by actual story nodes, then Continue them through the title.
 import assert from 'node:assert/strict';
-import { withBrowserJob } from '../lib/browser-job.mjs';
+import { withBrowserJob, gpuWaitOptions } from '../lib/browser-job.mjs';
 import { openGame } from '../../game3d/test/support/open-game.mjs';
 import fixture from '../../game3d/test/fixtures/save-v1.json' with { type: 'json' };
 
@@ -9,7 +9,7 @@ const cases = [
   { node: 'mio_lunch_end', leaf: 'mio_bond', period: 'lunch', finish: 'afternoon' },
   { node: 'work_afternoon', leaf: 'emi_drops_in', period: 'afternoon', finish: 'evening' },
   { node: 'legacy_office', leaf: 'office_in', place: 'office', legacy: true, period: 'morning', finish: 'morning', goal: 'Greet Mr. Mori.' },
-  { node: 'legacy_gate', leaf: 'lobby_in', place: 'gate', legacy: true, period: 'early', finish: 'early', goal: 'Say good morning to the guard.' },
+  { node: 'legacy_gate', leaf: 'lobby_in', place: 'gate', legacy: true, period: 'early', finish: 'early', goal: 'Say good morning to the guard in Japanese.' },
 ];
 const selected = process.argv[2];
 if (selected && !cases.some(c => c.node === selected)) throw new Error('Unknown checkpoint case: ' + selected);
@@ -89,7 +89,7 @@ try {
         console.log(`PASS checkpoint ${scenario.node} → ${scenario.leaf} → ${scenario.finish}`);
       } finally { await opened.close(); }
     }
-  }, { timeoutMs: 240000 });
+  }, gpuWaitOptions(60, 240000));
 } catch (error) {
   console.error(`${error.code === 'LOAD_DEFERRED' ? 'DEFERRED' : 'FAIL'} checkpoints: ${error.stack || error.message}`);
   process.exitCode = error.code === 'LOAD_DEFERRED' ? 75 : 1;
