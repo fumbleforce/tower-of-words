@@ -17,12 +17,12 @@ export function installResearch(game) {
     flags.research_mori_return_ready = conversationMemory.ready('mori_return_norway', known);
     if (a.state !== 'available') flags.research_office_ok = !!(await provider.act(a));
   };
-  game.hooks.research = async (a) => {
+  game.hooks.research = async (a, replay) => {
     flags.research_action_ok = false;
     flags.research_has_book = false;
     const provider = game.place?.research;
     if (!provider) return;
-    if (a.state !== 'available') flags.research_action_ok = !!(await provider.act(a));
+    if (a.state !== 'available') flags.research_action_ok = !!(await provider.act(a, replay));
     flags.research_has_book = !!provider.state.read().active;
   };
 }

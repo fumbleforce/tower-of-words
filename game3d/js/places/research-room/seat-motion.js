@@ -56,7 +56,7 @@ export function readingSeatMotion(game) {
     },
     stand(job) {
       const p = game.player,
-        out = p.seatOut;
+        out = p.seatOut || [p.root.position.x, p.root.position.z];
       return change(job, () => {
         p.seated = false;
         p.seatOut = null;

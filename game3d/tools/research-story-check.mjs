@@ -7,11 +7,11 @@ const width=+(process.argv[2]||1366),mc=process.argv[3]||'eric';
 const base=new URL((process.env.BASE||'game3d')+'/',`http://127.0.0.1:${process.env.PORT||8771}/`).href;
 const out=`/tmp/codex-research-story-${process.env.ROUND||'1'}`;fs.mkdirSync(out,{recursive:true});
 await withBrowserJob('research-story',async browser=>{
- const context=await publicResearchContextOptions(browser,{viewport:{width,height:width<700?844:860}}),page=await context.newPage(),errors=[],requests=[],captures=[];
- page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>requests.push(r.url()));
+ const context=await publicResearchContextOptions(browser,{viewport:{width,height:width<700?844:860}}),page=await context.newPage(),errors=[],consoleErrors=[],requests=[],captures=[];
+ page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')consoleErrors.push(m.text());});page.on('request',r=>requests.push(r.url()));
  await page.addInitScript(()=>globalThis.localStorage.setItem('amakawa-settings',JSON.stringify({v:2,textSpeed:'instant',voiceOn:false,privateMode:false})));
  const shot=async label=>page.screenshot({path:`${out}/${width}-${mc}-${label}.png`});
- const idle=()=>page.waitForFunction(()=>!globalThis.__game.busy,null,{timeout:90000});
+ const idle=async()=>{await page.waitForFunction(()=>!globalThis.__game.busy||globalThis.document.body.innerText.includes('The scene could not finish'),null,{timeout:90000});assert.equal(await page.getByText('The scene could not finish. Your last save is preserved.').count(),0,consoleErrors.join('\n'));};
  let watching=true;
  const watcher=(async()=>{while(watching){try{
   const cap=await page.evaluate(()=>globalThis.__researchCapture);
@@ -45,5 +45,5 @@ await withBrowserJob('research-story',async browser=>{
   assert.ok(result.known.includes('shiryou'));assert.equal(result.flags.found_research_weather_shapes,true);assert.deepEqual(result.proof.errors,[]);assert.deepEqual(errors,[]);
   await shot('finished');
  }catch(error){result={failure:error.stack,proof:await page.evaluate(()=>globalThis.__researchProof)};await shot('failure');throw error;}
- finally{watching=false;await watcher;fs.writeFileSync(`${out}/${width}-${mc}-report.json`,JSON.stringify({result,captures,errors,requests},null,2));await context.close();}
+ finally{watching=false;await watcher;fs.writeFileSync(`${out}/${width}-${mc}-report.json`,JSON.stringify({result,captures,errors,consoleErrors,requests},null,2));await context.close();}
 },{gpuWaitMs: Number(process.env.GPU_WAIT || 1800) * 1000, timeoutMs:300000});

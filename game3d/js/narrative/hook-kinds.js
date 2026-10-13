@@ -29,4 +29,14 @@ export const DURABLE_HOOKS = new Set([
   'relate',
 ]);
 export const PERIOD_HOOKS = new Set(['period', 'mioLunchComplete']);
-export const WORLD_HOOKS = new Set(['depart', 'bag', 'arrive', 'alight', 'cup', 'lunchSit', 'lunchOver', 'sitDown']);
+export const WORLD_HOOKS = new Set([
+  'depart',
+  'bag',
+  'arrive',
+  'alight',
+  'cup',
+  'lunchSit',
+  'lunchOver',
+  'sitDown',
+  'research',
+]);

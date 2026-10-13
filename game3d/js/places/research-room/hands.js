@@ -4,6 +4,21 @@ export function referenceHands(game, P) {
   const hands = diningHands(game, P.space),
     contacts = [];
   let held = null;
+  function pointHand(s) {
+    if (!s.pointAt || hands.active.get(s.r) !== s) return;
+    const y = P.space
+        .localToWorld(new THREE.Vector3(...s.pointAt))
+        .sub(s.hand.getWorldPosition(new THREE.Vector3()))
+        .normalize(),
+      x = new THREE.Vector3(0, 1, 0).addScaledVector(y, -y.y).normalize(),
+      rotation = new THREE.Quaternion().setFromRotationMatrix(
+        new THREE.Matrix4().makeBasis(x, y, new THREE.Vector3().crossVectors(x, y)),
+      );
+    s.hand.quaternion
+      .copy(s.handBase)
+      .slerp(s.hand.parent.getWorldQuaternion(new THREE.Quaternion()).invert().multiply(rotation), s.pointK ?? 1);
+    s.hand.updateWorldMatrix(false, true);
+  }
   function sample(s, id) {
     contacts.push({
       id,
@@ -15,11 +30,16 @@ export function referenceHands(game, P) {
   return {
     ...hands,
     contacts,
+    update() {
+      hands.update();
+      if (held) pointHand(held);
+    },
     snapshot: () =>
       held
         ? {
             who: held.r === P.people.research_reader ? 'research_reader' : 'eric',
             target: P.space.worldToLocal(held.target.clone()).toArray(),
+            ...(held.pointAt ? { pointAt: [...held.pointAt], pointBase: held.handBase.toArray() } : {}),
           }
         : null,
     restore(saved) {
@@ -30,8 +50,14 @@ export function referenceHands(game, P) {
       if (!rig) return;
       held = hands.start(rig);
       held.target.copy(P.space.localToWorld(new THREE.Vector3(...saved.target)));
+      if (saved.pointAt?.length === 3 && saved.pointAt.every(Number.isFinite)) {
+        held.pointAt = [...saved.pointAt];
+        held.handBase = held.hand.quaternion.clone();
+        if (saved.pointBase?.length === 4 && saved.pointBase.every(Number.isFinite))
+          held.handBase.fromArray(saved.pointBase);
+      }
     },
-    async touch(job, rig, target, id, { prop, end, hold = false, point = false } = {}) {
+    async touch(job, rig, target, id, { prop, end, hold = false, point = false, facePoint = false } = {}) {
       if (hold) this.release();
       const s = hands.start(rig);
       if (point) {
@@ -67,7 +93,20 @@ export function referenceHands(game, P) {
           sample(s, id + '-end');
         }
         if (hold) {
+          if (facePoint) {
+            s.pointAt = [...facePoint];
+            s.handBase = s.hand.quaternion.clone();
+          }
           held = s;
+          if (s.pointAt) {
+            s.pointK = 0;
+            await job.wait(
+              game.tween(0.25, (k) => {
+                if (job.live() && held === s && hands.active.get(s.r) === s) s.pointK = k;
+              }),
+            );
+          }
+          pointHand(s);
           return s;
         }
         await job.wait(game.wait(250));
@@ -77,6 +116,7 @@ export function referenceHands(game, P) {
     },
     release() {
       if (held) {
+        if (held.handBase && hands.active.get(held.r) === held) held.hand.quaternion.copy(held.handBase);
         held.prop = null;
         hands.stop(held);
         held = null;

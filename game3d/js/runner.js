@@ -1,3 +1,4 @@
+import { replayWorldHook } from './narrative/world-hook.js';
 import { newFrame, readCheckpoint } from './narrative/checkpoint.js';
 import { flagKeys } from './narrative/engine-flags.js';
 const ENGINE_KEYS = flagKeys('game3d/js/runner.js');
@@ -432,10 +433,7 @@ export class Runner {
           return result;
         });
     } else if (WORLD_HOOKS.has(s.do) && context) {
-      if (context.frame.done.includes(key + ':hook') && !context.replaying) return;
-      await h(s);
-      if (!context.frame.done.includes(key + ':hook')) context.frame.done.push(key + ':hook');
-      this.persist();
+      await replayWorldHook(h, s, context, key, () => this.persist());
     } else if (s.do === 'type') {
       if (context?.frame.done.includes(key + ':hook')) return;
       await h(s, (apply) => this.effect(context, key + ':hook', apply));

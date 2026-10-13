@@ -27,7 +27,7 @@ export function researchActivity(game, P, w) {
     camera.focus(
       [0.05, -1.7],
       game.player.seated
-        ? { distance: P.camera.aspect < 1 ? 3.6 : 2.8, height: 0.7, yaw: -1.35, elev: 0.3 }
+        ? { distance: P.camera.aspect < 1 ? 3.6 : 2.8, height: 0.7, yaw: -1.75, elev: 0.3 }
         : { distance: 2.6, height: 0.45, yaw: 0.9, elev: 0.22 },
     );
   async function stand(job) {
@@ -50,9 +50,10 @@ export function researchActivity(game, P, w) {
     await approach(job, [w.spots.research_shelf[0], SHELF[book][2]]);
     game.hooks.face({ who: 'eric', to: [3.27, SHELF[book][2]] });
   }
-  async function read(job) {
+  async function read(job, completedReplay = false) {
     const current = state.read().active;
     if (current) await select(job, current.book, current.seat);
+    if (completedReplay) return;
     await job.wait(
       readReference({
         state: state.read,
@@ -141,17 +142,17 @@ export function researchActivity(game, P, w) {
       if (panel) panel.hidden = true;
       sync();
     },
-    async act(a) {
+    async act(a, { completedReplay = false } = {}) {
       if (!active) return false;
       return actions.run(async (job) => {
         try {
           switch (a.state) {
             case 'select':
               await select(job, a.book, a.seat);
-              await read(job);
+              await read(job, completedReplay);
               break;
             case 'read':
-              await read(job);
+              await read(job, completedReplay);
               break;
             case 'putBack':
               await putBack(job);
@@ -180,11 +181,15 @@ export function researchActivity(game, P, w) {
               await select(job, 'weather', 'research_table_seat');
               state.act({ type: 'turn', page: 1 });
               sync();
-              await read(job);
+              await read(job, completedReplay);
               frameReader();
               break;
             case 'pointGauge':
-              await hands.touch(job, P.people.research_reader, [0.17, 0.7, -1.99], 'reader-gauge', { hold: true });
+              await hands.touch(job, P.people.research_reader, [0.17, 0.7, -1.99], 'reader-gauge', {
+                hold: true,
+                point: true,
+                facePoint: [0.17, 0.64, -1.7],
+              });
               camera.focus([0.06, -1.84], { distance: 0.95, height: 0.68, yaw: 0.4, elev: 1.15 });
               break;
             case 'cover':

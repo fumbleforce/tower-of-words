@@ -9,7 +9,7 @@ await withBrowserJob('research-goal',async browser=>{
  for(const width of [1366,390]){
  const c=await publicResearchContextOptions(browser,{viewport:{width,height:844}}),p=await c.newPage(),checks=[],errors=[];p.on('pageerror',e=>errors.push(e.message));await p.addInitScript(()=>globalThis.localStorage.setItem('amakawa-settings',JSON.stringify({v:2,voiceOn:false,privateMode:false})));
  try{
- await waitForGame(p,60000,()=>p.goto(`http://127.0.0.1:8786/game3d/index.html?day=2&place=works`),'play');await p.waitForFunction(()=>!globalThis.__game.busy);await p.locator('#boot').waitFor({state:'detached'});
+ await waitForGame(p,60000,()=>p.goto(`http://127.0.0.1:${process.env.PORT||8771}/${process.env.BASE||'game3d'}/index.html?day=2&place=works`),'play');await p.waitForFunction(()=>!globalThis.__game.busy);await p.locator('#boot').waitFor({state:'detached'});
  for(const [id,text]of [['long',long],['short','Return to the office.']]){
  await p.evaluate(text=>{globalThis.__game.ui.goal(text);},text);await p.waitForTimeout(500);
  const rect=await p.evaluate(()=>{const t=globalThis.document.querySelector('#goal .t'),b=globalThis.document.querySelector('#goal .gl'),s=globalThis.getComputedStyle(t);return{text:t.textContent,aria:b.getAttribute('aria-label'),height:t.clientHeight,line:parseFloat(s.lineHeight),padding:[s.paddingTop,s.paddingBottom],button:b.getBoundingClientRect().toJSON()};});
