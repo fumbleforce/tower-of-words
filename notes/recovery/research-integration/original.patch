@@ -1,0 +1,1960 @@
+diff --git a/docs/game/cast.md b/docs/game/cast.md
+index 2054bfef5..97f2c4d0e 100644
+--- a/docs/game/cast.md
++++ b/docs/game/cast.md
+@@ -27,6 +27,7 @@ The tables are checked against the game by `node tools/facts/check.mjs`. Ids in
+ | `ferry_reader` | Reader | An unnamed adult reading a leaflet by the harbour window; existing generic body and approved sales1 voice. |
+ | `ferry_traveller` | Traveller | An unnamed adult resting with a bag, which he moves from a usable seat; existing generic body and approved reader voice. |
+ | `canteen_worker` | Canteen worker | An unnamed adult who works at the indoor service counter and closes the canteen terrace after work. |
++| `research_reader` | Reader | An unnamed adult using the Research reading room to sketch the existing weather instruments; shipped generic worker body and approved reader voice. |
+ | `station_worker` | Grounds worker | An unnamed adult tending the station south garden by day; the existing grey worker body and borrowed reader voice. |
+ | `canteen_shirt` | Diner in a shirt | The existing seated adult at the west table, with a work badge and curry; approved sales1 voice. |
+ | `canteen_cardigan` | Diner in a cardigan | The existing adult with her own rice container and a canteen side dish; approved sales2 voice. |
+diff --git a/docs/game/island.md b/docs/game/island.md
+index 8e37372a2..6ff8d7c3b 100644
+--- a/docs/game/island.md
++++ b/docs/game/island.md
+@@ -145,7 +145,7 @@ The shop rows have fifteen bays each, numbered 0 to 14 from the west (island-sou
+ | `server_hall` | Old server hall (旧サーバー棟) | `works_blue` | A low early-nineties server hall; some racks still hum. Its outside is built in `works`, the door shut. | Door on its east face, on the hall apron off the works yard | Enter | Old machine labels and the logbook: 再起動, 異常, dates. |
+ | `works_yard` | Works yard (工場跡の広場) | `works_yard`, `works_shed`, `works_kiosk` | Cracked concrete between the sheds; the gatehouse (works_kiosk) is empty. Built and walked in `works`. | The works lane and the works street | Outside | The gatehouse's visitor book: 名前, 時間, 用件. |
+ | `recycling_centre` | Recycling centre (リサイクルセンター) | `w2` | Three storeys where the island's rubbish is sorted. Its front is built in `works`, the door shut. | Door on the works street | Enter | The sorting chart (分別): 燃える, 燃えない, 缶, びん. |
+-| `research_lab` | Amakawa Research (天川研究所) | `n4` | Six storeys at the quarter's north edge: labs, and a library of the company's technical papers. Its front is built in `works`, the door shut. | Door at the end of the research walk | Enter | Door signs and the library card: 貸出, 返却日. |
++| `research_lab` | Amakawa Research (天川研究所) | `n4` | Six storeys at the quarter's north edge: labs above the built optional ground-floor technical reading room. Its held-open west door is reached through `works`; see [places.md](places.md#research-reading-room-research_lab). | Door at the end of the research walk | Enter | Door signs and the library card: 貸出, 返却日. |
+ 
+ 
+ Canteen interior status (2026-10-06): the ground-floor dining room is playable from the plaza door, with seating and service fixtures. The kitchen and upper floor remain closed; other buildings listed as planned interiors remain shells until their own interior work is completed. See [places.md](places.md#canteen-canteen).
+diff --git a/docs/game/places.md b/docs/game/places.md
+index e8c13f155..1fd2d25a5 100644
+--- a/docs/game/places.md
++++ b/docs/game/places.md
+@@ -99,6 +99,7 @@ The buildings, paths, green and coast around the route, and the fit to the map,
+ | `forecourt` | -13.95 | -0.65 | 0 | 1 | 0 | The gate room: its exit is the station door. |
+ | `office` | 8.75 | -8.45 | 0 | 1 | -2 | Its lift under the forecourt's lift. |
+ | `campus` | -13.95 | -0.65 | 0 | 1 | 0 | Head-office north grounds in the forecourt frame. |
++| `research_lab` | -31 | -103.45 | 0 | 1 | 0 | Existing Research west door and built ground-floor reading room. |
+ | `ferry_terminal` | -112 | -100 | 0 | 1 | 0 | Existing terminal south door and waiting-room footprint. |
+ | `print_shop` | -24.3 | -43.3 | 270 | 1 | 0 | Existing w3 east door and ground-floor footprint. |
+ | `canteen` | 33.885 | -20.5 | 0 | 1 | 0 | The ground-floor footprint, front edge centred in the existing canteen. |
+@@ -144,6 +145,7 @@ The game's map and the minimap (controls-and-ui.md, The map) show each outdoor p
+ | `canteen` | | | `plaza` |
+ | `campus` | -19.25 | -33 | |
+ | `print_shop` | | | `campus` |
++| `research_lab` | | | `works` |
+ | `ferry_terminal` | | | `harbour` |
+ | `dorm_court` | 79.84 | -1.3 | |
+ | `dorms` | | | `dorm_court` |
+@@ -1378,7 +1380,7 @@ Walked: the works lane from the supply yard to a dead end at the chimney's foot,
+ 
+ The works are older than the rest of the town and look it. The lane carries on the supply yard's big concrete slabs; the yard and the aprons are older concrete, worn and patched, with cracks across them and weeds along the walls. An old siding comes out of the factory's gates, rails set flush in the concrete, curves east and runs along the yard to a buffer stop. The works street is old asphalt with faded white edge lines and patches, concrete utility poles with their wires down its west side, and behind them a chain-link fence round the works' empty land, its gate chained. The lamps are the works' own, arm lamps on tall poles; the research walk and the two forecourts are the town's pale slabs and post lamps, newer than the works round them. A pipe bridge of three pipes, one lagged in silver, runs on steel portals from the power plant over the lane's head to the factory. Trees stand between the lane and the harbour office, between the harbour office and the plant, behind the street's east side, in the fenced land and south of the research walk; a low hedge runs along the walk. A finger sign at the yard's east end points to Research 研究所 east and Harbour 港 west.
+ 
+-The factory is three storeys of faded green-grey corrugated walls on a concrete base under four saw-tooth roofs, their glazing to the north, with rows of steel works windows, a few panes dark, and rust under the gutter. Its gates are a pair of teal sliding leaves under their track, chained and padlocked, a 立入禁止 KEEP OUT plate on them and 安全第一 SAFETY FIRST on a green board above. The power plant is a tall pale concrete hall, piers between tall works windows, a boiler house on the roof and ivy up its south-east corner; its door on the lane is a chained steel pair under a concrete hood, はつでんしょ No.1 POWER PLANT on a plate beside it. The chimney stands at the lane's head, round and tapering, banded red and white at the top, a caged ladder up its south side. The works shed is pale blue-grey corrugated under a low gable, a roller door to the yard and its number ２ on the east gable. The gatehouse is a pale concrete box under a slab roof, its counter window onto the factory apron with うけつけ RECEPTION over it, and a red and white barrier raised at the apron's mouth. The server hall is low, pale panels under a blue band, louvres and two high windows on its north side, condensers on the roof; its door on its east face is a glazed pair under a canopy with サーバーとう SERVER HALL on it. The recycling centre and Amakawa Research are the town's lower blocks, each door a glazed pair under a deep canopy with the name on it: リサイクルセンター RECYCLING CENTRE on the street, sorting bins in four colours beside it; けんきゅうじょ AMAKAWA RESEARCH at the walk's end. The three doors are shut, a white card on the glass: 準備中 CLOSED. The factory's gates and the plant's door are chained.
++The factory is three storeys of faded green-grey corrugated walls on a concrete base under four saw-tooth roofs, their glazing to the north, with rows of steel works windows, a few panes dark, and rust under the gutter. Its gates are a pair of teal sliding leaves under their track, chained and padlocked, a 立入禁止 KEEP OUT plate on them and 安全第一 SAFETY FIRST on a green board above. The power plant is a tall pale concrete hall, piers between tall works windows, a boiler house on the roof and ivy up its south-east corner; its door on the lane is a chained steel pair under a concrete hood, はつでんしょ No.1 POWER PLANT on a plate beside it. The chimney stands at the lane's head, round and tapering, banded red and white at the top, a caged ladder up its south side. The works shed is pale blue-grey corrugated under a low gable, a roller door to the yard and its number ２ on the east gable. The gatehouse is a pale concrete box under a slab roof, its counter window onto the factory apron with うけつけ RECEPTION over it, and a red and white barrier raised at the apron's mouth. The server hall is low, pale panels under a blue band, louvres and two high windows on its north side, condensers on the roof; its door on its east face is a glazed pair under a canopy with サーバーとう SERVER HALL on it. The recycling centre and Amakawa Research are the town's lower blocks, each door a glazed pair under a deep canopy with the name on it: リサイクルセンター RECYCLING CENTRE on the street, sorting bins in four colours beside it; けんきゅうじょ AMAKAWA RESEARCH at the walk's end. The server hall and recycling centre doors are shut, a white card on the glass: 準備中 CLOSED. Research’s west door is held open onto its built reading room. The factory's gates and the plant's door are chained.
+ 
+ Beside the recycling centre, four lidded containers have front labels, lifting lips and rear wheels. They stand on a continuous concrete wash pad with a grated rear drain and gravel edge. The weather enclosure has a clear slab path from its existing gate, concrete instrument footings, a rain-collector rim and a small identification board clamped to the fence posts. Low planting stays outside the enclosure, away from the instruments and service route.
+ 
+@@ -1398,7 +1400,7 @@ In the morning the sun is the plaza's; after work the lamps, the server hall's d
+ | `old_factory` | Old factory | The factory's gates on its apron. Go in: chained. |
+ | `server_hall` | Server hall | The server hall's door on the hall apron. Go in: shut. |
+ | `recycling_centre` | Recycling centre | The recycling centre's door on the works street. Go in: shut. |
+-| `research_lab` | Amakawa Research | Amakawa Research's door at the research walk's end. Go in: shut. |
++| `research_lab` | Amakawa Research | The held-open west door at the research walk's end enters the built ground-floor reading room. |
+ 
+ ### Spots
+ 
+@@ -1438,7 +1440,7 @@ Nobody yet.
+ |---|---|---|
+ | `arrive` | Arrive | Goal line: "Head office is back down the works street and east along the office street, past the gym and the plaza. Take its lift down to B2."; after work, "The dorms are back down the works street, east along the office street, past the gym and down the north street." |
+ | `chained` | Go in at the factory's gates or the plant's door | It is chained shut. |
+-| `shut` | Go in at the server hall's, the recycling centre's or Amakawa Research's door | The door is shut; a card on the glass says 準備中: not open yet. |
++| `shut` | Go in at the server hall's or the recycling centre's door | The door is shut; a card on the glass says 準備中: not open yet. |
+ | `to_harbour` | Use or walk into the lane's south end | Eric walks back down into the supply yard. |
+ | `to_street` | Use or walk into the street's south end | Eric walks back down onto the office street. |
+ 
+@@ -1905,3 +1907,13 @@ All three residents have ordinary first and repeat Talk. The attendant welcomes
+ While seated, existing Bag Read works. The terminal seat menu also offers owned bread, riceball and drinks using the existing item definitions. A visible bite or sip must complete before one inventory item is consumed; a saved receipt prevents a resumed action from consuming it twice. Leaving during an action cancels its continuation. This is a terminal seat affordance, not a universal Bag Eat command.
+ 
+ The harbour, works and wider island still contain unentered shells. This room does not imply that the ferry journey or other harbour buildings are playable.
++
++## Research reading room (`research_lab`)
++
++The western ground floor of the existing Amakawa Research building, entered through its real west door from the works research walk. Canonical island origin (−31, −103.45), one unit = 1.5 metres. The usable shell spans local x−3.95..4 and z−3.35..3.35; a short floor bridge reaches the existing facade at x−4.2. The upper floors and remaining building mass stay intact. Both door leaves rest open and the same shell, shelves and books are visible from outside. The interior windows use the actual island skyline and the same weather-station builder at its canonical coordinates. The room is available through the existing harbour/works paths on day 1, days 2–5 and continuing days; sports boundaries and the other closed works buildings are unchanged. Entering the reading room and returning to Works retain the active objective, including on continuing days; ordinary Works arrivals still receive their usual guidance.
++
++Two physical reference volumes sit on the east display ledge. The player carries one to any of three usable communal-table chairs or the quiet desk beneath the north windows. A fourth communal-table chair belongs to the resident reader. The front browsing table holds an actual reference index that opens the same book choices; bound issues, archive boxes and the return shelf give the archive a separate working area. Warm oak furniture and pale walls distinguish it from the blue upholstery and browsing rug; three task lamps light the working surfaces. Selecting the other volume returns the first to its shelf before taking the second. The open page, selected seat and each volume's optional bookmark survive Continue. Saving a reference retains the identical authored illustration in Papers; it does not acquire or duplicate the physical volume.
++
++The weather volume locates the existing instrument nook and distinguishes its visible white box, small cylinder and mast. The copier volume depicts the existing external paper positions and status display. Neither invents internal mechanisms, repairs anything or changes a request. A resident works on a notebook sketch at the communal table, offers ordinary first/repeat conversation, points out the small rain gauge and optionally models `shiryou`. Mori's old copier copy is a separate physical handoff at his office desk from day 2 onward, requiring his actual heard offer and the intentionally learned word.
++
++Things: `research_exit`, `research_reader`, `research_side_seat`, `research_end_seat`, `research_archive`, `research_books`, `research_table_seat`, `research_window_seat`. Spots: `research_in`, `research_reader`, `research_shelf`. Seats: `research_table_seat`, `research_window_seat`, `research_side_seat`, `research_end_seat`. Person: `research_reader`. The local provider is reached through the global `research` hook. Existing Papers displays the four spreads and Mori's annotated sheet.
+diff --git a/docs/game/stories/day2/README.md b/docs/game/stories/day2/README.md
+index 0e5dc5f12..108800408 100644
+--- a/docs/game/stories/day2/README.md
++++ b/docs/game/stories/day2/README.md
+@@ -8,7 +8,7 @@ Authored for C-0367, work #192; built in C-0378. It plays after day one: day one
+ | [Welcome food](welcome.md) | The small gathering, the new pattern and its optional second word. |
+ | [Day-2 visits](visits.md) | Eric's computer, the optional walks, the route home and the end. |
+ 
+-The place set and trips in index.js apply both before work (`morning`) and after work (`evening`). Choosing to read Mori’s notes for the afternoon at Eric’s B2 desk advances between them; browsing repair requests does not. Accessible places: the room, dorm court, east lane, plaza, forecourt, security room, stationary train, B2, shop street and east coast. The north road and pool approach close the two entrances into the sports area; the office quarter, harbour and works are beyond that area. There is no countdown, missed-party timer or escort failure.
++The place set and trips in index.js apply both before work (`morning`) and after work (`evening`). Choosing to read Mori’s notes for the afternoon at Eric’s B2 desk advances between them; browsing repair requests does not. Accessible places: the room, dorm court, east lane, plaza, forecourt, security room, stationary train, B2, shop street and east coast. The north road and pool approach still close the sports area. The forecourt campus loop reaches the print shop, office quarter, harbour and waiting room, and both harbour paths reach the works and its Research reading room. There is no countdown, missed-party timer or escort failure.
+ 
+ The room starts day 2 with the previous day's choices and words intact. A first visit resets the transient `going_home` flag. The party's goodbye sets it again, while keeping exploration open. A return to the room after the party saves and ends the day; leaving the party does not end it on the promenade.
+ 
+diff --git a/docs/game/stories/day2/visits.md b/docs/game/stories/day2/visits.md
+index dd01f5774..eabcfff8a 100644
+--- a/docs/game/stories/day2/visits.md
++++ b/docs/game/stories/day2/visits.md
+@@ -36,6 +36,7 @@ Optional `mitai` is modelled normally and slowly by `kuroda`, then typed in `d2_
+ | Word | By | Node |
+ |---|---|---|
+ | `mitai` | `kuroda` | `d2_see_word` |
++| `shiryou` | `research_reader` | `word_practice` |
+ 
+ ## Nodes
+ 
+@@ -50,7 +51,7 @@ Optional `mitai` is modelled normally and slowly by `kuroda`, then typed in `d2_
+ 
+ ### North-campus routes
+ 
+-`day2/campus.js`, `day2/print_shop.js`, `day2/office_quarter.js` and `day2/harbour.js` reuse the physical routes without adding spoken scenes. The forecourt's `to_campus` enters the new loop. Campus uses `arrive`, `to_forecourt`, `to_offices`, `to_harbour`, `to_print`, `bench`; print shop uses `arrive`, `directory`, `print`, `end`, `sit`, `exit`. Office street uses `arrive`, `to_campus`, `to_harbour`, `shut`; harbour uses `arrive`, `to_campus`, `to_offices`, `shut`. Sports and works routes retain their day-2 closure. The free directory is a persistent readable item after a completed feed/output, with no new language lesson or quest.
++`day2/campus.js`, `day2/print_shop.js`, `day2/office_quarter.js` and `day2/harbour.js` reuse the physical routes without adding spoken scenes. The forecourt's `to_campus` enters the new loop. Campus uses `arrive`, `to_forecourt`, `to_offices`, `to_harbour`, `to_print`, `bench`; print shop uses `arrive`, `directory`, `print`, `end`, `sit`, `exit`. Office street uses `arrive`, `to_campus`, `to_harbour`, `shut`; harbour uses `arrive`, `to_campus`, `to_offices`, `shut`. Sports routes retain their day-2 closure. Harbour `to_works` and `to_works_street` lead through the two existing works paths to the open reading room; the other works buildings remain shut. The free directory is a persistent readable item after a completed feed/output, with no new language lesson or quest.
+ 
+ ### Harbour waiting room
+ 
+@@ -61,3 +62,12 @@ Optional `mitai` is modelled normally and slowly by `kuroda`, then typed in `d2_
+ Additional terminal seat nodes `landing_seat` and `notice_seat` use the same meal/reading affordance as `quiet_seat`, with no extra spoken lines.
+ 
+ The station garden composes the shared `conversations/station-worker.js` nodes into `day2/shotengai.js`: `garden_worker`, `garden_worker_busy`, `garden_sit_1`, `garden_sit_2`. The worker offers a free bench, returns to the next patch, defers while collecting, or rests after clearing both patches. `garden_worker_met` remembers the introduction; current bench availability, busy and completed-work flags are derived from the place routine. Neither sitting nor Talk changes the day's goals.
++
++### Research reading room
++
++The completed room adds optional reading, two usable seats and an ordinary resident. Reading and saving a reference do not teach words or advance time. `shiryou` is optional typing practice. Each volume keeps its page and bookmark, while only one physical volume can occupy a chosen seat. The weather illustrations support comparison with the existing outdoor instruments; the copier pages do not provide a repair solution. Mori's exact remembered offer can be understood before or after this word, with a later opportunity to hear it at his desk.
++
++| File | Nodes |
++|---|---|
++| `day2/research_lab.js` | `arrive`, `leave`, `end`, `books`, `read`, `put_back`, `reader`, `reader_menu`, `reader_busy`, `reader_weather`, `reader_word`, `word_practice`, `reader_copy`, `table_seat`, `window_seat`, `side_seat`, `end_seat`, `archive`, `weather_table`, `weather_window`, `copier_table`, `copier_window` |
++| `day2/works.js` | `weather`, `weather_plan`, `weather_box`, `weather_rain`, `weather_wind`, `weather_end`, `arrive`, `chained`, `shut`, `to_research`, `to_harbour`, `to_street` |
+diff --git a/docs/game/words.md b/docs/game/words.md
+index e9c76b766..d2fdaf547 100644
+--- a/docs/game/words.md
++++ b/docs/game/words.md
+@@ -13,6 +13,7 @@ Checked against game3d/js/lang.js. Kind: a `phrase` is a greeting Eric can say t
+ | `ohayo` | おはようございます | ohayō gozaimasu | good morning | phrase |
+ | `yoroshiku` | よろしくおねがいします | yoroshiku onegaishimasu | nice to meet you | phrase |
+ | `sumimasen` | すみません | sumimasen | excuse me, sorry | phrase |
++| `shiryou` | 資料 | shiryou | reference material | phrase |
+ | `mada` | まだ | mada | still; not yet | phrase |
+ | `yasumi` | 休み | yasumi | a break; a day off | phrase |
+ | `kanpai` | 乾杯 | kanpai | cheers | phrase |
+@@ -96,3 +97,7 @@ Known `gamen` returns during the court display inspection (`d4_display`) and at
+ The ticket app ([controls-and-ui.md](controls-and-ui.md)) labels its columns, fields, statuses and buttons in Japanese (Jørgen, 2026-10-03: "Some japanese here, and learnable"): 件名, 依頼者 and 状態 over the list and down the ticket's form, 報酬 by the pay, the statuses 未対応, 対応中 and 完了, and the buttons 担当する, 戻る and 閉じる. They are kept in game3d/js/tickets/words.js, which lang.js adds to its words. Each label shows its reading over it in small type and its short English after it (件名 Subject), every time. Tapping or clicking a label teaches its word, and using a button teaches the button's; a line at the foot of the page says "New word in your Words: 件名 kenmei, subject (of a ticket or an email)", the Words chip pops and the word joins the Words panel's Words list. Until one is known, that line says "Tap a Japanese label to learn it." (desktop: "Click"). A known label loses its dotted underline. None of them is needed to use the app or to move the story, none can be said, and none has a voice clip yet.
+ 
+ The optional [sender investigation](stories/investigations/sender.md) teaches `mada` only through Mio’s offered typing practice. Hearing Mori or inspecting records never learns it. Learning before or after his exact remembered remark opens the same tentative interpretation, including after the physical solve.
++
++### Optional reading-room word
++
++The reading-room resident models `shiryou`; only chosen typing practice learns it. Reading a volume, saving its reference in Papers, hearing Mori, or seeing the diagrams does not teach it. Its connection to Mori requires the actual heard line “古い資料ですが、よかったら使ってください。” Knowledge and that remembered evidence may arrive in either order. Mori can repeat his ordinary offer at his desk for a player who missed it.
+diff --git a/game3d/css/finds.css b/game3d/css/finds.css
+index 1f66a4b7d..5a3189ec9 100644
+--- a/game3d/css/finds.css
++++ b/game3d/css/finds.css
+@@ -50,3 +50,10 @@ body.phone #boardView .cork { padding: 14px; border-width: 6px; max-height: calc
+ body.phone #boardView .posts { grid-template-columns: 1fr 1fr; gap: 14px 10px; }
+ body.phone #boardView .post { font-size: 13px; padding: 14px 10px 10px; }
+ body.phone #findView .cap .t { font-size: 16px; }
++
++/* Direct controls on an open reference; collected Papers keep the ordinary close view. */
++#findView .reference-controls {display:flex;flex-wrap:wrap;gap:8px;justify-content:center;width:100%;}
++#findView .reference-controls button {min-height:44px;padding:8px 12px;border:1px solid var(--panel-edge);border-radius:8px;background:#252a33;color:var(--ink);font:inherit;cursor:pointer;}
++#findView .shot:has(.reference-controls) {gap:8px;}
++
++#findView .reference-saved {display:flex;align-items:center;min-height:44px;padding:8px 12px;color:var(--accent);}
+diff --git a/game3d/css/style.css b/game3d/css/style.css
+index 8cf4c93f3..0725d9ae0 100644
+--- a/game3d/css/style.css
++++ b/game3d/css/style.css
+@@ -1076,10 +1076,10 @@ body.kb #stage .por { visibility: hidden; }
+ #top > #goal { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 0; min-height: 0; max-width: min(460px, calc(100vw - 420px)); border-radius: 12px; border: 1px solid rgba(111, 208, 198, .45); background: rgba(19, 38, 40, .92); cursor: default; overflow: hidden; }
+ #top > #goal[hidden] { display: none; }
+ #top > #goal:hover { border-color: rgba(111, 208, 198, .45); }
+-#goal .gl { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 40px; padding: 0 14px 0 11px; border: 0; background: transparent; color: #e6faf7; font: 700 15px/1.25 var(--font); text-align: left; cursor: pointer; }
++#goal .gl { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 40px; padding: 8px 14px 8px 11px; border: 0; background: transparent; color: #e6faf7; font: 700 15px/1.25 var(--font); text-align: left; cursor: pointer; }
+ #goal .gl:hover .t { color: #fff; }
+ #goal .gl .ic svg { width: 18px; height: 18px; }
+-#goal .gl .t { padding: 8px 0; }
++#goal .gl .t { padding: 0; }
+ #goal.nogoal .gl { display: none; }
+ #top > #goal #goal2 { position: static; z-index: auto; margin: -4px 0 0; padding: 0 14px 8px 39px; border: 0; border-radius: 0; background: none; color: var(--ink-dim); font: 500 13px/1.35 var(--font); }
+ #top > #goal #goal2[hidden] { display: none; }
+diff --git a/game3d/js/conversations/index.js b/game3d/js/conversations/index.js
+index 12176e211..77be3554e 100644
+--- a/game3d/js/conversations/index.js
++++ b/game3d/js/conversations/index.js
+@@ -40,5 +40,10 @@ export function withConversations(story) {
+ }
+ export function installConversations(game) {
+   installSenderHook(game, flags);
+-  game.topicFor = (who) => topicFor(who, conversationMemory, known, game.sim?.met.has(who));
++  game.topicFor = (who) => {
++    const topic = topicFor(who, conversationMemory, known, game.sim?.met.has(who));
++    return topic && who === 'mori' && game.place?.researchOffice?.ready().available
++      ? { label: 'Chat with Mr. Mori', trigger: 'ask:mori-papers-menu' }
++      : topic;
++  };
+ }
+diff --git a/game3d/js/finds/index.js b/game3d/js/finds/index.js
+index 0ba728dcd..4fee7ffd9 100644
+--- a/game3d/js/finds/index.js
++++ b/game3d/js/finds/index.js
+@@ -65,7 +65,7 @@ export function installFinds(game) {
+   refreshFinds();
+ }
+ 
+-export async function take(game, id) {
++export async function take(game, id, { show = true } = {}) {
+   const f = FINDS[id];
+   if (!f || found(id)) return;
+   flags['found_' + id] = true;
+@@ -74,7 +74,7 @@ export async function take(game, id) {
+   sfx('ok');
+   save(game);
+   refreshFinds(id);
+-  await showFind(id, { fresh: true });
++  if (show) await showFind(id, { fresh: true });
+ }
+ 
+ // a club's find is only there for its members
+diff --git a/game3d/js/finds/prints.js b/game3d/js/finds/prints.js
+index a4bf5afb7..c5bbc5016 100644
+--- a/game3d/js/finds/prints.js
++++ b/game3d/js/finds/prints.js
+@@ -4,6 +4,7 @@
+ //   photoImg(print, thumb)          an <img> of the picture, 4:3
+ //   printTexture(print, onReady)    a small canvas: the picture in a white border, for the print lying in the world;
+ //                                   onReady() runs once the picture is drawn into it
++import { pageUrl } from '../reading-room/pages.js';
+ import { JP_FONT } from '../props.js';
+ 
+ const TAU = Math.PI * 2;
+@@ -18,7 +19,11 @@ export function photoImg(print, thumb = false) {
+   const img = new Image(4, 3); // the 4:3 box holds its place in the layout while it loads
+   img.decoding = 'async';
+   img.alt = '';
+-  img.src = photoUrl(print, thumb);
++  if (print.startsWith('research:')) {
++    img.width = 900;
++    img.height = 940;
++    img.src = pageUrl(print.slice(9));
++  } else img.src = photoUrl(print, thumb);
+   return img;
+ }
+ 
+diff --git a/game3d/js/finds/spots.js b/game3d/js/finds/spots.js
+index 2d565bd4c..bd61d5f3f 100644
+--- a/game3d/js/finds/spots.js
++++ b/game3d/js/finds/spots.js
+@@ -8,6 +8,41 @@
+ //   club: a club's id (story/clubs.js): the find is there only once Eric has joined that club
+ 
+ const LIST = [
++  {
++    'id': 'research_weather_plan',
++    'kind': 'paper',
++    'place': 'research_lab',
++    'print': 'research:weather-plan',
++    'title': 'Weather station plan',
++  },
++  {
++    'id': 'research_weather_shapes',
++    'kind': 'paper',
++    'place': 'research_lab',
++    'print': 'research:weather-shapes',
++    'title': 'Weather instruments',
++  },
++  {
++    'id': 'research_copier_exterior',
++    'kind': 'paper',
++    'place': 'research_lab',
++    'print': 'research:copier-exterior',
++    'title': 'Copier exterior',
++  },
++  {
++    'id': 'research_copier_paper',
++    'kind': 'paper',
++    'place': 'research_lab',
++    'print': 'research:copier-paper',
++    'title': 'Copier paper positions',
++  },
++  {
++    'id': 'research_mori_copy',
++    'kind': 'paper',
++    'place': 'office',
++    'print': 'research:mori-copy',
++    'title': 'Mori’s old copier record',
++  },
+   { id: 'photo_gate', kind: 'photo', place: 'gate', print: 'monorail', title: 'Monorail', at: [4.3, 4.1], turn: 0.3 },
+   {
+     id: 'photo_forecourt',
+diff --git a/game3d/js/lang.js b/game3d/js/lang.js
+index d3c432e6c..24601f956 100644
+--- a/game3d/js/lang.js
++++ b/game3d/js/lang.js
+@@ -7,6 +7,14 @@ import { MC } from './mc.js';
+ // The four commands are the ones Mio can say to make things happen.
+ 
+ export const WORDS = {
++  shiryou: {
++    ja: '資料',
++    alias: ['しりょう'],
++    ro: 'shiryou',
++    en: 'reference material',
++    phrase: true,
++    voice: 'eric-shiryou',
++  },
+   mada: { ja: 'まだ', ro: 'mada', en: 'still; not yet', phrase: true, voice: 'eric-mada' },
+   matte: {
+     ja: '待って',
+diff --git a/game3d/js/narrative/engine-flags.js b/game3d/js/narrative/engine-flags.js
+index f71d0e68a..a3ace6c81 100644
+--- a/game3d/js/narrative/engine-flags.js
++++ b/game3d/js/narrative/engine-flags.js
+@@ -213,3 +213,18 @@ export function isEngineFlag(name) {
+     )
+   );
+ }
++
++ENGINE_WRITES['game3d/js/reading-room/state.js'] = { exact: ['research_state'], prefix: [] };
++ENGINE_WRITES['game3d/js/reading-room/hook.js'] = {
++  exact: [
++    'research_action_ok',
++    'research_has_book',
++    'research_office_ok',
++    'research_mori_available',
++    'research_mori_understood',
++    'research_notes_recognized',
++    'research_mori_return_ready',
++  ],
++  prefix: [],
++};
++ENGINE_WRITES['game3d/js/places/research-room/activity.js'] = { exact: ['research_weather_seen'], prefix: [] };
+diff --git a/game3d/js/narrative/events.js b/game3d/js/narrative/events.js
+index 9cad97bd4..bdc708aa8 100644
+--- a/game3d/js/narrative/events.js
++++ b/game3d/js/narrative/events.js
+@@ -16,6 +16,7 @@ export const PLACE_EVENTS = {
+   },
+   forecourt: { start: { id: 'start', source: 'engine' } },
+   plaza: { start: { id: 'start', source: 'engine' } },
++  research_lab: { start: { id: 'start', source: 'engine' } },
+   ferry_terminal: { start: { id: 'start', source: 'engine' } },
+   print_shop: { start: { id: 'start', source: 'engine' } },
+   campus: { start: { id: 'start', source: 'engine' } },
+diff --git a/game3d/js/narrative/hooks.js b/game3d/js/narrative/hooks.js
+index 75705463c..734c41cbb 100644
+--- a/game3d/js/narrative/hooks.js
++++ b/game3d/js/narrative/hooks.js
+@@ -50,4 +50,6 @@ export const GLOBAL_HOOKS = [
+   'artVisit',
+   'flavorFind',
+   'sender',
++  'research',
++  'researchOffice',
+ ];
+diff --git a/game3d/js/places/catalog-south.js b/game3d/js/places/catalog-south.js
+index ab4469ac4..845555a11 100644
+--- a/game3d/js/places/catalog-south.js
++++ b/game3d/js/places/catalog-south.js
+@@ -9,6 +9,7 @@ import { EAST_COAST_DETAILS, DORM_COMMONS_DETAILS } from './catalog-east-coast.j
+ import { SPORTS_DETAILS, POOL_DETAILS, GYM_DETAILS } from './catalog-sports.js';
+ import { OFFICE_QUARTER_DETAILS } from './catalog-office-quarter.js';
+ import { HARBOUR_DETAILS } from './catalog-harbour.js';
++import { RESEARCH_DETAILS } from './research-room/catalog.js';
+ import { WORKS_DETAILS } from './catalog-works.js';
+ 
+ export const SOUTH_HALF_DETAILS = {
+@@ -27,4 +28,5 @@ export const SOUTH_HALF_DETAILS = {
+   office_quarter: OFFICE_QUARTER_DETAILS,
+   harbour: HARBOUR_DETAILS,
+   works: WORKS_DETAILS,
++  research_lab: RESEARCH_DETAILS,
+ };
+diff --git a/game3d/js/places/catalog-works.js b/game3d/js/places/catalog-works.js
+index 381d87cdf..0c6c4be40 100644
+--- a/game3d/js/places/catalog-works.js
++++ b/game3d/js/places/catalog-works.js
+@@ -1,5 +1,5 @@
+ // The old works' things and registration IDs (places/works.js), kept beside the catalog (catalog.js). The spots past
+-// lane_entry are the nooks (docs/game/places.md, "Nooks"): nothing in them yet.
++// lane_entry are the nooks (docs/game/places.md, "Nooks"); the existing weather station has reference comparisons.
+ export const WORKS_DETAILS = {
+   things: {
+     harbour_lane: { label: 'To the harbour', kind: 'thing', verb: 'Go' },
+@@ -8,6 +8,7 @@ export const WORKS_DETAILS = {
+     old_factory: { label: 'Old factory', kind: 'thing', verb: 'Go in' },
+     server_hall: { label: 'Server hall', kind: 'thing', verb: 'Go in' },
+     recycling_centre: { label: 'Recycling centre', kind: 'thing', verb: 'Go in' },
++    weather_station: { label: 'Weather station', kind: 'thing', verb: 'Look' },
+     research_lab: { label: 'Amakawa Research', kind: 'thing', verb: 'Go in' },
+   },
+   spots: ['lane_entry', 'chimney_foot', 'smoking_corner', 'gatehouse_window', 'transformer_lot', 'weather_station'],
+@@ -15,5 +16,5 @@ export const WORKS_DETAILS = {
+   seats: [],
+   zones: ['lane_exit', 'street_exit'],
+   people: [],
+-  hooks: [],
++  hooks: ['researchWeather'],
+ };
+diff --git a/game3d/js/places/definitions.js b/game3d/js/places/definitions.js
+index 4210b1556..08a2cc11f 100644
+--- a/game3d/js/places/definitions.js
++++ b/game3d/js/places/definitions.js
+@@ -32,6 +32,7 @@ export const PLACE_FILES = {
+   harbour: 'game3d/js/places/harbour.js',
+   ferry_terminal: 'game3d/js/places/ferry-terminal.js',
+   works: 'game3d/js/places/works.js',
++  research_lab: 'game3d/js/places/research-room.js',
+ };
+ // Place names for the save list and the end-of-day photos.
+ export const PLACE_NAMES = {
+@@ -61,6 +62,7 @@ export const PLACE_NAMES = {
+   harbour: 'Harbour',
+   ferry_terminal: 'Ferry waiting room',
+   works: 'Old works',
++  research_lab: 'Research reading room',
+ };
+ export const NEXT = {
+   train: 'gate',
+@@ -103,7 +105,8 @@ export const TRIPS = {
+   office_quarter: ['sports', 'harbour', 'campus'],
+   harbour: ['office_quarter', 'works', 'campus', 'ferry_terminal'],
+   ferry_terminal: ['harbour'],
+-  works: ['harbour'],
++  works: ['harbour', 'research_lab'],
++  research_lab: ['works'],
+ };
+ // Day 2 has its own ways (game3d/story/day2/index.js TRIPS, both periods), and no NEXT line; so has day 3's test
+ // skeleton (story/day3/index.js).
+@@ -141,5 +144,6 @@ export const STORY_FILES = [
+   'harbour',
+   'ferry_terminal',
+   'works',
++  'research_lab',
+   'transitions',
+ ];
+diff --git a/game3d/js/places/factories.js b/game3d/js/places/factories.js
+index a70113556..67519e1c1 100644
+--- a/game3d/js/places/factories.js
++++ b/game3d/js/places/factories.js
+@@ -24,6 +24,7 @@ import { gymPlace as gym } from './gym.js';
+ import { officeQuarterPlace as office_quarter } from './office-quarter.js';
+ import { ferryTerminalPlace as ferry_terminal } from './ferry-terminal.js';
+ import { harbourPlace as harbour } from './harbour.js';
++import { researchRoomPlace as research_lab } from './research-room.js';
+ import { worksPlace as works } from './works.js';
+ 
+ export const PLACES = {
+@@ -53,4 +54,5 @@ export const PLACES = {
+   harbour,
+   ferry_terminal,
+   works,
++  research_lab,
+ };
+diff --git a/game3d/js/places/lifecycle.js b/game3d/js/places/lifecycle.js
+index a8409e77b..dd2bfb70f 100644
+--- a/game3d/js/places/lifecycle.js
++++ b/game3d/js/places/lifecycle.js
+@@ -1,3 +1,4 @@
++import { installResearch } from '../reading-room/hook.js';
+ import { assertPlaceRegistered } from '../narrative/registration.js';
+ import { eventTrigger } from '../narrative/events.js';
+ import { PLACE_DETAILS, SHARED_THINGS } from './catalog.js';
+@@ -60,6 +61,7 @@ export function createPlaceLifecycle(
+   { PLACES, setComposer, resize, size, buildMarkers, nearSet, zoneSet, snapshot, crossfade },
+ ) {
+   const ui = game.ui;
++  installResearch(game);
+   installFinds(game); // the photos and papers Eric picks up (finds/index.js)
+   installTickets(game); // the repair tickets and their app on Eric's computers (tickets/index.js)
+   installConversations(game);
+@@ -115,6 +117,8 @@ export function createPlaceLifecycle(
+   }
+   async function enter(name, { persist = true, resuming = false } = {}) {
+     const { place } = await prepare(name);
++    const previousGoal = ui.goalText || '';
++    const previousPlace = game.place?.name;
+     // the story for today (days.js): a place built on the title's day 1 still plays a later day's set
+     const story = withConversations(withClubs(await game.runner.load(name))); // with the club sessions (clubs/index.js)
+     if (game.place && game.place.leave) game.place.leave();
+@@ -184,7 +188,7 @@ export function createPlaceLifecycle(
+     playMusic(sim.period === 'evening' ? 'night' : music || MUSIC[name] || 'calm');
+     syncFinds(place); // prints already picked up stay gone, also after a load
+     buildMarkers(place);
+-    ui.goal('');
++    ui.goal(place.preserveGoal || place.preserveGoalFrom?.includes(previousPlace) ? previousGoal : '');
+     if (persist) save(game);
+     nearSet.clear();
+     zoneSet.clear();
+diff --git a/game3d/js/places/office.js b/game3d/js/places/office.js
+index aab6861c0..2c6f008ea 100644
+--- a/game3d/js/places/office.js
++++ b/game3d/js/places/office.js
+@@ -21,8 +21,7 @@ import { chairPusher } from './office-chair.js';
+ import { isPlayer } from '../mc.js';
+ import { officeArrival } from './office-arrival.js';
+ import { MACHINE_LEAF } from './office-machine-door.js';
+-import { attachSender } from '../investigations/sender/index.js';
+-import { attachMioLunch } from './mio-lunch/index.js';
++import { attachOfficeActivities } from './office-activities.js';
+ import { LUNCH_TOP, LUNCH_SEATS as lunchSeats } from './mio-lunch/plan.js';
+ import { lunchBento } from './mio-lunch/props.js';
+ export async function officePlace(game) {
+@@ -1108,8 +1107,7 @@ export async function officePlace(game) {
+   }
+   P.lunch = { food: lunchFood, state: lunchState }; // QA (tools/lunch-shots.mjs)
+   day2.install(P);
+-  attachSender(game, P, w);
+-  attachMioLunch(game, P);
++  attachOfficeActivities(game, P, w);
+   return P;
+ }
+ export const MIO_SEAT_Y = 0.0,
+diff --git a/game3d/js/places/ongoing/index.js b/game3d/js/places/ongoing/index.js
+index 3f9996c6b..fbea927d5 100644
+--- a/game3d/js/places/ongoing/index.js
++++ b/game3d/js/places/ongoing/index.js
+@@ -65,7 +65,9 @@ export function installOngoing(game) {
+     if (state !== 'firstPage') throw new Error(`Unknown art visit ${state}`);
+     completeFirstPage(flags, sim.day);
+   };
+-  game.hooks.ongoingGoal = () => {
++  game.hooks.ongoingGoal = ({ keepExisting = false } = {}) => {
++    // Works opts in after lifecycle preserves an objective only on return from Research.
++    if (keepExisting && game.ui.goalText) return;
+     const meetings = clubs
+       .joined()
+       .map((id) => ({ id, next: clubs.nextMeeting(id, sim.day, sim.period) }))
+diff --git a/game3d/js/places/works.js b/game3d/js/places/works.js
+index 9cd96a5ab..d96b48d99 100644
+--- a/game3d/js/places/works.js
++++ b/game3d/js/places/works.js
+@@ -1,3 +1,7 @@
++import { researchEntranceView } from './research-room/entrance-view.js';
++import { worksReferences } from './research-room/weather.js';
++import { loadReading } from '../reading-room/model.js';
++import { flags } from '../narrative/state.js';
+ import * as THREE from 'three';
+ import { worksSteps } from '../scenes/works.js';
+ import { sliced } from '../perf/slice.js';
+@@ -15,7 +19,7 @@ import { turningCam, followFit } from './turning-cam.js';
+ // chimney's foot, along the works yard past the factory's gates and the server hall, down the works street to the
+ // office street past the recycling centre, and along the research walk to Amakawa Research; it also loads with
+ // ?place=works. The factory's gates and the plant's door are chained; the server hall, the recycling centre and
+-// Amakawa Research are shut for now (their doors say so). Both ways out lead to the harbour chunk: down the lane
++// Amakawa Research reading room is open; the other buildings remain shut. Both ways out lead to the harbour chunk: down the lane
+ // into the supply yard, down the street onto the office street.
+ //
+ // The camera looks up the lane from the south-east, so the plant's door faces it; over the yard from a little east
+@@ -37,7 +41,8 @@ export async function worksPlace(game) {
+       s = smooth(x + AX, TURN_STREET[0], TURN_STREET[1]),
+       a = smooth(z + AZ, TURN_APRON[0], TURN_APRON[1]);
+     const blend = (k) => lerp(lerp(lerp(yard[k], apron[k], a), lane[k], l), street[k], s);
+-    return { yaw: blend('yaw'), elev: blend('elev') };
++    const entry = 1 - smooth(Math.hypot(x + AX + 36.2, z + AZ + 103.45), 1.3, 3.8);
++    return { yaw: lerp(blend('yaw'), -1.45, entry), elev: lerp(blend('elev'), 0.22, entry) };
+   });
+   const { lane: down, street: south } = w.exits;
+   // the shut doors (plan.js DOORS): where each is, and where Eric stands to try it
+@@ -82,6 +87,12 @@ export async function worksPlace(game) {
+       spot: () => dk('recycling_centre').step,
+       face: () => dk('recycling_centre').local,
+     },
++    weather_station: {
++      ...PLACE_DETAILS.works.things.weather_station,
++      anchor: (v) => v.set(w.nooks.weather_station[0], 1, w.nooks.weather_station[1]),
++      spot: () => w.nooks.weather_station,
++      face: () => [42, -4.8],
++    },
+     research_lab: {
+       ...PLACE_DETAILS.works.things.research_lab,
+       anchor: (v) => pin(v, 'research_lab'),
+@@ -100,6 +111,7 @@ export async function worksPlace(game) {
+     start: w.in,
+     startFacing: NORTH,
+     music: 'calm',
++    preserveGoalFrom: ['research_lab'],
+     grade: MORNING_GRADE,
+     things,
+     // where he comes in, and the nooks (plan.js NOOKS)
+@@ -117,7 +129,7 @@ export async function worksPlace(game) {
+       lane_exit: (x, z) => inRect(x, z, down.zone),
+       street_exit: (x, z) => inRect(x, z, south.zone),
+     },
+-    hooks: {},
++    hooks: { researchWeather: (a) => P.references.act(a) },
+     fit(aspect) {
+       followFit(cam, w.nav, aspect, yard); // fitted at the yard's look, kept through the turns
+     },
+@@ -129,11 +141,13 @@ export async function worksPlace(game) {
+       const p = game.player.root.position;
+       w.follow(p.x, p.z);
+       turn.steer(p, dt);
++      entrance.update();
+       // heading for a way out: build the harbour now, so the walk there needs no loading pause
+       const near = ([x0, x1, z0, z1], d = 6) => p.x > x0 - d && p.x < x1 + d && p.z > z0 - d && p.z < z1 + d;
+       if ((near(down.zone) || near(south.zone)) && !game.prepared.harbour) game.prepare?.('harbour');
+     },
+     onPeriod(period) {
++      w.readingBooks.sync(loadReading(flags.research_state));
+       if (period !== 'evening' || P.grade === EVENING_GRADE) return;
+       eveningLight(w.scene);
+       w.evening();
+@@ -153,11 +167,18 @@ export async function worksPlace(game) {
+       cam.snap(game.player.root.position);
+     },
+     // in from the harbour up the lane or up the street, the way he left it, walking north; out by the way nearest
++    tripInFrom: { research_lab: () => entrance.arrive() },
+     tripIn: (g) => {
+       const e = viaOf(g, 'lane') === 'street' ? south : down;
+       return walkIn(g, cam, e.arrive, e.in, NORTH);
+     },
+-    tripOutTo: { harbour: (g) => walkOutNearest(g, cam, { lane: down, street: south }) },
++    tripOutTo: {
++      research_lab: () => entrance.leave(),
++      harbour: (g) => walkOutNearest(g, cam, { lane: down, street: south }),
++    },
+   };
++  const entrance = researchEntranceView(game, P, dk('research_lab'));
++  P.leave = () => entrance.release();
++  P.references = worksReferences(game, P);
+   return P;
+ }
+diff --git a/game3d/js/scenes/island-chunks.js b/game3d/js/scenes/island-chunks.js
+index 4e46393bb..d20c137da 100644
+--- a/game3d/js/scenes/island-chunks.js
++++ b/game3d/js/scenes/island-chunks.js
+@@ -7,6 +7,15 @@
+ // walk = its walkable rectangle and view = the part drawn on the map, both local [x0, x1, z0, z1];
+ // anchor = what pins it to the reference.
+ export const CHUNKS = {
++  research_lab: {
++    at: [-31, -103.45],
++    turn: 0,
++    scale: 1,
++    level: 0,
++    walk: [-3.91, 3.96, -3.31, 3.31],
++    view: [-4.2, 4, -3.35, 3.35],
++    anchor: 'the existing Research west door and built ground-floor reading room',
++  },
+   ferry_terminal: {
+     at: [-112, -100],
+     turn: 0,
+diff --git a/game3d/js/scenes/office-quarter/row.js b/game3d/js/scenes/office-quarter/row.js
+index e0485bd4d..248dc907e 100644
+--- a/game3d/js/scenes/office-quarter/row.js
++++ b/game3d/js/scenes/office-quarter/row.js
+@@ -26,7 +26,7 @@ const WALL = { w1: 0, m1: 2, m2: 3, m3: 0, m4: 1, m5: 2, b_h: 1 }; // the layout
+ 
+ // the name standing on the canopy's front edge, a dark back behind it; the card on the right leaf's glass; the
+ // canopy's two downlights and their pool (the works' server hall has them too, works/buildings.js)
+-export function fittings(p, signs, lights, k, door) {
++export function fittings(p, signs, lights, k, door, { open = false } = {}) {
+   const { f, t, canopy: c } = door,
+     ry = Math.atan2(f.n[0], f.n[1]),
+     [kana, en, colour] = k.sign;
+@@ -38,7 +38,7 @@ export function fittings(p, signs, lights, k, door) {
+   signs.board(kana, en, colour, bw, 0.56, at(t, c.out - 0.14, 2.3 + 0.3), ry);
+   const [bx, , bz] = at(t, c.out - 0.17, 0);
+   p.box('#2c3b42', f.d[0] ? bw + 0.04 : 0.04, 0.6, f.d[0] ? 0.04 : bw + 0.04, bx, 2.3, bz);
+-  signs.card('準備中', 'CLOSED', 0.46, 0.3, at(t + 0.3, 0.012, 1.2), ry, { door: k.place });
++  if (!open) signs.card('準備中', 'CLOSED', 0.46, 0.3, at(t + 0.3, 0.012, 1.2), ry, { door: k.place });
+   for (const s of [-1, 1]) {
+     const [x, , z] = at(t + s * (c.c1 - c.c0) * 0.3, c.out * 0.5, 0);
+     lights.glowParts.push(new THREE.BoxGeometry(0.26, 0.03, 0.26).translate(x, 2.18, z));
+@@ -87,23 +87,25 @@ function walks(pv, p, ids) {
+ // one block with its door, the name on its canopy and the card on its glass: k as plan.js BLOCKS ({ id, rect, row,
+ // face, door, w, seed, sign }, and wall, a colour, where the layout's own isn't wanted); the harbour builds its
+ // terminal and its office with it too (scenes/harbour/fronts.js)
+-export function* frontSteps(sets, signs, lights, k, { gf } = {}) {
++export function* frontSteps(sets, signs, lights, k, { gf, interior = null, open = false } = {}) {
+   const { doors } = yield* officeBlockSteps(sets, k.rect, {
+     storeys: k.row.storeys,
+     fh: k.row.floorH,
+     gf,
++    interior,
+     wall: k.wall ?? TOWN.walls[WALL[k.id]],
+     doors: [
+       {
+         face: k.face,
+         at: k.door[k.face === 's' || k.face === 'n' ? 0 : 1],
+         w: k.w,
++        open,
+         canopy: { out: 1.3, side: 0.7 },
+       },
+     ],
+     seed: k.seed,
+   });
+-  fittings(sets.p, signs, lights, k, doors[0]);
++  fittings(sets.p, signs, lights, k, doors[0], { open });
+ }
+ 
+ // sets: outdoor/block.js blockSets() (the caller builds them: buildBlockSets); pv, p: a paver and a Parts collector
+diff --git a/game3d/js/scenes/outdoor/block-style.js b/game3d/js/scenes/outdoor/block-style.js
+index 1f8809feb..4589963c6 100644
+--- a/game3d/js/scenes/outdoor/block-style.js
++++ b/game3d/js/scenes/outdoor/block-style.js
+@@ -144,22 +144,32 @@ export function roofPlant(p, [x0, x1, z0, z1], top, wall, sx) {
+ // a front door: a glazed pair in a pale frame with an automatic door's white band at chest height and pull bars,
+ // lit after work like the glass front; its landing and ramp (platform), its deep canopy (canopy). Returns the
+ // canopy's span and front, or null
+-export function frontDoor({ p, glass, lit }, f, { t, w, canopy, platform }) {
++export function frontDoor({ p, glass, lit }, f, { t, w, canopy, platform, open = false }) {
+   const h = 2.0;
+-  onFace(p, STEEL.pale, f, t - w / 2 - 0.06, t + w / 2 + 0.06, 0.08, h + 0.06, -0.1, -0.04);
+-  for (const [a, b] of [
+-    [t - w / 2, t - 0.02],
+-    [t + 0.02, t + w / 2],
+-  ]) {
+-    onFace(glass, DOOR_GLASS, f, a, b, 0.08, h, -0.04, -0.01);
+-    onFace(lit, BLOCK.lit, f, a, b, 0.08, h, -0.008, -0.004, { cast: false });
++  if (open) {
++    for (const [a, b] of [
++      [t - w / 2 - 0.06, t - w / 2],
++      [t + w / 2, t + w / 2 + 0.06],
++    ])
++      onFace(p, STEEL.pale, f, a, b, 0, h + 0.06, -0.1, -0.04);
++    onFace(p, STEEL.pale, f, t - w / 2, t + w / 2, h, h + 0.06, -0.1, -0.04);
++  } else {
++    onFace(p, STEEL.pale, f, t - w / 2 - 0.06, t + w / 2 + 0.06, 0.08, h + 0.06, -0.1, -0.04);
++    for (const [a, b] of [
++      [t - w / 2, t - 0.02],
++      [t + 0.02, t + w / 2],
++    ]) {
++      onFace(glass, DOOR_GLASS, f, a, b, 0.08, h, -0.04, -0.01);
++      onFace(lit, BLOCK.lit, f, a, b, 0.08, h, -0.008, -0.004, { cast: false });
++    }
++    onFace(p, STEEL.pale, f, t - 0.03, t + 0.03, 0.08, h, -0.04, 0.0); // the meeting stiles
++    onFace(p, SILL, f, t - w / 2, t + w / 2, 1.2, 1.27, -0.01, 0.0, { cast: false });
++    for (const c of [t - 0.12, t + 0.12])
++      onFace(p, STEEL.pale, f, c - 0.015, c + 0.015, 0.8, 1.5, 0, 0.04, { cast: false });
+   }
+-  onFace(p, STEEL.pale, f, t - 0.03, t + 0.03, 0.08, h, -0.04, 0.0); // the meeting stiles
+-  onFace(p, SILL, f, t - w / 2, t + w / 2, 1.2, 1.27, -0.01, 0.0, { cast: false });
+-  for (const c of [t - 0.12, t + 0.12])
+-    onFace(p, STEEL.pale, f, c - 0.015, c + 0.015, 0.8, 1.5, 0, 0.04, { cast: false });
+   if (platform) entrance(p, f, platform, { t, w });
+-  else onFace(p, BLOCK.plinth, f, t - w / 2 - 0.3, t + w / 2 + 0.3, 0, 0.08, 0, 0.6, { surf: 'concrete' });
++  else
++    onFace(p, BLOCK.plinth, f, t - w / 2 - 0.3, t + w / 2 + 0.3, 0, open ? 0.01 : 0.08, 0, 0.6, { surf: 'concrete' });
+   return canopy ? deepCanopy(p, f, t, w, canopy) : null;
+ }
+ 
+diff --git a/game3d/js/scenes/outdoor/block.js b/game3d/js/scenes/outdoor/block.js
+index 2ab71529f..606ebe900 100644
+--- a/game3d/js/scenes/outdoor/block.js
++++ b/game3d/js/scenes/outdoor/block.js
+@@ -13,6 +13,7 @@
+ // The palette and face maths are in outdoor/block-face.js, the style options' parts in outdoor/block-style.js.
+ // rect [x0, x1, z0, z1] on the grid. Faces: n (z0), s (z1), w (x0), e (x1); a door's `at` is its middle along
+ // the face (x on n and s, z on w and e), and doorAt(rect, face, at) gives the middle of the bay nearest it.
++import { remainingCore } from '../research-room/opening.js';
+ import * as THREE from 'three';
+ import { Parts, hash2 } from './parts.js';
+ import { STEEL } from './furniture.js';
+@@ -72,6 +73,7 @@ export function* officeBlockSteps(
+     glazed = '',
+     stair = null,
+     roof = 'plain',
++    interior = null,
+   } = {},
+ ) {
+   const { p, glass, lit } = sets;
+@@ -83,7 +85,10 @@ export function* officeBlockSteps(
+   const top = gf + (storeys - 1) * fh;
+   const out = { top, doors: [] };
+   // the body: the ground floor's dark wall set back behind the piers, the upper floors flush with the face
+-  p.box(BLOCK.core, w - 0.3, gf, d - 0.3, cx, 0, cz, { surf: 'concrete' });
++  if (interior) {
++    for (const [a, b, c, d] of remainingCore([x0 + 0.15, x1 - 0.15, z0 + 0.15, z1 - 0.15], interior))
++      p.box(BLOCK.core, b - a, gf, d - c, (a + b) / 2, 0, (c + d) / 2, { surf: 'concrete' });
++  } else p.box(BLOCK.core, w - 0.3, gf, d - 0.3, cx, 0, cz, { surf: 'concrete' });
+   // (a one-storey block gets a lid 1 cm thick instead, over the ground floor's top rather than level with it)
+   p.box(wall, w, Math.max(top - gf, 0.01), d, cx, gf, cz, { surf: 'cladding' });
+   facadeDrainage(p, rect, top);
+@@ -120,7 +125,17 @@ export function* officeBlockSteps(
+         // after work the ground floor is lit
+         onFace(lit, BLOCK.lit, f, t0, t1, 0.3, gf - 0.32, -0.075, -0.065, { cast: false });
+         if (front) glassFront(sets, f, t0, t1);
+-      } else onFace(p, BLOCK.core, f, t0, t1, 0.3, gf - 0.32, -0.15, -0.1);
++      } else {
++        const opening = myDoors.find((o) => o.open && t1 > o.t - o.w / 2 && t0 < o.t + o.w / 2);
++        if (!opening) onFace(p, BLOCK.core, f, t0, t1, 0.3, gf - 0.32, -0.15, -0.1);
++        else {
++          for (const [a, b] of [
++            [t0, Math.min(t1, opening.t - opening.w / 2)],
++            [Math.max(t0, opening.t + opening.w / 2), t1],
++          ])
++            if (b > a) onFace(p, BLOCK.core, f, a, b, 0.3, gf - 0.32, -0.15, -0.1);
++        }
++      }
+     }
+     onFace(p, BLOCK.fascia, f, -0.04, f.L + 0.04, gf - 0.32, gf, -0.15, 0.06);
+     // upper floors: a floor band, then the ribbon (a window band, mullions on the bay lines) or punched windows
+@@ -176,10 +191,10 @@ export function* officeBlockSteps(
+ // over it on the fascia line, a granite step in front, a pale name plate on the pier beside it
+ // porch: a canopy on two slim posts at its outer corners (a front or staff door); else a short hood (a service door)
+ // canopy, platform: a front door (outdoor/block-style.js), which returns its canopy's span and front, for its name
+-function door(sets, f, { t, w, porch, canopy, platform }) {
++function door(sets, f, { t, w, porch, canopy, platform, open = false }) {
+   const { p, glass } = sets;
+   const h = 2.0;
+-  if (canopy || platform) return frontDoor(sets, f, { t, w, canopy, platform });
++  if (canopy || platform || open) return frontDoor(sets, f, { t, w, canopy, platform, open });
+   onFace(p, STEEL.dark, f, t - w / 2 - 0.06, t + w / 2 + 0.06, 0.08, h + 0.06, -0.1, -0.04);
+   onFace(glass, BLOCK.glassLow, f, t - w / 2, t - 0.02, 0.08, h, -0.04, -0.01);
+   onFace(glass, BLOCK.glassLow, f, t + 0.02, t + w / 2, 0.08, h, -0.04, -0.01);
+diff --git a/game3d/js/scenes/works.js b/game3d/js/scenes/works.js
+index 1c7e856cc..5aed9c189 100644
+--- a/game3d/js/scenes/works.js
++++ b/game3d/js/scenes/works.js
+@@ -13,6 +13,8 @@
+ // on the hall apron, from the south-west up the street and the research walk (places/works.js eases it).
+ // Evening: the lamps, the server hall's door and two of its windows, the two fronts' ground floors and canopies and
+ // the town's windows light up; the factory, the plant and the gatehouse stay dark.
++import { buildResearchRoom } from './research-room/room.js';
++import { ORIGIN as RESEARCH_ORIGIN } from './research-room/plan.js';
+ import * as THREE from 'three';
+ import { Nav } from '../movement/navigation.js';
+ import { outdoorLight, sunFollow, TOWN } from './town.js';
+@@ -65,7 +67,17 @@ export function* worksSteps() {
+   const p = new Parts(),
+     sets = blockSets();
+   yield* buildingsSteps(p, sets, signs, plain, lights);
+-  for (const k of P.FRONTS) yield* frontSteps(sets, signs, lights, k);
++  for (const k of P.FRONTS)
++    yield* frontSteps(
++      sets,
++      signs,
++      lights,
++      k,
++      k.id === 'n4' ? { open: true, interior: [-35.2, -27, -106.8, -100.1] } : {},
++    );
++  const reading = buildResearchRoom({ preview: true });
++  reading.root.position.set(RESEARCH_ORIGIN[0], 0, RESEARCH_ORIGIN[1]);
++  isl.add(reading.root);
+   yield* frontSteps(sets, signs, lights, harbourFront('works_orange'));
+   warehouse(p, lights.glowParts, lights, signs);
+   // the ground and the small things, in cells so what the camera can't see is culled (a group of its own, added
+@@ -115,6 +127,7 @@ export function* worksSteps() {
+     scene,
+     sun,
+     nav,
++    readingBooks: reading.books,
+     follow: shadows.follow,
+     in: P.IN,
+     arriveEdge: P.ARRIVE_EDGE,
+diff --git a/game3d/js/scenes/works/props.js b/game3d/js/scenes/works/props.js
+index 7e6b8637a..5560b8221 100644
+--- a/game3d/js/scenes/works/props.js
++++ b/game3d/js/scenes/works/props.js
+@@ -193,7 +193,7 @@ export function corner(p, mesh, plain) {
+   for (let k = 0; k < 5; k++) grass(p, x0 + 0.3 + k * 0.9, z1 - 0.15, { seed: 320 + k });
+ }
+ 
+-function station(p, mesh) {
++export function station(p, mesh) {
+   const [x0, x1, z0, z1] = P.STATION;
+   const low = { h: 1.0 };
+   fence(p, mesh, [x0, z1], [x1, z1], { ...low, gaps: [[P.STATION_GATE[0] - x0, P.STATION_GATE[1] - x0]] });
+diff --git a/game3d/js/travel/pins.js b/game3d/js/travel/pins.js
+index 75fcb18da..aa06ba4c4 100644
+--- a/game3d/js/travel/pins.js
++++ b/game3d/js/travel/pins.js
+@@ -7,6 +7,7 @@ export const PINS = {
+   train: { at: [-28.6, -3.9] },
+   gate: { at: [-14.45, 6.5] },
+   print_shop: { in: 'campus' },
++  research_lab: { in: 'works' },
+   ferry_terminal: { in: 'harbour' },
+   campus: { at: [-19.25, -33] },
+   forecourt: { at: [-6, -1] },
+diff --git a/game3d/story/campus-routes.js b/game3d/story/campus-routes.js
+index e8c693af8..6444a7adc 100644
+--- a/game3d/story/campus-routes.js
++++ b/game3d/story/campus-routes.js
+@@ -1,3 +1,5 @@
++import research_lab from './research_lab.js';
++import works from './works.js';
+ import ferry_terminal from './ferry_terminal.js';
+ import print_shop from './print_shop.js';
+ import campus from './campus.js';
+@@ -5,7 +7,7 @@ import office_quarter from './office_quarter.js';
+ import harbour from './harbour.js';
+ // Opening-day stories keep their own dialogue; these completed pedestrian links are available on every day.
+ export function campusRoutes(stories) {
+- const out={office_quarter:campusDistrict('office_quarter',!!stories.sports),harbour:campusDistrict('harbour'),...stories,campus,print_shop,ferry_terminal};
++ const out={office_quarter:campusDistrict('office_quarter',!!stories.sports),harbour:campusDistrict('harbour'),...stories,campus,print_shop,ferry_terminal,research_lab,works:{...works,goal:{},nodes:{...works.nodes,arrive:[]}}};
+  for(const [place,targets] of Object.entries({forecourt:['campus'],office_quarter:['campus_shed','campus_quarter'],harbour:['campus']})) {
+   const old=out[place],on={...old.on};
+   for(const target of targets){on['talk:'+target]='to_campus';on['zone:'+target+'_exit']='to_campus';}
+@@ -14,9 +16,9 @@ export function campusRoutes(stories) {
+  return out;
+ }
+ 
+-// Keep each opening day's previous outer boundary: the completed loop does not unlock old works or a day-two club.
++// The reading room opens the works paths; each day's sports boundary remains intact.
+ export function campusDistrict(id,sports=false) {
+  const source=id==='harbour'?harbour:office_quarter;
+- const blocked=new Set(Object.entries(source.nodes).filter(([,steps])=>steps.some(s=>s.do==='trip'&&(s.to==='works'||s.to==='sports'&&!sports))).map(([node])=>node));
++ const blocked=new Set(Object.entries(source.nodes).filter(([,steps])=>steps.some(s=>s.do==='trip'&&(s.to==='sports'&&!sports))).map(([node])=>node));
+  return {...source,start:'arrive',goal:{},on:Object.fromEntries(Object.entries(source.on).filter(([,node])=>!blocked.has(node))),nodes:{...Object.fromEntries(Object.entries(source.nodes).filter(([node])=>!blocked.has(node))),arrive:[]}};
+ }
+diff --git a/game3d/story/conversations/index.js b/game3d/story/conversations/index.js
+index 7a4e2954f..1d025bf13 100644
+--- a/game3d/story/conversations/index.js
++++ b/game3d/story/conversations/index.js
+@@ -1,3 +1,4 @@
++import RESEARCH from '../investigations/research.js';
+ import SENDER from '../investigations/sender.js';
+ import MIO from './mio.js';
+ import EMI from './emi.js';
+@@ -8,4 +9,4 @@ import REI from './rei.js';
+ import HAMADA from './hamada.js';
+ import MORI from './mori.js';
+ import KENJI from './kenji.js';
+-export default { on: { ...SENDER.on, ...MORI.on, ...KENJI.on, ...HAMADA.on, ...MIO.on, ...EMI.on, ...GUARD.on, ...KURO.on, ...AOI.on, ...REI.on }, nodes: { ...SENDER.nodes, ...MORI.nodes, ...KENJI.nodes, ...HAMADA.nodes, ...MIO.nodes, ...EMI.nodes, ...GUARD.nodes, ...KURO.nodes, ...AOI.nodes, ...REI.nodes } };
++export default { on: { ...RESEARCH.on, ...SENDER.on, ...MORI.on, ...KENJI.on, ...HAMADA.on, ...MIO.on, ...EMI.on, ...GUARD.on, ...KURO.on, ...AOI.on, ...REI.on }, nodes: { ...RESEARCH.nodes, ...SENDER.nodes, ...MORI.nodes, ...KENJI.nodes, ...HAMADA.nodes, ...MIO.nodes, ...EMI.nodes, ...GUARD.nodes, ...KURO.nodes, ...AOI.nodes, ...REI.nodes } };
+diff --git a/game3d/story/conversations/remarks.js b/game3d/story/conversations/remarks.js
+index 6f3c073fa..d9e9b18a1 100644
+--- a/game3d/story/conversations/remarks.js
++++ b/game3d/story/conversations/remarks.js
+@@ -1,5 +1,7 @@
+ // Exact authored remarks, never inferred from a place visit or a completed day.
+ export const REMARKS = [
++  {id:'mori_old_reference',who:'mori',name:'Mr. Mori',words:['shiryou'],lines:['古い資料ですが、よかったら使ってください。']},
++  {id:'mio_old_copier_explanation',who:'mio',name:'Mio',words:[],lines:['They kept pulling the paper out and using it again. He left the request open because nobody had actually fixed it.']},
+   { id: 'mio_sender_complaint', who: 'mio', name: 'Mio', words: [], lines: ['The thing that sends everyone’s timesheets. It keeps restarting before I can get the log off it.'] },
+   { id: 'mori_sender_retained', who: 'mori', name: 'Mr. Mori', words: ['mada'], lines: ['そちらには、{mada}残っていますよ。'] },
+   { id: 'canteen_vegetable_recommendation', who: 'canteen_cardigan', name: 'Diner in a cardigan', words: ['oishii'], lines: ['これ、{oishii}ですよ。'] },
+diff --git a/game3d/story/day2/index.js b/game3d/story/day2/index.js
+index 572feeeea..c940a687c 100644
+--- a/game3d/story/day2/index.js
++++ b/game3d/story/day2/index.js
+@@ -18,7 +18,7 @@ export const OPEN_PLACES = Object.keys(STORIES);
+ // Same small area throughout day 2. Period changes never take away the route back to room 203.
+ export const PERIODS = ['morning', 'evening'];
+ export const TRIPS = {
+- campus:['forecourt','office_quarter','harbour','print_shop'],print_shop:['campus'],office_quarter:['campus','harbour'],harbour:['campus','office_quarter','ferry_terminal'],ferry_terminal:['harbour'],
++ campus:['forecourt','office_quarter','harbour','print_shop'],print_shop:['campus'],office_quarter:['campus','harbour'],harbour:['campus','office_quarter','ferry_terminal','works'],ferry_terminal:['harbour'],works:['harbour','research_lab'],research_lab:['works'],
+   dorms: ['dorm_court'], dorm_court: ['dorms', 'east_lane'],
+   east_lane: ['plaza', 'shotengai', 'dorm_court', 'east_coast'], east_coast: ['east_lane'],
+   canteen: ['plaza'], plaza: ['forecourt', 'east_lane', 'shotengai', 'canteen'], forecourt: ['gate', 'office', 'plaza', 'shotengai', 'campus'],
+diff --git a/game3d/story/finds.js b/game3d/story/finds.js
+index 8526c7b58..32de84248 100644
+--- a/game3d/story/finds.js
++++ b/game3d/story/finds.js
+@@ -8,6 +8,12 @@ export default {
+     photo_dorm: { title: 'Summer night' },
+   },
+   papers: {
++"research_weather_plan":{"title": "Weather station plan", "lines": []},
++"research_weather_shapes":{"title": "Weather instruments", "lines": []},
++"research_copier_exterior":{"title": "Copier exterior", "lines": []},
++"research_copier_paper":{"title": "Copier paper positions", "lines": []},
++"research_mori_copy":{"title": "Mori’s old copier record", "lines": [{"en": "Before the repair: paper removed; copier used again. Repair still outstanding."}, {"en": "Request opened 1 April 1996."}]},
++
+     bakery_flyer: {
+       title: 'Bakery welcome flyer',
+       lines: [
+diff --git a/game3d/story/ongoing/index.js b/game3d/story/ongoing/index.js
+index ea2b01df3..d6a5f6a3a 100644
+--- a/game3d/story/ongoing/index.js
++++ b/game3d/story/ongoing/index.js
+@@ -1,3 +1,4 @@
++import research_lab from './research_lab.js';
+ import ferry_terminal from './ferry_terminal.js';
+ import bakery from './bakery.js';
+ import konbini from './konbini.js';
+@@ -24,5 +25,5 @@ import dorm_commons from './dorm_commons.js';
+ import office_quarter from './office_quarter.js';
+ import harbour from './harbour.js';
+ import works from './works.js';
+-export const STORIES = { ferry_terminal, konbini, bakery, campus, print_shop, train, gate, forecourt, office, plaza, canteen, dorm_court, dorms, east_lane, east_coast, sports, pool, gym, shotengai, izakaya, karaoke, karaoke_booth, dorm_commons, office_quarter, harbour, works };
++export const STORIES = { research_lab, ferry_terminal, konbini, bakery, campus, print_shop, train, gate, forecourt, office, plaza, canteen, dorm_court, dorms, east_lane, east_coast, sports, pool, gym, shotengai, izakaya, karaoke, karaoke_booth, dorm_commons, office_quarter, harbour, works };
+ export { TRIPS } from './routes.js';
+diff --git a/game3d/story/ongoing/routes.js b/game3d/story/ongoing/routes.js
+index d35e4e86b..39470a8b5 100644
+--- a/game3d/story/ongoing/routes.js
++++ b/game3d/story/ongoing/routes.js
+@@ -222,7 +222,9 @@ export const ROUTES = {
+   "print_shop": {
+     "campus": ["talk:print_exit"]
+   },
++  "research_lab": {"works":["talk:research_exit"]},
+   "works": {
++    "research_lab": ["talk:research_lab"],
+     "harbour": [
+       "talk:harbour_lane",
+       "zone:lane_exit",
+diff --git a/game3d/story/ongoing/shared.js b/game3d/story/ongoing/shared.js
+index 58f12061c..258ca4b78 100644
+--- a/game3d/story/ongoing/shared.js
++++ b/game3d/story/ongoing/shared.js
+@@ -25,7 +25,9 @@ export function interactions(source, keys) {
+   }
+   return { on, nodes, speakers: structuredClone(source.speakers || {}) };
+ }
+-export function place(name, { on = {}, nodes = {}, arrive = [], show = {}, labels = {}, speakers: voices = {} } = {}) {
++// Optional destinations may omit the generic arrival goal or supply a bounded goal step.
++// Setup and authored arrival actions still run in their original order.
++export function place(name, { on = {}, nodes = {}, arrive = [], arrivalGoal = true, show = {}, labels = {}, speakers: voices = {} } = {}) {
+   const routes = {}, ways = {};
+   for (const [to, keys] of Object.entries(ROUTES[name] || {})) {
+     const id = `ongoing_to_${to}`;
+@@ -35,7 +37,7 @@ export function place(name, { on = {}, nodes = {}, arrive = [], show = {}, label
+   return {
+     speakers: { ...speakers, ...voices }, start: 'ongoing_arrive', on: { ...ways, ...on }, show, labels,
+     nodes: {
+-      ongoing_arrive: [{ do: 'ongoingSetup' }, ...arrive, { do: 'ongoingGoal' }],
++      ongoing_arrive: [{ do: 'ongoingSetup' }, ...arrive, ...(arrivalGoal ? [arrivalGoal === true ? { do: 'ongoingGoal' } : arrivalGoal] : [])],
+       ...routes, ...continuingGoals(nodes),
+     },
+   };
+diff --git a/game3d/story/ongoing/works.js b/game3d/story/ongoing/works.js
+index 8b3436f1f..91eace5ea 100644
+--- a/game3d/story/ongoing/works.js
++++ b/game3d/story/ongoing/works.js
+@@ -1,3 +1,3 @@
+ import source from '../works.js';
+ import { interactions, place } from './shared.js';
+-export default place('works', interactions(source, ['talk:old_power_plant', 'talk:old_factory', 'talk:server_hall', 'talk:recycling_centre', 'talk:research_lab']));
++export default place('works', {...interactions(source, ['talk:weather_station', 'talk:old_power_plant', 'talk:old_factory', 'talk:server_hall', 'talk:recycling_centre', 'talk:research_lab']), arrivalGoal: {do:'ongoingGoal', keepExisting:true}});
+diff --git a/game3d/story/works.js b/game3d/story/works.js
+index 5f1168a2b..356643c93 100644
+--- a/game3d/story/works.js
++++ b/game3d/story/works.js
+@@ -1,6 +1,6 @@
+ // The old works, walked from the supply yard up the works lane and along the yard, down the works street and along
+ // the research walk (docs/game/places.md). The factory's gates and the power plant's door are chained; the server
+-// hall, the recycling centre and Amakawa Research are shut for now and say so. Down the lane goes back into the
++// hall and recycling centre remain shut. Research opens its built reading room. Down the lane goes back into the
+ // supply yard, down the street onto the office street.
+ export default {
+   start: 'arrive',
+@@ -13,10 +13,23 @@ export default {
+     'talk:old_factory': 'chained',
+     'talk:server_hall': 'shut',
+     'talk:recycling_centre': 'shut',
+-    'talk:research_lab': 'shut',
++    'talk:weather_station':'weather',
++    'talk:research_lab': 'to_research',
+   },
+   goal: { office_street: 'true' },
+   nodes: {
++    weather:[{choice:[
++      {text:'Compare the retained diagram.',go:'weather_plan',if:'found_research_weather_plan || found_research_weather_shapes'},
++      {text:'Look at the white box.',go:'weather_box'},
++      {text:'Look at the small cylinder.',go:'weather_rain'},
++      {text:'Look at the mast.',go:'weather_wind'},
++      {text:'Step away.',go:'weather_end'},
++    ]}],
++    weather_plan:[{do:'researchWeather',state:'plan'},{go:'weather'}],
++    weather_box:[{do:'researchWeather',state:'box'},{go:'weather'}],
++    weather_rain:[{do:'researchWeather',state:'rain'},{go:'weather'}],
++    weather_wind:[{do:'researchWeather',state:'wind'},{go:'weather'}],
++    weather_end:[{do:'researchWeather',state:'release'}],
+     arrive: [
+       {
+         if: 'going_home',
+@@ -36,6 +49,7 @@ export default {
+     ],
+     chained: ['> It is chained shut.'],
+     shut: ['> The door is shut. A card on the glass says 準備中: not open yet.'],
++    to_research: [{do:'trip',to:'research_lab'}],
+     to_harbour: [{ do: 'trip', to: 'harbour' }],
+     to_street: [{ do: 'trip', to: 'harbour' }],
+   },
+diff --git a/game3d/test/fixtures/asset-props-added.json b/game3d/test/fixtures/asset-props-added.json
+index 815c2cfe3..33bcaa446 100644
+--- a/game3d/test/fixtures/asset-props-added.json
++++ b/game3d/test/fixtures/asset-props-added.json
+@@ -3057,6 +3057,174 @@
+       "thing"
+     ]
+   },
++  {
++    "id_": "prop/research_lab/research_archive",
++    "kind": "prop",
++    "name": "Reference index",
++    "paths": [
++      "game3d/js/places/research-room.js"
++    ],
++    "status": "provisional",
++    "status_from": "A named thing in the game (built in code)",
++    "source": "research-room.js things.research_archive",
++    "place": "research_lab",
++    "used": [
++      "Research reading room: tap target 'Reference index'"
++    ],
++    "view": {
++      "type": "room",
++      "room": "research-room",
++      "target": "research_archive"
++    },
++    "tags": [
++      "in game",
++      "thing"
++    ]
++  },
++  {
++    "id_": "prop/research_lab/research_books",
++    "kind": "prop",
++    "name": "Reference books",
++    "paths": [
++      "game3d/js/places/research-room.js"
++    ],
++    "status": "provisional",
++    "status_from": "A named thing in the game (built in code)",
++    "source": "research-room.js things.research_books",
++    "place": "research_lab",
++    "used": [
++      "Research reading room: tap target 'Reference books'"
++    ],
++    "view": {
++      "type": "room",
++      "room": "research-room",
++      "target": "research_books"
++    },
++    "tags": [
++      "in game",
++      "thing"
++    ]
++  },
++  {
++    "id_": "prop/research_lab/research_end_seat",
++    "kind": "prop",
++    "name": "Table-end chair",
++    "paths": [
++      "game3d/js/places/research-room.js"
++    ],
++    "status": "provisional",
++    "status_from": "A named thing in the game (built in code)",
++    "source": "research-room.js things.research_end_seat",
++    "place": "research_lab",
++    "used": [
++      "Research reading room: tap target 'Table-end chair'"
++    ],
++    "view": {
++      "type": "room",
++      "room": "research-room",
++      "target": "research_end_seat"
++    },
++    "tags": [
++      "in game",
++      "thing"
++    ]
++  },
++  {
++    "id_": "prop/research_lab/research_exit",
++    "kind": "prop",
++    "name": "Old works",
++    "paths": [
++      "game3d/js/places/research-room.js"
++    ],
++    "status": "provisional",
++    "status_from": "A named thing in the game (built in code)",
++    "source": "research-room.js things.research_exit",
++    "place": "research_lab",
++    "used": [
++      "Research reading room: tap target 'Old works'"
++    ],
++    "view": {
++      "type": "room",
++      "room": "research-room",
++      "target": "research_exit"
++    },
++    "tags": [
++      "in game",
++      "thing"
++    ]
++  },
++  {
++    "id_": "prop/research_lab/research_side_seat",
++    "kind": "prop",
++    "name": "Reading chair",
++    "paths": [
++      "game3d/js/places/research-room.js"
++    ],
++    "status": "provisional",
++    "status_from": "A named thing in the game (built in code)",
++    "source": "research-room.js things.research_side_seat",
++    "place": "research_lab",
++    "used": [
++      "Research reading room: tap target 'Reading chair'"
++    ],
++    "view": {
++      "type": "room",
++      "room": "research-room",
++      "target": "research_side_seat"
++    },
++    "tags": [
++      "in game",
++      "thing"
++    ]
++  },
++  {
++    "id_": "prop/research_lab/research_table_seat",
++    "kind": "prop",
++    "name": "Reading chair",
++    "paths": [
++      "game3d/js/places/research-room.js"
++    ],
++    "status": "provisional",
++    "status_from": "A named thing in the game (built in code)",
++    "source": "research-room.js things.research_table_seat",
++    "place": "research_lab",
++    "used": [
++      "Research reading room: tap target 'Reading chair'"
++    ],
++    "view": {
++      "type": "room",
++      "room": "research-room",
++      "target": "research_table_seat"
++    },
++    "tags": [
++      "in game",
++      "thing"
++    ]
++  },
++  {
++    "id_": "prop/research_lab/research_window_seat",
++    "kind": "prop",
++    "name": "Window chair",
++    "paths": [
++      "game3d/js/places/research-room.js"
++    ],
++    "status": "provisional",
++    "status_from": "A named thing in the game (built in code)",
++    "source": "research-room.js things.research_window_seat",
++    "place": "research_lab",
++    "used": [
++      "Research reading room: tap target 'Window chair'"
++    ],
++    "view": {
++      "type": "room",
++      "room": "research-room",
++      "target": "research_window_seat"
++    },
++    "tags": [
++      "in game",
++      "thing"
++    ]
++  },
+   {
+     "id_": "prop/shotengai/bakery",
+     "kind": "prop",
+@@ -3746,5 +3914,29 @@
+       "in game",
+       "thing"
+     ]
++  },
++  {
++    "id_": "prop/works/weather_station",
++    "kind": "prop",
++    "name": "Weather station",
++    "paths": [
++      "game3d/js/places/works.js"
++    ],
++    "status": "provisional",
++    "status_from": "A named thing in the game (built in code)",
++    "source": "works.js things.weather_station",
++    "place": "works",
++    "used": [
++      "Old works: tap target 'Weather station'"
++    ],
++    "view": {
++      "type": "room",
++      "room": "works",
++      "target": "weather_station"
++    },
++    "tags": [
++      "in game",
++      "thing"
++    ]
+   }
+ ]
+diff --git a/game3d/test/fixtures/declarations-before.json b/game3d/test/fixtures/declarations-before.json
+index 5aaee73ef..673155780 100644
+--- a/game3d/test/fixtures/declarations-before.json
++++ b/game3d/test/fixtures/declarations-before.json
+@@ -1759,6 +1759,11 @@
+           "kind": "thing",
+           "verb": "Go in"
+         },
++        "weather_station": {
++          "label": "Weather station",
++          "kind": "thing",
++          "verb": "Look"
++        },
+         "research_lab": {
+           "label": "Amakawa Research",
+           "kind": "thing",
+@@ -1786,7 +1791,9 @@
+         "street_exit"
+       ],
+       "people": [],
+-      "hooks": []
++      "hooks": [
++        "researchWeather"
++      ]
+     },
+     "dorms": {
+       "things": {
+@@ -2402,6 +2409,71 @@
+       "hooks": [
+         "ferryActivity"
+       ]
++    },
++    "research_lab": {
++      "things": {
++        "research_exit": {
++          "label": "Old works",
++          "kind": "thing",
++          "verb": "Go out"
++        },
++        "research_reader": {
++          "label": "Reader",
++          "kind": "person",
++          "verb": "Talk"
++        },
++        "research_side_seat": {
++          "label": "Reading chair",
++          "kind": "thing",
++          "verb": "Sit",
++          "pin": "near"
++        },
++        "research_end_seat": {
++          "label": "Table-end chair",
++          "kind": "thing",
++          "verb": "Sit",
++          "pin": "near"
++        },
++        "research_archive": {
++          "label": "Reference index",
++          "kind": "thing",
++          "verb": "Browse"
++        },
++        "research_books": {
++          "label": "Reference books",
++          "kind": "thing",
++          "verb": "Read"
++        },
++        "research_table_seat": {
++          "label": "Reading chair",
++          "kind": "thing",
++          "verb": "Sit",
++          "pin": "near"
++        },
++        "research_window_seat": {
++          "label": "Window chair",
++          "kind": "thing",
++          "verb": "Sit",
++          "pin": "near"
++        }
++      },
++      "spots": [
++        "research_in",
++        "research_reader",
++        "research_shelf",
++        "research_archive"
++      ],
++      "seats": [
++        "research_table_seat",
++        "research_window_seat",
++        "research_side_seat",
++        "research_end_seat"
++      ],
++      "people": [
++        "research_reader"
++      ],
++      "zones": [],
++      "hooks": []
+     }
+   }
+ }
+diff --git a/game3d/test/fixtures/structural-baseline.json b/game3d/test/fixtures/structural-baseline.json
+index e2a2e87ee..db8dffdd9 100644
+--- a/game3d/test/fixtures/structural-baseline.json
++++ b/game3d/test/fixtures/structural-baseline.json
+@@ -366,7 +366,8 @@
+     "office_quarter",
+     "harbour",
+     "ferry_terminal",
+-    "works"
++    "works",
++    "research_lab"
+   ],
+   "nodes": [
+     "train:intro",
+@@ -765,11 +766,39 @@
+     "ferry_terminal:end",
+     "ferry_terminal:landing_seat",
+     "ferry_terminal:notice_seat",
++    "works:weather",
++    "works:weather_plan",
++    "works:weather_box",
++    "works:weather_rain",
++    "works:weather_wind",
++    "works:weather_end",
+     "works:arrive",
+     "works:chained",
+     "works:shut",
++    "works:to_research",
+     "works:to_harbour",
+     "works:to_street",
++    "research_lab:arrive",
++    "research_lab:leave",
++    "research_lab:end",
++    "research_lab:books",
++    "research_lab:read",
++    "research_lab:put_back",
++    "research_lab:reader",
++    "research_lab:reader_menu",
++    "research_lab:reader_busy",
++    "research_lab:reader_weather",
++    "research_lab:reader_word",
++    "research_lab:word_practice",
++    "research_lab:reader_copy",
++    "research_lab:side_seat",
++    "research_lab:end_seat",
++    "research_lab:table_seat",
++    "research_lab:window_seat",
++    "research_lab:weather_table",
++    "research_lab:weather_window",
++    "research_lab:copier_table",
++    "research_lab:copier_window",
+     "transitions:train_to_gate",
+     "transitions:gate_to_forecourt",
+     "transitions:forecourt_to_office",
+@@ -2999,6 +3028,301 @@
+       "labels": [],
+       "cond": ""
+     },
++    {
++      "from": "works:weather",
++      "to": "works:weather_plan",
++      "kind": "choice",
++      "labels": [
++        "Compare the retained diagram."
++      ],
++      "cond": "(found_research_weather_plan || found_research_weather_shapes)"
++    },
++    {
++      "from": "works:weather",
++      "to": "works:weather_box",
++      "kind": "choice",
++      "labels": [
++        "Look at the white box."
++      ],
++      "cond": ""
++    },
++    {
++      "from": "works:weather",
++      "to": "works:weather_rain",
++      "kind": "choice",
++      "labels": [
++        "Look at the small cylinder."
++      ],
++      "cond": ""
++    },
++    {
++      "from": "works:weather",
++      "to": "works:weather_wind",
++      "kind": "choice",
++      "labels": [
++        "Look at the mast."
++      ],
++      "cond": ""
++    },
++    {
++      "from": "works:weather",
++      "to": "works:weather_end",
++      "kind": "choice",
++      "labels": [
++        "Step away."
++      ],
++      "cond": ""
++    },
++    {
++      "from": "works:weather_plan",
++      "to": "works:weather",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "works:weather_box",
++      "to": "works:weather",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "works:weather_rain",
++      "to": "works:weather",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "works:weather_wind",
++      "to": "works:weather",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:books",
++      "to": "research_lab:weather_table",
++      "kind": "choice",
++      "labels": [
++        "Weather instruments · reading table"
++      ],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:books",
++      "to": "research_lab:weather_window",
++      "kind": "choice",
++      "labels": [
++        "Weather instruments · window chair"
++      ],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:books",
++      "to": "research_lab:copier_table",
++      "kind": "choice",
++      "labels": [
++        "Copier · reading table"
++      ],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:books",
++      "to": "research_lab:copier_window",
++      "kind": "choice",
++      "labels": [
++        "Copier · window chair"
++      ],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:books",
++      "to": "research_lab:read",
++      "kind": "choice",
++      "labels": [
++        "Read the open book."
++      ],
++      "cond": "(research_has_book)"
++    },
++    {
++      "from": "research_lab:books",
++      "to": "research_lab:put_back",
++      "kind": "choice",
++      "labels": [
++        "Put the book back."
++      ],
++      "cond": "(research_has_book)"
++    },
++    {
++      "from": "research_lab:books",
++      "to": "research_lab:end",
++      "kind": "choice",
++      "labels": [
++        "Leave the books."
++      ],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:read",
++      "to": "research_lab:end",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:put_back",
++      "to": "research_lab:end",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:reader",
++      "to": "research_lab:reader_menu",
++      "kind": "go",
++      "labels": [],
++      "cond": "(research_reader_met)"
++    },
++    {
++      "from": "research_lab:reader_menu",
++      "to": "research_lab:reader_weather",
++      "kind": "choice",
++      "labels": [
++        "Point to the white box in the weather book."
++      ],
++      "cond": "(research_weather_seen)"
++    },
++    {
++      "from": "research_lab:reader_menu",
++      "to": "research_lab:reader_word",
++      "kind": "choice",
++      "labels": [
++        "Ask about the cover word."
++      ],
++      "cond": "(!know_shiryou)"
++    },
++    {
++      "from": "research_lab:reader_menu",
++      "to": "research_lab:reader_copy",
++      "kind": "choice",
++      "labels": [
++        "Show Mori’s copy."
++      ],
++      "cond": "(found_research_mori_copy)"
++    },
++    {
++      "from": "research_lab:reader_menu",
++      "to": "research_lab:reader_busy",
++      "kind": "choice",
++      "labels": [
++        "Leave the reader to their notes."
++      ],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:reader_busy",
++      "to": "research_lab:end",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:reader_weather",
++      "to": "research_lab:end",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:reader_word",
++      "to": "research_lab:word_practice",
++      "kind": "choice",
++      "labels": [
++        "Try saying it."
++      ],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:reader_word",
++      "to": "research_lab:end",
++      "kind": "choice",
++      "labels": [
++        "Keep reading."
++      ],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:word_practice",
++      "to": "research_lab:end",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:reader_copy",
++      "to": "research_lab:end",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:side_seat",
++      "to": "research_lab:end",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:end_seat",
++      "to": "research_lab:end",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:table_seat",
++      "to": "research_lab:end",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:window_seat",
++      "to": "research_lab:end",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:weather_table",
++      "to": "research_lab:end",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:weather_window",
++      "to": "research_lab:end",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:copier_table",
++      "to": "research_lab:end",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
++    {
++      "from": "research_lab:copier_window",
++      "to": "research_lab:end",
++      "kind": "go",
++      "labels": [],
++      "cond": ""
++    },
+     {
+       "from": "forecourt:to_campus",
+       "to": "campus:arrive",
+@@ -3299,6 +3623,12 @@
+       "kind": "trip",
+       "labels": []
+     },
++    {
++      "from": "works:to_research",
++      "to": "research_lab:arrive",
++      "kind": "trip",
++      "labels": []
++    },
+     {
+       "from": "works:to_harbour",
+       "to": "harbour:arrive",
+@@ -3311,6 +3641,12 @@
+       "kind": "trip",
+       "labels": []
+     },
++    {
++      "from": "research_lab:leave",
++      "to": "works:arrive",
++      "kind": "trip",
++      "labels": []
++    },
+     {
+       "from": "train:seat",
+       "to": "train:mio_catches",
+@@ -3864,6 +4200,9 @@
+     "konbini_visited",
+     "ferry_staff_met",
+     "ferry_reader_met",
++    "research_reader_met",
++    "know_shiryou",
++    "typed_shiryou",
+     "canteen_dining_complete",
+     "place",
+     "canteen_meal_phase",
+@@ -3913,6 +4252,12 @@
+     "ferry_has_coffee",
+     "ferry_has_tea",
+     "ferry_has_melon",
+-    "ferry_has_cornsoup"
++    "ferry_has_cornsoup",
++    "found_research_weather_plan",
++    "found_research_weather_shapes",
++    "research_has_book",
++    "research_action_ok",
++    "research_weather_seen",
++    "found_research_mori_copy"
+   ]
+ }
+diff --git a/game3d/test/unit/asset-source.test.mjs b/game3d/test/unit/asset-source.test.mjs
+index c4038b3c8..cfb21e65a 100644
+--- a/game3d/test/unit/asset-source.test.mjs
++++ b/game3d/test/unit/asset-source.test.mjs
+@@ -53,6 +53,7 @@ test('asset source data includes the actual words, cast, music, sounds and style
+     gym: {},
+     office_quarter: {},
+     harbour: {},
++    research_lab: { eric: 7, research_reader: 6 },
+     ferry_terminal: { eric: 16, ferry_reader: 4, ferry_staff: 4, ferry_traveller: 4 },
+     works: {},
+     transitions: { sales1: 2, sales2: 1 },
+diff --git a/game3d/test/unit/structural-baseline.test.mjs b/game3d/test/unit/structural-baseline.test.mjs
+index 781faaa99..c7e7186b7 100644
+--- a/game3d/test/unit/structural-baseline.test.mjs
++++ b/game3d/test/unit/structural-baseline.test.mjs
+@@ -67,6 +67,11 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
+   for (const flag of ['sender_state', 'sender_offered', 'sender_partial', 'sender_compared', 'sender_delivered']) expected.engine.exact[flag] = ['game3d/js/investigations/sender/state.js'];
+   for (const flag of ['sender_action_ok', 'sender_available', 'sender_complaint_heard', 'sender_remark_heard', 'sender_failed', 'sender_wants_mori']) expected.engine.exact[flag] = ['game3d/js/investigations/sender/index.js'];
+   for (const flag of ['sender_action_ok', 'sender_available']) expected.engine.exact[flag].unshift('game3d/js/investigations/sender/hook.js');
++  expected.engine.events.research_lab = {};
++  expected.engine.placeFile.research_lab = 'game3d/js/places/research-room.js';
++  expected.engine.exact.research_state = ['game3d/js/reading-room/state.js'];
++  expected.engine.exact.research_weather_seen = ['game3d/js/places/research-room/activity.js'];
++  for (const flag of ['research_action_ok', 'research_has_book', 'research_office_ok', 'research_mori_available', 'research_mori_understood', 'research_notes_recognized', 'research_mori_return_ready']) expected.engine.exact[flag] = ['game3d/js/reading-room/hook.js'];
+   assert.deepEqual(plain, expected);
+ });
+ test('missing and unexpected runtime registrations fail before play', () => {
+diff --git a/game3d/tools/day2-story-check.mjs b/game3d/tools/day2-story-check.mjs
+index 3ddb0448c..7b4ec0299 100644
+--- a/game3d/tools/day2-story-check.mjs
++++ b/game3d/tools/day2-story-check.mjs
+@@ -93,7 +93,8 @@ for (const [place, story] of Object.entries(STORIES)) {
+   assert(facts.includes(`day2/${place}.js`), `${place}: missing facts entry`);
+   for (const node of Object.keys(story.nodes)) assert(facts.includes('`' + node + '`'), `${place}/${node}: missing facts node`);
+ }
+-assert.deepEqual([...new Set(typed.map(x => x.word))].sort(), Object.keys(NEW_WORDS).sort(), 'Each new word needs a teaching node');
++assert.deepEqual([...new Set(typed.map(x => x.word))].sort(), [...Object.keys(NEW_WORDS), 'shiryou'].sort(), 'Each new word needs a teaching node');
++assert.deepEqual(typed.filter(t => t.word === 'shiryou'), [{ place: 'research_lab', node: 'word_practice', word: 'shiryou', from: 'research_reader' }], 'The shared optional reference word has one exact teaching source');
+ for (const t of typed) assert(facts.includes(`| \`${t.word}\` | \`${t.from}\` | \`${t.node}\` |`), 'Missing taught-word fact');
+ 
+ // Exercise actual story data with the engine's condition evaluator. Hooks are recorded, not faked as built scenes.
+diff --git a/tools/assets/render.html b/tools/assets/render.html
+index 7b0cea010..b81f470e4 100644
+--- a/tools/assets/render.html
++++ b/tools/assets/render.html
+@@ -20,7 +20,7 @@ window.renderThumb = async (view) => {
+   if (view.type === 'room') {
+     rooms[view.room] = rooms[view.room] || buildAsset({ type: 'room', room: view.room });
+     b = await rooms[view.room];
+-    b.focus = view.anchor ? { anchor: view.anchor, spot: view.spot, small: view.small } : null;
++    b.focus = view.target ? b.target(view.target) : view.anchor ? { anchor: view.anchor, spot: view.spot, small: view.small } : null;
+   } else {
+     b = await buildAsset(view);
+   }
+diff --git a/tools/assets/runtime_data.py b/tools/assets/runtime_data.py
+index 965594d81..7551415e0 100644
+--- a/tools/assets/runtime_data.py
++++ b/tools/assets/runtime_data.py
+@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[2]
+ CONST = {'lobby': {'BZ': -0.55, 'Z': 4.5, 'X': 6.3}, 'office': {'CN': 0.2, 'CS': 2.4, 'Z0': -6.4}, 'train': {'LZ': 1.2, 'LX': 4.0, 'DOOR_X': 3.25}}
+ # Library labels for every place the game registers (game3d/js/places/definitions.js PLACE_FILES), plus the lift,
+ # which rides between places. load_runtime_data() refuses a registered place that has no label here.
+-PLACES = {'ferry_terminal': 'Ferry waiting room', 'campus': 'North campus', 'print_shop': 'Print shop', 'train': 'Train', 'gate': 'Station security room', 'forecourt': 'Forecourt', 'plaza': 'Fountain plaza', 'canteen': 'Canteen', 'lift': 'Lift', 'office': 'B2 office', 'dorm_court': 'Dorm courtyard', 'dorms': "Eric's dorm room", 'shotengai': 'Shop street', 'izakaya': 'Izakaya', 'bakery': 'Bakery', 'konbini': 'Konbini', 'karaoke': 'Karaoke box', 'karaoke_booth': 'Karaoke booth', 'east_lane': 'East lane', 'east_coast': 'East coast', 'dorm_commons': 'Dorm common room', 'sports': 'Gym and pool', 'pool': 'Pool deck', 'gym': 'Gym', 'office_quarter': 'Office street', 'harbour': 'Harbour', 'works': 'Old works'}
++PLACES = {'research_lab': 'Research reading room', 'ferry_terminal': 'Ferry waiting room', 'campus': 'North campus', 'print_shop': 'Print shop', 'train': 'Train', 'gate': 'Station security room', 'forecourt': 'Forecourt', 'plaza': 'Fountain plaza', 'canteen': 'Canteen', 'lift': 'Lift', 'office': 'B2 office', 'dorm_court': 'Dorm courtyard', 'dorms': "Eric's dorm room", 'shotengai': 'Shop street', 'izakaya': 'Izakaya', 'bakery': 'Bakery', 'konbini': 'Konbini', 'karaoke': 'Karaoke box', 'karaoke_booth': 'Karaoke booth', 'east_lane': 'East lane', 'east_coast': 'East coast', 'dorm_commons': 'Dorm common room', 'sports': 'Gym and pool', 'pool': 'Pool deck', 'gym': 'Gym', 'office_quarter': 'Office street', 'harbour': 'Harbour', 'works': 'Old works'}
+ 
+ 
+ def num(expr, consts):
+@@ -29,6 +29,8 @@ def prop_entry(prop):
+                  status_from='A named thing in the game (built in code)', source=f'{os.path.basename(file)} things.{tid}',
+                  place=place, used=[f"{PLACES[place]}: tap target '{label}'"],
+                  view={'type': 'room', 'room': room}, tags=['in game', kind])
++    if place == 'research_lab' or (place == 'works' and tid == 'weather_station'):
++        entry['view']['target'] = tid
+     if prop['moving']:
+         return entry
+     consts = CONST.get(room, {})
+diff --git a/tools/assets/scan.py b/tools/assets/scan.py
+index 4ead31450..9329f1ad1 100644
+--- a/tools/assets/scan.py
++++ b/tools/assets/scan.py
+@@ -517,6 +517,7 @@ anim('chibi-sit', None, 'Chibi sit and breathe (code)', ['game3d/js/train/people
+ rounds = sorted([d for d in ls('game3d/shots') if re.search(r'/round-\d+$', d)], key=lambda d: int(d.rsplit('-', 1)[1]))
+ latest = rounds[-1] if rounds else None
+ ROOMS = [
++    ('research_lab', 'Research reading room', 'research_lab', 'research_lab.png', {'type': 'room', 'room': 'research-room'}, 'game3d/js/scenes/research-room/room.js buildResearchRoom() and places/research-room.js'),
+     ('ferry_terminal', 'Ferry waiting room', 'ferry_terminal', 'ferry_terminal.png', {'type': 'room', 'room': 'ferry_terminal'}, 'game3d/js/scenes/ferry-terminal/room.js buildFerryTerminal() and places/ferry-terminal.js'),
+     ('train', 'Monorail carriage', 'train', 'train.png', {'type': 'room', 'room': 'train'}, 'game3d/js/train/car.js buildCar() and places/train.js'),
+     ('platform', 'Honsha platform', 'train', 'platform.png', None, 'places/train.js (the arrival)'),
+diff --git a/tools/assets/viewer.js b/tools/assets/viewer.js
+index 8d0671a3f..410e2cf32 100644
+--- a/tools/assets/viewer.js
++++ b/tools/assets/viewer.js
+@@ -3,6 +3,7 @@
+ // code-built chibis through cast.js and train/people.js, the prop kit through props.js, and whole rooms through
+ // the scene builders. The page needs an import map for 'three' and 'three/addons/' (see index.html).
+ import * as THREE from 'three';
++import { researchTarget } from './research-targets.js';
+ 
+ const G = new URL('../../game3d/js/', import.meta.url).href;
+ const mod = (p) => import(G + p);
+@@ -160,6 +161,8 @@ async function room(view) {
+   else if (view.room === 'dorms') { w = (await mod('scenes/dorms.js')).buildDorms(); scene = w.scene; }
+   else if (view.room === 'konbini') { w = (await mod('scenes/konbini/room.js')).buildKonbini(); scene = w.scene; }
+   else if (['ferry_terminal', 'ferry-terminal'].includes(view.room)) { w = (await mod('scenes/ferry-terminal/room.js')).buildFerryTerminal(); scene = w.scene; }
++  else if (['research_lab', 'research-room'].includes(view.room)) { w = (await mod('scenes/research-room/room.js')).buildResearchRoom(); scene = w.scene; }
++  else if (view.room === 'works') { w = await (await mod('scenes/works.js')).buildWorks(); scene = w.scene; }
+   else if (view.room === 'bakery') { w = (await mod('scenes/bakery/room.js')).buildBakery(); scene = w.scene; }
+   else if (view.room === 'gym') { w = (await mod('scenes/rooms/gym.js')).buildGym(); scene = w.scene; }
+   else if (view.room === 'sports') { w = (await mod('scenes/sports.js')).buildSports(); scene = w.scene; }
+@@ -179,11 +182,12 @@ async function room(view) {
+   // Frame the playable room, excluding backdrop geometry and floors staged elsewhere.
+   const bounds = view.room === 'dorms'
+     ? { ...w.bounds, z0: w.bounds.back, z1: w.bounds.near }
+-    : ['gym', 'bakery', 'konbini', 'ferry_terminal', 'ferry-terminal'].includes(view.room) ? w.bounds : view.room === 'sports' ? w.nav : null;
++    : ['gym', 'bakery', 'konbini', 'ferry_terminal', 'ferry-terminal', 'research_lab', 'research-room'].includes(view.room) ? w.bounds : ['sports', 'works'].includes(view.room) ? w.nav : null;
++  const target = id => researchTarget(view.room, w, id);
+   return {
+     scene, object: w.root, room: view.room, actions: [], play() {}, update() {},
+-    bounds,
+-    focus: view.anchor ? { anchor: view.anchor, spot: view.spot, small: view.small } : null,
++    bounds, target,
++    focus: view.target ? target(view.target) : view.anchor ? { anchor: view.anchor, spot: view.spot, small: view.small } : null,
+   };
+ }
+ 
+@@ -239,7 +243,7 @@ export class Stage {
+       const sp = b.focus.spot ? new THREE.Vector3(b.focus.spot[0], y, b.focus.spot[1]) : t.clone().add(new THREE.Vector3(0, 0, 1));
+       const dir = sp.sub(t); dir.y = 0; if (dir.lengthSq() < 1e-4) dir.set(0, 0, 1); dir.normalize();
+       this.target.copy(t); this.target.y = Math.max(0.35, y * 0.8);
+-      this.yaw = Math.atan2(dir.x, dir.z); this.pitch = 0.62; this.dist = b.focus.small ? 3.0 : 4.2; this.cam.fov = 30;
++      this.yaw = Math.atan2(dir.x, dir.z); this.pitch = b.focus.pitch ?? 0.62; this.dist = b.focus.span ? b.focus.span / (2 * Math.tan(THREE.MathUtils.degToRad(15))) * 1.1 : b.focus.small ? 3.0 : 4.2; this.cam.fov = 30;
+       this.auto = false; this.minD = 0.8; this.maxD = 30;
+       if (b.room === 'train') {
+         // look down into the carriage from above its open top, the way the game's camera sees it
+diff --git a/tools/check/module-budgets.json b/tools/check/module-budgets.json
+index e6dc36f44..5dab5147d 100644
+--- a/tools/check/module-budgets.json
++++ b/tools/check/module-budgets.json
+@@ -65,10 +65,10 @@
+       "reason": "Existing gate place geometry and interaction hooks; stage 5 room-builder review is planned."
+     },
+     "game3d/js/places/office.js": {
+-      "lines": 1116,
+-      "bytes": 40631,
++      "lines": 1114,
++      "bytes": 40558,
+       "owner": "codex-tui",
+-      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; 2026-10-03 C-0378 day 2: the officeDay2 hook registered and installed (places/office-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 copy_room and machine_room zones a step past their doors, and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 Emi stays in her office on day 1 evening: the emi_door and emi_desk spots, and her shadow follows her; 2026-10-07 #309/#311: sender handles and separate arrival helper; ceiling reduced; 2026-10-07 #314: shared lunch food/seat definitions extracted, owned later-lunch adapter installed; ceiling lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered",
++      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; 2026-10-03 C-0378 day 2: the officeDay2 hook registered and installed (places/office-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 copy_room and machine_room zones a step past their doors, and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 Emi stays in her office on day 1 evening: the emi_door and emi_desk spots, and her shadow follows her; 2026-10-07 #309/#311: sender handles and separate arrival helper; ceiling reduced; 2026-10-07 #314: shared lunch food/seat definitions extracted, owned later-lunch adapter installed; ceiling lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered; 2026-10-07 #317 integration: optional activity attachments grouped in original order; ceiling lowered",
+       "reason": "Existing office place geometry and interaction hooks; stage 5 room-builder review is planned."
+     },
+     "game3d/js/places/train.js": {
+diff --git a/tools/voice/cfg.py b/tools/voice/cfg.py
+index b82e717b4..e5ac3a602 100644
+--- a/tools/voice/cfg.py
++++ b/tools/voice/cfg.py
+@@ -79,6 +79,7 @@ def speakers():
+     sp['canteen_shirt'] = sp['sales1']; sp['canteen_cardigan'] = sp['sales2']; sp['canteen_polo'] = sp['reader']
+     sp['bakery_clerk'] = sp['sales2']
+     sp['konbini_clerk'] = sp['sales2']
++    sp['research_reader'] = sp['reader']
+     sp['ferry_staff'] = sp['sales2']; sp['ferry_reader'] = sp['sales1']; sp['ferry_traveller'] = sp['reader']
+     # Background people use the approved body-matched contextual Talk presets.
+     sp['worker_a'] = sp['sales2']; sp['worker_b'] = sp['reader']
+@@ -92,7 +93,7 @@ def speakers():
+ FEMALE = {'carina', 'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'bakery_clerk', 'konbini_clerk', 'ferry_staff', 'worker_a', 'canteen_cardigan',
+           'member', 'rei'}
+ MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commuter', 'stander', 'worker_b', 'ferry_reader', 'ferry_traveller',
+-        'commuter_1', 'commuter_2', 'commuter_3', 'attendant', 'canteen_shirt', 'canteen_polo'}
++        'commuter_1', 'commuter_2', 'commuter_3', 'attendant', 'canteen_shirt', 'canteen_polo', 'research_reader'}
+ # clones whose reference speaks English: their Japanese is made from the timbre alone (gen_takes.xvec)
+ XVEC_JA = {'eric', 'carina'}
+ LUFS = {'eric': -23.0, 'carina': -23.0, 'gatev': -20.0, 'conductor': -20.0, 'ann': -20.0,  # player thoughts quieter, recorded voices a little under the cast

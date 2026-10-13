@@ -1,0 +1,872 @@
+{
+  "candidate": "research-integration",
+  "issue": 317,
+  "existing_local_branch": "wt/codex-research-integration",
+  "original_base_head": "6d83d82feb2932a5a0815ebc74bd7a91600b488d",
+  "source_archive": ".git/codex-reviews/retired-candidates-20261010/research-integration/files.tar.gz",
+  "source_archive_sha256": "9a386e276becdf9409ba5f92c4d942ff1a50f833422b654c03e819717f77adc2",
+  "original_patch": ".git/codex-reviews/retired-candidates-20261010/research-integration/working.patch",
+  "original_patch_sha256": "7a0a1eb31f7a4a1f242e92896ea0eb2b2ac946fd01f8f4e829a55268ab0e2938",
+  "original_patch_bytes": 103092,
+  "tracked_patch_path_count": 53,
+  "all_tracked_patch_paths_in_source_snapshot": true,
+  "source_file_count": 129,
+  "source_bytes": 2039052,
+  "excluded_original_artifacts": [
+    {
+      "path": "game3d/build.json",
+      "bytes": 26029,
+      "original_sha256": "a90ce204f1749d38e143c91a938965e4724adeb2d59ba7b5b1dd35b71df7ee88",
+      "reason": "Generated build identity/check data, not candidate source."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T20-42-54-111Z-3896397/1366x860.png",
+      "bytes": 145263,
+      "original_sha256": "3d2372191a9fc96a175d40c63e91578f0659759694582da1fab2796f3e0614fc",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T20-42-54-111Z-3896397/perf.json",
+      "bytes": 2845,
+      "original_sha256": "dface31fba80e70d9d48dbd241dccd3a0212013ce82571b741be7005dd36c2e2",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T20-42-54-111Z-3896397/result.json",
+      "bytes": 21834,
+      "original_sha256": "8a0a6853fd31fd7fc4ccec4e10cccc3342e0db17a3f128e9b52f8273a0b8cef6",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T20-44-49-425Z-3953142/390x844.png",
+      "bytes": 89935,
+      "original_sha256": "ed5b5caf2ecc701b979ee0dfc98fa9e57cee8fcb6d2b65f96a785ea00f1d9539",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T20-44-49-425Z-3953142/perf.json",
+      "bytes": 2841,
+      "original_sha256": "196ca75e15e072f315f4764847a0230b0a159e0b0be2d5b7440384da3fc1ef88",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T20-44-49-425Z-3953142/result.json",
+      "bytes": 21932,
+      "original_sha256": "e6633e7f1180b7ae0bed1f47ed58e10782216c83f44568858d5ade7b86bbdd2b",
+      "reason": "Generated capture/transcript/run evidence. Keep original local archive; not source needed to port feature."
+    },
+    {
+      "path": "tools/__pycache__/comfy.cpython-314.pyc",
+      "bytes": 22736,
+      "original_sha256": "5464d242d760fa9b75934b4ea01a83c6ef122485a4737018c9db285ac1b77884",
+      "reason": "Python bytecode/cache, not candidate source."
+    },
+    {
+      "path": "tools/__pycache__/gpu_priority.cpython-314.pyc",
+      "bytes": 29580,
+      "original_sha256": "cfadaff812bdaa080117f974369a63c3aad49fc3d9e9a253b4e116ed271eb502",
+      "reason": "Python bytecode/cache, not candidate source."
+    },
+    {
+      "path": "tools/assets/__pycache__/runtime_data.cpython-314.pyc",
+      "bytes": 6526,
+      "original_sha256": "e1a54677d71c3cdddd974ecedfa40fdb2b0c7975e26c2ef85a931c33e0cb7bcf",
+      "reason": "Python bytecode/cache, not candidate source."
+    }
+  ],
+  "package_root": "notes/recovery/research-integration/",
+  "external_requirements": [
+    "Five new original reference SVGs are included as source. Existing approved models/textures are base-game dependencies from original base and asset lock. Thirty-five proposed voice records were reviewed but not generated; missing mori-reference-dozo.mp3 remains a release blocker. Original screenshots/media stay local; preserved Showcase captions/hash JSONs identify them."
+  ],
+  "normalized_member_validation": {
+    "duplicate_names": [],
+    "absolute_or_traversal_paths": [],
+    "symlink_hardlink_special_members": [],
+    "private_paths": []
+  },
+  "reconstruction_proof": {
+    "verification": "audit_refs independently verified original HEAD + original patch reconstructs every changed tracked source blob exactly; this audit verified every selected final tar file hash against original manifest.",
+    "tracked_source_blobs_verified": 53,
+    "new_public_source_or_metadata_files_preserved": 76,
+    "final_snapshot_is_byte_exact": true
+  },
+  "files": [
+    {
+      "path": "docs/game/cast.md",
+      "bytes": 41326,
+      "sha256": "35f534398a172f3c41fe252c1a2d269f995e1af0cdce14a30e9abc13ece6e402",
+      "archived_path": "source/docs/game/cast.md"
+    },
+    {
+      "path": "docs/game/island.md",
+      "bytes": 28231,
+      "sha256": "c260ae487384e287aa5e138dbe75f7c779e1bd807f7c00061e7d5415c09cb3ef",
+      "archived_path": "source/docs/game/island.md"
+    },
+    {
+      "path": "docs/game/places.md",
+      "bytes": 237166,
+      "sha256": "e8fe36fa03f621772702df1cd6175ce5cbf09d75354a4d2cba0e1cca8bfb8cd1",
+      "archived_path": "source/docs/game/places.md"
+    },
+    {
+      "path": "docs/game/stories/day2/README.md",
+      "bytes": 2106,
+      "sha256": "98305f3e284946d0fb987e71bad9af1dd1c4acc3314c8e0353b8c13baef86b3f",
+      "archived_path": "source/docs/game/stories/day2/README.md"
+    },
+    {
+      "path": "docs/game/stories/day2/visits.md",
+      "bytes": 8376,
+      "sha256": "c5b857963875d8e3f16ebef1aa629fa7164ab42fde3f4aad34648ff3ac6fc8d9",
+      "archived_path": "source/docs/game/stories/day2/visits.md"
+    },
+    {
+      "path": "docs/game/words.md",
+      "bytes": 11406,
+      "sha256": "0c6a4dbc87d1452d6fa4c1c2a3b4998db8594f0cd7d6c25149e2fc5d1eec0a1a",
+      "archived_path": "source/docs/game/words.md"
+    },
+    {
+      "path": "game3d/assets/references/copier-exterior.svg",
+      "bytes": 4040,
+      "sha256": "183961315ec3076dac6b224d2dadc383defa452ed3dd8d1067e187099a0a3e93",
+      "archived_path": "source/game3d/assets/references/copier-exterior.svg"
+    },
+    {
+      "path": "game3d/assets/references/copier-paper.svg",
+      "bytes": 8139,
+      "sha256": "0ff6a37d216d6a1370373ddaf7b268f194699149f115b4a9c1eae0e9c36c8c3c",
+      "archived_path": "source/game3d/assets/references/copier-paper.svg"
+    },
+    {
+      "path": "game3d/assets/references/mori-copy.svg",
+      "bytes": 8636,
+      "sha256": "c60038e2fb36d36258185f17a49339ded1d3a93da2d9562daa8d07037bc38c3e",
+      "archived_path": "source/game3d/assets/references/mori-copy.svg"
+    },
+    {
+      "path": "game3d/assets/references/weather-plan.svg",
+      "bytes": 3411,
+      "sha256": "50d7a5fca1e2387d3429a2ba50a781b2f9870a0ef584f1dc70cbc3861a24150b",
+      "archived_path": "source/game3d/assets/references/weather-plan.svg"
+    },
+    {
+      "path": "game3d/assets/references/weather-shapes.svg",
+      "bytes": 3051,
+      "sha256": "5de4aee94890314df171c633c327c289d2be731110510f8be9c27c68e1608493",
+      "archived_path": "source/game3d/assets/references/weather-shapes.svg"
+    },
+    {
+      "path": "game3d/css/finds.css",
+      "bytes": 5312,
+      "sha256": "8e56e45258330587d71c918172adaaa043a25a1ca1b0e841e2c07db28f29ec90",
+      "archived_path": "source/game3d/css/finds.css"
+    },
+    {
+      "path": "game3d/css/style.css",
+      "bytes": 99404,
+      "sha256": "fdc3b2fc36095c3c17d4b4160096666a21af08903b960d9b5bc55af997c1d110",
+      "archived_path": "source/game3d/css/style.css"
+    },
+    {
+      "path": "game3d/js/conversations/index.js",
+      "bytes": 2210,
+      "sha256": "250cd1517f27a37571739d3ffe31380e9b1b1e7b9fa4a0cc94f41b9d6aef4a81",
+      "archived_path": "source/game3d/js/conversations/index.js"
+    },
+    {
+      "path": "game3d/js/finds/index.js",
+      "bytes": 6046,
+      "sha256": "e30501f55e6fa1c4b53b3520d06a8c489ab7354ce2838206be7b0a810fd9130b",
+      "archived_path": "source/game3d/js/finds/index.js"
+    },
+    {
+      "path": "game3d/js/finds/prints.js",
+      "bytes": 2970,
+      "sha256": "be6287ecbab1496e085c91d8cceca3720432326166f4de824899ce181a510242",
+      "archived_path": "source/game3d/js/finds/prints.js"
+    },
+    {
+      "path": "game3d/js/finds/spots.js",
+      "bytes": 2616,
+      "sha256": "f8486bf25175db112311724d68b0c8ba246aca027b17af38127aff8cb58bc334",
+      "archived_path": "source/game3d/js/finds/spots.js"
+    },
+    {
+      "path": "game3d/js/lang.js",
+      "bytes": 10019,
+      "sha256": "4fa7cd0689f76d13c88a103cc48efeaadba5a88b2903c223e6a0cacad3ee2e7c",
+      "archived_path": "source/game3d/js/lang.js"
+    },
+    {
+      "path": "game3d/js/narrative/engine-flags.js",
+      "bytes": 7266,
+      "sha256": "57c04b748b897cefb1892d6ff22ef5a85ca5ca9d028f47dfda72ef2964de3201",
+      "archived_path": "source/game3d/js/narrative/engine-flags.js"
+    },
+    {
+      "path": "game3d/js/narrative/events.js",
+      "bytes": 2796,
+      "sha256": "ee2fa8e84c9aef26eaf7f15f4db038ac9f34e2e1d4a3f25bc6812b17a85ffcf2",
+      "archived_path": "source/game3d/js/narrative/events.js"
+    },
+    {
+      "path": "game3d/js/narrative/hooks.js",
+      "bytes": 746,
+      "sha256": "ea1b3428cf6a72ca048aa3bf3bda625c4af6d14ccc968ca5c30bd677fcddc05f",
+      "archived_path": "source/game3d/js/narrative/hooks.js"
+    },
+    {
+      "path": "game3d/js/places/catalog-south.js",
+      "bytes": 1439,
+      "sha256": "94334c9fe56309272a6454aa4bbc8895b7d8a8e5359063b902c16789e0cb93c9",
+      "archived_path": "source/game3d/js/places/catalog-south.js"
+    },
+    {
+      "path": "game3d/js/places/catalog-works.js",
+      "bytes": 1225,
+      "sha256": "e573707f18ae8bb8b6633359202b3e38a52f8e02a6dfcaa070673dcdb45cf4d5",
+      "archived_path": "source/game3d/js/places/catalog-works.js"
+    },
+    {
+      "path": "game3d/js/places/definitions.js",
+      "bytes": 5883,
+      "sha256": "a3f40c50d2f62cafad1beaff25d6dbd9658ffa14e181f6e01a6e47dfc17b9e45",
+      "archived_path": "source/game3d/js/places/definitions.js"
+    },
+    {
+      "path": "game3d/js/places/factories.js",
+      "bytes": 2002,
+      "sha256": "534f3ef29d5232bfb1fa6fbebc4f2a9c855a8d0b0ad6f9981e59036f9e7834b4",
+      "archived_path": "source/game3d/js/places/factories.js"
+    },
+    {
+      "path": "game3d/js/places/lifecycle.js",
+      "bytes": 12338,
+      "sha256": "1a189a2995158e0f99d8738b94446951e4b21700395e49a6e9db77df56c2dbd1",
+      "archived_path": "source/game3d/js/places/lifecycle.js"
+    },
+    {
+      "path": "game3d/js/places/office-activities.js",
+      "bytes": 355,
+      "sha256": "517cab13bfc56036d4a3472239df03067b255e4e406ebdaf2a23c158ba8d48a3",
+      "archived_path": "source/game3d/js/places/office-activities.js"
+    },
+    {
+      "path": "game3d/js/places/office.js",
+      "bytes": 40558,
+      "sha256": "c26de91549b069f35a3008f38b60a0e917f1193252de67c03e015009f577ebc0",
+      "archived_path": "source/game3d/js/places/office.js"
+    },
+    {
+      "path": "game3d/js/places/ongoing/index.js",
+      "bytes": 3593,
+      "sha256": "2050bf8520d70c7e1aa161fd87a416a67c4aa7945ddf27f22417f8cde159f474",
+      "archived_path": "source/game3d/js/places/ongoing/index.js"
+    },
+    {
+      "path": "game3d/js/places/research-room.js",
+      "bytes": 4773,
+      "sha256": "a5185efcceb2a071d5d5d7ec93fe8efc504a672782ffc7f81c34024626f212ee",
+      "archived_path": "source/game3d/js/places/research-room.js"
+    },
+    {
+      "path": "game3d/js/places/research-room/activity.js",
+      "bytes": 7937,
+      "sha256": "83943359c2aa2f03de1f2d6d1d483082a1405e96c97ccc108b3276cff5a74496",
+      "archived_path": "source/game3d/js/places/research-room/activity.js"
+    },
+    {
+      "path": "game3d/js/places/research-room/camera.js",
+      "bytes": 2522,
+      "sha256": "1f6e1850fe7ccb0a16d0387edead6a8646728557f41417a997fe191c609c2a13",
+      "archived_path": "source/game3d/js/places/research-room/camera.js"
+    },
+    {
+      "path": "game3d/js/places/research-room/catalog.js",
+      "bytes": 978,
+      "sha256": "7061f2964268363b43d1e48feef5618669ebc908a16552e743bc7a3f7f7eb85c",
+      "archived_path": "source/game3d/js/places/research-room/catalog.js"
+    },
+    {
+      "path": "game3d/js/places/research-room/copy.js",
+      "bytes": 1964,
+      "sha256": "dd7dda336b7056714647d34440785639b920244aec70d61dbd5a323dc04794aa",
+      "archived_path": "source/game3d/js/places/research-room/copy.js"
+    },
+    {
+      "path": "game3d/js/places/research-room/entrance-view.js",
+      "bytes": 1626,
+      "sha256": "dfc0d85988b7eb9cb04cbd86513cd6e913331f0df0d3c754fbdcfe865fdc453b",
+      "archived_path": "source/game3d/js/places/research-room/entrance-view.js"
+    },
+    {
+      "path": "game3d/js/places/research-room/hands.js",
+      "bytes": 1878,
+      "sha256": "1efe73bedf7a76b4d3fcde1793efb018c29a1241308a80d8bb9e808b40d6a361",
+      "archived_path": "source/game3d/js/places/research-room/hands.js"
+    },
+    {
+      "path": "game3d/js/places/research-room/office.js",
+      "bytes": 10079,
+      "sha256": "477938e8e8495c65f9450e89e2e8c1c354ba6ff92efab68c2167ebb342d225b2",
+      "archived_path": "source/game3d/js/places/research-room/office.js"
+    },
+    {
+      "path": "game3d/js/places/research-room/paper-grip.js",
+      "bytes": 3953,
+      "sha256": "c62ce3dd43811e61e9f6b003c08834663bc58a235f31493c2aa364f82c9a3c7c",
+      "archived_path": "source/game3d/js/places/research-room/paper-grip.js"
+    },
+    {
+      "path": "game3d/js/places/research-room/residents.js",
+      "bytes": 1599,
+      "sha256": "7d70a7896326befcda351292464eda180afacb685650a56cc3b164f6f2e36077",
+      "archived_path": "source/game3d/js/places/research-room/residents.js"
+    },
+    {
+      "path": "game3d/js/places/research-room/transfer.js",
+      "bytes": 2928,
+      "sha256": "4a48e8d91af4426f4742664851066590c632e21155adf12f6dc64b8b368618e2",
+      "archived_path": "source/game3d/js/places/research-room/transfer.js"
+    },
+    {
+      "path": "game3d/js/places/research-room/weather.js",
+      "bytes": 1578,
+      "sha256": "2075611c3f5a5b9a96dfcfda2d4a8c195e5af18e907106194fde0bcb33b2a2fd",
+      "archived_path": "source/game3d/js/places/research-room/weather.js"
+    },
+    {
+      "path": "game3d/js/places/works.js",
+      "bytes": 7964,
+      "sha256": "2b9230b85dc37aedaa59eaa6d367fb26120ea19a28411edc38ccd4f76cbe4c9b",
+      "archived_path": "source/game3d/js/places/works.js"
+    },
+    {
+      "path": "game3d/js/reading-room/evidence.js",
+      "bytes": 480,
+      "sha256": "d307cdb0bc35f94cdbce77ac911540220915c5ea053f2c8d24583721e1078713",
+      "archived_path": "source/game3d/js/reading-room/evidence.js"
+    },
+    {
+      "path": "game3d/js/reading-room/hook.js",
+      "bytes": 1259,
+      "sha256": "a27d4434242856c331974151825c7ea284e4921bf16a542a1241db389194ebae",
+      "archived_path": "source/game3d/js/reading-room/hook.js"
+    },
+    {
+      "path": "game3d/js/reading-room/model.js",
+      "bytes": 2209,
+      "sha256": "954fe9c6317038b57469855079abdd9cd678d8470e92726b2a9e8b645fa3d2a8",
+      "archived_path": "source/game3d/js/reading-room/model.js"
+    },
+    {
+      "path": "game3d/js/reading-room/pages.js",
+      "bytes": 916,
+      "sha256": "fd4f4a00c0983170a794b26a9f547c158085550c86c50b1d082e76886158d916",
+      "archived_path": "source/game3d/js/reading-room/pages.js"
+    },
+    {
+      "path": "game3d/js/reading-room/state.js",
+      "bytes": 469,
+      "sha256": "f4d78859e1cb21b61bcfc9bdb3f3832db0509b072906e759f26ecffde460d8d3",
+      "archived_path": "source/game3d/js/reading-room/state.js"
+    },
+    {
+      "path": "game3d/js/reading-room/view.js",
+      "bytes": 1819,
+      "sha256": "3c2ca9717ad882c085f429c4bc2cc395e508a9639830bff8c8fab252124838a7",
+      "archived_path": "source/game3d/js/reading-room/view.js"
+    },
+    {
+      "path": "game3d/js/scenes/island-chunks.js",
+      "bytes": 8652,
+      "sha256": "915b7b6c0b30ce2baf567c80307f54e6e4d99850e8fab32aa46b59386ce79f67",
+      "archived_path": "source/game3d/js/scenes/island-chunks.js"
+    },
+    {
+      "path": "game3d/js/scenes/office-quarter/row.js",
+      "bytes": 5787,
+      "sha256": "abbafa9e3573c407c289aacc1cdb9182b5cb7d41c35661847d4ec042d48b5116",
+      "archived_path": "source/game3d/js/scenes/office-quarter/row.js"
+    },
+    {
+      "path": "game3d/js/scenes/outdoor/block-style.js",
+      "bytes": 12704,
+      "sha256": "a3b3ae365e82852d412d33caf4ab5951f4f2a1564730ea6c37aa35d3df4fec5f",
+      "archived_path": "source/game3d/js/scenes/outdoor/block-style.js"
+    },
+    {
+      "path": "game3d/js/scenes/outdoor/block.js",
+      "bytes": 11147,
+      "sha256": "3a5ebfc2ef67eb0b272175d810d9358a90b47f28b2d07aa4bd2d972bb9b71c09",
+      "archived_path": "source/game3d/js/scenes/outdoor/block.js"
+    },
+    {
+      "path": "game3d/js/scenes/research-room/archive.js",
+      "bytes": 3984,
+      "sha256": "2f02ddcacc2a0fb3e3047f74e36ab4abdc775d91637e2a504e152d959a08cc21",
+      "archived_path": "source/game3d/js/scenes/research-room/archive.js"
+    },
+    {
+      "path": "game3d/js/scenes/research-room/books.js",
+      "bytes": 2238,
+      "sha256": "9cc2c981299d07c3137d57006f8ea77d4528a43bb06160a6a375cd97ca418407",
+      "archived_path": "source/game3d/js/scenes/research-room/books.js"
+    },
+    {
+      "path": "game3d/js/scenes/research-room/details.js",
+      "bytes": 2629,
+      "sha256": "bd7363e9555313bf17ebcb79229a74e36445b8cefef30bfedd2111c61b204592",
+      "archived_path": "source/game3d/js/scenes/research-room/details.js"
+    },
+    {
+      "path": "game3d/js/scenes/research-room/furniture.js",
+      "bytes": 3474,
+      "sha256": "aeeadc27ca2a9adb4dbec7f20befe86d8fb6726dc35025a0d6ca1fdfd0f2ffcf",
+      "archived_path": "source/game3d/js/scenes/research-room/furniture.js"
+    },
+    {
+      "path": "game3d/js/scenes/research-room/notebook.js",
+      "bytes": 2120,
+      "sha256": "2d5317ae22f46e3d0f7d1483a69094225a529468eecd3394d9896fec0fd2f4d7",
+      "archived_path": "source/game3d/js/scenes/research-room/notebook.js"
+    },
+    {
+      "path": "game3d/js/scenes/research-room/opening.js",
+      "bytes": 468,
+      "sha256": "4e2365986c55b49e62decea1e75cefe6d76e30dd2124fc78206c426572a39586",
+      "archived_path": "source/game3d/js/scenes/research-room/opening.js"
+    },
+    {
+      "path": "game3d/js/scenes/research-room/plan.js",
+      "bytes": 2108,
+      "sha256": "634256c9423df711f4aa1c70ba6672775ee007eb556628e67f168a4141cea458",
+      "archived_path": "source/game3d/js/scenes/research-room/plan.js"
+    },
+    {
+      "path": "game3d/js/scenes/research-room/room.js",
+      "bytes": 3242,
+      "sha256": "36676d2247bf986eb3df5bb45120d355bb9213a88c6172752b1674b94c983420",
+      "archived_path": "source/game3d/js/scenes/research-room/room.js"
+    },
+    {
+      "path": "game3d/js/scenes/research-room/view.js",
+      "bytes": 1098,
+      "sha256": "2f5873e2b6cb7ea1dc5a3d32066b8655a5cfbb9b1a4bab5e4229c5ec34715f94",
+      "archived_path": "source/game3d/js/scenes/research-room/view.js"
+    },
+    {
+      "path": "game3d/js/scenes/works.js",
+      "bytes": 6321,
+      "sha256": "25cf5fba2737e505eb5e1e65b285b27fad34663721000fa8017a7663cf0d4f5f",
+      "archived_path": "source/game3d/js/scenes/works.js"
+    },
+    {
+      "path": "game3d/js/scenes/works/props.js",
+      "bytes": 11069,
+      "sha256": "b6a9a470add5da9479577df2597024abcfd8da75047d5c2f40e48209cebf43d2",
+      "archived_path": "source/game3d/js/scenes/works/props.js"
+    },
+    {
+      "path": "game3d/js/travel/pins.js",
+      "bytes": 1784,
+      "sha256": "530a75034392e44e25d2c5477a8b7fa22072da3c5493c2246f9faf516442baf5",
+      "archived_path": "source/game3d/js/travel/pins.js"
+    },
+    {
+      "path": "game3d/story/campus-routes.js",
+      "bytes": 1630,
+      "sha256": "075c87463c91c18d2d1ec65cf8c4627410fc996baba0ec630bafb0e9a7954338",
+      "archived_path": "source/game3d/story/campus-routes.js"
+    },
+    {
+      "path": "game3d/story/conversations/index.js",
+      "bytes": 721,
+      "sha256": "b725ce8606298df97547e71f3c9ac14385a08f36426a88486358dead0c38e4d1",
+      "archived_path": "source/game3d/story/conversations/index.js"
+    },
+    {
+      "path": "game3d/story/conversations/remarks.js",
+      "bytes": 2370,
+      "sha256": "be758cdfb96bd0633fa8a2b0de1b46e4a50f5a68d4b8227a9fd6ee6fc12d524b",
+      "archived_path": "source/game3d/story/conversations/remarks.js"
+    },
+    {
+      "path": "game3d/story/day2/index.js",
+      "bytes": 2887,
+      "sha256": "ae807dc3dec956b8dcb4790b10b4ace0281b5b94525b88b61b773babdfac07ee",
+      "archived_path": "source/game3d/story/day2/index.js"
+    },
+    {
+      "path": "game3d/story/day2/research_lab.js",
+      "bytes": 44,
+      "sha256": "2fa9cec285de9f054c086bc391b6039c27b9362d1a8ea209f786f9037a8054d1",
+      "archived_path": "source/game3d/story/day2/research_lab.js"
+    },
+    {
+      "path": "game3d/story/day2/works.js",
+      "bytes": 104,
+      "sha256": "4b8f05e48f24c84d14e724fd06bae34eeecdc0e72003290c003a3a17408a8013",
+      "archived_path": "source/game3d/story/day2/works.js"
+    },
+    {
+      "path": "game3d/story/day3/research_lab.js",
+      "bytes": 44,
+      "sha256": "2fa9cec285de9f054c086bc391b6039c27b9362d1a8ea209f786f9037a8054d1",
+      "archived_path": "source/game3d/story/day3/research_lab.js"
+    },
+    {
+      "path": "game3d/story/day3/works.js",
+      "bytes": 104,
+      "sha256": "4b8f05e48f24c84d14e724fd06bae34eeecdc0e72003290c003a3a17408a8013",
+      "archived_path": "source/game3d/story/day3/works.js"
+    },
+    {
+      "path": "game3d/story/day4/research_lab.js",
+      "bytes": 44,
+      "sha256": "2fa9cec285de9f054c086bc391b6039c27b9362d1a8ea209f786f9037a8054d1",
+      "archived_path": "source/game3d/story/day4/research_lab.js"
+    },
+    {
+      "path": "game3d/story/day4/works.js",
+      "bytes": 104,
+      "sha256": "4b8f05e48f24c84d14e724fd06bae34eeecdc0e72003290c003a3a17408a8013",
+      "archived_path": "source/game3d/story/day4/works.js"
+    },
+    {
+      "path": "game3d/story/day5/research_lab.js",
+      "bytes": 44,
+      "sha256": "2fa9cec285de9f054c086bc391b6039c27b9362d1a8ea209f786f9037a8054d1",
+      "archived_path": "source/game3d/story/day5/research_lab.js"
+    },
+    {
+      "path": "game3d/story/day5/works.js",
+      "bytes": 104,
+      "sha256": "4b8f05e48f24c84d14e724fd06bae34eeecdc0e72003290c003a3a17408a8013",
+      "archived_path": "source/game3d/story/day5/works.js"
+    },
+    {
+      "path": "game3d/story/finds.js",
+      "bytes": 2416,
+      "sha256": "7706480aee271de9e24c70249dbf43cdcf68e24d069d01ecde4c6fa435557de4",
+      "archived_path": "source/game3d/story/finds.js"
+    },
+    {
+      "path": "game3d/story/investigations/research.js",
+      "bytes": 5341,
+      "sha256": "cbc1ad4b1367e88899106f7317f3ddf5ff11b053b915cedbecceef7468d21437",
+      "archived_path": "source/game3d/story/investigations/research.js"
+    },
+    {
+      "path": "game3d/story/ongoing/index.js",
+      "bytes": 1348,
+      "sha256": "81dc3b299805ff2d222086abbc36e76bf8d381a9cf6e3dd2daee702183eb0e5e",
+      "archived_path": "source/game3d/story/ongoing/index.js"
+    },
+    {
+      "path": "game3d/story/ongoing/research_lab.js",
+      "bytes": 348,
+      "sha256": "b943b24332a65ef382b2bd5f06306cb53ffab74e81c1329f729e1b39785840f4",
+      "archived_path": "source/game3d/story/ongoing/research_lab.js"
+    },
+    {
+      "path": "game3d/story/ongoing/routes.js",
+      "bytes": 4632,
+      "sha256": "2915650a53cc486d313bbe32744f6342f53c134746cc2daaf95f3dd875eb7e7a",
+      "archived_path": "source/game3d/story/ongoing/routes.js"
+    },
+    {
+      "path": "game3d/story/ongoing/shared.js",
+      "bytes": 1943,
+      "sha256": "f563824195c58ca0727ee07deb91ad3b7d8fef9d8c9e8b0106a3bb0553525baf",
+      "archived_path": "source/game3d/story/ongoing/shared.js"
+    },
+    {
+      "path": "game3d/story/ongoing/works.js",
+      "bytes": 331,
+      "sha256": "5bebcd7cbd2f3e05841cefefc0ce0856fc58d6a1d4c75c86c877672e2ead1dc7",
+      "archived_path": "source/game3d/story/ongoing/works.js"
+    },
+    {
+      "path": "game3d/story/research_lab.js",
+      "bytes": 10157,
+      "sha256": "22fc14e7b74a96e2b2ab28900377855735a4123dff63274cb15a24d7d9765903",
+      "archived_path": "source/game3d/story/research_lab.js"
+    },
+    {
+      "path": "game3d/story/works.js",
+      "bytes": 2364,
+      "sha256": "32bc2a7e2bed38c2bc253ad17c85da9e7de1b74dbaccec08482fd9248227cb30",
+      "archived_path": "source/game3d/story/works.js"
+    },
+    {
+      "path": "game3d/test/fixtures/asset-props-added.json",
+      "bytes": 87780,
+      "sha256": "46e2950716773cdb61823f54e237793a3473d743690e240f955af81ddb5583f0",
+      "archived_path": "source/game3d/test/fixtures/asset-props-added.json"
+    },
+    {
+      "path": "game3d/test/fixtures/declarations-before.json",
+      "bytes": 53520,
+      "sha256": "a1745e0981cd5858565fb3d23fa9974b7602ae7b6abd075a81e915778b70a447",
+      "archived_path": "source/game3d/test/fixtures/declarations-before.json"
+    },
+    {
+      "path": "game3d/test/fixtures/structural-baseline.json",
+      "bytes": 90840,
+      "sha256": "95e1b860482d6b2ff4e6f43354f5e33cdea88956935eee218d164e2103c556f4",
+      "archived_path": "source/game3d/test/fixtures/structural-baseline.json"
+    },
+    {
+      "path": "game3d/test/support/research-integration-evidence.mjs",
+      "bytes": 2269,
+      "sha256": "148704030cc83ec04b0be3726e88675c110efe2285401aa70d491f3230cf3beb",
+      "archived_path": "source/game3d/test/support/research-integration-evidence.mjs"
+    },
+    {
+      "path": "game3d/test/support/research-seat-contact.mjs",
+      "bytes": 2383,
+      "sha256": "53a04f83bea4e209493396994f2440525ee8a9d2b9fc4bbd0bf4871f497177e4",
+      "archived_path": "source/game3d/test/support/research-seat-contact.mjs"
+    },
+    {
+      "path": "game3d/test/unit/asset-source.test.mjs",
+      "bytes": 6140,
+      "sha256": "55a288f1cab24d139b9b999a0366e52fb002b010a6c37c299d73bf6838c37bea",
+      "archived_path": "source/game3d/test/unit/asset-source.test.mjs"
+    },
+    {
+      "path": "game3d/test/unit/research-evidence.test.mjs",
+      "bytes": 2390,
+      "sha256": "0ea0e4405b519ca53ec360a81c1bf7813d0c3afb835a165a5971f525c0798166",
+      "archived_path": "source/game3d/test/unit/research-evidence.test.mjs"
+    },
+    {
+      "path": "game3d/test/unit/research-hook.test.mjs",
+      "bytes": 1306,
+      "sha256": "562e21c3b34b8b69d44d354283c698f5db560f2bfe601c27d9f07c53ab9f18bf",
+      "archived_path": "source/game3d/test/unit/research-hook.test.mjs"
+    },
+    {
+      "path": "game3d/test/unit/research-opening.test.mjs",
+      "bytes": 2200,
+      "sha256": "c4cde595e27552974ea93f17d3ce029053f07a9525f07ec9e4bf7535aff5727c",
+      "archived_path": "source/game3d/test/unit/research-opening.test.mjs"
+    },
+    {
+      "path": "game3d/test/unit/research-reference.test.mjs",
+      "bytes": 2770,
+      "sha256": "c9ad8ca1c29fa79e26730189652f56dbd59a42bf753822b9170cd3bff3d6c286",
+      "archived_path": "source/game3d/test/unit/research-reference.test.mjs"
+    },
+    {
+      "path": "game3d/test/unit/research-routes.test.mjs",
+      "bytes": 2240,
+      "sha256": "7d7c8b1454b43cd593726ad081dc1312782fabd8ae9b7e6c8ee7545d86228f22",
+      "archived_path": "source/game3d/test/unit/research-routes.test.mjs"
+    },
+    {
+      "path": "game3d/test/unit/structural-baseline.test.mjs",
+      "bytes": 7991,
+      "sha256": "def9757a038286f95964edd4637c38ba3148e58a561892f53422de4907d8979f",
+      "archived_path": "source/game3d/test/unit/structural-baseline.test.mjs"
+    },
+    {
+      "path": "game3d/tools/day2-story-check.mjs",
+      "bytes": 22191,
+      "sha256": "2aa7c9cb98d796ad6f109e58daaa619d700c12f07709f56d7a4020e68d8bb485",
+      "archived_path": "source/game3d/tools/day2-story-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-assets-check.mjs",
+      "bytes": 2490,
+      "sha256": "d6002af2ac04899f1253005bdb7f7d8d3b9e8b64590fc3075b9df3abb6ba0f8a",
+      "archived_path": "source/game3d/tools/research-assets-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-callback-check.mjs",
+      "bytes": 6005,
+      "sha256": "433af6b8fdefd4bf380770416e41632093a5170ba754946f1c627a2c62b684d4",
+      "archived_path": "source/game3d/tools/research-callback-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-cancel-check.mjs",
+      "bytes": 3381,
+      "sha256": "0c2b529215a708f3410b3650326e4e8137de9b675d49228fe3d50ff46314d7dc",
+      "archived_path": "source/game3d/tools/research-cancel-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-continue-check.mjs",
+      "bytes": 6715,
+      "sha256": "3373e87e9fefb9fb459b6a8a3cff984a915274f97d4f75c32bf1b8d392cd430b",
+      "archived_path": "source/game3d/tools/research-continue-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-copy-check.mjs",
+      "bytes": 2468,
+      "sha256": "25ee3c9163fd94fb1f198ee1913de3dac2604d128c4872807c3141845d6e1f39",
+      "archived_path": "source/game3d/tools/research-copy-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-copy-continue-check.mjs",
+      "bytes": 4737,
+      "sha256": "277eb3d507a1d44ec51249129d316272c2dbfcbfb61cf9271681d07ecdd74e82",
+      "archived_path": "source/game3d/tools/research-copy-continue-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-extra-seats-check.mjs",
+      "bytes": 6820,
+      "sha256": "8607b1f04a3307299f07a79bd1522b66a2b3d293f8a2fa085f30d95bb0184e64",
+      "archived_path": "source/game3d/tools/research-extra-seats-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-goal-check.mjs",
+      "bytes": 2473,
+      "sha256": "2bfae29de5341ce068d5166109758706e6a88908a2303e184b19b72a3cfc698b",
+      "archived_path": "source/game3d/tools/research-goal-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-grip-probe.mjs",
+      "bytes": 2827,
+      "sha256": "5b000240dd050adb0c6f3fbf4a13f7fb63f178e14b10bdf9a2140c47cb7902cd",
+      "archived_path": "source/game3d/tools/research-grip-probe.mjs"
+    },
+    {
+      "path": "game3d/tools/research-office-check.mjs",
+      "bytes": 3736,
+      "sha256": "c7ead7b4ce4587a191f64aecb1dfd4f8368428cc6e8cf14ce84b9641f597edb0",
+      "archived_path": "source/game3d/tools/research-office-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-office-continue-check.mjs",
+      "bytes": 6053,
+      "sha256": "e8cf74d605db424db6604f4d84351252140e58f35863e0fa2fe9446b8e9213a0",
+      "archived_path": "source/game3d/tools/research-office-continue-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-papers-check.mjs",
+      "bytes": 4164,
+      "sha256": "7bb1921f3170f69ad0b0e4074507c4d1fc3d995b6c7f7cd53197a5557662a141",
+      "archived_path": "source/game3d/tools/research-papers-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-room-check.mjs",
+      "bytes": 7056,
+      "sha256": "fe6190a7f3cd0e9231fb87e6ab0979fd170cc40ab84c89dac1a0c67ffb743427",
+      "archived_path": "source/game3d/tools/research-room-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-route-check.mjs",
+      "bytes": 3784,
+      "sha256": "82a513f5788e0d588375a315e320760cfe5fd865fec913db2942461b71dbf1b0",
+      "archived_path": "source/game3d/tools/research-route-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-seats-check.mjs",
+      "bytes": 2401,
+      "sha256": "e94047513333c42003e43b8ef1533534b6314727830ef95f795c517f93e7d360",
+      "archived_path": "source/game3d/tools/research-seats-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-story-check.mjs",
+      "bytes": 4858,
+      "sha256": "8b35b37acfd2625f834afea67b6fdd52ebc181deac3d5c028dc20d091fd257b9",
+      "archived_path": "source/game3d/tools/research-story-check.mjs"
+    },
+    {
+      "path": "game3d/tools/research-weather-check.mjs",
+      "bytes": 3632,
+      "sha256": "6f3d351b1beda4e9bf84be3ae2a148e1f44aee94a0f2bfa5e76ec1aaefa215fd",
+      "archived_path": "source/game3d/tools/research-weather-check.mjs"
+    },
+    {
+      "path": "notes/research-reading-room/integration-20261007.md",
+      "bytes": 7318,
+      "sha256": "6c13ff7554a7dfb04d78bec790462c7abf8c45f467e5462444b760bac3fea9e7",
+      "archived_path": "source/notes/research-reading-room/integration-20261007.md"
+    },
+    {
+      "path": "notes/research-reading-room/qa.md",
+      "bytes": 18808,
+      "sha256": "11815ae274a97ccb0eb918afa067dc450090b9643704684d86e5472d15c07330",
+      "archived_path": "source/notes/research-reading-room/qa.md"
+    },
+    {
+      "path": "notes/research-reading-room/recovery-20261007.md",
+      "bytes": 4812,
+      "sha256": "b0e6345f73063391a0a0dcb597716d4ec108ef7d6ed02c4dc10dfe79fe46862d",
+      "archived_path": "source/notes/research-reading-room/recovery-20261007.md"
+    },
+    {
+      "path": "notes/research-reading-room/resume-20261007.md",
+      "bytes": 7215,
+      "sha256": "7eedd73d1d2614280934238a2608b80cbcb394cf6ef590851d3bd30847b26bee",
+      "archived_path": "source/notes/research-reading-room/resume-20261007.md"
+    },
+    {
+      "path": "notes/research-reading-room/resume-independent-review.md",
+      "bytes": 2724,
+      "sha256": "af23d4fd904cda1f8d53c96279d4015f5ad519a8e85f97e58ed5e392e8982c64",
+      "archived_path": "source/notes/research-reading-room/resume-independent-review.md"
+    },
+    {
+      "path": "showcase/research-reading-room-20261007/capture-sha256.json",
+      "bytes": 424589,
+      "sha256": "4408f114921e8c8583b3710cf6ab220546e9530138db46f46ad1594ca53d00a2",
+      "archived_path": "source/showcase/research-reading-room-20261007/capture-sha256.json"
+    },
+    {
+      "path": "showcase/research-reading-room-20261007/entry.json",
+      "bytes": 369607,
+      "sha256": "68376fbddde7435c8ba661936597cab6a60bddc20ea5b1445a3254b60dfa6fd0",
+      "archived_path": "source/showcase/research-reading-room-20261007/entry.json"
+    },
+    {
+      "path": "tools/assets/render.html",
+      "bytes": 1777,
+      "sha256": "352e0562fb886cdf9d76c20d02a0fa42515a15d3634a704faf557cedff7012a7",
+      "archived_path": "source/tools/assets/render.html.txt"
+    },
+    {
+      "path": "tools/assets/research-targets.js",
+      "bytes": 1560,
+      "sha256": "c6a8cad4f951f5fc062f1aabeec71e196f6f9ad11f586ce2f9e6d29eb447bb36",
+      "archived_path": "source/tools/assets/research-targets.js"
+    },
+    {
+      "path": "tools/assets/runtime_data.py",
+      "bytes": 3972,
+      "sha256": "4e5667b76d641ee48cec29a7caac4be582bcf4a7a1a696cc182d910bf8c6dc81",
+      "archived_path": "source/tools/assets/runtime_data.py"
+    },
+    {
+      "path": "tools/assets/scan.py",
+      "bytes": 51791,
+      "sha256": "28062311456a6c949d5b31953608f498c00bc79efc4c6f82f9ee907c47f8f3bf",
+      "archived_path": "source/tools/assets/scan.py"
+    },
+    {
+      "path": "tools/assets/viewer.js",
+      "bytes": 18870,
+      "sha256": "ad0418005560a40e7811049ca1900505e80cf04cdc562ea6070719ae1ea403fb",
+      "archived_path": "source/tools/assets/viewer.js"
+    },
+    {
+      "path": "tools/check/module-budgets.json",
+      "bytes": 20510,
+      "sha256": "5cc07fc3bcc64a7817bbda411b72698d2fe8a247cc140253029541bacdf0238a",
+      "archived_path": "source/tools/check/module-budgets.json"
+    },
+    {
+      "path": "tools/voice/cfg.py",
+      "bytes": 12377,
+      "sha256": "fc5c45594f4fd006bc43b3d229e861e4bd8e3095684e541985ca1bc5842d9249",
+      "archived_path": "source/tools/voice/cfg.py"
+    }
+  ],
+  "status": "Parked draft. Story review, voice work, integration and current verification remain pending.",
+  "packaging": "Source files and original.patch retain exact bytes. Historical HTML has a .txt suffix only, mapped by archived_path.",
+  "preservation_branch": "wt/codex-research-integration"
+}

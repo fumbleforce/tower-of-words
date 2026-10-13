@@ -1,0 +1,13 @@
+# Independent continuation review
+
+Codex reviewer, 2026-10-07. No findings in the small continuation delta. Reviewed the window builder, retained-sheet coordinate and four changed browser helpers against the preserved pre-merge snapshot, plus `resume-20261007.md`. This does not review or release the full held Research feature.
+
+`scenes/research-room/view.js` now uses the same `stationDetails` and `signSet` builders as Works. Both window diagnostic captures show the slab path, footings, fence sign and planting. Their camera is explicitly diagnostic; these captures do not establish a dialogue shot or a normal seated window view.
+
+`places/research-room/copy.js` changes only x from -0.30 to -0.26. Height remains 0.636 and depth -1.32. The actual paper bounds in both final Continue reports are x [-0.38, -0.14], z [-1.445333, -1.194667]. Verified against the tabletop builder: x [-1.825, 0.825], z [-2.02, -1.18], top 0.635. The sheet is supported, lies 0.014667 local units inside the near edge and has 0.04 separation from the adjacent book. No reach threshold or shared solver change appears in this repair.
+
+Inspected all fourteen final phone language-first line captures, three handoff action captures, all six final desktop/phone Continue images and four final room/window views. The phone sequence reaches the comparison after learning the word and receiving the copy. Before/Continue images retain the same visible sheet and reading checkpoint. Reports preserve state except the intentionally fresh camera ownership token; completion hides the sheet, retains the owned copy, marks the page and clears hands/camera. No new visual defect is apparent in the changed placement.
+
+The four helpers install the existing public-only request boundary. Route reports confirm visible restored goals at both sizes. All six reviewed runtime/helper sources match the final source manifest and archived copies; selected final evidence hashes also match. Independently ran `git diff --check`: pass. The saved CPU log reports 688 passing unit tests and explicitly fails the required story gate for `mori-reference-dozo.mp3`.
+
+Limits: no fresh browser or broad test run in this review. Callback diagnostics mute audio, automate choices and travel, and seed limited prerequisite state; Continue uses the ordinary Quickslot/title controls. They prove the recorded mechanics, not a cold-player or voiced route. The wider 134-file feature, unchanged authored branches, other protagonists/poses, unresolved Sender keyboard contact and original preservation audit are outside this follow-up. Claude story review, missing voices and the remaining release gates remain required. No overall visual, story or release approval is implied.
