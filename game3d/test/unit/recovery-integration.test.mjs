@@ -8,7 +8,8 @@ import { showRecoveryNotice } from '../../js/ui/recovery-notice.js';
 import { goalAt } from '../../js/narrative/hooks/goal-at.js';
 import { snapshotGoalDestination, restoreGoal } from '../../js/saves/zones.js';
 import { restoreMet } from '../../js/saves/met.js';
-import { migrateDay2Save, needsDay2AccessRecovery } from '../../js/saves/day2.js';
+import { migrateDay2Save } from '../../js/saves/day2.js';
+import { needsAccessRecovery } from '../../js/saves/access-recovery.js';
 import { needsLegacyOpening } from '../../js/narrative/legacy-opening.js';
 import { visitSource } from '../../../tools/lib/source-data.mjs';
 
@@ -53,7 +54,7 @@ test('the actual Continue branch migrates old openings after hydration and prese
     const ui = Object.fromEntries(['refreshWords', 'refreshPeople', 'refreshBag', 'goal', 'sideGoal']
       .map(name => [name, () => events.push(name)]));
     game.hooks = { goal: ({ text, at }) => { assert.deepEqual(at, current ? [5, -1] : null); ui.goal(text); } };
-    const dependencies = { game, flags, ui, restoreGoal, migrateDay2Save, needsDay2AccessRecovery, sim: { met: new Set(), day: 1 }, enter, needsLegacyOpening, restoreMet, canTravel: () => false,
+    const dependencies = { game, flags, ui, restoreGoal, migrateDay2Save, needsAccessRecovery, sim: { met: new Set(), day: 1 }, enter, needsLegacyOpening, restoreMet, canTravel: () => false,
       restore: (target, value) => { assert.equal(target, game); assert.equal(value, saved); events.push('restore'); },
       startScene: place => { assert.equal(place, 'office'); events.push('start'); },
       save: () => events.push('save'), showEnd: () => { throw new Error('Unexpected end'); }, NEXT: {}, PLACES: {},

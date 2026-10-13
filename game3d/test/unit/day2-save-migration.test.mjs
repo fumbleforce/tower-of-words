@@ -109,7 +109,6 @@ test('current unrelated route checkpoints and transitions remain untouched', () 
     { runner: { queued: [newFrame('to_campus', [])] }, place: 'sports' },
     { transition: { from: 'forecourt', to: 'plaza', phase: 'leaving' } },
     { transition: { from: 'office_quarter', to: 'campus', phase: 'arriving' } },
-    { day: 3, transition: { from: 'forecourt', to: 'campus', phase: 'leaving' } },
     { ended: true, transition: { from: 'forecourt', to: 'campus', phase: 'leaving' } },
   ]) {
     const saved = oldSave('sit', { place: 'forecourt', flags: { d2_content_revision: 2 }, ...extra });

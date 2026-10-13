@@ -8,12 +8,13 @@ import { showEnd } from './end.js';
 import { nextDaySave, sampleDayEnd } from './days.js';
 import { restoreGoal } from './saves/zones.js';
 import { restoreMet } from './saves/met.js';
-import { migrateDay2Save, needsDay2AccessRecovery } from './saves/day2.js';
+import { migrateDay2Save } from './saves/day2.js';
+import { needsAccessRecovery } from './saves/access-recovery.js';
 
 export function createContinue(game, { enter, travel, startScene, PLACES }) {
   const ui = game.ui;
   return async function continueFrom(saved) {
-    const recoveredAccess = needsDay2AccessRecovery(saved);
+    const recoveredAccess = needsAccessRecovery(saved);
     saved = migrateDay2Save(saved);
     game.busy = true;
     restore(game, saved);
@@ -49,7 +50,8 @@ export function createContinue(game, { enter, travel, startScene, PLACES }) {
     game.restoreZones?.(saved);
     game.busy = false;
     game.saveEnabled = true;
-    if (recoveredAccess) ui.toast('The northwest staff entrance is closed. You’re back at the station forecourt.');
+    if (recoveredAccess)
+      ui.toast('The northwest staff entrance is closed. You’re on the public side of the station forecourt.');
     const transition = saved.transition;
     if (saved.ended) {
       showEnd(game);
@@ -83,6 +85,13 @@ export function dayStartSave(day, history = 'mio', place = null) {
   const base = prev?.ended && prev.day === day - 1 ? prev : sampleDayEnd(day, history);
   const save = nextDaySave({ ...base, day: day - 1 });
   return place && place !== save.place
-    ? { ...save, place, flags: { ...save.flags, place }, pendingStart: place, world: null, zones: null }
+    ? {
+        ...save,
+        place,
+        flags: { ...save.flags, place },
+        pendingStart: place,
+        world: null,
+        zones: null,
+      }
     : save;
 }

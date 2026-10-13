@@ -1,8 +1,9 @@
 import { flagKeys } from '../narrative/engine-flags.js';
 import { seedVisited } from '../travel/visited.js';
+import { accessRecoveryReason } from './access-recovery.js';
+export { needsAccessRecovery as needsDay2AccessRecovery } from './access-recovery.js';
 const KEYS = flagKeys('game3d/js/saves/day2.js');
 const REVISION = 2;
-const PROTECTED = new Set(['office_quarter', 'harbour', 'campus', 'print_shop', 'ferry_terminal']);
 // These conversations moved from the outdoor bench into the restaurant.
 const PARTY_NODES = new Set([
   'd2_after_work',
@@ -37,30 +38,13 @@ const PARTY_NODES = new Set([
   'd2_topic',
 ]);
 
-// Old checkpoints index the previous scripts. Resume at the place's progress-aware
-// opening instead of interpreting those indices against revised dialogue.
-export function needsDay2AccessRecovery(saved) {
-  if (saved.day !== 2 || saved.ended) return false;
-  if (PROTECTED.has(saved.place)) return true;
-  const transition = saved.transition;
-  if (
-    (transition?.from === 'forecourt' && transition.to === 'campus') ||
-    (transition?.from === 'campus' && transition.to === 'forecourt')
-  )
-    return true;
-  const removedRoute = (place, frame) =>
-    (place === 'forecourt' && frame.node === 'to_campus') || (place === 'campus' && frame.node === 'to_forecourt');
-  return (
-    (saved.runner?.execution?.frames || []).some((frame) =>
-      removedRoute(saved.runner.execution.place || saved.place, frame),
-    ) || (saved.runner?.queued || []).some((frame) => removedRoute(saved.place, frame))
-  );
-}
-
+// Access recovery runs before the day-two content revision shortcut, including later-day seam saves.
 export function migrateDay2Save(saved) {
-  if (saved.day !== 2 || saved.ended) return saved;
-  // The closed staff gate leaves this optional district without a day-two return.
-  const recoverAccess = needsDay2AccessRecovery(saved);
+  const recovery = accessRecoveryReason(saved);
+  // Place restoration already snaps this idle player to public ground; do not restore the stale support after it.
+  if (recovery === 'surface') saved = { ...saved, surface: null, zones: null };
+  const recoverAccess = recovery === 'route';
+  if (!recoverAccess && (saved.day !== 2 || saved.ended)) return saved;
   if (!recoverAccess && saved.flags?.[KEYS.d2_content_revision] === REVISION) return saved;
   const nodes = [...(saved.runner?.execution?.frames || []), ...(saved.runner?.queued || [])].map(
     (frame) => frame.node,
@@ -71,7 +55,7 @@ export function migrateDay2Save(saved) {
   const restart =
     recoverAccess || moveParty || nodes.some((node) => typeof node === 'string' && node.startsWith('d2_'));
   const flags = { ...saved.flags };
-  flags[KEYS.d2_content_revision] = REVISION;
+  if (saved.day === 2) flags[KEYS.d2_content_revision] = REVISION;
   if (!restart) return { ...saved, flags };
   const place = recoverAccess ? 'forecourt' : moveParty ? 'izakaya' : saved.place;
   flags[KEYS.place] = place;
