@@ -19,11 +19,8 @@ You build one outcome in Amakawa, the game in game3d/, from the brief you were g
 
 In your own git worktree, never in the main checkout: this agent type starts in one (`isolation: worktree` above, the Agent tool's worktree isolation; or, for a hand-made one, `tools/worktree.sh new <name>`). First run `tools/worktree.sh setup` there. When done, commit in the worktree and land with `tools/land.sh <your branch>` (land skill); it rebases, checks and fast-forwards main, then removes the worktree.
 
-## Rules you will need
+## Rules
 
-- Jørgen's feedback in the brief is his exact words; build to them, don't push them further (GUIDE: Relay feedback as given).
-- Scenes: GUIDE (Fewest steps, Say what happened). Scope: only what the intro day plays (GUIDE: Scope).
-- Headless browsers and the GPU: GUIDE (Headless browser runs, GPU lock). Never open pages on Jørgen's screen (GUIDE: Never open images or pages on his screen).
 - Look at close-ups of the exact thing you changed, on desktop and phone, before calling it done.
 - World pieces: look in the Asset library first, and add a variant to an existing piece rather than copy one (GUIDE: Art, World pieces).
 
@@ -35,8 +32,6 @@ In your own git worktree, never in the main checkout: this agent type starts in 
 
 ## Done
 
-GUIDE: Definition of done. For you that also means the day test passes at both sizes if game3d/ changed, the docs/game/ file is updated in the same commit when what the game is changed, and tools/land.sh has landed your branch on main.
-
 - **Clean up before you report:** stop every background command and waiting loop you started (no `until`/`while pgrep` loops left behind), and release any GPU lock you hold. A loop left running keeps you listed as working and clutters the machine (Jørgen 2026-10-10: "you should be cleaning up as you go").
 
-- **Live files (2026-10-10, #419):** a new private plugin file or live picture goes through `node tools/assets/live.mjs promote|register`; `node tools/assets/live.mjs check --local` must pass before you report.
+- **Live files:** a new private plugin file or live picture goes through `node tools/assets/live.mjs promote|register`; `node tools/assets/live.mjs check --local` must pass before you report.
