@@ -12,7 +12,7 @@ const ease = (value, a, b) => {
 export function boundaryOverviewPose(x, z, look) {
   const k = (1 - ease(x, west + 2, west + 4)) * ease(z, north - 1, north) * (1 - ease(z, south, south + 1));
   return {
-    yaw: look.yaw + ((Math.PI / 3) * (1 + ease(z, north + 2, south - 2)) - look.yaw) * k,
+    yaw: look.yaw + (0.2 + ((2 * Math.PI) / 3 - 0.2) * ease(z, south - 4, south - 0.5) - look.yaw) * k,
     elev: look.elev + ((64 * Math.PI) / 180 - look.elev) * k,
   };
 }
