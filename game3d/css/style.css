@@ -1178,3 +1178,9 @@ body:not(.phone) #actMenu .act .k { margin-right: 9px; justify-self: start; }
 body:not(.phone) #actMenu .act .k.none { margin: 0; min-width: 0; padding: 0; border: 0; background: none; }
 body:not(.phone) #actMenu .act .lb { grid-column: 2; }
 body:not(.phone) #actMenu .act .ct { grid-column: 3; }
+
+/* The owned outing destination stays readable while Kenji walks to the shop. */
+body.busy.outing-shop-approach:not(.trip) #goal { opacity: 1; pointer-events: none; }
+body.busy.outing-shop-approach:not(.trip) #top > #goal .gl,
+body.busy.outing-shop-approach:not(.trip) #top > #goal #hint { display: none; }
+body.busy.outing-shop-approach:not(.trip) #top > #goal #goal2 { margin: 0; padding: 10px 14px; color: #e6faf7; }

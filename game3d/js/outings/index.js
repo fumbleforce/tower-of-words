@@ -33,7 +33,16 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
     epoch = 0;
   const state = () => model.readOuting(flags[KEYS.outing_kenji]);
   const stage = () => flags[KEYS.outing_stage] || {};
+  const shopCue = () =>
+    globalThis.document?.body.classList.toggle(
+      'outing-shop-approach',
+      state().status === 'active' &&
+        action === 'drink' &&
+        game.ui?.sideText === SHOP_APPROACH &&
+        flags[KEYS.outing_goal] === SHOP_APPROACH,
+    );
   const syncPresentation = () => {
+    shopCue();
     if (!flags[KEYS.outing_kenji]) return;
     const active = state().status === 'active';
     flags[KEYS.outing_waiting] = active && !!stage().waiting;
@@ -44,6 +53,7 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
     flags[KEYS.outing_goal] = text;
   };
   const shopGoal = (P) => {
+    shopCue();
     const wait = stage();
     const approaching = action === 'drink' && !wait.waiting;
     if (state().status !== 'active' || (!wait.waiting && !approaching)) return;
@@ -70,6 +80,7 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
           : 'Choose and buy a drink. Kenji is waiting outside.';
     }
     if (text && flags[KEYS.outing_goal] !== text) goal(text);
+    shopCue();
   };
   const setStage = (value) => {
     flags[KEYS.outing_stage] = value;

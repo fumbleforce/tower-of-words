@@ -220,8 +220,9 @@ await withBrowserJob(`outing-${stem}`, async browser => {
   };
   async function continueSave(expectedPlace) {
     phase = 'quickslot-continue';
+    const savedBefore = await page.evaluate(async () => (await import('./js/saves/actions.js')).store.info('quick')?.at || 0);
     if (width < 700) await page.locator('#qsaveBtn').click(); else await page.keyboard.press('F5');
-    await page.waitForTimeout(400);
+    await page.waitForFunction(async before => ((await import('./js/saves/actions.js')).store.info('quick')?.at || 0) > before, savedBefore, { timeout: 10000 });
     const receipt = await page.evaluate(async () => { const data = (await import('./js/saves/actions.js')).store.info('quick')?.data; return data && { place: data.place, transition: data.transition, outing: data.world?.outing, stage: data.flags?.outing_stage, state: data.flags?.outing_kenji, runner: data.runner };  });
     assert.ok(receipt, 'native Quickslot was written'); report.push({ case: 'quickslot-receipt', receipt });
     await page.goto(`${base}/index.html?mc=${mc}`);
@@ -246,6 +247,25 @@ await withBrowserJob(`outing-${stem}`, async browser => {
     await page.waitForFunction(() => globalThis.__game.outing.actor.rig.meshy && globalThis.__game.player.meshy);
     const invited = await checkpoint('invited');
     assert.equal(invited.companion.chibi, false); assert.equal(invited.player.chibi, false);
+    if (mode === 'drinkcue') {
+      await chat(); await finish([], 'Buy a drink at the convenience store.');
+      await pick('Buy a drink at the convenience store.');
+      const dialogue = finish();
+      await page.waitForFunction(() => {
+        const g = globalThis.__game, goal = globalThis.document.getElementById('goal');
+        return globalThis.document.body.classList.contains('outing-shop-approach') && g.outing.actor.rig._walk &&
+          +globalThis.getComputedStyle(goal).opacity > .99;
+      }, null, { timeout: 30000 });
+      const cue = await page.evaluate(() => ({ text: globalThis.document.querySelector('#goal2 .t').textContent,
+        mainDisplay: globalThis.getComputedStyle(globalThis.document.querySelector('#goal .gl')).display,
+        opacity: globalThis.getComputedStyle(globalThis.document.getElementById('goal')).opacity,
+        moving: !!globalThis.__game.outing.actor.rig._walk }));
+      report.push({ case: 'visible-shop-departure', cue });
+      assert.match(cue.text, /Kenji is heading to the convenience store/); assert.equal(cue.mainDisplay, 'none');
+      await page.screenshot({ path: `${out}/${stem}-shop-departure-visible.png` });
+      await dialogue; await ready(); await checkpoint('shop-waiting');
+      assert.equal(await page.evaluate(() => globalThis.document.body.classList.contains('outing-shop-approach')), false);
+    }
     if (['story', 'storyarcade', 'arcadeview'].includes(mode)) {
       await chat(); await finish([], 'Invite Kenji for a walk.'); await checkpoint('ui-invite-menu');
       await pick('Invite Kenji for a walk.'); await finish([], 'Explore the shop street together.'); await checkpoint('ui-route-menu');

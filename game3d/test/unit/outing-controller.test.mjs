@@ -339,3 +339,23 @@ test('shop directions follow approach, entry, payment, collection and reunion wi
  assert.equal(flags.outing_stage.collected, true);
  assert.equal(game.ui.sideText, 'Meet Kenji outside the convenience store.');
  });
+
+ test('departure cue visibility belongs only to the current shop action and clears on terminal paths', async () => {
+ const previous = globalThis.document, classes = new Set();
+ globalThis.document = { body: { classList: { toggle(name, enabled) { enabled ? classes.add(name) : classes.delete(name); } } } };
+ try {
+ for (const terminal of ['arrival', 'failed', 'cancelled', 'paused', 'foreign']) {
+ const { outing, game, context } = setup();
+ game.ui = { sideText: '', sideGoal(text) { this.sideText = text; } }; outing.invite();
+ if (terminal === 'failed') context.blocked = true;
+ context.afterWalk = () => {
+ assert.ok(classes.has('outing-shop-approach'), terminal + ' departure is visible');
+ if (terminal === 'cancelled') outing.keepWalking();
+ if (terminal === 'paused') outing.pause();
+ if (terminal === 'foreign') { game.ui.sideText = 'Other activity.'; outing.update(game.place); }
+ };
+ await outing.stop('drink');
+ assert.equal(classes.has('outing-shop-approach'), false, terminal + ' clears visibility');
+ }
+ } finally { globalThis.document = previous; }
+ });
