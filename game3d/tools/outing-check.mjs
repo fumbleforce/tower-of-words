@@ -155,6 +155,7 @@ await withBrowserJob(`outing-${stem}`, async browser => {
     await page.waitForTimeout(1000); // Let the authored camera settle before reading the touch target.
     const point = await page.evaluate(() => { const r = globalThis.__game.markers.list.find(m => m.id === 'kenji').el.querySelector('.pin').getBoundingClientRect(); return [r.x + r.width / 2, r.y + r.height / 2]; });
     if (width < 700) await page.touchscreen.tap(...point); else await page.mouse.click(...point);
+    console.log('CHAT_PROBE', JSON.stringify(await page.evaluate(() => { const g=globalThis.__game,p=g.player.root.position,q=g.place.things.kenji.spot(); return {at:p.toArray(),to:q,near:g.near?.id,topic:g.topicFor('kenji'),met:[...g.sim.met],busy:g.busy,path:g.walker.path,nav:g.place.nav.path(p.x,p.z,...q),menu:globalThis.document.querySelector('#actMenu')?.outerHTML}; })));
     const topic = page.locator('#actMenu:not([hidden]) .topic');
     await topic.waitFor({ state: 'visible', timeout: 20000 });
     assert.match(await topic.innerText(), /^Chat (with Kenji|about our walk)$/); await shot('chat-action-' + (++dialogueFrame));
@@ -214,8 +215,8 @@ await withBrowserJob(`outing-${stem}`, async browser => {
     assert.equal(invited.companion.chibi, false); assert.equal(invited.player.chibi, false);
     if (['story', 'storyarcade', 'arcadeview'].includes(mode)) {
       await chat(); await finish([], 'Invite Kenji for a walk.'); await checkpoint('ui-invite-menu');
-      await pick('Invite Kenji for a walk.'); await finish([], 'Walk to the shop street together.'); await checkpoint('ui-route-menu');
-      await pick('Walk to the shop street together.'); await finish(); await ready();
+      await pick('Invite Kenji for a walk.'); await finish([], 'Explore the shop street together.'); await checkpoint('ui-route-menu');
+      await pick('Explore the shop street together.'); await finish(); await ready();
       assert.equal((await checkpoint('ui-invited')).outing.status, 'active');
       await chat(); await finish([], 'Stop by the game centre together.');
       await pick('Stop by the game centre together.'); await finish([], 'Head to the seafront.');
@@ -257,16 +258,16 @@ await withBrowserJob(`outing-${stem}`, async browser => {
           await page.waitForTimeout(1000); report.push({ case: 'arcade-view-' + i, view, geometry }); await shot('arcade-view-' + i);
         }
       } else if (mode === 'storyarcade') {
-        await pick('Stay here a little longer.'); await finish(); await ready(); await checkpoint('ui-arcade-stay');
+        await pick('Keep looking around.'); await finish(); await ready(); await checkpoint('ui-arcade-stay');
         await chat(); await finish([], 'Stop by the game centre together.'); await checkpoint('ui-arcade-chat-reentry');
         await pick('Keep walking together.'); await finish(); await ready(); await checkpoint('ui-arcade-keep-walking');
       } else {
       await pick('Head to the seafront.'); await finish(); await ready(); await checkpoint('ui-coast-goal');
       await use('plaza_lane', 'plaza'); await use('dorm_lane', 'east_lane'); await use('dorm_row', 'east_coast');
       await chat(); await finish([], 'Sit on the seafront bench with Kenji.');
-      await pick('Sit on the seafront bench with Kenji.'); await finish([], 'Stay on the bench a little longer.');
+      await pick('Sit on the seafront bench with Kenji.'); await finish([], 'Keep sitting with Kenji.');
       const bench = await checkpoint('ui-bench-controls'); assert.ok(bench.player.seated && bench.companion.seated);
-      await pick('Stay on the bench a little longer.'); await finish(); await ready();
+      await pick('Keep sitting with Kenji.'); await finish(); await ready();
       await chat(); await finish([], 'Get up and keep walking.'); await checkpoint('ui-bench-chat');
       assert.ok((await state()).player.seated, 'real bench Chat preserves sitting');
       await pick('Get up and keep walking.'); await finish(); await ready();
@@ -277,9 +278,9 @@ await withBrowserJob(`outing-${stem}`, async browser => {
     } else if (mode === 'storybench') {
       await page.evaluate(() => globalThis.__game.travel('east_coast', { fast: true })); await ready();
       await chat(); await finish([], 'Sit on the seafront bench with Kenji.'); await checkpoint('ui-before-sit');
-      await pick('Sit on the seafront bench with Kenji.'); await finish([], 'Stay on the bench a little longer.');
+      await pick('Sit on the seafront bench with Kenji.'); await finish([], 'Keep sitting with Kenji.');
       const bench = await checkpoint('ui-bench-controls'); assert.ok(bench.player.seated && bench.companion.seated);
-      await pick('Stay on the bench a little longer.'); await finish(); await ready();
+      await pick('Keep sitting with Kenji.'); await finish(); await ready();
       await chat(); await finish([], 'Get up and keep walking.'); await checkpoint('ui-bench-chat');
       await pick('Get up and keep walking.'); await finish(); await ready();
       const standing = await checkpoint('ui-standing'); assert.ok(!standing.player.seated && !standing.companion.seated);

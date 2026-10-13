@@ -1,6 +1,9 @@
 import { KONBINI_OPEN } from '../../js/gameplay/shop-hours.js';
 
-const kenji = (text, emo = 'casual') => ({ say: 'kenji', overheard: true, emo, text });
+const kenji = (text, emo = 'casual') => ({
+  say: 'kenji', overheard: true, emo, text,
+  ...(text.includes('ゲームセンター') ? { clear: [{ ja: 'ゲームセンター', ro: 'gēmu sentā', en: 'game centre' }] } : {}),
+});
 const player = (text, emo = 'warm') => ({ say: 'eric', emo, text });
 const action = (state) => ({ do: 'outing', state });
 const release = [{ do: 'cam', back: true }, { do: 'save' }];
@@ -50,7 +53,7 @@ export default {
         ],
       },
     ],
-    outing_invite: [player('Want to come for a walk?'), { go: 'outing_accept' }],
+    outing_invite: [player('Would you like to come for a walk?'), { go: 'outing_accept' }],
     outing_invite_words: [
       player('{isshoni}……{ikitai}。', 'hesitant'),
       action('invite'),
@@ -65,7 +68,7 @@ export default {
       { go: 'outing_choose_route' },
     ],
     outing_resume: [
-      player('Want to carry on with our walk?'),
+      player('Shall we carry on with our walk?'),
       action('resume'),
       { if: '!outing_action_complete', then: [{ go: 'outing_busy' }] },
       kenji('はい、行きましょう。', 'warm'),
@@ -73,6 +76,7 @@ export default {
     ],
     outing_busy: [
       kenji('すみません、今はちょっと。またあとでお願いします。', 'sheepish'),
+      { do: 'bow', who: 'kenji', depth: 'small' },
       player("Okay, I'll ask you later."),
       ...release,
     ],
@@ -80,8 +84,10 @@ export default {
       { do: 'gesture', who: 'kenji', kind: 'nod', to: 'eric' },
       {
         choice: [
-          { text: 'Walk to the shop street together.', go: 'outing_route_shop' },
-          { text: 'Walk to the seafront together.', go: 'outing_route_coast' },
+          { text: 'Walk to the shop street together.', if: "place != 'shotengai'", go: 'outing_route_shop' },
+          { text: 'Explore the shop street together.', if: "place == 'shotengai'", go: 'outing_route_shop' },
+          { text: 'Walk to the seafront together.', if: "place != 'east_coast'", go: 'outing_route_coast' },
+          { text: 'Walk along the seafront together.', if: "place == 'east_coast'", go: 'outing_route_coast' },
           { text: 'Actually, another time.', go: 'outing_defer' },
         ],
       },
@@ -104,12 +110,18 @@ export default {
     ],
     outing_route_shop: [
       action('keepWalking'),
-      { do: 'outing', state: 'goal', text: 'Walk with Kenji to the shop street. Chat with him to choose a stop.' },
+      { if: "place == 'shotengai'",
+        then: [{ do: 'outing', state: 'goal', text: 'Look around the shop street with Kenji. Chat with him to choose a stop.' }],
+        else: [{ do: 'outing', state: 'goal', text: 'Walk with Kenji to the shop street. Chat with him to choose a stop.' }],
+      },
       ...release,
     ],
     outing_route_coast: [
       action('keepWalking'),
-      { do: 'outing', state: 'goal', text: 'Walk with Kenji to the seafront bench. Chat with him to choose a stop.' },
+      { if: "place == 'east_coast'",
+        then: [{ do: 'outing', state: 'goal', text: 'Walk along the seafront with Kenji. Chat with him to choose a stop.' }],
+        else: [{ do: 'outing', state: 'goal', text: 'Walk with Kenji to the seafront. Chat with him to choose a stop.' }],
+      },
       ...release,
     ],
     outing_keep_walking: [
@@ -144,7 +156,7 @@ export default {
     outing_shop_controls: [
       {
         choice: [
-          { text: 'Stay here a little longer.', go: 'outing_stay_arcade' },
+          { text: 'Keep looking around.', go: 'outing_stay_arcade' },
           { text: 'Buy a drink at the convenience store.', go: 'outing_drink' },
           { text: 'Head to the seafront.', go: 'outing_route_coast' },
           { text: 'Keep walking together.', go: 'outing_keep_walking' },
@@ -198,7 +210,7 @@ export default {
       action('coast'),
       {
         if: '!outing_action_complete',
-        then: [player("We can't sit here together. Let's keep walking.", 'casual'), { go: 'outing_keep_walking' }],
+        then: [player("There's no room for both of us. Let's keep walking.", 'casual'), { go: 'outing_keep_walking' }],
       },
       { do: 'cam', on: 'kenji', zoom: 1.2, conversation: 'kenji' },
       { if: '!outing_coast_repeat', then: [kenji('ああ、ちょっと休みましょうか。')] },
@@ -209,7 +221,7 @@ export default {
       { do: 'cam', on: 'kenji', zoom: 1.2, conversation: 'kenji' },
       {
         choice: [
-          { text: 'Stay on the bench a little longer.', go: 'outing_leave_chat' },
+          { text: 'Keep sitting with Kenji.', go: 'outing_leave_chat' },
           { text: 'Get up and keep walking.', go: 'outing_stand' },
           { text: 'I should get going.', go: 'outing_part' },
         ],
@@ -217,7 +229,7 @@ export default {
     ],
     outing_stand: [
       player('Shall we keep going?', 'casual'),
-      kenji('はい、行きましょう。', 'warm'),
+      kenji('そうですね。行きましょうか。', 'warm'),
       { go: 'outing_keep_walking' },
     ],
     outing_part: [
@@ -228,7 +240,7 @@ export default {
     ],
     outing_finish: [
       action('finish'),
-      ...failed('outing_finish', 'Let Kenji try to leave again.'),
+      ...failed('outing_finish', 'Say goodbye again.'),
       { do: 'outing', state: 'goal', text: '' },
       { do: 'save' },
     ],
@@ -241,13 +253,13 @@ export default {
     ],
     outing_recall_drink: [
       player('Thanks for waiting while I got my drink.'),
-      kenji('はい。また一緒に行きましょう。', 'warm'),
+      kenji('いえ。また一緒に行きましょう。', 'warm'),
       { do: 'gesture', who: 'kenji', kind: 'nod', to: 'eric' },
       ...release,
     ],
     outing_recall_coast: [
-      player('I liked stopping at that bench with you.'),
-      kenji('はい。またあそこに座りましょう。', 'warm'),
+      player('That bench had a good view.'),
+      kenji('そうですね。またあそこに座りましょう。', 'warm'),
       { do: 'gesture', who: 'kenji', kind: 'nod', to: 'eric' },
       ...release,
     ],

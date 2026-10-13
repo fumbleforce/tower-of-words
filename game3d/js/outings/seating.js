@@ -101,6 +101,7 @@ export async function sitOutingPair(game, companion, seats, valid, { walk = walk
     scale = P.charScale || 1,
     rigs = [game.player, companion];
   game.standUp?.();
+  game.jump?.reset?.();
   if (companion.seated) {
     const out = companion.seatOut;
     standPose(companion);

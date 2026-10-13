@@ -13394,9 +13394,9 @@
   "emo": "bright"
  },
  {
-  "key": "ln-137i8yr",
+  "key": "ln-kvsg0y",
   "speaker": "eric",
-  "text": "Want to come for a walk?",
+  "text": "Would you like to come for a walk?",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -13448,9 +13448,9 @@
   "emo": "bright"
  },
  {
-  "key": "ln-38vyb1",
+  "key": "ln-10w2scy",
   "speaker": "eric",
-  "text": "Want to carry on with our walk?",
+  "text": "Shall we carry on with our walk?",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -13514,7 +13514,9 @@
     "ここ"
    ]
   ],
-  "clear": [],
+  "clear": [
+   "ゲームセンター"
+  ],
   "emo": "bright"
  },
  {
@@ -13534,7 +13536,9 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": [],
+  "clear": [
+   "ゲームセンター"
+  ],
   "emo": "bright"
  },
  {
@@ -13587,9 +13591,9 @@
   "emo": "casual"
  },
  {
-  "key": "ln-19ym0ks",
+  "key": "ln-18rowme",
   "speaker": "eric",
-  "text": "We can't sit here together. Let's keep walking.",
+  "text": "There's no room for both of us. Let's keep walking.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -13620,6 +13624,16 @@
   "words": [],
   "clear": [],
   "emo": "casual"
+ },
+ {
+  "key": "oh-o6z9lb",
+  "speaker": "kenji",
+  "text": "そうですね。行きましょうか。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
  },
  {
   "key": "ln-dh46pw",
@@ -13682,9 +13696,9 @@
   "emo": "warm"
  },
  {
-  "key": "oh-14p97of",
+  "key": "oh-vwruuw",
   "speaker": "kenji",
-  "text": "はい。また一緒に行きましょう。",
+  "text": "いえ。また一緒に行きましょう。",
   "lang": "ja",
   "overheard": true,
   "words": [],
@@ -13692,9 +13706,9 @@
   "emo": "warm"
  },
  {
-  "key": "ln-1kuaamz",
+  "key": "ln-801803",
   "speaker": "eric",
-  "text": "I liked stopping at that bench with you.",
+  "text": "That bench had a good view.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -13702,9 +13716,9 @@
   "emo": "warm"
  },
  {
-  "key": "oh-1wt04st",
+  "key": "oh-128as5q",
   "speaker": "kenji",
-  "text": "はい。またあそこに座りましょう。",
+  "text": "そうですね。またあそこに座りましょう。",
   "lang": "ja",
   "overheard": true,
   "words": [],
@@ -20936,9 +20950,9 @@
   "emo": "curious"
  },
  {
-  "key": "ln-137i8yr-carina",
+  "key": "ln-kvsg0y-carina",
   "speaker": "carina",
-  "text": "Want to come for a walk?",
+  "text": "Would you like to come for a walk?",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -20965,9 +20979,9 @@
   "emo": "hesitant"
  },
  {
-  "key": "ln-38vyb1-carina",
+  "key": "ln-10w2scy-carina",
   "speaker": "carina",
-  "text": "Want to carry on with our walk?",
+  "text": "Shall we carry on with our walk?",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -21025,9 +21039,9 @@
   "emo": "casual"
  },
  {
-  "key": "ln-19ym0ks-carina",
+  "key": "ln-18rowme-carina",
   "speaker": "carina",
-  "text": "We can't sit here together. Let's keep walking.",
+  "text": "There's no room for both of us. Let's keep walking.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -21075,9 +21089,9 @@
   "emo": "warm"
  },
  {
-  "key": "ln-1kuaamz-carina",
+  "key": "ln-801803-carina",
   "speaker": "carina",
-  "text": "I liked stopping at that bench with you.",
+  "text": "That bench had a good view.",
   "lang": "en",
   "overheard": false,
   "words": [],
