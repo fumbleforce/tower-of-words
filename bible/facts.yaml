@@ -46,11 +46,11 @@ characters:
       - [art/approved/mc/eric-eric-ink-2001-tired.webp, "Eric: tired (reviews/style-align-1 or npc-base-1 pick eric-ink-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
       - [art/approved/mc/eric-v2-734.webp, "eric-v2-734, the portrait the game's cut-outs come from", review]
       - [art/approved/mc/mc-it-guy-after.webp, "M-02-it-guy-601, the first approved portrait (eyes closed, red rim light). Replaced on 2026-09-28, now back under review for its style", review]
-      - [legacy/proto2/gallery/M-02-it-guy-601.webp, "M-02-it-guy-601 as picked on the chooser", review]
-      - [legacy/proto2/gallery/A-mc-neutral.webp, "A-mc gallery set: neutral (a younger, earlier main character)", review]
-      - [legacy/proto2/gallery/A-mc-smile.webp, "A-mc gallery set: smile", review]
-      - [legacy/proto2/gallery/A-mc-nervous.webp, "A-mc gallery set: nervous", review]
-      - [legacy/proto2/gallery/A-mc-magic.webp, "A-mc gallery set: magic", review]
+      - [art/references/eric-ancient/M-02-it-guy-601.webp, "M-02-it-guy-601 as picked on the chooser", review]
+      - [art/references/eric-ancient/A-mc-neutral.webp, "A-mc gallery set: neutral (a younger, earlier main character)", review]
+      - [art/references/eric-ancient/A-mc-smile.webp, "A-mc gallery set: smile", review]
+      - [art/references/eric-ancient/A-mc-nervous.webp, "A-mc gallery set: nervous", review]
+      - [art/references/eric-ancient/A-mc-magic.webp, "A-mc gallery set: magic", review]
     model: {dir: art/approved/mc/meshy, preview: art/approved/mc/meshy/preview.png, status: approved, src: "GUIDE.md ~ 3D character workflow", note: "Meshy task 01a0e731-1faf-70a7-98e4-c0f2d163c246. The game loads slimmed copies from game3d/assets/eric/. Approved (Jørgen, 2026-09-28: \"of course we need Mio and Eric's Meshy models\")."}
     facts:
       - ["Portrait eric-v2-734 (Jørgen, 2026-09-28: \"734 is best\"): the M-02-it-guy-601 design with his eyes open and without the red rim light. RDBT, seed 734.", review, "art/candidates/portraits/eric-sheet-v2.png"]
