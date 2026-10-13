@@ -4,6 +4,7 @@
 //   photoImg(print, thumb)          an <img> of the picture, 4:3
 //   printTexture(print, onReady)    a small canvas: the picture in a white border, for the print lying in the world;
 //                                   onReady() runs once the picture is drawn into it
+import { pageUrl } from '../reading-room/pages.js';
 import { JP_FONT } from '../props.js';
 
 const TAU = Math.PI * 2;
@@ -18,7 +19,11 @@ export function photoImg(print, thumb = false) {
   const img = new Image(4, 3); // the 4:3 box holds its place in the layout while it loads
   img.decoding = 'async';
   img.alt = '';
-  img.src = photoUrl(print, thumb);
+  if (print.startsWith('research:')) {
+    img.width = 900;
+    img.height = 940;
+    img.src = pageUrl(print.slice(9));
+  } else img.src = photoUrl(print, thumb);
   return img;
 }
 

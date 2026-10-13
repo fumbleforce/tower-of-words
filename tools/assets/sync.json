@@ -13,7 +13,8 @@
   "lists": [
     "tools/creator/base/public.json",
     "tools/creator/astra/viewer/review-assets.json",
-    "bible/pages-media.json"
+    "bible/pages-media.json",
+    "tools/assets/research-references.json"
   ],
   "exclude": [
     "*.blend1"

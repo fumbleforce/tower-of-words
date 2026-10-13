@@ -13,6 +13,8 @@
 // on the hall apron, from the south-west up the street and the research walk (places/works.js eases it).
 // Evening: the lamps, the server hall's door and two of its windows, the two fronts' ground floors and canopies and
 // the town's windows light up; the factory, the plant and the gatehouse stay dark.
+import { buildResearchRoom } from './research-room/room.js';
+import { ORIGIN as RESEARCH_ORIGIN } from './research-room/plan.js';
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
 import { outdoorLight, sunFollow, TOWN } from './town.js';
@@ -67,7 +69,17 @@ export function* worksSteps() {
   const p = new Parts(),
     sets = blockSets();
   yield* buildingsSteps(p, sets, signs, plain, lights);
-  for (const k of P.FRONTS) yield* frontSteps(sets, signs, lights, k);
+  for (const k of P.FRONTS)
+    yield* frontSteps(
+      sets,
+      signs,
+      lights,
+      k,
+      k.id === 'n4' ? { open: true, interior: [-35.2, -27, -106.8, -100.1] } : {},
+    );
+  const reading = buildResearchRoom({ preview: true });
+  reading.root.position.set(RESEARCH_ORIGIN[0], 0, RESEARCH_ORIGIN[1]);
+  isl.add(reading.root);
   yield* frontSteps(sets, signs, lights, harbourFront('works_orange'));
   warehouse(p, lights.glowParts, lights, signs);
   // the ground and the small things, in cells so what the camera can't see is culled (a group of its own, added
@@ -117,6 +129,7 @@ export function* worksSteps() {
     scene,
     sun,
     nav,
+    readingBooks: reading.books,
     follow: shadows.follow,
     in: P.IN,
     arriveEdge: P.ARRIVE_EDGE,

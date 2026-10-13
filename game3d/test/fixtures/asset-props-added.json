@@ -3081,6 +3081,174 @@
     ]
   },
   {
+    "id_": "prop/research_lab/research_archive",
+    "kind": "prop",
+    "name": "Reference index",
+    "paths": [
+      "game3d/js/places/research-room.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "research-room.js things.research_archive",
+    "place": "research_lab",
+    "used": [
+      "Research reading room: tap target 'Reference index'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "research-room",
+      "target": "research_archive"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/research_lab/research_books",
+    "kind": "prop",
+    "name": "Reference books",
+    "paths": [
+      "game3d/js/places/research-room.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "research-room.js things.research_books",
+    "place": "research_lab",
+    "used": [
+      "Research reading room: tap target 'Reference books'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "research-room",
+      "target": "research_books"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/research_lab/research_end_seat",
+    "kind": "prop",
+    "name": "Table-end chair",
+    "paths": [
+      "game3d/js/places/research-room.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "research-room.js things.research_end_seat",
+    "place": "research_lab",
+    "used": [
+      "Research reading room: tap target 'Table-end chair'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "research-room",
+      "target": "research_end_seat"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/research_lab/research_exit",
+    "kind": "prop",
+    "name": "Old works",
+    "paths": [
+      "game3d/js/places/research-room.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "research-room.js things.research_exit",
+    "place": "research_lab",
+    "used": [
+      "Research reading room: tap target 'Old works'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "research-room",
+      "target": "research_exit"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/research_lab/research_side_seat",
+    "kind": "prop",
+    "name": "Reading chair",
+    "paths": [
+      "game3d/js/places/research-room.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "research-room.js things.research_side_seat",
+    "place": "research_lab",
+    "used": [
+      "Research reading room: tap target 'Reading chair'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "research-room",
+      "target": "research_side_seat"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/research_lab/research_table_seat",
+    "kind": "prop",
+    "name": "Reading chair",
+    "paths": [
+      "game3d/js/places/research-room.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "research-room.js things.research_table_seat",
+    "place": "research_lab",
+    "used": [
+      "Research reading room: tap target 'Reading chair'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "research-room",
+      "target": "research_table_seat"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/research_lab/research_window_seat",
+    "kind": "prop",
+    "name": "Window chair",
+    "paths": [
+      "game3d/js/places/research-room.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "research-room.js things.research_window_seat",
+    "place": "research_lab",
+    "used": [
+      "Research reading room: tap target 'Window chair'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "research-room",
+      "target": "research_window_seat"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/shotengai/bakery",
     "kind": "prop",
     "name": "Delivery note",
@@ -3787,6 +3955,30 @@
     "view": {
       "type": "room",
       "room": "works"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/works/weather_station",
+    "kind": "prop",
+    "name": "Weather station",
+    "paths": [
+      "game3d/js/places/works.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "works.js things.weather_station",
+    "place": "works",
+    "used": [
+      "Old works: tap target 'Weather station'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "works",
+      "target": "weather_station"
     },
     "tags": [
       "in game",

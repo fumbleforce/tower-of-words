@@ -93,7 +93,8 @@ for (const [place, story] of Object.entries(STORIES)) {
   assert(facts.includes(`day2/${place}.js`), `${place}: missing facts entry`);
   for (const node of Object.keys(story.nodes)) assert(facts.includes('`' + node + '`'), `${place}/${node}: missing facts node`);
 }
-assert.deepEqual([...new Set(typed.map(x => x.word))].sort(), Object.keys(NEW_WORDS).sort(), 'Each new word needs a teaching node');
+assert.deepEqual([...new Set(typed.map(x => x.word))].sort(), [...Object.keys(NEW_WORDS), 'shiryou'].sort(), 'Each new word needs a teaching node');
+assert.deepEqual(typed.filter(t => t.word === 'shiryou'), [{ place: 'research_lab', node: 'word_practice', word: 'shiryou', from: 'research_reader' }], 'The shared optional reference word has one exact teaching source');
 for (const t of typed) assert(facts.includes(`| \`${t.word}\` | \`${t.from}\` | \`${t.node}\` |`), 'Missing taught-word fact');
 
 // Exercise actual story data with the engine's condition evaluator. Hooks are recorded, not faked as built scenes.
@@ -195,7 +196,7 @@ for (const submitted of [false, true]) {
 }
 // The closed northwest staff gate protects this optional district on day two.
 // Every active place still reaches every main-day goal and home in both periods.
-const protectedPlaces = ['office_quarter', 'harbour', 'campus', 'print_shop', 'ferry_terminal'];
+const protectedPlaces = ['office_quarter', 'harbour', 'campus', 'print_shop', 'ferry_terminal', 'works', 'research_lab'];
 const activePlaces = OPEN_PLACES.filter(place => !protectedPlaces.includes(place));
 assert(protectedPlaces.every(place => OPEN_PLACES.includes(place)));
 for (const period of PERIODS) for (const start of OPEN_PLACES) {
@@ -204,7 +205,7 @@ for (const period of PERIODS) for (const start of OPEN_PLACES) {
   const expected = protectedPlaces.includes(start) ? protectedPlaces : activePlaces;
   assert.deepEqual([...seen].sort(), [...expected].sort(), `${period}: wrong access from ${start}`);
 }
-for (const [from, to] of Object.entries({ campus: ['office_quarter', 'harbour', 'print_shop'], office_quarter: ['campus', 'harbour'], harbour: ['campus', 'office_quarter', 'ferry_terminal'], print_shop: ['campus'], ferry_terminal: ['harbour'] }))
+for (const [from, to] of Object.entries({ campus: ['office_quarter', 'harbour', 'print_shop'], office_quarter: ['campus', 'harbour'], harbour: ['campus', 'office_quarter', 'ferry_terminal', 'works'], works: ['harbour', 'research_lab'], research_lab: ['works'], print_shop: ['campus'], ferry_terminal: ['harbour'] }))
   assert.deepEqual([...TRIPS[from]].sort(), [...to].sort(), `${from}: protected links changed`);
 // A return after any completed milestone must point toward the next unfinished action.
 const milestones = [

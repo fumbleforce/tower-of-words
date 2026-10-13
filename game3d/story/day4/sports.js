@@ -1,8 +1,8 @@
 import { place, goal } from './shared.js';
 import { tennisNodes } from './tennis.js';
-export default place({ east_lane: ['talk:north_street', 'zone:north_exit'],
+export default place({ office_quarter: ['talk:office_street', 'zone:west_exit'], east_lane: ['talk:north_street', 'zone:north_exit'],
   east_coast: ['talk:onsen_path', 'zone:east_exit'], gym: ['talk:gym'], pool: ['talk:pool'] }, {
-  closed: ['talk:office_street', 'zone:west_exit'],
+
   labels: { rei: ['Rei', 'd4_rei_intro'], aoi: ['Aoi', 'd3_aoi_intro'] },
   show: { bench_ball: "period == 'evening' && !d4_bottle_seen" },
   on: {

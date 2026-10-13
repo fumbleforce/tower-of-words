@@ -83,6 +83,11 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   expected.nodes = expected.nodes.filter(id => !closed.has(id));
   expected.edges = expected.edges.filter(edge => !closed.has(edge.from) && !closed.has(edge.to));
   for (const flag of ['outing_kenji', 'outing_stage', 'outing_active', 'outing_paused', 'outing_callback', 'outing_done_arcade', 'outing_done_drink', 'outing_done_coast', 'outing_waiting', 'outing_seated', 'outing_goal', 'outing_action_complete']) expected.engine.exact[flag] = ['game3d/js/outings/index.js'];
+  expected.engine.events.research_lab = {};
+  expected.engine.placeFile.research_lab = 'game3d/js/places/research-room.js';
+  expected.engine.exact.research_state = ['game3d/js/reading-room/state.js'];
+  expected.engine.exact.research_weather_seen = ['game3d/js/places/research-room/activity.js'];
+  for (const flag of ['research_action_ok', 'research_has_book', 'research_office_ok', 'research_mori_available', 'research_mori_understood', 'research_notes_recognized', 'research_mori_return_ready']) expected.engine.exact[flag] = ['game3d/js/reading-room/hook.js'];
   assert.deepEqual(plain, expected);
 });
 test('missing and unexpected runtime registrations fail before play', () => {

@@ -1,0 +1,31 @@
+{
+  "source": "ln-vnnoog-carina~1/x1313.wav",
+  "destination": "carina-shiryou/r1313.wav",
+  "sha256": "f282621e68c74b546d9eebaab7af59cc30543a71befec4bf50f6b27270537f2d",
+  "unaltered": true,
+  "reason": "Same Carina spoken word 資料; standalone strict gates rerun",
+  "strict_validation": {
+    "dur": 1.04,
+    "speech": 0.8,
+    "median_f0": 230.1,
+    "low160": 0.156,
+    "pitch_ok": true,
+    "asr": "資料",
+    "cer": 0.0,
+    "edits": 0,
+    "sim": 0.681,
+    "lufs": -19.9,
+    "short": false,
+    "dur_ok": true,
+    "read_ok": true,
+    "ok": true,
+    "cer_written": 0.0,
+    "p_ja": 0.972,
+    "p_en": 0.011,
+    "native_ok": true,
+    "accent": null,
+    "mtime": 1791930721,
+    "text": "資料。",
+    "reading": "資料。"
+  }
+}

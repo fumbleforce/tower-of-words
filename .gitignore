@@ -1638,3 +1638,13 @@ collab/.post.lock
 /game3d/shots/karaoke-cold-player/
 /game3d/shots/kenji-cold/
 /game3d/shots/conversation-reciprocity-final/
+# Research reference illustrations are stored with the other live assets.
+/game3d/assets/references/copier-exterior.svg
+/game3d/assets/references/copier-paper.svg
+/game3d/assets/references/mori-copy.svg
+/game3d/assets/references/weather-plan.svg
+/game3d/assets/references/weather-shapes.svg
+
+# Research integration evidence stays local.
+/game3d/shots/finish-research-317/
+/game3d/shots/research-cold/

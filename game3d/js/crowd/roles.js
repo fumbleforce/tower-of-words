@@ -16,7 +16,7 @@ export const EVERYDAY_ROLES = {
   shirt: { body: 'a', places: ['canteen'] },
   cardigan: { body: 'b', places: ['canteen', 'ferry_terminal'] },
   polo: { body: 'older-1', places: ['canteen', 'ferry_terminal'] },
-  reader: { body: 'older-1', fallback: 'a', places: ['train'] },
+  reader: { body: 'older-1', fallback: 'a', places: ['train', 'research_lab'] },
   music: { body: 'casual-1', fallback: 'b', places: ['train'] },
   bun: { body: 'b', places: ['train'] },
   // the train's man with a bag (hidden since Jørgen read the dark standing man as a burglar; places/train.js) in A's

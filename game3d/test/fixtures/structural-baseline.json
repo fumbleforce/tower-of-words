@@ -370,7 +370,8 @@
     "office_quarter",
     "harbour",
     "ferry_terminal",
-    "works"
+    "works",
+    "research_lab"
   ],
   "nodes": [
     "train:intro",
@@ -777,11 +778,39 @@
     "ferry_terminal:end",
     "ferry_terminal:landing_seat",
     "ferry_terminal:notice_seat",
+    "works:weather",
+    "works:weather_plan",
+    "works:weather_box",
+    "works:weather_rain",
+    "works:weather_wind",
+    "works:weather_end",
     "works:arrive",
     "works:chained",
     "works:shut",
+    "works:to_research",
     "works:to_harbour",
     "works:to_street",
+    "research_lab:arrive",
+    "research_lab:leave",
+    "research_lab:end",
+    "research_lab:books",
+    "research_lab:read",
+    "research_lab:put_back",
+    "research_lab:reader",
+    "research_lab:reader_menu",
+    "research_lab:reader_busy",
+    "research_lab:reader_weather",
+    "research_lab:reader_word",
+    "research_lab:word_practice",
+    "research_lab:reader_copy",
+    "research_lab:side_seat",
+    "research_lab:end_seat",
+    "research_lab:table_seat",
+    "research_lab:window_seat",
+    "research_lab:weather_table",
+    "research_lab:weather_window",
+    "research_lab:copier_table",
+    "research_lab:copier_window",
     "transitions:train_to_gate",
     "transitions:gate_to_forecourt",
     "transitions:forecourt_to_office",
@@ -3074,6 +3103,301 @@
       "cond": ""
     },
     {
+      "from": "works:weather",
+      "to": "works:weather_plan",
+      "kind": "choice",
+      "labels": [
+        "Compare the retained diagram."
+      ],
+      "cond": "(found_research_weather_plan || found_research_weather_shapes)"
+    },
+    {
+      "from": "works:weather",
+      "to": "works:weather_box",
+      "kind": "choice",
+      "labels": [
+        "Look at the white box."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "works:weather",
+      "to": "works:weather_rain",
+      "kind": "choice",
+      "labels": [
+        "Look at the small cylinder."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "works:weather",
+      "to": "works:weather_wind",
+      "kind": "choice",
+      "labels": [
+        "Look at the mast."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "works:weather",
+      "to": "works:weather_end",
+      "kind": "choice",
+      "labels": [
+        "Step away."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "works:weather_plan",
+      "to": "works:weather",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "works:weather_box",
+      "to": "works:weather",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "works:weather_rain",
+      "to": "works:weather",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "works:weather_wind",
+      "to": "works:weather",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:books",
+      "to": "research_lab:weather_table",
+      "kind": "choice",
+      "labels": [
+        "Weather instruments · reading table"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:books",
+      "to": "research_lab:weather_window",
+      "kind": "choice",
+      "labels": [
+        "Weather instruments · window chair"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:books",
+      "to": "research_lab:copier_table",
+      "kind": "choice",
+      "labels": [
+        "Copier · reading table"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:books",
+      "to": "research_lab:copier_window",
+      "kind": "choice",
+      "labels": [
+        "Copier · window chair"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:books",
+      "to": "research_lab:read",
+      "kind": "choice",
+      "labels": [
+        "Read the open book."
+      ],
+      "cond": "(research_has_book)"
+    },
+    {
+      "from": "research_lab:books",
+      "to": "research_lab:put_back",
+      "kind": "choice",
+      "labels": [
+        "Put the book back."
+      ],
+      "cond": "(research_has_book)"
+    },
+    {
+      "from": "research_lab:books",
+      "to": "research_lab:end",
+      "kind": "choice",
+      "labels": [
+        "Leave the books."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:read",
+      "to": "research_lab:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:put_back",
+      "to": "research_lab:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:reader",
+      "to": "research_lab:reader_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": "(research_reader_met)"
+    },
+    {
+      "from": "research_lab:reader_menu",
+      "to": "research_lab:reader_weather",
+      "kind": "choice",
+      "labels": [
+        "Point to the white box in the weather book."
+      ],
+      "cond": "(research_weather_seen)"
+    },
+    {
+      "from": "research_lab:reader_menu",
+      "to": "research_lab:reader_word",
+      "kind": "choice",
+      "labels": [
+        "Ask about the cover word."
+      ],
+      "cond": "(!know_shiryou)"
+    },
+    {
+      "from": "research_lab:reader_menu",
+      "to": "research_lab:reader_copy",
+      "kind": "choice",
+      "labels": [
+        "Show Mori’s copy."
+      ],
+      "cond": "(found_research_mori_copy)"
+    },
+    {
+      "from": "research_lab:reader_menu",
+      "to": "research_lab:reader_busy",
+      "kind": "choice",
+      "labels": [
+        "Leave the reader to their notes."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:reader_busy",
+      "to": "research_lab:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:reader_weather",
+      "to": "research_lab:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:reader_word",
+      "to": "research_lab:word_practice",
+      "kind": "choice",
+      "labels": [
+        "Try saying “reference material”."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:reader_word",
+      "to": "research_lab:end",
+      "kind": "choice",
+      "labels": [
+        "Keep reading."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:word_practice",
+      "to": "research_lab:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:reader_copy",
+      "to": "research_lab:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:side_seat",
+      "to": "research_lab:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:end_seat",
+      "to": "research_lab:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:table_seat",
+      "to": "research_lab:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:window_seat",
+      "to": "research_lab:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:weather_table",
+      "to": "research_lab:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:weather_window",
+      "to": "research_lab:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:copier_table",
+      "to": "research_lab:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "research_lab:copier_window",
+      "to": "research_lab:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
       "from": "forecourt:to_campus",
       "to": "campus:arrive",
       "kind": "trip",
@@ -3386,6 +3710,12 @@
       "labels": []
     },
     {
+      "from": "works:to_research",
+      "to": "research_lab:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
       "from": "works:to_harbour",
       "to": "harbour:arrive",
       "kind": "trip",
@@ -3394,6 +3724,12 @@
     {
       "from": "works:to_street",
       "to": "harbour:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "research_lab:leave",
+      "to": "works:arrive",
       "kind": "trip",
       "labels": []
     },
@@ -3954,6 +4290,9 @@
     "fell_from",
     "ferry_staff_met",
     "ferry_reader_met",
+    "research_reader_met",
+    "know_shiryou",
+    "typed_shiryou",
     "canteen_dining_complete",
     "place",
     "canteen_meal_phase",
@@ -4005,6 +4344,12 @@
     "ferry_has_coffee",
     "ferry_has_tea",
     "ferry_has_melon",
-    "ferry_has_cornsoup"
+    "ferry_has_cornsoup",
+    "found_research_weather_plan",
+    "found_research_weather_shapes",
+    "research_has_book",
+    "research_action_ok",
+    "research_weather_seen",
+    "found_research_mori_copy"
   ]
 }

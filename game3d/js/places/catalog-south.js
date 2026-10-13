@@ -10,6 +10,7 @@ import { EAST_COAST_DETAILS, DORM_COMMONS_DETAILS } from './catalog-east-coast.j
 import { SPORTS_DETAILS, POOL_DETAILS, GYM_DETAILS } from './catalog-sports.js';
 import { OFFICE_QUARTER_DETAILS } from './catalog-office-quarter.js';
 import { HARBOUR_DETAILS } from './catalog-harbour.js';
+import { RESEARCH_DETAILS } from './research-room/catalog.js';
 import { WORKS_DETAILS } from './catalog-works.js';
 
 export const SOUTH_HALF_DETAILS = {
@@ -29,4 +30,5 @@ export const SOUTH_HALF_DETAILS = {
   office_quarter: OFFICE_QUARTER_DETAILS,
   harbour: HARBOUR_DETAILS,
   works: WORKS_DETAILS,
+  research_lab: RESEARCH_DETAILS,
 };

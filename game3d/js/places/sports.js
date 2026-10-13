@@ -70,7 +70,7 @@ export async function sportsPlace(game) {
   let aspect = 1,
     framed = false; // the camera holding the whole court
   const d3 = day3Place(game, 'sports', { root: w.root, K, ids: ['rei', 'aoi', 'member'] }); // day 3's afternoon: Rei's serves
-  // day 3: the office street closed past the gym's corner (places/closure.js; story/day3/sports.js d3_closed)
+  // The shared closure provider keeps crowd and player routes consistent.
   const westClosed = roadClosure({ space: w.root, nav: w.nav }, west, (x, z) => inRect(x, z, west.zone), {
     days: SPORTS_CLOSED_DAYS,
   });

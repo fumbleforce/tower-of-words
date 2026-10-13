@@ -218,7 +218,7 @@ export function corner(p, mesh, plain) {
   for (let k = 0; k < 5; k++) grass(p, x0 + 0.3 + k * 0.9, z1 - 0.15, { seed: 320 + k });
 }
 
-function station(p, mesh) {
+export function station(p, mesh) {
   const [x0, x1, z0, z1] = P.STATION;
   const low = { h: 1.0 };
   fence(p, mesh, [x0, z1], [x1, z1], { ...low, gaps: [[P.STATION_GATE[0] - x0, P.STATION_GATE[1] - x0]] });

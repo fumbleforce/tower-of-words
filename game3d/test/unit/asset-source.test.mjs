@@ -53,6 +53,7 @@ test('asset source data includes the actual words, cast, music, sounds and style
     gym: {},
     office_quarter: {},
     harbour: {},
+    research_lab: { eric: 7, research_reader: 6 },
     ferry_terminal: { eric: 16, ferry_reader: 4, ferry_staff: 4, ferry_traveller: 4 },
     works: {},
     transitions: { sales1: 2, sales2: 1 },

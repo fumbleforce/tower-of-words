@@ -65,7 +65,7 @@ export function installFinds(game) {
   refreshFinds();
 }
 
-export async function take(game, id) {
+export async function take(game, id, { show = true } = {}) {
   const f = FINDS[id];
   if (!f || found(id)) return;
   flags['found_' + id] = true;
@@ -74,7 +74,7 @@ export async function take(game, id) {
   sfx('ok');
   save(game);
   refreshFinds(id);
-  await showFind(id, { fresh: true });
+  if (show) await showFind(id, { fresh: true });
 }
 
 // a club's find is only there for its members

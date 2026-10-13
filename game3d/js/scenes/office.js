@@ -34,7 +34,7 @@ import { liveScreens } from '../props.js';
 import { drain } from '../perf/slice.js';
 import { emiOffice, emiOfficeBlocks, EMI_X, EMI_DOOR } from './office-emi.js';
 import { MC } from '../mc.js';
-import { officeWalls } from './office-enclosure.js';
+import { officeWalls, officeEntryFrame, OFFICE_DOOR_HEIGHT } from './office-enclosure.js';
 import { corridorToiletSigns, toiletSign } from './office-signs.js';
 import { referenceShelf } from './office-nook.js';
 export { EMI } from './office-emi.js';
@@ -653,7 +653,7 @@ export function* officeSteps() {
   W('x', X0, X1, CN, WH, T, {
     holes: [
       [X0, -4.2, 0, WH],
-      [...DOORS[CN].office_door, 0, 1.3],
+      [...DOORS[CN].office_door, 0, OFFICE_DOOR_HEIGHT],
       [...DOORS[CN].machine_door, 0, 1.25],
       [6.2, 6.8, 0, 0.0001],
     ],
@@ -1677,11 +1677,7 @@ export function* officeSteps() {
   root.add(rbox(0.4, 0.26, 0.34, PAL.box, { x: 3.05, y: 1.1, z: -1.5, r: 0.02 }));
   yield;
   // the office doorway gets a frame so it reads as a door, not a hole
-  {
-    const fm = mat(PAL.doorFrame);
-    for (const x of [-0.8, 0.3]) root.add(rbox(0.08, 1.3, T + 0.04, null, { x, z: CN, m: fm, r: 0.01 }));
-    root.add(rbox(1.18, 0.08, T + 0.04, null, { x: -0.25, y: 1.26, z: CN, m: fm, r: 0.01 }));
-  }
+  officeEntryFrame(root, CN, T, mat(PAL.doorFrame));
   yield;
   // machine room: a tape shelf where the floor fan was, LED glow on the floor in front of the racks
   {

@@ -1,5 +1,21 @@
 [
  {
+  "key": "word-shiryou",
+  "speaker": "mio",
+  "text": "資料。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "shiryou",
+    "資料"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
   "key": "word-mada",
   "speaker": "mio",
   "text": "まだ。",
@@ -478,6 +494,15 @@
   "clear": [],
   "emo": "slow",
   "slow": true
+ },
+ {
+  "key": "eric-shiryou",
+  "speaker": "eric",
+  "text": "資料。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
  },
  {
   "key": "eric-mada",
@@ -2031,7 +2056,7 @@
   "overheard": false,
   "words": [],
   "clear": [],
-  "emo": "neutral"
+  "emo": "warm"
  },
  {
   "key": "oh-1tdi6z6",
@@ -4553,6 +4578,141 @@
   "emo": "neutral"
  },
  {
+  "key": "ln-bl86yu",
+  "speaker": "eric",
+  "text": "Do you mind if I look at these?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-1fg741a",
+  "speaker": "research_reader",
+  "text": "どうぞ。読み終わったら、そこに戻してください。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-1nfgvbu",
+  "speaker": "research_reader",
+  "text": "すみません、ここだけ書いてしまいますね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ],
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-5zaf4a",
+  "speaker": "eric",
+  "text": "Sure. Take your time.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-mf4e9g",
+  "speaker": "eric",
+  "text": "Is that the rain gauge?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-11mu5ym",
+  "speaker": "research_reader",
+  "text": "雨量計は、こちらですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "oh-lkhpf9",
+  "speaker": "research_reader",
+  "text": "小さく描きすぎて、見落としそうで。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-12n13l8",
+  "speaker": "eric",
+  "text": "Oh, that one.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-awstep",
+  "speaker": "eric",
+  "text": "What does this say?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1j3qmcd",
+  "speaker": "research_reader",
+  "text": "資料。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "shiryou",
+    "資料"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "ln-1srwsx0",
+  "speaker": "eric",
+  "text": "This is the same diagram Mori gave me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "oh-1k85h5e",
+  "speaker": "research_reader",
+  "text": "ああ、同じ図ですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
   "key": "oh-1dltuqt",
   "speaker": "sales1",
   "text": "十時の会議、四番目の議題見た？",
@@ -5844,7 +6004,12 @@
   "text": "古い資料ですが、よかったら使ってください。",
   "lang": "ja",
   "overheard": true,
-  "words": [],
+  "words": [
+   [
+    "shiryou",
+    "資料"
+   ]
+  ],
   "clear": [],
   "emo": "polite"
  },
@@ -12846,6 +13011,91 @@
   "emo": "warm"
  },
  {
+  "key": "ln-2ru1xw",
+  "speaker": "eric",
+  "text": "May I look through these?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-vnnoog",
+  "speaker": "eric",
+  "text": "Could I have a copy of the 資料 you mentioned?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "shiryou",
+    "資料"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-p8ptyj",
+  "speaker": "mori",
+  "text": "はい。こちらです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-4zrltu",
+  "speaker": "eric",
+  "text": "So that’s the trouble Mio had with it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "quiet"
+ },
+ {
+  "key": "oh-1fe112e",
+  "speaker": "mori",
+  "text": "ええ。何度も詰まりました。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1etooo9",
+  "speaker": "eric",
+  "text": "Did it jam again?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-1kthmyy",
+  "speaker": "mori",
+  "text": "紙は出ましたが、また詰まりましたので。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "mori-reference-dozo",
+  "speaker": "mori",
+  "text": "どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
   "key": "ln-32ulsy",
   "speaker": "mio",
   "text": "The timesheet sender. It comes back up before I can see what made it fall over.",
@@ -16675,6 +16925,15 @@
   "emo": "polite"
  },
  {
+  "key": "carina-shiryou",
+  "speaker": "carina",
+  "text": "資料。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
   "key": "carina-mada",
   "speaker": "carina",
   "text": "まだ。",
@@ -17069,7 +17328,7 @@
   "overheard": false,
   "words": [],
   "clear": [],
-  "emo": "neutral"
+  "emo": "warm"
  },
  {
   "key": "ln-1qgdsmw-carina",
@@ -17697,6 +17956,66 @@
   "words": [],
   "clear": [],
   "emo": "neutral"
+ },
+ {
+  "key": "ln-bl86yu-carina",
+  "speaker": "carina",
+  "text": "Do you mind if I look at these?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-5zaf4a-carina",
+  "speaker": "carina",
+  "text": "Sure. Take your time.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-mf4e9g-carina",
+  "speaker": "carina",
+  "text": "Is that the rain gauge?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-12n13l8-carina",
+  "speaker": "carina",
+  "text": "Oh, that one.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-awstep-carina",
+  "speaker": "carina",
+  "text": "What does this say?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1srwsx0-carina",
+  "speaker": "carina",
+  "text": "This is the same diagram Mori gave me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-anowsi-carina",
@@ -20783,6 +21102,51 @@
   ],
   "clear": [],
   "emo": "hesitant"
+ },
+ {
+  "key": "ln-2ru1xw-carina",
+  "speaker": "carina",
+  "text": "May I look through these?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-vnnoog-carina",
+  "speaker": "carina",
+  "text": "Could I have a copy of the 資料 you mentioned?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "shiryou",
+    "資料"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-4zrltu-carina",
+  "speaker": "carina",
+  "text": "So that’s the trouble Mio had with it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "quiet"
+ },
+ {
+  "key": "ln-1etooo9-carina",
+  "speaker": "carina",
+  "text": "Did it jam again?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
  },
  {
   "key": "ln-1633jtb-carina",

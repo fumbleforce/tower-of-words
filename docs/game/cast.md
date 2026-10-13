@@ -28,6 +28,7 @@ The tables are checked against the game by `node tools/facts/check.mjs`. Ids in 
 | `ferry_reader` | Reader | An unnamed adult reading a leaflet by the harbour window; existing generic body and approved sales1 voice. |
 | `ferry_traveller` | Traveller | An unnamed adult resting with a bag, which he moves from a usable seat; existing generic body and approved reader voice. |
 | `canteen_worker` | Canteen worker | An unnamed adult who works at the indoor service counter and closes the canteen terrace after work. |
+| `research_reader` | Reader | An unnamed older man sketching the weather instruments in the Research reading room; approved reader body and voice. |
 | `station_worker` | Grounds worker | An unnamed older adult tending the station south garden by day, in an olive work jacket; borrowed reader voice. |
 | `canteen_shirt` | Diner in a shirt | The existing seated adult at the west table, with a work badge and curry; approved sales1 voice. |
 | `canteen_cardigan` | Diner in a cardigan | The existing adult with her own rice container and a canteen side dish; approved sales2 voice. |

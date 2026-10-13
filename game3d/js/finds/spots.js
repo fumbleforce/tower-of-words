@@ -8,6 +8,41 @@
 //   club: a club's id (story/clubs.js): the find is there only once Eric has joined that club
 
 const LIST = [
+  {
+    'id': 'research_weather_plan',
+    'kind': 'paper',
+    'place': 'research_lab',
+    'print': 'research:weather-plan',
+    'title': 'Weather station plan',
+  },
+  {
+    'id': 'research_weather_shapes',
+    'kind': 'paper',
+    'place': 'research_lab',
+    'print': 'research:weather-shapes',
+    'title': 'Weather instruments',
+  },
+  {
+    'id': 'research_copier_exterior',
+    'kind': 'paper',
+    'place': 'research_lab',
+    'print': 'research:copier-exterior',
+    'title': 'Copier exterior',
+  },
+  {
+    'id': 'research_copier_paper',
+    'kind': 'paper',
+    'place': 'research_lab',
+    'print': 'research:copier-paper',
+    'title': 'Copier paper positions',
+  },
+  {
+    'id': 'research_mori_copy',
+    'kind': 'paper',
+    'place': 'office',
+    'print': 'research:mori-copy',
+    'title': 'Mori’s old copier record',
+  },
   { id: 'photo_gate', kind: 'photo', place: 'gate', print: 'monorail', title: 'Monorail', at: [4.3, 4.1], turn: 0.3 },
   {
     id: 'photo_forecourt',

@@ -13,6 +13,7 @@ Checked against game3d/js/lang.js. Kana is the word in kana where it is written 
 | `ohayo` | おはようございます |  | ohayō gozaimasu | good morning | phrase |
 | `yoroshiku` | よろしくおねがいします |  | yoroshiku onegaishimasu | nice to meet you | phrase |
 | `sumimasen` | すみません |  | sumimasen | excuse me, sorry | phrase |
+| `shiryou` | 資料 | しりょう | shiryou | reference material | phrase |
 | `mada` | まだ |  | mada | still; not yet | phrase |
 | `yasumi` | 休み | やすみ | yasumi | a break; a day off | phrase |
 | `kanpai` | 乾杯 | かんぱい | kanpai | cheers | phrase |
@@ -100,3 +101,7 @@ Known `gamen` returns during the court display inspection (`d4_display`) and at 
 The ticket app ([controls-and-ui.md](controls-and-ui.md)) labels its columns, fields, statuses and buttons in Japanese (Jørgen, 2026-10-03: "Some japanese here, and learnable"): 件名, 依頼者 and 状態 over the list and down the ticket's form, 報酬 by the pay, the statuses 未対応, 対応中 and 完了, and the buttons 担当する, 戻る and 閉じる. They are kept in game3d/js/tickets/words.js, which lang.js adds to its words. Each label shows its reading over it in small type and its short English after it (件名 Subject), every time. Tapping or clicking a label teaches its word, and using a button teaches the button's; a line at the foot of the page says "New word in your Words: 件名 kenmei, subject (of a ticket or an email)", the Words chip pops and the word joins the Words panel (under Ticket app when it lists by kind). Until one is known, that line says "Tap a Japanese label to learn it." (desktop: "Click"). A known label loses its dotted underline. None of them is needed to use the app or to move the story, none can be said, and none has a voice clip yet.
 
 The optional [sender investigation](stories/investigations/sender.md) teaches `mada` only through Mio’s offered typing practice. Hearing Mori or inspecting records never learns it. Learning before or after his exact remembered remark opens the same tentative interpretation, including after the physical solve.
+
+### Optional reading-room word
+
+The reading-room resident models `shiryou`; only chosen typing practice learns it. Reading a volume, saving its reference in Papers, hearing Mori, or seeing the diagrams does not teach it. Its connection to Mori requires the actual heard line “古い資料ですが、よかったら使ってください。” Knowledge and that remembered evidence may arrive in either order. Mori can repeat his ordinary offer at his desk for a player who missed it.

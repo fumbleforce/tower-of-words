@@ -3,6 +3,7 @@
 // code-built chibis through cast.js and train/people.js, the world pieces through their own builders (kit-view.js,
 // variants from tools/assets/kit.json), and whole rooms through the scene builders. The page needs an import map for 'three' and 'three/addons/' (see index.html).
 import * as THREE from 'three';
+import { researchTarget } from './research-targets.js';
 
 const G = new URL('../../game3d/js/', import.meta.url).href;
 const mod = (p) => import(G + p);
@@ -149,6 +150,8 @@ async function room(view) {
   else if (view.room === 'konbini') { w = (await mod('scenes/konbini/room.js')).buildKonbini(); scene = w.scene; }
   else if (['ferry_terminal', 'ferry-terminal'].includes(view.room)) { w = (await mod('scenes/ferry-terminal/room.js')).buildFerryTerminal(); scene = w.scene; }
   else if (view.room === 'clinic') { w = (await mod('scenes/clinic/room.js')).buildClinic(); scene = w.scene; }
+  else if (['research_lab', 'research-room'].includes(view.room)) { w = (await mod('scenes/research-room/room.js')).buildResearchRoom(); scene = w.scene; }
+  else if (view.room === 'works') { w = await (await mod('scenes/works.js')).buildWorks(); scene = w.scene; }
   else if (view.room === 'bakery') { w = (await mod('scenes/bakery/room.js')).buildBakery(); scene = w.scene; }
   else if (view.room === 'gym') { w = (await mod('scenes/rooms/gym.js')).buildGym(); scene = w.scene; }
   else if (view.room === 'sports') { w = (await mod('scenes/sports.js')).buildSports(); scene = w.scene; }
@@ -168,11 +171,11 @@ async function room(view) {
   // Frame the playable room, excluding backdrop geometry and floors staged elsewhere.
   const bounds = view.room === 'dorms'
     ? { ...w.bounds, z0: w.bounds.back, z1: w.bounds.near }
-    : ['gym', 'bakery', 'konbini', 'clinic', 'ferry_terminal', 'ferry-terminal'].includes(view.room) ? w.bounds : view.room === 'sports' ? w.nav : null;
+    : ['gym', 'bakery', 'konbini', 'clinic', 'ferry_terminal', 'ferry-terminal', 'research_lab', 'research-room'].includes(view.room) ? w.bounds : ['sports', 'works'].includes(view.room) ? w.nav : null;
   return {
     scene, object: w.root, room: view.room, actions: [], play() {}, update() {},
-    bounds,
-    focus: view.anchor ? { anchor: view.anchor, spot: view.spot, small: view.small } : null,
+    bounds, target: id => researchTarget(view.room, w, id),
+    focus: view.target ? researchTarget(view.room, w, view.target) : view.anchor ? { anchor: view.anchor, spot: view.spot, small: view.small } : null,
   };
 }
 
@@ -228,7 +231,7 @@ export class Stage {
       const sp = b.focus.spot ? new THREE.Vector3(b.focus.spot[0], y, b.focus.spot[1]) : t.clone().add(new THREE.Vector3(0, 0, 1));
       const dir = sp.sub(t); dir.y = 0; if (dir.lengthSq() < 1e-4) dir.set(0, 0, 1); dir.normalize();
       this.target.copy(t); this.target.y = Math.max(0.35, y * 0.8);
-      this.yaw = Math.atan2(dir.x, dir.z); this.pitch = 0.62; this.dist = b.focus.small ? 3.0 : 4.2; this.cam.fov = 30;
+      this.yaw = Math.atan2(dir.x, dir.z); this.pitch = b.focus.pitch ?? 0.62; this.dist = b.focus.span ? b.focus.span / (2 * Math.tan(THREE.MathUtils.degToRad(15))) * 1.1 : b.focus.small ? 3.0 : 4.2; this.cam.fov = 30;
       this.auto = false; this.minD = 0.8; this.maxD = 30;
       if (b.room === 'train') {
         // look down into the carriage from above its open top, the way the game's camera sees it

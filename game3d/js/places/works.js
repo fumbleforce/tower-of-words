@@ -1,3 +1,7 @@
+import { researchEntranceView } from './research-room/entrance-view.js';
+import { worksReferences } from './research-room/weather.js';
+import { loadReading } from '../reading-room/model.js';
+import { flags } from '../narrative/state.js';
 import * as THREE from 'three';
 import { worksSteps } from '../scenes/works.js';
 import { sliced } from '../perf/slice.js';
@@ -15,7 +19,7 @@ import { turningCam, followFit } from './turning-cam.js';
 // chimney's foot, along the works yard past the factory's gates and the server hall, down the works street to the
 // office street past the recycling centre, and along the research walk to Amakawa Research; it also loads with
 // ?place=works. The factory's gates and the plant's door are chained; the server hall, the recycling centre and
-// Amakawa Research are shut for now (their doors say so). Both ways out lead to the harbour chunk: down the lane
+// Amakawa Research reading room is open; the other buildings remain shut. Both ways out lead to the harbour chunk: down the lane
 // into the supply yard, down the street onto the office street.
 //
 // The camera looks up the lane from the south-east, so the plant's door faces it; over the yard from a little east
@@ -37,7 +41,8 @@ export async function worksPlace(game) {
       s = smooth(x + AX, TURN_STREET[0], TURN_STREET[1]),
       a = smooth(z + AZ, TURN_APRON[0], TURN_APRON[1]);
     const blend = (k) => lerp(lerp(lerp(yard[k], apron[k], a), lane[k], l), street[k], s);
-    return { yaw: blend('yaw'), elev: blend('elev') };
+    const entry = 1 - smooth(Math.hypot(x + AX + 36.2, z + AZ + 103.45), 1.3, 3.8);
+    return { yaw: lerp(blend('yaw'), -1.45, entry), elev: lerp(blend('elev'), 0.22, entry) };
   });
   const { lane: down, street: south } = w.exits;
   // the shut doors (plan.js DOORS): where each is, and where Eric stands to try it
@@ -82,6 +87,12 @@ export async function worksPlace(game) {
       spot: () => dk('recycling_centre').step,
       face: () => dk('recycling_centre').local,
     },
+    weather_station: {
+      ...PLACE_DETAILS.works.things.weather_station,
+      anchor: (v) => v.set(w.nooks.weather_station[0], 1, w.nooks.weather_station[1]),
+      spot: () => w.nooks.weather_station,
+      face: () => [42, -4.8],
+    },
     research_lab: {
       ...PLACE_DETAILS.works.things.research_lab,
       anchor: (v) => pin(v, 'research_lab'),
@@ -100,6 +111,7 @@ export async function worksPlace(game) {
     start: w.in,
     startFacing: NORTH,
     music: 'calm',
+    preserveGoalFrom: ['research_lab'],
     grade: MORNING_GRADE,
     things,
     // where he comes in, and the nooks (plan.js NOOKS)
@@ -117,7 +129,7 @@ export async function worksPlace(game) {
       lane_exit: (x, z) => inRect(x, z, down.zone),
       street_exit: (x, z) => inRect(x, z, south.zone),
     },
-    hooks: {},
+    hooks: { researchWeather: (a) => P.references.act(a) },
     fit(aspect) {
       followFit(cam, w.nav, aspect, yard); // fitted at the yard's look, kept through the turns
     },
@@ -129,11 +141,13 @@ export async function worksPlace(game) {
       const p = game.player.root.position;
       w.follow(p.x, p.z);
       turn.steer(p, dt);
+      entrance.update();
       // heading for a way out: build the harbour now, so the walk there needs no loading pause
       const near = ([x0, x1, z0, z1], d = 6) => p.x > x0 - d && p.x < x1 + d && p.z > z0 - d && p.z < z1 + d;
       if ((near(down.zone) || near(south.zone)) && !game.prepared.harbour) game.prepare?.('harbour');
     },
     onPeriod(period) {
+      w.readingBooks.sync(loadReading(flags.research_state));
       if (period !== 'evening' || P.grade === EVENING_GRADE) return;
       eveningLight(w.scene);
       w.evening();
@@ -153,11 +167,18 @@ export async function worksPlace(game) {
       cam.snap(game.player.root.position);
     },
     // in from the harbour up the lane or up the street, the way he left it, walking north; out by the way nearest
+    tripInFrom: { research_lab: () => entrance.arrive() },
     tripIn: (g) => {
       const e = viaOf(g, 'lane') === 'street' ? south : down;
       return walkIn(g, cam, e.arrive, e.in, NORTH);
     },
-    tripOutTo: { harbour: (g) => walkOutNearest(g, cam, { lane: down, street: south }) },
+    tripOutTo: {
+      research_lab: () => entrance.leave(),
+      harbour: (g) => walkOutNearest(g, cam, { lane: down, street: south }),
+    },
   };
+  const entrance = researchEntranceView(game, P, dk('research_lab'));
+  P.leave = () => entrance.release();
+  P.references = worksReferences(game, P);
   return P;
 }

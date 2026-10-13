@@ -67,7 +67,9 @@ export function installOngoing(game) {
     if (state !== 'firstPage') throw new Error(`Unknown art visit ${state}`);
     completeFirstPage(flags, sim.day);
   };
-  game.hooks.ongoingGoal = () => {
+  game.hooks.ongoingGoal = ({ keepExisting = false } = {}) => {
+    // Works opts in after lifecycle preserves an objective only on return from Research.
+    if (keepExisting && game.ui.goalText) return;
     const meetings = clubs
       .joined()
       .map((id) => ({ id, next: clubs.nextMeeting(id, sim.day, sim.period) }))

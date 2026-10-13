@@ -147,24 +147,34 @@ export function roofPlant(p, [x0, x1, z0, z1], top, wall, sx) {
 // a front door: a glazed pair in a pale frame with an automatic door's white band at chest height and pull bars,
 // lit after work like the glass front; its landing and ramp (platform), its deep canopy (canopy). Returns the
 // canopy's span and front, or null
-export function frontDoor({ p, glass, lit }, f, { t, w, canopy, platform }) {
+export function frontDoor({ p, glass, lit }, f, { t, w, canopy, platform, open = false }) {
   const h = 2.0;
-  onFace(p, STEEL.pale, f, t - w / 2 - 0.06, t + w / 2 + 0.06, 0.08, h + 0.06, -0.1, -0.04);
-  for (const [a, b] of [
-    [t - w / 2, t - 0.02],
-    [t + 0.02, t + w / 2],
-  ]) {
-    onFace(glass, DOOR_GLASS, f, a, b, 0.08, h, -0.04, -0.01);
-    onFace(lit, BLOCK.lit, f, a, b, 0.08, h, -0.008, -0.004, { cast: false });
+  if (open) {
+    for (const [a, b] of [
+      [t - w / 2 - 0.06, t - w / 2],
+      [t + w / 2, t + w / 2 + 0.06],
+    ])
+      onFace(p, STEEL.pale, f, a, b, 0, h + 0.06, -0.1, -0.04);
+    onFace(p, STEEL.pale, f, t - w / 2, t + w / 2, h, h + 0.06, -0.1, -0.04);
+  } else {
+    onFace(p, STEEL.pale, f, t - w / 2 - 0.06, t + w / 2 + 0.06, 0.08, h + 0.06, -0.1, -0.04);
+    for (const [a, b] of [
+      [t - w / 2, t - 0.02],
+      [t + 0.02, t + w / 2],
+    ]) {
+      onFace(glass, DOOR_GLASS, f, a, b, 0.08, h, -0.04, -0.01);
+      onFace(lit, BLOCK.lit, f, a, b, 0.08, h, -0.008, -0.004, { cast: false });
+    }
+    // the meeting stiles (up into the head, past the glass's top) and the white band across the glass, behind the
+    // stiles' faces and short of the glass's ends (level with them it flickered)
+    onFace(p, STEEL.pale, f, t - 0.03, t + 0.03, 0.08, h + 0.004, -0.04, 0.0);
+    onFace(p, SILL, f, t - w / 2 + 0.003, t + w / 2 - 0.003, 1.2, 1.27, -0.01, -0.002, { cast: false });
+    for (const c of [t - 0.12, t + 0.12])
+      onFace(p, STEEL.pale, f, c - 0.015, c + 0.015, 0.8, 1.5, 0, 0.04, { cast: false });
   }
-  // the meeting stiles (up into the head, past the glass's top) and the white band across the glass, behind the
-  // stiles' faces and short of the glass's ends (level with them it flickered)
-  onFace(p, STEEL.pale, f, t - 0.03, t + 0.03, 0.08, h + 0.004, -0.04, 0.0);
-  onFace(p, SILL, f, t - w / 2 + 0.003, t + w / 2 - 0.003, 1.2, 1.27, -0.01, -0.002, { cast: false });
-  for (const c of [t - 0.12, t + 0.12])
-    onFace(p, STEEL.pale, f, c - 0.015, c + 0.015, 0.8, 1.5, 0, 0.04, { cast: false });
   if (platform) entrance(p, f, platform, { t, w });
-  else onFace(p, BLOCK.plinth, f, t - w / 2 - 0.3, t + w / 2 + 0.3, 0, 0.08, 0, 0.6, { surf: 'concrete' });
+  else
+    onFace(p, BLOCK.plinth, f, t - w / 2 - 0.3, t + w / 2 + 0.3, 0, open ? 0.01 : 0.08, 0, 0.6, { surf: 'concrete' });
   return canopy ? deepCanopy(p, f, t, w, canopy) : null;
 }
 

@@ -236,3 +236,17 @@ ENGINE_WRITES['game3d/js/outings/index.js'] = {
   ],
   prefix: [],
 };
+ENGINE_WRITES['game3d/js/reading-room/state.js'] = { exact: ['research_state'], prefix: [] };
+ENGINE_WRITES['game3d/js/reading-room/hook.js'] = {
+  exact: [
+    'research_action_ok',
+    'research_has_book',
+    'research_office_ok',
+    'research_mori_available',
+    'research_mori_understood',
+    'research_notes_recognized',
+    'research_mori_return_ready',
+  ],
+  prefix: [],
+};
+ENGINE_WRITES['game3d/js/places/research-room/activity.js'] = { exact: ['research_weather_seen'], prefix: [] };

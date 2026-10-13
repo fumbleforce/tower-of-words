@@ -51,4 +51,6 @@ export const GLOBAL_HOOKS = [
   'flavorFind',
   'outing',
   'sender',
+  'research',
+  'researchOffice',
 ];

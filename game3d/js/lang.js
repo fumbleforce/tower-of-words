@@ -7,6 +7,14 @@ import { MC } from './mc.js';
 // The four commands are the ones Mio can say to make things happen.
 
 export const WORDS = {
+  shiryou: {
+    ja: '資料',
+    alias: ['しりょう'],
+    ro: 'shiryou',
+    en: 'reference material',
+    phrase: true,
+    voice: 'eric-shiryou',
+  },
   mada: { ja: 'まだ', ro: 'mada', en: 'still; not yet', phrase: true, voice: 'eric-mada' },
   matte: {
     ja: '待って',

@@ -1,3 +1,4 @@
+import { installResearch } from '../reading-room/hook.js';
 import { assertPlaceRegistered } from '../narrative/registration.js';
 import { eventTrigger } from '../narrative/events.js';
 import { PLACE_DETAILS, SHARED_THINGS } from './catalog.js';
@@ -78,6 +79,7 @@ export function createPlaceLifecycle(
   const ui = game.ui;
   game.snapshotZones = () => snapshotZones(game, zoneSet);
   game.restoreZones = (saved, options) => restoreZones(game, zoneSet, saved, options);
+  installResearch(game);
   installFinds(game); // the photos and papers Eric picks up (finds/index.js)
   installTickets(game); // the repair tickets and their app on Eric's computers (tickets/index.js)
   installConversations(game);
@@ -155,6 +157,8 @@ export function createPlaceLifecycle(
   }
   async function enter(name, { persist = true, resuming = false } = {}) {
     const { place } = await prepare(name);
+    const previousGoal = ui.goalText || '';
+    const previousPlace = game.place?.name;
     // the story for today (days.js): a place built on the title's day 1 still plays a later day's set
     const story = withConversations(withClubs(await game.runner.load(name))); // with the club sessions (clubs/index.js)
     if (game.place && game.place.leave) game.place.leave();
@@ -230,7 +234,9 @@ export function createPlaceLifecycle(
     playMusic(sim.period === 'evening' ? 'night' : music || MUSIC[name] || 'calm');
     syncFinds(place); // prints already picked up stay gone, also after a load
     buildMarkers(place);
-    game.hooks.goal({ text: '' });
+    game.hooks.goal({
+      text: place.preserveGoal || place.preserveGoalFrom?.includes(previousPlace) ? previousGoal : '',
+    });
     nearSet.clear();
     zoneSet.clear();
     if (persist) save(game);

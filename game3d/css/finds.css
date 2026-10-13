@@ -54,3 +54,10 @@ body.phone #boardView .cork { padding: 14px; border-width: 6px; max-height: calc
 body.phone #boardView .posts { grid-template-columns: 1fr 1fr; gap: 14px 10px; }
 body.phone #boardView .post { font-size: 13px; padding: 14px 10px 10px; }
 body.phone #findView .cap .t { font-size: 16px; }
+
+/* Direct controls on an open reference; collected Papers keep the ordinary close view. */
+#findView .reference-controls {display:flex;flex-wrap:wrap;gap:8px;justify-content:center;width:100%;}
+#findView .reference-controls button {min-height:44px;padding:8px 12px;border:1px solid var(--panel-edge);border-radius:8px;background:#252a33;color:var(--ink);font:inherit;cursor:pointer;}
+#findView .shot:has(.reference-controls) {gap:8px;}
+
+#findView .reference-saved {display:flex;align-items:center;min-height:44px;padding:8px 12px;color:var(--accent);}

@@ -14,6 +14,7 @@
 // The palette and face maths are in outdoor/block-face.js, the style options' parts in outdoor/block-style.js.
 // rect [x0, x1, z0, z1] on the grid. Faces: n (z0), s (z1), w (x0), e (x1); a door's `at` is its middle along
 // the face (x on n and s, z on w and e), and doorAt(rect, face, at) gives the middle of the bay nearest it.
+import { remainingCore } from '../research-room/opening.js';
 import * as THREE from 'three';
 import { Parts, hash2 } from './parts.js';
 import { STEEL } from './furniture.js';
@@ -65,6 +66,7 @@ export function* officeBlockSteps(
     glazed = '',
     stair = null,
     roof = 'plain',
+    interior = null,
   } = {},
 ) {
   const { p, glass, lit } = sets;
@@ -76,7 +78,10 @@ export function* officeBlockSteps(
   const top = gf + (storeys - 1) * fh;
   const out = { top, doors: [] };
   // the body: the ground floor's dark wall set back behind the piers, the upper floors flush with the face
-  p.box(BLOCK.core, w - 0.3, gf, d - 0.3, cx, 0, cz, { surf: 'concrete' });
+  if (interior) {
+    for (const [a, b, c, d] of remainingCore([x0 + 0.15, x1 - 0.15, z0 + 0.15, z1 - 0.15], interior))
+      p.box(BLOCK.core, b - a, gf, d - c, (a + b) / 2, 0, (c + d) / 2, { surf: 'concrete' });
+  } else p.box(BLOCK.core, w - 0.3, gf, d - 0.3, cx, 0, cz, { surf: 'concrete' });
   // (a one-storey block gets a lid 1 cm thick instead, over the ground floor's top rather than level with it)
   p.box(wall, w, Math.max(top - gf, 0.01), d, cx, gf, cz, { surf: 'cladding' });
   facadeDrainage(p, rect, top);
@@ -113,7 +118,17 @@ export function* officeBlockSteps(
         // after work the ground floor is lit
         onFace(lit, BLOCK.lit, f, t0, t1, 0.3, gf - 0.32, -0.075, -0.065, { cast: false });
         if (front) glassFront(sets, f, t0, t1);
-      } else onFace(p, BLOCK.core, f, t0, t1, 0.3, gf - 0.32, -0.15, -0.1);
+      } else {
+        const opening = myDoors.find((o) => o.open && t1 > o.t - o.w / 2 && t0 < o.t + o.w / 2);
+        if (!opening) onFace(p, BLOCK.core, f, t0, t1, 0.3, gf - 0.32, -0.15, -0.1);
+        else {
+          for (const [a, b] of [
+            [t0, Math.min(t1, opening.t - opening.w / 2)],
+            [Math.max(t0, opening.t + opening.w / 2), t1],
+          ])
+            if (b > a) onFace(p, BLOCK.core, f, a, b, 0.3, gf - 0.32, -0.15, -0.1);
+        }
+      }
     }
     onFace(p, BLOCK.fascia, f, -0.04, f.L + 0.04, gf - 0.32, gf, -0.15, 0.06);
     // upper floors: a floor band, then the ribbon (a window band, mullions on the bay lines) or punched windows
@@ -169,10 +184,10 @@ export function* officeBlockSteps(
 // over it on the fascia line, a granite step in front, a pale name plate on the pier beside it
 // porch: a canopy on two slim posts at its outer corners (a front or staff door); else a short hood (a service door)
 // canopy, platform: a front door (outdoor/block-style.js), which returns its canopy's span and front, for its name
-function door(sets, f, { t, w, porch, canopy, platform }) {
+function door(sets, f, { t, w, porch, canopy, platform, open = false }) {
   const { p, glass } = sets;
   const h = 2.0;
-  if (canopy || platform) return frontDoor(sets, f, { t, w, canopy, platform });
+  if (canopy || platform || open) return frontDoor(sets, f, { t, w, canopy, platform, open });
   onFace(p, STEEL.dark, f, t - w / 2 - 0.06, t + w / 2 + 0.06, 0.08, h + 0.06, -0.1, -0.04);
   onFace(glass, BLOCK.glassLow, f, t - w / 2, t - 0.02, 0.08, h, -0.04, -0.01);
   onFace(glass, BLOCK.glassLow, f, t + 0.02, t + w / 2, 0.08, h, -0.04, -0.01);

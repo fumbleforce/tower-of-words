@@ -26,7 +26,7 @@ const WALL = { w1: 0, m1: 2, m2: 3, m3: 0, m4: 1, m5: 2, b_h: 1 }; // the layout
 
 // the name standing on the canopy's front edge, a dark back behind it; the card on the right leaf's glass; the
 // canopy's two downlights and their pool (the works' server hall has them too, works/buildings.js)
-export function fittings(p, signs, lights, k, door) {
+export function fittings(p, signs, lights, k, door, { open = false } = {}) {
   const { f, t, canopy: c } = door,
     ry = Math.atan2(f.n[0], f.n[1]),
     [kana, en, colour] = k.sign;
@@ -41,7 +41,7 @@ export function fittings(p, signs, lights, k, door) {
   signs.board(kana, en, colour, bw, 0.56, at(t, c.out + 0.012, base + 0.3), ry);
   const [bx, , bz] = at(t, c.out - 0.01, 0);
   p.box('#2c3b42', f.d[0] ? bw + 0.04 : 0.04, 0.6, f.d[0] ? 0.04 : bw + 0.04, bx, base, bz);
-  signs.card('準備中', 'CLOSED', 0.46, 0.3, at(t + 0.3, 0.012, 1.2), ry, { door: k.place });
+  if (!open) signs.card('準備中', 'CLOSED', 0.46, 0.3, at(t + 0.3, 0.012, 1.2), ry, { door: k.place });
   for (const s of [-1, 1]) {
     const [x, , z] = at(t + s * (c.c1 - c.c0) * 0.3, c.out * 0.5, 0);
     lights.glowParts.push(new THREE.BoxGeometry(0.26, 0.03, 0.26).translate(x, 2.18, z));
@@ -90,23 +90,25 @@ function walks(pv, p, ids) {
 // one block with its door, the name on its canopy and the card on its glass: k as plan.js BLOCKS ({ id, rect, row,
 // face, door, w, seed, sign }, and wall, a colour, where the layout's own isn't wanted); the harbour builds its
 // terminal and its office with it too (scenes/harbour/fronts.js)
-export function* frontSteps(sets, signs, lights, k, { gf } = {}) {
+export function* frontSteps(sets, signs, lights, k, { gf, interior = null, open = false } = {}) {
   const { doors } = yield* officeBlockSteps(sets, k.rect, {
     storeys: k.row.storeys,
     fh: k.row.floorH,
     gf,
+    interior,
     wall: k.wall ?? TOWN.walls[WALL[k.id]],
     doors: [
       {
         face: k.face,
         at: k.door[k.face === 's' || k.face === 'n' ? 0 : 1],
         w: k.w,
+        open,
         canopy: { out: 1.3, side: 0.7 },
       },
     ],
     seed: k.seed,
   });
-  fittings(sets.p, signs, lights, k, doors[0]);
+  fittings(sets.p, signs, lights, k, doors[0], { open });
 }
 
 // sets: outdoor/block.js blockSets() (the caller builds them: buildBlockSets); pv, p: a paver and a Parts collector

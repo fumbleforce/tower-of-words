@@ -36,6 +36,7 @@ Optional `mitai` is modelled normally and slowly by `kuroda`, then typed in `d2_
 | Word | By | Node |
 |---|---|---|
 | `mitai` | `kuroda` | `d2_see_word` |
+| `shiryou` | `research_reader` | `word_practice` |
 
 ## Nodes
 
@@ -50,7 +51,7 @@ Optional `mitai` is modelled normally and slowly by `kuroda`, then typed in `d2_
 
 ### North-campus routes
 
-`day2/campus.js`, `day2/print_shop.js`, `day2/office_quarter.js` and `day2/harbour.js` reuse the physical routes without adding spoken scenes. The forecourt's `to_campus` enters the new loop. Campus uses `arrive`, `to_forecourt`, `to_offices`, `to_harbour`, `to_print`, `bench`; print shop uses `arrive`, `directory`, `print`, `end`, `sit`, `exit`. Office street uses `arrive`, `to_campus`, `to_harbour`, `shut`; harbour uses `arrive`, `to_campus`, `to_offices`, `shut`. Sports and works routes retain their day-2 closure. The free directory is a persistent readable item after a completed feed/output, with no new language lesson or quest.
+`day2/campus.js`, `day2/print_shop.js`, `day2/office_quarter.js` and `day2/harbour.js` reuse the physical routes without adding spoken scenes. The forecourt staff gate is closed; these northern routes remain available to older saves already there. Campus uses `arrive`, `to_forecourt`, `to_offices`, `to_harbour`, `to_print`, `bench`; print shop uses `arrive`, `directory`, `print`, `end`, `sit`, `exit`. Office street uses `arrive`, `to_campus`, `to_harbour`, `shut`; harbour uses `arrive`, `to_campus`, `to_offices`, `shut`. Sports routes retain their day-2 closure. Harbour `to_works` and `to_works_street` lead through the two existing works paths to the open reading room; the other works buildings remain shut. The free directory is a persistent readable item after a completed feed/output, with no new language lesson or quest.
 
 ### Harbour waiting room
 
@@ -65,3 +66,12 @@ Additional terminal seat nodes `landing_seat` and `notice_seat` use the same mea
 `day2/clinic.js` reuses the clinic's story (story/clinic.js; [places.md](../../places.md), Clinic), entered from the plaza by `to_clinic`. Nodes: `arrive`, `leave`, `bed`, `nurse`, `nurse_again`, `nurse_after`, `wake`, `wake_head`, `wake_fine`, `wake_jump`, `wake_again`, `wake_end`. The nurse's talk and the wake-up after a fall are the same on every day; there is no day-2 scene there.
 
 The station garden composes the shared `conversations/station-worker.js` nodes into `day2/shotengai.js`: `garden_worker`, `garden_worker_busy`, `garden_sit_1`, `garden_sit_2`. The worker offers a free bench, returns to the next patch, defers while collecting, or rests after clearing both patches. `garden_worker_met` remembers the introduction; current bench availability, busy and completed-work flags are derived from the place routine. Neither sitting nor Talk changes the day's goals.
+
+### Research reading room
+
+The completed room adds optional reading, four usable seats and an ordinary resident. Reading and saving a reference do not teach words or advance time. `shiryou` is optional typing practice. Each volume keeps its page and bookmark, while only one physical volume can occupy a chosen seat. The weather illustrations support comparison with the existing outdoor instruments; the copier pages do not provide a repair solution. Mori's exact remembered offer can be understood before or after this word, with a later opportunity to hear it at his desk.
+
+| File | Nodes |
+|---|---|
+| `day2/research_lab.js` | `arrive`, `leave`, `end`, `books`, `read`, `put_back`, `reader`, `reader_menu`, `reader_busy`, `reader_weather`, `reader_word`, `word_practice`, `reader_copy`, `table_seat`, `window_seat`, `side_seat`, `end_seat`, `weather_table`, `weather_window`, `copier_table`, `copier_window` |
+| `day2/works.js` | `weather`, `weather_plan`, `weather_box`, `weather_rain`, `weather_wind`, `weather_end`, `arrive`, `chained`, `shut`, `to_research`, `to_harbour`, `to_street` |

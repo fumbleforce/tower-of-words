@@ -1,5 +1,7 @@
 // Exact authored remarks, never inferred from a place visit or a completed day.
 export const REMARKS = [
+  {id:'mori_old_reference',who:'mori',name:'Mr. Mori',words:['shiryou'],lines:['古い資料ですが、よかったら使ってください。']},
+  {id:'mio_old_copier_explanation',who:'mio',name:'Mio',words:[],lines:['They kept pulling the paper out and using it again. He left the request open because nobody had actually fixed it.']},
   { id: 'mio_sender_complaint', who: 'mio', name: 'Mio', words: [], lines: ['The thing that sends everyone’s timesheets. It keeps restarting before I can get the log off it.'] },
   { id: 'mori_sender_retained', who: 'mori', name: 'Mr. Mori', words: ['mada'], lines: ['そちらには、{mada}残っていますよ。'] },
   { id: 'canteen_vegetable_recommendation', who: 'canteen_cardigan', name: 'Diner in a cardigan', words: ['oishii'], lines: ['これ、{oishii}ですよ。'] },

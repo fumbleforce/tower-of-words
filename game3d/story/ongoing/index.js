@@ -1,3 +1,4 @@
+import research_lab from './research_lab.js';
 import ferry_terminal from './ferry_terminal.js';
 import clinic from './clinic.js';
 import bakery from './bakery.js';
@@ -25,5 +26,5 @@ import dorm_commons from './dorm_commons.js';
 import office_quarter from './office_quarter.js';
 import harbour from './harbour.js';
 import works from './works.js';
-export const STORIES = { ferry_terminal, clinic, konbini, bakery, campus, print_shop, train, gate, forecourt, office, plaza, canteen, dorm_court, dorms, east_lane, east_coast, sports, pool, gym, shotengai, izakaya, karaoke, karaoke_booth, dorm_commons, office_quarter, harbour, works };
+export const STORIES = { research_lab, ferry_terminal, clinic, konbini, bakery, campus, print_shop, train, gate, forecourt, office, plaza, canteen, dorm_court, dorms, east_lane, east_coast, sports, pool, gym, shotengai, izakaya, karaoke, karaoke_booth, dorm_commons, office_quarter, harbour, works };
 export { TRIPS } from './routes.js';

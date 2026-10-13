@@ -8,6 +8,12 @@ export default {
     photo_dorm: { title: 'Summer night' },
   },
   papers: {
+"research_weather_plan":{"title": "Weather station plan", "lines": []},
+"research_weather_shapes":{"title": "Weather instruments", "lines": []},
+"research_copier_exterior":{"title": "Copier exterior", "lines": []},
+"research_copier_paper":{"title": "Copier paper positions", "lines": []},
+"research_mori_copy":{"title": "Mori’s old copier record", "lines": [{"en": "Before the repair: paper removed; copier used again. Repair still outstanding."}, {"en": "Request opened 1 April 1996."}]},
+
     bakery_flyer: {
       title: 'Bakery welcome flyer',
       lines: [

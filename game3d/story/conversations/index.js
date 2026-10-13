@@ -1,3 +1,4 @@
+import RESEARCH from '../investigations/research.js';
 import SENDER from '../investigations/sender.js';
 import MIO from './mio.js';
 import EMI from './emi.js';
@@ -10,4 +11,4 @@ import MORI from './mori.js';
 import KENJI from './kenji.js';
 import OUTING from './outing.js';
 import REGISTER from './register.js';
-export default { on: { ...SENDER.on, ...MORI.on, ...KENJI.on, ...OUTING.on, ...HAMADA.on, ...MIO.on, ...EMI.on, ...GUARD.on, ...KURO.on, ...AOI.on, ...REI.on, ...REGISTER.on }, nodes: { ...SENDER.nodes, ...MORI.nodes, ...KENJI.nodes, ...OUTING.nodes, ...HAMADA.nodes, ...MIO.nodes, ...EMI.nodes, ...GUARD.nodes, ...KURO.nodes, ...AOI.nodes, ...REI.nodes, ...REGISTER.nodes } };
+export default { on: { ...RESEARCH.on, ...SENDER.on, ...MORI.on, ...KENJI.on, ...OUTING.on, ...HAMADA.on, ...MIO.on, ...EMI.on, ...GUARD.on, ...KURO.on, ...AOI.on, ...REI.on, ...REGISTER.on }, nodes: { ...RESEARCH.nodes, ...SENDER.nodes, ...MORI.nodes, ...KENJI.nodes, ...OUTING.nodes, ...HAMADA.nodes, ...MIO.nodes, ...EMI.nodes, ...GUARD.nodes, ...KURO.nodes, ...AOI.nodes, ...REI.nodes, ...REGISTER.nodes } };

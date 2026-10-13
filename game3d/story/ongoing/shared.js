@@ -25,7 +25,9 @@ export function interactions(source, keys) {
   }
   return { on, nodes, speakers: structuredClone(source.speakers || {}) };
 }
-export function place(name, { on = {}, nodes = {}, arrive = [], show = {}, labels = {}, speakers: voices = {} } = {}) {
+// Optional destinations may omit the generic arrival goal or supply a bounded goal step.
+// Setup and authored arrival actions still run in their original order.
+export function place(name, { on = {}, nodes = {}, arrive = [], arrivalGoal = true, show = {}, labels = {}, speakers: voices = {} } = {}) {
   const routes = {}, ways = {};
   for (const [to, keys] of Object.entries(ROUTES[name] || {})) {
     const id = `ongoing_to_${to}`;
@@ -35,7 +37,7 @@ export function place(name, { on = {}, nodes = {}, arrive = [], show = {}, label
   return {
     speakers: { ...speakers, ...voices }, start: 'ongoing_arrive', on: { ...ways, ...on }, show, labels,
     nodes: {
-      ongoing_arrive: [{ do: 'ongoingSetup' }, ...arrive, { do: 'ongoingGoal' }],
+      ongoing_arrive: [{ do: 'ongoingSetup' }, ...arrive, ...(arrivalGoal ? [arrivalGoal === true ? { do: 'ongoingGoal' } : arrivalGoal] : [])],
       ...routes, ...continuingGoals(nodes),
     },
   };

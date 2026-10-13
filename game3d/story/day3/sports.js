@@ -1,11 +1,11 @@
 import { place } from './shared.js';
 export default place(
   {
-    east_lane: ['talk:north_street', 'zone:north_exit'], east_coast: ['talk:onsen_path', 'zone:east_exit'],
+    office_quarter: ['talk:office_street', 'zone:west_exit'], east_lane: ['talk:north_street', 'zone:north_exit'], east_coast: ['talk:onsen_path', 'zone:east_exit'],
     gym: ['talk:gym'], pool: ['talk:pool'],
   },
   {
-    closed: ['talk:office_street', 'zone:west_exit'],
+
     labels: { rei: 'Tennis player' },
     on: { 'talk:rei': 'd3_rei_practice', 'talk:ball_basket': 'd3_basket', 'talk:court_display': 'd3_display' },
     nodes: {

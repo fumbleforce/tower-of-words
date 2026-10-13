@@ -70,9 +70,20 @@ test('while something runs, a place that would go waits with its reason', async 
   assert.equal(b.east_lane.reason, REASON.busy);
 });
 
-test('day 3 harbour remains beyond the closed forecourt gate; day 2 sports retains its gate', async () => {
-  assert.equal((await states(3, 'plaza', {})).s.harbour.state, 'later');
+test('day 3 harbour opens through sports; day 2 sports retains its gate', async () => {
+  assert.equal((await states(3, 'plaza', {})).s.harbour.state, 'go');
   assert.equal((await states(2, 'plaza', {})).s.sports.state, 'closed');
+});
+
+test('Research is reached by the public sports lane without reopening the forecourt gate', async () => {
+  for (const day of [1, 3, 4, 5]) {
+    const { graph, s } = await states(day, 'plaza', MORNING);
+    assert.equal(s.research_lab.state, 'go', `day ${day}`);
+    assert.ok(s.research_lab.route.path.includes('sports'));
+    assert.ok(s.research_lab.route.path.includes('office_quarter'));
+    assert.ok(!graph.forecourt.some(way => way.to === 'campus'));
+  }
+  assert.equal((await states(2, 'plaza', {})).s.research_lab.state, 'later');
 });
 
 test('a place he has not been to can still be travelled to (any open place, 4b)', async () => {

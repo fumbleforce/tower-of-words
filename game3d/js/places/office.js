@@ -22,8 +22,7 @@ import { chairPusher } from './office-chair.js';
 import { isPlayer } from '../mc.js';
 import { officeArrival } from './office-arrival.js';
 import { MACHINE_LEAF } from './office-machine-door.js';
-import { attachSender } from '../investigations/sender/index.js';
-import { attachMioLunch } from './mio-lunch/index.js';
+import { attachOfficeActivities } from './office-activities.js';
 import { LUNCH_TOP, LUNCH_SEATS as lunchSeats } from './mio-lunch/plan.js';
 import { lunchBento } from './mio-lunch/props.js';
 export async function officePlace(game) {
@@ -1102,8 +1101,7 @@ export async function officePlace(game) {
   }
   P.lunch = { food: lunchFood, state: lunchState }; // QA (tools/lunch-shots.mjs)
   day2.install(P);
-  attachSender(game, P, w);
-  attachMioLunch(game, P);
+  attachOfficeActivities(game, P, w);
   return P;
 }
 export const MIO_SEAT_Y = 0.0,

@@ -20,7 +20,7 @@ window.renderThumb = async (view) => {
   if (view.type === 'room') {
     rooms[view.room] = rooms[view.room] || buildAsset({ type: 'room', room: view.room });
     b = await rooms[view.room];
-    b.focus = view.anchor ? { anchor: view.anchor, spot: view.spot, small: view.small } : null;
+    b.focus = view.target ? b.target(view.target) : view.anchor ? { anchor: view.anchor, spot: view.spot, small: view.small } : null;
   } else {
     b = await buildAsset(view);
   }

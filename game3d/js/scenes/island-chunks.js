@@ -7,6 +7,15 @@
 // walk = its walkable rectangle and view = the part drawn on the map, both local [x0, x1, z0, z1];
 // anchor = what pins it to the reference.
 export const CHUNKS = {
+  research_lab: {
+    at: [-31, -103.45],
+    turn: 0,
+    scale: 1,
+    level: 0,
+    walk: [-3.91, 3.96, -3.31, 3.31],
+    view: [-4.2, 4, -3.35, 3.35],
+    anchor: 'the existing Research west door and built ground-floor reading room',
+  },
   ferry_terminal: {
     at: [-112, -100],
     turn: 0,

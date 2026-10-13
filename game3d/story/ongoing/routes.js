@@ -224,7 +224,9 @@ export const ROUTES = {
   "clinic": {
     "plaza": ["talk:clinic_exit"]
   },
+  "research_lab": { "works": ["talk:research_exit"] },
   "works": {
+    "research_lab": ["talk:research_lab"],
     "harbour": [
       "talk:harbour_lane",
       "zone:lane_exit",

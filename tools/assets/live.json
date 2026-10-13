@@ -253,6 +253,9 @@
   "game3d/assets/portraits/rei-offguard.webp": {},
   "game3d/assets/portraits/rei-scolding.webp": {},
   "game3d/assets/portraits/rei-smug.webp": {},
+  "game3d/assets/references/": {
+   "note": "Authored reference diagrams recovered for Research #317."
+  },
   "game3d/assets/station/station.glb": {},
   "game3d/assets/train/monorail-wear.webp": {},
   "game3d/assets/train/monorail.glb": {},
@@ -930,6 +933,13 @@
    ],
    "to": "art/production/retired/2026-10-13/",
    "note": "Issue 344: remove redundant fourth work reply so the phone conversation keeps people visible"
+  },
+  {
+   "date": "2026-10-13",
+   "action": "register",
+   "path": "game3d/assets/references/",
+   "round": "research-reading-room",
+   "note": "Authored reference diagrams recovered for Research #317."
   }
  ]
 }

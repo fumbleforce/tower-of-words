@@ -25,6 +25,7 @@ import { gymPlace as gym } from './gym.js';
 import { officeQuarterPlace as office_quarter } from './office-quarter.js';
 import { ferryTerminalPlace as ferry_terminal } from './ferry-terminal.js';
 import { harbourPlace as harbour } from './harbour.js';
+import { researchRoomPlace as research_lab } from './research-room.js';
 import { worksPlace as works } from './works.js';
 
 export const PLACES = {
@@ -55,4 +56,5 @@ export const PLACES = {
   harbour,
   ferry_terminal,
   works,
+  research_lab,
 };

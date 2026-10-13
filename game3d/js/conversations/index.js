@@ -49,10 +49,15 @@ export function installConversations(game) {
   installSenderHook(game, flags);
   // no Chat with Mio on the monorail, nor with the guard before Eric has said good morning (Jørgen, 2026-10-10: "do
   // also remove chat option from mio on the monorail"; at the guard, "remove the chat option also", #394)
-  game.topicFor = (who) =>
-    (who === 'mio' && game.place?.name === 'train') || (who === 'guard' && !flags.greeted_guard)
-      ? null
-      : who === 'kenji' && game.outing?.available()
-        ? { label: flags.outing_active ? 'Chat about our walk' : 'Chat with Kenji', trigger: 'ask:kenji-outing' }
-        : topicFor(who, conversationMemory, known, game.sim?.met.has(who));
+  game.topicFor = (who) => {
+    const topic =
+      (who === 'mio' && game.place?.name === 'train') || (who === 'guard' && !flags.greeted_guard)
+        ? null
+        : who === 'kenji' && game.outing?.available()
+          ? { label: flags.outing_active ? 'Chat about our walk' : 'Chat with Kenji', trigger: 'ask:kenji-outing' }
+          : topicFor(who, conversationMemory, known, game.sim?.met.has(who));
+    return topic && who === 'mori' && game.place?.researchOffice?.ready().available
+      ? { label: 'Chat with Mr. Mori', trigger: 'ask:mori-papers-menu' }
+      : topic;
+  };
 }

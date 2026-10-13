@@ -1,5 +1,5 @@
-// The resurfacing barrier closes the office approach for walkers as well as the player.
-export const SPORTS_CLOSED_DAYS = [3, 4];
+// The completed office-street route is open to residents and the player.
+export const SPORTS_CLOSED_DAYS = [];
 export function sportsCrowd(data, day) {
   if (!SPORTS_CLOSED_DAYS.includes(day)) return data;
   const open = (end) => (end === 'office_street' ? 'onsen_path' : end);

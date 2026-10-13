@@ -1,0 +1,17 @@
+export const RESEARCH_DETAILS = {
+  things: {
+    research_exit: { label: 'Old works', kind: 'thing', verb: 'Go out' },
+    research_reader: { label: 'Reader', kind: 'person', verb: 'Talk' },
+    research_side_seat: { label: 'Reading chair', kind: 'thing', verb: 'Sit', pin: 'near' },
+    research_end_seat: { label: 'Table-end chair', kind: 'thing', verb: 'Sit', pin: 'near' },
+    research_archive: { label: 'Reference index', kind: 'thing', verb: 'Browse' },
+    research_books: { label: 'Reference books', kind: 'thing', verb: 'Read' },
+    research_table_seat: { label: 'Reading chair', kind: 'thing', verb: 'Sit', pin: 'near' },
+    research_window_seat: { label: 'Window chair', kind: 'thing', verb: 'Sit', pin: 'near' },
+  },
+  spots: ['research_in', 'research_reader', 'research_shelf', 'research_archive'],
+  seats: ['research_table_seat', 'research_window_seat', 'research_side_seat', 'research_end_seat'],
+  people: ['research_reader'],
+  zones: [],
+  hooks: [],
+};
