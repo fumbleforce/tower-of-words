@@ -75,6 +75,10 @@ test('northern fences close their full spans at all detail and jump heights, wit
 
 test('northern boundary footprints preserve the grove bench, chimney nook and weather-station path', async () => {
   const W = await import('../../js/scenes/works/plan.js');
+  for (const [x0,x1,z0,z1] of edgeBlocks(PROTECTED_EDGES.works)) {
+    const [a,b,c,d] = W.LOT;
+    assert(x1 < a || x0 > b || z1 < c || z0 > d, 'the whole existing paved transformer/tank lot stays on the public side');
+  }
   const points = { sports: [[55.4,-82.1],[58.2,-89.5],[58.2,-77]],
     works: [W.NOOKS.chimney_foot, W.NOOKS.weather_station, [-41.5,-105.8],[-49.8,-108]] };
   for (const [place,list] of Object.entries(points)) for (const [x,z] of list)
@@ -94,5 +98,20 @@ test('works navigation still reaches every public nook, door and exit after nort
   for (const [id,p] of Object.entries(targets)) {
     assert(nav.free(...p), `${id} is free`);
     assert(nav.path(...P.IN,...p)?.length, `${id} is reachable`);
+  }
+});
+
+
+test('protected-side sports reverse probe is outside the canonical public walks', async () => {
+  const P = await import('../../js/scenes/sports/plan.js');
+  const { ground } = await import('../../js/scenes/sports/ground.js');
+  const { applyGround } = await import('../../js/movement/walk-ground.js');
+  const { Nav } = await import('../../js/movement/navigation.js');
+  const nav=applyGround(new Nav(...ground().bounds,.12),ground()), p=P.pt([58.2,-93.2]);
+  assert.equal(nav.free(...p),false,'reverse probe starts beyond closed pool-walk head');
+  const route=nav.path(...P.IN,...p);
+  if (route) {
+    const { toIsland } = await import('../../js/scenes/island-layout.js');
+    assert(toIsland('sports',...route.at(-1))[1]>-91.7,'a requested backdrop goal projects back to the public side of the fence');
   }
 });

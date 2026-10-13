@@ -66,22 +66,22 @@ const approaches = {
   ],
   sports: [
     ['pool-head', [58.2, -90.5], [0, -1], 1, -91.7, 1],
-    ['grove-west', [55.4, -82.1], [-1, 0], 0, 54.2, 1],
+    ['grove-west', [51.3, -82.1], [-1, 0], 0, 50.2, 1],
     ['pavilion-tie', [59.1, -90.4], [0,-1], 1, -91.7, 1],
-    ['gym-tie', [55.2, -76.8], [-1,0], 0, 54.2, 1],
-    ['corner', [54.8, -91.1], [-1,-1], 1, -91.7, 1],
-    ['grove-reverse', [53.3,-82.1], [1,0], 0, 54.2, -1],
+    ['gym-tie', [51.2, -76.8], [-1,0], 0, 50.2, 1],
+    ['corner', [50.8, -91.1], [-1,-1], 1, -91.7, 1],
+    ['grove-reverse', [49.3,-82.1], [1,0], 0, 50.2, -1],
     ['north-reverse', [58.2,-93.2], [0,1], 1, -91.7, -1],
   ],
   works: [
     ['chimney', [-82.4, -117.6], [0, -1], 1, -119.1, 1],
-    ['factory-east', [-49.8, -108], [0, -1], 1, -111, 1],
+    ['factory-east', [-49.8, -115.7], [0, -1], 1, -117, 1],
     ['plant-tie', [-84.9,-117.8], [0,-1], 1, -119.1, 1],
     ['factory-tie', [-77.2,-117.8], [0,-1], 1, -119.1, 1],
     ['research-tie', [-36,-107.4], [1,0], 0, -35.15, -1],
-    ['factory-east-tie', [-51.5,-114.2], [-1,0], 0, -52.45, 1],
+    ['factory-east-tie', [-51.5,-115.2], [-1,0], 0, -52.45, 1],
     ['chimney-reverse', [-84,-120.4], [0,1], 1, -119.1, -1],
-    ['factory-east-reverse', [-48,-112], [0,1], 1, -111, -1],
+    ['factory-east-reverse', [-48,-118.2], [0,1], 1, -117, -1],
     ['research-return-reverse', [-34,-109], [-1,0], 0, -35.15, 1],
     ['research', [-42, -107.8], [0, -1], 1, -110.4, 1],
   ],
@@ -189,6 +189,37 @@ await withBrowserJob('island-boundaries', async (browser) => {
             await page.screenshot({ path: `${out}/${file}` });
             reports.push({ width, place, period, file, ...state });
           }
+        }
+        if (place === 'sports' && process.env.BENCH_CHECK === '1') {
+          const seat = await page.evaluate(async () => {
+            const g = globalThis.__game, L = await import('./js/scenes/island-layout.js');
+            const p = L.toLocal('sports',55.4,-82.1);
+            const seats = [...g.place.seating.seats.values()].filter(s => g.place.seating.reachable(s));
+            seats.sort((a,b)=>Math.hypot(a.x-p[0],a.z-p[1])-Math.hypot(b.x-p[0],b.z-p[1]));
+            const s=seats[0]; if (!s || Math.hypot(s.x-p[0],s.z-p[1])>3) throw Error('grove seat unavailable');
+            const item=g.markers.list.find(m=>m.id===s.id), out=item.spot();
+            g.walker.stop();g.jump.reset();g.player.root.position.set(out[0],0,out[1]);g.walker.sync();g.place.cam.snap(g.player.root.position);
+            g.targetLock=item;g.near=item;g.ui.closeActs();
+            return {id:s.id,out};
+          });
+          await page.keyboard.press('KeyE');
+          await page.waitForFunction(()=>globalThis.__game.player.seated);
+          await page.waitForTimeout(500);
+          await page.screenshot({path:`${out}/${width}-sports-grove-seated.png`});
+          await page.keyboard.press('ArrowUp');
+          await page.waitForFunction(()=>!globalThis.__game.player.seated);
+          await page.waitForTimeout(500);
+          await page.screenshot({path:`${out}/${width}-sports-grove-stood.png`});
+          const end=await page.evaluate(async ()=>{
+            const g=globalThis.__game,L=await import('./js/scenes/island-layout.js');
+            const target=L.toLocal('sports',58.2,-82.1);g.targetLock=null;g.ui.closeActs();
+            await g.walkTo(...target);
+            const p=g.player.root.position;return {point:[p.x,p.z],target,free:g.place.nav.free(p.x,p.z),place:g.place.name};
+          });
+          assert.equal(end.place,'sports');assert(end.free,'exit returns to the public pool walk');
+          assert(Math.hypot(end.point[0]-end.target[0],end.point[1]-end.target[1])<.45,'normal walker reaches the pool walk from the seat exit');
+          await page.screenshot({path:`${out}/${width}-sports-grove-seat-exit.png`});
+          reports.push({width,place,bench:seat.id,seated:true,stood:true,routeExit:end});
         }
         if (maps && place !== 'forecourt') {
           await page.locator('#minimap').click();

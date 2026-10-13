@@ -7,9 +7,9 @@ const gym = building('gym'),
 const plant = building('nw_old'),
   factory = building('factory'),
   research = building('n4');
-const sportsCorner = [54.2, -91.7];
+const sportsCorner = [50.2, -91.7];
 const chimneyCorner = [plant[2], -119.1];
-const worksCorner = [factory[2] - 0.05, -111];
+const worksCorner = [factory[2] - 0.05, -117];
 const researchCorner = [research[0] + 0.05, worksCorner[1]];
 
 export const PROTECTED_EDGES = {
