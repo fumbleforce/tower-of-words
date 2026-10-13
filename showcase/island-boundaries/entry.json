@@ -6,13 +6,14 @@
   "commit": [
     "e9a8f7ac94c772fc785451c7fcc3f5fc39db9f60",
     "f7541d34a8572b5d44bccc599f7f7ac8698f9549",
-    "dc4a05341e862f915b6d96550ba74257fc7ef775"
+    "dc4a05341e862f915b6d96550ba74257fc7ef775",
+    "f131c321292dfe81b71ebf528f59e94e34832dae"
   ],
   "result": [
     "camera-after-a--1366-forecourt-morning-near-gate",
     "map-after-a--390-forecourt-morning-approach",
-    "after-b-final--1366-sports-morning-grove",
-    "after-b-final--390-works-morning-factory-east"
+    "after-b-repair-final--1366-sports-morning-grove",
+    "after-b-repair-final--390-works-morning-factory-east-tie"
   ],
   "sections": [
     {
@@ -142,8 +143,294 @@
       ]
     },
     {
-      "title": "Northern sports and works grounds — final",
-      "caption": "Final morning/evening approaches, building ties, reverse-side views and full maps. The sports grove bench and the works chimney and weather-station nooks remain accessible. Protected-side views are collision inspection positions.",
+      "title": "Northern grounds — final repaired views and maps",
+      "caption": "Final matching morning/evening views after moving the sports fence west into the grove and the works fence north behind the whole paved transformer/tank lot. Both phone foreground regressions are cleared. The old works reverse setup is now on the restored public side and shows the actor clearly. Desktop sports north-reverse remains an outside-boundary diagnostic; phone gym and desktop transformer frames retain baseline camera occlusion.",
+      "images": [
+        {
+          "id": "after-b-repair-final--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "after-b-repair-final--1366-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-sports-evening-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening gym tie."
+        },
+        {
+          "id": "after-b-repair-final--1366-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-sports-evening-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports evening north reverse."
+        },
+        {
+          "id": "after-b-repair-final--1366-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-sports-evening-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening pavilion tie."
+        },
+        {
+          "id": "after-b-repair-final--1366-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-sports-evening-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports evening pool head."
+        },
+        {
+          "id": "after-b-repair-final--1366-sports-map",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-sports-map.png",
+          "caption": "Desktop 1366 × 860 — sports map."
+        },
+        {
+          "id": "after-b-repair-final--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        },
+        {
+          "id": "after-b-repair-final--1366-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-sports-morning-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning gym tie."
+        },
+        {
+          "id": "after-b-repair-final--1366-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-sports-morning-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports morning north reverse."
+        },
+        {
+          "id": "after-b-repair-final--1366-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-sports-morning-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning pavilion tie."
+        },
+        {
+          "id": "after-b-repair-final--1366-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-sports-morning-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports morning pool head."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-evening-chimney",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-evening-chimney.png",
+          "caption": "Desktop 1366 × 860 — works evening chimney."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-evening-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-evening-factory-east-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening factory east tie."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-evening-factory-east",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-evening-factory-east.png",
+          "caption": "Desktop 1366 × 860 — works evening factory east."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-evening-factory-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-evening-factory-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening factory tie."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-evening-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — works evening north reverse."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-evening-plant-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-evening-plant-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening plant tie."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-evening-research-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-evening-research-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening research tie."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-evening-research",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-evening-research.png",
+          "caption": "Desktop 1366 × 860 — works evening research."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-map",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-map.png",
+          "caption": "Desktop 1366 × 860 — works map."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-morning-chimney",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-morning-chimney.png",
+          "caption": "Desktop 1366 × 860 — works morning chimney."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-morning-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-morning-factory-east-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning factory east tie."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-morning-factory-east",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-morning-factory-east.png",
+          "caption": "Desktop 1366 × 860 — works morning factory east."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-morning-factory-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-morning-factory-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning factory tie."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-morning-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — works morning north reverse."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-morning-plant-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-morning-plant-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning plant tie."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-morning-research-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-morning-research-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning research tie."
+        },
+        {
+          "id": "after-b-repair-final--1366-works-morning-research",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/1366-works-morning-research.png",
+          "caption": "Desktop 1366 × 860 — works morning research."
+        },
+        {
+          "id": "after-b-repair-final--390-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-sports-evening-grove.png",
+          "caption": "Phone 390 × 844 — sports evening grove."
+        },
+        {
+          "id": "after-b-repair-final--390-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-sports-evening-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports evening gym tie."
+        },
+        {
+          "id": "after-b-repair-final--390-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-sports-evening-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports evening north reverse."
+        },
+        {
+          "id": "after-b-repair-final--390-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-sports-evening-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports evening pavilion tie."
+        },
+        {
+          "id": "after-b-repair-final--390-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-sports-evening-pool-head.png",
+          "caption": "Phone 390 × 844 — sports evening pool head."
+        },
+        {
+          "id": "after-b-repair-final--390-sports-map",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-sports-map.png",
+          "caption": "Phone 390 × 844 — sports map."
+        },
+        {
+          "id": "after-b-repair-final--390-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-sports-morning-grove.png",
+          "caption": "Phone 390 × 844 — sports morning grove."
+        },
+        {
+          "id": "after-b-repair-final--390-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-sports-morning-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports morning gym tie."
+        },
+        {
+          "id": "after-b-repair-final--390-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-sports-morning-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports morning north reverse."
+        },
+        {
+          "id": "after-b-repair-final--390-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-sports-morning-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports morning pavilion tie."
+        },
+        {
+          "id": "after-b-repair-final--390-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-sports-morning-pool-head.png",
+          "caption": "Phone 390 × 844 — sports morning pool head."
+        },
+        {
+          "id": "after-b-repair-final--390-works-evening-chimney",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-evening-chimney.png",
+          "caption": "Phone 390 × 844 — works evening chimney."
+        },
+        {
+          "id": "after-b-repair-final--390-works-evening-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-evening-factory-east-tie.png",
+          "caption": "Phone 390 × 844 — works evening factory east tie."
+        },
+        {
+          "id": "after-b-repair-final--390-works-evening-factory-east",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-evening-factory-east.png",
+          "caption": "Phone 390 × 844 — works evening factory east."
+        },
+        {
+          "id": "after-b-repair-final--390-works-evening-factory-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-evening-factory-tie.png",
+          "caption": "Phone 390 × 844 — works evening factory tie."
+        },
+        {
+          "id": "after-b-repair-final--390-works-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-evening-north-reverse.png",
+          "caption": "Phone 390 × 844 — works evening north reverse."
+        },
+        {
+          "id": "after-b-repair-final--390-works-evening-plant-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-evening-plant-tie.png",
+          "caption": "Phone 390 × 844 — works evening plant tie."
+        },
+        {
+          "id": "after-b-repair-final--390-works-evening-research-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-evening-research-tie.png",
+          "caption": "Phone 390 × 844 — works evening research tie."
+        },
+        {
+          "id": "after-b-repair-final--390-works-evening-research",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-evening-research.png",
+          "caption": "Phone 390 × 844 — works evening research."
+        },
+        {
+          "id": "after-b-repair-final--390-works-map",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-map.png",
+          "caption": "Phone 390 × 844 — works map."
+        },
+        {
+          "id": "after-b-repair-final--390-works-morning-chimney",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-morning-chimney.png",
+          "caption": "Phone 390 × 844 — works morning chimney."
+        },
+        {
+          "id": "after-b-repair-final--390-works-morning-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-morning-factory-east-tie.png",
+          "caption": "Phone 390 × 844 — works morning factory east tie."
+        },
+        {
+          "id": "after-b-repair-final--390-works-morning-factory-east",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-morning-factory-east.png",
+          "caption": "Phone 390 × 844 — works morning factory east."
+        },
+        {
+          "id": "after-b-repair-final--390-works-morning-factory-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-morning-factory-tie.png",
+          "caption": "Phone 390 × 844 — works morning factory tie."
+        },
+        {
+          "id": "after-b-repair-final--390-works-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-morning-north-reverse.png",
+          "caption": "Phone 390 × 844 — works morning north reverse."
+        },
+        {
+          "id": "after-b-repair-final--390-works-morning-plant-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-morning-plant-tie.png",
+          "caption": "Phone 390 × 844 — works morning plant tie."
+        },
+        {
+          "id": "after-b-repair-final--390-works-morning-research-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-morning-research-tie.png",
+          "caption": "Phone 390 × 844 — works morning research tie."
+        },
+        {
+          "id": "after-b-repair-final--390-works-morning-research",
+          "image": "game3d/shots/island-boundaries/after-b-repair-final/390-works-morning-research.png",
+          "caption": "Phone 390 × 844 — works morning research."
+        }
+      ]
+    },
+    {
+      "title": "Northern grounds — first complete after set, before visual repair",
+      "caption": "Retained first complete milestone-B captures. Independent review found four new phone occlusion failures: morning/evening grove bench and factory-east tie. Those are repaired by physical fence placement in the later final set. Desktop sports reverse is a protected-side diagnostic; phone gym and desktop transformer actor occlusion already existed before this work.",
       "images": [
         {
           "id": "after-b-final--1366-sports-evening-grove",
@@ -2374,6 +2661,890 @@
           "id": "recovery-checkpoint-visible--390-leaving",
           "image": "game3d/shots/island-boundaries/recovery-checkpoint-visible/390-leaving.png",
           "caption": "Phone 390 × 844 — leaving."
+        }
+      ]
+    },
+    {
+      "title": "Northern grounds — immediate before-repair baseline",
+      "caption": "All 56 captures of the first milestone-B fence placement, before the two visual repairs. Includes the phone bench and transformer-lot regressions, severe protected-side probes and preexisting building camera limitations.",
+      "images": [
+        {
+          "id": "before-b-repair--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "before-b-repair--1366-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-sports-evening-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening gym tie."
+        },
+        {
+          "id": "before-b-repair--1366-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-sports-evening-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports evening north reverse."
+        },
+        {
+          "id": "before-b-repair--1366-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-sports-evening-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening pavilion tie."
+        },
+        {
+          "id": "before-b-repair--1366-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-sports-evening-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports evening pool head."
+        },
+        {
+          "id": "before-b-repair--1366-sports-map",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-sports-map.png",
+          "caption": "Desktop 1366 × 860 — sports map."
+        },
+        {
+          "id": "before-b-repair--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        },
+        {
+          "id": "before-b-repair--1366-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-sports-morning-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning gym tie."
+        },
+        {
+          "id": "before-b-repair--1366-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-sports-morning-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports morning north reverse."
+        },
+        {
+          "id": "before-b-repair--1366-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-sports-morning-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning pavilion tie."
+        },
+        {
+          "id": "before-b-repair--1366-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-sports-morning-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports morning pool head."
+        },
+        {
+          "id": "before-b-repair--1366-works-evening-chimney",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-evening-chimney.png",
+          "caption": "Desktop 1366 × 860 — works evening chimney."
+        },
+        {
+          "id": "before-b-repair--1366-works-evening-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-evening-factory-east-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening factory east tie."
+        },
+        {
+          "id": "before-b-repair--1366-works-evening-factory-east",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-evening-factory-east.png",
+          "caption": "Desktop 1366 × 860 — works evening factory east."
+        },
+        {
+          "id": "before-b-repair--1366-works-evening-factory-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-evening-factory-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening factory tie."
+        },
+        {
+          "id": "before-b-repair--1366-works-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-evening-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — works evening north reverse."
+        },
+        {
+          "id": "before-b-repair--1366-works-evening-plant-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-evening-plant-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening plant tie."
+        },
+        {
+          "id": "before-b-repair--1366-works-evening-research-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-evening-research-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening research tie."
+        },
+        {
+          "id": "before-b-repair--1366-works-evening-research",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-evening-research.png",
+          "caption": "Desktop 1366 × 860 — works evening research."
+        },
+        {
+          "id": "before-b-repair--1366-works-map",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-map.png",
+          "caption": "Desktop 1366 × 860 — works map."
+        },
+        {
+          "id": "before-b-repair--1366-works-morning-chimney",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-morning-chimney.png",
+          "caption": "Desktop 1366 × 860 — works morning chimney."
+        },
+        {
+          "id": "before-b-repair--1366-works-morning-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-morning-factory-east-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning factory east tie."
+        },
+        {
+          "id": "before-b-repair--1366-works-morning-factory-east",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-morning-factory-east.png",
+          "caption": "Desktop 1366 × 860 — works morning factory east."
+        },
+        {
+          "id": "before-b-repair--1366-works-morning-factory-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-morning-factory-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning factory tie."
+        },
+        {
+          "id": "before-b-repair--1366-works-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-morning-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — works morning north reverse."
+        },
+        {
+          "id": "before-b-repair--1366-works-morning-plant-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-morning-plant-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning plant tie."
+        },
+        {
+          "id": "before-b-repair--1366-works-morning-research-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-morning-research-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning research tie."
+        },
+        {
+          "id": "before-b-repair--1366-works-morning-research",
+          "image": "game3d/shots/island-boundaries/before-b-repair/1366-works-morning-research.png",
+          "caption": "Desktop 1366 × 860 — works morning research."
+        },
+        {
+          "id": "before-b-repair--390-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-sports-evening-grove.png",
+          "caption": "Phone 390 × 844 — sports evening grove."
+        },
+        {
+          "id": "before-b-repair--390-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-sports-evening-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports evening gym tie."
+        },
+        {
+          "id": "before-b-repair--390-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-sports-evening-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports evening north reverse."
+        },
+        {
+          "id": "before-b-repair--390-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-sports-evening-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports evening pavilion tie."
+        },
+        {
+          "id": "before-b-repair--390-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-sports-evening-pool-head.png",
+          "caption": "Phone 390 × 844 — sports evening pool head."
+        },
+        {
+          "id": "before-b-repair--390-sports-map",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-sports-map.png",
+          "caption": "Phone 390 × 844 — sports map."
+        },
+        {
+          "id": "before-b-repair--390-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-sports-morning-grove.png",
+          "caption": "Phone 390 × 844 — sports morning grove."
+        },
+        {
+          "id": "before-b-repair--390-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-sports-morning-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports morning gym tie."
+        },
+        {
+          "id": "before-b-repair--390-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-sports-morning-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports morning north reverse."
+        },
+        {
+          "id": "before-b-repair--390-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-sports-morning-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports morning pavilion tie."
+        },
+        {
+          "id": "before-b-repair--390-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-sports-morning-pool-head.png",
+          "caption": "Phone 390 × 844 — sports morning pool head."
+        },
+        {
+          "id": "before-b-repair--390-works-evening-chimney",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-evening-chimney.png",
+          "caption": "Phone 390 × 844 — works evening chimney."
+        },
+        {
+          "id": "before-b-repair--390-works-evening-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-evening-factory-east-tie.png",
+          "caption": "Phone 390 × 844 — works evening factory east tie."
+        },
+        {
+          "id": "before-b-repair--390-works-evening-factory-east",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-evening-factory-east.png",
+          "caption": "Phone 390 × 844 — works evening factory east."
+        },
+        {
+          "id": "before-b-repair--390-works-evening-factory-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-evening-factory-tie.png",
+          "caption": "Phone 390 × 844 — works evening factory tie."
+        },
+        {
+          "id": "before-b-repair--390-works-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-evening-north-reverse.png",
+          "caption": "Phone 390 × 844 — works evening north reverse."
+        },
+        {
+          "id": "before-b-repair--390-works-evening-plant-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-evening-plant-tie.png",
+          "caption": "Phone 390 × 844 — works evening plant tie."
+        },
+        {
+          "id": "before-b-repair--390-works-evening-research-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-evening-research-tie.png",
+          "caption": "Phone 390 × 844 — works evening research tie."
+        },
+        {
+          "id": "before-b-repair--390-works-evening-research",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-evening-research.png",
+          "caption": "Phone 390 × 844 — works evening research."
+        },
+        {
+          "id": "before-b-repair--390-works-map",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-map.png",
+          "caption": "Phone 390 × 844 — works map."
+        },
+        {
+          "id": "before-b-repair--390-works-morning-chimney",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-morning-chimney.png",
+          "caption": "Phone 390 × 844 — works morning chimney."
+        },
+        {
+          "id": "before-b-repair--390-works-morning-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-morning-factory-east-tie.png",
+          "caption": "Phone 390 × 844 — works morning factory east tie."
+        },
+        {
+          "id": "before-b-repair--390-works-morning-factory-east",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-morning-factory-east.png",
+          "caption": "Phone 390 × 844 — works morning factory east."
+        },
+        {
+          "id": "before-b-repair--390-works-morning-factory-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-morning-factory-tie.png",
+          "caption": "Phone 390 × 844 — works morning factory tie."
+        },
+        {
+          "id": "before-b-repair--390-works-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-morning-north-reverse.png",
+          "caption": "Phone 390 × 844 — works morning north reverse."
+        },
+        {
+          "id": "before-b-repair--390-works-morning-plant-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-morning-plant-tie.png",
+          "caption": "Phone 390 × 844 — works morning plant tie."
+        },
+        {
+          "id": "before-b-repair--390-works-morning-research-tie",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-morning-research-tie.png",
+          "caption": "Phone 390 × 844 — works morning research tie."
+        },
+        {
+          "id": "before-b-repair--390-works-morning-research",
+          "image": "game3d/shots/island-boundaries/before-b-repair/390-works-morning-research.png",
+          "caption": "Phone 390 × 844 — works morning research."
+        }
+      ]
+    },
+    {
+      "title": "Fence placement repair — first isolated checks",
+      "caption": "Eight retained morning/evening phone/desktop close-ups of the two changed locations. Phone actor and bench views are clear after moving the actual fence; the desktop transformer camera limitation remains as in baseline.",
+      "images": [
+        {
+          "id": "after-b-repair-frame--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-frame/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "after-b-repair-frame--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-frame/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        },
+        {
+          "id": "after-b-repair-frame--1366-works-evening-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-frame/1366-works-evening-factory-east-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening factory east tie."
+        },
+        {
+          "id": "after-b-repair-frame--1366-works-morning-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-frame/1366-works-morning-factory-east-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning factory east tie."
+        },
+        {
+          "id": "after-b-repair-frame--390-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-frame/390-sports-evening-grove.png",
+          "caption": "Phone 390 × 844 — sports evening grove."
+        },
+        {
+          "id": "after-b-repair-frame--390-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-frame/390-sports-morning-grove.png",
+          "caption": "Phone 390 × 844 — sports morning grove."
+        },
+        {
+          "id": "after-b-repair-frame--390-works-evening-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-frame/390-works-evening-factory-east-tie.png",
+          "caption": "Phone 390 × 844 — works evening factory east tie."
+        },
+        {
+          "id": "after-b-repair-frame--390-works-morning-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair-frame/390-works-morning-factory-east-tie.png",
+          "caption": "Phone 390 × 844 — works morning factory east tie."
+        }
+      ]
+    },
+    {
+      "title": "Fence placement repair — all native collision attempts",
+      "caption": "All 68 final walking and running-jump endpoint captures passed, testing middles, ends, corners and both sides at both sizes. Protected-side starts are deliberate test setups outside the public walk; near-fence and near-building endpoints retain camera occlusion and are functional diagnostics.",
+      "images": [
+        {
+          "id": "after-b-repair-native--1366-sports-corner-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-sports-corner-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports corner run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-sports-corner-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-sports-corner-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports corner walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-sports-grove-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-sports-grove-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove reverse run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-sports-grove-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-sports-grove-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove reverse walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-sports-grove-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-sports-grove-west-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove west run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-sports-grove-west-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-sports-grove-west-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove west walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-sports-gym-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-sports-gym-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports gym tie run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-sports-gym-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-sports-gym-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports gym tie walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-sports-north-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-sports-north-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports north reverse run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-sports-north-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-sports-north-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports north reverse walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-sports-pavilion-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-sports-pavilion-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports pavilion tie run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-sports-pavilion-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-sports-pavilion-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports pavilion tie walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-sports-pool-head-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-sports-pool-head-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports pool head run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-sports-pool-head-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-sports-pool-head-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports pool head walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-chimney-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-chimney-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works chimney reverse run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-chimney-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-chimney-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works chimney reverse walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-chimney-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-chimney-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works chimney run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-chimney-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-chimney-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works chimney walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-factory-east-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-factory-east-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works factory east reverse run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-factory-east-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-factory-east-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works factory east reverse walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-factory-east-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-factory-east-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works factory east run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-factory-east-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-factory-east-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works factory east tie run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-factory-east-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-factory-east-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works factory east tie walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-factory-east-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-factory-east-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works factory east walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-factory-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-factory-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works factory tie run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-factory-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-factory-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works factory tie walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-plant-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-plant-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works plant tie run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-plant-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-plant-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works plant tie walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-research-return-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-research-return-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works research return reverse run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-research-return-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-research-return-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works research return reverse walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-research-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-research-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works research run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-research-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-research-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works research tie run jump end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-research-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-research-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works research tie walk end."
+        },
+        {
+          "id": "after-b-repair-native--1366-works-research-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/1366-works-research-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works research walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-sports-corner-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-sports-corner-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports corner run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-sports-corner-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-sports-corner-walk-end.png",
+          "caption": "Phone 390 × 844 — sports corner walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-sports-grove-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-sports-grove-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports grove reverse run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-sports-grove-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-sports-grove-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — sports grove reverse walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-sports-grove-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-sports-grove-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports grove west run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-sports-grove-west-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-sports-grove-west-walk-end.png",
+          "caption": "Phone 390 × 844 — sports grove west walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-sports-gym-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-sports-gym-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports gym tie run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-sports-gym-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-sports-gym-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — sports gym tie walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-sports-north-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-sports-north-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports north reverse run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-sports-north-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-sports-north-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — sports north reverse walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-sports-pavilion-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-sports-pavilion-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports pavilion tie run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-sports-pavilion-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-sports-pavilion-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — sports pavilion tie walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-sports-pool-head-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-sports-pool-head-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports pool head run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-sports-pool-head-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-sports-pool-head-walk-end.png",
+          "caption": "Phone 390 × 844 — sports pool head walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-chimney-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-chimney-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works chimney reverse run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-chimney-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-chimney-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — works chimney reverse walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-chimney-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-chimney-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works chimney run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-chimney-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-chimney-walk-end.png",
+          "caption": "Phone 390 × 844 — works chimney walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-factory-east-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-factory-east-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works factory east reverse run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-factory-east-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-factory-east-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — works factory east reverse walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-factory-east-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-factory-east-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works factory east run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-factory-east-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-factory-east-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works factory east tie run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-factory-east-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-factory-east-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — works factory east tie walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-factory-east-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-factory-east-walk-end.png",
+          "caption": "Phone 390 × 844 — works factory east walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-factory-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-factory-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works factory tie run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-factory-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-factory-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — works factory tie walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-plant-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-plant-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works plant tie run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-plant-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-plant-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — works plant tie walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-research-return-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-research-return-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works research return reverse run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-research-return-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-research-return-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — works research return reverse walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-research-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-research-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works research run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-research-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-research-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works research tie run jump end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-research-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-research-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — works research tie walk end."
+        },
+        {
+          "id": "after-b-repair-native--390-works-research-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-repair-native/390-works-research-walk-end.png",
+          "caption": "Phone 390 × 844 — works research walk end."
+        }
+      ]
+    },
+    {
+      "title": "Bench fixture — first interrupted full capture",
+      "caption": "Ten retained sports views. The bench fixture stopped because its action-menu setup did not retain the selected target; no collision or game-source failure was involved. Final full views and functional proof are in separate later sections.",
+      "images": [
+        {
+          "id": "after-b-repair--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "after-b-repair--1366-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair/1366-sports-evening-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening gym tie."
+        },
+        {
+          "id": "after-b-repair--1366-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-repair/1366-sports-evening-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports evening north reverse."
+        },
+        {
+          "id": "after-b-repair--1366-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair/1366-sports-evening-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening pavilion tie."
+        },
+        {
+          "id": "after-b-repair--1366-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-repair/1366-sports-evening-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports evening pool head."
+        },
+        {
+          "id": "after-b-repair--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        },
+        {
+          "id": "after-b-repair--1366-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair/1366-sports-morning-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning gym tie."
+        },
+        {
+          "id": "after-b-repair--1366-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-repair/1366-sports-morning-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports morning north reverse."
+        },
+        {
+          "id": "after-b-repair--1366-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-repair/1366-sports-morning-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning pavilion tie."
+        },
+        {
+          "id": "after-b-repair--1366-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-repair/1366-sports-morning-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports morning pool head."
+        }
+      ]
+    },
+    {
+      "title": "Bench fixture — second menu attempt",
+      "caption": "Two retained phone grove views before the same fixture action-menu selection timeout. Superseded by native E input in later attempts.",
+      "images": [
+        {
+          "id": "after-b-repair-seat-attempt2--390-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-attempt2/390-sports-evening-grove.png",
+          "caption": "Phone 390 × 844 — sports evening grove."
+        },
+        {
+          "id": "after-b-repair-seat-attempt2--390-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-attempt2/390-sports-morning-grove.png",
+          "caption": "Phone 390 × 844 — sports morning grove."
+        }
+      ]
+    },
+    {
+      "title": "Bench fixture — native sit and stand, first exit attempt",
+      "caption": "Four retained phone captures. Native E sat Eric and an arrow stood him up; the fixed arrow direction then walked off the canonical paving, so the fixture failed its navigation assertion. The final proof uses the normal walker to return to the pool walk.",
+      "images": [
+        {
+          "id": "after-b-repair-seat-attempt3--390-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-attempt3/390-sports-evening-grove.png",
+          "caption": "Phone 390 × 844 — sports evening grove."
+        },
+        {
+          "id": "after-b-repair-seat-attempt3--390-sports-grove-seated",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-attempt3/390-sports-grove-seated.png",
+          "caption": "Phone 390 × 844 — sports grove seated."
+        },
+        {
+          "id": "after-b-repair-seat-attempt3--390-sports-grove-stood",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-attempt3/390-sports-grove-stood.png",
+          "caption": "Phone 390 × 844 — sports grove stood."
+        },
+        {
+          "id": "after-b-repair-seat-attempt3--390-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-attempt3/390-sports-morning-grove.png",
+          "caption": "Phone 390 × 844 — sports morning grove."
+        }
+      ]
+    },
+    {
+      "title": "Bench fixture — second directional exit attempt",
+      "caption": "Four retained desktop captures. Sit and stand worked, but the fixture reused a directional basis across camera movement and its endpoint was outside canonical paving. This attempt is not a final result.",
+      "images": [
+        {
+          "id": "after-b-repair-seat-final--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-final/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "after-b-repair-seat-final--1366-sports-grove-seated",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-final/1366-sports-grove-seated.png",
+          "caption": "Desktop 1366 × 860 — sports grove seated."
+        },
+        {
+          "id": "after-b-repair-seat-final--1366-sports-grove-stood",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-final/1366-sports-grove-stood.png",
+          "caption": "Desktop 1366 × 860 — sports grove stood."
+        },
+        {
+          "id": "after-b-repair-seat-final--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-final/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        }
+      ]
+    },
+    {
+      "title": "Bench fixture — off-screen ground-tap attempt",
+      "caption": "Four retained desktop captures. Sit and stand worked; the distant pool-walk target projected outside the close follow viewport, so the fixture stopped before tapping. No camera framing was changed to make this test pass.",
+      "images": [
+        {
+          "id": "after-b-repair-seat-tap-final--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-tap-final/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "after-b-repair-seat-tap-final--1366-sports-grove-seated",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-tap-final/1366-sports-grove-seated.png",
+          "caption": "Desktop 1366 × 860 — sports grove seated."
+        },
+        {
+          "id": "after-b-repair-seat-tap-final--1366-sports-grove-stood",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-tap-final/1366-sports-grove-stood.png",
+          "caption": "Desktop 1366 × 860 — sports grove stood."
+        },
+        {
+          "id": "after-b-repair-seat-tap-final--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-tap-final/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        }
+      ]
+    },
+    {
+      "title": "Grove bench — final sit, stand and return proof",
+      "caption": "Both sizes pass native E sitting, native arrow standing and the normal walker returning to the pool walk. Retained morning/evening standing views, seated/standing close-ups and the reached public path. The route return uses the gameplay walker API; it is not claimed as a native pointer test.",
+      "images": [
+        {
+          "id": "after-b-repair-seat-route-final--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-route-final/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "after-b-repair-seat-route-final--1366-sports-grove-seat-exit",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-route-final/1366-sports-grove-seat-exit.png",
+          "caption": "Desktop 1366 × 860 — sports grove seat exit."
+        },
+        {
+          "id": "after-b-repair-seat-route-final--1366-sports-grove-seated",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-route-final/1366-sports-grove-seated.png",
+          "caption": "Desktop 1366 × 860 — sports grove seated."
+        },
+        {
+          "id": "after-b-repair-seat-route-final--1366-sports-grove-stood",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-route-final/1366-sports-grove-stood.png",
+          "caption": "Desktop 1366 × 860 — sports grove stood."
+        },
+        {
+          "id": "after-b-repair-seat-route-final--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-route-final/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        },
+        {
+          "id": "after-b-repair-seat-route-final--390-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-route-final/390-sports-evening-grove.png",
+          "caption": "Phone 390 × 844 — sports evening grove."
+        },
+        {
+          "id": "after-b-repair-seat-route-final--390-sports-grove-seat-exit",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-route-final/390-sports-grove-seat-exit.png",
+          "caption": "Phone 390 × 844 — sports grove seat exit."
+        },
+        {
+          "id": "after-b-repair-seat-route-final--390-sports-grove-seated",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-route-final/390-sports-grove-seated.png",
+          "caption": "Phone 390 × 844 — sports grove seated."
+        },
+        {
+          "id": "after-b-repair-seat-route-final--390-sports-grove-stood",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-route-final/390-sports-grove-stood.png",
+          "caption": "Phone 390 × 844 — sports grove stood."
+        },
+        {
+          "id": "after-b-repair-seat-route-final--390-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-repair-seat-route-final/390-sports-morning-grove.png",
+          "caption": "Phone 390 × 844 — sports morning grove."
         }
       ]
     }
