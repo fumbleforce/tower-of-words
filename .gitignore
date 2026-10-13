@@ -28,10 +28,16 @@ game3d/shots/words-menu/
 game3d/shots/prompts/
 game3d/shots/chair/
 
+# Local caches and runtime JSON locks. Dependency and asset lockfiles stay visible.
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.json.lock
+
 # No binary is tracked anywhere (notes/asset-storage-proposal.md). Used assets sync with R2 through
 # tools/assets/sync.py and its lock file; everything else binary stays on this machine. The list is
 # tools/assets/sync.json's binary_ext, in lower and upper case.
-__pycache__/
 *.webp
 *.WEBP
 *.png
