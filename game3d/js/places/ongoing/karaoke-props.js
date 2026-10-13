@@ -70,7 +70,8 @@ export function karaokeProps(space) {
       new THREE.PlaneGeometry(0.24, 0.36),
       new THREE.MeshBasicMaterial({ map: page.texture }),
     );
-    mesh.position.set(-0.07, 0.13, back ? -0.001 : 0.001);
+    // Grip near the upper corner so the sheet hangs below the hand when read.
+    mesh.position.set(-0.07, -0.13, back ? -0.001 : 0.001);
     if (back) mesh.rotation.y = Math.PI;
     card.add(mesh);
   }
@@ -127,7 +128,7 @@ export function karaokeProps(space) {
   root.add(selector);
   function reset() {
     root.add(receipt, microphone);
-    receipt.position.set(0.24, 0.56, -2.0);
+    receipt.position.set(0.24, 0.56, -2.26);
     receipt.rotation.set(-Math.PI / 2, 0, 0);
     card.rotation.set(0, 0, 0);
     microphone.position.set(-1.17, 0.63, -2.0);

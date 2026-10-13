@@ -29,17 +29,24 @@ export function karaokeActions(game, P, props, action) {
       rig.root.position.set(out[0], 0, out[1]);
     }
   }
-  async function walk(who, point, face) {
+  async function walk(who, point, face, { carry = false } = {}) {
     stand(who);
-    if (held.has(who)) {
-      hands.reach(actor(who), null);
-      held.get(who).target = null;
+    const rig = actor(who),
+      start = rig.root.position.clone(),
+      record = held.get(who);
+    if (record && carry) hands.follow(rig);
+    else {
+      hands.reach(rig, null);
+      if (record) record.target = null;
     }
-    const rig = actor(who);
     await action.wait(walkRig(game, rig, point, { avoid: false }));
     rig._noAvoid = true;
-    if (face) await action.wait(faceRig(game, rig, face));
+    if (record?.target && carry) {
+      record.target = new THREE.Vector3(...record.target).add(rig.root.position).sub(start).toArray();
+      hands.reach(rig, record.target);
+    }
     if (who === 'eric') game.walker.sync();
+    if (face) await action.wait(faceRig(game, rig, face));
   }
   async function sit(who) {
     const rig = actor(who),
@@ -71,6 +78,10 @@ export function karaokeActions(game, P, props, action) {
   async function pickup(who, item) {
     const rig = actor(who),
       target = local(item);
+    const orientation = item.getWorldQuaternion(new THREE.Quaternion());
+    const axis = new THREE.Vector3(0, 1, 0).applyQuaternion(orientation);
+    axis.applyQuaternion(P.space.getWorldQuaternion(orientation).invert());
+    hands.aim(rig, axis.toArray());
     await reach(who, target.toArray());
     contacts.push({
       who,
@@ -83,7 +94,11 @@ export function karaokeActions(game, P, props, action) {
     });
     hands.hold(rig, item);
     hands.reach(rig, target.toArray());
-    held.set(who, { item: item.name, target: target.toArray(), side: hands.side(rig) });
+    held.set(who, {
+      item: item.name,
+      target: target.toArray(),
+      side: hands.side(rig),
+    });
   }
   async function carry(who, target) {
     await reach(who, target);
@@ -100,12 +115,14 @@ export function karaokeActions(game, P, props, action) {
     if (from === to) return;
     // The giver and recipient meet in the clear floor south-east of the table.
     hands.setSide(actor(to), hands.side(actor(from)) === 'Right' ? 'Left' : 'Right');
-    await walk(from, [0.45, -0.9], [1.1, -0.9]);
-    await walk(to, [1.01, -0.9], [0.1, -0.9]);
+    const giverOnLeft = hands.side(actor(from)) === 'Left';
+    await walk(from, [giverOnLeft ? 0.45 : 1.07, -1], [0.76, -0.45]);
+    await walk(to, [giverOnLeft ? 1.07 : 0.45, -0.8], [0.76, -0.45]);
     const a = actor(from),
       b = actor(to),
-      target = wrist(a).add(wrist(b)).multiplyScalar(0.5);
-    target.y = 0.72;
+      target = new THREE.Vector3(0.76, 0.48, -0.85);
+    // Quarter turns put the active hands inward without leaning heads together.
+    hands.aim(b, [0, 1, 0]);
     await Promise.all([carry(from, target.toArray()), reach(to, target.toArray())]);
     phase = 'shared-grip';
     await action.wait(game.wait(650));
@@ -124,8 +141,16 @@ export function karaokeActions(game, P, props, action) {
     held.delete(from);
     hands.hold(b, props.microphone);
     hands.reach(b, target.toArray());
-    held.set(to, { item: props.microphone.name, target: target.toArray(), side: hands.side(b) });
-    await carry(to, [b.root.position.x - 0.12, target.y, b.root.position.z - 0.2]);
+    held.set(to, {
+      item: props.microphone.name,
+      target: target.toArray(),
+      side: hands.side(b),
+    });
+    await carry(to, [
+      b.root.position.x + (hands.side(b) === 'Left' ? 0.12 : -0.12),
+      target.y,
+      b.root.position.z + 0.12,
+    ]);
     await sit(from);
   }
   return {

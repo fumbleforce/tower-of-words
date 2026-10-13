@@ -19,22 +19,28 @@ export function karaokeHands(root, { codeArms = false } = {}) {
     const side = sides.get(rig) || 'Right',
       index = side === 'Right' ? 1 : 0;
     const hand = bone(rig, side + 'Hand') || rig.arms?.[index]?.userData.hand || rig.arms?.[index];
-    const chain = [bone(rig, side + 'ForeArm'), bone(rig, side + 'Arm'), bone(rig, 'Spine')].filter(Boolean);
+    const torso = ['Spine', 'Spine01', 'Spine02'].map((name) => bone(rig, name)).filter(Boolean);
+    const chain = [bone(rig, side + 'ForeArm'), bone(rig, side + 'Arm'), ...torso].filter(Boolean);
+    const leanLimit = 0.75 / (torso.length || 1);
     if (!chain.length && codeArms && rig.arms?.[index]?.userData.hand) chain.push(rig.arms[index]);
     const original = rig.update,
       saved = new Map();
-    const state = { hand, chain, target: null, held: null, offset: 0 };
+    const state = { hand, chain, target: null, axis: null, follow: null, held: null, offset: 0 };
     const undo = () => {
       for (const [b, q] of saved) b.quaternion.copy(q);
       saved.clear();
     };
     const apply = () => {
+      if (state.follow) state.target.copy(rig.root.position).add(state.follow);
       if (state.target && hand) {
         for (const b of chain) saved.set(b, b.quaternion.clone());
         root.localToWorld(point.copy(state.target));
-        // The arm and bounded waist reach solve in world coordinates without altering the bind pose.
-        for (let n = 0; n < 5; n++)
+        // Native rigs name the chest Spine and the lower torso Spine01/02. Share the
+        // existing lean bound across them; the chest alone cannot reach the table.
+        // Let the arm converge first so reachable carries keep the torso upright.
+        for (let n = 0; n < 40; n++) {
           for (const b of chain) {
+            if (n < 20 && torso.includes(b)) continue;
             b.updateWorldMatrix(true, true);
             b.getWorldPosition(origin);
             hand.getWorldPosition(end);
@@ -44,13 +50,27 @@ export function karaokeHands(root, { codeArms = false } = {}) {
             b.parent.getWorldQuaternion(parent);
             delta.premultiply(parent.clone().invert()).multiply(parent);
             b.quaternion.premultiply(delta);
-            if (/Spine$/.test(b.name)) {
+            if (torso.includes(b)) {
               const base = saved.get(b),
                 angle = base.angleTo(b.quaternion);
-              if (angle > 0.75) b.quaternion.copy(base.clone().slerp(b.quaternion, 0.75 / angle));
+              if (angle > leanLimit) b.quaternion.copy(base.clone().slerp(b.quaternion, leanLimit / angle));
             }
             b.updateWorldMatrix(false, true);
           }
+          if (hand.getWorldPosition(end).distanceToSquared(point) < 0.002 ** 2) break;
+        }
+      }
+      if (state.axis && hand) {
+        saved.set(hand, hand.quaternion.clone());
+        hand.getWorldQuaternion(parent);
+        from.set(0, 1, 0).applyQuaternion(parent);
+        root.getWorldQuaternion(parent);
+        to.copy(state.axis).applyQuaternion(parent).normalize();
+        delta.setFromUnitVectors(from, to);
+        hand.parent.getWorldQuaternion(parent);
+        delta.premultiply(parent.clone().invert()).multiply(parent);
+        hand.quaternion.premultiply(delta);
+        hand.updateWorldMatrix(false, true);
       }
       if (state.held && hand) {
         hand.getWorldPosition(state.held.position);
@@ -86,8 +106,19 @@ export function karaokeHands(root, { codeArms = false } = {}) {
     },
     reach(rig, target) {
       const a = actor(rig);
+      a.follow = null;
       a.target = target ? new THREE.Vector3(...target) : null;
       a.undo();
+      a.apply();
+    },
+    follow(rig) {
+      const a = actor(rig);
+      a.follow = a.target?.clone().sub(rig.root.position) || null;
+    },
+    aim(rig, axis) {
+      const a = actor(rig);
+      a.undo();
+      a.axis = axis ? new THREE.Vector3(...axis).normalize() : null;
       a.apply();
     },
     hold(rig, item, offset = 0) {
@@ -95,8 +126,10 @@ export function karaokeHands(root, { codeArms = false } = {}) {
       root.attach(item);
       item.visible = true;
       a.held = item;
+      a.axis = new THREE.Vector3(0, 1, 0);
       a.offset = offset;
       a.target = null;
+      a.follow = null;
       a.undo();
       a.apply();
     },
@@ -105,6 +138,8 @@ export function karaokeHands(root, { codeArms = false } = {}) {
       if (a) {
         a.held = null;
         a.target = null;
+        a.axis = null;
+        a.follow = null;
         a.undo();
       }
     },

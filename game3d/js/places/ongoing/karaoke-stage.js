@@ -9,7 +9,12 @@ export function createKaraokeStage(game, P, w) {
     action = poolAction(game),
     shot = actionShot(P);
   const moves = karaokeActions(game, P, props, action);
-  const people = () => ({ eric: game.player, kenji: P.people.kenji, kuroda: P.people.kuroda });
+  props.card.rotation.order = 'YXZ';
+  const people = () => ({
+    eric: game.player,
+    kenji: P.people.kenji,
+    kuroda: P.people.kuroda,
+  });
   let active = false,
     prior = null,
     queue = [],
@@ -34,6 +39,7 @@ export function createKaraokeStage(game, P, w) {
     props.queue(queue, selected);
     cardAngle = receiptSide === 'back' ? Math.PI : 0;
     props.card.rotation.y = cardAngle - props.receipt.rotation.y;
+    props.card.rotation.x = 0;
   }
   function finish() {
     action.cancel();
@@ -62,11 +68,11 @@ export function createKaraokeStage(game, P, w) {
       micHolder = who;
       return;
     }
-    await moves.walk(who, [-1.41, -1.87], [-0.8, -1.87]);
+    await moves.walk(who, [-1.41, -2.13], [-0.8, -2.13]);
     await moves.pickup(who, props.microphone);
     micHolder = who;
     const rig = moves.actor(who);
-    await moves.carry(who, [rig.root.position.x + 0.25, 0.8, rig.root.position.z]);
+    await moves.carry(who, [rig.root.position.x + 0.18, 0.55, rig.root.position.z]);
   }
   return {
     props,
@@ -121,13 +127,22 @@ export function createKaraokeStage(game, P, w) {
           return;
         }
         if (state === 'receiptFront' || state === 'receiptBack') {
-          table();
+          shot.focus([0.35, -1.95], portrait() ? 10.5 : 5.2, 0.6, 0.08, 0.45);
           if (!moves.snapshot().kuroda || moves.snapshot().kuroda.item !== props.receipt.name) {
-            await moves.walk('kuroda', [0.44, -2.14], [-0.2, -2.14]);
+            await moves.walk('kuroda', [0.44, -2.12], [-0.2, -2.12]);
             await moves.pickup('kuroda', props.receipt);
+            // Keep the sheet flat until Hamada has stepped clear of the table.
+            props.card.rotation.x = -Math.PI / 2;
+            await moves.walk('kuroda', [0.82, -2.12], [0.82, -0.9], { carry: true });
+            await moves.carry('kuroda', [0.62, 0.56, -1.86]);
+            await moves.carry('kuroda', [0.73, 0.55, -1.86]);
+            await action.wait(
+              action.tween(0.4, (k) => {
+                props.card.rotation.x = -Math.PI / 2 + (Math.PI / 2) * k;
+              }),
+            );
           }
-          await moves.face('kuroda', [0.44, -0.9]);
-          await moves.carry('kuroda', [0.22, 0.72, -1.9]);
+          await moves.carry('kuroda', [0.73, 0.55, -1.86]);
           const from = cardAngle,
             to = state === 'receiptBack' ? Math.PI : 0;
           await action.wait(
@@ -138,14 +153,34 @@ export function createKaraokeStage(game, P, w) {
           );
           receiptSide = state === 'receiptBack' ? 'back' : 'front';
           sync();
-          shot.focus([0.44, -1.92], portrait() ? 5.5 : 3.3, 0.76, 0.08, 0.28);
+          shot.focus([0.82, -1.9], portrait() ? 5.5 : 3.3, 0.55, 0.08, 0.28);
           return;
         }
         if (state === 'selectNumber') {
+          shot.focus([-0.1, -1.8], portrait() ? 11 : 5.5, 0.6, 0.08, 0.45);
           if (moves.snapshot().kuroda?.item === props.receipt.name) {
-            await moves.carry('kuroda', [0.19, 0.57, -1.92]);
+            const angle = cardAngle;
+            await action.wait(
+              action.tween(0.4, (k) => {
+                cardAngle = angle * (1 - k);
+              }),
+            );
+            await action.wait(
+              action.tween(0.4, (k) => {
+                props.card.rotation.x = (-Math.PI / 2) * k;
+              }),
+            );
+            // Fold forward, then return along the outside of his body to the tabletop.
+            await moves.carry('kuroda', [0.62, 0.56, -1.86]);
+            await moves.carry('kuroda', [0.55, 0.56, -2.26]);
+            await moves.face('kuroda', [-0.2, -2.12]);
+            await moves.walk('kuroda', [0.44, -2.12], [-0.2, -2.12], { carry: true });
             moves.drop('kuroda', props.receipt);
-            props.receipt.rotation.x = -Math.PI / 2;
+            // Change the resting grip corner while leaving the paper footprint in place.
+            props.receipt.position.x -= 0.14;
+            props.receipt.rotation.set(-Math.PI / 2, 0, 0);
+            props.card.rotation.x = 0;
+            cardAngle = Math.PI;
           }
           await moves.walk('kuroda', [-0.18, -1.04], [-0.2, -1.75]);
           await moves.reach('kuroda', [-0.2, 0.71, -1.75]);
@@ -164,9 +199,9 @@ export function createKaraokeStage(game, P, w) {
             p = r.root.position;
           shot.focus([p.x, p.z], portrait() ? 6.6 : 4.5, 0.77, 0, 0.36);
           await moves.carry(who, [
-            p.x + Math.sin(r.root.rotation.y) * 0.26,
-            0.83,
-            p.z + Math.cos(r.root.rotation.y) * 0.26,
+            p.x + Math.sin(r.root.rotation.y) * 0.18,
+            0.55,
+            p.z + Math.cos(r.root.rotation.y) * 0.18,
           ]);
           return;
         }
