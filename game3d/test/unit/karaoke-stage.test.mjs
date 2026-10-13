@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {registerHooks} from 'node:module';
-const hook=registerHooks({resolve(s,c,n){return n(s==='three'?new URL('../../vendor/three/three.module.js',import.meta.url).href:s,c);},load(u,c,n){if(u.endsWith('/js/move.js'))return {format:'module',shortCircuit:true,source:`export async function walkRig(game,rig,to){rig.root.position.set(to[0],0,to[1]);} export async function faceRig(game,rig,to){rig.root.rotation.y=Math.atan2(to[0]-rig.root.position.x,to[1]-rig.root.position.z);}`};return n(u,c);}});
+const hook=registerHooks({resolve(s,c,n){return n(s==='three'?new URL('../../vendor/three/three.module.js',import.meta.url).href:s,c);},load(u,c,n){if(u.endsWith('/js/move.js'))return {format:'module',shortCircuit:true,source:`export async function walkRig(game,rig,to){if(game.pauseWalk)await game.pauseWalk(rig,to);rig.root.position.set(to[0],0,to[1]);} export async function faceRig(game,rig,to){rig.root.rotation.y=Math.atan2(to[0]-rig.root.position.x,to[1]-rig.root.position.z);}`};return n(u,c);}});
 const THREE=await import('../../vendor/three/three.module.js');
 const context=new Proxy({measureText:()=>({width:100})},{get:(t,k)=>t[k]||(()=>{}),set:(t,k,v)=>(t[k]=v,true)});
 globalThis.document={createElement:()=>({getContext:()=>context})};
@@ -89,4 +89,41 @@ test('walking back to a seat releases an empty-handed selector reach', async () 
     }
   }
   stage.leave();
+});
+
+function receiptCorners(stage) {
+  const points = [];
+  for (const mesh of stage.props.card.children) {
+    const vertices = mesh.geometry.attributes.position;
+    for (let i=0;i<vertices.count;i++) points.push(mesh.localToWorld(new THREE.Vector3().fromBufferAttribute(vertices,i)).toArray());
+  }
+  return points;
+}
+test('receipt world corners survive held and tabletop Continue snapshots', async () => {
+  const {stage} = fixture();
+  await stage.act({state:'start'});
+  for (const state of ['receiptBack','selectNumber']) {
+    await stage.act({state});
+    const saved = JSON.parse(JSON.stringify(stage.snapshot())), before = receiptCorners(stage);
+    stage.leave();stage.restore(saved);
+    const after=receiptCorners(stage);
+    before.forEach((p,i)=>p.forEach((v,j)=>assert(Math.abs(v-after[i][j])<1e-7, state+' corner moved after Continue')));
+  }
+  stage.leave();
+});
+test('leaving during the held receipt carry removes follow and update wrappers', async () => {
+  const {stage,game,P}=fixture(), original=P.people.kuroda.update;
+  await stage.act({state:'start'});
+  let unblock;
+  game.pauseWalk=async()=>{
+    if(stage.moves.snapshot().kuroda?.item==='bakery-receipt')await new Promise(resolve=>{unblock=resolve;});
+  };
+  const pending=stage.act({state:'receiptFront'});
+  while(!unblock)await Promise.resolve();
+  assert.equal(stage.moves.snapshot().kuroda.item,'bakery-receipt');
+  stage.leave();assert.equal(await pending,false);
+  unblock();await Promise.resolve();await Promise.resolve();
+  assert.equal(P.people.kuroda.update,original);
+  assert.deepEqual(stage.moves.snapshot(),{});
+  assert.equal(stage.props.root.visible,false);
 });

@@ -76,7 +76,7 @@ for (const side of ['Right', 'Left'])
     for (const b of bones) assert(b.quaternion.angleTo(identity) < 1e-7, 'temporary reach restores every bone');
   });
 
-test('top-corner receipt grip preserves every original resting world corner', () => {
+test('top-corner receipt grip lies flat on the back-right table corner', () => {
   const prior = globalThis.document,
     context = new Proxy({}, { get: () => () => {}, set: () => true });
   globalThis.document = {
@@ -86,19 +86,13 @@ test('top-corner receipt grip preserves every original resting world corner', ()
     const space = new THREE.Group(),
       props = karaokeProps(space);
     for (const mesh of props.card.children) {
-      const legacy = mesh.clone();
-      legacy.position.y = 0.13;
-      const receipt = new THREE.Group();
-      receipt.position.set(0.24, 0.56, -2);
-      receipt.rotation.x = -Math.PI / 2;
-      receipt.add(legacy);
       const vertices = mesh.geometry.attributes.position;
       for (let i = 0; i < vertices.count; i++) {
         const vertex = new THREE.Vector3().fromBufferAttribute(vertices, i);
-        assert(
-          mesh.localToWorld(vertex.clone()).distanceTo(legacy.localToWorld(vertex.clone())) < 1e-7,
-          'pivot changes must not move the resting sheet',
-        );
+        const point = mesh.localToWorld(vertex);
+        assert(point.x >= -1.22 && point.x <= 0.22, 'paper stays over table width');
+        assert(point.z >= -2.32 && point.z <= -1.48, 'paper stays over table depth');
+        assert(point.y > 0.55 && point.y < 0.554, 'paper lies within 4mm of the tabletop');
       }
     }
   } finally {

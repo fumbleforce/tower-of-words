@@ -145,6 +145,16 @@ await withBrowserJob(
             await page.screenshot({
               path: new URL(`${a.state}-${a.who || ''}-trail-${String(frame).padStart(2, '0')}.png`, out).pathname,
             });
+            const ms = await page.evaluate(() => {
+              const g = globalThis.__game,
+                P = g.place,
+                start = performance.now();
+              for (let i = 0; i < 10; i++) for (const rig of [g.player, P.people.kenji, P.people.kuroda]) rig.update(0);
+              return (performance.now() - start) / 10;
+            });
+            result.motionUpdateMs ||= [];
+            result.motionUpdateMs.push({ state: a.state, frame, ms });
+            assert(ms < 12, 'moving karaoke rigs exceed 12ms: ' + ms);
             if (await page.evaluate(() => globalThis.__karaokeDone)) break;
             await page.waitForTimeout(150);
           }
@@ -293,6 +303,23 @@ await withBrowserJob(
         await page.screenshot({
           path: new URL(a.state + '-' + (a.who || '') + '.png', out).pathname,
         });
+        if (a.state === 'selectNumber') {
+          await page.evaluate(() => {
+            const P = globalThis.__game.place,
+              shot = P.karaokeClub.snapshot().shot.shot;
+            globalThis.__restShot = { ...shot };
+            Object.assign(shot, { point: [0, -2.1], distance: 4, y: 0.552, yaw: 0.75, elev: 0.18 });
+            P.cam.closeOn(shot.point, P.cam.fitDist / shot.distance, shot.y);
+          });
+          await page.waitForTimeout(1300);
+          await page.screenshot({ path: new URL('receipt-table-contact-side.png', out).pathname });
+          await page.evaluate(() => {
+            const P = globalThis.__game.place,
+              shot = P.karaokeClub.snapshot().shot.shot;
+            Object.assign(shot, globalThis.__restShot);
+            P.cam.closeOn(shot.point, P.cam.fitDist / shot.distance, shot.y);
+          });
+        }
         if (a.state === 'receiptBack' || a.state === 'queue' || a.state === 'group') {
           await page.evaluate((a) => {
             const who = a.state === 'group' ? a.who || 'kenji' : 'kuroda';

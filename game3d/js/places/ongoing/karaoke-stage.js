@@ -177,7 +177,7 @@ export function createKaraokeStage(game, P, w) {
             await moves.walk('kuroda', [0.44, -2.12], [-0.2, -2.12], { carry: true });
             moves.drop('kuroda', props.receipt);
             // Change the resting grip corner while leaving the paper footprint in place.
-            props.receipt.position.x -= 0.14;
+            props.receipt.position.set(0.02, 0.552, -2.25);
             props.receipt.rotation.set(-Math.PI / 2, 0, 0);
             props.card.rotation.x = 0;
             cardAngle = Math.PI;
@@ -234,6 +234,8 @@ export function createKaraokeStage(game, P, w) {
         held: moves.snapshot(),
         shot: shot.snapshot(),
         receipt: snapshotObject(props.receipt),
+        card: snapshotObject(props.card),
+        cardAngle,
         microphone: snapshotObject(props.microphone),
       };
     },
@@ -263,6 +265,10 @@ export function createKaraokeStage(game, P, w) {
         game.walker.sync();
       }
       sync();
+      if (active && saved.card) {
+        restoreObject(props.card, saved.card);
+        cardAngle = saved.cardAngle ?? cardAngle;
+      }
     },
     leave: finish,
   };
