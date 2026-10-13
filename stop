@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+"""Stop this checkout's review server started by ./start (PORT defaults to 8771).
+
+Linux only. Match the exact checkout, script and port, then signal via pidfd so
+an exiting server's PID cannot be reused to stop an unrelated process.
+"""
+import os
+from pathlib import Path
+import re
+import signal
+import sys
+
+
+def matches(process, checkout, port):
+    try:
+        args = process.joinpath("cmdline").read_bytes().rstrip(b"\0").split(b"\0")
+        if len(args) != 3:
+            return False
+        command, script, argument = map(os.fsdecode, args)
+        if not re.fullmatch(r"python(?:3(?:\.\d+)?)?", Path(command).name):
+            return False
+        cwd = process.joinpath("cwd").resolve(strict=True)
+        return (cwd == checkout
+                and (cwd / script).resolve() == checkout / "tools/review_server.py"
+                and argument == str(port))
+    except (OSError, ValueError):
+        return False
+
+
+def main():
+    if len(sys.argv) != 1:
+        print("Usage: PORT=8771 ./stop", file=sys.stderr)
+        return 2
+    try:
+        port = int(os.environ.get("PORT", "8771"))
+        if not 1 <= port <= 65535:
+            raise ValueError
+    except ValueError:
+        print("PORT must be a number from 1 to 65535.", file=sys.stderr)
+        return 2
+    if not hasattr(os, "pidfd_open") or not hasattr(signal, "pidfd_send_signal"):
+        print("Stopping safely requires Linux pidfd support.", file=sys.stderr)
+        return 1
+    checkout = Path(__file__).resolve().parent
+    stopped = 0
+    for process in Path("/proc").iterdir():
+        if not process.name.isdecimal() or not matches(process, checkout, port):
+            continue
+        descriptor = None
+        try:
+            descriptor = os.pidfd_open(int(process.name))
+            if matches(process, checkout, port):
+                signal.pidfd_send_signal(descriptor, signal.SIGTERM)
+                print(f"Sent SIGTERM to review server {process.name} on port {port}.")
+                stopped += 1
+        except ProcessLookupError:
+            pass
+        except OSError as error:
+            print(f"Could not stop review server {process.name}: {error}", file=sys.stderr)
+            return 1
+        finally:
+            if descriptor is not None:
+                os.close(descriptor)
+    if not stopped:
+        print(f"No review server started by ./start in {checkout} on port {port}.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

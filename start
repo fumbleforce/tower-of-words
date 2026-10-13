@@ -64,7 +64,7 @@ echo "  Review: ${URL}bible/#review   (things waiting for your pick)"
 echo "  Assets: ${URL}tools/assets/   (every model, portrait, sound and prop, with its status)"
 echo "  Notes:  ${URL}hub/notes.html"
 echo
-echo "Stop it with: pkill -f 'review_server.py ${PORT}'"
+echo "Stop it with: PORT=${PORT} ./stop"
 
 if [[ "${1:-}" == "--open" ]]; then
   xdg-open "$URL" >/dev/null 2>&1 || true
