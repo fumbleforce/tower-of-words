@@ -903,6 +903,18 @@
    "round": "art/candidates/crowd-everyday-2",
    "review": "crowd-everyday-2",
    "note": "everyday crowd bodies, landed with #353"
+  },
+  {
+   "date": "2026-10-13",
+   "action": "retire",
+   "path": "game3d/audio/ln-ho9reh.mp3",
+   "to": "art/production/retired/2026-10-13/game3d/audio/ln-ho9reh.mp3"
+  },
+  {
+   "date": "2026-10-13",
+   "action": "retire",
+   "path": "game3d/audio/ln-if476k.mp3",
+   "to": "art/production/retired/2026-10-13/game3d/audio/ln-if476k.mp3"
   }
  ]
 }

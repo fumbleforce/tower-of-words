@@ -9,7 +9,8 @@ export const LATER_WORDS = new Set(['yasumi', 'nomitai', 'yoyaku', 'isshoni']);
 const LATER_TOPICS = new Set(['ask:mio-break', 'ask:guard-break', 'ask:kuroda-booking']);
 const laterReaction = name => /^register_(aoi|rei|kuro)_/.test(name) || /^register_.*_[23]$/.test(name);
 // Their setters are confined to the removed milestones and ongoing stories. Unknown conditions stay authored.
-const LATER_CONDITIONS = new Set(['day >= 3', 'ms3_mio', 'art_photo_seen || ms2_mori || ms3_mori',
+const LATER_CONDITIONS = new Set(['day >= 3', 'day >= 3 && !chat_emi_work_talked', 'day >= 3 && chat_emi_work_talked',
+  'know_yasumi && chat_mio_break_understood', 'ms3_mio', 'art_photo_seen || ms2_mori || ms3_mori',
   'art_mori_started || ms3_mori', 'ms2_kuroda || karaoke_receipt_seen', ...[...LATER_WORDS].map(id => 'know_' + id)]);
 function pruneSteps(list) {
   return list.flatMap(step => {

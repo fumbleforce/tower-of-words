@@ -13693,6 +13693,201 @@
   "emo": "casual"
  },
  {
+  "key": "ln-q4eml0",
+  "speaker": "mio",
+  "text": "What do you do after work here, anyway? Have you found anything?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1rmhq3p",
+  "speaker": "eric",
+  "text": "I like having some time to myself.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1kjioqf",
+  "speaker": "mio",
+  "text": "Mm, I usually go straight home and start a game.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-boyu7l",
+  "speaker": "mio",
+  "text": "Then I look up and it’s one in morning, so...",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-8brz9k",
+  "speaker": "eric",
+  "text": "I’d like to talk more. It takes me a while to get started.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-1vpqglq",
+  "speaker": "mio",
+  "text": "Oh. I keep answering before you finish because it’s faster. You can tell me to wait, you know.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-17vdyir",
+  "speaker": "mio",
+  "text": "Okay. I’ll stop jumping in.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1l1qyo3",
+  "speaker": "mio",
+  "text": "Mm, okay. I thought you wanted help with something.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-jkrw3n",
+  "speaker": "mio",
+  "text": "Mm, okay. I mostly just go home and play something.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-10kcuae",
+  "speaker": "mio",
+  "text": "Still finding enough time for yourself? Somebody always wants me to look at something.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-ckltol",
+  "speaker": "mio",
+  "text": "Okay, I remember. Go on.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-z4jjfa",
+  "speaker": "mio",
+  "text": "Mm, we can just talk. What is it?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-gvou1m",
+  "speaker": "mio",
+  "text": "So, have you found anything to do here yet?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1gu8n8q",
+  "speaker": "eric",
+  "text": "休み… Does your mother take her own advice?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "yasumi",
+    "休み"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-afmmmo",
+  "speaker": "mio",
+  "text": "She’s packing food while she tells me. I’ve tried pointing that out.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-thr863",
+  "speaker": "mio",
+  "text": "Then she asks if I don’t want it. So I take the food.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "fond"
+ },
+ {
+  "key": "ln-1kkjbtd",
+  "speaker": "eric",
+  "text": "Does your mother ask how you’re doing?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-18hdr05",
+  "speaker": "mio",
+  "text": "Yes, and I say it’s fine. Then she asks what I’ve eaten, and I have to give an actual answer.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-ds0qww",
+  "speaker": "mio",
+  "text": "Mm, see you.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
   "key": "ln-sf8jno",
   "speaker": "eric",
   "text": "Does your mother still send food back with you?",
@@ -13993,6 +14188,16 @@
   "emo": "sheepish"
  },
  {
+  "key": "ln-5rcikf",
+  "speaker": "emi",
+  "text": "Would that help, or is there something else you need from me?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
   "key": "ln-1tcezib",
   "speaker": "eric",
   "text": "大丈夫. I’ll tell you if I’m stuck.",
@@ -14018,9 +14223,9 @@
   "emo": "warm"
  },
  {
-  "key": "ln-if476k",
+  "key": "ln-1sxdi2z",
   "speaker": "emi",
-  "text": "Good. It gives me something I can explain, at least.",
+  "text": "Good. And I’ll ask what you’ve checked before I tell anyone it’s finished.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -14028,9 +14233,219 @@
   "emo": "warm"
  },
  {
-  "key": "ln-ho9reh",
+  "key": "ln-61fz68",
+  "speaker": "eric",
+  "text": "I’m still learning what people are asking for.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-172moty",
   "speaker": "emi",
-  "text": "Ask them to show you. And you can ask again. You’re allowed to take a moment.",
+  "text": "Ask them to show you. They know what they were doing when it stopped working.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-fbfene",
+  "speaker": "emi",
+  "text": "I’d rather you asked again than guessed. We can allow time for that.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-zvukg1",
+  "speaker": "emi",
+  "text": "You were having trouble understanding the requests. Are people giving you time to ask?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-ixk6jl",
+  "speaker": "emi",
+  "text": "We said you’d bring me the results, even the bad ones. Have I made that difficult?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-qchtji",
+  "speaker": "eric",
+  "text": "I’m all right with it. I just wanted to check we still agree.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-esne9p",
+  "speaker": "emi",
+  "text": "Yes, we do. You can give me the bad news. I may need a moment before I pass it on.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1cegffi",
+  "speaker": "eric",
+  "text": "If I keep asking, won’t you think I can’t do this?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-1gos7gn",
+  "speaker": "emi",
+  "text": "You can tell me you didn’t understand someone. I need to know that before I send you off with another request.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1foqipp",
+  "speaker": "emi",
+  "text": "You asked me to hear you out first. Were you going to say more, or shall I answer?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1prghgr",
+  "speaker": "emi",
+  "text": "You know how to look after the machines. If the Japanese is holding things up, tell me. I can help with that.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1g6j3dw",
+  "speaker": "eric",
+  "text": "Could you hear me out before giving me advice?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-11ganwz",
+  "speaker": "emi",
+  "text": "Yes. Sorry, I went straight into sorting it out. Was there more you wanted to say?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-z8l9rk",
+  "speaker": "emi",
+  "text": "All right. Thanks for telling me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1c0mvrc",
+  "speaker": "emi",
+  "text": "Please do. I may need a moment to change what I was going to tell upstairs.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-ve6ig2",
+  "speaker": "emi",
+  "text": "That doesn’t mean I wish you’d kept quiet.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-64yhrb",
+  "speaker": "emi",
+  "text": "Oh, hello. Sorry, I was about to find you something to do. You caught me in time.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-keh4fd",
+  "speaker": "emi",
+  "text": "Oh, hello. Sorry, you came over and I went straight to work.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-1i7pq5x",
+  "speaker": "eric",
+  "text": "How are you doing?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1oxxuz9",
+  "speaker": "emi",
+  "text": "I’m all right, thanks. Well, I keep checking my diary when I’m supposed to be having a break.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-o9msey",
+  "speaker": "emi",
+  "text": "I’ve put swimming in the diary. Kuro says the work bag can stay here, and she’s probably right.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-16aob3w",
+  "speaker": "emi",
+  "text": "Kuro keeps asking me that as well. She usually gets a better answer if we’re away from work.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -20363,6 +20778,51 @@
   "emo": "curious"
  },
  {
+  "key": "ln-1rmhq3p-carina",
+  "speaker": "carina",
+  "text": "I like having some time to myself.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-8brz9k-carina",
+  "speaker": "carina",
+  "text": "I’d like to talk more. It takes me a while to get started.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-1gu8n8q-carina",
+  "speaker": "carina",
+  "text": "休み… Does your mother take her own advice?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "yasumi",
+    "休み"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1kkjbtd-carina",
+  "speaker": "carina",
+  "text": "Does your mother ask how you’re doing?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
   "key": "ln-sf8jno-carina",
   "speaker": "carina",
   "text": "Does your mother still send food back with you?",
@@ -20481,6 +20941,56 @@
   "key": "ln-1dp9vte-carina",
   "speaker": "carina",
   "text": "I’ll bring you the result, even if it’s bad.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-61fz68-carina",
+  "speaker": "carina",
+  "text": "I’m still learning what people are asking for.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-qchtji-carina",
+  "speaker": "carina",
+  "text": "I’m all right with it. I just wanted to check we still agree.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1cegffi-carina",
+  "speaker": "carina",
+  "text": "If I keep asking, won’t you think I can’t do this?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-1g6j3dw-carina",
+  "speaker": "carina",
+  "text": "Could you hear me out before giving me advice?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1i7pq5x-carina",
+  "speaker": "carina",
+  "text": "How are you doing?",
   "lang": "en",
   "overheard": false,
   "words": [],

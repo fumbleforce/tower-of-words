@@ -52,6 +52,8 @@ test('a staged day-one edition removes later content and rejects later saves at 
     const remarks = await import(pathToFileURL(path.join(dir, 'game3d/story/conversations/remarks.js')).href);
     assert.equal(remarks.REMARKS.some(remark => remark.who === 'rei'), false);
     assert.equal(shared.default.nodes.chat_emi_team, undefined);
+    assert.equal(shared.default.nodes.chat_emi_team_again, undefined);
+    assert.equal(shared.default.nodes.chat_mio_her_break, undefined);
     assert.equal(shared.default.nodes.conversation_mori_drawing, undefined);
     assert.equal(shared.default.nodes.conversation_hamada_number, undefined);
     assert.equal(JSON.stringify(shared.default.nodes.chat_mio_lunch).includes('More than before.'), false);

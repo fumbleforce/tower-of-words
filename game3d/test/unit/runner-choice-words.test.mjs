@@ -14,7 +14,7 @@ async function play(story, node, { words = [], initial = {}, pick = 0 } = {}) {
   known.clear(); seen.clear();
   words.forEach(word => known.add(word));
   const menus = [];
-  globalThis.__saveTestUI = { choose: (_who, _prompt, options) => { menus.push(options); return pick; }, say() {} };
+  globalThis.__saveTestUI = { choose: (_who, _prompt, options) => { menus.push(options); return typeof pick === 'function' ? pick(options) : pick; }, say() {} };
   const place = { name: 'office', people: {}, hooks: {} };
   const game = { place, queue: [], wait: async () => {}, hooks: { cam() {}, face() {}, save() {} } };
   const runner = game.runner = new Runner(game);
@@ -49,7 +49,7 @@ test('known reply renders existing word spans and escapes authored text without 
 });
 test('actual remembered Mio menu renders its learned-word follow-up without changing knowledge', async () => {
   const [options] = await play(mio, 'chat_mio_understood', {
-    words: ['yasumi'], initial: { day: 12, period_afternoon: true, chat_mio_home: true }, pick: 3,
+    words: ['yasumi'], initial: { day: 12, period_afternoon: true, chat_mio_home: true }, pick: options => options.findIndex(option => option.html === 'I’ll let you get on.'),
   });
   const followup = options.find(option => option.html.includes('Was your mother telling'));
   assert.ok(followup.html.includes('data-w="yasumi"'));
