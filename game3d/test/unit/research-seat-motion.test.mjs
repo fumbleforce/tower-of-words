@@ -13,3 +13,18 @@ for(const matched of [false,true])test(`standing from an older seated save uses 
  assert.deepEqual(holder.position.toArray(),[0,0,0]);
  assert.equal(player.seated,false);assert.equal(player.seatOut,null);assert.equal(player.freeSeat,null);
 });
+
+for(const cancel of [false,true])test(`seat blend preserves walker yaw axes ${cancel?'when cancelled':'through sitting and standing'}`,async()=>{
+ const root=new Group(),holder=new Group(),model=new Group();root.add(holder);holder.add(model);
+ const player={root,model,seated:false,seatOut:null,setState(){},sitAt(x,y,z,yaw){root.position.set(x,y,z);root.rotation.set(0,yaw,0);}};
+ let live=true,motion;
+ const yawOnly=()=>{assert.equal(root.rotation.x,0);assert.equal(root.rotation.z,0);};
+ const game={player,walker:{facing:0},tween:async(_duration,step)=>{
+  for(const k of [0,.25,.5,.75,1]){step(k);motion.update();yawOnly();if(cancel&&k===.75){live=false;motion.clear();break;}}
+ },wait:async()=>{}};
+ motion=readingSeatMotion(game);const job={live:()=>live,wait:p=>p};
+ await motion.sit(job,{x:1,top:.4,z:-1,ry:Math.PI,out:[1,0]});yawOnly();
+ if(!cancel){assert.ok(Math.abs(Math.abs(root.rotation.y)-Math.PI)<1e-10);await motion.stand(job);yawOnly();}
+ root.rotation.y=-2.95;
+ assert.ok(Math.abs(2*Math.atan2(root.quaternion.y,root.quaternion.w)+2.95)<1e-10,'subsequent walker yaw is the actual body yaw');
+});

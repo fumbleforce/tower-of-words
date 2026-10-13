@@ -41,6 +41,8 @@ export function readingSeatMotion(game, seats = {}) {
         if (owned.k === 1) node.position.copy(target.position);
         else node.position.copy(from.position).lerp(target.position, owned.k);
         node.quaternion.copy(from.quaternion).slerp(target.quaternion, owned.k);
+        // The walker writes Euler y only. Keep the root's equivalent yaw-only form.
+        if (node === game.player.root) node.rotation.set(0, 2 * Math.atan2(node.quaternion.y, node.quaternion.w), 0);
       }
       game.player.root.updateWorldMatrix(true, true);
     },

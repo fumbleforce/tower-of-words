@@ -32,6 +32,6 @@ await withBrowserJob('research-callback',async browser=>{
   await enter('research_lab');await use('research_reader',['Show Mori’s copy.']);await idle();
   checks.push({retained:await status(),reading:await page.evaluate(()=>globalThis.__game.place.research.state.read())});assert.equal((await status()).copy,true);
   const proof=await page.evaluate(()=>globalThis.__referenceProof);checks.push({proof});assert.deepEqual(proof.errors,[]);assert.deepEqual(errors,[]);await shot('finished');
- }catch(error){checks.push({failure:error.stack,proof:await page.evaluate(()=>globalThis.__referenceProof),contacts:await page.evaluate(()=>globalThis.__game.place.research?.hands.contacts)});await shot('failure');throw error;}
+ }catch(error){checks.push({failure:error.stack,proof:await page.evaluate(()=>globalThis.__referenceProof),contacts:await page.evaluate(()=>{const g=globalThis.__game;return {room:g.place.research?.hands.contacts,office:g.place.researchOffice?.contacts,player:{position:g.player.root.position.toArray(),rotation:g.player.root.rotation.toArray(),seated:g.player.seated,pose:g.player.pose,holder:g.player.holder?.position?.toArray(),scale:g.player.root.scale.toArray()},walker:{facing:g.walker.facing,targetFacing:g.walker.targetFacing}};})});await shot('failure');throw error;}
  finally{watching=false;await watcher;fs.writeFileSync(`${out}/${width}-${order}-report.json`,JSON.stringify({checks,captures,phases:[...phases],errors},null,2));await context.close();}
 },{gpuWaitMs: Number(process.env.GPU_WAIT || 1800) * 1000, timeoutMs:295000});
