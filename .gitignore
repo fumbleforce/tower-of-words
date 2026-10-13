@@ -1631,3 +1631,6 @@ collab/.post.lock
 
 # Karaoke contact validation captures and local reports
 /game3d/shots/finish-karaoke/
+
+# Local Works facade verification captures and logs.
+/game3d/shots/finish-works/
