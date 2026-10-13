@@ -1,0 +1,154 @@
+{
+  "candidate": "works-facades",
+  "issue": 418,
+  "existing_local_branch": "wt/codex-works-facades",
+  "original_base_head": "5f97ad4a4926d510aa3d96bab9131c6e081ceb65",
+  "source_archive": ".git/codex-reviews/retired-candidates-20261010/works-facades/files.tar.gz",
+  "source_archive_sha256": "72033d7170b88d519192a92bb71ac270e4dced38e1d3e3f91c981a7570d6903a",
+  "original_patch": ".git/codex-reviews/retired-candidates-20261010/works-facades/working.patch",
+  "original_patch_sha256": "6f4813e6188db045eabf50e8012458019408a96a70dd800761648b28d40d98c8",
+  "original_patch_bytes": 19233,
+  "tracked_patch_path_count": 2,
+  "all_tracked_patch_paths_in_source_snapshot": true,
+  "source_file_count": 5,
+  "source_bytes": 272004,
+  "files": [
+    {
+      "path": "docs/game/places.md",
+      "bytes": 241231,
+      "sha256": "cf1e9642e9a6fea6dd87f8d66cbe223ee6f2a80029c7a8293c1d67895a0a9586"
+    },
+    {
+      "path": "game3d/js/scenes/works/buildings.js",
+      "bytes": 13175,
+      "sha256": "6d13d952423f3cce3a75837859b361bcdf44897cd8e1da70b10d3c3ec0ff0d1a"
+    },
+    {
+      "path": "game3d/js/scenes/works/factory-facade.js",
+      "bytes": 5102,
+      "sha256": "55e5a3adf9f2ee44bb2f2808a104b4a3fb1072f425cd034fc665e9935ae48fa4"
+    },
+    {
+      "path": "game3d/js/scenes/works/industrial-facades.js",
+      "bytes": 5509,
+      "sha256": "d3adc59cbe0ff2f8a694dd0370c77f54282403559c2f450bc966ebc0efa4c563"
+    },
+    {
+      "path": "game3d/test/unit/works-facades.test.mjs",
+      "bytes": 6987,
+      "sha256": "9e4076bbb4b2059420451524fbe0ab0fcbdee48ab0f8af4a84915b8198f2ae51"
+    }
+  ],
+  "excluded_original_artifacts": [
+    {
+      "path": "game3d/build.json",
+      "bytes": 25876,
+      "original_sha256": "2a2de7e77f5b89063aac8da3afcb40d7c056221cd5bbc06286784c40a4c27b19",
+      "reason": "Generated build identity/check data, not candidate source."
+    },
+    {
+      "path": "tools/__pycache__/comfy.cpython-314.pyc",
+      "bytes": 22729,
+      "original_sha256": "c3da2cb4536c70cfa5ff768995d65e43bbce78dda4ef7a1d0bcc1a2658a7070e",
+      "reason": "Python bytecode/cache, not candidate source."
+    },
+    {
+      "path": "tools/__pycache__/gpu_priority.cpython-314.pyc",
+      "bytes": 29573,
+      "original_sha256": "08a0e4cf6cff93227edc390776a55686030c0c95984dc5051194fd32c29af259",
+      "reason": "Python bytecode/cache, not candidate source."
+    },
+    {
+      "path": "tools/assets/__pycache__/runtime_data.cpython-314.pyc",
+      "bytes": 6320,
+      "original_sha256": "7e85b335530686deef2a18e1639be5cad6523bebe2b3479cb66bcf02bc8bc47b",
+      "reason": "Python bytecode/cache, not candidate source."
+    },
+    {
+      "path": "tools/assets/thumbs/1633d2e2f378723e.png",
+      "bytes": 1199,
+      "original_sha256": "12ad78e05f4798e1ce6fb307ec4ca373599e163fe0c3cc5e5f82f1c797b75fac",
+      "reason": "Binary/cached preview asset. Original manifest hash retained in exclusion list."
+    },
+    {
+      "path": "tools/assets/thumbs/8762fdd6e927ece5.png",
+      "bytes": 1087,
+      "original_sha256": "4050028a109c2daf1b71fc6c15eacb58c00342ebab73f8d37a7fa198cd6610aa",
+      "reason": "Binary/cached preview asset. Original manifest hash retained in exclusion list."
+    },
+    {
+      "path": "tools/assets/thumbs/892939da8c8bc164.png",
+      "bytes": 1244,
+      "original_sha256": "69e7e5c774be6afa4f738ae48698aa605d7ae2e8b97d3dfd7ec2d97e4a64ffa8",
+      "reason": "Binary/cached preview asset. Original manifest hash retained in exclusion list."
+    },
+    {
+      "path": "tools/assets/thumbs/a6ad1a760f151e13.png",
+      "bytes": 1246,
+      "original_sha256": "c1ce3f3c721c72cdf5ea78929822412a0c2dc1036d05d902a61b293e751ab544",
+      "reason": "Binary/cached preview asset. Original manifest hash retained in exclusion list."
+    },
+    {
+      "path": "tools/assets/thumbs/bc87f6d289e732a5.png",
+      "bytes": 1090,
+      "original_sha256": "16b64af94c5b41fbd401f1985884a9fd8305aa1c5c0d9e37fd7e5c75591735d1",
+      "reason": "Binary/cached preview asset. Original manifest hash retained in exclusion list."
+    }
+  ],
+  "package_root": "notes/recovery/works-facades/",
+  "external_requirements": [
+    "Reuses original-base game assets; no newly generated indispensable binary found in candidate tar. Original capture evidence excluded and remains in local archive. Story/voice/visual gates must be refreshed before integration."
+  ],
+  "normalized_member_validation": {
+    "duplicate_names": [],
+    "absolute_or_traversal_paths": [],
+    "symlink_hardlink_special_members": [],
+    "private_paths": []
+  },
+  "reconstruction_proof": {
+    "verification": "audit_refs independently verified original HEAD + original patch reconstructs every changed tracked source blob exactly; this audit verified every selected final tar file hash against original manifest.",
+    "tracked_source_blobs_verified": 2,
+    "new_public_source_or_metadata_files_preserved": 3,
+    "final_snapshot_is_byte_exact": true
+  },
+  "preservation_method": "Byte-exact public source snapshot and original tracked patch stored under notes/recovery, without activating runtime changes.",
+  "status": "Optional draft. Reflective glass and facade appearance still need visual review before integration.",
+  "packaged_files": [
+    {
+      "path": "original.patch",
+      "bytes": 19233,
+      "sha256": "6f4813e6188db045eabf50e8012458019408a96a70dd800761648b28d40d98c8"
+    },
+    {
+      "path": "base-head.txt",
+      "bytes": 41,
+      "sha256": "0f4e10c6018da8ea9dcc3f472880563b73e30d837846c0588272931f6b4bbef4"
+    },
+    {
+      "path": "source/docs/game/places.md",
+      "bytes": 241231,
+      "sha256": "cf1e9642e9a6fea6dd87f8d66cbe223ee6f2a80029c7a8293c1d67895a0a9586"
+    },
+    {
+      "path": "source/game3d/js/scenes/works/buildings.js",
+      "bytes": 13175,
+      "sha256": "6d13d952423f3cce3a75837859b361bcdf44897cd8e1da70b10d3c3ec0ff0d1a"
+    },
+    {
+      "path": "source/game3d/js/scenes/works/factory-facade.js",
+      "bytes": 5102,
+      "sha256": "55e5a3adf9f2ee44bb2f2808a104b4a3fb1072f425cd034fc665e9935ae48fa4"
+    },
+    {
+      "path": "source/game3d/js/scenes/works/industrial-facades.js",
+      "bytes": 5509,
+      "sha256": "d3adc59cbe0ff2f8a694dd0370c77f54282403559c2f450bc966ebc0efa4c563"
+    },
+    {
+      "path": "source/game3d/test/unit/works-facades.test.mjs",
+      "bytes": 6987,
+      "sha256": "9e4076bbb4b2059420451524fbe0ab0fcbdee48ab0f8af4a84915b8198f2ae51"
+    }
+  ],
+  "preservation_branch": "wt/codex-works-facades"
+}
