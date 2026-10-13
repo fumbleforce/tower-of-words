@@ -112,6 +112,7 @@ export async function eastLanePlace(game) {
     light: w.light, // the light for every period (scenes/east-lane.js, kit/light/)
     charScale: K,
     start: w.in,
+    outingExit: { lane: w.in, edge: w.arriveEdge },
     startFacing: Math.PI / 2,
     music: 'calm',
     things,

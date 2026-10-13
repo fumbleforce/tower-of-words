@@ -33,6 +33,7 @@ export function dayCast(game, { root, K = 1, ids = [], have = {} }) {
     own = new Set(); // the bodies made here (the others the place steps and shades itself)
   // someone the place already has: where it keeps them is their home
   function adopt(id, r) {
+    r = game.outing?.actor.scheduled(id, r, root) || r;
     if (r.selfGait) r.cat = true; // (a cat: creatures/cat.js)
     people[id] = r;
     homes[id] = {

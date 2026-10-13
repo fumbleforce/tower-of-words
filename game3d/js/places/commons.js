@@ -77,6 +77,7 @@ export async function commonsPlace(game) {
     sun: w.sun,
     charScale: K,
     start: d.in,
+    outingExit: { lane: d.out, edge: d.edge },
     startFacing: Math.PI,
     music: 'calm',
     things,

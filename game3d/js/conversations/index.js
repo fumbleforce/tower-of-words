@@ -29,6 +29,8 @@ export function topicFor(who, memory = conversationMemory, words = known, met = 
     return memory.ready('hamada_wednesday_booking', words)
       ? { label: 'Ask about his karaoke booking', trigger: 'ask:kuroda-booking' }
       : { label: 'Chat about his evenings', trigger: 'ask:kuroda' };
+  if (who === 'kenji' && introductions.outing_active)
+    return { label: 'Chat about our walk', trigger: 'ask:kenji-outing' };
   if (who === 'kenji')
     return {
       label: knows('kenji.arcade', introductions) ? 'Chat about the arcade' : 'Chat with Kenji',
@@ -50,5 +52,7 @@ export function installConversations(game) {
   game.topicFor = (who) =>
     (who === 'mio' && game.place?.name === 'train') || (who === 'guard' && !flags.greeted_guard)
       ? null
-      : topicFor(who, conversationMemory, known, game.sim?.met.has(who));
+      : who === 'kenji' && game.outing?.available()
+        ? { label: 'Chat with Kenji', trigger: 'ask:kenji-outing' }
+        : topicFor(who, conversationMemory, known, game.sim?.met.has(who));
 }

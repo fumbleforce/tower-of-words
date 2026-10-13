@@ -48,6 +48,7 @@ export function createContinue(game, { enter, travel, startScene, PLACES }) {
     ui.sideGoal(saved.ui?.sideGoal || '');
     game.hold = saved.ui?.hold || null;
     game.restoreZones?.(saved);
+    await game.outing?.restored(saved);
     game.busy = false;
     game.saveEnabled = true;
     if (recoveredAccess)

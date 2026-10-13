@@ -32,6 +32,7 @@ export function benches(P) {
   return out;
 }
 export const noteBenches = (P) => void benches(P); // before the draw-call pass merges them (places/lifecycle.js)
+export const benchSeats = (P) => benches(P).map((seat) => ({ ...seat }));
 export function benchNear(P, [x, z], { skip = 0 } = {}) {
   const sorted = [...benches(P)].sort((a, b) => Math.hypot(a.x - x, a.z - z) - Math.hypot(b.x - x, b.z - z));
   return sorted[Math.min(skip, sorted.length - 1)] || null;

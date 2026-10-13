@@ -4,6 +4,7 @@ import { extendMondayCatalog } from './day5/catalog.js';
 import { TRAIN_DETAILS } from './catalog-train.js';
 import { SOUTH_HALF_DETAILS } from './catalog-south.js';
 import { OFFICE_DETAILS } from './catalog-office.js';
+import { extendOutingCatalog } from '../outings/catalog.js';
 // Labels and registration IDs shared by place factories and structural checks.
 export const PLACE_DETAILS = {
   ferry_terminal: {
@@ -363,3 +364,7 @@ extendMondayCatalog(PLACE_DETAILS);
 export const SHARED_THINGS = { mio: { label: 'Mio', kind: 'person' } };
 
 extendOngoingCatalog(PLACE_DETAILS);
+
+// The outing actor is attached after the place factory returns.
+export const FACTORY_DETAILS = structuredClone(PLACE_DETAILS);
+extendOutingCatalog(PLACE_DETAILS);

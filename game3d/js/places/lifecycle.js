@@ -35,6 +35,7 @@ import { keepPublic } from '../travel/ways.js';
 import { PINS } from '../travel/pins.js';
 import { noteVisit } from '../travel/visited.js';
 import { installFlavorFinds, attachFlavorFinds } from '../flavor-finds/index.js';
+import { installOuting, attachOuting } from '../outings/index.js';
 import { snapshotZones, restoreZones, suppressArrivalZones } from '../gameplay/zones.js';
 import { loadPlantModels } from '../scenes/outdoor/plant-models.js';
 import { loadStationModel, STATION_PLACES } from '../scenes/station-model.js';
@@ -86,6 +87,7 @@ export function createPlaceLifecycle(
   installDay5(game);
   installOngoing(game);
   installFlavorFinds(game);
+  installOuting(game, { refreshMarkers: buildMarkers });
   watchPlacePlugins(game);
   // preparation runs a slice a frame while a place is being played, flat out while the player waits for it
   setUrgent(() => !game.place || document.body.classList.contains('loading'));
@@ -112,6 +114,7 @@ export function createPlaceLifecycle(
         attachSunday(game, place, name);
         attachMonday(game, place, name);
         attachOngoing(game, place, name);
+        attachOuting(game, place, name);
         assertPlaceRegistered(place, name, PLACE_DETAILS[name]);
         place.name = name;
         noteBenches(place); // its benches' seats, before the draw-call pass merges them (places/day3/seats.js)
@@ -220,6 +223,7 @@ export function createPlaceLifecycle(
     )
       sim.period = place.defaultPeriod;
     applySchedule(game, { instant: true });
+    game.outing?.enter(place, { resuming });
     place.ambient?.enter(sim.period); // the crowd for this period, everyone at once (crowd/index.js)
     ui.clock(sim.date, periodName(sim.period)); // a weekend's own names (sim.js periodName)
     const music = place.music === 'night' ? 'calm' : place.music; // a night place by day (day 2's morning room)
@@ -256,6 +260,7 @@ export function createPlaceLifecycle(
       phase: arriving ? 'arriving' : 'leaving',
       ...(fast ? { fast } : {}),
     };
+    await game.outing?.beforeTravel({ from: arriving ? fromName : game.place.name, to: name, fast, arriving });
     save(game);
     let built = false;
     const ready = prepare(name).then((r) => ((built = true), r));
@@ -277,6 +282,7 @@ export function createPlaceLifecycle(
       crossfade(snap);
     }
     await trips.arrive(game, game.place, slot);
+    await game.outing?.afterTravel();
     // a later day: a way out he arrives standing in (B2's lift, back up at the forecourt) waits until he steps out of
     // it and back in, so a trip never turns straight round
     if (sim.day > 1) suppressArrivalZones(game, zoneSet);

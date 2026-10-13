@@ -3,11 +3,8 @@ import { flagKeys } from './narrative/engine-flags.js';
 const ENGINE_KEYS = flagKeys('game3d/js/sim.js');
 import { ITEMS } from './gameplay/items.js';
 export { ITEMS } from './gameplay/items.js';
-// Social-sim layer, data-driven so it can grow into the open world: the day clock and its periods, NPC
-// schedules, ambient NPC-to-NPC moments, bonds (steps 0-5, points with caps, steps 3-5 gated on a scene),
-// what people remember of Eric, gifts, and save/load. Day one uses it lightly. Data comes from the story files
-// (story/FORMAT.md, "Sim data"), story/people.js (People panel text), js/bonds/cast.js (tastes, registers,
-// relations) and js/bonds/day1.js (day 1's moments, by node name). The maths is js/bonds/model.js.
+// Clock, schedules, bonds, memories and save/load. Story data: story/FORMAT.md.
+// Bond rules live in bonds/model.js; cast and day-one moments in bonds/cast.js and bonds/day1.js.
 import { flags, cond } from './narrative/state.js';
 import { known, seen, WORDS, COMMANDS, learnedAt, setLearnWhere, loadLearned } from './lang.js';
 import { ui, sfx } from './ui.js';
@@ -128,9 +125,11 @@ export function newDay(game) {
 // ---------- schedules: story `schedule: { who: { period: { at, sit, face, hide } } }` ----------
 export function applySchedule(game, { instant = false } = {}) {
   installSim(game);
+  game.outing?.syncClock();
   const sch = game.story && game.story.schedule;
   if (!sch) return;
   for (const [who, per] of Object.entries(sch)) {
+    if (game.outing?.controls(who)) continue;
     const e = per[sim.period] || per['*'];
     if (!e) continue;
     if (e.if && !cond(e.if)) continue;

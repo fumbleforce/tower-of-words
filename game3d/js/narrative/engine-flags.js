@@ -218,3 +218,21 @@ export function isEngineFlag(name) {
     )
   );
 }
+
+ENGINE_WRITES['game3d/js/outings/index.js'] = {
+  exact: [
+    'outing_kenji',
+    'outing_stage',
+    'outing_active',
+    'outing_paused',
+    'outing_callback',
+    'outing_action_complete',
+    'outing_done_arcade',
+    'outing_done_drink',
+    'outing_done_coast',
+    'outing_seated',
+    'outing_waiting',
+    'outing_goal',
+  ],
+  prefix: [],
+};

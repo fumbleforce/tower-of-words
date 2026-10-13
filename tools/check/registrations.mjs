@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { inspectPlaceSource, parseModule } from '../lib/place-source.mjs';
 import { PLACE_FILES } from '../../game3d/js/places/definitions.js';
-import { PLACE_DETAILS } from '../../game3d/js/places/catalog.js';
+import { FACTORY_DETAILS as PLACE_DETAILS } from '../../game3d/js/places/catalog.js';
 
 export function checkRegistrations(read = file => fs.readFileSync(new URL('../../' + file, import.meta.url), 'utf8')) {
   const factories = {};

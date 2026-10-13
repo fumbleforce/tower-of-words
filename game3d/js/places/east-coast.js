@@ -1,3 +1,4 @@
+import { conversationCamera } from './conversation-camera.js';
 import * as THREE from 'three';
 import { eastCoastSteps } from '../scenes/east-coast.js';
 import { sliced } from '../perf/slice.js';
@@ -116,6 +117,7 @@ export async function eastCoastPlace(game) {
     charScale: K,
     followCameraLift: 2.0, // keep the actor visible when the terrace pine compresses the follow camera
     start: w.in,
+    outingExit: { lane: w.in, edge: w.arriveEdge },
     startFacing: Math.PI / 2,
     music: 'calm',
     grade: MORNING_GRADE,
@@ -202,5 +204,8 @@ export async function eastCoastPlace(game) {
     },
   };
   visit.install(P);
+  conversationCamera(game, P, {
+    kenji: { seated: true, yaw: 0.6, elev: 30, fov: 45, minDistance: 4, halfWidth: 1.15, height: 0.15 },
+  });
   return P;
 }

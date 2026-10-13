@@ -1258,6 +1258,10 @@
           "label": "Amakawa Travel",
           "kind": "thing",
           "verb": "Go in"
+        },
+        "kenji": {
+          "label": "Kenji",
+          "kind": "person"
         }
       },
       "spots": [
@@ -1277,7 +1281,9 @@
         "row_exit",
         "north_exit"
       ],
-      "people": [],
+      "people": [
+        "kenji"
+      ],
       "hooks": []
     },
     "east_coast": {
@@ -1330,6 +1336,10 @@
         "rei": {
           "label": "Rei",
           "kind": "person"
+        },
+        "kenji": {
+          "label": "Kenji",
+          "kind": "person"
         }
       },
       "spots": [
@@ -1359,7 +1369,8 @@
         "aoi",
         "kuro",
         "tama",
-        "rei"
+        "rei",
+        "kenji"
       ],
       "hooks": [
         "coastVisit"
@@ -2098,6 +2109,10 @@
           "label": "Tama",
           "verb": "Pet",
           "kind": "person small"
+        },
+        "kenji": {
+          "label": "Kenji",
+          "kind": "person"
         }
       },
       "spots": [
@@ -2121,7 +2136,8 @@
       "people": [
         "canteen_worker",
         "aoi",
-        "tama"
+        "tama",
+        "kenji"
       ],
       "hooks": [
         "canteenChair",

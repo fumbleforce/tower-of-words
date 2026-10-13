@@ -13394,6 +13394,324 @@
   "emo": "bright"
  },
  {
+  "key": "ln-137i8yr",
+  "speaker": "eric",
+  "text": "Want to come for a walk?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1vn0xk",
+  "speaker": "eric",
+  "text": "いっしょに……行きたい。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ikitai",
+    "行きたい"
+   ],
+   [
+    "isshoni",
+    "いっしょに"
+   ]
+  ],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "oh-2mcygb",
+  "speaker": "kenji",
+  "text": "はい、いっしょに行きましょう。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "isshoni",
+    "いっしょに"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-k8lqww",
+  "speaker": "kenji",
+  "text": "はい、行きましょう。えっと、どちらへ？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-38vyb1",
+  "speaker": "eric",
+  "text": "Want to carry on with our walk?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-11ii7pg",
+  "speaker": "kenji",
+  "text": "はい、行きましょう。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1icp1di",
+  "speaker": "kenji",
+  "text": "すみません、今はちょっと。またあとでお願いします。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-511d7k",
+  "speaker": "eric",
+  "text": "Okay, I'll ask you later.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1n974oy",
+  "speaker": "kenji",
+  "text": "もう少し見てもいいですか？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "oh-n53ijm",
+  "speaker": "kenji",
+  "text": "あ、ここです。前に話したゲームセンター。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-18pclfp",
+  "speaker": "eric",
+  "text": "The crane game you were telling me about?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "oh-257o15",
+  "speaker": "kenji",
+  "text": "あ、ゲームセンター。ちょっと見てもいいですか？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-1m52ok3",
+  "speaker": "eric",
+  "text": "Sure. I'll have a look too.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1hz66h1",
+  "speaker": "eric",
+  "text": "It's closed. Let's keep going.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-jjqbx3",
+  "speaker": "eric",
+  "text": "I'm going to get a drink.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "oh-bdpdpw",
+  "speaker": "kenji",
+  "text": "はい。僕はここで待ってます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "matte",
+    "待って"
+   ],
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-19ym0ks",
+  "speaker": "eric",
+  "text": "We can't sit here together. Let's keep walking.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "oh-lhr33a",
+  "speaker": "kenji",
+  "text": "ああ、ちょっと休みましょうか。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "yasumi",
+    "休み"
+   ]
+  ],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1u3ba00",
+  "speaker": "eric",
+  "text": "Shall we keep going?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-dh46pw",
+  "speaker": "eric",
+  "text": "I should get going. See you later.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-x1tx6q",
+  "speaker": "kenji",
+  "text": "はい。またあとで。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-18a5ilj",
+  "speaker": "kenji",
+  "text": "はい、またあとでお願いします。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-349wi7",
+  "speaker": "eric",
+  "text": "Did you want to go into the game centre when we stopped there?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-nf2xz1",
+  "speaker": "kenji",
+  "text": "はい。でも、見てるだけでも面白いです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1lz5jg5",
+  "speaker": "eric",
+  "text": "Thanks for waiting while I got my drink.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-14p97of",
+  "speaker": "kenji",
+  "text": "はい。また一緒に行きましょう。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1kuaamz",
+  "speaker": "eric",
+  "text": "I liked stopping at that bench with you.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1wt04st",
+  "speaker": "kenji",
+  "text": "はい。またあそこに座りましょう。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
   "key": "oh-f9o0nb",
   "speaker": "kuroda",
   "text": "すみません。浜田です。経理にいます。",
@@ -20616,6 +20934,155 @@
   "words": [],
   "clear": [],
   "emo": "curious"
+ },
+ {
+  "key": "ln-137i8yr-carina",
+  "speaker": "carina",
+  "text": "Want to come for a walk?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1vn0xk-carina",
+  "speaker": "carina",
+  "text": "いっしょに……行きたい。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ikitai",
+    "行きたい"
+   ],
+   [
+    "isshoni",
+    "いっしょに"
+   ]
+  ],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-38vyb1-carina",
+  "speaker": "carina",
+  "text": "Want to carry on with our walk?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-511d7k-carina",
+  "speaker": "carina",
+  "text": "Okay, I'll ask you later.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-18pclfp-carina",
+  "speaker": "carina",
+  "text": "The crane game you were telling me about?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-1m52ok3-carina",
+  "speaker": "carina",
+  "text": "Sure. I'll have a look too.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1hz66h1-carina",
+  "speaker": "carina",
+  "text": "It's closed. Let's keep going.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-jjqbx3-carina",
+  "speaker": "carina",
+  "text": "I'm going to get a drink.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-19ym0ks-carina",
+  "speaker": "carina",
+  "text": "We can't sit here together. Let's keep walking.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1u3ba00-carina",
+  "speaker": "carina",
+  "text": "Shall we keep going?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-dh46pw-carina",
+  "speaker": "carina",
+  "text": "I should get going. See you later.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-349wi7-carina",
+  "speaker": "carina",
+  "text": "Did you want to go into the game centre when we stopped there?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1lz5jg5-carina",
+  "speaker": "carina",
+  "text": "Thanks for waiting while I got my drink.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1kuaamz-carina",
+  "speaker": "carina",
+  "text": "I liked stopping at that bench with you.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
  },
  {
   "key": "ln-1cmwhs9-carina",

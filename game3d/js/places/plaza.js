@@ -121,6 +121,7 @@ export async function plazaPlace(game) {
     light: w.light, // the light for every period (scenes/plaza.js, kit/light/)
     charScale: K,
     start: w.arriveIn,
+    outingExit: { lane: w.shopWalk, edge: w.shopEdge },
     startFacing: w.arriveFace,
     music: 'calm',
     things,

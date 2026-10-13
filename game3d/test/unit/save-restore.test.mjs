@@ -442,3 +442,47 @@ test('legacy completed later-cast introductions recover met state and preserve p
   S.restore(game, { v: 1, day: 3, period: 'morning', met: ['mio'], flags: {} });
   for (const id of ['kuro', 'aoi', 'rei']) assert.equal(S.sim.met.has(id), false, 'another save does not inherit an introduction');
 });
+
+test('outing ownership protects only its companion from schedules and expiry restores ordinary scheduling', () => {
+  const calls=[];
+  let active=true,expired=false;
+  game.outing={syncClock(){calls.push('clock');if(expired)active=false;},controls:who=>active&&who==='kenji'};
+  game.story={schedule:{kenji:{'*':{hide:true}},mori:{'*':{sit:'chair'}}}};
+  for(const who of ['kenji','mori'])game.place.people[who]={root:{visible:true,position:{x:1,z:2}}};
+  game.hooks.hide=({id})=>calls.push(['hide',id]);
+  game.place.placeSeated=(who,at)=>calls.push(['sit',who,at]);
+  S.applySchedule(game,{instant:true});
+  assert.deepEqual(calls,['clock',['sit','mori','chair']]);
+  calls.length=0;expired=true;
+  S.applySchedule(game,{instant:true});
+  assert.deepEqual(calls,['clock',['hide','kenji'],['sit','mori','chair']]);
+  calls.length=0;game.story={};
+  S.applySchedule(game);
+  assert.deepEqual(calls,['clock'],'expiry still runs in a place without authored schedules');
+});
+
+test('Continue reconciles an outing after saved flags and final later-day physical restoration', async () => {
+  const {createContinue}=await import('../../js/continue.js');
+  const events=[],saved={v:1,day:6,period:'evening',place:'shotengai',flags:{outing_fixture:'saved'},world:{companion:{x:3,z:4}},ui:{sideGoal:'Walk with Kenji.'}};
+  game.ui=Object.fromEntries(['refreshWords','refreshPeople','refreshBag','goal','sideGoal'].map(k=>[k,()=>events.push(k)]));
+  game.ui.sideGoal = text => { game.ui.sideText = text; events.push('sideGoal'); };
+  game.outing={restored(data){
+    assert.equal(data,saved);
+    assert.equal(flags.outing_fixture,'saved');
+    assert.deepEqual(game.place.pose,saved.world.companion);
+    assert.equal(events.filter(x=>x==='restore-physical').length,2);
+    assert.equal(game.ui.sideText, 'Walk with Kenji.');
+    game.ui.sideGoal(''); // Completing a saved departure clears the outing-owned goal.
+    events.push('outing-restored');
+  }};
+  game.hooks.ongoingSetup=async()=>{events.push('ongoing-setup');game.place.pose={x:99,z:99};};
+  const continueFrom=createContinue(game,{
+    enter:async()=>{game.place={name:'shotengai',people:{},restoreState(data){events.push('restore-physical');this.pose={...data.world.companion};}};flags.outing_fixture='schedule';},
+    travel(){assert.fail('unexpected transition');},PLACES:{},
+    startScene(){assert.ok(events.indexOf('outing-restored')>events.indexOf('ongoing-setup'));events.push('start');},
+  });
+  await continueFrom(saved);
+  assert.equal(game.ui.sideText, '');
+  assert.ok(events.indexOf('outing-restored')>events.indexOf('refreshWords'));
+  assert.ok(events.indexOf('outing-restored')<events.indexOf('start'));
+});

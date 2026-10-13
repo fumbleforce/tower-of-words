@@ -170,6 +170,7 @@ export async function shotengaiPlace(game) {
     charScale: K,
     followCameraLift: 2.0, // retain a third-person view beside the crossing’s shop walls
     start: w.in,
+    outingExit: { lane: [w.edge[0], w.edge[1] - 1.6], edge: w.edge },
     startFacing: w.face,
     music: 'calm',
     things,
@@ -307,6 +308,12 @@ export async function shotengaiPlace(game) {
   party.install(P);
   garden.install(P);
   conversationCamera(game, P, {
+    get kenji() {
+      const p = game.player.root.position,
+        frontage = P.things.game_centre.spot();
+      if (Math.hypot(p.x - frontage[0], p.z - frontage[1]) > 2.5 * K) return;
+      return { yaw: -2.65, elev: 42, fov: 55, minDistance: 3, halfWidth: 1.1, height: 0.25 };
+    },
     station_worker: { yaw: -0.7, elev: 40, fov: 45, minDistance: 8, halfWidth: 2.3, height: 0.4 },
     aoi: { yaw: -0.85, elev: 35, fov: 45, minDistance: 4.5, halfWidth: 1.0, height: 0.4 },
     rei: { yaw: -2.15, elev: 35, fov: 45, minDistance: 4.5, halfWidth: 1.0, height: 0.4 },
