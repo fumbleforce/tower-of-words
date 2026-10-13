@@ -21,8 +21,9 @@ export function installResearch(game) {
     flags.research_action_ok = false;
     flags.research_has_book = false;
     const provider = game.place?.research;
-    if (!provider) return;
+    if (!provider) return { worldComplete: false };
     if (a.state !== 'available') flags.research_action_ok = !!(await provider.act(a, replay));
     flags.research_has_book = !!provider.state.read().active;
+    return { worldComplete: a.state === 'available' || flags.research_action_ok };
   };
 }

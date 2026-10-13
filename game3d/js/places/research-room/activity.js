@@ -17,7 +17,7 @@ export function researchActivity(game, P, w) {
     camera = referenceCamera(game, P);
   const transfer = bookTransfer(game, P, w, hands, camera),
     state = readingState(flags, () => save(game));
-  const seating = readingSeatMotion(game);
+  const seating = readingSeatMotion(game, P.seats);
   const copy = referenceCopy(game, P, hands, transfer);
   const blockedApproach = Symbol('Research approach blocked');
   let active = true;

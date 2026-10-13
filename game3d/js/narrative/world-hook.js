@@ -3,7 +3,7 @@ export async function replayWorldHook(hook, step, context, key, persist) {
   const marker = key + ':hook',
     completed = context.frame.done.includes(marker);
   if (completed && !context.replaying) return;
-  await hook(step, { completedReplay: context.replaying && completed });
-  if (!completed) context.frame.done.push(marker);
+  const result = await hook(step, { completedReplay: context.replaying && completed });
+  if (!completed && result?.worldComplete !== false) context.frame.done.push(marker);
   persist();
 }

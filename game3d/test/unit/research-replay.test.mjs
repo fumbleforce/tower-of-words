@@ -33,3 +33,21 @@ test('old Research checkpoint without a done marker safely reopens its viewer on
  await x.runner.run('page');for(const frame of checkpoint.execution.frames)frame.done=frame.done.filter(key=>!key.endsWith(':hook'));
  const resumed=x.game.runner=new Runner(x.game);resumed.use(x.game.place,x.story);resumed.restore(checkpoint);await resumed.resume();assert.equal(x.calls.at(-1).completedReplay,false);assert.equal(x.calls.length,2);
 });
+
+test('failed or absent Research action does not mark a viewer complete at the automatic hook checkpoint',async()=>{
+ for(const absent of [false,true]){
+  const x=setup();let checkpoint;
+  const provider=x.game.place.research,act=provider.act;
+  provider.act=async(...args)=>{await act(...args);return false;};
+  if(absent)delete x.game.place.research;
+  x.runner.onCheckpoint=()=>{checkpoint ||= x.runner.snapshot();};globalThis.__saveTestUI={say(){}};
+  await x.runner.run('page');assert.ok(!checkpoint.execution.frames[0].done.some(key=>key.endsWith(':hook')));
+  x.game.place.research=provider;provider.act=act;
+  const resumed=x.game.runner=new Runner(x.game);resumed.use(x.game.place,x.story);resumed.restore(checkpoint);await resumed.resume();
+  assert.equal(x.calls.at(-1).completedReplay,false,'the first successful viewer must open after recovery');
+ }
+});
+test('ordinary false result from an existing WORLD hook retains its original completion semantics',async()=>{
+ const x=setup('cup');x.game.hooks.cup=async()=>false;let checkpoint;globalThis.__saveTestUI={say:()=>{checkpoint ||= x.runner.snapshot();}};
+ await x.runner.run('page');assert.ok(checkpoint.execution.frames[0].done.some(key=>key.endsWith(':hook')));
+});

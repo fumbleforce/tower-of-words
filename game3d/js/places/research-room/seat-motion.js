@@ -1,5 +1,5 @@
 // Research books remain in the hand while the player settles into or leaves a chair.
-export function readingSeatMotion(game) {
+export function readingSeatMotion(game, seats = {}) {
   let owned = null;
   const pose = (node) => ({ position: node.position.clone(), quaternion: node.quaternion.clone() });
   async function change(job, apply) {
@@ -56,7 +56,9 @@ export function readingSeatMotion(game) {
     },
     stand(job) {
       const p = game.player,
-        out = p.seatOut || [p.root.position.x, p.root.position.z];
+        out = p.seatOut ||
+          Object.values(seats).find((seat) => Math.hypot(p.root.position.x - seat.x, p.root.position.z - seat.z) < 0.03)
+            ?.out || [p.root.position.x, p.root.position.z];
       return change(job, () => {
         p.seated = false;
         p.seatOut = null;
