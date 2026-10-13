@@ -1634,3 +1634,7 @@ collab/.post.lock
 
 # Local Works facade verification captures and logs.
 /game3d/shots/finish-works/
+# Completed parked-branch QA captures (local, no binaries in git).
+/game3d/shots/karaoke-cold-player/
+/game3d/shots/kenji-cold/
+/game3d/shots/conversation-reciprocity-final/

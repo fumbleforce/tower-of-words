@@ -915,6 +915,21 @@
    "action": "retire",
    "path": "game3d/audio/ln-if476k.mp3",
    "to": "art/production/retired/2026-10-13/game3d/audio/ln-if476k.mp3"
+  },
+  {
+   "date": "2026-10-13",
+   "action": "retire",
+   "paths": [
+    "game3d/audio/ln-64yhrb.mp3",
+    "game3d/audio/ln-keh4fd.mp3",
+    "game3d/audio/ln-1i7pq5x.mp3",
+    "game3d/audio/ln-1oxxuz9.mp3",
+    "game3d/audio/ln-o9msey.mp3",
+    "game3d/audio/ln-16aob3w.mp3",
+    "game3d/audio/ln-1i7pq5x-carina.mp3"
+   ],
+   "to": "art/production/retired/2026-10-13/",
+   "note": "Issue 344: remove redundant fourth work reply so the phone conversation keeps people visible"
   }
  ]
 }

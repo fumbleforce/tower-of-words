@@ -141,7 +141,9 @@ export function thumbStyle(whoId, face) {
   return `background-image:url('${src}');background-size:${((F.W / R) * 100).toFixed(1)}% auto;background-position:${pct(cx, F.W)}% ${pct(cy, F.H)}%`;
 }
 const HOPS = new Set(['surprised', 'panicked', 'panic']);
+let currentPortrait = null;
 export function showPortraits(t, whoId, face) {
+  currentPortrait = { t, whoId, face };
   whoId = pid(whoId);
   const text = TEXT_PORTRAITS[whoId]; // a text message: the sender's portrait
   if (text) [whoId, face] = [text[0], PORTRAITS[text[0]].includes(face) ? face : text[1]];
@@ -314,6 +316,18 @@ function follow() {
   else followRaf = requestAnimationFrame(follow);
 }
 addEventListener('resize', () => layoutStage());
+// Renderer resizing updates the responsive class in a later frame. Re-select the
+// speaker when that class actually changes, after the phone/desktop rule is known.
+let portraitPhone = document.body.classList.contains('phone');
+new MutationObserver(() => {
+  const phone = document.body.classList.contains('phone');
+  if (phone === portraitPhone) return;
+  portraitPhone = phone;
+  if (!$('#stage')?.hidden && !$('#talk')?.hidden && currentPortrait) {
+    const { t, whoId, face } = currentPortrait;
+    showPortraits(t, whoId, face);
+  }
+}).observe(document.body, { attributes: true, attributeFilter: ['class'] });
 onKeyboard(() => layoutStage()); // the phone keyboard opened or closed (keyboard-fit.js)
 // the stage follows the talk panel: shown with it, hidden with it, re-laid out when its content changes (the phone
 // band grows with the text)
@@ -342,6 +356,7 @@ setTimeout(watchTalk, 0);
 
 // the talk box was emptied (ui/dialogue.js closeTalk): nobody's picture comes back with it
 export function clearPortraits() {
+  currentPortrait = null;
   for (const el of document.querySelectorAll('#stage .por')) el.hidden = true;
 }
 

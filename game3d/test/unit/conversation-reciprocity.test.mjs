@@ -103,21 +103,23 @@ test('Emi remembers practical help choices; revising them keeps the first histor
   assert.equal(again.state.chat_emi_work_help, 'request');
   assert.equal(again.memory.length, 1);
   assert.equal(again.memory[0].text, 'Talked about what each of you needs when handling requests.');
-  const next = await play('emi', 'chat_emi_team_again', { state: again.state });
+  const next = await play('emi', 'chat_emi_team_again', { state: again.state, picks: ['I’m all right with it'] });
+  assert.equal(next.menus[0].length, 3, 'phone follow-up keeps room for the people');
+  assert.equal(next.state.chat_emi_work_help, 'request', 'confirmation preserves the requested help');
   assert.ok(next.lines.some(line => line.text.includes('trouble understanding the requests')));
   assert.deepEqual(next.words, []);
 });
 
-test('Emi can hear a worry without treating it as consent to advice; her next hello acknowledges it', async () => {
+test('Emi remembers a request to hear a worry before giving advice', async () => {
   const worry = await play('emi', 'chat_emi_team_again', {
     state: { chat_emi_work_talked: true, chat_emi_work_help: 'request' },
     picks: ['won’t you think I can’t do this', 'hear me out', 'just wanted you to know'],
   });
   assert.equal(worry.state.chat_emi_ask_first, true);
   assert.ok(worry.memory.some(item => item.id === 'ask_first'));
-  const again = await play('emi', 'chat_emi_team_again', { state: worry.state, picks: ['just came to say hello', 'How are you doing'] });
-  assert.ok(again.lines.some(line => line.text.includes('caught me in time')));
-  assert.ok(again.lines.some(line => line.who === 'eric' && line.text === 'How are you doing?'));
+  const again = await play('emi', 'chat_emi_team_again', { state: worry.state, picks: ['won’t you think I can’t do this', 'No, I just needed to say it'] });
+  assert.ok(again.lines.some(line => line.text.includes('hear you out first')));
+  assert.ok(!again.lines.some(line => line.text.includes('look after the machines')));
   assert.ok(!again.lines.some(line => line.text.includes('got a turn this time')));
 });
 
@@ -153,7 +155,7 @@ test('new conversational nodes declare no unseen physical actions, subtitle bypa
     mio: ['settling', 'settling_choice', 'quiet_evening', 'try_evening', 'wait_for_me', 'talk_fine',
       'not_sure', 'settling_memory', 'settling_again', 'return_questions', 'her_break', 'mother_asks', 'short_hello'],
     emi: ['work_choice', 'team_again', 'still_agree', 'worry', 'worry_listen', 'worry_answer',
-      'ask_first', 'heard', 'unsure', 'hello', 'herself'],
+      'ask_first', 'heard', 'unsure'],
   };
   for (const [who, nodes] of Object.entries(added)) for (const node of nodes) visit(stories[who].nodes[`chat_${who}_${node}`]);
 });

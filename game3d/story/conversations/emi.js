@@ -98,7 +98,6 @@ export default {
         { text: 'If I keep asking, won’t you think I can’t do this?', go: 'chat_emi_worry' },
         { text: 'I’m all right with it. I just wanted to check we still agree.', go: 'chat_emi_still_agree' },
         { text: 'I need a different sort of help now.', go: 'chat_emi_work_choice' },
-        { text: 'Nothing to report. I just came to say hello.', go: 'chat_emi_hello' },
       ] },
     ],
     chat_emi_still_agree: [
@@ -142,27 +141,6 @@ export default {
     chat_emi_unsure: [
       { say: 'emi', emo: 'warm', text: 'Please do. I may need a moment to change what I was going to tell upstairs.' },
       { say: 'emi', emo: 'sheepish', text: 'That doesn’t mean I wish you’d kept quiet.' },
-      { go: 'chat_emi_leave' },
-    ],
-    chat_emi_hello: [
-      { if: 'chat_emi_ask_first', then: [
-        { say: 'emi', emo: 'warm', text: 'Oh, hello. Sorry, I was about to find you something to do. You caught me in time.' },
-      ], else: [
-        { say: 'emi', emo: 'sheepish', text: 'Oh, hello. Sorry, you came over and I went straight to work.' },
-      ] },
-      { choice: [
-        { text: 'How are you doing?', go: 'chat_emi_herself' },
-        { text: 'I’ll see you later.', go: 'chat_emi_leave' },
-      ] },
-    ],
-    chat_emi_herself: [
-      { say: 'eric', emo: 'warm', text: 'How are you doing?' },
-      { say: 'emi', emo: 'casual', text: 'I’m all right, thanks. Well, I keep checking my diary when I’m supposed to be having a break.' },
-      { if: 'chat_emi_club_known', then: [
-        { say: 'emi', emo: 'warm', text: 'I’ve put swimming in the diary. Kuro says the work bag can stay here, and she’s probably right.' },
-      ], else: [
-        { say: 'emi', emo: 'warm', text: 'Kuro keeps asking me that as well. She usually gets a better answer if we’re away from work.' },
-      ] },
       { go: 'chat_emi_leave' },
     ],
     chat_emi_repeat_word: [

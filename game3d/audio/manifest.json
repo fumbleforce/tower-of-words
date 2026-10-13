@@ -14393,66 +14393,6 @@
   "emo": "sheepish"
  },
  {
-  "key": "ln-64yhrb",
-  "speaker": "emi",
-  "text": "Oh, hello. Sorry, I was about to find you something to do. You caught me in time.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "warm"
- },
- {
-  "key": "ln-keh4fd",
-  "speaker": "emi",
-  "text": "Oh, hello. Sorry, you came over and I went straight to work.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "sheepish"
- },
- {
-  "key": "ln-1i7pq5x",
-  "speaker": "eric",
-  "text": "How are you doing?",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "warm"
- },
- {
-  "key": "ln-1oxxuz9",
-  "speaker": "emi",
-  "text": "I’m all right, thanks. Well, I keep checking my diary when I’m supposed to be having a break.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "casual"
- },
- {
-  "key": "ln-o9msey",
-  "speaker": "emi",
-  "text": "I’ve put swimming in the diary. Kuro says the work bag can stay here, and she’s probably right.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "warm"
- },
- {
-  "key": "ln-16aob3w",
-  "speaker": "emi",
-  "text": "Kuro keeps asking me that as well. She usually gets a better answer if we’re away from work.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "warm"
- },
- {
   "key": "ln-1pocn7f",
   "speaker": "emi",
   "text": "もう一度. Once more.",
@@ -20986,16 +20926,6 @@
   "words": [],
   "clear": [],
   "emo": "casual"
- },
- {
-  "key": "ln-1i7pq5x-carina",
-  "speaker": "carina",
-  "text": "How are you doing?",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "warm"
  },
  {
   "key": "ln-114mron-carina",
