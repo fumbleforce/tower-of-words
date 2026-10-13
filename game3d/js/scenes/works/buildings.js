@@ -1,6 +1,6 @@
 // The old works' buildings (works/plan.js), in the island frame, all outside only, nothing behind their doors:
 //   the factory: three storeys of faded green-grey corrugated walls on a concrete base, rows of steel-framed works
-//   windows with a few panes gone dark, four saw-tooth roofs with their glazing to the north, rust under the gutters;
+//   recessed reflective windows, four saw-tooth roofs with their glazing to the north, rust under the gutters;
 //   its gates a pair of teal sliding leaves, chained, a 立入禁止 KEEP OUT plate, 安全第一 SAFETY FIRST over them
 //   the power plant: a tall concrete-framed hall, piers between tall windows, a boiler house on the roof, ivy up its
 //   south-east corner; its door on the lane a chained steel pair under a concrete hood, はつでんしょ on a plate
@@ -18,6 +18,8 @@ import { STEEL, rod } from '../outdoor/furniture.js';
 import { fittings } from '../office-quarter/row.js';
 import * as P from './plan.js';
 import { hallFittings } from './yard-details.js';
+import { industrialShell, worksWindow, doorReveals, WORKS_METAL } from './industrial-facades.js';
+import { factoryFacade } from './factory-facade.js';
 
 export const C = {
   base: '#8c8d8c',
@@ -43,110 +45,27 @@ export const C = {
 };
 const NO = { cast: false };
 
-// steel works windows on a face: a dark frame, panes in a grid, a few dark (broken or open)
-function worksWindow(p, f, t0, t1, y0, y1, seed) {
-  onFace(p, C.frame, f, t0 - 0.06, t1 + 0.06, y0 - 0.06, y1 + 0.06, -0.02, 0.03, NO);
-  const nx = Math.max(2, Math.round((t1 - t0) / 0.6)),
-    ny = Math.max(2, Math.round((y1 - y0) / 0.55));
-  const pw = (t1 - t0) / nx,
-    ph = (y1 - y0) / ny;
-  for (let i = 0; i < nx; i++)
-    for (let j = 0; j < ny; j++) {
-      const dark = (i * 7 + j * 13 + seed * 5) % 17 < 2;
-      onFace(
-        p,
-        dark ? C.gone : C.pane,
-        f,
-        t0 + i * pw + 0.03,
-        t0 + (i + 1) * pw - 0.03,
-        y0 + j * ph + 0.03,
-        y0 + (j + 1) * ph - 0.03,
-        0.03,
-        0.04,
-        NO,
-      );
-    }
-}
-// rust running down from a point on a face
-const rust = (p, f, t, y, len) => onFace(p, C.rust, f, t - 0.05, t + 0.05, y - len, y, 0.03, 0.045, NO);
-
-// corrugated walls: the body, ribs every 0.5 on the faces asked for
-function ribbed(p, rect, h, wall, rib, sides, y = 0) {
-  const [x0, x1, z0, z1] = rect;
-  p.box(wall, x1 - x0, h, z1 - z0, (x0 + x1) / 2, y, (z0 + z1) / 2, { surf: 'metal' });
-  const F = faces(rect);
-  for (const s of sides)
-    for (let t = 0.25; t < F[s].L; t += 0.5)
-      onFace(p, rib, F[s], t - 0.04, t + 0.04, y + 0.05, y + h - 0.05, 0, 0.04, NO);
-}
-
-function* factory(p, plain) {
-  const R = P.FACTORY,
-    [x0, x1, z0, z1] = R,
-    H = 6.4,
-    F = faces(R);
-  p.box(C.base, x1 - x0 + 0.1, 1.0, z1 - z0 + 0.1, (x0 + x1) / 2, 0, (z0 + z1) / 2, { surf: 'concrete' });
-  ribbed(p, R, H - 1.0, C.wall, C.rib, ['s', 'w', 'e'], 1.0);
-  onFace(p, C.frame, F.s, -0.05, F.s.L + 0.05, H - 0.2, H, 0, 0.12); // the gutter's line
-  // the saw-tooth roofs: teeth across the depth, each a vertical glazed face to the north and a slope down south
-  const n = 4,
-    D = (z1 - z0) / n,
-    TH = 1.9;
-  for (let k = 0; k < n; k++) {
-    const sh = new THREE.Shape();
-    sh.moveTo(0, 0);
-    sh.lineTo(-D, 0);
-    sh.lineTo(0, TH);
-    sh.closePath();
-    const g = new THREE.ExtrudeGeometry(sh, { depth: x1 - x0 + 0.3, bevelEnabled: false })
-      .rotateY(Math.PI / 2)
-      .translate(x0 - 0.15, H, z0 + k * D);
-    p.geo(C.roof, g, { surf: 'metal' });
-    p.box(C.pane, x1 - x0 - 0.6, TH - 0.4, 0.05, (x0 + x1) / 2, H + 0.2, z0 + k * D - 0.03, NO);
-    // the mullions stand 5 mm over the glass's top edge
-    for (let x = x0 + 0.6; x < x1 - 0.4; x += 1.2)
-      p.box(C.frame, 0.06, TH - 0.395, 0.07, x, H + 0.2, z0 + k * D - 0.04, NO);
-  }
-  yield;
-  // the south face: two rows of works windows either side of the gates, rust under the gutter, downpipes
-  const gt = P.GATES.x - x0,
-    gw = P.GATES.w;
-  for (let t = 1.2; t + 2.2 < F.s.L - 0.6; t += 3.0) {
-    const inGate = t + 2.2 > gt - gw / 2 - 0.6 && t < gt + gw / 2 + 0.6;
-    if (!inGate) worksWindow(p, F.s, t, t + 2.2, 1.7, 3.3, Math.round(t));
-    worksWindow(p, F.s, t, t + 2.2, 4.0, 5.6, Math.round(t) + 3);
-    if (Math.round(t) % 2) rust(p, F.s, t + 1.1, H - 0.2, 1.4 + (t % 3) * 0.4);
-  }
-  for (const t of [0.5, F.s.L - 0.5]) onFace(p, C.frame, F.s, t - 0.07, t + 0.07, 0, H, 0.04, 0.16);
-  for (const f of [F.w, F.e])
-    for (let t = 1.0; t + 2.2 < f.L - 0.6; t += 3.2) worksWindow(p, f, t, t + 2.2, 4.0, 5.6, Math.round(t) + 7);
-  yield;
-  // the gates: two sliding leaves under a track, ribbed, chained at the meeting stiles
-  const f = F.s;
-  onFace(p, C.frame, f, gt - gw / 2 - 0.15, gt + gw / 2 + 0.15, 0, P.GATES.h + 0.15, -0.02, 0.05);
-  for (const s of [-1, 1]) {
-    const [a, b] = s < 0 ? [gt - gw / 2, gt - 0.02] : [gt + 0.02, gt + gw / 2];
-    onFace(p, C.gate, f, a, b, 0.05, P.GATES.h, 0.05, 0.12, { surf: 'metal' });
-    for (let y = 0.4; y < P.GATES.h; y += 0.5) onFace(p, C.gateRib, f, a + 0.05, b - 0.05, y, y + 0.06, 0.12, 0.15, NO);
-    rust(p, f, (a + b) / 2 + s * 0.6, 1.2, 1.0);
-  }
-  onFace(p, STEEL.dark, f, gt - gw - 0.3, gt + gw + 0.3, P.GATES.h + 0.15, P.GATES.h + 0.35, 0.02, 0.2); // the track
-  for (let k = -3; k <= 3; k++)
-    onFace(p, '#2b2e33', f, gt - 0.07 + k * 0.001, gt + 0.07, 1.05 + k * 0.09, 1.11 + k * 0.09, 0.15, 0.2, NO);
-  for (const s of [-1, 1])
-    rod(p, '#2b2e33', [P.GATES.x + s * 0.5, 1.05, z1 + 0.18], [P.GATES.x, 0.75, z1 + 0.19], 0.025);
-  p.box('#b8a24a', 0.14, 0.18, 0.08, P.GATES.x, 0.6, z1 + 0.2, NO); // the padlock
-  plain.card('立入禁止', 'KEEP OUT', 0.62, 0.4, [P.GATES.x - gw / 4, 1.55, z1 + 0.13], 0);
-  plain.board('安全第一', 'SAFETY FIRST', '#3d6a4e', 3.4, 0.9, [P.GATES.x, P.GATES.h + 1.05, z1 + 0.06], 0);
-  yield;
-}
-
 function* plant(p, plain) {
   const R = P.PLANT,
     [x0, x1, z0, z1] = R,
     H = 8.4,
     F = faces(R);
-  p.box(C.concrete, x1 - x0, H, z1 - z0, (x0 + x1) / 2, 0, (z0 + z1) / 2, { surf: 'concrete' });
+  const holes = { s: [], w: [], e: [] };
+  for (const [side, f] of Object.entries(F)) {
+    if (side === 'n') continue;
+    const n = Math.round(f.L / 2.2),
+      bw = f.L / n;
+    for (let i = 0; i < n; i++) {
+      const a = i * bw + 0.45,
+        b = (i + 1) * bw - 0.45;
+      const door = side === 'e' && Math.abs((a + b) / 2 - (z1 - P.PLANT_DOOR.z)) < bw / 2;
+      holes[side].push([a, b, door ? 3.6 : 1.6, 7.4]);
+    }
+  }
+  const doorT = z1 - P.PLANT_DOOR.z,
+    doorW = P.PLANT_DOOR.w;
+  holes.e.push([doorT - doorW / 2, doorT + doorW / 2, 0.12, 2.4]);
+  industrialShell(p, R, H, holes, { wall: C.concrete });
   p.box(C.pier, x1 - x0 + 0.3, 0.5, z1 - z0 + 0.3, (x0 + x1) / 2, H, (z0 + z1) / 2, { surf: 'concrete' });
   // the boiler house on the roof
   p.box(C.concrete, (x1 - x0) * 0.45, 2.6, (z1 - z0) * 0.5, x0 + (x1 - x0) * 0.35, H + 0.5, z0 + (z1 - z0) * 0.4, {
@@ -156,7 +75,10 @@ function* plant(p, plain) {
     if (id === 'n') continue; // its back, never seen
     const n = Math.round(f.L / 2.2),
       bw = f.L / n;
-    for (let i = 0; i <= n; i++) onFace(p, C.pier, f, i * bw - 0.2, i * bw + 0.2, 0, H, 0, 0.14, { surf: 'concrete' });
+    for (let i = 0; i <= n; i++)
+      onFace(p, C.pier, f, i * bw - 0.2, i * bw + 0.2, 0, H, 0, 0.14, {
+        surf: 'concrete',
+      });
     for (let i = 0; i < n; i++) {
       const [a, b] = [i * bw + 0.45, (i + 1) * bw - 0.45];
       if (id === 'e' && Math.abs((a + b) / 2 - (z1 - P.PLANT_DOOR.z)) < bw / 2) {
@@ -171,10 +93,12 @@ function* plant(p, plain) {
   const f = F.e,
     t = z1 - P.PLANT_DOOR.z,
     w = P.PLANT_DOOR.w;
-  onFace(p, C.frame, f, t - w / 2 - 0.12, t + w / 2 + 0.12, 0, 2.5, 0.0, 0.18);
-  onFace(p, '#5d6871', f, t - w / 2, t + w / 2, 0, 2.4, 0.18, 0.22, { surf: 'metal' });
-  onFace(p, C.frame, f, t - 0.02, t + 0.02, 0, 2.4, 0.22, 0.24, NO);
-  onFace(p, C.pier, f, t - w / 2 - 0.5, t + w / 2 + 0.5, 2.6, 2.8, 0, 0.9, { surf: 'concrete' }); // the hood
+  doorReveals(p, f, t - w / 2, t + w / 2, 0.12, 2.4);
+  onFace(p, '#5d6871', f, t - w / 2, t + w / 2, 0.12, 2.4, -0.2, -0.12, WORKS_METAL);
+  onFace(p, C.frame, f, t - 0.02, t + 0.02, 0.12, 2.4, -0.12, -0.09, NO);
+  onFace(p, C.pier, f, t - w / 2 - 0.5, t + w / 2 + 0.5, 2.6, 2.8, 0, 0.9, {
+    surf: 'concrete',
+  }); // the hood
   for (let k = -2; k <= 2; k++)
     onFace(
       p,
@@ -184,12 +108,14 @@ function* plant(p, plain) {
       t - 0.17 + k * 0.1,
       1.15 - Math.abs(k) * 0.05,
       1.21 - Math.abs(k) * 0.05,
-      0.24,
-      0.27,
+      -0.11,
+      -0.08,
       NO,
     );
-  p.box('#b8a24a', 0.08, 0.16, 0.14, x1 + 0.3, 0.98, P.PLANT_DOOR.z, NO);
-  onFace(p, C.base, f, t - w / 2 - 0.3, t + w / 2 + 0.3, 0, 0.12, 0, 0.7, { surf: 'concrete' }); // the step
+  p.box('#b8a24a', 0.08, 0.16, 0.14, x1 - 0.05, 0.98, P.PLANT_DOOR.z, NO);
+  onFace(p, C.base, f, t - w / 2 - 0.3, t + w / 2 + 0.3, 0, 0.12, 0, 0.7, {
+    surf: 'concrete',
+  }); // the step
   plain.board(
     'はつでんしょ',
     'No.1 POWER PLANT',
@@ -248,8 +174,28 @@ function* shed(p, plain) {
     F = faces(R),
     cx = (x0 + x1) / 2,
     cz = (z0 + z1) / 2;
-  p.box(C.base, x1 - x0 + 0.1, 0.3, z1 - z0 + 0.1, cx, 0, cz, { surf: 'concrete' });
-  ribbed(p, R, H - 0.3, C.shed, C.shedRib, ['s', 'w', 'e'], 0.3);
+  p.box(C.base, x1 - x0 + 0.1, 0.3, z1 - z0 + 0.1, cx, 0, cz, {
+    surf: 'concrete',
+  });
+  industrialShell(
+    p,
+    R,
+    H,
+    {
+      s: [
+        [1.85, 4.95, 0.3, 3.15],
+        [6.4, 7.3, 0.3, 2.3],
+        [7.6, 8.4, 1.4, 2.4],
+      ],
+    },
+    {
+      wall: C.shed,
+      surf: 'metal',
+      bottom: 0.3,
+      rib: C.shedRib,
+      ribSides: ['s', 'w', 'e'],
+    },
+  );
   const half = (z1 - z0) / 2 + 0.3,
     a = Math.atan2(RISE, half);
   for (const s of [-1, 1])
@@ -269,16 +215,20 @@ function* shed(p, plain) {
     for (const ry of [Math.PI / 2, -Math.PI / 2])
       p.geo(C.shed, new THREE.ShapeGeometry(sh).rotateY(ry).translate(x, H, cz), NO);
   }
-  // the roller door, a personnel door, a window; rust; the shed's number on its east gable
+  // the inset roller door, personnel door and window; the shed's number on its east gable
   const f = F.s,
     dt = 3.4;
-  onFace(p, C.frame, f, dt - 1.7, dt + 1.7, 0, 3.3, 0, 0.05, NO);
-  onFace(p, '#7e8790', f, dt - 1.55, dt + 1.55, 0.05, 3.15, 0.05, 0.08, { surf: 'metal' });
-  for (let y = 0.25; y < 3.1; y += 0.18) onFace(p, '#6f7780', f, dt - 1.55, dt + 1.55, y, y + 0.025, 0.08, 0.1, NO);
+  doorReveals(p, f, dt - 1.55, dt + 1.55, 0.3, 3.15);
+  onFace(p, '#7e8790', f, dt - 1.55, dt + 1.55, 0.3, 3.15, -0.2, -0.12, WORKS_METAL);
+  for (let y = 0.45; y < 3.1; y += 0.18)
+    onFace(p, '#6f7780', f, dt - 1.55, dt + 1.55, y, y + 0.025, -0.12, -0.1, {
+      ...WORKS_METAL,
+      cast: false,
+    });
   onFace(p, C.frame, f, dt - 1.85, dt + 1.85, 3.3, 3.6, 0, 0.3);
-  rust(p, f, dt - 0.8, 1.6, 1.2);
-  rust(p, f, dt + 1.0, 1.4, 0.9);
-  onFace(p, '#5b616b', f, 6.4, 7.3, 0.3, 2.3, 0.04, 0.08, { surf: 'metal' });
+  onFace(p, '#9aa3a2', f, dt - 0.18, dt + 0.18, 1.1, 1.17, -0.105, -0.055, WORKS_METAL);
+  doorReveals(p, f, 6.4, 7.3, 0.3, 2.3);
+  onFace(p, '#5b616b', f, 6.4, 7.3, 0.3, 2.3, -0.2, -0.12, WORKS_METAL);
   worksWindow(p, f, 7.6, 8.4, 1.4, 2.4, 4);
   plain.board('２', 'No.2', '#3e4a52', 0.7, 0.7, [x1 + 0.04, H - 0.9, cz], Math.PI / 2);
   yield;
@@ -289,21 +239,33 @@ function kiosk(p, plain) {
     [x0, x1, z0, z1] = R,
     H = 2.8,
     F = faces(R);
-  p.box(C.kiosk, x1 - x0, H, z1 - z0, (x0 + x1) / 2, 0, (z0 + z1) / 2, { surf: 'concrete' });
+  const wt = P.KIOSK_WINDOW.z - z0,
+    ww = P.KIOSK_WINDOW.w;
+  industrialShell(
+    p,
+    R,
+    H,
+    {
+      w: [[wt - ww / 2, wt + ww / 2, 1, 2.05]],
+      s: [
+        [0.8, 1.7, 0, 2.05],
+        [2.65, 4.35, 1.05, 1.95],
+      ],
+    },
+    { wall: C.kiosk },
+  );
   p.box('#a9a69e', x1 - x0 + 0.6, 0.2, z1 - z0 + 0.6, (x0 + x1) / 2, H, (z0 + z1) / 2, { surf: 'concrete' });
   // the counter window onto the apron: dark glass, a sliding pane, a shelf under it, the plate
   const f = F.w,
     t = P.KIOSK_WINDOW.z - z0,
     w = P.KIOSK_WINDOW.w;
-  onFace(p, C.frame, f, t - w / 2 - 0.08, t + w / 2 + 0.08, 0.95, 2.1, 0, 0.04);
-  onFace(p, '#47525c', f, t - w / 2, t + w / 2, 1.0, 2.05, 0.04, 0.05, NO);
-  onFace(p, '#6b7781', f, t - w / 2 + 0.05, t + 0.02, 1.02, 2.03, 0.05, 0.07, NO);
+  worksWindow(p, f, t - w / 2, t + w / 2, 1, 2.05, 2);
   onFace(p, '#a9a69e', f, t - w / 2 - 0.1, t + w / 2 + 0.1, 0.9, 0.98, 0, 0.35);
   plain.board('うけつけ', 'RECEPTION', '#5a5f66', 1.2, 0.36, [x0 - 0.03, 2.35, P.KIOSK_WINDOW.z], -Math.PI / 2);
   // a door and a window on the yard
-  onFace(p, '#5b616b', F.s, 0.8, 1.7, 0, 2.05, 0.02, 0.06, { surf: 'metal' });
-  onFace(p, C.frame, F.s, 2.6, 4.4, 1.0, 2.0, 0, 0.04);
-  onFace(p, '#47525c', F.s, 2.65, 4.35, 1.05, 1.95, 0.04, 0.05, NO);
+  doorReveals(p, F.s, 0.8, 1.7, 0, 2.05);
+  onFace(p, '#5b616b', F.s, 0.8, 1.7, 0, 2.05, -0.2, -0.12, WORKS_METAL);
+  worksWindow(p, F.s, 2.65, 4.35, 1.05, 1.95, 3);
   // the barrier at the apron's mouth, raised: its post and the arm up, red and white
   const bx = x0 + 0.2,
     bz = P.GATE[3] - 0.4;
@@ -373,7 +335,7 @@ function* hall(p, sets, signs, lights) {
 // lights: a lightSet; only: which of them (the harbour builds the ones it sees up the works lane, scenes/harbour.js)
 export const BUILDING_IDS = ['factory', 'plant', 'chimney', 'shed', 'kiosk', 'hall'];
 export function* buildingsSteps(p, sets, signs, plain, lights, only = BUILDING_IDS) {
-  if (only.includes('factory')) yield* factory(p, plain);
+  if (only.includes('factory')) yield* factoryFacade(p, plain, C);
   if (only.includes('plant')) yield* plant(p, plain);
   if (only.includes('chimney')) chimney(p);
   if (only.includes('shed')) yield* shed(p, plain);
