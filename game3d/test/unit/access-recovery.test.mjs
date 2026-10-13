@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import historical from '../fixtures/removed-staff-seam.json' with { type: 'json' };
 import { test } from 'node:test';
 import { accessRecoveryReason, needsAccessRecovery } from '../../js/saves/access-recovery.js';
 import { migrateDay2Save } from '../../js/saves/day2.js';
@@ -16,13 +17,14 @@ const old = (day, place, extra = {}) => ({
   runner: { onceDone: ['old-completed-trigger'] }, world: { old: true }, zones: { old: true },
   surface: { x: 1, z: 2, y: 0 }, ui: { hold: 'mio', goal: 'Old route', sideGoal: 'Keep this note' }, ...extra,
 });
-for (const day of [1, 2, 3, 4, 5]) for (const [from, to, node, trigger, fingerprint] of [
-  ['forecourt', 'campus', 'to_campus', 'zone:campus_exit', '29:3552aa51:2e604c5f'],
-  ['campus', 'forecourt', 'to_forecourt', 'zone:forecourt_exit', '32:e1f0386d:f5496da7'],
-]) {
-  const steps = [{ do: 'trip', to }], frame = newFrame(node, steps, trigger);
+const continuing = Object.fromEntries(await Promise.all(['forecourt', 'campus', 'office_quarter', 'harbour', 'print_shop', 'ferry_terminal']
+  .map(async place => [place, (await import(`../../story/ongoing/${place}.js`)).default])));
+stories[6] = stories[17] = continuing;
+for (const item of historical.cases) {
+  const { day, place: from, to, node, event: trigger } = item;
+  const steps = item.steps, frame = structuredClone(item.execution.frames[0]);
   frame.cursors = [{ path: [], index: 0, phase: 'step' }];
-  assert.equal(frame.fingerprint, fingerprint);
+  assert.deepEqual(frame, { ...newFrame(node, steps, trigger), cursors: frame.cursors });
   const execution = { v: 3, place: from, frames: [frame] };
   assert.ok(readCheckpoint(execution, from, { nodes: { [node]: steps } }));
   assert.equal(readCheckpoint(execution, from, stories[day][from]), null);
@@ -48,7 +50,7 @@ for (const day of [1, 2, 3, 4, 5]) for (const [from, to, node, trigger, fingerpr
     assert.equal(migrateDay2Save(next), next);
   });
 }
-for (const day of [3, 4, 5]) for (const place of ['campus', 'office_quarter', 'harbour', 'print_shop', 'ferry_terminal']) {
+for (const day of [3, 4, 5, 6, 17]) for (const place of ['campus', 'office_quarter', 'harbour', 'print_shop', 'ferry_terminal']) {
   test(`day${day} valid ${place} saves stay exactly where they were`, () => {
     const story = stories[day][place], node = Object.keys(story.nodes).find(n => n !== story.start);
     const frame = newFrame(node, story.nodes[node]);
@@ -78,7 +80,7 @@ test('legitimate supports, unrelated active runners, finished saves and days out
     { surface: { x: 4, z: 5, y: 0.34 } }, { surface: { x: -8, z: -7.9, y: 0 } },
     { surface: { x: -5.3, z: -7.9, y: 0 }, runner: { execution: { place: 'forecourt', frames: [newFrame('d3_to_plaza', day3.forecourt.nodes.d3_to_plaza)] } } },
     { ended: true, transition: { from: 'forecourt', to: 'campus' } },
-    { day: 6, transition: { from: 'forecourt', to: 'campus' } },
+    { day: 0, transition: { from: 'forecourt', to: 'campus' } },
     { runner: { queued: [newFrame('to_campus', [])] }, place: 'sports' },
   ]) {
     const saved = old(3, 'forecourt', extra);
@@ -91,4 +93,19 @@ test('legacy day-one seam saves without a day field also recover', () => {
   delete saved.day;
   assert.equal(migrateDay2Save(saved).place, 'forecourt');
   assert.deepEqual(migrateDay2Save(saved).runner.queued, []);
+});
+
+test('historically reachable ground beside the gate east post also stays on public ground after restoration', () => {
+  // Actual old northSteps mesh supports and a clear physical walk were independently verified at these points.
+  // They lie outside the old route grid, so checking only nav membership would miss real free-movement saves.
+  for (const [x, z, y] of [[-3.6, -7.9, .01], [-3.55, -7.75, .01]]) {
+    const saved = old(3, 'forecourt', { surface: { x, z, y }, world: { player: { eric: { position: [x, 0, z] } } } });
+    const next = migrateDay2Save(saved);
+    assert.equal(accessRecoveryReason(saved), 'surface');
+    assert.equal(next.surface, null); assert.equal(next.zones, null);
+    assert.equal(next.world, saved.world); assert.equal(next.runner, saved.runner);
+    assert.equal(migrateDay2Save(next), next);
+    const supportedBench = { ...saved, surface: { x, z, y: .34 } };
+    assert.equal(migrateDay2Save(supportedBench), supportedBench);
+  }
 });

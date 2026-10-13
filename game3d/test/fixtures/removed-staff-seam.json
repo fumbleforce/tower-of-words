@@ -1,0 +1,524 @@
+{
+  "sourceCommit": "f1eef49a2",
+  "description": "Evaluated actual historical default story modules, including their shared route generators. Frame cursors represent the saved trip step before completion.",
+  "cases": [
+    {
+      "day": 1,
+      "place": "forecourt",
+      "to": "campus",
+      "event": "zone:campus_exit",
+      "source": "game3d/story/forecourt.js",
+      "node": "to_campus",
+      "steps": [
+        {
+          "do": "trip",
+          "to": "campus"
+        }
+      ],
+      "execution": {
+        "v": 3,
+        "place": "forecourt",
+        "frames": [
+          {
+            "node": "to_campus",
+            "fingerprint": "29:3552aa51:2e604c5f",
+            "trigger": "zone:campus_exit",
+            "cursors": [
+              {
+                "path": [],
+                "index": 0,
+                "phase": "step"
+              }
+            ],
+            "done": [],
+            "branches": {},
+            "choices": {},
+            "staging": null,
+            "worldAfter": {}
+          }
+        ]
+      }
+    },
+    {
+      "day": 1,
+      "place": "campus",
+      "to": "forecourt",
+      "event": "zone:forecourt_exit",
+      "source": "game3d/story/campus.js",
+      "node": "to_forecourt",
+      "steps": [
+        {
+          "do": "trip",
+          "to": "forecourt"
+        }
+      ],
+      "execution": {
+        "v": 3,
+        "place": "campus",
+        "frames": [
+          {
+            "node": "to_forecourt",
+            "fingerprint": "32:e1f0386d:f5496da7",
+            "trigger": "zone:forecourt_exit",
+            "cursors": [
+              {
+                "path": [],
+                "index": 0,
+                "phase": "step"
+              }
+            ],
+            "done": [],
+            "branches": {},
+            "choices": {},
+            "staging": null,
+            "worldAfter": {}
+          }
+        ]
+      }
+    },
+    {
+      "day": 2,
+      "place": "forecourt",
+      "to": "campus",
+      "event": "zone:campus_exit",
+      "source": "game3d/story/day2/forecourt.js",
+      "node": "to_campus",
+      "steps": [
+        {
+          "do": "trip",
+          "to": "campus"
+        }
+      ],
+      "execution": {
+        "v": 3,
+        "place": "forecourt",
+        "frames": [
+          {
+            "node": "to_campus",
+            "fingerprint": "29:3552aa51:2e604c5f",
+            "trigger": "zone:campus_exit",
+            "cursors": [
+              {
+                "path": [],
+                "index": 0,
+                "phase": "step"
+              }
+            ],
+            "done": [],
+            "branches": {},
+            "choices": {},
+            "staging": null,
+            "worldAfter": {}
+          }
+        ]
+      }
+    },
+    {
+      "day": 2,
+      "place": "campus",
+      "to": "forecourt",
+      "event": "zone:forecourt_exit",
+      "source": "game3d/story/day2/campus.js",
+      "node": "to_forecourt",
+      "steps": [
+        {
+          "do": "trip",
+          "to": "forecourt"
+        }
+      ],
+      "execution": {
+        "v": 3,
+        "place": "campus",
+        "frames": [
+          {
+            "node": "to_forecourt",
+            "fingerprint": "32:e1f0386d:f5496da7",
+            "trigger": "zone:forecourt_exit",
+            "cursors": [
+              {
+                "path": [],
+                "index": 0,
+                "phase": "step"
+              }
+            ],
+            "done": [],
+            "branches": {},
+            "choices": {},
+            "staging": null,
+            "worldAfter": {}
+          }
+        ]
+      }
+    },
+    {
+      "day": 3,
+      "place": "forecourt",
+      "to": "campus",
+      "event": "zone:campus_exit",
+      "source": "game3d/story/day3/forecourt.js",
+      "node": "d3_to_campus",
+      "steps": [
+        {
+          "do": "trip",
+          "to": "campus"
+        }
+      ],
+      "execution": {
+        "v": 3,
+        "place": "forecourt",
+        "frames": [
+          {
+            "node": "d3_to_campus",
+            "fingerprint": "29:3552aa51:2e604c5f",
+            "trigger": "zone:campus_exit",
+            "cursors": [
+              {
+                "path": [],
+                "index": 0,
+                "phase": "step"
+              }
+            ],
+            "done": [],
+            "branches": {},
+            "choices": {},
+            "staging": null,
+            "worldAfter": {}
+          }
+        ]
+      }
+    },
+    {
+      "day": 3,
+      "place": "campus",
+      "to": "forecourt",
+      "event": "zone:forecourt_exit",
+      "source": "game3d/story/day3/campus.js",
+      "node": "to_forecourt",
+      "steps": [
+        {
+          "do": "trip",
+          "to": "forecourt"
+        }
+      ],
+      "execution": {
+        "v": 3,
+        "place": "campus",
+        "frames": [
+          {
+            "node": "to_forecourt",
+            "fingerprint": "32:e1f0386d:f5496da7",
+            "trigger": "zone:forecourt_exit",
+            "cursors": [
+              {
+                "path": [],
+                "index": 0,
+                "phase": "step"
+              }
+            ],
+            "done": [],
+            "branches": {},
+            "choices": {},
+            "staging": null,
+            "worldAfter": {}
+          }
+        ]
+      }
+    },
+    {
+      "day": 4,
+      "place": "forecourt",
+      "to": "campus",
+      "event": "zone:campus_exit",
+      "source": "game3d/story/day4/forecourt.js",
+      "node": "d4_to_campus",
+      "steps": [
+        {
+          "do": "trip",
+          "to": "campus"
+        }
+      ],
+      "execution": {
+        "v": 3,
+        "place": "forecourt",
+        "frames": [
+          {
+            "node": "d4_to_campus",
+            "fingerprint": "29:3552aa51:2e604c5f",
+            "trigger": "zone:campus_exit",
+            "cursors": [
+              {
+                "path": [],
+                "index": 0,
+                "phase": "step"
+              }
+            ],
+            "done": [],
+            "branches": {},
+            "choices": {},
+            "staging": null,
+            "worldAfter": {}
+          }
+        ]
+      }
+    },
+    {
+      "day": 4,
+      "place": "campus",
+      "to": "forecourt",
+      "event": "zone:forecourt_exit",
+      "source": "game3d/story/day4/campus.js",
+      "node": "to_forecourt",
+      "steps": [
+        {
+          "do": "trip",
+          "to": "forecourt"
+        }
+      ],
+      "execution": {
+        "v": 3,
+        "place": "campus",
+        "frames": [
+          {
+            "node": "to_forecourt",
+            "fingerprint": "32:e1f0386d:f5496da7",
+            "trigger": "zone:forecourt_exit",
+            "cursors": [
+              {
+                "path": [],
+                "index": 0,
+                "phase": "step"
+              }
+            ],
+            "done": [],
+            "branches": {},
+            "choices": {},
+            "staging": null,
+            "worldAfter": {}
+          }
+        ]
+      }
+    },
+    {
+      "day": 5,
+      "place": "forecourt",
+      "to": "campus",
+      "event": "zone:campus_exit",
+      "source": "game3d/story/day5/forecourt.js",
+      "node": "d5_to_campus",
+      "steps": [
+        {
+          "do": "trip",
+          "to": "campus"
+        }
+      ],
+      "execution": {
+        "v": 3,
+        "place": "forecourt",
+        "frames": [
+          {
+            "node": "d5_to_campus",
+            "fingerprint": "29:3552aa51:2e604c5f",
+            "trigger": "zone:campus_exit",
+            "cursors": [
+              {
+                "path": [],
+                "index": 0,
+                "phase": "step"
+              }
+            ],
+            "done": [],
+            "branches": {},
+            "choices": {},
+            "staging": null,
+            "worldAfter": {}
+          }
+        ]
+      }
+    },
+    {
+      "day": 5,
+      "place": "campus",
+      "to": "forecourt",
+      "event": "zone:forecourt_exit",
+      "source": "game3d/story/day5/campus.js",
+      "node": "to_forecourt",
+      "steps": [
+        {
+          "do": "trip",
+          "to": "forecourt"
+        }
+      ],
+      "execution": {
+        "v": 3,
+        "place": "campus",
+        "frames": [
+          {
+            "node": "to_forecourt",
+            "fingerprint": "32:e1f0386d:f5496da7",
+            "trigger": "zone:forecourt_exit",
+            "cursors": [
+              {
+                "path": [],
+                "index": 0,
+                "phase": "step"
+              }
+            ],
+            "done": [],
+            "branches": {},
+            "choices": {},
+            "staging": null,
+            "worldAfter": {}
+          }
+        ]
+      }
+    },
+    {
+      "day": 6,
+      "place": "forecourt",
+      "to": "campus",
+      "event": "zone:campus_exit",
+      "source": "game3d/story/ongoing/forecourt.js",
+      "node": "ongoing_to_campus",
+      "steps": [
+        {
+          "do": "trip",
+          "to": "campus"
+        }
+      ],
+      "execution": {
+        "v": 3,
+        "place": "forecourt",
+        "frames": [
+          {
+            "node": "ongoing_to_campus",
+            "fingerprint": "29:3552aa51:2e604c5f",
+            "trigger": "zone:campus_exit",
+            "cursors": [
+              {
+                "path": [],
+                "index": 0,
+                "phase": "step"
+              }
+            ],
+            "done": [],
+            "branches": {},
+            "choices": {},
+            "staging": null,
+            "worldAfter": {}
+          }
+        ]
+      }
+    },
+    {
+      "day": 6,
+      "place": "campus",
+      "to": "forecourt",
+      "event": "zone:forecourt_exit",
+      "source": "game3d/story/ongoing/campus.js",
+      "node": "ongoing_to_forecourt",
+      "steps": [
+        {
+          "do": "trip",
+          "to": "forecourt"
+        }
+      ],
+      "execution": {
+        "v": 3,
+        "place": "campus",
+        "frames": [
+          {
+            "node": "ongoing_to_forecourt",
+            "fingerprint": "32:e1f0386d:f5496da7",
+            "trigger": "zone:forecourt_exit",
+            "cursors": [
+              {
+                "path": [],
+                "index": 0,
+                "phase": "step"
+              }
+            ],
+            "done": [],
+            "branches": {},
+            "choices": {},
+            "staging": null,
+            "worldAfter": {}
+          }
+        ]
+      }
+    },
+    {
+      "day": 17,
+      "place": "forecourt",
+      "to": "campus",
+      "event": "zone:campus_exit",
+      "source": "game3d/story/ongoing/forecourt.js",
+      "node": "ongoing_to_campus",
+      "steps": [
+        {
+          "do": "trip",
+          "to": "campus"
+        }
+      ],
+      "execution": {
+        "v": 3,
+        "place": "forecourt",
+        "frames": [
+          {
+            "node": "ongoing_to_campus",
+            "fingerprint": "29:3552aa51:2e604c5f",
+            "trigger": "zone:campus_exit",
+            "cursors": [
+              {
+                "path": [],
+                "index": 0,
+                "phase": "step"
+              }
+            ],
+            "done": [],
+            "branches": {},
+            "choices": {},
+            "staging": null,
+            "worldAfter": {}
+          }
+        ]
+      }
+    },
+    {
+      "day": 17,
+      "place": "campus",
+      "to": "forecourt",
+      "event": "zone:forecourt_exit",
+      "source": "game3d/story/ongoing/campus.js",
+      "node": "ongoing_to_forecourt",
+      "steps": [
+        {
+          "do": "trip",
+          "to": "forecourt"
+        }
+      ],
+      "execution": {
+        "v": 3,
+        "place": "campus",
+        "frames": [
+          {
+            "node": "ongoing_to_forecourt",
+            "fingerprint": "32:e1f0386d:f5496da7",
+            "trigger": "zone:forecourt_exit",
+            "cursors": [
+              {
+                "path": [],
+                "index": 0,
+                "phase": "step"
+              }
+            ],
+            "done": [],
+            "branches": {},
+            "choices": {},
+            "staging": null,
+            "worldAfter": {}
+          }
+        ]
+      }
+    }
+  ]
+}
