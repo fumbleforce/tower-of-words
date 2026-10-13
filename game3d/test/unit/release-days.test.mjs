@@ -52,7 +52,11 @@ test('a staged day-one edition removes later content and rejects later saves at 
     const remarks = await import(pathToFileURL(path.join(dir, 'game3d/story/conversations/remarks.js')).href);
     assert.equal(remarks.REMARKS.some(remark => remark.who === 'rei'), false);
     assert.equal(shared.default.nodes.chat_emi_team, undefined);
-    assert.equal(shared.default.nodes.chat_emi_team_again, undefined);
+    for (const node of ['team_again', 'work_choice', 'worry', 'worry_listen', 'worry_answer',
+      'ask_first', 'hello', 'herself', 'still_agree']) assert.equal(shared.default.nodes[`chat_emi_${node}`], undefined);
+    // Mio can discuss her mother on day one; the reciprocal follow-up stays available then.
+    for (const node of ['settling', 'settling_choice', 'settling_again', 'return_questions', 'mother_asks', 'short_hello'])
+      assert.ok(shared.default.nodes[`chat_mio_${node}`]);
     assert.equal(shared.default.nodes.chat_mio_her_break, undefined);
     assert.equal(shared.default.nodes.conversation_mori_drawing, undefined);
     assert.equal(shared.default.nodes.conversation_hamada_number, undefined);

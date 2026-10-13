@@ -54,7 +54,7 @@ test('Mio asks back, accepts each preference, and recalls saved choices without 
   const variants = [
     ['time to myself', [], 'quiet', 'time for yourself'],
     ['talk more', ['moment to get it out'], 'try', 'I remember'],
-    ['talk more', ['It’s fine.'], 'english', 'we can just talk'],
+    ['talk more', ['It’s fine.'], 'talk', 'we can just talk'],
   ];
   for (const [first, rest, value, recall] of variants) {
     const start = await play('mio', 'chat_mio_mainland', { picks: ['That sounds nice', first, ...rest] });
@@ -138,7 +138,7 @@ test('Continue from a preference choice restores the actual Runner frames and ho
   const restored = await play('mio', 'chat_mio_settling', {
     state: checkpoint.state, restore: checkpoint.frames, picks: ['talk more', 'It’s fine.'],
   });
-  assert.equal(restored.state.chat_mio_evenings, 'english');
+  assert.equal(restored.state.chat_mio_evenings, 'talk');
   assert.equal(restored.memory.length, 1);
 });
 
@@ -149,7 +149,13 @@ test('new conversational nodes declare no unseen physical actions, subtitle bypa
     if (value.do) assert.ok(['face', 'cam', 'sender', 'save', 'remember', 'type'].includes(value.do), value.do);
     for (const child of Object.values(value)) if (typeof child === 'object') visit(child);
   };
-  visit(stories);
+  const added = {
+    mio: ['settling', 'settling_choice', 'quiet_evening', 'try_evening', 'wait_for_me', 'talk_fine',
+      'not_sure', 'settling_memory', 'settling_again', 'return_questions', 'her_break', 'mother_asks', 'short_hello'],
+    emi: ['work_choice', 'team_again', 'still_agree', 'worry', 'worry_listen', 'worry_answer',
+      'ask_first', 'heard', 'unsure', 'hello', 'herself'],
+  };
+  for (const [who, nodes] of Object.entries(added)) for (const node of nodes) visit(stories[who].nodes[`chat_${who}_${node}`]);
 });
 
 
@@ -203,7 +209,9 @@ test('a deferred Mio answer can become a first preference without pretending it 
 test('Emi first and repeat work conversations remain unavailable before day three', async () => {
   for (const day of [1, 2, 3]) for (const talked of [false, true]) {
     const result = await play('emi', 'chat_emi', { state: { day, chat_emi_work_talked: talked } });
-    assert.equal(result.menus[0].some(label => /easier for you at work|how work is going/.test(label)), day >= 3);
+    const work = result.menus[0].filter(label => /easier for you at work|how work is going/.test(label));
+    assert.deepEqual(work, day < 3 ? [] : [talked
+      ? 'Can we talk about how work is going?' : 'What makes things easier for you at work?']);
   }
 });
 
@@ -214,4 +222,19 @@ test('the existing personal-topic knowledge prerequisites survive recovery', () 
   }
   const mioMenu = stories.mio.nodes.chat_mio.find(step => step.choice).choice;
   assert.deepEqual(mioMenu.find(option => option.go === 'chat_mio_lunch').needs, ['mio.lunch_spot']);
+});
+
+
+test('the installed production remember hook preserves the first memory across repeated preference changes', async () => {
+  const { installSim, bonds } = await import('../../js/sim.js');
+  const game = { hooks: {}, place: { name: 'office' } };
+  bonds.load({});
+  installSim(game);
+  for (const [who, id] of [['mio', 'settling_in'], ['emi', 'work_agreement'], ['emi', 'ask_first']]) {
+    const first = `${who} first remembered conversation`;
+    game.hooks.remember({ who, id, text: first });
+    game.hooks.remember({ who, id, text: 'This later wording must not replace the memory.' });
+    assert.deepEqual(bonds.person(who).rem.filter(memory => memory.key === id).map(memory => memory.text), [first]);
+    assert.equal(flags[`rem_${who}_${id}`], true);
+  }
 });

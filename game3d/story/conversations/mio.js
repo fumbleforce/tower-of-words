@@ -72,7 +72,7 @@ export default {
       { say: 'mio', emo: 'casual', text: 'Oh. I keep answering before you finish because it’s faster. You can tell me to wait, you know.' },
       { choice: [
         { text: 'Give me a moment to get it out.', go: 'chat_mio_wait_for_me' },
-        { text: 'It’s fine. I just wanted to say it.', go: 'chat_mio_english_fine' },
+        { text: 'It’s fine. I just wanted to say it.', go: 'chat_mio_talk_fine' },
       ] },
     ],
     chat_mio_wait_for_me: [
@@ -81,9 +81,9 @@ export default {
       { do: 'remember', who: 'mio', id: 'settling_in', text: 'You talked about what you do after work.' },
       { go: 'chat_mio_return_questions' },
     ],
-    chat_mio_english_fine: [
+    chat_mio_talk_fine: [
       { say: 'mio', emo: 'casual', text: 'Mm, okay. I thought you wanted help with something.' },
-      { set: { chat_mio_evenings: 'english' } }, { go: 'chat_mio_settling_memory' },
+      { set: { chat_mio_evenings: 'talk' } }, { go: 'chat_mio_settling_memory' },
     ],
     chat_mio_not_sure: [
       { say: 'mio', emo: 'casual', text: 'Mm, okay. I mostly just go home and play something.' },
@@ -99,7 +99,7 @@ export default {
         { say: 'mio', emo: 'casual', text: 'Still finding enough time for yourself? Somebody always wants me to look at something.' },
       ], else: [{ if: "chat_mio_evenings == 'try'", then: [
         { say: 'mio', emo: 'casual', text: 'Okay, I remember. Go on.' },
-      ], else: [{ if: "chat_mio_evenings == 'english'", then: [
+      ], else: [{ if: "chat_mio_evenings == 'talk'", then: [
         { say: 'mio', emo: 'casual', text: 'Mm, we can just talk. What is it?' },
       ], else: [
         { say: 'mio', emo: 'curious', text: 'So, have you found anything to do here yet?' },

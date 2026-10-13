@@ -19,7 +19,7 @@ Emi's work topic asks whether the player needs help understanding requests or wa
 | Flag | Set when | Read by |
 |---|---|---|
 | `chat_mio_checkin_offered` | Mio asks how the player is settling in | First and repeat check-in entries |
-| `chat_mio_evenings` | Player chooses `quiet`, `try` or `english` | Later check-in; a first deferred answer has its own neutral entry, and a deferred revision preserves the previous answer |
+| `chat_mio_evenings` | Player chooses `quiet`, `try` or `talk` | Later check-in; a first deferred answer has its own neutral entry, and a deferred revision preserves the previous answer |
 | `chat_emi_work_talked` | Player chooses how to handle requests | Changes the ordinary work topic to the follow-up |
 | `chat_emi_work_help` | Player chooses `results` or `request` | Emi's next work-topic opener |
 | `chat_emi_ask_first` | Player asks to be heard before advice | Emi's repeated worry and next no-work hello |
@@ -34,5 +34,5 @@ No new words. The existing optional `mouichido` lesson remains at `chat_emi_repe
 
 | File | Nodes |
 |---|---|
-| `conversations/mio.js` | `chat_mio_settling`, `chat_mio_settling_choice`, `chat_mio_quiet_evening`, `chat_mio_try_evening`, `chat_mio_wait_for_me`, `chat_mio_english_fine`, `chat_mio_not_sure`, `chat_mio_settling_memory`, `chat_mio_settling_again`, `chat_mio_return_questions`, `chat_mio_her_break`, `chat_mio_mother_asks`, `chat_mio_short_hello` |
+| `conversations/mio.js` | `chat_mio_settling`, `chat_mio_settling_choice`, `chat_mio_quiet_evening`, `chat_mio_try_evening`, `chat_mio_wait_for_me`, `chat_mio_talk_fine`, `chat_mio_not_sure`, `chat_mio_settling_memory`, `chat_mio_settling_again`, `chat_mio_return_questions`, `chat_mio_her_break`, `chat_mio_mother_asks`, `chat_mio_short_hello` |
 | `conversations/emi.js` | `chat_emi_work_choice`, `chat_emi_team_again`, `chat_emi_still_agree`, `chat_emi_worry`, `chat_emi_worry_listen`, `chat_emi_worry_answer`, `chat_emi_ask_first`, `chat_emi_heard`, `chat_emi_unsure`, `chat_emi_hello`, `chat_emi_herself` |
