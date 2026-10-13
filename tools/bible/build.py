@@ -417,8 +417,8 @@ def build():
         'legacy': [item(r) for r in Q['legacy']],
         'legacy_lists': [
             {'title': 'Questions at the end of notes/mini-stories.md', 'items': numbered('notes/mini-stories.md', 'Open questions for Jørgen')},
-            {'title': 'Decisions the island slice plan needed', 'items': numbered('notes/island-slice-plan.md', '18. Decisions needed')},
-            {'title': 'Map questions (pixel era)', 'items': numbered('notes/map-design.md', '11. Questions')},
+            {'title': 'Decisions the island slice plan needed', 'items': [], 'archive': 'notes/island-slice-plan.md'},
+            {'title': 'Map questions (pixel era)', 'items': [], 'archive': 'notes/map-design.md'},
         ],
     }
 

@@ -614,7 +614,7 @@ function pageQuestions() {
     <h2>Conflicts between files</h2><div class="facts qgroup">${Q.conflicts.map((q) => row(q, 'CONFLICT')).join('')}</div>
     <h2>Closed</h2><div class="facts qgroup closed">${closed.map((q) => { const d = quote(q.src); return `<div class="fact"><div class="t"><b>${inline(q.t)}</b><div class="answer"><span class="qmark" aria-hidden="true">“</span>${d.text == null ? '<span class="missing-q">quote not found</span>' : markPhrase(atBase(q.src && q.src.path, () => inline(d.text)), d.phrase)}</div></div><div class="meta">${chip('decided')}${srcLink(d.src)}</div></div>`; }).join('')}</div>
     ${legacyBox('Questions from earlier versions of the game', `<div class="facts qgroup">${Q.legacy.map((q) => row(q)).join('')}</div>` +
-      Q.legacy_lists.map((g) => `<h3>${esc(g.title)}</h3><div class="facts qgroup">${g.items.map((q) => row(q)).join('')}</div>`).join(''),
+      Q.legacy_lists.filter((g) => g.archive || g.items.length).map((g) => `<h3>${esc(g.title)}</h3>${g.archive ? `<p><a href="${esc(archiveHref(g.archive))}">Questions preserved in the offline archive</a></p>` : `<div class="facts qgroup">${g.items.map((q) => row(q)).join('')}</div>`}`).join(''),
       Q.legacy.length + Q.legacy_lists.reduce((a, g) => a + g.items.length, 0))}
   </div>`;
 }

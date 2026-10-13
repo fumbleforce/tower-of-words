@@ -2,23 +2,23 @@
 
 These language-tool dictionaries and reference annotations were retained when the earlier game prototypes moved to the offline archive. Their current home is `tools/lang/data/`. They are used by `tools/lang/`; the current game uses its own language modules.
 
-Runtime data for the adaptive learning model (three tracks: vocabulary, grammar, letters). Built by the scripts in `tools/lang/`. Don't edit the generated files by hand; fix the source or `tools/lang/overrides.json` and rebuild.
+Reference data from the earlier adaptive learning prototype (vocabulary, grammar, letters). Built by the scripts in `tools/lang/`. Don't edit the generated files by hand; fix the source or `tools/lang/overrides.json` and rebuild.
 
 ## Files
 
 | File | What | Key fields |
 |---|---|---|
-| `words.json` | 6,745 words: the top 6,000 by frequency, every JLPT N5–N3 word, and every word the game script uses. Keyed by JMdict id. | `k` kanji forms, `r` readings, `g` short English, `p` part of speech, `n` JLPT level (5 = N5), `f` frequency rank, `uk` usually written in kana, `fu` furigana split of the first kanji form |
+| `words.json` | 6,745 words: the top 6,000 by frequency, every JLPT N5–N3 word, and every word the historical VN script used. Keyed by JMdict id. | `k` kanji forms, `r` readings, `g` short English, `p` part of speech, `n` JLPT level (5 = N5), `f` frequency rank, `uk` usually written in kana, `fu` furigana split of the first kanji form |
 | `kanji.json` | 2,941 kanji: every kanji in those words plus all jouyou and JLPT kanji | `on`, `kun` (`.` marks okurigana), `m` meanings, `n` JLPT, `gr` school grade, `s` strokes, `f` newspaper rank |
-| `lines.json` | Every Japanese line in `game/data/script.js` and `game/notes/day1-draft.md`, tokenised. Keyed by the line as plain text (script markup `{漢字\|かな\|key}` stripped to `漢字`). | per line: `t` tokens, `g` grammar ids, `src`, `kind`. Per token: `s` surface, `r` reading (absent for kana), `b` dictionary form, `id` JMdict id, `p` part of speech, `fu` furigana parts, `num` for counters, `en` for names |
+| `lines.json` | Retained annotations from the historical VN script and day-one draft. Rebuilding with `annotate.py` replaces this snapshot with annotations from the supplied draft only. Keyed by the line as plain text (script markup `{漢字\|かな\|key}` stripped to `漢字`). | per line: `t` tokens, `g` grammar ids, `src`, `kind`. Per token: `s` surface, `r` reading (absent for kana), `b` dictionary form, `id` JMdict id, `p` part of speech, `fu` furigana parts, `num` for counters, `en` for names |
 | `grammar.json` | 66 grammar points in teaching order, casual first | `id`, `order`, `week` (of the 12-week probation), `level`, `name`, `pattern`, `example`, `en` |
 | `kana.json` | 130 kana with romaji, row and group (basic, dakuten, youon, katakana-only extended), plus look-alike sets | `h`, `k`, `r`, `row`, `group` |
 | `romaji.js` | ES module: `toRomaji('カード')` = `kaado`, `toHiragana()` | |
 | `profiles.json` | Three reference players (beginner, Jørgen, N3) for the pacing checker and as level-check presets | |
 
-Using it in the game: strip the markup from a line, look it up in `lines.json`, and for each token use `id` to find the word in `words.json` (tap for meaning) and each kanji in `kanji.json` (per-kanji state). `fu` lets you put a reading over only the kanji part (止[と]まって), or show the whole word in kana when a kanji is still hidden. Particles and auxiliaries have ids too, but their meaning lives in the grammar ids of the line.
+For a tool using this reference format: strip the markup from a line, look it up in `lines.json`, and for each token use `id` to find the word in `words.json` (tap for meaning) and each kanji in `kanji.json` (per-kanji state). `fu` lets you put a reading over only the kanji part (止[と]まって), or show the whole word in kana when a kanji is still hidden. Particles and auxiliaries have ids too, but their meaning lives in the grammar ids of the line.
 
-Words are about 850 KB and kanji 330 KB as plain JSON; the service worker should cache them. If that's too big for the phone, the game can load `lines.json` plus only the ids it references.
+Words are about 850 KB and kanji 330 KB as plain JSON. These files are inputs for the language tools, not the current game's service worker.
 
 ## Tools (tools/lang)
 
