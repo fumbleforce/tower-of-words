@@ -83,3 +83,46 @@ test('coastal approach preserves the running top while fitting a clear beam and 
   supports.dispose();
   setStationModel(null);
 });
+
+test('the actual approach profile closes the outside of a bend without changing its running surface', async () => {
+  const fs = await import('node:fs');
+  const { GLTFLoader } = await import('../../vendor/loaders/GLTFLoader.js');
+  const bytes = fs.readFileSync(new URL('../../assets/station/station.glb', import.meta.url));
+  const gltf = await new GLTFLoader().parseAsync(
+    bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength),
+    '',
+  );
+  const nodes = {};
+  gltf.scene.traverse((object) => {
+    if (object.isMesh) nodes[object.name] = object.geometry;
+  });
+  setStationModel(nodes);
+  const [beam, supports] = approachGeometry(
+    [
+      [0, 0],
+      [0, 3],
+      [3, 3],
+    ],
+    2.34,
+    [1],
+    0.72,
+  );
+  const mesh = new THREE.Mesh(beam, new THREE.MeshBasicMaterial()),
+    down = new THREE.Vector3(0, -1, 0);
+  for (const [x, z] of [
+    [-0.25, 3.25],
+    [-0.1, 3.1],
+    [0, 3],
+    [0.25, 2.75],
+  ]) {
+    const hit = new THREE.Raycaster(new THREE.Vector3(x, 4, z), down, 0, 4).intersectObject(mesh)[0];
+    assert.ok(hit, `continuous running surface at the curved outer joint ${x},${z}`);
+    assert.ok(Math.abs(hit.point.y - 2.34) < 1e-6, 'the whole joint retains the train running top');
+  }
+  beam.computeBoundingBox();
+  assert.ok(Math.abs(beam.boundingBox.min.y - 1.62) < 1e-6, 'joint keeps pedestrian headroom');
+  beam.dispose();
+  supports.dispose();
+  mesh.material.dispose();
+  setStationModel(null);
+});

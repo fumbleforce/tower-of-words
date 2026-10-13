@@ -291,7 +291,7 @@ export const WEST_TREES = [
   ['pine', -24.6, 19.6, 1.05],
   ['pine', -24.6, 25.4, 1.1],
   ['pine', -24.6, 35.1, 1.0],
-  ...row('pine', -33.2, 18.5, 1, 1.3, 10),
+  ...row('pine', -31.8, 18.5, 1, 1.3, 10),
   ['pine', -35.0, 25.2, 1.3], // inland of the coastal promenade, clear of its walking line
   // the garden: a row of zelkovas between it and the line, a cherry in each panel, zelkovas south of the walk
   ...[20.6, 25.5].map((z) => ['keyaki', -23.4, z, 1.2]),

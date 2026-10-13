@@ -12,6 +12,7 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { GLTFLoader } from '../../vendor/loaders/GLTFLoader.js';
 import { mat, textTexture, plane, JP_FONT } from '../props.js';
 import { skyEnv } from '../train/models.js';
+import { curveBeam } from './station-beam.js';
 
 let parts = null,
   loading = null,
@@ -180,25 +181,14 @@ export function stationGlass(node) {
 }
 
 // The approach beam and its piers along a list of points ([x, z], one metre or so apart) at the beam's top `top`:
-// segments of ap_beam, and at each `piers` index a column (ap_col) under a hammerhead (ap_head), turned to the beam.
+// a continuous sweep of ap_beam, and at each `piers` index a column (ap_col) under a hammerhead (ap_head), turned to the beam.
 export function approachGeometry(points, top, piers, beamH) {
   if (!parts?.ap_beam) return null;
-  parts.ap_beam.computeBoundingBox();
-  const authoredTop = parts.ap_beam.boundingBox.max.y,
-    authoredDepth = authoredTop - parts.ap_beam.boundingBox.min.y;
-  const beam = [],
+  const beam = curveBeam(parts.ap_beam, points, top, beamH),
     heads = [],
     m = new THREE.Matrix4(),
     q = new THREE.Quaternion(),
     UP = new THREE.Vector3(0, 1, 0);
-  for (let i = 0; i + 1 < points.length; i++) {
-    const [ax, az] = points[i],
-      [bx, bz] = points[i + 1],
-      len = Math.hypot(bx - ax, bz - az);
-    q.setFromAxisAngle(UP, Math.atan2(bx - ax, bz - az));
-    m.compose(new THREE.Vector3(ax, top, az), q, new THREE.Vector3(1, beamH / authoredDepth, len + 0.02));
-    beam.push(parts.ap_beam.clone().translate(0, -authoredTop, 0).applyMatrix4(m));
-  }
   for (const i of piers) {
     const [ax, az] = points[i],
       [bx, bz] = points[Math.min(points.length - 1, i + 1)];
