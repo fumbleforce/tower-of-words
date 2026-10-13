@@ -15,6 +15,7 @@ import { roadClosure } from './closure.js';
 import { day3Place } from './day3/place.js';
 import { sim } from '../sim.js';
 import { sportsCrowd, SPORTS_CLOSED_DAYS } from './sports-crowd.js';
+import { boundaryOverviewPose } from './sports-camera.js';
 
 // The sports ground (scenes/sports.js): the north street walked on north from the east lane, past the back lane, to
 // the sports lane, the gym's front, the pool walk to the shower pavilion and the courts walk to the onsen path; it
@@ -52,7 +53,8 @@ export async function sportsPlace(game) {
       c = smooth(x, T.courts.x[0], T.courts.x[1]) * (1 - smooth(z, T.courts.z[1], T.courts.z[0]));
     const s = 1 - smooth(x, T.street.x[0], T.street.x[1]);
     const blend = (k) => lerp(lerp(lerp(lane[k], POSE.street[k], s), POSE.pavilion[k], v), POSE.courts[k], c);
-    return { yaw: blend('yaw'), elev: blend('elev') };
+    const look = { yaw: blend('yaw'), elev: blend('elev') };
+    return aspect < 1 && !game.followCamera?.active ? boundaryOverviewPose(x, z, look) : look;
   });
   const dk = (id) => w.doors.find((d) => d.id === id);
   const back = w.exits.east_lane,
