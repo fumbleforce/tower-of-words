@@ -19,7 +19,7 @@
         },
         {
           "id": "paper-table",
-          "image": "game3d/shots/finish-karaoke/contact-phone/receipt-table-contact-side.png",
+          "image": "game3d/shots/finish-karaoke/landing3-phone/receipt-table-contact-side.png",
           "caption": "The returned receipt lies flat on the table, seen from the side."
         },
         {
@@ -44,8 +44,8 @@
         },
         {
           "id": "return-after",
-          "image": "game3d/shots/finish-karaoke/final-desktop/selectNumber-sheet.jpg",
-          "caption": "The receipt moves outside his body on the return to the table."
+          "image": "game3d/shots/finish-karaoke/landing3-phone/landing-sheet.jpg",
+          "caption": "Hamada reaches the table before releasing the receipt, keeping the numbered side upward."
         }
       ]
     }

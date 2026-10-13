@@ -146,6 +146,7 @@ export function karaokeActions(game, P, props, action) {
       target: target.toArray(),
       side: hands.side(b),
     });
+    // These offsets clear the bodies at the two fixed handoff positions above.
     await carry(to, [
       b.root.position.x + (hands.side(b) === 'Left' ? 0.12 : -0.12),
       target.y,

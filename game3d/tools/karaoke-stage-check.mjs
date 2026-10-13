@@ -85,6 +85,18 @@ await withBrowserJob(
           }
           return wait.call(this, ms);
         };
+        const drop = moves.drop;
+        moves.drop = (who, item) => {
+          globalThis.__receiptBeforeDrop = [];
+          for (const mesh of P.karaokeClub.props.card.children.slice(0, 2)) {
+            const vertices = mesh.geometry.attributes.position;
+            for (let i = 0; i < vertices.count; i++) {
+              const v = mesh.position.clone().fromBufferAttribute(vertices, i);
+              globalThis.__receiptBeforeDrop.push(P.space.worldToLocal(mesh.localToWorld(v)).toArray());
+            }
+          }
+          return drop(who, item);
+        };
         moves.pickup = async (who, item) => {
           if (!globalThis.__capturePickup) return pickup(who, item);
           globalThis.__capturePickup = false;
@@ -104,6 +116,38 @@ await withBrowserJob(
           }
         };
       });
+      if (process.env.WORST_CASE) {
+        result.unreachable = await page.evaluate(async (base) => {
+          const { karaokeHands } = await import(base + '/js/places/ongoing/karaoke-hands.js');
+          const g = globalThis.__game,
+            P = g.place,
+            hands = karaokeHands(P.space),
+            samples = [];
+          const rigs = [g.player, P.people.kenji, P.people.kuroda];
+          try {
+            for (const side of ['Right', 'Left']) {
+              for (const rig of rigs) {
+                hands.setSide(rig, side);
+                hands.reach(rig, [100, 100, 100]);
+              }
+              for (let batch = 0; batch < 20; batch++) {
+                const start = performance.now();
+                for (let n = 0; n < 10; n++) for (const rig of rigs) rig.update(0);
+                samples.push({ side, ms: (performance.now() - start) / 10 });
+              }
+            }
+          } finally {
+            hands.dispose();
+          }
+          return samples;
+        }, base);
+        for (const sample of result.unreachable)
+          assert(sample.ms < 12, 'unreachable target exceeds 12ms: ' + sample.ms);
+        if (process.env.PERF_ONLY) {
+          result.pass = true;
+          return;
+        }
+      }
       for (const a of [
         { state: 'start' },
         { state: 'queue' },
@@ -118,7 +162,11 @@ await withBrowserJob(
         { state: 'group' },
         { state: 'group', who: 'kenji' },
         { state: 'group', who: 'kuroda' },
-      ].filter((a) => !process.env.GROUP_ONLY || a.state === 'start' || a.state === 'group')) {
+      ].filter(
+        (a) =>
+          (!process.env.GROUP_ONLY || a.state === 'start' || a.state === 'group') &&
+          (!process.env.RECEIPT_ONLY || ['start', 'receiptFront', 'receiptBack', 'selectNumber'].includes(a.state)),
+      )) {
         await page.evaluate(
           ({ a, trail }) => {
             globalThis.__captureHandoff = !trail && a.state === 'passMicrophone';
@@ -273,7 +321,7 @@ await withBrowserJob(
           const corners = await page.evaluate(() => {
             const P = globalThis.__game.place,
               points = [];
-            for (const mesh of P.karaokeClub.props.card.children) {
+            for (const mesh of P.karaokeClub.props.card.children.slice(0, 2)) {
               const vertices = mesh.geometry.attributes.position;
               for (let i = 0; i < vertices.count; i++) {
                 const p = mesh.position.clone().fromBufferAttribute(vertices, i);
@@ -283,6 +331,16 @@ await withBrowserJob(
             return points;
           });
           result.restingReceipt = corners;
+          const before = await page.evaluate(() => globalThis.__receiptBeforeDrop);
+          if (before) {
+            const shifts = before.map((p, i) => Math.hypot(...p.map((v, j) => v - corners[i][j])));
+            result.landing = { before, after: corners, maxCornerShift: Math.max(...shifts) };
+            assert(
+              result.landing.maxCornerShift < 0.03,
+              'receipt flips or jumps when released: ' + result.landing.maxCornerShift,
+            );
+          }
+
           for (const [, y] of corners)
             assert(y > 0.55 && y < 0.57, 'returned sheet rests above the actual tabletop: ' + JSON.stringify(corners));
           const xs = corners.map((p) => p[0]),
@@ -338,7 +396,7 @@ await withBrowserJob(
           await page.evaluate(() => globalThis.__game.ui.closeTalk());
         }
       }
-      if (!process.env.GROUP_ONLY) {
+      if (!process.env.GROUP_ONLY && !process.env.RECEIPT_ONLY) {
         const contacts = result.actions.at(-1).contacts;
         assert.equal(contacts.length, 4);
         for (const c of contacts) assert(c.gap < (c.action === 'pickup' ? 0.05 : 0.075), JSON.stringify(c));

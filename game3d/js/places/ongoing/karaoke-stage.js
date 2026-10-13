@@ -159,28 +159,25 @@ export function createKaraokeStage(game, P, w) {
         if (state === 'selectNumber') {
           shot.focus([-0.1, -1.8], portrait() ? 11 : 5.5, 0.6, 0.08, 0.45);
           if (moves.snapshot().kuroda?.item === props.receipt.name) {
-            const angle = cardAngle;
+            // Fold the visible side toward the table without turning the paper over.
+            // Its numbered back remains uppermost when that is the side being read.
+            const fold = receiptSide === 'back' ? Math.PI / 2 : -Math.PI / 2;
             await action.wait(
               action.tween(0.4, (k) => {
-                cardAngle = angle * (1 - k);
-              }),
-            );
-            await action.wait(
-              action.tween(0.4, (k) => {
-                props.card.rotation.x = (-Math.PI / 2) * k;
+                props.card.rotation.x = fold * k;
               }),
             );
             // Fold forward, then return along the outside of his body to the tabletop.
             await moves.carry('kuroda', [0.62, 0.56, -1.86]);
             await moves.carry('kuroda', [0.55, 0.56, -2.26]);
             await moves.face('kuroda', [-0.2, -2.12]);
-            await moves.walk('kuroda', [0.44, -2.12], [-0.2, -2.12], { carry: true });
+            await moves.walk('kuroda', [0.28, -2.12], [-0.2, -2.12], { carry: true });
+            await moves.carry('kuroda', [0.02, 0.552, -2.25]);
             moves.drop('kuroda', props.receipt);
-            // Change the resting grip corner while leaving the paper footprint in place.
+            // Settle the same grip onto the tabletop with no change of visible side.
             props.receipt.position.set(0.02, 0.552, -2.25);
             props.receipt.rotation.set(-Math.PI / 2, 0, 0);
             props.card.rotation.x = 0;
-            cardAngle = Math.PI;
           }
           await moves.walk('kuroda', [-0.18, -1.04], [-0.2, -1.75]);
           await moves.reach('kuroda', [-0.2, 0.71, -1.75]);

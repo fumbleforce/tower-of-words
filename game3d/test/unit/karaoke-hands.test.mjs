@@ -76,7 +76,7 @@ for (const side of ['Right', 'Left'])
     for (const b of bones) assert(b.quaternion.angleTo(identity) < 1e-7, 'temporary reach restores every bone');
   });
 
-test('top-corner receipt grip lies flat on the back-right table corner', () => {
+test('receipt lies flat within the supporting tabletop', () => {
   const prior = globalThis.document,
     context = new Proxy({}, { get: () => () => {}, set: () => true });
   globalThis.document = {

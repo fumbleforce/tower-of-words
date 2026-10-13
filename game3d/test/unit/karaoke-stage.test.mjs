@@ -124,6 +124,21 @@ test('leaving during the held receipt carry removes follow and update wrappers',
   stage.leave();assert.equal(await pending,false);
   unblock();await Promise.resolve();await Promise.resolve();
   assert.equal(P.people.kuroda.update,original);
+  assert.equal(P.people.kuroda._noAvoid,undefined, 'late carry completion cannot change restored avoidance');
   assert.deepEqual(stage.moves.snapshot(),{});
   assert.equal(stage.props.root.visible,false);
+});
+
+test('returning either receipt side preserves its face orientation at release', async () => {
+  for (const state of ['receiptFront','receiptBack']) {
+    const {stage,game}=fixture();
+    game.tween=async(_,step)=>{step(1);stage.update();};
+    await stage.act({state:'start'});await stage.act({state});
+    const normal=()=>new THREE.Vector3(0,0,1).applyQuaternion(stage.props.card.children[0].getWorldQuaternion(new THREE.Quaternion()));
+    const drop=stage.moves.drop;let before;
+    stage.moves.drop=(...args)=>{before=normal();return drop(...args);};
+    await stage.act({state:'selectNumber'});stage.update();
+    assert(before.dot(normal())>.999999, state+' must not flip its visible face on landing');
+    stage.leave();
+  }
 });
