@@ -8,12 +8,16 @@
     "f7541d34a8572b5d44bccc599f7f7ac8698f9549",
     "dc4a05341e862f915b6d96550ba74257fc7ef775",
     "f131c321292dfe81b71ebf528f59e94e34832dae",
-    "82b423b9fdeaa9fa71e5c07a9450c7aaf084badb"
+    "82b423b9fdeaa9fa71e5c07a9450c7aaf084badb",
+    "d12b772c84845632ce12141b625006dd99de3350",
+    "404d1cffb9d44ffccee6d9ecac9c6a3cdfba1189",
+    "ece6c4ed012e32a2b5105142f39800290e80101e",
+    "f016dda29a8406f3c0fe179a82f58d536d72d5af"
   ],
   "result": [
     "camera-after-a--1366-forecourt-morning-near-gate",
-    "map-after-a--390-forecourt-morning-approach",
-    "after-b-tree-final--1366-sports-morning-grove",
+    "after-b-camera-canopy-final--390-sports-corner-walk-end",
+    "after-b-camera-canopy-final--1366-sports-morning-grove",
     "after-b-repair-final--390-works-morning-factory-east-tie"
   ],
   "sections": [
@@ -1841,7 +1845,7 @@
     },
     {
       "title": "Northern grounds — first after captures and native attempts",
-      "caption": "Same final fence geometry. Includes all 68 native walking and running-jump endpoint captures: all tested middles, corners, ends and reverse approaches stopped at the visible barrier. Reverse probes deliberately start outside the public boundary; some cameras sit behind opaque panels. Two building-tie camera positions were improved in the final set.",
+      "caption": "Original milestone-B fence placement before the physical phone-view repair. Includes all 68 native walking and running-jump endpoint captures: all tested middles, corners, ends and reverse approaches stopped at the visible barrier. Reverse probes deliberately start outside the public boundary; some cameras sit behind opaque panels. Two building-tie camera positions were improved in the final set.",
       "images": [
         {
           "id": "after-b-initial--1366-sports-corner-run-jump-end",
@@ -3666,8 +3670,8 @@
       ]
     },
     {
-      "title": "Northern sports — final tree-clearance native attempts",
-      "caption": "All 28 native walking and running-jump endpoint tests pass after moving the two trees. Deliberate reverse starts and near-building endpoints can obscure the actor; these are retained functional diagnostics.",
+      "title": "Northern sports — tree-clearance native attempts before local camera repair",
+      "caption": "All28 physical walking and running-jump stops pass. Critic review found phone public-side fence-push actor occlusion, and native public-paving walks proved those positions reachable. The later sports-local overview repair restores visibility. Protected-side and other camera limitations remain retained as functional diagnostics, not featured visual results.",
       "images": [
         {
           "id": "after-b-tree-final--1366-sports-corner-run-jump-end",
@@ -3812,8 +3816,8 @@
       ]
     },
     {
-      "title": "Grove bench — final tree-clearance sitting and exit proof",
-      "caption": "Native E sits Eric, an arrow stands him up, and the normal gameplay walker returns to the public pool walk at both sizes. The return uses the gameplay walker API and is not claimed as a native pointer test. Desktop close seated/standing frames retain near-roof camera limits.",
+      "title": "Grove bench — tree-clearance full-angle fixture attempt",
+      "caption": "All E sit, arrow stand and normal gameplay walker return checks pass at both sizes. The desktop seated/standing screenshots inherit camera yaw from the preceding protected-side reverse test and face the gym wall: failed capture framing, not intentional first-person or claimed baseline behavior. A grove-only final incoming-orientation capture follows. All attempts remain retained.",
       "images": [
         {
           "id": "after-b-tree-final--1366-sports-grove-seat-exit",
@@ -3846,6 +3850,1746 @@
           "caption": "Phone 390 × 844 — sports grove stood."
         }
       ]
+    },
+    {
+      "title": "Grove bench — final normal approach, sitting and exit",
+      "caption": "Same unchanged tree-clearance runtime with the normal incoming grove orientation. Morning/evening approach, native E sit, native arrow stand and normal gameplay walker return show Eric and the bench at both sizes. The return uses the gameplay walker API, not a native pointer test. The preceding full-angle fixture camera failures remain retained.",
+      "images": [
+        {
+          "id": "after-b-tree-bench-final--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-tree-bench-final/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "after-b-tree-bench-final--1366-sports-grove-seat-exit",
+          "image": "game3d/shots/island-boundaries/after-b-tree-bench-final/1366-sports-grove-seat-exit.png",
+          "caption": "Desktop 1366 × 860 — sports grove seat exit."
+        },
+        {
+          "id": "after-b-tree-bench-final--1366-sports-grove-seated",
+          "image": "game3d/shots/island-boundaries/after-b-tree-bench-final/1366-sports-grove-seated.png",
+          "caption": "Desktop 1366 × 860 — sports grove seated."
+        },
+        {
+          "id": "after-b-tree-bench-final--1366-sports-grove-stood",
+          "image": "game3d/shots/island-boundaries/after-b-tree-bench-final/1366-sports-grove-stood.png",
+          "caption": "Desktop 1366 × 860 — sports grove stood."
+        },
+        {
+          "id": "after-b-tree-bench-final--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-tree-bench-final/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        },
+        {
+          "id": "after-b-tree-bench-final--390-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-tree-bench-final/390-sports-evening-grove.png",
+          "caption": "Phone 390 × 844 — sports evening grove."
+        },
+        {
+          "id": "after-b-tree-bench-final--390-sports-grove-seat-exit",
+          "image": "game3d/shots/island-boundaries/after-b-tree-bench-final/390-sports-grove-seat-exit.png",
+          "caption": "Phone 390 × 844 — sports grove seat exit."
+        },
+        {
+          "id": "after-b-tree-bench-final--390-sports-grove-seated",
+          "image": "game3d/shots/island-boundaries/after-b-tree-bench-final/390-sports-grove-seated.png",
+          "caption": "Phone 390 × 844 — sports grove seated."
+        },
+        {
+          "id": "after-b-tree-bench-final--390-sports-grove-stood",
+          "image": "game3d/shots/island-boundaries/after-b-tree-bench-final/390-sports-grove-stood.png",
+          "caption": "Phone 390 × 844 — sports grove stood."
+        },
+        {
+          "id": "after-b-tree-bench-final--390-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-tree-bench-final/390-sports-morning-grove.png",
+          "caption": "Phone 390 × 844 — sports morning grove."
+        }
+      ]
+    },
+    {
+      "title": "Phone boundary visibility — native public-path diagnosis",
+      "caption": "Native walks and running jumps start on the actual nav-free bench or pool paving. They reach the western lawn fence, proving the hidden-actor endpoints are reachable public gameplay. These pre-camera-repair failures are retained; off-navigation grass is not called unreachable.",
+      "images": [
+        {
+          "id": "reachability-b-final--390-bench-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/reachability-b-final/390-bench-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — bench west run jump end."
+        },
+        {
+          "id": "reachability-b-final--390-bench-west-run-jump-start",
+          "image": "game3d/shots/island-boundaries/reachability-b-final/390-bench-west-run-jump-start.png",
+          "caption": "Phone 390 × 844 — bench west run jump start."
+        },
+        {
+          "id": "reachability-b-final--390-bench-west-walk-end",
+          "image": "game3d/shots/island-boundaries/reachability-b-final/390-bench-west-walk-end.png",
+          "caption": "Phone 390 × 844 — bench west walk end."
+        },
+        {
+          "id": "reachability-b-final--390-bench-west-walk-start",
+          "image": "game3d/shots/island-boundaries/reachability-b-final/390-bench-west-walk-start.png",
+          "caption": "Phone 390 × 844 — bench west walk start."
+        },
+        {
+          "id": "reachability-b-final--390-pool-head-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/reachability-b-final/390-pool-head-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — pool head west run jump end."
+        },
+        {
+          "id": "reachability-b-final--390-pool-head-west-run-jump-start",
+          "image": "game3d/shots/island-boundaries/reachability-b-final/390-pool-head-west-run-jump-start.png",
+          "caption": "Phone 390 × 844 — pool head west run jump start."
+        },
+        {
+          "id": "reachability-b-final--390-pool-head-west-walk-end",
+          "image": "game3d/shots/island-boundaries/reachability-b-final/390-pool-head-west-walk-end.png",
+          "caption": "Phone 390 × 844 — pool head west walk end."
+        },
+        {
+          "id": "reachability-b-final--390-pool-head-west-walk-start",
+          "image": "game3d/shots/island-boundaries/reachability-b-final/390-pool-head-west-walk-start.png",
+          "caption": "Phone 390 × 844 — pool head west walk start."
+        },
+        {
+          "id": "reachability-b-final--390-pool-walk-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/reachability-b-final/390-pool-walk-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — pool walk west run jump end."
+        },
+        {
+          "id": "reachability-b-final--390-pool-walk-west-run-jump-start",
+          "image": "game3d/shots/island-boundaries/reachability-b-final/390-pool-walk-west-run-jump-start.png",
+          "caption": "Phone 390 × 844 — pool walk west run jump start."
+        },
+        {
+          "id": "reachability-b-final--390-pool-walk-west-walk-end",
+          "image": "game3d/shots/island-boundaries/reachability-b-final/390-pool-walk-west-walk-end.png",
+          "caption": "Phone 390 × 844 — pool walk west walk end."
+        },
+        {
+          "id": "reachability-b-final--390-pool-walk-west-walk-start",
+          "image": "game3d/shots/island-boundaries/reachability-b-final/390-pool-walk-west-walk-start.png",
+          "caption": "Phone 390 × 844 — pool walk west walk start."
+        }
+      ]
+    },
+    {
+      "title": "Local camera — interrupted baseline override diagnosis",
+      "caption": "All first local-camera probe frames retained. The three filenames containing baseline are NOT valid before-B evidence: the override missed cache-busted module URLs and still rendered candidate geometry/camera. The corrected asserted interception follows. This first pose also left the corner less clear and was refined locally.",
+      "images": [
+        {
+          "id": "camera-b-phone-repair-first--390-baseline-bench-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-baseline-bench-end.png",
+          "caption": "Phone 390 × 844 — baseline bench end."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-baseline-corner-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-baseline-corner-end.png",
+          "caption": "Phone 390 × 844 — baseline corner end."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-baseline-pool-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-baseline-pool-end.png",
+          "caption": "Phone 390 × 844 — baseline pool end."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-bench-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-bench-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — bench west run jump end."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-bench-west-run-jump-start",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-bench-west-run-jump-start.png",
+          "caption": "Phone 390 × 844 — bench west run jump start."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-bench-west-walk-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-bench-west-walk-end.png",
+          "caption": "Phone 390 × 844 — bench west walk end."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-bench-west-walk-start",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-bench-west-walk-start.png",
+          "caption": "Phone 390 × 844 — bench west walk start."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-candidate-bench-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-candidate-bench-end.png",
+          "caption": "Phone 390 × 844 — candidate bench end."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-candidate-corner-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-candidate-corner-end.png",
+          "caption": "Phone 390 × 844 — candidate corner end."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-candidate-pool-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-candidate-pool-end.png",
+          "caption": "Phone 390 × 844 — candidate pool end."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-pool-head-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-pool-head-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — pool head west run jump end."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-pool-head-west-run-jump-start",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-pool-head-west-run-jump-start.png",
+          "caption": "Phone 390 × 844 — pool head west run jump start."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-pool-head-west-walk-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-pool-head-west-walk-end.png",
+          "caption": "Phone 390 × 844 — pool head west walk end."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-pool-head-west-walk-start",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-pool-head-west-walk-start.png",
+          "caption": "Phone 390 × 844 — pool head west walk start."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-pool-walk-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-pool-walk-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — pool walk west run jump end."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-pool-walk-west-run-jump-start",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-pool-walk-west-run-jump-start.png",
+          "caption": "Phone 390 × 844 — pool walk west run jump start."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-pool-walk-west-walk-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-pool-walk-west-walk-end.png",
+          "caption": "Phone 390 × 844 — pool walk west walk end."
+        },
+        {
+          "id": "camera-b-phone-repair-first--390-pool-walk-west-walk-start",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-first/390-pool-walk-west-walk-start.png",
+          "caption": "Phone 390 × 844 — pool walk west walk start."
+        }
+      ]
+    },
+    {
+      "title": "Local camera — confirmed exact-point comparison and native approaches",
+      "caption": "Baseline-labelled frames use asserted original f754 sports grounds and pre-camera sports-place source interception at exact reached points. Bench/corner actors are clear before fences; the pool endpoint already has canopy occlusion. Candidate exact-point views restore all three; native public-path inputs reproduce the approach with the repaired local turn. Other runtime routes/assets are candidate, so these are isolated geometry/camera comparisons, not claimed as a full historical build.",
+      "images": [
+        {
+          "id": "camera-b-phone-repair-confirmed--390-baseline-bench-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-baseline-bench-end.png",
+          "caption": "Phone 390 × 844 — baseline bench end."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-baseline-corner-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-baseline-corner-end.png",
+          "caption": "Phone 390 × 844 — baseline corner end."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-baseline-pool-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-baseline-pool-end.png",
+          "caption": "Phone 390 × 844 — baseline pool end."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-bench-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-bench-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — bench west run jump end."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-bench-west-run-jump-start",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-bench-west-run-jump-start.png",
+          "caption": "Phone 390 × 844 — bench west run jump start."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-bench-west-walk-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-bench-west-walk-end.png",
+          "caption": "Phone 390 × 844 — bench west walk end."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-bench-west-walk-start",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-bench-west-walk-start.png",
+          "caption": "Phone 390 × 844 — bench west walk start."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-candidate-bench-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-candidate-bench-end.png",
+          "caption": "Phone 390 × 844 — candidate bench end."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-candidate-corner-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-candidate-corner-end.png",
+          "caption": "Phone 390 × 844 — candidate corner end."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-candidate-pool-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-candidate-pool-end.png",
+          "caption": "Phone 390 × 844 — candidate pool end."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-pool-head-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-pool-head-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — pool head west run jump end."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-pool-head-west-run-jump-start",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-pool-head-west-run-jump-start.png",
+          "caption": "Phone 390 × 844 — pool head west run jump start."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-pool-head-west-walk-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-pool-head-west-walk-end.png",
+          "caption": "Phone 390 × 844 — pool head west walk end."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-pool-head-west-walk-start",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-pool-head-west-walk-start.png",
+          "caption": "Phone 390 × 844 — pool head west walk start."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-pool-walk-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-pool-walk-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — pool walk west run jump end."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-pool-walk-west-run-jump-start",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-pool-walk-west-run-jump-start.png",
+          "caption": "Phone 390 × 844 — pool walk west run jump start."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-pool-walk-west-walk-end",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-pool-walk-west-walk-end.png",
+          "caption": "Phone 390 × 844 — pool walk west walk end."
+        },
+        {
+          "id": "camera-b-phone-repair-confirmed--390-pool-walk-west-walk-start",
+          "image": "game3d/shots/island-boundaries/camera-b-phone-repair-confirmed/390-pool-walk-west-walk-start.png",
+          "caption": "Phone 390 × 844 — pool walk west walk start."
+        }
+      ]
+    },
+    {
+      "title": "Northern sports — first local overview turn and retained probes",
+      "caption": "First local turn captures, before the grove-return canopy repair. Matching normal views/maps and unchanged desktop/follow views; all28 physical stops pass. Reachable west/corner/gym endpoints show Eric, but later native return samples expose two new foliage occlusions, retained in the following section and repaired in the final yaw0.2 runtime. Protected-side reverse and baseline building/foliage failures remain explicit failed screen evidence.",
+      "images": [
+        {
+          "id": "after-b-camera-final--1366-sports-corner-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-corner-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports corner run jump end."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-corner-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-corner-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports corner walk end."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-evening-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening gym tie."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-evening-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports evening north reverse."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-evening-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening pavilion tie."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-evening-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports evening pool head."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-grove-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-grove-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove reverse run jump end."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-grove-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-grove-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove reverse walk end."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-grove-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-grove-west-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove west run jump end."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-grove-west-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-grove-west-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove west walk end."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-gym-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-gym-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports gym tie run jump end."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-gym-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-gym-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports gym tie walk end."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-map",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-map.png",
+          "caption": "Desktop 1366 × 860 — sports map."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-morning-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning gym tie."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-morning-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports morning north reverse."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-morning-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning pavilion tie."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-morning-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports morning pool head."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-north-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-north-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports north reverse run jump end."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-north-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-north-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports north reverse walk end."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-pavilion-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-pavilion-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports pavilion tie run jump end."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-pavilion-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-pavilion-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports pavilion tie walk end."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-pool-head-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-pool-head-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports pool head run jump end."
+        },
+        {
+          "id": "after-b-camera-final--1366-sports-pool-head-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/1366-sports-pool-head-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports pool head walk end."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-corner-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-corner-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports corner run jump end."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-corner-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-corner-walk-end.png",
+          "caption": "Phone 390 × 844 — sports corner walk end."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-evening-grove.png",
+          "caption": "Phone 390 × 844 — sports evening grove."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-evening-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports evening gym tie."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-evening-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports evening north reverse."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-evening-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports evening pavilion tie."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-evening-pool-head.png",
+          "caption": "Phone 390 × 844 — sports evening pool head."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-grove-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-grove-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports grove reverse run jump end."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-grove-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-grove-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — sports grove reverse walk end."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-grove-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-grove-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports grove west run jump end."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-grove-west-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-grove-west-walk-end.png",
+          "caption": "Phone 390 × 844 — sports grove west walk end."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-gym-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-gym-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports gym tie run jump end."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-gym-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-gym-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — sports gym tie walk end."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-map",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-map.png",
+          "caption": "Phone 390 × 844 — sports map."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-morning-grove.png",
+          "caption": "Phone 390 × 844 — sports morning grove."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-morning-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports morning gym tie."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-morning-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports morning north reverse."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-morning-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports morning pavilion tie."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-morning-pool-head.png",
+          "caption": "Phone 390 × 844 — sports morning pool head."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-north-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-north-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports north reverse run jump end."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-north-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-north-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — sports north reverse walk end."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-pavilion-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-pavilion-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports pavilion tie run jump end."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-pavilion-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-pavilion-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — sports pavilion tie walk end."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-pool-head-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-pool-head-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports pool head run jump end."
+        },
+        {
+          "id": "after-b-camera-final--390-sports-pool-head-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-final/390-sports-pool-head-walk-end.png",
+          "caption": "Phone 390 × 844 — sports pool head walk end."
+        }
+      ]
+    },
+    {
+      "title": "Local overview turn — native entry, exit and retained obstacle attempts",
+      "caption": "First local-turn native inputs from public paving. Pool-walk crosses both strip edges in both directions with continuous sampled yaw. Bench/head fixed-direction returns stop at existing obstacles; two bench-return frames hide Eric behind foliage and score6/10. Asserted exact baseline comparison confirms this new camera regression, repaired in later final captures. All originals remain retained.",
+      "images": [
+        {
+          "id": "camera-b-transitions-final--390-bench-enter-end",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-bench-enter-end.png",
+          "caption": "Phone 390 × 844 — bench enter end."
+        },
+        {
+          "id": "camera-b-transitions-final--390-bench-enter-start",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-bench-enter-start.png",
+          "caption": "Phone 390 × 844 — bench enter start."
+        },
+        {
+          "id": "camera-b-transitions-final--390-bench-enter-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-bench-enter-x51.png",
+          "caption": "Phone 390 × 844 — bench enter x51."
+        },
+        {
+          "id": "camera-b-transitions-final--390-bench-enter-x52.2",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-bench-enter-x52.2.png",
+          "caption": "Phone 390 × 844 — bench enter x52.2."
+        },
+        {
+          "id": "camera-b-transitions-final--390-bench-enter-x54.2",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-bench-enter-x54.2.png",
+          "caption": "Phone 390 × 844 — bench enter x54.2."
+        },
+        {
+          "id": "camera-b-transitions-final--390-bench-exit-end",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-bench-exit-end.png",
+          "caption": "Phone 390 × 844 — bench exit end."
+        },
+        {
+          "id": "camera-b-transitions-final--390-bench-exit-start",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-bench-exit-start.png",
+          "caption": "Phone 390 × 844 — bench exit start."
+        },
+        {
+          "id": "camera-b-transitions-final--390-bench-exit-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-bench-exit-x51.png",
+          "caption": "Phone 390 × 844 — bench exit x51."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-head-enter-end",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-head-enter-end.png",
+          "caption": "Phone 390 × 844 — pool head enter end."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-head-enter-start",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-head-enter-start.png",
+          "caption": "Phone 390 × 844 — pool head enter start."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-head-enter-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-head-enter-x51.png",
+          "caption": "Phone 390 × 844 — pool head enter x51."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-head-enter-x52.2",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-head-enter-x52.2.png",
+          "caption": "Phone 390 × 844 — pool head enter x52.2."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-head-enter-x54.2",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-head-enter-x54.2.png",
+          "caption": "Phone 390 × 844 — pool head enter x54.2."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-head-exit-end",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-head-exit-end.png",
+          "caption": "Phone 390 × 844 — pool head exit end."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-head-exit-start",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-head-exit-start.png",
+          "caption": "Phone 390 × 844 — pool head exit start."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-head-exit-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-head-exit-x51.png",
+          "caption": "Phone 390 × 844 — pool head exit x51."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-walk-enter-end",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-walk-enter-end.png",
+          "caption": "Phone 390 × 844 — pool walk enter end."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-walk-enter-start",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-walk-enter-start.png",
+          "caption": "Phone 390 × 844 — pool walk enter start."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-walk-enter-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-walk-enter-x51.png",
+          "caption": "Phone 390 × 844 — pool walk enter x51."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-walk-enter-x52.2",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-walk-enter-x52.2.png",
+          "caption": "Phone 390 × 844 — pool walk enter x52.2."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-walk-enter-x54.2",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-walk-enter-x54.2.png",
+          "caption": "Phone 390 × 844 — pool walk enter x54.2."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-walk-exit-end",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-walk-exit-end.png",
+          "caption": "Phone 390 × 844 — pool walk exit end."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-walk-exit-start",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-walk-exit-start.png",
+          "caption": "Phone 390 × 844 — pool walk exit start."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-walk-exit-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-walk-exit-x51.png",
+          "caption": "Phone 390 × 844 — pool walk exit x51."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-walk-exit-x52.2",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-walk-exit-x52.2.png",
+          "caption": "Phone 390 × 844 — pool walk exit x52.2."
+        },
+        {
+          "id": "camera-b-transitions-final--390-pool-walk-exit-x54.2",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-final/390-pool-walk-exit-x54.2.png",
+          "caption": "Phone 390 × 844 — pool walk exit x54.2."
+        }
+      ]
+    },
+    {
+      "title": "Grove return — exact baseline, failed pose and first trial",
+      "caption": "Exact-point baseline overrides original pre-B grounds and pre-camera sports place source, with interceptions asserted; other runtime content remains candidate. Two public canopy failures are new. The 1.05-radian trial still obscures part of Eric. All attempts are retained.",
+      "images": [
+        {
+          "id": "camera-b-canopy-diagnosis--390-baseline-bench-blend-x52",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-baseline-bench-blend-x52.png",
+          "caption": "Phone 390 × 844 — baseline bench blend x52."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-baseline-bench-blend-x53",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-baseline-bench-blend-x53.png",
+          "caption": "Phone 390 × 844 — baseline bench blend x53."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-baseline-bench-exit-end",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-baseline-bench-exit-end.png",
+          "caption": "Phone 390 × 844 — baseline bench exit end."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-baseline-bench-exit-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-baseline-bench-exit-x51.png",
+          "caption": "Phone 390 × 844 — baseline bench exit x51."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-baseline-bench-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-baseline-bench-fence.png",
+          "caption": "Phone 390 × 844 — baseline bench fence."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-baseline-bench-paving",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-baseline-bench-paving.png",
+          "caption": "Phone 390 × 844 — baseline bench paving."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-baseline-corner-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-baseline-corner-fence.png",
+          "caption": "Phone 390 × 844 — baseline corner fence."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-baseline-pool-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-baseline-pool-fence.png",
+          "caption": "Phone 390 × 844 — baseline pool fence."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-candidate-bench-blend-x52",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-candidate-bench-blend-x52.png",
+          "caption": "Phone 390 × 844 — candidate bench blend x52."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-candidate-bench-blend-x53",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-candidate-bench-blend-x53.png",
+          "caption": "Phone 390 × 844 — candidate bench blend x53."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-candidate-bench-exit-end",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-candidate-bench-exit-end.png",
+          "caption": "Phone 390 × 844 — candidate bench exit end."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-candidate-bench-exit-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-candidate-bench-exit-x51.png",
+          "caption": "Phone 390 × 844 — candidate bench exit x51."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-candidate-bench-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-candidate-bench-fence.png",
+          "caption": "Phone 390 × 844 — candidate bench fence."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-candidate-bench-paving",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-candidate-bench-paving.png",
+          "caption": "Phone 390 × 844 — candidate bench paving."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-candidate-corner-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-candidate-corner-fence.png",
+          "caption": "Phone 390 × 844 — candidate corner fence."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-candidate-pool-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-candidate-pool-fence.png",
+          "caption": "Phone 390 × 844 — candidate pool fence."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-trial-bench-blend-x52",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-trial-bench-blend-x52.png",
+          "caption": "Phone 390 × 844 — trial bench blend x52."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-trial-bench-blend-x53",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-trial-bench-blend-x53.png",
+          "caption": "Phone 390 × 844 — trial bench blend x53."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-trial-bench-exit-end",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-trial-bench-exit-end.png",
+          "caption": "Phone 390 × 844 — trial bench exit end."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-trial-bench-exit-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-trial-bench-exit-x51.png",
+          "caption": "Phone 390 × 844 — trial bench exit x51."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-trial-bench-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-trial-bench-fence.png",
+          "caption": "Phone 390 × 844 — trial bench fence."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-trial-bench-paving",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-trial-bench-paving.png",
+          "caption": "Phone 390 × 844 — trial bench paving."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-trial-corner-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-trial-corner-fence.png",
+          "caption": "Phone 390 × 844 — trial corner fence."
+        },
+        {
+          "id": "camera-b-canopy-diagnosis--390-trial-pool-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-diagnosis/390-trial-pool-fence.png",
+          "caption": "Phone 390 × 844 — trial pool fence."
+        }
+      ]
+    },
+    {
+      "title": "Grove return — all three local angle trials",
+      "caption": "All 24 native originals remain visible: yaw0, yaw0.2 and yaw0.4 at the two obstacle contacts, blend points, paving and fence controls. Independent critic scored all eight chosen yaw0.2 views 8/10. These isolated module trials precede the final runtime captures below.",
+      "images": [
+        {
+          "id": "camera-b-canopy-angles--390-yaw0-bench-blend-x52",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw0-bench-blend-x52.png",
+          "caption": "Phone 390 × 844 — yaw0 bench blend x52."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw0-bench-blend-x53",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw0-bench-blend-x53.png",
+          "caption": "Phone 390 × 844 — yaw0 bench blend x53."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw0-bench-exit-end",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw0-bench-exit-end.png",
+          "caption": "Phone 390 × 844 — yaw0 bench exit end."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw0-bench-exit-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw0-bench-exit-x51.png",
+          "caption": "Phone 390 × 844 — yaw0 bench exit x51."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw0-bench-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw0-bench-fence.png",
+          "caption": "Phone 390 × 844 — yaw0 bench fence."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw0-bench-paving",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw0-bench-paving.png",
+          "caption": "Phone 390 × 844 — yaw0 bench paving."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw0-corner-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw0-corner-fence.png",
+          "caption": "Phone 390 × 844 — yaw0 corner fence."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw0-pool-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw0-pool-fence.png",
+          "caption": "Phone 390 × 844 — yaw0 pool fence."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw02-bench-blend-x52",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw02-bench-blend-x52.png",
+          "caption": "Phone 390 × 844 — yaw02 bench blend x52."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw02-bench-blend-x53",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw02-bench-blend-x53.png",
+          "caption": "Phone 390 × 844 — yaw02 bench blend x53."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw02-bench-exit-end",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw02-bench-exit-end.png",
+          "caption": "Phone 390 × 844 — yaw02 bench exit end."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw02-bench-exit-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw02-bench-exit-x51.png",
+          "caption": "Phone 390 × 844 — yaw02 bench exit x51."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw02-bench-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw02-bench-fence.png",
+          "caption": "Phone 390 × 844 — yaw02 bench fence."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw02-bench-paving",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw02-bench-paving.png",
+          "caption": "Phone 390 × 844 — yaw02 bench paving."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw02-corner-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw02-corner-fence.png",
+          "caption": "Phone 390 × 844 — yaw02 corner fence."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw02-pool-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw02-pool-fence.png",
+          "caption": "Phone 390 × 844 — yaw02 pool fence."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw04-bench-blend-x52",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw04-bench-blend-x52.png",
+          "caption": "Phone 390 × 844 — yaw04 bench blend x52."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw04-bench-blend-x53",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw04-bench-blend-x53.png",
+          "caption": "Phone 390 × 844 — yaw04 bench blend x53."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw04-bench-exit-end",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw04-bench-exit-end.png",
+          "caption": "Phone 390 × 844 — yaw04 bench exit end."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw04-bench-exit-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw04-bench-exit-x51.png",
+          "caption": "Phone 390 × 844 — yaw04 bench exit x51."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw04-bench-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw04-bench-fence.png",
+          "caption": "Phone 390 × 844 — yaw04 bench fence."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw04-bench-paving",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw04-bench-paving.png",
+          "caption": "Phone 390 × 844 — yaw04 bench paving."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw04-corner-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw04-corner-fence.png",
+          "caption": "Phone 390 × 844 — yaw04 corner fence."
+        },
+        {
+          "id": "camera-b-canopy-angles--390-yaw04-pool-fence",
+          "image": "game3d/shots/island-boundaries/camera-b-canopy-angles/390-yaw04-pool-fence.png",
+          "caption": "Phone 390 × 844 — yaw04 pool fence."
+        }
+      ]
+    },
+    {
+      "title": "Northern sports — final public overview and retained probes",
+      "caption": "Final local phone overview keeps Eric visible at the reachable west, corner and gym fence endpoints while preserving desktop follow and normal public paving. Both periods, sizes, maps and all native probes are retained. Protected reverse and baseline building/foliage occlusion probes remain explicit failed screen evidence; this set is not a blanket visual pass. Independent final critic: repaired public views score8/10; final50 contains40passes and10 retained protected/baseline failures.",
+      "images": [
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-corner-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-corner-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports corner run jump end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-corner-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-corner-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports corner walk end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-evening-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening gym tie."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-evening-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports evening north reverse."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-evening-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening pavilion tie."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-evening-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports evening pool head."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-grove-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-grove-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove reverse run jump end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-grove-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-grove-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove reverse walk end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-grove-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-grove-west-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove west run jump end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-grove-west-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-grove-west-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove west walk end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-gym-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-gym-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports gym tie run jump end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-gym-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-gym-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports gym tie walk end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-map",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-map.png",
+          "caption": "Desktop 1366 × 860 — sports map."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-morning-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning gym tie."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-morning-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports morning north reverse."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-morning-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning pavilion tie."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-morning-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports morning pool head."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-north-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-north-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports north reverse run jump end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-north-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-north-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports north reverse walk end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-pavilion-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-pavilion-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports pavilion tie run jump end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-pavilion-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-pavilion-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports pavilion tie walk end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-pool-head-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-pool-head-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports pool head run jump end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--1366-sports-pool-head-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/1366-sports-pool-head-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports pool head walk end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-corner-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-corner-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports corner run jump end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-corner-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-corner-walk-end.png",
+          "caption": "Phone 390 × 844 — sports corner walk end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-evening-grove.png",
+          "caption": "Phone 390 × 844 — sports evening grove."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-evening-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports evening gym tie."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-evening-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports evening north reverse."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-evening-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports evening pavilion tie."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-evening-pool-head.png",
+          "caption": "Phone 390 × 844 — sports evening pool head."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-grove-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-grove-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports grove reverse run jump end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-grove-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-grove-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — sports grove reverse walk end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-grove-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-grove-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports grove west run jump end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-grove-west-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-grove-west-walk-end.png",
+          "caption": "Phone 390 × 844 — sports grove west walk end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-gym-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-gym-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports gym tie run jump end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-gym-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-gym-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — sports gym tie walk end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-map",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-map.png",
+          "caption": "Phone 390 × 844 — sports map."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-morning-grove.png",
+          "caption": "Phone 390 × 844 — sports morning grove."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-morning-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports morning gym tie."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-morning-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports morning north reverse."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-morning-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports morning pavilion tie."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-morning-pool-head.png",
+          "caption": "Phone 390 × 844 — sports morning pool head."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-north-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-north-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports north reverse run jump end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-north-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-north-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — sports north reverse walk end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-pavilion-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-pavilion-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports pavilion tie run jump end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-pavilion-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-pavilion-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — sports pavilion tie walk end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-pool-head-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-pool-head-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports pool head run jump end."
+        },
+        {
+          "id": "after-b-camera-canopy-final--390-sports-pool-head-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-camera-canopy-final/390-sports-pool-head-walk-end.png",
+          "caption": "Phone 390 × 844 — sports pool head walk end."
+        }
+      ]
+    },
+    {
+      "title": "Grove return — final native movement and obstacle contacts",
+      "caption": "Final native entry/return attempts show the actor clear at the former canopy failures. Straight held-key bench and pool-walk returns stop at existing shrubs before leaving the strip; these are not complete returns. The pool-head return crosses the outer strip edge. All samples and screenshots remain retained. Independent critic inspected all24 and scored each8/10.",
+      "images": [
+        {
+          "id": "camera-b-transitions-repair--390-bench-enter-end",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-bench-enter-end.png",
+          "caption": "Phone 390 × 844 — bench enter end."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-bench-enter-start",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-bench-enter-start.png",
+          "caption": "Phone 390 × 844 — bench enter start."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-bench-enter-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-bench-enter-x51.png",
+          "caption": "Phone 390 × 844 — bench enter x51."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-bench-enter-x52.2",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-bench-enter-x52.2.png",
+          "caption": "Phone 390 × 844 — bench enter x52.2."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-bench-enter-x54.2",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-bench-enter-x54.2.png",
+          "caption": "Phone 390 × 844 — bench enter x54.2."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-bench-exit-end",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-bench-exit-end.png",
+          "caption": "Phone 390 × 844 — bench exit end."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-bench-exit-start",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-bench-exit-start.png",
+          "caption": "Phone 390 × 844 — bench exit start."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-bench-exit-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-bench-exit-x51.png",
+          "caption": "Phone 390 × 844 — bench exit x51."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-head-enter-end",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-head-enter-end.png",
+          "caption": "Phone 390 × 844 — pool head enter end."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-head-enter-start",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-head-enter-start.png",
+          "caption": "Phone 390 × 844 — pool head enter start."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-head-enter-x54.2",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-head-enter-x54.2.png",
+          "caption": "Phone 390 × 844 — pool head enter x54.2."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-head-exit-end",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-head-exit-end.png",
+          "caption": "Phone 390 × 844 — pool head exit end."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-head-exit-start",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-head-exit-start.png",
+          "caption": "Phone 390 × 844 — pool head exit start."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-head-exit-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-head-exit-x51.png",
+          "caption": "Phone 390 × 844 — pool head exit x51."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-head-exit-x52.2",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-head-exit-x52.2.png",
+          "caption": "Phone 390 × 844 — pool head exit x52.2."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-head-exit-x54.2",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-head-exit-x54.2.png",
+          "caption": "Phone 390 × 844 — pool head exit x54.2."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-walk-enter-end",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-walk-enter-end.png",
+          "caption": "Phone 390 × 844 — pool walk enter end."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-walk-enter-start",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-walk-enter-start.png",
+          "caption": "Phone 390 × 844 — pool walk enter start."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-walk-enter-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-walk-enter-x51.png",
+          "caption": "Phone 390 × 844 — pool walk enter x51."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-walk-enter-x52.2",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-walk-enter-x52.2.png",
+          "caption": "Phone 390 × 844 — pool walk enter x52.2."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-walk-enter-x54.2",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-walk-enter-x54.2.png",
+          "caption": "Phone 390 × 844 — pool walk enter x54.2."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-walk-exit-end",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-walk-exit-end.png",
+          "caption": "Phone 390 × 844 — pool walk exit end."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-walk-exit-start",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-walk-exit-start.png",
+          "caption": "Phone 390 × 844 — pool walk exit start."
+        },
+        {
+          "id": "camera-b-transitions-repair--390-pool-walk-exit-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-transitions-repair/390-pool-walk-exit-x51.png",
+          "caption": "Phone 390 × 844 — pool walk exit x51."
+        }
+      ]
+    },
+    {
+      "title": "Return input — retained unsuccessful tap attempt",
+      "caption": "Native entry reaches the fence, but the subsequent projected ground tap does not move Eric. These 21 images retain the failed return setup and are not used as exit proof. The later steered native return is recorded separately.",
+      "images": [
+        {
+          "id": "camera-b-return-native--390-bench-enter-end",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-bench-enter-end.png",
+          "caption": "Phone 390 × 844 — bench enter end."
+        },
+        {
+          "id": "camera-b-return-native--390-bench-enter-start",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-bench-enter-start.png",
+          "caption": "Phone 390 × 844 — bench enter start."
+        },
+        {
+          "id": "camera-b-return-native--390-bench-enter-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-bench-enter-x51.png",
+          "caption": "Phone 390 × 844 — bench enter x51."
+        },
+        {
+          "id": "camera-b-return-native--390-bench-enter-x52.2",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-bench-enter-x52.2.png",
+          "caption": "Phone 390 × 844 — bench enter x52.2."
+        },
+        {
+          "id": "camera-b-return-native--390-bench-enter-x54.2",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-bench-enter-x54.2.png",
+          "caption": "Phone 390 × 844 — bench enter x54.2."
+        },
+        {
+          "id": "camera-b-return-native--390-bench-exit-end",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-bench-exit-end.png",
+          "caption": "Phone 390 × 844 — bench exit end."
+        },
+        {
+          "id": "camera-b-return-native--390-bench-exit-start",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-bench-exit-start.png",
+          "caption": "Phone 390 × 844 — bench exit start."
+        },
+        {
+          "id": "camera-b-return-native--390-pool-head-enter-end",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-pool-head-enter-end.png",
+          "caption": "Phone 390 × 844 — pool head enter end."
+        },
+        {
+          "id": "camera-b-return-native--390-pool-head-enter-start",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-pool-head-enter-start.png",
+          "caption": "Phone 390 × 844 — pool head enter start."
+        },
+        {
+          "id": "camera-b-return-native--390-pool-head-enter-x54.2",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-pool-head-enter-x54.2.png",
+          "caption": "Phone 390 × 844 — pool head enter x54.2."
+        },
+        {
+          "id": "camera-b-return-native--390-pool-head-exit-end",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-pool-head-exit-end.png",
+          "caption": "Phone 390 × 844 — pool head exit end."
+        },
+        {
+          "id": "camera-b-return-native--390-pool-head-exit-start",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-pool-head-exit-start.png",
+          "caption": "Phone 390 × 844 — pool head exit start."
+        },
+        {
+          "id": "camera-b-return-native--390-pool-head-exit-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-pool-head-exit-x51.png",
+          "caption": "Phone 390 × 844 — pool head exit x51."
+        },
+        {
+          "id": "camera-b-return-native--390-pool-head-exit-x52.2",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-pool-head-exit-x52.2.png",
+          "caption": "Phone 390 × 844 — pool head exit x52.2."
+        },
+        {
+          "id": "camera-b-return-native--390-pool-walk-enter-end",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-pool-walk-enter-end.png",
+          "caption": "Phone 390 × 844 — pool walk enter end."
+        },
+        {
+          "id": "camera-b-return-native--390-pool-walk-enter-start",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-pool-walk-enter-start.png",
+          "caption": "Phone 390 × 844 — pool walk enter start."
+        },
+        {
+          "id": "camera-b-return-native--390-pool-walk-enter-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-pool-walk-enter-x51.png",
+          "caption": "Phone 390 × 844 — pool walk enter x51."
+        },
+        {
+          "id": "camera-b-return-native--390-pool-walk-enter-x52.2",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-pool-walk-enter-x52.2.png",
+          "caption": "Phone 390 × 844 — pool walk enter x52.2."
+        },
+        {
+          "id": "camera-b-return-native--390-pool-walk-enter-x54.2",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-pool-walk-enter-x54.2.png",
+          "caption": "Phone 390 × 844 — pool walk enter x54.2."
+        },
+        {
+          "id": "camera-b-return-native--390-pool-walk-exit-end",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-pool-walk-exit-end.png",
+          "caption": "Phone 390 × 844 — pool walk exit end."
+        },
+        {
+          "id": "camera-b-return-native--390-pool-walk-exit-start",
+          "image": "game3d/shots/island-boundaries/camera-b-return-native/390-pool-walk-exit-start.png",
+          "caption": "Phone 390 × 844 — pool walk exit start."
+        }
+      ]
+    },
+    {
+      "title": "Return movement — native steering around the planting",
+      "caption": "Pool-walk native arrows return from the reached fence endpoint around existing shrubs, crossing both overview strip edges to x54.812 with Eric visible. The later hedge contact at x56.98 is retained and is not claimed as arrival at the original paving target. The first bench fixture never enters the strip and remains a failed setup. All14 originals are retained. Independent critic scored all14 visual frames8/10 and separates the failed bench fixture from the successful pool-walk strip exit.",
+      "images": [
+        {
+          "id": "camera-b-return-keys--390-bench-return-end",
+          "image": "game3d/shots/island-boundaries/camera-b-return-keys/390-bench-return-end.png",
+          "caption": "Phone 390 × 844 — bench return end."
+        },
+        {
+          "id": "camera-b-return-keys--390-bench-return-start",
+          "image": "game3d/shots/island-boundaries/camera-b-return-keys/390-bench-return-start.png",
+          "caption": "Phone 390 × 844 — bench return start."
+        },
+        {
+          "id": "camera-b-return-keys--390-bench-return-waypoint0",
+          "image": "game3d/shots/island-boundaries/camera-b-return-keys/390-bench-return-waypoint0.png",
+          "caption": "Phone 390 × 844 — bench return waypoint0."
+        },
+        {
+          "id": "camera-b-return-keys--390-bench-return-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-return-keys/390-bench-return-x51.png",
+          "caption": "Phone 390 × 844 — bench return x51."
+        },
+        {
+          "id": "camera-b-return-keys--390-bench-return-x52.2",
+          "image": "game3d/shots/island-boundaries/camera-b-return-keys/390-bench-return-x52.2.png",
+          "caption": "Phone 390 × 844 — bench return x52.2."
+        },
+        {
+          "id": "camera-b-return-keys--390-bench-return-x54.2",
+          "image": "game3d/shots/island-boundaries/camera-b-return-keys/390-bench-return-x54.2.png",
+          "caption": "Phone 390 × 844 — bench return x54.2."
+        },
+        {
+          "id": "camera-b-return-keys--390-pool-walk-return-end",
+          "image": "game3d/shots/island-boundaries/camera-b-return-keys/390-pool-walk-return-end.png",
+          "caption": "Phone 390 × 844 — pool walk return end."
+        },
+        {
+          "id": "camera-b-return-keys--390-pool-walk-return-start",
+          "image": "game3d/shots/island-boundaries/camera-b-return-keys/390-pool-walk-return-start.png",
+          "caption": "Phone 390 × 844 — pool walk return start."
+        },
+        {
+          "id": "camera-b-return-keys--390-pool-walk-return-waypoint0",
+          "image": "game3d/shots/island-boundaries/camera-b-return-keys/390-pool-walk-return-waypoint0.png",
+          "caption": "Phone 390 × 844 — pool walk return waypoint0."
+        },
+        {
+          "id": "camera-b-return-keys--390-pool-walk-return-waypoint1",
+          "image": "game3d/shots/island-boundaries/camera-b-return-keys/390-pool-walk-return-waypoint1.png",
+          "caption": "Phone 390 × 844 — pool walk return waypoint1."
+        },
+        {
+          "id": "camera-b-return-keys--390-pool-walk-return-waypoint2",
+          "image": "game3d/shots/island-boundaries/camera-b-return-keys/390-pool-walk-return-waypoint2.png",
+          "caption": "Phone 390 × 844 — pool walk return waypoint2."
+        },
+        {
+          "id": "camera-b-return-keys--390-pool-walk-return-x51",
+          "image": "game3d/shots/island-boundaries/camera-b-return-keys/390-pool-walk-return-x51.png",
+          "caption": "Phone 390 × 844 — pool walk return x51."
+        },
+        {
+          "id": "camera-b-return-keys--390-pool-walk-return-x52.2",
+          "image": "game3d/shots/island-boundaries/camera-b-return-keys/390-pool-walk-return-x52.2.png",
+          "caption": "Phone 390 × 844 — pool walk return x52.2."
+        },
+        {
+          "id": "camera-b-return-keys--390-pool-walk-return-x54.2",
+          "image": "game3d/shots/island-boundaries/camera-b-return-keys/390-pool-walk-return-x54.2.png",
+          "caption": "Phone 390 × 844 — pool walk return x54.2."
+        }
+      ]
+    },
+    {
+      "title": "Historical staff entrance saves — first real Continue proof",
+      "caption": "Actual Continue and Autosave at both sizes preserve durable progress, recover obsolete staff-entrance checkpoints/transitions, clear idle old ground support, and retain valid campus saves. These12 frames all pass functional restoration. Desktop idle staff-approach compresses the existing follow camera against the gate and hides Eric; that screen is a retained camera failure, not a visible-actor pass.",
+      "images": [
+        {
+          "id": "access-save-initial--day1-checkpoint-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/day1-checkpoint-desk.png",
+          "caption": "Desktop 1366 × 860 — day1 checkpoint desk."
+        },
+        {
+          "id": "access-save-initial--day1-checkpoint-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/day1-checkpoint-phone.png",
+          "caption": "Phone 390 × 844 — day1 checkpoint phone."
+        },
+        {
+          "id": "access-save-initial--day3-checkpoint-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/day3-checkpoint-desk.png",
+          "caption": "Desktop 1366 × 860 — day3 checkpoint desk."
+        },
+        {
+          "id": "access-save-initial--day3-checkpoint-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/day3-checkpoint-phone.png",
+          "caption": "Phone 390 × 844 — day3 checkpoint phone."
+        },
+        {
+          "id": "access-save-initial--day3-idle-staff-approach-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/day3-idle-staff-approach-desk.png",
+          "caption": "Desktop 1366 × 860 — day3 idle staff approach desk."
+        },
+        {
+          "id": "access-save-initial--day3-idle-staff-approach-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/day3-idle-staff-approach-phone.png",
+          "caption": "Phone 390 × 844 — day3 idle staff approach phone."
+        },
+        {
+          "id": "access-save-initial--day3-valid-campus-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/day3-valid-campus-desk.png",
+          "caption": "Desktop 1366 × 860 — day3 valid campus desk."
+        },
+        {
+          "id": "access-save-initial--day3-valid-campus-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/day3-valid-campus-phone.png",
+          "caption": "Phone 390 × 844 — day3 valid campus phone."
+        },
+        {
+          "id": "access-save-initial--day4-queued-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/day4-queued-desk.png",
+          "caption": "Desktop 1366 × 860 — day4 queued desk."
+        },
+        {
+          "id": "access-save-initial--day4-queued-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/day4-queued-phone.png",
+          "caption": "Phone 390 × 844 — day4 queued phone."
+        },
+        {
+          "id": "access-save-initial--day5-arriving-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/day5-arriving-desk.png",
+          "caption": "Desktop 1366 × 860 — day5 arriving desk."
+        },
+        {
+          "id": "access-save-initial--day5-arriving-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/day5-arriving-phone.png",
+          "caption": "Phone 390 × 844 — day5 arriving phone."
+        }
+      ]
+    },
+    {
+      "title": "Historical generated routes and idle supports — final Continue proof",
+      "caption": "All22 actual Continue captures cover historical aliases, ongoing days6/17, reverse and arriving frames, idle east-return support and valid campus preservation. Functional restoration passes. Desktop idle staff-approach and east-return follow views hide Eric under the close camera; phone shows him on public ground. These failed desktop views remain retained and are not featured results.",
+      "images": [
+        {
+          "id": "access-save-generated-final--day1-checkpoint-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day1-checkpoint-desk.png",
+          "caption": "Desktop 1366 × 860 — day1 checkpoint desk."
+        },
+        {
+          "id": "access-save-generated-final--day1-checkpoint-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day1-checkpoint-phone.png",
+          "caption": "Phone 390 × 844 — day1 checkpoint phone."
+        },
+        {
+          "id": "access-save-generated-final--day17-arriving-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day17-arriving-desk.png",
+          "caption": "Desktop 1366 × 860 — day17 arriving desk."
+        },
+        {
+          "id": "access-save-generated-final--day17-arriving-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day17-arriving-phone.png",
+          "caption": "Phone 390 × 844 — day17 arriving phone."
+        },
+        {
+          "id": "access-save-generated-final--day17-generated-reverse-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day17-generated-reverse-desk.png",
+          "caption": "Desktop 1366 × 860 — day17 generated reverse desk."
+        },
+        {
+          "id": "access-save-generated-final--day17-generated-reverse-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day17-generated-reverse-phone.png",
+          "caption": "Phone 390 × 844 — day17 generated reverse phone."
+        },
+        {
+          "id": "access-save-generated-final--day17-valid-campus-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day17-valid-campus-desk.png",
+          "caption": "Desktop 1366 × 860 — day17 valid campus desk."
+        },
+        {
+          "id": "access-save-generated-final--day17-valid-campus-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day17-valid-campus-phone.png",
+          "caption": "Phone 390 × 844 — day17 valid campus phone."
+        },
+        {
+          "id": "access-save-generated-final--day3-checkpoint-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day3-checkpoint-desk.png",
+          "caption": "Desktop 1366 × 860 — day3 checkpoint desk."
+        },
+        {
+          "id": "access-save-generated-final--day3-checkpoint-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day3-checkpoint-phone.png",
+          "caption": "Phone 390 × 844 — day3 checkpoint phone."
+        },
+        {
+          "id": "access-save-generated-final--day3-idle-east-return-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day3-idle-east-return-desk.png",
+          "caption": "Desktop 1366 × 860 — day3 idle east return desk."
+        },
+        {
+          "id": "access-save-generated-final--day3-idle-east-return-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day3-idle-east-return-phone.png",
+          "caption": "Phone 390 × 844 — day3 idle east return phone."
+        },
+        {
+          "id": "access-save-generated-final--day3-idle-staff-approach-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day3-idle-staff-approach-desk.png",
+          "caption": "Desktop 1366 × 860 — day3 idle staff approach desk."
+        },
+        {
+          "id": "access-save-generated-final--day3-idle-staff-approach-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day3-idle-staff-approach-phone.png",
+          "caption": "Phone 390 × 844 — day3 idle staff approach phone."
+        },
+        {
+          "id": "access-save-generated-final--day3-valid-campus-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day3-valid-campus-desk.png",
+          "caption": "Desktop 1366 × 860 — day3 valid campus desk."
+        },
+        {
+          "id": "access-save-generated-final--day3-valid-campus-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day3-valid-campus-phone.png",
+          "caption": "Phone 390 × 844 — day3 valid campus phone."
+        },
+        {
+          "id": "access-save-generated-final--day4-queued-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day4-queued-desk.png",
+          "caption": "Desktop 1366 × 860 — day4 queued desk."
+        },
+        {
+          "id": "access-save-generated-final--day4-queued-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day4-queued-phone.png",
+          "caption": "Phone 390 × 844 — day4 queued phone."
+        },
+        {
+          "id": "access-save-generated-final--day5-arriving-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day5-arriving-desk.png",
+          "caption": "Desktop 1366 × 860 — day5 arriving desk."
+        },
+        {
+          "id": "access-save-generated-final--day5-arriving-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day5-arriving-phone.png",
+          "caption": "Phone 390 × 844 — day5 arriving phone."
+        },
+        {
+          "id": "access-save-generated-final--day6-generated-checkpoint-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day6-generated-checkpoint-desk.png",
+          "caption": "Desktop 1366 × 860 — day6 generated checkpoint desk."
+        },
+        {
+          "id": "access-save-generated-final--day6-generated-checkpoint-phone",
+          "image": "game3d/shots/island-expanded/save-recovery/generated-final/day6-generated-checkpoint-phone.png",
+          "caption": "Phone 390 × 844 — day6 generated checkpoint phone."
+        }
+      ]
+    },
+    {
+      "title": "Restored gate approach — matched camera diagnostic",
+      "caption": "All five native desktop diagnostics are retained. Before the fence, Eric is visible at the matched public point. The new solid gate compresses the normal follow arm to0.03m and hides him at idle. The first900ms retreat moved over0.5m on public ground but failed its premature visibility assertion before a fourth screenshot. A final3200ms native W retreat moves3.91m, restores the follow arm to3.9713m and shows the whole actor; navigation and progress remain valid. The original hidden-actor idle screens remain explicitly failed visual evidence.",
+      "images": [
+        {
+          "id": "access-save-camera--before-fence-matched-public-point-idle-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/camera-mode/before-fence-matched-public-point-idle-desk.png",
+          "caption": "Desktop 1366 × 860 — before fence matched public point idle desk."
+        },
+        {
+          "id": "access-save-camera--before-fence-matched-public-point-public-retreat-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/camera-mode/before-fence-matched-public-point-public-retreat-desk.png",
+          "caption": "Desktop 1366 × 860 — before fence matched public point public retreat desk."
+        },
+        {
+          "id": "access-save-camera--restored-staff-approach-idle-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/camera-mode/restored-staff-approach-idle-desk.png",
+          "caption": "Desktop 1366 × 860 — restored staff approach idle desk."
+        },
+        {
+          "id": "access-save-camera--restored-staff-approach-long-retreat-idle-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/camera-mode/restored-staff-approach-long-retreat-idle-desk.png",
+          "caption": "Desktop 1366 × 860 — restored staff approach long retreat idle desk."
+        },
+        {
+          "id": "access-save-camera--restored-staff-approach-long-retreat-public-retreat-desk",
+          "image": "game3d/shots/island-expanded/save-recovery/camera-mode/restored-staff-approach-long-retreat-public-retreat-desk.png",
+          "caption": "Desktop 1366 × 860 — restored staff approach long retreat public retreat desk."
+        }
+      ]
     }
   ],
   "links": [
@@ -3860,6 +5604,10 @@
     {
       "label": "Northern grounds before/after and native collision evidence",
       "href": "game3d/shots/island-boundaries/proof-b.md"
+    },
+    {
+      "label": "Historical save recovery proof",
+      "href": "game3d/shots/island-expanded/save-recovery/EVIDENCE.md"
     }
   ]
 }
