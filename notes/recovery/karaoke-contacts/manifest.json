@@ -1,0 +1,98 @@
+{
+  "candidate": "karaoke-contacts",
+  "issue": 349,
+  "existing_local_branch": "wt/codex-karaoke-contacts",
+  "original_base_head": "9a53313daaef29042c251215bc3f4408e4596093",
+  "source_archive": ".git/codex-reviews/retired-candidates-20261010/karaoke-contacts/files.tar.gz",
+  "source_archive_sha256": "cdd7da791f30c6cae1f6ae818362db0d499e02b3ee3192817d29cadb8bd603c0",
+  "original_patch": ".git/codex-reviews/retired-candidates-20261010/karaoke-contacts/working.patch",
+  "original_patch_sha256": "a0e4f70a805f22dc0461a5f0ca7627bf1f23d516b26ec199976b7d85d21509a9",
+  "original_patch_bytes": 23103,
+  "tracked_patch_path_count": 5,
+  "all_tracked_patch_paths_in_source_snapshot": true,
+  "source_file_count": 6,
+  "source_bytes": 41597,
+  "files": [
+    {
+      "path": "game3d/js/places/ongoing/karaoke-actions.js",
+      "bytes": 6356,
+      "sha256": "3871422de59b1b17b41faa2b954d4e54ca7f13f1819dec376fb9665fe6975521"
+    },
+    {
+      "path": "game3d/js/places/ongoing/karaoke-hands.js",
+      "bytes": 5623,
+      "sha256": "f132697a71ccdac545d19ea66ad5c7959d168f194b3750da2615bcd553b56844"
+    },
+    {
+      "path": "game3d/js/places/ongoing/karaoke-props.js",
+      "bytes": 4794,
+      "sha256": "b6503040e63b61295bbaf93c31e1bfda6141fd35028b51bb31ee691df305c3ee"
+    },
+    {
+      "path": "game3d/js/places/ongoing/karaoke-stage.js",
+      "bytes": 9842,
+      "sha256": "c66ffb37a5033b7007b7920caea33dbd02dff277459e9723020f95bff68684b2"
+    },
+    {
+      "path": "game3d/test/unit/karaoke-hands.test.mjs",
+      "bytes": 3607,
+      "sha256": "8075f56dcdb7f4411b1d62c65040b4b5fab586d3786b29859094fd97e3458e9e"
+    },
+    {
+      "path": "game3d/tools/karaoke-stage-check.mjs",
+      "bytes": 11375,
+      "sha256": "bb128016ecebce77fa9ab516517640b5e80dab1c3b1ba3fe9f18b98077b19abf"
+    }
+  ],
+  "excluded_original_artifacts": [
+    {
+      "path": "game3d/build.json",
+      "bytes": 25570,
+      "original_sha256": "e476bc881d1db71122338fd1def9d122e6cf23911723fcd7320fe8efd8d62750",
+      "reason": "Generated build identity/check data, not candidate source."
+    },
+    {
+      "path": "tools/__pycache__/comfy.cpython-314.pyc",
+      "bytes": 22732,
+      "original_sha256": "8556a7a0dad4611985f722c3973a267f198f84414ce64a52fdf21278072ca5ba",
+      "reason": "Python bytecode/cache, not candidate source."
+    },
+    {
+      "path": "tools/__pycache__/gpu_priority.cpython-314.pyc",
+      "bytes": 29576,
+      "original_sha256": "51d0ac6ffaf4ac187b0215d2318f9dfd7dae7853cebfb9a89f925655c8dc8a96",
+      "reason": "Python bytecode/cache, not candidate source."
+    },
+    {
+      "path": "tools/assets/__pycache__/runtime_data.cpython-314.pyc",
+      "bytes": 6323,
+      "original_sha256": "bd37aa8dc0c47d7af7788acf08b5faf7698962d688766294cf9dc0fc5b92cded",
+      "reason": "Python bytecode/cache, not candidate source."
+    }
+  ],
+  "package_root": "notes/recovery/karaoke-contacts/",
+  "external_requirements": [
+    "Reuses original-base game assets; no newly generated indispensable binary found in candidate tar. Original capture evidence excluded and remains in local archive. Story/voice/visual gates must be refreshed before integration."
+  ],
+  "normalized_member_validation": {
+    "duplicate_names": [],
+    "absolute_or_traversal_paths": [],
+    "symlink_hardlink_special_members": [],
+    "private_paths": []
+  },
+  "reconstruction_proof": {
+    "verification": "audit_refs independently verified original HEAD + original patch reconstructs every changed tracked source blob exactly; this audit verified every selected final tar file hash against original manifest.",
+    "tracked_source_blobs_verified": 5,
+    "new_public_source_or_metadata_files_preserved": 1,
+    "final_snapshot_is_byte_exact": true
+  },
+  "status": "draft repair; review and current verification pending",
+  "preservation_parent": "b36fc403150f4593a42a228f30f884edc1260146",
+  "layout": {
+    "source": "source/<original repository path>",
+    "patch": "original.patch",
+    "base": "original-base-head.txt"
+  },
+  "purpose": "Preserve the parked candidate without changing the live game. This is not an integration or approval.",
+  "preservation_branch": "wt/codex-karaoke-contacts"
+}

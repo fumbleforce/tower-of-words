@@ -1,0 +1,402 @@
+diff --git a/game3d/js/places/ongoing/karaoke-actions.js b/game3d/js/places/ongoing/karaoke-actions.js
+index 31bf55283..b3e6aa77e 100644
+--- a/game3d/js/places/ongoing/karaoke-actions.js
++++ b/game3d/js/places/ongoing/karaoke-actions.js
+@@ -29,17 +29,24 @@ export function karaokeActions(game, P, props, action) {
+       rig.root.position.set(out[0], 0, out[1]);
+     }
+   }
+-  async function walk(who, point, face) {
++  async function walk(who, point, face, { carry = false } = {}) {
+     stand(who);
+-    if (held.has(who)) {
+-      hands.reach(actor(who), null);
++    const rig = actor(who),
++      start = rig.root.position.clone(),
++      record = held.get(who);
++    if (record && carry) hands.follow(rig);
++    else if (record) {
++      hands.reach(rig, null);
+       held.get(who).target = null;
+     }
+-    const rig = actor(who);
+     await action.wait(walkRig(game, rig, point, { avoid: false }));
+     rig._noAvoid = true;
+-    if (face) await action.wait(faceRig(game, rig, face));
++    if (record?.target && carry) {
++      record.target = new THREE.Vector3(...record.target).add(rig.root.position).sub(start).toArray();
++      hands.reach(rig, record.target);
++    }
+     if (who === 'eric') game.walker.sync();
++    if (face) await action.wait(faceRig(game, rig, face));
+   }
+   async function sit(who) {
+     const rig = actor(who),
+@@ -71,6 +78,10 @@ export function karaokeActions(game, P, props, action) {
+   async function pickup(who, item) {
+     const rig = actor(who),
+       target = local(item);
++    const orientation = item.getWorldQuaternion(new THREE.Quaternion());
++    const axis = new THREE.Vector3(0, 1, 0).applyQuaternion(orientation);
++    axis.applyQuaternion(P.space.getWorldQuaternion(orientation).invert());
++    hands.aim(rig, axis.toArray());
+     await reach(who, target.toArray());
+     contacts.push({
+       who,
+@@ -83,7 +94,11 @@ export function karaokeActions(game, P, props, action) {
+     });
+     hands.hold(rig, item);
+     hands.reach(rig, target.toArray());
+-    held.set(who, { item: item.name, target: target.toArray(), side: hands.side(rig) });
++    held.set(who, {
++      item: item.name,
++      target: target.toArray(),
++      side: hands.side(rig),
++    });
+   }
+   async function carry(who, target) {
+     await reach(who, target);
+@@ -100,12 +115,14 @@ export function karaokeActions(game, P, props, action) {
+     if (from === to) return;
+     // The giver and recipient meet in the clear floor south-east of the table.
+     hands.setSide(actor(to), hands.side(actor(from)) === 'Right' ? 'Left' : 'Right');
+-    await walk(from, [0.45, -0.9], [1.1, -0.9]);
+-    await walk(to, [1.01, -0.9], [0.1, -0.9]);
++    const giverOnLeft = hands.side(actor(from)) === 'Left';
++    await walk(from, [giverOnLeft ? 0.45 : 1.07, -1], [0.76, -0.45]);
++    await walk(to, [giverOnLeft ? 1.07 : 0.45, -0.8], [0.76, -0.45]);
+     const a = actor(from),
+       b = actor(to),
+-      target = wrist(a).add(wrist(b)).multiplyScalar(0.5);
+-    target.y = 0.72;
++      target = new THREE.Vector3(0.76, 0.48, -0.85);
++    // Quarter turns put the active hands inward without leaning heads together.
++    hands.aim(b, [0, 1, 0]);
+     await Promise.all([carry(from, target.toArray()), reach(to, target.toArray())]);
+     phase = 'shared-grip';
+     await action.wait(game.wait(650));
+@@ -124,8 +141,16 @@ export function karaokeActions(game, P, props, action) {
+     held.delete(from);
+     hands.hold(b, props.microphone);
+     hands.reach(b, target.toArray());
+-    held.set(to, { item: props.microphone.name, target: target.toArray(), side: hands.side(b) });
+-    await carry(to, [b.root.position.x - 0.12, target.y, b.root.position.z - 0.2]);
++    held.set(to, {
++      item: props.microphone.name,
++      target: target.toArray(),
++      side: hands.side(b),
++    });
++    await carry(to, [
++      b.root.position.x + (hands.side(b) === 'Left' ? 0.12 : -0.12),
++      target.y,
++      b.root.position.z + 0.12,
++    ]);
+     await sit(from);
+   }
+   return {
+diff --git a/game3d/js/places/ongoing/karaoke-hands.js b/game3d/js/places/ongoing/karaoke-hands.js
+index 602f99107..6de813ca1 100644
+--- a/game3d/js/places/ongoing/karaoke-hands.js
++++ b/game3d/js/places/ongoing/karaoke-hands.js
+@@ -19,22 +19,28 @@ export function karaokeHands(root, { codeArms = false } = {}) {
+     const side = sides.get(rig) || 'Right',
+       index = side === 'Right' ? 1 : 0;
+     const hand = bone(rig, side + 'Hand') || rig.arms?.[index]?.userData.hand || rig.arms?.[index];
+-    const chain = [bone(rig, side + 'ForeArm'), bone(rig, side + 'Arm'), bone(rig, 'Spine')].filter(Boolean);
++    const torso = ['Spine', 'Spine01', 'Spine02'].map((name) => bone(rig, name)).filter(Boolean);
++    const chain = [bone(rig, side + 'ForeArm'), bone(rig, side + 'Arm'), ...torso].filter(Boolean);
++    const leanLimit = 0.75 / (torso.length || 1);
+     if (!chain.length && codeArms && rig.arms?.[index]?.userData.hand) chain.push(rig.arms[index]);
+     const original = rig.update,
+       saved = new Map();
+-    const state = { hand, chain, target: null, held: null, offset: 0 };
++    const state = { hand, chain, target: null, axis: null, follow: null, held: null, offset: 0 };
+     const undo = () => {
+       for (const [b, q] of saved) b.quaternion.copy(q);
+       saved.clear();
+     };
+     const apply = () => {
++      if (state.follow) state.target.copy(rig.root.position).add(state.follow);
+       if (state.target && hand) {
+         for (const b of chain) saved.set(b, b.quaternion.clone());
+         root.localToWorld(point.copy(state.target));
+-        // The arm and bounded waist reach solve in world coordinates without altering the bind pose.
+-        for (let n = 0; n < 5; n++)
++        // Native rigs name the chest Spine and the lower torso Spine01/02. Share the
++        // existing lean bound across them; the chest alone cannot reach the table.
++        // Let the arm converge first so reachable carries keep the torso upright.
++        for (let n = 0; n < 40; n++) {
+           for (const b of chain) {
++            if (n < 20 && torso.includes(b)) continue;
+             b.updateWorldMatrix(true, true);
+             b.getWorldPosition(origin);
+             hand.getWorldPosition(end);
+@@ -44,13 +50,27 @@ export function karaokeHands(root, { codeArms = false } = {}) {
+             b.parent.getWorldQuaternion(parent);
+             delta.premultiply(parent.clone().invert()).multiply(parent);
+             b.quaternion.premultiply(delta);
+-            if (/Spine$/.test(b.name)) {
++            if (torso.includes(b)) {
+               const base = saved.get(b),
+                 angle = base.angleTo(b.quaternion);
+-              if (angle > 0.75) b.quaternion.copy(base.clone().slerp(b.quaternion, 0.75 / angle));
++              if (angle > leanLimit) b.quaternion.copy(base.clone().slerp(b.quaternion, leanLimit / angle));
+             }
+             b.updateWorldMatrix(false, true);
+           }
++          if (hand.getWorldPosition(end).distanceToSquared(point) < 0.002 ** 2) break;
++        }
++      }
++      if (state.axis && hand) {
++        saved.set(hand, hand.quaternion.clone());
++        hand.getWorldQuaternion(parent);
++        from.set(0, 1, 0).applyQuaternion(parent);
++        root.getWorldQuaternion(parent);
++        to.copy(state.axis).applyQuaternion(parent).normalize();
++        delta.setFromUnitVectors(from, to);
++        hand.parent.getWorldQuaternion(parent);
++        delta.premultiply(parent.clone().invert()).multiply(parent);
++        hand.quaternion.premultiply(delta);
++        hand.updateWorldMatrix(false, true);
+       }
+       if (state.held && hand) {
+         hand.getWorldPosition(state.held.position);
+@@ -86,17 +106,30 @@ export function karaokeHands(root, { codeArms = false } = {}) {
+     },
+     reach(rig, target) {
+       const a = actor(rig);
++      a.follow = null;
+       a.target = target ? new THREE.Vector3(...target) : null;
+       a.undo();
+       a.apply();
+     },
++    follow(rig) {
++      const a = actor(rig);
++      a.follow = a.target?.clone().sub(rig.root.position) || null;
++    },
++    aim(rig, axis) {
++      const a = actor(rig);
++      a.undo();
++      a.axis = axis ? new THREE.Vector3(...axis).normalize() : null;
++      a.apply();
++    },
+     hold(rig, item, offset = 0) {
+       const a = actor(rig);
+       root.attach(item);
+       item.visible = true;
+       a.held = item;
++      a.axis = new THREE.Vector3(0, 1, 0);
+       a.offset = offset;
+       a.target = null;
++      a.follow = null;
+       a.undo();
+       a.apply();
+     },
+@@ -105,6 +138,8 @@ export function karaokeHands(root, { codeArms = false } = {}) {
+       if (a) {
+         a.held = null;
+         a.target = null;
++        a.axis = null;
++        a.follow = null;
+         a.undo();
+       }
+     },
+diff --git a/game3d/js/places/ongoing/karaoke-props.js b/game3d/js/places/ongoing/karaoke-props.js
+index 378b2f1b4..b83ce314d 100644
+--- a/game3d/js/places/ongoing/karaoke-props.js
++++ b/game3d/js/places/ongoing/karaoke-props.js
+@@ -70,7 +70,8 @@ export function karaokeProps(space) {
+       new THREE.PlaneGeometry(0.24, 0.36),
+       new THREE.MeshBasicMaterial({ map: page.texture }),
+     );
+-    mesh.position.set(-0.07, 0.13, back ? -0.001 : 0.001);
++    // Grip near the upper corner so the sheet hangs below the hand when read.
++    mesh.position.set(-0.07, -0.13, back ? -0.001 : 0.001);
+     if (back) mesh.rotation.y = Math.PI;
+     card.add(mesh);
+   }
+@@ -127,7 +128,7 @@ export function karaokeProps(space) {
+   root.add(selector);
+   function reset() {
+     root.add(receipt, microphone);
+-    receipt.position.set(0.24, 0.56, -2.0);
++    receipt.position.set(0.24, 0.56, -2.26);
+     receipt.rotation.set(-Math.PI / 2, 0, 0);
+     card.rotation.set(0, 0, 0);
+     microphone.position.set(-1.17, 0.63, -2.0);
+diff --git a/game3d/js/places/ongoing/karaoke-stage.js b/game3d/js/places/ongoing/karaoke-stage.js
+index a8fa586f6..dfd7db318 100644
+--- a/game3d/js/places/ongoing/karaoke-stage.js
++++ b/game3d/js/places/ongoing/karaoke-stage.js
+@@ -9,7 +9,12 @@ export function createKaraokeStage(game, P, w) {
+     action = poolAction(game),
+     shot = actionShot(P);
+   const moves = karaokeActions(game, P, props, action);
+-  const people = () => ({ eric: game.player, kenji: P.people.kenji, kuroda: P.people.kuroda });
++  props.card.rotation.order = 'YXZ';
++  const people = () => ({
++    eric: game.player,
++    kenji: P.people.kenji,
++    kuroda: P.people.kuroda,
++  });
+   let active = false,
+     prior = null,
+     queue = [],
+@@ -34,6 +39,7 @@ export function createKaraokeStage(game, P, w) {
+     props.queue(queue, selected);
+     cardAngle = receiptSide === 'back' ? Math.PI : 0;
+     props.card.rotation.y = cardAngle - props.receipt.rotation.y;
++    props.card.rotation.x = 0;
+   }
+   function finish() {
+     action.cancel();
+@@ -62,11 +68,11 @@ export function createKaraokeStage(game, P, w) {
+       micHolder = who;
+       return;
+     }
+-    await moves.walk(who, [-1.41, -1.87], [-0.8, -1.87]);
++    await moves.walk(who, [-1.41, -2.13], [-0.8, -2.13]);
+     await moves.pickup(who, props.microphone);
+     micHolder = who;
+     const rig = moves.actor(who);
+-    await moves.carry(who, [rig.root.position.x + 0.25, 0.8, rig.root.position.z]);
++    await moves.carry(who, [rig.root.position.x + 0.18, 0.55, rig.root.position.z]);
+   }
+   return {
+     props,
+@@ -123,11 +129,20 @@ export function createKaraokeStage(game, P, w) {
+         if (state === 'receiptFront' || state === 'receiptBack') {
+           table();
+           if (!moves.snapshot().kuroda || moves.snapshot().kuroda.item !== props.receipt.name) {
+-            await moves.walk('kuroda', [0.44, -2.14], [-0.2, -2.14]);
++            await moves.walk('kuroda', [0.44, -2.12], [-0.2, -2.12]);
+             await moves.pickup('kuroda', props.receipt);
++            // Keep the sheet flat until Hamada has stepped clear of the table.
++            props.card.rotation.x = -Math.PI / 2;
++            await moves.walk('kuroda', [0.82, -2.12], [0.82, -0.9], { carry: true });
++            await moves.carry('kuroda', [0.62, 0.56, -1.86]);
++            await moves.carry('kuroda', [0.73, 0.55, -1.86]);
++            await action.wait(
++              action.tween(0.4, (k) => {
++                props.card.rotation.x = -Math.PI / 2 + (Math.PI / 2) * k;
++              }),
++            );
+           }
+-          await moves.face('kuroda', [0.44, -0.9]);
+-          await moves.carry('kuroda', [0.22, 0.72, -1.9]);
++          await moves.carry('kuroda', [0.73, 0.55, -1.86]);
+           const from = cardAngle,
+             to = state === 'receiptBack' ? Math.PI : 0;
+           await action.wait(
+@@ -138,14 +153,33 @@ export function createKaraokeStage(game, P, w) {
+           );
+           receiptSide = state === 'receiptBack' ? 'back' : 'front';
+           sync();
+-          shot.focus([0.44, -1.92], portrait() ? 5.5 : 3.3, 0.76, 0.08, 0.28);
++          shot.focus([0.82, -1.9], portrait() ? 5.5 : 3.3, 0.55, 0.08, 0.28);
+           return;
+         }
+         if (state === 'selectNumber') {
+           if (moves.snapshot().kuroda?.item === props.receipt.name) {
+-            await moves.carry('kuroda', [0.19, 0.57, -1.92]);
++            const angle = cardAngle;
++            await action.wait(
++              action.tween(0.4, (k) => {
++                cardAngle = angle * (1 - k);
++              }),
++            );
++            await action.wait(
++              action.tween(0.4, (k) => {
++                props.card.rotation.x = (-Math.PI / 2) * k;
++              }),
++            );
++            // Fold forward, then return along the outside of his body to the tabletop.
++            await moves.carry('kuroda', [0.62, 0.56, -1.86]);
++            await moves.carry('kuroda', [0.55, 0.56, -2.26]);
++            await moves.face('kuroda', [-0.2, -2.12]);
++            await moves.walk('kuroda', [0.44, -2.12], [-0.2, -2.12], { carry: true });
+             moves.drop('kuroda', props.receipt);
+-            props.receipt.rotation.x = -Math.PI / 2;
++            // Change the resting grip corner while leaving the paper footprint in place.
++            props.receipt.position.x -= 0.14;
++            props.receipt.rotation.set(-Math.PI / 2, 0, 0);
++            props.card.rotation.x = 0;
++            cardAngle = Math.PI;
+           }
+           await moves.walk('kuroda', [-0.18, -1.04], [-0.2, -1.75]);
+           await moves.reach('kuroda', [-0.2, 0.71, -1.75]);
+@@ -164,9 +198,9 @@ export function createKaraokeStage(game, P, w) {
+             p = r.root.position;
+           shot.focus([p.x, p.z], portrait() ? 6.6 : 4.5, 0.77, 0, 0.36);
+           await moves.carry(who, [
+-            p.x + Math.sin(r.root.rotation.y) * 0.26,
+-            0.83,
+-            p.z + Math.cos(r.root.rotation.y) * 0.26,
++            p.x + Math.sin(r.root.rotation.y) * 0.18,
++            0.55,
++            p.z + Math.cos(r.root.rotation.y) * 0.18,
+           ]);
+           return;
+         }
+diff --git a/game3d/tools/karaoke-stage-check.mjs b/game3d/tools/karaoke-stage-check.mjs
+index b0dae5a8f..18f054024 100644
+--- a/game3d/tools/karaoke-stage-check.mjs
++++ b/game3d/tools/karaoke-stage-check.mjs
+@@ -4,7 +4,7 @@ import {withBrowserJob} from '../../tools/lib/browser-job.mjs';
+ import {scopedRoute} from '../../tools/bible/check-scope.mjs';
+ const width=+(process.argv[2]||1366),height=width<700?844:860,mc=width<700?'carina':'eric';
+ const base=`http://127.0.0.1:8771/${process.env.BASE||'game3d'}`;
+-const out=new URL(`../shots/karaoke-club/${process.env.ROUND||'round1'}-${width}/`,import.meta.url);fs.mkdirSync(out,{recursive:true});
++const out=process.env.OUT?new URL('file://'+process.env.OUT.replace(/\/$/,'')+'/'):new URL(`../shots/karaoke-club/${process.env.ROUND||'round1'}-${width}/`,import.meta.url);fs.mkdirSync(out,{recursive:true});
+ const result={width,mc,actions:[]};
+ await withBrowserJob('karaoke-stage-'+width,async browser=>{
+  const context=await browser.newContext({viewport:{width,height},hasTouch:width<700,isMobile:width<700}),page=await context.newPage();let closing=false;const errors=[],blocked=[];
+@@ -20,14 +20,46 @@ await withBrowserJob('karaoke-stage-'+width,async browser=>{
+    P.people.kenji.root.position.set(-1.6,0,-1);P.people.kuroda.root.position.set(1.45,0,-2.5);
+    g.beat(()=>new Promise(resolve=>{globalThis.__karaokeFinish=resolve;}));
+    globalThis.__karaokeBase={player:g.player.root.position.toArray(),kenji:P.people.kenji.update,kuroda:P.people.kuroda.update,eric:g.player.update,yaw:P.cam.yaw,elev:P.cam.elev};
++   const moves=P.karaokeClub.moves,pickup=moves.pickup,wait=g.wait;
++   g.wait=async function(ms){if(ms===650&&globalThis.__captureHandoff&&moves.phase==='shared-grip'){globalThis.__captureHandoff=false;await new Promise(resolve=>{globalThis.__resumeHandoff=resolve;});}return wait.call(this,ms);};
++   moves.pickup=async(who,item)=>{
++    if(!globalThis.__capturePickup)return pickup(who,item);
++    globalThis.__capturePickup=false;const tween=g.tween;
++    g.tween=async function(...args){await tween.apply(this,args);globalThis.__pickupPose={who,item:item.name};await new Promise(resolve=>{globalThis.__resumePickup=resolve;});};
++    try{return await pickup(who,item);}finally{g.tween=tween;globalThis.__pickupPose=null;}
++   };
+   });
+   for(const a of ([{state:'start'},{state:'queue'},{state:'clearQueueExtras'},{state:'receiptFront'},{state:'receiptBack'},{state:'selectNumber'},{state:'takeMicrophone',who:'kenji'},{state:'passMicrophone',who:'kuroda'},{state:'keepMicrophone',who:'kuroda'},{state:'passMicrophone',who:'eric'},{state:'group'},{state:'group',who:'kenji'},{state:'group',who:'kuroda'}]).filter(a=>!process.env.GROUP_ONLY||a.state==='start'||a.state==='group')){
+-   await page.evaluate(a=>{const P=globalThis.__game.place;globalThis.__karaokeDone=false;globalThis.__karaokeError=null;P.hooks.karaokeClub(a).catch(e=>{globalThis.__karaokeError=e.message;}).finally(()=>{globalThis.__karaokeDone=true;});},a);
+-   if(a.state==='passMicrophone'){await page.waitForFunction(()=>globalThis.__game.place.karaokeClub.moves.phase==='shared-grip'||globalThis.__karaokeDone,null,{timeout:25000});await page.screenshot({path:new URL(a.state+'-'+a.who+'-contact.png',out).pathname});}
++   await page.evaluate(a=>{globalThis.__captureHandoff=a.state==='passMicrophone';globalThis.__capturePickup=a.state==='receiptFront'||a.state==='takeMicrophone';const P=globalThis.__game.place;globalThis.__karaokeDone=false;globalThis.__karaokeError=null;P.hooks.karaokeClub(a).catch(e=>{globalThis.__karaokeError=e.message;}).finally(()=>{globalThis.__karaokeDone=true;});},a);
++   if(a.state==='receiptFront'||a.state==='takeMicrophone'){
++    await page.waitForFunction(()=>globalThis.__pickupPose||globalThis.__karaokeDone,null,{timeout:25000});
++    const pose=await page.evaluate(width=>{const P=globalThis.__game.place,pose=globalThis.__pickupPose;if(!pose)throw new Error('Pickup completed without endpoint capture');const r=P.people[pose.who],shot=P.karaokeClub.snapshot().shot.shot;globalThis.__pickupShot={...shot};Object.assign(shot,{point:[r.root.position.x,r.root.position.z],distance:width<700?8:4.5,y:.48,yaw:.3,elev:.5});P.cam.closeOn(shot.point,P.cam.fitDist/shot.distance,shot.y);return pose;},width);
++    await page.waitForTimeout(700);await page.screenshot({path:new URL(a.state+'-pickup-endpoint.png',out).pathname});
++    await page.evaluate(()=>{globalThis.__game.place.karaokeClub.snapshot().shot.shot.yaw=globalThis.__pickupPose.who==='kuroda'?-.8:.9;});await page.waitForTimeout(600);await page.screenshot({path:new URL(a.state+'-pickup-side.png',out).pathname});
++    result.pickupFrames||=[];result.pickupFrames.push(pose);
++    await page.evaluate(()=>{const P=globalThis.__game.place,shot=P.karaokeClub.snapshot().shot.shot;Object.assign(shot,globalThis.__pickupShot);P.cam.closeOn(shot.point,P.cam.fitDist/shot.distance,shot.y);globalThis.__resumePickup();});
++   }
++   if(a.state==='passMicrophone'){
++    await page.waitForFunction(()=>globalThis.__game.place.karaokeClub.moves.phase==='shared-grip'||globalThis.__karaokeDone,null,{timeout:25000});
++    await page.screenshot({path:new URL(a.state+'-'+a.who+'-contact.png',out).pathname});
++    const pose=await page.evaluate(who=>{const g=globalThis.__game,P=g.place,r=who==='eric'?g.player:P.people[who],shot=P.karaokeClub.snapshot().shot.shot;globalThis.__handoffShot={...shot};shot.yaw=.9;const p=r.root.position;return {who,state:r.state,walking:!!r._walk,yaw:r.root.rotation.y,wanted:Math.atan2(.76-p.x,-.45-p.z),targetFacing:who==='eric'?g.walker.targetFacing:null};},a.who);
++    if(a.who==='eric')assert(Math.abs(Math.atan2(Math.sin(pose.yaw-pose.wanted),Math.cos(pose.yaw-pose.wanted)))<.05,'player faces shared handoff before receiving: '+JSON.stringify(pose));
++    result.handoffFrames||=[];result.handoffFrames.push(pose);
++    await page.waitForTimeout(600);await page.screenshot({path:new URL(a.state+'-'+a.who+'-contact-side.png',out).pathname});
++    await page.evaluate(()=>{Object.assign(globalThis.__game.place.karaokeClub.snapshot().shot.shot,globalThis.__handoffShot);globalThis.__resumeHandoff();});
++   }
+    await page.waitForTimeout(450);await page.screenshot({path:new URL(a.state+'-'+(a.who||'')+'-motion.png',out).pathname});
+    await page.waitForFunction(()=>globalThis.__karaokeDone,null,{timeout:25000});
+    const data=await page.evaluate(()=>({error:globalThis.__karaokeError,snapshot:globalThis.__game.place.karaokeClub.snapshot(),contacts:globalThis.__game.place.karaokeClub.moves.contacts}));
+    result.actions.push({a,...data});assert.equal(data.error,null,a.state);
++   if(a.state==='selectNumber'){
++    const corners=await page.evaluate(()=>{const P=globalThis.__game.place,points=[];for(const mesh of P.karaokeClub.props.card.children){const vertices=mesh.geometry.attributes.position;for(let i=0;i<vertices.count;i++){const p=mesh.position.clone().fromBufferAttribute(vertices,i);points.push(P.space.worldToLocal(mesh.localToWorld(p)).toArray());}}return points;});
++    result.restingReceipt=corners;
++    for(const [,y]of corners)assert(y>.55&&y<.57,'returned sheet rests above the actual tabletop: '+JSON.stringify(corners));
++    const xs=corners.map(p=>p[0]),zs=corners.map(p=>p[2]),x0=Math.min(...xs),x1=Math.max(...xs),z0=Math.min(...zs),z1=Math.max(...zs);
++    const supported=Math.max(0,Math.min(x1,.232)-Math.max(x0,-1.22))*Math.max(0,Math.min(z1,-1.48)-Math.max(z0,-2.32));
++    assert(supported/((x1-x0)*(z1-z0))>.9,'at least 90% of the returned paper is supported by the tabletop');
++   }
+    await page.waitForTimeout(650);await page.screenshot({path:new URL(a.state+'-'+(a.who||'')+'.png',out).pathname});
+    if(a.state==='receiptBack'||a.state==='queue'||a.state==='group'){
+     await page.evaluate(a=>{const who=a.state==='group'?(a.who||'kenji'):'kuroda';void globalThis.__game.ui.say({name:who==='kenji'?'Kenji':'Hamada',color:'#ba9668'},who==='kenji'?'Come in. You can sit here. I put some songs in already.':'私のは、後でも大丈夫ですよ。',{whoId:who,overheard:who!=='kenji'});},a);
