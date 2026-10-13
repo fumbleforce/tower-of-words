@@ -115,7 +115,15 @@ try {
           const g = window.__game;
           const S = await import(new URL('js/sim.js', document.baseURI).href);
           S.save(g);
-          return { data: S.loadSave(), bodyPlace: document.body.dataset.place, runnerPlace: g.runner.place === g.place,
+          const data = S.loadSave(), surface = data.surface, k = g.player.root.scale.x || 1;
+          const { createTraversal } = await import(new URL('js/movement/traversal.js', document.baseURI).href);
+          const physical = createTraversal(g.place, [g.player.root, g.mioNpc?.root,
+            ...Object.values(g.place.people || {}).map(p => p.root), ...Object.values(g.place.extras || {}).map(p => p.root),
+            ...(g.place.crowd || []).map(p => p.root)]);
+          const support = physical.support(surface.x, surface.z, surface.y + 0.22 * k, 0.6 * k);
+          return { data, surfaceSupport: support,
+            surfaceFree: physical.free(surface.x, surface.z, surface.x, surface.z, support, k, false),
+            supportHeight: g.jump.supportHeight, bodyPlace: document.body.dataset.place, runnerPlace: g.runner.place === g.place,
             playerPosition: g.player.root.position.toArray(),
             floorX: g.place.space.getObjectByName('floor')?.getWorldPosition(g.player.root.position.clone()).x,
             trace: g.runner.trace || [], blocked: g.place.nav.rects.map(r => r.tag), continueFlag: sessionStorage.getItem('amakawa-continue') };
@@ -127,6 +135,8 @@ try {
           learned: { ugoite: { day: 1 }, ohayo: { day: 1 } },
           runner: { ...saved.runner, execution: null },
           zones: { place, consumed: [] },
+          // Idle saves serialize the player's actual supported feet, alongside their unchanged durable state.
+          surface: { x: state.playerPosition[0], z: state.playerPosition[2], y: state.playerPosition[1] + state.supportHeight },
           // Office restoration initializes its lunch availability; day 1 has no offer.
           flags: { ...saved.flags, ...(place === 'office' ? { mio_lunch_offer: 0 } : {}) },
           mc: 'eric',
@@ -137,6 +147,10 @@ try {
           visited: { train: ['train'], gate: ['train', 'gate'], office: ['train', 'gate', 'forecourt', 'office'] }[place],
           log: { v: 2, day: 1, items: [], memories: { v: 1, records: [] } },
         }, `${place}/${mode}: restored progression or legacy-save migration changed`);
+        assert.ok(Object.values(state.data.surface).every(Number.isFinite), `${place}/${mode}: finite saved support`);
+        assert.ok(Number.isFinite(state.surfaceSupport), `${place}/${mode}: physical support exists`);
+        assert.ok(Math.abs(state.surfaceSupport - state.data.surface.y) < 0.025, `${place}/${mode}: saved feet match physical support`);
+        assert.equal(state.surfaceFree, true, `${place}/${mode}: saved body has physical clearance`);
         assert.equal(state.bodyPlace, place);
         assert.equal(state.runnerPlace, true);
         assert.deepEqual(state.trace, [], 'idle Continue must not replay an opening');
