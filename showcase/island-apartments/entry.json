@@ -1,0 +1,925 @@
+{
+  "title": "Apartment upper floors and finished roofs",
+  "date": "2026-10-13",
+  "by": "codex",
+  "caption": "Open galleries, framed upper windows and a finished L-shaped roof now match across the courtyard and neighbouring island views. Every retained capture attempt is included below.",
+  "commit": [
+    "10b7344e84be4e330f97632a44781fd73f6918a5",
+    "c9d81782a890ea34c9edc859af1db3971b46843d",
+    "28f7541cd62343a920b74d38417bfb39666cd018",
+    "1720e68419b4048b5c933d713f9dc964f455c30c"
+  ],
+  "result": [
+    "after-palette-dorm-court-roof-evening-desk",
+    "after-palette-dorm-court-roof-evening-phone",
+    "after-palette-plaza-cluster-evening-desk",
+    "after-palette-plaza-cluster-evening-phone"
+  ],
+  "preview": "after-palette-dorm-court-roof-evening-desk",
+  "sections": [
+    {
+      "title": "First baseline attempt",
+      "caption": "Eleven retained desktop frames from f1eef49a2. The capture stopped at the dorm opening dialogue before phone views; this was a harness timing failure.",
+      "images": [
+        {
+          "id": "before-dorm-court-evening-approach-desk",
+          "image": "game3d/shots/island-apartments/before/dorm_court-evening-approach-desk.png",
+          "caption": "Dorm courtyard, evening; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-dorm-court-morning-approach-desk",
+          "image": "game3d/shots/island-apartments/before/dorm_court-morning-approach-desk.png",
+          "caption": "Dorm courtyard, morning; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-dorm-court-roof-desk",
+          "image": "game3d/shots/island-apartments/before/dorm_court-roof-desk.png",
+          "caption": "Dorm courtyard, evening, roof; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-dorm-court-stair-desk",
+          "image": "game3d/shots/island-apartments/before/dorm_court-stair-desk.png",
+          "caption": "Dorm courtyard, evening, stair corner; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-dorm-court-upper-desk",
+          "image": "game3d/shots/island-apartments/before/dorm_court-upper-desk.png",
+          "caption": "Dorm courtyard, evening, upper floors; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-east-coast-evening-approach-desk",
+          "image": "game3d/shots/island-apartments/before/east_coast-evening-approach-desk.png",
+          "caption": "East coast, evening; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-east-coast-morning-approach-desk",
+          "image": "game3d/shots/island-apartments/before/east_coast-morning-approach-desk.png",
+          "caption": "East coast, morning; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-east-lane-evening-approach-desk",
+          "image": "game3d/shots/island-apartments/before/east_lane-evening-approach-desk.png",
+          "caption": "East lane, evening; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-east-lane-morning-approach-desk",
+          "image": "game3d/shots/island-apartments/before/east_lane-morning-approach-desk.png",
+          "caption": "East lane, morning; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-plaza-evening-approach-desk",
+          "image": "game3d/shots/island-apartments/before/plaza-evening-approach-desk.png",
+          "caption": "Plaza, evening; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-plaza-morning-approach-desk",
+          "image": "game3d/shots/island-apartments/before/plaza-morning-approach-desk.png",
+          "caption": "Plaza, morning; staged playable approach with follow camera; native desktop 1366×860."
+        }
+      ]
+    },
+    {
+      "title": "Complete baseline",
+      "caption": "Thirty frames from f1eef49a2: staged player approaches, elevated court details and the playable upper corridor and roof. Court detail views use a diagnostic camera; the approaches use the desktop follow or phone overview camera.",
+      "images": [
+        {
+          "id": "before-complete-dorm-court-evening-approach-desk",
+          "image": "game3d/shots/island-apartments/before-complete/dorm_court-evening-approach-desk.png",
+          "caption": "Dorm courtyard, evening; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-complete-dorm-court-evening-approach-phone",
+          "image": "game3d/shots/island-apartments/before-complete/dorm_court-evening-approach-phone.png",
+          "caption": "Dorm courtyard, evening; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "before-complete-dorm-court-morning-approach-desk",
+          "image": "game3d/shots/island-apartments/before-complete/dorm_court-morning-approach-desk.png",
+          "caption": "Dorm courtyard, morning; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-complete-dorm-court-morning-approach-phone",
+          "image": "game3d/shots/island-apartments/before-complete/dorm_court-morning-approach-phone.png",
+          "caption": "Dorm courtyard, morning; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "before-complete-dorm-court-roof-desk",
+          "image": "game3d/shots/island-apartments/before-complete/dorm_court-roof-desk.png",
+          "caption": "Dorm courtyard, evening, roof; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-complete-dorm-court-roof-phone",
+          "image": "game3d/shots/island-apartments/before-complete/dorm_court-roof-phone.png",
+          "caption": "Dorm courtyard, evening, roof; elevated diagnostic camera; native phone 390×844."
+        },
+        {
+          "id": "before-complete-dorm-court-stair-desk",
+          "image": "game3d/shots/island-apartments/before-complete/dorm_court-stair-desk.png",
+          "caption": "Dorm courtyard, evening, stair corner; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-complete-dorm-court-stair-phone",
+          "image": "game3d/shots/island-apartments/before-complete/dorm_court-stair-phone.png",
+          "caption": "Dorm courtyard, evening, stair corner; elevated diagnostic camera; native phone 390×844."
+        },
+        {
+          "id": "before-complete-dorm-court-upper-desk",
+          "image": "game3d/shots/island-apartments/before-complete/dorm_court-upper-desk.png",
+          "caption": "Dorm courtyard, evening, upper floors; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-complete-dorm-court-upper-phone",
+          "image": "game3d/shots/island-apartments/before-complete/dorm_court-upper-phone.png",
+          "caption": "Dorm courtyard, evening, upper floors; elevated diagnostic camera; native phone 390×844."
+        },
+        {
+          "id": "before-complete-dorms-3f-desk",
+          "image": "game3d/shots/island-apartments/before-complete/dorms-3f-desk.png",
+          "caption": "Playable dorm; third-floor corridor after stairs interaction; gameplay camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-complete-dorms-3f-phone",
+          "image": "game3d/shots/island-apartments/before-complete/dorms-3f-phone.png",
+          "caption": "Playable dorm; third-floor corridor after stairs interaction; gameplay camera; native phone 390×844."
+        },
+        {
+          "id": "before-complete-dorms-evening-approach-desk",
+          "image": "game3d/shots/island-apartments/before-complete/dorms-evening-approach-desk.png",
+          "caption": "Playable dorm, evening; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-complete-dorms-evening-approach-phone",
+          "image": "game3d/shots/island-apartments/before-complete/dorms-evening-approach-phone.png",
+          "caption": "Playable dorm, evening; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "before-complete-dorms-morning-approach-desk",
+          "image": "game3d/shots/island-apartments/before-complete/dorms-morning-approach-desk.png",
+          "caption": "Playable dorm, morning; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-complete-dorms-morning-approach-phone",
+          "image": "game3d/shots/island-apartments/before-complete/dorms-morning-approach-phone.png",
+          "caption": "Playable dorm, morning; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "before-complete-dorms-roof-access-desk",
+          "image": "game3d/shots/island-apartments/before-complete/dorms-roof-access-desk.png",
+          "caption": "Playable dorm; playable roof after stairs interaction; gameplay camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-complete-dorms-roof-access-phone",
+          "image": "game3d/shots/island-apartments/before-complete/dorms-roof-access-phone.png",
+          "caption": "Playable dorm; playable roof after stairs interaction; gameplay camera; native phone 390×844."
+        },
+        {
+          "id": "before-complete-east-coast-evening-approach-desk",
+          "image": "game3d/shots/island-apartments/before-complete/east_coast-evening-approach-desk.png",
+          "caption": "East coast, evening; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-complete-east-coast-evening-approach-phone",
+          "image": "game3d/shots/island-apartments/before-complete/east_coast-evening-approach-phone.png",
+          "caption": "East coast, evening; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "before-complete-east-coast-morning-approach-desk",
+          "image": "game3d/shots/island-apartments/before-complete/east_coast-morning-approach-desk.png",
+          "caption": "East coast, morning; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-complete-east-coast-morning-approach-phone",
+          "image": "game3d/shots/island-apartments/before-complete/east_coast-morning-approach-phone.png",
+          "caption": "East coast, morning; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "before-complete-east-lane-evening-approach-desk",
+          "image": "game3d/shots/island-apartments/before-complete/east_lane-evening-approach-desk.png",
+          "caption": "East lane, evening; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-complete-east-lane-evening-approach-phone",
+          "image": "game3d/shots/island-apartments/before-complete/east_lane-evening-approach-phone.png",
+          "caption": "East lane, evening; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "before-complete-east-lane-morning-approach-desk",
+          "image": "game3d/shots/island-apartments/before-complete/east_lane-morning-approach-desk.png",
+          "caption": "East lane, morning; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-complete-east-lane-morning-approach-phone",
+          "image": "game3d/shots/island-apartments/before-complete/east_lane-morning-approach-phone.png",
+          "caption": "East lane, morning; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "before-complete-plaza-evening-approach-desk",
+          "image": "game3d/shots/island-apartments/before-complete/plaza-evening-approach-desk.png",
+          "caption": "Plaza, evening; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-complete-plaza-evening-approach-phone",
+          "image": "game3d/shots/island-apartments/before-complete/plaza-evening-approach-phone.png",
+          "caption": "Plaza, evening; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "before-complete-plaza-morning-approach-desk",
+          "image": "game3d/shots/island-apartments/before-complete/plaza-morning-approach-desk.png",
+          "caption": "Plaza, morning; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-complete-plaza-morning-approach-phone",
+          "image": "game3d/shots/island-apartments/before-complete/plaza-morning-approach-phone.png",
+          "caption": "Plaza, morning; staged playable approach with overview camera; native phone 390×844."
+        }
+      ]
+    },
+    {
+      "title": "Baseline building comparisons",
+      "caption": "Twenty-four diagnostic architecture views from f1eef49a2, in morning and evening. These are elevated fixed cameras; the phone camera is widened to fit the building, rather than the normal player view.",
+      "images": [
+        {
+          "id": "before-models-dorm-court-roof-evening-desk",
+          "image": "game3d/shots/island-apartments/before-models/dorm_court-roof-evening-desk.png",
+          "caption": "Dorm courtyard, evening, roof; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-models-dorm-court-roof-evening-phone",
+          "image": "game3d/shots/island-apartments/before-models/dorm_court-roof-evening-phone.png",
+          "caption": "Dorm courtyard, evening, roof; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "before-models-dorm-court-roof-morning-desk",
+          "image": "game3d/shots/island-apartments/before-models/dorm_court-roof-morning-desk.png",
+          "caption": "Dorm courtyard, morning, roof; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-models-dorm-court-roof-morning-phone",
+          "image": "game3d/shots/island-apartments/before-models/dorm_court-roof-morning-phone.png",
+          "caption": "Dorm courtyard, morning, roof; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "before-models-dorm-court-stair-evening-desk",
+          "image": "game3d/shots/island-apartments/before-models/dorm_court-stair-evening-desk.png",
+          "caption": "Dorm courtyard, evening, stair corner; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-models-dorm-court-stair-evening-phone",
+          "image": "game3d/shots/island-apartments/before-models/dorm_court-stair-evening-phone.png",
+          "caption": "Dorm courtyard, evening, stair corner; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "before-models-dorm-court-stair-morning-desk",
+          "image": "game3d/shots/island-apartments/before-models/dorm_court-stair-morning-desk.png",
+          "caption": "Dorm courtyard, morning, stair corner; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-models-dorm-court-stair-morning-phone",
+          "image": "game3d/shots/island-apartments/before-models/dorm_court-stair-morning-phone.png",
+          "caption": "Dorm courtyard, morning, stair corner; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "before-models-dorm-court-upper-evening-desk",
+          "image": "game3d/shots/island-apartments/before-models/dorm_court-upper-evening-desk.png",
+          "caption": "Dorm courtyard, evening, upper floors; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-models-dorm-court-upper-evening-phone",
+          "image": "game3d/shots/island-apartments/before-models/dorm_court-upper-evening-phone.png",
+          "caption": "Dorm courtyard, evening, upper floors; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "before-models-dorm-court-upper-morning-desk",
+          "image": "game3d/shots/island-apartments/before-models/dorm_court-upper-morning-desk.png",
+          "caption": "Dorm courtyard, morning, upper floors; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-models-dorm-court-upper-morning-phone",
+          "image": "game3d/shots/island-apartments/before-models/dorm_court-upper-morning-phone.png",
+          "caption": "Dorm courtyard, morning, upper floors; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "before-models-east-coast-cluster-evening-desk",
+          "image": "game3d/shots/island-apartments/before-models/east_coast-cluster-evening-desk.png",
+          "caption": "East coast, evening, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-models-east-coast-cluster-evening-phone",
+          "image": "game3d/shots/island-apartments/before-models/east_coast-cluster-evening-phone.png",
+          "caption": "East coast, evening, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "before-models-east-coast-cluster-morning-desk",
+          "image": "game3d/shots/island-apartments/before-models/east_coast-cluster-morning-desk.png",
+          "caption": "East coast, morning, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-models-east-coast-cluster-morning-phone",
+          "image": "game3d/shots/island-apartments/before-models/east_coast-cluster-morning-phone.png",
+          "caption": "East coast, morning, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "before-models-east-lane-cluster-evening-desk",
+          "image": "game3d/shots/island-apartments/before-models/east_lane-cluster-evening-desk.png",
+          "caption": "East lane, evening, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-models-east-lane-cluster-evening-phone",
+          "image": "game3d/shots/island-apartments/before-models/east_lane-cluster-evening-phone.png",
+          "caption": "East lane, evening, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "before-models-east-lane-cluster-morning-desk",
+          "image": "game3d/shots/island-apartments/before-models/east_lane-cluster-morning-desk.png",
+          "caption": "East lane, morning, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-models-east-lane-cluster-morning-phone",
+          "image": "game3d/shots/island-apartments/before-models/east_lane-cluster-morning-phone.png",
+          "caption": "East lane, morning, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "before-models-plaza-cluster-evening-desk",
+          "image": "game3d/shots/island-apartments/before-models/plaza-cluster-evening-desk.png",
+          "caption": "Plaza, evening, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-models-plaza-cluster-evening-phone",
+          "image": "game3d/shots/island-apartments/before-models/plaza-cluster-evening-phone.png",
+          "caption": "Plaza, evening, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "before-models-plaza-cluster-morning-desk",
+          "image": "game3d/shots/island-apartments/before-models/plaza-cluster-morning-desk.png",
+          "caption": "Plaza, morning, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "before-models-plaza-cluster-morning-phone",
+          "image": "game3d/shots/island-apartments/before-models/plaza-cluster-morning-phone.png",
+          "caption": "Plaza, morning, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        }
+      ]
+    },
+    {
+      "title": "First apartment milestone",
+      "caption": "Thirty frames after 10b7344e8: staged player approaches, court details and existing corridor/roof access. Later review found the blank return-end face in neighbouring views; the repair is shown below.",
+      "images": [
+        {
+          "id": "after-1-dorm-court-evening-approach-desk",
+          "image": "game3d/shots/island-apartments/after-1/dorm_court-evening-approach-desk.png",
+          "caption": "Dorm courtyard, evening; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-1-dorm-court-evening-approach-phone",
+          "image": "game3d/shots/island-apartments/after-1/dorm_court-evening-approach-phone.png",
+          "caption": "Dorm courtyard, evening; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "after-1-dorm-court-morning-approach-desk",
+          "image": "game3d/shots/island-apartments/after-1/dorm_court-morning-approach-desk.png",
+          "caption": "Dorm courtyard, morning; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-1-dorm-court-morning-approach-phone",
+          "image": "game3d/shots/island-apartments/after-1/dorm_court-morning-approach-phone.png",
+          "caption": "Dorm courtyard, morning; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "after-1-dorm-court-roof-desk",
+          "image": "game3d/shots/island-apartments/after-1/dorm_court-roof-desk.png",
+          "caption": "Dorm courtyard, evening, roof; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-1-dorm-court-roof-phone",
+          "image": "game3d/shots/island-apartments/after-1/dorm_court-roof-phone.png",
+          "caption": "Dorm courtyard, evening, roof; elevated diagnostic camera; native phone 390×844."
+        },
+        {
+          "id": "after-1-dorm-court-stair-desk",
+          "image": "game3d/shots/island-apartments/after-1/dorm_court-stair-desk.png",
+          "caption": "Dorm courtyard, evening, stair corner; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-1-dorm-court-stair-phone",
+          "image": "game3d/shots/island-apartments/after-1/dorm_court-stair-phone.png",
+          "caption": "Dorm courtyard, evening, stair corner; elevated diagnostic camera; native phone 390×844."
+        },
+        {
+          "id": "after-1-dorm-court-upper-desk",
+          "image": "game3d/shots/island-apartments/after-1/dorm_court-upper-desk.png",
+          "caption": "Dorm courtyard, evening, upper floors; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-1-dorm-court-upper-phone",
+          "image": "game3d/shots/island-apartments/after-1/dorm_court-upper-phone.png",
+          "caption": "Dorm courtyard, evening, upper floors; elevated diagnostic camera; native phone 390×844."
+        },
+        {
+          "id": "after-1-dorms-3f-desk",
+          "image": "game3d/shots/island-apartments/after-1/dorms-3f-desk.png",
+          "caption": "Playable dorm; third-floor corridor after stairs interaction; gameplay camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-1-dorms-3f-phone",
+          "image": "game3d/shots/island-apartments/after-1/dorms-3f-phone.png",
+          "caption": "Playable dorm; third-floor corridor after stairs interaction; gameplay camera; native phone 390×844."
+        },
+        {
+          "id": "after-1-dorms-evening-approach-desk",
+          "image": "game3d/shots/island-apartments/after-1/dorms-evening-approach-desk.png",
+          "caption": "Playable dorm, evening; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-1-dorms-evening-approach-phone",
+          "image": "game3d/shots/island-apartments/after-1/dorms-evening-approach-phone.png",
+          "caption": "Playable dorm, evening; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "after-1-dorms-morning-approach-desk",
+          "image": "game3d/shots/island-apartments/after-1/dorms-morning-approach-desk.png",
+          "caption": "Playable dorm, morning; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-1-dorms-morning-approach-phone",
+          "image": "game3d/shots/island-apartments/after-1/dorms-morning-approach-phone.png",
+          "caption": "Playable dorm, morning; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "after-1-dorms-roof-access-desk",
+          "image": "game3d/shots/island-apartments/after-1/dorms-roof-access-desk.png",
+          "caption": "Playable dorm; playable roof after stairs interaction; gameplay camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-1-dorms-roof-access-phone",
+          "image": "game3d/shots/island-apartments/after-1/dorms-roof-access-phone.png",
+          "caption": "Playable dorm; playable roof after stairs interaction; gameplay camera; native phone 390×844."
+        },
+        {
+          "id": "after-1-east-coast-evening-approach-desk",
+          "image": "game3d/shots/island-apartments/after-1/east_coast-evening-approach-desk.png",
+          "caption": "East coast, evening; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-1-east-coast-evening-approach-phone",
+          "image": "game3d/shots/island-apartments/after-1/east_coast-evening-approach-phone.png",
+          "caption": "East coast, evening; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "after-1-east-coast-morning-approach-desk",
+          "image": "game3d/shots/island-apartments/after-1/east_coast-morning-approach-desk.png",
+          "caption": "East coast, morning; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-1-east-coast-morning-approach-phone",
+          "image": "game3d/shots/island-apartments/after-1/east_coast-morning-approach-phone.png",
+          "caption": "East coast, morning; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "after-1-east-lane-evening-approach-desk",
+          "image": "game3d/shots/island-apartments/after-1/east_lane-evening-approach-desk.png",
+          "caption": "East lane, evening; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-1-east-lane-evening-approach-phone",
+          "image": "game3d/shots/island-apartments/after-1/east_lane-evening-approach-phone.png",
+          "caption": "East lane, evening; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "after-1-east-lane-morning-approach-desk",
+          "image": "game3d/shots/island-apartments/after-1/east_lane-morning-approach-desk.png",
+          "caption": "East lane, morning; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-1-east-lane-morning-approach-phone",
+          "image": "game3d/shots/island-apartments/after-1/east_lane-morning-approach-phone.png",
+          "caption": "East lane, morning; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "after-1-plaza-evening-approach-desk",
+          "image": "game3d/shots/island-apartments/after-1/plaza-evening-approach-desk.png",
+          "caption": "Plaza, evening; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-1-plaza-evening-approach-phone",
+          "image": "game3d/shots/island-apartments/after-1/plaza-evening-approach-phone.png",
+          "caption": "Plaza, evening; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "after-1-plaza-morning-approach-desk",
+          "image": "game3d/shots/island-apartments/after-1/plaza-morning-approach-desk.png",
+          "caption": "Plaza, morning; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-1-plaza-morning-approach-phone",
+          "image": "game3d/shots/island-apartments/after-1/plaza-morning-approach-phone.png",
+          "caption": "Plaza, morning; staged playable approach with overview camera; native phone 390×844."
+        }
+      ]
+    },
+    {
+      "title": "First model attempt, before repair",
+      "caption": "Twenty-four elevated diagnostic views after 10b7344e8. Independent review rejected twelve for blank wing faces. These failed views remain here alongside the repaired attempt.",
+      "images": [
+        {
+          "id": "after-models-1-dorm-court-roof-evening-desk",
+          "image": "game3d/shots/island-apartments/after-models-1/dorm_court-roof-evening-desk.png",
+          "caption": "Dorm courtyard, evening, roof; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-1-dorm-court-roof-evening-phone",
+          "image": "game3d/shots/island-apartments/after-models-1/dorm_court-roof-evening-phone.png",
+          "caption": "Dorm courtyard, evening, roof; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-1-dorm-court-roof-morning-desk",
+          "image": "game3d/shots/island-apartments/after-models-1/dorm_court-roof-morning-desk.png",
+          "caption": "Dorm courtyard, morning, roof; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-1-dorm-court-roof-morning-phone",
+          "image": "game3d/shots/island-apartments/after-models-1/dorm_court-roof-morning-phone.png",
+          "caption": "Dorm courtyard, morning, roof; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-1-dorm-court-stair-evening-desk",
+          "image": "game3d/shots/island-apartments/after-models-1/dorm_court-stair-evening-desk.png",
+          "caption": "Dorm courtyard, evening, stair corner; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-1-dorm-court-stair-evening-phone",
+          "image": "game3d/shots/island-apartments/after-models-1/dorm_court-stair-evening-phone.png",
+          "caption": "Dorm courtyard, evening, stair corner; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-1-dorm-court-stair-morning-desk",
+          "image": "game3d/shots/island-apartments/after-models-1/dorm_court-stair-morning-desk.png",
+          "caption": "Dorm courtyard, morning, stair corner; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-1-dorm-court-stair-morning-phone",
+          "image": "game3d/shots/island-apartments/after-models-1/dorm_court-stair-morning-phone.png",
+          "caption": "Dorm courtyard, morning, stair corner; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-1-dorm-court-upper-evening-desk",
+          "image": "game3d/shots/island-apartments/after-models-1/dorm_court-upper-evening-desk.png",
+          "caption": "Dorm courtyard, evening, upper floors; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-1-dorm-court-upper-evening-phone",
+          "image": "game3d/shots/island-apartments/after-models-1/dorm_court-upper-evening-phone.png",
+          "caption": "Dorm courtyard, evening, upper floors; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-1-dorm-court-upper-morning-desk",
+          "image": "game3d/shots/island-apartments/after-models-1/dorm_court-upper-morning-desk.png",
+          "caption": "Dorm courtyard, morning, upper floors; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-1-dorm-court-upper-morning-phone",
+          "image": "game3d/shots/island-apartments/after-models-1/dorm_court-upper-morning-phone.png",
+          "caption": "Dorm courtyard, morning, upper floors; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-1-east-coast-cluster-evening-desk",
+          "image": "game3d/shots/island-apartments/after-models-1/east_coast-cluster-evening-desk.png",
+          "caption": "East coast, evening, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-1-east-coast-cluster-evening-phone",
+          "image": "game3d/shots/island-apartments/after-models-1/east_coast-cluster-evening-phone.png",
+          "caption": "East coast, evening, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-1-east-coast-cluster-morning-desk",
+          "image": "game3d/shots/island-apartments/after-models-1/east_coast-cluster-morning-desk.png",
+          "caption": "East coast, morning, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-1-east-coast-cluster-morning-phone",
+          "image": "game3d/shots/island-apartments/after-models-1/east_coast-cluster-morning-phone.png",
+          "caption": "East coast, morning, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-1-east-lane-cluster-evening-desk",
+          "image": "game3d/shots/island-apartments/after-models-1/east_lane-cluster-evening-desk.png",
+          "caption": "East lane, evening, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-1-east-lane-cluster-evening-phone",
+          "image": "game3d/shots/island-apartments/after-models-1/east_lane-cluster-evening-phone.png",
+          "caption": "East lane, evening, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-1-east-lane-cluster-morning-desk",
+          "image": "game3d/shots/island-apartments/after-models-1/east_lane-cluster-morning-desk.png",
+          "caption": "East lane, morning, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-1-east-lane-cluster-morning-phone",
+          "image": "game3d/shots/island-apartments/after-models-1/east_lane-cluster-morning-phone.png",
+          "caption": "East lane, morning, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-1-plaza-cluster-evening-desk",
+          "image": "game3d/shots/island-apartments/after-models-1/plaza-cluster-evening-desk.png",
+          "caption": "Plaza, evening, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-1-plaza-cluster-evening-phone",
+          "image": "game3d/shots/island-apartments/after-models-1/plaza-cluster-evening-phone.png",
+          "caption": "Plaza, evening, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-1-plaza-cluster-morning-desk",
+          "image": "game3d/shots/island-apartments/after-models-1/plaza-cluster-morning-desk.png",
+          "caption": "Plaza, morning, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-1-plaza-cluster-morning-phone",
+          "image": "game3d/shots/island-apartments/after-models-1/plaza-cluster-morning-phone.png",
+          "caption": "Plaza, morning, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        }
+      ]
+    },
+    {
+      "title": "Repaired upper floors and neighbouring views",
+      "caption": "Twenty-four diagnostic views of the framed end windows, floor lines and corrected sento roof. Captured from the staged source committed unchanged as c9d81782a; the generated build stamp still showed 10b. Independent apartment review: 8/10. Phone camera widened for the model comparison.",
+      "images": [
+        {
+          "id": "after-models-2-dorm-court-roof-evening-desk",
+          "image": "game3d/shots/island-apartments/after-models-2/dorm_court-roof-evening-desk.png",
+          "caption": "Dorm courtyard, evening, roof; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-2-dorm-court-roof-evening-phone",
+          "image": "game3d/shots/island-apartments/after-models-2/dorm_court-roof-evening-phone.png",
+          "caption": "Dorm courtyard, evening, roof; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-2-dorm-court-roof-morning-desk",
+          "image": "game3d/shots/island-apartments/after-models-2/dorm_court-roof-morning-desk.png",
+          "caption": "Dorm courtyard, morning, roof; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-2-dorm-court-roof-morning-phone",
+          "image": "game3d/shots/island-apartments/after-models-2/dorm_court-roof-morning-phone.png",
+          "caption": "Dorm courtyard, morning, roof; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-2-dorm-court-stair-evening-desk",
+          "image": "game3d/shots/island-apartments/after-models-2/dorm_court-stair-evening-desk.png",
+          "caption": "Dorm courtyard, evening, stair corner; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-2-dorm-court-stair-evening-phone",
+          "image": "game3d/shots/island-apartments/after-models-2/dorm_court-stair-evening-phone.png",
+          "caption": "Dorm courtyard, evening, stair corner; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-2-dorm-court-stair-morning-desk",
+          "image": "game3d/shots/island-apartments/after-models-2/dorm_court-stair-morning-desk.png",
+          "caption": "Dorm courtyard, morning, stair corner; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-2-dorm-court-stair-morning-phone",
+          "image": "game3d/shots/island-apartments/after-models-2/dorm_court-stair-morning-phone.png",
+          "caption": "Dorm courtyard, morning, stair corner; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-2-dorm-court-upper-evening-desk",
+          "image": "game3d/shots/island-apartments/after-models-2/dorm_court-upper-evening-desk.png",
+          "caption": "Dorm courtyard, evening, upper floors; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-2-dorm-court-upper-evening-phone",
+          "image": "game3d/shots/island-apartments/after-models-2/dorm_court-upper-evening-phone.png",
+          "caption": "Dorm courtyard, evening, upper floors; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-2-dorm-court-upper-morning-desk",
+          "image": "game3d/shots/island-apartments/after-models-2/dorm_court-upper-morning-desk.png",
+          "caption": "Dorm courtyard, morning, upper floors; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-2-dorm-court-upper-morning-phone",
+          "image": "game3d/shots/island-apartments/after-models-2/dorm_court-upper-morning-phone.png",
+          "caption": "Dorm courtyard, morning, upper floors; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-2-east-coast-cluster-evening-desk",
+          "image": "game3d/shots/island-apartments/after-models-2/east_coast-cluster-evening-desk.png",
+          "caption": "East coast, evening, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-2-east-coast-cluster-evening-phone",
+          "image": "game3d/shots/island-apartments/after-models-2/east_coast-cluster-evening-phone.png",
+          "caption": "East coast, evening, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-2-east-coast-cluster-morning-desk",
+          "image": "game3d/shots/island-apartments/after-models-2/east_coast-cluster-morning-desk.png",
+          "caption": "East coast, morning, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-2-east-coast-cluster-morning-phone",
+          "image": "game3d/shots/island-apartments/after-models-2/east_coast-cluster-morning-phone.png",
+          "caption": "East coast, morning, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-2-east-lane-cluster-evening-desk",
+          "image": "game3d/shots/island-apartments/after-models-2/east_lane-cluster-evening-desk.png",
+          "caption": "East lane, evening, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-2-east-lane-cluster-evening-phone",
+          "image": "game3d/shots/island-apartments/after-models-2/east_lane-cluster-evening-phone.png",
+          "caption": "East lane, evening, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-2-east-lane-cluster-morning-desk",
+          "image": "game3d/shots/island-apartments/after-models-2/east_lane-cluster-morning-desk.png",
+          "caption": "East lane, morning, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-2-east-lane-cluster-morning-phone",
+          "image": "game3d/shots/island-apartments/after-models-2/east_lane-cluster-morning-phone.png",
+          "caption": "East lane, morning, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-2-plaza-cluster-evening-desk",
+          "image": "game3d/shots/island-apartments/after-models-2/plaza-cluster-evening-desk.png",
+          "caption": "Plaza, evening, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-2-plaza-cluster-evening-phone",
+          "image": "game3d/shots/island-apartments/after-models-2/plaza-cluster-evening-phone.png",
+          "caption": "Plaza, evening, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-models-2-plaza-cluster-morning-desk",
+          "image": "game3d/shots/island-apartments/after-models-2/plaza-cluster-morning-desk.png",
+          "caption": "Plaza, morning, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-models-2-plaza-cluster-morning-phone",
+          "image": "game3d/shots/island-apartments/after-models-2/plaza-cluster-morning-phone.png",
+          "caption": "Plaza, morning, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        }
+      ]
+    },
+    {
+      "title": "Repaired buildings from the playable approach",
+      "caption": "Four fresh c9d81782a approaches from the east coast, morning and evening, desktop follow and phone overview. Independent apartment review: 8/10. The preceding deferred after-2 job produced no PNG frames; its log remains in the evidence.",
+      "images": [
+        {
+          "id": "after-2-retry-east-coast-evening-approach-desk",
+          "image": "game3d/shots/island-apartments/after-2-retry/east_coast-evening-approach-desk.png",
+          "caption": "East coast, evening; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-2-retry-east-coast-evening-approach-phone",
+          "image": "game3d/shots/island-apartments/after-2-retry/east_coast-evening-approach-phone.png",
+          "caption": "East coast, evening; staged playable approach with overview camera; native phone 390×844."
+        },
+        {
+          "id": "after-2-retry-east-coast-morning-approach-desk",
+          "image": "game3d/shots/island-apartments/after-2-retry/east_coast-morning-approach-desk.png",
+          "caption": "East coast, morning; staged playable approach with follow camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-2-retry-east-coast-morning-approach-phone",
+          "image": "game3d/shots/island-apartments/after-2-retry/east_coast-morning-approach-phone.png",
+          "caption": "East coast, morning; staged playable approach with overview camera; native phone 390×844."
+        }
+      ]
+    },
+    {
+      "title": "Final roof finish, diagnostic views",
+      "caption": "Eight native views from committed 28f7541cd. Structural roof finishes use neutral grey so physical surface checks classify them as roof rather than foliage. Geometry is unchanged. Independent review: 8/10 throughout. These are elevated diagnostic cameras, widened on phone. The generated build stamp still showed c9; morning phone frames retain a faint objective-card animation edge, so the evening frames are the final highlights.",
+      "images": [
+        {
+          "id": "after-palette-dorm-court-roof-evening-desk",
+          "image": "game3d/shots/island-apartments/after-palette/dorm_court-roof-evening-desk.png",
+          "caption": "Dorm courtyard, evening, roof; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-palette-dorm-court-roof-evening-phone",
+          "image": "game3d/shots/island-apartments/after-palette/dorm_court-roof-evening-phone.png",
+          "caption": "Dorm courtyard, evening, roof; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-palette-dorm-court-roof-morning-desk",
+          "image": "game3d/shots/island-apartments/after-palette/dorm_court-roof-morning-desk.png",
+          "caption": "Dorm courtyard, morning, roof; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-palette-dorm-court-roof-morning-phone",
+          "image": "game3d/shots/island-apartments/after-palette/dorm_court-roof-morning-phone.png",
+          "caption": "Dorm courtyard, morning, roof; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-palette-plaza-cluster-evening-desk",
+          "image": "game3d/shots/island-apartments/after-palette/plaza-cluster-evening-desk.png",
+          "caption": "Plaza, evening, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-palette-plaza-cluster-evening-phone",
+          "image": "game3d/shots/island-apartments/after-palette/plaza-cluster-evening-phone.png",
+          "caption": "Plaza, evening, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        },
+        {
+          "id": "after-palette-plaza-cluster-morning-desk",
+          "image": "game3d/shots/island-apartments/after-palette/plaza-cluster-morning-desk.png",
+          "caption": "Plaza, morning, neighbouring building cluster; elevated diagnostic camera; native desktop 1366×860."
+        },
+        {
+          "id": "after-palette-plaza-cluster-morning-phone",
+          "image": "game3d/shots/island-apartments/after-palette/plaza-cluster-morning-phone.png",
+          "caption": "Plaza, morning, neighbouring building cluster; elevated diagnostic camera; widened for phone; native phone 390×844."
+        }
+      ]
+    },
+    {
+      "title": "Desktop corridor and roof interaction attempt",
+      "caption": "Five retained screenshots from real room/corridor/stair/roof checks. The subsequent courtyard-return harness call timed out because it called a marker callback outside the game interaction lifecycle; the corrected run follows. These controlled interaction checks are separate from the approach captures.",
+      "images": [
+        {
+          "id": "routes-final-3-203-corridor-return-desk",
+          "image": "game3d/shots/island-apartments/routes-final-3/203-corridor-return-desk.png",
+          "caption": "203 corridor after leaving the room; controlled interaction check; native desktop 1366×860."
+        },
+        {
+          "id": "routes-final-3-203-cutaway-desk",
+          "image": "game3d/shots/island-apartments/routes-final-3/203-cutaway-desk.png",
+          "caption": "Room 203 cutaway; controlled interaction check; native desktop 1366×860."
+        },
+        {
+          "id": "routes-final-3-2f-west-corridor-desk",
+          "image": "game3d/shots/island-apartments/routes-final-3/2f-west-corridor-desk.png",
+          "caption": "Second-floor west corridor; controlled interaction check; native desktop 1366×860."
+        },
+        {
+          "id": "routes-final-3-3f-west-corridor-desk",
+          "image": "game3d/shots/island-apartments/routes-final-3/3f-west-corridor-desk.png",
+          "caption": "Third-floor west corridor; controlled interaction check; native desktop 1366×860."
+        },
+        {
+          "id": "routes-final-3-roof-route-desk",
+          "image": "game3d/shots/island-apartments/routes-final-3/roof-route-desk.png",
+          "caption": "Playable roof route past washing and planters; controlled interaction check; native desktop 1366×860."
+        }
+      ]
+    },
+    {
+      "title": "Corrected door, cutaway and courtyard return",
+      "caption": "Six native screenshots from the real game interaction lifecycle on desktop and phone: door 203, room cutaway, corridor and courtyard return pass. This short run checks the return route; the upper-stair and roof checks are shown separately above. Earlier harness reference/timing attempts produced no PNG frames and remain logged in the evidence.",
+      "images": [
+        {
+          "id": "routes-final-4-203-corridor-return-desk",
+          "image": "game3d/shots/island-apartments/routes-final-4/203-corridor-return-desk.png",
+          "caption": "203 corridor after leaving the room; controlled interaction check; native desktop 1366×860."
+        },
+        {
+          "id": "routes-final-4-203-corridor-return-phone",
+          "image": "game3d/shots/island-apartments/routes-final-4/203-corridor-return-phone.png",
+          "caption": "203 corridor after leaving the room; controlled interaction check; native phone 390×844."
+        },
+        {
+          "id": "routes-final-4-203-cutaway-desk",
+          "image": "game3d/shots/island-apartments/routes-final-4/203-cutaway-desk.png",
+          "caption": "Room 203 cutaway; controlled interaction check; native desktop 1366×860."
+        },
+        {
+          "id": "routes-final-4-203-cutaway-phone",
+          "image": "game3d/shots/island-apartments/routes-final-4/203-cutaway-phone.png",
+          "caption": "Room 203 cutaway; controlled interaction check; native phone 390×844."
+        },
+        {
+          "id": "routes-final-4-court-return-desk",
+          "image": "game3d/shots/island-apartments/routes-final-4/court-return-desk.png",
+          "caption": "Courtyard after using the stairs-down marker; controlled interaction check; native desktop 1366×860."
+        },
+        {
+          "id": "routes-final-4-court-return-phone",
+          "image": "game3d/shots/island-apartments/routes-final-4/court-return-phone.png",
+          "caption": "Courtyard after using the stairs-down marker; controlled interaction check; native phone 390×844."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play the courtyard",
+      "href": "game3d/?day=2&place=dorm_court"
+    },
+    {
+      "label": "Evidence, checks and attempt history",
+      "href": "game3d/shots/island-apartments/EVIDENCE.md"
+    },
+    {
+      "label": "Final apartment visual audit",
+      "href": "game3d/shots/island-apartments/after-palette/visual-audit.md"
+    }
+  ]
+}
