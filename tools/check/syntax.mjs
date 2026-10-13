@@ -19,7 +19,10 @@ const files = process.argv.length > 2 && !listOnly
   ? process.argv.slice(2).map(filename => path.resolve(filename))
   : [...['game3d', 'tools', 'bible'].flatMap(folder => sources(path.join(root, folder))),
      ...fs.readdirSync(root).filter(name => /\.(?:js|mjs|cjs)$/.test(name)).map(name => path.join(root, name))];
-if (listOnly) { console.log(JSON.stringify(files.map(file => path.relative(root, file)).sort())); process.exit(0); }
+if (listOnly) {
+  await new Promise(resolve => process.stdout.write(`${JSON.stringify(files.map(file => path.relative(root, file)).sort())}\n`, resolve));
+  process.exit(0);
+}
 let failures = 0;
 for (const filename of files.sort()) {
   const browserModule = /^(game3d\/js|game3d\/story)\//.test(path.relative(root, filename)) && filename.endsWith('.js');

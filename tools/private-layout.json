@@ -1,0 +1,92 @@
+{
+  "_about": "The layout rules for island/private/ (git-ignored). Prose and reasons: island/PRIVATE.md, Layout. Read by tools/private_layout.py (the report and the check) and .claude/hooks/private_guard.py (the Write/Edit guard). Names only; nothing private is described here. game/ holds only what the game loads, registered in game/live.json (notes/asset-lifecycle.md); rewards/ is the generated area, and rewards/retired/<date>/<original path> holds replaced live files. Rounds nest under a project (rewards/<project>/<topic>-<n>/). The flat rounds were moved on 2026-10-05; `moved` is the old-to-new name map for reading older records.",
+  "top": [
+    "game",
+    "plugins",
+    "rewards",
+    "audio",
+    "imagegen",
+    "f95zone",
+    "bible",
+    "user"
+  ],
+  "user_only": "user",
+  "dashboard_only": [
+    "imagegen"
+  ],
+  "rewards": {
+    "round_regex": "^[a-z0-9]+(-[a-z0-9]+)*-[0-9]+$",
+    "fixed_dirs": [
+      "tools",
+      "workflows",
+      "reviews",
+      "encounters",
+      "docs",
+      "retired"
+    ],
+    "fixed_files": [
+      "index.html",
+      "manifest.json",
+      "sequences.json",
+      "lines.json",
+      "lines-days.json",
+      "scenes.html"
+    ],
+    "doc_regex": "^[A-Z][A-Z0-9-]*\\.md$",
+    "legacy": {},
+    "projects": {
+      "skimpy": "daring-outfit portraits and sets for the cast",
+      "peeks": "the first private peek scenes (bath, machine room, desk, office) and their redo rounds",
+      "day1": "the day-1 private scenes: hard scenes, the gate search, the pictures they still need",
+      "characters": "designs of private-only characters (the gate guard)",
+      "library": "scenes made but not used yet",
+      "days": "the pictures of the witnessed hard scenes of days 2 to 5 (rounds <scene>-<n>) and the promoted set per scene in d<N>/<scene id>/<n>.webp",
+      "archive": "September's gallery, round-27, round-28 and everything else retired"
+    },
+    "project_dirs": {
+      "days": "^d[0-9]+$"
+    },
+    "flat_rounds_legacy": [],
+    "moved": {
+      "day1-hard-1": "day1/hard-1",
+      "day1-hard-2": "day1/gate-search-1",
+      "day1-hard-3": "day1/extras-1",
+      "gate-guard-1": "characters/gate-guard-1",
+      "skimpy-aoi-2": "skimpy/aoi-2",
+      "skimpy-emi-2": "skimpy/emi-2",
+      "skimpy-emi-3": "skimpy/emi-3",
+      "skimpy-kuro-2": "skimpy/kuro-2",
+      "skimpy-mio-set-1": "skimpy/mio-set-1",
+      "skimpy-portraits-1": "skimpy/portraits-1",
+      "skimpy-portraits-2": "skimpy/portraits-2",
+      "skimpy-sets-1": "skimpy/sets-1",
+      "mio-bath": "peeks/mio-bath-1",
+      "mio-racks": "peeks/mio-racks-1",
+      "mio-racks-2": "peeks/mio-racks-2",
+      "kuro-desk": "peeks/kuro-desk-1",
+      "kuro-desk-2": "peeks/kuro-desk-2",
+      "emi-office": "peeks/emi-office-1",
+      "emi-office-2": "peeks/emi-office-2",
+      "round-27": "archive/round-27",
+      "round-28": "archive/round-28",
+      "img": "archive/img",
+      "web": "archive/web",
+      "work": "archive/work",
+      "index.html": "archive/index.html",
+      "log.json": "archive/log.json",
+      "notes.json": "archive/notes.json",
+      "picks.json": "archive/picks.json",
+      "day1-hard-1.md": "docs/day1-scenes.md"
+    }
+  },
+  "game": {
+    "files": [
+      "live.json"
+    ],
+    "dirs": {
+      "encounters": "the scene pictures the plugins show, flat",
+      "portraits": "the private portrait sets, one folder per person",
+      "models": "3D models the plugins load, one folder per model"
+    }
+  }
+}

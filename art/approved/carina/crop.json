@@ -1,0 +1,25 @@
+{
+ "canvas": [
+  648,
+  768
+ ],
+ "top": 70,
+ "f": [
+  219,
+  216,
+  429,
+  396
+ ],
+ "files": {
+  "neutral": "carina-neutral.webp",
+  "surprised": "carina-surprised.webp",
+  "tired": "carina-tired.webp"
+ },
+ "source": {
+  "neutral": "cf2-neutral-asis-2-cut.webp (mirrored: J\u00f8rgen \"should be mirrored\")",
+  "surprised": "carina-faces-2/cf2-surprised-1-cut.webp",
+  "tired": "carina-faces-2/cf2-tired-1-cut.webp"
+ },
+ "note": "neutral stays the faces-1 fit: faces-2 neutral seed ...760 shows 1 brow piercing (DRIFT), so it is not swapped",
+ "picked_by": "J\u00f8rgen, carina-faces-2 review, 2026-10-05"
+}

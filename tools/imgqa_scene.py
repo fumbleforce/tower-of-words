@@ -276,7 +276,12 @@ def thr(p, key):
     return (p.get('thresh') or {}).get(key, THRESH[key])
 
 
-def grade_face(f, p):
+def outfit_enabled(p, pic):
+    """Whether this person's outfit should be checked in this picture."""
+    return bool(p.get('outfit')) and (not p.get('outfit_in') or any(x in pic for x in p['outfit_in']))
+
+
+def grade_face(f, p, pic=''):
     """Statuses of an identified face from its stored measurements and THRESH: ccip, glasses, hair, skin."""
     f['ccip_status'] = imgqa.grade('ccip', f['ccip'], {'ccip': thr(p, 'ccip')})
     st = [f['ccip_status']]
@@ -307,8 +312,14 @@ def grade_face(f, p):
             s['status'], s['note'] = 'pass', 'shown, not graded (only the pale people are)'
         st.append(s['status'])
     o = f.get('outfit')
-    if o and p.get('outfit'):
-        st.append('pass' if grade_outfit(o, p) == 'na' else o['status'])
+    if o:
+        if outfit_enabled(p, pic):
+            st.append('pass' if grade_outfit(o, p, pic) == 'na' else o['status'])
+        else:
+            o.update(status='na', why=[])
+            o.pop('tag_warn', None)
+            for r in o['regions'].values():
+                r['status'] = 'na'
     f['status'] = imgqa.worst(*st)
     return f['status']
 
@@ -453,7 +464,7 @@ def measure_outfit(img, pil, box, p, skin, tags=True):
     return res
 
 
-def grade_outfit(o, p):
+def grade_outfit(o, p, pic=''):
     """Statuses from the stored measurements, the approved spec and OUTFIT: per region, then the worst. Adds `status`, `why`."""
     spec, why = p['outfit'], []
     o.pop('tag_warn', None)
@@ -483,8 +494,13 @@ def grade_outfit(o, p):
             if seen < OUTFIT['need_tag']:
                 why.append(f"tagger does not see the {q['name']} ({'/'.join(q['need_tags'])}: {seen})")
                 o['tag_warn'] = True
+    # `allow_in`: a forbidden garment word that is fine in pictures whose path contains one of the listed strings
+    # (Aoi's jacket in the arrival shots of the normal set, never in the skimpy one)
+    allowed = [w for w, pats in spec.get('allow_in', {}).items() if any(x in pic for x in pats)]
     for t, v in o['tags'].items():
         word = t.split('_')[0]
+        if any(a in t for a in allowed):
+            continue
         if v >= OUTFIT['forbid_tag'] and (any(w in t for w in spec.get('forbid_tags', [])) or (
                 word in COLOUR_WORDS and word not in spec.get('colour_words', COLOUR_WORDS) and t != word + '_hair')):
             why.append(f'tagger sees {t} {v}, not in the approved outfit')
@@ -531,13 +547,13 @@ def analyse(cast, path):
         sk = raw_skin(ref, m['skin'], m['tags'])
         if sk:
             f['skin'] = sk
-        if p.get('outfit'):
+        if outfit_enabled(p, path):
             f['outfit'] = measure_outfit(img, pil, m['box'], p, m['skin'])
         if who == 'eric':
             pt = m['tags']['ponytail']
             # not graded: from the front it is hidden, so not seeing one is "not measurable", not a fail
             f['ponytail'] = dict(p=pt, seen=pt >= 0.5, note='' if pt >= 0.5 else 'not seen: hidden or missing, look in the visual pass')
-        grade_face(f, p)
+        grade_face(f, p, path)
     res['faces'] = [f for f, _ in meas]
     return finish(res), img
 
@@ -556,10 +572,12 @@ def add_outfit(cast, rd):
     rep = json.load(open(jp)) if os.path.exists(jp) else dict(images=[])
     have = {r['path'] for r in rep['images']}
     for r in rep['images']:
-        faces = [f for f in r['faces'] if f['who'] in cast.people and cast.people[f['who']].get('outfit') and 'glasses' in f]
-        if not faces or not os.path.exists(os.path.join(rd, r['path'])):
+        path = os.path.join(rd, r['path'])
+        faces = [f for f in r['faces'] if f['who'] in cast.people and
+                 outfit_enabled(cast.people[f['who']], path) and 'glasses' in f]
+        if not faces or not os.path.exists(path):
             continue
-        img = imgqa.load(os.path.join(rd, r['path']))
+        img = imgqa.load(path)
         pil = imgqa.to_pil(img['grey'])
         for f in faces:
             f['outfit'] = measure_outfit(img, pil, f['box'], cast.people[f['who']], skin_lab(flat(img), f['box']))
@@ -588,7 +606,7 @@ def regrade(cast, rd):
                         f.pop(k, None)
                     f.update(note=f"nobody in the cast near enough (nearest {f['who']} {f['ccip']})", who='unknown', status='fail')
                     continue
-                grade_face(f, p)
+                grade_face(f, p, os.path.join(rd, r.get('path', '')))
         finish(r)
     rep['thresholds'] = THRESH
     rep['calibration'] = CALIBRATION

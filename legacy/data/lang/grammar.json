@@ -66,6 +66,7 @@
     {"id": "mashou", "order": 63, "week": 10, "level": 5, "name": "Polite let's 〜ましょう / 〜ませんか", "pattern": "V-mashou", "example": "行きましょう。", "en": "Let's go.", "detect": true},
     {"id": "polite-past", "order": 64, "week": 10, "level": 5, "name": "Polite past でした / ました", "pattern": "…でした / V-mashita", "example": "大変でした。", "en": "It was hard.", "detect": true},
     {"id": "passive", "order": 65, "week": 11, "level": 4, "name": "Passive 〜れる / 〜られる", "pattern": "V-areru", "example": "呼ばれた。", "en": "I got called.", "detect": true},
-    {"id": "keigo-request", "order": 66, "week": 11, "level": 3, "name": "Keigo request 〜ていただけますか", "pattern": "V-te + いただけますか", "example": "見ていただけますか。", "en": "Could you please look at it?", "detect": true}
+    {"id": "keigo-request", "order": 66, "week": 11, "level": 3, "name": "Keigo request 〜ていただけますか", "pattern": "V-te + いただけますか", "example": "見ていただけますか。", "en": "Could you please look at it?", "detect": true},
+    {"id": "neg-imperative", "order": 67, "week": 1, "level": 4, "name": "Don't: negative command 〜な", "pattern": "V-u + な", "example": "止まるな。", "en": "Don't stop.", "detect": true, "note": "The command form's negative: in the karaoke song (止まるな, 泣くな) and on the rule page. Ordered last so the older points keep their numbers."}
   ]
 }

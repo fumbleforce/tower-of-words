@@ -61,6 +61,15 @@ def main():
         sys.exit('Set "reset" in tools/usage.json (when the weekly limit last reset), or pass --since.')
     now_units = weighted_since(since)
     print(f'weighted usage since {since.isoformat()}: {now_units:,.0f}')
+    rs = cfg.get('readings') or []
+    if len(rs) >= 2:
+        a, b = rs[-2], rs[-1]
+        ua = weighted_since_until(since, parse(a['time'])); ub = weighted_since_until(since, parse(b['time']))
+        if ub > ua:
+            est = b['percent'] + (now_units - ub) * (b['percent'] - a['percent']) / (ub - ua)
+            print(f'calibration: {a["percent"]}% -> {b["percent"]}% between {a["time"]} and {b["time"]}')
+            print(f'estimated weekly usage now: {est:.1f}%')
+            return
     r = cfg.get('reading')
     if r:
         units_at_reading = weighted_since_until(since, parse(r['time']))

@@ -594,7 +594,7 @@ rules:
       - "docs/game/art-and-sound.md ~ Environment style is open #1"
       - "docs/game/controls-and-ui.md ~ Direction 1, \"faded\""
       - "GUIDE.md ~ No text on timers, ever"
-      - "docs/game/controls-and-ui.md ~ The over-head icons and labels are being redesigned"
+      - "docs/game/controls-and-ui.md ~ Markers: every interactable thing on screen"
       - "GUIDE.md ~ Avoid default AI aesthetics"
   - group: How we work
     quotes:
@@ -755,7 +755,6 @@ questions:
     - ["The environment style study: several attempts at the polish and vibe of the generated anime art, for Jørgen to judge.", "docs/game/art-and-sound.md ~ A style study aims at the polish", null]
     - ["Whether the bible goes public. It has never been committed.", "TODO.md ~ The bible (bible/) has never been committed", null]
     - ["The walkthrough's scope: Mio and Mori have full walkthroughs; GUIDE asks for arcs in full walkthrough detail, and also not to write ahead of the intro day.", "GUIDE.md ~ Character arcs are to be designed in full RPG-walkthrough detail", null]
-    - ["Over-head icons and labels are being redesigned.", "docs/game/controls-and-ui.md ~ The over-head icons and labels are being redesigned", null]
     - ["Aoi's age (22, 23 or 24 in different files).", "notes/mini-stories.md ~ Aoi's age", aoi]
     - ["Eric's age isn't in any current file (34 in the old portrait prompt, 29 in tools/production.py).", "tools/production.py ~ 29-year-old Nordic man", mc]
   conflicts:

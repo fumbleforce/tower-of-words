@@ -163,6 +163,26 @@ def nani_reading(nxt):
     return 'なに'
 
 
+# ---------------------------------------------------------------- one-word commands unidic misreads
+E_TO_U = {'え': 'う', 'け': 'く', 'げ': 'ぐ', 'せ': 'す', 'て': 'つ', 'ね': 'ぬ', 'べ': 'ぶ', 'め': 'む', 'れ': 'る'}
+
+
+def clause_final(toks, k):
+    """Token k is the last word of its clause: followed by nothing, punctuation, or sentence-final particles."""
+    for t in toks[k + 1:]:
+        if t['p'] == 'punct':
+            return True
+        if t['p'] == 'prt' and t.get('_m') and t['_m'][0]['pos2'] == '終助詞':
+            continue
+        return False
+    return True
+
+
+def clause_alone(toks, k):
+    """Token k is the only word between punctuation (走れ、立て、歌え)."""
+    return (k == 0 or toks[k - 1]['p'] == 'punct') and clause_final(toks, k)
+
+
 # ---------------------------------------------------------------- furigana alignment
 def kanji_candidates(ch, kanji):
     k = kanji.get(ch)
@@ -398,8 +418,45 @@ class Tokenizer:
         for k, t in enumerate(toks):
             if t['s'] == '何':
                 t['r'] = nani_reading(toks[k + 1]['s'] if k + 1 < len(toks) else '')
+            cmd = self.command_reading(toks, k)
+            if cmd:
+                t['b'], t['id'], t['p'], t['_cmd'] = cmd[0], cmd[1], 'v', True
             self.apply_override(t)
         return toks
+
+    def command_reading(self, toks, k):
+        """A one-word command that unidic reads as something else: 動け as the stem of the potential 動ける, 開け as the
+        stem of 開ける, 立て as a noun. Repair clause-final verb stems using a matching godan verb.
+        Noun repairs are limited to the known spelling 立て standing alone in its clause;
+        an e-row ending alone is not enough to reinterpret a noun as a command.
+        Returns (dictionary form, JMdict id) or None."""
+        t = toks[k]
+        if len(t.get('_m') or []) != 1 or t.get('_merge'):
+            return None
+        m = t['_m'][0]
+        s, kana = t['s'], m['kana'] or ''
+        if not s or s[-1] not in E_TO_U or not kana or kana[-1] not in E_TO_U:
+            return None
+        if m['pos1'] == '動詞':
+            if not (m['cType'] or '').startswith('下一段') or not (m['cForm'] or '').startswith(('連用形', '未然形')):
+                return None
+            if not clause_final(toks, k):
+                return None
+        elif m['pos1'] == '名詞':
+            if s != '立て' or not clause_alone(toks, k):
+                return None
+        else:
+            return None
+        base, base_r = s[:-1] + E_TO_U[s[-1]], kana[:-1] + E_TO_U[kana[-1]]
+        eid = self.lookup([base], [base_r], '動詞')
+        if not eid:
+            return None
+        e = self.data['entries'][eid]
+        if kata2hira(base_r) not in [kata2hira(r) for r in entry_readings(e, base)]:
+            return None
+        if not any(c.startswith('v5') for sense in e['sense'] for c in sense['partOfSpeech']):
+            return None
+        return base, eid
 
     def try_merge(self, ms, i):
         FI = self.data['form_index']
@@ -528,9 +585,13 @@ def detect_grammar(toks):
     if toks and '_g' in toks[0]:
         return list(toks[0]['_g'])
     ms = []
+    cmds = 0
     for t in toks:
         mode = t.get('_merge')
         if mode == 'lex':
+            continue
+        if t.get('_cmd'):
+            cmds += 1  # a one-word command (動け, 立て): its morpheme is unidic's misreading, so it isn't analysed
             continue
         ms.extend(t['_m'][-1:] if mode == 'verb' else t['_m'])
     g = []
@@ -538,6 +599,9 @@ def detect_grammar(toks):
     def add(x):
         if x not in g:
             g.append(x)
+
+    if cmds:
+        add('imperative')
 
     n = len(ms)
     for i, m in enumerate(ms):
@@ -608,6 +672,8 @@ def detect_grammar(toks):
                 add('tte')
             elif s == 'っけ':
                 add('kke')
+            elif s == 'な' and p2 == '終助詞' and prv and prv['pos1'] == '動詞' and (prv['cForm'] or '').startswith('終止形'):
+                add('neg-imperative')  # 止まるな, 泣くな
             elif s in ('て', 'で') and p2 == '接続助詞':
                 v = prv
                 follow = nxt['lemma'] if nxt else None
@@ -639,7 +705,7 @@ def detect_grammar(toks):
                         ct = v['cType'] or ''
                         if 'サ行' in ct and '五段' in ct:
                             add('te-su')
-                        elif 'ガ行' in ct:
+                        elif 'ガ行' in ct and '五段' in ct:
                             add('te-gu')
                         elif v['cForm'] == '連用形-撥音便':
                             add('te-bu-mu-nu')

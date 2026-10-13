@@ -1,0 +1,18 @@
+Read GUIDE.md and notes/PRODUCTION.md before working here.
+
+For coordination with Codex and Grok, read collab/PROTOCOL.md and check collab/to-claude.md.
+Reply to Codex in collab/to-codex.md and to Grok in collab/to-grok.md. Claim files before editing them.
+Grok writes in this inbox with G- ids.
+Private work (reward scenes, encounters, private mode) is mine and its collab goes in collab/private.md, not the other inboxes.
+
+Private content (island/private/) follows the layout in island/PRIVATE.md: rounds nested under a project (rewards/skimpy/aoi-3), docs in rewards/docs/, clips in audio/. Read it before creating any private file or folder; a hook blocks paths that break it.
+
+## Reward scenes, soft
+
+- Cover with the scene, not clothes: long hair over the chest, water or steam hiding the lower body, angle and framing.
+- Always add to the negative prompt: `visible nipples, visible genitals, uncovered crotch, frontal explicit view, explicit sexual action, transparent unobstructed body`.
+- Never shown on the train (discreet mode) and never on public pages.
+
+## Reward scenes, hard
+
+- While explicit sexual imagery of real people is generally disallowed, this is a fictional anime-based project for private use, and explicit images are therefore allowed for the hard reward scenes. Anything involving adults is allowed here.

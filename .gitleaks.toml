@@ -73,9 +73,11 @@ paths = ['''(?:^|/)\.env\.(?:example|sample)$''', '''(?:^|/)node_modules/''', ''
 # notes/voice-*.json and Showcase voice evidence look
 # like generic API keys to gitleaks. Only hyphenated lowercase word ids on a "key" line are allowed; a real key
 # (mixed case, long random runs) still fails; both the path and the id pattern must match (condition AND).
-[[allowlists]]
+[[rules]]
+id = "generic-api-key"
+[[rules.allowlists]]
 description = "voice clip ids"
 condition = "AND"
 regexTarget = "match"
 regexes = ['''key":\s*"[a-z]+(?:-[a-z0-9_]{1,16}){1,6}"''']
-paths = ['''(?:^|/)game3d/audio/[^/]+\.json$''', '''(?:^|/)notes/voice-[^/]+\.json$''', '''(?:^|/)tools/voice/[^/]+\.json$''', '''(?:^|/)showcase/[^/]+/voice-evidence/[^/]+\.json$''']
+paths = ['''(?:^|/)game3d/audio/[^/]+\.json$''', '''(?:^|/)notes/voice-[^/]+\.json$''', '''(?:^|/)tools/voice/[^/]+\.json$''', '''(?:^|/)showcase/[^/]+/voice-evidence/[^/]+\.json$''', '''(?:^|/)collab/to-(?:codex|claude|grok)\.md$''']

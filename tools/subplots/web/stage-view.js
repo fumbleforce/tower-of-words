@@ -162,9 +162,11 @@ export function diagramSvg(kind, name) {
   }
   if (kind === 'light') {
     const at = {front: [24, 31], left: [4, 14], right: [44, 14], back: [24, 3], above: [24, 2]}[name];
+    const figure = '<rect width="48" height="34" fill="#1a1f27"/><circle cx="24" cy="12" r="4" fill="#8a94a3"/><path d="M18 17h12l-2 14h-8z" fill="#8a94a3"/>';
+    if (name === 'none') return wrap(`${figure}<line x1="10" y1="31" x2="38" y2="31" stroke="#4a5462" stroke-dasharray="1.5 1.5"/>`);
     if (!at) return '';
     const rim = name === 'back' ? '<ellipse cx="24" cy="17" rx="6.5" ry="9" fill="none" stroke="#f3d27a" stroke-width="1"/>' : '';
-    return wrap(`<rect width="48" height="34" fill="#1a1f27"/><circle cx="24" cy="12" r="4" fill="#8a94a3"/><path d="M18 17h12l-2 14h-8z" fill="#8a94a3"/>${rim}<circle cx="${at[0]}" cy="${at[1]}" r="2.6" fill="#f3d27a"/><line x1="${at[0]}" y1="${at[1]}" x2="${f(at[0] + (24 - at[0]) * 0.45)}" y2="${f(at[1] + (15 - at[1]) * 0.45)}" stroke="#f3d27a" stroke-width="1"/>`);
+    return wrap(`${figure}${rim}<circle cx="${at[0]}" cy="${at[1]}" r="2.6" fill="#f3d27a"/><line x1="${at[0]}" y1="${at[1]}" x2="${f(at[0] + (24 - at[0]) * 0.45)}" y2="${f(at[1] + (15 - at[1]) * 0.45)}" stroke="#f3d27a" stroke-width="1"/>`);
   }
   if (kind === 'facing') {
     const ang = {camera: 90, left: 180, right: 0, away: 270}[name];

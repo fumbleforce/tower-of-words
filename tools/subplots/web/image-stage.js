@@ -7,8 +7,9 @@
 export const FACING = [['camera', 'Camera'], ['left', 'Left'], ['right', 'Right'], ['away', 'Away'], ['partner', 'Toward']];
 export const GAZE = [['viewer', 'Viewer'], ['partner', ''], ['away', 'Away'], ['down', 'Down'], ['up', 'Up']];
 export const HEIGHTS = [['short', 'Shorter'], ['', 'Average'], ['tall', 'Taller']];
+// 'none' says nothing about the light's direction, so its words are empty and the prompt gets nothing from it.
 export const LIGHT_FROM = [['front', 'Front', 'front lighting'], ['left', 'Left', 'light coming from the left'], ['right', 'Right', 'light coming from the right'],
-  ['back', 'Behind', 'backlighting, rim light'], ['above', 'Above', 'light from above']];
+  ['back', 'Behind', 'backlighting, rim light'], ['above', 'Above', 'light from above'], ['none', 'No direction', '']];
 export const MOODS = ['calm', 'warm and cosy', 'cheerful', 'playful', 'tense', 'awkward', 'romantic', 'melancholy', 'lonely', 'mysterious', 'dramatic'];
 export const EXPRESSIONS = ['smiling', 'laughing', 'neutral expression', 'serious', 'surprised', 'embarrassed, blushing', 'annoyed', 'sad', 'tired', 'focused', 'smug', 'shy'];
 

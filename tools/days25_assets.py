@@ -16,7 +16,7 @@ BG = {
     'mio_room': 'no humans, scenery, a gamer girl\'s messy dorm room at night, a sofa facing a big TV with a game on screen, controllers, energy drink cans, a gaming PC with RGB lights, posters without text, fairy lights, dominant deep navy and purple, broad warm lamp glow, sparse neon green accents',
 }
 CH = {
-    'aoi': (12, 'Aoi, a 22-year-old graduate intern: shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a crop top, company lanyard, cheeky energetic face',
+    'aoi': (12, 'Aoi, a 24-year-old graduate intern: shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a crop top, company lanyard, cheeky energetic face',
             {'grin': 'big cheeky grin, one eye winking', 'panic': 'panicked wide eyes, hands raised, sweat drop'}),
     'yuzuki': (13, 'Yuzuki, a 31-year-old company PR spokeswoman: glossy wavy chestnut hair, elegant makeup, pearl earrings, fitted cream blouse, mature face with high cheekbones',
                {'smile': 'flawless practised smile', 'serious': 'serious focused expression', 'tired': 'tired eyes, weary faint smile, shoulders slightly slumped'}),

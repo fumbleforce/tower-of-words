@@ -68,7 +68,8 @@ class Profile:
         if self.w_any and f and f <= self.w_any:
             return True
         if self.w_jlpt and n and n >= self.w_jlpt:
-            return not self.w_freq or (f is not None and f <= self.w_freq)
+            # words with no frequency rank (ください and 二人 lose theirs to unidic's lemmas) count on their level alone
+            return not self.w_freq or f is None or f <= self.w_freq
         return False
 
     def kanji_state(self, ch):

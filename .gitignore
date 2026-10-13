@@ -148,3 +148,7 @@ game3d/build.json.*.tmp
 
 # the creator's Blender build outputs (tools/creator/blender/README.md); the GLBs are in the lock file
 /art/parts/blender/*.json
+
+# private channel for reward scenes (public repo)
+/collab/private.md
+collab/.post.lock

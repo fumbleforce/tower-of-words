@@ -304,7 +304,7 @@
 .image-direction .section-head .hint { margin: 0 0 0 auto !important; font-size: 11.5px; }
 .stage-wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; align-items: start; }
 .compose-dialog .stage-wrap { grid-template-columns: auto minmax(200px, 1fr); }
-.stage-box { height: 220px; width: auto; max-width: min(60vw, 520px); border-radius: 6px; overflow: hidden; background: #11151b; touch-action: none; }
+.stage-box { height: 154px; width: auto; max-width: min(60vw, 364px); border-radius: 6px; overflow: hidden; background: #11151b; touch-action: none; }
 .stage-box .stage-svg { display: block; width: 100%; height: 100%; }
 .stage-fig { cursor: grab; }
 .stage-fig:active { cursor: grabbing; }
@@ -331,7 +331,7 @@
 .dia-cam { font-size: 4px; fill: var(--faint); text-anchor: middle; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (max-height: 800px) {
-  .stage-box { height: 176px; }
+  .stage-box { height: 123px; }
   .stage-side { gap: 3px; }
   .stage-side .ctl-row { grid-template-columns: minmax(0, 1fr); gap: 1px; }
   .stage-side .tile-mini { width: 38px; padding: 1px; }
@@ -352,7 +352,7 @@
   .tile-row { margin: 2px 0; }
 }
 @media (min-width: 1800px) {
-  .stage-box { height: clamp(380px, 30vh, 460px); max-width: 640px; }
+  .stage-box { height: clamp(266px, 21vh, 322px); max-width: 448px; }
   .tile { width: 76px; }
   .tile-art { height: 46px; }
   .tile-row-pics .tile { width: 92px; }
