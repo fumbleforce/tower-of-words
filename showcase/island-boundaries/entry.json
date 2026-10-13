@@ -7,12 +7,13 @@
     "e9a8f7ac94c772fc785451c7fcc3f5fc39db9f60",
     "f7541d34a8572b5d44bccc599f7f7ac8698f9549",
     "dc4a05341e862f915b6d96550ba74257fc7ef775",
-    "f131c321292dfe81b71ebf528f59e94e34832dae"
+    "f131c321292dfe81b71ebf528f59e94e34832dae",
+    "82b423b9fdeaa9fa71e5c07a9450c7aaf084badb"
   ],
   "result": [
     "camera-after-a--1366-forecourt-morning-near-gate",
     "map-after-a--390-forecourt-morning-approach",
-    "after-b-repair-final--1366-sports-morning-grove",
+    "after-b-tree-final--1366-sports-morning-grove",
     "after-b-repair-final--390-works-morning-factory-east-tie"
   ],
   "sections": [
@@ -143,8 +144,8 @@
       ]
     },
     {
-      "title": "Northern grounds — final repaired views and maps",
-      "caption": "Final matching morning/evening views after moving the sports fence west into the grove and the works fence north behind the whole paved transformer/tank lot. Both phone foreground regressions are cleared. The old works reverse setup is now on the restored public side and shows the actor clearly. Desktop sports north-reverse remains an outside-boundary diagnostic; phone gym and desktop transformer frames retain baseline camera occlusion.",
+      "title": "Northern grounds — repaired phone views, before tree clearance",
+      "caption": "Matching morning/evening views after moving the sports fence west and the works fence north behind the paved utility lot. Both public phone occlusions are repaired. Independent review then found a grove trunk intersecting the sports fence in both desktop gym-tie views; those failures are retained here and fixed in the later tree-clearance set. Protected-side desktop sports reverse and baseline roof/transformer occlusions remain diagnostic limitations.",
       "images": [
         {
           "id": "after-b-repair-final--1366-sports-evening-grove",
@@ -3545,6 +3546,304 @@
           "id": "after-b-repair-seat-route-final--390-sports-morning-grove",
           "image": "game3d/shots/island-boundaries/after-b-repair-seat-route-final/390-sports-morning-grove.png",
           "caption": "Phone 390 × 844 — sports morning grove."
+        }
+      ]
+    },
+    {
+      "title": "Northern sports — final tree clearance and maps",
+      "caption": "The two intersecting grove trunks now stand behind the unchanged service fence. Matching morning/evening public views and maps at both sizes. Desktop sports north-reverse starts outside the protected boundary; phone gym-tie roof occlusion already exists in the baseline. Both remain explicitly limited diagnostic frames.",
+      "images": [
+        {
+          "id": "after-b-tree-final--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-evening-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening gym tie."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-evening-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports evening north reverse."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-evening-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening pavilion tie."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-evening-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports evening pool head."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-map",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-map.png",
+          "caption": "Desktop 1366 × 860 — sports map."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-morning-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning gym tie."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-morning-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports morning north reverse."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-morning-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning pavilion tie."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-morning-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports morning pool head."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-evening-grove.png",
+          "caption": "Phone 390 × 844 — sports evening grove."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-evening-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports evening gym tie."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-evening-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports evening north reverse."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-evening-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports evening pavilion tie."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-evening-pool-head.png",
+          "caption": "Phone 390 × 844 — sports evening pool head."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-map",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-map.png",
+          "caption": "Phone 390 × 844 — sports map."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-morning-grove.png",
+          "caption": "Phone 390 × 844 — sports morning grove."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-morning-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports morning gym tie."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-morning-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports morning north reverse."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-morning-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports morning pavilion tie."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-morning-pool-head.png",
+          "caption": "Phone 390 × 844 — sports morning pool head."
+        }
+      ]
+    },
+    {
+      "title": "Northern sports — final tree-clearance native attempts",
+      "caption": "All 28 native walking and running-jump endpoint tests pass after moving the two trees. Deliberate reverse starts and near-building endpoints can obscure the actor; these are retained functional diagnostics.",
+      "images": [
+        {
+          "id": "after-b-tree-final--1366-sports-corner-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-corner-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports corner run jump end."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-corner-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-corner-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports corner walk end."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-grove-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-grove-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove reverse run jump end."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-grove-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-grove-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove reverse walk end."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-grove-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-grove-west-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove west run jump end."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-grove-west-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-grove-west-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove west walk end."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-gym-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-gym-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports gym tie run jump end."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-gym-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-gym-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports gym tie walk end."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-north-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-north-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports north reverse run jump end."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-north-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-north-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports north reverse walk end."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-pavilion-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-pavilion-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports pavilion tie run jump end."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-pavilion-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-pavilion-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports pavilion tie walk end."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-pool-head-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-pool-head-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports pool head run jump end."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-pool-head-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-pool-head-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports pool head walk end."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-corner-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-corner-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports corner run jump end."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-corner-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-corner-walk-end.png",
+          "caption": "Phone 390 × 844 — sports corner walk end."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-grove-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-grove-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports grove reverse run jump end."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-grove-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-grove-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — sports grove reverse walk end."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-grove-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-grove-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports grove west run jump end."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-grove-west-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-grove-west-walk-end.png",
+          "caption": "Phone 390 × 844 — sports grove west walk end."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-gym-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-gym-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports gym tie run jump end."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-gym-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-gym-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — sports gym tie walk end."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-north-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-north-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports north reverse run jump end."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-north-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-north-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — sports north reverse walk end."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-pavilion-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-pavilion-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports pavilion tie run jump end."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-pavilion-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-pavilion-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — sports pavilion tie walk end."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-pool-head-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-pool-head-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports pool head run jump end."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-pool-head-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-pool-head-walk-end.png",
+          "caption": "Phone 390 × 844 — sports pool head walk end."
+        }
+      ]
+    },
+    {
+      "title": "Grove bench — final tree-clearance sitting and exit proof",
+      "caption": "Native E sits Eric, an arrow stands him up, and the normal gameplay walker returns to the public pool walk at both sizes. The return uses the gameplay walker API and is not claimed as a native pointer test. Desktop close seated/standing frames retain near-roof camera limits.",
+      "images": [
+        {
+          "id": "after-b-tree-final--1366-sports-grove-seat-exit",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-grove-seat-exit.png",
+          "caption": "Desktop 1366 × 860 — sports grove seat exit."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-grove-seated",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-grove-seated.png",
+          "caption": "Desktop 1366 × 860 — sports grove seated."
+        },
+        {
+          "id": "after-b-tree-final--1366-sports-grove-stood",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/1366-sports-grove-stood.png",
+          "caption": "Desktop 1366 × 860 — sports grove stood."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-grove-seat-exit",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-grove-seat-exit.png",
+          "caption": "Phone 390 × 844 — sports grove seat exit."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-grove-seated",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-grove-seated.png",
+          "caption": "Phone 390 × 844 — sports grove seated."
+        },
+        {
+          "id": "after-b-tree-final--390-sports-grove-stood",
+          "image": "game3d/shots/island-boundaries/after-b-tree-final/390-sports-grove-stood.png",
+          "caption": "Phone 390 × 844 — sports grove stood."
         }
       ]
     }
