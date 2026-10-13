@@ -53,6 +53,6 @@ export function installConversations(game) {
     (who === 'mio' && game.place?.name === 'train') || (who === 'guard' && !flags.greeted_guard)
       ? null
       : who === 'kenji' && game.outing?.available()
-        ? { label: 'Chat with Kenji', trigger: 'ask:kenji-outing' }
+        ? { label: flags.outing_active ? 'Chat about our walk' : 'Chat with Kenji', trigger: 'ask:kenji-outing' }
         : topicFor(who, conversationMemory, known, game.sim?.met.has(who));
 }

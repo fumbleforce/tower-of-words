@@ -155,9 +155,11 @@ await withBrowserJob(`outing-${stem}`, async browser => {
     await page.waitForTimeout(1000); // Let the authored camera settle before reading the touch target.
     const point = await page.evaluate(() => { const r = globalThis.__game.markers.list.find(m => m.id === 'kenji').el.querySelector('.pin').getBoundingClientRect(); return [r.x + r.width / 2, r.y + r.height / 2]; });
     if (width < 700) await page.touchscreen.tap(...point); else await page.mouse.click(...point);
-    console.log('CHAT_PROBE', JSON.stringify(await page.evaluate(() => { const g=globalThis.__game,p=g.player.root.position,q=g.place.things.kenji.spot(); return {at:p.toArray(),to:q,near:g.near?.id,topic:g.topicFor('kenji'),met:[...g.sim.met],busy:g.busy,path:g.walker.path,nav:g.place.nav.path(p.x,p.z,...q),menu:globalThis.document.querySelector('#actMenu')?.outerHTML}; })));
+    await page.locator('#actMenu:not([hidden]) .use').click();
+    // Current Interact opens the topic chooser, or starts its sole topic directly.
+    await page.waitForFunction(() => globalThis.__game.busy || !!globalThis.document.querySelector('#actMenu:not([hidden]) .topic'));
+    if (await page.evaluate(() => globalThis.__game.busy)) return;
     const topic = page.locator('#actMenu:not([hidden]) .topic');
-    await topic.waitFor({ state: 'visible', timeout: 20000 });
     assert.match(await topic.innerText(), /^Chat (with Kenji|about our walk)$/); await shot('chat-action-' + (++dialogueFrame));
     await topic.click();
   }
@@ -209,6 +211,11 @@ await withBrowserJob(`outing-${stem}`, async browser => {
     await page.waitForFunction(() => !globalThis.document.querySelector('#boot'));
     await page.evaluate(() => globalThis.__game.hooks.period({ to: 'lunch' }));
     await ready();
+    // The current central-crossing spawn reaches the arcade by walking straight out before turning.
+    // The baseline direct diagonal cuts a shop corner; retain that separate regression evidence.
+    await page.evaluate(() => { const g = globalThis.__game; g.walker.goTo(0.3, g.player.root.position.z); });
+    await ready();
+    await checkpoint('central-crossing-approach');
     if (!['story', 'storyarcade', 'arcadeview'].includes(mode)) assert.equal(await page.evaluate(() => globalThis.__game.outing.invite()), true, 'real visible scheduled Kenji must accept prototype invite');
     await page.waitForFunction(() => globalThis.__game.outing.actor.rig.meshy && globalThis.__game.player.meshy);
     const invited = await checkpoint('invited');

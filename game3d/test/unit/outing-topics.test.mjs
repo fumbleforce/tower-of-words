@@ -14,6 +14,8 @@ test('outing offer leaves ordinary Kenji chat and knowledge prerequisites availa
   assert.equal(game.topicFor('kenji').trigger, 'ask:kenji', 'a paused outing does not offer a walk during work');
   game.outing.available = () => true;
   assert.equal(game.topicFor('kenji').trigger, 'ask:kenji-outing');
+  flags.outing_active = true;
+  assert.equal(game.topicFor('kenji').label, 'Chat about our walk');
   const story = withConversations({});
   assert.equal(story.on['ask:kenji'], 'conversation_kenji');
   assert.equal(story.on['ask:kenji-outing'], 'outing_chat');

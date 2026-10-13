@@ -239,3 +239,18 @@ test('cancelled first arcade walk cannot reset the next scene walker', async () 
   assert.equal(game.player._walk, true);
   assert.deepEqual(outing.state().stops, []);
 });
+
+ test('a failed stop releases its pending choice so another stop can start', async () => {
+  const { outing, context, game } = setup();
+  outing.invite(); context.blocked = true;
+  assert.equal(await outing.stop('arcade'), false);
+  assert.equal(outing.state().pending, null);
+  context.blocked = false;
+  assert.equal(await outing.stop('drink'), true);
+  assert.equal(flags.outing_stage.waiting, true);
+  await outing.afterTravel();
+  game.place = { name: 'east_coast' };
+  assert.equal(await outing.stop('coast'), false);
+  assert.equal(outing.state().pending, null);
+  assert.deepEqual(flags.outing_stage, {});
+});

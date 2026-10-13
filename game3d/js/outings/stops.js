@@ -6,7 +6,7 @@ import { clearOf } from '../movement/navigation.js';
 import { cancelSavedWalk } from '../places/saved-people.js';
 import { stopGait } from '../movement/gait.js';
 import { freeOutingSeats, sitOutingPair } from './seating.js';
-import { beginStop, completeStop } from './model.js';
+import { beginStop, cancelStop, completeStop } from './model.js';
 
 // Failed/cancelled movement leaves an unfinished stop available to retry.
 export function outingStops(game, control) {
@@ -46,7 +46,8 @@ export function outingStops(game, control) {
     write(next);
     const token = control.begin(),
       valid = () => control.valid(token) && game.place === P;
-    let hold = null;
+    let hold = null,
+      succeeded = false;
     const arrived = (rig, to) => Math.hypot(rig.root.position.x - to[0], rig.root.position.z - to[1]) < 0.3 * scale;
     const destination = (rig, desired) => {
       const others = bodies(game).filter((b) => b.root !== rig.root);
@@ -66,6 +67,7 @@ export function outingStops(game, control) {
           people: snapshotPeople({ kenji: actor.rig }),
           order: flags.konbini_order_id || 0,
         });
+        succeeded = true;
         return true;
       }
       if (which === 'arcade') {
@@ -106,10 +108,17 @@ export function outingStops(game, control) {
       } else return false;
       if (!valid()) return false;
       write(completeStop(state(), which));
+      succeeded = true;
       return true;
     } finally {
       releasePlayer(hold);
-      if (valid()) control.end();
+      if (valid()) {
+        if (!succeeded) {
+          write(cancelStop(state()));
+          setStage({});
+        }
+        control.end();
+      }
     }
   };
   stop.cancel = () => {
