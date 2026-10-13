@@ -236,6 +236,10 @@ test('plant piers clear the complete door opening below the lintel', () => {
 test('leaf ivy keeps the original corner envelope with a bounded opaque mesh budget', () => {
   const p = new Parts();
   plantIvy(p, 0, 0, ['#4f6b45', '#5b7a4e', '#46603f']);
+  assert.ok(
+    [...p.sets.values()].every((set) => set.surf !== 'foliage'),
+    'finished ivy is not coarsened as a phone canopy',
+  );
   const bounds = new THREE.Box3();
   let triangles = 0;
   for (const set of p.sets.values())

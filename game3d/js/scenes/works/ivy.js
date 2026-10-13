@@ -33,7 +33,8 @@ export function plantIvy(p, x, z, colors) {
       half = bounds.getSize(new THREE.Vector3()).multiplyScalar(0.5);
     // Curved leaves replace coplanar coloured slabs. Their outer envelope keeps the corrected depth offsets.
     const leaves = fitFoliage(leafMass(color, center, half, 741 + i * 13, 12), bounds);
-    for (const part of leaves) p.geo(part.color, part.geometry, { cast: false, surf: 'foliage' });
+    // These leaves are finished geometry, not coarse canopy volume for the global vegetation pass.
+    for (const part of leaves) p.geo(part.color, part.geometry, { cast: false, opts: { roughness: 1 } });
     const from = center.clone(),
       to = center.clone();
     from.y = bounds.min.y;
