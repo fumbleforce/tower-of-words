@@ -10,6 +10,7 @@ import { rock, drift } from '../forecourt/gardens.js';
 import { fence } from '../../kit/street/fence.js';
 import { finishStreet } from '../diorama/materials.js';
 import { phoneLighter } from '../../perf/phone.js';
+import { mergeStaticSteps } from '../merge-static.js';
 import { PATHS, REST_BENCHES, NORTH_FENCE } from './plan.js';
 
 export function* southwestSteps(island) {
@@ -78,5 +79,14 @@ export function* southwestSteps(island) {
   p.build(group);
   finishStreet(group, phoneLighter());
   const lit = lights.build(group, { poolY: 0.025 });
+  // Keep this seaward region in compact pieces: district-wide material batches otherwise draw its geometry
+  // even when the follow camera faces north toward the plaza. Names retain the regional build-time merge.
+  if (!phoneLighter()) {
+    yield* mergeStaticSteps(group);
+    let piece = 0;
+    group.traverse((o) => {
+      if (o.isMesh && !o.name) o.name = `southwest:piece-${piece++}`;
+    });
+  }
   return { group, glows: lit.glows };
 }
