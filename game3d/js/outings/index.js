@@ -16,6 +16,7 @@ import { standPose } from '../crowd/motion.js';
 import * as model from './model.js';
 
 const KEYS = flagKeys('game3d/js/outings/index.js');
+const WALK_GOAL = 'Walk with Kenji. Chat with him to stop or say goodbye.';
 const SHOP_APPROACH = 'Kenji is heading to the convenience store. Meet him at the entrance.';
 export function installOuting(game, { refreshMarkers = () => {} } = {}) {
   if (game.outing) return;
@@ -44,7 +45,7 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
   };
   const shopGoal = (P) => {
     const wait = stage();
-    const approaching = action && state().pending === 'drink' && !wait.waiting;
+    const approaching = action === 'drink' && !wait.waiting;
     if (state().status !== 'active' || (!wait.waiting && !approaching)) return;
     if (game.ui?.sideText && game.ui.sideText !== flags[KEYS.outing_goal]) return;
     let text;
@@ -58,13 +59,15 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
           ? 'Enter the convenience store. Kenji is waiting outside.'
           : 'Go to the convenience store entrance. Kenji is waiting there.';
     } else if (P.name === 'konbini') {
-      const fresh = flags.konbini_order_id > wait.order;
-      text =
-        fresh && flags.konbini_phase === 'complete'
-          ? 'Meet Kenji outside the convenience store.'
-          : fresh && flags.konbini_paid_id === flags.konbini_order_id && flags.konbini_phase === 'paid'
+      const fresh = flags.konbini_order_id > wait.order,
+        drink = flags.konbini_basket?.some((item) => ['milk', 'tea', 'coffee'].includes(item));
+      text = wait.collected
+        ? 'Meet Kenji outside the convenience store.'
+        : fresh && flags.konbini_paid_id === flags.konbini_order_id && flags.konbini_phase === 'paid'
+          ? drink
             ? 'Take your bag, then meet Kenji outside.'
-            : 'Choose and buy a drink. Kenji is waiting outside.';
+            : 'Take your bag, then choose a drink for the walk.'
+          : 'Choose and buy a drink. Kenji is waiting outside.';
     }
     if (text && flags[KEYS.outing_goal] !== text) goal(text);
   };
@@ -151,18 +154,17 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
     stage,
     setStage,
     write,
-    begin() {
+    begin(which) {
       const token = ++epoch;
       follower.pause();
-      action = true;
+      action = which;
       shopGoal(game.place);
       return token;
     },
     valid: (token) => token === epoch && state().status === 'active',
     end() {
       action = false;
-      if (!stage().waiting && game.ui?.sideText === SHOP_APPROACH)
-        goal('Walk with Kenji. Chat with him to stop or say goodbye.');
+      if (!stage().waiting && game.ui?.sideText === SHOP_APPROACH) goal(WALK_GOAL);
       shopGoal(game.place);
       save(game);
     },
@@ -171,8 +173,7 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
     actor,
     state,
     waiting: () => state().status === 'active' && !!stage().waiting,
-    shopDestination: () =>
-      state().status === 'active' && (!!stage().waiting || (action && state().pending === 'drink')),
+    shopDestination: () => state().status === 'active' && (!!stage().waiting || action === 'drink'),
     goal,
     available: () => model.canInvite(context()),
     controls: (who) =>
@@ -217,6 +218,7 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
     },
     stop,
     keepWalking() {
+      const leavingShop = stage().waiting || action === 'drink';
       cancelActions();
       game.standUp?.();
       const r = actor.rig;
@@ -232,6 +234,7 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
       }
       write(model.cancelStop(state()));
       setStage({});
+      if (leavingShop && (!game.ui?.sideText || game.ui.sideText === flags[KEYS.outing_goal])) goal(WALK_GOAL);
       save(game);
     },
     syncClock() {
@@ -274,8 +277,7 @@ export function installOuting(game, { refreshMarkers = () => {} } = {}) {
         if (stage().collected) write(model.completeStop(state(), 'drink'));
         else write(model.cancelStop(state()));
         setStage({});
-        if (!game.ui?.sideText || game.ui.sideText === flags[KEYS.outing_goal])
-          goal('Walk with Kenji. Chat with him to stop or say goodbye.');
+        if (!game.ui?.sideText || game.ui.sideText === flags[KEYS.outing_goal]) goal(WALK_GOAL);
       }
       shopGoal(game.place);
       follower.pause();

@@ -305,3 +305,26 @@ test('phone outing overview fits both standing bodies below the HUD without repl
   P.cam.close = null; P.camera.aspect = 1.5;
   assert.equal(P.cam.wanted(feet[0]), ordinary, 'desktop overview remains unchanged');
 });
+
+ test('installed phone overview frames actual controlled world rigs and yields beyond companion range', () => {
+ const camera = new THREE.PerspectiveCamera(45, 390 / 844, .1, 100);
+ const space = new THREE.Group(), playerRoot = new THREE.Group(), companionRoot = new THREE.Group();
+ playerRoot.add(new THREE.Mesh(new THREE.BoxGeometry(.6, 1.4, .6), new THREE.MeshBasicMaterial()));
+ playerRoot.children[0].position.y = .7; playerRoot.position.set(-.524, 0, .917);
+ companionRoot.position.set(-2.276, 0, .917); space.add(playerRoot, companionRoot); space.updateMatrixWorld(true);
+ const ordinary = [new THREE.Vector3(), 4];
+ const P = { space, camera, cam: { dir: new THREE.Vector3(-.3, .85, .4).normalize(), wanted: () => ordinary } };
+ const game = { player: { root: playerRoot }, outing: { actor: { rig: { root: companionRoot } }, controls: () => true } };
+ const previous = globalThis.window; globalThis.window = { __game: game };
+ try {
+ installOutingCamera(game, P, 'east_coast');
+ const actual = P.cam.wanted(playerRoot.position); assert.notEqual(actual, ordinary);
+ camera.position.copy(actual[0]).addScaledVector(P.cam.dir, actual[1]); camera.lookAt(actual[0]); camera.updateMatrixWorld();
+ for (const root of [playerRoot, companionRoot]) for (const y of [0, 1.4]) {
+ const point = root.getWorldPosition(new THREE.Vector3()); point.y += y; point.project(camera);
+ assert.ok(Math.abs(point.x) < .86 && point.y < .35 && point.y > -.78);
+ }
+ companionRoot.position.x = 10; space.updateMatrixWorld(true);
+ assert.equal(P.cam.wanted(playerRoot.position), ordinary);
+ } finally { globalThis.window = previous; }
+ });

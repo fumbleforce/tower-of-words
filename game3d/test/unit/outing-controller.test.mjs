@@ -301,3 +301,41 @@ test('shop directions follow approach, entry, payment, collection and reunion wi
  context.afterWalk = () => { game.ui.sideText = 'Another activity.'; };
  await outing.stop('drink'); assert.equal(game.ui.sideText, 'Another activity.');
  });
+
+ test('leaving a waiting shop or cancelling its approach clears only the owned direction', async () => {
+ const { outing, game, context } = setup();
+ game.ui = { sideText: '', sideGoal(text) { this.sideText = text; } };
+ outing.invite(); await outing.stop('drink'); outing.keepWalking();
+ assert.equal(game.ui.sideText, 'Walk with Kenji. Chat with him to stop or say goodbye.');
+ context.afterWalk = () => outing.keepWalking(); await outing.stop('drink');
+ assert.equal(game.ui.sideText, 'Walk with Kenji. Chat with him to stop or say goodbye.');
+ context.afterWalk = null; await outing.stop('drink'); game.ui.sideText = 'Other activity.'; outing.keepWalking();
+ assert.equal(game.ui.sideText, 'Other activity.');
+ });
+ test('repeat drink stops show the departure cue even though their receipt is already complete', async () => {
+ const { outing, game, context } = setup();
+ game.ui = { sideText: '', sideGoal(text) { this.sideText = text; } };
+ outing.invite(); await outing.stop('drink'); flags.outing_stage.collected = true; await outing.afterTravel();
+ context.afterWalk = () => {
+ assert.equal(outing.state().pending, null);
+ assert.equal(outing.shopDestination(), true);
+ assert.equal(game.ui.sideText, 'Kenji is heading to the convenience store. Meet him at the entrance.');
+ };
+ await outing.stop('drink'); assert.deepEqual(outing.state().stops, ['drink']);
+ });
+ test('a non-drink purchase keeps the drink request explicit and grants no stop', async () => {
+ const { outing, game } = setup();
+ game.ui = { sideText: '', sideGoal(text) { this.sideText = text; } };
+ outing.invite(); await outing.stop('drink'); game.place = { name: 'konbini' };
+ Object.assign(flags, { konbini_order_id: 1, konbini_paid_id: 1, konbini_phase: 'paid', konbini_basket: ['riceball'] });
+ outing.update(game.place); assert.equal(game.ui.sideText, 'Take your bag, then choose a drink for the walk.');
+ flags.konbini_phase = 'complete'; outing.update(game.place);
+ assert.equal(game.ui.sideText, 'Choose and buy a drink. Kenji is waiting outside.');
+ assert.equal(flags.outing_stage.collected, undefined); assert.deepEqual(outing.state().stops, []);
+ const { konbiniTrade } = await import('../../js/places/konbini/trade.js');
+ const trade = konbiniTrade({ yen: 1000, inv: [] }, flags);
+ assert.equal(trade.add('milk'), true); assert.equal(flags.konbini_order_id, 2);
+ assert.equal(trade.pay(), true); trade.finish(); outing.update(game.place);
+ assert.equal(flags.outing_stage.collected, true);
+ assert.equal(game.ui.sideText, 'Meet Kenji outside the convenience store.');
+ });

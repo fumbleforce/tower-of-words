@@ -81,9 +81,19 @@ await withBrowserJob(`outing-${stem}`, async browser => {
       return !chips || (!chips.classList.contains('arming') && [...chips.querySelectorAll('button')].every(b => +globalThis.getComputedStyle(b).opacity > .99));
     }, null, { timeout: 10000 });
     await page.waitForFunction(() => { const c = globalThis.__game?.place?.cam; return !c?.close || c.vel.every(v => Math.abs(v) < .08); }, null, { timeout: 12000 });
-    if (['ui-arcade-stay', 'ui-arcade-keep-walking'].includes(name)) await page.waitForFunction(() => globalThis.__game.place.cam.vel.every(v => Math.abs(v) < .08), null, { timeout: 15000 });
+    const settlingStarted = Date.now();
+    if (name === 'ui-standing') {
+      for (const [elapsed, delay] of [[0, 0], [250, 250], [500, 250], [1000, 500]]) {
+        if (delay) await page.waitForTimeout(delay);
+        await page.screenshot({ path: `${out}/${stem}-${name}-transition-${elapsed}ms.png` });
+        report.push({ case: 'standing-camera-transition', elapsedMs: Date.now() - settlingStarted,
+          velocity: await page.evaluate(() => [...globalThis.__game.place.cam.vel]) });
+      }
+    }
+    if (['ui-arcade-stay', 'ui-arcade-keep-walking', 'ui-standing', 'keep-walking'].includes(name)) await page.waitForFunction(() => globalThis.__game.place.cam.vel.every(v => Math.abs(v) < .08), null, { timeout: 15000 });
+    if (name === 'ui-standing') report.push({ case: 'standing-camera-settled', elapsedMs: Date.now() - settlingStarted });
     await page.waitForTimeout(200);
-    report.push({ case: 'capture-ready', name, ui: await page.evaluate(() => ({ chips: [...globalThis.document.querySelectorAll('#talk:not([hidden]) .chips button')].map(b => ({ text: b.textContent, disabled: b.disabled, opacity: globalThis.getComputedStyle(b).opacity })), camera: globalThis.__game?.place?.camera?.position.toArray(), velocity: globalThis.__game?.place?.cam?.vel })) });
+    report.push({ case: 'capture-ready', name, ui: await page.evaluate(() => ({ chips: [...globalThis.document.querySelectorAll('#talk:not([hidden]) .chips button')].map(b => ({ text: b.textContent, disabled: b.disabled, opacity: globalThis.getComputedStyle(b).opacity })), camera: globalThis.__game?.place?.camera?.position.toArray(), velocity: globalThis.__game?.place?.cam?.vel, outingOverview: globalThis.__game?.place?.cam?.outingOverview })) });
     return page.screenshot({ path: `${out}/${stem}-${name}.png` });
   };
   let dialogueFrame = 0;
@@ -345,10 +355,12 @@ await withBrowserJob(`outing-${stem}`, async browser => {
     } else if (mode === 'unsupported') {
       phase = 'unsupported-departure';
       await use('office_lane', 'forecourt', { departureOnly: true });
-      await page.waitForFunction(() => globalThis.__game.transition?.to === 'forecourt' && globalThis.__game.transition.phase === 'leaving', null, { timeout: 60000 });
-      const leaving = await checkpoint('unsupported-leaving');
+      await page.waitForFunction(() => globalThis.__game.transition?.to === 'forecourt' && globalThis.__game.transition.phase === 'leaving' && globalThis.__game.outing.state().status === 'paused', null, { timeout: 60000 });
+      const leaving = await state(); report.push({ case: 'unsupported-paused-before-save', state: leaving });
       assert.equal(leaving.outing.status, 'paused'); assert.equal(leaving.companion.visible, true);
       const receipt = await continueSave('forecourt'); assert.equal(receipt.transition?.to, 'forecourt');
+      assert.equal(receipt.transition?.phase, 'leaving'); assert.equal(receipt.state.status, 'paused');
+      assert.ok(receipt.outing?.people?.kenji, 'saved departure keeps the companion frame');
       await ready(); const arrived = await checkpoint('unsupported-continue-arrived');
       assert.equal(arrived.outing.status, 'paused'); assert.equal(arrived.companion.visible, false);
     } else if (mode === 'geometry' || mode === 'pausedseat') {

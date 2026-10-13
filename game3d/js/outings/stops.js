@@ -44,7 +44,7 @@ export function outingStops(game, control) {
     const next = beginStop(state(), which);
     if (next.pending !== which && !repeatStop) return false;
     write(next);
-    const token = control.begin(),
+    const token = control.begin(which),
       valid = () => control.valid(token) && game.place === P;
     let hold = null,
       succeeded = false;
