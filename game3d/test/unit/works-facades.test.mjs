@@ -44,6 +44,7 @@ const { blockSets } = await import('../../js/scenes/outdoor/block.js');
 const { buildingsSteps } = await import('../../js/scenes/works/buildings.js');
 const P = await import('../../js/scenes/works/plan.js');
 const { industrialShell } = await import('../../js/scenes/works/industrial-facades.js');
+const { plantIvy } = await import('../../js/scenes/works/ivy.js');
 const { factoryOpenings } = await import('../../js/scenes/works/factory-facade.js');
 function building(id) {
   const p = new Parts(),
@@ -77,10 +78,23 @@ function fingerprint(id) {
       for (const g of set.list)
         for (const key of Object.keys(g.attributes)) {
           hash.update(key);
-          hash.update(Buffer.from(g.attributes[key].array.buffer));
+          hash.update(
+            Buffer.from(
+              g.attributes[key].array.buffer,
+              g.attributes[key].array.byteOffset,
+              g.attributes[key].array.byteLength,
+            ),
+          );
         }
     }
-  for (const g of lights.glowParts) hash.update(Buffer.from(g.attributes.position.array.buffer));
+  for (const g of lights.glowParts)
+    hash.update(
+      Buffer.from(
+        g.attributes.position.array.buffer,
+        g.attributes.position.array.byteOffset,
+        g.attributes.position.array.byteLength,
+      ),
+    );
   hash.update(JSON.stringify(lights.lit));
   return hash.digest('hex');
 }
@@ -191,7 +205,12 @@ test('all four factory north lights are physical roof openings closed by inset g
 
 test('factory gates and inset personnel doors remain physically closed', () => {
   const closures = [
-    ['factory', 's', P.GATES.x - P.FACTORY[0], P.FACTORY],
+    ...[-P.GATES.w / 4, 0, P.GATES.w / 4].map((offset) => [
+      'factory',
+      's',
+      P.GATES.x - P.FACTORY[0] + offset,
+      P.FACTORY,
+    ]),
     ['plant', 'e', P.PLANT[3] - P.PLANT_DOOR.z, P.PLANT],
     ['shed', 's', 6.8, P.SHED],
     ['kiosk', 's', 1.2, P.KIOSK],
@@ -211,6 +230,65 @@ test('plant piers clear the complete door opening below the lintel', () => {
     const hits = hit(solid, f, t + offset, 1.8, 0.6);
     assert.ok(hits.length);
     assert.ok(hits[0].distance >= 0.18, 'door surface is inset, with no concrete pier ahead of it');
+  }
+});
+
+test('leaf ivy keeps the original corner envelope with a bounded opaque mesh budget', () => {
+  const p = new Parts();
+  plantIvy(p, 0, 0, ['#4f6b45', '#5b7a4e', '#46603f']);
+  const bounds = new THREE.Box3();
+  let triangles = 0;
+  for (const set of p.sets.values())
+    for (const g of set.list) {
+      g.computeBoundingBox();
+      bounds.union(g.boundingBox);
+      triangles += (g.index?.count ?? g.attributes.position.count) / 3;
+    }
+  assert.ok(bounds.min.x >= -2.25 && bounds.max.x <= 0.17);
+  assert.ok(bounds.min.z >= -2 && bounds.max.z <= 0.17);
+  assert.ok(bounds.min.y >= -0.001 && bounds.max.y <= 5.8);
+  assert.ok(triangles < 6500, 'ivy stays below its geometry allowance');
+});
+
+test('north-light end jambs close the slots beside the triangular roof caps', () => {
+  const { p } = building('factory'),
+    solid = rays(p);
+  const [x0, x1, z0, z1] = P.FACTORY,
+    pitch = (z1 - z0) / 4;
+  for (let k = 0; k < 4; k++) {
+    const f = { a: [x1, z0 + k * pitch], d: [-1, 0], n: [0, -1], L: x1 - x0 };
+    for (const t of [-0.035, f.L + 0.035])
+      assert.ok(hit(solid, f, t, 7.4).length, 'cap and jamb meet without an open slot');
+  }
+});
+
+test('all roof panes finish below the actual sloped plate underside', () => {
+  const { p } = building('factory'),
+    glass = rays(p, true);
+  const roofs = rays(p).filter((m) => {
+    m.geometry.computeBoundingBox();
+    const size = m.geometry.boundingBox.getSize(new THREE.Vector3());
+    return size.x > 24 && size.y > 1.9 && size.y < 2 && size.z > 3.5 && size.z < 3.8;
+  });
+  assert.equal(roofs.length, 4);
+  const panes = glass.filter((m) => {
+    m.geometry.computeBoundingBox();
+    return m.geometry.boundingBox.min.y > 6.4;
+  });
+  assert.equal(panes.length, 4);
+  for (const pane of panes) {
+    const b = pane.geometry.boundingBox,
+      x = (b.min.x + b.max.x) / 2,
+      z = b.min.z;
+    const hits = new THREE.Raycaster(
+      new THREE.Vector3(x, b.max.y + 1, z),
+      new THREE.Vector3(0, -1, 0),
+      0,
+      2,
+    ).intersectObjects(roofs);
+    assert.ok(hits.length >= 2, 'both sides of the thin roof plate are measured');
+    const underside = Math.min(...hits.map((h) => h.point.y));
+    assert.ok(underside > b.max.y + 0.02, 'glazing stays below the plate with construction clearance');
   }
 });
 

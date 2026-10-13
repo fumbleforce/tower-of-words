@@ -19,6 +19,7 @@ import { fittings } from '../office-quarter/row.js';
 import * as P from './plan.js';
 import { hallFittings } from './yard-details.js';
 import { industrialShell, worksWindow, doorReveals, WORKS_METAL } from './industrial-facades.js';
+import { plantIvy } from './ivy.js';
 import { factoryFacade } from './factory-facade.js';
 
 export const C = {
@@ -103,7 +104,10 @@ function* plant(p, plain) {
     t = z1 - P.PLANT_DOOR.z,
     w = P.PLANT_DOOR.w;
   doorReveals(p, f, t - w / 2, t + w / 2, 0.12, 2.4);
-  onFace(p, '#5d6871', f, t - w / 2, t + w / 2, 0.12, 2.4, -0.2, -0.12, WORKS_METAL);
+  onFace(p, '#a1afb6', f, t - w / 2, t + w / 2, 0.12, 2.4, -0.2, -0.12, {
+    surf: 'metal',
+    opts: { finish: 'painted', roughness: 0.46 },
+  });
   onFace(p, C.frame, f, t - 0.02, t + 0.02, 0.12, 2.4, -0.12, -0.09, NO);
   onFace(p, C.pier, f, t - w / 2 - 0.5, t + w / 2 + 0.5, 2.6, 2.8, 0, 0.9, {
     surf: 'concrete',
@@ -111,7 +115,7 @@ function* plant(p, plain) {
   for (let k = -2; k <= 2; k++)
     onFace(
       p,
-      '#2b2e33',
+      '#bac3c5',
       f,
       t - 0.25 + k * 0.1,
       t - 0.17 + k * 0.1,
@@ -126,15 +130,7 @@ function* plant(p, plain) {
     surf: 'concrete',
   }); // the step
   plain.board('はつでんしょ', 'No.1 POWER PLANT', '#5a5f66', 1.5, 0.48, [x1 + 0.16, 3.15, P.PLANT_DOOR.z], Math.PI / 2);
-  // ivy up the south-east corner; each clump 4 mm thicker than one of another green (clumps of one depth
-  // overlapping in different greens flickered)
-  for (let k = 0; k < 26; k++) {
-    const u = (k * 0.37) % 1.8,
-      y = ((k * 0.61) % 1) * (2.6 + u * 1.6),
-      d = 0.006 + 0.004 * (k % 6); // and clear of the corner pier's face (0.14 out)
-    p.box(C.ivy[k % 3], 0.5, 0.55, 0.12 + d, x1 - 0.2 - u, y, z1 + 0.08 + d / 2, NO);
-    if (k % 2) p.box(C.ivy[(k + 1) % 3], 0.12 + d, 0.5, 0.5, x1 + 0.08 + d / 2, y * 0.9, z1 - 0.3 - u * 0.8, NO);
-  }
+  plantIvy(p, x1, z1, C.ivy);
   yield;
 }
 
@@ -227,7 +223,7 @@ function* shed(p, plain) {
       cast: false,
     });
   onFace(p, C.frame, f, dt - 1.85, dt + 1.85, 3.3, 3.6, 0, 0.3);
-  onFace(p, '#9aa3a2', f, dt - 0.18, dt + 0.18, 1.1, 1.17, -0.105, -0.055, WORKS_METAL);
+  onFace(p, '#9aa3a2', f, dt - 0.18, dt + 0.18, 1.1, 1.17, -0.125, -0.075, WORKS_METAL);
   doorReveals(p, f, 6.4, 7.3, 0.3, 2.3);
   onFace(p, '#5b616b', f, 6.4, 7.3, 0.3, 2.3, -0.2, -0.12, WORKS_METAL);
   onFace(p, '#abb4b7', f, 7.02, 7.16, 1.23, 1.27, -0.12, -0.04, { ...WORKS_METAL, cast: false });

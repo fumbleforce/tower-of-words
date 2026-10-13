@@ -76,8 +76,15 @@ export function industrialShell(
 }
 
 export function doorReveals(p, f, a, b, y0, y1) {
-  for (const t of [a, b]) onFace(p, '#667175', f, t - 0.035, t + 0.035, y0, y1, -0.25, 0.015, FRAME);
-  onFace(p, '#707b7d', f, a - 0.035, b + 0.035, y1 - 0.045, y1 + 0.015, -0.25, 0.015, FRAME);
+  for (const t of [a, b])
+    onFace(p, '#94a2a8', f, t - 0.035, t + 0.035, y0, y1, -0.25, 0.015, {
+      ...FRAME,
+      opts: { finish: 'painted', roughness: 0.42 },
+    });
+  onFace(p, '#9ba9ac', f, a - 0.035, b + 0.035, y1 - 0.045, y1 + 0.015, -0.25, 0.015, {
+    ...FRAME,
+    opts: { finish: 'painted', roughness: 0.42 },
+  });
   onFace(p, '#999e99', f, a, b, y0 - 0.04, y0, -0.28, 0.04, {
     surf: 'concrete',
   });

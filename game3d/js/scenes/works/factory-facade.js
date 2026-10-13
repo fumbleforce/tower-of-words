@@ -55,8 +55,8 @@ function northLights(p, C, R, H) {
     onFace(p, '#718084', f, 0, f.L, H, H + 0.2, -0.22, 0.015, WORKS_METAL);
     onFace(p, '#718084', f, 0, f.L, H + rise - 0.2, H + rise, -0.22, 0.015, WORKS_METAL);
     for (const [a, b] of [
-      [0, 0.3],
-      [f.L - 0.3, f.L],
+      [-0.15, 0.3],
+      [f.L - 0.3, f.L + 0.15],
     ])
       onFace(p, '#718084', f, a, b, H + 0.2, H + rise - 0.2, -0.22, 0.015, WORKS_METAL);
     worksWindow(p, f, 0.3, f.L - 0.3, H + 0.2, H + rise - 0.2, k);
