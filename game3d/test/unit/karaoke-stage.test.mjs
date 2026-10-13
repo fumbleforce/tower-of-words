@@ -75,3 +75,18 @@ test('phone group shots cover the requested speaker or current holder, while des
 test('making room on a later visit retains Hamada without inventing an unqueued Kenji song',async()=>{
  const {stage}=fixture();await stage.act({state:'start'});await stage.act({state:'selectNumber'});await stage.act({state:'clearQueueExtras'});assert.deepEqual(stage.snapshot().queue,[{number:'0718',who:'kuroda'}]);stage.leave();
 });
+
+test('walking back to a seat releases an empty-handed selector reach', async () => {
+  const {stage, P} = fixture();
+  await stage.act({state:'start'});
+  for (const [state, who] of [['queue','kenji'], ['selectNumber','kuroda']]) {
+    await stage.act({state});
+    const rig = P.people[who];
+    assert.equal(rig.seated, true);
+    for (const name of ['Spine','RightArm','RightForeArm']) {
+      assert(rig.model.getObjectByName(name).quaternion.angleTo(new THREE.Quaternion()) < 1e-7,
+        'the empty hand must stop reaching at the selector after sitting: ' + who + '/' + name);
+    }
+  }
+  stage.leave();
+});

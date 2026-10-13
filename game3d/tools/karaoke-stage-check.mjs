@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
+import { withBrowserJob, gpuWaitOptions } from '../../tools/lib/browser-job.mjs';
 import { scopedRoute } from '../../tools/bible/check-scope.mjs';
 const width = +(process.argv[2] || 1366),
   height = width < 700 ? 844 : 860,
@@ -404,6 +404,6 @@ await withBrowserJob(
       await context.close();
     }
   },
-  { timeoutMs: 230000 },
+  gpuWaitOptions(900, 230000),
 );
 console.log('KARAOKE_STAGE', out.pathname, result.pass);
