@@ -127,3 +127,26 @@ test('generated lock has a hard sixteen MiB ceiling and other files retain their
     git('reset', '--quiet', 'HEAD', '--', file);
   }
 });
+
+const CATALOG = 'tools/assets/assets.json';
+const catalogText = JSON.stringify({ assets: [{ id: 'portrait/example', kind: 'portrait', paths: ['art/example.webp'] }],
+  counts: {}, kinds: { portrait: 'Portraits' }, statuses: ['approved'] });
+test('generated catalog allows bounded metadata while retaining immutable-byte and ordinary file gates', t => {
+  const { cwd, env, git, stage } = assetFixture(t);
+  const text = catalogText + ' '.repeat(2 * 1024 * 1024);
+  const snapshot = stage(CATALOG, text);
+  fs.writeFileSync(path.join(cwd, CATALOG), 'unrelated working copy');
+  assert.deepEqual(checkStagedSyntax(cwd, { env }).failures, []);
+  checkStagedAssets(cwd, snapshot, { env });
+  for (const [bad, error] of [
+    ['{}', /schema/], ['{', /JSON|property/i], [catalogText + '\0', /binary/],
+    [Buffer.from([0xff, 0xfe]), /UTF-8/],
+    [catalogText.replace('"paths":["art/example.webp"]', '"paths":[3]'), /entry/],
+    [catalogText + ' '.repeat(8 * 1024 * 1024), /exceeds 8388608 bytes/],
+  ]) assert.throws(() => checkStagedAssets(cwd, stage(CATALOG, bad), { env }), error);
+  assert.match(checkStagedSyntax(cwd, { env }).failures[0].error, /exceeds 8388608 bytes/);
+  stage(CATALOG, catalogText);
+  assert.throws(() => checkStagedAssets(cwd, stage('ordinary.json', text), { env }), /text exceeds/);
+  assert.match(checkStagedSyntax(cwd, { env }).failures[0].error, /exceeds 2097152 bytes/);
+  git('reset', '--quiet', 'HEAD', '--', 'ordinary.json');
+});

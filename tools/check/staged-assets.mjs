@@ -4,6 +4,8 @@ import { readStagedFile } from '../lib/staged-tree.mjs';
 
 export const GENERATED_ASSET_LOCK = 'tools/assets/assets.lock.json';
 export const GENERATED_ASSET_LOCK_LIMIT = 16 * 1024 * 1024;
+export const GENERATED_ASSET_CATALOG = 'tools/assets/assets.json';
+export const GENERATED_ASSET_CATALOG_LIMIT = 8 * 1024 * 1024;
 const record = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 function generatedLockPaths(bytes) {
   assert(!bytes.includes(0), 'Asset lock contains binary data');
@@ -51,6 +53,19 @@ export function checkStagedAssets(cwd, snapshot, { env = process.env } = {}) {
     if (change.file === GENERATED_ASSET_LOCK) {
       lockedPaths = generatedLockPaths(readStagedFile(cwd, snapshot, change.file,
         { env, maxBytes: GENERATED_ASSET_LOCK_LIMIT }));
+      continue;
+    }
+    if (change.file === GENERATED_ASSET_CATALOG) {
+      const bytes = readStagedFile(cwd, snapshot, change.file, { env, maxBytes: GENERATED_ASSET_CATALOG_LIMIT });
+      assert(!bytes.includes(0), 'Asset catalog contains binary data');
+      const source = bytes.toString('utf8');
+      assert(Buffer.from(source).equals(bytes), 'Asset catalog is not valid UTF-8');
+      const catalog = JSON.parse(source);
+      assert(record(catalog) && Array.isArray(catalog.assets) && record(catalog.counts)
+        && record(catalog.kinds) && Array.isArray(catalog.statuses), 'Invalid asset catalog schema');
+      assert(catalog.assets.every(entry => record(entry) && typeof entry.id === 'string'
+        && typeof entry.kind === 'string' && Array.isArray(entry.paths)
+        && entry.paths.every(file => typeof file === 'string')), 'Invalid asset catalog entry');
       continue;
     }
     // Every unallowed text candidate fits the cap, so inspect all its bytes for NUL.

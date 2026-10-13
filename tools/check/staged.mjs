@@ -6,7 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'espree';
 import { stagedSnapshot, readStagedFile, readStagedPrefix, assertSnapshotCurrent } from '../lib/staged-tree.mjs';
-import { GENERATED_ASSET_LOCK, GENERATED_ASSET_LOCK_LIMIT } from './staged-assets.mjs';
+import { GENERATED_ASSET_LOCK, GENERATED_ASSET_LOCK_LIMIT, GENERATED_ASSET_CATALOG, GENERATED_ASSET_CATALOG_LIMIT } from './staged-assets.mjs';
 
 function language(file, source) {
   const extension = path.extname(file);
@@ -33,7 +33,8 @@ export function checkStagedSyntax(cwd, { env = process.env } = {}) {
         if (!prefix.startsWith('#!') || !language(file, prefix)) continue;
       }
       const bytes = readStagedFile(cwd, snapshot, file,
-        { env, ...(file === GENERATED_ASSET_LOCK ? { maxBytes: GENERATED_ASSET_LOCK_LIMIT } : {}) });
+        { env, ...(file === GENERATED_ASSET_LOCK ? { maxBytes: GENERATED_ASSET_LOCK_LIMIT }
+          : file === GENERATED_ASSET_CATALOG ? { maxBytes: GENERATED_ASSET_CATALOG_LIMIT } : {}) });
       assert(!bytes.includes(0), 'binary data in source file');
       const source = bytes.toString('utf8');
       assert(Buffer.from(source).equals(bytes), 'source is not valid UTF-8');
