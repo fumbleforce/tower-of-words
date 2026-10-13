@@ -276,7 +276,7 @@ await withBrowserJob(`outing-${stem}`, async browser => {
       await pick('Explore the shop street together.'); await finish(); await ready();
       assert.equal((await checkpoint('ui-invited')).outing.status, 'active');
       await chat(); await finish([], 'Stop by the game centre together.');
-      await pick('Stop by the game centre together.'); await finish([], 'Head to the seafront.');
+      await pick('Stop by the game centre together.'); await finish([], 'Head to the East coast benches.');
       assert.ok((await checkpoint('ui-arcade-complete')).outing.stops.includes('arcade'));
       if (process.env.CONTINUE_GATE) {
         console.log('AWAIT_VISUAL_GATE', process.env.CONTINUE_GATE);
@@ -290,7 +290,7 @@ await withBrowserJob(`outing-${stem}`, async browser => {
         if (process.env.CHECK_FACING) assert.ok(Math.abs(before.frontage.playerHeadingError) < .08, 'player visibly faces actual frontage');
         const choices = await page.locator('#talk .chips button').allTextContents();
         const receipt = await continueSave('shotengai'); assert.ok(receipt.runner?.execution, 'actual runner execution saved');
-        await finish([], 'Head to the seafront.');
+        await finish([], 'Head to the East coast benches.');
         const after = await checkpoint('ui-arcade-choice-continue');
         assert.deepEqual(await page.locator('#talk .chips button').allTextContents(), choices);
         assert.equal(dialogueFrame, frame, 'Continue did not replay spoken opening');
@@ -319,7 +319,7 @@ await withBrowserJob(`outing-${stem}`, async browser => {
         await chat(); await finish([], 'Stop by the game centre together.'); await checkpoint('ui-arcade-chat-reentry');
         await pick('Keep walking together.'); await finish(); await ready(); await checkpoint('ui-arcade-keep-walking');
       } else {
-      await pick('Head to the seafront.'); await finish(); await ready(); await checkpoint('ui-coast-goal');
+      await pick('Head to the East coast benches.'); await finish(); await ready(); await checkpoint('ui-coast-goal');
       await use('plaza_lane', 'plaza'); await use('dorm_lane', 'east_lane'); await use('dorm_row', 'east_coast');
       await chat(); await finish([], 'Sit on the seafront bench with Kenji.');
       await pick('Sit on the seafront bench with Kenji.'); await finish([], 'Keep sitting with Kenji.');

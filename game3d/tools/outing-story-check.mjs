@@ -47,11 +47,11 @@ for(const words of [[],['ikitai'],['isshoni'],['ikitai','isshoni']]){
  const r=await play('invitation menu '+words,{words,picks:['Maybe another time']});
  assert.equal(r.menus[0].some(s=>s.includes('Try')),words.length===2);
 }
-let r=await play('ordinary invitation unknown words',{picks:['Invite Kenji','Walk to the seafront']});assert.equal(r.state.status,'active');assert.deepEqual(r.state.stops,[]);
+let r=await play('ordinary invitation unknown words',{picks:['Invite Kenji','Walk to the East coast benches']});assert.equal(r.state.status,'active');assert.deepEqual(r.state.stops,[]);
 r=await play('word invitation',{words:['ikitai','isshoni'],picks:['Try','Explore the shop street']});assert(r.transcript.some(l=>l.text==='はい、{isshoni}行きましょう。'));
 r=await play('busy invitation',{picks:['Invite Kenji'],fail:['invite']});assert.equal(r.state.status,'idle');assert(!r.transcript.some(l=>l.text.includes('どっち')));
 r=await play('busy resume',{initial:{outing_paused:true},picks:['Continue our walk'],fail:['resume']});assert.equal(r.state.status,'paused');
-r=await play('resume keeps receipt',{initial:{outing_paused:true,state:{status:'paused',day:3,period:'afternoon',stops:['arcade']}},picks:['Continue our walk','Walk to the seafront']});assert.deepEqual(r.state.stops,['arcade']);
+r=await play('resume keeps receipt',{initial:{outing_paused:true,state:{status:'paused',day:3,period:'afternoon',stops:['arcade']}},picks:['Continue our walk','Walk to the East coast benches']});assert.deepEqual(r.state.stops,['arcade']);
 for(const heard of [false,true]){r=await play('arcade context '+heard,{initial:{outing_active:true,kenji_arcade_talked:heard},picks:['Stop by','Keep walking']});assert.equal(r.transcript.some(l=>l.text.includes('telling me')),heard);assert.equal(r.flags.kenji_arcade_talked,heard);assert.deepEqual(r.state.stops,['arcade']);}
 r=await play('failed arcade arrival',{initial:{outing_active:true},picks:['Stop by','Keep walking'],fail:['arcade']});assert.deepEqual(r.state.stops,[]);assert.equal(r.transcript.length,0);assert.equal(r.actions.find(a=>a.state==='arcade').failedPending,'arcade');assert.equal(r.state.pending,null);
 r=await play('repeat arcade',{initial:{outing_active:true,outing_done_arcade:true},picks:['Stop by','Keep walking']});assert(r.transcript.some(l=>l.text==='もう少し見てもいいですか？'));assert.deepEqual(r.state.stops,['arcade']);
@@ -69,7 +69,7 @@ r=await play('unlearned crane topic stays hidden',{picks:['Chat with Kenji','Let
 r=await play('waiting survives another Chat',{initial:{outing_active:true,outing_waiting:true},picks:["I'll head into"]});assert(!r.actions.some(a=>a.state==='keepWalking'));assert(!r.actions.some(a=>a.do==='trip'));
 r=await play('cancel waiting by walking',{initial:{outing_active:true,outing_waiting:true},picks:['Keep walking']});assert(r.actions.some(a=>a.state==='keepWalking'));
 r=await play('repeat coast seating',{initial:{outing_active:true,place:'east_coast',state:{status:'active',day:3,period:'afternoon',stops:['coast']}},picks:['Sit on','Keep sitting']});assert.deepEqual(r.state.stops,['coast']);assert(!r.transcript.some(l=>l.text==='ああ、ちょっと休みましょうか。'));
-for(const place of ['plaza','east_lane','dorm_commons']){r=await play('route controls '+place,{initial:{outing_active:true,place},picks:['Keep walking']});assert(r.menus[0].some(s=>s.includes('shop street')));assert(r.menus[0].some(s=>s.includes('seafront')));}
+for(const place of ['plaza','east_lane','dorm_commons']){r=await play('route controls '+place,{initial:{outing_active:true,place},picks:['Keep walking']});assert(r.menus[0].some(s=>s.includes('shop street')));assert(r.menus[0].some(s=>s.includes('East coast benches')));}
 r=await play('old word topic remains available',{initial:{kenji_arcade_talked:true},picks:['Chat with Kenji','Let him get back']});assert(r.menus[1].some(s=>s.includes('How do you say')));
 r=await play('failed drink returns to walking',{initial:{outing_active:true},picks:['Buy a drink','Keep walking'],fail:['drink']});assert.equal(r.actions.find(a=>a.state==='drink').failedPending,'drink');assert.equal(r.state.pending,null);assert.equal(r.state.status,'active');
 r=await play('failed departure returns to walking',{initial:{outing_active:true},picks:['split up','Keep walking'],fail:['finish']});assert.equal(r.state.status,'active');assert.equal(r.state.callback,null);assert.equal(r.transcript.length,2);
