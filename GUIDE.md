@@ -2,7 +2,7 @@
 
 How we work, and the rules Jørgen has set. Every agent reads this before starting. What the game is (setting, cast, places, storylines, words, systems, UI, art and sound) is in docs/game/; read the files for your area and never contradict them. docs/game/README.md maps where every kind of fact lives, game or not: start there when you look something up. When this file and an older doc disagree, this file wins; on what the game is, docs/game/ wins.
 
-Rules that belong to one area live with that area, and this file points to them. Old rules and verdicts that no longer apply (the VN, Godot, the island slice, pixel sprites, low-poly Mio) are in legacy/notes/GUIDE-history.md, word for word. Don't follow them.
+Rules that belong to one area live with that area, and this file points to them. Old rules and verdicts that no longer apply (the VN, Godot, the island slice, pixel sprites, low-poly Mio) are in notes/history/GUIDE-history.md, word for word. Don't follow them.
 
 ## Index
 
