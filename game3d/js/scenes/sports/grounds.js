@@ -135,7 +135,12 @@ function* planting(p, lights, signRoot) {
     pitch: 3.2,
     soil: false,
   });
-  yield* belt(p, [GYM[0] + 1, GYM[1] - 3.2, PW[2] + 1, GYM[2] - 2.4], [pine, maple, keyaki], {
+  // Keep the grove's living trunks behind the staff fence while retaining each tree's species and seed.
+  const fenceX = PROTECTED_EDGES.sports[1][0][0];
+  const groveTrees = [pine, maple, keyaki].map(
+    (kind) => (parts, x, z, scale, seed) => kind(parts, Math.abs(x - fenceX) < 0.75 ? fenceX - 1 : x, z, scale, seed),
+  );
+  yield* belt(p, [GYM[0] + 1, GYM[1] - 3.2, PW[2] + 1, GYM[2] - 2.4], groveTrees, {
     seed: 53,
     pitch: 3.4,
     soil: false,
