@@ -75,6 +75,7 @@ export function installMetrics(game, qualityNow = () => null) {
   let lastPlace = null;
   let last = 0,
     lastDrawn = -1,
+    lastHidden = false,
     frame = 0,
     armed = false,
     running = false,
@@ -94,10 +95,19 @@ export function installMetrics(game, qualityNow = () => null) {
       return;
     }
     requestAnimationFrame(tick);
-    // the frame cap (perf/view.js due) skips some display frames: only the ones the game drew count
-    const drawn = game.view ? game.view.draws : frame + 1;
+    // Count paced presentation callbacks. An opaque scene presents DOM while its hidden 3D view draws nothing.
+    const drawn = game.view ? (game.view.presentations ?? game.view.draws) : frame + 1;
     if (drawn === lastDrawn) return;
     lastDrawn = drawn;
+    const hidden = !!game.view?.worldHidden?.();
+    if (hidden !== lastHidden) {
+      ringN = ringAt = 0;
+      last = 0;
+      lastHidden = hidden;
+      calls = tris = 0;
+      if (armed) info.autoReset = true;
+      armed = false;
+    }
     const dt = last ? now - last : 0;
     last = now;
     frame++;
@@ -105,7 +115,8 @@ export function installMetrics(game, qualityNow = () => null) {
     const real = dt > 0 && dt < 5000;
     const name = game.place && game.place.name;
     let rec = null;
-    if (recording && name) rec = recs[name] || (recs[name] = placeRec());
+    // Place budgets measure visible world frames, never DOM-only presentation frames.
+    if (recording && name && !hidden) rec = recs[name] || (recs[name] = placeRec());
     if (rec && game.place !== lastPlace) {
       lastPlace = game.place;
       rec.visits++;
@@ -123,7 +134,7 @@ export function installMetrics(game, qualityNow = () => null) {
     // draw calls: counters were reset one frame ago and held; what they hold now is exactly one frame.
     // window.__perfHold: a tool is sampling renderer.info itself (tools/perf/ab.mjs); leave the counters alone.
     // A tool that toggles autoReset on its own (autoReset already off) is left alone too.
-    if (window.__perfHold) armed = false;
+    if (window.__perfHold || hidden) armed = false;
     else if (armed) {
       armed = false;
       info.autoReset = true;

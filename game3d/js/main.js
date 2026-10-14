@@ -419,6 +419,11 @@ function step(dt, drawn) {
   const nearSays = !!(near && !game.busy && game.saysSomething(near));
   if (nearSays) st = near;
   game.sayTarget = st;
+  if (view.worldHidden()) {
+    stepAmbient(game);
+    ambience.update(game, dt);
+    return; // the fullscreen scene hides markers and controls, but not world/story clocks
+  }
   updateOutline();
   // when a goal is waiting on a word he knows, the Say button lights up
   const waiting =

@@ -184,7 +184,9 @@ export async function withBrowserJob(name, run, {
     started = Date.now();
     arm(timeoutMs, 'to run');
     const args = gpu
-      ? ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gpu-blocklist', '--enable-gpu']
+      ? process.env.GL === 'opengl'
+        ? ['--use-angle=gl', '--ignore-gpu-blocklist', '--enable-gpu']
+        : ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gpu-blocklist', '--enable-gpu']
       : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'];
     console.log(`${name}: ${!gpu ? 'software GL (explicit GL=soft)' : gpuSlot ? `GPU slot ${gpuSlot.slot + 1}` : `exclusive GPU lock as ${gpuLock}`}`);
     safeToRelease = false;

@@ -25,8 +25,16 @@ export function createView(game, renderer, canvas, save) {
       : lighterAfterLoss(
           window.__qualityTier ? (TIER[window.__qualityTier()] ?? 1) : renderer.userData.software ? 0 : 2,
         );
-  const view = { quality: tierNow(), composer: null, post: null, outline: null, place: null, draws: 0 };
-  game.view = view; // its draws count is what the metrics overlay times (perf/metrics.js)
+  const view = {
+    quality: tierNow(),
+    composer: null,
+    post: null,
+    outline: null,
+    place: null,
+    draws: 0,
+    presentations: 0,
+  };
+  game.view = view; // metrics time presentations; draws count only actual world frames
   const size = () => [+(Q.get('w') || window.innerWidth), +(Q.get('h') || window.innerHeight)];
   function setComposer(place) {
     disposePost(view.composer, [view.place?.beforeAO]); // the last place's chain; its own pass stays with it
@@ -100,8 +108,12 @@ export function createView(game, renderer, canvas, save) {
   // one-shot callbacks run right after the next frame drawn, while the canvas still holds it (ui/frame-grab.js)
   const drawn = [];
   view.afterDraw = (fn) => drawn.push(fn);
+  // A fullscreen scene hides #stage with cg-on. Keep its clocks running, but no hidden GPU passes.
+  view.worldHidden = () => document.body.classList.contains('cg-on');
   function render() {
     if (!view.composer || !game.place) return;
+    view.presentations++; // paced animation callbacks, including a DOM-only scene
+    if (view.worldHidden() && !drawn.length) return; // queued frame grabs still get one fresh world frame
     game.place.beforeRender?.();
     renderer.shadowMap.needsUpdate = true;
     view.post.render();
