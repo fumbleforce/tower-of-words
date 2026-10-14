@@ -8,7 +8,6 @@ import { K } from '../scenes/office.js';
 import { eveningLight, EVENING_GRADE, MORNING_GRADE } from '../scenes/town.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { poolDoorVisibility } from './day3/pool-door-visibility.js';
-import { poolWalkingCamera } from './day3/pool-walking-camera.js';
 import { poolSave } from './day3/pool-save.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { followFit } from './turning-cam.js';
@@ -38,7 +37,6 @@ export async function poolPlace(game) {
     }),
   );
   const cam = new RoomCam({ ...w.camera, yaw: D.LOOK.yaw, elev: D.LOOK.elev }); // elev in degrees here
-  const walkingCamera = poolWalkingCamera(cam, LOOK, MC.gender);
   const doorVisibility = poolDoorVisibility(w.root, cam);
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const out = MC.gender === 'woman' ? D.EXIT_W : D.EXIT; // the protagonist's own changing room
@@ -116,7 +114,6 @@ export async function poolPlace(game) {
     update(dt) {
       if (shownPeriod !== sim.period) P.onPeriod(sim.period);
       const p = game.player.root.position;
-      walkingCamera.update(p, dt);
       doorVisibility.update(p, dt);
       w.follow(p.x, p.z);
       w.update();

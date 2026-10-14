@@ -8,34 +8,9 @@ registerHooks({ resolve(s, c, next) {
 } });
 globalThis.location = { search: '' };
 globalThis.window = {};
-const { poolWalkingCamera } = await import('../../js/places/day3/pool-walking-camera.js');
-const { changingPlan } = await import('../../js/scenes/sports/changing-room.js');
-for (const gender of ['man', 'woman']) test(`pool corridor shows the actor above lockers without changing deck or held shots: ${gender}`, () => {
-  const look = { yaw: -.22, elev: 54 * Math.PI / 180 };
-  const cam = { ...look }, walk = poolWalkingCamera(cam, look, gender);
-  const { bounds: [x0, x1, , z1], corridor, deck } = changingPlan(gender);
-  // A ray from a 1 m torso to the camera clears a 1.65 m locker less than 0.2 m ahead.
-  for (let x = x0 + .4; x < x1 - .4; x += .5) {
-    const p = { x, z: corridor[1] };
-    walk.update(p, 1);
-    assert.ok(1 + .2 * Math.tan(cam.elev) > 1.65);
-    assert.equal(cam.yaw, look.yaw);
-  }
-  walk.update({ x: 10.556155122038238, z: -30.332565043504808 }, 1);
-  assert.ok(cam.elev > 1.3, 'the actual hidden foreground-wall pose keeps the higher view');
-  walk.update({ x: corridor[0], z: z1 + .3 }, 1);
-  assert.ok(cam.elev > 1.3, 'pavilion doorway retains its readable view');
-  cam.close = { poolWaterShot: true }; cam.elev = .48;
-  walk.update({ x: corridor[0], z: corridor[1] }, 1);
-  assert.equal(cam.elev, .48, 'authored water shot unchanged');
-  cam.close = null; walk.update({ x: deck[0], z: deck[1] + 2 }, 1);
-  assert.equal(cam.elev, look.elev, 'normal deck camera restored');
-});
-
-
 const THREE = await import('../../vendor/three/three.module.js');
 const { Parts } = await import('../../js/kit/core/parts.js');
-const { buildChangingRoom } = await import('../../js/scenes/sports/changing-room.js');
+const { buildChangingRoom, changingPlan } = await import('../../js/scenes/sports/changing-room.js');
 const { pt } = await import('../../js/scenes/sports/plan.js');
 const D = await import('../../js/scenes/sports/deck-plan.js');
 const { RoomCam } = await import('../../js/cam.js');
@@ -63,10 +38,10 @@ for (const aspect of [390 / 844, 1366 / 860]) for (const gender of ['man', 'woma
     const nav = { x0: Math.min(...walks.map(r => r[0])) - .2, x1: Math.max(...walks.map(r => r[1])) + .2, z0: Math.min(...walks.map(r => r[2])) - .2, z1: Math.max(...walks.map(r => r[3])) + .2 };
     const look = { yaw: -.22, elev: 54 * Math.PI / 180 }, cam = new RoomCam({ ...look, elev: 54, fov: 24, space: root });
     followFit(cam, nav, aspect, look);
-    const walking = poolWalkingCamera(cam, look, gender), visibility = poolDoorVisibility(root, cam), ray = new THREE.Raycaster();
+    const visibility = poolDoorVisibility(root, cam), ray = new THREE.Raycaster();
     const sample = (p, settle = false) => {
       actor.position.copy(p); actor.updateWorldMatrix(true, true);
-      for (let frame = 0; frame < (settle ? 40 : 30); frame++) { walking.update(p, .05); cam.update(.05, p); visibility.update(p, .05); }
+      for (let frame = 0; frame < (settle ? 40 : 30); frame++) { cam.update(.05, p); visibility.update(p, .05); }
       root.updateMatrixWorld(true);
       for (const y of [.8, 1.2]) {
         const target = p.clone().setY(y), eye = cam.camera.position;
@@ -76,7 +51,6 @@ for (const aspect of [390 / 844, 1366 / 860]) for (const gender of ['man', 'woma
       }
     };
     sample(new THREE.Vector3(11.85770478629641, 0, -34.73223874558539), true);
-    if (aspect < 1) assert.ok(cards.some(card => !card.visible), `actual saved phone doorway head occluder fades ${cam.camera.position.toArray()} target${cam.target.toArray()}`);
     const points = [];
     for (const z of [plan.corridor[1] - .65, plan.corridor[1], -34.76]) for (let x = plan.bounds[0] + .6; x < plan.bounds[1] - .4; x += .24) points.push(new THREE.Vector3(x, 0, z));
     for (let z = plan.corridor[1]; z < plan.deck[1] + 2; z += .12) points.push(new THREE.Vector3(plan.deck[0], 0, z));
