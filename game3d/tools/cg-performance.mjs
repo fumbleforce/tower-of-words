@@ -1,13 +1,15 @@
 // Public neutral fullscreen cover: measure the runtime without loading local content.
 // BASE=.claude/worktrees/<name>/game3d GL=opengl node game3d/tools/cg-performance.mjs [phone] [--compare]
-// --compare pins BASELINE_REF (default HEAD^) to measure the prior runtime in the same GPU job.
+// --compare requires BASELINE_REF from before the CG fix, and pins that runtime in the same GPU job.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { scopedRoute } from '../../tools/bible/check-scope.mjs';
 const phone = process.argv.includes('phone');
-const baselineRef = process.env.BASELINE_REF || 'HEAD^';
+const functional = process.env.FUNCTIONAL === '1';
+const baselineRef = process.env.BASELINE_REF;
+if ((process.env.BASELINE || process.argv.includes('--compare')) && !baselineRef) throw new Error('Set BASELINE_REF to a commit from before the CG fix for a comparison.');
 const original = process.env.BASELINE || process.argv.includes('--compare') ? Object.fromEntries(['main.js', 'perf/view.js', 'perf/metrics.js'].map(name => [name, execFileSync('git', ['show', `${baselineRef}:game3d/js/${name}`], { encoding: 'utf8' })])) : null;
 const passes = process.argv.includes('--compare') ? [original, null] : [original];
 if (original) console.log('baseline runtime pinned');
@@ -18,7 +20,8 @@ await withBrowserJob('cg-performance', async browser => {
   const context = await browser.newContext({ serviceWorkers: 'block', viewport: phone ? { width: 390, height: 844 } : { width: 2327, height: 1196 }, deviceScaleFactor: phone ? 3 : 1.1 });
   const scopeErrors = [], errors = [];
   await context.route('**/*', scopedRoute({ publicOnly: true, onFailure: e => scopeErrors.push(String(e)) }));
-  if (pinned) for (const [name, body] of Object.entries(pinned)) await context.route(`**/js/${name}*`, route => route.fulfill({ status: 200, contentType: 'text/javascript', body }));
+  const sourceBase = new URL(`http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/js/`);
+  if (pinned) for (const [name, body] of Object.entries(pinned)) await context.route(url => url.origin === sourceBase.origin && url.pathname === sourceBase.pathname + name, route => route.fulfill({ status: 200, contentType: 'text/javascript', body }));
   const page = await context.newPage();
   page.on('pageerror', e => errors.push(e.message));
   await page.addInitScript(() => globalThis.localStorage.setItem('amakawa-settings', JSON.stringify({ privateMode: false, quality: 'high', frameCap: 'off' })));
@@ -79,10 +82,10 @@ await withBrowserJob('cg-performance', async browser => {
     const covered = results.at(-1);
     assert.equal(covered.worldDraws, 0, 'fullscreen cover must not draw hidden world passes');
     assert.equal(covered.markerUpdates, 0, 'hidden markers must not update');
-    assert.ok(covered.worldSeconds > 3, 'world clocks keep advancing');
+    assert.ok(covered.worldSeconds > (functional ? 0.5 : 3), 'world clocks keep advancing');
     assert.ok(covered.updates > 0, 'scripted movement/tweens keep updating');
     assert.match(covered.overlay, /calls\s+0/);
-    assert.ok(parseFloat(covered.overlay) > 25, 'overlay must show presentation frames');
+    if (!functional) assert.ok(parseFloat(covered.overlay) > 25, 'overlay must show presentation frames');
     await page.evaluate(async () => {
       const g = globalThis.__game, before = g.view.draws;
       await Promise.all([new Promise(resolve => g.view.afterDraw(resolve)), new Promise(resolve => g.view.afterDraw(resolve))]);
@@ -106,4 +109,4 @@ await withBrowserJob('cg-performance', async browser => {
   console.log(output, JSON.stringify(results, null, 2));
   await context.close();
   }
-}, { gpuLock: `cg-performance-${process.pid}`, gpuWaitMs: 900000, timeoutMs: 180000 });
+}, { gpuLock: functional ? null : `cg-performance-${process.pid}`, gpuWaitMs: 900000, timeoutMs: 180000 });

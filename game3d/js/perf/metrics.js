@@ -105,7 +105,7 @@ export function installMetrics(game, qualityNow = () => null) {
       last = 0;
       lastHidden = hidden;
       calls = tris = 0;
-      if (armed) info.autoReset = true;
+      if (armed && !window.__perfHold) info.autoReset = true;
       armed = false;
     }
     const dt = last ? now - last : 0;

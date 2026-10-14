@@ -1,0 +1,26 @@
+{
+  "title": "Fullscreen scenes stop drawing the hidden world",
+  "date": "2026-10-14",
+  "by": "codex/cg-performance",
+  "caption": "The hidden 3D view stops rendering during a CG. Story clocks and typing keep working, and closing the picture restores the world.",
+  "commit": ["1d99b8558", "6ed8f3b8d", "4fd06af9c"],
+  "result": ["desktop-covered", "phone-covered"],
+  "sections": [
+    {
+      "title": "Desktop comparison with a neutral picture",
+      "caption": "RTX 3080, OpenGL, High quality, no frame limit, 2327 × 1196 at DPR 1.1. Both versions reached 60 FPS in this public test. The earlier version still made 458 world draw calls behind the picture. The candidate makes none. The reported 7–9 FPS was not reproduced.",
+      "images": [
+        {"id": "desktop-before", "image": "game3d/shots/cg-performance-20261014/cg-performance-desktop-1792009765372-baseline-covered.png", "caption": "Before: the neutral picture hides the world, but its draw calls continue."},
+        {"id": "desktop-covered", "image": "game3d/shots/cg-performance-20261014/cg-performance-desktop-1792009765372-candidate-covered.png", "caption": "After: the same neutral test picture, with zero hidden world draw calls."}
+      ]
+    },
+    {
+      "title": "Phone checks",
+      "caption": "At 390 × 844, the public typing prompt, world clocks, fresh captures and returning to the world pass. This shared GPU run verifies those functions and makes no phone performance claim.",
+      "images": [
+        {"id": "phone-covered", "image": "game3d/shots/cg-performance-20261014/cg-performance-phone-1792010230409-candidate-covered.png", "caption": "Neutral phone test picture. The hidden world makes zero draw calls."}
+      ]
+    }
+  ],
+  "links": [{"label": "Play", "href": "game3d/"}]
+}
