@@ -124,13 +124,20 @@ export function installJumpPose(hop, player) {
     }
     turn('Spine', (airborne ? 0.1 + tuck * 0.32 : 0.15) * weight);
   }
-  let originalUpdate = player.update;
-  const update = function (...args) {
-    undo();
-    const result = originalUpdate.apply(this, args);
-    apply();
-    return result;
-  };
+  let originalUpdate = player.update,
+    update = wrap(originalUpdate);
+  function wrap(delegate) {
+    const wrapped = function (...args) {
+      // Saved checks/overlays may still call an earlier wrapper. Its delegate
+      // stays fixed, and only the current wrapper owns the pose layer.
+      if (wrapped !== update) return delegate.apply(this, args);
+      undo();
+      const result = delegate.apply(this, args);
+      apply();
+      return result;
+    };
+    return wrapped;
+  }
   player.update = update;
   function reset() {
     undo();
@@ -169,7 +176,10 @@ export function installJumpPose(hop, player) {
     activate() {
       // A Continue into water can install a fresh swimming overlay after the
       // outfit slot restores its animation method, before this body is synced.
-      if (player.update !== update) originalUpdate = player.update;
+      if (player.update !== update && player.update !== originalUpdate) {
+        originalUpdate = player.update;
+        update = wrap(originalUpdate);
+      }
       player.update = update;
     },
     body,
