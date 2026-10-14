@@ -4,7 +4,7 @@
 //   view.due(now): whether this display frame is drawn (the frame cap); view.afterDraw(fn): fn right after the next one
 import * as THREE from 'three';
 import { Q } from '../engine.js';
-import { frameCap } from '../settings.js';
+import { frameCap, settings } from '../settings.js';
 import { createFramePacer } from './frame-pacer.js';
 import { makePost, GRADE } from '../post.js';
 import { styleGrade, currentStyle } from '../style/index.js';
@@ -85,20 +85,17 @@ export function createView(game, renderer, canvas, save) {
   }
   onResizeFrame(resize);
   const guard = installGlGuard({ canvas, renderer, save, resize: () => resize() });
-  // Frame pacing: due(now) says whether this display frame should be drawn (and the world stepped). The cap
-  // (settings.js frameCap: 60, or 30 at low) keeps a 120 or 144 Hz screen from drawing every refresh. The title's
-  // shot moves only by a slow sway, so it draws at most 30 a second (Jørgen, 2026-10-05: an RTX 3080 at about 80 %
-  // load with only the title open), and a paused world, which doesn't move, at most 20. A frame counts as due a few
-  // ms early so a 60 Hz screen under a 30 cap draws every other refresh rather than drifting.
+  // Auto saves power on the title. Explicit frame limits also apply there; pause keeps its quiet 20 fps.
   const pace = createFramePacer();
   let cap = frameCap();
-  function due(now) {
-    if (CAP_MODE) return true;
-    const paused = game.paused && !game.mapOpen;
+  function activeCap() {
     let fps = cap;
-    if (document.body.classList.contains('at-title')) fps = fps ? Math.min(fps, 30) : 30;
-    if (paused) fps = fps ? Math.min(fps, 20) : 20;
-    return pace(now, fps);
+    if (!Q.has('fps') && settings.frameCap === 'auto' && document.body.classList.contains('at-title')) fps = 30;
+    if (game.paused && !game.mapOpen) fps = fps ? Math.min(fps, 20) : 20;
+    return CAP_MODE ? 0 : fps;
+  }
+  function due(now) {
+    return pace(now, activeCap());
   }
   // one-shot callbacks run right after the next frame drawn, while the canvas still holds it (ui/frame-grab.js)
   const drawn = [];
@@ -129,5 +126,5 @@ export function createView(game, renderer, canvas, save) {
     view.post.setGrade(styleGrade({ ...GRADE, ...(view.place.grade || {}) }, currentStyle()));
     liftPeople(game, view.place);
   };
-  return Object.assign(view, { setComposer, applyQuality, resize, size, render, due });
+  return Object.assign(view, { setComposer, applyQuality, resize, size, render, due, activeCap });
 }

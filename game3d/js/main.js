@@ -389,7 +389,7 @@ function step(dt, drawn) {
     holdNudge();
   }
   steer.update(dt);
-  game.jump.update(dt);
+  if (!document.body.classList.contains('at-title')) game.jump.update(dt);
   const moveDt = playerMovementDt(game, dt, HURRY);
   if (game.walker && !mio.seated && !mio.scripted) moving = game.walker.update(moveDt, place.camera);
   if (!mio.seated && !mio.scripted && !mio._walk) {

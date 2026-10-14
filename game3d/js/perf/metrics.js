@@ -186,6 +186,7 @@ export function installMetrics(game, qualityNow = () => null) {
     const heap = performance.memory ? (performance.memory.usedJSHeapSize / 1048576).toFixed(0) + ' MB' : 'n/a';
     const q = qualityNow();
     const place = (game.place && game.place.name) || '-';
+    const cap = game.view?.activeCap?.();
     const gl = renderer.userData && renderer.userData.software ? 'software GL' : 'GPU';
     el.innerHTML =
       `<b>${fps.toFixed(0).padStart(3)}</b> fps  <i>avg</i> ${avg.toFixed(1)} ms\n` +
@@ -195,7 +196,8 @@ export function installMetrics(game, qualityNow = () => null) {
       `<i>geo</i> ${mem.geometries}  <i>tex</i> ${mem.textures}\n` +
       `<i>heap</i>   ${heap}\n` +
       `<i>place</i>  ${place}\n` +
-      `<i>tier</i>   ${q == null ? '-' : TIERS[q] || q}  <i>${gl}</i>`;
+      `<i>tier</i>   ${q == null ? '-' : TIERS[q] || q}  <i>${gl}</i>\n` +
+      `<i>limit</i>  ${cap ? cap + ' fps' : 'None'}${document.body.classList.contains('at-title') ? ' (title)' : ''}`;
   }
 
   function show() {
@@ -216,7 +218,7 @@ export function installMetrics(game, qualityNow = () => null) {
     setSetting('perfOverlay', !settings.perfOverlay);
   });
   window.addEventListener('amakawa:settings', (e) => {
-    if (e.detail && e.detail.key === 'perfOverlay') show();
+    if (e.detail && ['perfOverlay', 'frameCap'].includes(e.detail.key)) show();
   });
 
   // the fast test's numbers: per place, frame times (median, 1% low, worst), draw calls and triangles (median, max)

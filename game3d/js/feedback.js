@@ -40,7 +40,7 @@ let available = false,
   releaseView = null;
 
 // ---------- where the game is ----------
-async function gather() {
+async function gather(frameLimit) {
   const g = game();
   let sim = null,
     names = {};
@@ -102,6 +102,12 @@ async function gather() {
       dpr: devicePixelRatio,
       layout: b.classList.contains('phone') ? 'phone' : 'desktop',
     },
+    graphics: {
+      ...g?.renderer?.userData,
+      quality: g?.view?.quality,
+      frameLimit,
+      frameLimitSetting: window.__settings?.frameCap,
+    },
     userAgent: navigator.userAgent,
   };
 }
@@ -141,9 +147,10 @@ async function open() {
   isOpen = true;
   const g = game();
   wasPaused = !!g?.paused;
+  const frameLimit = g?.view?.activeCap?.();
   releaseView = g?.followCamera?.holdView();
   if (g && !wasPaused) setPause(true);
-  const [c, cap] = await Promise.all([gather(), capture(layer)]);
+  const [c, cap] = await Promise.all([gather(frameLimit), capture(layer)]);
   ctx = c;
   shot = cap;
   if (!isOpen) return;
