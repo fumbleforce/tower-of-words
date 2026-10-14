@@ -43,7 +43,7 @@ for (const aspect of [390 / 844, 1366 / 860]) for (const gender of ['man', 'woma
       actor.position.copy(p); actor.updateWorldMatrix(true, true);
       for (let frame = 0; frame < (settle ? 40 : 30); frame++) { cam.update(.05, p); visibility.update(p, .05); }
       root.updateMatrixWorld(true);
-      for (const y of [.8, 1.2]) {
+      for (const y of [.8, .9, 1, 1.1, 1.2]) {
         const target = p.clone().setY(y), eye = cam.camera.position;
         ray.set(eye, target.clone().sub(eye).normalize()); ray.far = eye.distanceTo(target) - .02;
         const opaque = meshes.filter(m => { for (let n = m; n; n = n.parent) if (!n.visible) return false; return m.material.opacity > .01; });
@@ -51,6 +51,8 @@ for (const aspect of [390 / 844, 1366 / 860]) for (const gender of ['man', 'woma
       }
     };
     sample(new THREE.Vector3(11.85770478629641, 0, -34.73223874558539), true);
+    sample(new THREE.Vector3(5.25, 0, -35.55), true);
+    if (aspect < 1) assert.ok(cards.some(card => !card.visible), 'the genuine normal-lens corridor label clears neck and upper torso');
     const points = [];
     for (const z of [plan.corridor[1] - .65, plan.corridor[1], -34.76]) for (let x = plan.bounds[0] + .6; x < plan.bounds[1] - .4; x += .24) points.push(new THREE.Vector3(x, 0, z));
     for (let z = plan.corridor[1]; z < plan.deck[1] + 2; z += .12) points.push(new THREE.Vector3(plan.deck[0], 0, z));

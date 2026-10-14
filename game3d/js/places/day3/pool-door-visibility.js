@@ -19,7 +19,7 @@ export function poolDoorVisibility(root, cam) {
       (position) => {
         if (cam.close) return false;
         cam.camera.getWorldPosition(eye);
-        for (const y of [0.8, 1.2])
+        for (const y of [0.6, 0.8, 1, 1.2])
           for (const dx of [-0.2, 0, 0.2]) {
             target.set(position.x + dx, position.y + y, position.z);
             root.localToWorld(target);
