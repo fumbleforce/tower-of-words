@@ -34,6 +34,15 @@ export function poolClub(game, { root, cast, outfits }) {
   const camera = poolCamera(game);
   const who = (id) => (id === 'eric' ? game.player : cast.people[id]);
   const poses = new Map();
+  let benchFollow = null;
+  const followBench = () => {
+    if (!benchFollow) return;
+    const points = benchFollow.map((id) => who(id).root.position);
+    camera.track([
+      points.reduce((n, p) => n + p.x, 0) / points.length,
+      points.reduce((n, p) => n + p.z, 0) / points.length,
+    ]);
+  };
   const waterPose = (id) => {
     const r = who(id);
     if (!poses.has(r)) poses.set(r, swimmerPose(r));
@@ -185,7 +194,7 @@ export function poolClub(game, { root, cast, outfits }) {
   const hooks = {
     async poolSession({ state, repeat = false, from = 'member', staySeated = false, track = false } = {}) {
       const cam = P().cam;
-      if (!['length', 'another', 'emiEnter'].includes(state)) camera.clear();
+      if (!['length', 'another', 'emiEnter'].includes(state) && !(state === 'free' && staySeated)) camera.clear();
       if (state === 'begin') {
         arrange({ repeat });
         game.walker.faceTo?.(STEPS_TOP[0] - 1.6, STEPS_TOP[1] - 0.25);
@@ -232,6 +241,12 @@ export function poolClub(game, { root, cast, outfits }) {
         return;
       }
       if (state === 'sit') {
+        if (staySeated) {
+          benchFollow = flags.d3_player_swims ? ['eric', 'emi', 'kuro'] : ['emi', 'kuro'];
+          const p = who('emi').root.position;
+          camera.frame([p.x, p.z], { span: 8.5, y: 0.65, yaw: 1.2, elev: 0.65, cut: true });
+          followBench();
+        }
         await action.wait(climbOut('emi', [SEAT_S[0] + 0.65, SEAT_S[1] + 0.62]));
         await action.wait(climbOut('kuro', KURO_REST));
         const swims = !!flags.d3_player_swims;
@@ -254,12 +269,14 @@ export function poolClub(game, { root, cast, outfits }) {
             i ? 0.02 : 0.36,
           ),
         );
+        benchFollow = null;
         camera.frame([SEAT_S[0] + 0.25, SEAT_S[1] + 0.62], {
           span: 2.8,
           y: 0.65,
           yaw: 1.2,
           elev: 0.42,
           untilStanding: staySeated,
+          cut: staySeated,
         });
         return;
       }
@@ -317,6 +334,7 @@ export function poolClub(game, { root, cast, outfits }) {
     hooks,
     goggles: () => gogglesThing,
     update() {
+      followBench();
       camera.update();
       handling.update();
       for (const [rig, pose] of poses) if (pose.active && rig.blob) rig.blob.visible = false;
@@ -346,6 +364,7 @@ export function poolClub(game, { root, cast, outfits }) {
       return !!poses.get(game.player)?.active;
     },
     leave() {
+      benchFollow = null;
       camera.dispose();
       action.cancel();
       game.walker.stop();

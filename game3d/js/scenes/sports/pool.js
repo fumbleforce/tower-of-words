@@ -307,8 +307,9 @@ export function* poolSteps(root, p, q, pv, signs, lights, { interior = false } =
   const floodlights = poolFloodlights(root, p);
   yield;
   const glow = [];
+  let changing;
   if (interior) {
-    buildChangingRoom(p, pv, signs, lights, root);
+    changing = buildChangingRoom(p, pv, signs, lights, root);
     p.box(STEEL.mid, 0.07, D.CLOCK[1], 0.07, D.CLOCK[0], 0, D.CLOCK[2]); // clock support with pavilion front cut away
   } else pavilion(p, glow, signs, lights);
   const glass = new THREE.MeshStandardMaterial({
@@ -329,6 +330,10 @@ export function* poolSteps(root, p, q, pv, signs, lights, { interior = false } =
   return {
     floodlights,
     onPeriod(period) {
+      for (const object of [...(changing?.doorCards || []), ...(changing?.lockerRows || [])])
+        object.traverse((mesh) => {
+          if (mesh.material?.emissiveMap) mesh.material.emissiveIntensity = period === 'evening' ? 0.6 : 0;
+        });
       glass.emissiveIntensity = period === 'evening' ? 0.6 : 0;
       floodlights.onPeriod(period);
     },

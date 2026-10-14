@@ -56,6 +56,7 @@ test('changing pavilion closes every upper perimeter and partition junction with
   const { MEN_X, WOMEN_X } = await import('../../js/scenes/sports/deck-plan.js');
   const { Parts } = await import('../../js/scenes/outdoor/parts.js');
   const root = new THREE.Group(), parts = new Parts();
+  globalThis.document = { createElement: () => ({ getContext: () => new Proxy({}, { get: () => () => {} }) }) };
   buildChangingRoom(parts, {field(){}}, {card(){}}, {glowParts:[],lit:[]}, root);
   parts.build(root);
   root.updateMatrixWorld(true);

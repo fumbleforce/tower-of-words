@@ -1,6 +1,8 @@
 // The pavilion's actual rooms, in island coordinates. A common entrance/corridor reaches either changing room;
 // only the protagonist's own room is walkable. The roof/front wall are cut away in the pool place only.
 import * as THREE from 'three';
+import { Parts } from '../outdoor/parts.js';
+import { signSet } from '../shop-signs.js';
 import { roomEnclosure } from '../rooms/enclosure.js';
 import { PAVILION, PAV_DOOR_Z, pt, rect } from './plan.js';
 import { MEN_X, WOMEN_X, DOOR_Z } from './deck-plan.js';
@@ -47,6 +49,8 @@ function wall(p, a, b, h = 0.65) {
   });
 }
 export function buildChangingRoom(p, pv, signs, lights, root) {
+  const doorCards = [],
+    lockerRows = [];
   const enclosure = roomEnclosure(root, { x0, x1, z0, z1, h: 2.7 }, { color: '#d9ddd8' });
   enclosure.group.userData.followEnclosure.region = [x0, x1, z0, z1];
   enclosure.wall('x', x0, x1, z0, 2.7, 0.14);
@@ -86,14 +90,24 @@ export function buildChangingRoom(p, pv, signs, lights, root) {
     wall(p, [wallLeft, z1], [doorX - 0.6, z1]);
     wall(p, [doorX + 0.6, z1], [wallRight, z1]);
     // Numbered lockers, a slatted bench, and a tiled rinse area on the way to the deck.
+    const row = new THREE.Group(),
+      lockers = new Parts(),
+      numbers = signSet();
+    row.name = `pool:locker-row:${gender}`;
+    row.userData.perfAnchor = true;
+    row.userData.poolChangingOccluder = true;
+    root.add(row);
     let n = 1;
     for (let x = left + 0.38; x < right - 0.3; x += 0.55) {
       if (Math.abs(x - roomDoor) < 0.85) continue;
-      p.box(woman ? '#819496' : '#7e929f', 0.5, 1.65, 0.48, x, 0, corridorZ + 0.32);
-      p.box('#dce3df', 0.46, 0.035, 0.02, x, 0.82, corridorZ + 0.57);
-      p.box(STEEL.dark, 0.025, 0.11, 0.035, x + 0.15, 0.72, corridorZ + 0.59);
-      signs.card(String(n++), '', 0.13, 0.13, [x, 1.35, corridorZ + 0.59], 0);
+      lockers.box(woman ? '#819496' : '#7e929f', 0.5, 1.65, 0.48, x, 0, corridorZ + 0.32);
+      lockers.box('#dce3df', 0.46, 0.035, 0.02, x, 0.82, corridorZ + 0.57);
+      lockers.box(STEEL.dark, 0.025, 0.11, 0.035, x + 0.15, 0.72, corridorZ + 0.59);
+      numbers.card(String(n++), '', 0.13, 0.13, [x, 1.35, corridorZ + 0.59], 0);
     }
+    lockers.build(row);
+    numbers.build(row);
+    lockerRows.push(row);
     const [bx, bz] = f.seat.at;
     const offset = pt([0, 0]);
     bench(p, bx - offset[0], bz - offset[1], f.seat.ry, { len: 1.3 });
@@ -109,7 +123,8 @@ export function buildChangingRoom(p, pv, signs, lights, root) {
     p.box('#63777b', 0.22, 0.009, 0.22, showerX, 0.011, z1 - 0.65);
     for (let k = 0; k < 5; k++) p.box('#a4b4b5', 0.17, 0.01, 0.009, showerX, 0.02, z1 - 0.71 + k * 0.03);
     p.box(woman ? '#a36b72' : '#527894', 0.28, 0.28, 0.04, doorX + 0.72, 0.9, z1 + 0.075);
-    signs.card(
+    const label = signSet();
+    label.card(
       woman ? '更衣室 女' : '更衣室 男',
       woman ? 'WOMEN' : 'MEN',
       1.3,
@@ -117,7 +132,13 @@ export function buildChangingRoom(p, pv, signs, lights, root) {
       [roomDoor, 1.9, corridorZ + 0.04],
       0,
     );
+    const card = label.build(root).mesh;
+    card.name = `pool:changing-door:${gender}`;
+    card.userData.noBatch = true;
+    card.userData.poolChangingOccluder = true;
+    doorCards.push(card);
     lights.glowParts.push(new THREE.BoxGeometry(1.1, 0.07, 0.08).translate(roomDoor, 2.35, z0 + 0.12));
     lights.lit.push([roomDoor, z1 - 2.3, 2.3]);
   }
+  return { doorCards, lockerRows };
 }
