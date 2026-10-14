@@ -41,14 +41,21 @@ const D = await import('../../js/scenes/sports/deck-plan.js');
 const { RoomCam } = await import('../../js/cam.js');
 const { followFit } = await import('../../js/places/turning-cam.js');
 const { poolDoorVisibility } = await import('../../js/places/day3/pool-door-visibility.js');
+const { mergeStatic } = await import('../../js/scenes/merge-static.js');
 globalThis.document = { createElement: () => ({ getContext: () => new Proxy({}, { get: () => () => {} }) }) };
 for (const aspect of [390 / 844, 1366 / 860]) for (const gender of ['man', 'woman']) {
   test(`actual RoomCam corridor rays, cards restore, both directions ${aspect} ${gender}`, () => {
     const root = new THREE.Group(), island = new THREE.Group(), parts = new Parts(); root.add(island);
     const offset = pt([0, 0]); island.position.set(offset[0], 0, offset[1]);
     const { doorCards: cards, lockerRows } = buildChangingRoom(parts, { field() {} }, { card() {} }, { glowParts: [], lit: [] }, island);
-    const meshes = [...parts.build(island), ...cards];
-    for (const row of lockerRows) row.traverse(mesh => { if (mesh.isMesh) meshes.push(mesh); });
+    parts.build(island);
+    const enclosure = root.getObjectByName('follow-interior'), upperMeshes = [...enclosure.children];
+    mergeStatic(root);
+    assert.ok(upperMeshes.every(mesh => mesh.parent === enclosure), 'hidden upper walls remain inside the overview cutaway after merge');
+    for (const row of lockerRows) {
+      assert.ok(row.children.some(mesh => mesh.name.startsWith('pool:lockers:')), 'build-time merge retains locker bodies in their fade group');
+    }
+    const meshes = []; root.traverse(mesh => { if (mesh.isMesh) meshes.push(mesh); });
     const actor = new THREE.Group(); actor.add(new THREE.Mesh(new THREE.BoxGeometry(.68, 1.204, .824).translate(0, .608, 0), new THREE.MeshBasicMaterial())); root.add(actor);
     globalThis.window.__game = { player: { root: actor }, busy: false, markers: { list: [] } };
     root.updateMatrixWorld(true);
@@ -64,8 +71,8 @@ for (const aspect of [390 / 844, 1366 / 860]) for (const gender of ['man', 'woma
       for (const y of [.8, 1.2]) {
         const target = p.clone().setY(y), eye = cam.camera.position;
         ray.set(eye, target.clone().sub(eye).normalize()); ray.far = eye.distanceTo(target) - .02;
-        const opaque = meshes.filter(m => m.visible && m.material.opacity > .01);
-        assert.equal(ray.intersectObjects(opaque, false).length, 0, `${p.toArray()} body ${y}, cam ${cam.camera.position.toArray()}`);
+        const opaque = meshes.filter(m => { for (let n = m; n; n = n.parent) if (!n.visible) return false; return m.material.opacity > .01; });
+        assert.equal(ray.intersectObjects(opaque, false).length, 0, `${p.toArray()} body ${y}, cam ${cam.camera.position.toArray()} hits ${ray.intersectObjects(opaque, false).map(h=>h.object.name+":"+h.point.toArray()).join(";")}`);
       }
     };
     sample(new THREE.Vector3(11.85770478629641, 0, -34.73223874558539), true);

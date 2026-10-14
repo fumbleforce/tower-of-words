@@ -105,7 +105,10 @@ export function buildChangingRoom(p, pv, signs, lights, root) {
       lockers.box(STEEL.dark, 0.025, 0.11, 0.035, x + 0.15, 0.72, corridorZ + 0.59);
       numbers.card(String(n++), '', 0.13, 0.13, [x, 1.35, corridorZ + 0.59], 0);
     }
-    lockers.build(row);
+    lockers.build(row).forEach((mesh, i) => {
+      mesh.name = `pool:lockers:${gender}:${i}`;
+      mesh.userData.noBatch = true;
+    });
     numbers.build(row);
     lockerRows.push(row);
     const [bx, bz] = f.seat.at;
@@ -140,5 +143,8 @@ export function buildChangingRoom(p, pv, signs, lights, root) {
     lights.glowParts.push(new THREE.BoxGeometry(1.1, 0.07, 0.08).translate(roomDoor, 2.35, z0 + 0.12));
     lights.lit.push([roomDoor, z1 - 2.3, 2.3]);
   }
+  enclosure.group.traverse((mesh) => {
+    if (mesh.isMesh) mesh.name ||= 'pool:changing-enclosure';
+  });
   return { doorCards, lockerRows };
 }
