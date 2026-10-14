@@ -75,6 +75,15 @@ export const swimmingNodes = {
     ...action('free'), { do: 'cam', back: true }, { do: 'ongoingGoal' }, { do: 'save' },
   ],
   // Continue-only tails for exact historical gym effect journals. The physical action already happened.
+  swimming_resume_shared: [
+    { if: '!d3_swimming_shared', then: [
+      { do: 'bond', who: 'emi', source: 'scene', why: 'spent an evening at the swimming club' },
+      { do: 'bond', who: 'kuro', source: 'scene', why: 'spent an evening at the swimming club' },
+      { set: 'd3_swimming_shared' },
+    ] },
+    { set: 'd3_winter_intro_done' }, { go: 'swimming_resume_free' },
+  ],
+  swimming_resume_intro: [{ set: 'd3_winter_intro_done' }, { go: 'swimming_resume_free' }],
   swimming_resume_emi: [
     { set: 'ms3_emi' }, { do: 'bondStep', who: 'emi', to: 3 },
     { do: 'remember', who: 'emi', id: 'winter_turn', text: 'Left the booking sheet with the attendant and took her own turn.' },

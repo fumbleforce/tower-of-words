@@ -69,8 +69,12 @@ function gymTail(execution) {
   if (!Array.isArray(execution?.frames)) return null;
   const frame = execution.frames.at(-1);
   if (revisions.gym[frame?.node] !== frame?.fingerprint || !frame?.fingerprint) return null;
-  if (frame.node === 'ongoing_winter_done') {
-    const node = 'swimming_resume_practice';
+  if (frame.node === 'club_swimming_winter_sit' && frame.done?.includes('[7]:call')) {
+    const node = 'swimming_resume_intro';
+    return { v: 3, place: 'pool', frames: [newFrame(node, laterNodes[node], frame.trigger)] };
+  }
+  if (['ongoing_winter_done', 'club_swimming_shared'].includes(frame.node)) {
+    const node = frame.node === 'club_swimming_shared' ? 'swimming_resume_shared' : 'swimming_resume_practice';
     return {
       v: 3,
       place: 'pool',

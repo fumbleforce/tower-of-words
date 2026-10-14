@@ -78,6 +78,18 @@ export default {
         'carina': ['88:5b15138e:141666b0', '54:ca76d17e:762987c0'],
       },
     },
+    'ongoing:gym': {
+      'd3_gym_board': {
+        'eric': ['94:17d9f3e5:d26fb793', '53:13f07579:3e7acf1b'],
+        'carina': ['94:17d9f3e5:d26fb793', '53:13f07579:3e7acf1b'],
+      },
+    },
+    'ongoing:pool': {
+      'd4_pool_notice': {
+        'eric': ['88:5b15138e:141666b0', '54:ca76d17e:762987c0'],
+        'carina': ['88:5b15138e:141666b0', '54:ca76d17e:762987c0'],
+      },
+    },
     'ongoing:east_coast': {
       'ongoing_emi_coast': {
         'eric': ['283:d39e1d4e:bdf072e', '274:b6d6f073:15621397'],

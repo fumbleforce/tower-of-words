@@ -98,7 +98,7 @@ test('damaged checkpoints reach ordinary validation without migration throwing f
 });
 
 test('text-only seasonal edits preserve actual Eric and Carina checkpoints in their existing place', async () => {
-  const paths = { '3:gym': 'day3/gym', '4:gym': 'day4/gym', '4:pool': 'day4/pool', '5:gym': 'day5/gym', '5:pool': 'day5/pool', 'ongoing:east_coast': 'ongoing/east_coast' };
+  const paths = { '3:gym': 'day3/gym', '4:gym': 'day4/gym', '4:pool': 'day4/pool', '5:gym': 'day5/gym', '5:pool': 'day5/pool', 'ongoing:east_coast': 'ongoing/east_coast', 'ongoing:gym': 'ongoing/gym', 'ongoing:pool': 'ongoing/pool' };
   for (const [key, nodes] of Object.entries(revisions.text)) {
     const current = (await import(`../../story/${paths[key]}.js`)).default;
     const [dayName, place] = key.split(':'); const day = dayName === 'ongoing' ? 17 : +dayName;
@@ -121,4 +121,19 @@ test('malformed visited and unknown future queue names do not break or broaden h
   assert.doesNotThrow(() => migrateSwimmingSave(before));
   const after = migrateSwimmingSave(before);
   assert.deepEqual(after.runner.queued, [{ node: 'ongoing_winter_future' }]);
+});
+
+test('both protagonists retain historical pool dispatch nested else cursor and intro parent stack', () => {
+  for (const mc of ['eric', 'carina']) {
+    const old = expandMc(structuredClone(legacy.pool), PROTAGONISTS[mc]);
+    const current = expandMc(structuredClone(story), PROTAGONISTS[mc]);
+    const parent = checkpoint('club_swimming_1', old.club_swimming_1, 1);
+    parent.cursors = [{ path: [], index: 1, phase: 'branch' }, { path: [1, 'else'], index: 0, phase: 'step' }];
+    parent.done = ['entry', '[0]:call']; parent.branches = { '[1]': false };
+    const caller = checkpoint('club_swimming_1', old.club_swimming_1); caller.cursors[0].phase = 'call';
+    for (const frames of [[parent], [caller, checkpoint('club_swimming_intro', old.club_swimming_intro)]]) {
+      const before = save(frames, { mc }); const after = migrateSwimmingSave(before);
+      assert.ok(readCheckpoint(after.runner.execution, 'pool', current), `${mc} ${frames.length}`);
+    }
+  }
 });

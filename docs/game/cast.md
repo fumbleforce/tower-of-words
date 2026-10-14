@@ -211,7 +211,7 @@ Repeat meeting: Wednesday evening karaoke, with weekday B2 contact. The chair an
 
 Route: Saturday evening swimming club at the pool. She wants a regular evening with people who can see her without bringing a budget request. She is good at organising, so people keep letting her do it, including herself.
 
-Repeat meeting: Saturday evening swimming club at the pool; weekdays at B2 for brief contact. An unfinished first pool visit remains available on later Saturdays.
+Repeat meeting: Saturday evening swimming club at the pool; weekdays at B2 for brief contact. An unfinished first pool visit remains available on later Saturdays. Continue finishes any unpaid effects from an old club save without repeating an already paid shared award.
 
 | Step | Milestone and consequence |
 |---|---|

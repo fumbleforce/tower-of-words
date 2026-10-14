@@ -122,3 +122,17 @@ test('real Runner resumes partial historical practice award without paying Emi t
   assert.equal(flags.winter_practice_done, true); assert.equal(flags.d3_swimming_shared, true);
   assert.equal(f.game.runner.recoveryError, null);
 });
+
+test('historical introductory shared award resumes unpaid Kuro without repaying Emi', async () => {
+  const f = fixture();
+  const frame = newFrame('club_swimming_shared', legacy.gym.club_swimming_shared);
+  frame.done = ['entry', '[0,"then",0]:hook']; frame.branches = { '[0]': true };
+  frame.cursors = [{ path: [], index: 0, phase: 'branch' }, { path: [0, 'then'], index: 0, phase: 'step' }];
+  const saved = migrateSwimmingSave({ day: 10, place: 'gym', flags: { ...flags }, world: { winterClub: { active: true } },
+    runner: { execution: { v: 3, place: 'gym', frames: [frame] } } });
+  Object.assign(flags, saved.flags); f.P.name = saved.place;
+  f.game.runner.restore(saved.runner); assert.equal(await f.game.runner.resume(), true);
+  assert.deepEqual(f.awards.filter(step => step.do === 'bond').map(step => step.who), ['kuro']);
+  assert.equal(flags.d3_winter_intro_done, true); assert.equal(flags.d3_swimming_shared, true);
+  assert.equal(f.game.runner.recoveryError, null);
+});
