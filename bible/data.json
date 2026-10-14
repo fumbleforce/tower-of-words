@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-13 21:38",
+ "generated": "2026-10-14 02:06",
  "characters": [
   {
    "id": "mc",
@@ -19,8 +19,8 @@
     "s": "approved",
     "src": {
      "path": "docs/game/cast.md",
-     "label": "docs/game/cast.md:65",
-     "line": 65,
+     "label": "docs/game/cast.md:66",
+     "line": 66,
      "phrase": "Look: approved portrait eric-ink-2001"
     }
    },
@@ -105,8 +105,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/cast.md",
-      "label": "docs/game/cast.md:63",
-      "line": 63,
+      "label": "docs/game/cast.md:64",
+      "line": 64,
       "phrase": "Speaks English, and barely any Japanese"
      }
     },
@@ -362,8 +362,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/cast.md",
-      "label": "docs/game/cast.md:76",
-      "line": 76,
+      "label": "docs/game/cast.md:77",
+      "line": 77,
       "phrase": "Hair dark green bordering on black",
       "n": 1
      }
@@ -373,8 +373,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/cast.md",
-      "label": "docs/game/cast.md:76",
-      "line": 76,
+      "label": "docs/game/cast.md:77",
+      "line": 77,
       "phrase": "3D: Jørgen's Meshy model; game colours",
       "n": 1
      }
@@ -384,8 +384,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/cast.md",
-      "label": "docs/game/cast.md:76",
-      "line": 76,
+      "label": "docs/game/cast.md:77",
+      "line": 77,
       "phrase": "Eyes light tan, not brown",
       "n": 1
      }
@@ -437,8 +437,8 @@
      "s": "rejected",
      "src": {
       "path": "docs/game/cast.md",
-      "label": "docs/game/cast.md:76",
-      "line": 76,
+      "label": "docs/game/cast.md:77",
+      "line": 77,
       "phrase": "3D: Jørgen's Meshy model; game colours"
      }
     },
@@ -644,8 +644,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/cast.md",
-      "label": "docs/game/cast.md:146",
-      "line": 146,
+      "label": "docs/game/cast.md:147",
+      "line": 147,
       "phrase": "The B2 team is Eric, Mio, Mori and Kenji",
       "n": 1
      }
@@ -655,8 +655,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/cast.md",
-      "label": "docs/game/cast.md:84",
-      "line": 84,
+      "label": "docs/game/cast.md:85",
+      "line": 85,
       "phrase": "Look: approved portrait mori-new-713"
      }
     }
@@ -738,8 +738,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/cast.md",
-      "label": "docs/game/cast.md:92",
-      "line": 92,
+      "label": "docs/game/cast.md:93",
+      "line": 93,
       "phrase": "Look: about 21, inexperienced"
      }
     },
@@ -802,8 +802,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/cast.md",
-      "label": "docs/game/cast.md:97",
-      "line": 97,
+      "label": "docs/game/cast.md:98",
+      "line": 98,
       "phrase": "On day 1 she is upstairs at head office all day",
       "n": 1
      }
@@ -813,8 +813,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/cast.md",
-      "label": "docs/game/cast.md:99",
-      "line": 99,
+      "label": "docs/game/cast.md:100",
+      "line": 100,
       "phrase": "A cast member like any other"
      }
     },
@@ -951,8 +951,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/cast.md",
-      "label": "docs/game/cast.md:115",
-      "line": 115,
+      "label": "docs/game/cast.md:116",
+      "line": 116,
       "phrase": "Look: approved portrait hamada-new-743"
      }
     }
@@ -963,8 +963,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/cast.md",
-      "label": "docs/game/cast.md:53",
-      "line": 53,
+      "label": "docs/game/cast.md:54",
+      "line": 54,
       "phrase": "The id `kuroda` is Mr. Hamada"
      }
     }
@@ -992,8 +992,8 @@
     "s": "approved",
     "src": {
      "path": "docs/game/cast.md",
-     "label": "docs/game/cast.md:107",
-     "line": 107,
+     "label": "docs/game/cast.md:108",
+     "line": 108,
      "phrase": "Look: approved portrait guard-ink-2001"
     }
    },
@@ -2186,8 +2186,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/cast.md",
-      "label": "docs/game/cast.md:146",
-      "line": 146,
+      "label": "docs/game/cast.md:147",
+      "line": 147,
       "phrase": "Goro is a late-game character"
      }
     }
@@ -2363,8 +2363,8 @@
    "s": "approved",
    "src": {
     "path": "docs/game/cast.md",
-    "label": "docs/game/cast.md:146",
-    "line": 146,
+    "label": "docs/game/cast.md:147",
+    "line": 147,
     "phrase": "Goro is a late-game character"
    }
   },
@@ -2412,8 +2412,8 @@
    "s": "legacy",
    "src": {
     "path": "docs/game/cast.md",
-    "label": "docs/game/cast.md:411",
-    "line": 411,
+    "label": "docs/game/cast.md:412",
+    "line": 412,
     "phrase": "Left from before the B2 team was settled"
    }
   }
@@ -2980,8 +2980,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/words.md",
-      "label": "docs/game/words.md:80",
-      "line": 80,
+      "label": "docs/game/words.md:81",
+      "line": 81,
       "phrase": "Only words taught in play count as known"
      }
     },
@@ -4638,8 +4638,8 @@
     "t": "Who the player is.",
     "src": {
      "path": "docs/game/cast.md",
-     "label": "docs/game/cast.md:60",
-     "line": 60,
+     "label": "docs/game/cast.md:61",
+     "line": 61,
      "phrase": "The player. From Norway.",
      "n": 1
     }
@@ -4668,8 +4668,8 @@
     "t": "Who is on the B2 team.",
     "src": {
      "path": "docs/game/cast.md",
-     "label": "docs/game/cast.md:146",
-     "line": 146,
+     "label": "docs/game/cast.md:147",
+     "line": 147,
      "phrase": "The B2 team is Eric, Mio, Mori and Kenji",
      "n": 1
     }
@@ -4747,8 +4747,8 @@
     "t": "Goro on day 1.",
     "src": {
      "path": "docs/game/cast.md",
-     "label": "docs/game/cast.md:146",
-     "line": 146,
+     "label": "docs/game/cast.md:147",
+     "line": 147,
      "phrase": "Goro is a late-game character"
     }
    },
@@ -4756,8 +4756,8 @@
     "t": "Mio's colours, hair and eyes.",
     "src": {
      "path": "docs/game/cast.md",
-     "label": "docs/game/cast.md:76",
-     "line": 76,
+     "label": "docs/game/cast.md:77",
+     "line": 77,
      "phrase": "Hair dark green bordering on black",
      "n": 1
     }
@@ -4788,8 +4788,8 @@
     "match": "Is Emi at head office",
     "src": {
      "path": "docs/game/cast.md",
-     "label": "docs/game/cast.md:97",
-     "line": 97,
+     "label": "docs/game/cast.md:98",
+     "line": 98,
      "phrase": "On day 1 she is upstairs at head office all day",
      "n": 1
     }
@@ -5269,6 +5269,7 @@
    "commons-detail-20261008/",
    "continue-goal/",
    "conversation-reciprocity-20261008/",
+   "conversation-reciprocity-final/",
    "conversations/",
    "crowd-bags/",
    "crowd-everyday-integration-20261009/",
@@ -5326,6 +5327,9 @@
    "fc-north-work/",
    "feedback-camera/",
    "ferry-terminal/",
+   "finish-karaoke/",
+   "finish-research-317/",
+   "finish-works/",
    "fix433/",
    "fix443/",
    "flock-spacing/",
@@ -5376,9 +5380,11 @@
    "jump-animation-519/",
    "jump-perf-542/",
    "karaoke-club/",
+   "karaoke-cold-player/",
    "karaoke-contacts-20261008/",
    "karaoke-detail-20261008/",
    "karaoke-song-2/",
+   "kenji-cold/",
    "kenji-day2-voice/",
    "kenji-outing/",
    "kitchenette239/",
@@ -5460,6 +5466,7 @@
    "rei-body-1/",
    "rei-recovery-integrated/",
    "research-audit/",
+   "research-cold/",
    "research-final-independent-review/",
    "research-reading-room/",
    "restart-20261008/",
