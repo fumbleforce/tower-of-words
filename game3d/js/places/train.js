@@ -6,6 +6,7 @@ import { snapshotPeople, restorePeople, snapshotObject, restoreObject } from './
 // Train car, passengers, arrival and platform. Dialogue lives in story/train.js.
 import * as THREE from 'three';
 import { trainLaptop } from './train-laptop.js';
+import { trainBunCamera } from '../train/bun-camera.js';
 import { Pass } from 'three/addons/postprocessing/Pass.js';
 import { SimplexNoise } from 'three/addons/math/SimplexNoise.js';
 import { buildWorld, SPEED } from '../train/world.js';
@@ -670,6 +671,7 @@ export async function trainPlace(game) {
     },
   };
   const _v = new THREE.Vector3();
+  const bunView = trainBunCamera(cam, () => bun.root.position);
   // the cut-away for the screen's shape (a portrait phone sees the car from its end)
   function layout(aspect) {
     const mode = aspect >= 1 ? 'land' : 'port';
@@ -681,6 +683,7 @@ export async function trainPlace(game) {
     return mode;
   }
   function fit(aspect) {
+    bunView.reset();
     const mode = layout(aspect);
     camera.aspect = aspect;
     let pts, limX, limY;
