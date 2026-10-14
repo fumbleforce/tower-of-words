@@ -1,11 +1,10 @@
 // The gym reception's booking terminal and printer on day 3 (ticket T-0004, story/day3/gym.js), and the swimming club's
-// first winter meeting by the windows (story/clubs.js club_swimming_winter, a later Saturday's).
+// pool club bookings, without moving its meetings into the hall.
 // `bookingRepair` states: reset (the reset button under the terminal pressed: the frozen screen goes dark and comes back
 // with today's bookings), restart (the same screen back, after the kotodama on the terminal), print (Print pressed: the
 // printer runs until the whole sheet lies in its tray, nothing left queued), check (the attendant takes the sheet up
 // and reads down to its last row). d3_booking_restarted and d3_booking_done keep the screen and the sheet on every
 // return. The sheet carries the day it is printed (bonds/model.js dateOf).
-// `day3Setup` state winterClub: Emi, Kuro and the attendant round the hall's benches by the windows.
 import * as THREE from 'three';
 import { flags } from '../../narrative/state.js';
 import { sim } from '../../sim.js';
@@ -22,7 +21,7 @@ const panel = (w, h, draw, px = 256) => {
 };
 function rows() {
   const weekday = (sim.day + 3) % 7;
-  const evening = weekday === 6 ? 'Swimming club' : weekday === 0 ? 'Tennis club' : 'Open practice';
+  const evening = weekday === 6 ? 'Swimming club · pool' : weekday === 0 ? 'Tennis club' : 'Open practice';
   return ['09:00  Tennis · court A', '13:00  Badminton', '16:00  Court B reservation', '18:00  ' + evening];
 }
 function screenDraw(state) {
@@ -171,14 +170,6 @@ export function gymDesk(game, { w, cast }) {
       put(desk);
     }
   }
-  // the first winter meeting (a later Saturday): round the hall's benches on the west side, by the windows; Kuro
-  // on the bench nearer the doors, the player's seat the other (story/clubs.js gym_bench_n)
-  function winterClub() {
-    const [bs, bn] = w.seats;
-    cast.put('emi', [bs.x + 1.2, bs.z - 1.75], [bs.x + 0.05, bs.z - 2.6]);
-    cast.seat('kuro', { ...bs, z: bs.z - 0.15 });
-    cast.put('attendant', [bn.x + 1.5, bn.z - 1.15], [bn.x + 0.35, bn.z - 0.2]);
-  }
   return {
     restore,
     snapshot: () => ({
@@ -198,7 +189,6 @@ export function gymDesk(game, { w, cast }) {
       sheet.rotation.fromArray(s.sheet.rotation);
     },
     hooks: { bookingRepair },
-    winterClub,
     kotodamaTargets: (id) => (id === 'booking_terminal' ? [screen] : null),
   };
 }

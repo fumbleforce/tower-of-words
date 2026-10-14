@@ -10,12 +10,13 @@ import { restoreGoal } from './saves/zones.js';
 import { restoreMet } from './saves/met.js';
 import { migrateDay2Save } from './saves/day2.js';
 import { needsAccessRecovery } from './saves/access-recovery.js';
+import { migrateSwimmingSave } from './saves/swimming.js';
 
 export function createContinue(game, { enter, travel, startScene, PLACES }) {
   const ui = game.ui;
   return async function continueFrom(saved) {
     const recoveredAccess = needsAccessRecovery(saved);
-    saved = migrateDay2Save(saved);
+    saved = migrateSwimmingSave(migrateDay2Save(saved));
     game.busy = true;
     restore(game, saved);
     await enter(saved.place || 'train', { persist: false, resuming: true });

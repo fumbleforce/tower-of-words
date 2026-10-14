@@ -50,9 +50,9 @@ test('club hosts return on their weekday without the introductory date', () => {
     assert.ok(weeklyPlan(day).karaoke_booth.kuroda.evening);
   }
   for (const day of [10, 17, 38]) {
-    assert.ok(weeklyPlan(day).gym.emi.evening);
-    assert.ok(weeklyPlan(day).gym.kuro.evening);
-    assert.deepEqual(weeklyPlan(day).pool.emi, {});
+    assert.ok(weeklyPlan(day).pool.emi.evening);
+    assert.ok(weeklyPlan(day).pool.kuro.evening);
+    assert.deepEqual(weeklyPlan(day).gym.emi, {});
   }
   for (const day of [11, 18, 39]) {
     assert.ok(weeklyPlan(day).sports.rei.evening);

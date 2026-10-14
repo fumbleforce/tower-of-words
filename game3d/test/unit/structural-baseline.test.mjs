@@ -11,6 +11,7 @@ import declarations from '../fixtures/declarations-before.json' with { type: 'js
 test('shared literals and complete place registrations match the pre-extraction runtime', () => {
   const expected = structuredClone(declarations);
   // #548 closes this one staff entrance; every other registered target remains.
+  expected.places.gym.hooks = expected.places.gym.hooks.filter(id => id !== 'winterClub');
   delete expected.places.forecourt.things.campus;
   delete expected.places.campus.things.forecourt;
   expected.places.forecourt.zones = expected.places.forecourt.zones.filter(id => id !== 'campus_exit');
@@ -62,9 +63,9 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   expected.engine.events.bakery = {};
   expected.engine.placeFile.bakery = 'game3d/js/places/bakery.js';
   for (const flag of ['bakery_can_eat', 'bakery_has_curry', 'bakery_has_roll']) expected.engine.exact[flag] = ['game3d/js/places/bakery/stage.js'];
-  for (const key of ['ongoing_workday', 'ongoing_tennis_day', 'ongoing_team_day', 'ongoing_art_day', 'ongoing_model_day', 'ongoing_art_ready', 'ongoing_winter_day', 'ongoing_winter_ready']) expected.engine.exact[key] = ['game3d/js/places/ongoing/index.js'];
+  for (const key of ['ongoing_workday', 'ongoing_tennis_day', 'ongoing_team_day', 'ongoing_art_day', 'ongoing_model_day', 'ongoing_art_ready']) expected.engine.exact[key] = ['game3d/js/places/ongoing/index.js'];
   expected.engine.exact.art_action_completed = ['game3d/js/places/commons.js'];
-  expected.engine.exact.winter_action_completed = ['game3d/js/places/gym.js'];
+  expected.engine.exact.pool_action_completed = ['game3d/js/places/day3/pool-action.js'];
   expected.engine.exact.art_first_day = ['game3d/js/places/ongoing/art-progress.js'];
   // the clinic (2026-10-12): its place file, and the fall that sends Eric there
   expected.engine.events.clinic = {};

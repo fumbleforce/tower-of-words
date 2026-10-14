@@ -83,7 +83,7 @@ test('members come through the cast layer: another person in a role is in the cl
   assert.deepEqual(c.members('karaoke', castSet()), ['kenji', 'kuroda']);
 });
 
-test('the schedule: next meeting by weekday, today until its period has passed or he went, season lines', () => {
+test('the schedule: next meeting by weekday, today until its period has passed or he went, same pool venue', () => {
   const c = make();
   assert.equal(dateOf(3), 'Sat 3 Oct');
   const at = (id, day, period) => {
@@ -95,10 +95,10 @@ test('the schedule: next meeting by weekday, today until its period has passed o
   assert.equal(at('tennis', 3, 'morning'), '4 Sun evening sports');
   assert.equal(at('art', 3, 'morning'), '6 Tue evening dorm_commons');
   assert.equal(at('karaoke', 3, 'morning'), '7 Wed evening karaoke_booth');
-  // after the outdoor season the Saturday club meets in the gym
-  assert.equal(at('swimming', 4, 'morning'), '10 Sat evening gym');
+  // Later Saturdays keep the swimming club at the pool.
+  assert.equal(at('swimming', 4, 'morning'), '10 Sat evening pool');
   flags[dayFlag('swimming')] = 3; // he went tonight
-  assert.equal(at('swimming', 3, 'evening'), '10 Sat evening gym');
+  assert.equal(at('swimming', 3, 'evening'), '10 Sat evening pool');
   // a single event is on the board until its day has passed
   const data = { ...CLUBS, events: [{ id: 'fair', title: 'Book fair', ja: '古本市', ro: 'furuhonichi', day: 4, period: 'afternoon', place: 'plaza', where: 'Fountain plaza', text: 'x' }] };
   const e = make(data);
@@ -130,9 +130,9 @@ test('a session is due only for a member, at its place, in its period, once that
   assert.deepEqual(c.attend('swimming', 3), { node: 'club_swimming_1', event: null });
   assert.equal(flags[progressFlag('swimming')], 1);
   assert.equal(c.due('pool', 3, 'evening'), null, 'once a day');
-  assert.deepEqual(c.due('gym', 10, 'evening'), { id: 'swimming', node: 'club_swimming_2', event: null });
+  assert.deepEqual(c.due('pool', 10, 'evening'), { id: 'swimming', node: 'club_swimming_2', event: null });
   c.attend('swimming', 10);
-  assert.equal(c.due('gym', 17, 'evening').node, 'club_swimming_2', 'the last session repeats');
+  assert.equal(c.due('pool', 17, 'evening').node, 'club_swimming_2', 'the last session repeats');
 });
 
 test('a special event runs instead of the week’s session once it is due, and only once', () => {

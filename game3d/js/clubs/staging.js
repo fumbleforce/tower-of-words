@@ -1,6 +1,6 @@
 // Continuing sessions only start when their physical scene is ready. A missing
 // reviewed asset must not consume attendance or queue an action that will fail.
-const STAGES = { art: 'artClub', karaoke: 'karaokeClub', swimming: 'winterClub' };
+const STAGES = { art: 'artClub', karaoke: 'karaokeClub', swimming: 'swimmingClub' };
 export function clubStageReady(day, club, place) {
   if (day <= 5 || !STAGES[club]) return true;
   const stage = place?.[STAGES[club]];

@@ -106,7 +106,7 @@ export default place(
       ],
       d3_booking_later: [{ do: 'cam', back: true }],
       ...fanNodes,
-      d3_gym_board: ['> “Swimming club: Saturday evenings in the gym from 10 October.”'],
+      d3_gym_board: ['> “Swimming club: Saturday evenings at the pool.”'],
     },
   },
 );

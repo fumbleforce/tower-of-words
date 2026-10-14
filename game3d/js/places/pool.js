@@ -26,26 +26,20 @@ const seat = ({ at, top, ry }) => {
   return { x, z, top, ry, out: [x + Math.sin(ry) * 0.6, z + Math.cos(ry) * 0.6] };
 };
 export async function poolPlace(game) {
-  const closed = sim.day === 4;
   const changing = changingPlan(MC.gender);
   const w = await sliced(
-    sportsSteps(
-      closed
-        ? {}
-        : {
-            walks: [...D.WALKS, ...changing.walks],
-            blocks: [...D.BLOCKS, ...changing.blocks],
-            start: CHANGING_ENTRY.inside,
-            poolInterior: true,
-          },
-    ),
+    sportsSteps({
+      walks: [...D.WALKS, ...changing.walks],
+      blocks: [...D.BLOCKS, ...changing.blocks],
+      start: CHANGING_ENTRY.inside,
+      poolInterior: true,
+    }),
   );
   const cam = new RoomCam({ ...w.camera, yaw: D.LOOK.yaw, elev: D.LOOK.elev }); // elev in degrees here
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-  const door = w.doors.find((d) => d.id === 'pool');
-  const out = closed ? { edge: door.local, lane: door.step, in: door.step } : MC.gender === 'woman' ? D.EXIT_W : D.EXIT; // the protagonist's own changing room
+  const out = MC.gender === 'woman' ? D.EXIT_W : D.EXIT; // the protagonist's own changing room
   const d3 = day3Place(game, 'pool', { root: w.root, K, ids: ['emi', 'kuro', 'attendant', 'member'] });
-  const outfits = closed ? null : await poolOutfits(game, d3.cast);
+  const outfits = await poolOutfits(game, d3.cast);
   const club = poolClub(game, { root: w.root, cast: d3.cast, outfits });
   d3.also(() => club.arrange());
   const things = {
@@ -53,11 +47,11 @@ export async function poolPlace(game) {
     changing_room: {
       ...PLACE_DETAILS.pool.things.changing_room,
       anchor: (v) => {
-        const q = closed ? out.edge : CHANGING_ENTRY.edge;
+        const q = CHANGING_ENTRY.edge;
         return v.set(q[0], 1.5, q[1]);
       },
-      spot: () => (closed ? out.lane : CHANGING_ENTRY.inside),
-      face: () => (closed ? out.edge : CHANGING_ENTRY.edge),
+      spot: () => CHANGING_ENTRY.inside,
+      face: () => CHANGING_ENTRY.edge,
     },
     emi: { ...PLACE_DETAILS.pool.things.emi, ...d3.thing('emi') },
     kuro: { ...PLACE_DETAILS.pool.things.kuro, ...d3.thing('kuro') },
@@ -85,9 +79,9 @@ export async function poolPlace(game) {
     nav: w.nav,
     sun: w.sun,
     charScale: K,
-    start: closed ? out.in : CHANGING_ENTRY.inside,
-    changing: closed ? null : changing,
-    creatureExclusions: closed ? [] : [changing.bounds],
+    start: CHANGING_ENTRY.inside,
+    changing: changing,
+    creatureExclusions: [changing.bounds],
     startFacing: 0,
     music: 'calm',
     grade: MORNING_GRADE,
@@ -105,6 +99,7 @@ export async function poolPlace(game) {
     seats: { deck_bench_n: seat(D.SEATS.deck_bench_n), deck_bench_s: seat(D.SEATS.deck_bench_s) },
     people: { emi: d3.people.emi, kuro: d3.people.kuro, attendant: d3.people.attendant, member: d3.people.member },
     zones: {},
+    swimmingClub: club,
     hooks: { poolSession: club.hooks.poolSession },
     day3: (a) => d3.setup(P, a),
     fit(aspect) {
@@ -140,17 +135,9 @@ export async function poolPlace(game) {
       P.grade = EVENING_GRADE;
     },
     // out of the changing room onto the deck, walking south; back in at its door
-    tripIn: (g) =>
-      walkIn(
-        g,
-        cam,
-        closed ? out.edge : CHANGING_ENTRY.edge,
-        closed ? out.in : CHANGING_ENTRY.inside,
-        closed ? 0 : Math.PI / 2,
-      ),
+    tripIn: (g) => walkIn(g, cam, CHANGING_ENTRY.edge, CHANGING_ENTRY.inside, Math.PI / 2),
     tripOutTo: {
-      sports: (g) =>
-        walkOut(g, cam, closed ? out.lane : CHANGING_ENTRY.inside, closed ? out.edge : CHANGING_ENTRY.edge),
+      sports: (g) => walkOut(g, cam, CHANGING_ENTRY.inside, CHANGING_ENTRY.edge),
     },
   };
   const saved = poolSave(game, P, club);

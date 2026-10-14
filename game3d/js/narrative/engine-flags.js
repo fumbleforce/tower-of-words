@@ -100,13 +100,11 @@ ENGINE_WRITES['game3d/js/places/ongoing/index.js'] = {
     'ongoing_art_day',
     'ongoing_model_day',
     'ongoing_art_ready',
-    'ongoing_winter_day',
-    'ongoing_winter_ready',
   ],
   prefix: [],
 };
 
-ENGINE_WRITES['game3d/js/places/gym.js'] = { exact: ['winter_action_completed'], prefix: [] };
+ENGINE_WRITES['game3d/js/places/day3/pool-action.js'] = { exact: ['pool_action_completed'], prefix: [] };
 ENGINE_WRITES['game3d/js/places/commons.js'] = { exact: ['art_action_completed'], prefix: [] };
 
 ENGINE_WRITES['game3d/js/places/konbini/trade.js'] = {

@@ -69,12 +69,12 @@ export default place('east_coast', {
       { do: 'cam', on: 'emi', zoom: 1.2 },
       { say: 'emi', emo: 'warm', text: 'I’m having lunch before someone remembers where I am. Have you had yours?' },
       { choice: [
-        { text: 'Ask about the club’s winter sessions.', go: 'ongoing_emi_club' },
+        { text: 'Ask about the swimming club.', go: 'ongoing_emi_club' },
         { text: 'Let her eat.', go: 'ongoing_coast_leave' },
       ] },
     ],
     ongoing_emi_club: [
-      { say: 'emi', emo: 'casual', text: 'Saturday evenings in the gym. Kuro comes too. I need someone to make me leave the office.' },
+      { say: 'emi', emo: 'casual', text: 'We swim on Saturday evenings. Kuro comes too. I need someone to make me leave the office.' },
       { say: 'eric', emo: 'warm', text: 'Does she come up and get you?' },
       { say: 'emi', emo: 'amused', text: 'She has done. I can’t pretend I’m out when she’s at reception.' },
       { go: 'ongoing_coast_leave' },

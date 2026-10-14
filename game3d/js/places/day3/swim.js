@@ -9,10 +9,11 @@ import { poolChanging } from './pool-changing.js';
 import * as D from '../../scenes/sports/deck-plan.js';
 import { pt, DECK } from '../../scenes/sports/plan.js';
 import { swimmerPose, faceSwimmer } from './swim-pose.js';
-import { poolAction } from './pool-action.js';
+import { poolAction, completedPoolAction } from './pool-action.js';
 import { poolHandling } from './pool-handling.js';
 import { poolEquipmentActions } from './pool-equipment.js';
 import { poolCamera } from './pool-camera.js';
+import { poolMeeting } from './pool-meeting.js';
 
 const [WX0, WZ0] = pt([D.WATER[0], D.WATER[2]]),
   [WX1, WZ1] = pt([D.WATER[1], D.WATER[3]]); // the water, in the sports chunk's frame
@@ -73,7 +74,7 @@ export function poolClub(game, { root, cast, outfits }) {
     if (r.blob) r.blob.visible = false;
   };
   // the group as the story has got to it, on every arrival and Continue (no timers: each state just set)
-  function arrange() {
+  function arrange({ repeat = false } = {}) {
     for (const pose of poses.values()) pose.leave();
     handling.drop(who('emi'));
     handling.drop(who('member'));
@@ -83,16 +84,16 @@ export function poolClub(game, { root, cast, outfits }) {
       bag.position.set(i * 0.38, 0, 0);
       bag.rotation.set(0, 0, 0);
     });
-    for (const id of ['emi', 'kuro']) outfit(id, sim.day === 3 && sim.period === 'evening');
-    goggles.visible = sim.day === 3 && sim.period === 'evening' && !flags.d3_goggles_returned && !!flags.club_swimming;
-    if (sim.day !== 3 || sim.period !== 'evening') {
+    for (const id of ['emi', 'kuro']) outfit(id, poolMeeting(sim.day, sim.period));
+    goggles.visible = poolMeeting(sim.day, sim.period) && !flags.d3_goggles_returned && !!flags.club_swimming;
+    if (!poolMeeting(sim.day, sim.period)) {
       for (const o of [bags, list, floats, ...towels]) o.visible = false;
       for (const id of ['emi', 'kuro', 'attendant', 'member']) cast.hide(id);
       return;
     }
     setAt(floats, [ATTENDANT[0] + 0.7, ATTENDANT[1] - 0.2], 0.05);
     cast.put('attendant', ATTENDANT, [ATTENDANT[0] + 0.7, ATTENDANT[1] - 0.2]);
-    if (flags.d3_swim_done) {
+    if (flags.d3_swim_done && !repeat) {
       // resting after the swim: Emi and Kuro on the south bench with their towels, the bags with the attendant
       cast.seat('emi', {
         x: SEAT_S[0] + 0.02,
@@ -113,7 +114,7 @@ export function poolClub(game, { root, cast, outfits }) {
     cast.put('member', [STEPS_TOP[0] - 1.0, STEPS_TOP[1] - 1.25], [STEPS_TOP[0] - 1.6, STEPS_TOP[1] - 0.25]);
     inWater('kuro', [LANE2, WZ1 - 1.8], 0); // leave the wall-side crossing to the shared steps clear
     setAt(bags, BAGS_AT, 0.415);
-    handling.hold(who('member'), list);
+    handling.hold(who(repeat ? 'attendant' : 'member'), list);
     for (const t of towels) t.visible = false;
   }
 
@@ -198,7 +199,7 @@ export function poolClub(game, { root, cast, outfits }) {
     }
   }
 
-  const { putListAway, carryBags, collectList } = poolEquipmentActions(game, {
+  const { putListAway, carryBags, collectList, returnList, giveList } = poolEquipmentActions(game, {
     action,
     handling,
     who,
@@ -211,31 +212,17 @@ export function poolClub(game, { root, cast, outfits }) {
   });
 
   const hooks = {
-    async poolSession({ state } = {}) {
+    async poolSession({ state, repeat = false, from = 'member', staySeated = false } = {}) {
       const cam = P().cam;
       if (!['length', 'another', 'emiEnter'].includes(state)) camera.clear();
       if (state === 'begin') {
-        arrange();
+        arrange({ repeat });
         game.walker.faceTo?.(STEPS_TOP[0] - 1.6, STEPS_TOP[1] - 0.25);
         cam.closeOn?.([STEPS_TOP[0] - 0.6, STEPS_TOP[1] - 0.6], 1.25);
         return;
       }
-      if (state === 'list') {
-        const member = who('member'),
-          emi = who('emi'),
-          ep = emi.root.position;
-        cam.closeOn?.([ep.x + 0.25, ep.z], 1.9);
-        handling.hold(member, list);
-        await action.wait(walkRig(game, member, [ep.x + 0.5, ep.z], { speed: 1.0 }));
-        await action.wait(faceRig(game, member, [ep.x, ep.z]));
-        await action.wait(faceRig(game, emi, [member.root.position.x, member.root.position.z]));
-        handling.reach(emi, list.position.toArray());
-        await action.wait(game.wait(500));
-        handling.drop(member);
-        handling.hold(emi, list);
-        sfx('tap');
-        return;
-      }
+      if (state === 'list') return giveList(from);
+      if (state === 'sheetBack') return returnList();
       if (state === 'handover' || state === 'bags') {
         const id = state === 'bags' ? 'eric' : 'emi',
           r = who(id);
@@ -300,7 +287,7 @@ export function poolClub(game, { root, cast, outfits }) {
         return;
       }
       if (state === 'free') {
-        if (game.player.seated) await action.wait(game.hooks.stand({ who: 'eric' }));
+        if (game.player.seated && !staySeated) await action.wait(game.hooks.stand({ who: 'eric' }));
         return;
       }
       if (state === 'exit') return changing.exit();
@@ -330,7 +317,7 @@ export function poolClub(game, { root, cast, outfits }) {
     inWater: () => poses.get(game.player)?.active,
   });
   const runSession = hooks.poolSession;
-  hooks.poolSession = (args) => action.run(() => runSession(args));
+  hooks.poolSession = completedPoolAction(game, root, action, runSession);
   // the goggles on the fence, members only (the story's show), until she has them back
   const gogglesThing = {
     anchor: (v) => v.set(FENCE[0], 1.4, FENCE[1]),
@@ -340,12 +327,13 @@ export function poolClub(game, { root, cast, outfits }) {
   };
   return {
     arrange,
+    ready: () =>
+      poolMeeting(sim.day, sim.period) && ['emi', 'kuro', 'attendant', 'member'].every((id) => who(id)?.root.visible),
     restoreOutfits(saved) {
       // Runner may restore water, then a later bench checkpoint in the same place.
       for (const pose of poses.values()) pose.leave();
       for (const id of ['eric', 'emi', 'kuro']) {
-        const on =
-          saved?.outfits?.[id] ?? (id === 'eric' ? !!saved?.swimmers?.eric : sim.day === 3 && sim.period === 'evening');
+        const on = saved?.outfits?.[id] ?? (id === 'eric' ? !!saved?.swimmers?.eric : poolMeeting(sim.day, sim.period));
         outfit(id, on);
       }
     },

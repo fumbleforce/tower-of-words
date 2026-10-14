@@ -23,9 +23,8 @@ const THREE = await import('../../vendor/three/three.module.js');
 const { Runner, flags } = await import('../../js/runner.js');
 const { flagKeys } = await import('../../js/narrative/engine-flags.js');
 const { createArtStage } = await import('../../js/places/ongoing/art-stage.js');
-const { createWinterStage } = await import('../../js/places/ongoing/winter-stage.js');
 const { artNodes } = await import('../../story/ongoing/art.js');
-const { winterNodes } = await import('../../story/ongoing/winter.js');
+const { swimmingNodes } = await import('../../story/ongoing/swimming.js');
 
 // Execute each exact production hook, with only its enclosing room dependencies supplied.
 // Building the entire room would require unrelated live cast/audio loaders.
@@ -59,15 +58,15 @@ function fixture(kind) {
   const game = { player, place: P, walker: { sync() {} }, wait: async () => {}, tween: async (_, f) => f(1), hooks: {
     bond: a => awards.push(a), bondStep: a => awards.push(a), remember: a => awards.push(a), ongoingGoal() {}, save() {},
   } };
-  const stage = kind === 'art' ? createArtStage(game, P, { photograph: new THREE.Texture({ width: 10, height: 10 }), approved: true }) : createWinterStage(game, P);
+  const stage = createArtStage(game, P, { photograph: new THREE.Texture({ width: 10, height: 10 }), approved: true });
   stage.restore({ active: true, drawing: 'blank', people: {}, props: {}, held: [{ id: 'emi', item: 'winter-organizer-sheet', target: null }] });
   game.hooks[`${kind}Club`] = wrapper(kind, game, P, stage);
   globalThis.__saveTestUI = { say: (...args) => lines.push(args), choose: () => { throw new Error('Canceled story reached a choice'); } };
   game.runner = new Runner(game);
-  game.runner.use(P, { nodes: kind === 'art' ? artNodes : winterNodes });
+  game.runner.use(P, { nodes: artNodes });
   return { game, P, stage, awards, lines };
 }
-for (const kind of ['art', 'winter']) {
+for (const kind of ['art']) {
   test(`${kind}: actual action cancellation stops authored Runner progression`, async () => {
     const f = fixture(kind);
     let reached, resolve;
@@ -100,22 +99,6 @@ for (const kind of ['art', 'winter']) {
     assert.equal(flags[`${kind}_action_completed`], 'new-scene-owned');
   });
 }
-test('winter milestone cancels at the actual participant turn immediately before the award', async () => {
-  const f = fixture('winter');
-  const steps = winterNodes.ongoing_winter_sheet;
-  const start = steps.findIndex(s => s.do === 'winterClub' && s.state === 'emiTurn');
-  f.game.runner.story = { nodes: { ...winterNodes, testedTurn: steps.slice(start) } };
-  let reached, finish;
-  const started = new Promise(r => { reached = r; });
-  f.game.walkTo = () => { reached(); return new Promise(r => { finish = r; }); };
-  const pending = f.game.runner.run('testedTurn');
-  await started;
-  f.stage.leave(); await pending; finish(); await Promise.resolve();
-  assert.equal(flags.winter_action_completed, false);
-  assert.equal(flags.ms3_emi, undefined);
-  assert.deepEqual(f.awards, []);
-  assert.deepEqual(f.lines, []);
-});
 test('completed real art action reaches its authored milestone and memory exactly once', async () => {
   const f = fixture('art');
   await f.game.runner.run('ongoing_art_mori_draws');
@@ -124,12 +107,12 @@ test('completed real art action reaches its authored milestone and memory exactl
   assert.equal(f.awards.length, 2);
   assert.equal(f.stage.snapshot().active, false);
 });
-test('every nested art/winter physical action has an immediate completion guard', () => {
-  for (const [kind, nodes] of [['art', artNodes], ['winter', winterNodes]]) {
+test('every nested art/swimming physical action has an immediate completion guard', () => {
+  for (const [kind, nodes] of [['art', artNodes], ['pool', swimmingNodes]]) {
     function inspect(value) {
       if (Array.isArray(value)) {
         for (let i = 0; i < value.length; i++) {
-          if (value[i]?.do === `${kind}Club`) assert.deepEqual(value[i + 1], { if: `!${kind}_action_completed`, then: [{ end: true }] });
+          if (value[i]?.do === (kind === 'pool' ? 'poolSession' : 'artClub')) assert.deepEqual(value[i + 1], { if: `!${kind}_action_completed`, then: [{ end: true }] });
           inspect(value[i]);
         }
       } else if (value && typeof value === 'object') Object.values(value).forEach(inspect);

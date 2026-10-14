@@ -940,6 +940,47 @@
    "path": "game3d/assets/references/",
    "round": "research-reading-room",
    "note": "Authored reference diagrams recovered for Research #317."
+  },
+  {
+   "date": "2026-10-14",
+   "action": "retire",
+   "paths": [
+    "game3d/audio/ln-16hb9fa.mp3",
+    "game3d/audio/ln-16yqtyl.mp3",
+    "game3d/audio/ln-1axk4v1.mp3",
+    "game3d/audio/ln-1axk4v1-carina.mp3",
+    "game3d/audio/ln-1knpnpe.mp3",
+    "game3d/audio/ln-1l0afpr.mp3",
+    "game3d/audio/ln-1lf08x1.mp3",
+    "game3d/audio/ln-1qgvyhu.mp3",
+    "game3d/audio/ln-1wyfipz.mp3",
+    "game3d/audio/ln-7edg8a.mp3",
+    "game3d/audio/ln-bftv8e.mp3",
+    "game3d/audio/ln-c32ryv.mp3",
+    "game3d/audio/ln-fuzrmx.mp3",
+    "game3d/audio/ln-jxavey.mp3",
+    "game3d/audio/ln-jxavey-carina.mp3",
+    "game3d/audio/ln-qliz7b.mp3",
+    "game3d/audio/ln-s1602m.mp3",
+    "game3d/audio/ln-vla143.mp3",
+    "game3d/audio/oh-181egj4.mp3",
+    "game3d/audio/oh-1itr97j.mp3",
+    "game3d/audio/oh-1j2qeia.mp3",
+    "game3d/audio/oh-1l4dtns.mp3",
+    "game3d/audio/oh-1sdccw7.mp3",
+    "game3d/audio/oh-1u3qion.mp3",
+    "game3d/audio/oh-1u64h57.mp3",
+    "game3d/audio/oh-5ztdsp.mp3",
+    "game3d/audio/oh-99tttq.mp3",
+    "game3d/audio/oh-guamfy.mp3",
+    "game3d/audio/oh-ndoq16.mp3",
+    "game3d/audio/oh-qcn3qr.mp3",
+    "game3d/audio/oh-th2io9.mp3",
+    "game3d/audio/oh-wesb6v.mp3",
+    "game3d/audio/oh-ygq8rj.mp3"
+   ],
+   "to": "art/production/retired/2026-10-14/",
+   "note": "Swimming stays at the pool, #436; seasonal gym dialogue removed."
   }
  ]
 }

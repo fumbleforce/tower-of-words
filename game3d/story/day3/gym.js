@@ -135,15 +135,14 @@ export default place(
         ] },
       ],
       d3_emi: [...emiHello,
-        { say: 'emi', emo: 'bright', text: 'I’m here for the pool keys. We’ve got one last swim outdoors tonight.' },
+        { say: 'emi', emo: 'bright', text: 'I’m here for the pool keys. We’re swimming tonight.' },
         emiClubFact,
         { if: 'club_swimming', then: [
           { say: 'emi', emo: 'bright', text: 'See you at the pool, then. You don’t have to swim, you can sit by the water.' },
         ], else: [{ say: 'emi', emo: 'casual', text: 'Take a slip at the plaza if you fancy it. You don’t have to swim, you can sit by the water.' }] },
       ],
-      d3_gym_board: ['> “Swimming club: Saturday evenings here from 10 October. The 3 October swim is outdoors.”'],
+      d3_gym_board: ['> “Swimming club: Saturday evenings at the pool.”'],
       d3_fan: [{ say: 'eric', emo: 'warm', text: 'That feels better. I walked up here too fast.' }],
-      d3_winter_setup: [{ do: 'day3Setup', state: 'winterClub' }],
     },
   },
 );

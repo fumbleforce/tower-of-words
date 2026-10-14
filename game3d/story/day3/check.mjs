@@ -79,7 +79,7 @@ for (const [where, story] of Object.entries(STORIES)) {
     if (Array.isArray(label)) condition(label[1]);
   }
   for (const id of Object.keys(story.nodes)) node(id);
-  if (['pool', 'gym'].includes(where)) node('club_swimming_1');
+  if (where === 'pool') node('club_swimming_1');
 }
 for (const mc of Object.values(PROTAGONISTS)) {
   const expanded = expandMc(structuredClone({ STORIES, CLUBS, TICKETS }), mc);
@@ -275,12 +275,12 @@ for (const reported of [false, true]) {
   p.run('club_swimming_pool', ['club_swimming_watch', 'club_swimming_goodnight']); assert(p.flags.d3_swim_done);
 }
 {
-  const p = new Play('gym', { day: 10, period: 'evening' });
-  p.run('club_swimming_1', ['club_swimming_winter_leave']); assert(!p.flags.d3_winter_intro_done);
-  p.flags.day = 17; p.run('club_swimming_2', ['club_swimming_winter_leave']); assert(!p.flags.d3_winter_intro_done);
-  p.flags.day = 24; p.run('club_swimming_2', ['club_swimming_winter_sit']); assert(p.flags.d3_winter_intro_done);
-  assert(!p.flags.d3_swim_done); assert(!p.hooks.some(h => h.do === 'poolSession'));
-  assert.equal(p.hooks.filter(h => h.do === 'bond').length, 2); p.record('Winter: defer twice, then sit');
+  const p = new Play('pool', { day: 10, period: 'evening' });
+  p.run('club_swimming_1', ['club_swimming_leave_early']); assert(!p.flags.d3_swim_done);
+  p.flags.day = 17; p.run('club_swimming_2', ['club_swimming_leave_early']); assert(!p.flags.d3_swim_done);
+  p.flags.day = 24; p.run('club_swimming_2', ['club_swimming_watch', 'club_swimming_sit']); assert(p.flags.d3_swim_done);
+  assert(p.hooks.some(h => h.do === 'poolSession'));
+  assert.equal(p.hooks.filter(h => h.do === 'bond').length, 2); p.record('Pool: defer twice, then watch');
 }
 {
   const p = new Play('pool', { period: 'evening' }); p.run('d3_goggles'); p.run('d3_goggles');
@@ -337,16 +337,16 @@ for (const knows of [false, true]) {
   assert(!p.hooks.some(h => h.do === 'type'));
   p.record(`Watching without a new lesson; prior mitai ${knows}`);
 }
-// Test seasonal dispatch through the real club model, including multiple missed/declined meetings.
+// The same pool venue remains available after missed or declined meetings.
 {
   const flags = { day: 3, period: 'morning' }, cond = createConditionEvaluator(k => flags[k] ?? false);
   const c = createClubs({ flags, cond, data: () => CLUBS, dateOf, periods: PERIODS });
   assert.equal(c.due('pool', 3, 'evening'), null); c.join('swimming');
-  assert.equal(c.due('gym', 10, 'evening').node, 'club_swimming_1');
+  assert.equal(c.due('pool', 10, 'evening').node, 'club_swimming_1');
   c.attend('swimming', 10);
-  assert.equal(c.due('gym', 10, 'evening'), null);
-  assert.equal(c.due('gym', 17, 'evening').node, 'club_swimming_2');
-  assert.equal(c.due('pool', 17, 'evening'), null);
+  assert.equal(c.due('pool', 10, 'evening'), null);
+  assert.equal(c.due('pool', 17, 'evening').node, 'club_swimming_2');
+  assert.equal(c.due('gym', 17, 'evening'), null);
 }
 const output = process.argv[2];
 if (output) writeFileSync(output, transcripts.join('\n'));

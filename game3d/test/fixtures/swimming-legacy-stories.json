@@ -1,0 +1,2235 @@
+{
+  "pool": {
+    "club_swimming_1": [
+      {
+        "call": "club_swimming_intro"
+      },
+      {
+        "if": "place == 'gym'",
+        "then": [
+          {
+            "go": "club_swimming_winter"
+          }
+        ],
+        "else": [
+          {
+            "go": "club_swimming_pool"
+          }
+        ]
+      }
+    ],
+    "club_swimming_intro": [
+      {
+        "do": "cam",
+        "on": "emi",
+        "zoom": 1.2
+      },
+      {
+        "if": "!d3_emi_introduced && !d2_brief_done && !fact_emi_ten_years && (!met_emi || d3_emi_needs_intro)",
+        "then": [
+          {
+            "say": "emi",
+            "emo": "bright",
+            "text": "Oh, you must be {mc.name}. I\u2019m Emi, from B2. It\u2019s good to meet you at last."
+          },
+          {
+            "do": "meet",
+            "who": "emi"
+          },
+          {
+            "set": "d3_emi_introduced"
+          },
+          {
+            "unset": "d3_emi_needs_intro"
+          }
+        ],
+        "else": [
+          {
+            "unset": "d3_emi_needs_intro"
+          },
+          {
+            "say": "emi",
+            "emo": "bright",
+            "text": "{mc.name}! I was hoping you\u2019d make it."
+          }
+        ]
+      },
+      {
+        "do": "fact",
+        "who": "emi",
+        "id": "swimming_club",
+        "text": "In the swimming club. It meets on Saturday evenings."
+      },
+      {
+        "if": "!d3_kuro_intro",
+        "then": [
+          {
+            "do": "cam",
+            "on": "kuro",
+            "zoom": 1.2
+          },
+          {
+            "if": "d2_kuro_weekend_seen && day == 3",
+            "then": [
+              {
+                "say": "kuro",
+                "name": "Receptionist",
+                "overheard": true,
+                "emo": "warm",
+                "text": "\u6765\u305f\u3093\u3067\u3059\u306d\u3002\u2026\u2026\u5fd8\u308c\u308b\u3068\u601d\u3063\u3066\u307e\u3057\u305f\u3002"
+              },
+              {
+                "say": "eric",
+                "emo": "warm",
+                "text": "You pointed me at the club yesterday. I thought I\u2019d come and see."
+              },
+              {
+                "say": "kuro",
+                "name": "Receptionist",
+                "overheard": true,
+                "emo": "amused",
+                "text": "\u7396\u8def\u3067\u3059\u3002"
+              }
+            ],
+            "else": [
+              {
+                "if": "kuro_reception_seen || d2_kuro_greeted",
+                "then": [
+                  {
+                    "say": "kuro",
+                    "name": "Receptionist",
+                    "overheard": true,
+                    "emo": "amused",
+                    "text": "\u3053\u3093\u3070\u3093\u306f\u3002\u4eca\u65e5\u306f\u3001\u4f55\u968e\uff1f"
+                  },
+                  {
+                    "say": "eric",
+                    "emo": "warm",
+                    "text": "I think I\u2019m in the right place this time."
+                  },
+                  {
+                    "say": "kuro",
+                    "name": "Receptionist",
+                    "overheard": true,
+                    "emo": "polite",
+                    "text": "\u7396\u8def\u3067\u3059\u3002\u53d7\u4ed8\u306e\u3002"
+                  }
+                ],
+                "else": [
+                  {
+                    "say": "kuro",
+                    "name": "Receptionist",
+                    "overheard": true,
+                    "emo": "polite",
+                    "text": "\u3053\u3093\u3070\u3093\u306f\u3002\u7396\u8def\u3067\u3059\u3002\u672c\u793e\u306e\u53d7\u4ed8\u3067\u3059\u3002"
+                  },
+                  {
+                    "say": "eric",
+                    "emo": "warm",
+                    "text": "I\u2019m {mc.name}. Nice to meet you."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "do": "meet",
+            "who": "kuro"
+          },
+          {
+            "set": "d3_kuro_intro"
+          }
+        ]
+      },
+      {
+        "do": "cam",
+        "back": true
+      }
+    ],
+    "club_swimming_pool": [
+      {
+        "call": "d3_pool_begin"
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "warm",
+        "text": "\u3053\u306e\u30d7\u30fc\u30eb\u3001\u4eca\u65e5\u3067\u6700\u5f8c\u306a\u3093\u3067\u3059\u3088\u3002",
+        "clear": [
+          "\u30d7\u30fc\u30eb"
+        ]
+      },
+      {
+        "say": "emi",
+        "emo": "casual",
+        "text": "Last evening at this pool. The water\u2019s fine once you\u2019re in, apparently."
+      },
+      {
+        "say": "emi",
+        "emo": "casual",
+        "text": "I came down to put these bags away and have a quick swim. I haven\u2019t managed either yet."
+      },
+      {
+        "say": "member",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u30a8\u30df\u3055\u3093\u3001\u3053\u308c\u3082\u304a\u9858\u3044\u3057\u307e\u3059\u3002\u5099\u54c1\u306e\u30ea\u30b9\u30c8\u3067\u3059\u3002",
+        "clear": [
+          "\u30ea\u30b9\u30c8"
+        ]
+      },
+      {
+        "call": "d3_pool_list"
+      },
+      {
+        "say": "emi",
+        "emo": "amused",
+        "text": "Oh, she\u2019s found me something else. That can wait until I\u2019m dry again."
+      },
+      {
+        "say": "kuro",
+        "face": "teasing",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "teasing",
+        "text": "\u30a8\u30df\u3055\u3093\u3001\u6cf3\u304e\u306b\u6765\u305f\u3093\u3067\u3057\u3087\u3046\uff1f"
+      },
+      {
+        "say": "emi",
+        "emo": "warm",
+        "text": "Yes, I did come here to swim. You\u2019re quite right."
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "curious",
+        "text": "\u4eca\u65e5\u306f\u3001{oyogu}\uff1f"
+      },
+      {
+        "choice": [
+          {
+            "text": "Swim with Kuro.",
+            "go": "club_swimming_join"
+          },
+          {
+            "text": "Ask how to say you\u2019ll swim.",
+            "if": "!know_oyogu",
+            "go": "club_swimming_word"
+          },
+          {
+            "text": "Carry Emi\u2019s bags to the attendant.",
+            "go": "club_swimming_bags"
+          },
+          {
+            "text": "Sit on the deck and watch.",
+            "go": "club_swimming_watch"
+          },
+          {
+            "text": "Leave them to their evening.",
+            "go": "club_swimming_leave_early"
+          }
+        ]
+      }
+    ],
+    "club_swimming_word": [
+      {
+        "say": "emi",
+        "emo": "casual",
+        "text": "She\u2019s asking you too. {oyogu} means swim. Or you can sit with us, there\u2019s no test."
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "emo": "slow",
+        "slow": true,
+        "text": "{oyogu}\u3002"
+      },
+      {
+        "do": "type",
+        "word": "oyogu",
+        "from": "kuro",
+        "prompt": "Try the word she used for swimming: oyogu."
+      },
+      {
+        "go": "club_swimming_join"
+      }
+    ],
+    "club_swimming_slow": [
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "warm",
+        "text": "\u3086\u3063\u304f\u308a\u3067\u3001\u3044\u3044\u3067\u3059\u3088\u3002"
+      },
+      {
+        "say": "emi",
+        "emo": "warm",
+        "text": "Take it slowly, she says. I could do with remembering that myself."
+      },
+      {
+        "say": "eric",
+        "emo": "warm",
+        "text": "I may need a moment at the other end."
+      }
+    ],
+    "club_swimming_join": [
+      {
+        "if": "know_oyogu",
+        "then": [
+          {
+            "say": "eric",
+            "emo": "warm",
+            "text": "{oyogu}. I\u2019ll come in, but I\u2019m a bit out of practice."
+          }
+        ],
+        "else": [
+          {
+            "say": "eric",
+            "emo": "warm",
+            "text": "I\u2019ll come in, but I\u2019m a bit out of practice."
+          }
+        ]
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u3053\u3063\u3061\u3067\u3059\u3002"
+      },
+      {
+        "do": "gesture",
+        "who": "kuro",
+        "kind": "beckon",
+        "to": "eric"
+      },
+      {
+        "set": "d3_player_swims"
+      },
+      {
+        "call": "d3_pool_enter"
+      },
+      {
+        "do": "cam",
+        "on": "attendant",
+        "zoom": 1.2
+      },
+      {
+        "say": "emi",
+        "overheard": true,
+        "emo": "casual",
+        "text": "{sumimasen}\u3001\u3053\u308c\u3001\u304a\u9858\u3044\u3067\u304d\u307e\u3059\u304b\uff1f"
+      },
+      {
+        "say": "attendant",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u306f\u3044\u3001\u9810\u304b\u308a\u307e\u3059\u306d\u3002"
+      },
+      {
+        "call": "d3_pool_emi_hands_over"
+      },
+      {
+        "go": "club_swimming_length"
+      }
+    ],
+    "club_swimming_bags": [
+      {
+        "say": "eric",
+        "emo": "warm",
+        "text": "I can carry those over. Go on."
+      },
+      {
+        "say": "emi",
+        "emo": "bright",
+        "text": "Thank you. Just take them over to him by the steps."
+      },
+      {
+        "call": "d3_pool_bags"
+      },
+      {
+        "choice": [
+          {
+            "text": "Get in the water.",
+            "go": "club_swimming_after_bags"
+          },
+          {
+            "text": "Take a seat on the deck.",
+            "go": "club_swimming_deck"
+          }
+        ]
+      }
+    ],
+    "club_swimming_after_bags": [
+      {
+        "set": "d3_player_swims"
+      },
+      {
+        "call": "d3_pool_enter"
+      },
+      {
+        "go": "club_swimming_length"
+      }
+    ],
+    "club_swimming_watch": [
+      {
+        "if": "know_mitai",
+        "then": [
+          {
+            "say": "eric",
+            "emo": "warm",
+            "text": "{mitai}. I\u2019ll watch for a bit. Don\u2019t wait for me."
+          }
+        ],
+        "else": [
+          {
+            "say": "eric",
+            "emo": "warm",
+            "text": "I\u2019ll watch for a bit. Don\u2019t wait for me."
+          }
+        ]
+      },
+      {
+        "do": "cam",
+        "on": "attendant",
+        "zoom": 1.2
+      },
+      {
+        "say": "emi",
+        "overheard": true,
+        "emo": "casual",
+        "text": "{sumimasen}\u3001\u3053\u308c\u3001\u304a\u9858\u3044\u3067\u304d\u307e\u3059\u304b\uff1f"
+      },
+      {
+        "say": "attendant",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u306f\u3044\u3001\u9810\u304b\u308a\u307e\u3059\u306d\u3002"
+      },
+      {
+        "call": "d3_pool_emi_hands_over"
+      },
+      {
+        "go": "club_swimming_deck"
+      }
+    ],
+    "club_swimming_deck": [
+      {
+        "do": "sit",
+        "who": "eric",
+        "at": "deck_bench_s"
+      },
+      {
+        "go": "club_swimming_length"
+      }
+    ],
+    "club_swimming_length": [
+      {
+        "call": "d3_pool_emi_enters"
+      },
+      {
+        "if": "d3_player_swims",
+        "then": [
+          {
+            "call": "club_swimming_slow"
+          }
+        ]
+      },
+      {
+        "say": "emi",
+        "emo": "surprised",
+        "text": "Oh. That\u2019s colder than it was in August."
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "warm",
+        "text": "\u6cf3\u3052\u3070\u3001\u5c11\u3057\u6e29\u304b\u304f\u306a\u308a\u307e\u3059\u3088\u3002"
+      },
+      {
+        "call": "d3_pool_length"
+      },
+      {
+        "if": "d3_player_swims",
+        "then": [
+          {
+            "do": "cam",
+            "on": "kuro",
+            "zoom": 1.2
+          },
+          {
+            "say": "kuro",
+            "name": "Kuro",
+            "overheard": true,
+            "emo": "curious",
+            "text": "\u901f\u304b\u3063\u305f\uff1f"
+          },
+          {
+            "say": "eric",
+            "emo": "warm",
+            "text": "Yes. I just need a moment at the wall."
+          }
+        ]
+      },
+      {
+        "say": "emi",
+        "emo": "warm",
+        "text": "I nearly stayed upstairs to finish an email. I\u2019m glad I didn\u2019t."
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u3082\u3046\u4e00\u672c\u3001\u6cf3\u304e\u307e\u305b\u3093\u304b\u3002"
+      },
+      {
+        "say": "emi",
+        "emo": "bright",
+        "text": "One more length? Yes, we\u2019ve got time."
+      },
+      {
+        "do": "cam",
+        "on": "attendant",
+        "zoom": 1.2
+      },
+      {
+        "say": "emi",
+        "overheard": true,
+        "emo": "casual",
+        "text": "{sumimasen}\u3001\u30ea\u30b9\u30c8\u3001\u30c6\u30fc\u30d6\u30eb\u306b\u7f6e\u3044\u3066\u3082\u3089\u3048\u307e\u3059\u304b\uff1f",
+        "clear": [
+          "\u30ea\u30b9\u30c8",
+          "\u30c6\u30fc\u30d6\u30eb"
+        ]
+      },
+      {
+        "say": "attendant",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u306f\u3044\u3001\u7f6e\u3044\u3066\u304a\u304d\u307e\u3059\u3002"
+      },
+      {
+        "call": "d3_pool_another"
+      },
+      {
+        "set": "d3_swim_done"
+      },
+      {
+        "call": "club_swimming_shared"
+      },
+      {
+        "do": "remember",
+        "who": "emi",
+        "id": "first_club",
+        "text": "You were there for the last outdoor swim."
+      },
+      {
+        "do": "save"
+      },
+      {
+        "choice": [
+          {
+            "text": "Sit with them after the swim.",
+            "go": "club_swimming_sit"
+          },
+          {
+            "text": "Say goodnight and leave the pool.",
+            "go": "club_swimming_goodnight"
+          }
+        ]
+      }
+    ],
+    "club_swimming_sit": [
+      {
+        "call": "d3_pool_sit"
+      },
+      {
+        "say": "emi",
+        "emo": "warm",
+        "text": "I used to keep my goggles in my work bag so I\u2019d actually come down. Then I started carrying everyone else\u2019s things instead."
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "dry",
+        "text": "\u8377\u7269\u306f\u3001\u81ea\u5206\u3067\u3002"
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "warm",
+        "text": "\u6b21\u306f\u3001{isshoni}\u3002"
+      },
+      {
+        "say": "attendant",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u6765\u9031\u304b\u3089\u4f53\u80b2\u9928\u3067\u3059\u3002\u5ba4\u5185\u7528\u306e\u9774\u3092\u6301\u3063\u3066\u304d\u3066\u304f\u3060\u3055\u3044\u306d\u3002"
+      },
+      {
+        "say": "emi",
+        "emo": "casual",
+        "text": "Gym from next week, he says, and bring indoor shoes. They really do send you home without them."
+      },
+      {
+        "say": "eric",
+        "emo": "warm",
+        "text": "I\u2019ll know where to find you if the email can wait."
+      },
+      {
+        "do": "remember",
+        "who": "kuro",
+        "id": "club_seat",
+        "text": "Sat with her after the club session."
+      },
+      {
+        "call": "d3_pool_free"
+      },
+      {
+        "do": "cam",
+        "back": true
+      },
+      {
+        "do": "goal",
+        "text": "Stay by the pool, or go home to room 203 when you want to sleep."
+      },
+      {
+        "do": "save"
+      }
+    ],
+    "club_swimming_goodnight": [
+      {
+        "say": "eric",
+        "emo": "warm",
+        "text": "I\u2019ll head back. Thanks for having me."
+      },
+      {
+        "say": "emi",
+        "emo": "warm",
+        "text": "See you next Saturday, if you\u2019re free. We\u2019ll be in the gym by then."
+      },
+      {
+        "call": "d3_pool_exit"
+      },
+      {
+        "do": "cam",
+        "back": true
+      },
+      {
+        "do": "trip",
+        "to": "sports"
+      }
+    ],
+    "club_swimming_leave_early": [
+      {
+        "say": "emi",
+        "emo": "casual",
+        "text": "All right. We\u2019ll be here if you come back."
+      },
+      {
+        "do": "cam",
+        "back": true
+      },
+      {
+        "do": "trip",
+        "to": "sports"
+      }
+    ],
+    "club_swimming_winter": [
+      {
+        "call": "d3_winter_setup"
+      },
+      {
+        "say": "emi",
+        "emo": "bright",
+        "text": "We\u2019re indoors for the winter. You missed the last outdoor swim, but so did half the club."
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "amused",
+        "text": "\u6301\u3063\u3066\u304d\u3061\u3083\u3044\u307e\u3057\u305f\u3002"
+      },
+      {
+        "say": "emi",
+        "emo": "casual",
+        "text": "Mine are in here somewhere. Shall we find out what we\u2019re doing?"
+      },
+      {
+        "choice": [
+          {
+            "text": "Sit with them for the introduction.",
+            "go": "club_swimming_winter_sit"
+          },
+          {
+            "text": "Say hello and leave for tonight.",
+            "go": "club_swimming_winter_leave"
+          }
+        ]
+      }
+    ],
+    "club_swimming_winter_sit": [
+      {
+        "do": "sit",
+        "who": "eric",
+        "at": "gym_bench_n"
+      },
+      {
+        "say": "attendant",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u3053\u306e\u3042\u305f\u308a\u306f\u81ea\u7531\u306b\u4f7f\u3048\u307e\u3059\u3002\u30de\u30c3\u30c8\u306f\u3001\u305d\u3053\u306e\u68da\u3067\u3059\u3002",
+        "clear": [
+          "\u30de\u30c3\u30c8"
+        ]
+      },
+      {
+        "do": "gesture",
+        "who": "attendant",
+        "kind": "point"
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "tired",
+        "text": "\u5bd2\u3044\u2026\u2026\u9774\u4e0b\u3001\u3082\u3063\u3068\u539a\u3044\u306e\u306b\u3059\u308c\u3070\u3088\u304b\u3063\u305f\u3002"
+      },
+      {
+        "say": "eric",
+        "emo": "warm",
+        "text": "I\u2019ll remember that for next time."
+      },
+      {
+        "do": "remember",
+        "who": "emi",
+        "id": "first_club",
+        "text": "Joined her for your first winter club meeting."
+      },
+      {
+        "do": "remember",
+        "who": "kuro",
+        "id": "club_seat",
+        "text": "Sat with her at the club\u2019s winter meeting."
+      },
+      {
+        "call": "club_swimming_shared"
+      },
+      {
+        "set": "d3_winter_intro_done"
+      },
+      {
+        "do": "stand",
+        "who": "eric"
+      },
+      {
+        "do": "cam",
+        "back": true
+      },
+      {
+        "do": "goal",
+        "text": "Stay at the gym, or head home when you want to sleep."
+      },
+      {
+        "do": "save"
+      }
+    ],
+    "club_swimming_shared": [
+      {
+        "if": "!d3_swimming_shared",
+        "then": [
+          {
+            "do": "bond",
+            "who": "emi",
+            "source": "scene",
+            "why": "spent an evening at the swimming club"
+          },
+          {
+            "do": "bond",
+            "who": "kuro",
+            "source": "scene",
+            "why": "spent an evening at the swimming club"
+          },
+          {
+            "set": "d3_swimming_shared"
+          }
+        ]
+      }
+    ],
+    "club_swimming_winter_leave": [
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u307e\u305f\u571f\u66dc\u65e5\u306b\u3002"
+      },
+      {
+        "do": "gesture",
+        "who": "kuro",
+        "kind": "point",
+        "to": "eric"
+      },
+      {
+        "do": "cam",
+        "back": true
+      },
+      {
+        "do": "trip",
+        "to": "sports"
+      }
+    ],
+    "club_swimming_2": [
+      {
+        "if": "!d3_swim_done && !d3_winter_intro_done",
+        "then": [
+          {
+            "go": "club_swimming_1"
+          }
+        ]
+      },
+      "> Placeholder: an ordinary swimming club evening (Codex writes it)."
+    ],
+    "d3_kuro_pool": [
+      {
+        "if": "d3_swim_done && know_oyogu",
+        "then": [
+          {
+            "say": "kuro",
+            "name": "Kuro",
+            "overheard": true,
+            "emo": "curious",
+            "text": "\u307e\u3060{oyogu}\uff1f"
+          },
+          {
+            "say": "eric",
+            "emo": "warm",
+            "text": "Not tonight. I\u2019ll stay here a bit longer."
+          },
+          {
+            "end": true
+          }
+        ]
+      },
+      {
+        "if": "d3_kuro_intro",
+        "then": [
+          {
+            "say": "kuro",
+            "face": "teasing",
+            "name": "Kuro",
+            "overheard": true,
+            "emo": "teasing",
+            "text": "\u30d7\u30fc\u30eb\u3001\u4eca\u65e5\u3067\u6700\u5f8c\u3067\u3059\u3088\u3002\u6765\u9031\u306f\u30b8\u30e0\u3067\u3002",
+            "clear": [
+              {
+                "ja": "\u30d7\u30fc\u30eb",
+                "ro": "p\u016bru",
+                "en": "pool"
+              },
+              {
+                "ja": "\u30b8\u30e0",
+                "ro": "jimu",
+                "en": "gym"
+              }
+            ]
+          }
+        ],
+        "else": [
+          {
+            "if": "kuro_reception_seen",
+            "then": [
+              {
+                "say": "kuro",
+                "overheard": true,
+                "emo": "amused",
+                "text": "\u3053\u3093\u3070\u3093\u306f\u3002\u6765\u305f\u3093\u3067\u3059\u306d\u3002"
+              }
+            ],
+            "else": [
+              {
+                "say": "kuro",
+                "overheard": true,
+                "emo": "polite",
+                "text": "\u3053\u3093\u3070\u3093\u306f\u3002\u30af\u30e9\u30d6\u3067\u3059\u304b\uff1f",
+                "clear": [
+                  {
+                    "ja": "\u30af\u30e9\u30d6",
+                    "ro": "kurabu",
+                    "en": "club"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "d3_pool_attendant": [
+      {
+        "if": "period == 'evening'",
+        "then": [
+          {
+            "if": "club_swimming",
+            "then": [
+              {
+                "say": "attendant",
+                "overheard": true,
+                "emo": "polite",
+                "text": "\u3069\u3046\u305e\u3002\u307e\u3060\u5927\u4e08\u592b\u3067\u3059\u3088\u3002"
+              },
+              {
+                "do": "gesture",
+                "who": "attendant",
+                "kind": "point",
+                "to": "emi"
+              }
+            ],
+            "else": [
+              {
+                "say": "attendant",
+                "overheard": true,
+                "emo": "polite",
+                "text": "\u3059\u307f\u307e\u305b\u3093\u3001\u4eca\u591c\u306f\u6c34\u6cf3\u90e8\u3060\u3051\u306a\u3093\u3067\u3059\u3002"
+              },
+              {
+                "say": "eric",
+                "emo": "tired",
+                "text": "Club members only, I think. The slips were on the plaza board."
+              }
+            ]
+          }
+        ],
+        "else": [
+          {
+            "say": "eric",
+            "emo": "warm",
+            "text": "The sign says the club has the pool this evening. I can come back then."
+          }
+        ]
+      }
+    ],
+    "d3_pool_begin": [
+      {
+        "do": "poolSession",
+        "state": "begin"
+      }
+    ],
+    "d3_pool_list": [
+      {
+        "do": "poolSession",
+        "state": "list"
+      }
+    ],
+    "d3_pool_enter": [
+      {
+        "do": "poolSession",
+        "state": "enter"
+      }
+    ],
+    "d3_pool_emi_hands_over": [
+      {
+        "do": "poolSession",
+        "state": "handover"
+      }
+    ],
+    "d3_pool_bags": [
+      {
+        "do": "poolSession",
+        "state": "bags"
+      }
+    ],
+    "d3_pool_emi_enters": [
+      {
+        "do": "poolSession",
+        "state": "emiEnter"
+      }
+    ],
+    "d3_pool_length": [
+      {
+        "do": "poolSession",
+        "state": "length"
+      }
+    ],
+    "d3_pool_another": [
+      {
+        "do": "poolSession",
+        "state": "another"
+      }
+    ],
+    "d3_pool_sit": [
+      {
+        "do": "poolSession",
+        "state": "sit"
+      }
+    ],
+    "d3_pool_free": [
+      {
+        "do": "poolSession",
+        "state": "free"
+      }
+    ],
+    "d3_pool_exit": [
+      {
+        "do": "poolSession",
+        "state": "exit"
+      }
+    ]
+  },
+  "gym": {
+    "club_swimming_1": [
+      {
+        "go": "ongoing_winter"
+      }
+    ],
+    "club_swimming_intro": [
+      {
+        "do": "cam",
+        "on": "emi",
+        "zoom": 1.2
+      },
+      {
+        "if": "!d3_emi_introduced && !d2_brief_done && !fact_emi_ten_years && (!met_emi || d3_emi_needs_intro)",
+        "then": [
+          {
+            "say": "emi",
+            "emo": "bright",
+            "text": "Oh, you must be {mc.name}. I\u2019m Emi, from B2. It\u2019s good to meet you at last."
+          },
+          {
+            "do": "meet",
+            "who": "emi"
+          },
+          {
+            "set": "d3_emi_introduced"
+          },
+          {
+            "unset": "d3_emi_needs_intro"
+          }
+        ],
+        "else": [
+          {
+            "unset": "d3_emi_needs_intro"
+          },
+          {
+            "say": "emi",
+            "emo": "bright",
+            "text": "{mc.name}! I was hoping you\u2019d make it."
+          }
+        ]
+      },
+      {
+        "do": "fact",
+        "who": "emi",
+        "id": "swimming_club",
+        "text": "In the swimming club. It meets on Saturday evenings."
+      },
+      {
+        "if": "!d3_kuro_intro",
+        "then": [
+          {
+            "do": "cam",
+            "on": "kuro",
+            "zoom": 1.2
+          },
+          {
+            "if": "d2_kuro_weekend_seen && day == 3",
+            "then": [
+              {
+                "say": "kuro",
+                "name": "Receptionist",
+                "overheard": true,
+                "emo": "warm",
+                "text": "\u6765\u305f\u3093\u3067\u3059\u306d\u3002\u2026\u2026\u5fd8\u308c\u308b\u3068\u601d\u3063\u3066\u307e\u3057\u305f\u3002"
+              },
+              {
+                "say": "eric",
+                "emo": "warm",
+                "text": "You pointed me at the club yesterday. I thought I\u2019d come and see."
+              },
+              {
+                "say": "kuro",
+                "name": "Receptionist",
+                "overheard": true,
+                "emo": "amused",
+                "text": "\u7396\u8def\u3067\u3059\u3002"
+              }
+            ],
+            "else": [
+              {
+                "if": "kuro_reception_seen || d2_kuro_greeted",
+                "then": [
+                  {
+                    "say": "kuro",
+                    "name": "Receptionist",
+                    "overheard": true,
+                    "emo": "amused",
+                    "text": "\u3053\u3093\u3070\u3093\u306f\u3002\u4eca\u65e5\u306f\u3001\u4f55\u968e\uff1f"
+                  },
+                  {
+                    "say": "eric",
+                    "emo": "warm",
+                    "text": "I think I\u2019m in the right place this time."
+                  },
+                  {
+                    "say": "kuro",
+                    "name": "Receptionist",
+                    "overheard": true,
+                    "emo": "polite",
+                    "text": "\u7396\u8def\u3067\u3059\u3002\u53d7\u4ed8\u306e\u3002"
+                  }
+                ],
+                "else": [
+                  {
+                    "say": "kuro",
+                    "name": "Receptionist",
+                    "overheard": true,
+                    "emo": "polite",
+                    "text": "\u3053\u3093\u3070\u3093\u306f\u3002\u7396\u8def\u3067\u3059\u3002\u672c\u793e\u306e\u53d7\u4ed8\u3067\u3059\u3002"
+                  },
+                  {
+                    "say": "eric",
+                    "emo": "warm",
+                    "text": "I\u2019m {mc.name}. Nice to meet you."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "do": "meet",
+            "who": "kuro"
+          },
+          {
+            "set": "d3_kuro_intro"
+          }
+        ]
+      },
+      {
+        "do": "cam",
+        "back": true
+      }
+    ],
+    "club_swimming_pool": [
+      {
+        "call": "d3_pool_begin"
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "warm",
+        "text": "\u3053\u306e\u30d7\u30fc\u30eb\u3001\u4eca\u65e5\u3067\u6700\u5f8c\u306a\u3093\u3067\u3059\u3088\u3002",
+        "clear": [
+          "\u30d7\u30fc\u30eb"
+        ]
+      },
+      {
+        "say": "emi",
+        "emo": "casual",
+        "text": "Last evening at this pool. The water\u2019s fine once you\u2019re in, apparently."
+      },
+      {
+        "say": "emi",
+        "emo": "casual",
+        "text": "I came down to put these bags away and have a quick swim. I haven\u2019t managed either yet."
+      },
+      {
+        "say": "member",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u30a8\u30df\u3055\u3093\u3001\u3053\u308c\u3082\u304a\u9858\u3044\u3057\u307e\u3059\u3002\u5099\u54c1\u306e\u30ea\u30b9\u30c8\u3067\u3059\u3002",
+        "clear": [
+          "\u30ea\u30b9\u30c8"
+        ]
+      },
+      {
+        "call": "d3_pool_list"
+      },
+      {
+        "say": "emi",
+        "emo": "amused",
+        "text": "Oh, she\u2019s found me something else. That can wait until I\u2019m dry again."
+      },
+      {
+        "say": "kuro",
+        "face": "teasing",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "teasing",
+        "text": "\u30a8\u30df\u3055\u3093\u3001\u6cf3\u304e\u306b\u6765\u305f\u3093\u3067\u3057\u3087\u3046\uff1f"
+      },
+      {
+        "say": "emi",
+        "emo": "warm",
+        "text": "Yes, I did come here to swim. You\u2019re quite right."
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "curious",
+        "text": "\u4eca\u65e5\u306f\u3001{oyogu}\uff1f"
+      },
+      {
+        "choice": [
+          {
+            "text": "Swim with Kuro.",
+            "go": "club_swimming_join"
+          },
+          {
+            "text": "Ask how to say you\u2019ll swim.",
+            "if": "!know_oyogu",
+            "go": "club_swimming_word"
+          },
+          {
+            "text": "Carry Emi\u2019s bags to the attendant.",
+            "go": "club_swimming_bags"
+          },
+          {
+            "text": "Sit on the deck and watch.",
+            "go": "club_swimming_watch"
+          },
+          {
+            "text": "Leave them to their evening.",
+            "go": "club_swimming_leave_early"
+          }
+        ]
+      }
+    ],
+    "club_swimming_word": [
+      {
+        "say": "emi",
+        "emo": "casual",
+        "text": "She\u2019s asking you too. {oyogu} means swim. Or you can sit with us, there\u2019s no test."
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "emo": "slow",
+        "slow": true,
+        "text": "{oyogu}\u3002"
+      },
+      {
+        "do": "type",
+        "word": "oyogu",
+        "from": "kuro",
+        "prompt": "Try the word she used for swimming: oyogu."
+      },
+      {
+        "go": "club_swimming_join"
+      }
+    ],
+    "club_swimming_slow": [
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "warm",
+        "text": "\u3086\u3063\u304f\u308a\u3067\u3001\u3044\u3044\u3067\u3059\u3088\u3002"
+      },
+      {
+        "say": "emi",
+        "emo": "warm",
+        "text": "Take it slowly, she says. I could do with remembering that myself."
+      },
+      {
+        "say": "eric",
+        "emo": "warm",
+        "text": "I may need a moment at the other end."
+      }
+    ],
+    "club_swimming_join": [
+      {
+        "if": "know_oyogu",
+        "then": [
+          {
+            "say": "eric",
+            "emo": "warm",
+            "text": "{oyogu}. I\u2019ll come in, but I\u2019m a bit out of practice."
+          }
+        ],
+        "else": [
+          {
+            "say": "eric",
+            "emo": "warm",
+            "text": "I\u2019ll come in, but I\u2019m a bit out of practice."
+          }
+        ]
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u3053\u3063\u3061\u3067\u3059\u3002"
+      },
+      {
+        "do": "gesture",
+        "who": "kuro",
+        "kind": "beckon",
+        "to": "eric"
+      },
+      {
+        "set": "d3_player_swims"
+      },
+      {
+        "call": "d3_pool_enter"
+      },
+      {
+        "do": "cam",
+        "on": "attendant",
+        "zoom": 1.2
+      },
+      {
+        "say": "emi",
+        "overheard": true,
+        "emo": "casual",
+        "text": "{sumimasen}\u3001\u3053\u308c\u3001\u304a\u9858\u3044\u3067\u304d\u307e\u3059\u304b\uff1f"
+      },
+      {
+        "say": "attendant",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u306f\u3044\u3001\u9810\u304b\u308a\u307e\u3059\u306d\u3002"
+      },
+      {
+        "call": "d3_pool_emi_hands_over"
+      },
+      {
+        "go": "club_swimming_length"
+      }
+    ],
+    "club_swimming_bags": [
+      {
+        "say": "eric",
+        "emo": "warm",
+        "text": "I can carry those over. Go on."
+      },
+      {
+        "say": "emi",
+        "emo": "bright",
+        "text": "Thank you. Just take them over to him by the steps."
+      },
+      {
+        "call": "d3_pool_bags"
+      },
+      {
+        "choice": [
+          {
+            "text": "Get in the water.",
+            "go": "club_swimming_after_bags"
+          },
+          {
+            "text": "Take a seat on the deck.",
+            "go": "club_swimming_deck"
+          }
+        ]
+      }
+    ],
+    "club_swimming_after_bags": [
+      {
+        "set": "d3_player_swims"
+      },
+      {
+        "call": "d3_pool_enter"
+      },
+      {
+        "go": "club_swimming_length"
+      }
+    ],
+    "club_swimming_watch": [
+      {
+        "if": "know_mitai",
+        "then": [
+          {
+            "say": "eric",
+            "emo": "warm",
+            "text": "{mitai}. I\u2019ll watch for a bit. Don\u2019t wait for me."
+          }
+        ],
+        "else": [
+          {
+            "say": "eric",
+            "emo": "warm",
+            "text": "I\u2019ll watch for a bit. Don\u2019t wait for me."
+          }
+        ]
+      },
+      {
+        "do": "cam",
+        "on": "attendant",
+        "zoom": 1.2
+      },
+      {
+        "say": "emi",
+        "overheard": true,
+        "emo": "casual",
+        "text": "{sumimasen}\u3001\u3053\u308c\u3001\u304a\u9858\u3044\u3067\u304d\u307e\u3059\u304b\uff1f"
+      },
+      {
+        "say": "attendant",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u306f\u3044\u3001\u9810\u304b\u308a\u307e\u3059\u306d\u3002"
+      },
+      {
+        "call": "d3_pool_emi_hands_over"
+      },
+      {
+        "go": "club_swimming_deck"
+      }
+    ],
+    "club_swimming_deck": [
+      {
+        "do": "sit",
+        "who": "eric",
+        "at": "deck_bench_s"
+      },
+      {
+        "go": "club_swimming_length"
+      }
+    ],
+    "club_swimming_length": [
+      {
+        "call": "d3_pool_emi_enters"
+      },
+      {
+        "if": "d3_player_swims",
+        "then": [
+          {
+            "call": "club_swimming_slow"
+          }
+        ]
+      },
+      {
+        "say": "emi",
+        "emo": "surprised",
+        "text": "Oh. That\u2019s colder than it was in August."
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "warm",
+        "text": "\u6cf3\u3052\u3070\u3001\u5c11\u3057\u6e29\u304b\u304f\u306a\u308a\u307e\u3059\u3088\u3002"
+      },
+      {
+        "call": "d3_pool_length"
+      },
+      {
+        "if": "d3_player_swims",
+        "then": [
+          {
+            "do": "cam",
+            "on": "kuro",
+            "zoom": 1.2
+          },
+          {
+            "say": "kuro",
+            "name": "Kuro",
+            "overheard": true,
+            "emo": "curious",
+            "text": "\u901f\u304b\u3063\u305f\uff1f"
+          },
+          {
+            "say": "eric",
+            "emo": "warm",
+            "text": "Yes. I just need a moment at the wall."
+          }
+        ]
+      },
+      {
+        "say": "emi",
+        "emo": "warm",
+        "text": "I nearly stayed upstairs to finish an email. I\u2019m glad I didn\u2019t."
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u3082\u3046\u4e00\u672c\u3001\u6cf3\u304e\u307e\u305b\u3093\u304b\u3002"
+      },
+      {
+        "say": "emi",
+        "emo": "bright",
+        "text": "One more length? Yes, we\u2019ve got time."
+      },
+      {
+        "do": "cam",
+        "on": "attendant",
+        "zoom": 1.2
+      },
+      {
+        "say": "emi",
+        "overheard": true,
+        "emo": "casual",
+        "text": "{sumimasen}\u3001\u30ea\u30b9\u30c8\u3001\u30c6\u30fc\u30d6\u30eb\u306b\u7f6e\u3044\u3066\u3082\u3089\u3048\u307e\u3059\u304b\uff1f",
+        "clear": [
+          "\u30ea\u30b9\u30c8",
+          "\u30c6\u30fc\u30d6\u30eb"
+        ]
+      },
+      {
+        "say": "attendant",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u306f\u3044\u3001\u7f6e\u3044\u3066\u304a\u304d\u307e\u3059\u3002"
+      },
+      {
+        "call": "d3_pool_another"
+      },
+      {
+        "set": "d3_swim_done"
+      },
+      {
+        "call": "club_swimming_shared"
+      },
+      {
+        "do": "remember",
+        "who": "emi",
+        "id": "first_club",
+        "text": "You were there for the last outdoor swim."
+      },
+      {
+        "do": "save"
+      },
+      {
+        "choice": [
+          {
+            "text": "Sit with them after the swim.",
+            "go": "club_swimming_sit"
+          },
+          {
+            "text": "Say goodnight and leave the pool.",
+            "go": "club_swimming_goodnight"
+          }
+        ]
+      }
+    ],
+    "club_swimming_sit": [
+      {
+        "call": "d3_pool_sit"
+      },
+      {
+        "say": "emi",
+        "emo": "warm",
+        "text": "I used to keep my goggles in my work bag so I\u2019d actually come down. Then I started carrying everyone else\u2019s things instead."
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "dry",
+        "text": "\u8377\u7269\u306f\u3001\u81ea\u5206\u3067\u3002"
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "warm",
+        "text": "\u6b21\u306f\u3001{isshoni}\u3002"
+      },
+      {
+        "say": "attendant",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u6765\u9031\u304b\u3089\u4f53\u80b2\u9928\u3067\u3059\u3002\u5ba4\u5185\u7528\u306e\u9774\u3092\u6301\u3063\u3066\u304d\u3066\u304f\u3060\u3055\u3044\u306d\u3002"
+      },
+      {
+        "say": "emi",
+        "emo": "casual",
+        "text": "Gym from next week, he says, and bring indoor shoes. They really do send you home without them."
+      },
+      {
+        "say": "eric",
+        "emo": "warm",
+        "text": "I\u2019ll know where to find you if the email can wait."
+      },
+      {
+        "do": "remember",
+        "who": "kuro",
+        "id": "club_seat",
+        "text": "Sat with her after the club session."
+      },
+      {
+        "call": "d3_pool_free"
+      },
+      {
+        "do": "cam",
+        "back": true
+      },
+      {
+        "do": "goal",
+        "text": "Stay by the pool, or go home to room 203 when you want to sleep."
+      },
+      {
+        "do": "save"
+      }
+    ],
+    "club_swimming_goodnight": [
+      {
+        "say": "eric",
+        "emo": "warm",
+        "text": "I\u2019ll head back. Thanks for having me."
+      },
+      {
+        "say": "emi",
+        "emo": "warm",
+        "text": "See you next Saturday, if you\u2019re free. We\u2019ll be in the gym by then."
+      },
+      {
+        "call": "d3_pool_exit"
+      },
+      {
+        "do": "cam",
+        "back": true
+      },
+      {
+        "do": "trip",
+        "to": "sports"
+      }
+    ],
+    "club_swimming_leave_early": [
+      {
+        "say": "emi",
+        "emo": "casual",
+        "text": "All right. We\u2019ll be here if you come back."
+      },
+      {
+        "do": "cam",
+        "back": true
+      },
+      {
+        "do": "trip",
+        "to": "sports"
+      }
+    ],
+    "club_swimming_winter": [
+      {
+        "call": "d3_winter_setup"
+      },
+      {
+        "say": "emi",
+        "emo": "bright",
+        "text": "We\u2019re indoors for the winter. You missed the last outdoor swim, but so did half the club."
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "amused",
+        "text": "\u6301\u3063\u3066\u304d\u3061\u3083\u3044\u307e\u3057\u305f\u3002"
+      },
+      {
+        "say": "emi",
+        "emo": "casual",
+        "text": "Mine are in here somewhere. Shall we find out what we\u2019re doing?"
+      },
+      {
+        "choice": [
+          {
+            "text": "Sit with them for the introduction.",
+            "go": "club_swimming_winter_sit"
+          },
+          {
+            "text": "Say hello and leave for tonight.",
+            "go": "club_swimming_winter_leave"
+          }
+        ]
+      }
+    ],
+    "club_swimming_winter_sit": [
+      {
+        "do": "sit",
+        "who": "eric",
+        "at": "gym_bench_n"
+      },
+      {
+        "say": "attendant",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u3053\u306e\u3042\u305f\u308a\u306f\u81ea\u7531\u306b\u4f7f\u3048\u307e\u3059\u3002\u30de\u30c3\u30c8\u306f\u3001\u305d\u3053\u306e\u68da\u3067\u3059\u3002",
+        "clear": [
+          "\u30de\u30c3\u30c8"
+        ]
+      },
+      {
+        "do": "gesture",
+        "who": "attendant",
+        "kind": "point"
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "tired",
+        "text": "\u5bd2\u3044\u2026\u2026\u9774\u4e0b\u3001\u3082\u3063\u3068\u539a\u3044\u306e\u306b\u3059\u308c\u3070\u3088\u304b\u3063\u305f\u3002"
+      },
+      {
+        "say": "eric",
+        "emo": "warm",
+        "text": "I\u2019ll remember that for next time."
+      },
+      {
+        "do": "remember",
+        "who": "emi",
+        "id": "first_club",
+        "text": "Joined her for your first winter club meeting."
+      },
+      {
+        "do": "remember",
+        "who": "kuro",
+        "id": "club_seat",
+        "text": "Sat with her at the club\u2019s winter meeting."
+      },
+      {
+        "call": "club_swimming_shared"
+      },
+      {
+        "set": "d3_winter_intro_done"
+      },
+      {
+        "do": "stand",
+        "who": "eric"
+      },
+      {
+        "do": "cam",
+        "back": true
+      },
+      {
+        "do": "goal",
+        "text": "Stay at the gym, or head home when you want to sleep."
+      },
+      {
+        "do": "save"
+      }
+    ],
+    "club_swimming_shared": [
+      {
+        "if": "!d3_swimming_shared",
+        "then": [
+          {
+            "do": "bond",
+            "who": "emi",
+            "source": "scene",
+            "why": "spent an evening at the swimming club"
+          },
+          {
+            "do": "bond",
+            "who": "kuro",
+            "source": "scene",
+            "why": "spent an evening at the swimming club"
+          },
+          {
+            "set": "d3_swimming_shared"
+          }
+        ]
+      }
+    ],
+    "club_swimming_winter_leave": [
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u307e\u305f\u571f\u66dc\u65e5\u306b\u3002"
+      },
+      {
+        "do": "gesture",
+        "who": "kuro",
+        "kind": "point",
+        "to": "eric"
+      },
+      {
+        "do": "cam",
+        "back": true
+      },
+      {
+        "do": "trip",
+        "to": "sports"
+      }
+    ],
+    "club_swimming_2": [
+      {
+        "go": "ongoing_winter"
+      }
+    ],
+    "ongoing_winter": [
+      {
+        "if": "!winter_visit_seen",
+        "then": [
+          {
+            "call": "club_swimming_intro"
+          }
+        ]
+      },
+      {
+        "if": "bondready_emi == 3 && !ms3_emi",
+        "then": [
+          {
+            "do": "winterClub",
+            "state": "begin",
+            "organizing": true
+          },
+          {
+            "if": "!winter_action_completed",
+            "then": [
+              {
+                "end": true
+              }
+            ]
+          },
+          {
+            "set": "winter_visit_seen"
+          },
+          {
+            "say": "emi",
+            "emo": "casual",
+            "text": "He\u2019s given me the booking sheet. I should check who\u2019s coming next week before we start."
+          },
+          {
+            "choice": [
+              {
+                "text": "Which part did you want to join?",
+                "go": "ongoing_winter_emi_choice"
+              },
+              {
+                "text": "Could he keep the sheet while you play?",
+                "go": "ongoing_winter_sheet"
+              },
+              {
+                "text": "Leave her to it for now.",
+                "go": "ongoing_winter_free"
+              }
+            ]
+          }
+        ],
+        "else": [
+          {
+            "do": "winterClub",
+            "state": "begin"
+          },
+          {
+            "if": "!winter_action_completed",
+            "then": [
+              {
+                "end": true
+              }
+            ]
+          },
+          {
+            "if": "!winter_visit_seen",
+            "then": [
+              {
+                "say": "emi",
+                "emo": "warm",
+                "text": "We\u2019ve got this end of the hall. Kuro\u2019s showing me how to keep it low. Mine keeps going up towards the lights."
+              },
+              {
+                "set": "winter_visit_seen"
+              }
+            ],
+            "else": [
+              {
+                "say": "kuro",
+                "name": "Kuro",
+                "overheard": true,
+                "emo": "warm",
+                "text": "\u30e9\u30b1\u30c3\u30c8\u3001\u3082\u3046\u4e00\u672c\u3042\u308a\u307e\u3059\u3088\u3002\u3088\u304b\u3063\u305f\u3089\u4f7f\u3063\u3066\u304f\u3060\u3055\u3044\u3002"
+              }
+            ]
+          },
+          {
+            "go": "ongoing_winter_offer"
+          }
+        ]
+      }
+    ],
+    "ongoing_winter_emi_choice": [
+      {
+        "say": "emi",
+        "emo": "hesitant",
+        "text": "This, actually. I haven\u2019t even picked up a racket yet."
+      },
+      {
+        "go": "ongoing_winter_sheet"
+      }
+    ],
+    "ongoing_winter_sheet": [
+      {
+        "say": "emi",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u3059\u307f\u307e\u305b\u3093\u3001\u3053\u308c\u3001\u304a\u9858\u3044\u3057\u3066\u3082\u3044\u3044\u3067\u3059\u304b\u3002\u79c1\u3082\u5c11\u3057\u6253\u3061\u305f\u3044\u306e\u3067\u3002"
+      },
+      {
+        "say": "attendant",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u306f\u3044\u3001\u3053\u3061\u3089\u3067\u805e\u3044\u3066\u304a\u304d\u307e\u3059\u3002\u3069\u3046\u305e\u3002"
+      },
+      {
+        "do": "winterClub",
+        "state": "sheetBack"
+      },
+      {
+        "if": "!winter_action_completed",
+        "then": [
+          {
+            "end": true
+          }
+        ]
+      },
+      {
+        "say": "emi",
+        "emo": "bright",
+        "text": "Thank you. Right, I\u2019d like a turn before I find something else to do."
+      },
+      {
+        "do": "winterClub",
+        "state": "emiTurn"
+      },
+      {
+        "if": "!winter_action_completed",
+        "then": [
+          {
+            "end": true
+          }
+        ]
+      },
+      {
+        "set": "ms3_emi"
+      },
+      {
+        "do": "bondStep",
+        "who": "emi",
+        "to": 3
+      },
+      {
+        "do": "remember",
+        "who": "emi",
+        "id": "winter_turn",
+        "text": "Left the booking sheet with the attendant and took her own turn."
+      },
+      {
+        "go": "ongoing_winter_offer"
+      }
+    ],
+    "ongoing_winter_offer": [
+      {
+        "do": "winterClub",
+        "state": "group"
+      },
+      {
+        "if": "!winter_action_completed",
+        "then": [
+          {
+            "end": true
+          }
+        ]
+      },
+      {
+        "choice": [
+          {
+            "text": "Take the spare racket.",
+            "go": "ongoing_winter_try"
+          },
+          {
+            "text": "Watch Kuro and Emi practise.",
+            "go": "ongoing_winter_watch"
+          },
+          {
+            "text": "Ask Kuro about swimming.",
+            "go": "ongoing_winter_kuro"
+          },
+          {
+            "text": "Leave them to their practice.",
+            "go": "ongoing_winter_free"
+          }
+        ]
+      }
+    ],
+    "ongoing_winter_try": [
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "warm",
+        "text": "\u3086\u3063\u304f\u308a\u6253\u3061\u307e\u3059\u306d\u3002\u307e\u305a\u3001\u898b\u3066\u3044\u3066\u304f\u3060\u3055\u3044\u3002"
+      },
+      {
+        "do": "winterClub",
+        "state": "demonstrate"
+      },
+      {
+        "if": "!winter_action_completed",
+        "then": [
+          {
+            "end": true
+          }
+        ]
+      },
+      {
+        "do": "winterClub",
+        "state": "playerTurn"
+      },
+      {
+        "if": "!winter_action_completed",
+        "then": [
+          {
+            "end": true
+          }
+        ]
+      },
+      {
+        "do": "winterClub",
+        "state": "group"
+      },
+      {
+        "if": "!winter_action_completed",
+        "then": [
+          {
+            "end": true
+          }
+        ]
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "polite",
+        "text": "\u5927\u4e08\u592b\u3067\u3057\u305f\u304b\u3002"
+      },
+      {
+        "choice": [
+          {
+            "text": "{daijoubu}. That was all right.",
+            "if": "know_daijoubu",
+            "go": "ongoing_winter_ok"
+          },
+          {
+            "text": "I\u2019d like another try.",
+            "go": "ongoing_winter_repeat"
+          },
+          {
+            "text": "{mouichido}. Once more?",
+            "if": "know_mouichido",
+            "go": "ongoing_winter_word"
+          },
+          {
+            "text": "Let Emi have the next turn.",
+            "go": "ongoing_winter_watch"
+          },
+          {
+            "text": "Put the racket back.",
+            "go": "ongoing_winter_done"
+          }
+        ]
+      }
+    ],
+    "ongoing_winter_ok": [
+      {
+        "say": "eric",
+        "emo": "warm",
+        "text": "{daijoubu}\u3002"
+      },
+      {
+        "go": "ongoing_winter_done"
+      }
+    ],
+    "ongoing_winter_word": [
+      {
+        "say": "eric",
+        "emo": "warm",
+        "text": "{mouichido}\uff1f"
+      },
+      {
+        "go": "ongoing_winter_repeat"
+      }
+    ],
+    "ongoing_winter_repeat": [
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "warm",
+        "text": "\u306f\u3044\u3002\u3082\u3046\u4e00\u5ea6\u3001\u3053\u3053\u304b\u3089\u6253\u3061\u307e\u3059\u306d\u3002"
+      },
+      {
+        "do": "winterClub",
+        "state": "repeat"
+      },
+      {
+        "if": "!winter_action_completed",
+        "then": [
+          {
+            "end": true
+          }
+        ]
+      },
+      {
+        "go": "ongoing_winter_done"
+      }
+    ],
+    "ongoing_winter_watch": [
+      {
+        "say": "emi",
+        "emo": "warm",
+        "text": "All right, my turn. Kuro, keep it about there again?"
+      },
+      {
+        "do": "winterClub",
+        "state": "emiTurn"
+      },
+      {
+        "if": "!winter_action_completed",
+        "then": [
+          {
+            "end": true
+          }
+        ]
+      },
+      {
+        "do": "winterClub",
+        "state": "group"
+      },
+      {
+        "if": "!winter_action_completed",
+        "then": [
+          {
+            "end": true
+          }
+        ]
+      },
+      {
+        "say": "emi",
+        "emo": "amused",
+        "text": "Could we do that again? I think I know where to stand now."
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "warm",
+        "text": "\u306f\u3044\u3001\u540c\u3058\u3068\u3053\u308d\u3067\u3002"
+      },
+      {
+        "do": "winterClub",
+        "state": "repeat"
+      },
+      {
+        "if": "!winter_action_completed",
+        "then": [
+          {
+            "end": true
+          }
+        ]
+      },
+      {
+        "go": "ongoing_winter_done"
+      }
+    ],
+    "ongoing_winter_kuro": [
+      {
+        "say": "eric",
+        "emo": "curious",
+        "text": "Have you been swimming with the club for long?"
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "warm",
+        "text": "\u5cf6\u306b\u6765\u305f\u3068\u304d\u304b\u3089\u3067\u3059\u3002\u524d\u306f\u4e00\u4eba\u3067\u6cf3\u3044\u3067\u305f\u3093\u3067\u3059\u3051\u3069\u3001\u4eca\u306f\u30a8\u30df\u3055\u3093\u3068\u3002\u7d04\u675f\u3057\u3066\u308b\u3068\u3001\u4ed5\u4e8b\u3082\u5207\u308a\u4e0a\u3052\u3084\u3059\u304f\u3066\u3002"
+      },
+      {
+        "say": "emi",
+        "emo": "casual",
+        "text": "Since she moved here. She used to go alone, but now she gets me to come too. It gets us both out of the office."
+      },
+      {
+        "say": "kuro",
+        "name": "Kuro",
+        "overheard": true,
+        "emo": "amused",
+        "text": "\u5fd8\u308c\u306a\u3044\u3088\u3046\u306b\u58f0\u3092\u304b\u3051\u3066\u3063\u3066\u3001\u8a00\u3063\u305f\u3067\u3057\u3087\u3046\u3002"
+      },
+      {
+        "say": "emi",
+        "emo": "amused",
+        "text": "I did ask her to remind me. Just not in front of everybody."
+      },
+      {
+        "go": "ongoing_winter_offer"
+      }
+    ],
+    "ongoing_winter_done": [
+      {
+        "if": "!winter_practice_done",
+        "then": [
+          {
+            "do": "bond",
+            "who": "emi",
+            "source": "scene",
+            "why": "spent a winter club practice with her"
+          },
+          {
+            "do": "bond",
+            "who": "kuro",
+            "source": "scene",
+            "why": "joined or watched her winter practice"
+          },
+          {
+            "set": "winter_practice_done"
+          },
+          {
+            "set": "d3_winter_intro_done"
+          }
+        ]
+      },
+      {
+        "go": "ongoing_winter_free"
+      }
+    ],
+    "ongoing_winter_free": [
+      {
+        "do": "winterClub",
+        "state": "free"
+      },
+      {
+        "if": "!winter_action_completed",
+        "then": [
+          {
+            "end": true
+          }
+        ]
+      },
+      {
+        "do": "cam",
+        "back": true
+      },
+      {
+        "do": "ongoingGoal"
+      },
+      {
+        "do": "save"
+      }
+    ],
+    "d3_winter_setup": [
+      {
+        "do": "ongoingSetup",
+        "state": "winterClub"
+      }
+    ]
+  }
+}

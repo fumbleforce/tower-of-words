@@ -70,7 +70,7 @@ The notice board is the one place to find what's on (built; its rules are in [sy
 
 ## Clubs
 
-A club is a social space for getting to know people. There are no minigames: a session is a scene with the club's people and a word or two of Japanese. Clubs meet on fixed evenings, one session a week each. Membership, saved progress, the first swimming and tennis sessions, recurring winter practice and Mori’s art visits are built; [systems.md](systems.md#clubs) records the playable meetings and remaining content. Art uses the approved photograph with staged drawing, tea and return visits. Karaoke still requires its approved recording and integrated performance before that meeting counts. These playable sessions do not complete the clubs’ planned storylines or later special events.
+A club is a social space for getting to know people. There are no minigames: a session is a scene with the club's people and a word or two of Japanese. Clubs meet on fixed evenings, one session a week each. Membership, saved progress, the first swimming and tennis sessions, recurring pool sessions and Mori’s art visits are built; [systems.md](systems.md#clubs) records the playable meetings and remaining content. Art uses the approved photograph with staged drawing, tea and return visits. Karaoke still requires its approved recording and integrated performance before that meeting counts. These playable sessions do not complete the clubs’ planned storylines or later special events.
 
 - Some of the cast belong to clubs, alongside new people with a reason to be there.
 - Each club has its own storylines and its own progression as Eric keeps going.

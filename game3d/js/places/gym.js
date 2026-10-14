@@ -1,6 +1,3 @@
-import { flags } from '../narrative/state.js';
-import { flagKeys } from '../narrative/engine-flags.js';
-const ACTION_KEYS = flagKeys('game3d/js/places/gym.js');
 import * as THREE from 'three';
 import { buildGym } from '../scenes/rooms/gym.js';
 import { RoomCam } from '../cam.js';
@@ -10,13 +7,12 @@ import { walkOut, walkIn } from './edge-walk.js';
 import { roomView, roomSave } from './room-view.js';
 import { day3Place } from './day3/place.js';
 import { gymDesk } from './day3/booking.js';
-import { createWinterStage } from './ongoing/winter-stage.js';
 import { MC } from '../mc.js';
 
 // The gym's ground floor (scenes/rooms/gym.js): the entrance lobby inside the main doors (the shoe lockers and the
 // slipper step, the reception counter with the booking terminal and the fan, the printer on the back counter behind
 // it, the club board, the changing rooms' and the pool corridor's doors), and the sports hall behind its glass wall
-// (the court, the benches, the equipment store, the winter meeting corner). In from the sports lane through the main
+// (the court, the benches, the equipment store, the club meeting corner). In from the sports lane through the main
 // doors, out the same way. The protagonist's own changing room's door is the way to the pool deck once the story
 // uses it (talk:gym_changing): Carina's is the women's. It also loads with ?place=gym, inside the doors. The camera
 // looks in from the south over the cut-down front wall: the whole floor on a desktop, following Eric on a phone.
@@ -30,10 +26,7 @@ export function gymPlace(game) {
   // day 3: the attendant, Mori and Emi; the booking repair at the desk (places/day3/booking.js)
   const d3 = day3Place(game, 'gym', { root: w.root, K, ids: ['attendant', 'mori', 'emi', 'kuro'] });
   const desk = gymDesk(game, { w, cast: d3.cast });
-  d3.also(({ state } = {}) => {
-    desk.restore();
-    if (state === 'winterClub') desk.winterClub();
-  });
+  d3.also(() => desk.restore());
   const things = {
     gym_door: {
       ...PLACE_DETAILS.gym.things.gym_door,
@@ -107,11 +100,6 @@ export function gymPlace(game) {
     zones: {},
     hooks: {
       bookingRepair: desk.hooks.bookingRepair,
-      winterClub: async (a) => {
-        flags[ACTION_KEYS.winter_action_completed] = false;
-        const completed = await winter.act(a);
-        if (game.place === P) flags[ACTION_KEYS.winter_action_completed] = completed === true;
-      },
       fanRepair: (a) => P.sunday.hooks.fanRepair(a),
     },
     day3: (a) => d3.setup(P, a),
@@ -125,13 +113,11 @@ export function gymPlace(game) {
     },
     update(dt) {
       d3.update(dt);
-      winter.update(dt);
     },
-    snapshotState: () => ({ ...save.snapshot(), booking: desk.snapshot(), winterClub: winter.snapshot() }),
+    snapshotState: () => ({ ...save.snapshot(), booking: desk.snapshot() }),
     restoreState(saved) {
       save.restore(saved);
       desk.load(saved.world?.booking);
-      winter.restore(saved.world?.winterClub);
     },
     // in through the main doors, walking north onto the tiles; out the same way
     tripIn: (g) => walkIn(g, cam, d.edge, d.in, Math.PI),
@@ -140,8 +126,5 @@ export function gymPlace(game) {
       pool: (g) => walkOut(g, cam, ch.out, ch.edge), // in at the protagonist's changing room's door
     },
   };
-  const winter = createWinterStage(game, P);
-  P.winterClub = winter;
-  P.leave = () => winter.leave();
   return P;
 }

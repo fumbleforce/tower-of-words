@@ -110,7 +110,7 @@ export default place(
       d3_emi: [...emiHello, { if: 'd3_swim_done', then: [
         { say: 'emi', emo: 'warm', text: 'I felt fine getting out of the pool yesterday. Now I can barely lift my bag. I’m going to stretch for a bit.' },
       ], else: [{ say: 'emi', emo: 'casual', text: 'I’m going to stretch before I go home. My shoulders are still up round my ears from Friday.' }] }],
-      d3_gym_board: ['> “Swimming club: Saturday evenings in the gym from 10 October.”'],
+      d3_gym_board: ['> “Swimming club: Saturday evenings at the pool.”'],
     },
   },
 );

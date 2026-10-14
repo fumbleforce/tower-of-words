@@ -31,11 +31,10 @@ export default {
       ro: 'suieibu',
       open: 'day >= 3',
       meets: [
-        { weekday: 'Sat', period: 'evening', place: 'pool', where: 'Outdoor pool', until: 3 },
-        { weekday: 'Sat', period: 'evening', place: 'gym', where: 'Gym', from: 4 },
+        { weekday: 'Sat', period: 'evening', place: 'pool', where: 'Outdoor pool' },
       ],
       members: ['role:team_lead', 'role:receptionist'],
-      poster: '3 October only: one last outdoor swim. Saturdays after that, meet in the gym.',
+      poster: 'Saturday evening swimming at the outdoor pool. Come for a swim, or sit with us by the water.',
       sessions: ['club_swimming_1', 'club_swimming_2'],
       events: [],
       show: {},
@@ -81,7 +80,7 @@ export default {
   nodes: {
     club_swimming_1: [
       { call: 'club_swimming_intro' },
-      { if: "place == 'gym'", then: [{ go: 'club_swimming_winter' }], else: [{ go: 'club_swimming_pool' }] },
+      { if: "place == 'pool'", then: [{ go: 'club_swimming_pool' }], else: [{ go: 'club_swimming_pool' }] },
     ],
     club_swimming_intro: [
       { do: 'cam', on: 'emi', zoom: 1.2 },
@@ -110,8 +109,6 @@ export default {
     ],
     club_swimming_pool: [
       { call: 'd3_pool_begin' },
-      { say: 'kuro', name: 'Kuro', overheard: true, emo: 'warm', text: 'このプール、今日で最後なんですよ。', clear: ['プール'] },
-      { say: 'emi', emo: 'casual', text: 'Last evening at this pool. The water’s fine once you’re in, apparently.' },
       { say: 'emi', emo: 'casual', text: 'I came down to put these bags away and have a quick swim. I haven’t managed either yet.' },
       { say: 'member', overheard: true, emo: 'polite', text: 'エミさん、これもお願いします。備品のリストです。', clear: ['リスト'] },
       { call: 'd3_pool_list' },
@@ -171,8 +168,6 @@ export default {
     club_swimming_length: [
       { call: 'd3_pool_emi_enters' },
       { if: 'd3_player_swims', then: [{ call: 'club_swimming_slow' }] },
-      { say: 'emi', emo: 'surprised', text: 'Oh. That’s colder than it was in August.' },
-      { say: 'kuro', name: 'Kuro', overheard: true, emo: 'warm', text: '泳げば、少し温かくなりますよ。' },
       { call: 'd3_pool_length' },
       { if: 'd3_player_swims', then: [
         { do: 'cam', on: 'kuro', zoom: 1.2 },
@@ -187,7 +182,7 @@ export default {
       { say: 'attendant', overheard: true, emo: 'polite', text: 'はい、置いておきます。' },
       { call: 'd3_pool_another' },
       { set: 'd3_swim_done' }, { call: 'club_swimming_shared' },
-      { do: 'remember', who: 'emi', id: 'first_club', text: 'You were there for the last outdoor swim.' },
+      { do: 'remember', who: 'emi', id: 'first_club', text: 'Spent an evening swimming with her club.' },
       { do: 'save' },
       { choice: [
         { text: 'Sit with them after the swim.', go: 'club_swimming_sit' },
@@ -199,8 +194,6 @@ export default {
       { say: 'emi', emo: 'warm', text: 'I used to keep my goggles in my work bag so I’d actually come down. Then I started carrying everyone else’s things instead.' },
       { say: 'kuro', name: 'Kuro', overheard: true, emo: 'dry', text: '荷物は、自分で。' },
       { say: 'kuro', name: 'Kuro', overheard: true, emo: 'warm', text: '次は、{isshoni}。' },
-      { say: 'attendant', overheard: true, emo: 'polite', text: '来週から体育館です。室内用の靴を持ってきてくださいね。' },
-      { say: 'emi', emo: 'casual', text: 'Gym from next week, he says, and bring indoor shoes. They really do send you home without them.' },
       { say: 'eric', emo: 'warm', text: 'I’ll know where to find you if the email can wait.' },
       { do: 'remember', who: 'kuro', id: 'club_seat', text: 'Sat with her after the club session.' },
       { call: 'd3_pool_free' }, { do: 'cam', back: true },
@@ -208,34 +201,12 @@ export default {
     ],
     club_swimming_goodnight: [
       { say: 'eric', emo: 'warm', text: 'I’ll head back. Thanks for having me.' },
-      { say: 'emi', emo: 'warm', text: 'See you next Saturday, if you’re free. We’ll be in the gym by then.' },
+      { say: 'emi', emo: 'warm', text: 'See you at the pool next Saturday, if you’re free.' },
       { call: 'd3_pool_exit' }, { do: 'cam', back: true }, { do: 'trip', to: 'sports' },
     ],
     club_swimming_leave_early: [
       { say: 'emi', emo: 'casual', text: 'All right. We’ll be here if you come back.' },
       { do: 'cam', back: true }, { do: 'trip', to: 'sports' },
-    ],
-    // First visit after the seasonal pool date: its own scene, with the same early social progress available.
-    club_swimming_winter: [
-      { call: 'd3_winter_setup' },
-      { say: 'emi', emo: 'bright', text: 'We’re indoors for the winter. You missed the last outdoor swim, but so did half the club.' },
-      { say: 'kuro', name: 'Kuro', overheard: true, emo: 'amused', text: '持ってきちゃいました。' },
-      { say: 'emi', emo: 'casual', text: 'Mine are in here somewhere. Shall we find out what we’re doing?' },
-      { choice: [
-        { text: 'Sit with them for the introduction.', go: 'club_swimming_winter_sit' },
-        { text: 'Say hello and leave for tonight.', go: 'club_swimming_winter_leave' },
-      ] },
-    ],
-    club_swimming_winter_sit: [
-      { do: 'sit', who: 'eric', at: 'gym_bench_n' },
-      { say: 'attendant', overheard: true, emo: 'polite', text: 'このあたりは自由に使えます。マットは、そこの棚です。', clear: ['マット'] },
-      { do: 'gesture', who: 'attendant', kind: 'point' },
-      { say: 'kuro', name: 'Kuro', overheard: true, emo: 'tired', text: '寒い……靴下、もっと厚いのにすればよかった。' },
-      { say: 'eric', emo: 'warm', text: 'I’ll remember that for next time.' },
-      { do: 'remember', who: 'emi', id: 'first_club', text: 'Joined her for your first winter club meeting.' },
-      { do: 'remember', who: 'kuro', id: 'club_seat', text: 'Sat with her at the club’s winter meeting.' },
-      { call: 'club_swimming_shared' }, { set: 'd3_winter_intro_done' }, { do: 'stand', who: 'eric' },
-      { do: 'cam', back: true }, { do: 'goal', text: 'Stay at the gym, or head home when you want to sleep.' }, { do: 'save' },
     ],
     club_swimming_shared: [
       { if: '!d3_swimming_shared', then: [
@@ -244,15 +215,7 @@ export default {
         { set: 'd3_swimming_shared' },
       ] },
     ],
-    club_swimming_winter_leave: [
-      { say: 'kuro', name: 'Kuro', overheard: true, emo: 'polite', text: 'また土曜日に。' },
-      { do: 'gesture', who: 'kuro', kind: 'point', to: 'eric' },
-      { do: 'cam', back: true }, { do: 'trip', to: 'sports' },
-    ],
-    club_swimming_2: [
-      { if: '!d3_swim_done && !d3_winter_intro_done', then: [{ go: 'club_swimming_1' }] },
-      '> Placeholder: an ordinary swimming club evening (Codex writes it).',
-    ],
+    club_swimming_2: [{ go: 'club_swimming_1' }],
     club_tennis_1: [{ call: 'd4_tennis_offer' }],
     club_tennis_2: [{ if: '!d4_tennis_done', then: [{ call: 'd4_tennis_offer' }], else: [{ call: 'd4_tennis_repeat' }] }],
     club_art_1: ["> Placeholder: the art club's first session (Codex writes it)."],

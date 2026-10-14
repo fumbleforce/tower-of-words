@@ -87,7 +87,7 @@ export default [
   { id: 'd4-nonmember', description: 'A nonmember can speak to Aoi without being enrolled or forced into play.',
     seed: seed('sports', {}, { period: 'evening' }), choices: [], actions: [use('aoi')],
     expect: { flags: { d4_tennis_done: false, club_tennis: false, d3_aoi_intro: true }, yen: 4000 } },
-  { id: 'd4-pool-closed', description: 'Closed pool notice outside the pavilion, return to sports lane.',
+  { id: 'd4-pool-notice', description: 'Open pool notice in the changing entry, return to sports lane.',
     seed: seed('pool'), choices: [], actions: [use('pool_notice'), { ...use('changing_room'), settleAt: 'sports' }],
     expect: { flags: { d3_swim_done: false }, yen: 4000 } },
   { id: 'd4-later-sunday', description: 'The retained local tennis scene works on the next Sunday after an early departure.',

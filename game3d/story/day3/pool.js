@@ -23,7 +23,7 @@ export default place(
           { say: 'eric', emo: 'warm', text: 'Not tonight. I’ll stay here a bit longer.' }, { end: true },
         ] },
         { if: 'd3_kuro_intro', then: [
-        { say: 'kuro', face: 'teasing', name: 'Kuro', overheard: true, emo: 'teasing', text: 'プール、今日で最後ですよ。来週はジムで。', clear: [{ ja: 'プール', ro: 'pūru', en: 'pool' }, { ja: 'ジム', ro: 'jimu', en: 'gym' }] },
+        { say: 'kuro', name: 'Kuro', overheard: true, emo: 'curious', text: '今日は、{oyogu}？' },
       ], else: [{ if: 'kuro_reception_seen', then: [
         { say: 'kuro', overheard: true, emo: 'amused', text: 'こんばんは。来たんですね。' },
       ], else: [{ say: 'kuro', overheard: true, emo: 'polite', text: 'こんばんは。クラブですか？', clear: [{ ja: 'クラブ', ro: 'kurabu', en: 'club' }] }] }] }],
@@ -51,7 +51,7 @@ export default place(
         { set: 'd3_goggles_returned' }, { do: 'cam', back: true }, { do: 'save' },
       ],
       // The club uses global call hooks; these place-local nodes own its physical staging.
-      d3_pool_begin: [{ do: 'poolSession', state: 'begin' }],
+      d3_pool_begin: [{ unset: 'd3_player_swims' }, { do: 'poolSession', state: 'begin' }],
       d3_pool_list: [{ do: 'poolSession', state: 'list' }],
       d3_pool_enter: [{ do: 'poolSession', state: 'enter' }],
       d3_pool_emi_hands_over: [{ do: 'poolSession', state: 'handover' }],

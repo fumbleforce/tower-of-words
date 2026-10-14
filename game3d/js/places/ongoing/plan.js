@@ -3,7 +3,6 @@ import { PLANS as SUNDAY } from '../day4/plan.js';
 import { PLANS as MONDAY } from '../day5/plan.js';
 import { benchNear } from '../day3/seats.js';
 import { weekdayOf, isWeekend } from './calendar.js';
-import { POSTS as GYM_POSTS } from '../../scenes/rooms/gym-plan.js';
 
 const home = { home: true };
 const table = { at: (P) => P.spots.commons_table, face: (P) => P.things.art_table.face() };
@@ -42,12 +41,7 @@ export function weeklyPlan(day) {
     }
     // A completed introduction does not remove Aoi from the island on Saturdays.
     if (week === 6) at('plaza', 'aoi', { morning: { at: [-1, 9.3], face: [-0.5, 10.46] } });
-    // The seasonal outdoor pool has closed; the weekly gathering is indoors.
-    if (week === 6) {
-      at('gym', 'attendant', { ...SATURDAY.gym.attendant, evening: GYM_POSTS.attendant });
-      at('gym', 'emi', { evening: { at: (P) => P.spots.gym_benches, face: (P) => P.spots.gym_court } });
-      at('gym', 'kuro', { evening: { seat: 'gym_bench_s' } });
-    }
+    if (week === 6) for (const id of ['attendant', 'emi', 'kuro', 'member']) at('pool', id, { evening: home });
     return plan;
   }
   for (const id of ['mio', 'kenji', 'mori', 'emi']) {

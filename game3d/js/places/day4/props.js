@@ -103,7 +103,7 @@ export function sundayProps(game, P, name, shot) {
   if (name === 'pool') {
     const t = P.things.changing_room,
       s = t.spot();
-    const notice = own(card(['Pool closed for the season', 'Swimming club: gym Saturdays']));
+    const notice = own(card(['Swimming club', 'Saturday evenings at the pool']));
     notice.position.set(s[0] + 0.55, 1.1, s[1]);
     things.pool_notice = {
       label: 'Pool notice',
@@ -112,7 +112,7 @@ export function sundayProps(game, P, name, shot) {
       anchor: (v) => notice.getWorldPosition(v),
       spot: () => s,
       face: () => [s[0] + 0.55, s[1]],
-      enabled: () => sim.day === 4,
+      enabled: () => sim.day >= 3,
     };
   }
   function follow(o, id, dx, y, dz = 0) {

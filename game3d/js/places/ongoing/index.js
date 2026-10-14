@@ -35,7 +35,7 @@ export function attachOngoing(game, P, name) {
     const kenji = plan.kenji?.[sim.period];
     P.roomResidents?.sync({ kenji: kenji ? (kenji.seat ? true : undefined) : false });
     flags[KEYS.ongoing_art_ready] = name === 'dorm_commons' && clubStageReady(sim.day, 'art', P);
-    flags[KEYS.ongoing_winter_ready] = name === 'gym' && clubStageReady(sim.day, 'swimming', P);
+    P.swimmingClub?.arrange();
   };
   P.ongoing = async (a = {}) => {
     if (!isContinuing(sim.day)) return;
@@ -60,7 +60,6 @@ export function installOngoing(game) {
     flags[KEYS.ongoing_team_day] = weekdayOf(sim.day) === 5;
     flags[KEYS.ongoing_art_day] = weekdayOf(sim.day) === 2;
     flags[KEYS.ongoing_model_day] = weekdayOf(sim.day) === 4;
-    flags[KEYS.ongoing_winter_day] = weekdayOf(sim.day) === 6;
     return game.place?.ongoing?.(a);
   };
   game.hooks.artVisit = ({ state }) => {

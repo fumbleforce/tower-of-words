@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { clubStageReady } from '../../js/clubs/staging.js';
 
 test('missing or unapproved ongoing stages cannot consume a club visit', () => {
-  for (const [club, key] of Object.entries({ art: 'artClub', karaoke: 'karaokeClub', swimming: 'winterClub' })) {
+  for (const [club, key] of Object.entries({ art: 'artClub', karaoke: 'karaokeClub', swimming: 'swimmingClub' })) {
     assert.equal(clubStageReady(10, club, {}), false);
     assert.equal(clubStageReady(10, club, { [key]: { performanceReady: true, ready: () => false } }), false);
     assert.equal(clubStageReady(10, club, { [key]: { performanceReady: true, ready: () => true } }), true);

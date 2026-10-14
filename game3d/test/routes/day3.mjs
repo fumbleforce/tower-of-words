@@ -156,7 +156,7 @@ export default [
     seed: seed('gym'), choices: ['Come back to it later.'], actions: [use('booking_terminal')],
     expect: { nodes: ['d3_booking', 'd3_booking_later'], flags: { d3_booking_restarted: false }, yen: YEN },
   },
-  // the swimming club's last outdoor swim: every way through it, and the goggles
+  // the swimming club's pool session: every way through it, and the goggles
   {
     id: 'd3-pool-swim-sit', description: 'A member arriving: the introductions, swimming with Kuro, sitting with them after.',
     seed: seed('pool', club, { period: 'evening' }), choices: ['Swim with Kuro.', 'Sit with them after the swim.'],
@@ -164,9 +164,9 @@ export default [
   },
   {
     id: 'd3-pool-optional-word', description: 'Choose to learn the swim reply, use it in the water invitation, then hear it again in a later conversation.',
-    seed: seed('pool', club, { period: 'evening' }), choices: ['Ask how to say you’ll swim.', 'Sit with them after the swim.'],
+    seed: seed('pool', club, { period: 'evening' }), choices: ['Ask how to say you’ll swim.', 'Sit with them after the swim.', 'Ask about her time off.', '{oyogu}… Swimming?', 'Leave her to her break.'],
     actions: [use('kuro')],
-    expect: { nodes: ['club_swimming_word', 'club_swimming_join', 'club_swimming_sit', 'd3_kuro_pool'], flags: { d3_swim_done: true }, known: ['oyogu'] },
+    expect: { nodes: ['club_swimming_word', 'club_swimming_join', 'club_swimming_sit', 'chat_kuro_swimming_question'], flags: { d3_swim_done: true }, known: ['oyogu'] },
   },
   {
     id: 'd3-pool-swim-continue', description: 'Continue at water entry resumes the conversation and swim without inserting a lesson.',

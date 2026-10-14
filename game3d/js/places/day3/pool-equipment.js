@@ -4,6 +4,21 @@ import { TABLE } from '../../scenes/sports/deck-plan.js';
 import { pt } from '../../scenes/sports/plan.js';
 
 export function poolEquipmentActions(game, { action, handling, who, setAt, list, bagItems, source, target, seat }) {
+  async function giveList(id) {
+    const member = who(id),
+      emi = who('emi'),
+      ep = emi.root.position;
+    game.place.cam.closeOn?.([ep.x + 0.25, ep.z], 1.9);
+    handling.hold(member, list);
+    await action.wait(walkRig(game, member, [ep.x + 0.5, ep.z], { speed: 1.0 }));
+    await action.wait(faceRig(game, member, [ep.x, ep.z]));
+    await action.wait(faceRig(game, emi, [member.root.position.x, member.root.position.z]));
+    handling.reach(emi, list.position.toArray());
+    await action.wait(game.wait(500));
+    handling.drop(member);
+    handling.hold(emi, list);
+    sfx('tap');
+  }
   async function putListAway() {
     const emi = who('emi');
     if (handling.owner(list) !== emi) return;
@@ -54,5 +69,14 @@ export function poolEquipmentActions(game, { action, handling, who, setAt, list,
     handling.drop(r);
     setAt(list, [table[0] - 0.45, table[1]], 0.505);
   }
-  return { putListAway, carryBags, collectList };
+  return {
+    giveList,
+    putListAway,
+    carryBags,
+    collectList,
+    async returnList() {
+      await action.wait(putListAway());
+      await action.wait(collectList());
+    },
+  };
 }

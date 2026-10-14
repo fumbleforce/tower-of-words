@@ -1,3 +1,6 @@
+import { flags } from '../../narrative/state.js';
+import { flagKeys } from '../../narrative/engine-flags.js';
+const KEYS = flagKeys('game3d/js/places/day3/pool-action.js');
 // A pool choreography stops when its place is left, including waits already in flight.
 const CANCELLED = Symbol('pool action cancelled');
 export function poolAction(game) {
@@ -46,3 +49,14 @@ export function poolAction(game) {
     },
   };
 }
+
+// The story can award progress only after the current place finished its physical action.
+export const completedPoolAction = (game, root, action, run) => async (args) => {
+  flags[KEYS.pool_action_completed] = false;
+  const completed = await action.run(async () => {
+    await run(args);
+    return true;
+  });
+  if (game.place?.space === root) flags[KEYS.pool_action_completed] = completed === true;
+  return completed;
+};
