@@ -35,13 +35,16 @@ await withBrowserJob('copy-room-entry-check', async browser => {
     await page.waitForTimeout(700);
     const clearance=await page.evaluate(()=>{
      const g=globalThis.__game;
-     return {nav:g.place.nav.free(-4.03,2.5),physical:g.walker.traversal.clear([-4.03,2.14],[-4.03,2.9]),scale:g.player.root.scale.x};
+     return {nav:g.place.nav.free(-4.03,2.5),physical:g.walker.traversal.clear([-4.03,2.14],[-4.03,2.7]),scale:g.player.root.scale.x};
     });
-    // Use the real keyboard path. Pin its initial camera frame toward the door so both views use the same direction.
+    // Use real keyboard movement toward the visible aisle, slightly right of the paper shelf inside the door.
     const walk=async direction=>{
      await page.keyboard.down('ArrowUp');
-     await page.evaluate(direction=>{globalThis.__game.walker.keyFrame={x:0,y:0,z:direction};},direction);
-     try {await page.waitForTimeout(950);} finally {await page.keyboard.up('ArrowUp');}
+     await page.evaluate(direction=>{globalThis.__game.walker.keyFrame={x:direction>0?0.18:0,y:0,z:direction};},direction);
+     try {
+      if(blocked) await page.waitForTimeout(950);
+      else await page.waitForFunction(direction=>direction>0?globalThis.__game.player.root.position.z>3.05:globalThis.__game.player.root.position.z<2.1,direction,{timeout:5000});
+     } finally {await page.keyboard.up('ArrowUp');}
      await page.waitForTimeout(180);
      return page.evaluate(()=>globalThis.__game.player.root.position.toArray());
     };
@@ -62,14 +65,14 @@ await withBrowserJob('copy-room-entry-check', async browser => {
      g.walker.stop();g.player.root.position.set(-4.03,0,2.14);g.jump.reset();g.walker.sync();
     });
     await page.keyboard.down('ArrowUp');
-    await page.evaluate(()=>{globalThis.__game.walker.keyFrame={x:0,y:0,z:1};});
-    try {await page.waitForFunction(async()=> (await import('./js/narrative/state.js')).flags.copier_started,{timeout:10000});}
+    await page.evaluate(()=>{globalThis.__game.walker.keyFrame={x:0.18,y:0,z:1};});
+    try {await page.waitForFunction(async()=> (await import('./js/narrative/state.js')).flags.copier_started,null,{timeout:10000});}
     finally {await page.keyboard.up('ArrowUp');}
-    await page.waitForFunction(()=>globalThis.__game.runner.currentNode==='copier',{timeout:15000});
-    await page.waitForTimeout(2500);
+    await page.locator('#talk').waitFor({state:'visible',timeout:30000});
+    await page.waitForFunction(()=>globalThis.document.querySelector('#talk .who .nm')?.textContent==='Mr. Mori',null,{timeout:30000});
     await page.screenshot({path:`${out}/${mc}-${width}-copier-scene.png`});
-    const scene=await page.evaluate(async()=>({node:globalThis.__game.runner.currentNode,started:(await import('./js/narrative/state.js')).flags.copier_started,position:globalThis.__game.player.root.position.toArray()}));
-    assert.equal(scene.started,true);assert.equal(scene.node,'copier');
+    const scene=await page.evaluate(async()=>({node:globalThis.__game.runner.currentNode,started:(await import('./js/narrative/state.js')).flags.copier_started,position:globalThis.__game.player.root.position.toArray(),speaker:globalThis.document.querySelector('#talk .who .nm')?.textContent,line:globalThis.document.querySelector('#talk .line')?.textContent}));
+    assert.equal(scene.started,true);assert.equal(scene.speaker,'Mr. Mori');assert.ok(scene.line.length>0);assert.ok(scene.position[2]>2.85);
     console.log('PASS native entry starts copier scene',mc,width,JSON.stringify(scene));
    }
    assert.deepEqual(errors,[]);
