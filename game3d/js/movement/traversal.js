@@ -105,19 +105,17 @@ export function createTraversal(place, excluded = []) {
       ...(place.crowd || []),
     ])
       if (actor.root) skip.add(actor.root);
+    // Update the full source trees once. Updating each mesh with its parents repeatedly recomputes the
+    // same ancestors, even while the player stands still. Every moving support still updates this frame.
+    for (const sourceRoot of roots) sourceRoot.updateWorldMatrix(true, true);
     if (performance.now() - discovery > 250) {
-      for (const sourceRoot of roots) {
-        sourceRoot.updateWorldMatrix(true, true);
-        sourceRoot.traverse(collect);
-      }
+      for (const sourceRoot of roots) sourceRoot.traverse(collect);
       discovery = performance.now();
     }
-    root.updateWorldMatrix(true, false);
     const previousInverse = inverse.clone();
     inverse.copy(root.matrixWorld).invert();
     const frameMoved = !inverse.equals(previousInverse);
     for (const [source, record] of sources) {
-      source.updateWorldMatrix(true, false);
       if (
         !frameMoved &&
         source.matrixWorld.equals(record.matrix) &&
