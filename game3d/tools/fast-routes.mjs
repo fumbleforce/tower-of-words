@@ -3,7 +3,7 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
+import { withBrowserJob, gpuWaitOptions } from '../../tools/lib/browser-job.mjs';
 import day1 from '../test/routes/index.mjs';
 import day2 from '../test/routes/day2.mjs';
 import day3 from '../test/routes/day3.mjs';
@@ -17,6 +17,7 @@ const who = mcArgs(), argv = who.rest, dayAt = argv.indexOf('--day'), day = dayA
 const args = dayAt >= 0 ? argv.filter((_, i) => i !== dayAt && i !== dayAt + 1) : argv, worker = args[0] === '--worker';
 const routes = { 2: day2, 3: day3, 4: day4, 5: day5 }[day] || day1;
 const names = new Set(routes.map(route => route.id));
+const jobOptions = { ...gpuWaitOptions(900, 280000), loadWaitMs: 60000 };
 if (names.size !== routes.length) throw new Error('Duplicate route ID');
 if (args[0] === '--list') {
   for (const route of routes) console.log(`${route.id.padEnd(30)} ${route.description}`);
@@ -29,7 +30,7 @@ if (args[0] === '--list') {
         base: `http://127.0.0.1:${process.env.PORT || 8771}/${process.env.BASE || 'game3d'}`,
         viewport: { width: +(process.env.WIDTH || 390), height: +(process.env.HEIGHT || 844) }, who,
       }));
-    }, { timeoutMs: 280000 });
+    }, jobOptions);
   } catch (error) {
     results.push({ id: 'worker', pass: false, error: `${error.code || 'FAIL'}: ${error.message}` });
   }
@@ -43,7 +44,8 @@ if (args[0] === '--list') {
   const runWorker = group => new Promise(resolve => {
     let output = '';
     const child = spawn(process.execPath, [fileURLToPath(import.meta.url), '--worker', ...group, '--day', String(day)], { env: { ...process.env, MC: who.mc || '', CAST: who.spec || '' }, stdio: ['ignore', 'pipe', 'pipe'] });
-    const timer = setTimeout(() => child.kill('SIGTERM'), 290000);
+    // Queue backstop, browser close and slot cleanup need time beyond the separate wait/run budgets.
+    const timer = setTimeout(() => child.kill('SIGTERM'), jobOptions.loadWaitMs + jobOptions.gpuWaitMs + jobOptions.timeoutMs + 20000);
     child.stdout.on('data', data => { output += data; });
     child.stderr.on('data', data => { output += data; });
     child.on('error', error => { clearTimeout(timer); resolve([{ id: 'worker', pass: false, error: error.message }]); });
