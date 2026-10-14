@@ -24,4 +24,3 @@ The combined runtime at `4fd06af9c` includes the separately reviewed physical-ma
 
 A final diagnostic-only review found that toggling the cover could reset counters owned by an active `__perfHold` sampler. The follow-up changes one reset condition and adds two actual-metrics regressions. The ownership test fails on `1d99b8558` and passes after the correction. Ordinary gameplay does not use that hold, so its behavior is unchanged. The existing full-day runs are reused for that normal path.
 
-The branch still awaits root integration and landing. No 9-to-60 FPS reproduction is claimed.
