@@ -224,7 +224,7 @@ try {
   );
 } catch (error) {
   report.errors.push(error.stack);
-  process.exitCode = 1;
+  process.exitCode = ['GPU_DEFERRED', 'LOAD_DEFERRED'].includes(error.code) ? 75 : 1;
 } finally {
   fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify(report, null, 2));
   console.log(output);
