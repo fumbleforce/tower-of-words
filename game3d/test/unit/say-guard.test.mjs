@@ -51,7 +51,7 @@ async function fixture({ practice = true, voiced = () => Promise.resolve() } = {
     place: { people: { mio: {} } },
     player: { seated: false, root: { position: { x: 0, z: 0 } } },
     walker: { faceTo() {}, stop() {}, goTo() {} },
-    runner: { has: (k) => k === 'say:ohayou:cat' || k.startsWith('talk:'), trigger: (k) => (calls.push(k), true) },
+    runner: { resolve: (k) => k.startsWith('talk:') ? k.slice(5) : null, has: (k) => k === 'say:ohayou:cat' || k.startsWith('talk:'), trigger: (k) => (calls.push(k), true) },
     found: new Set(),
     markers: { clear() {}, add() {} },
     mioSays: () => {},

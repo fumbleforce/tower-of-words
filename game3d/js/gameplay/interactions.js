@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { CHARACTER_SCALE, characterHead } from '../character-scale.js';
 import { giveItem } from './gifts.js';
+import { resumeInterruptedUse } from './interrupted-use.js';
 import { approachSpot } from '../move.js';
 import { needsPractice } from '../mastery.js';
 import { learned } from '../feel.js';
@@ -110,21 +111,7 @@ export function installInteractions(game) {
   let pointerAt = -1e9;
   globalThis.addEventListener?.('pointerdown', () => (pointerAt = performance.now()), true);
   globalThis.addEventListener?.('keydown', () => (pointerAt = -1e9), true);
-  // a scene that starts while he walks to something he clicked (a zone he crossed, a queued event) stops that walk: he
-  // carries on to it and uses it once the scenes are over (cold playtest 2026-09-30: Mio needed an extra E)
-  let cutUse = null;
-  const beat = game.beat;
-  game.beat = async function (fn) {
-    if (this.busy || this.runner?.recoveryError) return beat.call(this, fn);
-    if (this.walker.arrive?.use) cutUse = this.walker.arrive.use;
-    const place = this.place;
-    await beat.call(this, fn);
-    if (!cutUse || this.busy) return; // a queued scene carries it on
-    const u = cutUse;
-    cutUse = null;
-    if (this.place === place && !this.walker.path && this.markers.list.includes(u.item) && u.item.enabled())
-      use(u.item, u.options);
-  };
+  const pendingUse = resumeInterruptedUse(game, use);
   // get Eric out of his seat (a tap on the floor or on something out of reach does this)
   function standUp() {
     const pl = game.player;
@@ -170,7 +157,7 @@ export function installInteractions(game) {
     // while Eric is saying a word (its practice prompt, his voice, the answer) a tap on anything else is ignored, so
     // the word is never lost to a new talk; saying is cleared in sayWord's finally, so this can't stick
     if (!item || game.busy || game.saying) return;
-    cutUse = null;
+    pendingUse.clear();
     const ask = !direct && performance.now() - pointerAt < 1500;
     ui.closeActs?.();
     if (held() && item.id !== game.hold) {
@@ -192,7 +179,7 @@ export function installInteractions(game) {
       }
       talk(item, trigger);
     };
-    go.use = { item, options: { direct, trigger } }; // the beat wrapper above sends him on to it if a scene cuts this walk
+    go.use = pendingUse.request(item, { direct, trigger });
     const sp = approachSpot(game, item) || (item.spot ? item.spot() : null);
     // seated: he talks from his seat to what's within reach; for anything further he stands up and walks over
     if (game.player.seated) {
