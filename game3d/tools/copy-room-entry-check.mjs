@@ -29,7 +29,7 @@ await withBrowserJob('copy-room-entry-check', async browser => {
     await page.evaluate(async cameraMode=>{
      const g=globalThis.__game;
      (await import('./js/settings.js')).setSetting('cameraMode',cameraMode);
-     g.walker.stop();g.player.root.position.set(-4.03,0,2.14);g.jump.reset();g.walker.sync();
+     g.walker.stop();g.player.root.position.set(-4.03,0,2.14);g.player.root.rotation.y=0.8;g.jump.reset();g.walker.sync();
      g.followCamera.aim(0,0.05);
     },cameraMode);
     await page.waitForTimeout(700);
@@ -40,10 +40,14 @@ await withBrowserJob('copy-room-entry-check', async browser => {
     // Use real keyboard movement toward the visible aisle, slightly right of the paper shelf inside the door.
     const walk=async direction=>{
      await page.keyboard.down('ArrowUp');
-     await page.evaluate(direction=>{globalThis.__game.walker.keyFrame={x:direction>0?0.18:0,y:0,z:direction};},direction);
+     await page.evaluate(direction=>{
+      const g=globalThis.__game;
+      g.followCamera.aim(direction>0?Math.atan2(0.18,1):Math.PI,0.05);
+      g.walker.keyFrame={x:direction>0?0.18:0,y:0,z:direction};
+     },direction);
      try {
       if(blocked) await page.waitForTimeout(950);
-      else await page.waitForFunction(direction=>direction>0?globalThis.__game.player.root.position.z>3.05:globalThis.__game.player.root.position.z<2.1,direction,{timeout:5000});
+      else await page.waitForFunction(direction=>direction>0?globalThis.__game.player.root.position.z>3.05:globalThis.__game.player.root.position.z<2.1,direction,{timeout:10000});
      } finally {await page.keyboard.up('ArrowUp');}
      await page.waitForTimeout(180);
      return page.evaluate(()=>globalThis.__game.player.root.position.toArray());
@@ -60,13 +64,16 @@ await withBrowserJob('copy-room-entry-check', async browser => {
    }
    if(!blocked){
     await page.evaluate(async()=>{
-     const g=globalThis.__game,{flags}=await import('./js/narrative/state.js');
+     const g=globalThis.__game,flags=g.flagsRef;
      flags.copier_done=false;flags.copier_started=false;
-     g.walker.stop();g.player.root.position.set(-4.03,0,2.14);g.jump.reset();g.walker.sync();
+     // The ticket has already sent Mori ahead to this spot in the reported checkpoint.
+     await g.place.standPerson('mori');
+     g.place.people.mori.root.position.set(-2.95,0,4.2);
+     g.walker.stop();g.player.root.position.set(-4.03,0,2.14);g.player.root.rotation.y=0.8;g.jump.reset();g.walker.sync();
     });
     await page.keyboard.down('ArrowUp');
-    await page.evaluate(()=>{globalThis.__game.walker.keyFrame={x:0.18,y:0,z:1};});
-    try {await page.waitForFunction(async()=> (await import('./js/narrative/state.js')).flags.copier_started,null,{timeout:10000});}
+    await page.evaluate(()=>{const g=globalThis.__game;g.followCamera.aim(Math.atan2(0.18,1),0.05);g.walker.keyFrame={x:0.18,y:0,z:1};});
+    try {await page.waitForFunction(()=>globalThis.__game.flagsRef.copier_started===true,null,{timeout:10000});}
     finally {await page.keyboard.up('ArrowUp');}
     await page.locator('#talk').waitFor({state:'visible',timeout:30000});
     await page.waitForFunction(()=>globalThis.document.querySelector('#talk .who .nm')?.textContent==='Mr. Mori',null,{timeout:30000});
