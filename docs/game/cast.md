@@ -209,16 +209,16 @@ Repeat meeting: Wednesday evening karaoke, with weekday B2 contact. The chair an
 
 ### Emi: joining without running it
 
-Route: swimming club at the seasonal pool session, then the gym's winter meetings. She wants a regular evening with people who can see her without bringing a budget request. She is good at organising, so people keep letting her do it, including herself.
+Route: Saturday evening swimming club at the pool. She wants a regular evening with people who can see her without bringing a budget request. She is good at organising, so people keep letting her do it, including herself.
 
-Repeat meeting: Saturday evening swimming club; weekdays at B2 for brief contact. Winter milestones concern the club's next-season plans and conditioning; actual lengths wait for the pool's next opening. None requires catching the one October swim.
+Repeat meeting: Saturday evening swimming club at the pool; weekdays at B2 for brief contact. An unfinished first pool visit remains available on later Saturdays.
 
 | Step | Milestone and consequence |
 |---|---|
 | 0 | The absent team lead whose parts meeting is keeping her upstairs. |
 | 1 | Her B2 introduction after the budget meeting. |
 | 2 | At a club meeting she asks Eric to sit beside her while someone else explains the plan. She leaves her work bag under the bench. |
-| 3 | The group hands her the winter booking sheet by habit. Eric can offer to ask another member or ask which exercise she wanted to join. She names a volunteer, hands over the sheet and joins the session. |
+| 3 | The attendant hands her the booking sheet. Eric can ask which part she wanted to join or suggest leaving the sheet with him. He collects the sheet, and she swims before her milestone is recorded. |
 | 4 | The volunteer chooses a different session order. Emi starts correcting it, then asks for the spare mat instead. Eric can join her or watch; she finishes a session somebody else arranged. |
 | 5 | She asks him to get supper after the meeting, with their work phones put away. They settle whether this is their regular meal as friends or a date. Later invitations come from her as a member, without a club job attached. |
 
@@ -258,7 +258,7 @@ Superseded. Her line is now [her route](../../notes/characters/kuro/route.md), a
 
 Route: swimming club, with reception as first contact. She wants an evening where people remember what she enjoys without asking her to find somebody or hold a bag. Her even courtesy stays; trust means letting Eric hear a direct preference without wrapping it as a service offer.
 
-Repeat meeting: Saturday club, pool in season and gym in winter. She attends as a member and does not become the club's receptionist. Her short English exchanges remain within the language limits in her People entry.
+Repeat meeting: Saturday swimming club at the pool. She attends as a member and does not become the club's receptionist. Her short English exchanges remain within the language limits in her People entry.
 
 | Step | Milestone and consequence |
 |---|---|

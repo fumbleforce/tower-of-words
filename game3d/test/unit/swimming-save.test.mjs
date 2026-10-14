@@ -7,10 +7,11 @@ import { newFrame, readCheckpoint, nodeFingerprint } from '../../js/narrative/ch
 import CLUBS from '../../story/clubs.js';
 import POOL from '../../story/day3/pool.js';
 import ONGOING from '../../story/ongoing/pool.js';
+import { expandMc, PROTAGONISTS } from '../../js/mc.js';
 const legacy = JSON.parse(readFileSync(new URL('../fixtures/swimming-legacy-stories.json', import.meta.url)));
 const story = { nodes: { ...CLUBS.nodes, ...POOL.nodes } };
 const later = { nodes: { ...CLUBS.nodes, ...ONGOING.nodes } };
-const checkpoint = (node, steps, index = 0) => ({ ...newFrame(node, steps), cursors: [{ path: [], index, phase: 'step' }] });
+const checkpoint = (node, steps, index = 0) => ({ ...newFrame(node, steps), done: ['entry'], cursors: [{ path: [], index, phase: 'step' }] });
 const save = (frames, extra = {}) => ({ day: 3, place: 'pool', flags: { club_swimming: true, clubprog_swimming: 1, clubday_swimming: 3 },
   world: { player: { eric: { position: [1, -.5, 2] } }, swim: { swimmers: { eric: 'tread' } } },
   runner: { execution: { v: 3, place: 'pool', frames }, queued: [] }, ...extra });
@@ -94,4 +95,30 @@ test('damaged checkpoints reach ordinary validation without migration throwing f
     assert.doesNotThrow(() => migrateSwimmingSave(before));
     assert.equal(migrateSwimmingSave(before).runner.execution, execution);
   }
+});
+
+test('text-only seasonal edits preserve actual Eric and Carina checkpoints in their existing place', async () => {
+  const paths = { '3:gym': 'day3/gym', '4:gym': 'day4/gym', '4:pool': 'day4/pool', '5:gym': 'day5/gym', '5:pool': 'day5/pool', 'ongoing:east_coast': 'ongoing/east_coast' };
+  for (const [key, nodes] of Object.entries(revisions.text)) {
+    const current = (await import(`../../story/${paths[key]}.js`)).default;
+    const [dayName, place] = key.split(':'); const day = dayName === 'ongoing' ? 17 : +dayName;
+    for (const [id, mcs] of Object.entries(nodes)) for (const [mc, [oldFingerprint, nextFingerprint]] of Object.entries(mcs)) {
+      const steps = expandMc(structuredClone(legacy.text[key][id]), PROTAGONISTS[mc]);
+      assert.equal(nodeFingerprint(steps), oldFingerprint);
+      assert.equal(nodeFingerprint(expandMc(structuredClone(current.nodes[id]), PROTAGONISTS[mc])), nextFingerprint);
+      const before = save([checkpoint(id, steps)], { day, place, mc }); before.runner.execution.place = place;
+      const after = migrateSwimmingSave(before);
+      assert.equal(after.place, place); assert.equal(after.world, before.world);
+      assert.ok(readCheckpoint(after.runner.execution, place, expandMc(structuredClone(current), PROTAGONISTS[mc])));
+      assert.deepEqual(after.runner.execution.frames[0].done, ['entry']);
+    }
+  }
+});
+test('malformed visited and unknown future queue names do not break or broaden historical recovery', () => {
+  const frame = checkpoint('ongoing_winter_sheet', legacy.gym.ongoing_winter_sheet);
+  const before = save([frame], { day: 10, place: 'gym', visited: {}, world: { winterClub: { active: true } },
+    runner: { execution: { v: 3, place: 'gym', frames: [frame] }, queued: [{ node: 'ongoing_winter_future' }] } });
+  assert.doesNotThrow(() => migrateSwimmingSave(before));
+  const after = migrateSwimmingSave(before);
+  assert.deepEqual(after.runner.queued, [{ node: 'ongoing_winter_future' }]);
 });

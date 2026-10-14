@@ -1,4 +1,5 @@
 import source from '../day3/gym.js';
+import { swimmingNodes } from './swimming.js';
 import { fanNodes } from '../day4/fan.js';
 import { interactions, place } from './shared.js';
 const repairs = interactions(source, [
@@ -11,7 +12,7 @@ export default place('gym', {
     'say:ugoite:desk_fan': { if: "!period_evening && know_ugoite && d4_fan_requested && !d4_fan_done", node: 'd4_fan_magic' },
   },
   nodes: {
-    ...repairs.nodes, ...fanNodes,
+    ...repairs.nodes, ...fanNodes, ...Object.fromEntries(Object.entries(swimmingNodes).filter(([id]) => id.startsWith('swimming_resume_'))),
     // The repaired terminal prints today's list, not the opening Saturday's outdoor swim.
     d3_print: [
       { say: 'attendant', overheard: true, emo: 'polite', text: '{dashite}。' },

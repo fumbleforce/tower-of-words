@@ -4,8 +4,8 @@ const NOTICES = {
   karaoke: { karaoke_desk: ['Booth check upstairs', 'Monday lunchtime', 'Club: Wednesday, unchanged'] },
   sports: { ball_basket: ['Please bring the balls in', 'if it rains.'] },
   shotengai: { bakery: ['Tomorrow’s orders', 'Write your room number clearly.'] },
-  pool: { pool_notice: ['Pool closed for the season', 'Swimming club: gym', 'Saturday evenings'] },
-  gym: { gym_board: ['Swimming club', 'Saturday evenings in the gym', 'from 10 October'] },
+  pool: { pool_notice: ['Swimming club', 'Saturday evenings', 'Outdoor pool'] },
+  gym: { gym_board: ['Swimming club', 'Saturday evenings at the pool'] },
 };
 export function mondayNotices(P, name) {
   for (const [id, lines] of Object.entries(NOTICES[name] || {})) {

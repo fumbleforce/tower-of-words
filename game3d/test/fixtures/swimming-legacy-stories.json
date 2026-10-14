@@ -30,7 +30,7 @@
           {
             "say": "emi",
             "emo": "bright",
-            "text": "Oh, you must be {mc.name}. I\u2019m Emi, from B2. It\u2019s good to meet you at last."
+            "text": "Oh, you must be {mc.name}. I’m Emi, from B2. It’s good to meet you at last."
           },
           {
             "do": "meet",
@@ -50,7 +50,7 @@
           {
             "say": "emi",
             "emo": "bright",
-            "text": "{mc.name}! I was hoping you\u2019d make it."
+            "text": "{mc.name}! I was hoping you’d make it."
           }
         ]
       },
@@ -76,19 +76,19 @@
                 "name": "Receptionist",
                 "overheard": true,
                 "emo": "warm",
-                "text": "\u6765\u305f\u3093\u3067\u3059\u306d\u3002\u2026\u2026\u5fd8\u308c\u308b\u3068\u601d\u3063\u3066\u307e\u3057\u305f\u3002"
+                "text": "来たんですね。……忘れると思ってました。"
               },
               {
                 "say": "eric",
                 "emo": "warm",
-                "text": "You pointed me at the club yesterday. I thought I\u2019d come and see."
+                "text": "You pointed me at the club yesterday. I thought I’d come and see."
               },
               {
                 "say": "kuro",
                 "name": "Receptionist",
                 "overheard": true,
                 "emo": "amused",
-                "text": "\u7396\u8def\u3067\u3059\u3002"
+                "text": "玖路です。"
               }
             ],
             "else": [
@@ -100,19 +100,19 @@
                     "name": "Receptionist",
                     "overheard": true,
                     "emo": "amused",
-                    "text": "\u3053\u3093\u3070\u3093\u306f\u3002\u4eca\u65e5\u306f\u3001\u4f55\u968e\uff1f"
+                    "text": "こんばんは。今日は、何階？"
                   },
                   {
                     "say": "eric",
                     "emo": "warm",
-                    "text": "I think I\u2019m in the right place this time."
+                    "text": "I think I’m in the right place this time."
                   },
                   {
                     "say": "kuro",
                     "name": "Receptionist",
                     "overheard": true,
                     "emo": "polite",
-                    "text": "\u7396\u8def\u3067\u3059\u3002\u53d7\u4ed8\u306e\u3002"
+                    "text": "玖路です。受付の。"
                   }
                 ],
                 "else": [
@@ -121,12 +121,12 @@
                     "name": "Receptionist",
                     "overheard": true,
                     "emo": "polite",
-                    "text": "\u3053\u3093\u3070\u3093\u306f\u3002\u7396\u8def\u3067\u3059\u3002\u672c\u793e\u306e\u53d7\u4ed8\u3067\u3059\u3002"
+                    "text": "こんばんは。玖路です。本社の受付です。"
                   },
                   {
                     "say": "eric",
                     "emo": "warm",
-                    "text": "I\u2019m {mc.name}. Nice to meet you."
+                    "text": "I’m {mc.name}. Nice to meet you."
                   }
                 ]
               }
@@ -155,28 +155,28 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "warm",
-        "text": "\u3053\u306e\u30d7\u30fc\u30eb\u3001\u4eca\u65e5\u3067\u6700\u5f8c\u306a\u3093\u3067\u3059\u3088\u3002",
+        "text": "このプール、今日で最後なんですよ。",
         "clear": [
-          "\u30d7\u30fc\u30eb"
+          "プール"
         ]
       },
       {
         "say": "emi",
         "emo": "casual",
-        "text": "Last evening at this pool. The water\u2019s fine once you\u2019re in, apparently."
+        "text": "Last evening at this pool. The water’s fine once you’re in, apparently."
       },
       {
         "say": "emi",
         "emo": "casual",
-        "text": "I came down to put these bags away and have a quick swim. I haven\u2019t managed either yet."
+        "text": "I came down to put these bags away and have a quick swim. I haven’t managed either yet."
       },
       {
         "say": "member",
         "overheard": true,
         "emo": "polite",
-        "text": "\u30a8\u30df\u3055\u3093\u3001\u3053\u308c\u3082\u304a\u9858\u3044\u3057\u307e\u3059\u3002\u5099\u54c1\u306e\u30ea\u30b9\u30c8\u3067\u3059\u3002",
+        "text": "エミさん、これもお願いします。備品のリストです。",
         "clear": [
-          "\u30ea\u30b9\u30c8"
+          "リスト"
         ]
       },
       {
@@ -185,7 +185,7 @@
       {
         "say": "emi",
         "emo": "amused",
-        "text": "Oh, she\u2019s found me something else. That can wait until I\u2019m dry again."
+        "text": "Oh, she’s found me something else. That can wait until I’m dry again."
       },
       {
         "say": "kuro",
@@ -193,19 +193,19 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "teasing",
-        "text": "\u30a8\u30df\u3055\u3093\u3001\u6cf3\u304e\u306b\u6765\u305f\u3093\u3067\u3057\u3087\u3046\uff1f"
+        "text": "エミさん、泳ぎに来たんでしょう？"
       },
       {
         "say": "emi",
         "emo": "warm",
-        "text": "Yes, I did come here to swim. You\u2019re quite right."
+        "text": "Yes, I did come here to swim. You’re quite right."
       },
       {
         "say": "kuro",
         "name": "Kuro",
         "overheard": true,
         "emo": "curious",
-        "text": "\u4eca\u65e5\u306f\u3001{oyogu}\uff1f"
+        "text": "今日は、{oyogu}？"
       },
       {
         "choice": [
@@ -214,12 +214,12 @@
             "go": "club_swimming_join"
           },
           {
-            "text": "Ask how to say you\u2019ll swim.",
+            "text": "Ask how to say you’ll swim.",
             "if": "!know_oyogu",
             "go": "club_swimming_word"
           },
           {
-            "text": "Carry Emi\u2019s bags to the attendant.",
+            "text": "Carry Emi’s bags to the attendant.",
             "go": "club_swimming_bags"
           },
           {
@@ -237,14 +237,14 @@
       {
         "say": "emi",
         "emo": "casual",
-        "text": "She\u2019s asking you too. {oyogu} means swim. Or you can sit with us, there\u2019s no test."
+        "text": "She’s asking you too. {oyogu} means swim. Or you can sit with us, there’s no test."
       },
       {
         "say": "kuro",
         "name": "Kuro",
         "emo": "slow",
         "slow": true,
-        "text": "{oyogu}\u3002"
+        "text": "{oyogu}。"
       },
       {
         "do": "type",
@@ -262,7 +262,7 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "warm",
-        "text": "\u3086\u3063\u304f\u308a\u3067\u3001\u3044\u3044\u3067\u3059\u3088\u3002"
+        "text": "ゆっくりで、いいですよ。"
       },
       {
         "say": "emi",
@@ -282,14 +282,14 @@
           {
             "say": "eric",
             "emo": "warm",
-            "text": "{oyogu}. I\u2019ll come in, but I\u2019m a bit out of practice."
+            "text": "{oyogu}. I’ll come in, but I’m a bit out of practice."
           }
         ],
         "else": [
           {
             "say": "eric",
             "emo": "warm",
-            "text": "I\u2019ll come in, but I\u2019m a bit out of practice."
+            "text": "I’ll come in, but I’m a bit out of practice."
           }
         ]
       },
@@ -298,7 +298,7 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "polite",
-        "text": "\u3053\u3063\u3061\u3067\u3059\u3002"
+        "text": "こっちです。"
       },
       {
         "do": "gesture",
@@ -321,13 +321,13 @@
         "say": "emi",
         "overheard": true,
         "emo": "casual",
-        "text": "{sumimasen}\u3001\u3053\u308c\u3001\u304a\u9858\u3044\u3067\u304d\u307e\u3059\u304b\uff1f"
+        "text": "{sumimasen}、これ、お願いできますか？"
       },
       {
         "say": "attendant",
         "overheard": true,
         "emo": "polite",
-        "text": "\u306f\u3044\u3001\u9810\u304b\u308a\u307e\u3059\u306d\u3002"
+        "text": "はい、預かりますね。"
       },
       {
         "call": "d3_pool_emi_hands_over"
@@ -381,14 +381,14 @@
           {
             "say": "eric",
             "emo": "warm",
-            "text": "{mitai}. I\u2019ll watch for a bit. Don\u2019t wait for me."
+            "text": "{mitai}. I’ll watch for a bit. Don’t wait for me."
           }
         ],
         "else": [
           {
             "say": "eric",
             "emo": "warm",
-            "text": "I\u2019ll watch for a bit. Don\u2019t wait for me."
+            "text": "I’ll watch for a bit. Don’t wait for me."
           }
         ]
       },
@@ -401,13 +401,13 @@
         "say": "emi",
         "overheard": true,
         "emo": "casual",
-        "text": "{sumimasen}\u3001\u3053\u308c\u3001\u304a\u9858\u3044\u3067\u304d\u307e\u3059\u304b\uff1f"
+        "text": "{sumimasen}、これ、お願いできますか？"
       },
       {
         "say": "attendant",
         "overheard": true,
         "emo": "polite",
-        "text": "\u306f\u3044\u3001\u9810\u304b\u308a\u307e\u3059\u306d\u3002"
+        "text": "はい、預かりますね。"
       },
       {
         "call": "d3_pool_emi_hands_over"
@@ -441,14 +441,14 @@
       {
         "say": "emi",
         "emo": "surprised",
-        "text": "Oh. That\u2019s colder than it was in August."
+        "text": "Oh. That’s colder than it was in August."
       },
       {
         "say": "kuro",
         "name": "Kuro",
         "overheard": true,
         "emo": "warm",
-        "text": "\u6cf3\u3052\u3070\u3001\u5c11\u3057\u6e29\u304b\u304f\u306a\u308a\u307e\u3059\u3088\u3002"
+        "text": "泳げば、少し温かくなりますよ。"
       },
       {
         "call": "d3_pool_length"
@@ -466,7 +466,7 @@
             "name": "Kuro",
             "overheard": true,
             "emo": "curious",
-            "text": "\u901f\u304b\u3063\u305f\uff1f"
+            "text": "速かった？"
           },
           {
             "say": "eric",
@@ -478,19 +478,19 @@
       {
         "say": "emi",
         "emo": "warm",
-        "text": "I nearly stayed upstairs to finish an email. I\u2019m glad I didn\u2019t."
+        "text": "I nearly stayed upstairs to finish an email. I’m glad I didn’t."
       },
       {
         "say": "kuro",
         "name": "Kuro",
         "overheard": true,
         "emo": "polite",
-        "text": "\u3082\u3046\u4e00\u672c\u3001\u6cf3\u304e\u307e\u305b\u3093\u304b\u3002"
+        "text": "もう一本、泳ぎませんか。"
       },
       {
         "say": "emi",
         "emo": "bright",
-        "text": "One more length? Yes, we\u2019ve got time."
+        "text": "One more length? Yes, we’ve got time."
       },
       {
         "do": "cam",
@@ -501,17 +501,17 @@
         "say": "emi",
         "overheard": true,
         "emo": "casual",
-        "text": "{sumimasen}\u3001\u30ea\u30b9\u30c8\u3001\u30c6\u30fc\u30d6\u30eb\u306b\u7f6e\u3044\u3066\u3082\u3089\u3048\u307e\u3059\u304b\uff1f",
+        "text": "{sumimasen}、リスト、テーブルに置いてもらえますか？",
         "clear": [
-          "\u30ea\u30b9\u30c8",
-          "\u30c6\u30fc\u30d6\u30eb"
+          "リスト",
+          "テーブル"
         ]
       },
       {
         "say": "attendant",
         "overheard": true,
         "emo": "polite",
-        "text": "\u306f\u3044\u3001\u7f6e\u3044\u3066\u304a\u304d\u307e\u3059\u3002"
+        "text": "はい、置いておきます。"
       },
       {
         "call": "d3_pool_another"
@@ -551,27 +551,27 @@
       {
         "say": "emi",
         "emo": "warm",
-        "text": "I used to keep my goggles in my work bag so I\u2019d actually come down. Then I started carrying everyone else\u2019s things instead."
+        "text": "I used to keep my goggles in my work bag so I’d actually come down. Then I started carrying everyone else’s things instead."
       },
       {
         "say": "kuro",
         "name": "Kuro",
         "overheard": true,
         "emo": "dry",
-        "text": "\u8377\u7269\u306f\u3001\u81ea\u5206\u3067\u3002"
+        "text": "荷物は、自分で。"
       },
       {
         "say": "kuro",
         "name": "Kuro",
         "overheard": true,
         "emo": "warm",
-        "text": "\u6b21\u306f\u3001{isshoni}\u3002"
+        "text": "次は、{isshoni}。"
       },
       {
         "say": "attendant",
         "overheard": true,
         "emo": "polite",
-        "text": "\u6765\u9031\u304b\u3089\u4f53\u80b2\u9928\u3067\u3059\u3002\u5ba4\u5185\u7528\u306e\u9774\u3092\u6301\u3063\u3066\u304d\u3066\u304f\u3060\u3055\u3044\u306d\u3002"
+        "text": "来週から体育館です。室内用の靴を持ってきてくださいね。"
       },
       {
         "say": "emi",
@@ -581,7 +581,7 @@
       {
         "say": "eric",
         "emo": "warm",
-        "text": "I\u2019ll know where to find you if the email can wait."
+        "text": "I’ll know where to find you if the email can wait."
       },
       {
         "do": "remember",
@@ -608,12 +608,12 @@
       {
         "say": "eric",
         "emo": "warm",
-        "text": "I\u2019ll head back. Thanks for having me."
+        "text": "I’ll head back. Thanks for having me."
       },
       {
         "say": "emi",
         "emo": "warm",
-        "text": "See you next Saturday, if you\u2019re free. We\u2019ll be in the gym by then."
+        "text": "See you next Saturday, if you’re free. We’ll be in the gym by then."
       },
       {
         "call": "d3_pool_exit"
@@ -631,7 +631,7 @@
       {
         "say": "emi",
         "emo": "casual",
-        "text": "All right. We\u2019ll be here if you come back."
+        "text": "All right. We’ll be here if you come back."
       },
       {
         "do": "cam",
@@ -649,19 +649,19 @@
       {
         "say": "emi",
         "emo": "bright",
-        "text": "We\u2019re indoors for the winter. You missed the last outdoor swim, but so did half the club."
+        "text": "We’re indoors for the winter. You missed the last outdoor swim, but so did half the club."
       },
       {
         "say": "kuro",
         "name": "Kuro",
         "overheard": true,
         "emo": "amused",
-        "text": "\u6301\u3063\u3066\u304d\u3061\u3083\u3044\u307e\u3057\u305f\u3002"
+        "text": "持ってきちゃいました。"
       },
       {
         "say": "emi",
         "emo": "casual",
-        "text": "Mine are in here somewhere. Shall we find out what we\u2019re doing?"
+        "text": "Mine are in here somewhere. Shall we find out what we’re doing?"
       },
       {
         "choice": [
@@ -686,9 +686,9 @@
         "say": "attendant",
         "overheard": true,
         "emo": "polite",
-        "text": "\u3053\u306e\u3042\u305f\u308a\u306f\u81ea\u7531\u306b\u4f7f\u3048\u307e\u3059\u3002\u30de\u30c3\u30c8\u306f\u3001\u305d\u3053\u306e\u68da\u3067\u3059\u3002",
+        "text": "このあたりは自由に使えます。マットは、そこの棚です。",
         "clear": [
-          "\u30de\u30c3\u30c8"
+          "マット"
         ]
       },
       {
@@ -701,12 +701,12 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "tired",
-        "text": "\u5bd2\u3044\u2026\u2026\u9774\u4e0b\u3001\u3082\u3063\u3068\u539a\u3044\u306e\u306b\u3059\u308c\u3070\u3088\u304b\u3063\u305f\u3002"
+        "text": "寒い……靴下、もっと厚いのにすればよかった。"
       },
       {
         "say": "eric",
         "emo": "warm",
-        "text": "I\u2019ll remember that for next time."
+        "text": "I’ll remember that for next time."
       },
       {
         "do": "remember",
@@ -718,7 +718,7 @@
         "do": "remember",
         "who": "kuro",
         "id": "club_seat",
-        "text": "Sat with her at the club\u2019s winter meeting."
+        "text": "Sat with her at the club’s winter meeting."
       },
       {
         "call": "club_swimming_shared"
@@ -770,7 +770,7 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "polite",
-        "text": "\u307e\u305f\u571f\u66dc\u65e5\u306b\u3002"
+        "text": "また土曜日に。"
       },
       {
         "do": "gesture",
@@ -807,12 +807,12 @@
             "name": "Kuro",
             "overheard": true,
             "emo": "curious",
-            "text": "\u307e\u3060{oyogu}\uff1f"
+            "text": "まだ{oyogu}？"
           },
           {
             "say": "eric",
             "emo": "warm",
-            "text": "Not tonight. I\u2019ll stay here a bit longer."
+            "text": "Not tonight. I’ll stay here a bit longer."
           },
           {
             "end": true
@@ -828,15 +828,15 @@
             "name": "Kuro",
             "overheard": true,
             "emo": "teasing",
-            "text": "\u30d7\u30fc\u30eb\u3001\u4eca\u65e5\u3067\u6700\u5f8c\u3067\u3059\u3088\u3002\u6765\u9031\u306f\u30b8\u30e0\u3067\u3002",
+            "text": "プール、今日で最後ですよ。来週はジムで。",
             "clear": [
               {
-                "ja": "\u30d7\u30fc\u30eb",
-                "ro": "p\u016bru",
+                "ja": "プール",
+                "ro": "pūru",
                 "en": "pool"
               },
               {
-                "ja": "\u30b8\u30e0",
+                "ja": "ジム",
                 "ro": "jimu",
                 "en": "gym"
               }
@@ -851,7 +851,7 @@
                 "say": "kuro",
                 "overheard": true,
                 "emo": "amused",
-                "text": "\u3053\u3093\u3070\u3093\u306f\u3002\u6765\u305f\u3093\u3067\u3059\u306d\u3002"
+                "text": "こんばんは。来たんですね。"
               }
             ],
             "else": [
@@ -859,10 +859,10 @@
                 "say": "kuro",
                 "overheard": true,
                 "emo": "polite",
-                "text": "\u3053\u3093\u3070\u3093\u306f\u3002\u30af\u30e9\u30d6\u3067\u3059\u304b\uff1f",
+                "text": "こんばんは。クラブですか？",
                 "clear": [
                   {
-                    "ja": "\u30af\u30e9\u30d6",
+                    "ja": "クラブ",
                     "ro": "kurabu",
                     "en": "club"
                   }
@@ -884,7 +884,7 @@
                 "say": "attendant",
                 "overheard": true,
                 "emo": "polite",
-                "text": "\u3069\u3046\u305e\u3002\u307e\u3060\u5927\u4e08\u592b\u3067\u3059\u3088\u3002"
+                "text": "どうぞ。まだ大丈夫ですよ。"
               },
               {
                 "do": "gesture",
@@ -898,7 +898,7 @@
                 "say": "attendant",
                 "overheard": true,
                 "emo": "polite",
-                "text": "\u3059\u307f\u307e\u305b\u3093\u3001\u4eca\u591c\u306f\u6c34\u6cf3\u90e8\u3060\u3051\u306a\u3093\u3067\u3059\u3002"
+                "text": "すみません、今夜は水泳部だけなんです。"
               },
               {
                 "say": "eric",
@@ -1002,7 +1002,7 @@
           {
             "say": "emi",
             "emo": "bright",
-            "text": "Oh, you must be {mc.name}. I\u2019m Emi, from B2. It\u2019s good to meet you at last."
+            "text": "Oh, you must be {mc.name}. I’m Emi, from B2. It’s good to meet you at last."
           },
           {
             "do": "meet",
@@ -1022,7 +1022,7 @@
           {
             "say": "emi",
             "emo": "bright",
-            "text": "{mc.name}! I was hoping you\u2019d make it."
+            "text": "{mc.name}! I was hoping you’d make it."
           }
         ]
       },
@@ -1048,19 +1048,19 @@
                 "name": "Receptionist",
                 "overheard": true,
                 "emo": "warm",
-                "text": "\u6765\u305f\u3093\u3067\u3059\u306d\u3002\u2026\u2026\u5fd8\u308c\u308b\u3068\u601d\u3063\u3066\u307e\u3057\u305f\u3002"
+                "text": "来たんですね。……忘れると思ってました。"
               },
               {
                 "say": "eric",
                 "emo": "warm",
-                "text": "You pointed me at the club yesterday. I thought I\u2019d come and see."
+                "text": "You pointed me at the club yesterday. I thought I’d come and see."
               },
               {
                 "say": "kuro",
                 "name": "Receptionist",
                 "overheard": true,
                 "emo": "amused",
-                "text": "\u7396\u8def\u3067\u3059\u3002"
+                "text": "玖路です。"
               }
             ],
             "else": [
@@ -1072,19 +1072,19 @@
                     "name": "Receptionist",
                     "overheard": true,
                     "emo": "amused",
-                    "text": "\u3053\u3093\u3070\u3093\u306f\u3002\u4eca\u65e5\u306f\u3001\u4f55\u968e\uff1f"
+                    "text": "こんばんは。今日は、何階？"
                   },
                   {
                     "say": "eric",
                     "emo": "warm",
-                    "text": "I think I\u2019m in the right place this time."
+                    "text": "I think I’m in the right place this time."
                   },
                   {
                     "say": "kuro",
                     "name": "Receptionist",
                     "overheard": true,
                     "emo": "polite",
-                    "text": "\u7396\u8def\u3067\u3059\u3002\u53d7\u4ed8\u306e\u3002"
+                    "text": "玖路です。受付の。"
                   }
                 ],
                 "else": [
@@ -1093,12 +1093,12 @@
                     "name": "Receptionist",
                     "overheard": true,
                     "emo": "polite",
-                    "text": "\u3053\u3093\u3070\u3093\u306f\u3002\u7396\u8def\u3067\u3059\u3002\u672c\u793e\u306e\u53d7\u4ed8\u3067\u3059\u3002"
+                    "text": "こんばんは。玖路です。本社の受付です。"
                   },
                   {
                     "say": "eric",
                     "emo": "warm",
-                    "text": "I\u2019m {mc.name}. Nice to meet you."
+                    "text": "I’m {mc.name}. Nice to meet you."
                   }
                 ]
               }
@@ -1127,28 +1127,28 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "warm",
-        "text": "\u3053\u306e\u30d7\u30fc\u30eb\u3001\u4eca\u65e5\u3067\u6700\u5f8c\u306a\u3093\u3067\u3059\u3088\u3002",
+        "text": "このプール、今日で最後なんですよ。",
         "clear": [
-          "\u30d7\u30fc\u30eb"
+          "プール"
         ]
       },
       {
         "say": "emi",
         "emo": "casual",
-        "text": "Last evening at this pool. The water\u2019s fine once you\u2019re in, apparently."
+        "text": "Last evening at this pool. The water’s fine once you’re in, apparently."
       },
       {
         "say": "emi",
         "emo": "casual",
-        "text": "I came down to put these bags away and have a quick swim. I haven\u2019t managed either yet."
+        "text": "I came down to put these bags away and have a quick swim. I haven’t managed either yet."
       },
       {
         "say": "member",
         "overheard": true,
         "emo": "polite",
-        "text": "\u30a8\u30df\u3055\u3093\u3001\u3053\u308c\u3082\u304a\u9858\u3044\u3057\u307e\u3059\u3002\u5099\u54c1\u306e\u30ea\u30b9\u30c8\u3067\u3059\u3002",
+        "text": "エミさん、これもお願いします。備品のリストです。",
         "clear": [
-          "\u30ea\u30b9\u30c8"
+          "リスト"
         ]
       },
       {
@@ -1157,7 +1157,7 @@
       {
         "say": "emi",
         "emo": "amused",
-        "text": "Oh, she\u2019s found me something else. That can wait until I\u2019m dry again."
+        "text": "Oh, she’s found me something else. That can wait until I’m dry again."
       },
       {
         "say": "kuro",
@@ -1165,19 +1165,19 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "teasing",
-        "text": "\u30a8\u30df\u3055\u3093\u3001\u6cf3\u304e\u306b\u6765\u305f\u3093\u3067\u3057\u3087\u3046\uff1f"
+        "text": "エミさん、泳ぎに来たんでしょう？"
       },
       {
         "say": "emi",
         "emo": "warm",
-        "text": "Yes, I did come here to swim. You\u2019re quite right."
+        "text": "Yes, I did come here to swim. You’re quite right."
       },
       {
         "say": "kuro",
         "name": "Kuro",
         "overheard": true,
         "emo": "curious",
-        "text": "\u4eca\u65e5\u306f\u3001{oyogu}\uff1f"
+        "text": "今日は、{oyogu}？"
       },
       {
         "choice": [
@@ -1186,12 +1186,12 @@
             "go": "club_swimming_join"
           },
           {
-            "text": "Ask how to say you\u2019ll swim.",
+            "text": "Ask how to say you’ll swim.",
             "if": "!know_oyogu",
             "go": "club_swimming_word"
           },
           {
-            "text": "Carry Emi\u2019s bags to the attendant.",
+            "text": "Carry Emi’s bags to the attendant.",
             "go": "club_swimming_bags"
           },
           {
@@ -1209,14 +1209,14 @@
       {
         "say": "emi",
         "emo": "casual",
-        "text": "She\u2019s asking you too. {oyogu} means swim. Or you can sit with us, there\u2019s no test."
+        "text": "She’s asking you too. {oyogu} means swim. Or you can sit with us, there’s no test."
       },
       {
         "say": "kuro",
         "name": "Kuro",
         "emo": "slow",
         "slow": true,
-        "text": "{oyogu}\u3002"
+        "text": "{oyogu}。"
       },
       {
         "do": "type",
@@ -1234,7 +1234,7 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "warm",
-        "text": "\u3086\u3063\u304f\u308a\u3067\u3001\u3044\u3044\u3067\u3059\u3088\u3002"
+        "text": "ゆっくりで、いいですよ。"
       },
       {
         "say": "emi",
@@ -1254,14 +1254,14 @@
           {
             "say": "eric",
             "emo": "warm",
-            "text": "{oyogu}. I\u2019ll come in, but I\u2019m a bit out of practice."
+            "text": "{oyogu}. I’ll come in, but I’m a bit out of practice."
           }
         ],
         "else": [
           {
             "say": "eric",
             "emo": "warm",
-            "text": "I\u2019ll come in, but I\u2019m a bit out of practice."
+            "text": "I’ll come in, but I’m a bit out of practice."
           }
         ]
       },
@@ -1270,7 +1270,7 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "polite",
-        "text": "\u3053\u3063\u3061\u3067\u3059\u3002"
+        "text": "こっちです。"
       },
       {
         "do": "gesture",
@@ -1293,13 +1293,13 @@
         "say": "emi",
         "overheard": true,
         "emo": "casual",
-        "text": "{sumimasen}\u3001\u3053\u308c\u3001\u304a\u9858\u3044\u3067\u304d\u307e\u3059\u304b\uff1f"
+        "text": "{sumimasen}、これ、お願いできますか？"
       },
       {
         "say": "attendant",
         "overheard": true,
         "emo": "polite",
-        "text": "\u306f\u3044\u3001\u9810\u304b\u308a\u307e\u3059\u306d\u3002"
+        "text": "はい、預かりますね。"
       },
       {
         "call": "d3_pool_emi_hands_over"
@@ -1353,14 +1353,14 @@
           {
             "say": "eric",
             "emo": "warm",
-            "text": "{mitai}. I\u2019ll watch for a bit. Don\u2019t wait for me."
+            "text": "{mitai}. I’ll watch for a bit. Don’t wait for me."
           }
         ],
         "else": [
           {
             "say": "eric",
             "emo": "warm",
-            "text": "I\u2019ll watch for a bit. Don\u2019t wait for me."
+            "text": "I’ll watch for a bit. Don’t wait for me."
           }
         ]
       },
@@ -1373,13 +1373,13 @@
         "say": "emi",
         "overheard": true,
         "emo": "casual",
-        "text": "{sumimasen}\u3001\u3053\u308c\u3001\u304a\u9858\u3044\u3067\u304d\u307e\u3059\u304b\uff1f"
+        "text": "{sumimasen}、これ、お願いできますか？"
       },
       {
         "say": "attendant",
         "overheard": true,
         "emo": "polite",
-        "text": "\u306f\u3044\u3001\u9810\u304b\u308a\u307e\u3059\u306d\u3002"
+        "text": "はい、預かりますね。"
       },
       {
         "call": "d3_pool_emi_hands_over"
@@ -1413,14 +1413,14 @@
       {
         "say": "emi",
         "emo": "surprised",
-        "text": "Oh. That\u2019s colder than it was in August."
+        "text": "Oh. That’s colder than it was in August."
       },
       {
         "say": "kuro",
         "name": "Kuro",
         "overheard": true,
         "emo": "warm",
-        "text": "\u6cf3\u3052\u3070\u3001\u5c11\u3057\u6e29\u304b\u304f\u306a\u308a\u307e\u3059\u3088\u3002"
+        "text": "泳げば、少し温かくなりますよ。"
       },
       {
         "call": "d3_pool_length"
@@ -1438,7 +1438,7 @@
             "name": "Kuro",
             "overheard": true,
             "emo": "curious",
-            "text": "\u901f\u304b\u3063\u305f\uff1f"
+            "text": "速かった？"
           },
           {
             "say": "eric",
@@ -1450,19 +1450,19 @@
       {
         "say": "emi",
         "emo": "warm",
-        "text": "I nearly stayed upstairs to finish an email. I\u2019m glad I didn\u2019t."
+        "text": "I nearly stayed upstairs to finish an email. I’m glad I didn’t."
       },
       {
         "say": "kuro",
         "name": "Kuro",
         "overheard": true,
         "emo": "polite",
-        "text": "\u3082\u3046\u4e00\u672c\u3001\u6cf3\u304e\u307e\u305b\u3093\u304b\u3002"
+        "text": "もう一本、泳ぎませんか。"
       },
       {
         "say": "emi",
         "emo": "bright",
-        "text": "One more length? Yes, we\u2019ve got time."
+        "text": "One more length? Yes, we’ve got time."
       },
       {
         "do": "cam",
@@ -1473,17 +1473,17 @@
         "say": "emi",
         "overheard": true,
         "emo": "casual",
-        "text": "{sumimasen}\u3001\u30ea\u30b9\u30c8\u3001\u30c6\u30fc\u30d6\u30eb\u306b\u7f6e\u3044\u3066\u3082\u3089\u3048\u307e\u3059\u304b\uff1f",
+        "text": "{sumimasen}、リスト、テーブルに置いてもらえますか？",
         "clear": [
-          "\u30ea\u30b9\u30c8",
-          "\u30c6\u30fc\u30d6\u30eb"
+          "リスト",
+          "テーブル"
         ]
       },
       {
         "say": "attendant",
         "overheard": true,
         "emo": "polite",
-        "text": "\u306f\u3044\u3001\u7f6e\u3044\u3066\u304a\u304d\u307e\u3059\u3002"
+        "text": "はい、置いておきます。"
       },
       {
         "call": "d3_pool_another"
@@ -1523,27 +1523,27 @@
       {
         "say": "emi",
         "emo": "warm",
-        "text": "I used to keep my goggles in my work bag so I\u2019d actually come down. Then I started carrying everyone else\u2019s things instead."
+        "text": "I used to keep my goggles in my work bag so I’d actually come down. Then I started carrying everyone else’s things instead."
       },
       {
         "say": "kuro",
         "name": "Kuro",
         "overheard": true,
         "emo": "dry",
-        "text": "\u8377\u7269\u306f\u3001\u81ea\u5206\u3067\u3002"
+        "text": "荷物は、自分で。"
       },
       {
         "say": "kuro",
         "name": "Kuro",
         "overheard": true,
         "emo": "warm",
-        "text": "\u6b21\u306f\u3001{isshoni}\u3002"
+        "text": "次は、{isshoni}。"
       },
       {
         "say": "attendant",
         "overheard": true,
         "emo": "polite",
-        "text": "\u6765\u9031\u304b\u3089\u4f53\u80b2\u9928\u3067\u3059\u3002\u5ba4\u5185\u7528\u306e\u9774\u3092\u6301\u3063\u3066\u304d\u3066\u304f\u3060\u3055\u3044\u306d\u3002"
+        "text": "来週から体育館です。室内用の靴を持ってきてくださいね。"
       },
       {
         "say": "emi",
@@ -1553,7 +1553,7 @@
       {
         "say": "eric",
         "emo": "warm",
-        "text": "I\u2019ll know where to find you if the email can wait."
+        "text": "I’ll know where to find you if the email can wait."
       },
       {
         "do": "remember",
@@ -1580,12 +1580,12 @@
       {
         "say": "eric",
         "emo": "warm",
-        "text": "I\u2019ll head back. Thanks for having me."
+        "text": "I’ll head back. Thanks for having me."
       },
       {
         "say": "emi",
         "emo": "warm",
-        "text": "See you next Saturday, if you\u2019re free. We\u2019ll be in the gym by then."
+        "text": "See you next Saturday, if you’re free. We’ll be in the gym by then."
       },
       {
         "call": "d3_pool_exit"
@@ -1603,7 +1603,7 @@
       {
         "say": "emi",
         "emo": "casual",
-        "text": "All right. We\u2019ll be here if you come back."
+        "text": "All right. We’ll be here if you come back."
       },
       {
         "do": "cam",
@@ -1621,19 +1621,19 @@
       {
         "say": "emi",
         "emo": "bright",
-        "text": "We\u2019re indoors for the winter. You missed the last outdoor swim, but so did half the club."
+        "text": "We’re indoors for the winter. You missed the last outdoor swim, but so did half the club."
       },
       {
         "say": "kuro",
         "name": "Kuro",
         "overheard": true,
         "emo": "amused",
-        "text": "\u6301\u3063\u3066\u304d\u3061\u3083\u3044\u307e\u3057\u305f\u3002"
+        "text": "持ってきちゃいました。"
       },
       {
         "say": "emi",
         "emo": "casual",
-        "text": "Mine are in here somewhere. Shall we find out what we\u2019re doing?"
+        "text": "Mine are in here somewhere. Shall we find out what we’re doing?"
       },
       {
         "choice": [
@@ -1658,9 +1658,9 @@
         "say": "attendant",
         "overheard": true,
         "emo": "polite",
-        "text": "\u3053\u306e\u3042\u305f\u308a\u306f\u81ea\u7531\u306b\u4f7f\u3048\u307e\u3059\u3002\u30de\u30c3\u30c8\u306f\u3001\u305d\u3053\u306e\u68da\u3067\u3059\u3002",
+        "text": "このあたりは自由に使えます。マットは、そこの棚です。",
         "clear": [
-          "\u30de\u30c3\u30c8"
+          "マット"
         ]
       },
       {
@@ -1673,12 +1673,12 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "tired",
-        "text": "\u5bd2\u3044\u2026\u2026\u9774\u4e0b\u3001\u3082\u3063\u3068\u539a\u3044\u306e\u306b\u3059\u308c\u3070\u3088\u304b\u3063\u305f\u3002"
+        "text": "寒い……靴下、もっと厚いのにすればよかった。"
       },
       {
         "say": "eric",
         "emo": "warm",
-        "text": "I\u2019ll remember that for next time."
+        "text": "I’ll remember that for next time."
       },
       {
         "do": "remember",
@@ -1690,7 +1690,7 @@
         "do": "remember",
         "who": "kuro",
         "id": "club_seat",
-        "text": "Sat with her at the club\u2019s winter meeting."
+        "text": "Sat with her at the club’s winter meeting."
       },
       {
         "call": "club_swimming_shared"
@@ -1742,7 +1742,7 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "polite",
-        "text": "\u307e\u305f\u571f\u66dc\u65e5\u306b\u3002"
+        "text": "また土曜日に。"
       },
       {
         "do": "gesture",
@@ -1795,7 +1795,7 @@
           {
             "say": "emi",
             "emo": "casual",
-            "text": "He\u2019s given me the booking sheet. I should check who\u2019s coming next week before we start."
+            "text": "He’s given me the booking sheet. I should check who’s coming next week before we start."
           },
           {
             "choice": [
@@ -1833,7 +1833,7 @@
               {
                 "say": "emi",
                 "emo": "warm",
-                "text": "We\u2019ve got this end of the hall. Kuro\u2019s showing me how to keep it low. Mine keeps going up towards the lights."
+                "text": "We’ve got this end of the hall. Kuro’s showing me how to keep it low. Mine keeps going up towards the lights."
               },
               {
                 "set": "winter_visit_seen"
@@ -1845,7 +1845,7 @@
                 "name": "Kuro",
                 "overheard": true,
                 "emo": "warm",
-                "text": "\u30e9\u30b1\u30c3\u30c8\u3001\u3082\u3046\u4e00\u672c\u3042\u308a\u307e\u3059\u3088\u3002\u3088\u304b\u3063\u305f\u3089\u4f7f\u3063\u3066\u304f\u3060\u3055\u3044\u3002"
+                "text": "ラケット、もう一本ありますよ。よかったら使ってください。"
               }
             ]
           },
@@ -1859,7 +1859,7 @@
       {
         "say": "emi",
         "emo": "hesitant",
-        "text": "This, actually. I haven\u2019t even picked up a racket yet."
+        "text": "This, actually. I haven’t even picked up a racket yet."
       },
       {
         "go": "ongoing_winter_sheet"
@@ -1870,13 +1870,13 @@
         "say": "emi",
         "overheard": true,
         "emo": "polite",
-        "text": "\u3059\u307f\u307e\u305b\u3093\u3001\u3053\u308c\u3001\u304a\u9858\u3044\u3057\u3066\u3082\u3044\u3044\u3067\u3059\u304b\u3002\u79c1\u3082\u5c11\u3057\u6253\u3061\u305f\u3044\u306e\u3067\u3002"
+        "text": "すみません、これ、お願いしてもいいですか。私も少し打ちたいので。"
       },
       {
         "say": "attendant",
         "overheard": true,
         "emo": "polite",
-        "text": "\u306f\u3044\u3001\u3053\u3061\u3089\u3067\u805e\u3044\u3066\u304a\u304d\u307e\u3059\u3002\u3069\u3046\u305e\u3002"
+        "text": "はい、こちらで聞いておきます。どうぞ。"
       },
       {
         "do": "winterClub",
@@ -1893,7 +1893,7 @@
       {
         "say": "emi",
         "emo": "bright",
-        "text": "Thank you. Right, I\u2019d like a turn before I find something else to do."
+        "text": "Thank you. Right, I’d like a turn before I find something else to do."
       },
       {
         "do": "winterClub",
@@ -1965,7 +1965,7 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "warm",
-        "text": "\u3086\u3063\u304f\u308a\u6253\u3061\u307e\u3059\u306d\u3002\u307e\u305a\u3001\u898b\u3066\u3044\u3066\u304f\u3060\u3055\u3044\u3002"
+        "text": "ゆっくり打ちますね。まず、見ていてください。"
       },
       {
         "do": "winterClub",
@@ -2008,7 +2008,7 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "polite",
-        "text": "\u5927\u4e08\u592b\u3067\u3057\u305f\u304b\u3002"
+        "text": "大丈夫でしたか。"
       },
       {
         "choice": [
@@ -2018,7 +2018,7 @@
             "go": "ongoing_winter_ok"
           },
           {
-            "text": "I\u2019d like another try.",
+            "text": "I’d like another try.",
             "go": "ongoing_winter_repeat"
           },
           {
@@ -2041,7 +2041,7 @@
       {
         "say": "eric",
         "emo": "warm",
-        "text": "{daijoubu}\u3002"
+        "text": "{daijoubu}。"
       },
       {
         "go": "ongoing_winter_done"
@@ -2051,7 +2051,7 @@
       {
         "say": "eric",
         "emo": "warm",
-        "text": "{mouichido}\uff1f"
+        "text": "{mouichido}？"
       },
       {
         "go": "ongoing_winter_repeat"
@@ -2063,7 +2063,7 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "warm",
-        "text": "\u306f\u3044\u3002\u3082\u3046\u4e00\u5ea6\u3001\u3053\u3053\u304b\u3089\u6253\u3061\u307e\u3059\u306d\u3002"
+        "text": "はい。もう一度、ここから打ちますね。"
       },
       {
         "do": "winterClub",
@@ -2121,7 +2121,7 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "warm",
-        "text": "\u306f\u3044\u3001\u540c\u3058\u3068\u3053\u308d\u3067\u3002"
+        "text": "はい、同じところで。"
       },
       {
         "do": "winterClub",
@@ -2150,7 +2150,7 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "warm",
-        "text": "\u5cf6\u306b\u6765\u305f\u3068\u304d\u304b\u3089\u3067\u3059\u3002\u524d\u306f\u4e00\u4eba\u3067\u6cf3\u3044\u3067\u305f\u3093\u3067\u3059\u3051\u3069\u3001\u4eca\u306f\u30a8\u30df\u3055\u3093\u3068\u3002\u7d04\u675f\u3057\u3066\u308b\u3068\u3001\u4ed5\u4e8b\u3082\u5207\u308a\u4e0a\u3052\u3084\u3059\u304f\u3066\u3002"
+        "text": "島に来たときからです。前は一人で泳いでたんですけど、今はエミさんと。約束してると、仕事も切り上げやすくて。"
       },
       {
         "say": "emi",
@@ -2162,7 +2162,7 @@
         "name": "Kuro",
         "overheard": true,
         "emo": "amused",
-        "text": "\u5fd8\u308c\u306a\u3044\u3088\u3046\u306b\u58f0\u3092\u304b\u3051\u3066\u3063\u3066\u3001\u8a00\u3063\u305f\u3067\u3057\u3087\u3046\u3002"
+        "text": "忘れないように声をかけてって、言ったでしょう。"
       },
       {
         "say": "emi",
@@ -2231,5 +2231,133 @@
         "state": "winterClub"
       }
     ]
+  },
+  "text": {
+    "3:gym": {
+      "d3_emi": [
+        {
+          "if": "!d3_emi_introduced && !d2_brief_done && !fact_emi_ten_years && (!met_emi || d3_emi_needs_intro)",
+          "then": [
+            {
+              "say": "emi",
+              "emo": "bright",
+              "text": "Oh, you must be {mc.name}. I’m Emi, from B2. It’s good to meet you at last."
+            },
+            {
+              "do": "meet",
+              "who": "emi"
+            },
+            {
+              "set": "d3_emi_introduced"
+            },
+            {
+              "unset": "d3_emi_needs_intro"
+            }
+          ],
+          "else": [
+            {
+              "unset": "d3_emi_needs_intro"
+            }
+          ]
+        },
+        {
+          "say": "emi",
+          "emo": "bright",
+          "text": "I’m here for the pool keys. We’ve got one last swim outdoors tonight."
+        },
+        {
+          "do": "fact",
+          "who": "emi",
+          "id": "swimming_club",
+          "text": "In the swimming club. It meets on Saturday evenings."
+        },
+        {
+          "if": "club_swimming",
+          "then": [
+            {
+              "say": "emi",
+              "emo": "bright",
+              "text": "See you at the pool, then. You don’t have to swim, you can sit by the water."
+            }
+          ],
+          "else": [
+            {
+              "say": "emi",
+              "emo": "casual",
+              "text": "Take a slip at the plaza if you fancy it. You don’t have to swim, you can sit by the water."
+            }
+          ]
+        }
+      ],
+      "d3_gym_board": [
+        "> “Swimming club: Saturday evenings here from 10 October. The 3 October swim is outdoors.”"
+      ]
+    },
+    "4:gym": {
+      "d3_gym_board": [
+        "> “Swimming club: Saturday evenings in the gym from 10 October.”"
+      ]
+    },
+    "4:pool": {
+      "d4_pool_notice": [
+        "> “Pool closed for the season. Swimming club meets in the gym on Saturday evenings.”"
+      ]
+    },
+    "5:gym": {
+      "d3_gym_board": [
+        "> “Swimming club: Saturday evenings in the gym from 10 October.”"
+      ]
+    },
+    "5:pool": {
+      "d5_pool_notice": [
+        "> “Pool closed for the season. Swimming club meets in the gym on Saturday evenings.”"
+      ]
+    },
+    "ongoing:east_coast": {
+      "ongoing_emi_coast": [
+        {
+          "do": "cam",
+          "on": "emi",
+          "zoom": 1.2
+        },
+        {
+          "say": "emi",
+          "emo": "warm",
+          "text": "I’m having lunch before someone remembers where I am. Have you had yours?"
+        },
+        {
+          "choice": [
+            {
+              "text": "Ask about the club’s winter sessions.",
+              "go": "ongoing_emi_club"
+            },
+            {
+              "text": "Let her eat.",
+              "go": "ongoing_coast_leave"
+            }
+          ]
+        }
+      ],
+      "ongoing_emi_club": [
+        {
+          "say": "emi",
+          "emo": "casual",
+          "text": "Saturday evenings in the gym. Kuro comes too. I need someone to make me leave the office."
+        },
+        {
+          "say": "eric",
+          "emo": "warm",
+          "text": "Does she come up and get you?"
+        },
+        {
+          "say": "emi",
+          "emo": "amused",
+          "text": "She has done. I can’t pretend I’m out when she’s at reception."
+        },
+        {
+          "go": "ongoing_coast_leave"
+        }
+      ]
+    }
   }
 }

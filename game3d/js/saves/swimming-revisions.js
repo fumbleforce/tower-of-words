@@ -43,4 +43,50 @@ export default {
     'ongoing_winter_done': '311:91b25d86:3c144fea',
     'ongoing_winter_free': '152:bef20234:c09552a4',
   },
+  'text': {
+    '3:gym': {
+      'd3_emi': {
+        'eric': ['852:f2813f67:f985a113', '834:fab3691:11d21563'],
+        'carina': ['854:ec3be6b6:5828958', '836:660c8058:81f341e8'],
+      },
+      'd3_gym_board': {
+        'eric': ['94:17d9f3e5:d26fb793', '53:13f07579:3e7acf1b'],
+        'carina': ['94:17d9f3e5:d26fb793', '53:13f07579:3e7acf1b'],
+      },
+    },
+    '4:gym': {
+      'd3_gym_board': {
+        'eric': ['68:c6418a81:5ef33313', '53:13f07579:3e7acf1b'],
+        'carina': ['68:c6418a81:5ef33313', '53:13f07579:3e7acf1b'],
+      },
+    },
+    '4:pool': {
+      'd4_pool_notice': {
+        'eric': ['88:5b15138e:141666b0', '54:ca76d17e:762987c0'],
+        'carina': ['88:5b15138e:141666b0', '54:ca76d17e:762987c0'],
+      },
+    },
+    '5:gym': {
+      'd3_gym_board': {
+        'eric': ['68:c6418a81:5ef33313', '53:13f07579:3e7acf1b'],
+        'carina': ['68:c6418a81:5ef33313', '53:13f07579:3e7acf1b'],
+      },
+    },
+    '5:pool': {
+      'd5_pool_notice': {
+        'eric': ['88:5b15138e:141666b0', '54:ca76d17e:762987c0'],
+        'carina': ['88:5b15138e:141666b0', '54:ca76d17e:762987c0'],
+      },
+    },
+    'ongoing:east_coast': {
+      'ongoing_emi_coast': {
+        'eric': ['283:d39e1d4e:bdf072e', '274:b6d6f073:15621397'],
+        'carina': ['283:d39e1d4e:bdf072e', '274:b6d6f073:15621397'],
+      },
+      'ongoing_emi_club': {
+        'eric': ['326:8cbb19cb:a4534225', '326:5f801379:be764a1b'],
+        'carina': ['326:8cbb19cb:a4534225', '326:5f801379:be764a1b'],
+      },
+    },
+  },
 };

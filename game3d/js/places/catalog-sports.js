@@ -33,7 +33,7 @@ export const SPORTS_DETAILS = {
 export const POOL_DETAILS = {
   things: {
     changing_room: { label: 'Pool exit', kind: 'thing', verb: 'Go' },
-    // day 3, the evening: the swimming club's last outdoor swim (story/clubs.js, story/day3/pool.js)
+    // Saturday evenings: the swimming club’s pool session (story/clubs.js, story/day3/pool.js)
     emi: { label: 'Emi', kind: 'person' },
     kuro: { label: 'Receptionist', kind: 'person' },
     attendant: { label: 'Attendant', kind: 'person' },
