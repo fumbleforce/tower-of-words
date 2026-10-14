@@ -29,10 +29,10 @@ export const swimmingNodes = {
   ],
   ongoing_swimming_deck: [{ do: 'sit', who: 'eric', at: 'deck_bench_s' }, { go: 'ongoing_swimming_length' }],
   ongoing_swimming_length: [
-    ...action('emiEnter'), ...action('length'),
+    ...action('emiEnter'), ...action('length', { track: true }),
     { say: 'kuro', name: 'Kuro', overheard: true, emo: 'polite', text: 'もう一本、泳ぎませんか。' },
     { say: 'emi', emo: 'bright', text: 'One more length? Yes, we’ve got time.' },
-    ...action('another'), { call: 'ongoing_swimming_done' }, { do: 'save' },
+    ...action('another', { track: true }), { call: 'ongoing_swimming_done' }, { do: 'save' },
     { choice: [
       { text: 'Sit with them after the swim.', go: 'ongoing_swimming_sit' },
       { text: 'Say goodnight and leave the pool.', go: 'club_swimming_goodnight' },
@@ -48,7 +48,7 @@ export const swimmingNodes = {
     { say: 'attendant', overheard: true, emo: 'polite', text: 'はい、預かりますね。' },
     ...action('sheetBack'),
     { say: 'emi', emo: 'bright', text: 'Thank you. I’d like to get a length in before I find something else to do.' },
-    ...action('emiEnter'), ...action('length'), ...action('sit'),
+    ...action('emiEnter'), ...action('length', { track: true }), ...action('sit'),
     { set: 'ms3_emi' }, { do: 'bondStep', who: 'emi', to: 3 },
     { do: 'remember', who: 'emi', id: 'winter_turn', text: 'Left the booking sheet with the attendant and went swimming.' },
     { call: 'ongoing_swimming_done' }, { go: 'ongoing_swimming_seated' },

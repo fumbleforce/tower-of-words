@@ -18,7 +18,7 @@
 //   the hall: a maple floor, the wainscot and high windows round its walls; the badminton court across its north
 //   part in green, its net up; the red boundary line; two long benches down the west wall by the windows; the
 //   equipment store in the north-west corner, its sliding door pushed open on the ball carts, the mats and the net
-//   posts; the winter meeting corner north-east (folding chairs facing a whiteboard, a trolley of chairs); a cart of
+//   posts; the meeting corner north-east (folding chairs facing a whiteboard, a trolley of chairs); a cart of
 //   volleyballs inside the doors; the basketball goal and the clock on the north wall
 import * as THREE from 'three';
 import { Kit } from '../dorms/kit.js';
@@ -228,12 +228,12 @@ function changing(kit, nav, signs) {
   kit.box('#3f8f6a', 0.06, 0.06, 0.046, ax, 0.52, az + 0.003, {
     opts: { emissive: '#3f8f6a', emissiveIntensity: 0.6 },
   });
-  // between the changing rooms: the pool's notice for the season, white
+  // between the changing rooms: the pool's swimming-club notice, white
   const nx = (CHANGING.men + CHANGING.women) / 2;
   signs.drawn(poolNotice, 0.62, 0.5, [nx, 0.95, fz + 0.03], 0);
   return { men: CHANGING.men, women: CHANGING.women };
 }
-// the notice: the outdoor pool's last day this season, the hall from the week after (story/day3/gym.js d3_gym_board)
+// the notice: the outdoor pool's Saturday-evening club meeting (story/day3/gym.js d3_gym_board)
 function poolNotice(g, W, H) {
   g.fillStyle = '#f4f2ec';
   g.fillRect(0, 0, W, H);
@@ -246,8 +246,8 @@ function poolNotice(g, W, H) {
   g.fillText('OUTDOOR POOL', W / 2, H * 0.125);
   g.fillStyle = '#2a2d33';
   g.font = `700 ${Math.round(H * 0.13)}px sans-serif`;
-  g.fillText('Last swim: Sat 3 Oct', W / 2, H * 0.42);
+  g.fillText('Swimming club', W / 2, H * 0.42);
   g.font = `${Math.round(H * 0.105)}px sans-serif`;
-  g.fillText('Swimming club meets', W / 2, H * 0.64);
-  g.fillText('in the hall from 10 Oct', W / 2, H * 0.8);
+  g.fillText('Saturday evenings', W / 2, H * 0.64);
+  g.fillText('Meet at the pool', W / 2, H * 0.8);
 }

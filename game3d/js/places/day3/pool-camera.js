@@ -27,7 +27,7 @@ export function poolCamera(game) {
     cam.close.zoom = cam.fitDist / (distance / Math.min(1.25, width));
   }
   return {
-    frame(point, { span = 3.8, y = 0.3, yaw = 3.65, elev = 0.48 } = {}) {
+    frame(point, { span = 3.8, y = 0.3, yaw = 3.65, elev = 0.48, cut = false } = {}) {
       bind();
       home ||= { yaw: cam.yaw, elev: cam.elev };
       shot = { point, span, y, yaw, elev };
@@ -35,6 +35,12 @@ export function poolCamera(game) {
       held = cam.close;
       held.poolWaterShot = true;
       update();
+      if (cut) cam.snap(game.player.root.position);
+    },
+    track(point) {
+      if (!shot || !cam?.close) return;
+      shot.point = [...point];
+      cam.close.target.copy(cam.toWorld(point[0], point[1], shot.y));
     },
     clear,
     update,

@@ -13,6 +13,7 @@ import { poolAction, completedPoolAction } from './pool-action.js';
 import { poolHandling } from './pool-handling.js';
 import { poolEquipmentActions } from './pool-equipment.js';
 import { poolCamera } from './pool-camera.js';
+import { poolLengths } from './pool-length.js';
 import { poolMeeting } from './pool-meeting.js';
 
 const [WX0, WZ0] = pt([D.WATER[0], D.WATER[2]]),
@@ -154,50 +155,20 @@ export function poolClub(game, { root, cast, outfits }) {
     game.player.seatOut = out;
     game.walker.facing = s.ry;
   }
-  // a length and back: the swimmers along their lanes, heads up
-  async function swimLength(withPlayer) {
-    const rows = [
-      ['kuro', LANE2],
-      ['emi', LANE2 + D.LANE_W],
-    ];
-    if (withPlayer) rows.push(['eric', LANE]);
-    const from = rows.map(([id, x]) => {
-      const r = who(id);
-      if (id !== 'eric') inWater(id, [x, r.root.position.z], Math.PI);
-      waterPose(id).enter('swim');
-      return [r, x, r.root.position.z, id];
-    });
-    const far = WZ0 + 1.2,
-      near = WZ1 - 1.8;
-    const cam = P().cam;
-    camera.clear();
-    cam.closeOn?.([(WX0 + WX1) / 2, (WZ0 + WZ1) / 2], 0.9);
-    sfx('flap');
-    await action.wait(
-      action.tween(8, (k) =>
-        from.forEach(([r, x, z0]) => {
-          r.root.position.set(x, r.root.position.y, z0 + (far - z0) * k);
-          r.root.rotation.y = Math.PI;
-        }),
-      ),
-    );
-    await action.wait(
-      action.tween(8, (k) =>
-        from.forEach(([r, x]) => {
-          r.root.position.set(x, r.root.position.y, far + (near - far) * k);
-          r.root.rotation.y = 0;
-        }),
-      ),
-    );
-    for (const [, , , id] of from) waterPose(id).enter();
-    sfx('flap');
-    if (withPlayer) {
-      // Kuro finishes beside the player and waits at the wall
-      const k = who('kuro');
-      k.root.position.set(LANE + 0.75, k.root.position.y, near);
-      camera.frame([LANE2, near]);
-    }
-  }
+  const swimLength = poolLengths(game, {
+    action,
+    camera,
+    who,
+    inWater,
+    waterPose,
+    LANE,
+    LANE2,
+    WX0,
+    WX1,
+    WZ0,
+    WZ1,
+    laneWidth: D.LANE_W,
+  });
 
   const { putListAway, carryBags, collectList, returnList, giveList } = poolEquipmentActions(game, {
     action,
@@ -212,7 +183,7 @@ export function poolClub(game, { root, cast, outfits }) {
   });
 
   const hooks = {
-    async poolSession({ state, repeat = false, from = 'member', staySeated = false } = {}) {
+    async poolSession({ state, repeat = false, from = 'member', staySeated = false, track = false } = {}) {
       const cam = P().cam;
       if (!['length', 'another', 'emiEnter'].includes(state)) camera.clear();
       if (state === 'begin') {
@@ -253,11 +224,11 @@ export function poolClub(game, { root, cast, outfits }) {
         return;
       }
       if (state === 'length') {
-        await action.wait(swimLength(!!flags.d3_player_swims));
+        await action.wait(swimLength(!!flags.d3_player_swims, { track }));
         return;
       }
       if (state === 'another') {
-        await action.wait(Promise.all([collectList(), swimLength(!!flags.d3_player_swims)]));
+        await action.wait(Promise.all([collectList(), swimLength(!!flags.d3_player_swims, { track })]));
         return;
       }
       if (state === 'sit') {

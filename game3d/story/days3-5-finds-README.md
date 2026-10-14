@@ -12,6 +12,6 @@ Filter by `from`, `until` and `if` before creating a target at `at` with the giv
 
 `putBack` completes the return action specified by that entry before control returns. No umbrella, key, letter, catalogue, cup, book or lunch slip enters inventory. Return the coin flap and saucer to their initial position; leave the bench shim in place. Save only the final seen flag. On Continue after an interrupted look, restore the object and make the interaction available again unless its final flag was saved.
 
-Preserve the telescope's free-use sign and taped payment slot. The old pool key find is day 3 only, for swimming members in the evening, and cannot appear at a winter gym meeting. All other finds remain optional. Do not change the bakery flyer or album totals.
+Preserve the telescope's free-use sign and taped payment slot. The pool key find is day 3 only, for swimming members in the evening. All other finds remain optional. Do not change the bakery flyer or album totals.
 
 Check both protagonist choices, each date/condition boundary, repeated looks, Continue during a look and the return route on phone and desktop. The structural checker covers data and persistence hooks; it is not rendered verification.
