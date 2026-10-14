@@ -107,7 +107,7 @@ Where a word is taught, Eric types its romaji. The prompt shows the Japanese, th
 
 With Settings, Skip skill checks on, there is nothing to type: the prompt's line shows as an ordinary line with the word under it (the Japanese with its play button, the romaji, the English), it moves on like any line (a tap, or Auto), and the story goes on as if it was typed: Eric says the word, it becomes known and `typed_<word>` is set. It doesn't count as one of the word's practice tries, and the Say menu doesn't ask for the word to be typed while the setting is on.
 
-Voice input (Jørgen, 2026-09-28): he can say the word into the microphone instead, both at the prompt and when using it. It runs Whisper on the device by default (a one-time download of about 77 MB; nothing leaves the device), or the browser's recogniser, or off (Settings). The microphone is asked for only the first time he presses the mic.
+Voice input (Jørgen, 2026-09-28): he can say the word into the microphone instead, both at the prompt and when using it. It runs Whisper on the device by default (a one-time download of about 77 MB; nothing leaves the device), or the browser's recogniser, or off (Settings). The microphone is asked for only the first time he presses the mic. Holding the mic or V keeps the full recording through release, including a quiet ending. A quick tap listens until 0.9 seconds of quiet or six seconds in total. On-device recognition checks the recording against the room measured before the press and keeps quiet syllables once speech is detected; silence and steady room noise do not count as a word (Jørgen, 2026-10-14).
 
 ## Word practice
 

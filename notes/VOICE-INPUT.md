@@ -111,6 +111,18 @@ Test: game3d/tools/speech/level-clips.py makes the files and level.mjs plays the
 
 Eric's learner "kite" near -50 comes out as タイト about half the time in both versions; that's the recogniser on a hard clip, not the level. Not tested: his own mic (a SteelSeries Arctis Nova 7 on PipeWire is the system default), and the Browser mode (Web Speech), which has its own endpointing.
 
+## 6. Complete recordings (2026-10-14, #582)
+
+Jørgen: "does the voice recording during skill checks have a lower limit on picking up sound or something? it doesnt seem to fully record what I am saying, even when the microphone picks it up."
+
+The earlier gate estimated room noise from the recording itself. That could treat quiet syllables as noise, reject a short word, or trim a soft ending after a louder syllable. The microphone also discarded the input block still pending when the player released the button.
+
+The current capture keeps the room level from idle audio and freezes it when recording starts. Speech must exceed twice that level and 0.00035 RMS, about -69 dBFS, for a total of 80 milliseconds. A recording without idle history falls back to its own quiet frames so steady noise on a first press still fails. The meter and tap endpoint use the same loudness threshold. The tap endpoint counts voiced audio samples rather than animation frames, so a short word still counts at a low frame rate. Changes in room noise can still resemble speech to an energy gate.
+
+Recognition receives the full recording without amplitude trimming. Releasing a hold waits for the next input block, capped at 250 milliseconds if audio callbacks stop. Closing the prompt resolves that wait and prevents a late result from completing the next prompt. The microphone still retains about 0.35 seconds before a press.
+
+`node --test game3d/test/unit/speech-signal.test.mjs` checks quiet and short words, a quiet ending, gaps between voiced sounds, silence and steady noise. `BASE=<checkout>/game3d node game3d/tools/speech/capture-regression.mjs` checks real DOM holds and taps at desktop and phone sizes, pending audio on release, resampling, first-press noise, cancellation and a real WebAudio stream. Its transcript stub records exactly what reaches recognition. Separate cases run Whisper base against existing native clips at their original and quiet levels. Screenshots and JSON stay in the printed artifacts folder.
+
 ## Wiring (requested)
 
 notes/production-requests.md, 2026-09-29, voice-input:
