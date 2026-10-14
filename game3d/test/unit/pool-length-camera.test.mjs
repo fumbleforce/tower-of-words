@@ -58,3 +58,17 @@ test('the first authored visit retains its existing wide length framing', async 
   await run(false);
   assert.deepEqual(shots, [[[3.5, 1], .9]]);
 });
+
+test('recurring bench shot survives free play and Continue, then releases when the player stands', () => {
+  const cam = new RoomCam({ yaw: -.22, elev: 54 });
+  const game = { place: { cam }, player: { root: new THREE.Group(), seated: true } };
+  const camera = poolCamera(game);
+  camera.frame([2, -8], { span: 2.8, y: .65, yaw: 1.2, elev: .42, untilStanding: true });
+  const saved = structuredClone(camera.snapshot()); camera.update();
+  assert.ok(cam.close?.poolWaterShot, 'the free seated ending retains its authored group view');
+  camera.dispose(); camera.restore(saved); camera.update();
+  assert.ok(cam.close?.poolWaterShot, 'Continue retains the bench view');
+  game.player.seated = false; camera.update();
+  assert.equal(cam.close, null); assert.equal(camera.snapshot(), null);
+  assert.equal(cam.elev, 54 * Math.PI / 180); camera.dispose();
+});

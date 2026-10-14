@@ -254,7 +254,13 @@ export function poolClub(game, { root, cast, outfits }) {
             i ? 0.02 : 0.36,
           ),
         );
-        camera.frame([SEAT_S[0] + 0.25, SEAT_S[1] + 0.62], { span: 2.8, y: 0.65, yaw: 1.2, elev: 0.42 });
+        camera.frame([SEAT_S[0] + 0.25, SEAT_S[1] + 0.62], {
+          span: 2.8,
+          y: 0.65,
+          yaw: 1.2,
+          elev: 0.42,
+          untilStanding: staySeated,
+        });
         return;
       }
       if (state === 'free') {

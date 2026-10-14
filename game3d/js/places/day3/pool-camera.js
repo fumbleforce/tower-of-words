@@ -20,6 +20,10 @@ export function poolCamera(game) {
       if (cam.close?.poolWaterShot) held = cam.close;
       else clear();
     }
+    if (shot?.untilStanding && !game.player.seated) {
+      cam.release();
+      return;
+    }
     if (!shot || !cam.close) return;
     Object.assign(cam, { yaw: shot.yaw, elev: shot.elev });
     const width = Math.max(1, cam.camera.aspect);
@@ -27,10 +31,10 @@ export function poolCamera(game) {
     cam.close.zoom = cam.fitDist / (distance / Math.min(1.25, width));
   }
   return {
-    frame(point, { span = 3.8, y = 0.3, yaw = 3.65, elev = 0.48, cut = false } = {}) {
+    frame(point, { span = 3.8, y = 0.3, yaw = 3.65, elev = 0.48, cut = false, untilStanding = false } = {}) {
       bind();
       home ||= { yaw: cam.yaw, elev: cam.elev };
-      shot = { point, span, y, yaw, elev };
+      shot = { point, span, y, yaw, elev, untilStanding };
       cam.closeOn(point, 1, y);
       held = cam.close;
       held.poolWaterShot = true;

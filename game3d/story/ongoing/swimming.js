@@ -38,7 +38,7 @@ export const swimmingNodes = {
       { text: 'Say goodnight and leave the pool.', go: 'club_swimming_goodnight' },
     ] },
   ],
-  ongoing_swimming_sit: [...action('sit'), { go: 'ongoing_swimming_seated' }],
+  ongoing_swimming_sit: [...action('sit', { staySeated: true }), { go: 'ongoing_swimming_seated' }],
   ongoing_swimming_emi_choice: [
     { say: 'emi', emo: 'hesitant', text: 'Swimming, actually. I haven’t even got in yet.' },
     { go: 'ongoing_swimming_sheet' },
@@ -48,7 +48,7 @@ export const swimmingNodes = {
     { say: 'attendant', overheard: true, emo: 'polite', text: 'はい、預かりますね。' },
     ...action('sheetBack'),
     { say: 'emi', emo: 'bright', text: 'Thank you. I’d like to get a length in before I find something else to do.' },
-    ...action('emiEnter'), ...action('length', { track: true }), ...action('sit'),
+    ...action('emiEnter'), ...action('length', { track: true }), ...action('sit', { staySeated: true }),
     { set: 'ms3_emi' }, { do: 'bondStep', who: 'emi', to: 3 },
     { do: 'remember', who: 'emi', id: 'winter_turn', text: 'Left the booking sheet with the attendant and went swimming.' },
     { call: 'ongoing_swimming_done' }, { go: 'ongoing_swimming_seated' },
@@ -69,7 +69,7 @@ export const swimmingNodes = {
     ] },
   ],
   ongoing_swimming_seated: [
-    ...action('free', { staySeated: true }), { do: 'cam', back: true }, { do: 'ongoingGoal' }, { do: 'save' },
+    ...action('free', { staySeated: true }), { do: 'ongoingGoal' }, { do: 'save' },
   ],
   ongoing_swimming_free: [
     ...action('free'), { do: 'cam', back: true }, { do: 'ongoingGoal' }, { do: 'save' },

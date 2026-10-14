@@ -3,11 +3,11 @@ import { turningCam } from '../turning-cam.js';
 
 // Look over the lockers while walking the rear entrance corridor; deck and authored water shots keep their lens.
 export function poolWalkingCamera(cam, look, gender) {
-  const { bounds, corridor } = changingPlan(gender);
+  const { bounds } = changingPlan(gender);
   const poseAt = (x, z) => {
-    const [x0, x1, z0] = bounds;
+    const [x0, x1, z0, z1] = bounds;
     const inPavilion = x >= x0 - 0.4 && x <= x1 + 0.4 && z >= z0 - 0.4;
-    const blend = inPavilion ? Math.max(0, Math.min(1, (corridor[1] + 2.3 - z) / 1.4)) : 0;
+    const blend = inPavilion ? Math.max(0, Math.min(1, (z1 + 2.0 - z) / 1.4)) : 0;
     return { yaw: look.yaw, elev: look.elev + (Math.PI * 0.43 - look.elev) * blend };
   };
   const turn = turningCam(cam, poseAt);
