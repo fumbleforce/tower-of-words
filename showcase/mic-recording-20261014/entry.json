@@ -1,0 +1,37 @@
+{
+  "title": "Complete voice recordings",
+  "date": "2026-10-14",
+  "by": "codex",
+  "caption": "Voice skill checks retain quiet words and soft endings, including the audio still pending when you release the microphone.",
+  "commit": "d7fb1e819",
+  "result": [
+    "phone-listening",
+    "desktop-hit"
+  ],
+  "images": [
+    {
+      "id": "phone-listening",
+      "image": "game3d/shots/mic-repair-20261014/1792011580550-1236664/390-listening.png",
+      "caption": "The actual phone prompt in an isolated microphone test."
+    },
+    {
+      "id": "desktop-hit",
+      "image": "game3d/shots/mic-repair-20261014/1792011580550-1236664/1366-hit.png",
+      "caption": "The actual desktop prompt after the test answer is accepted."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play locally",
+      "href": "game3d/"
+    },
+    {
+      "label": "Capture and endpoint checks",
+      "href": "game3d/shots/mic-repair-20261014/1792011580550-1236664/1366-capture.json"
+    },
+    {
+      "label": "Recognition checks",
+      "href": "game3d/shots/mic-repair-20261014/1792011580550-1236664/asr.json"
+    }
+  ]
+}
