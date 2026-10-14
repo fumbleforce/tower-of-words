@@ -13,7 +13,7 @@ export function officeWalls(root, bounds) {
       bottom,
       height >= h && h >= 1.4 ? 2.4 : height,
     ]);
-    enclosure.wall(axis, a, b, c, h, t, { ...options, holes }, 1.3);
+    enclosure.wall(axis, a, b, c, h, t, { ...options, holes }, OFFICE_DOOR_HEIGHT);
   };
 }
 
