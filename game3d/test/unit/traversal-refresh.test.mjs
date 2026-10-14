@@ -104,3 +104,100 @@ test("instanced supports and external sibling roots update immediately as the pl
   traversal.refresh();
   near(traversal.support(3, 0, 2), 0.9);
 });
+
+test("excluded actor and decoration subtrees receive no matrix updates during construction or refresh", () => {
+  const space = new T.Group(),
+    actor = new T.Group(),
+    decoration = new T.Group();
+  space.add(actor, decoration);
+  decoration.userData.noTraversal = true;
+  for (const parent of [actor, decoration])
+    for (let i = 0; i < 512; i++) block(parent, 0, 2, 0);
+  block(space, 0, -0.1, 0);
+  const excluded = new Set();
+  actor.traverse((o) => excluded.add(o));
+  decoration.traverse((o) => excluded.add(o));
+  const original = T.Object3D.prototype.updateWorldMatrix;
+  let calls = 0;
+  T.Object3D.prototype.updateWorldMatrix = function (...args) {
+    if (excluded.has(this)) calls++;
+    return original.apply(this, args);
+  };
+  let traversal;
+  try {
+    traversal = createTraversal({ space }, [actor]);
+    traversal.refresh();
+    actor.position.y = 3;
+    decoration.position.y = 4;
+    traversal.refresh();
+  } finally {
+    T.Object3D.prototype.updateWorldMatrix = original;
+  }
+  assert.equal(calls, 0);
+  near(traversal.support(0, 0, 10), 0);
+});
+
+test("reparented supports change immediately and excluded former sources do no actor matrix work", () => {
+  const space = new T.Group(),
+    parent = new T.Group(),
+    actor = new T.Group();
+  space.add(parent, actor);
+  const support = block(parent, 0, 0, 0),
+    traversal = createTraversal({ space }, [actor]);
+  traversal.refresh();
+  near(traversal.support(0, 0, 2), 0.1);
+  actor.add(support);
+  actor.position.y = 0.5;
+  const original = T.Object3D.prototype.updateWorldMatrix;
+  let calls = 0;
+  T.Object3D.prototype.updateWorldMatrix = function (...args) {
+    if (this === actor || this === support) calls++;
+    return original.apply(this, args);
+  };
+  try {
+    traversal.refresh();
+  } finally {
+    T.Object3D.prototype.updateWorldMatrix = original;
+  }
+  assert.equal(calls, 0);
+  assert.equal(traversal.support(0, 0, 2), null);
+  parent.add(support);
+  parent.position.y = 0.4;
+  traversal.refresh();
+  near(traversal.support(0, 0, 2), 0.5);
+});
+
+test("manual local and world matrices retain Three world-update semantics through parent changes", () => {
+  const space = new T.Group(),
+    parent = new T.Group();
+  space.add(parent);
+  const support = block(parent);
+  support.updateMatrix();
+  support.matrixAutoUpdate = false;
+  const traversal = createTraversal({ space });
+  traversal.refresh();
+  near(traversal.support(0, 0, 2), 0.1);
+  parent.position.y = 0.5;
+  traversal.refresh();
+  near(traversal.support(0, 0, 2), 0.6);
+  support.matrixWorldAutoUpdate = false;
+  support.matrixWorld.makeTranslation(0, 1, 0);
+  traversal.refresh();
+  near(traversal.support(0, 0, 2), 1.1);
+});
+
+test("nested void declarations use their current parent transform during index construction", () => {
+  const space = new T.Group(),
+    holes = new T.Group();
+  space.add(holes);
+  holes.position.x = 2;
+  holes.userData.traversalVoids = [
+    { min: [-0.4, -2, -0.4], max: [0.4, 0.3, 0.4] },
+  ];
+  const floor = new T.Mesh(new T.BoxGeometry(8, 0.2, 8), material);
+  floor.position.y = -0.1;
+  space.add(floor);
+  const traversal = createTraversal({ space });
+  assert.equal(traversal.support(2, 0, 0.2), null);
+  near(traversal.support(0, 0, 0.2), 0);
+});

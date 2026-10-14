@@ -8,7 +8,19 @@ const EPS = 0.025;
 export function createTraversal(place, excluded = []) {
   const root = place.space;
   const roots = [root, ...(place.traversalRoots || [])];
-  for (const sourceRoot of roots) sourceRoot.updateWorldMatrix(true, true);
+  const updated = new Map();
+  // The same parent-first world updates as Three's subtree walk, restricted to physical sources. Sharing
+  // ancestors avoids repeating them per mesh; excluded actors and decorations need no matrix work here.
+  function updateSourceMatrix(object) {
+    if (!object) return false;
+    if (updated.has(object)) return updated.get(object);
+    const force = updateSourceMatrix(object.parent);
+    const dirty = force || object.matrixAutoUpdate || object.matrixWorldNeedsUpdate;
+    object.updateWorldMatrix(false, false, force);
+    updated.set(object, dirty);
+    return dirty;
+  }
+  for (const sourceRoot of roots) updateSourceMatrix(sourceRoot);
   const inverse = root.matrixWorld.clone().invert();
   const skip = new Set(excluded.filter(Boolean));
   const entries = [],
@@ -48,6 +60,7 @@ export function createTraversal(place, excluded = []) {
   }
   function collect(object) {
     if (object.userData.traversalVoids && !voidSources.has(object)) {
+      updateSourceMatrix(object);
       voidSources.add(object);
       const matrix = new THREE.Matrix4().multiplyMatrices(inverse, object.matrixWorld);
       for (const v of object.userData.traversalVoids)
@@ -73,6 +86,7 @@ export function createTraversal(place, excluded = []) {
       )
     )
       return;
+    updateSourceMatrix(object);
     sources.set(object, {
       matrix: object.matrixWorld.clone(),
       geometry: object.geometry,
@@ -105,9 +119,8 @@ export function createTraversal(place, excluded = []) {
       ...(place.crowd || []),
     ])
       if (actor.root) skip.add(actor.root);
-    // Update the full source trees once. Updating each mesh with its parents repeatedly recomputes the
-    // same ancestors, even while the player stands still. Every moving support still updates this frame.
-    for (const sourceRoot of roots) sourceRoot.updateWorldMatrix(true, true);
+    updated.clear();
+    for (const sourceRoot of roots) updateSourceMatrix(sourceRoot);
     if (performance.now() - discovery > 250) {
       for (const sourceRoot of roots) sourceRoot.traverse(collect);
       discovery = performance.now();
@@ -116,6 +129,8 @@ export function createTraversal(place, excluded = []) {
     inverse.copy(root.matrixWorld).invert();
     const frameMoved = !inverse.equals(previousInverse);
     for (const [source, record] of sources) {
+      if (!present(source)) continue;
+      updateSourceMatrix(source);
       if (
         !frameMoved &&
         source.matrixWorld.equals(record.matrix) &&
