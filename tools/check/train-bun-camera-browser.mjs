@@ -150,10 +150,15 @@ try {
         await page.locator('#title .mcont').click();
         await page.locator('#saves button.slot').filter({ hasText: 'Quick save' }).click();
         await page.waitForFunction(
-          () =>
-            !document.body.classList.contains('at-title') &&
-            !document.getElementById('talk').hidden &&
-            document.getElementById('talk').innerText.includes('Woman with a bun'),
+          () => {
+            const talk = document.getElementById('talk');
+            return (
+              !!talk &&
+              !document.body.classList.contains('at-title') &&
+              !talk.hidden &&
+              talk.innerText.includes('Woman with a bun')
+            );
+          },
           null,
           { timeout: 30000 },
         );
