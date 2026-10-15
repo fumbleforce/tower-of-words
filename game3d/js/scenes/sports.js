@@ -40,6 +40,7 @@ import * as E from './plaza/east-plan.js';
 import { courts } from './sports/courts.js';
 import { gymSteps } from './sports/gym.js';
 import { poolSteps } from './sports/pool.js';
+import { openPoolBasin } from './sports/pool-basin.js';
 import { groundsSteps } from './sports/grounds.js';
 import { linkSteps, PAVE_W } from './office-quarter/link.js';
 import { streetSteps } from './office-quarter/grounds.js';
@@ -142,6 +143,7 @@ export function* sportsSteps({
     near: 40,
     far: 80,
   });
+  openPoolBasin(root);
   const nooks = buildNooks(P.NOOKS, root);
   for (const r of nooks.blocks) nav.block(...r);
   yield* mergeStaticSteps(root);

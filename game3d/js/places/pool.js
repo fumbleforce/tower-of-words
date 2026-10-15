@@ -120,7 +120,7 @@ export async function poolPlace(game) {
       w.follow(p.x, p.z);
       w.update();
       d3.update(dt);
-      club.update();
+      club.update(dt);
     },
     leave() {
       doorVisibility.reset();

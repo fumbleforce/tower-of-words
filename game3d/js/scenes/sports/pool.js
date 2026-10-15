@@ -23,6 +23,7 @@ import { meshFence } from './courts.js';
 import * as P from './plan.js';
 import * as D from './deck-plan.js';
 import { poolFloodlights } from './pool-lights.js';
+import { poolWater } from './pool-water.js';
 import { buildChangingRoom } from './changing-room.js';
 
 const C = {
@@ -42,23 +43,31 @@ const [DX0, DX1, DZ0, DZ1] = P.DECK,
 const { x: PX, z: PZ, w: PW, l: PL } = D.POOL; // six lanes, 25 m
 const PH = 3.6; // the pavilion's walls (with the parapet, the layout's 2 storeys of 2)
 
-function deck(p, pv, signs) {
-  pv.field([DX0, DX1, DZ0, DZ1], {
-    pattern: 'grid',
-    module: [1.0, 1.0],
-    tones: GRANITE.pale,
-    origin: [DX0, DZ0],
-  });
+function deck(root, p, pv, signs) {
+  const [x0, x1, z0, z1] = D.WATER;
+  for (const rect of [
+    [DX0, x0, DZ0, DZ1],
+    [x1, DX1, DZ0, DZ1],
+    [x0, x1, DZ0, z0],
+    [x0, x1, z1, DZ1],
+  ])
+    pv.field(rect, {
+      pattern: 'grid',
+      module: [1.0, 1.0],
+      tones: GRANITE.pale,
+      origin: [DX0, DZ0],
+    });
   // the pool: the coping, the water, the lane lines under it, the ropes on it
-  const [x0, x1, z0, z1] = [PX - PW / 2, PX + PW / 2, PZ - PL / 2, PZ + PL / 2];
-  p.box(C.coping, PW + 0.6, 0.07, PL + 0.6, PX, 0, PZ, { cast: false });
-  p.box(C.water, PW, 0.02, PL, PX, 0.07, PZ, { cast: false });
+  for (const x of [x0 - 0.15, x1 + 0.15]) p.box(C.coping, 0.3, 1.34, PL + 0.6, x, -1.2, PZ, { cast: false });
+  for (const z of [z0 - 0.15, z1 + 0.15]) p.box(C.coping, PW, 1.34, 0.3, PX, -1.2, z, { cast: false });
+  p.box('#83afb8', PW, 0.05, PL, PX, -1.25, PZ, { cast: false });
+  const water = poolWater(root);
   const lw = PW / 6;
   for (let i = 0; i < 6; i++) {
     const x = x0 + lw * (i + 0.5);
-    p.box(C.line, 0.22, 0.01, PL - 2.2, x, 0.09, PZ, { cast: false });
+    p.box(C.line, 0.22, 0.01, PL - 2.2, x, -1.199, PZ, { cast: false });
     for (const s of [-1, 1])
-      p.box(C.line, 0.7, 0.01, 0.22, x, 0.09, PZ + s * (PL / 2 - 1.2), {
+      p.box(C.line, 0.7, 0.01, 0.22, x, -1.199, PZ + s * (PL / 2 - 1.2), {
         cast: false,
       });
   }
@@ -108,6 +117,7 @@ function deck(p, pv, signs) {
   meshFence(p, [DX0, DZ1], [DX1, DZ1], { h: 2.0 });
   meshFence(p, [DX1, DZ0], [DX1, DZ1], { h: 2.0 });
   meshFence(p, [VX1, DZ0], [DX1, DZ0], { h: 2.0 });
+  return water;
 }
 
 // the steps down into the first lane at the south end: each tread a paler band under the water, deeper ones darker,
@@ -118,10 +128,11 @@ function steps(p) {
     cx = (x0 + x1) / 2;
   for (let i = 0; i < n; i++) {
     const z = z1 - tread * (i + 0.5);
-    p.box(['#9fd0d8', '#86c0cb', '#71afbc'][i], w, 0.012, tread, cx, 0.085, z, {
+    const top = -0.12 - i * 0.35;
+    p.box(['#9fd0d8', '#86c0cb', '#71afbc'][i], w, top + 1.2, tread, cx, -1.2, z, {
       cast: false,
     });
-    p.box('#eef2f0', w, 0.014, 0.05, cx, 0.088, z + tread / 2 - 0.03, {
+    p.box('#eef2f0', w, 0.014, 0.05, cx, top, z + tread / 2 - 0.03, {
       cast: false,
     });
   }
@@ -303,7 +314,7 @@ function pavilion(p, glow, signs, lights) {
 export function* poolSteps(root, p, q, pv, signs, lights, { interior = false } = {}) {
   // The rendered water overlays combined deck/landscape meshes. Those covered faces are not a walking floor.
   root.userData.traversalVoids = [{ min: [PX - PW / 2, -100, PZ - PL / 2], max: [PX + PW / 2, 0.2, PZ + PL / 2] }];
-  deck(q, pv, signs);
+  const water = deck(root, q, pv, signs);
   const floodlights = poolFloodlights(root, p);
   yield;
   const glow = [];
@@ -330,6 +341,7 @@ export function* poolSteps(root, p, q, pv, signs, lights, { interior = false } =
   return {
     floodlights,
     onPeriod(period) {
+      water.onPeriod(period);
       for (const object of [...(changing?.doorCards || []), ...(changing?.lockerRows || [])])
         object.traverse((mesh) => {
           if (mesh.material?.emissiveMap) mesh.material.emissiveIntensity = period === 'evening' ? 0.6 : 0;

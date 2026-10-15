@@ -14,6 +14,7 @@ import { poolHandling } from './pool-handling.js';
 import { poolEquipmentActions } from './pool-equipment.js';
 import { poolCamera } from './pool-camera.js';
 import { poolLengths } from './pool-length.js';
+import { poolWaterContact } from '../../scenes/sports/pool-water.js';
 import { poolMeeting } from './pool-meeting.js';
 
 const [WX0, WZ0] = pt([D.WATER[0], D.WATER[2]]),
@@ -25,6 +26,7 @@ const SEAT_S = pt(D.SEATS.deck_bench_s.at);
 const SEAT_N = pt(D.SEATS.deck_bench_n.at);
 const TOP = D.SEATS.deck_bench_s.top;
 const EAST = Math.PI / 2;
+const WATER_ACTORS = ['eric', 'emi', 'kuro'];
 const KURO_REST = [SEAT_S[0] + 0.55, SEAT_S[1] + 1.55]; // at the south bench's end, by Emi
 
 export function poolClub(game, { root, cast, outfits }) {
@@ -33,7 +35,8 @@ export function poolClub(game, { root, cast, outfits }) {
     handling = poolHandling(root);
   const camera = poolCamera(game);
   const who = (id) => (id === 'eric' ? game.player : cast.people[id]);
-  const poses = new Map();
+  const poses = new Map(),
+    water = poolWaterContact(root);
   let benchFollow = null;
   const followBench = () => {
     if (!benchFollow) return;
@@ -85,6 +88,7 @@ export function poolClub(game, { root, cast, outfits }) {
   };
   // the group as the story has got to it, on every arrival and Continue (no timers: each state just set)
   function arrange({ repeat = false } = {}) {
+    water.clear();
     for (const pose of poses.values()) pose.leave();
     handling.drop(who('emi'));
     handling.drop(who('member'));
@@ -324,6 +328,7 @@ export function poolClub(game, { root, cast, outfits }) {
     ready: () =>
       poolMeeting(sim.day, sim.period) && ['emi', 'kuro', 'attendant', 'member'].every((id) => who(id)?.root.visible),
     restoreOutfits(saved) {
+      water.clear();
       // Runner may restore water, then a later bench checkpoint in the same place.
       for (const pose of poses.values()) pose.leave();
       for (const id of ['eric', 'emi', 'kuro']) {
@@ -333,7 +338,12 @@ export function poolClub(game, { root, cast, outfits }) {
     },
     hooks,
     goggles: () => gogglesThing,
-    update() {
+    update(dt) {
+      water.update(dt);
+      for (let i = 0; i < WATER_ACTORS.length; i++) {
+        const rig = who(WATER_ACTORS[i]);
+        water.set(i, rig, poses.get(rig)?.mode);
+      }
       followBench();
       camera.update();
       handling.update();
@@ -349,6 +359,7 @@ export function poolClub(game, { root, cast, outfits }) {
       };
     },
     restore(saved = {}) {
+      water.clear();
       camera.restore(saved.camera);
       for (const [id, mode] of Object.entries(saved.swimmers || saved)) {
         if (!who(id) || !['tread', 'swim'].includes(mode)) continue;
@@ -367,6 +378,7 @@ export function poolClub(game, { root, cast, outfits }) {
       return !!poses.get(game.player)?.active;
     },
     leave() {
+      water.clear();
       benchFollow = null;
       camera.dispose();
       action.cancel();

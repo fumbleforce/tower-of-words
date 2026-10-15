@@ -40,6 +40,7 @@ const { poolHandling } = await import('../../js/places/day3/pool-handling.js');
 const { poolAction } = await import('../../js/places/day3/pool-action.js');
 const { poolCamera } = await import('../../js/places/day3/pool-camera.js');
 const { poolFloodlights } = await import('../../js/scenes/sports/pool-lights.js');
+const { poolWater } = await import('../../js/scenes/sports/pool-water.js');
 const { Parts } = await import('../../js/scenes/outdoor/parts.js');
 const THREE = await import('../../vendor/three/three.module.js');
 test('both changing routes connect entrance, locker, shower and deck on free floor', () => {
@@ -246,7 +247,8 @@ hook.deregister();
 
 // Runner rewinds staging before replaying the current line, so these checkpoints share one club instance.
 test('real pool club clears old water overlays before restoring a later dry checkpoint', () => {
-  const root = new THREE.Group();
+  const root = new THREE.Group(); poolWater(root);
+  const contacts = root.getObjectByName('pool:water').material.uniforms.uSwimmers.value;
   function person() {
     const body = new THREE.Group(), head = new THREE.Bone();
     head.name = 'Head'; head.position.y = 1; body.add(head); root.add(body);
@@ -272,12 +274,16 @@ test('real pool club clears old water overlays before restoring a later dry chec
   club.restore({ swimmers: { eric: 'tread', emi: 'tread' } });
   player.update(.1); people.emi.update(.1);
   assert.equal(player.swimming, true);
+  club.update(.05); assert.ok(contacts.some(v => v.w > 0), 'wet restore has current swimmer contact');
   save.restore(dry);
+  assert.ok(contacts.every(v => v.w === 0), 'dry Continue immediately clears old water contact');
   for (let i = 0; i < 5; i++) { player.update(.1); people.emi.update(.1); }
   for (const r of [player, people.emi]) {
     assert.equal(r.swimming, false); assert.equal(r.seated, true); assert.equal(r.root.position.y, .34);
   }
   assert.equal(club.snapshot().swimmers.eric, null);
   assert.equal(club.snapshot().swimmers.emi, null);
-  club.leave();
+  club.restore({ swimmers: { eric: 'tread' } }); club.update(.05);
+  assert.ok(contacts.some(v => v.w > 0));
+  club.leave(); assert.ok(contacts.every(v => v.w === 0), 'place leave clears all contact');
 });
