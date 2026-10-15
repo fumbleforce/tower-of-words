@@ -28,6 +28,7 @@ const { Nav } = await import('../../js/movement/navigation.js');
 const { lamps } = await import('../../js/scenes/outdoor/furniture.js');
 const { createTraversal } = await import('../../js/movement/traversal.js');
 const { startGaitCheck } = await import('../../js/movement/gait-watch.js');
+const { softSeparate, awayFromHome } = await import('../../js/movement/crowd.js');
 const fixture = JSON.parse(fs.readFileSync(new URL('../fixtures/lamp-gait-replay.json', import.meta.url)));
 async function geometry(name) {
   const file = fs.readFileSync(new URL('../../assets/eric/' + name + '.glb', import.meta.url));
@@ -55,7 +56,7 @@ function setup(legacy = false) {
   lamps({ glowParts: [], lit: [] }, p, [[4.120000000000011, -2.75]], { kind: 'post' });
   space.add(new THREE.Mesh(new THREE.BoxGeometry(30, .1, 80).translate(0, -.05, -20), new THREE.MeshStandardMaterial()));
   const place = { name: 'lamp regression', space, charScale: fixture.scale };
-  const physical = createTraversal(place), nav = new Nav(-10, 20, -50, 10); nav.build();
+  const physical = createTraversal(place), nav = new Nav(-10, 20, -50, 10); nav.build(); place.nav = nav;
   const rig = actor(), body = rig.root; body.scale.setScalar(fixture.scale); space.add(body); body.position.fromArray(fixture.position);
   const walker = new SmoothWalker(body, nav, { speed: fixture.speed, others: () => [] });
   walker.path = fixture.path.map(p => [...p]);
@@ -88,9 +89,9 @@ function replay(legacy) {
     const moving = s.walker.update(dt, s.camera);
     // main.step's ordinary player sequence, including the live distance-driven gait.
     s.rig.setState(moving ? 'walk' : 'idle'); s.rig.setGait(s.walker.gait.v, s.walker.gait); s.rig.update(dt, 1.25);
-    s.check.sample();
+    softSeparate(s.game, dt); s.check.sample();
     if (moving !== last) { changes++; last = moving; }
-    samples.push({ t: s.game.t, moving, at: s.body.position.toArray(), v: s.walker.v, path: s.walker.path?.map(p => [...p]), feet: s.rig._gaitFeet?.map(b => b.getWorldPosition(new THREE.Vector3()).toArray()) });
+    samples.push({ t: s.game.t, moving, at: s.body.position.toArray(), v: s.walker.v, path: s.walker.path?.map(p => [...p]), travel: s.walker.moving, feet: s.rig._gaitFeet?.map(b => b.getWorldPosition(new THREE.Vector3()).toArray()) });
   }
   return { ...s, samples, changes, reports: s.check.reports(4) };
 }
@@ -101,7 +102,7 @@ test('real lamp replay stops clip resets without changing a single physical step
   assert.ok(old.reports.some(r => r.includes('on the spot')), 'real feet reproduce the gait failure');
   assert.equal(fixed.changes, 2, 'one genuine stop and one sustained restart');
   assert.deepEqual(fixed.reports, [], 'unchanged gait watcher sees no four-window failure');
-  assert.deepEqual(fixed.samples.map(({ at, v, path }) => ({ at, v, path })), old.samples.map(({ at, v, path }) => ({ at, v, path })), 'animation selection never changes displacement, collision speed or route');
+  assert.deepEqual(fixed.samples.map(({ at, v, path, travel }) => ({ at, v, path, travel })), old.samples.map(({ at, v, path, travel }) => ({ at, v, path, travel })), 'animation selection never changes displacement, collision speed or route');
   assert.ok(fixed.body.position.z < -7, 'walk progresses past the lamp');
 });
 
@@ -119,12 +120,12 @@ function continuous(kind, legacy) {
     // installSteer retains the target object while smoothing its coordinates.
     if (kind === 'steer') s.walker.steer.x += Math.sin(s.game.t) * dt * .001;
     const moving = s.walker.update(dt, s.camera);
-    s.rig.setState(moving ? 'walk' : 'idle'); s.rig.setGait(s.walker.gait.v, s.walker.gait); s.rig.update(dt, 1.25); s.check.sample();
+    s.rig.setState(moving ? 'walk' : 'idle'); s.rig.setGait(s.walker.gait.v, s.walker.gait); s.rig.update(dt, 1.25); softSeparate(s.game, dt); s.check.sample();
     assert.equal(s.walker.steer || s.walker.keyFrame, intent, 'continuous input retains its intent');
     if (s.walker.path && s.walker.path !== lastPath) replans++;
     lastPath = s.walker.path;
     if (moving !== last) { changes++; last = moving; }
-    physical.push({ at: s.body.position.toArray(), v: s.walker.v, path: s.walker.path?.map(p => [...p]), travel: s.walker.locomotion.travelMoving });
+    physical.push({ at: s.body.position.toArray(), v: s.walker.v, path: s.walker.path?.map(p => [...p]), travel: s.walker.moving });
   }
   return { physical, changes, replans, reports: s.check.reports(4) };
 }
@@ -160,4 +161,38 @@ test('unblocked starts are immediate, contact restart is bounded, and handoffs c
   assert.equal(w.update(.03, s.camera), true, 'scripted handoff starts without the previous contact delay');
   w.path.scripted = false; latch(); w.sync(); assert.equal(w.locomotion.contact, false, 'place/pose sync clears contact');
   assert.equal(w.update(.03, s.camera), true);
+});
+
+function separationStep(legacy, withNpc = false) {
+  const nav = new Nav(-5, 5, -5, 5).block(-1, 1, 0, .5); nav.build();
+  const space = new THREE.Group(), root = new THREE.Group(); space.add(root); root.position.set(0, 0, -.19);
+  const rig = { root }, camera = new THREE.PerspectiveCamera();
+  const walker = new SmoothWalker(root, nav, { speed: 1.43, others: () => [] });
+  const npc = { root: new THREE.Group() }; npc.root.position.set(-.51, 0, -.19);
+  const people = withNpc ? { bystander: npc } : {};
+  if (withNpc) space.add(npc.root);
+  const game = globalThis.__game = { place: { space, nav, charScale: 1, people, camera }, player: rig, walker, t: 0 };
+  awayFromHome(game.place, { root, x: -.1, z: -.19 });
+  walker.steer = { x: 3, z: -.19 }; walker.vx = 1; walker.vz = 0;
+  walker.facing = walker.targetFacing = Math.PI / 2; root.rotation.y = Math.PI / 2;
+  let blocked = true;
+  walker.traversal = { clear: () => true, collide: (x, z, ox, oz) => blocked ? [ox, oz] : nav.collide(x, z, ox, oz) };
+  if (legacy) walker.locomotion.step = function ({ moving, v }, moved, dt) {
+    const speed = moved / Math.max(dt, 1e-4);
+    return this.travelMoving = moving ? speed > .04 && v > .04 : speed > .1 && v > .1;
+  };
+  walker.update(.05, camera); blocked = false;
+  const animating = walker.update(.05, camera), before = root.position.toArray();
+  softSeparate(game, .05);
+  return { moving: walker.moving, animating, state: walker.animState, before, after: root.position.toArray(), npc: npc.root.position.toArray() };
+}
+for (const npc of [false, true]) test(`post-walker separation preserves ${npc ? 'NPC retreat' : 'furniture clearance'} decisions`, () => {
+  const old = separationStep(true, npc), fixed = separationStep(false, npc);
+  assert.equal(old.moving, true); assert.equal(old.animating, true);
+  assert.equal(fixed.animating, false, 'contact restart still holds the standing pose');
+  assert.equal(fixed.state, 'idle', 'animation state is separate from public movement');
+  assert.deepEqual(fixed.before, old.before, 'walk displacement is unchanged');
+  assert.deepEqual(fixed.after, old.after, 'actual softSeparate cannot add the reviewed 14mm push');
+  assert.deepEqual(fixed.npc, old.npc, 'nearby NPC has the same retreat decision');
+  assert.equal(fixed.moving, old.moving, 'public movement flag retains its original physical meaning');
 });

@@ -10,12 +10,11 @@ export class LocomotionState {
     this.contact = false;
     this.restart = 0;
   }
-  step({ v, path, steer, keyFrame, aside }, moved, dt, limited, keys) {
+  step({ moving: was, v, path, steer, keyFrame, aside }, moved, dt, limited, keys) {
     const source = keys ? keyFrame : steer || path || aside,
       speed = moved / Math.max(dt, 1e-4);
-    // Preserve the old selector for steering's arrival radius. Clip restart
-    // hysteresis must never change where the body goes or stops.
-    this.travelMoving = this.travelMoving ? speed > 0.04 && v > 0.04 : speed > 0.1 && v > 0.1;
+    // Keep the public physical movement flag independent of clip restarts.
+    this.travelMoving = was ? speed > 0.04 && v > 0.04 : speed > 0.1 && v > 0.1;
     if (source !== this.source || !source) this.reset(source);
     if (!this.travelMoving) {
       if (limited && source) this.contact = true;
