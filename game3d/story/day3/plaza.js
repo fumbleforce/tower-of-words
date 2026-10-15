@@ -54,7 +54,7 @@ export default place(
         '> Her new staff card says Facilities, room bookings.',
         { do: 'fact', who: 'aoi', id: 'assignment', text: 'Works in Facilities, on room bookings.' },
         { do: 'gesture', who: 'aoi', kind: 'point', to: 'noticeboard' },
-        { say: 'aoi', name: 'Aoi', overheard: true, emo: 'bright', text: 'プール、今夜が最後ですよ！', clear: ['プール'] },
+        { say: 'aoi', name: 'Aoi', overheard: true, emo: 'bright', text: 'あ、プールのサークル、今夜ですよ！', clear: ['プール'] },
         { say: 'eric', emo: 'curious', text: 'The pool? I’ll have a look at the poster.' },
         { if: '!know_rokuji', then: [
           { say: 'aoi', name: 'Aoi', overheard: true, emo: 'bright', text: '18時……{rokuji}からです。', clear: ['18'] },

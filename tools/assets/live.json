@@ -981,6 +981,22 @@
    ],
    "to": "art/production/retired/2026-10-14/",
    "note": "Swimming stays at the pool, #436; seasonal gym dialogue removed."
+  },
+  {
+   "date": "2026-10-15",
+   "action": "promote",
+   "path": "game3d/audio/oh-lr27k5.mp3",
+   "from": "art/production/aoi-pool-436-20261015/oh-lr27k5.mp3",
+   "round": "art/production/aoi-pool-436-20261015",
+   "note": "Approved Aoi clone, same evening swimming-club reminder, #436"
+  },
+  {
+   "date": "2026-10-15",
+   "action": "retire",
+   "path": "game3d/audio/oh-1al5j7p.mp3",
+   "to": "art/production/retired/2026-10-15/game3d/audio/oh-1al5j7p.mp3",
+   "by": "game3d/audio/oh-lr27k5.mp3",
+   "note": "Aoi names tonight’s pool meeting; original clip preserved in archive, #436"
   }
  ]
 }
