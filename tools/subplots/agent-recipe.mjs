@@ -72,3 +72,17 @@ export function prepareAgentGeneration(recipe, presets, name = 'recipe') {
   if (!body.model_file) fail('the selected model preset has no model file.');
   return body;
 }
+
+// Reward calls use the same composition contract and assembler, with the configured exclusion selection intact.
+export function prepareRewardGeneration(recipe, presets, name = 'recipe') {
+  const body = prepareAgentGeneration(recipe, presets, name);
+  if (body.compose.hard !== true) fail('reward pictures require Adult mode (hard: true); content rating is separate.');
+  const defaults = applyDefaults(normalizeComposition({}), presets).negatives;
+  const selected = body.compose.negatives;
+  if (selected.length !== defaults.length || defaults.some(id => !selected.includes(id)))
+    fail('reward exclusions must match the configured default selection without additions or removals.');
+  return body;
+}
+
+// The established reward recipe directory is enforced even when the caller forgets --reward.
+export const isRewardRecipePath = file => /(?:^|[/\\])island[/\\]private[/\\]rewards(?:[/\\]|$)/.test(file);

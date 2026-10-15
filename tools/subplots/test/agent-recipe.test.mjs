@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {prepareAgentGeneration} from '../agent-recipe.mjs';
+import {prepareAgentGeneration, prepareRewardGeneration, isRewardRecipePath} from '../agent-recipe.mjs';
 import {applyDefaults, normalizeComposition, assembleComposition} from '../web/image-compose.js';
 
 // Synthetic versioned presets; no local preset, cast or image data enters these tests.
@@ -162,4 +162,34 @@ test('normal reset metadata and generic cast outfits preserve canonical GUI asse
   expected.compose.recipe = 'reset';
   assert.deepEqual(prepareAgentGeneration(recipe, genericPresets, 'reset'), expected);
   assert.match(expected.positive, /wearing grey suit/);
+});
+
+
+test('reward entry requires Adult mode independently of rating', () => {
+  for (const recipe of [{...base}, {...base, rating: 'nsfw'}, {...base, hard: false, rating: 'nsfw'}])
+    assert.throws(() => prepareRewardGeneration(recipe, presets), /require Adult mode/);
+  assert.equal(prepareRewardGeneration({...base, hard: true, rating: 'safe'}, presets).compose.hard, true);
+});
+
+test('reward entry preserves exactly the configured exclusion selection and normal GUI output', () => {
+  const recipe = {...base, hard: true, rating: 'nsfw', subplotId: 'local:sample:scene:steps', imageSlot: 'pic:scene.1'};
+  const expected = assembleComposition(applyDefaults(normalizeComposition(recipe), presets), presets, recipe.subplotId);
+  expected.compose.recipe = 'reward';
+  assert.deepEqual(prepareRewardGeneration(recipe, presets, 'reward'), expected);
+  const blocks = structuredClone(presets);
+  blocks.negative.push(rec('optional', {text: 'optional exclusions', default: false}));
+  for (const negatives of [[], ['clean', 'optional'], ['optional'], ['clean', 'clean']])
+    assert.throws(() => prepareRewardGeneration({...recipe, negatives}, blocks), /configured default selection/);
+  assert.throws(() => prepareRewardGeneration({...recipe, negative: 'extra words'}, blocks), /selected negative presets/);
+  blocks.negative[1].data.default = true;
+  const updated = prepareRewardGeneration(recipe, blocks);
+  assert.deepEqual(updated.presets.negatives, [{id: 'clean', v: 3}, {id: 'optional', v: 1}]);
+  assert.throws(() => prepareRewardGeneration({...recipe, negatives: ['clean']}, blocks), /configured default selection/);
+});
+
+test('reward path detection follows the established directory, without matching unrelated names', () => {
+  for (const file of ['/tmp/project/island/private/rewards/peeks/example-1/recipes/example.json', 'island/private/rewards/peeks/example-1/recipes/example.json', 'C:\\project\\island\\private\\rewards\\peeks\\example-1\\recipes\\example.json'])
+    assert.equal(isRewardRecipePath(file), true, file);
+  for (const file of ['/tmp/rewards/example.json', '/tmp/public/rewards-copy/example.json'])
+    assert.equal(isRewardRecipePath(file), false, file);
 });

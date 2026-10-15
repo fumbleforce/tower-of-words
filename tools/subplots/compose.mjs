@@ -5,7 +5,7 @@
 // every block. There is no second prompt builder.
 //
 //   node tools/subplots/compose.mjs <recipe.json> [--count N] [--seed S] [--dry-run] [--wait] [--out DIR]
-//        [--server URL] [--presets FILE] [--end-session]
+//        [--server URL] [--presets FILE] [--end-session] [--reward]
 //
 // Agent recipes are validated by agent-recipe.mjs before queueing. Whole prompt, style/exclusion and people
 // text overrides are refused. --presets is available only with --dry-run.
@@ -24,10 +24,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {prepareAgentGeneration} from './agent-recipe.mjs';
+import {prepareAgentGeneration, prepareRewardGeneration, isRewardRecipePath} from './agent-recipe.mjs';
 
 const args = process.argv.slice(2);
 const flag = name => { const i = args.indexOf('--' + name); if (i < 0) return undefined; const v = args[i + 1]; args.splice(i, v && !v.startsWith('--') ? 2 : 1); return v && !v.startsWith('--') ? v : true; };
+const reward = flag('reward');
 const count = flag('count'), seed = flag('seed'), dry = flag('dry-run'), wait = flag('wait'), endSession = flag('end-session');
 const server = (flag('server') || process.env.IMAGEGEN_URL || 'http://127.0.0.1:8772').replace(/\/$/, '');
 const presetsFile = flag('presets'); let outDir = flag('out');
@@ -52,7 +53,8 @@ if (presetsFile && !dry) throw new Error('--presets is supported only with --dry
 const presets = presetsFile ? JSON.parse(fs.readFileSync(presetsFile, 'utf8')) : await getJson(server + '/api/presets');
 if (count) recipe.count = +count;
 if (seed != null) { recipe.seed = +seed; recipe.seedMode = 'fixed'; }
-const body = prepareAgentGeneration(recipe, presets, name);
+const rewardRecipe = reward || [path.resolve(file), fs.realpathSync(file)].some(isRewardRecipePath);
+const body = (rewardRecipe ? prepareRewardGeneration : prepareAgentGeneration)(recipe, presets, name);
 if (body.rating !== (recipe.rating || 'safe')) console.error(`Note: a character preset limits this picture to ${body.rating}.`);
 if (dry) { console.log(JSON.stringify(body, null, 2)); process.exit(0); }
 

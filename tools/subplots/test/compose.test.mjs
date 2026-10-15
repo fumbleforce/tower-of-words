@@ -18,7 +18,7 @@ const presets = {
   style: [rec('soft', {name: 'Soft', quality: 'high quality'})],
   model: [rec('model', {name: 'Model', file: 'fixture.safetensors', steps: 5, cfg: 4, sampler: 'euler', scheduler: 'normal'})],
   framing: [rec('wide', {prompt: 'wide shot', w: 64, h: 64})],
-  camera: [], negative: [rec('clean', {name: 'Clean', default: true, text: 'blur'})], scene: [],
+  camera: [], negative: [rec('clean', {name: 'Clean', default: true, text: 'blur'}), rec('optional', {name: 'Optional', default: false, text: 'extra exclusion'})], scene: [],
 };
 
 function stub({busy = false, out404 = false} = {}) {
@@ -47,9 +47,13 @@ function stub({busy = false, out404 = false} = {}) {
 async function run(opts, extra = [], env = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'compose-test-'));
   fs.writeFileSync(path.join(dir, 'p.json'), JSON.stringify(presets));
-  fs.writeFileSync(path.join(dir, 'pic.recipe.json'), JSON.stringify(opts?.recipe || {characters: ['alice'], model: 'model', style: 'soft', framing: 'wide'}));
+  const file = path.join(dir, ...(opts?.rewardPath ? ['island', 'private', 'rewards', 'peeks', 'example-1', 'recipes'] : []), 'pic.recipe.json');
+  fs.mkdirSync(path.dirname(file), {recursive: true});
+  fs.writeFileSync(file, JSON.stringify(opts?.recipe || {characters: ['alice'], model: 'model', style: 'soft', framing: 'wide'}));
+  const commandFile = opts?.rewardSymlink ? path.join(dir, 'alias.recipe.json') : file;
+  if (opts?.rewardSymlink) fs.symlinkSync(file, commandFile);
   const {srv, seen, url} = await stub(opts);
-  const child = spawn('node', [script, path.join(dir, 'pic.recipe.json'), '--server', url, '--wait', ...(opts?.localPresets ? ['--presets', path.join(dir, 'p.json')] : []), ...extra],
+  const child = spawn('node', [script, commandFile, '--server', url, '--wait', ...(opts?.localPresets ? ['--presets', path.join(dir, 'p.json')] : []), ...extra],
     {env: {...process.env, ...env}});
   let stdout = '', stderr = '';
   child.stdout.on('data', d => stdout += d); child.stderr.on('data', d => stderr += d);
@@ -110,4 +114,25 @@ test('local presets cannot replace canonical queue presets; dry-run fixtures rem
   const preview = await run({localPresets: true}, ['--dry-run']);
   assert.equal(preview.code, 0, preview.stderr); assert.deepEqual(preview.seen.posts, []);
   fs.rmSync(refused.dir, {recursive: true}); fs.rmSync(preview.dir, {recursive: true});
+});
+
+
+test('reward paths and their symlinks require Adult mode without an opt-in flag', async () => {
+  for (const rewardSymlink of [false, true]) {
+    const r = await run({rewardPath: true, rewardSymlink});
+    assert.notEqual(r.code, 0); assert.match(r.stderr, /require Adult mode/);
+    assert.deepEqual(r.seen.posts, []); fs.rmSync(r.dir, {recursive: true});
+  }
+});
+
+test('reward CLI rejects additional preset exclusions and supports explicit mode elsewhere', async () => {
+  const extra = await run({rewardPath: true, recipe: {hard: true, negatives: ['clean', 'optional']}});
+  assert.notEqual(extra.code, 0); assert.match(extra.stderr, /configured default selection/);
+  assert.deepEqual(extra.seen.posts, []); fs.rmSync(extra.dir, {recursive: true});
+  const missing = await run({}, ['--reward']);
+  assert.notEqual(missing.code, 0); assert.match(missing.stderr, /require Adult mode/);
+  assert.deepEqual(missing.seen.posts, []); fs.rmSync(missing.dir, {recursive: true});
+  const correct = await run({recipe: {hard: true}}, ['--reward', '--dry-run']);
+  assert.equal(correct.code, 0, correct.stderr); assert.deepEqual(correct.seen.posts, []);
+  assert.equal(JSON.parse(correct.stdout).compose.hard, true); fs.rmSync(correct.dir, {recursive: true});
 });
