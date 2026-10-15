@@ -7,7 +7,7 @@ import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
 import { eveningLight, EVENING_GRADE, MORNING_GRADE } from '../scenes/town.js';
 import { PLACE_DETAILS } from './catalog.js';
-import { poolMarkerAnchor } from './day3/pool-marker-anchor.js';
+import { poolMarkerAnchor, poolSeatAnchor } from './day3/pool-marker-anchor.js';
 import { poolDoorVisibility } from './day3/pool-door-visibility.js';
 import { poolSave } from './day3/pool-save.js';
 import { walkOut, walkIn } from './edge-walk.js';
@@ -84,6 +84,7 @@ export async function poolPlace(game) {
     sun: w.sun,
     charScale: K,
     characterAnchor: poolMarkerAnchor(cam.camera),
+    seatAnchor: poolSeatAnchor(cam.camera),
     start: CHANGING_ENTRY.inside,
     changing: changing,
     creatureExclusions: [changing.bounds],

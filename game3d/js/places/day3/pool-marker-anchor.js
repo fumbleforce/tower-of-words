@@ -55,3 +55,22 @@ export function poolMarkerAnchor(camera) {
     return out.unproject(camera);
   };
 }
+
+// Keep a nearby seat's target under its own pin, but clear the player beside it.
+export function poolSeatAnchor(camera) {
+  const hair = poolMarkerAnchor(camera),
+    head = new THREE.Vector3(),
+    view = new THREE.Matrix4();
+  return (person, out) => {
+    hair(person, head).project(camera);
+    // Solve projected Y along the seat's world vertical. Its x/z also define the
+    // fixed-height pick box, so moving along camera-up would move the hit target.
+    view.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+    const e = view.elements,
+      y =
+        (head.y * (e[3] * out.x + e[11] * out.z + e[15]) - (e[1] * out.x + e[9] * out.z + e[13])) /
+        (e[5] - head.y * e[7]);
+    if (Number.isFinite(y)) out.y = Math.max(out.y, y);
+    return out;
+  };
+}

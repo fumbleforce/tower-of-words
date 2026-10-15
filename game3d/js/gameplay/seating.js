@@ -86,7 +86,8 @@ export function attachSeating(game, place) {
         v.y += 0.24 * CHARACTER_SCALE * game.player.root.scale.y;
         return v;
       }
-      return place.space.localToWorld(v.set(s.x, s.top + 0.25, s.z));
+      place.space.localToWorld(v.set(s.x, s.top + 0.25, s.z));
+      return place.seatAnchor && game.near?.id === id ? place.seatAnchor(game.player, v) : v;
     };
     if (own) {
       own.anchor = anchor;
