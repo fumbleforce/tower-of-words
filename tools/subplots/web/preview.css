@@ -1,13 +1,16 @@
 /* The preview, laid out like the game's subtitle dialogue (game3d/css/style.css #talk and vn.css): no panel,
    the line over the picture with a soft shadow, the name in the speaker's colour, the portrait at the left. */
 .preview-dialog { width: min(1400px, 96vw); max-height: 96vh; padding: 0; border: 1px solid var(--line2); border-radius: var(--r); background: #0b0d11; color: #eef0f4; overflow: hidden; }
+.preview-dialog[open] { display: flex; flex-direction: column; }
 .preview-dialog::backdrop { background: rgba(5, 7, 10, .85); }
-.pv-stage { position: relative; aspect-ratio: 16 / 9; max-height: calc(96vh - 52px); overflow: hidden; background: radial-gradient(120% 90% at 50% 30%, #2a3140, #14181f); cursor: pointer; user-select: none; }
+.pv-stage { position: relative; flex-shrink: 1; min-height: 0; aspect-ratio: 16 / 9; max-height: calc(96vh - 52px); overflow: hidden; background: radial-gradient(120% 90% at 50% 30%, #2a3140, #14181f); cursor: pointer; user-select: none; }
 .pv-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .pv-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14, 18, 28, 0) 45%, rgba(14, 18, 28, .55) 72%, rgba(14, 18, 28, .92) 100%); pointer-events: none; }
 .pv-notes { position: absolute; top: 14px; left: 16px; display: grid; gap: 4px; justify-items: start; }
 .pv-notes span { padding: 2px 9px; border-radius: 6px; background: rgba(14, 18, 28, .66); color: #a9b1bf; font-size: 12.5px; font-style: italic; }
-.pv-talk { position: absolute; left: 27%; right: 24%; bottom: 7%; font-family: var(--font); text-shadow: 0 1px 2px rgba(0, 0, 0, .75), 0 0 18px rgba(14, 18, 28, .9); }
+.pv-talk { display: flex; flex-direction: column; max-height: 86%; position: absolute; left: 27%; right: 24%; bottom: 7%; font-family: var(--font); text-shadow: 0 1px 2px rgba(0, 0, 0, .75), 0 0 18px rgba(14, 18, 28, .9); }
+.pv-copy { position: relative; z-index: 1; min-height: 0; overflow-y: auto; overflow-wrap: anywhere; overscroll-behavior: contain; scrollbar-gutter: stable; }
+.pv-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .pv-por { position: absolute; left: -36%; bottom: -14%; height: 230%; max-height: 520px; width: auto; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .45)); pointer-events: none; }
 .pv-who { margin-bottom: 6px; font-weight: 700; font-size: clamp(15px, 1.5vw, 20px); color: var(--c); }
 .pv-line { font-size: clamp(17px, 1.75vw, 24px); line-height: 1.5; font-weight: 500; }
@@ -22,5 +25,21 @@
 .pv-chips button.picked { border-color: rgba(111, 208, 198, .7); box-shadow: inset 3px 0 0 #6fd0c6; }
 .pv-chips small { width: 100%; color: #9aa6b8; font-size: 12px; }
 .pv-end { position: absolute; inset: 0; display: grid; place-content: center; gap: 12px; text-align: center; font-size: 18px; }
-.pv-bar { display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 14px; border-top: 1px solid var(--line); background: var(--panel); font-size: 13px; }
+.pv-bar { display: flex; align-items: center; gap: 10px; min-height: 52px; flex-shrink: 0; flex-wrap: wrap; padding: 8px 14px; border-top: 1px solid var(--line); background: var(--panel); font-size: 13px; }
 .pv-bar .grow { flex: 1; }
+
+.pv-counter { white-space: nowrap; }
+@media (max-width: 800px) {
+  .preview-dialog { height: min(720px, 96dvh); max-height: 96dvh; }
+  .pv-stage { flex: 1; aspect-ratio: auto; max-height: none; }
+  .pv-talk { left: 25%; right: 6%; bottom: 5%; max-height: 90%; }
+  .pv-talk.narr { left: 6%; }
+  .pv-por { max-height: 240px; max-width: 34%; object-fit: contain; object-position: left bottom; }
+  .pv-bar { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 6px; padding: 8px; }
+  .pv-counter { grid-row: 1; grid-column: 2; text-align: center; }
+  .pv-bar [data-back] { grid-row: 1; grid-column: 1; }
+  .pv-bar [data-next] { grid-row: 1; grid-column: 3; }
+  .pv-bar [data-edit] { grid-row: 2; grid-column: 1 / 3; }
+  .pv-bar [data-close] { grid-row: 2; grid-column: 3; }
+  .pv-bar .grow, .pv-bar .quiet { display: none; }
+}

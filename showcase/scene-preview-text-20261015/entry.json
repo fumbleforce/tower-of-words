@@ -1,0 +1,54 @@
+{
+  "title": "Scene Preview keeps every line reachable",
+  "date": "2026-10-15",
+  "by": "codex",
+  "caption": "Preview starts long text at the first line and lets it scroll. Back, Next, Edit and Close remain reachable on phone and desktop.",
+  "result": [
+    "phone-first",
+    "desktop-first"
+  ],
+  "sections": [
+    {
+      "title": "Public synthetic fixtures",
+      "caption": "These screenshots use invented text and a simple diagram portrait to test the editor. They are not game artwork.",
+      "images": [
+        {
+          "id": "phone-first",
+          "image": "bible/shots/showcase/scene-preview-text-20261015/phone-first.webp",
+          "caption": "Phone: narration opens at its first line."
+        },
+        {
+          "id": "phone-last",
+          "image": "bible/shots/showcase/scene-preview-text-20261015/phone-last.webp",
+          "caption": "Phone: the last narration line is reachable by scrolling; controls stay visible."
+        },
+        {
+          "id": "phone-japanese",
+          "image": "bible/shots/showcase/scene-preview-text-20261015/phone-japanese.webp",
+          "caption": "Phone: Japanese opens at its first line beside a synthetic portrait."
+        },
+        {
+          "id": "phone-japanese-last",
+          "image": "bible/shots/showcase/scene-preview-text-20261015/phone-japanese-last.webp",
+          "caption": "Phone: the last Japanese line remains readable while scrolling."
+        },
+        {
+          "id": "desktop-first",
+          "image": "bible/shots/showcase/scene-preview-text-20261015/desktop-first.webp",
+          "caption": "Desktop: long narration opens at its first line."
+        },
+        {
+          "id": "phone-before",
+          "image": "bible/shots/showcase/scene-preview-text-20261015/phone-before.webp",
+          "caption": "Before: the start of long narration was clipped above the phone Preview."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Open the scene editor",
+      "href": "tools/subplots/web/"
+    }
+  ]
+}

@@ -60,9 +60,12 @@ function backdrop() {
 function paint() {
   const item = items[at];
   const d = dlg();
+  const focused = document.activeElement;
+  const focusControl = ['back', 'next', 'edit', 'close'].find(key => focused?.hasAttribute('data-' + key));
   if (!item) {
     d.innerHTML = `<div class="pv-stage"><div class="pv-end"><p>End of “${esc(nodeTitle(scene.node))}”.</p><button data-close class="primary">Back to editing</button></div></div>`;
     d.querySelector('[data-close]').onclick = () => d.close();
+    d.querySelector('[data-close]').focus({ preventScroll: true });
     return;
   }
   const { step } = item, kind = kindOf(step);
@@ -95,8 +98,22 @@ function paint() {
   d.innerHTML = `<div class="pv-stage">${bg ? `<img class="pv-bg" src="${esc(bg)}" alt="">` : ''}<div class="pv-shade"></div>
     ${notes.length ? `<div class="pv-notes">${notes.map(n => `<span>${esc(n)}</span>`).join('')}</div>` : ''}
     ${box}</div>
-    <div class="pv-bar"><button data-back ${at === 0 ? 'disabled' : ''}>Back</button><span>Beat ${at + 1} of ${items.length}</span><button data-edit>Edit this beat</button><span class="grow"></span><span class="quiet">${scene === S.scene ? '' : 'Showing “' + esc(nodeTitle(scene.node)) + '”. '}Space or → next, ← back, Esc closes</span><button data-close>Close</button></div>`;
-  d.querySelector('.pv-stage').onclick = e => { if (!e.target.closest('button')) next(); };
+    <div class="pv-bar"><button data-back ${at === 0 ? 'disabled' : ''}>Back</button><span class="pv-counter">Beat ${at + 1} of ${items.length}</span><button data-next ${['choice', 'branch', 'jump'].includes(kind) ? 'disabled' : ''}>Next</button><button data-edit>Edit this beat</button><span class="grow"></span><span class="quiet">${scene === S.scene ? '' : 'Showing “' + esc(nodeTitle(scene.node)) + '”. '}Space or → next, ← back, Esc closes</span><button data-close>Close</button></div>`;
+  for (const talk of d.querySelectorAll('.pv-talk')) {
+    const copy = document.createElement('div');
+    copy.className = 'pv-copy';
+    copy.tabIndex = 0;
+    copy.setAttribute('role', 'region');
+    copy.setAttribute('aria-label', 'Scene text');
+    for (const child of [...talk.childNodes]) if (!child.classList?.contains('pv-por')) copy.append(child);
+    talk.append(copy);
+  }
+  d.querySelector('.pv-stage').onclick = e => {
+    if (e.target.closest('button')) return;
+    const copy = e.target.closest('.pv-copy');
+    if (!copy || copy.scrollHeight <= copy.clientHeight + 1) next();
+  };
+  d.querySelector('[data-next]').onclick = next;
   d.querySelector('[data-back]').onclick = () => { at = Math.max(0, at - 1); paint(); };
   d.querySelector('[data-close]').onclick = () => d.close();
   d.querySelector('[data-edit]').onclick = () => {
@@ -104,8 +121,18 @@ function paint() {
     if (scene === S.scene) select(item.path);
   };
   d.querySelectorAll('[data-opt]').forEach(b => { b.onclick = () => choose(item, +b.dataset.opt); });
-  d.querySelectorAll('[data-arm]').forEach(b => { b.onclick = () => { items.splice(at + 1, 0, ...expand(step[b.dataset.arm], [...item.path, b.dataset.arm])); next(); }; });
+  d.querySelectorAll('[data-arm]').forEach(b => { b.onclick = () => {
+    // Replace the previously explored arm, including any nested branches it opened.
+    let end = at + 1;
+    while (end < items.length && item.path.every((part, i) => items[end].path[i] === part) && ['then', 'else'].includes(items[end].path[item.path.length])) end++;
+    items.splice(at + 1, end - at - 1, ...expand(step[b.dataset.arm], [...item.path, b.dataset.arm]));
+    at++;
+    paint();
+  }; });
   d.querySelector('[data-follow]')?.addEventListener('click', e => follow(e.currentTarget.dataset.follow));
+  // Repainting replaces the focused control; keep native keyboard input inside the modal.
+  const restore = focusControl && d.querySelector(`[data-${focusControl}]:enabled`);
+  (restore || d.querySelector('.pv-copy') || d.querySelector('[data-next]:enabled') || d.querySelector('[data-close]')).focus({ preventScroll: true });
 }
 
 function next() {
@@ -143,7 +170,10 @@ async function follow(node) {
 
 export function installPreview() {
   dlg().addEventListener('keydown', e => {
-    if (e.key === ' ' || e.key === 'ArrowRight' || e.key === 'Enter') { if (!e.target.closest?.('button')) { e.preventDefault(); next(); } }
-    if (e.key === 'ArrowLeft') { at = Math.max(0, at - 1); paint(); }
+    const copy = e.target.closest?.('.pv-copy');
+    if (copy && copy.scrollHeight > copy.clientHeight + 1 && [' ', 'PageDown', 'PageUp', 'Home', 'End', 'ArrowDown', 'ArrowUp'].includes(e.key)) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+    if (e.key === ' ' || e.key === 'Enter') { if (!e.target.closest?.('button')) { e.preventDefault(); next(); } }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); at = Math.max(0, at - 1); paint(); }
   });
 }
