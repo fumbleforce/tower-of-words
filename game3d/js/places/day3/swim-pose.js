@@ -40,24 +40,35 @@ export function swimmerPose(rig) {
   });
   const head = bones.Head || rig.head,
     root = rig.root,
+    body = rig.model && rig.model !== root ? rig.model.parent : root,
+    bodyRotation = body.quaternion.clone(),
+    pitch = new THREE.Quaternion(),
     originals = new Map();
   const originalUpdate = rig.update;
   let mode = null,
     time = 0,
     rootX = 0,
+    rootZ = 0,
+    rootOrder = root.rotation.order,
     previousAvoid,
     immersion = 1;
   function undo() {
     if (!mode && !originals.size) return;
     for (const [bone, q] of originals) bone.quaternion.copy(q);
     originals.clear();
-    root.rotation.x = rootX;
+    if (body === root) root.rotation.set(rootX, root.rotation.y, rootZ, rootOrder);
+    else body.quaternion.copy(bodyRotation);
   }
   function apply() {
     if (!mode) return;
     for (const bone of Object.values(bones)) originals.set(bone, bone.quaternion.clone());
     const swimming = mode === 'swim';
-    root.rotation.x = rootX + (swimming ? 0.72 : 0);
+    if (body === root) {
+      root.rotation.set(rootX + (swimming ? 1.28 : 0), root.rotation.y, rootZ, 'YXZ');
+    } else {
+      body.quaternion.copy(bodyRotation);
+      if (swimming) body.quaternion.multiply(pitch.setFromAxisAngle(_axis.set(1, 0, 0), 1.28));
+    }
     root.updateWorldMatrix(true, true);
     const sweep = Math.sin(time * (swimming ? 3.3 : 2.2));
     rotate(root, bones.LeftArm, [0, 0, 1], 0.36 + sweep * 0.12);
@@ -66,12 +77,12 @@ export function swimmerPose(rig) {
     rotate(root, bones.RightArm, [1, 0, 0], swimming ? -0.65 : -0.35);
     rotate(root, bones.LeftForeArm, [1, 0, 0], -0.45);
     rotate(root, bones.RightForeArm, [1, 0, 0], -0.45);
-    rotate(root, bones.Head, [1, 0, 0], swimming ? -0.65 : 0);
+    rotate(root, bones.Head, [1, 0, 0], swimming ? -1.05 : 0);
     root.updateWorldMatrix(true, true);
     if (head) {
       head.getWorldPosition(_point);
       root.parent?.worldToLocal(_point);
-      root.position.y = (root.position.y + WATER_Y + 0.26 + Math.sin(time * 2) * 0.012 - _point.y) * immersion;
+      root.position.y = (root.position.y + WATER_Y + 0.07 + Math.sin(time * 2) * 0.008 - _point.y) * immersion;
       root.updateWorldMatrix(true, true);
     }
   }
@@ -87,14 +98,18 @@ export function swimmerPose(rig) {
       immersion = depth;
       if (!mode) {
         rootX = root.rotation.x;
+        rootZ = root.rotation.z;
+        rootOrder = root.rotation.order;
+        bodyRotation.copy(body.quaternion);
         previousAvoid = rig._noAvoid;
       }
       mode = next;
       rig.swimming = true;
       rig._noAvoid = true; // fixed water choreography must not be pushed onto the deck's walk grid
       rig.seated = false;
-      rig.setState?.('idle');
       undo();
+      rig.setState?.('idle');
+      originalUpdate?.call(rig, 0);
       apply();
     },
     setDepth(depth) {

@@ -88,7 +88,8 @@ test('movement checks survive repeated ordinary/swim reactivation and a fresh wa
     for (let frame = 0; frame < 3; frame++) {
       root.rotation.x = 0;
       tick('swim', 0.1);
-      assert.equal(root.rotation.x, 0.72, 'the current swimming overlay applies');
+      const up = new THREE.Vector3(0, 1, 0).applyQuaternion(player.model.getWorldQuaternion(new THREE.Quaternion()));
+      assert.ok(Math.abs(up.y - Math.cos(1.28)) < 1e-6, 'the current local swimming overlay applies');
     }
     swim.dispose();
     slot.set(false);

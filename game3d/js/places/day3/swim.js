@@ -352,6 +352,9 @@ export function poolClub(game, { root, cast, outfits }) {
       camera.restore(saved.camera);
       for (const [id, mode] of Object.entries(saved.swimmers || saved)) {
         if (!who(id) || !['tread', 'swim'].includes(mode)) continue;
+        // Historical checkpoints pitched the walking root. Water now owns a local model overlay.
+        who(id).root.rotation.x = 0;
+        who(id).root.rotation.z = 0;
         waterPose(id).enter(mode);
         if (id === 'eric') game.player.scripted = true;
       }

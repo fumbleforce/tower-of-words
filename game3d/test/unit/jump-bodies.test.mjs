@@ -97,7 +97,8 @@ test('restoring a cached outfit directly into water keeps the new swimming overl
     const before = calls.swimwear;
     root.rotation.x = 0;
     player.update(0.1);
-    assert.equal(root.rotation.x, 0.72, 'the restored swim overlay still applies every frame');
+    const up = new THREE.Vector3(0, 1, 0).applyQuaternion(player.model.getWorldQuaternion(new THREE.Quaternion()));
+    assert.ok(Math.abs(up.y - Math.cos(1.28)) < 1e-6, 'the restored local swim overlay applies every frame');
     assert.equal(calls.swimwear, before + 1, 'one native mixer update, without old overlay accumulation');
     water.dispose();
     slot.set(false);

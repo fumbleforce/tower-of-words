@@ -98,11 +98,11 @@ test('swimmer waterline follows actual head height without cumulative drift and 
     root.updateWorldMatrix(true, true);
     const p = new THREE.Vector3();
     head.getWorldPosition(p);
-    assert.ok(p.y > 0.33 && p.y < 0.37);
+    assert.ok(p.y > 0.15 && p.y < 0.18);
     pose.enter('swim');
     for (let n = 0; n < 20; n++) rig.update(0.016);
     head.getWorldPosition(p);
-    assert.ok(p.y > 0.33 && p.y < 0.37);
+    assert.ok(p.y > 0.15 && p.y < 0.18);
     pose.leave();
     assert.equal(rig.swimming, false);
     assert.equal(rig._noAvoid, undefined);
@@ -261,6 +261,14 @@ test('real pool club clears old water overlays before restoring a later dry chec
   player.sitAt(1, .34, 1, 1); player.seated = true;
   people.emi.sitAt(1, .34, 2, 1); people.emi.seated = true;
   const dry = { world: save.snapshot() };
+  const oldWet = structuredClone(dry);
+  oldWet.world.player.eric.rotation = [.72, Math.PI, 0, 'XYZ'];
+  oldWet.world.swim.swimmers = { eric: 'swim' };
+  for (let n = 0; n < 3; n++) {
+    save.restore(oldWet); player.update(.1);
+    assert.ok(Math.abs(player.root.rotation.x - 1.28) < 1e-8, 'old walking-root pitch is not added to the local water overlay');
+  }
+  save.restore(dry);
   club.restore({ swimmers: { eric: 'tread', emi: 'tread' } });
   player.update(.1); people.emi.update(.1);
   assert.equal(player.swimming, true);

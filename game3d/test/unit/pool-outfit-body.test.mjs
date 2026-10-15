@@ -17,10 +17,9 @@ async function geometry(name,id='eric'){
  json.buffers[0].uri='data:application/octet-stream;base64,'+file.subarray(28+length).toString('base64');
  return new GLTFLoader().parseAsync(JSON.stringify(json),'');
 }
-const [walk,run]=await Promise.all([geometry('walk'),geometry('run')]);
-const carina=await Promise.all(['walk','run'].map(name=>geometry(name,'carina')));
+const assets=Object.fromEntries(await Promise.all(['eric','carina','emi','kuro'].map(async id=>[id,await Promise.all(['walk','run'].map(name=>geometry(name,id)))])));
 const clip=(name,id='eric')=>THREE.AnimationClip.parse(JSON.parse(fs.readFileSync(new URL('../../assets/characters/swimwear-'+id+'/'+name+'.json',import.meta.url))));
-function parts(id='eric'){const [w,r]=id==='carina'?carina:[walk,run];const model=clone(w.scene);model.traverse(o=>{if(o.isMesh)o.material=o.material.clone();});return [{...w,scene:model},r,clip('idle',id),{animations:[clip('sit',id)]},new THREE.Texture(),null];}
+function parts(id='eric'){const [w,r]=assets[id];const model=clone(w.scene);model.traverse(o=>{if(o.isMesh)o.material=o.material.clone();});return [{...w,scene:model},r,clip('idle',id),{animations:[clip('sit',id)]},new THREE.Texture(),null];}
 test('real supplied-root Meshy construction retains ordinary root and measures the same gait/seat as the default',()=>{
  const normal=meshyFrom('pool-default-root',parts(),{height:1.2});
  const parent=new THREE.Group(),root=new THREE.Group(),oldModel=new THREE.Group();parent.position.set(12,4,-9);parent.rotation.y=.7;parent.scale.setScalar(1.3);
@@ -84,4 +83,24 @@ test('cached pool body can deactivate and return with the same live mixer and ow
   slot.set(true);assert.equal(actor.mixer,mixer);assert.equal(disposed,0);
  }
  slot.dispose();assert.ok(disposed>0);assert.ok(material);
+});
+
+for(const id of ['eric','carina','emi','kuro'])test(`${id} selected pool body swims head first in either direction with its torso at the waterline`,()=>{
+ const actor=meshyFrom('water-'+id,parts(id),{height:id==='eric'?1.2:id==='emi'?1.09:1.12}),space=new THREE.Group();space.add(actor.root);
+ const overlay=swimmerPose(actor),rotation=actor.model.parent.quaternion.clone();
+ const bone=name=>{const b=actor.model.getObjectByName(name);return space.worldToLocal(b.getWorldPosition(new THREE.Vector3()));};
+ overlay.enter('swim');
+ for(const yaw of [Math.PI,0,Math.PI/2,-Math.PI/2]){
+  actor.root.rotation.y=yaw;
+  for(let n=0;n<20;n++)actor.update(1/60);
+  space.updateMatrixWorld(true);
+  const head=bone('Head'),hips=bone('Hips'),feet=bone('LeftFoot').add(bone('RightFoot')).multiplyScalar(.5);
+  const direction=new THREE.Vector3(Math.sin(yaw),0,Math.cos(yaw));
+  assert.ok(head.clone().sub(feet).dot(direction)>.2,`head leads ${id} yaw ${yaw}: head ${head.toArray()} feet ${feet.toArray()}`);
+  assert.ok(Math.abs(head.y-feet.y)<Math.hypot(head.x-feet.x,head.z-feet.z)*.65,'body is prone rather than upright');
+  assert.ok(head.y>.14&&head.y<.18,`head breathes at the surface: ${head.y}`);
+  assert.ok(hips.y<.13,`hips stay immersed: ${hips.y}`);
+  assert.equal(actor.root.rotation.x,0,'water does not pitch the saved walking root');
+ }
+ overlay.leave();assert.ok(actor.model.parent.quaternion.angleTo(rotation)<1e-7);overlay.dispose();
 });
