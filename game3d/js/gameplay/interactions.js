@@ -92,9 +92,10 @@ export function installInteractions(game) {
       }
       const person = place.people[id] || (id === 'mio' ? game.mioNpc : null),
         head = CHARACTER_SCALE !== 1 && characterHead(person);
-      if (head && !person.cat && !person.selfGait) {
+      if (person && (head || place.characterAnchor) && !person.cat && !person.selfGait) {
         const scale = new THREE.Vector3();
         item.anchor = (v) => {
+          if (place.characterAnchor) return place.characterAnchor(person, v);
           (characterHead(person) || person.root).getWorldPosition(v);
           person.root.getWorldScale(scale);
           v.y += 0.24 * (person.model ? CHARACTER_SCALE : 1) * scale.y;

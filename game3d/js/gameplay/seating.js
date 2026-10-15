@@ -81,6 +81,7 @@ export function attachSeating(game, place) {
     const anchor = (v) => {
       if (!sittingOn(s) && originalAnchor) return originalAnchor(v);
       if (sittingOn(s)) {
+        if (place.characterAnchor) return place.characterAnchor(game.player, v);
         (characterHead(game.player) || game.player.root).getWorldPosition(v);
         v.y += 0.24 * CHARACTER_SCALE * game.player.root.scale.y;
         return v;
