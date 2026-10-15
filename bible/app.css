@@ -228,7 +228,7 @@ table.t td.path { font: 12.5px var(--mono); }
 .lb { position: fixed; inset: 0; background: rgb(10 16 17 / .9); display: none; z-index: 20; align-items: center; justify-content: center; flex-direction: column; gap: 10px; padding: 20px; }
 .lb.on { display: flex; }
 .lb img { max-height: calc(100dvh - 90px); max-width: 100%; object-fit: contain; border-radius: 6px; }
-.lb .c { color: #e6ecea; font-size: 13.5px; text-align: center; }
+.lb .c { max-width: 100%; overflow-wrap: anywhere; color: #e6ecea; font-size: 13.5px; text-align: center; }
 .lb button { position: absolute; background: rgb(255 255 255 / .1); border: 0; color: #fff; border-radius: 999px; width: 42px; height: 42px; cursor: pointer; font-size: 18px; }
 .lb .x { top: 14px; right: 14px; } .lb .p { left: 14px; top: 50%; } .lb .n { right: 14px; top: 50%; }
 
@@ -367,7 +367,7 @@ a.rrow:hover { text-decoration: none; border-color: var(--accent); }
 .rimg img { width: 100%; border-radius: 7px; cursor: zoom-in; background: var(--panel-2); }
 .rmore { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 6px; }
 .rmore img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 50% 15%; border-radius: 6px; cursor: zoom-in; background: var(--panel-2); }
-.rlab { display: flex; flex-direction: column; gap: 2px; }
+.rlab { display: flex; flex-direction: column; gap: 2px; overflow-wrap: anywhere; }
 .rlab b { font-size: 15.5px; }
 .racts { display: flex; gap: 8px; flex-wrap: wrap; }
 .racts button { min-height: 44px; border: 1px solid var(--line); background: var(--bg); border-radius: 8px; padding: 0 14px; cursor: pointer; font-size: 14px; color: var(--ink); }
