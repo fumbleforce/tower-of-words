@@ -53,8 +53,7 @@ class HooksTest(unittest.TestCase):
     def test_internal_envelopes_do_not_become_human_feedback(self):
         envelopes = [f'<{tag} source="test">Internal instructions</{tag}>'
                      for tag in ('agent-message', 'cross-session-message', 'codex_internal_context')]
-        for prompt in [*envelopes, '\n  ' + '\n'.join(envelopes) + '\n',
-                       '<system-reminder>context</system-reminder>\n' + envelopes[0]]:
+        for prompt in [*envelopes, '\n  ' + '\n'.join(envelopes) + '\n']:
             with self.subTest(prompt=prompt):
                 result = adapter.invoke('feedback_log.py', {'prompt': prompt})
                 self.assertEqual(result.returncode, 0, result.stderr)
@@ -72,6 +71,12 @@ class HooksTest(unittest.TestCase):
             '<agent-message-example>my example</agent-message>',
             '  日本語\n\nKeep this spacing.\n',
             'Keep my <system-reminder>quoted words</system-reminder> too.',
+            '<system-reminder>Please keep this user feedback.</system-reminder>',
+            '<agent-message>quoted</agent-message> <system-reminder>Please fix it.</system-reminder>',
+            '<system-reminder>context</system-reminder>\n<agent-message>quoted</agent-message>',
+            '<task-notification>quoted</task-notification> Please fix this.',
+            '<command-name>quoted</command-name> Please fix this.',
+            '<system-reminder>Please fix this.</system-reminder>/compact',
         ]
         for number, prompt in enumerate(prompts):
             result = adapter.invoke('feedback_log.py', {'prompt': prompt, 'turn_id': str(number)})
@@ -80,9 +85,10 @@ class HooksTest(unittest.TestCase):
         for prompt in prompts:
             self.assertIn('\n' + prompt + '\n', log)
 
-    def test_existing_command_and_harness_exclusions_are_retained(self):
+    def test_commands_and_complete_control_envelopes_are_excluded(self):
         for prompt in ('', '  ', '/compact', '<task-notification>done</task-notification>',
-                       '<system-reminder>context</system-reminder>'):
+                       '<command-name>/compact</command-name>', '<local-command-stdout>done</local-command-stdout>',
+                       '<bash-stdout>done</bash-stdout>', '<teammate-message>done</teammate-message>'):
             result = adapter.invoke('feedback_log.py', {'prompt': prompt})
             self.assertEqual(result.returncode, 0, result.stderr)
         self.assertFalse((self.root / 'notes/feedback-log').exists())

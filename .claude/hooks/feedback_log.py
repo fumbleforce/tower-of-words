@@ -16,12 +16,12 @@ from datetime import datetime
 sys.path.insert(0, os.path.dirname(__file__))
 from common import main_root  # noqa: E402
 
-HARNESS = ('<task-notification', '<command-', '<local-command', '<bash-', '<system-reminder',
-           '<user-prompt-submit-hook', '<teammate-message')
 ONLY_SLASH = re.compile(r'^/[\w:.-]+$')
 REMINDER = re.compile(r'<system-reminder>.*?</system-reminder>', re.S)
 INTERNAL = re.compile(
-    r'(?:<(agent-message|cross-session-message|codex_internal_context)(?:\s[^>]*)?>'
+    r'(?:<(agent-message|cross-session-message|codex_internal_context|task-notification|'
+    r'command-[\w.-]+|local-command(?:-[\w.-]+)?|bash-[\w.-]+|'
+    r'user-prompt-submit-hook|teammate-message)(?:\s[^>]*)?>'
     r'(?:(?!</\1>).)*</\1>\s*)+', re.S)
 
 
@@ -30,12 +30,12 @@ def main():
     text = data.get('prompt')
     if not isinstance(text, str):
         return
-    normalized = REMINDER.sub('', text).strip()
+    stripped = text.strip()
     # Only a complete internal envelope is excluded. A user can discuss or quote
     # these tags in ordinary prose without losing their feedback.
-    if INTERNAL.fullmatch(normalized):
+    if INTERNAL.fullmatch(stripped):
         return
-    if not normalized or ONLY_SLASH.fullmatch(normalized) or normalized.startswith(HARNESS):
+    if not stripped or ONLY_SLASH.fullmatch(stripped):
         return
     now = datetime.now().astimezone()
     folder = os.path.join(main_root(data), 'notes', 'feedback-log')
@@ -52,6 +52,7 @@ def main():
     if event:
         # Keep the existing marker identity so a retry can find an entry written
         # before verbatim whitespace was retained.
+        normalized = REMINDER.sub('', text).strip()
         identity = f"{data.get('session_id', '?')}\0{event}\0{normalized}"
         marker = '<!-- feedback-event ' + hashlib.sha256(identity.encode()).hexdigest() + ' -->'
         entry = marker + '\n' + entry
