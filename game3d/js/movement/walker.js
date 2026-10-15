@@ -6,11 +6,9 @@ import * as THREE from 'three';
 import { sfx } from '../sfx.js';
 import { isPassing, slideStep, isHard, press } from './crowd.js';
 import { heldRun, doubleTap } from './run-input.js';
+import { LocomotionState } from './locomotion-state.js';
 
-// running (Jørgen, 2026-09-30: "Shift button to run, and caps lock to toggle running"): the walker's speed times RUN
-// while Shift is held, Caps Lock is on (run-input.js) or the tapped route was a double tap. gait.run tells the avatar
-// to show the run clip (makeGait in mio.js); scripted walks never set it.
-// The run multiplier stays 2.07; the player default is 1.43 m/s (10 % faster walking and running, 2026-10-06).
+// Shift, Caps Lock or a double tap runs at 2.07 times the ordinary 1.43 m/s (run-input.js).
 export const RUN = 2.07;
 const STEER_STOP = 0.3,
   STEER_GO = 0.5; // m from the steer point where a held walk stops, and how far it must move away to set off again
@@ -21,6 +19,7 @@ export class SmoothWalker extends Walker {
     this.v = 0; // current ground speed (place units / s)
     this.vx = 0;
     this.vz = 0; // current direction of travel
+    this.locomotion = new LocomotionState();
     this.gait = { v: 0, k: 0, run: false };
     this.preview = new PathPreview();
     this.others = opts.others || (() => bodies(window.__game).filter((b) => b.root !== this.body));
@@ -32,6 +31,7 @@ export class SmoothWalker extends Walker {
   }
   stop() {
     super.stop();
+    this.locomotion.reset();
     this.preview.clear();
     this.aside = null;
     this.runTo = false;
@@ -109,6 +109,7 @@ export class SmoothWalker extends Walker {
   }
   // snap the walker to the body as it is now (after a trip or a sit): no leftover turn, no leftover speed
   sync() {
+    this.locomotion.reset();
     this.facing = this.targetFacing = this.body.rotation.y;
     this.v = 0;
     this._yaw = this._facing = this.facing;
@@ -236,7 +237,7 @@ export class SmoothWalker extends Walker {
       mz = this.steer.z - p.z;
       const k = this.body.scale.x || 1; // in the place's own units, like his body
       remain = Math.hypot(mx, mz);
-      if (remain < (this.moving ? STEER_STOP : STEER_GO) * k) {
+      if (remain < (this.locomotion.travelMoving ? STEER_STOP : STEER_GO) * k) {
         if (remain > 0.05 * k) this.targetFacing = Math.atan2(mx, mz);
         mx = mz = 0;
       } else remain -= STEER_STOP * k;
@@ -310,7 +311,8 @@ export class SmoothWalker extends Walker {
     // in the air (jump.js sets air each frame) he keeps most of his speed: little grip to stop or speed up with
     const a = (want > this.v ? ACCEL : BRAKE) * (this.air ? (want > this.v ? 0.6 : 0.2) : 1);
     this.v += THREE.MathUtils.clamp(want - this.v, -a * dt, a * dt);
-    let moved = 0;
+    let moved = 0,
+      limited = false;
     if (this.v > 1e-3) {
       const dl = Math.hypot(this.vx, this.vz) || 1,
         step = this.v * dt;
@@ -355,6 +357,7 @@ export class SmoothWalker extends Walker {
       p.x = nx;
       p.z = nz;
       moved = Math.hypot(nx - ox, nz - oz);
+      limited = moved < step * 0.9;
       // blocked: the speed drops to what actually happened (sliding along a wall is slower)
       if (step > 1e-5) this.v = Math.min(this.v, (moved / dt) * 1.02 + 0.02);
       // steering into a wall: sliding along it, he turns to walk the way he goes (his feet stepping one way while he
@@ -377,10 +380,7 @@ export class SmoothWalker extends Walker {
     }
     if (this.targetFacing !== undefined) this.facing = turnToward(this.facing, this.targetFacing, dt);
     this.body.rotation.y = this.facing;
-    // walking or not, with some hysteresis so a slow slide along a wall doesn't flicker walk / idle / walk
-    const speedNow = moved / Math.max(dt, 1e-4);
-    const was = this.moving;
-    this.moving = was ? speedNow > 0.04 && this.v > 0.04 : speedNow > 0.1 && this.v > 0.1;
+    this.moving = this.locomotion.step(this, moved, dt, limited, keys);
     // a big turn on the spot (the spin check lets it through); he turns standing, without steps
     const turnLeft = this.targetFacing === undefined ? 0 : Math.abs(angDiff(this.targetFacing, this.facing));
     this.turning = !this.moving && turnLeft > 0.5;
