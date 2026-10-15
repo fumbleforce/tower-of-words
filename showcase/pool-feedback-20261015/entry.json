@@ -13,33 +13,31 @@
   "sections": [
     {
       "title": "Swimming",
-      "caption": "The basin has depth, steps and a transparent surface. Swimmers have trailing limbs and small water-contact rings. These round 6, attempt 2 captures predate landing and show the accepted water appearance. Swimming remains part of the authored club scene.",
       "images": [
         {
           "id": "water-desktop",
           "image": "bible/shots/showcase/pool-feedback-20261015/water-desktop.webp",
-          "caption": "Desktop: three head-first swimmers with visible limbs beneath the surface."
+          "caption": "Desktop: three head-first swimmers with visible limbs beneath the surface. Round 6, attempt 2, captured before landing. Swimming remains part of the authored club scene."
         },
         {
           "id": "water-phone",
           "image": "bible/shots/showcase/pool-feedback-20261015/water-phone.webp",
-          "caption": "Phone: the lanes, swimmers and water-contact rings remain distinct."
+          "caption": "Phone: the lanes, swimmers and water-contact rings remain distinct. From the accepted round 6, attempt 2 water captures."
         }
       ]
     },
     {
       "title": "Benches and saved games",
-      "caption": "Both changing rooms can be reached and used. A saved seated player returns to the bench, then can stand and walk away. The Sit and Stand up prompts clear the player’s hair. These final captures are from source 584b07479, build 1015-1257-584b07479.",
       "images": [
         {
           "id": "bench-desktop",
           "image": "bible/shots/showcase/pool-feedback-20261015/bench-desktop.webp",
-          "caption": "Desktop: Sit and its E badge sit above the standing player."
+          "caption": "Desktop: Sit and its E badge clear the standing player’s hair. Source 584b07479, build 1015-1257-584b07479."
         },
         {
           "id": "bench-phone",
           "image": "bible/shots/showcase/pool-feedback-20261015/bench-phone.webp",
-          "caption": "Phone: a seated Quick save has been restored, with Stand up above the player."
+          "caption": "Phone: a seated Quick save has been restored, with Stand up above the player. From the same final 584b07479 captures."
         }
       ]
     },

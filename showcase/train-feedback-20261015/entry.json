@@ -13,39 +13,37 @@
   "sections": [
     {
       "title": "After talking to the cat",
-      "caption": "The close-up ends and the normal train view returns on desktop and phone. These captures are from the be3456ca3 repair candidate. Its cat camera and story code are unchanged in the landed repair.",
       "images": [
         {
           "id": "cat-desktop",
           "image": "bible/shots/showcase/train-feedback-20261015/cat-desktop.webp",
-          "caption": "Desktop: the train overview returns after the conversation."
+          "caption": "Desktop: the train overview returns after the conversation. Captured on be3456ca3, with the cat camera and story code unchanged in the landed repair."
         },
         {
           "id": "cat-phone",
           "image": "bible/shots/showcase/train-feedback-20261015/cat-phone.webp",
-          "caption": "Phone: the player and the route back to Mio remain visible."
+          "caption": "Phone: the player and the route back to Mio remain visible. Captured on the be3456ca3 repair candidate."
         }
       ]
     },
     {
       "title": "At the exit",
-      "caption": "The player cannot wander away during the approach or lesson. Reloading and choosing Continue resumes the arrival. The phone camera keeps the player and doorway above Mio’s portrait. These captures show the final framing candidate, whose runtime files match the repair landed in 1a91efd1.",
       "images": [
         {
           "id": "arrival-phone",
           "image": "bible/shots/showcase/train-feedback-20261015/arrival-phone.webp",
-          "caption": "Phone: the player and open doorway stay visible during the lesson."
+          "caption": "Phone: the player and open doorway stay above Mio’s portrait. This final framing candidate has the same runtime files as landed repair 1a91efd1."
         },
         {
           "id": "arrival-desktop",
           "image": "bible/shots/showcase/train-feedback-20261015/arrival-desktop.webp",
-          "caption": "Desktop: the player has stepped onto the platform."
+          "caption": "Desktop: the player has stepped onto the platform. This is the same final framing candidate."
         }
       ]
     },
     {
       "title": "Before and rejected framing",
-      "caption": "These earlier captures are retained for comparison.",
+      "caption": "These earlier captures are retained for comparison. The separate opening feedback about early markers, the blurred passenger and submitting a typed word remains open in #540, #541 and #588.",
       "images": [
         {
           "id": "before-cat",
@@ -58,10 +56,6 @@
           "caption": "Rejected phone attempt on be3456ca3: Mio’s portrait covered the player and exit. The corrected result is shown above."
         }
       ]
-    },
-    {
-      "title": "Still being worked on",
-      "caption": "The separate opening feedback about early markers, the blurred passenger and submitting a typed word remains open in #540, #541 and #588. This entry covers the cat camera and arrival repairs."
     }
   ],
   "links": [
