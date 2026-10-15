@@ -246,6 +246,7 @@ export default {
       { do: 'emote', who: 'tama', kind: 'heart' },
       { say: 'mio', emo: 'amused', face: 'smile', text: "See? She's fine with it." },
       { set: 'cat_done' },
+      { do: 'cam', back: true },
       { do: 'goal', text: 'Talk to Mio.' },
     ],
     lesson3: [

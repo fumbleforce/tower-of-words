@@ -7,6 +7,7 @@ import { snapshotPeople, restorePeople, snapshotObject, restoreObject } from './
 import * as THREE from 'three';
 import { trainLaptop } from './train-laptop.js';
 import { trainBunCamera } from '../train/bun-camera.js';
+import { trainArrival } from '../train/arrival.js';
 import { Pass } from 'three/addons/postprocessing/Pass.js';
 import { SimplexNoise } from 'three/addons/math/SimplexNoise.js';
 import { buildWorld, SPEED } from '../train/world.js';
@@ -605,6 +606,7 @@ export async function trainPlace(game) {
   };
 
   // ---- camera: the whole car on a wide screen, along it on a phone ----
+  const arrival = trainArrival(st);
   const camera = new THREE.PerspectiveCamera(20, 16 / 9, 1, 160);
   const cam = {
     camera,
@@ -1208,11 +1210,12 @@ export async function trainPlace(game) {
     },
     hooks: {
       announce: ({ text, voice: v }) => ui.board(text, { voiceKey: v }),
-      arrive: () => {
-        station.visible = true;
-        startRunIn(st);
-        game.event(eventId('train', 'approach'));
-      },
+      arrive: () =>
+        arrival.begin(() => {
+          station.visible = true;
+          startRunIn(st);
+          game.event(eventId('train', 'approach'));
+        }),
       doorsOpen: () => {
         st.doorWant = 1;
         st.chimeT = -1;
@@ -1595,7 +1598,10 @@ export async function trainPlace(game) {
       }
     },
     onEnter: async () => {},
-    leave: () => finds.dispose(), // the passengers' sounds and pictures stop with the place
+    leave: () => {
+      arrival.leave();
+      finds.dispose();
+    },
     placeMio(m) {
       rei.root.visible = false;
       rei.blob.visible = false;
@@ -1698,6 +1704,7 @@ export async function trainPlace(game) {
     sfx('brake');
     P.hooks.doorsOpen();
     game.event(eventId('train', 'arrived'));
+    arrival.stopped();
   }
   st.stopX = 1e6;
   day2.install(P);

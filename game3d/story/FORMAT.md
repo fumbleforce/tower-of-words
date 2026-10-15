@@ -147,7 +147,7 @@ The things, spots, seats and zones each hook refers to are listed in docs/game/p
 Events: `start`, `approach` (the train starts slowing, when the story runs `{ do: 'arrive' }`), `arrived` (stopped, doors open), `chime` (the door-closing chime starts).
 
 - `announce` `text`, `voice`: the LED board at the top with the station announcement (`text: ''` hides it).
-- `arrive`: the train brakes and pulls into the station (about 8 s), then fires `event:arrived`.
+- `arrive`: waits while the train brakes and pulls into the station (about 8 s), then fires `event:arrived`. The approach scene keeps movement locked until that event continues it.
 - `doorsOpen`; `doorsClose` (`to`, 1 open to 0 shut, and `ms` for a slow steady close; no `ms` is the quick close); `chime` (starts the closing chime; the doors start closing after about 3 s unless `doorsHold` runs); `doorsHold` (`kotodama: true` freezes the doors where they are, with the effect; without it they bounce back to about half open).
 - `alight` `except`: everyone gets off but those listed. `depart`: the train leaves.
 - `wake` `who`: a sleeper jolts awake.
