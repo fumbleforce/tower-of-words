@@ -1,5 +1,6 @@
 // The pavilion's actual rooms, in island coordinates. A common entrance/corridor reaches either changing room;
-// only the protagonist's own room is walkable. The roof/front wall are cut away in the pool place only.
+// both open rooms have walkable floor. Authored changing uses the protagonist's own room.
+// The roof/front wall are cut away in the pool place only.
 import * as THREE from 'three';
 import { Parts } from '../outdoor/parts.js';
 import { signSet } from '../shop-signs.js';
@@ -40,6 +41,10 @@ export function changingPlan(gender) {
     deck: pt([doorX, DOOR_Z + 1.9]),
     seat: { at: pt([benchX, z1 - 1.95]), top: 0.34, ry: woman ? -Math.PI / 2 : Math.PI / 2 },
   };
+}
+export function changingNavigation() {
+  const plans = ['man', 'woman'].map(changingPlan);
+  return { walks: plans.flatMap((p) => p.walks), blocks: plans.flatMap((p) => p.blocks) };
 }
 function wall(p, a, b, h = 0.65) {
   const dx = b[0] - a[0],

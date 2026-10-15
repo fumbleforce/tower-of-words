@@ -27,7 +27,7 @@ Object.assign(globalThis, {
     documentElement: { style: { setProperty() {} } },
   },
 });
-const { changingPlan, CHANGING_ENTRY } = await import('../../js/scenes/sports/changing-room.js');
+const { changingPlan, changingNavigation, CHANGING_ENTRY } = await import('../../js/scenes/sports/changing-room.js');
 const D = await import('../../js/scenes/sports/deck-plan.js');
 const { boundsOf, inRect } = await import('../../js/scenes/sports/plan.js');
 const { Nav } = await import('../../js/movement/navigation.js');
@@ -46,11 +46,12 @@ const THREE = await import('../../vendor/three/three.module.js');
 test('both changing routes connect entrance, locker, shower and deck on free floor', () => {
   for (const gender of ['man', 'woman']) {
     const c = changingPlan(gender),
-      walks = [...D.WALKS, ...c.walks],
+      floor = changingNavigation(),
+      walks = [...D.WALKS, ...floor.walks],
       b = boundsOf(walks),
       nav = new Nav(b[0] - 0.2, b[1] + 0.2, b[2] - 0.2, b[3] + 0.2, 0.12);
     nav.extra = (x, z) => walks.some((r) => inRect(x, z, r, -0.02));
-    for (const r of [...D.BLOCKS, ...c.blocks]) nav.block(...r);
+    for (const r of [...D.BLOCKS, ...floor.blocks]) nav.block(...r);
     nav.build();
     const points = [CHANGING_ENTRY.inside, c.corridor, c.locker, c.shower, c.deck];
     for (let i = 0; i < points.length; i++) {
@@ -58,7 +59,8 @@ test('both changing routes connect entrance, locker, shower and deck on free flo
       if (i) assert.ok(nav.path(...points[i - 1], ...points[i])?.length, `${gender} route ${i}`);
     }
     const other = changingPlan(gender === 'man' ? 'woman' : 'man');
-    assert.ok(!nav.free(...other.locker), `${gender} does not enter other changing room`);
+    assert.ok(nav.free(...other.locker), `${gender} can explore the other physically open room`);
+    assert.ok(nav.path(...c.corridor, ...other.locker)?.length, `${gender} both rooms share the corridor`);
   }
 });
 test('four actual floodlights illuminate at evening and switch off again in daylight', () => {

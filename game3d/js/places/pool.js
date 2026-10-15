@@ -17,7 +17,7 @@ import { sim } from '../sim.js';
 import { day3Place } from './day3/place.js';
 import { poolClub } from './day3/swim.js';
 import { poolOutfits } from './day3/pool-outfits.js';
-import { changingPlan, CHANGING_ENTRY } from '../scenes/sports/changing-room.js';
+import { changingPlan, changingNavigation, CHANGING_ENTRY } from '../scenes/sports/changing-room.js';
 
 // Shared sports world with a cutaway pavilion, own changing-room route and deck navigation.
 // Day 3's swimming choreography owns water movement; normal walking stays on dry floor.
@@ -28,11 +28,12 @@ const seat = ({ at, top, ry }) => {
   return { x, z, top, ry, out: [x + Math.sin(ry) * 0.6, z + Math.cos(ry) * 0.6] };
 };
 export async function poolPlace(game) {
-  const changing = changingPlan(MC.gender);
+  const changing = changingPlan(MC.gender),
+    floorPlan = changingNavigation();
   const w = await sliced(
     sportsSteps({
-      walks: [...D.WALKS, ...changing.walks],
-      blocks: [...D.BLOCKS, ...changing.blocks],
+      walks: [...D.WALKS, ...floorPlan.walks],
+      blocks: [...D.BLOCKS, ...floorPlan.blocks],
       start: CHANGING_ENTRY.inside,
       poolInterior: true,
     }),
