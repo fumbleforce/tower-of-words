@@ -13,9 +13,9 @@ const out=process.env.ARTIFACTS || path.join(repo,'game3d/shots/shot-versions');
 fs.mkdirSync(out,{recursive:true});
 if(await fetch(base).then(()=>true,()=>false))throw Error('Fixture port already in use');
 const id='public:game3d/story/fixture.js#start',slot='file:fixture/station.webp';
-const scene={id,node:'start',title:'A station door',group:'Train',where:'game3d/story/fixture.js',audience:'public',revision:'fixture',entries:[],metadata:{},history:[],
+const scene={id,node:'start',title:'A station door',group:'Train',where:'game3d/story/fixture.js',audience:'public',recipe:true,capabilities:{picture:'pic'},revision:'fixture',entries:[],metadata:{},history:[],
  images:[{id:slot,file:'fixture/station.webp',url:'/fixture/live.svg',available:true}],
- steps:[{narration:'The station doors close as Mira reaches the platform.'},{shot:{},imageSlot:slot,imageUrl:'/fixture/live.svg'},{say:'mira',text:'Hold the door, please.'},{choice:[{text:'Wait here'},{text:'Go ahead'}]}]};
+ steps:[{narration:'The station doors close as Mira reaches the platform.'},{shot:{},imageSlot:slot,imageUrl:'/fixture/live.svg'},{say:'mira',text:'Hold the door, please.'},{choice:[{text:'Wait here'},{text:'Go ahead'}]},{if:'alternate_player',then:[{narration:'Mira holds the bag while the others board.'},{say:'mira',text:'I will take the next train.'},{action:'fin'}],else:[{narration:'You wait beside the platform entrance.'}]}]};
 const renders=Array.from({length:8},(_,i)=>({id:'attempt-'+(i+1),n:i+1,file:`fixture/${i+1}.svg`,thumb:`fixture/${i+1}.svg`,seed:100+i,at:`2026-10-15T12:0${i}:00`,
  reject:i%2===0,reject_reason:i%2===0?'The door frame is clipped.':'',compose:{subplotId:id,imageSlot:slot}}));
 const deleted={...renders[0],id:'deleted',n:9,deleted:true};
@@ -36,13 +36,15 @@ try{
     if(r.request().method()!=='GET'){report.writes.push(r.request().url());return r.abort();}
     const u=new URL(r.request().url()),a=u.pathname.slice('/api/subplots/'.length);
     if(a.includes('/out/')||a.includes('/thumb/'))return r.fulfill({contentType:'image/svg+xml',body:svg(u.pathname.split('/').at(-1))});
-    const json=a==='authoring'?{characters:[{id:'mira',name:'Mira'}],places:[],variables:[],events:[],words:[]}:a==='catalog'?{scenes:[scene]}:a==='map'?{nodes:[]}:a==='status'?{status:{}}:a==='read'?scene:a==='pictures'?{runs:history}:a==='picture-source'?{job:null}:a==='comments'?{comments:[]}:a==='image/api/jobs'?[{...renders[2],status:'done'}]:a==='image/api/presets'?{}:[];
+    const json=a==='authoring'?{characters:[{id:'mira',name:'Mira'}],places:[],variables:[{id:'alternate_player',label:'A different protagonist is playing',type:'boolean'}],events:[],words:[]}:a==='catalog'?{scenes:[scene]}:a==='map'?{nodes:[]}:a==='status'?{status:{}}:a==='read'?scene:a==='pictures'?{runs:history}:a==='picture-source'?{job:null}:a==='comments'?{comments:[]}:a==='image/api/jobs'?[{...renders[2],status:'done'}]:a==='image/api/presets'?{}:[];
     return r.fulfill({json});
    });
    const page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));
    try{
     await page.goto(base+'/tools/subplots/web/?scene='+encodeURIComponent(id),{waitUntil:'networkidle'});
     assert.match(await page.locator('#timeline textarea').first().inputValue(),/station doors close/);
+    await page.locator('#timeline .arm .add-row.full [data-k=picture]').first().click({trial:true});
+    assert.equal(await page.locator('#timeline .kind-head .arm-switch').first().isVisible(),true);
     await page.locator('#timeline .pic .change').click();
     await page.locator('[data-v="attempt-8"]').waitFor();
     assert.equal(await page.evaluate(()=>globalThis.document.documentElement.scrollWidth<=globalThis.innerWidth),true,'no horizontal page overflow');

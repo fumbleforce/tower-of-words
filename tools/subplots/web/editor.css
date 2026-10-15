@@ -469,6 +469,9 @@ body.drag-private .place-chip[data-place]:not(.on), body.drag-private #days butt
   .path-bar { margin: -16px -8px 14px; padding: 10px 8px; }
   .beat { grid-template-columns: 34px minmax(0, 1fr); }
   .beat > .tools { grid-column: 2; opacity: 1; flex-wrap: wrap; }
+  .kind-head, .add-row.full { flex-wrap: wrap; }
+  .kind-head .cond { overflow-wrap: anywhere; }
+  .arm { min-width: 0; }
   .pic figcaption { opacity: 1; }
   .banner { flex-wrap: wrap; }
 }

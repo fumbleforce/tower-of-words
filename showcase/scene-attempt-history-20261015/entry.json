@@ -25,7 +25,7 @@
         {
           "id": "phone-history",
           "image": "bible/shots/showcase/scene-attempt-history-20261015/phone-history.webp",
-          "caption": "Phone: story and picture details stack vertically."
+          "caption": "Phone: story, nested branch controls and picture details fit vertically."
         },
         {
           "id": "desktop-compare",
@@ -40,5 +40,6 @@
       "label": "Open the scene editor",
       "href": "tools/subplots/web/"
     }
-  ]
+  ],
+  "updated": "2026-10-15T21:01:01+02:00"
 }
