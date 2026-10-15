@@ -4,6 +4,7 @@ prompt, negative, seed, size, steps, cfg, sampler and model, and who made it.
 
 It writes through store.py (same file lock as the dashboard) and never raises: a logging failure must not break a render.
 """
+import copy as _copy
 import hashlib, os, re, sys
 
 try:
@@ -52,10 +53,14 @@ def file_sha(path):
 
 def add(fields, src, copy=True):
     """Append one agent render. fields: positive, negative, seed, w, h, steps, cfg, sampler, scheduler, model_file, extras,
-    mode, denoise, src_image, owner, round, elapsed, at, backfilled. src: the original image.
+    mode, denoise, src_image, owner, round, compose, elapsed, at, backfilled. src: the original image.
+    compose carries the editor scene (subplotId) and shot (imageSlot) when this render belongs to a scene.
     copy=True puts a webp copy in outputs/<date>/ (live renders); False keeps only a thumbnail and points at src (backfill).
     Returns the new log id, or None when this exact picture is already logged."""
     from PIL import Image
+    compose = fields.get('compose')
+    if compose is not None and not isinstance(compose, dict):
+        raise ValueError('compose must be an object or None')
     out_path = rel_path(src)
     if os.path.join(store.REPO, out_path).startswith(store.OFF_LIMITS + os.sep):
         return None
@@ -74,7 +79,7 @@ def add(fields, src, copy=True):
                  steps=fields.get('steps'), cfg=fields.get('cfg'), sampler=fields.get('sampler'), scheduler=fields.get('scheduler'),
                  positive=fields.get('positive') or '', negative=fields.get('negative') or '', extras=fields.get('extras') or [],
                  mode=fields.get('mode'), denoise=fields.get('denoise'), src_image=fields.get('src_image'),
-                 overridden=False, presets=None, rating='', scene_text='', characters=[], compose=None, elapsed=fields.get('elapsed'),
+                 overridden=False, presets=None, rating='', scene_text='', characters=[], compose=_copy.deepcopy(compose), elapsed=fields.get('elapsed'),
                  backfilled=bool(fields.get('backfilled')), at=at, star=False, fav=False, reject=False, reject_reason='', note='')
         if copy:
             dst = os.path.join(store.OUTPUTS, rel)
@@ -93,3 +98,33 @@ def record(parsed, out_path, elapsed=None):
     except Exception as e:
         print(f'agentlog: not logged ({type(e).__name__}: {e})', file=sys.stderr)
         return None
+
+
+def associate(render_id, scene_id, image_slot, *, expected_compose):
+    """Attach one explicitly identified existing render to an editor scene and shot, without picking it.
+
+    expected_compose must be the record's current compose object (or None). A stale caller cannot overwrite a
+    concurrent metadata change. Only the two association keys change; prompts, provenance and ratings stay intact.
+    The dashboard queue and agentlog use the same render store, so either source can carry an association.
+    """
+    if any(not isinstance(v, str) or not v.strip() for v in (render_id, scene_id, image_slot)):
+        raise ValueError('render id, scene id and image slot must be nonempty strings')
+    if expected_compose is not None and not isinstance(expected_compose, dict):
+        raise ValueError('expected_compose must be an object or None')
+    with store._log_locked():
+        rows = [r for r in store.log_read() if r.get('id') == render_id]
+        if len(rows) != 1:
+            raise ValueError('Expected exactly one existing render')
+        row = rows[0]
+        current = row.get('compose')
+        if current is not None and not isinstance(current, dict):
+            raise ValueError('Existing compose is not an object')
+        if current != expected_compose:
+            target = {**(expected_compose or {}), 'subplotId': scene_id, 'imageSlot': image_slot}
+            if current == target:  # an exact retry is harmless and does not rewrite the log
+                return row
+            raise ValueError('Render composition changed; read it again before associating')
+        target = {**(current or {}), 'subplotId': scene_id, 'imageSlot': image_slot}
+        if current == target:
+            return row
+        return store.log_set(render_id, {'compose': target})[0]
