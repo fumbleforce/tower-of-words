@@ -82,6 +82,26 @@ class StudioDrafts(unittest.TestCase):
             self.assertEqual(len(restored['steps']), 1)
         self.assertEqual(self.story.read_bytes(), before)
 
+    def test_external_generation_evidence_survives_draft_save_and_source_lookup(self):
+        self.job.update(seed=None,model_file=None,steps=None,cfg=None,sampler=None,scheduler=None,
+                        provenance={'schema':1,'kind':'external','engine':'image_gen.imagegen','replay':False,
+                                    'requested':{'prompt':'a rainy station','transparent_background':False},
+                                    'observed':{'provider_output':'fixture.png'},'unavailable':['seed','cfg'],
+                                    'output':{'path':'original.png','sha256':'a'*64,'width':1,'height':1},
+                                    'references':[{'path':'first.png','sha256':'b'*64,'width':1,'height':1}]})
+        original = copy.deepcopy(self.job)
+        scene_id = self.create()
+        scene = self.read(scene_id)
+        scene['steps'].append({'narration':'The doors close.'})
+        api.dispatch('save',scene)
+        with patch.object(api,'image_render',side_effect=ValueError('Original no longer available')):
+            source = api.dispatch('picture-source',{'id':scene_id,'slot':'image:0'})['job']
+        self.assertEqual(source['provenance'],original['provenance'])
+        self.assertEqual(source['positive'],original['positive'])
+        self.assertIsNone(source['seed'])
+        self.assertIsNone(source['model_file'])
+        self.assertEqual(self.job,original)
+
     def test_discarded_pick_persists_saved_picture_and_empty_revisions_stay_empty(self):
         scene_id = self.create()
         scene = self.read(scene_id)

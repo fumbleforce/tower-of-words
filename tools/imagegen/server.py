@@ -356,7 +356,7 @@ def new_run(body, private=False):
 
 def public_job(j):
     out = {k: j.get(k) for k in ('id', 'n', 'run_id', 'idx', 'status', 'progress', 'seed', 'file', 'thumb', 'error', 'w', 'h', 'elapsed',
-                                  'positive', 'negative', 'overridden', 'compose', 'model_file', 'star', 'fav', 'reject', 'reject_reason', 'note',
+                                  'positive', 'negative', 'overridden', 'compose', 'model_file', 'steps', 'cfg', 'sampler', 'scheduler', 'star', 'fav', 'reject', 'reject_reason', 'note',
                                   'presets', 'characters', 'rating', 'deleted', 'ipa', 'repaint', 'raw_file', 'phase', 'start', 'loras', 'control', 'huefix')}
     if j.get('created') is not None:
         out['created'] = j['created']
@@ -494,12 +494,13 @@ def private_files():
                 ids.add(r.get('id'))
                 names.update(x for x in (r.get('file'), r.get('raw_file'), r.get('thumb')) if x)
                 names.update(os.path.splitext(x)[0] + '.webp' for x in (r.get('file'),) if x)
+                names.update(x['file'] for x in (r.get('provenance') or {}).get('references', []) if x.get('file'))
         _PRIV.update(stamp=stamp, names=frozenset(names), ids=frozenset(ids))
     return _PRIV['names'], _PRIV['ids']
 
 
 # ---------------------------------------------------------------- history and tuning
-AGENT_FIELDS = ('source', 'owner', 'round', 'extras', 'out_path', 'backfilled', 'mode', 'denoise', 'src_image', 'steps', 'cfg', 'sampler', 'scheduler')
+AGENT_FIELDS = ('provenance', 'private', 'imported_at', 'source', 'owner', 'round', 'extras', 'out_path', 'backfilled', 'mode', 'denoise', 'src_image', 'steps', 'cfg', 'sampler', 'scheduler')
 
 
 def history_time(at):
@@ -655,6 +656,7 @@ class H(BaseHTTPRequestHandler):
                 and os.path.isfile(PRIVATE_NAV) and os.environ.get('SUBPLOTS_PUBLIC_ONLY') != '1')
 
     def _file(self, base, rel, cache=True, check=False):
+        rel = os.path.normpath(rel)
         if check and not self._private() and rel in private_files()[0]:
             return self._send(404, {'error': 'not found'})
         path = os.path.realpath(os.path.join(base, rel))

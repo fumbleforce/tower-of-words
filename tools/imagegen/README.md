@@ -32,3 +32,53 @@ A block keeps every version; saving makes a new one and Restore brings an old on
 ## Backups
 
 Local tool data needs its own backup. `tools/assets/sync.py` never uploads private files and only uploads binaries. Before a tool migration, preserve the versioned code in Git and archive `tools/imagegen/config/`, the image service data directory, and the scene editor state directory. Browser composition drafts remain in that browser's local storage. Restore data with the services stopped so a running writer cannot overwrite it.
+
+## Generation records
+
+Both Image Gen and Scene Editor use the same picture library and settings lightbox. Fresh queue results and reloaded history keep steps, CFG, sampler and scheduler. Loading a local picture preserves its exact recorded prompt and exclusions even when a shared block has changed since generation. Changing a block deliberately rebuilds the prompt. The Original prompt panel keeps the full source recipe, including preset versions, local block changes, references and picture tools.
+
+A completed external tool output enters that same numbered history through:
+
+```sh
+python3 tools/imagegen/external.py /path/to/receipt.json
+```
+
+The receipt records evidence from the actual tool call. A minimal example is:
+
+```json
+{
+  "import_id": "tool-call-output-1",
+  "engine": "image_gen.imagegen",
+  "prompt": "A quiet station entrance with a blue sign.",
+  "output": "/path/to/original.png",
+  "rating": "safe",
+  "references": ["/path/to/reference.png"],
+  "requested": {
+    "prompt": "A quiet station entrance with a blue sign.",
+    "transparent_background": false,
+    "referenced_image_paths": ["/path/to/reference.png"]
+  },
+  "observed": {"provider_output": "tool-output.png"}
+}
+```
+
+Use the actual known engine identifier. Do not infer its internal model version or local sampler settings. `requested` holds only verified tool arguments; `observed` holds returned metadata or explicitly labelled historical evidence. If a historical request is incomplete, record that in `observed` and leave unknown arguments absent. `references` preserves input order and must agree with `requested.referenced_image_paths` when present. The prompt must also agree with `requested.prompt`.
+
+`at` is optional. Supply an ISO timestamp with a timezone only when evidence exists, with `timestamp_source` explaining it, such as `tool_receipt` or `source_file_mtime`. A file modification time remains labelled as such. Without `at`, the row uses import time for history ordering, while `provenance.generated_at` remains null and its source is `not_recorded`. `imported_at` always records import time.
+
+The importer stores the original and reference snapshots byte for byte, with original paths, SHA-256 and decoded dimensions. It takes the ordinary cross-process store lock. Identical retries of an `import_id` return the same numbered row and preserve ratings and notes. Contradictory evidence for that ID is refused. Inputs are fully decoded before mutation. A guarded importing record is written before any output, reference or thumbnail becomes addressable. A failed import removes its new copies and can resume with the same number without losing notes. Protected sources and symlinks are refused before opening them. Private ratings or private source/reference paths keep the entire record and its reference copies private; `private: true` may explicitly retain a private audience.
+
+External records retain rating, notes, comparison, trash, image selection and Create scene/character actions. The same lightbox displays their exact request, observed result, unavailable controls and ordered references. Unsupported seed replay is disabled in both hosts and guarded in their action handlers. Opening an external scene source shows its settings read-only. Starting a new local generation is an explicit separate action.
+
+| Feature | Image Gen and Scene Editor |
+|---|---|
+| Cast, outfit, scene, place, light, camera, style, excludes and local block changes | Shared composer and prompt builder |
+| Seed, size, model, steps, CFG, sampler and scheduler | Shared queue recipe, live results and durable history |
+| Prompt overrides and preset versions | Exact original words and full versioned recipe retained |
+| Reference, start image, LoRA, guide and colour tools | Full recorded fields retained in settings and local reuse |
+| Original prompt and original/current settings | Shared source record, visible in both composers |
+| Star, favourite, reject reason, notes, compare and trash | Shared library actions and service records |
+| Create scene or character | Existing source-preserving actions; scene-only attachments stay in Scene Editor |
+| External tool evidence | Same library/lightbox; unsupported provider controls remain unknown |
+
+Tests: `python3 -m unittest tools/imagegen/test_external.py tools/imagegen/test_imagegen.py tools/subplots/test/test_studio.py`, `node --test tools/imagegen/test/*.test.mjs tools/subplots/test/image-compose.test.mjs`, and `GL=soft node tools/imagegen/test/provenance-browser.mjs`. The browser matrix intercepts every request and checks both actual hosts at 390px and 1366px. It does not access the live queue or measure native GPU performance.

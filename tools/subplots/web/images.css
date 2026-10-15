@@ -431,3 +431,20 @@
 .block-pick select { flex-basis: 120px; }
 .row-head { min-width: 0; }
 .row-head .tile-tool { max-width: 100%; white-space: normal; text-align: left; }
+
+/* Generation evidence appears inside both composers as well as their shared lightbox. */
+.generation-provenance { min-width: 0; }
+.generation-provenance .kv { display: grid; grid-template-columns: minmax(0, 100px) minmax(0, 1fr); gap: 4px 12px; font-size: 12.5px; }
+.generation-provenance .kv span:nth-child(odd) { color: var(--dim); }
+.generation-provenance .ptext { padding: 8px; border-radius: 8px; background: #0f1217; font: 12px/1.5 ui-monospace, monospace; }
+.generation-provenance ol { padding-left: 22px; }
+.generation-provenance li { margin-bottom: 12px; }
+.lib-overlay .lb .pic, .lib-overlay .lb .side { min-width: 0; }
+@media (max-width: 760px) {
+  .lib-overlay .lb { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(150px, 34dvh) minmax(0, 1fr); }
+  .lib-overlay .lb .pic { padding: 8px; }
+  .lib-overlay .lb .pic img { max-height: calc(34dvh - 16px); }
+  .lib-overlay .lb .side { border-left: 0; border-top: 1px solid var(--line); }
+}
+.generation-provenance .hint, .image-original .hint, .image-settings .settings-peek, .external-source-notice .hint { color: var(--dim); }
+.image-cast > .hint { grid-column: 1 / -1; color: var(--dim); }

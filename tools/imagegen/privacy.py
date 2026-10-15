@@ -52,7 +52,7 @@ def is_private_render(r):
     rule = rules()
     neg, pos = (r.get('negative') or '').lower(), (r.get('positive') or '').lower()
     path = r.get('out_path') or ''
-    return (r.get('rating') in rule['ratings'] or any(path.startswith(p) for p in rule['paths'])
+    return (bool(r.get('private')) or r.get('rating') in rule['ratings'] or any(path.startswith(p) for p in rule['paths'])
             or any(t.lower() in neg for t in rule['negative_terms']) or any(t.lower() in pos for t in rule['positive_terms']))
 
 

@@ -2,6 +2,7 @@
    editor's composer (tools/subplots/web/library.js). Each page wires the clicks; the markup, the rating rules and the
    keys are here. `base` is where the image service answers ('' on 8772, '/api/subplots/image' through the editor). */
 import { esc, wordDiff } from './blocks.js';
+import {isExternal, provenanceHtml, localSettingsHtml} from './provenance.js';
 
 export const isAgent = t => t?.source === 'agent';
 // Only this local, content-addressed endpoint may override a render's service URL.
@@ -30,9 +31,9 @@ export function lightboxKey(e) {
 
 // ctx: { i, n, pinned, raw (show before the face fix), styleName, base }
 export function lightboxHtml(t, ctx) {
-  const c = t.compose || {}, base = ctx.base || '', agent = isAgent(t);
+  const c = t.compose || {}, base = ctx.base || '', agent = isAgent(t), external = isExternal(t);
   return `<div class="lb">
-    <div class="pic"><img src="${ctx.raw && t.raw_file ? `${base}/out/${esc(t.raw_file)}` : esc(fullUrl(t, base))}" alt="Seed ${t.seed}">
+    <div class="pic"><img src="${ctx.raw && t.raw_file ? `${base}/out/${esc(t.raw_file)}` : esc(fullUrl(t, base))}" alt="${external ? 'Picture ' + esc(t.n || t.id) : 'Seed ' + t.seed}">
       ${ctx.n > 1 ? `<button class="btn nav l" data-lb="-1" aria-label="Previous"><i class="ph ph-caret-left"></i></button><button class="btn nav r" data-lb="1" aria-label="Next"><i class="ph ph-caret-right"></i></button>` : ''}</div>
     <div class="side">
       <div class="row gap8"><h2 style="margin-right:auto">${ctx.i + 1} of ${ctx.n}</h2>${t.n ? `<button class="btn sm" data-a="copyn" data-id="${esc(t.id)}" title="Copy the picture number">#${t.n}</button>` : ''}<button class="btn sm" data-close="1"><i class="ph ph-x"></i> Close</button></div>
@@ -43,14 +44,14 @@ export function lightboxHtml(t, ctx) {
         <button class="btn sm" data-a="pin" data-id="${esc(t.id)}" aria-pressed="${!!ctx.pinned}"><i class="ph ph-columns"></i> ${ctx.pinned ? 'Pinned' : 'Compare'}</button>
         <button class="btn sm danger" data-a="del" data-id="${esc(t.id)}" title="Delete (Delete key)"><i class="ph ph-trash"></i> Delete</button>
       </div>
-      <div class="row gap8 wrap">
+      ${external ? '' : `<div class="row gap8 wrap">
         <button class="btn sm" data-a="sameseed" data-id="${esc(t.id)}">${ctx.useLabel || (agent ? 'Load prompt and seed into Compose' : 'Same seed, edit prompt')}</button>
         ${agent && !ctx.agentNewSeeds ? '' : `<button class="btn sm" data-a="newseeds" data-id="${esc(t.id)}">New seeds, same prompt</button>`}
         <button class="btn sm" data-a="copyseed" data-id="${esc(t.id)}">Copy seed ${t.seed}</button>
-      </div>
+      </div>`}
       <label>Reject reason<input type="text" id="lbReason" value="${esc(t.reject_reason || '')}" placeholder="Only needed if you reject it"></label>
       <label>Note to Claude<textarea id="lbNote" rows="2" placeholder="What works, what doesn't">${esc(t.note || '')}</textarea></label>
-      <div class="kv"><span>Seed</span><span class="mono">${t.seed}</span><span>Model</span><span>${esc((t.model_file || '').replace('.safetensors', ''))}</span>
+      ${external ? provenanceHtml(t) : `<div class="kv"><span>Seed</span><span class="mono">${t.seed}</span><span>Model</span><span>${esc((t.model_file || '').replace('.safetensors', ''))}</span>
         <span>Size</span><span>${t.w} × ${t.h}</span>${agent ? '' : `<span>Style</span><span>${esc(ctx.styleName || c.style || '')}</span>`}
         <span>Steps</span><span>${esc(t.steps ?? 'Not recorded')}</span><span>Prompt strength (CFG)</span><span>${esc(t.cfg ?? 'Not recorded')}</span>${t.sampler ? `<span>Sampler</span><span>${esc(t.sampler)}${t.scheduler ? ' ' + esc(t.scheduler) : ''}</span>` : ''}
         ${t.start ? `<span>Started from</span><span class="mono" style="word-break:break-all">${esc(t.start.image)} at ${t.start.denoise}${t.start.mask ? ', masked (inpaint)' : ''}</span>` : ''}
@@ -62,11 +63,11 @@ export function lightboxHtml(t, ctx) {
           ${(t.extras || []).length ? `<span>Also used</span><span>${t.extras.map(esc).join('<br>')}</span>` : ''}` : '<span>Made by</span><span>Jørgen (dashboard)</span>'}
         <span>Render</span><span class="mono">${esc(t.id)}</span>
         ${agent ? '' : `<span>On-model</span><span>${t.ipa ? `Reference at ${(+t.ipa.strength).toFixed(2)}${t.ipa.cutout ? ' (cut out onto white)' : ''}` : 'No reference'}${t.repaint ? (t.repaint.skipped ? `; face fix skipped: ${esc(t.repaint.skipped)}` : `; face fix at ${(+t.repaint.denoise).toFixed(2)}${t.repaint.secs ? ` (${t.repaint.secs} s)` : ''}`) : ''}</span>
-        ${t.ipa || t.repaint ? `<span>Reference</span><span class="mono" style="word-break:break-all">${esc((t.ipa || t.repaint).ref)}</span>` : ''}`}</div>
+        ${t.ipa || t.repaint ? `<span>Reference</span><span class="mono" style="word-break:break-all">${esc((t.ipa || t.repaint).ref)}</span>` : ''}`}</div>${localSettingsHtml(t)}`}
       ${t.raw_file ? `<div class="row gap8"><button class="btn sm" data-lbraw="1">${ctx.raw ? 'Show the result' : 'Show before the fix'}</button></div>` : ''}
       ${t.repaint && !t.repaint.skipped ? `<details class="adv"><summary>Repaint prompt</summary><div class="ptext mt4">${esc(t.repaint.prompt)}</div></details>` : ''}
       <div><div class="lbl">Positive${t.overridden ? ' <span class="badge">edited by hand</span>' : ''}</div><div class="ptext">${esc(t.positive || '')}</div></div>
-      <div><div class="lbl">Negative</div><div class="ptext">${esc(t.negative || '')}</div></div>
+      ${external ? '' : `<div><div class="lbl">Negative</div><div class="ptext">${esc(t.negative || '')}</div></div>`}
     </div></div>`;
 }
 
@@ -74,8 +75,8 @@ export function lightboxHtml(t, ctx) {
 export function compareHtml(pins, base = '') {
   const first = pins[0];
   return `<button class="btn sm close" data-close="1"><i class="ph ph-x"></i> Close</button><div class="cmp"><div class="cmpgrid">${pins.map((p, k) => `
-    <figure><img src="${esc(fullUrl(p, base))}" alt="Seed ${p.seed}" data-open="${esc(p.id)}" style="cursor:zoom-in">
-      <figcaption><div class="row gap8" style="margin-bottom:6px"><button class="btn sm" data-unpin="${esc(p.id)}">Unpin</button><button class="btn sm danger" data-cdel="${esc(p.id)}"><i class="ph ph-trash"></i> Delete</button></div><div class="kv"><span>Seed</span><span class="mono">${p.seed}</span><span>Model</span><span>${esc((p.model_file || '').replace('.safetensors', ''))}</span></div>
+    <figure><img src="${esc(fullUrl(p, base))}" alt="${isExternal(p) ? 'Picture ' + esc(p.n || p.id) : 'Seed ' + p.seed}" data-open="${esc(p.id)}" style="cursor:zoom-in">
+      <figcaption><div class="row gap8" style="margin-bottom:6px"><button class="btn sm" data-unpin="${esc(p.id)}">Unpin</button><button class="btn sm danger" data-cdel="${esc(p.id)}"><i class="ph ph-trash"></i> Delete</button></div>${isExternal(p) ? provenanceHtml(p) : `<div class="kv"><span>Seed</span><span class="mono">${p.seed}</span><span>Model</span><span>${esc((p.model_file || '').replace('.safetensors', ''))}</span></div>`}
       <div class="lbl mt8">Positive${k ? ' (changes from the first)' : ''}</div><div class="ptext">${k ? wordDiff(first.positive, p.positive) : esc(p.positive || '')}</div>
-      <div class="lbl mt8">Negative</div><div class="ptext">${k ? wordDiff(first.negative, p.negative) : esc(p.negative || '')}</div></figcaption></figure>`).join('')}</div></div>`;
+      ${isExternal(p) ? '' : `<div class="lbl mt8">Negative</div><div class="ptext">${k ? wordDiff(first.negative, p.negative) : esc(p.negative || '')}</div>`}</figcaption></figure>`).join('')}</div></div>`;
 }

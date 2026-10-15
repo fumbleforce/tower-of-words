@@ -100,7 +100,7 @@ function build(c, presets, subplotId) {
   return {parts, body: {
     positive: (typeof c.override === 'string' ? c.override : c.override?.positive)?.trim() || positive,
     negative: c.override?.negative != null ? withSoft(c.override.negative) : negative, overridden: !!c.override,
-    model_file: md.file, steps: +c.steps || md.steps || 30, cfg: +c.cfg || md.cfg || 5,
+    model_file: md.file, steps: +c.steps || md.steps || 30, cfg: c.cfg != null && c.cfg !== '' ? +c.cfg : (md.cfg ?? 5),
     sampler: c.sampler || md.sampler || 'euler_ancestral', scheduler: c.scheduler || md.scheduler || 'normal',
     w: +c.width || fr.w || 1152, h: +c.height || fr.h || 896, count: Math.min(8, Math.max(1, +c.count || 1)),
     seed_mode: c.seedMode, seed: +c.seed || 0, rating, characters: chars.map(p => p.id), scene_text: direction,

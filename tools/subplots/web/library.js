@@ -5,6 +5,7 @@
 const {document, navigator} = globalThis;
 import {esc} from './common.js';
 import {rateFields, lightboxKey, lightboxHtml, compareHtml, thumbUrl, fullUrl, isAgent, draftPictureUrl} from '../../imagegen/web/gallery.js';
+import {isExternal, externalReplayNotice, providerLabel} from '../../imagegen/web/provenance.js';
 
 const BASE = '/api/subplots/image';
 
@@ -40,6 +41,7 @@ export function createLibrary(hooks) {
   }
   function copy(text, what) { navigator.clipboard?.writeText(text); hooks.notice(what + ' copied.'); }
   function newSeeds(t) {
+    if (isExternal(t)) { hooks.notice(externalReplayNotice, true); return Promise.resolve(); }
     const body = {positive: t.positive, negative: t.negative || '', overridden: !!t.overridden, model_file: t.model_file, w: t.w, h: t.h,
       steps: t.steps, cfg: t.cfg, sampler: t.sampler, scheduler: t.scheduler, count: hooks.count(), seed_mode: 'random',
       compose: t.compose || {}, presets: t.presets || {}, characters: t.characters || [], rating: t.rating, scene_text: t.compose?.scene || '',
@@ -50,6 +52,7 @@ export function createLibrary(hooks) {
   // one handler for the card buttons and the lightbox buttons
   function act(action, t, btn) {
     if (!t) return;
+    if (isExternal(t) && ['sameseed', 'newseeds', 'reuse', 'copyseed'].includes(action)) return hooks.notice(externalReplayNotice, true);
     if (action === 'open') return openLightbox(t.id);
     if (action === 'star' || action === 'fav') return rate(t, rateFields(action, t));
     if (action === 'reject') {
@@ -87,11 +90,11 @@ export function createLibrary(hooks) {
         <button type="button" data-lib="del" data-i="${i}" title="Delete (moves it to the trash)">Del</button></div>` : '';
     const meta = [j.n ? `<button type="button" class="link" data-lib="copyn" data-i="${i}" title="Copy the picture number">#${j.n}</button>` : '',
       j.seed != null ? `<button type="button" class="link" data-lib="copyseed" data-i="${i}" title="Copy the seed">s${j.seed}</button>` : '',
-      esc(j.status === 'done' ? j.at?.slice(0, 10) || 'Ready' : j.status + (j.status === 'running' ? ` · ${Math.round((j.progress || 0) * 100)}%` : '')),
-      isAgent(j) ? `<span title="${esc(j.owner || '')}">agent</span>` : '', marks ? `<span class="lib-marks">${marks}</span>` : ''].filter(Boolean).join(' · ');
+      esc(j.status === 'done' ? isExternal(j) ? 'Imported ' + (j.imported_at?.slice(0, 10) || '(time not recorded)') : j.at?.slice(0, 10) || 'Ready' : j.status + (j.status === 'running' ? ` · ${Math.round((j.progress || 0) * 100)}%` : '')),
+      isExternal(j) ? `<span title="${esc(j.provenance.engine)}">${esc(providerLabel(j))}</span>` : isAgent(j) ? `<span title="${esc(j.owner || '')}">agent</span>` : '', marks ? `<span class="lib-marks">${marks}</span>` : ''].filter(Boolean).join(' · ');
     return `<article class="render-card${hooks.selected?.() === j.id ? ' selected' : ''}${j.reject ? ' rejected' : ''}">${done ? `<button type="button" class="lib-shot" data-lib="open" data-i="${i}" title="Open (arrows, s, f, x, Delete)"><img loading="lazy" src="${esc(thumbUrl(j, BASE) || fullUrl(j, BASE))}" alt="Picture ${j.n ? '#' + j.n : i + 1}"></button>` : ''}
       <small>${meta}</small>${j.error ? `<small>${esc(j.error)}</small>` : ''}${j.reject && j.reject_reason ? `<small>Rejected: ${esc(j.reject_reason)}</small>` : ''}${j.note ? `<small>Note: ${esc(j.note)}</small>` : ''}
-      ${tools}${canUse ? `<button data-lib="use" data-i="${i}">${esc(hooks.useLabel || 'Use for this shot')}</button>` : ''}${canUse && hooks.actions ? `<div class="lib-create">${createButtons(kind => `data-lib="${kind}" data-i="${i}"`)}</div>` : ''}${j.positive ? `<button data-lib="reuse" data-i="${i}">${esc(hooks.reuseLabel || 'Use in Compose')}</button>` : ''}</article>`;
+      ${tools}${canUse ? `<button data-lib="use" data-i="${i}">${esc(hooks.useLabel || 'Use for this shot')}</button>` : ''}${canUse && hooks.actions ? `<div class="lib-create">${createButtons(kind => `data-lib="${kind}" data-i="${i}"`)}</div>` : ''}${isExternal(j) ? `<button data-lib="open" data-i="${i}">View original settings</button>` : j.positive ? `<button data-lib="reuse" data-i="${i}">${esc(hooks.reuseLabel || 'Use in Compose')}</button>` : ''}</article>`;
   }
   function bind(host, list) {
     lb.all = list;

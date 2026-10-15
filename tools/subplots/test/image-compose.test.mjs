@@ -152,3 +152,11 @@ test('shot mode only changes standing exclusions and preserves copied prompts an
   assert.deepEqual(normalizeComposition(copy.compose).override, c.override);
   assert.ok(SOFT_NEGATIVE.includes('visible genitals'));
 });
+
+test('reusing a recorded zero CFG does not replace it with model defaults', () => {
+  const c = composition({cfg: 0, sampler: 'dpmpp_2m', scheduler: 'karras'});
+  const body = assembleComposition(c, presets, 'fixture');
+  assert.equal(body.cfg, 0);
+  assert.equal(body.sampler, 'dpmpp_2m');
+  assert.equal(body.scheduler, 'karras');
+});

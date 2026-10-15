@@ -1,0 +1,60 @@
+{
+  "title": "Image generation keeps the original settings",
+  "date": "2026-10-15",
+  "by": "codex",
+  "caption": "Image Gen and Scene Editor show the same saved generation settings. External outputs keep their actual request and references, with unavailable controls clearly labelled.",
+  "result": [
+    "studio-phone-external",
+    "studio-desktop-external",
+    "scene-phone-external-source",
+    "scene-desktop-external"
+  ],
+  "sections": [
+    {
+      "title": "Public synthetic fixtures",
+      "caption": "These diagrams and prompts test the tools. They are not game artwork.",
+      "images": [
+        {
+          "id": "studio-phone-external",
+          "image": "bible/shots/showcase/imagegen-settings-20261015/studio-phone-external.webp",
+          "caption": "Image Gen on phone: the picture and actions fit the screen; original settings scroll below."
+        },
+        {
+          "id": "studio-desktop-external",
+          "image": "bible/shots/showcase/imagegen-settings-20261015/studio-desktop-external.webp",
+          "caption": "Image Gen on desktop: the source, request and unavailable controls remain visible."
+        },
+        {
+          "id": "scene-phone-external-source",
+          "image": "bible/shots/showcase/imagegen-settings-20261015/scene-phone-external-source.webp",
+          "caption": "Scene Editor on phone: an external source opens with its recorded settings and original prompt."
+        },
+        {
+          "id": "scene-desktop-external",
+          "image": "bible/shots/showcase/imagegen-settings-20261015/scene-desktop-external.webp",
+          "caption": "Scene Editor uses the same settings lightbox."
+        },
+        {
+          "id": "studio-phone-original",
+          "image": "bible/shots/showcase/imagegen-settings-20261015/studio-phone-original.webp",
+          "caption": "Image Gen retains the original local prompt, CFG and sampler settings when loading history."
+        },
+        {
+          "id": "scene-desktop-original",
+          "image": "bible/shots/showcase/imagegen-settings-20261015/scene-desktop-original.webp",
+          "caption": "Scene Editor retains the same exact local source recipe."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Open Image Gen",
+      "href": "http://127.0.0.1:8772/"
+    },
+    {
+      "label": "Open Scene Editor",
+      "href": "tools/subplots/web/"
+    }
+  ]
+}

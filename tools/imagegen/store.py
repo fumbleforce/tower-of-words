@@ -11,7 +11,7 @@ log.jsonl                 one line per render; star, fav, reject and note are re
 outputs/<date>/<file>.png the original PNGs from ComfyUI (workflow embedded)
 thumbs/<date>/<file>.webp small copies for the grids
 """
-import contextlib, fcntl, json, os, threading, time, re
+import contextlib, fcntl, json, os, threading, time, re, tempfile
 
 # The data always belongs to the main checkout: a worktree's copy of this code reads and writes the same files.
 REPO = re.split(r'/\.claude/worktrees/', os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))[0]
@@ -57,6 +57,21 @@ def _atomic_write(path, text):
     with open(tmp, 'w', encoding='utf-8') as f:
         f.write(text)
     os.replace(tmp, path)
+
+
+def _atomic_write_bytes(path, data):
+    # A partial private copy must never live below the HTTP-served image directories.
+    staging = os.path.join(ROOT, '.import-staging')
+    os.makedirs(staging, exist_ok=True)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    fd, tmp = tempfile.mkstemp(dir=staging)
+    try:
+        with os.fdopen(fd, 'wb') as f:
+            f.write(data)
+        os.replace(tmp, path)
+    finally:
+        if os.path.exists(tmp):
+            os.remove(tmp)
 
 
 def make_thumb(src, rel):

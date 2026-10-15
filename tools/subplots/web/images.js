@@ -4,6 +4,7 @@ import {localBlockHtml, bindBlockWords} from './image-block-words.js';
 import {newestPictureFirst} from './image-order.js';
 import {clearPendingPicture, picturePick, picturePath} from './picture-selection.js';
 import {draftPictureUrl} from '../../imagegen/web/gallery.js';
+import {isExternal, externalReplayNotice, provenanceHtml, originalGeneration, externalSourceExplanationHtml, localOriginalPromptHtml} from '../../imagegen/web/provenance.js';
 import {standaloneComposition, standaloneJob, standalonePromptHtml} from './image-standalone.js';
 import {personWords} from './image-people.js';
 import {guessComposition} from './image-guess.js';
@@ -57,7 +58,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
   function compose() {
     if (standalone) {
       const c = standalone.getComposition();
-      if (presets) applyDefaults(c, presets);
+      if (presets && !c.original?.readOnlySource) applyDefaults(c, presets);
       return c;
     }
     const scene = getScene();
@@ -79,7 +80,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
       c = scene.metadata.compositions[key] = normalizeComposition(seed);
       c.imageSlot = activeSlot;
     }
-    if (presets) {
+    if (presets && !c.original?.readOnlySource) {
       applyDefaults(c, presets);
       if (!c.castInitialized) {
         const speakers = new Set();
@@ -188,15 +189,15 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
   // preset, as in the image gen dashboard ("seed should have an auto option, learn from the imagegen view").
   function settingsPeek(c) {
     const md = preset('model', c.model)?.data || {}, n = +c.count || 1;
-    return [md.name || 'No model', n + (n > 1 ? ' pictures' : ' picture'), c.seedMode === 'fixed' ? 'seed ' + (c.seed || '?') : 'seed auto',
-      (+c.steps || md.steps || 30) + ' steps', 'CFG ' + (+c.cfg || md.cfg || 5), sizeOf(c).label].join(' · ');
+    return [md.name || 'No model', n + (n > 1 ? ' pictures' : ' picture'), c.seedMode === 'fixed' ? 'seed ' + (c.seed != null && c.seed !== '' ? c.seed : '?') : 'seed auto',
+      (+c.steps || md.steps || 30) + ' steps', 'CFG ' + (c.cfg != null && c.cfg !== '' ? +c.cfg : (md.cfg ?? 5)), sizeOf(c).label].join(' · ');
   }
   function settingsHtml(c) {
     const md = preset('model', c.model)?.data || {}, size = sizeOf(c);
     const fixed = c.seedMode === 'fixed';
     const sizes = active('framing').map(f => chip(f.data.name + ' ' + f.data.w + '×' + f.data.h, f.id === c.framing && !size.own, `data-size="${esc(f.id)}" title="${esc(f.data.prompt || f.data.notes || '')}"`)).join('');
     return `<details class="image-section image-settings" data-settings-open ${settingsOpen ? 'open' : ''}><summary><span class="settings-title">Generation settings</span><span class="hint settings-peek">${esc(settingsPeek(c))}</span></summary>
-      <div class="settings-grid">${pickerHtml('model', 'model', 'Model', presetOptions('model'), c.model, null)}${number('count', 'Pictures', c.count, 1, 8)}${number('steps', 'Steps', c.steps, 1, 100, 1, md.steps || 30)}${number('cfg', 'Prompt strength', c.cfg, 0.1, 30, 0.1, md.cfg || 5)}</div>
+      <div class="settings-grid">${pickerHtml('model', 'model', 'Model', presetOptions('model'), c.model, null)}${number('count', 'Pictures', c.count, 1, 8)}${number('steps', 'Steps', c.steps, 1, 100, 1, md.steps || 30)}${number('cfg', 'Prompt strength', c.cfg, 0, 30, 0.1, md.cfg ?? 5)}</div>
       <div class="settings-seed"><span class="settings-label">Seed</span><span class="seed-mode">${chip('Auto', !fixed, 'data-seed-mode="random" title="A new random seed for every picture"')}${chip('Fixed', fixed, 'data-seed-mode="fixed" title="Repeat one seed"')}</span>
         <input data-compose="seed" type="number" min="0" max="9007199254740991" step="1" value="${esc(c.seed ?? '')}" placeholder="${fixed ? 'Seed' : 'Random'}" aria-label="Seed" ${fixed ? '' : 'disabled'}></div>
       <div class="chips sizes"><span class="settings-label">Size</span>${sizes}${size.own ? chip('This shot’s size ' + size.w + '×' + size.h, true, 'data-size-own') : ''}${chip('Custom size', customSize, 'data-size-custom')}<button type="button" data-new-block="framing">+ New</button><button type="button" data-edit-block="framing" data-edit-field="framing">Edit shared template…</button></div>${localBlockHtml(c, presets || {}, 'framing', c.framing, 'Picture shape')}
@@ -284,11 +285,33 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     bindShot(shot);
   }
   function bindShot(root) {
-    root.querySelectorAll('#generate').forEach(b => { b.onclick = guarded(generate); });
+    root.querySelectorAll('#generate').forEach(b => { b.onclick = guarded(generate); if (compose()?.original?.readOnlySource) b.disabled = true; });
     root.querySelectorAll('[data-preview-place]').forEach(b => { b.onclick = guarded(previewPlace); });
     const pick = root.querySelector('[data-compose=imageSlot]');
     if (pick) pick.oninput = () => { activeSlot = pick.value; fold(); render(); };
     root.querySelectorAll('[data-clear-image]').forEach(b => { b.onclick = () => { clearPendingPicture(getScene(), activeSlot); changed(); render(); announceImage(); }; });
+  }
+  function externalOriginalHtml(o) {
+    return `<section class="image-section image-original">${provenanceHtml(o)}<label>Original prompt<textarea rows="5" readonly>${esc(o.positive || '')}</textarea></label></section>`;
+  }
+  function renderExternalSource(c) {
+    const host = $('#composition'), stage = $('#composePreview'), shot = $('#composeShot');
+    host.innerHTML = externalOriginalHtml(c.original) + (stage ? '' : externalSourceExplanationHtml(c.original));
+    if (stage) stage.innerHTML = externalSourceExplanationHtml(c.original);
+    if (shot) { shot.innerHTML = shotHtml(c); bindShot(shot); }
+    if ($('#studioPrompt')) $('#studioPrompt').innerHTML = '';
+    if ($('#quickGenerate')) $('#quickGenerate').disabled = true;
+    const startLocal = () => {
+      const next = normalizeComposition({sourceChecked: true, castInitialized: true, edited: true,
+        original: {...c.original, readOnlySource: false}});
+      applyDefaults(next, presets || {});
+      if (standalone) standalone.setComposition(standaloneComposition(next));
+      else getScene().metadata.compositions[activeSlot || 'scene'] = next;
+      changed(); render();
+      notice('New local generation. Choose its controls and prompt. The imported original settings are kept below.');
+    };
+    for (const root of [host, stage]) root?.querySelectorAll('[data-new-local-generation]').forEach(button => { button.onclick = startLocal; });
+    renderJobs();
   }
   function render() {
     const host = $('#composition');
@@ -298,6 +321,8 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     const slot = slots().find(s => s.id === activeSlot);
     const picked = selectedImage(activeSlot);
     if (!standalone && presets && !c.sourceChecked && !c.edited && (picked || slot?.available)) loadSource(activeSlot);
+    if (c.original?.readOnlySource && isExternal(c.original)) return renderExternalSource(c);
+    if ($('#quickGenerate')) $('#quickGenerate').disabled = false;
     const cast = c.characters.map(id => preset('character', id)).filter(Boolean);
     const current = standalone ? '' : shotHtml(c);
     const look = `<section class="image-section image-look"><div class="two">${pickerHtml('style', 'style', 'Art style', presetOptions('style'), c.style, null)}${field('rating', 'Content level', [{id: 'safe', label: 'General'}, {id: 'sensitive', label: 'Mature'}, {id: 'nsfw', label: 'Adult'}], c.rating, null)}</div><p id="imageRatingNote" class="hint"></p>${localBlockHtml(c, presets || {}, 'style', c.style, 'Art style')}</section>`;
@@ -316,16 +341,11 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     const dctx = directCtx();
     const o = c.original;
     const smallChanges = o?.start ? '<button data-small-changes title="Start from this shot’s picture with the same seed and change it a little (img2img, low strength).">Small changes to this picture</button>' : '';
-    const original = o && o.positive == null ? `<section class="image-section image-original"><div class="section-head"><h3>Original prompt</h3>${smallChanges}</div><p class="hint">There is no record of how this picture was made. Describe it below, or start from it.</p></section>`
-      : o ? `<section class="image-section image-original"><div class="section-head"><h3>Original prompt</h3><span class="hint original-facts">${esc(['Seed ' + (o.seed ?? '?'), o.w && o.h ? o.w + '×' + o.h : '', o.steps ? o.steps + ' steps' : '', o.cfg ? 'CFG ' + o.cfg : ''].filter(Boolean).join(' · '))}</span>${smallChanges}</div>
-      <details data-original-open ${c.originalOpen ? 'open' : ''}><summary><span class="original-peek" title="Show the whole original prompt">${esc(c.override?.positive ?? o.positive ?? '')}</span><span class="original-less">Hide the original prompt</span></summary>
-      <p class="hint">${esc(['Seed ' + (o.seed ?? '?'), o.model_file, o.w && o.h ? o.w + '×' + o.h : '', o.steps ? o.steps + ' steps' : '', o.cfg ? 'CFG ' + o.cfg : '', o.sampler].filter(Boolean).join(' · '))}. From ${esc(o.how || 'the picture')}.</p>
-      <label>Prompt<textarea data-original="positive" rows="3">${esc(c.override?.positive ?? o.positive ?? '')}</textarea></label>
-      <label>Negative<textarea data-original="negative" rows="2">${esc(c.override?.negative ?? o.negative ?? '')}</textarea></label>
-      ${c.override ? '<p class="hint">Generate uses this prompt as it stands. Changing a block builds a new prompt instead.</p>' : '<button data-use-original>Use the original prompt</button>'}</details></section>` : '';
+    const original = isExternal(o) ? externalOriginalHtml(o) : o && o.positive == null ? `<section class="image-section image-original"><div class="section-head"><h3>Original prompt</h3>${smallChanges}</div><p class="hint">There is no record of how this picture was made. Describe it below, or start from it.</p></section>`
+      : o ? localOriginalPromptHtml(c, {readOnly: !!standalone, tools: smallChanges}) : '';
     const currentPicture = currentSource(picked, slot);
     const tools = toolsHtml(c, {loras: loraFiles, controls: controlFiles, current: currentPicture});
-    const prompt = `<section class="image-section image-prompt"><div class="section-head"><h3>Generated prompt</h3>${c.override ? '<button data-reset-prompt>Build the prompt from these controls</button>' : ''}${c.source ? '<button data-fill-prompt title="Guesses the character, camera, shape, style and model blocks from the old prompt and puts the rest in the free text. Nothing is saved until you generate.">Fill from prompt</button>' : ''}</div>${c.override && !c.original ? '<p class="hint">This picture uses a prompt copied from history.</p>' : ''}<p id="assembled" class="hint prompt-box"></p></section>`;
+    const prompt = `<section class="image-section image-prompt"><div class="section-head"><h3>Current prompt</h3>${c.override ? '<button data-reset-prompt>Build the prompt from these controls</button>' : ''}${c.source ? '<button data-fill-prompt title="Guesses the character, camera, shape, style and model blocks from the old prompt and puts the rest in the free text. Nothing is saved until you generate.">Fill from prompt</button>' : ''}</div>${c.override && !c.original ? '<p class="hint">This picture uses a prompt copied from history.</p>' : ''}<p id="assembled" class="hint prompt-box"></p></section>`;
     // The full-screen composer (index.html) reads left to right as a director works: the cast and the place (people
     // with how each keeps their face, setting, light, mood, style; the excludes, generation settings and Picture tools
     // folded), then the shot (What happens, the stage, shot size, angle, lens, pose, the prompt), then the picture with
@@ -341,7 +361,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     }
     const direct = directHtml(c, dctx), place = placeHtml(c, dctx);
     if (standalone) {
-      host.innerHTML = peopleHtml(c, cast) + happens + place + look + details + exclude + settingsHtml(c) + tools;
+      host.innerHTML = peopleHtml(c, cast) + happens + place + look + details + original + exclude + settingsHtml(c) + tools;
       stage.innerHTML = `<details class="studio-direction" data-studio-direction ${c.directionOpen ? 'open' : ''}><summary>Camera and staging<span class="hint">Position people, choose the angle and lens</span></summary>${direct}</details>`;
       $('#studioPrompt').innerHTML = standalonePromptHtml(c, assemble(), !!presets);
     } else if (stage && shot) {
@@ -525,6 +545,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     return pendingConnect;
   }
   async function generate() {
+    if (compose()?.original?.readOnlySource) throw Error(externalReplayNotice);
     const body = assemble();
     if (!body.model_file) throw Error('Choose a generation model first.');
     $('#generate').disabled = true;if($('#quickGenerate'))$('#quickGenerate').disabled=true;
@@ -636,6 +657,14 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
   // them, else Fill from prompt; the original prompt and settings ride along either way.
   function fillFromJob(j, {how = '', start = '', slot = activeSlot, quiet = false} = {}) {
     const s = getScene(); if (!s && !standalone) return;
+    if (isExternal(j)) {
+      const c = normalizeComposition({imageSlot: slot, castInitialized: true, sourceChecked: true,
+        original: originalGeneration(j, {how: how || 'the picture', readOnlySource: true})});
+      if (standalone) standalone.setComposition(standaloneComposition(c));
+      else s.metadata.compositions[slot || 'scene'] = c;
+      if (!quiet) changed();
+      render(); return;
+    }
     const current = compose() || normalizeComposition();
     const blocks = hasBlocks(j.compose);
     let c;
@@ -645,11 +674,10 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     } else c = guessComposition(j, presets || {}).composition;
     c.model = active('model').find(p => p.data.file === j.model_file)?.id || c.model || current.model;
     Object.assign(c, {imageSlot: slot, seedMode: 'fixed', seed: j.seed, count: 1, width: j.w, height: j.h,
-      steps: j.steps || c.steps, cfg: j.cfg || c.cfg, sampler: j.sampler || undefined, scheduler: j.scheduler || undefined,
+      steps: j.steps ?? c.steps, cfg: j.cfg ?? c.cfg, sampler: j.sampler || undefined, scheduler: j.scheduler || undefined,
       castInitialized: true, sourceChecked: true, edited: false,
-      original: {positive: j.positive || '', negative: j.negative || '', seed: j.seed, model_file: j.model_file, w: j.w, h: j.h,
-        steps: j.steps, cfg: j.cfg, sampler: j.sampler, how: how || (j.n ? 'picture #' + j.n : 'the picture'), start: start || draftPictureUrl(j.url) || (j.file ? 'island/private/imagegen/outputs/' + j.file : j.out_path || ''), blocks},
-      override: blocks ? null : {positive: j.positive || '', negative: j.negative || ''}});
+      original: originalGeneration(j, {how: how || (j.n ? 'picture #' + j.n : 'the picture'), start: start || draftPictureUrl(j.url) || (j.file ? 'island/private/imagegen/outputs/' + j.file : j.out_path || ''), blocks}),
+      override: {positive: j.positive || '', negative: j.negative || ''}});
     if (j.ipa) Object.assign(c, {reference: j.ipa.ref, referenceOn: true, referenceStrength: j.ipa.strength, referenceCutout: j.ipa.cutout});
     if (j.repaint) Object.assign(c, {reference: j.repaint.ref, faceFix: true, faceStrength: j.repaint.denoise});
     if (j.start?.image) c.start = {image: j.start.image, denoise: j.start.denoise, ...(j.start.mask ? {mask: j.start.mask} : {})};
@@ -664,6 +692,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     render();
   }
   function reuseImage(j) {
+    if (isExternal(j)) { notice(externalReplayNotice, true); return; }
     fillFromJob(j);
     notice('Picture settings loaded. Change the direction or generate another version.');
   }
@@ -676,6 +705,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     activeSlot = slotId;
     let c = compose();
     if (!c.sourceChecked && !c.edited) { await loadSource(slotId); c = compose(); }
+    if (c.original?.readOnlySource) throw Error(externalReplayNotice);
     if (!anyway && !c.edited && !c.original?.positive) return null;
     return assemble();
   }

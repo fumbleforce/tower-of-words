@@ -2,6 +2,7 @@
    the prompt diff are shared with the scene editor's composer (blocks.js). */
 import { KINDS, RATINGS, fieldsHtml as sharedFieldsHtml, getp, setp, blank, wordDiff } from './blocks.js';
 import { isAgent, fullUrl, rateFields, lightboxKey, lightboxHtml, compareHtml } from './gallery.js';
+import {isExternal, externalReplayNotice, providerLabel} from './provenance.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -445,7 +446,7 @@ function tileHtml(t) {
   const notes = (t.reject && t.reject_reason ? `<b>Rejected:</b> ${esc(t.reject_reason)} ` : '') + (t.note ? esc(t.note) : '');
   return `<div class="tile${t.reject ? ' rej' : ''}${t.fav ? ' fav' : ''}" data-id="${esc(t.id)}">
     <div class="shot" ${done ? `data-a="open" data-id="${esc(t.id)}"` : ''}>${shot}<div class="mark">${markIcons(t)}</div></div>
-    ${done ? `<div class="tbar">${t.n ? `<span class="seed num" data-a="copyn" data-id="${esc(t.id)}" title="Picture number: name it in chat (click to copy)">#${t.n}</span>` : ''}<span class="seed" data-a="copyseed" data-id="${esc(t.id)}" title="Copy seed">s${t.seed}</span>
+    ${done ? `<div class="tbar">${t.n ? `<span class="seed num" data-a="copyn" data-id="${esc(t.id)}" title="Picture number: name it in chat (click to copy)">#${t.n}</span>` : ''}${isExternal(t) ? `<span class="seed" title="${esc(t.provenance.engine)}">${esc(providerLabel(t))}</span>` : `<span class="seed" data-a="copyseed" data-id="${esc(t.id)}" title="Copy seed">s${t.seed}</span>`}
       <button class="ib${t.star ? ' on' : ''}" data-a="star" data-id="${esc(t.id)}" title="Star (s)"><i class="${t.star ? 'ph-fill' : 'ph'} ph-star"></i></button>
       <button class="ib${t.fav ? ' on' : ''}" data-a="fav" data-id="${esc(t.id)}" title="Favourite (f)"><i class="${t.fav ? 'ph-fill' : 'ph'} ph-heart"></i></button>
       <button class="ib r${t.reject ? ' on' : ''}" data-a="reject" data-id="${esc(t.id)}" title="Reject with a reason (x)"><i class="ph ph-x-circle"></i></button>
@@ -484,6 +485,7 @@ async function saveInline() {
 }
 function tileAction(a, id, btn) {
   const t = T.get(id); if (!t) return;
+  if (isExternal(t) && ['sameseed', 'newseeds', 'copyseed'].includes(a)) return toast(externalReplayNotice);
   if (a === 'open') return openLightbox(id);
   if (a === 'star' || a === 'fav') return rate(id, rateFields(a, t));
   if (a === 'reject') { if (t.reject) return rate(id, rateFields(a, t)); openInline = { id, kind: 'reject' }; return renderRuns(); }
@@ -500,8 +502,8 @@ function tileAction(a, id, btn) {
 function showMenu(btn, t) {
   closeMenu();
   const m = document.createElement('div'); m.className = 'menu'; m.id = 'menu';
-  m.innerHTML = `<button data-a="sameseed" data-id="${esc(t.id)}"><i class="ph ph-pencil-simple"></i> Same seed, edit prompt</button>
-    <button data-a="newseeds" data-id="${esc(t.id)}"><i class="ph ph-shuffle"></i> New seeds, same prompt</button>
+  m.innerHTML = `${isExternal(t) ? `<button data-a="open" data-id="${esc(t.id)}">View original settings</button>` : `<button data-a="sameseed" data-id="${esc(t.id)}"><i class="ph ph-pencil-simple"></i> Same seed, edit prompt</button>
+    <button data-a="newseeds" data-id="${esc(t.id)}"><i class="ph ph-shuffle"></i> New seeds, same prompt</button>`}
     <button data-a="fullsize" data-id="${esc(t.id)}"><i class="ph ph-arrow-square-out"></i> Open the full-size PNG</button>`;
   document.body.appendChild(m);
   const r = btn.getBoundingClientRect();
@@ -531,12 +533,14 @@ function loadCompose(c, over) {
   showTab('compose'); renderControls();
 }
 function sameSeed(t) {
+  if (isExternal(t)) return toast(externalReplayNotice);
   closeOverlays();
   loadCompose(t.compose, { seedMode: 'fixed', seed: t.seed, count: 1, override: { positive: t.positive, negative: t.negative } });
   $('#posOut').focus();
   toast('Loaded with the same seed. Edit the prompt, then Generate.');
 }
 function newSeeds(t) {
+  if (isExternal(t)) return toast(externalReplayNotice);
   closeOverlays();
   const body = genBody({
     positive: t.positive, negative: t.negative, overridden: !!t.overridden, model_file: t.model_file, w: t.w, h: t.h, seed_mode: 'random',
@@ -688,11 +692,11 @@ function renderHistory() {
     const styleName = byId('style', p.style?.id)?.data.name || p.style?.id || '';
     const nStar = r.renders.filter(x => T.get(x.id)?.star || T.get(x.id)?.fav).length;
     return `<div class="hrun"><div class="meta"><b>${esc(names)}</b>
-      <span>${esc(r.at.replace('T', ' ').slice(0, 16))} · ${r.renders.length} picture${r.renders.length === 1 ? '' : 's'}${nStar ? ` · ${nStar} starred` : ''}</span>
-      <span>${isAgent(r) ? `${r.steps ? r.steps + ' steps, CFG ' + r.cfg + ', ' : ''}${esc(r.sampler || '')} ` : `${esc(styleName)}${p.style ? ` v${p.style.v}` : ''} · ${esc(r.rating || '')} · `}${esc((r.model_file || '').replace('.safetensors', ''))} · ${r.w}×${r.h}${isAgent(r) ? ' · s' + r.renders[0].seed : ''}</span>
+      <span>${isExternal(r) ? 'Imported ' + esc((r.imported_at || '(time not recorded)').replace('T', ' ').slice(0, 19)) : esc(r.at.replace('T', ' ').slice(0, 16))} · ${r.renders.length} picture${r.renders.length === 1 ? '' : 's'}${nStar ? ` · ${nStar} starred` : ''}</span>
+      <span>${isExternal(r) ? esc(providerLabel(r)) : isAgent(r) ? `${r.steps ? r.steps + ' steps, CFG ' + r.cfg + ', ' : ''}${esc(r.sampler || '')} ` : `${esc(styleName)}${p.style ? ` v${p.style.v}` : ''} · ${esc(r.rating || '')} · `}${esc((r.model_file || '').replace('.safetensors', ''))} · ${r.w}×${r.h}${isAgent(r) && !isExternal(r) ? ' · s' + r.renders[0].seed : ''}</span>
       ${agentBadges(r)}${r.overridden || r.ipa || r.repaint ? `<span class="omb">${r.overridden ? '<span class="badge">edited by hand</span>' : ''}${omBadges(r)}</span>` : ''}
       <div class="clip">${esc(r.positive)}</div>
-      <div class="row gap8 wrap"><button class="btn sm" data-load="${esc(r.run_id)}"><i class="ph ph-arrow-bend-up-left"></i> Load into Compose</button>
+      <div class="row gap8 wrap"><button class="btn sm" ${isExternal(r) ? 'data-settings' : 'data-load'}="${esc(r.run_id)}"><i class="ph ph-arrow-bend-up-left"></i> ${isExternal(r) ? 'View original settings' : 'Load into Compose'}</button>
         <button class="btn ghost sm" data-showp="${esc(r.run_id)}">Full prompt</button>
         <button class="btn ghost sm danger" data-delrun="${esc(r.run_id)}"><i class="ph ph-trash"></i> Delete run</button></div>
       <div class="ptext" id="hp-${esc(r.run_id)}" hidden>${esc(r.positive)}\n\nNegative: ${esc(r.negative)}</div></div>
@@ -707,9 +711,11 @@ function wireHistory() {
     const b = e.target.closest('button'); if (!b) return;
     if (b.dataset.load) {
       const r = HIST.find(x => x.run_id === b.dataset.load);
+      if (isExternal(r)) return toast(externalReplayNotice);
       loadCompose(r.compose, { seedMode: 'random', override: r.overridden || isAgent(r) ? { positive: r.positive, negative: r.negative } : null, ...castOf(r) });
       toast(isAgent(r) ? 'Prompt loaded into Compose. Its model and size are not copied.' : 'Settings loaded into Compose.');
     }
+    if (b.dataset.settings) { const r = HIST.find(x => x.run_id === b.dataset.settings); if (r?.renders[0]) openLightbox(r.renders[0].id); }
     if (b.dataset.showp) { const el = $('#hp-' + CSS.escape(b.dataset.showp)); el.hidden = !el.hidden; }
     if (b.dataset.delrun) deleteRun(b.dataset.delrun);
     if (b.dataset.trestore) restoreRenders([b.dataset.trestore]);
