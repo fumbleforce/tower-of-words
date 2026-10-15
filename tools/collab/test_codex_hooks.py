@@ -53,7 +53,8 @@ class HooksTest(unittest.TestCase):
     def test_internal_envelopes_do_not_become_human_feedback(self):
         envelopes = [f'<{tag} source="test">Internal instructions</{tag}>'
                      for tag in ('agent-message', 'cross-session-message', 'codex_internal_context')]
-        for prompt in [*envelopes, '\n  ' + '\n'.join(envelopes) + '\n']:
+        nested = '<agent-message>Examples: <agent-message>x</agent-message></agent-message>'
+        for prompt in [*envelopes, '\n  ' + '\n'.join(envelopes) + '\n', nested]:
             with self.subTest(prompt=prompt):
                 result = adapter.invoke('feedback_log.py', {'prompt': prompt})
                 self.assertEqual(result.returncode, 0, result.stderr)
@@ -68,6 +69,7 @@ class HooksTest(unittest.TestCase):
             '<agent-message>an incomplete tag in my report',
             '<agent-message>quoted</agent-message> Please fix this.',
             '<agent-message>one</agent-message> My feedback. <agent-message>two</agent-message>',
+            '<agent-message>Nested: <agent-message>x</agent-message></agent-message> My feedback.',
             '<agent-message-example>my example</agent-message>',
             '  日本語\n\nKeep this spacing.\n',
             'Keep my <system-reminder>quoted words</system-reminder> too.',

@@ -18,11 +18,30 @@ from common import main_root  # noqa: E402
 
 ONLY_SLASH = re.compile(r'^/[\w:.-]+$')
 REMINDER = re.compile(r'<system-reminder>.*?</system-reminder>', re.S)
-INTERNAL = re.compile(
-    r'(?:<(agent-message|cross-session-message|codex_internal_context|task-notification|'
+INTERNAL_OPEN = re.compile(
+    r'<(agent-message|cross-session-message|codex_internal_context|task-notification|'
     r'command-[\w.-]+|local-command(?:-[\w.-]+)?|bash-[\w.-]+|'
-    r'user-prompt-submit-hook|teammate-message)(?:\s[^>]*)?>'
-    r'(?:(?!</\1>).)*</\1>\s*)+', re.S)
+    r'user-prompt-submit-hook|teammate-message)(?:\s[^>]*)?>')
+
+
+def internal_envelopes(text):
+    """Recognize whole control envelopes, including examples nested in a report."""
+    position = 0
+    while position < len(text):
+        opening = INTERNAL_OPEN.match(text, position)
+        if not opening:
+            return False
+        tag = re.escape(opening.group(1))
+        tokens = re.compile(r'</' + tag + r'>|<' + tag + r'(?:\s[^>]*)?>')
+        depth = 1
+        for token in tokens.finditer(text, opening.end()):
+            depth += -1 if token.group().startswith('</') else 1
+            if depth == 0:
+                position = re.compile(r'\s*').match(text, token.end()).end()
+                break
+        else:
+            return False
+    return bool(text)
 
 
 def main():
@@ -33,7 +52,7 @@ def main():
     stripped = text.strip()
     # Only a complete internal envelope is excluded. A user can discuss or quote
     # these tags in ordinary prose without losing their feedback.
-    if INTERNAL.fullmatch(stripped):
+    if internal_envelopes(stripped):
         return
     if not stripped or ONLY_SLASH.fullmatch(stripped):
         return
