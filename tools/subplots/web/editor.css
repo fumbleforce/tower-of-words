@@ -449,3 +449,26 @@ body.drag-private .place-chip[data-place]:not(.on), body.drag-private #days butt
 .check-notes li.problem { background: rgba(240, 138, 126, .13); color: var(--warn); }
 .check-notes li.voice { background: var(--raise); color: var(--dim); }
 .beat.has-problem { border-color: rgba(240, 138, 126, .55); }
+
+/* Keep the story and picture history reachable on a narrow screen. */
+@media (max-width: 800px) {
+  body { display: block; height: auto; min-height: 100%; overflow: auto; }
+  .top { display: flex; flex-wrap: wrap; height: auto; gap: 8px; padding: 12px; }
+  .top .brand, .top .doc, .top .actions { flex-basis: 100%; min-width: 0; }
+  .top .doc-title, .top .doc-meta, .top .actions { flex-wrap: wrap; }
+  .top .doc h1, .top .doc-meta .where { white-space: normal; }
+  .top .status { max-width: 100%; white-space: normal; }
+  .top .actions button, .top .actions .button { padding: 0 9px; }
+  .work { display: flex; flex-direction: column; }
+  .scenes, .timeline-wrap, .inspector { width: 100%; min-width: 0; border: 0; }
+  .scene-list { flex: auto; max-height: 220px; }
+  .timeline-wrap, .tab-body { overflow: visible; }
+  .timeline-wrap { min-height: 220px; }
+  .inspector { border-top: 1px solid var(--line); }
+  .timeline { padding: 16px 8px; }
+  .path-bar { margin: -16px -8px 14px; padding: 10px 8px; }
+  .beat { grid-template-columns: 34px minmax(0, 1fr); }
+  .beat > .tools { grid-column: 2; opacity: 1; flex-wrap: wrap; }
+  .pic figcaption { opacity: 1; }
+  .banner { flex-wrap: wrap; }
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Scene history includes rejected attempts",
+  "date": "2026-10-15",
+  "by": "codex",
+  "caption": "Open a picture\u2019s Versions to see its attempts beside the story. Rejected attempts keep their labels and reasons. The editor also stacks vertically on a phone.",
+  "result": [
+    "desktop-history",
+    "phone-compare"
+  ],
+  "sections": [
+    {
+      "title": "Public tool fixtures",
+      "caption": "These diagrams exercise the editor. They are test fixtures, not new game artwork.",
+      "images": [
+        {
+          "id": "desktop-history",
+          "image": "bible/shots/showcase/scene-attempt-history-20261015/desktop-history.webp",
+          "caption": "Desktop: eight attempts beside the story, including rejected attempts."
+        },
+        {
+          "id": "phone-compare",
+          "image": "bible/shots/showcase/scene-attempt-history-20261015/phone-compare.webp",
+          "caption": "Phone: a rejected attempt and its recorded reason in Compare."
+        },
+        {
+          "id": "phone-history",
+          "image": "bible/shots/showcase/scene-attempt-history-20261015/phone-history.webp",
+          "caption": "Phone: story and picture details stack vertically."
+        },
+        {
+          "id": "desktop-compare",
+          "image": "bible/shots/showcase/scene-attempt-history-20261015/desktop-compare.webp",
+          "caption": "Desktop: the selected picture beside a rejected attempt."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Open the scene editor",
+      "href": "tools/subplots/web/"
+    }
+  ]
+}

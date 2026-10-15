@@ -51,7 +51,7 @@ export function versionsOf(id, slot, pic) {
   const all = new Map();
   for (const run of k.runs) for (const r of run.renders || []) {
     const v = { ...run, ...r, status: 'done' };
-    if (mine(v) && !v.deleted && !v.reject && (v.file || draftPictureUrl(v.url))) all.set(v.id, v);
+    if (mine(v) && !v.deleted && (v.file || draftPictureUrl(v.url))) all.set(v.id, v);
   }
   // the queue's state over the history's record; a job has no picture number until the render log gives it one
   const set = o => Object.fromEntries(Object.entries(o).filter(([, v]) => v != null));
@@ -184,7 +184,7 @@ function versionThumb(v, i, pic) {
     return `<button disabled class="making" title="${esc(v.how)}"><div class="ver-wait">${v.status === 'error' ? 'Failed' : v.status === 'running' ? pct + '%' : 'Waiting'}</div><span>${esc(v.how.split(':')[0])}</span>${v.status === 'running' ? `<i style="width:${pct}%"></i>` : ''}</button>`;
   }
   const chosen = pic.chosen?.id === v.id && pic.changed;
-  return `<button data-v="${esc(v.id)}" class="${chosen ? 'picked' : ''}" title="${esc(v.how)}"><img src="${esc(thumbUrl(v, '/api/subplots/image'))}" alt="" loading="lazy"><span>${v.n ? '#' + esc(v.n) : 'New'}${chosen ? ' · used' : ''}</span></button>`;
+  return `<button data-v="${esc(v.id)}" class="${chosen ? 'picked' : ''}" title="${esc(v.reject ? 'Rejected: ' + (v.reject_reason || 'No reason recorded') : v.how)}"><img src="${esc(thumbUrl(v, '/api/subplots/image'))}" alt="" loading="lazy"><span>${v.n ? '#' + esc(v.n) : 'New'}${v.reject ? ' · Rejected' : ''}${chosen ? ' · used' : ''}</span></button>`;
 }
 
 // ---------- Compare ----------
@@ -210,11 +210,12 @@ function openCompare(ctx, rightId) {
         <img src="${esc(v.url)}" alt="">
         <figcaption><strong>${v.id === use ? 'The beat uses this one' : which === 'left' ? 'On the left' : 'On the right'}</strong>
           <span class="quiet">${esc(v.live ? savedTitle : `${v.n ? '#' + v.n + ' · ' : ''}${v.how}${v.seed != null ? ` · seed ${v.seed}` : ''}`)}</span>
+          ${v.reject ? `<strong>Rejected</strong><span>${esc(v.reject_reason || 'No reason recorded')}</span>` : ''}
           ${v.id === use ? '' : `<button class="primary" data-use="${esc(v.id)}">Use this one</button>`}</figcaption></figure>`;
     dialog.innerHTML = `<div class="cmp-head"><h2>Compare versions <span class="quiet">Shot ${(doc.images || []).findIndex(i => i.id === slot) + 1}</span></h2>
         <span class="quiet">Click a version to put it on the right, Shift-click for the left. ← → step through them.</span><button data-close>Done</button></div>
       <div class="cmp-pair">${side(list.find(v => v.id === left), 'left')}${side(list.find(v => v.id === right), 'right')}</div>
-      <div class="cmp-strip">${list.map(v => `<button data-pick="${esc(v.id)}" class="${v.id === right ? 'right' : ''} ${v.id === left ? 'left' : ''}"><img src="${esc(v.live ? v.url : thumbUrl(v, '/api/subplots/image'))}" alt="" loading="lazy"><span>${v.live ? savedLabel : v.n ? '#' + esc(v.n) : 'New'}${v.id === use ? ' · used' : ''}</span></button>`).join('')}</div>`;
+      <div class="cmp-strip">${list.map(v => `<button data-pick="${esc(v.id)}" class="${v.id === right ? 'right' : ''} ${v.id === left ? 'left' : ''}"><img src="${esc(v.live ? v.url : thumbUrl(v, '/api/subplots/image'))}" alt="" loading="lazy"><span>${v.live ? savedLabel : v.n ? '#' + esc(v.n) : 'New'}${v.reject ? ' · Rejected' : ''}${v.id === use ? ' · used' : ''}</span></button>`).join('')}</div>`;
     dialog.querySelector('[data-close]').onclick = () => dialog.close();
     dialog.querySelectorAll('[data-pick]').forEach(b => { b.onclick = e => { if (e.shiftKey) left = b.dataset.pick; else right = b.dataset.pick; paint(); }; });
     dialog.querySelectorAll('[data-use]').forEach(b => { b.onclick = () => { use_(list.find(v => v.id === b.dataset.use)); paint(); }; });
