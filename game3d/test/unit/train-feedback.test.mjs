@@ -77,3 +77,42 @@ for (const cancel of [false, true]) test(`real approach Runner ${cancel ? 'leave
     'only physical completion journals the arrival world hook');
   if (cancel) assert.deepEqual(game.queue, [], 'leaving emits no arrival scene');
 });
+
+test('Continue at the stop-event checkpoint runs the sumimasen lesson once', async () => {
+  const make = (arrived = false) => {
+    const st = { arrived }, arrival = trainArrival(st), snapshots = [];
+    const noop = () => {};
+    const game = { place: { name: 'train', people: {} }, story: train, busy: true, queue: [], wait: async () => {},
+      hooks: { goal: noop, walk: noop, stand: noop, doorsOpen: noop, announce: noop, face: noop,
+        type: noop, alight: noop, hide: noop, catTo: noop, arrive: () => arrival.begin(noop) },
+      captureStaging: () => ({ arrived: st.arrived }), restoreStaging: s => { st.arrived = s.arrived; } };
+    const runner = game.runner = new Runner(game);
+    runner.use(game.place, train);
+    runner.onCheckpoint = () => snapshots.push({ runner: runner.snapshot(), arrived: st.arrived });
+    return { st, arrival, game, runner, snapshots };
+  };
+  const first = make();
+  const running = first.runner.run('approach');
+  await new Promise(resolve => setImmediate(resolve));
+  first.st.arrived = true;
+  first.runner.trigger('event:arrived');
+  first.arrival.stopped();
+  await running;
+  // enqueue persists inside onStop, before the approach hook can finish.
+  const checkpoint = first.snapshots.find(s => s.arrived && s.runner.queued?.length &&
+    s.runner.execution?.frames.at(-1)?.node === 'approach');
+  assert.ok(checkpoint, 'test the real enqueue checkpoint, not an invented fixture');
+  const resumed = make(checkpoint.arrived), lines = [];
+  globalThis.__saveTestUI = { say: async (_speaker, line) => lines.push(line) };
+  resumed.runner.restore(checkpoint.runner);
+  const replay = resumed.runner.resume();
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(resumed.st.arrived, false, 'Continue rebuilds pre-approach physical staging');
+  resumed.st.arrived = true;
+  resumed.runner.trigger('event:arrived');
+  resumed.arrival.stopped();
+  await replay;
+  while (resumed.game.queue.length) await resumed.game.queue.shift()();
+  assert.equal(lines.filter(line => line.includes("Ah, she's in the way")).length, 1);
+  assert.equal(resumed.runner.recoveryError, null);
+});

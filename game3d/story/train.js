@@ -57,7 +57,7 @@ export default {
     'say:ohayo:kuroda': 'asleep',
     'say:yoroshiku:kuroda': 'asleep',
     'say:sumimasen:kuroda': 'asleep',
-    'event:arrived': 'arrival',
+    'event:arrived': { node: 'arrival', once: true },
   },
 
   show: { mio: "!sat || !lesson_on || (cat_done && !lesson_done) || (phone_buzz && !can_exit)" },
