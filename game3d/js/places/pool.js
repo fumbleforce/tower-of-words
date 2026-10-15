@@ -123,6 +123,7 @@ export async function poolPlace(game) {
       club.update();
     },
     leave() {
+      doorVisibility.reset();
       club.leave();
     },
     onPeriod(period) {

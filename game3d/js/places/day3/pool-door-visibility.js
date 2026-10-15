@@ -1,9 +1,10 @@
 import * as THREE from 'three';
 import { addOccluder, updateOccluders } from '../../scenes/occluders.js';
 
-// Existing doorway labels and locker rows fade only while they cover the walking player.
+// Doorway labels, locker rows and individual light fixtures cut away only while they cover the walking player.
 export function poolDoorVisibility(root, cam) {
   const view = {},
+    initial = new Map(),
     ray = new THREE.Raycaster(),
     target = new THREE.Vector3(),
     eye = new THREE.Vector3();
@@ -11,7 +12,10 @@ export function poolDoorVisibility(root, cam) {
     if (!object.userData.poolChangingOccluder) return;
     const meshes = [];
     object.traverse((mesh) => {
-      if (mesh.isMesh) meshes.push(mesh);
+      if (mesh.isMesh) {
+        meshes.push(mesh);
+        initial.set(mesh, { visible: mesh.visible, opacity: mesh.material.opacity });
+      }
     });
     addOccluder(
       view,
@@ -19,7 +23,7 @@ export function poolDoorVisibility(root, cam) {
       (position) => {
         if (cam.close) return false;
         cam.camera.getWorldPosition(eye);
-        for (const y of [0.6, 0.8, 1, 1.2])
+        for (const y of [0.2, 0.4, 0.6, 0.8, 1, 1.2])
           for (const dx of [-0.2, 0, 0.2]) {
             target.set(position.x + dx, position.y + y, position.z);
             root.localToWorld(target);
@@ -33,8 +37,15 @@ export function poolDoorVisibility(root, cam) {
     );
   });
   return {
-    update(position, dt) {
-      updateOccluders(view, position, dt);
+    reset() {
+      for (const occluder of view.occluders || []) occluder.k = 1;
+      for (const [mesh, saved] of initial) {
+        mesh.visible = saved.visible;
+        mesh.material.opacity = saved.opacity;
+      }
+    },
+    update(position) {
+      updateOccluders(view, position, Infinity);
     },
   };
 }

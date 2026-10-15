@@ -1,9 +1,10 @@
 // Four shielded sports fixtures light the lanes and deck after sunset. No shadow maps per fixture.
 import * as THREE from 'three';
 import { POOL, FLOODLIGHTS } from './deck-plan.js';
+import { Parts } from '../outdoor/parts.js';
 import { STEEL } from '../outdoor/furniture.js';
 
-export function poolFloodlights(root, parts) {
+export function poolFloodlights(root) {
   const lamps = [],
     faces = [];
   const material = new THREE.MeshStandardMaterial({
@@ -13,9 +14,19 @@ export function poolFloodlights(root, parts) {
     roughness: 0.45,
   });
   material.userData.noLook = true;
-  for (const [x, z] of FLOODLIGHTS) {
+  for (const [index, [x, z]] of FLOODLIGHTS.entries()) {
+    const group = new THREE.Group(),
+      parts = new Parts();
+    group.name = `pool:floodlight-fixture:${index}`;
+    group.userData.perfAnchor = true;
+    group.userData.poolChangingOccluder = true;
+    root.add(group);
     parts.box(STEEL.mid, 0.16, 5.4, 0.16, x, 0, z);
     parts.box(STEEL.dark, 0.45, 0.16, 0.45, x, 0, z);
+    parts.build(group).forEach((mesh, i) => {
+      mesh.name = `pool:floodlight-pole:${index}:${i}`;
+      mesh.userData.noBatch = true;
+    });
     const target = new THREE.Object3D();
     target.position.set(POOL.x, 0, z < POOL.z ? POOL.z - 3 : POOL.z + 3);
     root.add(target);
@@ -36,8 +47,10 @@ export function poolFloodlights(root, parts) {
     );
     const face = new THREE.Mesh(new THREE.PlaneGeometry(0.73, 0.36), material);
     face.position.z = 0.086;
+    housing.name = `pool:floodlight-housing:${index}`;
+    face.name = `pool:floodlight-face:${index}`;
     fixture.add(housing, face);
-    root.add(fixture);
+    group.add(fixture);
     faces.push(face);
   }
   return {
@@ -46,7 +59,7 @@ export function poolFloodlights(root, parts) {
     onPeriod(period) {
       const evening = period === 'evening';
       for (const light of lamps) light.intensity = evening ? 210 : 0;
-      material.emissiveIntensity = evening ? 3 : 0.05;
+      for (const face of faces) face.material.emissiveIntensity = evening ? 3 : 0.05;
     },
   };
 }
