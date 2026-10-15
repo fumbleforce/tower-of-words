@@ -1,9 +1,8 @@
 // Keep the approach scene in control until the moving train actually stops.
 // This wait belongs to one place instance, never to a save or a timer.
-export function trainArrival(st) {
+export function trainArrival(st, isCurrent = () => true) {
   let pending = null,
-    resolve = null,
-    left = false;
+    resolve = null;
   const finish = (result) => {
     const done = resolve;
     resolve = pending = null;
@@ -11,7 +10,7 @@ export function trainArrival(st) {
   };
   return {
     begin(start) {
-      if (left) return { worldComplete: false };
+      if (!isCurrent()) return { worldComplete: false };
       if (st.arrived) return;
       if (!pending) {
         pending = new Promise((done) => {
@@ -30,7 +29,6 @@ export function trainArrival(st) {
       finish();
     },
     leave() {
-      left = true;
       finish({ worldComplete: false });
     },
   };

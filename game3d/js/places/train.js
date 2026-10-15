@@ -606,7 +606,7 @@ export async function trainPlace(game) {
   };
 
   // ---- camera: the whole car on a wide screen, along it on a phone ----
-  const arrival = trainArrival(st);
+  const arrival = trainArrival(st, () => game.place === P);
   const camera = new THREE.PerspectiveCamera(20, 16 / 9, 1, 160);
   const cam = {
     camera,

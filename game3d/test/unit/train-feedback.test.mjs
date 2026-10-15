@@ -41,14 +41,34 @@ test('one arrival wait spans physical braking and clears on stop', async () => {
 });
 
 test('leaving settles the pending hook without completing it or starting another run-in', async () => {
-  const arrival = trainArrival({ arrived: false });
+  let current = true;
+  const arrival = trainArrival({ arrived: false }, () => current);
   let starts = 0;
   const wait = arrival.begin(() => starts++);
+  current = false;
   arrival.leave();
   assert.deepEqual(await wait, { worldComplete: false });
   arrival.stopped();
   assert.deepEqual(arrival.begin(() => starts++), { worldComplete: false });
   assert.equal(starts, 1);
+});
+
+test('the cached train can arrive after Continue leaves and re-enters the same place', async () => {
+  let current = true;
+  const st = { arrived: false }, arrival = trainArrival(st, () => current);
+  const first = arrival.begin(() => {});
+  current = false;
+  arrival.leave();
+  assert.deepEqual(await first, { worldComplete: false });
+  // places/lifecycle.enter reuses the object in game.prepared, including on Continue.
+  current = true;
+  let started = false;
+  const second = arrival.begin(() => { started = true; });
+  assert.ok(started, 're-entering the cached train starts its saved approach');
+  assert.ok(second instanceof Promise);
+  st.arrived = true;
+  arrival.stopped();
+  assert.equal(await second, undefined);
 });
 
 for (const cancel of [false, true]) test(`real approach Runner ${cancel ? 'leaves cleanly' : 'waits for queued arrival'}`, async () => {
