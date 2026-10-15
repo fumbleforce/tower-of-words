@@ -7,12 +7,14 @@
 //   node tools/subplots/compose.mjs <recipe.json> [--count N] [--seed S] [--dry-run] [--wait] [--out DIR]
 //        [--server URL] [--presets FILE] [--end-session]
 //
+// Agent recipes are validated by agent-recipe.mjs before queueing. Whole prompt, style/exclusion and people
+// text overrides are refused. --presets is available only with --dry-run.
 // Recipe fields are the composition's (web/image-compose.js DEFAULT_COMPOSITION): characters, outfit, cameras,
 // framing, style, model, rating, hard, scene, pose, angle, environment, light, stage (who stands where, facing and
 // looking at what: web/image-stage.js), extra (more prompt words),
-// negatives, negative (more to avoid), reference/referenceOn/referenceStrength/referenceCutout (identity
+// negatives (selected exclusion preset ids), reference/referenceOn/referenceStrength/referenceCutout (identity
 // reference), faceFix/faceStrength, width, height, steps, cfg, count, seed. Also `subplotId` (the scene the
-// picture belongs to, so the editor lists it under that scene) and `details` (free notes for what the blocks
+// picture belongs to, full scene editor id) together with `imageSlot` (the exact shot id) and `details` (free notes for what the blocks
 // cannot say yet: img2img start, inpaint, hue fix, LoRA weights, ControlNet; stored and shown, never sent).
 // --dry-run prints the assembled job and sends nothing. --wait waits for the pictures, saves each next to the
 // recipe (or in --out) and prints the paths; --end-session then ends the image gen session so the GPU is freed,
@@ -22,7 +24,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {applyDefaults, normalizeComposition, assembleComposition} from './web/image-compose.js';
+import {prepareAgentGeneration} from './agent-recipe.mjs';
 
 const args = process.argv.slice(2);
 const flag = name => { const i = args.indexOf('--' + name); if (i < 0) return undefined; const v = args[i + 1]; args.splice(i, v && !v.startsWith('--') ? 2 : 1); return v && !v.startsWith('--') ? v : true; };
@@ -45,23 +47,13 @@ const getJson = async (url, init = {}) => {
   if (!r.ok) throw new Error(`${url}: ${r.status} ${t.slice(0, 300)}`);
   return JSON.parse(t);
 };
+// A local preset file is a preview fixture, never an alternate source for a queued agent job.
+if (presetsFile && !dry) throw new Error('--presets is supported only with --dry-run; queued jobs use the dashboard presets.');
 const presets = presetsFile ? JSON.parse(fs.readFileSync(presetsFile, 'utf8')) : await getJson(server + '/api/presets');
-
-const c = applyDefaults(normalizeComposition(recipe), presets);
-if (count) c.count = +count;
-if (seed != null) { c.seed = +seed; c.seedMode = 'fixed'; }
-const unknown = [];
-const known = (type, id) => !id || (presets[type] || []).some(p => p.id === id);
-for (const id of c.characters) if (!known('character', id)) unknown.push('character ' + id);
-for (const id of c.cameras) if (!known('camera', id)) unknown.push('camera ' + id);
-for (const id of c.negatives || []) if (!known('negative', id)) unknown.push('negative ' + id);
-for (const type of ['model', 'style', 'framing']) if (!known(type, c[type])) unknown.push(type + ' ' + c[type]);
-if (unknown.length) { console.error('Not in the image gen presets: ' + unknown.join(', ')); process.exit(1); }
-
-const body = assembleComposition(c, presets, recipe.subplotId || 'recipe:' + name);
-body.compose.recipe = name;
-if (!body.model_file) { console.error('No model in the recipe or the presets.'); process.exit(1); }
-if (body.rating !== c.rating) console.error(`Note: a character preset limits this picture to ${body.rating}.`);
+if (count) recipe.count = +count;
+if (seed != null) { recipe.seed = +seed; recipe.seedMode = 'fixed'; }
+const body = prepareAgentGeneration(recipe, presets, name);
+if (body.rating !== (recipe.rating || 'safe')) console.error(`Note: a character preset limits this picture to ${body.rating}.`);
 if (dry) { console.log(JSON.stringify(body, null, 2)); process.exit(0); }
 
 const sent = await getJson(server + '/api/generate', {method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify(body)});

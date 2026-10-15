@@ -6,6 +6,7 @@ import {blockId} from '../../imagegen/web/blocks.js';
 import {blockData, directionText} from './image-block-words.js';
 import {personWords} from './image-people.js';
 import {stageWords, personOf} from './image-stage.js';
+import {compositionSchema} from './image-composition-schema.js';
 export const DIRECTION_KINDS = [['pose', 'pose', 'Pose'], ['environment', 'location', 'Setting'], ['light', 'light', 'Light']];
 export const DEFAULT_COMPOSITION = {
   characters: [], outfit: {}, useShort: true, cameras: [], sceneRefs: [], negatives: null,
@@ -13,6 +14,9 @@ export const DEFAULT_COMPOSITION = {
   extra: '', details: '', hard: false,
   reference: '', referenceOn: false, referenceStrength: 0.6, referenceCutout: false, faceFix: false, faceStrength: 0.65,
 };
+// One typed field contract for compositions; agent validation leaves the browser's editing policy intact.
+export const COMPOSITION_SCHEMA = compositionSchema(DEFAULT_COMPOSITION);
+export const COMPOSITION_FIELDS = Object.freeze(Object.keys(COMPOSITION_SCHEMA.properties));
 // The negative every Mature or Adult picture must carry unless the scene is marked hard (CLAUDE.md, soft reward scenes).
 export const SOFT_NEGATIVE = 'visible nipples, visible genitals, uncovered crotch, frontal explicit view, explicit sexual action, transparent unobstructed body';
 // What an empty composition gets from the presets: the first model, style and framing, and the default negatives.

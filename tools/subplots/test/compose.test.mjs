@@ -29,6 +29,7 @@ function stub({busy = false, out404 = false} = {}) {
       seen.cookies.push(req.headers.cookie || '');
       const json = (code, o) => { res.writeHead(code, {'content-type': 'application/json'}); res.end(JSON.stringify(o)); };
       if (req.method === 'POST') seen.posts.push([req.url, body ? JSON.parse(body) : {}]);
+      if (req.url === '/api/presets') return json(200, presets);
       if (req.url === '/api/generate') return json(200, {run_id: 'r1', jobs: [{id: 'mine'}]});
       if (req.url === '/api/jobs') return json(200, [{id: 'mine', status: 'done', file: '2026/a.png', seed: 3}, ...(busy ? [{id: 'other', status: 'queued'}] : [])]);
       if (req.url === '/api/cancel') return json(200, {ok: true});
@@ -46,9 +47,9 @@ function stub({busy = false, out404 = false} = {}) {
 async function run(opts, extra = [], env = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'compose-test-'));
   fs.writeFileSync(path.join(dir, 'p.json'), JSON.stringify(presets));
-  fs.writeFileSync(path.join(dir, 'pic.recipe.json'), JSON.stringify({characters: ['alice'], model: 'model', style: 'soft', framing: 'wide'}));
+  fs.writeFileSync(path.join(dir, 'pic.recipe.json'), JSON.stringify(opts?.recipe || {characters: ['alice'], model: 'model', style: 'soft', framing: 'wide'}));
   const {srv, seen, url} = await stub(opts);
-  const child = spawn('node', [script, path.join(dir, 'pic.recipe.json'), '--presets', path.join(dir, 'p.json'), '--server', url, '--wait', ...extra],
+  const child = spawn('node', [script, path.join(dir, 'pic.recipe.json'), '--server', url, '--wait', ...(opts?.localPresets ? ['--presets', path.join(dir, 'p.json')] : []), ...extra],
     {env: {...process.env, ...env}});
   let stdout = '', stderr = '';
   child.stdout.on('data', d => stdout += d); child.stderr.on('data', d => stderr += d);
@@ -86,4 +87,27 @@ test('--end-session cancels only its own jobs and leaves a busy session running'
   assert.match(busy.stdout, /Session left running/);
   const idle = await run({busy: false}, ['--end-session']);
   assert.doesNotMatch(idle.stdout, /Session left running/);
+});
+
+
+test('strict validation is automatic and never posts a refused agent recipe', async () => {
+  for (const recipe of [
+    {override: {negative: 'replacement'}}, {negative: 'custom exclusions'},
+    {style: 'soft', blockOverrides: {style: {soft: {quality: ''}}}},
+    {people: {alice: {appearance: 'replacement'}}},
+    {subplotId: 'local:sample:scene:steps'},
+  ]) {
+    const r = await run({recipe});
+    assert.notEqual(r.code, 0); assert.match(r.stderr, /Agent recipe refused/);
+    assert.deepEqual(r.seen.posts, []); fs.rmSync(r.dir, {recursive: true});
+  }
+});
+
+test('local presets cannot replace canonical queue presets; dry-run fixtures remain usable', async () => {
+  const refused = await run({localPresets: true});
+  assert.notEqual(refused.code, 0); assert.match(refused.stderr, /only with --dry-run/);
+  assert.deepEqual(refused.seen.posts, []);
+  const preview = await run({localPresets: true}, ['--dry-run']);
+  assert.equal(preview.code, 0, preview.stderr); assert.deepEqual(preview.seen.posts, []);
+  fs.rmSync(refused.dir, {recursive: true}); fs.rmSync(preview.dir, {recursive: true});
 });
