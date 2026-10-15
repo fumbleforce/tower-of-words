@@ -182,6 +182,25 @@ await withBrowserJob('train-feedback-native', async browser => {
           return q.still >= 12;
         }, null, { timeout: 15000 });
         await shot('sumimasen');
+        const framing = await page.evaluate(() => {
+          const g = globalThis.__game, camera = g.place.camera;
+          const project = (root, x, y, z) => {
+            const v = g.player.root.position.clone().set(x, y, z);
+            root.localToWorld(v); v.project(camera);
+            return [(v.x + 1) * globalThis.innerWidth / 2, (1 - v.y) * globalThis.innerHeight / 2];
+          };
+          const bodies = Object.fromEntries([['player', g.player], ['aoi', g.place.people.aoi]].map(([id, rig]) =>
+            [id, [-.32, .32].flatMap(x => [0, 1.4].map(y => project(rig.root, x, y, 0)))]));
+          const doorway = [-3.1, -2.2].flatMap(x => [0, 1.22].map(y => project(g.place.space, x, y, 1.2)));
+          const uiTop = Math.min(globalThis.document.querySelector('#talk').getBoundingClientRect().top,
+            ...Array.from(globalThis.document.querySelectorAll('.por:not([hidden]):not(.aside)'))
+              .map(e => e.getBoundingClientRect()).filter(r => r.width && r.height).map(r => r.top));
+          return { bodies, doorway, uiTop };
+        });
+        rows.push({ width, scenario: 'lesson framing', framing });
+        if (width < 700 && !baseline) for (const [id, points] of Object.entries({ ...framing.bodies, doorway: framing.doorway }))
+          assert.ok(points.every(([x, y]) => x > 0 && x < width && y > 0 && y < framing.uiTop - 8),
+            `${id} remains onscreen above the dialogue portraits`);
         const lesson = await state();
         assert.equal(lesson.busy, true);
         await target('door_r');

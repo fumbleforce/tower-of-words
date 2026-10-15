@@ -8,6 +8,7 @@ import * as THREE from 'three';
 import { trainLaptop } from './train-laptop.js';
 import { trainBunCamera } from '../train/bun-camera.js';
 import { trainArrival } from '../train/arrival.js';
+import { frameTrainArrival } from '../train/arrival-view.js';
 import { Pass } from 'three/addons/postprocessing/Pass.js';
 import { SimplexNoise } from 'three/addons/math/SimplexNoise.js';
 import { buildWorld, SPEED } from '../train/world.js';
@@ -652,6 +653,7 @@ export async function trainPlace(game) {
         t.x = clamp(p.x * 0.85, -6.5, 3.5);
         t.z = this.base.z + clamp((p.z - LZ - 0.8) * 0.8, 0, 2.0);
       }
+      frameTrainArrival(t, p, this.follow, st.arrived, flags);
       return [keepEric(this, t, p), this.fitDist];
     },
     update(dt, p) {
