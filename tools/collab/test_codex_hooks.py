@@ -2,11 +2,15 @@
 import contextlib
 import importlib.util
 import io
+import hashlib
+import json
+from datetime import datetime
 from pathlib import Path
 import shutil
 import subprocess
 import tempfile
 import unittest
+from unittest import mock
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -45,6 +49,87 @@ class HooksTest(unittest.TestCase):
         adapter.invoke('feedback_log.py', data)
         log = next((self.root / 'notes/feedback-log').glob('*.md')).read_text()
         self.assertEqual(log.count(data['prompt']), 2)
+
+    def test_internal_envelopes_do_not_become_human_feedback(self):
+        envelopes = [f'<{tag} source="test">Internal instructions</{tag}>'
+                     for tag in ('agent-message', 'cross-session-message', 'codex_internal_context')]
+        for prompt in [*envelopes, '\n  ' + '\n'.join(envelopes) + '\n',
+                       '<system-reminder>context</system-reminder>\n' + envelopes[0]]:
+            with self.subTest(prompt=prompt):
+                result = adapter.invoke('feedback_log.py', {'prompt': prompt})
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(result.stdout, '')
+        self.assertFalse((self.root / 'notes/feedback-log').exists())
+
+    def test_user_prose_and_quotes_of_internal_tags_are_logged_verbatim(self):
+        prompts = [
+            'Please stop recording <agent-message> notices.',
+            'He wrote "<cross-session-message>hello</cross-session-message>".',
+            '````\n<agent-message>quoted</agent-message>\n````',
+            '<agent-message>an incomplete tag in my report',
+            '<agent-message>quoted</agent-message> Please fix this.',
+            '<agent-message>one</agent-message> My feedback. <agent-message>two</agent-message>',
+            '<agent-message-example>my example</agent-message>',
+            '  日本語\n\nKeep this spacing.\n',
+            'Keep my <system-reminder>quoted words</system-reminder> too.',
+        ]
+        for number, prompt in enumerate(prompts):
+            result = adapter.invoke('feedback_log.py', {'prompt': prompt, 'turn_id': str(number)})
+            self.assertEqual(result.returncode, 0, result.stderr)
+        log = next((self.root / 'notes/feedback-log').glob('*.md')).read_text()
+        for prompt in prompts:
+            self.assertIn('\n' + prompt + '\n', log)
+
+    def test_existing_command_and_harness_exclusions_are_retained(self):
+        for prompt in ('', '  ', '/compact', '<task-notification>done</task-notification>',
+                       '<system-reminder>context</system-reminder>'):
+            result = adapter.invoke('feedback_log.py', {'prompt': prompt})
+            self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertFalse((self.root / 'notes/feedback-log').exists())
+
+    def test_native_and_manual_retries_share_the_legacy_marker(self):
+        folder = self.root / 'notes/feedback-log'
+        folder.mkdir(parents=True)
+        path = folder / (datetime.now().astimezone().strftime('%Y-%m-%d') + '.md')
+        identity = 'codex/test\0one\0Keep this.'
+        marker = '<!-- feedback-event ' + hashlib.sha256(identity.encode()).hexdigest() + ' -->'
+        prior = marker + '\nAlready logged by the native hook.\n'
+        path.write_text(prior)
+        original_invoke = adapter.invoke
+
+        def invoke_logger_only(name, data):
+            if name == 'feedback_log.py':
+                return original_invoke(name, data)
+            return subprocess.CompletedProcess([], 0, '', '')
+
+        with mock.patch.object(adapter, 'invoke', side_effect=invoke_logger_only):
+            for _ in range(2):
+                self.assertEqual(adapter.main('prompt', {
+                    'prompt': '  Keep this.\n', 'session_id': 'test', 'turn_id': 'one'}), 0)
+        self.assertEqual(path.read_text(), prior)
+        result = original_invoke('feedback_log.py', {
+            'prompt': '  Keep this.\n', 'session_id': 'codex/test', 'turn_id': 'two'})
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('\n  Keep this.\n\n', path.read_text())
+
+    def test_logger_filesystem_failure_is_visible_and_propagates(self):
+        (self.root / 'notes').write_text('This file prevents creating the log directory.')
+        result = adapter.invoke('feedback_log.py', {'prompt': 'Do not lose this.'})
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Feedback log failed:', result.stderr)
+        self.assertEqual(result.stdout, '')
+        with self.assertRaisesRegex(RuntimeError, 'feedback_log.py failed: Feedback log failed:'):
+            adapter.main('prompt', {'prompt': 'Do not lose this.'})
+
+    def test_logger_malformed_input_is_visible(self):
+        script = self.root / '.claude/hooks/feedback_log.py'
+        for payload in ('{', json.dumps(['unexpected payload'])):
+            with self.subTest(payload=payload):
+                result = subprocess.run(['python3', str(script)], input=payload,
+                                        text=True, capture_output=True)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn('Feedback log failed:', result.stderr)
+        self.assertFalse((self.root / 'notes/feedback-log').exists())
 
     def test_game_feedback_reaches_each_client_once(self):
         feedback = self.root / 'notes/feedback-game/example'
