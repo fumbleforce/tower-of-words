@@ -1,0 +1,89 @@
+{
+  "title": "Pool water, entrance and bench repairs",
+  "date": "2026-10-15",
+  "by": "codex",
+  "caption": "Swimmers lie head-first in visible water. The entrance stays clear, bench prompts stay above the player, and changing-room saves restore where they were made.",
+  "commit": "584b0747959a6b54a1489fa013de1b90d1031883",
+  "result": [
+    "water-desktop",
+    "water-phone",
+    "bench-desktop",
+    "bench-phone"
+  ],
+  "sections": [
+    {
+      "title": "Swimming",
+      "caption": "The basin has depth, steps and a transparent surface. Swimmers have trailing limbs and small water-contact rings. These round 6, attempt 2 captures predate landing and show the accepted water appearance. Swimming remains part of the authored club scene.",
+      "images": [
+        {
+          "id": "water-desktop",
+          "image": "bible/shots/showcase/pool-feedback-20261015/water-desktop.webp",
+          "caption": "Desktop: three head-first swimmers with visible limbs beneath the surface."
+        },
+        {
+          "id": "water-phone",
+          "image": "bible/shots/showcase/pool-feedback-20261015/water-phone.webp",
+          "caption": "Phone: the lanes, swimmers and water-contact rings remain distinct."
+        }
+      ]
+    },
+    {
+      "title": "Benches and saved games",
+      "caption": "Both changing rooms can be reached and used. A saved seated player returns to the bench, then can stand and walk away. The Sit and Stand up prompts clear the player’s hair. These final captures are from source 584b07479, build 1015-1257-584b07479.",
+      "images": [
+        {
+          "id": "bench-desktop",
+          "image": "bible/shots/showcase/pool-feedback-20261015/bench-desktop.webp",
+          "caption": "Desktop: Sit and its E badge sit above the standing player."
+        },
+        {
+          "id": "bench-phone",
+          "image": "bible/shots/showcase/pool-feedback-20261015/bench-phone.webp",
+          "caption": "Phone: a seated Quick save has been restored, with Stand up above the player."
+        }
+      ]
+    },
+    {
+      "title": "Clear entrance",
+      "caption": "The entrance posts move out of the camera view while crossing the changing-room doorway, then return when the player leaves. These round 4, attempt 2 captures show the earlier accepted entrance repair.",
+      "images": [
+        {
+          "id": "entrance-desktop",
+          "image": "bible/shots/showcase/pool-feedback-20261015/entrance-desktop.webp",
+          "caption": "Desktop: the player remains visible at the entrance."
+        },
+        {
+          "id": "entrance-phone",
+          "image": "bible/shots/showcase/pool-feedback-20261015/entrance-phone.webp",
+          "caption": "Phone: the doorway and player stay clear."
+        }
+      ]
+    },
+    {
+      "title": "Rejected attempts",
+      "caption": "These earlier captures show the water and marker problems that were corrected.",
+      "images": [
+        {
+          "id": "attempt-water",
+          "image": "bible/shots/showcase/pool-feedback-20261015/attempt-water.webp",
+          "caption": "Round 5, attempt 1: the bright surface patch and weak water contact were rejected. The final water appears above."
+        },
+        {
+          "id": "attempt-bench",
+          "image": "bible/shots/showcase/pool-feedback-20261015/attempt-bench.webp",
+          "caption": "Source 996b89a50: the E badge overlapped the standing player’s hair. The corrected 584b07479 view appears above."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Pool feedback #436",
+      "href": "https://github.com/fumbleforce/tower-of-words/issues/436"
+    },
+    {
+      "label": "Changing-room save repair #590",
+      "href": "https://github.com/fumbleforce/tower-of-words/issues/590"
+    }
+  ]
+}
