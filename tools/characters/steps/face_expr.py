@@ -20,7 +20,10 @@ Settings, a JSON file in the round folder (face.json):
   ~/ai/sd/venv/bin/python tools/characters/steps/face_expr.py paste <round>/face.json <render.webp...>
       writes <render>-full.webp (the source with the new face) and <render>-cut.webp (game size, the neutral's alpha)
   ~/ai/sd/venv/bin/python tools/characters/steps/face_expr.py sheet <round>/face.json <out.webp> <label=picture ...>
-      a contact sheet of the face area of each picture, labelled, in the order given"""
+      a contact sheet of the face area of each picture, labelled, in the order given
+  ~/ai/sd/venv/bin/python tools/characters/steps/face_expr.py gamesize <round>/face.json <out.webp> <label=cut-out ...>
+      the cut-outs at the CSS size the dialogue stage shows them (game3d/js/ui/portraits.js layoutStage): a phone row
+      (face 57 px, 390x844) above a desktop row (face 112 px, 1366x860), each cut at the band or the screen bottom"""
 import json, os, sys
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
@@ -129,6 +132,47 @@ def sheet(cfg, out, cells):
     print(out, sh_.size)
 
 
+# game3d/js/ui/portraits.js: FACE box heights and layoutStage's face height F and chin-to-cut cutK
+FACE_BOX = {'mio': (214, 383)}
+STAGE = [('phone 390x844', min(58, 844 * 0.068), 1.55), ('desktop 1366x860', min(124, 860 * 0.13), 2.25)]
+
+
+def gamesize(cfg, out, cells, who='mio'):
+    f0, f1 = FACE_BOX[who]
+    try:
+        font = ImageFont.truetype('/usr/share/fonts/TTF/DejaVuSans.ttf', 13)
+    except OSError:
+        font = ImageFont.load_default()
+    rows = []
+    for name, F, cutK in STAGE:
+        s = F / (f1 - f0)
+        tiles = []
+        for cell in cells:
+            label, path = cell.split('=', 1)
+            im = Image.open(path).convert('RGBA')
+            im = im.resize((round(im.width * s), round(im.height * s)), Image.LANCZOS)
+            im = im.crop((0, 0, im.width, min(im.height, round((f1 + cutK * (f1 - f0)) * s))))  # the cut
+            tiles.append((label, im))
+        rows.append((f'{name}: face {F:.0f} px', tiles))
+    pad, top = 8, 20
+    W = max(sum(t.width + pad for _, t in tiles) + pad for _, tiles in rows)
+    H = sum(max(t.height for _, t in tiles) + 2 * top + pad for _, tiles in rows)
+    sh_ = Image.new('RGB', (W, H), (52, 60, 76))  # a dim stage behind them, as the game's darkened scene
+    d = ImageDraw.Draw(sh_)
+    y = 0
+    for head, tiles in rows:
+        d.text((pad, y + 4), head, fill=(235, 238, 242), font=font)
+        y += top
+        x = pad
+        for label, t in tiles:
+            d.text((x + 2, y + 3), label, fill=(235, 238, 242), font=font)
+            sh_.paste(t, (x, y + top), t)
+            x += t.width + pad
+        y += top + max(t.height for _, t in tiles) + pad
+    sh_.save(out, 'WEBP', quality=92)
+    print(out, sh_.size)
+
+
 if __name__ == '__main__':
     cmd, cfg, *rest = sys.argv[1:]
     if cmd == 'prep':
@@ -137,5 +181,7 @@ if __name__ == '__main__':
         paste(cfg, rest)
     elif cmd == 'sheet':
         sheet(cfg, rest[0], rest[1:])
+    elif cmd == 'gamesize':
+        gamesize(cfg, rest[0], rest[1:])
     else:
         raise SystemExit(__doc__)
