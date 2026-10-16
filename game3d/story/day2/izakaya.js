@@ -120,7 +120,7 @@ export default {
       { if: 'lunch_mori', then: [{ say: 'eric', emo: 'warm', text: 'You’ll have to show me. I only know the ski jump from television.' }],
         else: [{ say: 'eric', emo: 'curious', text: 'What did you think of it?' }] },
       { say: 'mori', overheard: true, emo: 'fond', text: '寒かったですが、また行きたいですね。今度は、もう少しゆっくり。' },
-      { say: 'emi', emo: 'warm', text: 'He’d like to go back and take his time. Would summer be better?' },
+      { say: 'emi', emo: 'warm', text: 'It was cold, but he’d like to go back and take his time. Would summer be better?' },
       { say: 'eric', emo: 'warm', text: 'For walking around, definitely. You can stay out much longer.' },
       { go: 'd2_party_free' },
     ],
@@ -203,6 +203,7 @@ export default {
       { say: 'emi', emo: 'casual', text: 'He’s taking the leftovers home. I said I’d help with the bags.' },
       { say: 'mori', overheard: true, emo: 'warm', text: 'ありがとうございます。リレハンメルの写真も持ってきます。お茶の時に、ご覧になりますか。' },
       { say: 'emi', emo: 'warm', text: 'He’ll bring his Norway photos. He wants to show you over tea, if you have time.' },
+      { do: 'gesture', who: 'eric', kind: 'nod', to: 'mori' },
       { if: '!lunch_mori && !d2_norway_talked', then: [
         { say: 'mori', overheard: true, emo: 'fond', text: '1994年に行ったんです。また行きたいですね。' },
       ], else: [{ say: 'mori', overheard: true, emo: 'fond', text: 'また行きたいですね。今度は夏に。' }] },

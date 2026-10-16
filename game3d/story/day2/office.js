@@ -85,14 +85,14 @@ export default {
       { say: 'mori', overheard: true, emo: 'polite', text: 'はい。紙が詰まるたびに、取り出して使っていました。' },
       { say: 'mio', emo: 'casual', text: 'They kept pulling the paper out and using it again. He left the request open because nobody had actually fixed it.' },
       { say: 'eric', emo: 'quiet', text: 'I thought the list was just out of date.' },
-      { say: 'mio', emo: 'dry', text: 'Some of it is. Ask him before you close anything. He used to run purchasing upstairs, so he remembers who bought what.' },
+      { say: 'mio', emo: 'dry', text: 'Some of it is. Ask him before you close anything. He used to run a purchasing team upstairs, so he remembers who bought what.' },
       { choice: [
         { text: 'Go through the old requests with Mori.', go: 'd2_review_requests' },
         { text: 'Get up and come back to this.', go: 'd2_leave_desk' },
       ] },
     ],
     d2_review_requests: [
-      '> You match the old requests to Mori’s notes and mark the copier complete. He has pencilled in another check for next week.',
+      '> You match the old requests to Mori’s notes and confirm the copier fix. He has pencilled in another check for next week.',
       { set: 'd2_shift_done' }, { do: 'period', to: 'evening' }, { do: 'stand', who: 'eric' },
       { do: 'officeDay2', state: 'afterWork' },
       { do: 'goal', text: 'Meet Kenji by the izakaya’s blue curtain.', at: 'lift' }, { do: 'save' },

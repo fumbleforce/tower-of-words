@@ -430,7 +430,7 @@ export default {
     mori_landing: [
       { do: 'gesture', who: 'eric', kind: 'skijump' },
       { say: 'eric', emo: 'amused', text: 'That’s as close as I’m getting to the real thing.' },
-      { say: 'mori', face: 'smile', overheard: true, emo: 'amused', text: '実は、私も見ていただけなんですよ。' },
+      { say: 'mori', face: 'smile', overheard: true, emo: 'amused', text: '実は、私は見ていただけなんですよ。' },
       { go: 'mori_cups' },
     ],
     mori_pour: [
