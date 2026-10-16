@@ -1,0 +1,292 @@
+{
+ "character": "mori",
+ "ref": "game3d/assets/portraits/mori-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   228,
+   171,
+   371,
+   334
+  ]
+ ],
+ "ref_face_detected": [
+  228.0,
+  171.0,
+  370.0,
+  334.0
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-1-s1.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    341.0,
+    139.0,
+    573.0,
+    412.0
+   ],
+   "eyes": [
+    [
+     405.5,
+     231.0
+    ],
+    [
+     507.0,
+     229.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.02,
+    "zoom": 0.896,
+    "top": 0.115,
+    "bottom_short": 0.0,
+    "hair_top_game": 101,
+    "hair_top_ref": 86,
+    "crop": [
+     -43.8,
+     -147.4,
+     956.1,
+     1138.9
+    ],
+    "eyes": -0.0,
+    "tilt": 1.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.079,
+    "ssim": 0.279
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-2-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    334.0,
+    133.0,
+    565.0,
+    393.0
+   ],
+   "eyes": [
+    [
+     398.0,
+     218.0
+    ],
+    [
+     497.0,
+     210.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0023
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.007,
+    "zoom": 0.94,
+    "top": 0.114,
+    "bottom_short": 0.0,
+    "hair_top_game": 92,
+    "hair_top_ref": 86,
+    "crop": [
+     -27.4,
+     -139.8,
+     924.8,
+     1085.3
+    ],
+    "eyes": -0.023,
+    "tilt": -2.8,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.09,
+    "ssim": 0.259
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-3-s3.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    316.0,
+    164.0,
+    550.0,
+    426.0
+   ],
+   "eyes": [
+    [
+     379.0,
+     248.5
+    ],
+    [
+     481.5,
+     237.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0008
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.041,
+    "zoom": 0.933,
+    "top": 0.09,
+    "bottom_short": 0.0,
+    "hair_top_game": 98,
+    "hair_top_ref": 86,
+    "crop": [
+     -47.6,
+     -110.9,
+     912.0,
+     1123.6
+    ],
+    "eyes": -0.033,
+    "tilt": -4.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.11,
+    "ssim": 0.26
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-4-s4.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    339.0,
+    132.0,
+    555.0,
+    376.0
+   ],
+   "eyes": [
+    [
+     399.0,
+     212.5
+    ],
+    [
+     490.5,
+     206.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0019
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.013,
+    "zoom": 1.002,
+    "top": 0.108,
+    "bottom_short": 0.0,
+    "hair_top_game": 92,
+    "hair_top_ref": 86,
+    "crop": [
+     -0.6,
+     -124.0,
+     893.1,
+     1025.7
+    ],
+    "eyes": -0.018,
+    "tilt": -2.2,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.108,
+    "ssim": 0.249
+   },
+   "status": "fail"
+  }
+ ]
+}

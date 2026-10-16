@@ -1,0 +1,18 @@
+{
+ "details": "Mori base portrait, round 1 pass 1 (#662). The one change from his approved mori-new-713: the face words, through the candidate preset mori-mature ('a handsome, well-kept face with a few fine lines and warm, expressive dark eyes' instead of 'a lined, kind face'). Hair, build, suit and age as the cast Look line. House portrait style, no props. Staging: ../staging.md.",
+ "characters": [
+  "mori-mature"
+ ],
+ "outfit": {
+  "mori-mature": true
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "calm, warm expression with a slight smile, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ]
+}

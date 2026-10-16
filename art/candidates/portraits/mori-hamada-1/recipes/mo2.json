@@ -1,0 +1,18 @@
+{
+ "details": "Mori base portrait, round 1 pass 2 (#662). One change from mo1: all four mo1 renders read 35 to 50, not 58, so the candidate preset's age words gain 'middle-aged' and 'mature male' (preset v2). Everything else as mo1. Staging: ../staging.md.",
+ "characters": [
+  "mori-mature"
+ ],
+ "outfit": {
+  "mori-mature": true
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "calm, warm expression with a slight smile, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ]
+}

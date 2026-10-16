@@ -1,0 +1,23 @@
+{
+ "details": "Hamada base portrait, round 1 pass 3 (#662). One change from ha2: seed 3 drew a light brown tuft in his black hair in both passes, so brown hair goes in his appearance exclusions. Everything else as ha2 (preset hamada-mature v2). Staging: ../staging.md.",
+ "characters": [
+  "hamada-mature"
+ ],
+ "outfit": {
+  "hamada-mature": true
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "calm, warm expression with a slight smile, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ],
+ "people": {
+  "hamada-mature": {
+   "appearanceNegative": "brown hair, light brown hair"
+  }
+ }
+}

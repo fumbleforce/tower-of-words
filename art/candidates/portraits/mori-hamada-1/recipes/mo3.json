@@ -1,0 +1,23 @@
+{
+ "details": "Mori base portrait, round 1 pass 3 (#662). One change from mo2: the hair came out spiky on all eight renders of passes 1 and 2 (his look says neatly combed), so spiky and messy hair go in his appearance exclusions. Everything else as mo2 (preset mori-mature v2). Staging: ../staging.md.",
+ "characters": [
+  "mori-mature"
+ ],
+ "outfit": {
+  "mori-mature": true
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "calm, warm expression with a slight smile, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ],
+ "people": {
+  "mori-mature": {
+   "appearanceNegative": "spiky hair, messy hair, hair standing up"
+  }
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "details": "Mori base portrait, round 1 pass 4 (#662). One change from mo3: the outfit is the candidate preset mori-cardigan (a neat charcoal grey knit cardigan over a white shirt and a navy tie) instead of his usual dark grey suit, the other option Jørgen named ('neat cardigan or suit, warm'). Everything else as mo3. Staging: ../staging.md.",
+ "characters": [
+  "mori-mature"
+ ],
+ "outfit": {
+  "mori-mature": "mori-cardigan"
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "calm, warm expression with a slight smile, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ],
+ "people": {
+  "mori-mature": {
+   "appearanceNegative": "spiky hair, messy hair, hair standing up"
+  }
+ }
+}

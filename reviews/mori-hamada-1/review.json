@@ -1,0 +1,286 @@
+{
+ "title": "Mori and Hamada as attractive mature men, round 1",
+ "date": "2026-10-16",
+ "by": "claude-main/art-round",
+ "status": "open",
+ "question": "Which of these, if any, should become Mori's and Hamada's new base portraits? If you prefer, the current portraits can stay as the non-adult version and a pick here would be the Adult-mode look.",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/approved/mori/mori-mori-new-713-neutral.webp",
+   "caption": "Mori now (mori-new-713, npc-base-1)"
+  },
+  {
+   "image": "art/approved/hamada/kuroda-hamada-new-743-neutral.webp",
+   "caption": "Hamada now (hamada-new-743, npc-base-1)"
+  },
+  {
+   "image": "art/candidates/portraits/mori-hamada-1/sheet-mori.webp",
+   "caption": "Mori: the current portrait, then all 16 renders in order, framed at the game's portrait scale. Pass 1 new face words; pass 2 adds age words (pass 1 read 35 to 50); pass 3 stops the spiky hair; pass 4 is the cardigan you mentioned. Seeds 1 to 4 in every pass."
+  },
+  {
+   "image": "art/candidates/portraits/mori-hamada-1/sheet-hamada.webp",
+   "caption": "Hamada: the current portrait, then all 12 renders in order. Pass 1 new face words; pass 2 adds age words; pass 3 stops the brown tuft seed 3 drew. Seed 4 keeps drawing a teal suit."
+  }
+ ],
+ "options": [
+  {
+   "id": "mo1-s1",
+   "label": "mo1-s1",
+   "image": "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-1-s1.webp"
+   ],
+   "note": "Mori, pass 1: new face words (mori-mature preset). Recipe art/candidates/portraits/mori-hamada-1/recipes/mo1.json, seed 1, RDBT, portrait style, no-props. Red rim 0.0%. Framing: headroom 2%, 12% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.079 (a new face is the point). Dashboard #2369. My verdict, rejected: handsome and well kept, but reads about 45, not 58; hair spiky, not neatly combed"
+  },
+  {
+   "id": "mo1-s2",
+   "label": "mo1-s2",
+   "image": "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-2-s2.webp"
+   ],
+   "note": "Mori, pass 1: new face words (mori-mature preset). Recipe art/candidates/portraits/mori-hamada-1/recipes/mo1.json, seed 2, RDBT, portrait style, no-props. Red rim 0.2%. Framing: headroom 1%, 11% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.090 (a new face is the point). Dashboard #2370. My verdict, rejected: reads about 40, not 58; spiky hair, not neatly combed"
+  },
+  {
+   "id": "mo1-s3",
+   "label": "mo1-s3",
+   "image": "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-3-s3.webp"
+   ],
+   "note": "Mori, pass 1: new face words (mori-mature preset). Recipe art/candidates/portraits/mori-hamada-1/recipes/mo1.json, seed 3, RDBT, portrait style, no-props. Red rim 0.1%. Framing: headroom 4%, 9% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.110 (a new face is the point). Dashboard #2371. My verdict, rejected: closest to his age (about 50) and warm, but still young for 58; spiky hair, not neatly combed"
+  },
+  {
+   "id": "mo1-s4",
+   "label": "mo1-s4",
+   "image": "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-4-s4.webp"
+   ],
+   "note": "Mori, pass 1: new face words (mori-mature preset). Recipe art/candidates/portraits/mori-hamada-1/recipes/mo1.json, seed 4, RDBT, portrait style, no-props. Red rim 0.2%. Framing: headroom 1%, 11% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.108 (a new face is the point). Dashboard #2372. My verdict, rejected: reads about 45, not 58; spiky hair, not neatly combed"
+  },
+  {
+   "id": "mo2-s1",
+   "label": "mo2-s1",
+   "image": "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-1-s1.webp"
+   ],
+   "note": "Mori, pass 2: + \"middle-aged, mature male\" age words. Recipe art/candidates/portraits/mori-hamada-1/recipes/mo2.json, seed 1, RDBT, portrait style, no-props. Red rim 0.0%. Framing: headroom 2%, 11% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.082 (a new face is the point). Dashboard #2377. My verdict, rejected: age now reads mid-50s and the face is kind and well kept, but the hair is spiky, not neatly combed"
+  },
+  {
+   "id": "mo2-s2",
+   "label": "mo2-s2",
+   "image": "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-2-s2.webp"
+   ],
+   "note": "Mori, pass 2: + \"middle-aged, mature male\" age words. Recipe art/candidates/portraits/mori-hamada-1/recipes/mo2.json, seed 2, RDBT, portrait style, no-props. Red rim 0.2%. Framing: headroom 0%, 12% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.083 (a new face is the point). Dashboard #2378. My verdict, rejected: reads mid-50s, warm, upright; hair spiky, not neatly combed"
+  },
+  {
+   "id": "mo2-s3",
+   "label": "mo2-s3",
+   "image": "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-3-s3.webp"
+   ],
+   "note": "Mori, pass 2: + \"middle-aged, mature male\" age words. Recipe art/candidates/portraits/mori-hamada-1/recipes/mo2.json, seed 3, RDBT, portrait style, no-props. Red rim 0.4%. Framing: headroom 4%, 8% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.101 (a new face is the point). Dashboard #2379. My verdict, rejected: reads mid-50s; hair spiky and swept up, not neatly combed"
+  },
+  {
+   "id": "mo2-s4",
+   "label": "mo2-s4",
+   "image": "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-4-s4.webp"
+   ],
+   "note": "Mori, pass 2: + \"middle-aged, mature male\" age words. Recipe art/candidates/portraits/mori-hamada-1/recipes/mo2.json, seed 4, RDBT, portrait style, no-props. Red rim 0.3%. Framing: headroom 1%, 10% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.091 (a new face is the point). Dashboard #2380. My verdict, rejected: reads mid-50s; hair spiky, not neatly combed"
+  },
+  {
+   "id": "mo3-s1",
+   "label": "mo3-s1",
+   "image": "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-1-s1.webp"
+   ],
+   "note": "Mori, pass 3: + spiky/messy hair excluded. Recipe art/candidates/portraits/mori-hamada-1/recipes/mo3.json, seed 1, RDBT, portrait style, no-props. Red rim 0.2%. Framing: headroom 3%, 11% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.028 (a new face is the point). Dashboard #2385. My verdict, kept: neatly combed grey hair, reads mid-50s, warm smile, upright; hair outline a little blocky on top"
+  },
+  {
+   "id": "mo3-s2",
+   "label": "mo3-s2",
+   "image": "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-2-s2.webp"
+   ],
+   "note": "Mori, pass 3: + spiky/messy hair excluded. Recipe art/candidates/portraits/mori-hamada-1/recipes/mo3.json, seed 2, RDBT, portrait style, no-props. Red rim 0.0%. Framing: headroom 2%, 12% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.044 (a new face is the point). Dashboard #2386. My verdict, kept: neatly combed grey hair with a side sweep, reads mid-50s, warm and upright"
+  },
+  {
+   "id": "mo3-s3",
+   "label": "mo3-s3",
+   "image": "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-3-s3.webp"
+   ],
+   "note": "Mori, pass 3: + spiky/messy hair excluded. Recipe art/candidates/portraits/mori-hamada-1/recipes/mo3.json, seed 3, RDBT, portrait style, no-props. Red rim 0.1%. Framing: headroom 5%, 9% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.085 (a new face is the point). Dashboard #2387. My verdict, kept: combed grey hair, the oldest read (about 58), kind eyes"
+  },
+  {
+   "id": "mo3-s4",
+   "label": "mo3-s4",
+   "image": "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-4-s4.webp"
+   ],
+   "note": "Mori, pass 3: + spiky/messy hair excluded. Recipe art/candidates/portraits/mori-hamada-1/recipes/mo3.json, seed 4, RDBT, portrait style, no-props. Red rim 0.3%. Framing: headroom 2%, 11% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.023 (a new face is the point). Dashboard #2388. My verdict, kept: swept-back grey hair, reads mid-50s, closest to the old portrait's identity (ccip 0.023)"
+  },
+  {
+   "id": "mo4-s1",
+   "label": "mo4-s1",
+   "image": "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-1-s1.webp"
+   ],
+   "note": "Mori, pass 4: the cardigan instead of the suit. Recipe art/candidates/portraits/mori-hamada-1/recipes/mo4.json, seed 1, RDBT, portrait style, no-props. Red rim 0.8%. Framing: headroom 2%, 13% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.036 (a new face is the point). Dashboard #2397. My verdict, kept: cable-knit charcoal cardigan, white shirt, navy tie; warm and neat; combed grey hair, mid-50s"
+  },
+  {
+   "id": "mo4-s2",
+   "label": "mo4-s2",
+   "image": "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-2-s2.webp"
+   ],
+   "note": "Mori, pass 4: the cardigan instead of the suit. Recipe art/candidates/portraits/mori-hamada-1/recipes/mo4.json, seed 2, RDBT, portrait style, no-props. Red rim 0.9%. Framing: headroom 2%, 12% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.027 (a new face is the point). Dashboard #2398. My verdict, kept: cardigan with a slimmer cut, hands at his sides with five fingers each; his right hand (image left) is shaded much darker than his face"
+  },
+  {
+   "id": "mo4-s3",
+   "label": "mo4-s3",
+   "image": "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-3-s3.webp"
+   ],
+   "note": "Mori, pass 4: the cardigan instead of the suit. Recipe art/candidates/portraits/mori-hamada-1/recipes/mo4.json, seed 3, RDBT, portrait style, no-props. Red rim 0.0%. Framing: headroom 2%, 12% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.020 (a new face is the point). Dashboard #2399. My verdict, kept: cardigan, hands in his trouser pockets, reads mid-50s, kind smile"
+  },
+  {
+   "id": "mo4-s4",
+   "label": "mo4-s4",
+   "image": "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-4-s4.webp"
+   ],
+   "note": "Mori, pass 4: the cardigan instead of the suit. Recipe art/candidates/portraits/mori-hamada-1/recipes/mo4.json, seed 4, RDBT, portrait style, no-props. Red rim 0.0%. Framing: headroom 2%, 12% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.025 (a new face is the point). Dashboard #2400. My verdict, kept: cardigan, hands in his pockets, swept-back grey hair, closest to the old identity (ccip 0.020)"
+  },
+  {
+   "id": "ha1-s1",
+   "label": "ha1-s1",
+   "image": "art/candidates/portraits/mori-hamada-1/ha1-r261016-163923-b7a-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/ha1-r261016-163923-b7a-1-s1.webp"
+   ],
+   "note": "Hamada, pass 1: new face words (hamada-mature preset). Recipe art/candidates/portraits/mori-hamada-1/recipes/ha1.json, seed 1, RDBT, portrait style, no-props. Red rim 0.0%. Framing: headroom 2%, 9% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.108 (a new face is the point). Dashboard #2373. My verdict, rejected: handsome, but reads about 35, not 54"
+  },
+  {
+   "id": "ha1-s2",
+   "label": "ha1-s2",
+   "image": "art/candidates/portraits/mori-hamada-1/ha1-r261016-163923-b7a-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/ha1-r261016-163923-b7a-2-s2.webp"
+   ],
+   "note": "Hamada, pass 1: new face words (hamada-mature preset). Recipe art/candidates/portraits/mori-hamada-1/recipes/ha1.json, seed 2, RDBT, portrait style, no-props. Red rim 0.2%. Framing: headroom 1%, 11% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.097 (a new face is the point). Dashboard #2374. My verdict, rejected: reads about 35, not 54"
+  },
+  {
+   "id": "ha1-s3",
+   "label": "ha1-s3",
+   "image": "art/candidates/portraits/mori-hamada-1/ha1-r261016-163923-b7a-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/ha1-r261016-163923-b7a-3-s3.webp"
+   ],
+   "note": "Hamada, pass 1: new face words (hamada-mature preset). Recipe art/candidates/portraits/mori-hamada-1/recipes/ha1.json, seed 3, RDBT, portrait style, no-props. Red rim 0.2%. Framing: headroom 3%, 7% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.143 (a new face is the point). Dashboard #2375. My verdict, rejected: reads about 40, not 54; a brown tuft in the black hair, top right"
+  },
+  {
+   "id": "ha1-s4",
+   "label": "ha1-s4",
+   "image": "art/candidates/portraits/mori-hamada-1/ha1-r261016-163923-b7a-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/ha1-r261016-163923-b7a-4-s4.webp"
+   ],
+   "note": "Hamada, pass 1: new face words (hamada-mature preset). Recipe art/candidates/portraits/mori-hamada-1/recipes/ha1.json, seed 4, RDBT, portrait style, no-props. Red rim 0.3%. Framing: headroom 2%, 9% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.067 (a new face is the point). Dashboard #2376. My verdict, rejected: reads about 35, not 54; suit drifts to teal blue, not navy"
+  },
+  {
+   "id": "ha2-s1",
+   "label": "ha2-s1",
+   "image": "art/candidates/portraits/mori-hamada-1/ha2-r261016-164427-1f3-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/ha2-r261016-164427-1f3-1-s1.webp"
+   ],
+   "note": "Hamada, pass 2: + \"middle-aged, mature male\" age words. Recipe art/candidates/portraits/mori-hamada-1/recipes/ha2.json, seed 1, RDBT, portrait style, no-props. Red rim 0.0%. Framing: headroom 3%, 9% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.105 (a new face is the point). Dashboard #2381. My verdict, kept: reads mid-40s to 50, handsome, strong brows, grey temples, navy suit; a bit young but in range"
+  },
+  {
+   "id": "ha2-s2",
+   "label": "ha2-s2",
+   "image": "art/candidates/portraits/mori-hamada-1/ha2-r261016-164427-1f3-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/ha2-r261016-164427-1f3-2-s2.webp"
+   ],
+   "note": "Hamada, pass 2: + \"middle-aged, mature male\" age words. Recipe art/candidates/portraits/mori-hamada-1/recipes/ha2.json, seed 2, RDBT, portrait style, no-props. Red rim 0.3%. Framing: headroom 1%, 11% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.093 (a new face is the point). Dashboard #2382. My verdict, kept: reads about 50, handsome, calm smile, grey temples, navy suit and tie"
+  },
+  {
+   "id": "ha2-s3",
+   "label": "ha2-s3",
+   "image": "art/candidates/portraits/mori-hamada-1/ha2-r261016-164427-1f3-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/ha2-r261016-164427-1f3-3-s3.webp"
+   ],
+   "note": "Hamada, pass 2: + \"middle-aged, mature male\" age words. Recipe art/candidates/portraits/mori-hamada-1/recipes/ha2.json, seed 3, RDBT, portrait style, no-props. Red rim 0.4%. Framing: headroom 3%, 7% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.120 (a new face is the point). Dashboard #2383. My verdict, rejected: best age read (about 52) and handsome, but a light brown tuft in the black hair, top right (seed 3 in both passes)"
+  },
+  {
+   "id": "ha2-s4",
+   "label": "ha2-s4",
+   "image": "art/candidates/portraits/mori-hamada-1/ha2-r261016-164427-1f3-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/ha2-r261016-164427-1f3-4-s4.webp"
+   ],
+   "note": "Hamada, pass 2: + \"middle-aged, mature male\" age words. Recipe art/candidates/portraits/mori-hamada-1/recipes/ha2.json, seed 4, RDBT, portrait style, no-props. Red rim 0.9%. Framing: headroom 2%, 10% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.060 (a new face is the point). Dashboard #2384. My verdict, rejected: reads about 48 and handsome, but the suit drifts to teal blue, not navy (seed 4 in both passes)"
+  },
+  {
+   "id": "ha3-s1",
+   "label": "ha3-s1",
+   "image": "art/candidates/portraits/mori-hamada-1/ha3-r261016-164933-d06-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/ha3-r261016-164933-d06-1-s1.webp"
+   ],
+   "note": "Hamada, pass 3: + brown hair excluded. Recipe art/candidates/portraits/mori-hamada-1/recipes/ha3.json, seed 1, RDBT, portrait style, no-props. Red rim 0.0%. Framing: headroom 2%, 8% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.098 (a new face is the point). Dashboard #2389. My verdict, kept: reads mid-40s to 50, handsome, grey temples, navy suit"
+  },
+  {
+   "id": "ha3-s2",
+   "label": "ha3-s2",
+   "image": "art/candidates/portraits/mori-hamada-1/ha3-r261016-164933-d06-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/ha3-r261016-164933-d06-2-s2.webp"
+   ],
+   "note": "Hamada, pass 3: + brown hair excluded. Recipe art/candidates/portraits/mori-hamada-1/recipes/ha3.json, seed 2, RDBT, portrait style, no-props. Red rim 0.6%. Framing: headroom 2%, 11% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.080 (a new face is the point). Dashboard #2390. My verdict, kept: reads about 50, handsome, calm smile, grey temples, navy suit"
+  },
+  {
+   "id": "ha3-s3",
+   "label": "ha3-s3",
+   "image": "art/candidates/portraits/mori-hamada-1/ha3-r261016-164933-d06-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/ha3-r261016-164933-d06-3-s3.webp"
+   ],
+   "note": "Hamada, pass 3: + brown hair excluded. Recipe art/candidates/portraits/mori-hamada-1/recipes/ha3.json, seed 3, RDBT, portrait style, no-props. Red rim 0.3%. Framing: headroom 4%, 7% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.108 (a new face is the point). Dashboard #2391. My verdict, kept: the brown tuft is gone; best age read (about 52), handsome, grey temples, navy suit"
+  },
+  {
+   "id": "ha3-s4",
+   "label": "ha3-s4",
+   "image": "art/candidates/portraits/mori-hamada-1/ha3-r261016-164933-d06-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-hamada-1/ha3-r261016-164933-d06-4-s4.webp"
+   ],
+   "note": "Hamada, pass 3: + brown hair excluded. Recipe art/candidates/portraits/mori-hamada-1/recipes/ha3.json, seed 4, RDBT, portrait style, no-props. Red rim 0.0%. Framing: headroom 2%, 9% missing above the game crop (the framed preview fills it flat; the pick gets a real outpaint). Face drift from the current portrait ccip 0.066 (a new face is the point). Dashboard #2392. My verdict, rejected: reads about 48, handsome, but the suit is teal blue, not navy (seed 4 in all three passes)"
+  }
+ ],
+ "links": [
+  {
+   "label": "Staging note for the round",
+   "href": "art/candidates/portraits/mori-hamada-1/staging.md"
+  }
+ ]
+}
