@@ -1,0 +1,65 @@
+{
+ "id": "chibi-gen-polo",
+ "folder": "game3d/assets/characters/chibi-gen-polo",
+ "name": "Older man in a polo (chibi)",
+ "round": "chibi-crowd-1",
+ "review": "chibi-crowd-1",
+ "review_removed": "3f90cd97",
+ "source": null,
+ "meshy": {
+  "shape": "01a101cb-6ab5-73f9-b9be-eb446e514ce7",
+  "texture": null,
+  "rig": "01a101cf-f815-71fd-9a01-040f95d77c87",
+  "anim-sit": null
+ },
+ "steps": [
+  {
+   "step": "chibi-shape",
+   "texture_resolution": "4k",
+   "should_remesh": false,
+   "image_enhancement": false,
+   "ai_model": null,
+   "unknown": "ai_model: model version is not in the credit record. The picture is the attempt named in the note"
+  },
+  {
+   "step": "chibi-rig",
+   "height": 1.0,
+   "model": "art/parts/chibi-crowd-1/meshy/polo-1-60k.glb",
+   "unknown": "how the 60k copy was made is not recorded"
+  },
+  {
+   "step": "chibi-game",
+   "script": "tools/characters/chibi_game.py",
+   "lods": {
+    "hi": "about 6k triangles, 1024 px texture",
+    "lo": "2.8k triangles, 512 px texture",
+    "far": "1.8k triangles, 256 px texture"
+   },
+   "unknown": "the command line is not recorded"
+  },
+  {
+   "step": "region-mask",
+   "script": "tools/characters/chibi_regions.py",
+   "unknown": "settings are not recorded"
+  },
+  {
+   "step": "chibi-bake",
+   "script": "tools/characters/chibi-bake.mjs",
+   "clips": null,
+   "unknown": "clips: the clip source for these generic bases is not recorded"
+  },
+  {
+   "step": "chibi-build",
+   "file": "game3d/js/chibi-builds.js",
+   "head_scale": 0.85,
+   "build": "none (generic base)",
+   "unknown": "the 15 percent head reduction is from docs/game/art-and-sound.md"
+  }
+ ],
+ "note": "The Meshy chibi look, dropped 2026-10-04 and off by default. Shape 01a101cb-6ab5-73f9-b9be-eb446e514ce7 and rig 01a101cf-f815-71fd-9a01-040f95d77c87 are the tasks in the Review credits, recovered from git (3f90cd97^). The Review was removed with the look.",
+ "unknown": {
+  "source": "the picture for attempt polo-b-103 is not located in the repo under a matching name",
+  "meshy.texture": "textured in the shape task (4k). No separate texture task",
+  "meshy.anim-sit": "the clips are baked from the game's own clips, not a Meshy sit task"
+ }
+}

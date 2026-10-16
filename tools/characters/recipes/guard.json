@@ -1,0 +1,78 @@
+{
+ "id": "guard",
+ "folder": "game3d/assets/characters/guard",
+ "name": "Mr. Ishibashi (the guard)",
+ "round": "guard-meshy-1",
+ "review": "guard-meshy-1",
+ "source": "art/parts/guard-meshy-1/pics/d1.png",
+ "meshy": {
+  "shape": "01a10b0e-da7b-72fd-810f-7b4ac20adc4e",
+  "texture": "01a10b10-be00-7199-ae2b-83f84c417559",
+  "rig": "01a10b11-43c5-711b-813c-369d492fdc12",
+  "anim-sit": "01a10b11-a76e-76a3-b925-e37ba55b7540"
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "polycount": 1050,
+   "pose": "a-pose",
+   "textured": false,
+   "picture": "art/parts/guard-meshy-1/pics/d1.png"
+  },
+  {
+   "step": "face-uv",
+   "script": "art/candidates/aoi-emi-meshy-1/uv_bl.py",
+   "unknown": "not recorded: the round command line is not in the repo"
+  },
+  {
+   "step": "meshy-texture",
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "uv_model": "art/parts/guard-meshy-1/meshy/guard-1-uv.glb",
+   "picture": "art/parts/guard-meshy-1/pics/d1.png",
+   "ai_model": null,
+   "texture_resolution": null,
+   "unknown": "ai_model, texture_resolution: not in the credit record"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.1
+  },
+  {
+   "step": "meshy-anim",
+   "name": "sit",
+   "action": 32,
+   "clip": "Chair_Sit_Idle_F"
+  },
+  {
+   "step": "hand-scale",
+   "scale": 0.75,
+   "where": "game3d/js/cast3d.js HANDS"
+  },
+  {
+   "step": "package",
+   "script": "art/candidates/staff-meshy-1/install.sh",
+   "args": [
+    "guard",
+    "guard-1"
+   ],
+   "base": "Meshy's texture as painted",
+   "unknown": "no fix arguments are recorded"
+  },
+  {
+   "step": "idle",
+   "file": "relaxed-idle-guard.json",
+   "source": "art/parts/candidates/idle-neutral-3.glb (reviews/creator-idle-neutral-3)",
+   "exporter": "tools/characters/export-approved-idle.mjs"
+  },
+  {
+   "step": "sheets",
+   "script": "art/candidates/staff-meshy-1/renders.sh and sheets.sh"
+  }
+ ],
+ "note": "Round 1 (guard-1, 01a10b0e-da7b-72fd-810f-7b4ac20adc4e) is in the game. His hands are scaled to 0.75 at load, as Aoi's are.",
+ "unknown": {}
+}

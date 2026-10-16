@@ -1,0 +1,74 @@
+{
+ "id": "kuro",
+ "folder": "game3d/assets/characters/kuro",
+ "name": "Kuro",
+ "round": "kuro-meshy-orig-3",
+ "review": "kuro-meshy-orig-3",
+ "source": "art/parts/kuro-meshy-orig-3/pics/e5.png",
+ "meshy": {
+  "shape": "01a10869-58c7-738d-a8e1-d621b25264ef",
+  "texture": "01a1086c-920c-75be-bb6e-8273ad13b570",
+  "rig": "01a1086e-083c-7265-a179-78acc237346b",
+  "anim-sit": null
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "polycount": 1050,
+   "pose": "a-pose",
+   "textured": false,
+   "picture": "art/parts/kuro-meshy-orig-3/pics/e5.png"
+  },
+  {
+   "step": "face-uv",
+   "script": "art/candidates/kuro-meshy-orig-3/uv_bl.py",
+   "face_scale": 3,
+   "unknown": "the command line is not recorded. face_scale 3 is the script default"
+  },
+  {
+   "step": "meshy-texture",
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "uv_model": "art/parts/kuro-meshy-orig-3/meshy/kuro-3b-uv.glb",
+   "picture": "art/parts/kuro-meshy-orig-3/pics/e5.png",
+   "ai_model": null,
+   "texture_resolution": null,
+   "unknown": "ai_model, texture_resolution: not in the credit record"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.1
+  },
+  {
+   "step": "cheek-fix",
+   "script": "art/candidates/kuro-meshy-orig-3/cheek_fix.py",
+   "lo": 0.58,
+   "hi": 0.69,
+   "dark": 0.6,
+   "mask": null,
+   "unknown": "mask: the script defaults are Kuro's. Whether a mask file was passed is not recorded"
+  },
+  {
+   "step": "package",
+   "tool": "game3d/tools/slim_glb.py",
+   "base": "the cheek-fixed texture"
+  },
+  {
+   "step": "idle",
+   "file": "relaxed-idle-kuro.json",
+   "source": "art/parts/candidates/idle-neutral-3.glb (reviews/creator-idle-neutral-3)",
+   "exporter": "tools/characters/export-approved-idle.mjs"
+  },
+  {
+   "step": "sheets",
+   "script": "art/candidates/kuro-meshy-orig-3/sheets.sh"
+  }
+ ],
+ "note": "Approved 2026-10-04 (\"Yes, very good\", review kuro-meshy-orig-3). Her cheek was repainted with cheek_fix.py. kuro-3 (01a10868-9391-707a-956b-1c2065b93130) went out with the same picture and settings and was not textured. The sit clip has no Meshy task in the record.",
+ "unknown": {
+  "meshy.anim-sit": "no sit task in reviews/kuro-meshy-orig-3/credits.json. The folder has sit.glb"
+ }
+}

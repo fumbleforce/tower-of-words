@@ -1,0 +1,90 @@
+{
+ "id": "crowd-b",
+ "folder": "game3d/assets/characters/crowd-b",
+ "name": "Office woman (B)",
+ "round": "crowd-pilot-5",
+ "review": "crowd-pilot-5",
+ "source": "art/parts/crowd-pilot-1/pics/b-d1.png",
+ "meshy": {
+  "shape": "01a10d35-394c-777d-b581-b9a151a8ea1f",
+  "texture": "01a11315-8bfe-718b-8b65-7ca202367711",
+  "rig": "01a10d37-833b-71d6-a7cb-67ac2af142fb",
+  "anim-sit": "01a10d38-2b04-76a6-83e7-5ed3e422735d"
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "polycount": 1050,
+   "pose": "a-pose",
+   "textured": false,
+   "picture": "art/parts/crowd-pilot-1/pics/b-d1.png"
+  },
+  {
+   "step": "face-uv",
+   "script": "art/candidates/kuro-meshy-orig-3/uv_bl.py",
+   "face_scale": 3,
+   "unknown": "as crowd-pilot-1 used it. The command is not recorded"
+  },
+  {
+   "step": "meshy-texture",
+   "variant": "crowd-pilot-1 (superseded)",
+   "ai_model": null,
+   "texture_resolution": null,
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "uv_model": "art/parts/crowd-pilot-1/meshy/b-1-uv.glb",
+   "picture": "art/parts/crowd-pilot-1/pics/b-d1.png",
+   "task": "01a10d36-af20-7269-ab7b-cb9e2f609ee5",
+   "unknown": "ai_model, texture_resolution: not in the credit record"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.1
+  },
+  {
+   "step": "meshy-anim",
+   "name": "sit",
+   "action": 32,
+   "clip": "Chair_Sit_Idle_F"
+  },
+  {
+   "step": "reweight",
+   "script": "art/candidates/crowd-pilot-2/reweight.py",
+   "output": "art/parts/crowd-pilot-2/rig/b-rigged.glb",
+   "unknown": "the input path is not recorded. The rig is inferred (see note)"
+  },
+  {
+   "step": "meshy-texture",
+   "variant": "crowd-pilot-5 b-image",
+   "ai_model": "meshy-7",
+   "texture_resolution": "2k",
+   "enable_pbr": false,
+   "enable_original_uv": true,
+   "remove_lighting": null,
+   "input_model": "art/parts/crowd-pilot-2/rig/b-rigged.glb",
+   "picture": "art/parts/crowd-pilot-1/pics/b-d1.png",
+   "unknown": "remove_lighting: not in the request"
+  },
+  {
+   "step": "fringe-fix",
+   "script": null,
+   "unknown": "script: the fringe patch is corrected within a saved UV mask. The tool is not recorded"
+  },
+  {
+   "step": "package",
+   "script": "art/candidates/crowd-pilot-2/install.sh",
+   "base": "the texture as Meshy painted",
+   "unknown": "the arguments of the call are not recorded"
+  },
+  {
+   "step": "idle",
+   "file": "folder",
+   "script": "art/candidates/crowd-pilot-2/idles.sh"
+  }
+ ],
+ "note": "Office woman, the ambient crowd's B. Review crowd-pilot-5 picked b-image. Her pale fringe patch is corrected within a saved UV mask. Her rig is inferred: crowd-pilot-2 put B on Meshy's own rig and clips, and the rig task recorded for her shape is 01a10d37-833b-71d6-a7cb-67ac2af142fb. The reweight input is not recorded.",
+ "unknown": {}
+}

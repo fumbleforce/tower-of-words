@@ -1,0 +1,75 @@
+{
+ "id": "rei",
+ "folder": "game3d/assets/characters/rei",
+ "name": "Rei",
+ "round": "rei-meshy-1",
+ "review": "rei-meshy-1",
+ "source": "art/parts/rei-meshy-1/pics/d1.png",
+ "meshy": {
+  "shape": "01a10b4d-f3a3-7349-b3f8-3ac2a38dcb58",
+  "texture": "01a10b55-ceeb-7585-94b5-c26afc47da79",
+  "rig": "01a10b56-53f4-72d5-a319-49db86845709",
+  "anim-sit": "01a10b56-aa8d-76a7-9f37-677658da9b4b"
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "polycount": 1050,
+   "pose": "a-pose",
+   "textured": false,
+   "picture": "art/parts/rei-meshy-1/pics/d1.png"
+  },
+  {
+   "step": "face-uv",
+   "script": "art/candidates/aoi-emi-meshy-1/uv_bl.py",
+   "unknown": "not recorded: the round command line is not in the repo"
+  },
+  {
+   "step": "meshy-texture",
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "uv_model": "art/parts/rei-meshy-1/meshy/rei-1-uv.glb",
+   "picture": "art/parts/rei-meshy-1/pics/d1.png",
+   "ai_model": null,
+   "texture_resolution": null,
+   "unknown": "ai_model, texture_resolution: not in the credit record"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.1
+  },
+  {
+   "step": "meshy-anim",
+   "name": "sit",
+   "action": 32,
+   "clip": "Chair_Sit_Idle_F",
+   "unknown": "recorded, but not in the game: the rerig below takes Emi's sit clip"
+  },
+  {
+   "step": "rerig",
+   "script": "art/candidates/rei-rig-2/rerig2.py",
+   "joints": "art/parts/rei-meshy-1/rig2/rei-walk-rig.json",
+   "donors": {
+    "walk": "game3d/assets/characters/emi/walk.glb",
+    "run": "game3d/assets/characters/emi/run.glb",
+    "sit": "game3d/assets/characters/emi/sit.glb"
+   },
+   "pieces": "Rei's default"
+  },
+  {
+   "step": "package",
+   "base": null,
+   "unknown": "base: base.webp is not written by rei-rig-2/install.sh. Where it came from is not recorded"
+  },
+  {
+   "step": "idle",
+   "file": "relaxed-idle-rei.json",
+   "source": "Emi donor frames, corrected, on the aligned rig (docs/game/art-and-sound.md)"
+  }
+ ],
+ "note": "Round 1 (rei-1, 01a10b4d-f3a3-7349-b3f8-3ac2a38dcb58) on rig 2 from art/candidates/rei-rig-2, the rig docs/game/art-and-sound.md names. Rig 3 and the task 01a10b8e-5d2a-73a8-80f1-5658b8885fbe (a second rig of rei-1) are not in the game.",
+ "unknown": {}
+}

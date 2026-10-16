@@ -1,0 +1,76 @@
+{
+ "id": "aoi",
+ "folder": "game3d/assets/characters/aoi",
+ "name": "Aoi",
+ "round": "aoi-meshy-1",
+ "review": "aoi-meshy-1",
+ "source": "art/parts/aoi-meshy-1/pics/e2.png",
+ "meshy": {
+  "shape": "01a1090b-d943-738d-a9d0-07f0c3195d4d",
+  "texture": "01a10924-fd6f-75ec-892c-ae3f0c27e76d",
+  "rig": "01a10925-e056-722a-bb37-ff108b6619f3",
+  "anim-sit": "01a1092f-e537-7574-a911-e4c2f9778c62"
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "polycount": 1050,
+   "pose": "a-pose",
+   "textured": false,
+   "picture": "art/parts/aoi-meshy-1/pics/e2.png"
+  },
+  {
+   "step": "face-uv",
+   "script": "art/candidates/aoi-emi-meshy-1/uv_bl.py",
+   "unknown": "not recorded: the round command line is not in the repo"
+  },
+  {
+   "step": "meshy-texture",
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "uv_model": "art/parts/aoi-meshy-1/meshy/aoi-2-uv.glb",
+   "picture": "art/parts/aoi-meshy-1/pics/e2.png",
+   "ai_model": null,
+   "texture_resolution": null,
+   "unknown": "ai_model, texture_resolution: not in the credit record"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.1
+  },
+  {
+   "step": "meshy-anim",
+   "name": "sit",
+   "action": 32,
+   "clip": "Chair_Sit_Idle_F"
+  },
+  {
+   "step": "hand-scale",
+   "scale": 0.75,
+   "where": "game3d/js/cast3d.js HANDS"
+  },
+  {
+   "step": "package",
+   "script": "art/candidates/aoi-emi-meshy-2/install.sh",
+   "args": [
+    "aoi"
+   ],
+   "base": "Meshy's texture as painted"
+  },
+  {
+   "step": "idle",
+   "file": "relaxed-idle-aoi.json",
+   "source": "art/parts/candidates/idle-neutral-3.glb (reviews/creator-idle-neutral-3)",
+   "exporter": "tools/characters/export-approved-idle.mjs"
+  },
+  {
+   "step": "sheets",
+   "script": "art/candidates/aoi-emi-meshy-2/renders.sh and sheets.sh"
+  }
+ ],
+ "note": "Round 2 (aoi-2, 01a1090b-d943-738d-a9d0-07f0c3195d4d) is in the game. Round 1 (aoi-1, from c2.png, shape 01a108ad-f02d-7578-bed5-6b0af1564b09) was not picked. Her hands are scaled to 0.75 at load.",
+ "unknown": {}
+}

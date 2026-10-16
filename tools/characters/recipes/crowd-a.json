@@ -1,0 +1,85 @@
+{
+ "id": "crowd-a",
+ "folder": "game3d/assets/characters/crowd-a",
+ "name": "Office man (A)",
+ "round": "crowd-pilot-2",
+ "review": "crowd-pilot-5",
+ "source": "art/parts/crowd-pilot-2/pics/a-e1.png",
+ "meshy": {
+  "shape": "01a10dd4-2839-763c-affd-4ac5adf3f5bd",
+  "texture": "01a11315-850e-7590-8f82-2d684bb7fd0e",
+  "rig": "01a10e22-67ee-775f-ab89-44b9a24da5c3",
+  "anim-sit": "01a10e22-e671-7632-8417-54c1932748af"
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "polycount": 1050,
+   "pose": "a-pose",
+   "textured": false,
+   "picture": "art/parts/crowd-pilot-2/pics/a-e1.png"
+  },
+  {
+   "step": "face-uv",
+   "script": "art/candidates/kuro-meshy-orig-3/uv_bl.py",
+   "face_scale": 3,
+   "unknown": "the face-first layout as crowd-pilot-1 and -2 used it (crowd-everyday-2/uv.sh). The command is not recorded"
+  },
+  {
+   "step": "meshy-texture",
+   "variant": "crowd-pilot-2 (superseded)",
+   "ai_model": null,
+   "texture_resolution": null,
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "uv_model": "art/parts/crowd-pilot-2/meshy/a-2-uv.glb",
+   "picture": "art/parts/crowd-pilot-2/pics/a-e1.png",
+   "task": "01a10e21-b1a5-7511-beb9-bf957c167ffd",
+   "unknown": "ai_model, texture_resolution: not in the credit record"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.1
+  },
+  {
+   "step": "meshy-anim",
+   "name": "sit",
+   "action": 32,
+   "clip": "Chair_Sit_Idle_F"
+  },
+  {
+   "step": "reweight",
+   "script": "art/candidates/crowd-pilot-2/reweight.py",
+   "output": "art/parts/crowd-pilot-2/rig/a-rigged.glb",
+   "unknown": "the input path is not recorded"
+  },
+  {
+   "step": "meshy-texture",
+   "variant": "crowd-pilot-5 a-image",
+   "ai_model": "meshy-7",
+   "texture_resolution": "2k",
+   "enable_pbr": false,
+   "enable_original_uv": true,
+   "remove_lighting": null,
+   "input_model": "art/parts/crowd-pilot-2/rig/a-rigged.glb",
+   "picture": "art/parts/crowd-pilot-2/pics/a-e1.png",
+   "unknown": "remove_lighting: not in the request"
+  },
+  {
+   "step": "package",
+   "script": "art/candidates/crowd-pilot-2/install.sh",
+   "base": "the texture as Meshy painted",
+   "unknown": "the arguments of the call are not recorded"
+  },
+  {
+   "step": "idle",
+   "file": "folder",
+   "script": "art/candidates/crowd-pilot-2/idles.sh"
+  }
+ ],
+ "note": "Office man, the ambient crowd's A. Review crowd-pilot-5 picked a-image: a Meshy retexture of the reweighted rig (task 01a11315-850e-7590-8f82-2d684bb7fd0e). Crowd pilot 2 was pulled before the pick (critic 6.5). Its rig and clips are kept, and the texture is the crowd-pilot-5 retexture.",
+ "unknown": {}
+}

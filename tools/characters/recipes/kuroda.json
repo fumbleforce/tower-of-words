@@ -1,0 +1,73 @@
+{
+ "id": "kuroda",
+ "folder": "game3d/assets/characters/kuroda",
+ "name": "Mr. Hamada",
+ "round": "kuroda-meshy-1",
+ "review": "kuroda-meshy-1",
+ "source": "art/parts/kuroda-meshy-1/pics/e1.png",
+ "meshy": {
+  "shape": "01a10b29-9d19-73e6-885b-a4420994b88b",
+  "texture": "01a10b2a-ed48-7554-926e-bd5f45a63915",
+  "rig": "01a10b2c-9045-76ac-9ae8-b8e4a61abc4d",
+  "anim-sit": "01a10b2c-e3d6-7098-9c1f-091e6d9bfe3f"
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "polycount": 1050,
+   "pose": "a-pose",
+   "textured": false,
+   "picture": "art/parts/kuroda-meshy-1/pics/e1.png"
+  },
+  {
+   "step": "face-uv",
+   "script": "art/candidates/aoi-emi-meshy-1/uv_bl.py",
+   "unknown": "not recorded: the round command line is not in the repo"
+  },
+  {
+   "step": "meshy-texture",
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "uv_model": "art/parts/kuroda-meshy-1/meshy/kuroda-1-uv.glb",
+   "picture": "art/parts/kuroda-meshy-1/pics/e1.png",
+   "ai_model": null,
+   "texture_resolution": null,
+   "unknown": "ai_model, texture_resolution: not in the credit record"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.1
+  },
+  {
+   "step": "meshy-anim",
+   "name": "sit",
+   "action": 32,
+   "clip": "Chair_Sit_Idle_F"
+  },
+  {
+   "step": "package",
+   "script": "art/candidates/staff-meshy-1/install.sh",
+   "args": [
+    "kuroda",
+    "kuroda-1"
+   ],
+   "base": "Meshy's texture as painted",
+   "unknown": "no fix arguments are recorded"
+  },
+  {
+   "step": "idle",
+   "file": "relaxed-idle-kuroda.json",
+   "source": "art/parts/candidates/idle-neutral-3.glb (reviews/creator-idle-neutral-3)",
+   "exporter": "tools/characters/export-approved-idle.mjs"
+  },
+  {
+   "step": "sheets",
+   "script": "art/candidates/staff-meshy-1/renders.sh and sheets.sh"
+  }
+ ],
+ "note": "Round 1 (kuroda-1, 01a10b29-9d19-73e6-885b-a4420994b88b). The id kuroda is the code name for Mr. Hamada. The train seat takes his dozing act in game3d/js/cast3d.js.",
+ "unknown": {}
+}

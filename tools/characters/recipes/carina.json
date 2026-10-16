@@ -1,0 +1,80 @@
+{
+ "id": "carina",
+ "folder": "game3d/assets/characters/carina",
+ "name": "Carina",
+ "round": "carina-meshy-1",
+ "review": "carina-meshy-2",
+ "source": "art/parts/carina-meshy-1/pics/nd1.png",
+ "meshy": {
+  "shape": "01a10d64-4caa-731e-8554-bccff2560007",
+  "texture": "01a10d65-2d5f-72d2-b410-7e543f2f7f29",
+  "rig": "01a10d65-e575-7116-85b1-5b6d4f230c49",
+  "anim-sit": "01a10e9f-230f-764a-9845-ae3635690ea9"
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "polycount": 1050,
+   "pose": "a-pose",
+   "textured": false,
+   "picture": "art/parts/carina-meshy-1/pics/nd1.png"
+  },
+  {
+   "step": "face-uv",
+   "unknown": "carina-2-uv.glb was the texture input. No script is recorded for it"
+  },
+  {
+   "step": "meshy-texture",
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "uv_model": "art/parts/carina-meshy-1/meshy/carina-2-uv.glb",
+   "picture": "art/parts/carina-meshy-1/pics/nd1.png",
+   "ai_model": null,
+   "texture_resolution": null,
+   "unknown": "ai_model, texture_resolution: not in the credit record"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.1
+  },
+  {
+   "step": "meshy-anim",
+   "name": "sit",
+   "action": 32,
+   "clip": "Chair_Sit_Idle_F"
+  },
+  {
+   "step": "carina-fix",
+   "script": "art/candidates/carina-meshy-1/fix_bl.py",
+   "seam": 1,
+   "head": 0.85,
+   "trousers": "grey",
+   "input": "carina-2-tex-rigged.glb"
+  },
+  {
+   "step": "clip-copy",
+   "script": "art/candidates/carina-meshy-1/clips.py",
+   "unknown": "Meshy walk, run and sit are copied onto the edited model unchanged. The exact call is not recorded"
+  },
+  {
+   "step": "install",
+   "script": "art/candidates/carina-meshy-1/install.sh",
+   "base": "art/parts/carina-meshy-1/r2/viewer/grey/base.webp"
+  },
+  {
+   "step": "idle",
+   "file": "relaxed-idle-carina.json",
+   "source": "art/parts/candidates/idle-neutral-3.glb (reviews/creator-idle-neutral-3)",
+   "exporter": "tools/characters/export-approved-idle.mjs"
+  },
+  {
+   "step": "sheets",
+   "script": "art/candidates/carina-meshy-1/sheets.sh"
+  }
+ ],
+ "note": "Round 2 (review carina-meshy-2) picked carina-2-r2-grey: the waist seam is fixed, the head is 15 percent smaller and the trousers are grey. Her picture is the approved portrait named in docs/game/art-and-sound.md. carina-1 (01a10d35-3e5b-7378-ab3a-5a7240ef9d1d) was not picked.",
+ "unknown": {}
+}

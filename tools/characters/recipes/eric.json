@@ -1,0 +1,37 @@
+{
+ "id": "eric",
+ "folder": "game3d/assets/characters/eric",
+ "name": "Eric (gesture clips)",
+ "round": null,
+ "review": null,
+ "source": null,
+ "meshy": {
+  "shape": null,
+  "texture": null,
+  "rig": null,
+  "anim-sit": null
+ },
+ "steps": [
+  {
+   "step": "retarget",
+   "script": "tools/characters/retarget.py",
+   "clips": [
+    "bow",
+    "wave",
+    "shrug",
+    "nod",
+    "phone"
+   ],
+   "unknown": "the Meshy library clip ids and the retarget settings are not recorded"
+  }
+ ],
+ "note": "approved before reviews: the clips came in the 2026-09-28 phone hook (commit a87b3ecc), the same day Jørgen approved Eric's Meshy model in chat (bible/facts.yaml). They have no Review item of their own. Eric's body is recipe eric-body.",
+ "unknown": {
+  "round": "no round folder. The clips were made in the 2026-09-28 phone hook (commit a87b3ecc)",
+  "source": "a library clip set, not a picture",
+  "meshy.shape": "the library clip ids are not recorded",
+  "meshy.texture": "no texture task for clips",
+  "meshy.rig": "no rig task recorded for the clips",
+  "meshy.anim-sit": "the clips are retargeted from library clips. No task id recorded"
+ }
+}

@@ -1,0 +1,86 @@
+{
+ "id": "emi",
+ "folder": "game3d/assets/characters/emi",
+ "name": "Emi",
+ "round": "emi-meshy-1",
+ "review": "emi-meshy-1",
+ "source": "art/parts/emi-meshy-1/pics/c3.png",
+ "meshy": {
+  "shape": "01a1090b-d945-71d9-92b7-7e680820c94a",
+  "texture": "01a10925-8492-7061-8927-df57acf76b38",
+  "rig": "01a10926-1ee6-70df-870c-094b6c3d5014",
+  "anim-sit": "01a10930-13c9-71d4-8486-cd1fa2b7640b"
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "polycount": 1050,
+   "pose": "a-pose",
+   "textured": false,
+   "picture": "art/parts/emi-meshy-1/pics/c3.png"
+  },
+  {
+   "step": "face-uv",
+   "script": "art/candidates/aoi-emi-meshy-1/uv_bl.py",
+   "unknown": "not recorded: the round command line is not in the repo"
+  },
+  {
+   "step": "meshy-texture",
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "uv_model": "art/parts/emi-meshy-1/meshy/emi-2-uv.glb",
+   "picture": "art/parts/emi-meshy-1/pics/c3.png",
+   "ai_model": null,
+   "texture_resolution": null,
+   "unknown": "ai_model, texture_resolution: not in the credit record"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.1
+  },
+  {
+   "step": "meshy-anim",
+   "name": "sit",
+   "action": 32,
+   "clip": "Chair_Sit_Idle_F"
+  },
+  {
+   "step": "cheek-fix",
+   "script": "art/candidates/kuro-meshy-orig-3/cheek_fix.py",
+   "lo": 0.45,
+   "hi": 0.65,
+   "skip": [
+    19,
+    20,
+    72,
+    73
+   ],
+   "mask": "art/parts/emi-meshy-1/round2/fix-mask.png",
+   "dark": 0.6,
+   "unknown": "dark is not passed on the command line, so the script default is used"
+  },
+  {
+   "step": "package",
+   "script": "art/candidates/aoi-emi-meshy-2/install.sh",
+   "args": [
+    "emi"
+   ],
+   "base": "the cheek-fixed texture"
+  },
+  {
+   "step": "idle",
+   "file": "relaxed-idle-emi.json",
+   "source": "art/parts/candidates/idle-neutral-3.glb (reviews/creator-idle-neutral-3)",
+   "exporter": "tools/characters/export-approved-idle.mjs"
+  },
+  {
+   "step": "sheets",
+   "script": "art/candidates/aoi-emi-meshy-2/renders.sh and sheets.sh"
+  }
+ ],
+ "note": "Round 2 (emi-2, 01a1090b-d945-71d9-92b7-7e680820c94a) is in the game, with no lanyard. Round 1 (emi-1, from c1.png, shape 01a108ad-f0cc-7796-8452-81a7ab10d953) was not picked.",
+ "unknown": {}
+}

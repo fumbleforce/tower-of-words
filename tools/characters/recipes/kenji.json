@@ -1,0 +1,80 @@
+{
+ "id": "kenji",
+ "folder": "game3d/assets/characters/kenji",
+ "name": "Kenji",
+ "round": "kenji-meshy-1",
+ "review": "kenji-meshy-1",
+ "source": "art/parts/kenji-meshy-1/pics/f3.png",
+ "meshy": {
+  "shape": "01a10cd6-3b3b-756b-9cec-eec69de47836",
+  "texture": "01a10cdb-641f-76d1-8bab-fb90821076f2",
+  "rig": "01a10cde-7189-7671-9c86-ca1a94c9f871",
+  "anim-sit": "01a10ce2-20c9-744a-a932-ca0d7fce1f1a"
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "polycount": 1050,
+   "pose": "a-pose",
+   "textured": false,
+   "picture": "art/parts/kenji-meshy-1/pics/f3.png"
+  },
+  {
+   "step": "face-uv",
+   "script": "art/candidates/aoi-emi-meshy-1/uv_bl.py",
+   "unknown": "not recorded: the round command line is not in the repo"
+  },
+  {
+   "step": "meshy-texture",
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "uv_model": "art/parts/kenji-meshy-1/meshy/kenji-3-uv.glb",
+   "picture": "art/parts/kenji-meshy-1/pics/f3.png",
+   "ai_model": null,
+   "texture_resolution": null,
+   "unknown": "ai_model, texture_resolution: not in the credit record"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.1
+  },
+  {
+   "step": "meshy-anim",
+   "name": "sit",
+   "action": 32,
+   "clip": "Chair_Sit_Idle_F",
+   "via": "tools/characters/meshy.py anim"
+  },
+  {
+   "step": "reweight",
+   "script": "art/candidates/kenji-meshy-3/reweight.py",
+   "heat": "art/candidates/kenji-meshy-3/heat_bl.py",
+   "unknown": "which files were reweighted and how they reached the folder are not recorded"
+  },
+  {
+   "step": "package",
+   "script": "art/candidates/staff-meshy-1/install.sh",
+   "args": [
+    "kenji",
+    "kenji-3"
+   ],
+   "base": "Meshy's texture as painted",
+   "unknown": "fix arguments are not recorded. The order against reweight is inferred from the game files"
+  },
+  {
+   "step": "idle",
+   "file": "relaxed-idle-kenji.json",
+   "source": "art/parts/candidates/idle-neutral-3.glb (reviews/creator-idle-neutral-3)",
+   "exporter": "tools/characters/export-approved-idle.mjs"
+  },
+  {
+   "step": "sheets",
+   "script": "art/candidates/kenji-meshy-3/sheets.sh"
+  }
+ ],
+ "note": "Round 3 (kenji-3, 01a10cd6-3b3b-756b-9cec-eec69de47836) is in the game, with his skin weights reworked by reweight.py because Meshy put his belly and tie on the thighs. The review has no pick recorded. docs/game/art-and-sound.md names kenji-3.",
+ "unknown": {}
+}

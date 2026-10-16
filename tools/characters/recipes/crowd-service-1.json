@@ -1,0 +1,84 @@
+{
+ "id": "crowd-service-1",
+ "folder": "game3d/assets/characters/crowd-service-1",
+ "name": "Apron worker (service-1)",
+ "round": "crowd-everyday-2",
+ "review": "crowd-everyday-2",
+ "source": "art/parts/crowd-everyday-1/pics/service-01.png",
+ "meshy": {
+  "shape": "01a12054-b5ba-7246-9580-f6e4206489d3",
+  "texture": "01a12067-ff97-751e-8f9e-e4e40a5645b4",
+  "rig": "01a12068-9cf9-753e-bd2c-ab234f34bbf8",
+  "anim-sit": "01a12069-83bf-7457-b49c-085452ede70b"
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "polycount": 1050,
+   "pose": "a-pose",
+   "textured": false,
+   "picture": "art/parts/crowd-everyday-1/pics/service-01.png"
+  },
+  {
+   "step": "face-uv",
+   "script": "art/candidates/crowd-everyday-2/uv.sh",
+   "face_scale": 3,
+   "unknown": "uv.sh calls kuro-meshy-orig-3/uv_bl.py with default options"
+  },
+  {
+   "step": "meshy-texture",
+   "ai_model": "meshy-7",
+   "texture_resolution": "2k",
+   "enable_pbr": false,
+   "enable_original_uv": true,
+   "remove_lighting": null,
+   "uv_model": "art/parts/crowd-everyday-2/meshy/service-1-uv.glb",
+   "unknown": "remove_lighting: not in the request"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.1
+  },
+  {
+   "step": "meshy-anim",
+   "name": "sit",
+   "action": 32,
+   "clip": "Chair_Sit_Idle_F"
+  },
+  {
+   "step": "reweight",
+   "script": "art/candidates/crowd-pilot-2/reweight.py",
+   "unknown": "run by crowd-everyday-2/install.sh"
+  },
+  {
+   "step": "package",
+   "script": "art/candidates/crowd-everyday-2/install.sh",
+   "args": [
+    "service-1"
+   ],
+   "base": "the rigged texture"
+  },
+  {
+   "step": "shirt-panel-fix",
+   "unknown": "the upper-back shirt panel is corrected within its saved UV polygon (docs/game/art-and-sound.md). The tool and order are not recorded"
+  },
+  {
+   "step": "region-mask",
+   "anchors": null,
+   "unknown": "anchors: mask.webp is in the folder. The anchors used are not recorded"
+  },
+  {
+   "step": "idle",
+   "file": "folder",
+   "script": "art/candidates/crowd-everyday-2/idles.sh"
+  },
+  {
+   "step": "sheets",
+   "script": "art/candidates/crowd-everyday-2/sheets.py"
+  }
+ ],
+ "note": "Picked in Review crowd-everyday-2 (2026-10-09). Task ids are from the request files in art/parts/crowd-everyday-2/meshy/. tools/assets/live.json registers the body from crowd-everyday-2 (2026-10-10, #353).",
+ "unknown": {}
+}

@@ -1,0 +1,73 @@
+{
+ "id": "mori",
+ "folder": "game3d/assets/characters/mori",
+ "name": "Mr. Mori",
+ "round": "mori-meshy-1",
+ "review": "mori-meshy-1",
+ "source": "art/parts/mori-meshy-1/pics/d1.png",
+ "meshy": {
+  "shape": "01a10a98-3aab-74a2-acb2-8d7e3448000f",
+  "texture": "01a10a99-e487-75e7-be2d-c3e6f3b1d533",
+  "rig": "01a10a9a-8e04-7427-b7e5-0be04fa69443",
+  "anim-sit": "01a10a9b-a32c-7227-89b5-09f59c2f3e23"
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "polycount": 1050,
+   "pose": "a-pose",
+   "textured": false,
+   "picture": "art/parts/mori-meshy-1/pics/d1.png"
+  },
+  {
+   "step": "face-uv",
+   "script": "art/candidates/aoi-emi-meshy-1/uv_bl.py",
+   "unknown": "the staff round used Aoi's uv_bl.py (staff-meshy-1/review.py). The command line is not recorded"
+  },
+  {
+   "step": "meshy-texture",
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "uv_model": "art/parts/mori-meshy-1/meshy/mori-1-uv.glb",
+   "picture": "art/parts/mori-meshy-1/pics/d1.png",
+   "ai_model": null,
+   "texture_resolution": null,
+   "unknown": "ai_model, texture_resolution: not in the credit record"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.1
+  },
+  {
+   "step": "meshy-anim",
+   "name": "sit",
+   "action": 32,
+   "clip": "Chair_Sit_Idle_F"
+  },
+  {
+   "step": "package",
+   "script": "art/candidates/staff-meshy-1/install.sh",
+   "args": [
+    "mori",
+    "mori-1"
+   ],
+   "base": "Meshy's texture as painted",
+   "unknown": "no fix arguments are recorded"
+  },
+  {
+   "step": "idle",
+   "file": "relaxed-idle-mori.json",
+   "source": "art/parts/candidates/idle-neutral-3.glb (reviews/creator-idle-neutral-3)",
+   "exporter": "tools/characters/export-approved-idle.mjs"
+  },
+  {
+   "step": "sheets",
+   "script": "art/candidates/staff-meshy-1/renders.sh and sheets.sh"
+  }
+ ],
+ "note": "Round 1 (mori-1, 01a10a98-3aab-74a2-acb2-8d7e3448000f) is in the game. The folder also holds idle.glb from the 2026-09-28 test (4ad9c691). No code loads it (the game reads relaxed-idle-mori.json), so it is left over.",
+ "unknown": {}
+}

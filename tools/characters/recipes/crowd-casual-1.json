@@ -1,10 +1,11 @@
 {
  "id": "crowd-casual-1",
+ "folder": "game3d/assets/characters/crowd-casual-1",
  "name": "Casual walker (casual-1)",
  "round": "crowd-everyday-2",
  "review": "crowd-everyday-2",
  "source": "art/parts/crowd-everyday-1/pics/casual-01.png",
- "note": "Selected in Review crowd-everyday-2 (2026-10-09). Rebuilt from the round's cached Meshy files (import), with no Meshy call: walk, run, sit, base.webp, its phone copies and the idle come out byte for byte as the live game3d/assets/characters/crowd-casual-1/. The live mask.webp was made by a script that is not in the repo; region-mask makes its own.",
+ "note": "Selected in Review crowd-everyday-2 (2026-10-09). Rebuilt from the round's cached Meshy files (import), with no Meshy call: walk, run, sit, base.webp, its phone copies and the idle come out byte for byte as the live game3d/assets/characters/crowd-casual-1/. The live mask.webp was made by a script that is not in the repo. Region-mask makes its own.",
  "import": {
   "meshy/shape.glb": "art/parts/crowd-everyday-2/meshy/casual-1.glb",
   "meshy/shape.json": "art/parts/crowd-everyday-2/meshy/casual-1-shape.json",

@@ -1,0 +1,61 @@
+{
+ "id": "eric-body",
+ "folder": "game3d/assets/eric",
+ "name": "Eric (body)",
+ "round": "art/approved/mc/meshy",
+ "review": null,
+ "source": null,
+ "meshy": {
+  "shape": "01a0e731-1faf-70a7-98e4-c0f2d163c246",
+  "texture": null,
+  "rig": "01a0e73c-899a-705a-a27e-767620e5cda0",
+  "anim-sit": "01a0e73e-8f83-7114-aff8-8a72efa35403"
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "mode": "text",
+   "prompt": "Cyan Shadow Bun Chibi",
+   "unknown": "the task record has no polycount, pose or topology. No picture was used"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.1,
+   "walk_run": "Meshy basic walking and running",
+   "unknown": "rig.json gives the height and clips only"
+  },
+  {
+   "step": "meshy-anim",
+   "name": "idle",
+   "action": 0,
+   "task": "01a0e73e-84d6-712a-8f5a-da4230b25bff",
+   "clip": "Idle"
+  },
+  {
+   "step": "meshy-anim",
+   "name": "sit",
+   "action": 33,
+   "task": "01a0e73e-8f83-7114-aff8-8a72efa35403",
+   "clip": "Chair_Sit_Idle_M"
+  },
+  {
+   "step": "meshy-anim",
+   "name": "tosit",
+   "action": 58,
+   "task": "01a0e73e-99eb-774b-b7ab-0defefc2a85b",
+   "clip": "Step_to_Sit_Transition",
+   "unknown": "the to-sit clip is in rig.json but not in the game folder"
+  },
+  {
+   "step": "package",
+   "tool": null,
+   "base": null,
+   "unknown": "tool, base: the slimming tool and the texture that became base.webp are not recorded. art/approved/mc/meshy has tex0_base_color.png, and game3d/tools/slim_glb.py is the usual tool"
+  }
+ ],
+ "note": "approved before reviews: Jørgen approved Eric's Meshy model in chat on 2026-09-28, with no Review item (bible/facts.yaml). The model is Meshy text prompt task 01a0e731-1faf-70a7-98e4-c0f2d163c246 (prompt \"Cyan Shadow Bun Chibi\", art/approved/mc/meshy/task.json). The game loads slimmed copies from game3d/assets/eric/.",
+ "unknown": {
+  "source": "a text prompt, not a picture, so there is no source picture",
+  "meshy.texture": "the shape task is textured. No separate texture task is recorded"
+ }
+}

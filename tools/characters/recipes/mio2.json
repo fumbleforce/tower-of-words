@@ -1,0 +1,92 @@
+{
+ "id": "mio2",
+ "folder": "game3d/assets/characters/mio2",
+ "name": "Mio",
+ "round": "mio-meshy-2",
+ "review": "mio-meshy-2",
+ "source": "art/parts/mio-meshy-2/pics/d1.png",
+ "meshy": {
+  "shape": "01a10de2-b3fb-7793-aa1d-6402b442924e",
+  "texture": "01a10de5-534f-738e-88ea-dd9499d89a35",
+  "rig": "01a10de6-408a-7050-9e2c-c25f533c65fb",
+  "anim-sit": "01a10de7-3c78-7664-a023-0528de870966"
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "polycount": 1050,
+   "pose": "a-pose",
+   "textured": false,
+   "picture": "art/parts/mio-meshy-2/pics/d1.png",
+   "unknown": "this is the second send of the same picture (mio-2b) for the bun. The first (01a10de0-154b-70b9-9865-cbede317895c) had none"
+  },
+  {
+   "step": "face-uv",
+   "unknown": "the script is not recorded. The texture input is mio-2b-uv.glb"
+  },
+  {
+   "step": "meshy-texture",
+   "variant": "base-d1",
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "uv_model": "art/parts/mio-meshy-2/meshy/mio-2b-uv.glb",
+   "picture": "art/parts/mio-meshy-2/pics/d1.png",
+   "ai_model": null,
+   "texture_resolution": null,
+   "unknown": "ai_model, texture_resolution: not in the credit record"
+  },
+  {
+   "step": "meshy-texture",
+   "variant": "base",
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "uv_model": "art/parts/mio-meshy-2/meshy/mio-2b-uv.glb",
+   "picture": "art/parts/mio-meshy-2/pics/h1.png",
+   "ai_model": null,
+   "texture_resolution": null,
+   "unknown": "ai_model, texture_resolution: not in the credit record"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.1
+  },
+  {
+   "step": "meshy-anim",
+   "name": "Chair_Sit_Idle_F",
+   "action": 32,
+   "unknown": "the record gives action 32 only. The name follows the other records with that action"
+  },
+  {
+   "step": "colour-variant",
+   "script": "art/candidates/mio-meshy-2/green.py",
+   "variant": "base-green"
+  },
+  {
+   "step": "install",
+   "script": "art/candidates/mio-meshy-2/install.sh",
+   "base": "base.webp from mio-2b-texg (mio-2)"
+  },
+  {
+   "step": "retarget",
+   "script": "tools/characters/retarget.py",
+   "onto": "the upper body (docs/game/art-and-sound.md)",
+   "unknown": "settings are not recorded"
+  },
+  {
+   "step": "idle",
+   "file": "relaxed-idle-mio2.json",
+   "source": "art/parts/candidates/idle-neutral-3.glb (reviews/creator-idle-neutral-3)",
+   "exporter": "tools/characters/export-approved-idle.mjs"
+  },
+  {
+   "step": "sheets",
+   "script": "art/candidates/mio-meshy-2/sheets.sh"
+  }
+ ],
+ "note": "mio-2 (base), mio-2-green and mio-2-d1 were the Review options. Jørgen picked mio-2 (2026-10-06). Discarded: mio-2 (01a10de0-154b-70b9-9865-cbede317895c, no bun) and mio-3 (01a10de0-9b24-7794-aecf-d9312c4c2413, glasses as a block, no bun).",
+ "unknown": {}
+}

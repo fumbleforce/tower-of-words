@@ -1,0 +1,67 @@
+{
+ "id": "swimwear-emi",
+ "folder": "game3d/assets/characters/swimwear-emi",
+ "name": "Emi in swimwear",
+ "round": "pool-swimwear-1",
+ "review": "pool-swimwear-1",
+ "source": "art/parts/pool-swimwear-1/pics/emi-a.png",
+ "meshy": {
+  "shape": "01a11332-616c-7144-9de8-be21d050849d",
+  "texture": "01a11336-0f4b-7717-8c18-8bb0646f9e21",
+  "rig": "01a11338-311a-77cc-95f0-f53b0dc68b25",
+  "anim-sit": null
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "polycount": 1050,
+   "pose": "a-pose",
+   "textured": false,
+   "picture": "art/parts/pool-swimwear-1/pics/emi-a.png"
+  },
+  {
+   "step": "face-uv",
+   "unknown": "the face island method is described in art/candidates/pool-swimwear-1/brief.md. No script for shape-uv.glb is recorded"
+  },
+  {
+   "step": "meshy-texture",
+   "ai_model": "meshy-7",
+   "texture_resolution": "2k",
+   "enable_pbr": false,
+   "enable_original_uv": true,
+   "uv_model": "art/parts/pool-swimwear-1/meshy/emi/shape-uv.glb",
+   "picture": "art/parts/pool-swimwear-1/pics/emi-a.png",
+   "remove_lighting": null,
+   "unknown": "remove_lighting: not in the request"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.09
+  },
+  {
+   "step": "bake-rest-clips",
+   "script": "art/candidates/pool-swimwear-1/bake-rest-clips.mjs",
+   "makes": [
+    "idle.json",
+    "sit.json"
+   ],
+   "unknown": "settings are not recorded. The sit clip is baked, not a Meshy task"
+  },
+  {
+   "step": "package",
+   "script": "art/candidates/pool-swimwear-1/package_models.py",
+   "makes": [
+    "walk.glb",
+    "run.glb",
+    "base.webp"
+   ],
+   "unknown": "settings are not recorded"
+  }
+ ],
+ "note": "Pool swimwear, picked in Review pool-swimwear-1 (Codex, 2026-10-07) and installed in 9eed9fa3. The picture is a built-in image edit of the approved pictures, not a Meshy call. Shape, texture and rig are the tasks in reviews/pool-swimwear-1/credits.json. Edited from art/parts/emi-meshy-1/pics/c3.png.",
+ "unknown": {
+  "meshy.anim-sit": "the sit clip is baked from the rest pose (bake-rest-clips.mjs), no Meshy sit task"
+ }
+}

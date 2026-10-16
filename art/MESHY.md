@@ -20,7 +20,7 @@ Step 3 names what to simplify and every prop to remove (lanyard, bag, badge, pho
 
 ## 2. The recipe
 
-`tools/characters/recipes/<id>.json` (committed): `id` (the folder name in game3d/assets/characters/), `round`, `review`, `source` (the picture, a path in the main checkout), `meshy` (the task ids, written as each task is sent), and `steps`, in order, each `{"step": name, ...settings}`. crowd-casual-1.json is a full example.
+`tools/characters/recipes/<id>.json` (committed) holds one body: `id` (the folder name in game3d/assets/characters/), `folder` (its repo path, game3d/assets/eric for Eric's body), `round`, `review`, `source` (the picture, a path in the main checkout), `meshy` (the task ids, written as each task is sent), `steps` in order, each `{"step": name, ...settings}`, and `unknown`. A setting nobody recorded stays `null`, with its reason in the step's own `unknown` text, or at the top level under `unknown` keyed by field path. A body with no Review has `review: null` and a note that starts "approved before reviews". A chibi body names its removed Review in `review_removed`. Every folder under game3d/assets/characters/ and game3d/assets/eric/ needs exactly one recipe. `python3 tools/characters/check_recipes.py` checks that, and npm run check runs it. Older rounds use scripts that build.py does not run (cheek_fix.py, the chibi tools), so build.py refuses those recipes before it runs any step. crowd-casual-1.json is a full example.
 
 ## 3. The build
 

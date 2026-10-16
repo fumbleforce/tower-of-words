@@ -1,0 +1,67 @@
+{
+ "id": "swimwear-kuro",
+ "folder": "game3d/assets/characters/swimwear-kuro",
+ "name": "Kuro in swimwear (kuro-b)",
+ "round": "pool-swimwear-1",
+ "review": "pool-swimwear-1",
+ "source": "art/parts/pool-swimwear-1/pics/kuro-a.png",
+ "meshy": {
+  "shape": "01a11333-b827-7732-a4e9-d0d824c6d181",
+  "texture": "01a11336-169f-7618-b121-9d85cc8095d7",
+  "rig": "01a11338-401b-7357-8054-74388a5eb5ca",
+  "anim-sit": null
+ },
+ "steps": [
+  {
+   "step": "meshy-shape",
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "polycount": 1050,
+   "pose": "a-pose",
+   "textured": false,
+   "picture": "art/parts/pool-swimwear-1/pics/kuro-a.png"
+  },
+  {
+   "step": "face-uv",
+   "unknown": "the face island method is described in art/candidates/pool-swimwear-1/brief.md. No script for shape-uv.glb is recorded"
+  },
+  {
+   "step": "meshy-texture",
+   "ai_model": "meshy-7",
+   "texture_resolution": "2k",
+   "enable_pbr": false,
+   "enable_original_uv": true,
+   "uv_model": "art/parts/pool-swimwear-1/meshy/kuro-b/shape-uv.glb",
+   "picture": "art/parts/pool-swimwear-1/pics/kuro-a.png",
+   "remove_lighting": null,
+   "unknown": "remove_lighting: not in the request"
+  },
+  {
+   "step": "meshy-rig",
+   "height": 1.12
+  },
+  {
+   "step": "bake-rest-clips",
+   "script": "art/candidates/pool-swimwear-1/bake-rest-clips.mjs",
+   "makes": [
+    "idle.json",
+    "sit.json"
+   ],
+   "unknown": "settings are not recorded. The sit clip is baked, not a Meshy task"
+  },
+  {
+   "step": "package",
+   "script": "art/candidates/pool-swimwear-1/package_models.py",
+   "makes": [
+    "walk.glb",
+    "run.glb",
+    "base.webp"
+   ],
+   "unknown": "settings are not recorded"
+  }
+ ],
+ "note": "Pool swimwear, picked in Review pool-swimwear-1 (Codex, 2026-10-07) and installed in 9eed9fa3. The picture is a built-in image edit of the approved pictures, not a Meshy call. Shape, texture and rig are the tasks in reviews/pool-swimwear-1/credits.json. Edited from art/parts/kuro-meshy-orig-3/pics/e5.png. The first Kuro shape (01a11332-56a2-7791-92d7-9bfef7bb28d4) was rejected before texturing.",
+ "unknown": {
+  "meshy.anim-sit": "the sit clip is baked from the rest pose (bake-rest-clips.mjs), no Meshy sit task"
+ }
+}

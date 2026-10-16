@@ -1,0 +1,32 @@
+{
+ "id": "mio",
+ "folder": "game3d/assets/characters/mio",
+ "name": "Mio (legacy phone pose)",
+ "round": null,
+ "review": null,
+ "source": null,
+ "meshy": {
+  "shape": null,
+  "texture": null,
+  "rig": null,
+  "anim-sit": null
+ },
+ "steps": [
+  {
+   "step": "retarget",
+   "script": "tools/characters/retarget.py",
+   "source": "Meshy's Texting_Walk, upper body (commit a87b3ecc)",
+   "target": "Mio's rig",
+   "unknown": "the settings are not recorded"
+  }
+ ],
+ "note": "approved before reviews: the phone pose was made in the 2026-09-28 phone hook (commit a87b3ecc). It loads only with ?mio=legacy. Review mio-meshy-2 moved Mio to mio2, which has its own phone.json.",
+ "unknown": {
+  "round": "no round folder. The pose came from the 2026-09-28 phone hook (commit a87b3ecc)",
+  "source": "a library clip, not a picture",
+  "meshy.shape": "the library clip is not a task of this body",
+  "meshy.texture": "no texture task",
+  "meshy.rig": "no rig task recorded",
+  "meshy.anim-sit": "no task recorded for the phone clip"
+ }
+}
