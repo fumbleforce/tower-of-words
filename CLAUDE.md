@@ -7,11 +7,16 @@ Private work (reward scenes, encounters, private mode) is mine and its collab go
 
 Private content (island/private/) follows the layout in island/PRIVATE.md: rounds nested under a project (rewards/skimpy/aoi-3), docs in rewards/docs/, clips in audio/. Read it before creating any private file or folder; a hook blocks paths that break it.
 
+## Reward tiers by mode
+
+Jørgen, 2026-10-16: "In the public nonadult mode, rewards are at maximum soft, and are more playful, funny and fun than sexy. In the adult mode, rewards are at minimum skimpy / partly revealing / very teasing, up to hard rewards. This way we segment players, and the commuters would play the safe nonadult mode. It should be possible to toggle on and off part way through, enabling / disabling the extra scenes."
+
+The soft rules below are for nonadult-mode rewards. Adult-mode reward recipes use Adult mode and its configured exclusions, with no extra negative words (GUIDE).
+
 ## Reward scenes, soft
 
 - Cover with the scene, not clothes: long hair over the chest, water or steam hiding the lower body, angle and framing.
-- Always add to the negative prompt: `visible nipples, visible genitals, uncovered crotch, frontal explicit view, explicit sexual action, transparent unobstructed body`.
-- Never shown on the train (discreet mode) and never on public pages.
+- Negative prompt: `visible nipples, visible genitals, uncovered crotch, frontal explicit view, explicit sexual action, transparent unobstructed body`. It comes from the soft negative preset; don't type it by hand.
 
 ## Reward scenes, hard
 
