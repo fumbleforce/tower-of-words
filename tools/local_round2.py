@@ -7,7 +7,8 @@ import comfy
 OUT = os.path.join(os.path.dirname(__file__), '..', 'art', 'company', 'local2')
 NAILS_P = 'short fingernails'
 NAILS_N = 'long fingernails, sharp fingernails, claws'
-EXPLICIT_N = 'nipples, pussy, penis, sex, explicit'
+EXPLICIT_N = 'nipples, pussy, penis, sex, explicit'  # non-adult scenes (safe, sensitive)
+SOFT_N = 'visible nipples, visible genitals, uncovered crotch, frontal explicit view, explicit sexual action, transparent unobstructed body'  # nsfw scene: the soft reward rule
 
 # Each scene: (tags for SDXL, natural-language prompt for Anima, width, height, rating)
 SCENES = {
@@ -45,7 +46,7 @@ for name, ckpt in MODELS:
         if os.path.exists(path):
             continue
         t = time.time()
-        neg_extra = f'{NAILS_N}, {EXPLICIT_N}'
+        neg_extra = f'{NAILS_N}, {SOFT_N if rating == "nsfw" else EXPLICIT_N}'
         if ckpt is None:
             wf = comfy.anima(f'{ANIMA_Q}, {rating}, {text} {NAILS_P}.', f'{ANIMA_N}, {neg_extra}', w=w, h=h, steps=30, cfg=5, seed=7)
         else:
