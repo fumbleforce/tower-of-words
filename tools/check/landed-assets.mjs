@@ -1,4 +1,7 @@
-// Put the landed commit's ignored assets in main before the source worktree can be removed.
+// Put the landed commit's ignored assets in main before the source worktree can be removed, and move out the ones the
+// commit retires (tools/assets/live.mjs retire). A retire from a worktree leaves main's copy in place until the retire
+// commit lands, so main keeps every file its landed registry lists; landing moves that copy to the retired area the
+// registry log names (#606).
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -7,11 +10,19 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const LOCK = 'tools/assets/assets.lock.json';
+const REGISTRY = 'tools/assets/live.json';
 
 function lockedFiles(main, commit) {
   const git = args => execFileSync('git', args, { cwd: main, encoding: 'utf8', maxBuffer: 64 << 20 });
   if (!git(['ls-tree', '--name-only', commit, '--', LOCK]).trim()) return {};
   return JSON.parse(git(['show', `${commit}:${LOCK}`])).files;
+}
+
+// The public registry at a commit (its generated area and its log); {} when the commit has none.
+function registryAt(main, commit) {
+  const git = args => execFileSync('git', args, { cwd: main, encoding: 'utf8', maxBuffer: 64 << 20 });
+  if (!git(['ls-tree', '--name-only', commit, '--', REGISTRY]).trim()) return {};
+  return JSON.parse(git(['show', `${commit}:${REGISTRY}`]));
 }
 
 function digest(file) {
@@ -54,17 +65,59 @@ function sourceFile(main, worktree, file, expected) {
   return source;
 }
 
-export function materializeLandedAssets(main, worktree, base, commit) {
+// Where each locked file the landed commit retires goes: the retire entries it adds to the registry log name the retired
+// path (one entry per path, or one per batch), and a folder's files go under it. Maps file -> retired path in main.
+function retiredPlaces(main, base, commit, before) {
+  const landed = registryAt(main, commit), places = new Map();
+  const old = new Set((registryAt(main, base).log ?? []).map(entry => JSON.stringify(entry)));
+  for (const entry of landed.log ?? []) {
+    if (entry.action !== 'retire' || old.has(JSON.stringify(entry))) continue;
+    for (const from of entry.paths ?? [entry.path]) {
+      assert(entry.paths || entry.to.endsWith(from), `Retire log entry does not end at its path: ${from}`);
+      const prefix = entry.paths ? entry.to : entry.to.slice(0, entry.to.length - from.length);
+      assert(prefix.startsWith(`${landed.generated}retired/`) && !prefix.split('/').includes('..'),
+        `Retire log entry names a place outside the retired area: ${entry.to}`);
+      for (const file of Object.keys(before))
+        if (file === from || (from.endsWith('/') && file.startsWith(from))) places.set(file, prefix + file);
+    }
+  }
+  return places;
+}
+
+// The copies main keeps in step with the lock: retired files move first (a replaced file's previous bytes are archived
+// before its new ones land), then the landed copies are put in. Plan everything first so an existing conflict cannot
+// cause a partial asset handoff. Returns how many assets were copied and how many retired files moved.
+export function materializeLandedAssets(main, worktree, base, commit, { dryRun = false } = {}) {
   main = fs.realpathSync(main); worktree = fs.realpathSync(worktree);
-  const before = lockedFiles(main, base), landed = lockedFiles(main, commit), plan = [];
-  // Plan everything first so an existing conflict cannot cause a partial asset handoff.
+  const before = lockedFiles(main, base), landed = lockedFiles(main, commit), plan = [], retire = [];
+  for (const [file, dest] of retiredPlaces(main, base, commit, before)) {
+    const current = destination(main, file);
+    if (current === null) continue; // not in main: nothing to move
+    assert(current === before[file].sha256, `Preserved changed asset in main: ${file}. A retire moves only the locked bytes`);
+    const there = destination(main, dest);
+    assert(there === null || there === current, `Preserved retired copy in main: ${dest} holds other bytes`);
+    assert(!dest.split('/').some(p => ['', '.', '..', '.git', 'private'].includes(p)), `Unsafe retired path: ${dest}`);
+    retire.push({ file, dest, current, keep: there !== null });
+  }
+  const leaving = new Set(retire.map(r => r.file));
   for (const [file, entry] of Object.entries(landed)) {
     validate(file, entry);
-    const current = destination(main, file);
+    const current = leaving.has(file) ? null : destination(main, file);
     if (current === entry.sha256) continue;
     assert(current === null || current === before[file]?.sha256,
       `Preserved unrelated changed asset in main: ${file}. Its bytes match neither the previous nor landed lock`);
     plan.push({ file, expected: entry.sha256, current, source: sourceFile(main, worktree, file, entry.sha256) });
+  }
+  if (dryRun) return { copied: plan.length, retired: retire.length };
+  for (const { file, dest, keep } of retire) {
+    const from = path.join(main, file), to = path.join(main, dest);
+    if (keep) fs.unlinkSync(from); // the retired area already holds these bytes
+    else {
+      fs.mkdirSync(path.dirname(to), { recursive: true });
+      fs.linkSync(from, to); // exclusive creation: never over a copy another task put there
+      fs.unlinkSync(from);
+    }
+    assert.equal(destination(main, file), null, `Retired file still in main: ${file}`);
   }
   for (const { file, expected, current, source } of plan) {
     const target = path.join(main, file);
@@ -82,17 +135,20 @@ export function materializeLandedAssets(main, worktree, base, commit) {
       assert.equal(destination(main, file), expected, `Main asset failed verification after copying: ${file}`);
     } finally { fs.rmSync(temporary, { recursive: true, force: true }); }
   }
+  for (const { dest, current } of retire)
+    assert.equal(destination(main, dest), current, `Retired copy failed verification: ${dest}`);
   for (const [file, entry] of Object.entries(landed))
     assert.equal(destination(main, file), entry.sha256, `Main asset differs from the landed lock: ${file}`);
-  return plan.length;
+  return { copied: plan.length, retired: retire.length };
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   try {
-    const [main, worktree, base, commit] = process.argv.slice(2);
-    assert(main && worktree && base && commit, 'Usage: landed-assets.mjs <main> <worktree> <base> <commit>');
-    const copied = materializeLandedAssets(main, worktree, base, commit);
-    console.log(`land assets: verified main against ${commit.slice(0, 8)}, copied ${copied} asset(s)`);
+    const args = process.argv.slice(2), dryRun = args.includes('--dry-run');
+    const [main, worktree, base, commit] = args.filter(arg => arg !== '--dry-run');
+    assert(main && worktree && base && commit, 'Usage: landed-assets.mjs [--dry-run] <main> <worktree> <base> <commit>');
+    const { copied, retired } = materializeLandedAssets(main, worktree, base, commit, { dryRun });
+    console.log(`land assets: ${dryRun ? 'dry run for' : 'verified main against'} ${commit.slice(0, 8)}, copied ${copied} asset(s), retired ${retired} file(s)`);
   } catch (error) {
     console.error(`land assets: FAIL: ${error.message}`);
     process.exitCode = 1;

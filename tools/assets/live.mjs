@@ -338,14 +338,18 @@ function rename(from, to) {
   catch (e) { if (e.code !== 'EXDEV') throw e; fs.copyFileSync(from, to); fs.unlinkSync(from); }
 }
 // The main checkout (an agent worktree's binaries are links into a read-only store there: tools/assets/worktree_links.py).
-// A retired file always lands in the main checkout's generated area (a worktree's goes when it is removed), and in a
-// worktree main's own copy leaves its live folder at once, so main never keeps a file the landed registry dropped.
-function moveFile(src, dest) {
+// A retired file always lands in the main checkout's generated area (a worktree's goes when it is removed). From a
+// worktree, a public file's copy in main stays where it is until the retire commit lands: main keeps every file its
+// landed registry still lists, and tools/check/landed-assets.mjs moves that copy when the commit is on main (#606).
+// A local-only file is never committed, so it moves at once. Where main has no copy, the worktree's bytes are kept.
+function moveFile(src, dest, { deferMain = false } = {}) {
   const m = mainCheckout();
   const inMain = path.join(m, src);
   if (path.resolve(m) !== path.resolve(ROOT)) {
-    if (fs.existsSync(inMain)) rename(inMain, path.join(m, dest));
-    else if (fs.existsSync(abs(src))) { fs.mkdirSync(path.dirname(path.join(m, dest)), { recursive: true }); fs.copyFileSync(fs.realpathSync(abs(src)), path.join(m, dest)); }
+    if (!(deferMain && fs.existsSync(inMain))) {
+      if (fs.existsSync(inMain)) rename(inMain, path.join(m, dest));
+      else if (fs.existsSync(abs(src))) { fs.mkdirSync(path.dirname(path.join(m, dest)), { recursive: true }); fs.copyFileSync(fs.realpathSync(abs(src)), path.join(m, dest)); }
+    }
     if (fs.lstatSync(abs(src), { throwIfNoEntry: false })) fs.unlinkSync(abs(src));
     return;
   }
@@ -365,7 +369,7 @@ export function retire(livePath, { by = null, note = '', reg = registryFor(liveP
   for (let n = 2; files.some((f) => fs.existsSync(path.join(mainCheckout(), `${reg.generated}retired/${date}/${f}`))); n++) date = `${today()}-${n}`;
   const to = `${reg.generated}retired/${date}/${livePath}`;
   if (!dryRun) {
-    for (const f of files) moveFile(f, `${reg.generated}retired/${date}/${f}`);
+    for (const f of files) moveFile(f, `${reg.generated}retired/${date}/${f}`, { deferMain: reg._file === PUBLIC_REGISTRY });
     // the unit goes when it is the retired path or inside it; a file leaving a folder unit leaves the folder registered
     for (const k of Object.keys(reg.units)) if (k === livePath || (isDir && k.startsWith(livePath))) delete reg.units[k];
     const u = reg.units[key];

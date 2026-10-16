@@ -44,7 +44,7 @@ node tools/assets/live.mjs register <live path>... --round <round or build> [--r
 
 - Promote copies the picked file into the live folder, registers it (unless a folder unit already covers the path) and logs its round and review. `--replace` retires the file it replaces first. For a public file, then run `python3 tools/assets/sync.py push` and commit live.json with the lock file.
 - Register adds a file or folder a build script made in place (a Blender export of an approved model, a new crowd body installed by its round's script) without copying it, and logs where it came from.
-- Retire moves the file (or folder) into the retired area, drops its unit (a voice clip also leaves audio/index.json), drops its lock entries (`sync.py forget`) and logs what replaced it. Run in an agent worktree, it moves the main checkout's copy too, so main never keeps a file the landed registry dropped.
+- Retire moves the file (or folder) into the retired area, drops its unit (a voice clip also leaves audio/index.json), drops its lock entries (`sync.py forget`) and logs what replaced it. Run in an agent worktree, a public file's copy in the main checkout stays where it is until the retire lands: the landing (tools/check/landed-assets.mjs) moves it into the retired area the log names, so main keeps every file its landed registry lists and none it dropped (#606). A local-only file moves at once.
 
 ## The check
 

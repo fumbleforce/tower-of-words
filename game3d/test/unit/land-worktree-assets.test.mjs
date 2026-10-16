@@ -9,8 +9,10 @@ import { isolatedGitEnvironment } from '../../../tools/lib/git-environment.mjs';
 import { checkStagedCpu } from '../../../tools/check/staged-cpu.mjs';
 import { materializeLandedAssets } from '../../../tools/check/landed-assets.mjs';
 
-const LOCK = 'tools/assets/assets.lock.json', ASSET = 'art/used.bin';
+const LOCK = 'tools/assets/assets.lock.json', REGISTRY = 'tools/assets/live.json', ASSET = 'art/used.bin';
 const record = text => ({ sha256: crypto.createHash('sha256').update(text).digest('hex') });
+// The public registry a candidate commits when it retires `file` into `to` (the log entry live.mjs retire writes).
+const retiring = (file, to, extra = {}) => ({ generated: 'art/production/', units: {}, log: [{ date: '2026-10-16', action: 'retire', path: file, to, ...extra }] });
 
 function fixture(t, initial = { [ASSET]: 'old locked bytes' }) {
   const base = fs.mkdtempSync(path.join(os.tmpdir(), 'land-assets-fixture-'));
@@ -62,10 +64,11 @@ function fixture(t, initial = { [ASSET]: 'old locked bytes' }) {
   git(main, 'commit', '--quiet', '-m', 'fixture');
   const original = git(main, 'rev-parse', 'HEAD');
   git(main, 'worktree', 'add', '--quiet', '-b', 'task', task);
-  const commit = (files = initial) => {
+  const commit = (files = initial, registry = null) => {
     lock(task, files);
     write(task, 'notes/change.md', 'Candidate documentation.\n');
-    git(task, 'add', LOCK, 'notes/change.md');
+    if (registry) write(task, REGISTRY, JSON.stringify(registry));
+    git(task, 'add', LOCK, 'notes/change.md', ...(registry ? [REGISTRY] : []));
     git(task, 'commit', '--quiet', '-m', 'candidate');
     return git(task, 'rev-parse', 'HEAD');
   };
@@ -190,4 +193,64 @@ test('a stale asset copy left in the land candidate is replaced when a later bra
   assert.match(land(), /copied 1 asset\(s\)/);
   assert.equal(git(main, 'rev-parse', 'HEAD'), second);
   assert.equal(fs.readFileSync(path.join(main, ASSET), 'utf8'), 'second rebuild');
+});
+
+test('a retire that lands moves main\'s locked copy to the retired area its registry log names', t => {
+  const { main, task, write, commit, original } = fixture(t);
+  write(main, ASSET, 'old locked bytes');
+  const to = 'art/production/retired/2026-10-16/art/used.bin';
+  const candidate = commit({}, retiring(ASSET, to));
+  // The worktree's own retire already dropped its link and lock entry; main keeps the locked bytes until the land.
+  assert.deepEqual(materializeLandedAssets(main, task, original, candidate), { copied: 0, retired: 1 });
+  assert(!fs.existsSync(path.join(main, ASSET)));
+  assert.equal(fs.readFileSync(path.join(main, to), 'utf8'), 'old locked bytes');
+});
+
+test('a retired copy that already holds the same bytes is not duplicated', t => {
+  const { main, task, write, commit, original } = fixture(t);
+  write(main, ASSET, 'old locked bytes');
+  const to = 'art/production/retired/2026-10-16/art/used.bin';
+  write(main, to, 'old locked bytes');
+  const candidate = commit({}, retiring(ASSET, to));
+  assert.deepEqual(materializeLandedAssets(main, task, original, candidate), { copied: 0, retired: 1 });
+  assert(!fs.existsSync(path.join(main, ASSET)));
+  assert.equal(fs.readFileSync(path.join(main, to), 'utf8'), 'old locked bytes');
+});
+
+test('a retire refuses main copies that are not the locked bytes, and never overwrites a retired copy', t => {
+  const { main, task, write, commit, original } = fixture(t);
+  const to = 'art/production/retired/2026-10-16/art/used.bin';
+  write(main, ASSET, 'someone edited main');
+  const candidate = commit({}, retiring(ASSET, to));
+  assert.throws(() => materializeLandedAssets(main, task, original, candidate), /Preserved changed asset/);
+  assert.equal(fs.readFileSync(path.join(main, ASSET), 'utf8'), 'someone edited main');
+  write(main, ASSET, 'old locked bytes');
+  write(main, to, 'an earlier, different copy');
+  assert.throws(() => materializeLandedAssets(main, task, original, candidate), /Preserved retired copy/);
+  assert.equal(fs.readFileSync(path.join(main, ASSET), 'utf8'), 'old locked bytes');
+  assert.equal(fs.readFileSync(path.join(main, to), 'utf8'), 'an earlier, different copy');
+});
+
+test('a replaced locked asset archives its previous bytes before the new ones land', t => {
+  const { main, task, write, commit, original } = fixture(t);
+  write(main, ASSET, 'old locked bytes');
+  const to = 'art/production/retired/2026-10-16/art/used.bin';
+  write(task, ASSET, 'new locked bytes');
+  const candidate = commit({ [ASSET]: 'new locked bytes' }, retiring(ASSET, to, { by: ASSET }));
+  assert.deepEqual(materializeLandedAssets(main, task, original, candidate), { copied: 1, retired: 1 });
+  assert.equal(fs.readFileSync(path.join(main, ASSET), 'utf8'), 'new locked bytes');
+  assert.equal(fs.readFileSync(path.join(main, to), 'utf8'), 'old locked bytes');
+});
+
+test('a retired folder moves each locked file under it to the retired path', t => {
+  const a = 'art/dir/a.bin', b = 'art/dir/b.bin';
+  const { main, task, write, commit, original } = fixture(t, { [a]: 'a bytes', [b]: 'b bytes' });
+  write(main, a, 'a bytes');
+  write(main, b, 'b bytes');
+  const to = 'art/production/retired/2026-10-16/art/dir/';
+  const candidate = commit({}, retiring('art/dir/', to));
+  assert.deepEqual(materializeLandedAssets(main, task, original, candidate), { copied: 0, retired: 2 });
+  assert(!fs.existsSync(path.join(main, a)) && !fs.existsSync(path.join(main, b)));
+  assert.equal(fs.readFileSync(path.join(main, to, 'a.bin'), 'utf8'), 'a bytes');
+  assert.equal(fs.readFileSync(path.join(main, to, 'b.bin'), 'utf8'), 'b bytes');
 });
