@@ -45,7 +45,7 @@ export function installGoalArrow({ game, phone, paused, root }) {
     const act = document.getElementById('actMenu');
     if (act && !act.hidden) out.push(rect(act));
     // HUD controls and the optional metrics box stay clear of the moving edge button too.
-    for (const id of ['minimap', 'top', 'perfHud', 'jumpBtn', 'sayBtn', 'giveBtn', 'sayMenu']) {
+    for (const id of ['minimap', 'top', 'perfHud', 'jumpBtn', 'sayBtn', 'sayMenu']) {
       const el = document.getElementById(id);
       if (el && !el.hidden && el.offsetWidth) out.push(rect(el));
     }

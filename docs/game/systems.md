@@ -85,7 +85,7 @@ Mio’s weekday B2 lunch scenes (steps 2 and 3, from day five) use the existing 
 
 ## Gifts
 
-Eric starts with ¥1000. On day 1 the only shop is the B2 vending machine. A drink goes into the Bag; stand next to someone and press Give. How each person takes each drink is in [cast.md](cast.md), What they like. On day 1 a second drink for the same person is turned down and stays in the Bag.
+Eric starts with ¥1000. On day 1 the only shop is the B2 vending machine. A drink goes into the Bag; stand next to someone and give it from their Interact menu ([controls-and-ui.md](controls-and-ui.md), Interact and its options), or click the drink in the Bag. How each person takes each drink is in [cast.md](cast.md), What they like. On day 1 a second drink for the same person is turned down and stays in the Bag.
 
 | Id | Name | Price |
 |---|---|---|

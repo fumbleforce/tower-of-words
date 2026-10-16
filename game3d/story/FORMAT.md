@@ -81,7 +81,7 @@ Conditions (`if`, `show`, `goal`, trigger `if`): flag names with `!`, `&&`, `||`
 | `idle:<person>` | Talking to a person when no `talk:<person>` entry holds right now (see Idle lines below). |
 | `say:<word>:<id>` | Eric says a phrase or command from the Say menu while that person or object is the nearest target. |
 | `say:<word>:*` | Fallback for that word anywhere in this place. With no match at all, the engine uses a small built-in reaction. |
-| `give:<item>:<id>`, `give:*:<id>` | Eric gives an item (the Give button, next to a person). See Sim data. |
+| `give:<item>:<id>`, `give:*:<id>` | Eric gives an item (Give in the Interact menu, next to a person). See Sim data. |
 | `near:<id>` | Eric walks within about one step of it (checked every frame; use `once: true` for a one-off). |
 | `zone:<zone>` | Eric steps into a named zone (docs/game/places.md). |
 | `event:<name>` | Engine events (per place, below). |
@@ -249,7 +249,7 @@ export default {
   moments: { caught: { remember: [['mio', 'caught_bag', 'You caught her lunch bag.']], bond: [['mio', 'help', 1, 'the bag']] } },
   reasons: { copier: { source: 'ticket' } },         // the source of a `bond` step in that node ('node:who' for one person)
   on: {
-    'give:coffee:mori': 'mori_coffee',   // Eric gives an item (Give button, when a person is near)
+    'give:coffee:mori': 'mori_coffee',   // Eric gives an item (Give in the Interact menu, when a person is near)
     'give:*:kenji': 'kenji_any_gift',    // any item
   },
 };

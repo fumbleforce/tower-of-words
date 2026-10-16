@@ -292,17 +292,11 @@ body.phone #end ul.w { grid-template-columns: 1fr; }
 #bagPanel.can-give li::after { content: "Give"; color: var(--accent); font-weight: 700; font-size: 14px; }
 #bagPanel.can-give li:hover { color: var(--accent); }
 #bagPanel .to { margin: 0 0 8px; font-size: 14px; color: var(--ink-dim); }
-#giveBtn { position: absolute; right: 100px; bottom: 66px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; border: 2px solid rgba(255, 201, 168, .5); background: #2e2622; color: var(--ink); cursor: pointer; }
-#giveBtn[hidden] { display: none; }
-#giveBtn .t { font-weight: 700; font-size: 14px; color: var(--jp); }
-#giveBtn .to { font-size: 10px; color: var(--ink-dim); max-width: 54px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-body.busy #giveBtn { display: none; }
 .cmd .en { font-size: 17px; }
 body.phone #clock { position: absolute; right: 0; top: 46px; font-size: 12px; }
 body.phone #clock .d { display: none; }
 body.phone #goal { max-width: calc(100vw - 170px); }
 body.phone #peopleBtn .lbl, body.phone #bagBtn .lbl, body.phone #cmdsBtn .lbl { display: none; }
-body.phone #giveBtn { right: 88px; bottom: 58px; }
 
 [hidden] { display: none !important; }
 

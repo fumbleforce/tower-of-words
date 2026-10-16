@@ -70,9 +70,7 @@ export function reactionView(game, place) {
     const width = box.offsetWidth,
       height = box.offsetHeight;
     const avoid = [];
-    for (const el of document.querySelectorAll(
-      '#hud, #goal, #goal2, #goalArrow, #minimap, #jumpBtn, #sayBtn, #giveBtn',
-    )) {
+    for (const el of document.querySelectorAll('#hud, #goal, #goal2, #goalArrow, #minimap, #jumpBtn, #sayBtn')) {
       const b = el.getBoundingClientRect();
       if (b.width && b.height && getComputedStyle(el).visibility !== 'hidden')
         avoid.push({ x0: b.left, y0: b.top, x1: b.right, y1: b.bottom });

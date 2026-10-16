@@ -123,7 +123,6 @@ export const ui = {
       </div>
       <div id="peoplePanel" class="panel" hidden><div class="card"><div class="head">People</div><ul></ul><button type="button" class="close">Close</button></div></div>
       <div id="bagPanel" class="panel" hidden><div class="card"><div class="head">Bag</div><p class="yen"></p><ul></ul><button type="button" class="close">Close</button></div></div>
-      <button id="giveBtn" type="button" hidden><span class="t">Give</span><span class="to"></span></button>
       <div id="actMenu" hidden role="group" aria-label="Actions"></div>
       <div id="talkHit" hidden aria-hidden="true"></div>
       <button id="sayBtn" type="button" hidden aria-label="Say a word"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7l-4 3.5V16H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="t">Say</span><span class="key" aria-hidden="true">Q</span></button>
@@ -138,10 +137,6 @@ export const ui = {
     $('#sayBtn').onclick = (e) => {
       e.stopPropagation();
       this.onSay && this.onSay();
-    };
-    $('#giveBtn').onclick = (e) => {
-      e.stopPropagation();
-      this.onGive && this.onGive();
     };
     $('#peopleBtn').onclick = () => {
       $('#peoplePanel ul').innerHTML = this.peopleHTML ? this.peopleHTML(thumbStyle) : '';
@@ -518,12 +513,6 @@ export const ui = {
     b.querySelector('.n').textContent = sim.inv.length;
     $('#bagPanel .yen').textContent = `¥${sim.yen} left`;
     $('#bagPanel ul').innerHTML = sim.inv.map((id) => bagItemHTML(id, this.items?.[id])).join('');
-  },
-  setGiveTarget(name, on) {
-    const g = $('#giveBtn');
-    g.hidden = !on;
-    const t = g.querySelector('.to');
-    if (t.textContent !== (name || '')) t.textContent = name || '';
   },
   // pick an item to give: resolves with the item id or null
   giveMenu(targetName, inv, items) {

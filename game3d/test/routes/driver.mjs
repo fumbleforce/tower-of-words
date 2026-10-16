@@ -147,7 +147,6 @@ async function action(page, step, place) {
   if (step.type === 'give') await page.locator('#sayMenu').waitFor({ state: 'hidden', timeout: 5000 });
   const gift = await page.evaluate(async step => {
     const g = window.__game, state = window.__branch;
-    const { ui } = await import(new URL('js/ui.js', location.href));
     const target = g.markers.list.find(marker => marker.id === step.target);
     if (!target) throw new Error('Missing interaction target: ' + step.target);
     state.actionDone = false;
@@ -159,8 +158,7 @@ async function action(page, step, place) {
     } else if (step.type === 'give') {
       const index = [...new Set(g.sim.inv)].indexOf(step.item);
       if (index < 0) throw new Error('Missing gift: ' + step.item);
-      g.sayTarget = target;
-      ui.onGive().then(() => { state.actionDone = true; }, e => state.errors.push(e.message));
+      g.giveTo(target).then(() => { state.actionDone = true; }, e => state.errors.push(e.message));
       return { index, target: target.label };
     } else throw new Error('Unknown route action: ' + step.type);
   }, step);

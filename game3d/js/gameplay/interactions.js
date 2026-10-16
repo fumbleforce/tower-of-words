@@ -331,14 +331,14 @@ export function installInteractions(game) {
   game.sayWord = sayWord;
   ui.peopleHTML = (faceOf) => (ui.clubsHTML?.() || '') + peopleHTML(faceOf); // the joined clubs above the people (clubs/index.js)
   ui.items = ITEMS;
-  // the person in reach who can be given something (the Give button and the bag both use it)
+  // the person in reach who can be given something (the Bag's drinks use it)
   function giveTarget() {
     const t = game.sayTarget;
     return t && game.place.people[t.id] && /person/.test(t.kind || '') ? t : null;
   }
-  async function give(picked) {
-    if (game.busy || !sim.inv.length || !game.sayTarget) return;
-    const target = game.sayTarget;
+  // the gift to a person: the item picked from the bag (or from its list), and what they do with it (gifts.js)
+  async function give(target, picked) {
+    if (game.busy || !sim.inv.length || !target) return;
     const item = picked || (await ui.giveMenu(target.label, sim.inv, ITEMS));
     if (!item || !sim.inv.includes(item)) return;
     if (ITEMS[item]?.giftable === false) {
@@ -351,7 +351,9 @@ export function installInteractions(game) {
       ui.say(null, `${target.label} doesn't seem to want the ${ITEMS[item].name.toLowerCase()}. You keep it.`),
     );
   }
-  ui.onGive = () => give();
+  // Give is a row in a person's Interact menu (interact-menu.js) while the bag holds something that can be given
+  game.giveTo = (target) => give(target);
+  game.canGive = () => !game.busy && sim.inv.some((id) => ITEMS[id] && ITEMS[id].giftable !== false);
   // the Bag: a click on a drink gives it to the person in reach (cold playtest 2026-09-30: nothing in it could be clicked)
   const bag = globalThis.document?.getElementById('bagPanel');
   const note = bag?.querySelector('.yen').insertAdjacentElement('afterend', document.createElement('p'));
@@ -367,7 +369,7 @@ export function installInteractions(game) {
     const item = li && sim.inv[[...li.parentNode.children].indexOf(li)];
     if (!item || !bag.classList.contains('can-give') || !giveTarget()) return;
     bag.hidden = true;
-    give(item);
+    give(giveTarget(), item);
   });
   game.sim = sim;
   // a small moment when a bond steps up (sim.js fires amakawa:bondstep); meeting someone (0 to 1) stays quiet

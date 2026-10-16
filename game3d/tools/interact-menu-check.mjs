@@ -3,6 +3,9 @@
 //           highlighted and focused, E again runs the beat (Jørgen's report: "neither has the E key")
 //   kenji   day 1, Kenji not met yet: the story beat alone runs straight away, no menu
 //   mori    day 2 afternoon: Mori has topics only, E goes straight into them
+//   mori-gift  day 1 morning with a hot corn soup in the bag: E on Mori opens a menu with Give last before Leave (no
+//           brown Give button), Give lists the bag, and the soup goes to Mori (gift_mori_cornsoup runs)
+//   mori-day2-gift  day 2 afternoon with the soup: the topic and Give, the same menu (day 2 has no gift lines yet)
 //   guard   day 1 at the gate, not greeted yet, from Continue: the goal says Japanese, the how-to hint is up, the guard
 //           has no Chat, and E (or the menu's Interact) opens the Say menu (#394)
 // Usage: node game3d/tools/interact-menu-check.mjs [width] [scenarios,...]  (BASE=<worktree>/game3d for a worktree)
@@ -30,6 +33,17 @@ const SCENES = {
     who: 'mori',
   },
 };
+// the bag holds his gift for the gift scenarios: Mori's favourite is the hot corn soup (cast.md, What they like). Day 1's
+// office has his gift lines (gift_mori_cornsoup); day 2's office has none yet, so only the menu is checked there
+SCENES['mori-gift'] = {
+  day: 1,
+  period: 'morning',
+  met: ['mio', 'mori', 'kenji'],
+  flags: { ...DAY1, got_ticket: true, copier_done: true },
+  who: 'mori',
+  inv: ['cornsoup'],
+};
+SCENES['mori-day2-gift'] = { ...SCENES.mori, inv: ['cornsoup'] };
 const results = [];
 await withBrowserJob('interact-menu-check', async (browser) => {
   for (const name of process.argv[3]?.split(',') || Object.keys(SCENES)) {
@@ -37,7 +51,7 @@ await withBrowserJob('interact-menu-check', async (browser) => {
     const saved = {
       v: 1, day: s.day, mc, place: s.place || 'office', period: s.period, known: ['ohayo'], met: s.met,
       flags: { day: s.day, place: s.place || 'office', period: s.period, ['period_' + s.period]: true, ...s.flags },
-      seen: [], inv: ['card'], yen: 3000, ui: { goal: s.goal || '' },
+      seen: [], inv: s.inv || ['card'], yen: 3000, ui: { goal: s.goal || '' },
     };
     const opened = await openGame(browser, {
       mode: 'title', viewport: { width, height: phone ? 844 : 860 }, touch: phone, url: `${base}/index.html?q=0`,
@@ -63,12 +77,15 @@ await withBrowserJob('interact-menu-check', async (browser) => {
         g.walker.goTo(...item.spot());
       }, s.who);
       await page.waitForFunction(() => !window.__game.walker.path);
+      // no separate Give button is left on the HUD (the gift is a row in the person's menu)
+      assert.equal(await page.evaluate(() => document.querySelectorAll('#giveBtn').length), 0, 'no brown Give button');
+      await page.screenshot({ path: `${out}${width}-${name}-hud.png` });
       const plan = await page.evaluate(async (who) => {
         const g = window.__game, item = g.markers.list.find((m) => m.id === who);
         g.targetLock = item; g.near = item;
         const { planInteract } = await import('./js/gameplay/interact-menu.js');
         const p = planInteract(g, item, { person: true });
-        return { story: p.story, topics: p.topics.map((t) => t.label), plain: p.plain };
+        return { story: p.story, topics: p.topics.map((t) => t.label), plain: p.plain, gift: !!p.gift };
       }, s.who);
       // the action menu a click or tap opens: Interact with its E, Say with its Q
       await page.evaluate((who) => window.__game.ui.openActs(window.__game.markers.list.find((m) => m.id === who)), s.who);
@@ -132,9 +149,32 @@ await withBrowserJob('interact-menu-check', async (browser) => {
         assert.equal(menu.rows.length, 0);
         assert.ok(await page.evaluate(() => !document.querySelector('#sayMenu').hidden), 'E opens Say');
       } else if (name === 'mori') {
-        assert.ok(!plan.story && plan.topics.length);
+        assert.ok(!plan.story && plan.topics.length && !plan.gift, 'nothing to give in the bag');
         assert.equal(menu.rows.length, 0, 'topics alone go straight in');
         assert.ok(await page.evaluate(() => !document.querySelector('#talk').hidden && window.__game.busy), 'his topic is running');
+      } else if (name === 'mori-day2-gift') {
+        assert.ok(!plan.story && plan.topics.length && plan.gift, 'the topic and Give');
+        assert.deepEqual(
+          menu.rows.map((r) => r.cls.split(' ').find((c) => ['topic', 'gift', 'leave'].includes(c))),
+          ['topic', 'gift', 'leave'],
+        );
+        assert.match(menu.rows[1].text, /Give/);
+      } else if (name === 'mori-gift') {
+        // Give is the row before Leave, after whatever else Mori offers
+        const kinds = menu.rows.map((r) => r.cls.split(' ').find((c) => ['story', 'topic', 'plain', 'gift', 'leave'].includes(c)));
+        assert.ok(plan.gift && kinds.at(-1) === 'leave' && kinds.at(-2) === 'gift', 'Give before Leave: ' + kinds.join(','));
+        assert.match(menu.rows.at(-2).text, /Give/);
+        // Give opens the bag's list; the soup goes to him and his gift line runs
+        if (phone) await page.locator('#talk .chip.gift').tap();
+        else await page.locator('#talk .chip.gift').click();
+        await page.waitForFunction(() => !document.querySelector('#sayMenu').hidden, null, { timeout: 8000 });
+        assert.match(await page.locator('#sayMenu .head').textContent(), /Give to/);
+        await page.screenshot({ path: `${out}${width}-${name}-list.png` });
+        if (phone) await page.locator('#sayMenu .list button').filter({ hasText: 'Hot corn soup' }).tap();
+        else await page.locator('#sayMenu .list button').filter({ hasText: 'Hot corn soup' }).click();
+        await page.waitForFunction(() => window.__game.runner.trace?.includes('gift_mori_cornsoup'), null, { timeout: 15000 });
+        assert.equal(await page.evaluate(() => window.__game.sim.inv.length), 0, 'the soup left the bag');
+        await page.screenshot({ path: `${out}${width}-${name}-gave.png` });
       }
       assert.deepEqual(opened.errors, []);
       results.push({ ...row, pass: true });

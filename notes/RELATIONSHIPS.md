@@ -43,7 +43,7 @@ The cap is 3 points per person per day. Neglect doesn't lower a bond, it just ho
 
 - Each person has a place for each period (commute, morning, lunch, afternoon, evening, night), a weekend pattern, and one or two **open times**: Mio when a build finishes, Mori at three o'clock tea, Kuro after 23:00. The world shows who's open (headphones off, a cup in hand), so there's no talk menu.
 - Weekly fixtures: Mio at her mother's on Wednesday night and on the Thursday train back (day 1 is that train). Tsubasa runs at six. The bar is loud on Fridays.
-- Gifts are small and local: canned coffee, corn soup, milk tea, melon bread, Goro's tomatoes. Each person has two likes, one dislike and one current need. The Give button shows when someone is near, as on day 1.
+- Gifts are small and local: canned coffee, corn soup, milk tea, melon bread, Goro's tomatoes. Each person has two likes, one dislike and one current need. Give is in the Interact menu when someone is near, as on day 1.
 
 ### Japanese as shared language
 

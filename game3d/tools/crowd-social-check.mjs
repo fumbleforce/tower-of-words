@@ -71,7 +71,7 @@ await withBrowserJob('crowd-social-' + width, async browser => {
       await shot('top-edge-' + targetY);
       const placement = await page.evaluate(() => {
         const b = globalThis.document.querySelector('.crowd-reaction').getBoundingClientRect();
-        const blockers = [...globalThis.document.querySelectorAll('#hud, #goal, #goal2, #goalArrow, #minimap, #jumpBtn, #sayBtn, #giveBtn')].filter(el => {
+        const blockers = [...globalThis.document.querySelectorAll('#hud, #goal, #goal2, #goalArrow, #minimap, #jumpBtn, #sayBtn')].filter(el => {
           const r = el.getBoundingClientRect(); return r.width && r.height && globalThis.getComputedStyle(el).visibility !== 'hidden';
         }).map(el => {
           const r = el.getBoundingClientRect();

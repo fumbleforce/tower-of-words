@@ -12,6 +12,7 @@
 //   3. options other code adds (addInteractOptions below), such as a private scene's choice at a door
 //   4. the target's plain use (a thing's talk node, act or look when no story beat matches; a person's repeat line
 //      when they have neither a story beat nor topics), under its own verb
+//   5. Give, for a person, while the bag holds something to give (game.canGive; the gift is run by interactions.js)
 // None of them: Interact does what it always did. One: it is done straight away, no menu. Two or more: a menu in the
 // dialogue box with Leave at the end. The rules: docs/game/controls-and-ui.md, Interact and its options.
 import { flags, cond } from '../narrative/state.js';
@@ -53,33 +54,50 @@ export function extraOptions(game, item) {
 }
 
 // whether running a node would move the story on: it sets a flag to a new value or sets a goal, on any branch that can
-// run now (if/then/else read against the flags as they are; every choice open now; go: and call: followed once)
+// run now (if/then/else read against the flags as they are; every choice open now; call: followed once). The steps
+// run in Runner.step's order. A go or end stops the node, also inside a branch, so the steps after it never run. A
+// choice whose open options all jump away stops the node the same way. A call returns to the node that made it.
 export function progresses(nodes, node, seen = new Set()) {
   if (!node || seen.has(node)) return false;
   seen.add(node);
   const changes = (set) =>
     Object.entries(typeof set === 'string' ? { [set]: true } : set).some(([k, v]) => flags[k] !== v);
+  // what a list of steps comes to: 'progress' (a step moves the story on), 'stop' (the path ends or jumps away, so
+  // no later step runs) or 'next' (the steps ran out, or a call came back, and the caller carries on)
+  const choice = (opts) => {
+    let open = false;
+    for (const o of opts || []) {
+      if (o.if !== undefined && !cond(o.if)) continue;
+      if (o.set !== undefined && changes(o.set)) return 'progress';
+      if (o.call && progresses(nodes, o.call, seen)) return 'progress';
+      if (!o.go) open = true;
+      else if (progresses(nodes, o.go, seen)) return 'progress';
+    }
+    return open ? 'next' : 'stop';
+  };
   const walk = (steps) => {
     for (const s of steps || []) {
       if (!s || typeof s !== 'object') continue;
-      if (s.set !== undefined && changes(s.set)) return true;
-      if (s.do === 'goal' && s.text) return true;
-      if (s.if !== undefined && (s.then || s.else)) {
-        if (walk(cond(s.if) ? s.then : s.else)) return true;
+      // a say, offer or learn step runs nothing else in its object (Runner.step returns there)
+      if (s.say || s.offer || s.learn) continue;
+      if (s.choice) {
+        const r = choice(s.choice);
+        if (r !== 'next') return r;
         continue;
       }
-      for (const o of s.choice || []) {
-        if (o.if !== undefined && !cond(o.if)) continue;
-        if (o.set !== undefined && changes(o.set)) return true;
-        if (progresses(nodes, o.go, seen) || progresses(nodes, o.call, seen)) return true;
+      if (s.set !== undefined && changes(s.set)) return 'progress';
+      if (s.if !== undefined && (s.then || s.else)) {
+        const r = walk(cond(s.if) ? s.then : s.else);
+        if (r !== 'next') return r;
       }
-      if (s.call && progresses(nodes, s.call, seen)) return true;
-      if (s.go) return progresses(nodes, s.go, seen);
-      if (s.end) return false;
+      if (s.go) return progresses(nodes, s.go, seen) ? 'progress' : 'stop';
+      if (s.call && progresses(nodes, s.call, seen)) return 'progress';
+      if (s.do === 'goal' && s.text) return 'progress';
+      if (s.end) return 'stop';
     }
-    return false;
+    return 'next';
   };
-  return walk(nodes?.[node]);
+  return walk(nodes?.[node]) === 'progress';
 }
 
 // speaker() always answers, with the bare id for a thing that has no name of its own, so the label wins over an id
@@ -105,7 +123,7 @@ function storyLabel(game, item, entry, steps, person) {
   return person ? `Talk to ${nameOf(game, item)}` : `${item.verb || 'Look'}: ${nameOf(game, item)}`;
 }
 
-// What Interact offers this target now: { story, topics, extra, plain }. Called before meet(), so a first meeting
+// What Interact offers this target now: { story, topics, extra, plain, gift }. Called before meet(), so a first meeting
 // (no topics yet) runs the story directly.
 export function planInteract(game, item, { person = false } = {}) {
   const key = 'talk:' + item.id;
@@ -126,13 +144,15 @@ export function planInteract(game, item, { person = false } = {}) {
     story || (person && topics.length) || (item.seatAction && extra.length)
       ? null
       : { label: person ? 'Talk' : plainLabel || 'Look', use: true };
-  return { person, story, topics, extra, plain };
+  // Give, last before Leave: a person, while the bag holds something to give (interactions.js sets game.canGive)
+  const gift = person && game.canGive?.() ? { label: 'Give', gift: true } : null;
+  return { person, story, topics, extra, plain, gift };
 }
 
 // Interact on a target, after planInteract. Returns true when it handled it (a menu, or a single option that isn't
 // the target's usual use); false leaves the usual use (talk: trigger, act, look, idle line) to run.
 export function runInteract(game, item, plan) {
-  const { person, story, topics, extra, plain } = plan;
+  const { person, story, topics, extra, plain, gift } = plan;
   const talkKey = 'talk:' + item.id;
   const rows = [
     ...(story ? [{ label: story.label, story: true, trigger: talkKey, cls: 'story' }] : []),
@@ -143,6 +163,7 @@ export function runInteract(game, item, plan) {
     })),
     ...extra.map((o) => ({ ...o, cls: o.story ? 'story' : 'extra' })),
     ...(plain ? [{ ...plain, cls: 'plain' }] : []),
+    ...(gift ? [{ ...gift, cls: 'gift' }] : []),
   ];
   // the added story rows join the first one at the top
   rows.sort((a, b) => (b.story ? 1 : 0) - (a.story ? 1 : 0));
@@ -184,6 +205,7 @@ export function runInteract(game, item, plan) {
 
 function perform(game, item, row) {
   if (row.use) return game.useDefault?.(item);
+  if (row.gift) return void game.giveTo?.(item);
   if (row.trigger) return void game.runner.trigger(row.trigger);
   if (row.node) return void game.beat(() => game.runner.run(row.node, { trigger: 'talk:' + item.id }));
   if (row.run) return void game.beat(() => row.run(game, item));

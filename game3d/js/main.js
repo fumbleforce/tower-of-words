@@ -34,7 +34,7 @@ import { known, SAYABLE } from './lang.js';
 import { Runner, flags } from './runner.js';
 import { PLACES } from './places/factories.js';
 import { snapshot as snapshotOf, crossfade } from './places/crossfade.js';
-import { installSim, sim, stepAmbient, save, loadSave, clearSave } from './sim.js';
+import { installSim, stepAmbient, save, loadSave, clearSave } from './sim.js';
 import { createContinue, dayStartSave } from './continue.js';
 import { stepZones } from './gameplay/zones.js';
 import { installViewer } from './plugins.js';
@@ -435,8 +435,6 @@ function step(dt, drawn) {
   ui.sayReady(waiting);
   // Say in the target's menu: when a known word does something there (or while the Say tip is up)
   ui.placeSay(!!(st && st === near && !game.busy && known.size && (nearSays || ui.sayIntro)));
-  const person = st && place.people[st.id] && /person/.test(st.kind || '');
-  ui.setGiveTarget(person ? st.label : '', !!(person && sim.inv.length && !game.busy));
   stepAmbient(game);
   ambience.update(game, dt);
   game.markers.update(place.camera, canvas, mp, near);

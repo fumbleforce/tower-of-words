@@ -37,7 +37,9 @@ export function start(game) {
     }
     const key = (game.runner.currentNode || '') + '|' + chips.map((c) => c.html).join('|');
     const n = (seenChoice[key] = (seenChoice[key] ?? -1) + 1);
-    const i = n % chips.length;
+    // Give opens the item list, which the route never answers: the cycle takes the other replies only
+    const replies = chips.map((_, k) => k).filter((k) => chips[k].cls !== 'gift');
+    const i = replies.length ? replies[n % replies.length] : n % chips.length;
     T.choices.push(`${game.runner.currentNode}: ${String(chips[i].html).replace(/<[^>]+>/g, '')}`);
     return i;
   };

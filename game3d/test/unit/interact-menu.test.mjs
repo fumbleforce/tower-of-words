@@ -12,6 +12,15 @@ const nodes = {
   hop: [{ choice: [{ text: 'a', go: 'sets_goal' }] }],
   sets_goal: [{ do: 'goal', text: 'Go home.' }],
   machine_door: [{ say: 'mio', text: 'Mm, one minute!' }],
+  // a taken branch that ends or jumps away: the set after it never runs
+  early_end: [{ if: 'qc_stop', then: [{ end: true }] }, { set: 'qc_unreachable' }],
+  early_go: [{ if: 'qc_stop', then: [{ go: 'mio_busy' }] }, { set: 'qc_unreachable' }],
+  all_jump: [{ choice: [{ text: 'a', go: 'mio_busy' }, { text: 'b', go: 'mio_busy' }] }, { set: 'qc_unreachable' }],
+  one_stays: [{ choice: [{ text: 'a', go: 'mio_busy' }, { text: 'b' }] }, { set: 'qc_after_choice' }],
+  // a call comes back to its node; an end inside the called node only ends that node
+  call_back: [{ call: 'mio_busy' }, { set: 'qc_after_call' }],
+  call_ends: [{ call: 'ends_here' }, { set: 'qc_after_call' }],
+  ends_here: [{ end: true }],
 };
 const TOPIC = { label: 'Chat with Mio', trigger: 'ask:mio' };
 function fakeGame({ on, topic = null, goal = false, goalText = '', id = 'mio' }) {
@@ -121,4 +130,66 @@ test('added options join the menu; a heart row shows only in private mode', asyn
     remove();
     delete globalThis.__settings;
   }
+});
+
+test('a taken branch that ends or jumps away stops the node, as the Runner does', () => {
+  for (const k of Object.keys(flags)) delete flags[k];
+  flags.qc_stop = true;
+  assert.equal(progresses(nodes, 'early_end'), false, 'an end in the taken branch stops the node');
+  assert.equal(progresses(nodes, 'early_go'), false, 'a go in the taken branch stops it too');
+  assert.equal(progresses(nodes, 'all_jump'), false, 'a choice whose open options all jump away stops it');
+  flags.qc_stop = false;
+  assert.equal(progresses(nodes, 'early_end'), true, 'the other branch runs on to its set');
+  assert.equal(progresses(nodes, 'early_go'), true);
+  assert.equal(progresses(nodes, 'one_stays'), true, 'a choice option that stays on the node runs on');
+  delete flags.qc_stop;
+});
+
+test('a call returns to its node; an end inside a called node only ends that node', () => {
+  for (const k of Object.keys(flags)) delete flags[k];
+  assert.equal(progresses(nodes, 'call_back'), true);
+  assert.equal(progresses(nodes, 'call_ends'), true);
+});
+
+test('a person gets a Give row while the bag can give, last before Leave; other targets and empty bags get none', async () => {
+  const gave = [];
+  const { game, item, triggered } = fakeGame({ on: { 'talk:mio': { node: 'ticket_done', if: 'x' } }, topic: TOPIC });
+  game.canGive = () => true;
+  game.giveTo = (target) => gave.push(target.id);
+  assert.equal(planInteract(game, item, person).gift.label, 'Give');
+  let shown;
+  game.ui.choose = async (who, text, chips) => ((shown = chips), 2);
+  assert.equal(runInteract(game, item, planInteract(game, item, person)), true);
+  await new Promise((r) => setTimeout(r, 0));
+  assert.deepEqual(
+    shown.map((c) => c.cls),
+    ['story', 'topic', 'gift', 'leave'],
+  );
+  assert.match(shown[2].html, /Give/);
+  await game.after();
+  assert.deepEqual(gave, ['mio'], 'picking Give hands the target to the gift');
+  assert.deepEqual(triggered, [], 'the story row was not picked');
+
+  const bare = fakeGame({ on: {} });
+  bare.game.canGive = () => true;
+  assert.deepEqual(
+    planInteract(bare.game, bare.item, person).plain,
+    { label: 'Talk', use: true },
+    'a person with nothing else keeps Talk beside Give',
+  );
+  let bareShown;
+  bare.game.ui.choose = async (who, text, chips) => ((bareShown = chips), 0);
+  runInteract(bare.game, bare.item, planInteract(bare.game, bare.item, person));
+  await new Promise((r) => setTimeout(r, 0));
+  assert.deepEqual(
+    bareShown.map((c) => c.cls),
+    ['plain', 'gift', 'leave'],
+  );
+
+  const thing = fakeGame({ on: {}, id: 'door' });
+  thing.game.canGive = () => true;
+  assert.equal(planInteract(thing.game, thing.item).gift, null, 'a thing gets no Give');
+  const empty = fakeGame({ on: {} });
+  empty.game.canGive = () => false;
+  assert.equal(planInteract(empty.game, empty.item, person).gift, null, 'nothing to give, no row');
 });
