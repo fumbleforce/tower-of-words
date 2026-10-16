@@ -4,11 +4,11 @@ How we work, and the rules Jørgen has set. Every agent reads this first. What t
 
 ## Current focus
 
-- Days 2 and 3 are being rebuilt to the day-1 standard: Japanese learning, a coherent story and fully staged interiors.
-- Scope: build small, finished slices and let him judge them before scaling up. No future arcs, extra variants or systems for later. Parked ideas are work issues (Process, Work tracker).
+- Priority: day 1 playable, polished and a great first impression, with an eye to days 2–3. In scope: starter-area engine and map, portraits, early story and backgrounds, performance, marketing, visuals. Far-out ideas wait.
+- Build small, finished slices he can judge before scaling up. No future arcs, variants or systems for later; park ideas as issues.
 - No seasons, climate or calendar systems, and don't use them to change approved scenes. Kuro keeps swimming.
 - Game ideas are things the player sees and does: excitement, spice, fun, replayability. Hidden simulation and more layers of language learning are out. The ideas he liked are issues #468 to #479.
-- First passes are checkpoints, and passing checks is not acceptance. Keep improving until the result is detailed and coherent.
+- First passes are checkpoints; passing checks isn’t acceptance.
 - Character arcs are designed in full RPG-walkthrough detail in notes/walkthrough/. They stay ideas until he decides them.
 - The production bar and file ownership: notes/PRODUCTION.md.
 
