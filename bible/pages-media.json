@@ -1,6 +1,13 @@
 {
 "about": "Images and audio the public bible shows: open Review items and the newest Showcase entries (tools/bible/pages.py media writes this; tools/assets/sync.py pushes every file listed). Do not edit by hand.",
 "data": [
+"art/candidates/dorm-quarter-1/0-today.webp",
+"art/candidates/dorm-quarter-1/a1-full-merge.webp",
+"art/candidates/dorm-quarter-1/a2-park-only.webp",
+"art/candidates/dorm-quarter-1/b1-dorm5.webp",
+"art/candidates/dorm-quarter-1/b2-new-block.webp",
+"art/candidates/dorm-quarter-1/mood-south.webp",
+"art/candidates/dorm-quarter-1/mood-west.webp",
 "bible/shots/showcase/imagegen-settings-20261015/scene-desktop-external.webp",
 "bible/shots/showcase/imagegen-settings-20261015/scene-desktop-original.webp",
 "bible/shots/showcase/imagegen-settings-20261015/scene-phone-external-source.webp",
