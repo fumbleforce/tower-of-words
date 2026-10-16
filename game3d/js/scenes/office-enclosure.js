@@ -32,3 +32,19 @@ export function officeEntryFrame(root, z, thickness, material) {
     }),
   );
 }
+
+// The machine-room door's frame, on the corridor face of the wall. The jambs and header take the office height
+// above, so the office-scaled player walks under the header. The caller makes the opening OFFICE_DOOR_HEIGHT high.
+export function machineDoorFrame(root, [x0, x1], z, depth, material) {
+  for (const x of [x0 - 0.04, x1 + 0.04])
+    root.add(rbox(0.08, OFFICE_DOOR_HEIGHT, depth, null, { x, z, m: material, r: 0.02 }));
+  root.add(
+    rbox(x1 - x0 + 0.16, 0.08, depth, null, {
+      x: (x0 + x1) / 2,
+      y: OFFICE_DOOR_HEIGHT - 0.04,
+      z,
+      m: material,
+      r: 0.02,
+    }),
+  );
+}

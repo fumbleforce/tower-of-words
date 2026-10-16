@@ -107,10 +107,10 @@
       "reason": "Existing lobby geometry composition; preserve the room while extracting responsibilities later."
     },
     "game3d/js/scenes/office.js": {
-      "lines": 1954,
-      "bytes": 67896,
+      "lines": 1952,
+      "bytes": 67796,
       "owner": "codex-tui",
-      "review": "C-0110 / X-0193; C-0352: tray, sink plate and counter no longer overlap, unused kitchen()/tableSet() removed; existing responsibility unchanged; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 the corridor door openings defined once, for the wall holes and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-07 X-0668: officeWalls wrapper reuses exact partition calls for follow-only enclosure; ceiling reduced; 2026-10-07 #309/#311: sender handles and separate arrival helper; ceiling reduced; 2026-10-07 X-0761: office-only CRT option, ceilings lowered; 2026-10-10 #411: the alarm as a front light of one rack (office-leds.js alarmLight; two lines); 2026-10-12 #532/#533: remove unused desk column, extract office-signs.js, lower ceiling; #532 huddle/reference nook, shelf producer extracted",
+      "review": "C-0110 / X-0193; C-0352: tray, sink plate and counter no longer overlap, unused kitchen()/tableSet() removed; existing responsibility unchanged; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 the corridor door openings defined once, for the wall holes and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-07 X-0668: officeWalls wrapper reuses exact partition calls for follow-only enclosure; ceiling reduced; 2026-10-07 #309/#311: sender handles and separate arrival helper; ceiling reduced; 2026-10-07 X-0761: office-only CRT option, ceilings lowered; 2026-10-10 #411: the alarm as a front light of one rack (office-leds.js alarmLight; two lines); 2026-10-12 #532/#533: remove unused desk column, extract office-signs.js, lower ceiling; #532 huddle/reference nook, shelf producer extracted; 2026-10-16 #640 the machine-room door's leaf and frame take the office door height (machineDoorFrame in office-enclosure.js); ceiling lowered",
       "reason": "Existing office geometry composition; preserve the room while extracting responsibilities later."
     },
     "game3d/js/showcase/decals.js": {

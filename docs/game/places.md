@@ -1534,7 +1534,7 @@ Emi's office is the left part of what was one big copy room, split by a partitio
 | `nameplate` | Nameplate | Face down on Mori's desk. |
 | `covered` | A covered desk | North row, east end: a dust sheet over the monitor, and no dust on the name card. |
 | `covered_monitor` | Covered monitor | The monitor on the north row’s covered desk. |
-| `machine_door` | Machine room | The machine room door, with a card reader. |
+| `machine_door` | Machine room | The machine room door, with a card reader. Its aperture and frame are as high as the main office doorway's, so the office-scaled player walks through it. |
 | `racks` | Server racks | Inside the machine room, from the nineties. |
 | `sender_console` | Sender console | Existing cart: retained timesheet output, comparison and one reversible held slot after Mio offers the investigation. |
 | `sender_live` | Timesheet sender | Mio’s existing desk monitor: live pending, held and acknowledged items. |

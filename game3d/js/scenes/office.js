@@ -34,7 +34,7 @@ import { liveScreens } from '../props.js';
 import { drain } from '../perf/slice.js';
 import { emiOffice, emiOfficeBlocks, EMI_X, EMI_DOOR } from './office-emi.js';
 import { MC } from '../mc.js';
-import { officeWalls, officeEntryFrame, OFFICE_DOOR_HEIGHT } from './office-enclosure.js';
+import { officeWalls, officeEntryFrame, machineDoorFrame, OFFICE_DOOR_HEIGHT } from './office-enclosure.js';
 import { corridorToiletSigns, toiletSign } from './office-signs.js';
 import { referenceShelf } from './office-nook.js';
 export { EMI } from './office-emi.js';
@@ -654,7 +654,7 @@ export function* officeSteps() {
     holes: [
       [X0, -4.2, 0, WH],
       [...DOORS[CN].office_door, 0, OFFICE_DOOR_HEIGHT],
-      [...DOORS[CN].machine_door, 0, 1.25],
+      [...DOORS[CN].machine_door, 0, OFFICE_DOOR_HEIGHT],
       [6.2, 6.8, 0, 0.0001],
     ],
   });
@@ -684,12 +684,10 @@ export function* officeSteps() {
   md.userData.hinge = HINGE;
   root.add(md);
   {
-    const d = door(0.8, 1.25, { windows: false });
+    const d = door(0.8, OFFICE_DOOR_HEIGHT - 0.04, { windows: false });
     d.remove(d.children[0]);
     // an open frame (two jambs and a header) so the doorway shows through when the leaf swings away
-    const fm = mat(PAL.doorFrame);
-    for (const x of [4.66, 5.54]) root.add(rbox(0.08, 1.31, 0.06, null, { x, z: CN + T / 2, r: 0.02, m: fm }));
-    root.add(rbox(0.96, 0.07, 0.06, null, { x: 5.1, y: 1.24, z: CN + T / 2, r: 0.02, m: fm }));
+    machineDoorFrame(root, DOORS[CN].machine_door, CN + T / 2, 0.06, mat(PAL.doorFrame));
     // no backing panel in the opening: when the leaf swings in, the room's own floor and light show through, matching
     // where Eric can walk (it used to be an opaque dark panel that he walked through; Codex world review, item 1)
     d.position.set(-LEAF_W / 2, 0, -0.01);
