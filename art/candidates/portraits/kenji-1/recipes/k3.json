@@ -1,0 +1,18 @@
+{
+ "details": "Kenji base portrait, round 1 pass 3 (#663). Method change after the body fault repeated (8 of 8 renders in k1 and k2 had bodybuilder arms; the muscle exclusion changed nothing): the build words in candidate preset kenji-real v2 (overweight, soft out-of-shape build with a round belly and soft, fleshy arms; was \"overweight, heavyset build with a soft belly and thick neck\"). Face words, hair, outfit, muscle exclusion and seeds as k2. Staging: ../staging.md.",
+ "characters": [
+  "kenji-real"
+ ],
+ "outfit": {
+  "kenji-real": true
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "an open, friendly smile, standing at ease, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "no-props",
+  "muscle"
+ ]
+}

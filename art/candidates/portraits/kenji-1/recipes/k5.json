@@ -1,0 +1,22 @@
+{
+ "details": "Kenji base portrait, round 1 pass 5 (#663). As k4 with the denoise at 0.7 instead of 0.6, for a little more room to change the face and proportions; k4 kept him but changed the face only a little. Staging: ../staging.md.",
+ "characters": [
+  "kenji-real"
+ ],
+ "outfit": {
+  "kenji-real": true
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "an open, friendly smile, standing at ease, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "no-props",
+  "muscle"
+ ],
+ "start": {
+  "image": "art/candidates/portraits/kenji-1/start/approved-grey.png",
+  "denoise": 0.7
+ }
+}

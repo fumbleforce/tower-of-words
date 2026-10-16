@@ -1,0 +1,9 @@
+{
+ "details": "Kenji base portrait, round 1 pass 1 (#663). The one change from the approved kenji-ink-2001: a little more realism, after Jørgen's \"Kenji is fine, maybe give him a little bit more realism\". Look and build words in candidate preset kenji-real v1 (a soft, friendly face with full cheeks, realistic adult proportions; overweight, heavyset build with a soft belly and thick neck; was \"a round, friendly face\" and \"soft pudgy build\"), and the heavy body exclusion left off since it fights his build. Hair, outfit, style and framing as the kenji preset. Staging: ../staging.md.",
+ "characters": ["kenji-real"],
+ "outfit": {"kenji-real": true},
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "an open, friendly smile, standing at ease, arms relaxed at his sides, looking at the viewer",
+ "negatives": ["base", "limits", "no-props"]
+}

@@ -1,0 +1,18 @@
+{
+ "details": "Kenji base portrait, round 1 pass 2 (#663). One change from k1: all four k1 renders had bodybuilder arms and chest, so the muscle exclusion preset (muscular, bodybuilder) is on, as in Mori's round 2. Everything else as k1 (candidate preset kenji-real v1, heavy exclusion off). Staging: ../staging.md.",
+ "characters": [
+  "kenji-real"
+ ],
+ "outfit": {
+  "kenji-real": true
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "an open, friendly smile, standing at ease, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "no-props",
+  "muscle"
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "details": "Kenji base portrait, round 1 pass 4 (#663). Method change after the body fault repeated a third time (12 of 12 text-to-image renders in k1 to k3 had bodybuilder arms whatever the build words): img2img from the approved portrait kenji-ink-2001 (on the renders' grey, scaled to 896x1152) at denoise 0.6, so his soft body and identity carry over and the realism words reshape face and proportions. Words as k3 (candidate preset kenji-real v2, muscle exclusion). Staging: ../staging.md.",
+ "characters": [
+  "kenji-real"
+ ],
+ "outfit": {
+  "kenji-real": true
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "an open, friendly smile, standing at ease, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "no-props",
+  "muscle"
+ ],
+ "start": {
+  "image": "art/candidates/portraits/kenji-1/start/approved-grey.png",
+  "denoise": 0.6
+ }
+}

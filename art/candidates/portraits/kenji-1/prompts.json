@@ -1,0 +1,70 @@
+{
+ "k1": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young Japanese man, short messy black bedhead hair, dark eyes and a soft, friendly face with full cheeks, realistic adult proportions, overweight, heavyset build with a soft belly and thick neck, wearing a white short-sleeved shirt, a dark tie and a lanyard, an open, friendly smile, standing at ease, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "seed": 1,
+  "count": 4
+ },
+ "k2": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young Japanese man, short messy black bedhead hair, dark eyes and a soft, friendly face with full cheeks, realistic adult proportions, overweight, heavyset build with a soft belly and thick neck, wearing a white short-sleeved shirt, a dark tie and a lanyard, an open, friendly smile, standing at ease, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, muscular, bodybuilder, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "seed": 1,
+  "count": 4
+ },
+ "k3": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young Japanese man, short messy black bedhead hair, dark eyes and a soft, friendly face with full cheeks, realistic adult proportions, overweight, soft out-of-shape build with a round belly and soft, fleshy arms, wearing a white short-sleeved shirt, a dark tie and a lanyard, an open, friendly smile, standing at ease, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, muscular, bodybuilder, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "seed": 1,
+  "count": 4
+ },
+ "k4": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young Japanese man, short messy black bedhead hair, dark eyes and a soft, friendly face with full cheeks, realistic adult proportions, overweight, soft out-of-shape build with a round belly and soft, fleshy arms, wearing a white short-sleeved shirt, a dark tie and a lanyard, an open, friendly smile, standing at ease, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, muscular, bodybuilder, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "seed": 1,
+  "count": 4,
+  "start": {
+   "image": "art/candidates/portraits/kenji-1/start/approved-grey.png",
+   "denoise": 0.6
+  }
+ },
+ "k5": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young Japanese man, short messy black bedhead hair, dark eyes and a soft, friendly face with full cheeks, realistic adult proportions, overweight, soft out-of-shape build with a round belly and soft, fleshy arms, wearing a white short-sleeved shirt, a dark tie and a lanyard, an open, friendly smile, standing at ease, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, muscular, bodybuilder, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "seed": 1,
+  "count": 4,
+  "start": {
+   "image": "art/candidates/portraits/kenji-1/start/approved-grey.png",
+   "denoise": 0.7
+  }
+ }
+}

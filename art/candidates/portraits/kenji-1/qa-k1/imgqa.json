@@ -1,0 +1,292 @@
+{
+ "character": "kenji",
+ "ref": "game3d/assets/portraits/kenji-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   219,
+   166,
+   383,
+   335
+  ]
+ ],
+ "ref_face_detected": [
+  219.0,
+  166.0,
+  384.0,
+  336.0
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/kenji-1/k1-r261016-194930-b5f-1-s1.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    343.0,
+    135.0,
+    564.0,
+    365.0
+   ],
+   "eyes": [
+    [
+     404.0,
+     214.5
+    ],
+    [
+     496.0,
+     209.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0103
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.027,
+    "zoom": 1.109,
+    "top": 0.086,
+    "bottom_short": 0.0,
+    "hair_top_game": 89,
+    "hair_top_ref": 80,
+    "crop": [
+     45.6,
+     -89.6,
+     853.3,
+     949.5
+    ],
+    "eyes": -0.036,
+    "tilt": 6.5,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.05,
+    "ssim": 0.277
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-1/k1-r261016-194930-b5f-2-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    307.0,
+    146.0,
+    549.0,
+    388.0
+   ],
+   "eyes": [
+    [
+     366.5,
+     236.0
+    ],
+    [
+     454.0,
+     221.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0055
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.023,
+    "zoom": 1.054,
+    "top": 0.083,
+    "bottom_short": 0.0,
+    "hair_top_game": 82,
+    "hair_top_ref": 80,
+    "crop": [
+     -1.2,
+     -90.3,
+     848.7,
+     1003.0
+    ],
+    "eyes": -0.03,
+    "tilt": -0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.065,
+    "ssim": 0.328
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-1/k1-r261016-194930-b5f-3-s3.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    314.0,
+    138.0,
+    541.0,
+    378.0
+   ],
+   "eyes": [
+    [
+     373.5,
+     221.5
+    ],
+    [
+     461.0,
+     213.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.023,
+    "zoom": 1.063,
+    "top": 0.089,
+    "bottom_short": 0.0,
+    "hair_top_game": 86,
+    "hair_top_ref": 80,
+    "crop": [
+     1.9,
+     -96.4,
+     844.7,
+     987.9
+    ],
+    "eyes": -0.04,
+    "tilt": 4.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.041,
+    "ssim": 0.306
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-1/k1-r261016-194930-b5f-4-s4.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    301.0,
+    158.0,
+    540.0,
+    402.0
+   ],
+   "eyes": [
+    [
+     360.5,
+     249.5
+    ],
+    [
+     447.5,
+     233.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0104
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.036,
+    "zoom": 1.045,
+    "top": 0.073,
+    "bottom_short": 0.0,
+    "hair_top_game": 84,
+    "hair_top_ref": 80,
+    "crop": [
+     -12.2,
+     -80.3,
+     844.6,
+     1022.0
+    ],
+    "eyes": -0.028,
+    "tilt": -0.8,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.046,
+    "ssim": 0.324
+   },
+   "status": "warn"
+  }
+ ]
+}
