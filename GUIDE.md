@@ -117,7 +117,7 @@ Prompts, models, settings, cast lines, rewards, 3D characters and video: [art/PR
 
 - World pieces: before building a bench, lamp, tree, kerb, window or roof, look in the bible's Asset library (http://127.0.0.1:8771/bible/#assets). Use the piece there or add a variant to it. Don't copy it into a scene.
 - Every image and video prompt starts with a staging note from the shot-staging skill. Prompt from it and check the render against it. The note stays out of the prompt.
-- Every still picture goes through the image service: Jørgen uses Image Gen or the Scene Editor, agents a recipe through compose.mjs ([art/PROMPTS.md](art/PROMPTS.md), How a picture is made). Keep the configured presets. Rating exclusions are fixed; content exclusions are manual, per composer section. Don't patch pictures together or replace presets with custom prompts. Fix the setup and generate a coherent picture.
+- Every still picture goes through the image service: Jørgen uses Image Gen or the Scene Editor, agents a recipe through compose.mjs ([art/PROMPTS.md](art/PROMPTS.md), How a picture is made). Keep the configured presets. Rating exclusions are fixed; content exclusions are manual, per composer section. Don't patch pictures together; fix the setup and regenerate.
 - Marketing artwork: prefer Codex's built-in image generator, with the approved cast and branding, quiet backgrounds and no unexplained vocabulary labels.
 - Prompt style: describe only what is visible in the frame. Story context (destination, why he's there) stays out.
 - Don't overcorrect: fix one flaw by changing one thing. Check heights and scale, and compare each render with the approved style before showing it.
@@ -141,7 +141,7 @@ Methods, tests and music: art/SOUND.md. Approved voices and tracks: docs/game/ar
 
 - Say each fact once. Give each fact one home and link to it from elsewhere.
 - One focused task per agent: different kinds of work go to separate, fresh agents. The main thread coordinates and never waits. Implementation runs in background subagents with clear file ownership.
-- Work tracker: every task, request, decision follow-up and parked item is a GitHub issue labelled work, kept with `python3 tools/work.py` (`--help` has the rules). Update it when you start, park or finish. A commit that finishes one says "Fixes #N". Run `python3 tools/work.py stale` before reporting. The repo is public, so nothing private goes in an issue.
+- Work tracker: every task, request, decision follow-up and parked item is a GitHub issue labelled work, kept with `python3 tools/work.py` (`--help` has the rules). Update it when you start, park or finish. A commit that finishes one says "Fixes #N". Run `work.py stale` before reporting. Issues are public: nothing private in them.
 - Sharing work with Codex and Grok, lanes, and committing as you go: [collab/PROTOCOL.md](collab/PROTOCOL.md).
 - Validate each fix in isolation: render a close-up of the exact thing he flagged, in every state it can be in, look at it, and show him.
 - Storyboard a new opening screen by screen and get it approved before building.
@@ -170,6 +170,6 @@ Where code goes, the checks and the commit gate: [ARCHITECTURE.md](ARCHITECTURE.
 - Full and vanilla builds: public game code gates optional local content on `__FULL__` ([notes/vanilla-flavor.md](notes/vanilla-flavor.md)).
 - Desktop release: [docs/desktop-release.md](docs/desktop-release.md). A separate Windows edition holds only day 1, with its output and saves kept apart from the full edition.
 - Save every ComfyUI workflow we use as loadable API JSON in tools/workflows/ and ~/ai/workflows/. Keep original PNGs, which embed their workflow.
-- Game captures go in game3d/shots/<job>/. Scratch files go in the shared scratchpad, with unique names. Scratch output untouched for 14 days is swept (Jørgen, 2026-10-16); the rules are in [ARCHITECTURE.md](ARCHITECTURE.md#tool-state-and-outputs).
+- Captures go in game3d/shots/<job>/, scratch in the shared scratchpad; both are swept after 14 days ([ARCHITECTURE.md](ARCHITECTURE.md#tool-state-and-outputs)).
 - World bible: http://127.0.0.1:8771/bible/. bible/facts.yaml keeps history, rejections and questions. After a decision changes, update it, run `python3 tools/bible/build.py`, then `node tools/bible/check.mjs`. Never link the private bible from the public one.
 - Repo layout: active work is in game3d/, bible/, art/, tools/, docs/ and notes/. Retired material goes to `../bk-jap` (notes/history/offline-archive.md). Approved art is in art/approved/<bible id>/, his references in art/refs/.
