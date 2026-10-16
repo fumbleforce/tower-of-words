@@ -27,7 +27,7 @@ import { attachMonday, installDay5 } from './day5/place.js';
 import { attachOngoing, installOngoing } from './ongoing/index.js';
 import { attachSunday, installDay4 } from './day4/index.js';
 import { noteBenches } from './day3/seats.js';
-import { installBoot, installPlacePlugin, watchPlacePlugins } from '../plugins.js';
+import { installPlacePlugin, watchPlacePlugins } from '../plugins.js';
 import { installCreatures } from '../creatures/index.js';
 import { attachSeating } from '../gameplay/seating.js';
 import { attachCrowd } from '../crowd/index.js';
@@ -91,7 +91,18 @@ export function createPlaceLifecycle(
   installOngoing(game);
   installFlavorFinds(game);
   installOuting(game, { refreshMarkers: buildMarkers });
-  watchPlacePlugins(game);
+  // private mode switched on mid-game: the place being played takes its plugin now, and its story and pins again
+  watchPlacePlugins(game, {
+    reinstall: async () => {
+      const place = game.place;
+      if (!place?.name) return;
+      const raw = await game.runner.load(place.name);
+      if (!(await installPlacePlugin(place.name, { game, story: raw, place })) || game.place !== place) return;
+      game.story = withConversations(withClubs(raw));
+      game.runner.use(place, game.story);
+      buildMarkers(place);
+    },
+  });
   // preparation runs a slice a frame while a place is being played, flat out while the player waits for it
   setUrgent(() => !game.place || document.body.classList.contains('loading'));
   async function prepare(name) {
@@ -122,7 +133,6 @@ export function createPlaceLifecycle(
         place.name = name;
         noteBenches(place); // its benches' seats, before the draw-call pass merges them (places/day3/seats.js)
         attachFlavorFinds(game, place, name, buildMarkers);
-        await installBoot();
         keepPublic(story); // its ways out as the public story wrote them, for fast travel (travel/ways.js)
         await installPlacePlugin(name, { game, story, place });
         await nextFrame();
@@ -161,7 +171,9 @@ export function createPlaceLifecycle(
     const previousGoal = ui.goalText || '';
     const previousPlace = game.place?.name;
     // the story for today (days.js): a place built on the title's day 1 still plays a later day's set
-    const story = withConversations(withClubs(await game.runner.load(name))); // with the club sessions (clubs/index.js)
+    const raw = await game.runner.load(name);
+    await installPlacePlugin(name, { game, story: raw, place }); // prepared while private mode was off (plugins.js)
+    const story = withConversations(withClubs(raw)); // with the club sessions (clubs/index.js)
     if (game.place && game.place.leave) game.place.leave();
     cancelSavedWalk(game.player);
     cancelSavedWalk(game.mioNpc);

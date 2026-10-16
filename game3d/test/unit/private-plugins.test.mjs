@@ -29,7 +29,7 @@ test('a place can take a plugin, and a missing one changes nothing', () => {
 test('a plugin can serve its own voice clips; with none set the public audio/<key>.mp3 path is used', () => {
   const core = fs.readFileSync('game3d/js/audio/core.js', 'utf8');
   assert.match(core, /export function setClipResolver/);
-  assert.match(core, /clipResolver\?\.\(key\) \|\| new URL\(`\.\.\/\.\.\/audio\/\$\{key\}\.mp3`/);
+  assert.match(core, /\(settings\.privateMode && clipResolver\?\.\(key\)\) \|\| new URL\(`\.\.\/\.\.\/audio\/\$\{key\}\.mp3`/);
   assert.equal((core.match(/new Audio\(clipUrl\(key\)\)/g) || []).length, 2, 'both players take the resolver');
   const plug = fs.readFileSync('game3d/js/plugins.js', 'utf8');
   assert.match(plug, /audio: \{ voice, stopVoice, setClipResolver \}/);

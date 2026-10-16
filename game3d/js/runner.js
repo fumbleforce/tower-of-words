@@ -17,6 +17,7 @@ import { flags, cond } from './narrative/state.js';
 export { flags, cond } from './narrative/state.js';
 import { lineClip, audioKeys } from './narrative/voice-keys.js';
 import { playAmbient } from './narrative/ambient-lines.js';
+import * as optional from './narrative/optional-steps.js';
 
 import { KEEP_TALK, DURABLE_HOOKS, PERIOD_HOOKS, WORLD_HOOKS } from './narrative/hook-kinds.js';
 export class Runner {
@@ -114,7 +115,7 @@ export class Runner {
       execution: this.recoveryError
         ? structuredClone(this.pendingExecution)
         : this.frames.length
-          ? structuredClone({ v: 3, place: this.place.name, frames: this.frames })
+          ? structuredClone({ v: 3, place: this.place.name, frames: optional.annotate(this.frames, this.story) })
           : this.pendingExecution || null,
       ...(this.queued.length ? { queued: structuredClone(this.queued) } : {}),
     };
@@ -126,6 +127,7 @@ export class Runner {
     this.pendingQueue = Array.isArray(data?.queued) ? data.queued : [];
   }
   async resume() {
+    this.pendingExecution = optional.adaptExecution(this.pendingExecution, this.story, this.optionalOff);
     const frames = readCheckpoint(this.pendingExecution, this.place.name, this.story);
     if (this.pendingExecution && !frames) {
       this.failRecovery('This saved scene has changed and cannot be resumed.');
@@ -178,10 +180,15 @@ export class Runner {
       }
     }
   }
+  // Private mode off: a plugin's nodes don't start, and running ones end (narrative/optional-steps.js); true if one did
+  setOptional(on) {
+    this.optionalOff = !on;
+    return !on && optional.cut(this.frames, this.story) && (ui.closeTalk({ sceneOver: true }), true);
+  }
   async run(node, { restored = null, trigger = null, replace = null } = {}) {
     const steps = this.story.nodes[node];
-    if (!steps) {
-      console.warn('missing node', node);
+    if (!steps || (this.optionalOff && optional.isOptionalSteps(steps))) {
+      if (!steps) console.warn('missing node', node);
       return;
     }
     const frame = restored?.[0] || newFrame(node, steps, trigger || replace?.trigger);
@@ -196,6 +203,7 @@ export class Runner {
     frame.cursors = [];
     if (replace) this.frames.splice(this.frames.indexOf(replace), 1, frame);
     else this.frames.push(frame);
+    const cut = optional.track(frame);
     try {
       if (context.replaying) this.game.restoreStaging(frame.staging);
       if (!continuing) {
@@ -204,7 +212,7 @@ export class Runner {
         this.effect(context, 'entry', () => this.onNodeStart?.(node));
         this.game.onNode?.(node, 'start');
       }
-      await this.steps(steps, context);
+      await Promise.race([this.steps(steps, context), cut]);
       this.game.onNode?.(node, 'end');
       if (this.frames.includes(frame)) {
         const talk = /^talk:(.+)$/.exec(frame.trigger || '');
@@ -214,6 +222,7 @@ export class Runner {
       this.failRecovery('The scene could not finish.');
       throw error;
     } finally {
+      optional.untrack(frame);
       const index = this.frames.indexOf(frame);
       if (index >= 0) this.frames.splice(index, 1);
     }
@@ -226,6 +235,7 @@ export class Runner {
     context?.frame.cursors.push(cursor);
     try {
       for (let index = cursor.index; index < list.length; index++) {
+        if (context && !optional.running(context.frame)) return 'end'; // a cut frame stops
         cursor.index = index;
         cursor.phase = index === target?.index ? target.phase : 'step';
         const key = JSON.stringify([...path, index]);

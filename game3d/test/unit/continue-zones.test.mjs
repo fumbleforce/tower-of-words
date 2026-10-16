@@ -84,7 +84,7 @@ function fixture() {
     SmoothWalker: Walker, setComposer: noop, liftPeople: noop, lightPlace: noop, resize: noop, absorb: S.absorb, PERIOD_ORDER: S.PERIODS,
     applySchedule: noop, periodName: S.periodName, playMusic: noop, MUSIC: {}, syncFinds: noop, buildMarkers: noop,
     save: S.save, nearSet: new Set(), zoneSet: consumed, withConversations: s => s, withClubs: s => s,
-    prepare: async name => ({ place: places[name] }), eventTrigger, clubArrival: noop };
+    prepare: async name => ({ place: places[name] }), eventTrigger, clubArrival: noop, installPlacePlugin: async () => false };
   const enter = boundary('enter', deps), startScene = boundary('startScene', deps);
   const continueFrom = createContinue(game, { enter, startScene, travel: () => calls.push('travel'), PLACES: places });
   return { game, consumed, calls, enter, continueFrom, settled: () => beat,

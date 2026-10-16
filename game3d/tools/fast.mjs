@@ -67,6 +67,15 @@ try {
     const game = await openGame(browser, { viewport: { width: +W, height: +H }, mode: 'fast', url });
     const { page } = game;
     pageErrors = game.errors;
+    // PRIVATE_TOGGLE=<s>: private mode switched every s seconds through the run (#604: off and on mid-game, no reload)
+    if (+process.env.PRIVATE_TOGGLE > 0) await page.evaluate((ms) => {
+      window.__privateToggles = [];
+      setInterval(async () => {
+        const { settings, setSetting } = await import('./js/settings.js');
+        setSetting('privateMode', !settings.privateMode);
+        window.__privateToggles.push(`${settings.privateMode ? 'on' : 'off'}@${window.__game?.place?.name || '-'}`);
+      }, ms);
+    }, +process.env.PRIVATE_TOGGLE * 1000);
     // GUIDE caps the whole job at five minutes, including startup, capture and cleanup.
     const routeMs = Math.max(1, Math.min(+S * 1000, jobBudgetMs - (Date.now() - jobStarted) - captureReserveMs));
     if (routeMs < +S * 1000) console.log(`Route budget limited to ${(routeMs / 1000).toFixed(1)}s to reserve capture/cleanup within five minutes`);
@@ -74,7 +83,7 @@ try {
     catch (error) { errors.push(`Route wait failed: ${error.message.split('\n')[0]}`); }
     run = await page.evaluate(() => ({
       ...window.__test, ended: !!window.__ended, place: window.__game.place?.name, mc: window.__game.mc?.id, cast: window.__game.cast,
-      goal: window.__game.ui.goalText, voices: window.__voiceLog, move: window.__moveCheck,
+      goal: window.__game.ui.goalText, voices: window.__voiceLog, move: window.__moveCheck, privateToggles: window.__privateToggles,
       gait: window.__gaitCheck && { long: window.__gaitCheck.reports(4), short: window.__gaitCheck.reports(2).length, windows: window.__gaitCheck.windows },
     }));
     if (who.mc && run.mc !== who.mc) errors.push(`played ${run.mc}, not --mc ${who.mc}`);
@@ -111,6 +120,7 @@ console.log(`movement: ${run.move?.steps || 0} steps, ${result.overlaps || 0} ov
 console.log(`gait: ${run.gait?.windows || 0} windows, ${result.gait || 0} people stepping on the spot or sliding for 2.4 s or more (${run.gait?.short || 0} for 1.2 s or more: game3d/tools/gait-check.mjs looks closer)`);
 for (const line of run.gait?.long || []) console.log('  gait:', line);
 console.log('practice prompts passed via Say:', run.practice || 0);
+if (run.privateToggles) console.log(`private mode switched ${run.privateToggles.length} times:`, run.privateToggles.join(' '));
 if (run.bondRoute || run.bonds) console.log('bonds:', run.bondRoute || '', JSON.stringify(run.bonds || {}).slice(0, 400));
 console.log('voices:', JSON.stringify(run.voices));
 for (const heard of (run.heard || []).filter(entry => /sumimasen|すみません/.test(entry.text))) {

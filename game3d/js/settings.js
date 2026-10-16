@@ -77,7 +77,15 @@ function load() {
 }
 export const settings = load();
 window.__settings = settings;
-if (__FULL__) flags.private_mode = !!settings.privateMode;
+// private_mode: the setting as a story flag, read live, so a scene's condition follows a switch mid-game. Never saved (not
+// enumerable) and a write is ignored, so a save made in either mode reads the mode the player has now (plugins.js).
+if (__FULL__)
+  Object.defineProperty(flags, 'private_mode', {
+    get: () => !!settings.privateMode,
+    set() {},
+    configurable: true,
+    enumerable: false,
+  });
 flags.skill_checks = !settings.skipChecks; // the save keeps both choices of the new-game screen (ui/new-game.js)
 
 const subs = new Set();
@@ -88,7 +96,6 @@ export function onSettings(fn) {
 export function setSetting(key, value) {
   if (!(key in DEFAULTS) || settings[key] === value) return;
   settings[key] = value;
-  if (__FULL__ && key === 'privateMode') flags.private_mode = !!value;
   if (key === 'skipChecks') flags.skill_checks = !value;
   storage.set(KEY, settings);
   apply();
@@ -104,7 +111,6 @@ export function setSetting(key, value) {
 // a setting changed for this page only, not saved and not announced (the local scene viewer, plugins.js installViewer)
 export function forceSetting(key, value) {
   settings[key] = value;
-  if (__FULL__ && key === 'privateMode') flags.private_mode = !!value;
 }
 export function resetSettings() {
   for (const k of Object.keys(DEFAULTS)) setSetting(k, DEFAULTS[k]);

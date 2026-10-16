@@ -1,10 +1,17 @@
 // Optional local plugins, one file per place. Nothing in this module names a scene.
 //
 // A plugin is island/private/plugins/<place>.js, git-ignored with the rest of island/private/. The place
-// name is the one the story uses (dorm_court, plaza). It loads only while private mode is on: once when
-// the place is prepared (places/lifecycle.js), and again if private mode is switched on in that place.
+// name is the one the story uses (dorm_court, plaza). It loads only while private mode is on: when the place is
+// prepared or entered (places/lifecycle.js), and when private mode is switched on in that place.
 // A missing file, a failed load, or private mode off leaves the place as the public story built it.
 // Each place loads at most once for a story object.
+//
+// Switching private mode mid-game (watchPlacePlugins): off ends a plugin's scene that is running (Runner.setOptional),
+// starts none, hides its picture and its portraits (portraitSource), and hides every element a plugin marked
+// data-private (html[data-private-mode="off"], css/style.css). Its pins and talk need no help: every plugin condition
+// reads the live private_mode flag (settings.js). Nothing is deleted: flags, the album and saves stay as they were.
+// On again: the boot plugin and this place's plugin install if they haven't, and the place's pins come back.
+// What a plugin added to a story is recorded (narrative/optional-steps.js), so a save made in one mode resumes in the other.
 //
 // The file exports install({ game, story, place }). install may add story.on, story.show, story.nodes
 // and place.hooks. It runs before the place is entered, so a pin added there is visible on arrival.
@@ -14,6 +21,7 @@
 import { forceSetting, onSettings, settings } from './settings.js';
 import { sampleDayOneEnd } from './days.js';
 import { voice, stopVoice, setClipResolver } from './audio/core.js';
+import { recordInstall } from './narrative/optional-steps.js';
 
 const PLACE = /^[a-z0-9_]+$/;
 
@@ -62,13 +70,17 @@ async function refresh(name) {
   refreshed.add(name);
   await fetch(pluginHref(name), { cache: 'reload' }).catch(() => {});
 }
+const missing = new Set(); // asked for once: a place entered again doesn't ask again
 async function loadPlugin(name) {
   const names = await pluginList();
-  if (Array.isArray(names) && !names.includes(name)) return null;
+  if (missing.has(name) || (Array.isArray(names) && !names.includes(name))) return null;
   const href = pluginHref(name);
   if (Array.isArray(names)) await Promise.all(names.map(refresh)); // boot.js imports kit.js and encounters.js
   const res = await fetch(href, LOCAL ? { cache: 'reload' } : undefined);
-  if (!res.ok) return null;
+  if (!res.ok) {
+    missing.add(name);
+    return null;
+  }
   return import(href);
 }
 
@@ -79,32 +91,43 @@ export function addPlaceInstaller(fn) {
   extras.push(fn);
 }
 
+// true when anything was installed now (the place's own plugin or the extra installers)
 export async function installPlacePlugin(name, ctx) {
   if (!settings.privateMode || !PLACE.test(name)) return false;
   const story = ctx.story;
   if (!story) return false;
-  const first = !story._plugins?.[name];
-  let loaded = false;
-  if (first) {
-    let mod = null;
+  await installBoot(); // its place installers go in first (guard-swap)
+  let mod = null;
+  if (!story._plugins?.[name]) {
     try {
       mod = await loadPlugin(name);
     } catch {
       mod = null;
     }
-    if (mod) {
-      story._plugins = story._plugins || {};
-      story._plugins[name] = true;
-      await mod.install?.(ctx);
-      loaded = true;
-    }
+  }
+  if (!mod && (story._extras?.[name] || !extras.length)) return false; // nothing new for this story
+  return applyPlugin(mod, name, ctx);
+}
+
+// The install itself, with what it adds recorded. Exported for the unit test, which hands it a module of its own.
+export async function applyPlugin(mod, name, ctx) {
+  const story = ctx.story;
+  const done = recordInstall(story);
+  let changed = false;
+  if (mod) {
+    story._plugins = story._plugins || {};
+    story._plugins[name] = true;
+    await mod.install?.(ctx);
+    changed = true;
   }
   story._extras = story._extras || {};
   if (!story._extras[name] && extras.length) {
     story._extras[name] = true;
     for (const fn of extras) await fn(ctx);
+    changed = true;
   }
-  return loaded;
+  done();
+  return changed;
 }
 
 // ?scene=<id> on a local server: the private scene viewer (island/private/plugins/viewer.js). Private mode is forced on
@@ -152,7 +175,7 @@ export function setPortraitSource(fn) {
 }
 
 export function portraitSource(who, face) {
-  return portraitFn?.(who, face) || null;
+  return (settings.privateMode && portraitFn?.(who, face)) || null;
 }
 
 export function installBoot() {
@@ -181,17 +204,21 @@ export function installBoot() {
   return bootPromise;
 }
 
-export function watchPlacePlugins(game) {
+// reinstall: the place lifecycle's own step for the place being played (install into its story, then pins again)
+export function watchPlacePlugins(game, { reinstall } = {}) {
   void installBoot();
+  const apply = () => {
+    const on = !!settings.privateMode;
+    if (typeof document !== 'undefined') document.documentElement.dataset.privateMode = on ? 'on' : 'off';
+    return { on, cut: game.runner?.setOptional?.(on) };
+  };
+  apply();
   onSettings((key) => {
-    if (key !== 'privateMode' || !settings.privateMode) return;
-    void installBoot();
-    if (!game.place?.name) return;
-    void installPlacePlugin(game.place.name, {
-      game,
-      story: game.story,
-      place: game.place,
-    });
+    if (key !== 'privateMode') return;
+    const { on, cut } = apply();
+    if (on) return void installBoot().then(() => reinstall?.());
+    if (cut) stopVoice();
+    Promise.resolve(game.place?.hooks?.picture?.({ state: 'hide' })).catch(() => {});
   });
 }
 

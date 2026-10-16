@@ -128,11 +128,13 @@ const sounding = () =>
     (a) => a && a instanceof Audio && !a.paused && !a.ended && !a._fading,
   ).length;
 // A local plugin may serve some clips from elsewhere: fn(key) returns a URL, or null to use audio/<key>.mp3.
+// Only while private mode is on: switched off mid-game, every line plays its public clip (plugins.js).
 let clipResolver = null;
 export function setClipResolver(fn) {
   clipResolver = fn;
 }
-const clipUrl = (key) => clipResolver?.(key) || new URL(`../../audio/${key}.mp3`, import.meta.url).href;
+const clipUrl = (key) =>
+  (settings.privateMode && clipResolver?.(key)) || new URL(`../../audio/${key}.mp3`, import.meta.url).href;
 export function stopVoice(ms = 80) {
   voiceGen++; // a clip still starting up for the old line won't play on
   const a = curVoice;

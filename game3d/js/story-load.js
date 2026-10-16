@@ -11,7 +11,12 @@ export class StoryMissingError extends Error {
   }
 }
 
-const EMPTY = () => ({ nodes: {}, on: {} });
+// one empty story per place and day, like a module's, so what a plugin adds to it stays for the next visit (plugins.js)
+const empties = new Map();
+const EMPTY = (key) => {
+  if (!empties.has(key)) empties.set(key, { nodes: {}, on: {} });
+  return empties.get(key);
+};
 
 async function tryImport(p, name, expected) {
   try {
@@ -30,10 +35,11 @@ async function tryImport(p, name, expected) {
 // to the placeholder story and then to an empty one; a later day's place its index doesn't list has an empty story.
 // A place the day's index lists must load, or this throws StoryMissingError and the trip stops (places/story-guard.js).
 export async function importStory(name, day) {
-  if (day > 1) return (await tryImport(storyPath(name, day), name, storyRegistered(name, day))) || EMPTY();
+  if (day > 1)
+    return (await tryImport(storyPath(name, day), name, storyRegistered(name, day))) || EMPTY(`${name}@${day}`);
   return (
     (await tryImport(`../story/${name}.js`, name, false)) ||
     (await tryImport(`../story/placeholder/${name}.js`, name, false)) ||
-    EMPTY()
+    EMPTY(`${name}@1`)
   );
 }

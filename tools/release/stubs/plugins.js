@@ -5,6 +5,9 @@ export function addPlaceInstaller() {}
 export async function installPlacePlugin() {
   return false;
 }
+export async function applyPlugin() {
+  return false;
+}
 export async function installViewer() {
   return null;
 }

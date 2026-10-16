@@ -125,6 +125,12 @@ export function checkDeclarations(read = readSource) {
         const resolve = imports.get(node.callee.name).name === 'eventId' ? eventId : eventTrigger;
         for (const id of places) resolve(id, name.value);
       }
+      // a live flag (settings.js private_mode) is a getter defined on flags: a write by its owner
+      if (node.type === 'CallExpression' && member(node.callee, 'Object', 'defineProperty') && flagObject(node.arguments[0])) {
+        const exact = constant(node.arguments[1]);
+        assert.notEqual(exact, undefined, file + ': unresolved flag property');
+        writes.exact.add(exact);
+      }
       if (node.type === 'CallExpression' && member(node.callee, 'Object', 'assign') && flagObject(node.arguments[0])) {
         assert.equal(node.arguments.length, 2, file + ': unresolved bulk flag write');
         const value = node.arguments[1];

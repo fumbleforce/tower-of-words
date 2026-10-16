@@ -1178,3 +1178,6 @@ body.busy.outing-shop-approach:not(.trip) #goal { opacity: 1; pointer-events: no
 body.busy.outing-shop-approach:not(.trip) #top > #goal .gl,
 body.busy.outing-shop-approach:not(.trip) #top > #goal #hint { display: none; }
 body.busy.outing-shop-approach:not(.trip) #top > #goal #goal2 { margin: 0; padding: 10px 14px; color: #e6faf7; }
+
+/* private mode switched off mid-game: what a local plugin marked data-private goes with it (js/plugins.js) */
+html[data-private-mode="off"] [data-private] { display: none !important; }
