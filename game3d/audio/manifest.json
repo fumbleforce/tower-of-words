@@ -797,66 +797,6 @@
   "clear": []
  },
  {
-  "key": "oh-gtvr5a",
-  "speaker": "aoi",
-  "text": "あ、ごめん、ちょっと待って。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [
-   [
-    "matte",
-    "待って"
-   ]
-  ],
-  "clear": [],
-  "emo": "bright"
- },
- {
-  "key": "oh-1p65yct",
-  "speaker": "stander",
-  "text": "…あそこ。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [],
-  "clear": [],
-  "emo": "low"
- },
- {
-  "key": "ln-18140tk",
-  "speaker": "bun",
-  "text": "ありがとう。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [],
-  "clear": [],
-  "emo": "warm"
- },
- {
-  "key": "ln-k8txd4",
-  "speaker": "music",
-  "text": "あ、ごめん。音、漏れてた？",
-  "lang": "ja",
-  "overheard": true,
-  "words": [],
-  "clear": [],
-  "emo": "apologetic"
- },
- {
-  "key": "ln-1hdwfkl",
-  "speaker": "music",
-  "text": "自分で録ったの。まだ下手だけど。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [
-   [
-    "mada",
-    "まだ"
-   ]
-  ],
-  "clear": [],
-  "emo": "shy"
- },
- {
   "key": "bun-ohayo",
   "speaker": "bun",
   "text": "はい、おはようございます。",
@@ -1522,26 +1462,6 @@
   "words": [],
   "clear": [],
   "emo": "bright"
- },
- {
-  "key": "ln-1azsw7e",
-  "speaker": "reader",
-  "text": "会社のは古くて、同じボタンがないんだよ。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [],
-  "clear": [],
-  "emo": "weary"
- },
- {
-  "key": "ln-1f3apoo",
-  "speaker": "eric",
-  "text": "Windows 95?",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "surprised"
  },
  {
   "key": "gate-worker-a-ohayo",
@@ -17250,16 +17170,6 @@
   "words": [],
   "clear": [],
   "emo": "tired"
- },
- {
-  "key": "ln-1f3apoo-carina",
-  "speaker": "carina",
-  "text": "Windows 95?",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "surprised"
  },
  {
   "key": "ln-mn2vz-carina",

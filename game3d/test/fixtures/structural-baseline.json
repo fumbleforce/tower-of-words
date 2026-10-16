@@ -819,7 +819,7 @@
   "edges": [
     {
       "from": "train:first_aoi",
-      "to": "train:nod_seat",
+      "to": "train:phone_girl",
       "kind": "call",
       "labels": [],
       "cond": "",
@@ -834,14 +834,6 @@
       "call": true
     },
     {
-      "from": "train:first_bun",
-      "to": "train:nod_seat",
-      "kind": "call",
-      "labels": [],
-      "cond": "",
-      "call": true
-    },
-    {
       "from": "train:first_music",
       "to": "train:music",
       "kind": "call",
@@ -850,16 +842,8 @@
       "call": true
     },
     {
-      "from": "train:first_music",
-      "to": "train:nod_seat",
-      "kind": "call",
-      "labels": [],
-      "cond": "",
-      "call": true
-    },
-    {
       "from": "train:first_stander",
-      "to": "train:nod_seat",
+      "to": "train:stander",
       "kind": "call",
       "labels": [],
       "cond": "",

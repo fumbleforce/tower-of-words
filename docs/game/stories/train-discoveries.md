@@ -1,6 +1,6 @@
 # People on the train
 
-Four optional encounters give the passengers something of their own to do before Eric sits with Mio. Built. The passages follow the author decision in reviews/train-discoveries-1 under C-0193; Aoi keeps her original replies. Japanese has English subtitles for the player, while Eric follows gestures and familiar words.
+The unnamed passengers stay in the background. Eric does not handle their belongings, and they do not show him personal projects or direct him to a seat (Jørgen, 2026-10-16). Hamada keeps his sleepy phone reminder before the later rescue. Built. Spoken Japanese remains blurred except for words Eric knows.
 
 ## Cast
 
@@ -8,20 +8,20 @@ Four optional encounters give the passengers something of their own to do before
 
 ## Beats
 
-1. Talking to the bun-haired woman: she points at her overfilled shopping bag, Eric presses it down while she zips it, and she thanks him. The bag stays closed.
-2. Talking to the headphone wearer: she lifts one side of her headphones and asks whether the sound was leaking. Eric nods; she shows her own guitar practice video, then puts the phone away and headphone back.
-3. Talking to the reader: the book title is shown, then its page beside his old Windows 95 printout. He explains the missing buttons; Eric recognises the version, and the reader nods.
-4. Talking to Hamada: His phone buzzes with the appointment reminder; he sleepily apologises while it is held on screen, then taps it silent when the player advances. He stays asleep for the later [rescue](sleeping-man.md).
+1. The woman with a bun gives a quiet emote. Her shopping bag stays by her feet.
+2. The woman with headphones keeps listening to her music.
+3. The man with a book keeps reading. Eric can read its title, "Excel for People Who Hate Excel".
+4. Talking to Hamada: his phone buzzes with the appointment reminder. He sleepily apologises while it is held on screen, then taps it silent when the player advances. He stays asleep for the later [rescue](sleeping-man.md).
 
 ## Choices and flags
 
-These are optional talk actions, with no menu, item reward or new lesson. When bun or music is the first passenger spoken to, their encounter flows straight into the directed seat point and existing `nod_seat` goal. Reader and Hamada retain their original lack of a seat hint. Repeat talks give a small emote; greetings are unchanged. Each held view is dismissed inside the same node, and Continue restarts the active encounter with its captured staging; completed encounters retain their seen flags and prop states.
+These are optional talk actions, with no item reward or new lesson. Bun and music give the same quiet emote every time. Reader keeps his book-title line on the first visit and gives a quiet emote after that. Greetings are unchanged. The unused first-talk node ids remain and contain no seat directions. Hamada's phone is dismissed inside his node, and Continue restarts that encounter with its captured staging. Completed encounters retain their seen flags.
 
 | Flag | Set when | Read by |
 |---|---|---|
-| `train_bun_seen` | Her encounter finishes | `bun`, quiet repeat |
-| `train_music_seen` | Her encounter finishes | `music`, quiet repeat |
-| `train_reader_seen` | His encounter finishes | `reader`, quiet repeat |
+| `train_bun_seen` | Her talk action finishes | Retained save flag |
+| `train_music_seen` | Her talk action finishes | Retained save flag |
+| `train_reader_seen` | His talk action finishes | `reader`, quiet repeat |
 | `train_hamada_seen` | His encounter finishes | `hamada`, quiet repeat |
 
 The shared seat flags belong to [Mio on the train](mio-train.md).

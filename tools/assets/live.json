@@ -1246,6 +1246,22 @@
    ],
    "to": "art/production/retired/2026-10-16/",
    "note": "Refs #662: superseded Mori depth dialogue; replacement speech queued for voicing."
+  },
+  {
+   "date": "2026-10-16",
+   "action": "retire",
+   "paths": [
+    "game3d/audio/ln-18140tk.mp3",
+    "game3d/audio/ln-1azsw7e.mp3",
+    "game3d/audio/ln-1f3apoo.mp3",
+    "game3d/audio/ln-1f3apoo-carina.mp3",
+    "game3d/audio/ln-1hdwfkl.mp3",
+    "game3d/audio/ln-k8txd4.mp3",
+    "game3d/audio/oh-1p65yct.mp3",
+    "game3d/audio/oh-gtvr5a.mp3"
+   ],
+   "to": "art/production/retired/2026-10-16/",
+   "note": "#665: remove contrived train passenger exchanges"
   }
  ]
 }

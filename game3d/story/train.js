@@ -41,9 +41,9 @@ export default {
     'talk:foodbag': { if: 'bag_wobble', node: 'caught' },
     'talk:tama': 'tama',
     'talk:kuroda': 'hamada',
-    'talk:aoi': [{ if: '!seat_goal && !sat', node: 'first_aoi' }, 'phone_girl'],
-    'talk:bun': [{ if: '!seat_goal && !sat', node: 'first_bun' }, 'bun'],
-    'talk:music': [{ if: '!seat_goal && !sat', node: 'first_music' }, 'music'],
+    'talk:aoi': 'phone_girl',
+    'talk:bun': 'bun',
+    'talk:music': 'music',
     'talk:reader': 'reader',
     'talk:window': 'window',
     'talk:plant': 'plant',
@@ -69,62 +69,27 @@ export default {
   labels: { mio: ['Woman with a laptop', '!mio_named'], kuroda: 'Sleeping man' },
 
   nodes: {
-    // no goal and no text at load: the shell shows the controls line; the first goal comes from a passenger
+    // No goal or text at load. The free seat is visible beside Mio and her lunchbox.
     intro: [],
 
-    // the first passenger he talks to answers in Japanese and points at the seat with the lunchbox
-    first_aoi: [
-      { say: 'aoi', overheard: true, emo: 'bright', text: 'あ、ごめん、ちょっと待って。' },
-      { do: 'gesture', who: 'aoi', kind: 'point', to: 'seat_far_r' },
-      { call: 'nod_seat' },
-    ],
-    first_bun: [
-      { call: 'bun' },
-      { do: 'gesture', who: 'bun', kind: 'point', to: 'seat_far_r' },
-      { call: 'nod_seat' },
-    ],
-    first_music: [
-      { call: 'music' },
-      { do: 'gesture', who: 'music', kind: 'point', to: 'seat_far_r' },
-      { call: 'nod_seat' },
-    ],
-    first_stander: [
-      { say: 'stander', overheard: true, emo: 'low', text: '…あそこ。' },
-      { do: 'gesture', who: 'stander', kind: 'point', to: 'seat_far_r' },
-      { call: 'nod_seat' },
-    ],
+    // Retained node ids. Current passenger talks use their ordinary nodes directly.
+    first_aoi: [{ call: 'phone_girl' }],
+    first_bun: [{ call: 'bun' }],
+    first_music: [{ call: 'music' }],
+    first_stander: [{ call: 'stander' }],
+    // Unused legacy node. Keep its id and flags. Eric finds the seat himself.
     nod_seat: [
       { inc: 'passengers' },
       { set: 'seat_goal' },
       { do: 'goal', text: 'Sit by the lunchbox.', at: 'seat_far_r' },
     ],
     bun: [
-      { if: "train_bun_seen", then: [
-        { do: "emote", who: "bun", kind: "heart" },
-      ], else: [
-        { do: "cam", on: "bun", zoom: 1.7 },
-        { do: "shopBag", state: "ask" },
-        { do: "shopBag", state: "close" },
-        { say: "bun", emo: "warm", text: "ありがとう。", overheard: true, voice: "ln-18140tk" },
-        { do: "cam", back: true },
-        { set: "train_bun_seen" },
-      ] },
+      { do: 'emote', who: 'bun', kind: '…' },
+      { set: 'train_bun_seen' },
     ],
     music: [
-      { if: "train_music_seen", then: [
-        { do: "emote", who: "music", kind: "♪" },
-      ], else: [
-        { do: "cam", on: "music", zoom: 1.7 },
-        { do: "headphones", who: "music", state: "lift" },
-        { say: "music", emo: "apologetic", text: "あ、ごめん。音、漏れてた？", overheard: true, voice: "ln-k8txd4" },
-        { do: "gesture", who: "eric", kind: "nod" },
-        { do: "phone", who: "music", state: "show" },
-        { say: "music", emo: "shy", text: "自分で録ったの。まだ下手だけど。", overheard: true, voice: "ln-1hdwfkl" },
-        { do: "phone", who: "music", state: "away" },
-        { do: "headphones", who: "music", state: "on" },
-        { do: "cam", back: true },
-        { set: "train_music_seen" },
-      ] },
+      { do: 'emote', who: 'music', kind: '♪' },
+      { set: 'train_music_seen' },
     ],
     stander: [{ do: 'emote', who: 'stander', kind: '…' }],
     ohayo_bun: [{ say: 'bun', voice: 'bun-ohayo', overheard: true, emo: 'warm', text: 'はい、{ohayo}。' }],
@@ -408,18 +373,11 @@ export default {
       { say: 'aoi', emo: 'bright', text: 'だから今日、配属が決まるの！どこでもいいけど、地下はいや。', overheard: true },
     ],
     reader: [
-      { if: "train_reader_seen", then: [
-        { do: "emote", who: "reader", kind: "…" },
+      { if: 'train_reader_seen', then: [
+        { do: 'emote', who: 'reader', kind: '…' },
       ], else: [
-        { do: "cam", on: "reader", zoom: 1.7 },
-        "> The book is called \"Excel for People Who Hate Excel\".",
-        { do: "printout", state: "show" },
-        { say: "reader", emo: "weary", text: "会社のは古くて、同じボタンがないんだよ。", overheard: true, voice: "ln-1azsw7e" },
-        { say: "eric", emo: "surprised", text: "Windows 95?" },
-        { do: "gesture", who: "reader", kind: "nod", to: "eric" },
-        { do: "printout", state: "away" },
-        { do: "cam", back: true },
-        { set: "train_reader_seen" },
+        '> The book is called "Excel for People Who Hate Excel".',
+        { set: 'train_reader_seen' },
       ] },
     ],
   },
