@@ -96,10 +96,20 @@ Mori wants someone to have dinner with after the others leave, and he is open to
 
 ### Kenji (`kenji`)
 
-- Age 21. Two months on the team, the newest before Eric. Kenji is mild, confused and somewhat clumsy (Jørgen, 2026-10-09). He is keen to help and easily distracted.
-- Routine: lives on melon soda. His chair broke, so he borrowed Eric's and left it in the machine room.
-- Speaks casual Japanese with peers; with Eric, his senpai, he stays polite (です/ます, {mc.name_jp}さん) until Eric tells him to relax (approved voice sheet notes/characters/kenji/voice.md, Jørgen 2026-10-09). His English is a few school words.
-- Knows: Mori (likes him), Mio (owes her).
+- Age 21.
+
+Kenji has been on B2 for two months and was its newest engineer before Eric arrived. He is overweight, mild and somewhat innocent. He gets distracted easily and bumps into chairs when he hurries past. He takes an offer of help at face value and is quick to offer his own. He often agrees to do something before he understands the whole request, then feels too embarrassed to ask again. When several people give him instructions, he tries to follow whoever spoke last.
+
+He wants to be trusted to handle a job alone. He can follow a patient explanation and enjoys showing someone a thing he has learned, but worries about admitting that a job has gone wrong. He sometimes says it is fine while he is still trying to fix it. He is quick to apologise when someone finds out.
+
+In his dorm room he builds plastic spacecraft from old science-fiction television programmes. He knows which version of a ship belongs to which series and talks about it confidently. He wants a proper workbench where he can leave a model between evenings. He also plays computer games and goes to the arcade, where he spends more than he meant to on crane games.
+
+He belongs to the karaoke club and wants to host an evening people enjoy. He gets carried away adding songs and trying equipment tricks before checking that everything works. He is happy to sing with someone who wants company and shy about asking them himself. At work he drinks melon soda. His chair broke, so he borrowed Eric's and left it in the machine room. He likes Mori and owes Mio, who has barred him from the machine room.
+
+He sees the player, Eric or Carina, as his senpai and would be surprised if they took a personal interest in him. If they kept spending time with him and taking an interest in his hobbies, he would develop a crush. He would look forward to their visits while wondering whether he had mistaken ordinary kindness for interest. If they wanted to date him, he would be pleased, very flustered and unsure what they saw in him. He could talk easily about a favourite ship, then lose his place when they asked about him.
+
+He speaks casual Japanese with peers. With his senpai he stays polite (です/ます) until invited to relax, and keeps {mc.name_jp}さん either way. He bows a little too deeply and makes small, respectful jokes, then checks that they know he is kidding. His English is a few school words. He points or uses his hands when words fail him. His approved voice sheet is [Kenji's voice](../../notes/characters/kenji/voice.md).
+
 - Look: about 21, inexperienced, eager, easily distracted; varied looks but grounded, a junior IT support guy in work clothes (Jørgen, 2026-09-28). Approved portrait: h4, black bedhead hair with an open smile (reviews/kenji-concept-3), redrawn toward Mio and Kuro as kenji-ink-2001 (reviews/style-align-1): soft pudgy build, white short-sleeved shirt, dark tie, empty hands. Round 1 (hobby costumes) was rejected as "way out of whacko land... he is at work".
 
 ### Emi (`emi`)
@@ -164,9 +174,9 @@ Use [the existing bond rules](systems.md#bonds). Steps 0 and 1 describe the firs
 
 Each later scene is offered at the listed recurring meeting once its bond requirement is ready. Walking past or leaving early keeps it available next time. A scene can recall a ticket, gift or command actually used, but none requires a particular optional repair or magic demonstration. Club milestones need that club's board slip; place-based threads need no membership. Completion produces the stated memory and changes the next encounter; repeated visits cannot award the same milestone again.
 
-The women below each have a friendship ending and an optional romantic invitation at step 5. Eric chooses whether to ask for a date; the scene supplies a clear mutual answer. Either ending completes the same step and retains the continuing friendship. Nothing in points, gifts, club attendance or a work favour silently selects romance. Public scenes end with plans to meet again. Mori, Kenji, Ishibashi and Hamada have friendship endings; Tama's last step is familiarity with a cat.
+The women below, together with Mori, Kenji and Hamada, each have a friendship ending and an optional romantic invitation at step 5, for either protagonist, Eric or Carina. The player chooses whether to ask for a date, and the scene supplies a clear mutual answer. Either ending completes the same step and retains the continuing friendship. Nothing in points, gifts, club attendance or a work favour silently selects romance. Public scenes end with plans to meet again. Ishibashi stays friendship-only for now. Tama's last step is familiarity with a cat. This is a route rule only. The men's existing step-5 rows below remain friendship outlines, and their romantic scenes are left unwritten while days 1–3 take priority.
 
-Eric is the player, so has no bond with himself. This covers all ten named non-player characters in Everyone. Unnamed workers/passengers, voice aliases, removed speakers and undeveloped wider-cast placeholders such as Goro and Kanae do not gain invented routes here.
+The protagonist has no bond with themself. This covers all ten named non-player characters in Everyone. Unnamed workers/passengers, voice aliases, removed speakers and undeveloped wider-cast placeholders such as Goro and Kanae do not gain invented routes here.
 
 ### Mio: leaving a working server alone
 
