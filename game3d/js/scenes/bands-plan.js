@@ -1,10 +1,31 @@
 // The bands past each outdoor place's exits (#260), what builds each and where, in the island frame
 // ([x0, x1, z0, z1]); scenes/bands.js builds them (its header lists the builders). Rects of one band never overlap,
 // and never cover what the place lays itself. Each place's bands stay small (game3d/test/unit/bands-build.test.mjs).
+import { CHUNKS } from './island-chunks.js';
+import { LANE as PLAZA_LANE, STOP, TERRACE, FOOTPATH } from './plaza/plan.js';
+
+// The fountain plaza seen down the lane from a neighbour (#658), from x0 to x1 in the plaza's frame, between the
+// canteen's front and the footpath behind the shops. The neighbour lays the lane itself over [l0, l1] (its brick
+// runs in under the circle's border ring and its planting stops at the plaza's verges), so that strip stays out.
+function plazaView(x0, x1, [l0, l1]) {
+  const [px, pz] = CHUNKS.plaza.at,
+    [z0, z1] = [TERRACE[2], FOOTPATH[2]],
+    [lz0, lz1] = PLAZA_LANE.w.slice(2);
+  const rects = [
+    [x0, l0, z0, z1],
+    [l0, l1, z0, lz0],
+    [l0, l1, lz1, z1],
+    [l1, x1, z0, z1],
+  ].filter((r) => r[1] - r[0] > 0.01);
+  return { by: 'fountainPlaza', rects: rects.map(([a, b, c, d]) => [a + px, b + px, c + pz, d + pz]) };
+}
+
 // The lawn east of m6, south of the office street's own belts; bank planting is shared with campus.
 const M6_LAWN = [[24.4, 31, -45.4, -41], 'keyaki,pine', 3.4];
 
 export const BANDS = {
+  // the plaza at the lane's end, past the gateposts, on to the jog (forecourt/plan.js stops the lane's planting there)
+  forecourt: [plazaView(-STOP, PLAZA_LANE.e[1], [-STOP, PLAZA_LANE.w[1]])],
   dorm_court: [
     // The pocket park and its actual shop fronts across the courtyard's gate.
     // Stop at the street's western curb so the courtyard keeps ownership of its lane.
@@ -74,6 +95,8 @@ export const BANDS = {
     },
   ],
   east_lane: [
+    // the plaza west along the lane: its circle, fountain and ring, and the lane on west past it
+    plazaView(-20, STOP, [PLAZA_LANE.e[0], STOP]),
     // the sports lane's corner with the north street and the lawns past it, past the north street's top
     { by: 'sportsGrounds', rects: [[56, 84, -62, -46.5]] },
     {

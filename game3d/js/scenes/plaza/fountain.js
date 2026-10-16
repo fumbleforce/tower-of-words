@@ -77,7 +77,8 @@ function streakTexture() {
   return t;
 }
 
-export function fountain(root, x, z, R) {
+// far: seen from a neighbour down the lane (bands.js), with a third of the coins, which read there only as glints
+export function fountain(root, x, z, R, { far = false } = {}) {
   const group = new THREE.Group();
   group.position.set(x, 0, z);
   const W = 0.42, // the rim's width
@@ -142,14 +143,14 @@ export function fountain(root, x, z, R) {
   // camera sees (south), and a ring round the drum. Their own materials: after dark they catch the underwater light
   const coinsA = [],
     coinsB = [];
-  for (let i = 0; i < 150; i++) {
+  for (let i = 0; i < 150; i += far ? 3 : 1) {
     const south = i < 95;
     const a = south ? Math.PI * (0.12 + 0.76 * rnd()) : rnd() * Math.PI * 2;
     const r = south ? IN - 0.25 - rnd() * 1.3 : 1.2 + rnd() * 0.5;
-    const c = new THREE.CylinderGeometry(0.075, 0.075, 0.012, 10)
+    const c = new THREE.CylinderGeometry(0.075, 0.075, 0.012, far ? 6 : 10)
       .rotateX((rnd() - 0.5) * 0.3)
       .translate(Math.cos(a) * r, 0.075, Math.sin(a) * r);
-    (i % 3 ? coinsA : coinsB).push(c);
+    ((far ? i / 3 : i) % 3 ? coinsA : coinsB).push(c);
   }
   const coinMat = (color, glow) =>
     new THREE.MeshStandardMaterial({

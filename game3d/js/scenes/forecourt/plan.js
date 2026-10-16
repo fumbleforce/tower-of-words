@@ -10,10 +10,11 @@
 //   the lane: east from the court's north-east corner along the tower's south face, an avenue on to the plaza
 import { STATION, DOOR_X } from '../station-exterior.js';
 import { T, at, DOOR_U } from '../head-office/frame.js';
-import { BUILDINGS, toLocal } from '../island-layout.js';
+import { BUILDINGS, CHUNKS, toLocal } from '../island-layout.js';
 import { CROSS, STREET_W } from './cross-plan.js';
 import { doorAt } from '../outdoor/block-face.js';
 import { STAFF_GATE, STAFF_FENCE } from './access-plan.js';
+import { LANE as PLAZA_LANE, STOP as PLAZA_STOP, F as PLAZA_F } from '../plaza/plan.js';
 export { CROSS, STREET_W };
 
 export { STATION, DOOR_X };
@@ -79,16 +80,22 @@ export const SHELTER_PATH = [SHED_ST[1], SHELTER[0] - 0.1, SHELTER[2], SHELTER[3
 export const SHELTER_FLOOR = [SHELTER_PATH[0], SHELTER[1], SHELTER[2], SHELTER[3]];
 export const SHELTER_BIKES = [SHELTER[0] - 0.05, SHELTER[1] + 0.05, SHELTER[2], SHELTER[3]];
 export const NORTH_BED = [SHED_ST[1] + 0.3, 5.5, HZ + 0.05, HZ + 1.15]; // the raised bed along the court's north edge
-// the lane, and the planted strips either side of it (the north one starts past the tower)
-export const LANE = [LE, 52, HZ, HZ + 3];
+// the lane, and the planted strips either side of it (the north one starts past the tower). Down the lane lies the
+// fountain plaza (its band, bands-plan.js): the lane's brick runs in under the circle's border ring as the plaza
+// lays it, and the strips stop where the plaza's own verges stop, short of its ring bed, so the fountain shows at
+// the lane's end (#658)
+const PLAZA_X = toLocal('forecourt', ...CHUNKS.plaza.at)[0]; // the plaza frame's x = 0 here
+export const LANE_END = PLAZA_X + PLAZA_LANE.w[1],
+  PLANTED_END = PLAZA_X + PLAZA_F[0] - PLAZA_STOP;
+export const LANE = [LE, LANE_END, HZ, HZ + 3];
 export const LANE_Z = (LANE[2] + LANE[3]) / 2;
-export const STRIP_S = [LE, 52, LANE[3], LANE[3] + 3.2],
-  STRIP_N = [TE, 52, HZ - 1.2, HZ];
+export const STRIP_S = [LE, PLANTED_END, LANE[3], LANE[3] + 3.2],
+  STRIP_N = [TE, PLANTED_END, HZ - 1.2, HZ];
 export const LANE_WALK = 35; // where the walk grid ends (the plaza trip starts before it)
 export const GATE_X = 35.6; // the gateposts at the edge of head office's grounds
-// the planted rhythm along the lane: trees every 4, the first 2 past the court
+// the planted rhythm along the lane: trees every 4, the first 2 past the court, the last a step clear of the strips' end
 export const LANE_TREES = [];
-for (let x = LE + 2.05; x < 52; x += 4) LANE_TREES.push(x);
+for (let x = LE + 2.05; x < PLANTED_END - 1; x += 4) LANE_TREES.push(x);
 // the garden south of the lane (forecourt/gardens.js): stepping stones from a gap in the lane's hedge, between the
 // first two avenue trees, to a raked gravel court with a bench and a stone lantern; he can walk both
 export const PATH_X = LANE_TREES[0] + 2.2;

@@ -20,6 +20,10 @@
 //                 trees over layered planting (dorm-court/cluster-yards.js belt), and walks [rect, kerb sides]
 //                 in the walks' pale slabs
 //   fronts        skyline boxes given a ground floor and a door (plaza/east-fronts.js): blocks [{ id, face, ground }]
+//   fountainPlaza the fountain plaza as plaza.js lays it, seen down the lane from a neighbour: the circle, the
+//                 fountain, the ring bed and its trees, benches, lamps, the notice board, the lanes' and the link's
+//                 ends with their verges and the terrace's paving, as far as the band reaches; groves: true adds the
+//                 tree groups on its lawns
 // Distant bands do not cast shadows; quarterGrounds retains campus tree shadows at the walked seam. Each band is merged by
 // material on its own (one mesh per kind) and named, so the camera culls it whenever its exit is out of view.
 import * as THREE from 'three';
@@ -38,7 +42,7 @@ import { eastLaneSteps, walk } from './plaza/east-lane.js';
 import { yardGround, yardSteps } from './plaza/north-yard.js';
 import { blockSets, buildBlockSets } from './outdoor/block.js';
 import { frontsSteps } from './plaza/east-fronts.js';
-import { BLOCKS as EAST_BLOCKS } from './plaza/east-plan.js';
+import { BLOCKS as EAST_BLOCKS, CROSS } from './plaza/east-plan.js';
 import { groundsSteps } from './sports/grounds.js';
 import { walkSteps, kerbWalks } from './east-coast/walk.js';
 import { planting as officeLawns, streetSteps as officeStreet } from './office-quarter/grounds.js';
@@ -48,6 +52,13 @@ import { quarterGrounds } from './campus/quarter-grounds.js';
 import { southQuarterGrounds } from './forecourt/quarter-planting.js';
 import { shedGarden } from './campus/shed-garden.js';
 import { BANDS } from './bands-plan.js';
+import { laneField } from './outdoor/lane.js';
+import { circleSteps, terrace } from './plaza/ground.js';
+import { ringSteps, vergeSteps } from './plaza/green.js';
+import { groveSteps } from './plaza/groves.js';
+import { buildBenches, buildLamps, buildNoticeBoard } from './plaza/furniture.js';
+import { fountain } from './plaza/fountain.js';
+import * as PLAN from './plaza/plan.js';
 import { lightUp } from '../kit/light/glow.js';
 
 export { BANDS };
@@ -167,6 +178,40 @@ const BUILD = {
         kinds.split(',').map((k) => TREES[k]),
         { seed: seed ?? (b.seed || 300) + i * 7, pitch, under: 1 },
       );
+  },
+  *fountainPlaza(b, isl, out, s) {
+    // the landmark at the end of the lane (#658): the circle and the fountain are whole, so the band holds them
+    const { pf, lights, clip } = plazaFrame(b, isl, s),
+      q = new Parts(),
+      pv = paver(),
+      parts = clip.parts(q),
+      paving = clip.paver(pv),
+      nav = { block() {} }, // backdrop, never walked from here
+      { F, LZ, HALF, LANE, LINK, MARKET, MARKET_VIEW, BASIN } = PLAN,
+      origin = [F[0], LZ - HALF];
+    laneField(paving, LANE.w, { origin });
+    laneField(paving, LANE.e, { origin });
+    laneField(paving, LINK, { along: 'z', origin });
+    // the cross walk through the east verges, as plaza/east-lane.js lays it
+    for (const r of [
+      [CROSS[0], CROSS[1], CROSS[2], LANE.e[2]],
+      [CROSS[0], CROSS[1], LANE.e[3], CROSS[3]],
+    ])
+      walk(paving, r);
+    laneField(paving, MARKET_VIEW, { along: 'z', origin: [MARKET[0], MARKET[2]] });
+    terrace(paving);
+    pv.build(pf);
+    yield* circleSteps(pf);
+    yield* ringSteps(parts, { far: true });
+    yield* vergeSteps(parts);
+    if (b.groves) yield* groveSteps(parts);
+    buildBenches(parts, nav);
+    buildNoticeBoard(parts, nav);
+    const uplit = buildLamps(clip.lights(lights), parts, nav, pf);
+    q.build(pf);
+    const water = fountain(pf, F[0], F[1], BASIN, { far: true });
+    out.glows.push(...uplit, ...water.glows);
+    out.update.push(() => water.update(performance.now() / 1000));
   },
   *fronts(b, isl, out, s) {
     const blocks = b.blocks.map((k) => {

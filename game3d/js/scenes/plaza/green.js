@@ -18,7 +18,7 @@ import { groveSteps } from './groves.js';
 import * as P from './plan.js';
 import * as E from './east-plan.js';
 
-const { F, R, BAND, ARCS, LANE, LINK, AVENUE, TERRACE, TERRACE_S, polar, rad } = P;
+const { F, R, BAND, ARCS, LANE, LINK, AVENUE, TERRACE, TERRACE_S, STOP, polar, rad } = P;
 const CROSS = E.CROSS_X;
 // cosmos, the autumn flower of every Japanese park: pink, white and a deep rose
 const COSMOS = ['#d59aae', '#ece6e3', '#b86f8e', '#dcb3c6'];
@@ -35,14 +35,14 @@ export const RING_LAMPS = [213.75, 326.25, 146.25, 33.75].map(rad);
 export const SOUTH_PAIR = [-(P.MARKET[1] + 0.5), P.MARKET[1] + 0.5];
 const MAPLES = [247.5, 292.5];
 
-// cosmos: a low mound of leaves with small flowers dotted over its top
-function cosmos(p, x, z, seed) {
+// cosmos: a low mound of leaves with small flowers dotted over its top (a few bigger ones, seen from far)
+function cosmos(p, x, z, seed, far = false) {
   const q = rng(seed + 5);
   mound(p, x, z, 0.32, LEAF.fresh, { squash: 0.7 });
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < (far ? 3 : 9); i++) {
     const a = q() * Math.PI * 2,
       d = q() * 0.26;
-    const g = new THREE.IcosahedronGeometry(0.045, 0).translate(
+    const g = new THREE.IcosahedronGeometry(far ? 0.07 : 0.045, 0).translate(
       x + Math.cos(a) * d,
       0.26 + q() * 0.08,
       z + Math.sin(a) * d * 0.8,
@@ -72,7 +72,8 @@ function ringArc(p, [a0, a1]) {
   arcBox(p, LEAF.mid, F, r1 - 0.6, r1 - 0.22, a0 + pad, a1 - pad, { y: 0.51, h: 0.04, cast: false, surf: null });
 }
 
-export function* ringSteps(p) {
+// far: seen from a neighbour down the lane (bands.js), the cosmos with fewer, bigger flowers
+export function* ringSteps(p, { far = false } = {}) {
   for (const arc of Object.values(ARCS)) {
     ringArc(p, arc);
     yield;
@@ -101,14 +102,13 @@ export function* ringSteps(p) {
       if (lampDeg.some((l) => Math.abs(d + k * 3.2 - l) < 2.6)) continue;
       const [x, z] = polar(rad(d + k * 3.2), R + 0.45);
       if (k === 0 && Math.round(d) % 2) grass(p, x, z, { seed: Math.round(d), h: 0.45 });
-      else cosmos(p, x, z, Math.round(d * 10 + k + q() * 5));
+      else cosmos(p, x, z, Math.round(d * 10 + k + q() * 5), far);
       if (k === 1) yield;
     }
 }
 
 // both sides of both lanes, from the edge of the view in to just short of the ring bed, the same on each side
-const STOP = R + BAND + 0.9;
-function* verges(p) {
+export function* vergeSteps(p) {
   const { w } = LANE;
   const west = AVENUE.map((d) => F[0] - d);
   verge(p, [-44, w[2]], [F[0] - STOP, w[2]], 'n', { trees: west, seed: 3 });
@@ -160,7 +160,7 @@ function* terraceEdges(p) {
 // a generator that yields every few trees and flowers, so the plaza builds in slices (js/perf/slice.js)
 export function* greenSteps(p) {
   yield* ringSteps(p);
-  yield* verges(p);
+  yield* vergeSteps(p);
   yield* terraceEdges(p);
   yield* groveSteps(p);
 }

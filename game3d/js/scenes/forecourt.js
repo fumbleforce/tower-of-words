@@ -41,6 +41,7 @@ import { buildNooks } from './outdoor/nooks.js';
 import { streetPlanting } from './diorama/planting.js';
 import { phoneLighter } from '../perf/phone.js';
 import { dressStreet, finishWindows, finishOffice } from './diorama/index.js';
+import { bandSteps } from './bands.js';
 
 const { STATION, DOOR_X, X0, SE, ZN, HZ, HO_X, COURT, BIKES, GARDEN, LANE, LANE_Z, STRIP_S, STRIP_N, SERVICE, TE } = PL;
 const lanePt = (x) => [x, LANE_Z];
@@ -152,6 +153,8 @@ export function* forecourtSteps() {
   const lights = lamps.build(statics);
   yield;
   const { sky, front } = yield* town(statics, planting);
+  // the fountain plaza at the lane's end, as the plaza lays it (bands-plan.js), in the plaza's own look
+  const bands = yield* bandSteps(root, 'forecourt');
   // the street style: its materials, the station's softened walls, the paving detail, leaves and meadow, its daylight
   const streetEnvironment = dressStreet(statics, scene, sun, station, nav, phoneLighter());
   light.takeLook('day');
@@ -161,7 +164,7 @@ export function* forecourtSteps() {
   finishWindows(root, streetEnvironment);
   const lift = ho.landing;
   // after work the lamps, the lit windows and the station and tower glass glow
-  light.glow.add(lights.glows, front.glows, nooks.glows, ho.glows, station.glows, sky.glows);
+  light.glow.add(lights.glows, front.glows, nooks.glows, ho.glows, station.glows, sky.glows, bands.glows);
   if (north.lit) light.glow.add({ show: north.lit });
   let previousTime = null;
   return {
@@ -201,6 +204,7 @@ export function* forecourtSteps() {
     hoDoor: [HO_X, T.o[1]],
     update(t, dt) {
       statics.userData.dioramaDetail();
+      bands.update(sun);
       const elapsed = dt ?? (previousTime == null ? 1 / 60 : t - previousTime);
       previousTime = t;
       lift.update(Math.min(0.1, Math.max(0, elapsed)));

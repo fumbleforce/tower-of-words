@@ -18,8 +18,8 @@ export const TOWER = [T.o[0], T.o[0] + T.W, T.o[1] - T.D, T.o[1]];
 export const DOORWAY = [DOOR_X - 0.55, DOOR_X + 0.55, ZN - 0.1, ZN + 1.4];
 // the service yard's mouth, up to its closed gate (forecourt/service.js)
 export const YARD_MOUTH = [SERVICE[0], SERVICE[1], HZ - 0.25, HZ];
-// the bench bays cut into the lane's south strip (forecourt/lane.js), paved and walked into
-export const BAY_X = [P.LANE_TREES[1] + 2, P.LANE_TREES[4] + 2];
+// the bench bay cut into the lane's south strip (forecourt/lane.js), paved and walked into
+export const BAY_X = [P.LANE_TREES[1] + 2];
 export const BAYS = BAY_X.map((x) => [x - 1.0, x + 1.0, S[2], S[2] + 0.9]);
 
 // the court's raised north bed (forecourt/court.js), taken out of the court back to its north edge
@@ -60,7 +60,7 @@ export function ground() {
       },
       // The staff entrance is visibly closed. Public trips continue east and south.
       ...P.ACCESS_BLOCKS.map((rect) => ({ kind: 'gate', rect })),
-      { kind: 'open', rect: [52, 80, LANE[2], LANE[3]] },
+      { kind: 'open', rect: [LANE[1], 80, LANE[2], LANE[3]] },
       { kind: 'open', rect: [link[0], link[1], link[3], link[3] + 10] },
       // the campus's buildings and its own trips' starts, past the streets seen from here
       ...NORTH_BUILDINGS,

@@ -7,7 +7,9 @@ import { test } from 'node:test';
 export const BAND_TRIS = 35000; // per place, all its bands
 // the north campus is open to four neighbours past its edges (the office street and its row, the canteen's yard, the
 // shed and the coast walk), so it sees more of them; its frame stays inside its place budget (tools/perf)
-const BAND_TRIS_FOR = { campus: 60000 };
+// the east lane looks both ways down its lane: west to the fountain plaza, its landmark (#658), and north to the sports
+// lane
+const BAND_TRIS_FOR = { campus: 60000, east_lane: 50000 };
 
 test('every place builds its bands inside the triangle budget', async () => {
   const hooks = registerHooks({

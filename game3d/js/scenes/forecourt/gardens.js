@@ -136,7 +136,8 @@ function north(p) {
     hedge(p, [a, z], [b, z], { w: 0.55, h, seed: Math.round(b) });
 }
 
-// the belts of taller trees behind both gardens: irregular spacing and depth, mixed kinds, on past the gateposts
+// the belts of taller trees behind both gardens: irregular spacing and depth, mixed kinds, on past the gateposts to
+// where the plaza's lawns begin
 function belts(p) {
   const q = rng(17);
   for (const [x0, zs, side] of [
@@ -144,7 +145,7 @@ function belts(p) {
     [TE + 0.8, N[2] - 6.4, -1],
   ]) {
     let i = 0;
-    for (let x = x0; x < 52; x += 1.7 + q() * 1.2, i++) {
+    for (let x = x0; x < S[1]; x += 1.7 + q() * 1.2, i++) {
       const kind = [keyaki, ginkgo, keyaki, sakura, keyaki][Math.floor(q() * 5)];
       kind(p, x, zs + side * q() * 1.8, 1.1 + q() * 0.25, i + (side > 0 ? 50 : 80));
     }

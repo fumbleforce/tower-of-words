@@ -95,6 +95,9 @@ export const ARCS = {
 // the zelkovas along the lanes, every 4 from the ring bed out to the edge of the view; the lamps stand between
 // every other pair
 export const AVENUE = [0, 4, 8].map((d) => R + BAND + 3 + d);
+// the lanes' verges run from the edge of the view in to here (from the fountain), just short of the ring bed; a
+// neighbour's own lane stops its planting here too, where the plaza band takes over (bands-plan.js)
+export const STOP = R + BAND + 0.9;
 // the footpath along the shops' backs, east to the dorm street
 export const FOOTPATH = [-44, local(path('dorm_street').rect)[0], SHOPS_Z - 1.7, SHOPS_Z];
 
