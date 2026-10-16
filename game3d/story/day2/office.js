@@ -134,7 +134,7 @@ export default {
     d2_kenji_invite_again: [{ say: 'kenji', emo: 'bright', text: 'Blue curtain! After work. I am there.' }],
     d2_gift_mio: [
       { set: 'd2_gifted_mio' },
-      { say: 'mio', emo: 'warm', text: 'Oh, thanks. I’ll put it here until I can stop for a minute.' },
+      { say: 'mio', emo: 'dry', text: 'Oh. Thanks. I’ll drink it when I can look away from this, so... later.' },
     ],
     d2_gift_mori: [
       { set: 'd2_gifted_mori' },
