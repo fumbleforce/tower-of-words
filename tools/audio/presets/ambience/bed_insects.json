@@ -1,0 +1,26 @@
+{
+ "id": "bed_insects",
+ "kind": "ambience",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/nature.py (SOUNDS[\"bed_insects\"])",
+   "generator": "synth",
+   "prompt": "Bell crickets and field crickets at night, a faint chorus.",
+   "settings": {
+    "module": "tools/feel/nature.py",
+    "sound": "bed_insects"
+   },
+   "length": null,
+   "loop": {
+    "wrap": true,
+    "fade": 3.0
+   },
+   "loudness": -42,
+   "use": "Outdoors after work: bell crickets and field crickets.",
+   "live": "bed_insects"
+  }
+ ]
+}

@@ -83,6 +83,7 @@ The anime portraits beside the dialogue box. The faces each person has are in [c
 
 ## Music and sound
 
+- New music, songs, beds and effects are made from presets by tools/audio/make.py and reach the game only when Jørgen picks them (art/SOUND.md, How a sound is made). Background music comes from Lyria 2 or YuE2, songs are YuE2 prototypes that a paid release can't ship, beds from Stable Audio 3 or synthesis, and effects from synthesis first, then Stable Audio 3 or CC0 packs.
 - Each place has a loop: the train `calm` (also under the title), the lobby `lively`, the office `office`, after work `night` (a YuE2 city-pop instrumental, 132 s; the others are Lyria). Each loop is cut where the music repeats, 22 to 29 s long for the Lyria ones, and plays without a gap at the seam (game3d/audio/music/loops.json). Voices duck it.
 - Each place has an ambience bed with occasional one-shots under the music; a kotodama dips it.
 - Each door has its own sound: the train doors, the station's glass entrance doors, the lift doors (after the lift's ding when they open) and the gate's flaps. The copier running, the kettle pouring and a can dropping in the vending machine have theirs too. No crowd sound: the ambience bed carries the people.

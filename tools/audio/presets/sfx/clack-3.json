@@ -1,0 +1,23 @@
+{
+ "id": "clack-3",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"clack-3\"])",
+   "generator": "synth",
+   "prompt": "Two dull knocks of train wheels over a rail joint, with a faint tick.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "clack-3"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -31,
+   "use": "The monorail over a beam joint (one of three).",
+   "live": "clack-3"
+  }
+ ]
+}

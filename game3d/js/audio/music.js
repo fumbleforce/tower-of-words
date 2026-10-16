@@ -6,7 +6,7 @@ import('../ambience.js').then((module) => {
 });
 
 // ---------- music ----------
-// Loops (audio/music/*.mp3), one per place, cut by tools/make_loop.py. Each file is the loop body with a second of
+// Loops (audio/music/*.mp3), one per place, cut by tools/audio/make_loop.py. Each file is the loop body with a second of
 // itself wrapped around both ends, and audio/music/loops.json gives the body's start and end in seconds. One
 // AudioBufferSourceNode loops that region sample-accurately, so there is no timer at the seam (a hidden tab can't
 // delay it) and an MP3 decoder that keeps or drops the encoder delay still joins continuous audio. A track missing

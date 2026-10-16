@@ -1,0 +1,23 @@
+{
+ "id": "chime",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"chime\"])",
+   "generator": "synth",
+   "prompt": "Three soft bell notes falling.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "chime"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -27,
+   "use": "The monorail's door chime.",
+   "live": "chime"
+  }
+ ]
+}

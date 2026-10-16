@@ -1,0 +1,23 @@
+{
+ "id": "printer",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from tools/feel/sa3_gen.py SPEC; takes 1 to 4 are its seeds 5100, 5231, 5362 and 5493; the game plays printer-5493 (tools/feel/picks.json)",
+   "generator": "sa3",
+   "prompt": "A laser printer in an office printing three pages: a motor whirs up, paper feeds through the rollers, pages drop into the tray, the motor winds down.",
+   "settings": {
+    "seed": 5100,
+    "seed_step": 131
+   },
+   "length": 8,
+   "loop": null,
+   "loudness": -39,
+   "use": "A printer, far off in the office, scattered over the bed.",
+   "live": "printer"
+  }
+ ]
+}

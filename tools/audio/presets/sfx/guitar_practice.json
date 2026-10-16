@@ -1,0 +1,23 @@
+{
+ "id": "guitar_practice",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/pluck.py (SOUNDS[\"guitar_practice\"])",
+   "generator": "synth",
+   "prompt": "A clean electric guitar played slowly by a learner, one fumbled note, through a small phone speaker.",
+   "settings": {
+    "module": "tools/feel/pluck.py",
+    "sound": "guitar_practice"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -30,
+   "use": "A train passenger's guitar practice, from a phone speaker or a lifted headphone.",
+   "live": "guitar_practice"
+  }
+ ]
+}

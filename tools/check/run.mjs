@@ -33,6 +33,8 @@ const checks = [
   ['direct render test', ['--test', 'tools/facts/direct-render.test.mjs']],
   ['art scripts', ['tools/facts/art-scripts.mjs']],
   ['art scripts test', ['--test', 'tools/facts/art-scripts.test.mjs']],
+  ['audio scripts', ['tools/audio/ratchet.py'], 'python3'],
+  ['audio presets and refusals', ['tools/audio/test_audio.py'], 'python3'],
   ['story map', ['tools/bible/story-map-check.mjs']],
   ['nav registry', ['tools/check/nav-registry.mjs']],
 ];

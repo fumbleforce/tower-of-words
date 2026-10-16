@@ -1,0 +1,23 @@
+{
+ "id": "lift",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"lift\"])",
+   "generator": "synth",
+   "prompt": "One clear bell note with a long tail.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "lift"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -28,
+   "use": "The lift's arrival tone.",
+   "live": "lift"
+  }
+ ]
+}

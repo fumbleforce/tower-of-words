@@ -1,0 +1,23 @@
+{
+ "id": "beep",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"beep\"])",
+   "generator": "synth",
+   "prompt": "A short soft electronic beep of a card reader.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "beep"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -30,
+   "use": "A card reader at the gate.",
+   "live": "beep"
+  }
+ ]
+}

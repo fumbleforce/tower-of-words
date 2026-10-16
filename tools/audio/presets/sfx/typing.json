@@ -1,0 +1,23 @@
+{
+ "id": "typing",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from tools/feel/sa3_gen.py SPEC; takes 1 to 4 are its seeds 5100, 5231, 5362 and 5493; the game plays typing-5362 (tools/feel/picks.json)",
+   "generator": "sa3",
+   "prompt": "Someone typing on a computer keyboard for a few seconds in a quiet office, soft keys, medium distance.",
+   "settings": {
+    "seed": 5100,
+    "seed_step": 131
+   },
+   "length": 6,
+   "loop": null,
+   "loudness": -40,
+   "use": "Someone typing at a desk nearby, scattered over the bed.",
+   "live": "typing"
+  }
+ ]
+}

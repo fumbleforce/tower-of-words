@@ -1,5 +1,5 @@
 """Measure how much vocal is in a track: split it with Demucs (htdemucs_ft, two stems) on the CPU and compare
-the vocal stem with the full mix. Run with ~/ai/sep/bin/python tools/vocal_check.py file.mp3 [...]
+the vocal stem with the full mix. Run with ~/ai/sep/bin/python tools/audio/vocal_check.py file.mp3 [...]
 Prints: vocal energy relative to the mix (dB) and the share of 0.5 s windows where the vocal stem is
 within 15 dB of the mix (a rough 'someone is singing' measure). Stems land in ~/ai/sep/out/."""
 import sys, os, json, subprocess

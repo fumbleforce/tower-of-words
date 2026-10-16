@@ -1,0 +1,23 @@
+{
+ "id": "door",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"door\"])",
+   "generator": "synth",
+   "prompt": "A sliding door rolling open on its runner and stopping with a soft thud.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "door"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -29,
+   "use": "A sliding door.",
+   "live": "door"
+  }
+ ]
+}

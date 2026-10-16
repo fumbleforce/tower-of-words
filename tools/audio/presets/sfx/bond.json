@@ -1,0 +1,23 @@
+{
+ "id": "bond",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"bond\"])",
+   "generator": "synth",
+   "prompt": "Two low warm soft mallet notes, a third apart.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "bond"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -27,
+   "use": "Someone likes Eric a little more.",
+   "live": "bond"
+  }
+ ]
+}

@@ -1,0 +1,25 @@
+{
+ "id": "bed_lobby-synth",
+ "kind": "ambience",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"bed_lobby\"]); the game plays a Stable Audio take instead (preset bed_lobby)",
+   "generator": "synth",
+   "prompt": "A large stone hall: air handling hum with a long reverb.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "bed_lobby"
+   },
+   "length": null,
+   "loop": {
+    "wrap": true,
+    "fade": 3.0
+   },
+   "loudness": -36,
+   "use": "The bed in the head office lobby."
+  }
+ ]
+}

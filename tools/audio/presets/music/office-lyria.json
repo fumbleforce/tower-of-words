@@ -1,0 +1,26 @@
+{
+ "id": "office-lyria",
+ "kind": "music",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from tools/music_round5.py (written for Lyria 3 Pro); its length sentence dropped, since Lyria 2 makes about 33 s",
+   "generator": "lyria-2",
+   "prompt": "Lo-fi hip hop beat with a dusty soft drum loop and mellow electric piano chords, a little vinyl warmth, steady and unobtrusive, good for working. 80 BPM. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. Sparse, unhurried and easy to listen to for a long time. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.",
+   "settings": {
+    "seed": 7011,
+    "seed_step": 1
+   },
+   "length": null,
+   "loop": {
+    "min": 20,
+    "max": 30,
+    "fade": 1.5
+   },
+   "loudness": -20,
+   "use": "Inside the office while Eric works."
+  }
+ ]
+}

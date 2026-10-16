@@ -1,0 +1,23 @@
+{
+ "id": "buzz",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/pluck.py (SOUNDS[\"buzz\"])",
+   "generator": "synth",
+   "prompt": "A phone vibrating on a lap.",
+   "settings": {
+    "module": "tools/feel/pluck.py",
+    "sound": "buzz"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -31,
+   "use": "A phone buzzing on a lap (Mio's too).",
+   "live": "buzz"
+  }
+ ]
+}

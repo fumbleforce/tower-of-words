@@ -1,0 +1,32 @@
+{
+ "id": "evening-yue2",
+ "kind": "music",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from tools/music_round6.py (round 6, Review music-round-6); even takes add the NAR add-on, as there",
+   "generator": "yue2",
+   "prompt": "Japanese city pop, 104 BPM, clean electric guitar, Rhodes electric piano, slap bass, tight drums, warm, nostalgic, sunset, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix",
+   "settings": {
+    "lyrics": "[intro]\n[verse]\n[chorus]\n[verse]\n[chorus]\n[bridge]\n[chorus]\n[outro]",
+    "ckpt": "bf16",
+    "instrumental": true,
+    "nar": "even",
+    "seed": 9911,
+    "seed_step": 1
+   },
+   "length": 150,
+   "loop": {
+    "min": 75,
+    "max": 144,
+    "fade": 3.0,
+    "accept": 0.45
+   },
+   "loudness": -20,
+   "use": "Everywhere after work.",
+   "live": "night"
+  }
+ ]
+}

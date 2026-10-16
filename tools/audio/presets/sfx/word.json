@@ -1,0 +1,23 @@
+{
+ "id": "word",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"word\"])",
+   "generator": "synth",
+   "prompt": "Two soft vibraphone notes rising a fifth with a faint high sparkle and a warm tail.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "word"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -25,
+   "use": "A word learned.",
+   "live": "word"
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{
+ "id": "kotodama",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"kotodama\"])",
+   "generator": "synth",
+   "prompt": "A soft low impact, a deep tone that swells and sinks, glassy shimmering partials and a faint electric hum.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "kotodama"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -22,
+   "use": "A kotodama taking hold: the lights dip.",
+   "live": "kotodama"
+  }
+ ]
+}

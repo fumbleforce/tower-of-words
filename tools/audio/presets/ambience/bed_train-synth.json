@@ -1,0 +1,25 @@
+{
+ "id": "bed_train-synth",
+ "kind": "ambience",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"bed_train\"]); the game plays a Stable Audio take instead (preset bed_train)",
+   "generator": "synth",
+   "prompt": "Inside a monorail carriage: a low rumble, a soft motor whine and air rushing past.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "bed_train"
+   },
+   "length": null,
+   "loop": {
+    "wrap": true,
+    "fade": 3.0
+   },
+   "loudness": -35,
+   "use": "The bed inside the monorail."
+  }
+ ]
+}

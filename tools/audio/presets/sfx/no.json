@@ -1,0 +1,23 @@
+{
+ "id": "no",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"no\"])",
+   "generator": "synth",
+   "prompt": "Two muted wooden knocks falling in pitch.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "no"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -29,
+   "use": "Interface: a wrong answer.",
+   "live": "no"
+  }
+ ]
+}

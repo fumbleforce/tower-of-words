@@ -6,7 +6,7 @@ the loop body once through as art/candidates/music-3/<take>.mp3 for the Review i
 """
 import io, json, os, re, subprocess, sys
 import numpy as np, soundfile as sf
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path[:0] = [os.path.dirname(os.path.abspath(__file__)), os.path.join(os.path.dirname(os.path.abspath(__file__)), 'audio')]
 import make_loop, vocal_check
 
 RAW = os.path.expanduser('~/ai/music-raw/r3')

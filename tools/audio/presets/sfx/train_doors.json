@@ -1,0 +1,23 @@
+{
+ "id": "train_doors",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from tools/feel/sa3_gen.py SPEC; takes 1 to 4 are its seeds 5100, 5231, 5362 and 5493; the game plays train_doors-5100 (tools/feel/picks.json)",
+   "generator": "sa3",
+   "prompt": "Train doors sliding open with a short pneumatic hiss and a smooth rolling slide, then a soft thud.",
+   "settings": {
+    "seed": 5100,
+    "seed_step": 131
+   },
+   "length": 3,
+   "loop": null,
+   "loudness": -28,
+   "use": "The train's doors opening.",
+   "live": "train_doors"
+  }
+ ]
+}

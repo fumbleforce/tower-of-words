@@ -1,0 +1,42 @@
+{
+ "id": "call-home-tenor",
+ "kind": "song",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from art/candidates/karaoke-song-1/generate.py, take b (Review karaoke-song-1)",
+   "generator": "yue2",
+   "prompt": "Japanese, warm male tenor vocal, unforced adult register, modest Japanese acoustic pop, clear Japanese diction, acoustic guitar, electric piano, soft bass and drums, intimate karaoke accompaniment, complete short verse and refrain, 104 bpm",
+   "settings": {
+    "title": "帰りの電話",
+    "lyrics": "[verse]\n帰りの電車を一本見送って\nホームの端で電話をかけた\n話すことなんてないと思ってた\n\n[chorus]\nそっちは雨かと聞いただけ\n次の電車が来るまで話した\n明日も同じ時間にかけようか\n",
+    "ckpt": "int8",
+    "instrumental": false,
+    "seed": 207102,
+    "seed_step": 1,
+    "keep": {
+     "intro": [
+      "last",
+      1
+     ],
+     "interlude": [
+      "drop",
+      0
+     ],
+     "outro": [
+      "first",
+      1
+     ]
+    },
+    "max_score_s": 65
+   },
+   "length": 40,
+   "loop": null,
+   "loudness": -20,
+   "use": "Hamada's karaoke scene: the song he sings.",
+   "context": "Hamada sings it himself, in a booth upstairs at the karaoke box, on a Wednesday evening after work."
+  }
+ ]
+}

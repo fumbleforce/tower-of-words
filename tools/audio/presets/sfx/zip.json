@@ -1,0 +1,23 @@
+{
+ "id": "zip",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/pluck.py (SOUNDS[\"zip\"])",
+   "generator": "synth",
+   "prompt": "A bag zip pulled open.",
+   "settings": {
+    "module": "tools/feel/pluck.py",
+    "sound": "zip"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -30,
+   "use": "A train passenger's bag zip.",
+   "live": "zip"
+  }
+ ]
+}

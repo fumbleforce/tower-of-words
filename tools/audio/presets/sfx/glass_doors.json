@@ -1,0 +1,23 @@
+{
+ "id": "glass_doors",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from tools/feel/sa3_gen.py SPEC; takes 1 to 4 are its seeds 5100, 5231, 5362 and 5493; the game plays glass_doors-5231 (tools/feel/picks.json)",
+   "generator": "sa3",
+   "prompt": "Automatic glass sliding doors at a building entrance opening: a soft motor hum and a smooth slide.",
+   "settings": {
+    "seed": 5100,
+    "seed_step": 131
+   },
+   "length": 3,
+   "loop": null,
+   "loudness": -29,
+   "use": "The station's glass entrance doors.",
+   "live": "glass_doors"
+  }
+ ]
+}

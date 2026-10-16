@@ -1,0 +1,23 @@
+{
+ "id": "bath_answer",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/hum.py (SOUNDS[\"bath_answer\"])",
+   "generator": "synth",
+   "prompt": "A second man humming back in a tiled bathroom, with reverb.",
+   "settings": {
+    "module": "tools/feel/hum.py",
+    "sound": "bath_answer"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -29,
+   "use": "The dorm sento: a second man humming back (no longer played).",
+   "live": "bath_answer"
+  }
+ ]
+}

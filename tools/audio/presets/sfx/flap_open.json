@@ -1,0 +1,23 @@
+{
+ "id": "flap_open",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from tools/feel/sa3_gen.py SPEC; takes 1 to 4 are its seeds 5100, 5231, 5362 and 5493; the game plays flap_open-5231 (tools/feel/picks.json)",
+   "generator": "sa3",
+   "prompt": "Glass security turnstile flaps swinging open with a soft pneumatic whoosh and a click.",
+   "settings": {
+    "seed": 5100,
+    "seed_step": 131
+   },
+   "length": 2,
+   "loop": null,
+   "loudness": -30,
+   "use": "The gate's flaps swinging open.",
+   "live": "flap_open"
+  }
+ ]
+}

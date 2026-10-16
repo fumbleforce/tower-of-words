@@ -1,0 +1,23 @@
+{
+ "id": "nope",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"nope\"])",
+   "generator": "synth",
+   "prompt": "One soft low wooden knock.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "nope"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -33,
+   "use": "Interface: a tap on something that cannot be reached.",
+   "live": "nope"
+  }
+ ]
+}

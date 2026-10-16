@@ -1,0 +1,25 @@
+{
+ "id": "bed_lift-sa3",
+ "kind": "ambience",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from tools/feel/sa3_gen.py SPEC; takes 1 to 4 are its seeds 5100, 5231, 5362 and 5493",
+   "generator": "sa3",
+   "prompt": "Inside a moving elevator: a low steady motor hum and a soft whoosh of air, a faint rattle. No music.",
+   "settings": {
+    "seed": 5100,
+    "seed_step": 131
+   },
+   "length": 12,
+   "loop": {
+    "wrap": true,
+    "fade": 3.0
+   },
+   "loudness": -36,
+   "use": "The bed inside the lift."
+  }
+ ]
+}

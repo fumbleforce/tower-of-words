@@ -162,9 +162,11 @@ def wings_flap(secs=1.3):
     return buf
 
 
+SOUNDS = {'bed_birds': bed_birds, 'bed_insects': bed_insects, 'wings_flap': wings_flap}   # tools/audio presets name them
+
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)
-    for name, fn in (('bed_birds', bed_birds), ('bed_insects', bed_insects), ('wings_flap', wings_flap)):
+    for name, fn in SOUNDS.items():
         y = fn()
         y /= np.abs(y).max() + 1e-9
         sf.write(f'{OUT}/{name}.wav', (0.9 * y).astype(np.float32), SR)

@@ -1,0 +1,26 @@
+{
+ "id": "bed_lobby",
+ "kind": "ambience",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from tools/feel/sa3_gen.py SPEC; takes 1 to 4 are its seeds 5100, 5231, 5362 and 5493; the game plays bed_lobby-5493 (tools/feel/picks.json)",
+   "generator": "sa3",
+   "prompt": "A large office building lobby with a high ceiling and stone floor: a soft murmur of many people talking quietly, reverberant, a low air conditioning hum. No music.",
+   "settings": {
+    "seed": 5100,
+    "seed_step": 131
+   },
+   "length": 30,
+   "loop": {
+    "wrap": true,
+    "fade": 3.0
+   },
+   "loudness": -36,
+   "use": "The bed in the head office lobby.",
+   "live": "bed_lobby"
+  }
+ ]
+}

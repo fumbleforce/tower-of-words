@@ -1,0 +1,26 @@
+{
+ "id": "bed_station",
+ "kind": "ambience",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from tools/feel/sa3_gen.py SPEC; takes 1 to 4 are its seeds 5100, 5231, 5362 and 5493; the game plays bed_station-5231 (tools/feel/picks.json)",
+   "generator": "sa3",
+   "prompt": "An open-air elevated train platform on a quiet morning: light wind, distant city traffic hum, faint birds. Calm and constant, no music.",
+   "settings": {
+    "seed": 5100,
+    "seed_step": 131
+   },
+   "length": 30,
+   "loop": {
+    "wrap": true,
+    "fade": 3.0
+   },
+   "loudness": -38,
+   "use": "The bed on the station platform and forecourt.",
+   "live": "bed_station"
+  }
+ ]
+}

@@ -1,0 +1,26 @@
+{
+ "id": "bed_birds",
+ "kind": "ambience",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/nature.py (SOUNDS[\"bed_birds\"])",
+   "generator": "synth",
+   "prompt": "Tree sparrows chirping round about and a light wind, outdoors by day.",
+   "settings": {
+    "module": "tools/feel/nature.py",
+    "sound": "bed_birds"
+   },
+   "length": null,
+   "loop": {
+    "wrap": true,
+    "fade": 3.0
+   },
+   "loudness": -41,
+   "use": "Outdoors by day: sparrows and a light wind, under everything.",
+   "live": "bed_birds"
+  }
+ ]
+}

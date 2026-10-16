@@ -1,0 +1,23 @@
+{
+ "id": "doorslow",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"doorslow\"])",
+   "generator": "synth",
+   "prompt": "A heavy sliding door rolling slowly open.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "doorslow"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -30,
+   "use": "A slow, heavy sliding door.",
+   "live": "doorslow"
+  }
+ ]
+}

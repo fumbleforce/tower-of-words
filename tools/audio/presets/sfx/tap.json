@@ -1,0 +1,23 @@
+{
+ "id": "tap",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"tap\"])",
+   "generator": "synth",
+   "prompt": "A soft short click, like tapping a phone case with a fingernail.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "tap"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -33,
+   "use": "Interface: a tap on a button or row.",
+   "live": "tap"
+  }
+ ]
+}

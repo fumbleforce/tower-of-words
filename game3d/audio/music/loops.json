@@ -1,5 +1,5 @@
 {
- "about": "Loop region of each music file, in seconds of the file: tools/make_loop.py cut prints it. game3d/js/audio/music.js loops [start, end).",
+ "about": "Loop region of each music file, in seconds of the file: tools/audio/make_loop.py cut prints it; tools/audio/make.py promote writes it. game3d/js/audio/music.js loops [start, end).",
  "calm": {
   "start": 1.0,
   "end": 30.093

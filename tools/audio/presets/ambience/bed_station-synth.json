@@ -1,0 +1,25 @@
+{
+ "id": "bed_station-synth",
+ "kind": "ambience",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"bed_station\"]); the game plays a Stable Audio take instead (preset bed_station)",
+   "generator": "synth",
+   "prompt": "An open-air platform: light wind in gusts and a distant city hum.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "bed_station"
+   },
+   "length": null,
+   "loop": {
+    "wrap": true,
+    "fade": 3.0
+   },
+   "loudness": -38,
+   "use": "The bed on the station platform and forecourt."
+  }
+ ]
+}

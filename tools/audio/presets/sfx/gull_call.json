@@ -1,0 +1,23 @@
+{
+ "id": "gull_call",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from tools/feel/sa3_gen.py SPEC; takes 1 to 4 are its seeds 5100, 5231, 5362 and 5493; the game plays gull_call-5100 (tools/feel/picks.json)",
+   "generator": "sa3",
+   "prompt": "A single seagull calling outdoors, a long drawn-out mewing cry then a shorter squeal, clean, no other sounds, no music.",
+   "settings": {
+    "seed": 5100,
+    "seed_step": 131
+   },
+   "length": 4,
+   "loop": null,
+   "loudness": -34,
+   "use": "A gull crying, played near it.",
+   "live": "gull_call"
+  }
+ ]
+}

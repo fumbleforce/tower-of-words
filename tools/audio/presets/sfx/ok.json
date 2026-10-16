@@ -1,0 +1,23 @@
+{
+ "id": "ok",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"ok\"])",
+   "generator": "synth",
+   "prompt": "A soft bright mallet note on a vibraphone, short and pleasant.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "ok"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -29,
+   "use": "Interface: a right answer or a confirmed choice.",
+   "live": "ok"
+  }
+ ]
+}

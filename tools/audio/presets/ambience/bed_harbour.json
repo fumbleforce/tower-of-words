@@ -1,0 +1,26 @@
+{
+ "id": "bed_harbour",
+ "kind": "ambience",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from tools/feel/sa3_gen.py SPEC; takes 1 to 4 are its seeds 5100, 5231, 5362 and 5493; the game plays bed_harbour-5493 (tools/feel/picks.json)",
+   "generator": "sa3",
+   "prompt": "Calm water lapping gently against a stone harbour wall and moored boats, soft slow waves, a faint creak of ropes, steady and constant, no birds, no voices, no music.",
+   "settings": {
+    "seed": 5100,
+    "seed_step": 131
+   },
+   "length": 30,
+   "loop": {
+    "wrap": true,
+    "fade": 3.0
+   },
+   "loudness": -40,
+   "use": "The harbour: water lapping at the quay, under the birds.",
+   "live": "bed_harbour"
+  }
+ ]
+}

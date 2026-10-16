@@ -1,0 +1,22 @@
+{
+ "id": "phone_far-synth",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"phone_far\"]); the game plays a Stable Audio take instead (preset phone_far)",
+   "generator": "synth",
+   "prompt": "A desk phone ringing twice far away in a large room, muffled.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "phone_far"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -40,
+   "use": "A desk phone ringing far across the office, scattered over the bed."
+  }
+ ]
+}

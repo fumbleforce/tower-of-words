@@ -1,0 +1,26 @@
+{
+ "id": "bed_train",
+ "kind": "ambience",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from tools/feel/sa3_gen.py SPEC; takes 1 to 4 are its seeds 5100, 5231, 5362 and 5493; the game plays bed_train-5231 (tools/feel/picks.json)",
+   "generator": "sa3",
+   "prompt": "Inside a modern monorail carriage running smoothly: a steady low rumble, a soft electric motor whine, gentle air rushing past the windows. Constant, no voices, no music.",
+   "settings": {
+    "seed": 5100,
+    "seed_step": 131
+   },
+   "length": 30,
+   "loop": {
+    "wrap": true,
+    "fade": 3.0
+   },
+   "loudness": -35,
+   "use": "The bed inside the monorail.",
+   "live": "bed_train"
+  }
+ ]
+}

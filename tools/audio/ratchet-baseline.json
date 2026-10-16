@@ -1,0 +1,16 @@
+{
+ "about": "Scripts outside tools/audio that build an audio generation, with their counts, as the record of what ran; nothing new goes here (tools/audio/ratchet.py). Make sounds with tools/audio/make.py.",
+ "files": {
+  "art/candidates/karaoke-song-1/generate.py": 2,
+  "tools/feel/sa3_gen.py": 3,
+  "tools/island_audio/sfx_sa3.py": 3,
+  "tools/island_audio/song_gen.py": 3,
+  "tools/island_audio/song_gen2.py": 3,
+  "tools/island_audio/song_gen3.py": 2,
+  "tools/music_inst.py": 6,
+  "tools/music_round3.py": 1,
+  "tools/music_round4.py": 2,
+  "tools/music_round5.py": 2,
+  "tools/yue2_music.py": 3
+ }
+}

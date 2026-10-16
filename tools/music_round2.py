@@ -2,7 +2,7 @@
 measure the vocals in everything, and write legacy/proto2/music/round2.json for the old music page (archived).
 Run with ~/ai/sep/bin/python tools/music_round2.py (needs demucs + librosa, CPU only)."""
 import os, json, subprocess, sys
-sys.path.insert(0, os.path.dirname(__file__))
+sys.path[:0] = [os.path.dirname(__file__), os.path.join(os.path.dirname(__file__), 'audio')]
 from make_loop import make_loop
 from vocal_check import measure
 

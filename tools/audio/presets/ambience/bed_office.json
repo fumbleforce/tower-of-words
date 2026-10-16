@@ -1,0 +1,26 @@
+{
+ "id": "bed_office",
+ "kind": "ambience",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from tools/feel/sa3_gen.py SPEC; takes 1 to 4 are its seeds 5100, 5231, 5362 and 5493; the game plays bed_office-5100 (tools/feel/picks.json)",
+   "generator": "sa3",
+   "prompt": "A quiet open-plan office: a steady air conditioning hum, computer fans, a faint murmur of distant conversation. No music.",
+   "settings": {
+    "seed": 5100,
+    "seed_step": 131
+   },
+   "length": 30,
+   "loop": {
+    "wrap": true,
+    "fade": 3.0
+   },
+   "loudness": -39,
+   "use": "The bed in the office.",
+   "live": "bed_office"
+  }
+ ]
+}

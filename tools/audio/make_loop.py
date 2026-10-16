@@ -1,7 +1,7 @@
 """Cut a seamless loop out of a music track, and check a loop's seam.
 
-    ~/ai/sep/bin/python tools/make_loop.py cut in.mp3 out.mp3 [--min 20] [--max 75] [--fade 1.5] [--pad 1] [--accept 0.35]
-    ~/ai/sep/bin/python tools/make_loop.py check out.mp3 --start S --end E [--wav seam.wav]
+    ~/ai/sep/bin/python tools/audio/make_loop.py cut in.mp3 out.mp3 [--min 20] [--max 75] [--fade 1.5] [--pad 1] [--accept 0.35]
+    ~/ai/sep/bin/python tools/audio/make_loop.py check out.mp3 --start S --end E [--wav seam.wav]
 
 cut: finds the pair of points a < b, (b - a) between --min and --max seconds, where the few seconds after a sound most
 like the few seconds after b (chroma, MFCC and onset strength, compared frame by frame along the whole window), then

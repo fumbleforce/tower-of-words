@@ -1,0 +1,23 @@
+{
+ "id": "bath_first",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/hum.py (SOUNDS[\"bath_first\"])",
+   "generator": "synth",
+   "prompt": "A man humming a slow tune in a tiled bathroom, heard through a curtain, with reverb.",
+   "settings": {
+    "module": "tools/feel/hum.py",
+    "sound": "bath_first"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -31,
+   "use": "The dorm sento: a man humming inside, heard through the curtain (no longer played).",
+   "live": "bath_first"
+  }
+ ]
+}

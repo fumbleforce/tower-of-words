@@ -1,94 +1,49 @@
-"""Level and encode game3d's effects and ambience beds.
-Sources: tools/feel/synth.py and hum.py output (~/ai/feel-audio/synth/*.wav) and picked Stable Audio takes (~/ai/feel-audio/raw/, PICKS below).
-Every file is levelled to the loudness it should have in the game (TARGET, LUFS), so the engine plays them at gain 1:
-  beds: integrated loudness; one-shots: the loudest 400 ms window (momentary max), which is fair to short sounds.
-Beds get a 3 s equal-power crossfade from their end into their start, so they loop without a seam even as a plain loop.
-Writes game3d/audio/sfx/<name>.mp3, game3d/audio/amb/<name>.mp3 and game3d/audio/sfx/levels.json (targets, measured
-loudness of the encoded MP3 by ffmpeg's EBU R128 meter, peak).
-Run: ~/ai/tts-bench/.venv/bin/python tools/feel/build_audio.py"""
-import os, json, subprocess, re, sys
-import numpy as np, soundfile as sf, pyloudnorm as pyln, librosa
+"""Remake game3d's effects and ambience beds from their sources, levelled and encoded as the game plays them.
+What each live sound is, its loudness target and its source come from its preset: the sfx and ambience presets in
+tools/audio/presets/ with a "live" name (the latest version). Its audio is the picked Stable Audio take
+(tools/feel/picks.json: raw file stem, start s, end s or None; raw takes in ~/ai/feel-audio/raw/) or, for a synth
+preset, the synth output (~/ai/feel-audio/synth/<name>.wav from the module the preset names).
+Levelling, the beds' 3 s loop crossfade and the encoded-file measurement are tools/audio/level.py, as in
+tools/audio/make.py --post. New sounds go through tools/audio/make.py and its promote; this script remakes the old set.
+Writes game3d/audio/sfx/<name>.mp3, game3d/audio/amb/<name>.mp3 and game3d/audio/sfx/levels.json.
+Run: ~/ai/tts-bench/.venv/bin/python tools/feel/build_audio.py [name ...]"""
+import os, json, subprocess, sys
+import numpy as np, soundfile as sf, librosa
 
 REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.insert(0, os.path.join(REPO, 'tools/audio'))
+import level, presets
+
 SYN = os.path.expanduser('~/ai/feel-audio/synth')
 RAW = os.path.expanduser('~/ai/feel-audio/raw')
 SFX = f'{REPO}/game3d/audio/sfx'
 AMB = f'{REPO}/game3d/audio/amb'
 SR = 44100
 
-# In-game loudness (LUFS). Reference points: voices about -20 (Mio -17 at 0.75 gain), music -20.5 in the file at
-# bus gain 0.2, so about -34.5 in the game (-42 under a voice).
-TARGET = {
-    # interface: quiet, clearly under the voices
-    'tap': -33, 'open': -33, 'nope': -33, 'ok': -29, 'no': -29,
-    # moments
-    'word': -25, 'command': -23, 'bond': -27, 'kotodama': -22,
-    # world events
-    'chime': -27, 'lift': -28, 'beep': -30, 'clack-1': -31, 'clack-2': -31, 'clack-3': -31,
-    'door': -29, 'doorslow': -30, 'train_doors': -28, 'glass_doors': -29, 'lift_doors': -29, 'brake': -29,
-    'flap_open': -30, 'copier_run': -30, 'kettle_pour': -31, 'vending': -29,
-    # the dorm courtyard's bath: hummed inside, heard through the curtain (tools/feel/hum.py); the place scales the
-    # first one down with distance
-    'bath_first': -31, 'bath_answer': -29,
-    # the train passengers (tools/feel/pluck.py): the guitar from a phone speaker or a lifted headphone, a bag's zip,
-    # a phone buzzing on a lap
-    'guitar_practice': -30, 'zip': -30, 'buzz': -31,
-    # distant one-shots scattered over the beds
-    'printer': -39, 'phone_far': -40, 'typing': -40,
-    # beds (under the music: -34.5)
-    'bed_train': -35, 'bed_station': -38, 'bed_lobby': -36, 'bed_office': -39, 'bed_lift': -36,
-    # outdoors (tools/feel/nature.py): sparrows and wind by day, crickets after work, under everything; a flock of
-    # pigeons taking off near Eric
-    'bed_birds': -41, 'bed_insects': -42, 'wings_flap': -34,
-    # a crow's caw and a gull's cry (Stable Audio takes, played when one is near), and the harbour's water at the quay
-    'crow_caw': -33, 'gull_call': -34, 'bed_harbour': -40,
-}
-BEDS = {k for k in TARGET if k.startswith('bed_')}
-PLUCKED = {'guitar_practice', 'zip', 'buzz'}
-NATURE = {'bed_birds', 'bed_insects', 'wings_flap'}
-# picked Stable Audio takes: name -> (raw file stem, start s, end s or None). Filled in after listening to the
-# spectrograms and scores; anything not here comes from synth.py.
-PICKS = json.load(open(os.path.join(os.path.dirname(__file__), 'picks.json'))) if os.path.exists(os.path.join(os.path.dirname(__file__), 'picks.json')) else {}
-
-
-def momentary_max(y, sr):
-    m = pyln.Meter(sr, block_size=0.4)
-    if len(y) < int(0.6 * sr): y = np.concatenate([y, np.zeros((int(0.6 * sr) - len(y), y.shape[1]))])
-    hop = int(0.05 * sr); w = int(0.4 * sr); best = -120
-    for i in range(0, len(y) - w + 1, hop):
-        seg = y[i:i + w]
-        if np.abs(seg).max() < 1e-6: continue
-        try: best = max(best, m.integrated_loudness(seg))
-        except Exception: pass
-    return best
-
-
-def loop_it(y, sr, x=3.0):
-    n = int(x * sr); a = y[:-n] if len(y) > 2 * n else y
-    if len(y) <= 2 * n: return y
-    head, tail = y[:n], y[-n:]
-    th = np.linspace(0, np.pi / 2, n)[:, None]
-    mixed = tail * np.cos(th) + head * np.sin(th)
-    return np.concatenate([mixed, y[n:-n]])
-
-
-def ebur(path):
-    out = subprocess.run(['ffmpeg', '-hide_banner', '-nostats', '-i', path, '-af', 'ebur128=peak=true', '-f', 'null', '-'], capture_output=True, text=True).stderr
-    I = re.findall(r'I:\s+(-?[\d.]+) LUFS', out); P = re.findall(r'Peak:\s+(-?[\d.]+) dBFS', out)
-    M = [float(v) for v in re.findall(r' M:\s*(-?[\d.]+)', out)]
-    return (float(I[-1]) if I else None), (max(M) if M else None), (float(P[-1]) if P else None)
+# In-game loudness reference points: voices about -20 LUFS (Mio -17 at 0.75 gain), music -20.5 in the file at bus gain
+# 0.2, so about -34.5 in the game (-42 under a voice). Interface sounds sit clearly under the voices, beds under the music.
+LIVE = {}   # live name -> (kind, preset id, version)
+for kind, pre in presets.every():
+    v = pre['versions'][-1]
+    if kind in ('sfx', 'ambience') and v.get('live'):
+        LIVE[v['live']] = (kind, pre['id'], v)
+TARGET = {name: v['loudness'] for name, (_, _, v) in LIVE.items()}
+BEDS = {name for name, (kind, _, _) in LIVE.items() if kind == 'ambience'}
+PICKS = json.load(open(os.path.join(os.path.dirname(__file__), 'picks.json')))
 
 
 def load(name):
-    if name in PICKS:
+    kind, pid, v = LIVE[name]
+    if v['generator'] == 'sa3':
         stem, a, b = PICKS[name]
         y, sr = sf.read(f'{RAW}/{stem}.flac', always_2d=True)
         y = y[int(a * sr): int(b * sr) if b else None]
-        src = f'Stable Audio 3 Medium, local ({stem}, {a}-{b or "end"} s)'
+        src = f'Stable Audio 3 Medium, local ({stem}, {a}-{b or "end"} s); preset {kind}/{pid}@v{v["v"]}'
     else:
         p = f'{SYN}/{name}.wav'
         if not os.path.exists(p): return None, None, None
-        y, sr = sf.read(p, always_2d=True); src = f"synthesised (tools/feel/{'hum' if name.startswith('bath_') else 'pluck' if name in PLUCKED else 'nature' if name in NATURE else 'synth'}.py)"
+        y, sr = sf.read(p, always_2d=True)
+        src = f'synthesised ({v["settings"]["module"]}); preset {kind}/{pid}@v{v["v"]}'
     if y.shape[1] == 1: y = np.repeat(y, 2, 1)
     if sr != SR: y = librosa.resample(y.T, orig_sr=sr, target_sr=SR).T; sr = SR
     return y, sr, src
@@ -104,21 +59,14 @@ if __name__ == '__main__':
         if y is None: print('missing', name); continue
         bed = name in BEDS
         if bed:
-            k = int(0.02 * sr); y[:k] *= np.linspace(0, 1, k)[:, None]; y[-k:] *= np.linspace(1, 0, k)[:, None]
-            y = loop_it(y, sr)
-            now = pyln.Meter(sr).integrated_loudness(y)
+            y = level.wrap_loop(level.fade_edges(y, sr, 0.02, 0.02), sr)
         else:
-            k = int(0.01 * sr); y[-k:] *= np.linspace(1, 0, k)[:, None]
+            y = level.fade_edges(y, sr, 0, 0.01)
             if len(y) < int(0.6 * sr): y = np.concatenate([y, np.zeros((int(0.6 * sr) - len(y), 2))])   # short files measure right
-            now = momentary_max(y, sr)
-        y = y * 10 ** ((tgt - now) / 20)
-        pk = 20 * np.log10(np.abs(y).max() + 1e-12)
-        if pk > -1: y *= 10 ** ((-1 - pk) / 20)
+        y = level.set_level(y, sr, tgt, 'integrated' if bed else 'momentary max')
         out = f'{AMB if bed else SFX}/{name}.mp3'
-        tmp = out + '.wav'; sf.write(tmp, y.astype(np.float32), sr, subtype='FLOAT')
-        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', tmp, '-c:a', 'libmp3lame', '-b:a', '80k' if bed else '112k', out], check=True)
-        os.remove(tmp)
-        I, M, P = ebur(out)
+        level.encode(y, sr, out, ['-b:a', '80k' if bed else '112k'])
+        I, M, P = level.ebur(out)
         levels[name] = {'target_lufs': tgt, 'measure': 'integrated' if bed else 'momentary max', 'encoded_integrated': I, 'encoded_momentary_max': M,
                         'peak_dbfs': P, 'seconds': round(len(y) / sr, 2), 'kb': round(os.path.getsize(out) / 1024), 'source': src}
         print(f'{name:14s} target {tgt:6.1f}  I {I}  Mmax {M}  peak {P}  {levels[name]["kb"]} KB  {src}')

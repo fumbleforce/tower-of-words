@@ -1,0 +1,23 @@
+{
+ "id": "wings_flap",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/nature.py (SOUNDS[\"wings_flap\"])",
+   "generator": "synth",
+   "prompt": "A flock of pigeons taking off, a clatter of wings.",
+   "settings": {
+    "module": "tools/feel/nature.py",
+    "sound": "wings_flap"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -34,
+   "use": "A flock of pigeons taking off near Eric.",
+   "live": "wings_flap"
+  }
+ ]
+}

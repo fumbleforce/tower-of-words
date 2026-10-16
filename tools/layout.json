@@ -2,6 +2,7 @@
   "about": "Top-level entries of this folder as git sees them. \"folders\" are pipelines or services. \"scripts\" is the short allowlist of loose entry scripts, and it shrinks as they move into folders. npm run check fails on a new entry or on a listed one that is gone. Regenerate with node tools/check/layout.mjs --baseline and read the diff.",
   "folders": [
     "assets",
+    "audio",
     "bible",
     "blockout",
     "characters",
@@ -47,10 +48,8 @@
     "land.sh",
     "layout.json",
     "locations1.py",
-    "make_loop.py",
     "matte_refine.py",
     "music_inst.py",
-    "music_listen.py",
     "music_round2.py",
     "music_round3.py",
     "music_round3_post.py",
@@ -83,7 +82,6 @@
     "transcripts.mjs",
     "usage.py",
     "verdict.py",
-    "vocal_check.py",
     "work.py",
     "worktree.sh",
     "yue2_music.py"

@@ -1,0 +1,23 @@
+{
+ "id": "open",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"open\"])",
+   "generator": "synth",
+   "prompt": "Two soft quick taps, the second a little higher.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "open"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -33,
+   "use": "Interface: a panel or menu coming up.",
+   "live": "open"
+  }
+ ]
+}

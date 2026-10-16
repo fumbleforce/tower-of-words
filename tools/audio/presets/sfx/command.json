@@ -1,0 +1,23 @@
+{
+ "id": "command",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"command\"])",
+   "generator": "synth",
+   "prompt": "A soft vibraphone chord blooming note by note over a low tone, with a breath of air on top.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "command"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -23,
+   "use": "A command learned.",
+   "live": "command"
+  }
+ ]
+}

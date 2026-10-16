@@ -3,7 +3,7 @@ on the CPU) scores against plain descriptions of what we want and what Jørgen h
 the reference tracks he called full-bodied (the current Lyria loops and the YuE2 opening theme). worst_<x> gives
 the highest score of each bad description over 10 s windows and where it is (seconds).
 
-    ~/ai/sd/venv/bin/python tools/music_listen.py file.wav [...] [--json out.json]
+    ~/ai/sd/venv/bin/python tools/audio/music_listen.py file.wav [...] [--json out.json]
 
 The numbers are a screen, not a verdict: a clip that scores well still gets a look at its spectrogram and its
 section-by-section numbers before it goes in front of Jørgen.
@@ -11,8 +11,11 @@ section-by-section numbers before it goes in front of Jørgen.
 import argparse, json, os, subprocess, io
 import numpy as np, soundfile as sf, librosa, torch
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-REFS = [f'{ROOT}/art/music/calm.wav', f'{ROOT}/art/music/night.wav', f'{ROOT}/art/approved/music/opening.mp3']
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# the reference tracks are local files: read them from the main checkout (a worktree has none of art/music/)
+_common = subprocess.run(['git', '-C', ROOT, 'rev-parse', '--path-format=absolute', '--git-common-dir'], capture_output=True, text=True).stdout.strip()
+MAIN = os.path.dirname(_common) if _common else ROOT
+REFS = [f'{MAIN}/art/music/calm.wav', f'{MAIN}/art/music/night.wav', f'{MAIN}/art/approved/music/opening.mp3']
 GOOD = ['a beautiful melodic anime soundtrack with piano and strings', 'warm full-bodied orchestral pop music, polished studio recording',
         'a calm pleasant instrumental melody']
 BAD = {'vocals': 'a person singing, vocals, voice', 'noise': 'random noises, static, glitchy sound effects',
@@ -60,7 +63,8 @@ def listen(paths, clap=None):
     clap = clap or Clap()
     good = clap.text(GOOD)
     bad = clap.text(list(BAD.values()))
-    refs = torch.stack([clap.audio(load(r, 48000)) for r in REFS if os.path.exists(r)])
+    have = [r for r in REFS if os.path.exists(r)]   # local files: a fresh checkout or a worktree may have none
+    refs = torch.stack([clap.audio(load(r, 48000)) for r in have]) if have else None
     out = {}
     for p in paths:
         y48 = load(p, 48000)
@@ -82,7 +86,7 @@ def listen(paths, clap=None):
             'hiss': round(flat_hi, 4), 'peak': round(float(np.abs(y48).max()), 3),
             'good': round(float((good @ a).mean()), 3),
             **{k: round(float(v), 3) for k, v in zip(BAD, (bad @ a).tolist())},
-            'like_refs': round(float((refs @ a).mean()), 3), **worst,
+            'like_refs': round(float((refs @ a).mean()), 3) if refs is not None else None, **worst,
         }
     return out
 

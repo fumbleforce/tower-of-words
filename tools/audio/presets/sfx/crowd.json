@@ -1,0 +1,22 @@
+{
+ "id": "crowd",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "from tools/feel/sa3_gen.py SPEC; takes 1 to 4 are its seeds 5100, 5231, 5362 and 5493",
+   "generator": "sa3",
+   "prompt": "A small crowd of office workers walking past in a lobby, rustling coats and bags, a few quiet voices, reverberant.",
+   "settings": {
+    "seed": 5100,
+    "seed_step": 131
+   },
+   "length": 4,
+   "loop": null,
+   "loudness": -30,
+   "use": "Office workers walking past in the lobby (not used: the beds carry the people)."
+  }
+ ]
+}

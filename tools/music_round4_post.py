@@ -10,7 +10,7 @@ game file: the body with 1 s of itself wrapped around each end) and results.json
 """
 import io, json, os, re, subprocess, sys
 import numpy as np, soundfile as sf
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path[:0] = [os.path.dirname(os.path.abspath(__file__)), os.path.join(os.path.dirname(os.path.abspath(__file__)), 'audio')]
 import make_loop, music_listen
 
 ROUND = os.environ.get('MUSIC_ROUND', '4')  # MUSIC_ROUND=5 for round 5 (tools/music_round5.py)
@@ -43,7 +43,7 @@ def vocals(path):
     os.makedirs(os.path.dirname(link), exist_ok=True)
     if not os.path.exists(link):
         os.symlink(path, link)
-    r = subprocess.run([os.path.expanduser('~/ai/sep/bin/python'), os.path.join(os.path.dirname(__file__), 'vocal_check.py'), link],
+    r = subprocess.run([os.path.expanduser('~/ai/sep/bin/python'), os.path.join(os.path.dirname(__file__), 'audio', 'vocal_check.py'), link],
                        capture_output=True, text=True, check=True)
     return json.loads(r.stdout.strip().splitlines()[-1])
 

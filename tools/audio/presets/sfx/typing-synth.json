@@ -1,0 +1,22 @@
+{
+ "id": "typing-synth",
+ "kind": "sfx",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/audio-route",
+   "note": "today's sound from tools/feel/synth.py (SOUNDS[\"typing\"]); the game plays a Stable Audio take instead (preset typing)",
+   "generator": "synth",
+   "prompt": "Someone typing on a computer keyboard nearby, soft plastic key clicks in bursts.",
+   "settings": {
+    "module": "tools/feel/synth.py",
+    "sound": "typing"
+   },
+   "length": null,
+   "loop": null,
+   "loudness": -40,
+   "use": "Someone typing at a desk nearby, scattered over the bed."
+  }
+ ]
+}
