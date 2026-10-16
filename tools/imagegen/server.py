@@ -206,6 +206,7 @@ def log_entry(j):
             'scheduler', 'positive', 'negative', 'overridden', 'presets', 'rating', 'scene_text', 'characters', 'compose', 'elapsed',
             'ipa', 'repaint', 'raw_file', 'start', 'loras', 'control', 'huefix')
     e = {k: j.get(k) for k in keep}
+    e.update({k: j[k] for k in ('owner', 'round') if k in j})  # only an agent's render has them
     e['at'] = j.get('at') or store.now()
     e.update(star=False, fav=False, reject=False, reject_reason='', note='')
     return e
@@ -316,6 +317,12 @@ def _clean_control(x, private):
                 end=max(0.05, min(1.0, float(x.get('end', 0.8)))))
 
 
+def made_by(body):
+    """The owner and round an agent gave a render (compose.mjs sends both). Jørgen's own UI sends neither: its rows have no owner."""
+    owner = str(body.get('owner') or '').strip()[:80]
+    return dict(owner=owner, round=str(body.get('round') or '').strip()[:300]) if owner else {}
+
+
 def new_run(body, private=False):
     run_id = 'r' + time.strftime('%y%m%d-%H%M%S') + '-' + uuid.uuid4().hex[:3]
     count = max(1, min(8, int(body.get('count', 1))))
@@ -335,6 +342,7 @@ def new_run(body, private=False):
     if start and start.get('mask') and isinstance(body.get('compose'), dict) and isinstance(body['compose'].get('start'), dict):
         body['compose']['start'] = dict(body['compose']['start'], mask=start['mask'])  # the record keeps the path, not the drawing
     loras, control, fixes = _clean_loras(body.get('loras')), _clean_control(body.get('control'), private), huefix.clean(body.get('huefix'))
+    who = made_by(body)
     jobs = []
     for i, s in enumerate(seeds):
         jobs.append(dict(
@@ -345,7 +353,7 @@ def new_run(body, private=False):
             presets=body.get('presets', {}), rating=body.get('rating'), scene_text=body.get('scene_text', ''),
             characters=chars, compose=body.get('compose', {}), created=time.time(),
             ipa=_clean_ipa(body.get('ipa')), repaint=_clean_repaint(body.get('repaint')), start=start,
-            loras=loras, control=control, huefix=fixes))
+            loras=loras, control=control, huefix=fixes, **who))
     with JOBS_LOCK:
         JOBS.extend(jobs)
         del JOBS[:-400]
@@ -357,7 +365,8 @@ def new_run(body, private=False):
 def public_job(j):
     out = {k: j.get(k) for k in ('id', 'n', 'run_id', 'idx', 'status', 'progress', 'seed', 'file', 'thumb', 'error', 'w', 'h', 'elapsed',
                                   'positive', 'negative', 'overridden', 'compose', 'model_file', 'steps', 'cfg', 'sampler', 'scheduler', 'star', 'fav', 'reject', 'reject_reason', 'note',
-                                  'presets', 'characters', 'rating', 'deleted', 'ipa', 'repaint', 'raw_file', 'phase', 'start', 'loras', 'control', 'huefix')}
+                                  'presets', 'characters', 'rating', 'deleted', 'ipa', 'repaint', 'raw_file', 'phase', 'start', 'loras', 'control', 'huefix',
+                                  'owner', 'round')}
     if j.get('created') is not None:
         out['created'] = j['created']
     if j.get('at'):
@@ -447,7 +456,7 @@ def portrait_choices(character='', private=False):
             out.insert(0, dict(path=f'island/private/imagegen/portraits/{f}', group='Uploaded'))
     # his starred renders of this character can be portraits too
     for r in store.log_read():
-        if r.get('status') == 'done' and not r.get('deleted') and (r.get('star') or r.get('fav')) and r.get('source') != 'agent' and (private or not is_private_render(r)) and (not character or character in (r.get('characters') or [])):
+        if r.get('status') == 'done' and not r.get('deleted') and (r.get('star') or r.get('fav')) and not agent_row(r) and (private or not is_private_render(r)) and (not character or character in (r.get('characters') or [])):
             out.insert(0, dict(path=f"island/private/imagegen/outputs/{r['file']}", group='Your starred renders', thumb=r.get('thumb')))
     if character:
         out.sort(key=lambda x: (x['group'] not in ('Uploaded', 'Your starred renders'), character not in x['path'].lower()))
@@ -511,13 +520,18 @@ def history_time(at):
         return 0
 
 
+def agent_row(r):
+    """Made by an agent: an agent's own log row (source 'agent') or any row that names its owner (compose.mjs)."""
+    return r.get('source') == 'agent' or bool(r.get('owner'))
+
+
 def history(q, private=False):
-    """q['who']: 'mine' (rendered in the dashboard), 'agents' (logged by tools/comfy.py, agentlog.py) or all (default)."""
+    """q['who']: 'mine' (rendered in the dashboard), 'agents' (agent_row) or all (default)."""
     store.number_all()  # pictures logged by an agent process still running the older store code get their #n here
     who = q.get('who', 'all')
     rows = [r for r in store.log_read() if r.get('status') == 'done' and not r.get('deleted') and _exists(r)
             and (private or not is_private_render(r))
-            and (who == 'all' or (r.get('source') == 'agent') == (who == 'agents'))]
+            and (who == 'all' or agent_row(r) == (who == 'agents'))]
     ch = q.get('character')
     pre = q.get('preset')  # "type:id"
     starred = q.get('star') == '1'

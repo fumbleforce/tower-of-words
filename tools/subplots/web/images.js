@@ -3,7 +3,7 @@ import {$, esc, api, guarded, notice} from './common.js';
 import {localBlockHtml, bindBlockWords} from './image-block-words.js';
 import {newestPictureFirst} from './image-order.js';
 import {clearPendingPicture, picturePick, picturePath} from './picture-selection.js';
-import {draftPictureUrl} from '../../imagegen/web/gallery.js';
+import {draftPictureUrl, madeByAgent} from '../../imagegen/web/gallery.js';
 import {isExternal, externalReplayNotice, provenanceHtml, originalGeneration, externalSourceExplanationHtml, localOriginalPromptHtml} from '../../imagegen/web/provenance.js';
 import {standaloneComposition, standaloneJob, standalonePromptHtml} from './image-standalone.js';
 import {personWords} from './image-people.js';
@@ -603,7 +603,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
       all.set(job.id, {...saved, ...job, n: job.n ?? saved?.n, ...(durable ? {url: durable, status: 'done', deleted: false, raw_file: null} : {})});
     }
     for (const [id, f] of edits) if (all.has(id)) Object.assign(all.get(id), f);
-    const madeBy = j => historyWho === 'all' || (j.source === 'agent') === (historyWho === 'agents');
+    const madeBy = j => historyWho === 'all' || madeByAgent(j) === (historyWho === 'agents');
     selected = [...all.values()].filter(j => !j.deleted && madeBy(j) && !j.compose?.example && !j.compose?.placePreview
       && (!historyCharacter || j.characters?.includes(historyCharacter)) && (!historyStar || j.star || j.fav))
       .sort(newestPictureFirst);

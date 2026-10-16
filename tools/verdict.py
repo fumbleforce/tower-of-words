@@ -11,7 +11,7 @@ a one-line reason here (art/PROMPTS.md, Verdicts):
 or from Python: verdict.verdict(image_path, reject=True, reason='...'). Exit code 1 when the picture isn't logged.
 The record is the dashboard render with that #n or job id; else the newest agent render with this image's repo path (a
 worktree path counts as the repo's), preferring the one with this exact file; else a dashboard render whose job id or
-file name is in the image's file name (compose.mjs --wait saves <recipe>-<job id>-s<seed>.png). It writes through the dashboard's store.py, under the same lock as the dashboard."""
+file name is in the image's file name (compose.mjs --wait saves <recipe>-<job id>-s<seed>.webp). It writes through the dashboard's store.py, under the same lock as the dashboard."""
 import argparse, os, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

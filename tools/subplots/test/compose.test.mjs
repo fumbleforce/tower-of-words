@@ -7,8 +7,9 @@ import path from 'node:path';
 import {spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 
-// compose.mjs against a stub dashboard: the private cookie, a failed download that must fail loudly, and
-// --end-session that cancels only this run's jobs and leaves the session alone while other jobs are busy.
+// compose.mjs against a stub dashboard: the private cookie, a failed download that must fail loudly, --end-session
+// that cancels only this run's jobs and leaves the session alone while other jobs are busy, the webp round copy
+// (in the round folder, not recipes/), the owner and round in the request, and a failed webp encode.
 const here = path.dirname(fileURLToPath(import.meta.url));
 const script = path.join(here, '..', 'compose.mjs');
 const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', 'base64');
@@ -47,33 +48,69 @@ function stub({busy = false, out404 = false} = {}) {
 async function run(opts, extra = [], env = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'compose-test-'));
   fs.writeFileSync(path.join(dir, 'p.json'), JSON.stringify(presets));
-  const file = path.join(dir, ...(opts?.rewardPath ? ['island', 'private', 'rewards', 'peeks', 'example-1', 'recipes'] : []), 'pic.recipe.json');
+  const folder = opts?.rewardPath ? ['island', 'private', 'rewards', 'peeks', 'example-1', 'recipes'] : opts?.inRecipes ? ['recipes'] : [];
+  const file = path.join(dir, ...folder, 'pic.recipe.json');
   fs.mkdirSync(path.dirname(file), {recursive: true});
   fs.writeFileSync(file, JSON.stringify(opts?.recipe || {characters: ['alice'], model: 'model', style: 'soft', framing: 'wide'}));
   const commandFile = opts?.rewardSymlink ? path.join(dir, 'alias.recipe.json') : file;
   if (opts?.rewardSymlink) fs.symlinkSync(file, commandFile);
   const {srv, seen, url} = await stub(opts);
+  // the owner comes from the environment only when a test sets it
   const child = spawn('node', [script, commandFile, '--server', url, '--wait', ...(opts?.localPresets ? ['--presets', path.join(dir, 'p.json')] : []), ...extra],
-    {env: {...process.env, ...env}});
+    {env: {...process.env, IMAGEGEN_OWNER: '', ...env}});
   let stdout = '', stderr = '';
   child.stdout.on('data', d => stdout += d); child.stderr.on('data', d => stderr += d);
   const code = await new Promise(ok => child.on('close', ok));
   srv.close();
-  return {dir, seen, stdout, stderr, code};
+  return {dir, file, seen, stdout, stderr, code};
 }
+const generateBody = seen => seen.posts.find(p => p[0] === '/api/generate')[1];
 
 const hasPrivate = fs.existsSync(path.join(here, '..', '..', '..', 'island', 'private', 'bible', 'nav.js'))
   || fs.existsSync('/home/jorgen/repo/japanese/island/private/bible/nav.js');
 
-test('saves the picture, and sends the private cookie only when private files are here', {timeout: 30000}, async () => {
+test('saves the picture as webp, and sends the private cookie only when private files are here', {timeout: 30000}, async () => {
   const r = await run();
   assert.equal(r.code, 0, r.stderr);
-  const saved = fs.readdirSync(r.dir).filter(f => f.endsWith('.png'));
-  assert.equal(saved.length, 1);
-  assert.deepEqual(fs.readFileSync(path.join(r.dir, saved[0])), PNG);
+  assert.deepEqual(fs.readdirSync(r.dir).filter(f => f.endsWith('.png')), []);
+  const saved = fs.readdirSync(r.dir).filter(f => f.endsWith('.webp'));
+  assert.deepEqual(saved, ['pic-mine-s3.webp']);
+  const bytes = fs.readFileSync(path.join(r.dir, saved[0]));
+  assert.deepEqual([bytes.subarray(0, 4).toString(), bytes.subarray(8, 12).toString()], ['RIFF', 'WEBP']);
   assert.ok(r.seen.cookies.every(c => hasPrivate ? c === 'amakawa_mode=private' : c === ''), JSON.stringify(r.seen.cookies));
   const pub = await run({}, [], {SUBPLOTS_PUBLIC_ONLY: '1'});
   assert.ok(pub.seen.cookies.every(c => c === ''));
+});
+
+test('the round copy goes in the round folder, not recipes/, and the request names the round', {timeout: 30000}, async () => {
+  const r = await run({inRecipes: true});
+  assert.equal(r.code, 0, r.stderr);
+  assert.deepEqual(fs.readdirSync(path.join(r.dir, 'recipes')), ['pic.recipe.json']);
+  assert.deepEqual(fs.readdirSync(r.dir).filter(f => f.endsWith('.webp')), ['pic-mine-s3.webp']);
+  assert.equal(generateBody(r.seen).round, r.dir);
+  const out = fs.mkdtempSync(path.join(os.tmpdir(), 'compose-out-'));
+  const elsewhere = await run({inRecipes: true}, ['--out', out]);
+  assert.equal(elsewhere.code, 0, elsewhere.stderr);
+  assert.deepEqual(fs.readdirSync(out), ['pic-mine-s3.webp']);
+  assert.deepEqual(fs.readdirSync(elsewhere.dir).filter(f => f.endsWith('.webp')), []);
+  for (const d of [r.dir, elsewhere.dir, out]) fs.rmSync(d, {recursive: true});
+});
+
+test('the owner is --owner, else IMAGEGEN_OWNER, else agent; a bare --owner is refused', {timeout: 30000}, async () => {
+  const owner = async (extra, env) => { const r = await run({}, extra, env); assert.equal(r.code, 0, r.stderr); fs.rmSync(r.dir, {recursive: true}); return generateBody(r.seen).owner; };
+  assert.equal(await owner([]), 'agent');
+  assert.equal(await owner([], {IMAGEGEN_OWNER: 'from-env'}), 'from-env');
+  assert.equal(await owner(['--owner', 'claude-main/imagegen-owner-round'], {IMAGEGEN_OWNER: 'from-env'}), 'claude-main/imagegen-owner-round');
+  const bare = await run({}, ['--owner']);
+  assert.equal(bare.code, 2); assert.match(bare.stderr, /--owner needs a name/);
+  assert.deepEqual(bare.seen.posts, []); fs.rmSync(bare.dir, {recursive: true});
+});
+
+test('a failed webp encode is an error and leaves no copy', {timeout: 30000}, async () => {
+  const r = await run({}, [], {IMAGEGEN_PYTHON: '/bin/false'});
+  assert.notEqual(r.code, 0); assert.match(r.stderr, /could not make the webp copy/);
+  assert.deepEqual(fs.readdirSync(r.dir).filter(f => f.endsWith('.webp')), []);
+  fs.rmSync(r.dir, {recursive: true});
 });
 
 test('a failed download is an error, never a JSON file named like a picture', {timeout: 30000}, async () => {

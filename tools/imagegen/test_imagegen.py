@@ -146,6 +146,66 @@ class HistoryOrder(unittest.TestCase):
         self.assertEqual(server.log_entry(job)['at'], job['at'])
 
 
+class MadeBy(unittest.TestCase):
+    """compose.mjs names its owner and round on the row; Jørgen's own UI rows keep neither, and only owned rows are agents'."""
+    def setUp(self):
+        reset()
+        models = tempfile.TemporaryDirectory()
+        self.addCleanup(models.cleanup)
+        open(os.path.join(models.name, 'fixture.safetensors'), 'w').close()
+        for name, value in (('MODELS_DIR', models.name), ('LORAS_DIR', models.name), ('CONTROL_DIR', models.name), ('log', lambda msg: None)):
+            p = patch.object(server, name, value)
+            p.start()
+            self.addCleanup(p.stop)
+        self.addCleanup(server.JOBS.clear)
+
+    def test_queue_response_shows_the_owner_while_the_render_is_pending(self):
+        srv = ThreadingHTTPServer(('127.0.0.1', 0), server.H)
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        self.addCleanup(srv.server_close)
+        self.addCleanup(srv.shutdown)
+        body = dict(positive='a reader', negative='', model_file='fixture.safetensors', w=64, h=64,
+                    owner='claude-main/x', round='island/private/rounds/a')
+        req = urllib.request.Request(f'http://127.0.0.1:{srv.server_port}/api/generate', json.dumps(body).encode(), {'content-type': 'application/json'})
+        job = json.load(urllib.request.urlopen(req))['jobs'][0]
+        self.assertEqual((job['owner'], job['round'], job['status']), ('claude-main/x', 'island/private/rounds/a', 'queued'))
+
+    def logged(self, **extra):
+        body = dict(positive='a reader by a window', negative='', model_file='fixture.safetensors', w=64, h=64, seed_mode='fixed', seed=7, **extra)
+        _, (job,) = server.new_run(body)
+        store.log_append(server.log_entry(job))
+        return store.log_read()[-1]
+
+    def test_agent_render_names_its_owner_and_round_on_its_row(self):
+        row = self.logged(owner='claude-main/imagegen-owner-round', round='island/private/rewards/skimpy/aoi-3/round-1')
+        self.assertEqual((row['owner'], row['round']), ('claude-main/imagegen-owner-round', 'island/private/rewards/skimpy/aoi-3/round-1'))
+        self.assertNotIn('source', row)  # the pipeline stays the dashboard's: tools/verdict.py reads that
+
+    def test_dashboard_render_row_has_no_owner_or_round(self):
+        row = self.logged()
+        self.assertNotIn('owner', row)
+        self.assertNotIn('round', row)
+
+    def test_agents_filter_counts_owned_rows_and_only_those(self):
+        rows = [dict(id='ui-1', run_id='ui-1', idx=1, status='done', rating='safe', at='2026-10-16T10:00:00Z'),
+                dict(id='cp-1', run_id='cp-1', idx=1, status='done', rating='safe', at='2026-10-16T10:01:00Z', owner='claude-main/x', round='island/private/rounds/a'),
+                dict(id='old-1', run_id='old-1', idx=1, status='done', rating='safe', at='2026-10-16T10:02:00Z', source='agent', owner='backfill')]
+        with patch.object(store, 'number_all'), patch.object(store, 'log_read', return_value=rows), patch.object(server, '_exists', return_value=True):
+            agents = {r['run_id'] for r in server.history({'who': 'agents'})}
+            mine = {r['run_id'] for r in server.history({'who': 'mine'})}
+            by_run = {r['run_id']: r for r in server.history({})}
+        self.assertEqual((agents, mine), ({'cp-1', 'old-1'}, {'ui-1'}))
+        self.assertEqual((by_run['cp-1']['owner'], by_run['cp-1']['round']), ('claude-main/x', 'island/private/rounds/a'))
+
+    def test_starred_renders_that_an_agent_made_are_not_yours_for_portraits(self):
+        rows = [dict(id='ui-1', run_id='ui-1', idx=1, status='done', rating='safe', file='2026-10-16/ui.webp', star=True),
+                dict(id='cp-1', run_id='cp-1', idx=1, status='done', rating='safe', file='2026-10-16/cp.webp', star=True, owner='claude-main/x')]
+        with tempfile.TemporaryDirectory() as repo, patch.object(store, 'REPO', repo), patch.object(store, 'PORTRAITS', os.path.join(repo, 'none')), \
+                patch.object(store, 'log_read', return_value=rows):
+            yours = [c['path'] for c in server.portrait_choices() if c['group'] == 'Your starred renders']
+        self.assertEqual(yours, ['island/private/imagegen/outputs/2026-10-16/ui.webp'])
+
+
 class Verdict(unittest.TestCase):
     ROWS = [dict(id='abc123', n=7, file='2026-10-11/a.webp', source=None), dict(id='abc12345', n=8, file='2026-10-11/b.webp'),
             dict(id='old1', n=9, source='agent', out_path='rewards/r1-x.png', at='1'), dict(id='gone', n=10, deleted=True)]

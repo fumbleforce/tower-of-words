@@ -5,6 +5,8 @@ import { esc, wordDiff } from './blocks.js';
 import {isExternal, provenanceHtml, localSettingsHtml} from './provenance.js';
 
 export const isAgent = t => t?.source === 'agent';
+// Made by an agent: an agent row, or any render that names its owner (compose.mjs). Jørgen's own renders have no owner.
+export const madeByAgent = t => isAgent(t) || !!t?.owner;
 // Only this local, content-addressed endpoint may override a render's service URL.
 export function draftPictureUrl(value) {
   if (typeof value !== 'string' || !value.startsWith('/api/subplots/draft-picture?') || value.includes('#')) return '';
@@ -31,7 +33,7 @@ export function lightboxKey(e) {
 
 // ctx: { i, n, pinned, raw (show before the face fix), styleName, base }
 export function lightboxHtml(t, ctx) {
-  const c = t.compose || {}, base = ctx.base || '', agent = isAgent(t), external = isExternal(t);
+  const c = t.compose || {}, base = ctx.base || '', agent = isAgent(t), byAgent = madeByAgent(t), external = isExternal(t);
   return `<div class="lb">
     <div class="pic"><img src="${ctx.raw && t.raw_file ? `${base}/out/${esc(t.raw_file)}` : esc(fullUrl(t, base))}" alt="${external ? 'Picture ' + esc(t.n || t.id) : 'Seed ' + t.seed}">
       ${ctx.n > 1 ? `<button class="btn nav l" data-lb="-1" aria-label="Previous"><i class="ph ph-caret-left"></i></button><button class="btn nav r" data-lb="1" aria-label="Next"><i class="ph ph-caret-right"></i></button>` : ''}</div>
@@ -58,9 +60,9 @@ export function lightboxHtml(t, ctx) {
         ${(t.loras || []).length ? `<span>LoRA</span><span>${t.loras.map(l => esc(l.file.replace('.safetensors', '')) + ' ' + l.weight).join('<br>')}</span>` : ''}
         ${t.control ? `<span>Guide</span><span>${esc(t.control.file.replace('.safetensors', ''))} at ${t.control.strength}</span>` : ''}
         ${(t.huefix || []).length ? `<span>Colour fix</span><span>${t.huefix.map(h => esc(h.op)).join(', ')}</span>` : ''}
-        ${agent ? `<span>Made by</span><span>${esc(t.owner || '')}</span><span>Round</span><span class="mono" style="word-break:break-all">${esc(t.round || '')}</span>
-          <span>Original</span><span class="mono" style="word-break:break-all">${esc(t.out_path || '')}</span>${t.mode && t.mode !== 'txt2img' ? `<span>Mode</span><span>${esc(t.mode)}${t.denoise != null ? ' at ' + t.denoise : ''}${t.src_image ? ', from ' + esc(t.src_image) : ''}</span>` : ''}
-          ${(t.extras || []).length ? `<span>Also used</span><span>${t.extras.map(esc).join('<br>')}</span>` : ''}` : '<span>Made by</span><span>Jørgen (dashboard)</span>'}
+        ${byAgent ? `<span>Made by</span><span>${esc(t.owner || '')}</span><span>Round</span><span class="mono" style="word-break:break-all">${esc(t.round || '')}</span>` : '<span>Made by</span><span>Jørgen (dashboard)</span>'}
+        ${agent ? `<span>Original</span><span class="mono" style="word-break:break-all">${esc(t.out_path || '')}</span>${t.mode && t.mode !== 'txt2img' ? `<span>Mode</span><span>${esc(t.mode)}${t.denoise != null ? ' at ' + t.denoise : ''}${t.src_image ? ', from ' + esc(t.src_image) : ''}</span>` : ''}
+          ${(t.extras || []).length ? `<span>Also used</span><span>${t.extras.map(esc).join('<br>')}</span>` : ''}` : ''}
         <span>Render</span><span class="mono">${esc(t.id)}</span>
         ${agent ? '' : `<span>On-model</span><span>${t.ipa ? `Reference at ${(+t.ipa.strength).toFixed(2)}${t.ipa.cutout ? ' (cut out onto white)' : ''}` : 'No reference'}${t.repaint ? (t.repaint.skipped ? `; face fix skipped: ${esc(t.repaint.skipped)}` : `; face fix at ${(+t.repaint.denoise).toFixed(2)}${t.repaint.secs ? ` (${t.repaint.secs} s)` : ''}`) : ''}</span>
         ${t.ipa || t.repaint ? `<span>Reference</span><span class="mono" style="word-break:break-all">${esc((t.ipa || t.repaint).ref)}</span>` : ''}`}</div>${localSettingsHtml(t)}`}

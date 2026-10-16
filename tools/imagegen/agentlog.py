@@ -8,9 +8,9 @@ import copy as _copy
 import hashlib, os, re, sys
 
 try:
-    from . import store
+    from . import store, to_webp
 except ImportError:  # run as a plain script, or with tools/imagegen on sys.path
-    import store
+    import store, to_webp
 
 
 def rel_path(p):
@@ -84,8 +84,7 @@ def add(fields, src, copy=True):
         if copy:
             dst = os.path.join(store.OUTPUTS, rel)
             os.makedirs(os.path.dirname(dst), exist_ok=True)
-            with Image.open(src) as im:
-                im.convert('RGB').save(dst, 'WEBP', quality=92)
+            to_webp.save_webp(src, dst)
             e['file'] = rel
         store.log_append(e)
         return rid

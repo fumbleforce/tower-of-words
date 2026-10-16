@@ -35,7 +35,7 @@ Local tool data needs its own backup. `tools/assets/sync.py` never uploads priva
 
 ## Generation records
 
-Both Image Gen and Scene Editor use the same picture library and settings lightbox. Fresh queue results and reloaded history keep steps, CFG, sampler and scheduler. Loading a local picture preserves its exact recorded prompt and exclusions even when a shared block has changed since generation. Changing a block deliberately rebuilds the prompt. The Original prompt panel keeps the full source recipe, including preset versions, local block changes, references and picture tools.
+Both Image Gen and Scene Editor use the same picture library and settings lightbox. A compose.mjs render keeps the owner and round it was sent with. Made by and the Agents filter count any row with an owner as an agent's (`agent_row` in server.py); Jørgen's own renders have no owner. Fresh queue results and reloaded history keep steps, CFG, sampler and scheduler. Loading a local picture preserves its exact recorded prompt and exclusions even when a shared block has changed since generation. Changing a block deliberately rebuilds the prompt. The Original prompt panel keeps the full source recipe, including preset versions, local block changes, references and picture tools.
 
 A completed external tool output enters that same numbered history through:
 

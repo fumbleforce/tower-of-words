@@ -95,6 +95,34 @@ class SceneAssociation(unittest.TestCase):
         self.assertEqual(named[0]['renders'][0]['compose']['imageSlot'], self.slot)
         self.assertEqual(row['compose']['imageSlot'], 'image:0')
 
+    def test_live_copy_is_webp_and_the_master_is_not_changed(self):
+        from PIL import Image
+        image = self.root / 'render.png'
+        Image.new('RGB', (16, 20), (10, 20, 30)).save(image)
+        before = image.read_bytes()
+        rid = agentlog.add({'owner': 'fixture-worker', 'round': 'fixture-1'}, str(image))
+        row = store.log_read()[0]
+        self.assertEqual(row['id'], rid)
+        self.assertTrue(row['file'].endswith('.webp'))
+        self.assertEqual(Path(store.OUTPUTS, row['file']).read_bytes()[8:12], b'WEBP')
+        self.assertEqual(image.read_bytes(), before)
+
+
+class WebpCopy(unittest.TestCase):
+    def test_copy_is_rgb_webp_at_the_same_size_and_the_source_is_kept(self):
+        from PIL import Image
+        from tools.imagegen import to_webp
+        with tempfile.TemporaryDirectory() as d:
+            src, dst = Path(d, 'master.png'), Path(d, 'copy.webp')
+            Image.new('RGBA', (16, 20), (10, 20, 30, 255)).save(src)
+            before = src.read_bytes()
+            to_webp.save_webp(str(src), str(dst))
+            data = dst.read_bytes()
+            self.assertEqual((data[:4], data[8:12]), (b'RIFF', b'WEBP'))
+            with Image.open(dst) as im:
+                self.assertEqual((im.format, im.mode, im.size), ('WEBP', 'RGB', (16, 20)))
+            self.assertEqual(src.read_bytes(), before)
+
 
 if __name__ == '__main__':
     unittest.main()
