@@ -88,19 +88,29 @@ await withBrowserJob('tickets-check', async (browser) => {
     ok(!(await page.isVisible('#ticketsApp .list-tip')), `${tag}: the list tip stays after a ticket was opened`);
     ok(await page.isVisible('#ticketsApp .take-tip'), `${tag}: no tip by Take ticket`);
     await shot(page, '2-detail');
-    // a Japanese label teaches its word: into the known words, with a line on the page saying so
+    // a Japanese label explains its word and offers a typed attempt; only the attempt teaches it (#638)
+    const knows = (id) => page.evaluate(async (w) => (await import('./js/lang.js')).known.has(w), id);
     await page.click('#ticketsApp .tk-form .tkw[data-w="kenmei"]');
     await page.waitForTimeout(150);
-    ok(
-      await page.evaluate(async () => (await import('./js/lang.js')).known.has('kenmei')),
-      `${tag}: tapping 件名 didn't teach it`,
-    );
-    ok(/件名/.test(await page.textContent('#ticketsApp .tk-learn')), `${tag}: no line saying 件名 was learned`);
-    await shot(page, '2b-learned');
+    ok(!(await knows('kenmei')), `${tag}: tapping 件名 taught it with no attempt`);
+    ok(/件名/.test(await page.textContent('#ticketsApp .tk-learn')), `${tag}: no explanation of 件名`);
+    ok(await page.isVisible('#ticketsApp .tk-try'), `${tag}: no typed attempt offered for 件名`);
+    await shot(page, '2b-explained');
+    await page.click('#ticketsApp .tk-try');
+    await page.waitForSelector('#talk .tp-in', { timeout: 5000 });
+    await page.waitForTimeout(300);
+    await shot(page, '2c-typing');
+    await page.fill('#talk .tp-in', 'kenmei');
+    await page.waitForFunction(async () => (await import('./js/lang.js')).known.has('kenmei'), null, { timeout: 5000 }).catch(() => {});
+    ok(await knows('kenmei'), `${tag}: typing kenmei didn't teach it`);
+    await page.waitForTimeout(200);
+    ok(/New word/.test(await page.textContent('#ticketsApp .tk-learn')), `${tag}: no line saying 件名 was learned`);
+    await shot(page, '2d-learned');
     await page.click('#ticketsApp .d-act .take');
     await page.waitForTimeout(250);
     const status = await page.evaluate(async () => (await import('./js/narrative/state.js')).flags.ticket_T0002);
     ok(status === 'progress', `${tag}: Take ticket left it ${status}`);
+    ok(!(await knows('tanto')), `${tag}: Take ticket taught 担当する`);
     await shot(page, '3-taken');
     const paidNow = async () => +(await page.textContent('#ticketsApp .sum')).replace(/[^\d]/g, '');
     const paid0 = await paidNow(); // what earlier tickets (day 1's) have paid already
@@ -108,6 +118,7 @@ await withBrowserJob('tickets-check', async (browser) => {
       await page.click('#ticketsApp .tk-back');
       await page.waitForTimeout(200);
       ok(await page.isVisible('#ticketsApp .tk-list'), `${tag}: Back didn't return to the list`);
+      ok(!(await knows('modoru')), `${tag}: Back taught 戻る`);
       await shot(page, '4-back');
     }
     // the keyboard (#235): Enter on a row opens it and the arrows then move through the list; the focus stays in the
@@ -133,8 +144,9 @@ await withBrowserJob('tickets-check', async (browser) => {
       ok(f.inApp, `${tag}: after ${key} the focus left the ticket app`);
       ok(f.sel === want, `${tag}: after ${key} ${f.sel} is selected, not ${want}`);
     }
-    // 閉じる Close closes the app
+    // 閉じる Close closes the app and teaches nothing
     await page.click('#ticketsApp .tk-close');
+    ok(!(await knows('tojiru')), `${tag}: Close taught 閉じる`);
     await page.waitForFunction(() => document.getElementById('ticketsApp').hidden, null, { timeout: 5000 }).catch(() => {});
     await page.waitForFunction(() => !globalThis.__game.busy, null, { timeout: 20000 }).catch(() => {});
     ok(await page.evaluate(() => !globalThis.__game.player.seated), `${tag}: Eric still sits after the app closed`);
@@ -161,7 +173,12 @@ await withBrowserJob('tickets-check', async (browser) => {
       g.runner.story.nodes.__tickets_show = [{ do: 'tickets', show: 'T-0002' }];
       g.beat(() => g.runner.run('__tickets_show'));
     });
-    await page.waitForSelector('#ticketsApp:not([hidden])', { timeout: 10000 });
+    const again = await page.waitForSelector('#ticketsApp:not([hidden])', { timeout: 10000 }).then(() => true, () => false);
+    ok(again, `${tag}: the app didn't reopen (a story reply list from taking the ticket is still up; fails the same on main before #638)`);
+    if (!again) {
+      await ctx.close();
+      continue;
+    }
     await page.waitForTimeout(400);
     ok(/Paid/.test(await page.textContent('#ticketsApp .d-meta')), `${tag}: the closed ticket doesn't say Paid`);
     const paid1 = await paidNow();

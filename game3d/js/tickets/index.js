@@ -10,6 +10,7 @@ import { sfx } from '../sfx.js';
 import { createTickets } from './model.js';
 import { openTickets } from '../ui/tickets-view.js';
 import { learn, known } from '../lang.js';
+import { settings } from '../settings.js';
 // imported up front, not on demand: a story's first `ticket` step can run before any lazy load would finish
 import TICKETS from '../../story/tickets.js';
 import { expandMc } from '../mc.js';
@@ -53,7 +54,14 @@ export function installTickets(game) {
         save(game);
         return true;
       },
-      // the page's Japanese labels (tickets/words.js): a tap teaches one, into the Words panel and the save
+      // the page's Japanese labels (tickets/words.js): a tap explains one; the typed attempt is the game's typing
+      // prompt (Settings > Skip skill checks passes it), and only a successful one teaches it (#638)
+      practice: async (id) => {
+        if (settings.skipChecks) return true;
+        const ok = await game.ui.typePrompt(id, { who: null, text: 'Type it to learn it.' }, { cancel: true });
+        game.ui.closeTalk({ sceneOver: true }); // empties the box, so no later reply list shows the prompt again
+        return ok;
+      },
       learn: (id) => {
         if (!learn(id)) return false;
         sfx('word');

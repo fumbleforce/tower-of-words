@@ -142,3 +142,10 @@
 #ticketsApp.one .tk-learn { padding: 6px 10px; }
 #ticketsApp.one .tk-foot { padding: 4px 8px; font-size: 10px; }
 #ticketsApp.one .tkw[data-w] { min-height: 44px; align-items: center; }
+
+/* a label's typed attempt (#638): the game's typing prompt comes up over the page, on a dark card to read on */
+body:has(#ticketsApp.typing) #talk { z-index: 41; }
+body:not(.phone):has(#ticketsApp.typing) #talk.typing { padding: 14px 16px; border-radius: 12px; background: rgba(20, 26, 38, .96); box-shadow: 0 6px 30px rgba(0, 0, 0, .45); }
+#ticketsApp .tk-learn .tk-try { margin-left: 8px; min-height: 32px; }
+#ticketsApp.one .tk-learn .tk-try { display: flex; min-height: 44px; margin: 6px 0 0; width: 100%; }
+body.phone:has(#ticketsApp.typing) #talk.typing { background: rgba(20, 26, 38, .98); }

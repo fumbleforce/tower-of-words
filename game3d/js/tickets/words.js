@@ -1,6 +1,6 @@
 // The ticket system's Japanese labels (Jørgen, 2026-10-03: "Some japanese here, and learnable"). They are words like
 // any other in lang.js, marked `ui: 'tickets'` so the Words panel lists them apart. Each label shows its reading and
-// English every time; tapping a label, or using a button, teaches it (ui/tickets-view.js). None is needed to play.
+// English every time; tapping a label explains it and a typed attempt teaches it; buttons teach nothing (ui/tickets-view.js). None is needed to play.
 //   label: the short English on the screen; en: the meaning in the Words panel
 export const WORDS = {
   kenmei: {

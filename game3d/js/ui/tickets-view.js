@@ -3,15 +3,18 @@
 // learnable"). A blue header with the company mark, a breadcrumb, a thin-bordered zebra table of his tickets
 // (No., 件名, 依頼者, 状態) and the ticket as a form table under it, a copyright footer. Desktop shows the list over
 // the ticket; the phone shows one at a time, with 戻る Back. The labels are words (tickets/words.js) shown with their
-// reading and English; tapping one, or using a button, teaches it. It teaches itself the first time: a tip over the
-// list until he opens a ticket, and one by 担当する until he takes one. A panel (.panel), so Esc closes it (menu.js)
+// reading and English; tapping one explains it and offers a typed attempt (the game's typing prompt), and only a
+// successful attempt teaches it; the buttons just navigate (ticket-words.js). A tip over the list shows until he opens
+// a ticket, and one by 担当する until he takes one. A panel (.panel), so Esc closes it (menu.js)
 // and the game's input waits.
 //   openTickets({ list, show, date, earned, name, read, take, learn, isKnown })   resolves when the page is closed
 //     list() -> [{ id, title, from, text, pay, status, read }]; earned() -> yen paid for closed tickets;
 //     name(id) -> a speaker's name; read(id) marks it read; take(id) -> true when it moved to in progress;
+//     practice(id) -> Promise<boolean>: the typed attempt for a label (false when he backs out)
 //     learn(id) -> true when the word is new to him; isKnown(id) -> whether he knows the word
 import { lineHTML, WORDS } from '../lang.js';
 import { MC } from '../mc.js';
+import { createLabelLessons } from './ticket-words.js';
 
 const $ = (s, el = document) => el.querySelector(s);
 const esc = (s) =>
@@ -22,7 +25,7 @@ const yen = (n) => '¥' + n.toLocaleString('en');
 const APP = 'Repair Tickets';
 const URL = 'http://intra.amakawa.co.jp/shuri/list.do';
 
-// a label: the Japanese with its reading over it, the short English after it. `tap` makes it teach itself on a tap.
+// a label: the Japanese with its reading over it, the short English after it. `tap` makes it explain itself on a tap.
 function lab(id, { tap = true, en = WORDS[id].label } = {}) {
   const w = WORDS[id];
   const ja = `<ruby lang="ja">${w.ja}<rt>${w.ro}</rt></ruby>`;
@@ -95,6 +98,7 @@ export function openTickets({
   name,
   read,
   take,
+  practice = async () => false,
   learn = () => false,
   isKnown = () => false,
 }) {
@@ -106,19 +110,39 @@ export function openTickets({
   const tickets = () => list();
   const cur = () => tickets().find((t) => t.id === sel) || null;
 
-  // a label tapped or a button used: the word is his, and the line under the page says so
-  function teach(id) {
-    if (!WORDS[id] || !learn(id)) return;
+  const lessons = createLabelLessons({ practice, learn, isKnown });
+  const learnLine = () => $('.tk-learn', app);
+  const wordLine = (id) => {
     const w = WORDS[id];
-    $('.tk-learn', app).innerHTML = `New word in your Words: <b lang="ja">${w.ja}</b> ${esc(w.ro)}, ${esc(w.en)}`;
-    marks();
+    return `<b lang="ja">${w.ja}</b> ${esc(w.ro)}, ${esc(w.en)}`;
+  };
+  // a tapped label: what it means, and a short typed attempt; the word is his only once that succeeds
+  function explain(id) {
+    if (!WORDS[id]) return;
+    const { known } = lessons.explain(id);
+    learnLine().innerHTML = known
+      ? `${wordLine(id)}. You know this word.`
+      : `${wordLine(id)} <button type="button" class="tk-btn tk-try">Type it to learn it</button>`;
+    const b = $('.tk-try', app);
+    if (b)
+      b.onclick = async () => {
+        b.disabled = true;
+        app.classList.add('typing');
+        const learned = await lessons.attempt(id);
+        app.classList.remove('typing');
+        if (learned) {
+          learnLine().innerHTML = `New word in your Words: ${wordLine(id)}`;
+          marks();
+        } else explain(id);
+        app.querySelector(`.tkw[data-w="${id}"]`)?.focus({ preventScroll: true });
+      };
   }
   // known labels lose the dotted underline that says "tap me"; the hint goes once one is known
   function marks() {
     for (const el of app.querySelectorAll('.tkw[data-w]')) el.classList.toggle('kn', isKnown(el.dataset.w));
-    const learnLine = $('.tk-learn', app);
-    if (!learnLine.innerHTML && !Object.keys(WORDS).some((id) => WORDS[id].ui === 'tickets' && isKnown(id)))
-      learnLine.textContent = `${phone() ? 'Tap' : 'Click'} a Japanese label to learn it.`;
+    const line = learnLine();
+    if (!line.innerHTML && !Object.keys(WORDS).some((id) => WORDS[id].ui === 'tickets' && isKnown(id)))
+      line.textContent = `${phone() ? 'Tap' : 'Click'} a Japanese label to learn it.`;
   }
 
   function pick(id, open) {
@@ -202,33 +226,28 @@ export function openTickets({
       tk.onclick = () => {
         if (!take(t.id)) return;
         render();
-        teach('tanto');
       };
     marks();
     if (sel && !onPhone) $('.tk-rows .on', app)?.scrollIntoView({ block: 'nearest' });
   }
 
   // the page's controls
-  $('.tk-close', app).onclick = () => {
-    teach('tojiru');
-    close();
-  };
+  $('.tk-close', app).onclick = close;
   $('.tk-back', app).onclick = () => {
     mode = 'list';
     render();
-    teach('modoru');
   };
-  // a tapped label teaches its word (the rows' badges don't: a tap there opens the ticket)
+  // a tapped label explains its word (the rows' badges don't: a tap there opens the ticket)
   const tapWord = (e) => {
     const w = e.target.closest('.tkw[data-w]');
     if (!w) return false;
     e.preventDefault();
     e.stopPropagation();
-    teach(w.dataset.w);
+    explain(w.dataset.w);
     return true;
   };
   app.onclick = tapWord;
-  // arrow keys move through the list on a keyboard; Enter or Space on a label teaches it
+  // arrow keys move through the list on a keyboard; Enter or Space on a label explains it
   app.onkeydown = (e) => {
     if ((e.key === 'Enter' || e.key === ' ') && tapWord(e)) return;
     if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
@@ -239,7 +258,7 @@ export function openTickets({
     pick(ids[Math.max(0, Math.min(ids.length - 1, i < 0 ? 0 : i + (e.key === 'ArrowDown' ? 1 : -1)))], false);
   };
 
-  $('.tk-learn', app).textContent = '';
+  learnLine().textContent = '';
   $('.date', app).textContent = date || '';
   if (show) read(show);
   render();
