@@ -11,6 +11,8 @@
 import * as THREE from 'three';
 import { OutlinePass as ThreeOutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 
+// the layer the selection is drawn on for the mask (render below); nothing else uses it
+const MASK_BIT = 1 << 30;
 const box = new THREE.Box3(),
   v = new THREE.Vector3(),
   rect = new THREE.Box2();
@@ -108,13 +110,41 @@ export class OutlinePass extends ThreeOutlinePass {
     this._depthCam = crop;
     const draw = renderer.render,
       mask = this.prepareMaskMaterial;
-    if (depth)
+    const tagged = [];
+    if (depth) {
+      // The mask draws the selected meshes only. Instead of hiding every other object in the scene and showing it
+      // again (two walks of the whole scene graph a frame), the selection goes on a layer of its own for that draw.
+      // The lights stay on that layer for good (looked for again every 2 s or so): a draw without them would count
+      // as a new light setup, and every lit material would check its program again on the next frame.
+      if (this._lightsFor !== this.renderScene || ++this._lightsAge > 240) {
+        this._lightsFor = this.renderScene;
+        this._lightsAge = 0;
+        this.renderScene.traverse((o) => {
+          if (o.isLight) o.layers.mask |= MASK_BIT;
+        });
+      }
+      const camMask = this.renderCamera.layers.mask;
+      for (const o of this.selectedObjects)
+        o.traverse((m) => {
+          if ((m.isMesh || m.isSprite) && m.layers.mask & camMask) {
+            tagged.push([m, m.layers.mask]);
+            m.layers.mask |= MASK_BIT;
+          }
+        });
+      this._skipHide = true;
       renderer.render = (scene, camera) => {
         if (scene.overrideMaterial === this.depthMaterial) return; // the main render's depth stands in for it
-        if (scene.overrideMaterial === mask) mask.uniforms.depthTexture.value = depth;
-        draw.call(renderer, scene, camera);
+        if (scene.overrideMaterial !== mask) return void draw.call(renderer, scene, camera);
+        mask.uniforms.depthTexture.value = depth;
+        const before = camera.layers.mask;
+        camera.layers.mask = MASK_BIT;
+        try {
+          draw.call(renderer, scene, camera);
+        } finally {
+          camera.layers.mask = before;
+        }
       };
-    else {
+    } else {
       this.prepareMaskMaterial = this.packedMask;
       if (crop)
         renderer.render = (scene, camera) =>
@@ -123,11 +153,16 @@ export class OutlinePass extends ThreeOutlinePass {
     try {
       super.render(renderer, writeBuffer, readBuffer, deltaTime, maskActive);
     } finally {
+      for (const [m, was] of tagged) m.layers.mask = was;
+      this._skipHide = false;
       renderer.render = draw;
       this.prepareMaskMaterial = mask;
       this._depthCam = null;
       this.selectedObjects = sel;
     }
+  }
+  _changeVisibilityOfNonSelectedObjects(visible) {
+    if (!this._skipHide) super._changeVisibilityOfNonSelectedObjects(visible);
   }
   _updateTextureMatrix() {
     const c = this._depthCam || this.renderCamera;

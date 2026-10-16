@@ -137,7 +137,17 @@ export function createView(game, renderer, canvas, save) {
     if (still && !drawn.length && sameView(cam)) return;
     game.place.beforeRender?.();
     renderer.shadowMap.needsUpdate = true;
-    view.post.render();
+    // the scene's matrices once a frame: every renderer.render() in the post chain (the scene, the AO's normals, the
+    // outline's mask) would walk the whole scene graph again (#630)
+    const scene = view.place.scene,
+      auto = scene.matrixWorldAutoUpdate;
+    if (auto) scene.updateMatrixWorld();
+    scene.matrixWorldAutoUpdate = false;
+    try {
+      view.post.render();
+    } finally {
+      scene.matrixWorldAutoUpdate = auto;
+    }
     view.draws++;
     held = still ? cam : null;
     if (held) (heldCam.set(cam.matrixWorld.elements), heldCam.set(cam.projectionMatrix.elements, 16));

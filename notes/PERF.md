@@ -777,6 +777,14 @@ Changes, none of them in the look of a frame at 1920x1080 or smaller:
 
 Two runs of the 120hz tier afterwards (ms, median / p95), the places that had exceptions: title 4.7 / 8.5 and 4.5 / 7.8, train 4.5 / 8.5 and 4.5 / 8.0, east coast 4.0 / 7.0, east lane 3.8 / 6.7, works 3.9 / 7.5, campus 3.3 / 5.7, dorms 3.0 / 5.8, sports 3.6 / 7.4, gate 3.1 / 5.9, dorm court 4.2 / 6.9, research lab 3.4 / 6.6, harbour 3.1 / 5.8, office quarter 3.2 / 6.1 (second run). Their exceptions are gone; the office, forecourt, title and train keep theirs while the CPU side is looked at.
 
+Then, the same pictures again (frozen frames and the outline's own buffers compared):
+
+- The sea (scenes/outdoor/sea.js) was 2.7 ms of the title's 4.8 ms frame and 1.5 ms of the train's: six foam taps of a dozen noise lookups each, a pixel. Where the swell is too low for foam the taps came out 0; those pixels now skip them (title 2.7 to 1.8 ms, harbour 1.2 to 0.35).
+- The scene's matrices are updated once a frame (perf/view.js) instead of once for every renderer.render() in the chain (the scene, the AO's normals, the outline's mask): the office's updateMatrixWorld 1.2 to 0.5 ms of CPU.
+- The outline's mask draws the selection from a layer of its own (perf/outline.js) instead of hiding every other object in the scene and showing it again, two walks of the whole scene a frame. The lights stay on that layer, or the next frame would see a new light setup and every lit material would check its program again.
+
+After these the title ran at 3.7 / 5.9 and the train at 3.7 / 6.9. The office and the forecourt swing between runs (office 5.1 / 6.1 to 8.6 / 10.8, forecourt 4.2 / 5.3 to 8.2 / 10.9): at about 5.5 ms of main-thread JS a frame they follow whatever else the machine's CPU is doing. Most of it is three's own render calls; the player's ground support (movement/traversal.js `refresh`, about 0.8 ms in the office) and the draw-call pass's check (0.5 ms) are next.
+
 Measured on 2026-10-09 on main e47b108e (with the new planting) plus this tool, on the RTX 3080. The load times are from a quiet run just before the planting landed; the run with the planting had a load average of 32, which stretched every load. The desktop calls and triangles are the worst of nine views; the last column is the overview camera alone. `*` marks a number over budget that has a known exception.
 
 | place | phone calls | phone tris | phone geo MB | phone tex MB | phone load s | desktop calls | desktop tris | desktop overview calls |

@@ -89,9 +89,12 @@ void main(){
 
   // foam on the crests, blurred along the direction of travel
   float crest = smoothstep(0.05, 0.35, h0) * (0.4 + 0.6 * smoothstep(-0.2, 0.3, fbm(q * 0.04 - 7.0)));
+  // (each tap is a dozen noise lookups and comes out 0 where crest is 0: those pixels skip them, same result, #630)
   float foam = 0.0;
-  for (int k = 0; k < 6; k++) foam += foamAt(q + vec2(uBlur * (float(k) / 5.0 - 0.5), 0.0), crest);
-  foam *= 1.0 / 6.0;
+  if (crest > 0.0) {
+    for (int k = 0; k < 6; k++) foam += foamAt(q + vec2(uBlur * (float(k) / 5.0 - 0.5), 0.0), crest);
+    foam *= 1.0 / 6.0;
+  }
 
   // foam collars where the pillars stand in the water: a crisp ring round the foot (radius 0.8), like the crest
   // strokes, not a soft disc (that read as a blur where the run in brings a foot to the frame's edge)
