@@ -33,18 +33,6 @@
       "context": "2b85b808d5bcd7b3516cc96a4c11fd85f16c46aa5b479a51ccc6f04401d3c682"
     },
     {
-      "file": "game3d/js/cast.js",
-      "ruleId": "no-unused-vars",
-      "message": "'guardCap' is defined but never used.",
-      "context": "751916ade94d4fc64deed106db8570d4c88a190b1d59a56ad6fe6d73f1ef7746"
-    },
-    {
-      "file": "game3d/js/cast.js",
-      "ruleId": "no-unused-vars",
-      "message": "'rx' is assigned a value but never used.",
-      "context": "6740d5726a637cb3a0afcea3dfbc2c10bf3a9dbb7e3b12470e04bcea524a376a"
-    },
-    {
       "file": "game3d/js/places/lift.js",
       "ruleId": "no-unused-vars",
       "message": "'JP_FONT' is defined but never used.",

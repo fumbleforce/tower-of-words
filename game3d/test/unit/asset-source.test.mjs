@@ -16,10 +16,8 @@ const read = file => fs.readFileSync(new URL(file, root), 'utf8');
 test('asset source data includes the actual words, cast, music, sounds and style metadata', () => {
   const data = assetSourceData(read);
   assert.deepEqual(data.words, WORDS);
-  assert.equal(Object.keys(data.people).length, 12);
+  assert.equal(Object.keys(data.people).length, 9);
   assert.deepEqual(data.people.rei.used, ['gate', 'office', 'train']);
-  assert.match(data.people.rei.comments[0], /Sales: long silver-grey hair/);
-  assert.equal(data.people.mori.comments[0], 'portrait: grey hair, no glasses, brown-grey suit, navy tie');
   assert.deepEqual(data.music, { train: 'calm', gate: 'lively', office: 'office' });
   assert.equal(data.beds.gate, 'bed_lobby');
   assert.ok(data.events.office.some(event => event.f === 'phone_far'));
@@ -71,7 +69,7 @@ test('the full public scanner registers parsed metadata and preserves existing i
     const entries = new Map(JSON.parse(fs.readFileSync(output, 'utf8')).assets.map(entry => [entry.id, entry]));
     assert.equal(entries.get('icon/say-a-word-c34e06')?.name, 'Say a word');
     assert.ok(entries.get('piece/props/bench')?.used.length > 0 && entries.get('piece/outdoor/furniture/bench')?.used.length > 0);
-    assert.ok(entries.get('model/chibi-rei')?.used.includes('B2 office'));
+    assert.equal(entries.get('model/tama')?.view.type, 'cat');
     assert.ok(entries.get('music/calm')?.used.includes('Background loop in Train'));
     assert.match(entries.get('icon/word-matte')?.svg || '', /<path/);
     assert.equal(entries.get('style/world-1')?.name, 'World look 1: Soft cel');

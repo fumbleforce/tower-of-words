@@ -1,10 +1,10 @@
 // 3D thumbnails for the asset gallery: every entry in tools/assets/assets.json with a 3D view (Meshy models,
-// animations, code-built chibis, every variant of the world pieces, rooms and the props in them) rendered by the game's own code in one
+// animations, Tama, every variant of the world pieces, rooms and the props in them) rendered by the game's own code in one
 // headless browser run. Only missing or stale thumbnails are rendered (a thumbnail is stale when a file the entry
 // lists is newer than it), so a second run is quick.
 //   node tools/assets/render3d.mjs            render what is missing or stale, then refresh assets.json
 //   node tools/assets/render3d.mjs --all      render everything again
-//   node tools/assets/render3d.mjs --only=chibi   render the entries whose id contains 'chibi'
+//   node tools/assets/render3d.mjs --only=mio     render the entries whose id contains 'mio'
 // Takes the shared browser lock (GUIDE, Process). Software GL (SwiftShader), so it never touches the GPU lock.
 import { chromium } from '/home/jorgen/ai/opening/node_modules/playwright/index.mjs';
 import { spawn, execFileSync } from 'node:child_process';

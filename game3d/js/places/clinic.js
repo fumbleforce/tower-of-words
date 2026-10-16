@@ -17,7 +17,6 @@ import { generic } from '../crowd/bodies.js';
 import { PEOPLE, idle } from '../cast.js';
 import { walkPerson, stepPeople } from '../story.js';
 import { blob } from '../engine.js';
-import { rbox } from '../props.js';
 import { flags } from '../narrative/state.js';
 
 const TOP = '#d6e6ea'; // the nurse's pale blue tunic
@@ -27,8 +26,6 @@ export function clinicPlace(game) {
     cam = new RoomCam({ elev: 50, yaw: 0.15, fov: 32 }),
     floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const nurse = generic('apron', 31, { proxy: true, tint: { top: TOP } }) || PEOPLE.worker(31);
-  if (!nurse.crowdRole && nurse.torso)
-    nurse.torso.add(rbox(0.25, 0.3, 0.02, TOP, { y: -0.15, z: 0.105, r: 0.008, seg: 1 }));
   nurse.root.scale.multiplyScalar(K);
   const shadow = blob(0.35, 0.25);
   nurse.root.add(shadow);

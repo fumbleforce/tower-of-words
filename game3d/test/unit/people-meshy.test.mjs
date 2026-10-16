@@ -1,6 +1,6 @@
-// The code-built chibi() of train/people.js may only lose callers (notes/people-plan.md). Every file that calls it is
-// listed below with its count. A new caller fails. So does a listed file that calls it more often, and one that calls
-// it less or not at all: lower the count, or remove the file, so the list only shrinks.
+// Nobody in the game is built in code (notes/people-plan.md): the code-built chibi() of train/people.js is gone, and
+// a person whose model did not load is a stand-in that is never drawn (train/people.js standIn, missing). This keeps it
+// that way: no module may define or call a chibi() in train/people.js again, and the list of callers stays empty.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -10,11 +10,7 @@ import { parse } from 'espree';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const PEOPLE = 'game3d/js/train/people.js';
-const CALLERS = {
-  'game3d/js/cast.js': 12,
-  'game3d/js/crowd/looks.js': 3,
-  'game3d/js/train/people.js': 7,
-};
+const CALLERS = {};
 
 const isChibi = (callee, names, spaces) => (callee.type === 'Identifier' && names.has(callee.name))
   || (callee.type === 'MemberExpression' && !callee.computed && callee.object.type === 'Identifier'
@@ -55,7 +51,7 @@ function jsFiles() {
     .map((f) => `game3d/js/${f}`);
 }
 
-test('code-built chibi() has no new callers, and its callers only go down', () => {
+test('nobody calls a code-built chibi()', () => {
   const found = {};
   for (const file of jsFiles()) {
     const n = chibiCalls(fs.readFileSync(path.join(ROOT, file), 'utf8'), file);
@@ -63,7 +59,7 @@ test('code-built chibi() has no new callers, and its callers only go down', () =
   }
   const problems = [];
   for (const [file, n] of Object.entries(found)) {
-    if (!(file in CALLERS)) problems.push(`${file}: calls the code-built chibi() ${n} time(s), and is not on the list. Draw people from their Meshy models instead (notes/people-plan.md).`);
+    if (!(file in CALLERS)) problems.push(`${file}: calls the code-built chibi() ${n} time(s), and is not on the list. Draw people from their Meshy models instead, with a stand-in when one fails (notes/people-plan.md).`);
     else if (n > CALLERS[file]) problems.push(`${file}: calls chibi() ${n} times, ${CALLERS[file]} on the list. The count may only go down.`);
     else if (n < CALLERS[file]) problems.push(`${file}: calls chibi() ${n} times now, ${CALLERS[file]} on the list. Lower its count to ${n}.`);
   }
@@ -89,4 +85,10 @@ test('chibi() calls: comments, strings, method calls, other modules and local fu
 
 test('train/people.js counts its own calls to chibi()', () => {
   assert.equal(chibiCalls('export function chibi(o) { return o; }\nexport const x = chibi({});', PEOPLE), 1);
+});
+
+test('train/people.js has no chibi() to call', () => {
+  const ast = parse(fs.readFileSync(path.join(ROOT, PEOPLE), 'utf8'), { ecmaVersion: 'latest', sourceType: 'module' });
+  const names = ast.body.flatMap((n) => (n.type === 'ExportNamedDeclaration' ? [n.declaration?.id?.name, ...n.specifiers.map((s) => s.exported.name)] : n.type === 'FunctionDeclaration' ? [n.id.name] : []));
+  assert.ok(!names.includes('chibi'), 'train/people.js defines chibi() again');
 });

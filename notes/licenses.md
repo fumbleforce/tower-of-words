@@ -76,7 +76,7 @@ Generation tools: ComfyUI on the local GPU. The Anima family (RDBT, One Obsessio
 | Meshy image-to-3D models (Eric, Mio, Kuro, Aoi, Emi, Mori, Kenji, the guard, Hamada, Rei, Carina, the crowd models, swimwear) and Meshy auto-rig | [Meshy help: commercial use](https://intercom.help/meshy/en/articles/16102098-can-i-use-meshy-assets-commercially). Paid plan: you own it, no attribution, provided inputs infringe nobody and the model was not published to Meshy Community. Free plan: CC BY 4.0, commercial use allowed, credit Meshy | yes / yes either way | Free plan: "Model created with Meshy." | Needs action: confirm plan (item 4) and that nothing went to the Community page |
 | Meshy animation library clips (walk, run, sit, gestures) | Same as above (Meshy output) | yes / yes | Same | Needs action: same |
 | Our idles, gestures on the rig and sit/phone poses (`relaxed-idle-*.json`, rig-gestures.js) | ours | n/a | none | OK |
-| Code-built chibis, rooms, props, world kit | ours | n/a | none | OK |
+| Code-built Tama, rooms, props, world kit | ours | n/a | none | OK |
 | Mixamo | Bone names (`mixamorig`) appear in the rigs because Meshy uses that naming; no Mixamo clip is recorded as imported | n/a | none | OK. If a clip turns out to be from Mixamo, Adobe's [Mixamo FAQ](https://helpx.adobe.com/creative-cloud/faq/mixamo-faq.html) allows commercial use in games |
 | pixiv VRM sample (art/parts, the removed VRM test page) | Prototype only, never in the game | n/a | n/a | OK, keep out of the app |
 | TRELLIS.2 / Hunyuan3D meshes | Tested as guides; rejected for shipping per GUIDE | n/a | n/a | OK, not shipped |

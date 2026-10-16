@@ -1,6 +1,5 @@
 import { generic } from '../../crowd/bodies.js';
 import { PEOPLE, idle, sit } from '../../cast.js';
-import { rbox } from '../../props.js';
 import { blob } from '../../engine.js';
 import { SEAT_Y } from '../../train/car.js';
 import { K } from '../../scenes/office.js';
@@ -15,8 +14,6 @@ export function terminalResidents(root) {
   const people = {};
   for (const [id, kind, seed, x, z, ry, top, color] of rows) {
     const rig = generic(kind, seed, { proxy: true, tint: { top: color } }) || PEOPLE.worker(seed);
-    if (id === 'ferry_staff' && !rig.crowdRole)
-      rig.torso.add(rbox(0.25, 0.3, 0.02, color, { y: -0.15, z: 0.105, r: 0.008, seg: 1 }));
     rig.root.scale.multiplyScalar(K);
     rig.root.position.set(x, 0, z);
     rig.root.rotation.y = ry;

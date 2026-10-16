@@ -409,10 +409,10 @@ People the engine defines that no storyline uses.
 
 | Id | What it is | Why it's there |
 |---|---|---|
-| `yui` | A speaker and a hidden figure at the B2 copier (to remove). | Left from before the B2 team was settled; the office no longer has them (game3d/story/REQUESTS.md, done). |
-| `sota` | A speaker and a hidden figure at the B2 coffee machine (to remove). | Same. |
-| `nao` | A speaker and a hidden figure at a B2 desk (to remove). | Same. |
-| `hiro` | A speaker and a hidden figure at a B2 desk (to remove). | Same. |
+| `yui` | A speaker only (to remove). | Left from before the B2 team was settled; the office no longer has them, and their hidden figures went with the code-built bodies (game3d/story/REQUESTS.md, done). |
+| `sota` | A speaker only (to remove). | Same. |
+| `nao` | A speaker only (to remove). | Same. |
+| `hiro` | A speaker only (to remove). | Same. |
 | `kanae` | A speaker only. | Added for an earlier day-1 draft; nothing uses it now. Kanae is in the wider cast (bible). |
 | `reitext` | A speaker only: Rei's text messages. | Added for an earlier day-1 draft; nothing uses it now. |
 

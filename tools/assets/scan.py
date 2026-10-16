@@ -3,7 +3,7 @@
 
 Every entry: id, kind, name, who (character), place, paths, status, status_from (where the status comes from),
 source (how it was made), used (where the game uses it), thumb, review (review item id, if any), view (how the
-gallery previews it: image, audio, 3D model, code-built chibi or prop, room).
+gallery previews it: image, audio, 3D model, Tama or a prop, room).
 
 Statuses: approved (Jørgen picked it), provisional (in the game but not approved, or approved then put back under
 review), candidate (waiting in an open review or a candidates folder), legacy (from an earlier version of the game),
@@ -441,38 +441,9 @@ for p in ls('legacy/side/flat/meshy', r'\.glb$') + ls('legacy/side/hd2d/figures/
     add(f"model/legacy-{os.path.splitext(os.path.basename(p))[0]}", 'model', os.path.basename(p), [p], 'legacy', 'Under legacy/ (reference only)',
         source='Meshy parts round 14b' if 'flat' in p else 'HD-2D figure test', who='mio', view={'type': 'glb', 'src': p})
 
-# code-built chibis (cast.js PEOPLE, avatar.js buildEric, train/people.js passengers and the cat)
-fmt_gone = quote('docs/game/cast.md', 'Left from before the B2 team was settled')
-for pid, person in RUNTIME['source']['people'].items():
-    comment, used = person['comments'], person['used']
-    if pid == 'worker':
-        for i in range(7):
-            add(f'model/chibi-worker-{i}', 'model', f'Office worker {i}', ['game3d/js/cast.js'], 'provisional',
-                'Code-built chibi in the game; never put to Jørgen as an asset', source='cast.js PEOPLE.worker(' + str(i) + '), chibi() from train/people.js',
-                who='worker', place=None, used=[f"Background people in {', '.join(PLACES.get(u, u) for u in used)}"] if used else [],
-                view={'type': 'chibi', 'fn': 'worker', 'arg': i}, tags=['code-built'])
-        continue
-    gone = pid in ('yui', 'sota')
-    add(f'model/chibi-{pid}', 'model', f"{NAMES.get(pid, pid)} (chibi)", ['game3d/js/cast.js'], 'legacy' if gone else 'provisional',
-        fmt_gone if gone else 'Code-built chibi in the game; never put to Jørgen as an asset',
-        source='cast.js PEOPLE.' + pid + ' (chibi() from train/people.js)' + (': ' + comment[0] if comment else ''), who=pid,
-        used=([f"Still built in {', '.join(PLACES.get(u, u) for u in used)}, but cut from the story"] if gone and used else
-              [f"{PLACES.get(u, u)}" for u in used] or (['Not placed in any scene'] if not gone else [])),
-        view={'type': 'chibi', 'fn': pid}, tags=['code-built'])
-add('model/chibi-eric', 'model', 'Eric (chibi fallback)', ['game3d/js/avatar.js'], 'provisional', 'The fallback when the Meshy model fails, or with ?eric=chibi',
-    source='avatar.js buildEric(): chibi() matched to the approved portrait', who='eric', used=['Only when the Meshy Eric fails to load, or ?eric=chibi'],
-    view={'type': 'chibi', 'fn': 'eric'}, tags=['code-built'])
-ppl = read('game3d/js/train/people.js')
-pas = ppl.split('export function buildPassengers', 1)[1].split('export function', 1)[0] if 'buildPassengers' in ppl else ''
-for i, m in enumerate(re.finditer(r'//\s*(\d+)\.\s*(.*)', pas)):
-    add(f'model/chibi-passenger-{i + 1}', 'model', f"Passenger: {m.group(2).split(',')[0].split(';')[0]}", ['game3d/js/train/people.js'], 'provisional',
-        'Code-built chibi in the game; never put to Jørgen as an asset', source=f'train/people.js buildPassengers() #{i + 1}: {m.group(2)}',
-        place='train', used=['Train carriage'], view={'type': 'chibi', 'fn': 'passenger', 'arg': i}, tags=['code-built', 'seated'])
-add('model/chibi-cat', 'model', 'Tama (cat)', ['game3d/js/train/people.js'], 'provisional', 'Code-built in the game; never put to Jørgen as an asset',
-    source='train/people.js cat()', who='tama', used=['Train (on a seat)', 'Lobby (by the gate)', 'B2 office (on your desk)'], view={'type': 'chibi', 'fn': 'cat'}, tags=['code-built'])
-add('model/chibi-old-player', 'model', 'Old player chibi (with backpack)', ['game3d/js/train/people.js'], 'legacy',
-    'From the Mio-as-player version (the player is Eric now); buildPlayer() is not called', source='train/people.js buildPlayer()',
-    view={'type': 'chibi', 'fn': 'oldplayer'}, tags=['code-built'])
+# Tama, built in code (creatures/cat.js)
+add('model/tama', 'model', 'Tama (cat)', ['game3d/js/creatures/cat.js'], 'provisional', 'Code-built in the game; never put to Jørgen as an asset',
+    source='creatures/cat.js makeCat()', who='tama', used=['Train (on a seat)', 'Lobby (by the gate)', 'B2 office (on your desk)'], view={'type': 'cat'}, tags=['code-built'])
 
 # animations
 def anim(id_, who, name, paths, status, why, source, used, view):
@@ -509,10 +480,6 @@ for clip in ['idle', 'walk']:
     p = f'art/parts/anim/{clip}.glb'
     if exists(p):
         anim(f'parts-{clip}', None, f'Creator parts: {clip}', [p], 'candidate', 'Creator experiment (paused)', 'tools/creator', [], {'type': 'glb', 'src': p})
-anim('chibi-walk', None, 'Chibi walk cycle (code)', ['game3d/js/train/people.js'], 'provisional', 'Code animation in the game; never reviewed on its own',
-     'train/people.js walkPose(): swinging legs and arms, a small hip bob', ['Every code-built chibi that walks'], {'type': 'chibi', 'fn': 'kenji', 'play': 'walk'})
-anim('chibi-sit', None, 'Chibi sit and breathe (code)', ['game3d/js/train/people.js', 'game3d/js/cast.js'], 'provisional', 'Code animation in the game',
-     'train/people.js sit() and cast.js idle(): bent legs, hands in the lap, a slow breath', ['Seated passengers and office workers'], {'type': 'chibi', 'fn': 'kenji', 'play': 'sit'})
 
 # ------------------------------------------------------------------ rooms and props
 rounds = sorted([d for d in ls('game3d/shots') if re.search(r'/round-\d+$', d)], key=lambda d: int(d.rsplit('-', 1)[1]))
@@ -836,7 +803,7 @@ def private(p):
 
 for e in list(A.values()):
     e['paths'] = [p for p in e['paths'] if not private(p)]
-    if not e['paths'] and not e.get('svg') and e['view'].get('type') not in ('chibi', 'piece', 'code'):
+    if not e['paths'] and not e.get('svg') and e['view'].get('type') not in ('cat', 'piece', 'code'):
         del A[e['id']]
 
 
@@ -890,7 +857,7 @@ def make_thumbs(entries, do=True):
                 var['thumb'] = var['thumb3d'] if exists(var['thumb3d']) else None
             if e.get('variants'):
                 e['thumb3d'], e['thumb'] = e['variants'][0]['thumb3d'], e['variants'][0]['thumb']
-        elif v.get('type') in ('meshy', 'mio', 'glb', 'chibi', 'room'):
+        elif v.get('type') in ('meshy', 'glb', 'cat', 'room'):
             dst = f"{THUMBS}/3d-{re.sub(r'[^a-z0-9]+', '-', e['id'].lower())}.webp"
             e['thumb3d'] = dst
             if exists(dst):

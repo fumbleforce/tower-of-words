@@ -10,15 +10,12 @@ import { walkIn, walkOut } from './edge-walk.js';
 import { generic } from '../crowd/bodies.js';
 import { PEOPLE, idle } from '../cast.js';
 import { blob } from '../engine.js';
-import { rbox } from '../props.js';
 import { bakeryStage } from './bakery/stage.js';
 import { bakeryAction } from './bakery/action.js';
 export function bakeryPlace(game) {
   const w = buildBakery(),
     cam = new RoomCam({ elev: 48, yaw: 0.18, fov: 32 });
   const clerk = generic('apron', 25, { proxy: true, tint: { top: '#668578' } }) || PEOPLE.worker(25);
-  if (!clerk.crowdRole && clerk.torso)
-    clerk.torso.add(rbox(0.25, 0.3, 0.02, '#668578', { y: -0.15, z: 0.105, r: 0.008, seg: 1 }));
   clerk.root.scale.multiplyScalar(K);
   clerk.root.position.set(CLERK[0], 0, CLERK[1]);
   clerk.root.add(blob(0.35, 0.25));

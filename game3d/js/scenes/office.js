@@ -1223,14 +1223,6 @@ export function* officeSteps() {
   seatAt(kenji, dN(0), 0);
   root.add(kenji.root);
   yield;
-  const nao = scaleUp(PEOPLE.worker(1));
-  seatAt(nao, dN(1), 0);
-  root.add(nao.root);
-  yield;
-  const hiro = scaleUp(PEOPLE.worker(2));
-  seatAt(hiro, dN(1), 0);
-  root.add(hiro.root);
-  yield;
   const mori = scaleUp(PEOPLE.mori());
   sit(mori);
   mori.root.position.set(2.16, mori.root.position.y + 0.03 * K, -3.36);
@@ -1247,20 +1239,6 @@ export function* officeSteps() {
   const emiBlob = blob(0.55, 0.38);
   emiBlob.position.set(-5.3, 0.004, -1.35);
   root.add(emiBlob);
-  const yui = scaleUp(PEOPLE.yui());
-  yui.root.position.set(-2.95, 0, 3.55);
-  yui.root.rotation.y = Math.PI;
-  root.add(yui.root);
-  yield;
-  const sota = scaleUp(PEOPLE.sota());
-  sota.root.position.set(1.05, 0, 3.5);
-  sota.root.rotation.y = Math.PI;
-  root.add(sota.root);
-  yield;
-  const sm2 = mug('#c96a5a');
-  sm2.position.set(0, -0.26, 0.02);
-  sota.arms[1].add(sm2);
-  sota.arms[1].rotation.x = -0.9;
   for (const [x, z] of [dN(0).seat]) {
     const b = blob(0.6, 0.3);
     b.position.set(x, 0.004, z);
@@ -1769,7 +1747,7 @@ export function* officeSteps() {
 
   yield;
   groundShadows(root, {
-    skip: new Set([kenji.root, nao.root, hiro.root, mori.root, emi.root, yui.root, sota.root, life.pools]),
+    skip: new Set([kenji.root, mori.root, emi.root, life.pools]),
   });
 
   yield;
@@ -1891,7 +1869,6 @@ export function* officeSteps() {
   B(2.8, 3.3, -1.8, -0.7);
   B(2.81, 3.19, -5.77, -4.33); // reference shelf
 
-  for (const r of [nao, hiro, yui, sota]) r.root.visible = false;
   const world = {
     root,
     scene,
@@ -1903,13 +1880,9 @@ export function* officeSteps() {
     dN,
     dS,
     kenji,
-    nao,
-    hiro,
     mori,
     emi,
     emiBlob,
-    yui,
-    sota,
     tama,
     tamaRig,
     covers,
@@ -1935,13 +1908,10 @@ export function* officeSteps() {
     for (const d of life.dust) d.userData.update(t);
     liveScreens.update(t);
     for (let i = 0; i < life.leds.length; i++) life.leds.set(i, Math.sin(t * (3 + (i % 5)) + i * 1.7) > -0.6);
-    for (const r of [kenji, nao, hiro, mori, yui, sota]) idle(r, t);
+    for (const r of [kenji, mori]) idle(r, t);
     if (!emi._walk) idle(emi, t);
     if (!kenji.gesturing) kenji.arms[1].rotation.x = -1.2 + Math.max(0, Math.sin(t * 6)) * 0.06;
-    nao.arms[0].rotation.x = -1.2 + Math.max(0, Math.sin(t * 5 + 1)) * 0.06;
     mori.head.rotation.x = -0.1 + Math.sin(t * 0.4) * 0.03;
-    yui.arms[0].rotation.x = -0.8 + Math.sin(t * 1.3) * 0.2;
-    sota.arms[1].rotation.x = -0.9 + Math.max(0, Math.sin(t * 0.5)) * -0.4;
   };
   world.openLift = (k) => {
     leaves[0].position.x = -0.255 - k * 0.47;

@@ -5,7 +5,7 @@ import { poolHandling } from '../day3/pool-handling.js';
 export function gardenPoses(P, worker, tools) {
   const hands = poolHandling(P.space, { codeArms: true });
   // the hands the broom and pan hang from: the approved body's own hand bones (the right one poolHandling reaches
-  // with), or the code-built worker's
+  // with), or the stand-in's
   const bone = (name) => worker.model?.getObjectByName(name);
   const wrist = bone('RightHand') || worker.arms[1].userData.hand,
     leftHand = bone('LeftHand') || worker.arms[0].userData.hand;

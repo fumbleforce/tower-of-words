@@ -50,7 +50,7 @@ await withBrowserJob(
           const g = globalThis.__game,
             T = await import('three');
           const { CHARACTER_SCALE, characterHead } = await import('./js/character-scale.js');
-          const { chibi } = await import('./js/train/people.js');
+          const { standIn } = await import('./js/train/people.js');
           const { bodies } = await import('./js/movement/shared.js');
           const rig = (r) => {
             if (!r?.root) return null;
@@ -68,7 +68,7 @@ await withBrowserJob(
               strides: r.strides,
             };
           };
-          const dummy = chibi({ skin: '#f6d9c6', top: '#234455', bottom: '#334455', hair: '#223344', scale: 1 });
+          const dummy = standIn('scale check', { scale: 1 });
           const fallbackScale = dummy.root.scale.x;
           dummy.root.traverse((o) => {
             o.geometry?.dispose();

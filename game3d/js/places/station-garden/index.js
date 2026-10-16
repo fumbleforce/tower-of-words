@@ -24,7 +24,7 @@ export function stationGarden(game, { w, K }) {
       return P?.crowd || [];
     },
   };
-  // the grounds worker: older-1 in an olive work jacket (crowd/roles.js grounds); the code-built worker if it didn't load
+  // the grounds worker: older-1 in an olive work jacket (crowd/roles.js grounds); a stand-in if it didn't load
   const worker = roleBody('grounds', 5, { proxy: true, tint: { top: '#5f6b4c' } }) || PEOPLE.worker(5);
   worker.root.scale.multiplyScalar(K);
   worker.root.add(blob(0.28, 0.22));

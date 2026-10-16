@@ -35,7 +35,7 @@ The island is well populated (Jørgen, 2026-10-02: "there should be plenty of pe
 - Nobody appears or vanishes in view: a new walker comes in at a street's end out of view (checked where they will stand, each of a pair) or steps out of a door, and leaves the same way. Nobody vanishes on a door's threshold either (Jørgen, 2026-10-10: "they also disappear as soon as they walk to the door, with literally no one in the reception, very jarring"): at head office's door they walk on through the lobby to the lifts before they are gone, and the ones coming out walk from the lifts to the door; at the station's door they walk through the security room, past its arch and readers, to the platform doors, and the ones coming out walk the other way. The clock moving while Eric is there changes only the people out of view.
 - While a scene plays, nobody steps out of a door (new walkers come only from a street's end out of view), nobody stops on the way, walkers give Eric a wide berth and nobody heads for a door he is at, so the scene keeps its room.
 - The numbers in places.md are for a desktop at high quality. The medium tier shows 85% of them and the low tier 70%; phones show 55, 75 or 90% (low, medium, high), with no sun shadows. There is a cap per place on how many are out at once: 22, 30 and 36 on a desktop, 14, 18 and 22 on a phone.
-- They are the same chibi bodies as the lobby's office workers, built in game3d/js/crowd/looks.js, so a later character model replaces one file.
+- They wear the approved crowd models, the same as the lobby's office workers (game3d/js/crowd/looks.js and crowd/bodies.js), so a later character model replaces one file.
 
 ## Ambient moments
 

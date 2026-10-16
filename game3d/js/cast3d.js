@@ -2,7 +2,7 @@
 // them like the code-built people of cast.js. Their files load once, and every place that builds the person gets its
 // own copy.
 import * as THREE from 'three';
-import { HIP } from './train/people.js';
+import { HIP, missing } from './train/people.js';
 import { SEAT_Y } from './train/car.js';
 import { clone } from '../vendor/utils/SkeletonUtils.js';
 import { meshyFiles, meshyFrom } from './avatar.js';
@@ -48,8 +48,6 @@ await Promise.all(
       }).catch(warn(id))),
   ),
 );
-// the ids cast.js asks for here first
-export const CAST3D_IDS = Object.keys(CAST3D);
 // Wrap a loaded Meshy character so the scenes can treat it like a code-built rig: the pose helpers (sit, walkPose,
 // arms...) switch its clips instead, the parts they write to are harmless stand-ins (the head follows the real head bone,
 // for labels and look-at), `seated` picks sit or idle, and it updates itself each frame it's drawn.
@@ -150,11 +148,11 @@ export const meshy3 = (id) => {
   return meshyPerson(m);
 };
 
-// A Meshy model (if it is on) in a code-built passenger's seat, facing the same way, with an optional act (train.js);
-// otherwise the passenger as built
+// A Meshy model in a passenger's seat (train/people.js buildPassengers), facing the same way, with an optional act
+// (train.js); the stand-in, never drawn, if the model did not load
 export function inSeat(id, r, act) {
   const m = meshy3(id);
-  if (!m) return r;
+  if (!m) return missing(r, id);
   m.root.position.set(r.root.position.x, 0, r.root.position.z);
   m.root.rotation.copy(r.root.rotation);
   m.seated = true;

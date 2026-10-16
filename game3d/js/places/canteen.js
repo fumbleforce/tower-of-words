@@ -10,7 +10,7 @@ import { generic } from '../crowd/bodies.js';
 import { PEOPLE, idle, sit } from '../cast.js';
 import { SEAT_Y } from '../train/car.js';
 import { signBoard } from '../scenes/plaza-buildings.js';
-import { plant, clock, rbox } from '../props.js';
+import { plant, clock } from '../props.js';
 import { sim } from '../sim.js';
 import { blob } from '../engine.js';
 import { counterActivity } from './room-activity.js';
@@ -113,7 +113,6 @@ export function canteenPlace(game) {
     const r =
       generic(kind, i ? 63 + i : 25, i ? { proxy: true } : { proxy: true, tint: { top: AWNING.canvas } }) ||
       PEOPLE.worker(i ? 63 + i : 25);
-    if (!i && !r.crowdRole) r.torso.add(rbox(0.25, 0.3, 0.02, AWNING.canvas, { y: -0.15, z: 0.105, r: 0.008, seg: 1 }));
     r.root.scale.multiplyScalar(K);
     r.root.position.set(x, 0, z);
     r.root.rotation.y = ry;

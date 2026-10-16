@@ -1,6 +1,6 @@
 // 3D previews for the asset gallery and its thumbnail renderer. Everything is built by the game's own code
-// (game3d/js), so a preview shows exactly what the game shows: the Meshy models through their loaders, the
-// code-built chibis through cast.js and train/people.js, the world pieces through their own builders (kit-view.js,
+// (game3d/js), so a preview shows exactly what the game shows: the Meshy models through their loaders, Tama through
+// creatures/cat.js, the world pieces through their own builders (kit-view.js,
 // variants from tools/assets/kit.json), and whole rooms through the scene builders. The page needs an import map for 'three' and 'three/addons/' (see index.html).
 import * as THREE from 'three';
 import { researchTarget } from './research-targets.js';
@@ -15,7 +15,7 @@ export async function buildAsset(view) {
   switch (view.type) {
     case 'meshy': return figure(await meshy(view), view);
     case 'glb': return glb(view);
-    case 'chibi': return chibi(view);
+    case 'cat': return cat();
     case 'piece': return (await import('./kit-view.js')).buildPiece(view);
     case 'room': return room(view);
     default: throw new Error('no 3D view for ' + view.type);
@@ -104,37 +104,13 @@ async function glb(view) {
   return { object: g, actions: actions.length > 1 ? actions : [], current: '0', play, update: (dt) => mixer.update(dt) };
 }
 
-// the code-built people and the cat
-async function chibi(view) {
-  const cast = await mod('cast.js');
-  const ppl = await mod('train/people.js');
-  let r;
-  if (view.fn === 'eric') r = (await mod('avatar.js')).buildEric();
-  else if (view.fn === 'passenger') { const car = await mod('train/car.js'); r = ppl.buildPassengers(car.LZ, car.SEAT_Y)[view.arg || 0]; }
-  else if (view.fn === 'cat') { const c = ppl.cat(); c.scale.setScalar(1.4); const g = new THREE.Group(); g.add(c); return { object: g, actions: [], play() {}, update() {} }; }
-  else if (view.fn === 'oldplayer') r = ppl.buildPlayer();
-  else r = cast.PEOPLE[view.fn](view.arg || 0);
-  if (!r || !r.root) throw new Error('no chibi ' + view.fn);
-  const g = new THREE.Group(); g.add(r.root);
-  const seated = r.root.position.y > 0.04 || view.fn === 'passenger';
-  r.root.position.x = 0; r.root.position.z = 0; r.root.rotation.y = 0;
-  const base = { y: r.root.position.y };
-  const seatBlock = seat(0.22 * (r.root.scale.y || 1) + 0.02); g.add(seatBlock); seatBlock.visible = seated;
-  const actions = seated ? [] : [{ id: 'idle', label: 'Stand' }, { id: 'walk', label: 'Walk' }, { id: 'sit', label: 'Sit' }];
-  let mode = view.play || 'idle', ph = 0, t = 0;
-  const rest = () => { r.root.position.y = base.y; for (const l of r.legs || []) l.rotation.set(0, 0, 0); for (const k of r.knees || []) k.rotation.set(0, 0, 0); for (const a of r.arms || []) a.rotation.set(0, 0, 0); };
-  const play = (id) => {
-    mode = id; rest(); seatBlock.visible = seated;
-    if (id === 'sit') { ppl.sit(r); ppl.armsLap(r); r.root.position.y = Math.max(r.root.position.y, 0); seatBlock.visible = true; }
-  };
-  if (!seated) play(mode);
-  return {
-    object: g, actions, current: mode, play,
-    update(dt) {
-      t += dt; r.ph = r.ph || 0;
-      if (mode === 'walk') { ph += dt * 9.5; ppl.walkPose(r, ph, 1); } else if (r.torso) { r.torso.scale.y = 1 + 0.012 * Math.sin(t * 1.7); }
-    },
-  };
+// Tama, sitting
+async function cat() {
+  const { makeCat } = await mod('creatures/cat.js');
+  const c = makeCat('calico', { mode: 'sit' });
+  c.root.scale.setScalar(1.4);
+  const g = new THREE.Group(); g.add(c.root);
+  return { object: g, actions: [], play() {}, update: (dt) => c.update?.(dt) };
 }
 
 // a whole room from the game's scene builder; `anchor` and `spot` aim the camera at one named thing
@@ -160,9 +136,6 @@ async function room(view) {
     scene.add(new THREE.HemisphereLight('#dfe8f5', '#8a8378', 2.0));
     const sun = new THREE.DirectionalLight('#ffe0b0', 2.4); sun.position.set(-4, 9, 6); sun.castShadow = true;
     Object.assign(sun.shadow.camera, { left: -6, right: 6, top: 6, bottom: -6 }); sun.shadow.mapSize.set(2048, 2048); scene.add(sun);
-    // the carriage's passengers, seated where the game puts them
-    const ppl = await mod('train/people.js'); const C = await mod('train/car.js');
-    for (const r of ppl.buildPassengers(C.LZ, C.SEAT_Y)) car.root.add(r.root);
     scene.add(car.root); w = { root: car.root };
   }
   const anim = [];

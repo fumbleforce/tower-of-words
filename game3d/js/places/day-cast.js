@@ -2,7 +2,7 @@
 // makes their bodies once with dayCast() and registers each explicitly (people.<id>: cast.people.<id>, things.<id>:
 // { ...PLACE_DETAILS.<place>.things.<id>, ...cast.thing(id) }); the day's setup hook (places/day3/) then puts each
 // where the day's plan has them for the period, or hides them. Tama is a cat (creatures/cat.js); the attendant and the
-// club member wear the approved office bodies A and B (crowd/roles.js), or the code-built office workers' (cast.js
+// club member wear the approved office bodies A and B (crowd/roles.js), or a stand-in that is never drawn (cast.js
 // PEOPLE.worker) if those didn't load; everyone else is the cast's own.
 // A person the place already has (day 1's guard at his desk, day 2's Mori) comes in through `have`: their body is
 // the place's, home(id) puts them back where the place keeps them, and only the place registers them.
@@ -160,7 +160,7 @@ export function dayCast(game, { root, K = 1, ids = [], have = {} }) {
         if (r.cat) r.update(dt);
         else {
           if (r.blob) syncBlob(r);
-          if (!r.meshy && !r._walk && !r.seated) idle(r, game.t || 0); // a code-built body breathes
+          if (!r.meshy && !r._walk && !r.seated) idle(r, game.t || 0); // a stand-in's torso breathes as the old bodies did
         }
       }
     },

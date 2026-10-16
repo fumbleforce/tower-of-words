@@ -6,10 +6,9 @@
 //   stack  Eric turns his chair over onto the table, then the worker sets theirs beside it
 //   leave  the worker goes back to closing at the next table
 //   state: 'open' (before), 'taken', 'stacked', 'closed' (after)
-import { PEOPLE, armsHold, walkPose, idle } from '../cast.js';
+import { PEOPLE, walkPose, idle } from '../cast.js';
 import { walkPerson, stepPeople } from '../story.js';
 import { blob } from '../engine.js';
-import { rbox } from '../props.js';
 import { K } from '../scenes/office.js';
 import { AWNING } from '../scenes/plaza-buildings.js';
 import { TERRACE_TABLES as T, chairAt, chairBlock, terraceChair, STACKED_Y } from '../scenes/plaza/furniture.js';
@@ -34,13 +33,10 @@ export function canteenClosing(game, root, nav, chairs) {
   root.add(his, theirs);
   his.userData.noBatch = theirs.userData.noBatch = true; // they move: the draw-call pass leaves them alone
   // The selected apron worker wears the canteen's colour.
-  const chibi = generic('apron', 25, { proxy: true, tint: { top: AWNING.canvas } });
-  const r = chibi || PEOPLE.worker(25);
+  const r = generic('apron', 25, { proxy: true, tint: { top: AWNING.canvas } }) || PEOPLE.worker(25);
   r.root.scale.multiplyScalar(K);
-  if (!chibi) r.torso.add(rbox(0.25, 0.3, 0.02, AWNING.canvas, { y: -0.15, z: 0.105, r: 0.008, seg: 1 }));
-  // a chibi's arms are its stand-ins (chibi-crowd.js), which armsHold leaves alone
-  const holdArms = (x, z) =>
-    chibi ? r.arms.forEach((a, i) => a.rotation.set(x, 0, (i ? -1 : 1) * z)) : armsHold(r, x, z);
+  // the body's arms are its proxies (crowd/bodies.js proxyParts), which armsHold leaves alone on a Meshy body
+  const holdArms = (x, z) => r.arms.forEach((a, i) => a.rotation.set(x, 0, (i ? -1 : 1) * z));
   r.root.add(blob(0.45, 0.35));
   root.add(r.root);
   const AT = {

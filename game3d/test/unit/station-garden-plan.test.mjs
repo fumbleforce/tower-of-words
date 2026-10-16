@@ -105,10 +105,10 @@ test('moving tool meshes survive the actual static merge and remain anchored to 
   const { maintenanceProps } = await import('../../js/scenes/station-garden/props.js');
   const { mergeStatic } = await import('../../js/scenes/merge-static.js');
   const { gardenPoses } = await import('../../js/places/station-garden/poses.js');
-  const { PEOPLE } = await import('../../js/cast.js');
+  const { standIn } = await import('../../js/train/people.js');
   const root = new THREE.Group(),
     tools = maintenanceProps(root),
-    worker = PEOPLE.worker(5);
+    worker = standIn('grounds worker', { headK: 0.63 });
   worker.root.scale.multiplyScalar(1.18);
   const count = tools.broom.children.length;
   mergeStatic(root);
@@ -130,10 +130,10 @@ test('cached place re-entry resumes its routine and evening/Continue retain comp
   const THREE = await import('../../vendor/three/three.module.js');
   const { maintenanceProps } = await import('../../js/scenes/station-garden/props.js');
   const { gardenRoutine } = await import('../../js/places/station-garden/routine.js');
-  const { PEOPLE } = await import('../../js/cast.js');
+  const { standIn } = await import('../../js/train/people.js');
   const root = new THREE.Group(),
     tools = maintenanceProps(root),
-    worker = PEOPLE.worker(5);
+    worker = standIn('grounds worker', { headK: 0.63 });
   worker.root.scale.multiplyScalar(1.18);
   root.add(worker.root);
   const player = new THREE.Group();
@@ -183,9 +183,9 @@ test('worker yields to both residents and ambient people before continuing its a
   const THREE = await import('../../vendor/three/three.module.js');
   const { maintenanceProps } = await import('../../js/scenes/station-garden/props.js');
   const { gardenRoutine } = await import('../../js/places/station-garden/routine.js');
-  const { PEOPLE } = await import('../../js/cast.js');
+  const { standIn } = await import('../../js/train/people.js');
   const root = new THREE.Group(),
-    worker = PEOPLE.worker(5),
+    worker = standIn('grounds worker', { headK: 0.63 }),
     blocker = { root: new THREE.Group() };
   root.add(worker.root);
   worker.root.scale.multiplyScalar(1.18);

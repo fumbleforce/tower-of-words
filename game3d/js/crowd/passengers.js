@@ -1,17 +1,18 @@
 // The train's unnamed passengers on the approved native crowd bodies (crowd/approved-models.js): the man with a book,
-// the woman with headphones, the woman with a bun and the man with a bag, standing (docs/game/cast.md). Each code-built passenger
-// (train/people.js buildPassengers) becomes that body in place, the same object, so places/train.js and
+// the woman with headphones, the woman with a bun and the man with a bag, standing (docs/game/cast.md). Each passenger's
+// stand-in (train/people.js buildPassengers) becomes that body in place, the same object, so places/train.js and
 // train/discoveries.js keep every reference they hold. The things that tell them apart move over onto the new body:
 // the book, the phones and the headphones. Office woman B already wears her hair in a bun. Called by
-// trainDiscoveries before it reads their parts. If a body fails to load, the code-built passenger stays. The man with
-// a bag keeps the code-built one's visibility (places/train.js hides him).
+// trainDiscoveries before it reads their parts. If a body fails to load, the stand-in stays and is never drawn
+// (train/people.js missing). The man with a bag keeps the stand-in's visibility (places/train.js hides him).
 import * as THREE from 'three';
 import { EVERYDAY_ROLES } from './roles.js';
 import { proxyParts, roleBody, preparePlacePeople } from './bodies.js';
 import { bridgeOfficePose } from './office-pose.js';
 import { phoneLighter } from '../perf/phone.js';
+import { missing } from '../train/people.js';
 
-// How each passenger sits: the code-built passenger's hold (train/people.js armsHold), so the hands stay on the book
+// How each passenger sits: the stand-in's hold (train/people.js armsHold), so the hands stay on the book
 // or phone, and a little shorter for the student. Which body each one gets is the shared role table's (crowd/roles.js).
 const POSE = {
   reader: { arms: [-1.05, 0.55] },
@@ -19,7 +20,7 @@ const POSE = {
   bun: { arms: [-1.1, 0.5] },
   stander: { stand: true }, // his arms as the idle has them, the bag in his hand
 };
-const IN_HAND = new THREE.Vector3(0, 0.03, 0.05); // code-built units (train/people.js S), on the torso
+const IN_HAND = new THREE.Vector3(0, 0.03, 0.05); // the stand-ins' units (train/people.js S), on the torso
 
 export const prepareTrainPassengers = () => preparePlacePeople('train');
 
@@ -60,7 +61,10 @@ export function nativePassengers(people) {
     const r = people[id];
     if (!r || r.meshy || !EVERYDAY_ROLES[id]) continue;
     const n = roleBody(id);
-    if (!n) continue;
+    if (!n) {
+      missing(r, id);
+      continue;
+    }
     const old = { root: r.root, torso: r.torso, head: r.head, headK: r.headK, arms: r.arms };
     // the props: groups on the torso (the book, a phone), the headphones on the head
     const props = old.torso.children.filter((o) => o.isGroup && o !== old.head && !old.arms.includes(o));

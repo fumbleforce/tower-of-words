@@ -2,6 +2,8 @@
 
 Jørgen, 2026-10-05: "we should be working on the rest of the people, the regular people, I dont want to see the old models anywhere". The approved method is art/PROMPTS.md, "3D characters: ChatGPT chibi, then Meshy". This note lists every person the game can draw and how to cover them all with as few models as possible. Checked against the code on 2026-10-05.
 
+Done on 2026-10-16 (#643): the chibi kit, the old Mio and every code-built body are gone. A person whose model fails to load is a stand-in that is never drawn, with an error logged (game3d/js/train/people.js standIn and missing), and game3d/test/unit/people-meshy.test.mjs keeps its list of chibi() callers empty. The tables below are the 2026-10-05 survey.
+
 ## Bodies the game has today
 
 - **Meshy cast:** game3d/assets/characters/<id>/ or assets/mio, assets/eric. Loaded by cast3d.js (CAST3D_ON), mio.js and avatar.js. This is the approved look.
