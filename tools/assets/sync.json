@@ -36,5 +36,6 @@
     "safetensors", "ckpt", "pt", "pth", "onnx", "bin", "npy", "npz", "pkl", "pyc"
   ],
   "commit_allow": [],
+  "large_allow": ["game3d/assets/", "game3d/audio/", "game3d/fonts/"],
   "max_text_kb": 2048
 }

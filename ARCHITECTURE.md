@@ -112,3 +112,29 @@ Run `node tools/check/pre-commit.mjs` for the same check outside Git. Hooks are
 locally bypassable. The boot check after commit and land and the secret scan
 before push are in GUIDE (Engineering, Commit gate). Receipt enforcement and
 asset-lock/live-disk synchronization are deferred under C-0080.
+
+## Tool state and outputs
+
+Tool state never goes inside `.git` (Jørgen, 2026-10-16: no gigabytes in git).
+
+- `tools/lib/cachedir.py` is the one helper for where tool state lives.
+  `python3 tools/lib/cachedir.py <name>` prints `~/.cache/amakawa/<name>/` and
+  creates it. Python tools import `cache_dir(name)` from the same file. The
+  current folders are `pages-cache` (the bible's WebP copies) and
+  `codex-reviews` (Codex review packets and reports).
+- Check snapshots (`tools/lib/git-snapshot.mjs`) are temporary copies in
+  `.git/snapshots`. A run removes its own copy when it ends, or on SIGINT or
+  SIGTERM. The next run removes the copies of processes that have stopped.
+
+The commit gate (`tools/check/staged-assets.mjs`) applies these rules to every
+staged file. `tools/check/commit-cpu.mjs` applies them to every commit that a
+land takes in, so a commit made with `--no-verify` cannot reach main.
+
+- Binaries go to asset storage: a sync.json root, then
+  `python3 tools/assets/sync.py push`.
+- A text file over 2 MB is refused. The exception is a file in a folder listed
+  in `large_allow` in `tools/assets/sync.json`, the shipping game asset folders.
+  Those folders take files up to 16 MB.
+- Pictures and video under any `shots` folder are refused. Game captures go to
+  `game3d/shots/<job>/`, which git ignores. Other scratch output goes to
+  `~/.cache/amakawa/<name>/`.

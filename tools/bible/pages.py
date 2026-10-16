@@ -34,6 +34,8 @@ import time
 from showcase_dates import write_dates
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.insert(0, os.path.join(ROOT, 'tools', 'lib'))
+import cachedir  # noqa: E402  (tool state lives under ~/.cache/amakawa, never in .git)
 REPO_BLOB = 'https://github.com/fumbleforce/tower-of-words/blob/main/'
 REPO_TREE = 'https://github.com/fumbleforce/tower-of-words/tree/main/'
 LIST = 'bible/pages-media.json'
@@ -161,10 +163,7 @@ def cmd_push():
 
 # ------------------------------------------------------------------ staging
 def cache_dir():
-    d = git('rev-parse', '--path-format=absolute', '--git-common-dir').strip()
-    d = os.path.join(d, 'pages-cache')
-    os.makedirs(d, exist_ok=True)
-    return d
+    return cachedir.cache_dir('pages-cache')
 
 
 def webp_copy(src, sha, cache):

@@ -116,7 +116,9 @@ export async function withGitSnapshot(cwd, tree, use, { env = process.env, timeo
   // On disk under the shared .git, not the system temp folder: /tmp is RAM on this machine and each snapshot is several GB.
   const base = path.join(gitCommonDir(cwd, env), 'snapshots');
   fs.mkdirSync(base, { recursive: true });
+  sweepDeadSnapshots(base);
   const directory = fs.mkdtempSync(path.join(base, `git-snapshot-${process.pid}-`));
+  track(directory);
   try {
     await writeBlobs(cwd, directory, entries, env, timeoutMs, signal);
     // Separate metadata lets checks query tracked paths without reading the shared index.
@@ -127,5 +129,66 @@ export async function withGitSnapshot(cwd, tree, use, { env = process.env, timeo
     git(directory, ['-c', 'core.splitIndex=false', 'update-index', '-z', '--index-info'], cleanEnv, records);
     signal?.throwIfAborted();
     return await use({ directory, entries, env: cleanEnv, tree, signal });
-  } finally { fs.rmSync(directory, { recursive: true, force: true }); }
+  } finally { untrack(directory); }
+}
+
+// Snapshot cleanup. A run removes its own snapshot in its finally block; a killed run never gets there, so each
+// run also removes the snapshots of processes that are no longer running, and a SIGINT or SIGTERM removes the live ones.
+const live = new Set();
+const signalHandlers = new Map();
+const SNAPSHOT_SIGNALS = ['SIGINT', 'SIGTERM'];
+
+function processRunning(pid) {
+  try { process.kill(pid, 0); return true; }
+  catch (error) { return error.code !== 'ESRCH'; }
+}
+
+function removeSnapshot(directory) {
+  fs.rmSync(directory, { recursive: true, force: true });
+}
+
+// Best effort: a folder that cannot be removed is left for a later run.
+function sweepDeadSnapshots(base) {
+  for (const entry of fs.readdirSync(base, { withFileTypes: true })) {
+    const match = /^git-snapshot-(\d+)-/.exec(entry.name);
+    if (!match || !entry.isDirectory() || processRunning(Number(match[1]))) continue;
+    try { removeSnapshot(path.join(base, entry.name)); }
+    catch { /* another user's or still-busy folder */ }
+  }
+}
+
+function startSignalHandlers() {
+  if (signalHandlers.size) return;
+  for (const signal of SNAPSHOT_SIGNALS) {
+    const handler = () => onSignal(signal);
+    signalHandlers.set(signal, handler);
+    process.on(signal, handler);
+  }
+}
+
+function stopSignalHandlers() {
+  for (const [signal, handler] of signalHandlers) process.off(signal, handler);
+  signalHandlers.clear();
+}
+
+function onSignal(signal) {
+  for (const directory of live) {
+    try { removeSnapshot(directory); }
+    catch { /* the interrupted run's own cleanup retries */ }
+  }
+  live.clear();
+  stopSignalHandlers();
+  // Our listener was the only one for this signal: hand it back, so the process ends with the signal's usual action.
+  if (process.listenerCount(signal) === 0) process.kill(process.pid, signal);
+}
+
+function track(directory) {
+  live.add(directory);
+  startSignalHandlers();
+}
+
+function untrack(directory) {
+  live.delete(directory);
+  removeSnapshot(directory);
+  if (!live.size) stopSignalHandlers();
 }

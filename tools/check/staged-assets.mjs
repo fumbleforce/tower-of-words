@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { readStagedFile } from '../lib/staged-tree.mjs';
 
@@ -6,6 +7,13 @@ export const GENERATED_ASSET_LOCK = 'tools/assets/assets.lock.json';
 export const GENERATED_ASSET_LOCK_LIMIT = 16 * 1024 * 1024;
 export const GENERATED_ASSET_CATALOG = 'tools/assets/assets.json';
 export const GENERATED_ASSET_CATALOG_LIMIT = 8 * 1024 * 1024;
+// Files under sync.json's large_allow (the shipping game asset folders) may be this big, and no bigger. Scripts and
+// JSON also go through the syntax check, which parses at most 2 MiB (staged.mjs).
+export const LARGE_ALLOW_LIMIT = 16 * 1024 * 1024;
+// Pictures and video stay out of git wherever they are, including every shots folder that captures are written to.
+const PICTURE_OR_VIDEO = new Set(['png', 'jpg', 'jpeg', 'webp', 'gif', 'avif', 'bmp', 'tif', 'tiff', 'psd', 'kra', 'exr',
+  'hdr', 'svg', 'mp4', 'webm', 'mov', 'mkv', 'avi']);
+const WHERE = 'keep used assets in storage (tools/assets/sync.py push) and scratch output in ~/.cache/amakawa/<name>/';
 const record = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 function generatedJson(bytes, label) {
   assert(!bytes.includes(0), `${label} contains binary data`);
@@ -37,6 +45,19 @@ function generatedLockPaths(bytes) {
   return Object.keys(lock.files);
 }
 
+// sync.json rules: "dir/" matches a path prefix; any other rule is a glob where * and ? match as in fnmatch.
+function ruleMatches(file, rule) {
+  if (rule.endsWith('/')) return file.startsWith(rule);
+  const source = [...rule].map(char => (char === '*' ? '.*' : char === '?' ? '.' : char.replace(/[.+^${}()|[\]\\]/g, '\\$&')))
+    .join('');
+  return new RegExp(`^${source}$`, 's').test(file);
+}
+const anyRule = (file, rules = []) => rules.some(rule => ruleMatches(file, rule));
+const limitLabel = bytes => (bytes % (1024 * 1024) === 0 ? `${bytes / (1024 * 1024)} MB` : `${bytes / 1024} KB`);
+const binaryFailure = file => `${file}: binary belongs in asset storage; ${WHERE}`;
+const sizeFailure = (file, ceiling) => `${file}: text exceeds the ${limitLabel(ceiling)} staged limit; large files stay out of git; ${WHERE}`;
+const pictureFailure = file => `${file}: pictures and video stay out of git; game captures go to game3d/shots/<job>/ (git-ignored) and other scratch output to ~/.cache/amakawa/<name>/`;
+
 // Use staged policy and immutable blob bytes; never traverse live asset folders.
 export function checkStagedAssets(cwd, snapshot, { env = process.env } = {}) {
   const git = args => execFileSync('git', ['--no-replace-objects', ...args],
@@ -48,7 +69,11 @@ export function checkStagedAssets(cwd, snapshot, { env = process.env } = {}) {
   assert(Array.isArray(config.commit_allow) && config.commit_allow.every(value => typeof value === 'string'), 'Invalid commit allowlist');
   assert(config.never === undefined || (Array.isArray(config.never) && config.never.every(value => typeof value === 'string')),
     'Invalid excluded asset paths');
-  const entries = [];
+  assert(config.large_allow === undefined
+    || (Array.isArray(config.large_allow) && config.large_allow.every(value => typeof value === 'string')),
+  'Invalid large-file allowlist');
+  const binaryExtensions = new Set(config.binary_ext.map(ext => ext.toLowerCase()));
+  const failures = [];
   let lockedPaths = [], catalogPaths = [];
   for (const change of snapshot.changes) {
     assert(!change.file.split('/').includes('private'), 'Private paths cannot be committed');
@@ -74,26 +99,21 @@ export function checkStagedAssets(cwd, snapshot, { env = process.env } = {}) {
       for (const file of catalogPaths) publicRelativePath(file, 'asset catalog');
       continue;
     }
-    // Every unallowed text candidate fits the cap, so inspect all its bytes for NUL.
-    const binary = size <= cap && readStagedFile(cwd, snapshot, change.file, { env, maxBytes: cap }).includes(0);
-    entries.push({ file: change.file, size, binary });
+    const extension = path.extname(change.file).slice(1).toLowerCase();
+    if (change.file.split('/').slice(0, -1).includes('shots') && PICTURE_OR_VIDEO.has(extension)) {
+      failures.push(pictureFailure(change.file));
+      continue;
+    }
+    if (anyRule(change.file, config.commit_allow)) continue;
+    const ceiling = anyRule(change.file, config.large_allow) ? LARGE_ALLOW_LIMIT : cap;
+    if (binaryExtensions.has(extension)) failures.push(binaryFailure(change.file));
+    else if (size > ceiling) failures.push(sizeFailure(change.file, ceiling));
+    // Every candidate fits its ceiling here, so inspect all its bytes for NUL.
+    else if (readStagedFile(cwd, snapshot, change.file, { env, maxBytes: ceiling }).includes(0)) {
+      failures.push(binaryFailure(change.file));
+    }
   }
-  const failures = JSON.parse(execFileSync('python3', ['-c', `import fnmatch,json,os,sys
-data=json.load(sys.stdin)
-conf=data['config']; cap=data['cap']; failures=[]
-extensions={'.'+ext.lower() for ext in conf['binary_ext']}
-for p in data['lockedPaths']:
-    if any(p.startswith(rule) if rule.endswith('/') else fnmatch.fnmatchcase(p, rule) for rule in conf.get('never', [])):
-        failures.append(p+': excluded asset lock path')
-for p in data['catalogPaths']:
-    if any(p.startswith(rule) if rule.endswith('/') else fnmatch.fnmatchcase(p, rule) for rule in conf.get('never', [])):
-        failures.append(p+': excluded asset catalog path')
-for entry in data['entries']:
-    p=entry['file']
-    if any(p.startswith(rule) if rule.endswith('/') else fnmatch.fnmatchcase(p, rule) for rule in conf['commit_allow']): continue
-    if entry['binary'] or os.path.splitext(p)[1].lower() in extensions: failures.append(p+': binary belongs in asset storage')
-    elif entry['size']>cap: failures.append(p+': text exceeds staged size limit')
-print(json.dumps(failures[:20]))`], { cwd, env, input: JSON.stringify({ config, cap, entries, lockedPaths, catalogPaths }),
-    encoding: 'utf8', timeout: 10000, maxBuffer: 3 * 1024 * 1024 }));
-  assert(!failures.length, failures.join('\n'));
+  for (const file of lockedPaths) if (anyRule(file, config.never)) failures.push(`${file}: excluded asset lock path`);
+  for (const file of catalogPaths) if (anyRule(file, config.never)) failures.push(`${file}: excluded asset catalog path`);
+  assert(!failures.length, failures.slice(0, 20).join('\n'));
 }

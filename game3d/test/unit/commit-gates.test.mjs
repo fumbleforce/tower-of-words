@@ -9,6 +9,7 @@ import { stagedSnapshot } from '../../../tools/lib/staged-tree.mjs';
 import { checkStagedAssets } from '../../../tools/check/staged-assets.mjs';
 import { checkFactsTrailer } from '../../../tools/check/commit-message.mjs';
 import { checkStagedSyntax } from '../../../tools/check/staged.mjs';
+import { checkCommitAssets } from '../../../tools/check/commit-cpu.mjs';
 
 test('binary gate uses staged policy/bytes and refuses private or nonregular entries', t => {
   const cwd = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-commit-gate-'));
@@ -66,6 +67,7 @@ function assetFixture(t) {
   }));
   git('add', '--', 'tools/assets/sync.json');
   const stage = (file, text) => {
+    fs.mkdirSync(path.dirname(path.join(cwd, file)), { recursive: true });
     fs.writeFileSync(path.join(cwd, file), text);
     git('add', '--', file);
     return stagedSnapshot(cwd, { env });
@@ -155,4 +157,80 @@ test('generated catalog allows bounded metadata while retaining immutable-byte a
   assert.throws(() => checkStagedAssets(cwd, stage('ordinary.json', text), { env }), /text exceeds/);
   assert.match(checkStagedSyntax(cwd, { env }).failures.find(failure => failure.file === 'ordinary.json')?.error, /exceeds 2097152 bytes/);
   git('reset', '--quiet', 'HEAD', '--', 'ordinary.json');
+});
+
+// Size and picture rules. Files over max_text_kb are refused unless a large_allow folder (the shipping game assets)
+// holds them, and then only up to LARGE_ALLOW_LIMIT. Pictures and video are refused under any shots folder.
+test('large files stay out of git outside the shipping asset folders, with a one-line pointer to where they go', t => {
+  const { cwd, env, git, stage } = assetFixture(t);
+  fs.writeFileSync(path.join(cwd, 'tools/assets/sync.json'), JSON.stringify({
+    binary_ext: ['png', 'mp4'], commit_allow: [], max_text_kb: 2048, large_allow: ['game3d/assets/', 'game3d/audio/'],
+  }));
+  git('add', '--', 'tools/assets/sync.json');
+  const big = 'x'.repeat(3 * 1024 * 1024);
+  let snapshot = stage('docs/notes.txt', big);
+  assert.throws(() => checkStagedAssets(cwd, snapshot, { env }), error => {
+    assert.match(error.message, /^docs\/notes\.txt: text exceeds the 2 MB staged limit;/);
+    assert.equal(error.message.includes('\n'), false, 'one line');
+    assert.match(error.message, /~\/\.cache\/amakawa\/<name>\//);
+    return true;
+  });
+  git('reset', '--quiet', 'HEAD', '--', 'docs/notes.txt');
+  snapshot = stage('game3d/assets/characters/big.json', big);
+  checkStagedAssets(cwd, snapshot, { env });
+  git('reset', '--quiet', 'HEAD', '--', 'game3d/assets/characters/big.json');
+  snapshot = stage('game3d/assets/characters/huge.txt', 'x'.repeat(17 * 1024 * 1024));
+  assert.throws(() => checkStagedAssets(cwd, snapshot, { env }), /huge\.txt: text exceeds the 16 MB staged limit/);
+  git('reset', '--quiet', 'HEAD', '--', 'game3d/assets/characters/huge.txt');
+  snapshot = stage('game3d/assets/characters/hidden.dat', `${big}\0`);
+  assert.throws(() => checkStagedAssets(cwd, snapshot, { env }), /hidden\.dat: binary belongs/);
+  git('reset', '--quiet', 'HEAD', '--', 'game3d/assets/characters/hidden.dat');
+});
+
+test('pictures and video are refused under any shots folder, and code or data in shots folders passes', t => {
+  const { cwd, env, git, stage } = assetFixture(t);
+  fs.writeFileSync(path.join(cwd, 'tools/assets/sync.json'), JSON.stringify({
+    binary_ext: ['png'], commit_allow: [], max_text_kb: 2048, large_allow: ['game3d/assets/'],
+  }));
+  git('add', '--', 'tools/assets/sync.json');
+  for (const file of ['game3d/shots/fast/frame.png', 'bible/shots/clip.mp4', 'shots/root.webp',
+    'game3d/assets/shots/inside.jpg', 'art/parts/base/shots/render.svg']) {
+    assert.throws(() => checkStagedAssets(cwd, stage(file, 'tiny'), { env }), error => {
+      assert.ok(error.message.startsWith(`${file}: pictures and video stay out of git`), error.message);
+      return true;
+    });
+    git('reset', '--quiet', 'HEAD', '--', file);
+  }
+  for (const file of ['game3d/opening/shots/index.js', 'art/parts/base/shots/source/attempts.json', 'docs/shots.md']) {
+    checkStagedAssets(cwd, stage(file, 'tiny'), { env });
+    git('reset', '--quiet', 'HEAD', '--', file);
+  }
+});
+
+test('landing checks the asset policy on every commit, including commits made without hooks', t => {
+  const { cwd, git } = assetFixture(t);
+  fs.writeFileSync(path.join(cwd, 'tools/assets/sync.json'), JSON.stringify({
+    binary_ext: ['png'], commit_allow: [], max_text_kb: 2048, large_allow: ['game3d/assets/'],
+  }));
+  git('add', '--', 'tools/assets/sync.json');
+  git('commit', '--quiet', '--no-verify', '-m', 'policy');
+  const base = git('rev-parse', 'HEAD').trim();
+  const commitWith = (file, text) => {
+    fs.mkdirSync(path.dirname(path.join(cwd, file)), { recursive: true });
+    fs.writeFileSync(path.join(cwd, file), text);
+    git('add', '--', file);
+    git('commit', '--quiet', '--no-verify', '-m', `add ${file}`);
+    return git('rev-parse', 'HEAD').trim();
+  };
+  const shipping = commitWith('game3d/assets/ok.json', 'x'.repeat(3 * 1024 * 1024));
+  const docs = commitWith('docs/big.txt', 'x'.repeat(3 * 1024 * 1024));
+  const picture = commitWith('game3d/shots/job/frame.png', 'tiny');
+  assert.deepEqual(checkCommitAssets(cwd, base, shipping).failures, []);
+  const single = checkCommitAssets(cwd, undefined, docs);
+  assert.equal(single.commits.length, 1);
+  assert.match(single.failures[0], /docs\/big\.txt: text exceeds the 2 MB staged limit/);
+  const range = checkCommitAssets(cwd, base, picture);
+  assert.deepEqual(range.commits.length, 3);
+  assert.equal(range.failures.length, 2);
+  assert.match(range.failures[1], /game3d\/shots\/job\/frame\.png: pictures and video stay out of git/);
 });

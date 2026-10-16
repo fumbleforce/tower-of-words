@@ -1,6 +1,7 @@
 // The commit checks for one exact commit, used by tools/land.sh: every commit in <base>..<commit> needs a valid
-// Facts line (as commit-msg checks), and <commit>'s own tree passes `npm run check` in a disposable snapshot with
-// dependencies installed from that commit's lockfile (as pre-commit does for the index). No working tree is read.
+// Facts line (as commit-msg checks) and must pass the asset policy on its own changes (as pre-commit checks the index),
+// and <commit>'s own tree passes `npm run check` in a disposable snapshot with dependencies installed from that
+// commit's lockfile (as pre-commit does for the index). No working tree is read.
 // Usage: node tools/check/commit-cpu.mjs <commit> [--since <base>]
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
@@ -8,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { withGitSnapshot } from '../lib/git-snapshot.mjs';
 import { boundedCommand } from '../lib/bounded-command.mjs';
 import { checkFactsTrailer } from './commit-message.mjs';
+import { checkStagedAssets } from './staged-assets.mjs';
 
 const git = (cwd, args) => execFileSync('git', ['--no-replace-objects', ...args],
   { cwd, encoding: 'utf8', timeout: 10000, maxBuffer: 16 * 1024 * 1024 }).trim();
@@ -16,11 +18,22 @@ function changes(cwd, commit) {
   const raw = git(cwd, ['diff-tree', '-r', '-z', '--raw', '--no-abbrev', '--no-renames', '--root', '--no-commit-id', commit]);
   const fields = raw.split('\0').filter(Boolean), list = [];
   for (let index = 0; index < fields.length; index += 2) {
-    const match = /^:[0-7]{6} ([0-7]{6}) [a-f0-9]+ [a-f0-9]+ ([A-Z])$/.exec(fields[index]);
+    const match = /^:[0-7]{6} ([0-7]{6}) [a-f0-9]+ ([a-f0-9]+) ([A-Z])$/.exec(fields[index]);
     assert(match, `Malformed diff record for ${commit}`);
-    list.push({ mode: match[1], status: match[2], file: fields[index + 1] });
+    list.push({ mode: match[1], oid: match[2], status: match[3], file: fields[index + 1] });
   }
   return list;
+}
+
+// Landing is the one way into main, so commits that were made with --no-verify get the same asset policy here.
+export function checkCommitAssets(cwd, base, commit) {
+  const commits = base ? git(cwd, ['rev-list', '--reverse', `${base}..${commit}`]).split('\n').filter(Boolean) : [commit];
+  const failures = [];
+  for (const oid of commits) {
+    try { checkStagedAssets(cwd, { tree: git(cwd, ['rev-parse', `${oid}^{tree}`]), changes: changes(cwd, oid) }); }
+    catch (error) { failures.push(`${oid.slice(0, 7)} ${git(cwd, ['log', '-1', '--format=%s', oid])}: ${error.message}`); }
+  }
+  return { commits, failures };
 }
 
 export function checkCommitMessages(cwd, base, commit) {
@@ -63,6 +76,9 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       if (failures.length) throw new Error(`Facts line:\n${failures.join('\n')}`);
       console.log(`commit messages: PASS; ${commits.length} commits`);
     }
+    const assets = checkCommitAssets(cwd, baseArg, commit);
+    if (assets.failures.length) throw new Error(`asset policy:\n${assets.failures.join('\n')}`);
+    console.log(`commit assets: PASS; ${assets.commits.length} commits`);
     const tree = await checkCommitCpu(cwd, commit, { signal: controller.signal });
     console.log(`commit CPU: PASS; commit ${commit.slice(0, 12)}; tree ${tree.slice(0, 12)}`);
   } catch (error) {
