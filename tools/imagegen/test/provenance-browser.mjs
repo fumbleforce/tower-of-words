@@ -50,7 +50,7 @@ await withBrowserJob('imagegen-settings-599',async browser=>{
    }
    let file=p==='/'?'tools/imagegen/web/index.html':p.startsWith('/web/')?'tools/imagegen'+p:p.endsWith('/tools/subplots/web/')?'tools/subplots/web/index.html':p.slice(1);
    if(!/^(tools\/(imagegen|subplots)\/web\/|game3d\/fonts\/)/.test(file)||file.includes('..')){report.unexpected.push(p);return route.abort();}
-   try{return route.fulfill({contentType:{'.html':'text/html','.js':'text/javascript','.css':'text/css','.woff2':'font/woff2'}[path.extname(file)],body:await fs.readFile(path.join(root,file))});}catch{report.unexpected.push(p);return route.abort();}
+   try{return route.fulfill({contentType:{'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.woff2':'font/woff2'}[path.extname(file)],body:await fs.readFile(path.join(root,file))});}catch{report.unexpected.push(p);return route.abort();}
   });
   const page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));
   try{

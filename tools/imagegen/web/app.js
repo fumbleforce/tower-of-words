@@ -3,11 +3,13 @@
 import { KINDS, RATINGS, fieldsHtml as sharedFieldsHtml, getp, setp, blank, wordDiff } from './blocks.js';
 import { isAgent, fullUrl, rateFields, lightboxKey, lightboxHtml, compareHtml } from './gallery.js';
 import {isExternal, externalReplayNotice, providerLabel} from './provenance.js';
+import ALWAYS_NEGATIVE from './always-negative.json' with {type: 'json'};
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const clone = o => JSON.parse(JSON.stringify(o));
+$('[data-always-neg]').textContent = `${ALWAYS_NEGATIVE.join(', ')} always stays in`;
 
 async function api(path, body) {
   const opt = body === undefined ? {} : { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) };
@@ -116,7 +118,7 @@ function assemble() {
   const negList = activeNegs().map(id => byId('negative', id).data.text);
   if (style.negative && !st.styleNegOff) negList.push(style.negative);
   for (const c of chars.concat(st.man && man ? [man] : [])) if (c.data.negative && !st.charNegOff[c.id]) negList.push(c.data.negative);
-  negList.push('child, loli');
+  negList.push(ALWAYS_NEGATIVE.join(', '));
   return { positive: pos, negative: dedupeTags(negList) };
 }
 
@@ -160,7 +162,7 @@ function renderControls() {
     `<optgroup label="All scenes">${scenes.map(opt).join('')}</optgroup>`;
 
   const negs = activeNegs();
-  let nc = `<span class="chip on locked" title="Always on">child, loli</span>`;
+  let nc = `<span class="chip on locked" title="Always on">${esc(ALWAYS_NEGATIVE.join(', '))}</span>`;
   nc += live('negative').map(n => chip(n.data.name, negs.includes(n.id), `data-neg="${esc(n.id)}" title="${esc(n.data.text)}"`)).join('');
   const style = byId('style', st.style)?.data;
   if (style?.negative) nc += chip('Style: ' + style.negative, !st.styleNegOff, 'data-styleneg="1"');

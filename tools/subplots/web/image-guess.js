@@ -2,6 +2,7 @@
 // Pure and read-only. It returns a composition and never touches the old record; nothing is saved unless the
 // user generates from it. Whatever no block explains goes into the free text (scene) and the extra negative.
 import {normalizeComposition} from './image-compose.js';
+import ALWAYS_NEGATIVE from '../../imagegen/web/always-negative.json' with {type: 'json'};
 
 const tokens = text => String(text || '').split(',').map(s => s.trim()).filter(Boolean);
 const key = s => s.toLowerCase().replace(/\.$/, '');
@@ -66,7 +67,7 @@ export function guessComposition(job, presets) {
   const covered = new Set(negPresets.flatMap(p => tokens(p.data.text).map(key)));
   c.negatives = negPresets.filter(p => p.data.soft !== true).map(p => p.id);
   list('negative').filter(p => p.data.soft === true).forEach(p => tokens(p.data.text).forEach(t => covered.add(key(t))));
-  tokens('child, loli').forEach(t => covered.add(key(t)));
+  ALWAYS_NEGATIVE.forEach(t => covered.add(key(t)));
   const own = new Set(chars.flatMap(p => tokens(p.data.negative).map(key)).concat(tokens(style?.data.negative).map(key)));
   c.negative = negTokens.filter(t => !covered.has(key(t)) && !own.has(key(t))).join(', ');
   if (negPresets.length) found.push('negatives');

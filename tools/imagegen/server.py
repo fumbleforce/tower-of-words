@@ -25,7 +25,10 @@ CONTROL_DIR = os.path.expanduser('~/ai/ComfyUI/models/controlnet')
 NOT_ANIMA_LORA = ('wan', 'yue', 'lightx2v')
 MASKS = os.path.join(store.ROOT, 'masks')
 NOT_ANIMA = ('wan', 'causal', 'pixal3d', 'trellis', 'dasiwa', 'put_')
-ALWAYS_NEG = 'child, loli'
+# The words every picture avoids, whatever the composer or recipe sent. One list (web/always-negative.json), also read by
+# the browser composer; ensure_negative adds any that are missing, so every render path gets them (#667).
+with open(os.path.join(WEB, 'always-negative.json'), encoding='utf-8') as _f:
+    ALWAYS_NEG = json.load(_f)
 DASH_LOG = os.path.join(store.ROOT, 'dashboard.log')
 CLIENT_ID = uuid.uuid4().hex
 
@@ -63,7 +66,7 @@ def on_progress(pid, value, mx):
 def ensure_negative(neg):
     n = neg.strip().rstrip(',')
     have = {t.strip().lower() for t in n.split(',')}
-    for t in ALWAYS_NEG.split(', '):
+    for t in ALWAYS_NEG:
         if t not in have:
             n = (n + ', ' if n else '') + t
     return n
@@ -697,7 +700,7 @@ class H(BaseHTTPRequestHandler):
             # The standalone page imports the exact modules used by the scene editor.
             for prefix, folder in (('/tools/subplots/web/', os.path.join(HERE, '..', 'subplots', 'web')),
                                    ('/tools/imagegen/web/', WEB), ('/game3d/fonts/', os.path.join(HERE, '..', '..', 'game3d', 'fonts'))):
-                if p.startswith(prefix) and os.path.splitext(p)[1] in ('.js', '.css', '.woff2'):
+                if p.startswith(prefix) and os.path.splitext(p)[1] in ('.js', '.css', '.woff2', '.json'):
                     return self._file(folder, p[len(prefix):], cache=False)
             if p == '/favicon.ico':
                 return self._send(204, b'', 'image/x-icon')

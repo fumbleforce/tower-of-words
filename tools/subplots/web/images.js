@@ -16,6 +16,7 @@ import {createLibrary} from './library.js';
 import {toolsHtml, bindTools} from './image-tools.js';
 import {directHtml, placeHtml, bindDirect} from './image-direct.js';
 import {loadExamples, exampleJob, exampleOf, placeJob, placeOf, placeKey, loadPlace, noteDone} from './block-examples.js';
+import ALWAYS_NEGATIVE from '../../imagegen/web/always-negative.json' with {type: 'json'};
 
 const options = (items, value) => items.map(item => {
   const id = item.id ?? item;
@@ -339,7 +340,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     const sectionWords = Object.values(c.sectionNegatives || {}).some(Boolean) || (c.people && Object.values(c.people).some(p => p.appearanceNegative || p.clothingNegative));
     const excludePeek = [...negNames, sectionWords ? 'words by section' : '', c.negative ? 'more words' : '', locked.soft ? 'soft-scene limits' : ''].filter(Boolean).join(', ') || 'nothing';
     const details = `<section class="image-section image-details"><label class="details-line">More details<textarea data-compose="extra" rows="1" placeholder="Props, clothes, anything the blocks don't say">${esc(c.extra || '')}</textarea></label>${sectionNegativeHtml(c, 'details')}</section>`;
-    const exclude = `<details class="image-section image-exclude" data-exclude-open ${excludeOpen ? 'open' : ''}><summary><span class="settings-title">Exclude</span><span class="hint exclude-peek">${esc(excludePeek)}</span></summary><div class="chips">${active('negative').map(p => lockedOn(p.id)
+    const exclude = `<details class="image-section image-exclude" data-exclude-open ${excludeOpen ? 'open' : ''}><summary><span class="settings-title">Exclude</span><span class="hint exclude-peek">${esc(excludePeek)}</span></summary><p class="hint always-on">Always on for every picture: ${ALWAYS_NEGATIVE.map(w => esc(w).replace(/ /g, '&nbsp;')).join(', ')}.</p><div class="chips">${active('negative').map(p => lockedOn(p.id)
       ? chip(p.data.name, true, `data-negative="${esc(p.id)}" disabled title="${esc('On for this shot: ' + (p.data.text || ''))}"`)
       : chip(p.data.name, c.negatives?.includes(p.id), `data-negative="${esc(p.id)}" title="${esc(p.data.text)}"`)).join('')}<button type="button" data-new-block="negative">+ New</button><button type="button" data-edit-block="negative" data-edit-list="negatives">Edit shared template…</button></div>
       ${(c.negatives || []).map(id => localBlockHtml(c, presets || {}, 'negative', id)).join('')}

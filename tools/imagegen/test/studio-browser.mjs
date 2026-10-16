@@ -4,6 +4,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {withBrowserJob} from '../../lib/browser-job.mjs';
+import ALWAYS_NEGATIVE from '../../imagegen/web/always-negative.json' with {type: 'json'};
+const ALWAYS = ALWAYS_NEGATIVE.join(', ');  // the permanent words every picture avoids (#667)
 const root = fileURLToPath(new URL('../../../', import.meta.url));
 const output = process.env.STUDIO_SHOTS || '/tmp/amakawa-image-studio-qa';
 const record = (id, data) => ({id, v: 1, data});
@@ -61,7 +63,7 @@ await withBrowserJob('codex-image-studio', async browser => {
     }
     let file = p === '/' ? 'tools/imagegen/web/index.html' : p.startsWith('/web/') ? 'tools/imagegen' + p : p.slice(1);
     if (!/^(tools\/(imagegen|subplots)\/web\/|game3d\/fonts\/)/.test(file) || file.includes('..')) { unexpected.push(p); return route.abort(); }
-    const contentType = {'.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.woff2': 'font/woff2'}[path.extname(file)];
+    const contentType = {'.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.woff2': 'font/woff2'}[path.extname(file)];
     try { return route.fulfill({contentType, body: await fs.readFile(path.join(root, file))}); }
     catch { unexpected.push(p); return route.abort(); }
   });
@@ -102,12 +104,14 @@ await withBrowserJob('codex-image-studio', async browser => {
       await page.locator('.studio-controls-toggle').click();
     }
     await page.locator('[data-section-negative=setting]').fill('crowd, posters');
-    assert.equal(await negative.inputValue(), 'watermark, blurry, crowd, posters, child, loli');
+    assert.equal(await negative.inputValue(), `watermark, blurry, crowd, posters, ${ALWAYS}`);
     await page.locator('.image-place').screenshot({path: path.join(output, `place-avoid-${width}.png`)});
     await page.locator('.image-what').screenshot({path: path.join(output, `what-avoid-${width}.png`)});
+    await page.locator('.image-exclude').evaluate(el => { el.open = true; });
+    await page.locator('.image-exclude').screenshot({path: path.join(output, `exclude-${width}.png`)});
   }
   await page.locator('[data-section-negative=setting]').fill('');
-  assert.equal(await negative.inputValue(), 'watermark, blurry, child, loli');
+  assert.equal(await negative.inputValue(), `watermark, blurry, ${ALWAYS}`);
   await page.setViewportSize({width: 1440, height: 1000});
   await page.screenshot({path: path.join(output, 'desktop.png')});
   await page.setViewportSize({width: 2560, height: 1440});

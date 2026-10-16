@@ -4,6 +4,8 @@ import os from 'node:os';
 import path from 'node:path';
 import {spawn} from 'node:child_process';
 import {withBrowserJob} from '../../lib/browser-job.mjs';
+import ALWAYS_NEGATIVE from '../../imagegen/web/always-negative.json' with {type: 'json'};
+const ALWAYS = ALWAYS_NEGATIVE.join(', ');  // the permanent words every picture avoids (#667)
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'subplot-images-'));
 const port = +process.env.SUBPLOTS_TEST_PORT || 8797;
 const base = `http://127.0.0.1:${port}`;
@@ -338,6 +340,8 @@ try {
     assert.notEqual(await softChip.getAttribute('disabled'), null);
     assert.match(await page.locator('#assembledNegative').textContent(), /visible genitals/);
     assert.match(await page.locator('.image-exclude p.hint', {hasText: 'Nonadult reward'}).textContent(), /always on/);
+    // the permanent words are listed first in Exclude, for every picture (#667)
+    assert.equal((await page.locator('.image-exclude .always-on').textContent()).replace(/\u00a0/g, ' '), `Always on for every picture: ${ALWAYS}.`);
     // the reward's configured defaults are locked too, and section words never take them out (#616)
     assert.notEqual(await page.locator('[data-negative=clean]').getAttribute('disabled'), null);
     await page.locator('[data-section-negative=details]').fill('visible genitals');
@@ -359,7 +363,7 @@ try {
     await page.locator('[data-section-negative=setting]').fill('crowd, street signs');
     await page.locator('[data-section-negative=pose]').fill('crossed arms');
     await page.locator('[data-section-negative=scene]').fill('phone');
-    assert.match(await page.locator('#assembledNegative').textContent(), /phone, crossed arms, crowd, street signs, bad hands, child, loli$/);
+    assert.match(await page.locator('#assembledNegative').textContent(), new RegExp(`phone, crossed arms, crowd, street signs, bad hands, ${ALWAYS}$`));
     assert.match(await page.locator('.image-exclude-peek, .exclude-peek').first().textContent(), /words by section/);
     await page.locator('#generate').click();
     assert.deepEqual(generated.at(-1).compose.sectionNegatives, {setting: 'crowd, street signs', pose: 'crossed arms', scene: 'phone'});
@@ -406,6 +410,8 @@ try {
       for (const section of ['place', 'look', 'direction']) await page.locator('.image-' + section).screenshot({path:`/tmp/codex-subplot-shot-blocks/${section}-${width}.png`});
       await page.locator('[data-local-block=pose]').screenshot({path:`/tmp/codex-subplot-shot-blocks/pose-${width}.png`});
       await page.locator('.section-avoid', {has: page.locator('[data-section-negative=setting]')}).screenshot({path:`/tmp/codex-subplot-shot-blocks/setting-avoid-${width}.png`});
+      await page.locator('.image-exclude').evaluate(el => { el.open = true; });
+      await page.locator('.image-exclude').screenshot({path:`/tmp/codex-subplot-shot-blocks/exclude-${width}.png`});
       await page.locator('.image-direction').evaluate(el => el.scrollIntoView({block:'start'}));
       await page.evaluate(() => { globalThis.document.querySelector('#composeDialog').scrollTop = 0; globalThis.scrollTo(0,0); });
       await page.screenshot({path:`/tmp/codex-subplot-shot-blocks/direction-screen-${width}.png`});

@@ -324,5 +324,30 @@ class CreateFromImage(unittest.TestCase):
                 server.image_actions.draft_picture(invalid, True)
 
 
+class AlwaysOnNegatives(unittest.TestCase):
+    """The permanent words (web/always-negative.json, #667) reach every job, whatever negative the caller sent."""
+    def setUp(self):
+        reset()
+        models = tempfile.TemporaryDirectory()
+        self.addCleanup(models.cleanup)
+        open(os.path.join(models.name, 'fixture.safetensors'), 'w').close()
+        for name, value in (('MODELS_DIR', models.name), ('log', lambda msg: None)):
+            p = patch.object(server, name, value)
+            p.start()
+            self.addCleanup(p.stop)
+        self.addCleanup(server.JOBS.clear)
+
+    def test_the_permanent_list_is_child_loli_and_the_shaved_side_terms(self):
+        self.assertEqual(server.ALWAYS_NEG, ['child', 'loli', 'undercut', 'shaved sides', 'side shave', 'buzzed sides', 'sidecut'])
+
+    def test_every_job_gets_the_words_it_lacks_and_keeps_its_own(self):
+        always = ', '.join(server.ALWAYS_NEG)
+        self.assertEqual(server.ensure_negative(''), always)
+        self.assertEqual(server.ensure_negative('watermark'), f'watermark, {always}')
+        self.assertEqual(server.ensure_negative('Undercut, watermark'), f'Undercut, watermark, child, loli, shaved sides, side shave, buzzed sides, sidecut')
+        _, (job,) = server.new_run(dict(positive='a reader', negative='watermark', model_file='fixture.safetensors', w=64, h=64, seed_mode='fixed', seed=7))
+        self.assertEqual(job['negative'], f'watermark, {always}')
+
+
 if __name__ == '__main__':
     unittest.main()

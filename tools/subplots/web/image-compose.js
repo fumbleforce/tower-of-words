@@ -8,6 +8,7 @@ import {personWords} from './image-people.js';
 import {stageWords, personOf} from './image-stage.js';
 import {compositionSchema} from './image-composition-schema.js';
 import {sectionNegativeWords} from './image-section-negatives.js';
+import ALWAYS_NEGATIVE from '../../imagegen/web/always-negative.json' with {type: 'json'};
 export const DIRECTION_KINDS = [['pose', 'pose', 'Pose'], ['environment', 'location', 'Setting'], ['light', 'light', 'Light']];
 export const DEFAULT_COMPOSITION = {
   characters: [], outfit: {}, useShort: true, cameras: [], sceneRefs: [], negatives: null,
@@ -96,7 +97,7 @@ function build(c, presets, subplotId) {
   const lockedAdded = lockedIds.filter(id => !negatives.includes(id));
   const lockedTexts = lockedIds.map(id => blockData(c, presets, 'negative', id).text);
   const negative = dedupe([...negatives.map(id => blockData(c, presets, 'negative', id).text), c.blockOverrides?.style?.[c.style]?.negative ?? (c.styleNegOff ? '' : style.negative),
-    ...people.map(p => p.appearanceNegative), ...people.map(p => p.clothingNegative), ...sectionNegativeWords(c), c.negative, 'child, loli',
+    ...people.map(p => p.appearanceNegative), ...people.map(p => p.clothingNegative), ...sectionNegativeWords(c), c.negative, ...ALWAYS_NEGATIVE,
     ...lockedAdded.map(id => blockData(c, presets, 'negative', id).text)]);
   const md = byId('model', c.model)?.data || {};
   const fr = byId('framing', c.framing)?.data || {};

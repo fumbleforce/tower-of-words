@@ -2,9 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {prepareAgentGeneration, prepareRewardGeneration, isRewardRecipePath} from '../agent-recipe.mjs';
 import {applyDefaults, normalizeComposition, assembleComposition} from '../web/image-compose.js';
+import ALWAYS_NEGATIVE from '../../imagegen/web/always-negative.json' with {type: 'json'};
 
 // Synthetic versioned presets; no local preset, cast or image data enters these tests.
 const rec = (id, data, v = 1) => ({id, v, data});
+const ALWAYS = ALWAYS_NEGATIVE.join(', ');  // the permanent words (#667), added to every recipe's negative
 const presets = {
   character: [rec('alice', {name: 'Alice', age: 'adult', look: 'black hair', outfit: 'blue uniform', negative: 'wrong eye colour'})],
   outfit: [rec('coat', {text: 'raincoat', negative: 'wrong coat'})],
@@ -25,7 +27,7 @@ test('agent command uses the exact normal assembler and preserves selected versi
   expected.compose.recipe = 'test';
   assert.deepEqual(prepareAgentGeneration(recipe, presets, 'test'), expected);
   assert.equal(expected.positive, 'quality words, safe, 1girl, painted, Alice, adult, black hair, wearing raincoat, Alice reads a report, eye level, wide view, finishing words');
-  assert.equal(expected.negative, 'preset exclusions, style exclusions, wrong eye colour, wrong coat, child, loli');
+  assert.equal(expected.negative, `preset exclusions, style exclusions, wrong eye colour, wrong coat, ${ALWAYS}`);
   assert.deepEqual(expected.presets.style, {id: 'paint', v: 4});
   assert.deepEqual(expected.presets.negatives, [{id: 'clean', v: 3}]);
 });
@@ -56,7 +58,7 @@ for (const key of ['appearance', 'clothing'])
 test('section, person and older free exclusion words add to the preset exclusions in a fixed order (#616)', () => {
   const body = build({negative: 'general words', sectionNegatives: {details: 'details words', setting: 'crowd, signs', scene: 'scene words'},
     people: {alice: {clothingNegative: 'hat', appearanceNegative: ''}}});
-  assert.equal(body.negative, 'preset exclusions, style exclusions, wrong eye colour, wrong coat, hat, scene words, crowd, signs, details words, general words, child, loli');
+  assert.equal(body.negative, `preset exclusions, style exclusions, wrong eye colour, wrong coat, hat, scene words, crowd, signs, details words, general words, ${ALWAYS}`);
   assert.equal(body.compose.people.alice.clothingNegative, 'wrong coat, hat');
   assert.deepEqual(body.presets.negatives, [{id: 'clean', v: 3}]);
   assert.throws(() => build({people: {bob: {clothingNegative: 'hat'}}}), /absent from the shot/);
@@ -65,7 +67,7 @@ test('section, person and older free exclusion words add to the preset exclusion
 });
 test('an older recipe with one free negative still assembles it after the section words', () => {
   const old = build({negative: 'custom tags'});
-  assert.equal(old.negative, 'preset exclusions, style exclusions, wrong eye colour, wrong coat, custom tags, child, loli');
+  assert.equal(old.negative, `preset exclusions, style exclusions, wrong eye colour, wrong coat, custom tags, ${ALWAYS}`);
 });
 test('refuses exclusion-disable switches', () => {
   assert.throws(() => build({styleNegOff: true}), /style exclusions/);
@@ -147,7 +149,7 @@ test('preset defaults and explicit empty negative selection keep normal editor s
   assert.deepEqual(build({negatives: null}).presets.negatives, [{id: 'clean', v: 3}]);
   const empty = build({negatives: []});
   assert.deepEqual(empty.presets.negatives, []);
-  assert.equal(empty.negative, 'style exclusions, wrong eye colour, wrong coat, child, loli');
+  assert.equal(empty.negative, `style exclusions, wrong eye colour, wrong coat, ${ALWAYS}`);
 });
 
 
@@ -211,7 +213,7 @@ test('reward entry preserves exactly the configured exclusion selection and norm
   assert.deepEqual(prepareRewardGeneration({...recipe, negatives: ['clean', 'clean']}, blocks).presets.negatives, [{id: 'clean', v: 3}]);
   const added = prepareRewardGeneration({...recipe, negatives: ['optional', 'clean'], negative: 'extra words', sectionNegatives: {setting: 'crowd'}}, blocks);
   assert.deepEqual(added.presets.negatives, [{id: 'clean', v: 3}, {id: 'optional', v: 1}]);
-  assert.match(added.negative, /^preset exclusions, optional exclusions, .*crowd, extra words, child, loli$/);
+  assert.match(added.negative, new RegExp(`^preset exclusions, optional exclusions, .*crowd, extra words, ${ALWAYS}$`));
   blocks.negative[1].data.default = true;
   const updated = prepareRewardGeneration(recipe, blocks);
   assert.deepEqual(updated.presets.negatives, [{id: 'clean', v: 3}, {id: 'optional', v: 1}]);
