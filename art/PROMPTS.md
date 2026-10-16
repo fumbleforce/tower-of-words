@@ -57,7 +57,7 @@ Tested examples (reviewer passes):
 
 In 60+ tries these layouts never came from a prompt, on either model: the aisle view toward a front window, desks pushed together into islands, a window filled by a wall, a tower cut off by the top edge. For layouts like these:
 
-1. **Quick line sketch** (tools/promptlab_sketch.py draws one in code: horizon, a beam on pillars, a skyline) into Anima LLLite lineart at 0.8 until 60% of the steps. On One Obsession this was the best result of the study: 5 of 12 seeds passed, against 2 of 18 for the same prompt without the sketch, and closeness to the reference rose from about 2 to 3. It is the recipe for any exterior with a layout that matters. The sketch is crude and that is fine: the model only needs the horizon, the line of the beam and where the city stands (tools/promptlab_guides/bay-lines.png).
+1. **Quick line sketch** (a script in the offline archive, see notes/history/offline-archive.md, drew one in code: horizon, a beam on pillars, a skyline) into Anima LLLite lineart at 0.8 until 60% of the steps. On One Obsession this was the best result of the study: 5 of 12 seeds passed, against 2 of 18 for the same prompt without the sketch, and closeness to the reference rose from about 2 to 3. It is the recipe for any exterior with a layout that matters. The sketch is crude and that is fine: the model only needs the horizon, the line of the beam and where the city stands (tools/promptlab_guides/bay-lines.png).
 2. **Blender blockout** (tools/blockout): img2img from its flat colour guide at 0.8 plus its lineart at 0.8 until 80% of the steps. This is what finally gave Sales its desk islands. Lineart alone at 0.3 to 0.7 did not.
 3. A 2D depth sketch helped less than the line sketch.
 

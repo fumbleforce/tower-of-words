@@ -9,3 +9,7 @@ The bible keeps the original paths as historical citations. Archived pictures an
 The next cleanup on 2026-10-13 preserved local work in `../bk-jap/remaining-cleanup-20261013/`. Each backup keeps its original repository paths and a checksum manifest. The capture and art output backup contains 59,428 files. These outputs remain at their existing checkout paths so local reviews and showcases can still load them. Git ignores the recorded job directories and tool state.
 
 The `source-recipes/` backup holds obsolete figure tools and island scene trials, the old Carina voice plan, and original copies of the source files preserved during this cleanup. Reusable tools, voice transcripts and workflow recipes are in Git. The local Rei outpaint settings are saved as `tools/workflows/anima-outpaint-rei-rf-2105.json`. These backups are on the same machine, outside Git.
+
+## Render scripts
+
+On 2026-10-16 the dead one-off image render scripts moved out of the checkout to `../bk-jap/2026-10-16-render-scripts/`, each under its original repository path, with a `manifest.json` of sha256 checksums. Scripts that the game, the checks, the skills or the anime opening still depend on stayed in place, and so did every output, saved ComfyUI workflow and Review viewer. Notes and bible citations keep the old paths.
