@@ -75,10 +75,13 @@ export function meshyPerson(m) {
   m.headK = O();
   let last = null;
   const bones = {};
-  m.model.traverse((o) => o.isBone && /^(Head|Spine)$/.test(o.name) && (bones[o.name] ??= o));
+  m.model.traverse((o) => o.isBone && /^(Head|Spine|Spine02)$/.test(o.name) && (bones[o.name] ??= o));
   // m.lean = { head: [forward, side], spine: forward } (radians, about the body's own axes) bends the head and upper
   // back over whatever the clip did this frame: Hamada asleep on the train (places/train.js); null leaves the clip
   m.lean = null;
+  // m.sitLean = [waist, head] (radians forward) sits a body up off a bench back while it is seated: the sit clip
+  // leans back, and Aoi's bob went into the train's bench back (#672). inSeat sets it from the seat's fit.
+  m.sitLean = null;
   const sks = [];
   m.model.traverse((o) => o.isSkinnedMesh && sks.push(o));
   // on the game's clock, which moves them (a sped-up or paused game, a slow frame): on the wall clock their steps
@@ -96,6 +99,10 @@ export function meshyPerson(m) {
       m.root.position.y = 0;
     }
     m.update(dt);
+    if (m.sitLean && m.state === 'sit') {
+      bend(m.root, bones.Spine02 || bones.Spine, 'x', m.sitLean[0]);
+      bend(m.root, bones.Head, 'x', m.sitLean[1]);
+    }
     if (m.lean) leanOver(m, bones);
   };
   for (const sk of sks) sk.onBeforeRender = step;
@@ -155,11 +162,12 @@ export const meshy3 = (id) => {
 export function inSeat(id, r, act, fit = null) {
   const m = meshy3(id);
   if (!m) return missing(r, id);
-  const [dx, dz] = fit ? seatOffset(r.root.rotation.y) : [0, 0];
+  const [dx, dz] = fit ? seatOffset(r.root.rotation.y, fit.fwd) : [0, 0];
   m.root.position.set(r.root.position.x + dx, 0, r.root.position.z + dz);
   m.root.rotation.copy(r.root.rotation);
   m.seated = true;
   m.seatLegs = fit ? fit.legs : null;
+  m.sitLean = fit?.lean ?? null;
   if (act) m.act = act;
   return m;
 }

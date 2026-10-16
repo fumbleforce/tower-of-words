@@ -38,7 +38,7 @@ import { makeCat } from '../creatures/cat.js';
 import { moveTrainCat } from './train-cat.js';
 import { PEOPLE } from '../cast.js';
 import { inSeat, dozing } from '../cast3d.js';
-import { SEAT_FIT, sitFitted } from '../train/seat-fit.js';
+import { AOI_FIT, SEAT_FIT, sitFitted } from '../train/seat-fit.js';
 import { prepareTrainPassengers } from '../crowd/passengers.js';
 import { Nav, blob } from '../engine.js';
 import { ui, sfx } from '../ui.js';
@@ -148,8 +148,8 @@ export async function trainPlace(game) {
 
   // passengers, cat and bags as in side/train
   const list = buildPassengers(LZ, SEAT_Y);
-  // Meshy models in passengers' seats (cast3d.js): Aoi (no phone: no props on models), Hamada asleep
-  list[1] = inSeat('aoi', list[1], null, SEAT_FIT);
+  // Meshy models in passengers' seats (cast3d.js): Aoi (no props on models), Hamada asleep
+  list[1] = inSeat('aoi', list[1], null, AOI_FIT);
   list[0] = inSeat('kuroda', list[0], dozing, SEAT_FIT);
   const [kuroda, aoi, reader, music, stander, bun] = list;
   const blobs = {};

@@ -144,8 +144,20 @@ async function inPage({ scene, TOL, phase, placed = [], seatIds, playerOnly }) {
     const box = new THREE.Box3().setFromObject(o);
     const sz = box.getSize(new THREE.Vector3());
     if (Math.min(sz.x, sz.y, sz.z) < 0.004 || sz.y < 0.03) return; // planes, floors
-    furn.push({ o, box, tris: null });
+    furn.push({ o, box, tris: null, m: o.matrixWorld.clone() });
   });
+  // The furniture as it stands now. A moving place (the train car sways and bounces under its seated people) moves
+  // its benches between frames, so triangles and bounds cached at one frame put a body measured at another a few cm
+  // into or above its seat (#672: Eric's near-right train seat read 2 cm high).
+  const refresh = () => {
+    SC.updateMatrixWorld(true);
+    for (const f of furn)
+      if (!f.m.equals(f.o.matrixWorld)) {
+        f.m.copy(f.o.matrixWorld);
+        f.box.setFromObject(f.o);
+        f.tris = null;
+      }
+  };
   const triOf = (f) => {
     if (f.tris) return f.tris;
     const geo = f.o.geometry,
@@ -229,7 +241,7 @@ async function inPage({ scene, TOL, phase, placed = [], seatIds, playerOnly }) {
     }
     const parts = new Set();
     grp.traverse((o) => parts.add(o));
-    return { top, parts, hip: h, at, off };
+    return { top, parts, hip: h, at, off, f: best.f };
   }
   const name = (o) => {
     const bits = [];
@@ -242,6 +254,7 @@ async function inPage({ scene, TOL, phase, placed = [], seatIds, playerOnly }) {
   // a desk or table (above the seat top and ahead of the seat: the top, a drawer pedestal, a modesty panel) or other
   // (a bench back, a wall). Only desks and tables fail.
   function measure(r, known) {
+    refresh();
     const pts = body(r);
     const seat = seatOf(r, known);
     const top = seat.top ?? seat.hip.y - 0.06; // no chair under the point (Eric's, away in the machine room)
@@ -275,12 +288,21 @@ async function inPage({ scene, TOL, phase, placed = [], seatIds, playerOnly }) {
       legsIn = new Set();
     pts.bone.forEach((b, j) => b && /leg|foot|toe/i.test(b) && !/up_?leg/i.test(b) && legs.add(j));
     // the underside of the seated body: its lowest hips or thigh vertex over the seat (up to 20 cm ahead of the seat
-    // point; the knees can hang past the front edge), from the seat top (negative: below it)
+    // point; the knees can hang past the front edge), from the seat's surface right above or below it (negative: below
+    // it). A vertex past the seat's edge is not over it: the back of a knee that bends down over a bench's rounded
+    // front lip read as the thigh 4 cm into the cushion (#672).
     let under = Infinity;
+    const surf = seat.f && triOf(seat.f);
     for (const j of pts.seat) {
       const i = j * 3,
         ahead = (pts[i] - seat.at.x) * fwd.x + (pts[i + 2] - seat.at.z) * fwd.z;
-      if (ahead < 0.2) under = Math.min(under, pts[i + 1] - top);
+      if (ahead >= 0.2) continue;
+      if (!surf) {
+        under = Math.min(under, pts[i + 1] - top);
+        continue;
+      }
+      const [c, d] = cast(surf, pts[i] + 1e-4, top + 0.3, pts[i + 2] + 1.3e-4, 0, -1, 0);
+      if (c) under = Math.min(under, pts[i + 1] - (top + 0.3 - d));
     }
     for (let i = 0; i < pts.length; i += 3) {
       const x = pts[i] + 1.1e-5, y = pts[i + 1] + 0.7e-5, z = pts[i + 2] + 1.3e-5;

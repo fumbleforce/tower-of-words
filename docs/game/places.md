@@ -210,7 +210,7 @@ Tama checks for clear floor and a clear hop path before jumping off the bench. S
 
 `seat_aoi`, `seat_far_r` (the seat next to Mio), `seat_near_l`, `seat_near_r`, `seat_mio`
 
-Seated people sit with their hips a few centimetres toward the aisle and their feet hanging in front of the bench, not in the seat. (Jørgen, 2026-10-14: "aoi and the man are clipping into the seats").
+Seated people sit with their hips a few centimetres toward the aisle and their feet hanging in front of the bench, not in the seat. Aoi sits a little further forward and upright, so her bob stays off the bench back. (Jørgen, 2026-10-14: "aoi and the man are clipping into the seats").
 
 ### Zones
 

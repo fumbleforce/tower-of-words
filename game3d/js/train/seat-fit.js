@@ -5,6 +5,10 @@
 // where the feet point, `ahead` from the hips and `height` above the floor). Used by every seated person on the train:
 // the passengers (crowd/passengers.js, cast3d.js inSeat), Mio and Eric (places/train.js).
 export const SEAT_FIT = { fwd: 0.07, legs: { ahead: 0.2, height: 0.075 } };
+// Aoi: the sit clip leans her back, and her bob reaches about 28 cm behind her hips, 8 cm into the bench back. She sits
+// 5 cm further forward and up from the waist, her chin lifted back part of the way (`lean`: [waist, head], radians
+// forward; cast3d.js sitLean), which clears it (#672).
+export const AOI_FIT = { ...SEAT_FIT, fwd: 0.12, lean: [0.3, -0.15] };
 
 // the hips' offset from the seat point for a body facing `ry`
 export function seatOffset(ry, fwd = SEAT_FIT.fwd) {
