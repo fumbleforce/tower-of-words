@@ -36,7 +36,7 @@ characters:
       - {q: "docs/game/cast.md ~ Speaks English, and barely any Japanese", s: approved}
       - {q: "docs/game/setting.md ~ Eric is a Western IT support engineer from Norway #2", s: approved}
       - {q: "docs/game/art-and-sound.md ~ eric-v2-734 (seed 734 v2) was approved", s: review}
-      - {q: "art/PROMPTS.md ~ Red rim light (2026-09-28, Eric's portrait)", s: approved}
+      - {q: "notes/history/PROMPTS-history.md ~ Red rim light (2026-09-28, Eric's portrait)", s: approved}
       - {q: "docs/game/art-and-sound.md ~ Eric: voice design eric-2 with no accent", s: approved}
       - {q: "art/SOUND.md ~ Eric uses voice design eric-2 with no accent", s: approved}
       - {q: "GUIDE.md ~ 3D character workflow (Jørgen, 2026-09-28; worked first try for Eric)", s: approved}
@@ -170,7 +170,7 @@ characters:
     decisions:
       - {q: "docs/game/cast.md ~ On day 1 she is upstairs at head office all day #1", s: approved}
       - {q: "docs/game/cast.md ~ A cast member like any other", s: approved}
-      - {q: "art/PROMPTS.md ~ Emi: the approved round-3 RDBT seed 41 design", s: approved}
+      - {q: "notes/history/PROMPTS-history.md ~ Emi: the approved round-3 RDBT seed 41 design", s: approved}
     images:
       - [art/approved/emi/emi-emi-base-2001-neutral.webp, "Emi: neutral (reviews/style-align-1 or npc-base-1 pick emi-base-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
       - [art/approved/emi/emi-after.webp, "Round-3 RDBT seed 41 with headroom, the design emi-base-2001 was redrawn from", approved]
@@ -237,7 +237,7 @@ characters:
     portrait_status: approved
     decisions:
       - {q: "notes/history/GUIDE-history.md ~ Rei, Mio, Aoi and Kaori = the RDBT versions", s: approved}
-      - {q: "art/PROMPTS.md ~ Aoi: slim with small B-cup breasts, not flat #1", s: approved}
+      - {q: "notes/history/PROMPTS-history.md ~ Aoi: slim with small B-cup breasts, not flat #1", s: approved}
     images:
       - [art/approved/aoi/aoi-aoi-base-2001-neutral.webp, "Aoi: neutral (reviews/style-align-1 or npc-base-1 pick aoi-base-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
       - [art/approved/aoi/aoi-after.webp, "gallery B-aoi (RDBT) with headroom, the design aoi-base-2001 was redrawn from", approved]
@@ -259,7 +259,7 @@ characters:
     portrait_status: approved
     decisions:
       - {q: "notes/history/GUIDE-history.md ~ The receptionist is named Kuro #1", s: approved}
-      - {q: "art/PROMPTS.md ~ Kuro's glasses (Jørgen, 2026-09-27)", s: approved}
+      - {q: "notes/history/PROMPTS-history.md ~ Kuro's glasses (Jørgen, 2026-09-27)", s: approved}
     images:
       - [art/approved/kuro/kuro-after.webp, "A-luna-s101 with headroom", approved]
     history:
@@ -282,7 +282,7 @@ characters:
     prompt_id: rei-cold
     decisions:
       - {q: "notes/history/GUIDE-history.md ~ Rei, Mio, Aoi and Kaori = the RDBT versions", s: approved}
-      - {q: "art/PROMPTS.md ~ Rei: silver ponytail #1", s: approved}
+      - {q: "notes/history/PROMPTS-history.md ~ Rei: silver ponytail #1", s: approved}
     facts:
       - ["Long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold lapel pin.", approved, "tools/production.py ~ 'rei': ('1girl'"]
       - ["The reward preset dresses her in a light grey blazer over a black top.", draft, "tools/imagegen/seed.py ~ a light grey blazer over a black top"]
@@ -302,7 +302,7 @@ characters:
     pick: gallery B-kaori (RDBT)
     prompt_id: kaori-smile
     decisions:
-      - {q: "art/PROMPTS.md ~ Kaori: tall, slender #1", s: approved}
+      - {q: "notes/history/PROMPTS-history.md ~ Kaori: tall, slender #1", s: approved}
     facts:
       - ["Tall, short grey-streaked hair, white chef jacket with rolled sleeves, faded tattoo on her forearm, towel over her shoulder.", approved, "tools/production.py ~ 'kaori': ('1girl'"]
     history:
@@ -320,7 +320,7 @@ characters:
     prompt_id: yuzuki-e-201
     decisions:
       - {q: "notes/history/GUIDE-history.md ~ Yuzuki = yuzuki-e-201", s: approved}
-      - {q: "art/PROMPTS.md ~ Yuzuki: lean with medium breasts #1", s: approved}
+      - {q: "notes/history/PROMPTS-history.md ~ Yuzuki: lean with medium breasts #1", s: approved}
     facts:
       - ["Long honey-blonde hair in a low loose ponytail over her left shoulder, a small mole on her chin, mustard-yellow corduroy blazer over a white turtleneck, silver hoop earrings.", approved, "legacy/proto2/decide2/index.html"]
     history:
@@ -369,7 +369,7 @@ characters:
     prompt_id: new-sumi-201
     decisions:
       - {q: "notes/history/GUIDE-history.md ~ Sumi (new-sumi-201", s: approved}
-      - {q: "art/PROMPTS.md ~ Sumi: petite with medium breasts #1", s: approved}
+      - {q: "notes/history/PROMPTS-history.md ~ Sumi: petite with medium breasts #1", s: approved}
     facts:
       - ["Dark-brown hair in two short low pigtails, straight-cut bangs, tomato-red knitted vest over a cream shirt, wide brown-grey trousers, ink on her fingers, a big brush.", approved, "legacy/proto2/decide2/index.html"]
     history:
@@ -416,12 +416,12 @@ characters:
     prompt_id: kiyoko-camel-201
     decisions:
       - {q: "notes/history/GUIDE-history.md ~ Kiyoko = kiyoko-camel-201", s: approved}
-      - {q: "art/PROMPTS.md ~ Kiyoko's age wording", s: approved}
+      - {q: "notes/history/PROMPTS-history.md ~ Kiyoko's age wording", s: approved}
     history:
       - ["Decisions, round 2 (kiyoko-camel-201)", legacy/proto2/decide2/index.html, approved]
     rejected:
       - ["kiyoko-plum, kiyoko-green, kiyoko-ivory and kiyoko-teal outfits; A-kiyoko-s102.", rejected, legacy/proto2/decide2/index.html]
-      - ["Round 28's Kiyoko: \"WAY older… 90s, witch… creepy\".", rejected, "art/PROMPTS.md ~ Kiyoko's age wording"]
+      - ["Round 28's Kiyoko: \"WAY older… 90s, witch… creepy\".", rejected, "notes/history/PROMPTS-history.md ~ Kiyoko's age wording"]
 
   - id: goro
     name: Goro
@@ -479,9 +479,9 @@ removed:
 cast_rules:
   - {q: "GUIDE.md ~ The cast stays (Jørgen #2", s: approved}
   - {q: "GUIDE.md ~ Cast palette", s: approved}
-  - {q: "art/PROMPTS.md ~ Build lines (Jørgen, 2026-09-27", s: approved}
+  - {q: "notes/history/PROMPTS-history.md ~ Build lines (Jørgen, 2026-09-27", s: approved}
   - {q: "GUIDE.md ~ Expression sets must keep everything", s: approved}
-  - {q: "art/PROMPTS.md ~ Portrait framing (2026-09-25)", s: approved}
+  - {q: "notes/history/PROMPTS-history.md ~ Portrait framing (2026-09-25)", s: approved}
   - {q: "GUIDE.md ~ Don't repeat ideas", s: approved}
   - {q: "GUIDE.md ~ Characters have their own concerns", s: approved}
   - {q: "docs/game/setting.md ~ All characters are adults #1", s: approved}
@@ -537,7 +537,7 @@ locations:
     image: legacy/proto2/locations1/sales-rdbt-s9-nophones-colorguide0.8-8408.webp
     pick: none
     facts:
-      - ["Sales passed only with the Blender blockout as line control; nothing was picked.", legacy, "art/PROMPTS.md ~ Sales passed with the blockout"]
+      - ["Sales passed only with the Blender blockout as line control; nothing was picked.", legacy, "notes/history/PROMPTS-history.md ~ Sales passed with the blockout"]
     pages: [legacy/proto2/locations1/index.html]
 
 places_mentioned:
@@ -617,15 +617,15 @@ legacy_rules:
 # ---------------------------------------------------------------------------------------------
 art:
   models:
-    - ["RDBT Anima: the house model for portraits and rewards.", approved, "art/PROMPTS.md ~ RDBT Anima is the main model"]
-    - ["One Obsession: open scenery and logic in hard scenes. JANIMA: style and groups.", approved, "art/PROMPTS.md ~ One Obsession: logic in hard scenes"]
-    - ["Settings: Euler A, 30 steps, CFG 5; 1216×832 for scenes, 896×1152 for portraits.", approved, "art/PROMPTS.md ~ Euler A, 30 steps, CFG 5, 1216×832"]
-    - ["Video: Wan 2.2 I2V 14B with lightx2v; the 5B is unusable.", approved, "art/PROMPTS.md ~ Wan 2.2 14B (lightx2v) is pretty good"]
+    - ["RDBT Anima: the house model for portraits and rewards.", approved, "notes/history/PROMPTS-history.md ~ RDBT Anima is the main model"]
+    - ["One Obsession: open scenery and logic in hard scenes. JANIMA: style and groups.", approved, "notes/history/PROMPTS-history.md ~ One Obsession: logic in hard scenes"]
+    - ["Settings: Euler A, 30 steps, CFG 5; 1216×832 for scenes, 896×1152 for portraits.", approved, "notes/history/PROMPTS-history.md ~ Euler A, 30 steps, CFG 5, 1216×832"]
+    - ["Video: Wan 2.2 I2V 14B with lightx2v; the 5B is unusable.", approved, "notes/history/PROMPTS-history.md ~ Wan 2.2 14B (lightx2v) is pretty good"]
   quotes:
     - "GUIDE.md ~ 3D character workflow (Jørgen, 2026-09-28"
     - "GUIDE.md ~ Meshy parts (Jørgen, 2026-09-27, round 14)"
     - "docs/game/art-and-sound.md ~ cut-outs use the refined matting"
-    - "art/PROMPTS.md ~ Reward quality (Jørgen, 2026-09-27)"
+    - "notes/history/PROMPTS-history.md ~ Reward quality (Jørgen, 2026-09-27)"
     - "GUIDE.md ~ Every image and video prompt starts with the shot-staging skill"
     - "GUIDE.md ~ The main prompt rule"
     - "GUIDE.md ~ Don't overcorrect"
@@ -638,7 +638,7 @@ art:
     - ["Shrinking or recolouring generated meshes (TRELLIS etc.) for characters.", rejected, "GUIDE.md ~ Shrinking or recolouring a generated mesh"]
     - ["Training LoRAs.", rejected, "GUIDE.md ~ we don't want to train models"]
     - ["Jørgen's own images as img2img sources or edited into assets.", rejected, "GUIDE.md ~ Jørgen's own images (art/refs"]
-    - ["Tinted lenses on Kuro.", rejected, "art/PROMPTS.md ~ Tinted lenses are off-model"]
+    - ["Tinted lenses on Kuro.", rejected, "notes/history/PROMPTS-history.md ~ Tinted lenses are off-model"]
     - ["Footsteps.", rejected, "docs/game/art-and-sound.md ~ No footsteps"]
     - ["Ceiling light fixtures in the top-down scenes (keep their light).", rejected, "docs/game/controls-and-ui.md ~ Ceiling light fixtures are not shown"]
 

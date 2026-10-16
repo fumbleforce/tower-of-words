@@ -55,7 +55,7 @@ The inboxes (collab/to-codex.md, collab/to-claude.md) and dated notes record mes
 
 | Kind of fact | Home |
 |---|---|
-| Image and video prompts: models, settings, cast prompt lines, reward prompts, composition control, the Meshy 3D workflow | [art/PROMPTS.md](../../art/PROMPTS.md) |
+| Image prompts: recipes, presets, scene text, layout control, cast looks, reward pictures; the Meshy 3D workflow | [art/PROMPTS.md](../../art/PROMPTS.md), [art/MESHY.md](../../art/MESHY.md) |
 | Portrait style blocks | [art/STYLE.md](../../art/STYLE.md) |
 | Voice, TTS and music methods and tests | [art/SOUND.md](../../art/SOUND.md) |
 | Visual storyboards, bilingual scene editing, conditions, revisions and image composition | [tools/subplots/README.md](../../tools/subplots/README.md) |

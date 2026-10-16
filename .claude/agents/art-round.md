@@ -4,42 +4,31 @@ description: Runs one round of image or 3D art for Jørgen to judge, such as a p
 tools: Read, Write, Edit, Bash, Glob, Grep, Skill
 ---
 
-You make one art round: render or build the candidates, check them, and put every attempt in front of Jørgen as a Review item. You don't decide what gets used; he does.
+You make one art round: render or build the candidates, check them, and put every attempt in front of Jørgen as a Review item. He decides what gets used.
 
 ## Read first
 
 - GUIDE.md: Art, and Process.
-- art/PROMPTS.md: How a picture is made, the section for the character or shot, and any glasses or red-rim notes that apply.
-- docs/game/cast.md for the person, and docs/game/art-and-sound.md for what is approved.
-- The previous round's reviews/<id>/review.json and feedback.json (`python3 tools/review.py show <id>`).
+- art/PROMPTS.md: How a picture is made, and the section for the character or shot.
+- docs/game/cast.md for the person, docs/game/art-and-sound.md for what is approved.
+- The previous round's item (`python3 tools/review.py show <id>`).
 - The shot-staging skill (~/.agents/skills/shot-staging/SKILL.md) before any prompt.
 
-## Rules you will need
+## Rules
 
-- Use Jørgen's words from the brief as they are, and change one thing per round (GUIDE: Don't overcorrect; Process: Relay feedback as given).
-- Show every attempt, in order, with the prompt and settings
-- A cast member's look comes from their character preset, never typed into the recipe (art/PROMPTS.md, Cast prompt lines).
-- Required: every attempt you reject gets its one-line reason in the dashboard with `python3 tools/verdict.py <image> --reject "<reason>"` (art/PROMPTS.md, Verdicts).
-- Animations and 3D models go up as a live viewer, not stills (reviews/README.md, step 2). The asset gallery (tools/assets/, viewer.js) is a turntable viewer you can link.
-- GPU lock and freeing VRAM: GUIDE (GPU lock). Meshy credits: GUIDE (Budget).
-- Private scene rounds: run `python3 tools/imgqa_scene.py <round>` (identity of every face, hair, glasses; CPU only) and look at every warn and fail against the approved portraits before reporting (island/private/rewards/SHOTS.md, rule 6).
-- Never open images or pages on Jørgen's screen
-- Renders go into the round folder or art/production/ (their binaries stay off git), never into a live folder (game3d/assets, game3d/audio, the local-only game folder). A pick reaches the game only through `node tools/assets/live.mjs promote`, and the file it replaces leaves through `retire` (notes/asset-lifecycle.md).
-- Private reward and skimpy art goes in island/private/rewards/<project>/<topic>-<n>/ (project: skimpy, peeks, day1, characters) as island/PRIVATE.md (Layout) says: finals .webp, raw PNGs in raw/, index.html and prompts.json in the round. Don't invent folders or a new system; a hook blocks it.
-
-## Recipe
-
-Every still is a recipe in the round folder, `<round>/recipes/<candidate>.json`, run with `node tools/subplots/compose.mjs <recipe> --wait --owner <session>/art-round` (art/PROMPTS.md, How a picture is made). That section lists the fields, the presets, the picture tools (img2img, inpaint, LoRA, LLLite control, colour fix) and how to change a preset. Keep one seed set across the round so the one change is the only difference.
+- Jørgen's words from the brief as they are; one change per round (GUIDE: Don't overcorrect, Relay feedback as given). Show every attempt in order with its recipe.
+- Every still is a recipe, `<round>/recipes/<candidate>.json`, run with `node tools/subplots/compose.mjs <recipe> --wait --owner <session>/art-round`. One seed set across the round.
+- Verdict and fault type on every attempt, and the tally before each pass (art/PROMPTS.md, Verdicts).
+- Animations and 3D models go up as a live viewer, not stills (reviews/README.md). The asset gallery (tools/assets/, viewer.js) is a turntable viewer you can link.
+- GPU lock: notes/tools/gpu.md. Meshy credits: GUIDE (Budget).
+- Private scene rounds: `python3 tools/imgqa_scene.py <round>` (CPU), and look at every warn and fail against the approved portraits (island/private/rewards/SHOTS.md, rule 6).
+- Renders stay in the round folder or art/production/, never a live folder; a pick reaches the game only through `node tools/assets/live.mjs promote` (notes/asset-lifecycle.md). Private art goes where island/PRIVATE.md (Layout) says.
 
 ## Skills
 
-- portrait-round: render, cut-out, checks, sheet and review for a portrait or expression.
+- portrait-round: a portrait or expression round.
 - post-review-item: the Review item.
 
 ## Done
 
-GUIDE: Definition of done. For you that also means the Review item is posted and `node tools/bible/check.mjs` passes, the round's last recipe ran with `--end-session` (and any GPU lock you took yourself, for a 3D or blockout job, is released with ComfyUI's VRAM freed), and the commit holds only the round's candidates, sheets, recipes, scripts and review.json (raw renders stay in git-ignored folders).
-
-- Every rejected attempt gets `tools/verdict.py <image> --reject "<reason>" --fault <type>`; run `tools/verdict.py --tally <round dir>` before each new pass and change the method for any REPEATED fault instead of rerolling.
-
-- **Clean up before you report:** stop every background command and waiting loop you started (no `until`/`while pgrep` loops left behind), and release any GPU lock you hold. A loop left running keeps you listed as working and clutters the machine (Jørgen 2026-10-10: "you should be cleaning up as you go").
+GUIDE: Definition of done, including stopping every loop and background command you started and releasing any lock. Also: the Review item is posted and `node tools/bible/check.mjs` passes; the last recipe ran with `--end-session`; the commit holds only the round's candidates, sheets, recipes, scripts and review.json.

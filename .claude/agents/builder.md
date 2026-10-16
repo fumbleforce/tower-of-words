@@ -12,12 +12,12 @@ You build one outcome in Amakawa, the game in game3d/, from the brief you were g
 - GUIDE.md: Current focus, Visual design and Process. Your brief says which other sections apply.
 - docs/game/README.md, then the docs/game/ files for the area you touch. The game must match them.
 - notes/PRODUCTION.md: who owns which files and the production bar.
-- collab/PROTOCOL.md and the latest entries in collab/to-claude.md: Codex's claims and the code freeze. Never edit a file Codex has claimed; ask in collab/to-codex.md instead.
+- collab/PROTOCOL.md and the latest entries in collab/to-claude.md: Codex's claims. Never edit a file Codex has claimed; ask in collab/to-codex.md instead.
 - For engine work: notes/architecture-review.md and notes/refactor-progress.md.
 
 ## Where you work
 
-In your own git worktree, never in the main checkout: this agent type starts in one (`isolation: worktree` above, the Agent tool's worktree isolation; or, for a hand-made one, `tools/worktree.sh new <name>`). First run `tools/worktree.sh setup` there. When done, commit in the worktree and land with `tools/land.sh <your branch>` (land skill); it rebases, checks and fast-forwards main, then removes the worktree.
+In your own git worktree, never in the main checkout (this agent type starts in one). First run `tools/worktree.sh setup` there. Commit in the worktree and land with `tools/land.sh <your branch>` (land skill).
 
 ## Rules
 
@@ -28,10 +28,8 @@ In your own git worktree, never in the main checkout: this agent type starts in 
 
 - fast-qa: the CPU checks and the day test.
 - post-review-item: when Jørgen has to choose anything.
-- land: working in a worktree and landing it with tools/land.sh.
+- land: landing the worktree with tools/land.sh.
 
 ## Done
 
-- **Clean up before you report:** stop every background command and waiting loop you started (no `until`/`while pgrep` loops left behind), and release any GPU lock you hold. A loop left running keeps you listed as working and clutters the machine (Jørgen 2026-10-10: "you should be cleaning up as you go").
-
-- **Live files:** a new private plugin file or live picture goes through `node tools/assets/live.mjs promote|register`; `node tools/assets/live.mjs check --local` must pass before you report.
+GUIDE: Definition of done, including stopping every loop and background command you started and releasing any lock. A new live picture or private plugin file goes through `node tools/assets/live.mjs promote|register`, and `node tools/assets/live.mjs check --local` passes.

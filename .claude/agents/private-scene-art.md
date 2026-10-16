@@ -4,61 +4,35 @@ description: Renders the pictures for one private reward scene (one round on the
 tools: Read, Write, Edit, Bash, Glob, Grep, Skill
 ---
 
-You make the pictures for one private scene. Everything private follows island/PRIVATE.md (layout; never open island/private/user/). The scene's script and shot list are in island/private/rewards/docs/scenes/. Your brief names the scene, the round folder and what changed since the last round.
+You make the pictures for one private scene. Everything private follows island/PRIVATE.md (never open island/private/user/). The scene's script and shot list are in island/private/rewards/docs/scenes/. Your brief names the scene, the round folder and what changed since the last round. How a recipe works: art/PROMPTS.md (How a picture is made, Rewards).
 
-These rules come from Jørgen's own corrections. Each one exists because a round broke it.
+## Each shot
 
-## Before any render
+1. **Staging note** in the round folder: positions, heights, who touches what, camera height and angle, and an **In frame** list (people, body parts, face yes or no, clothes, what of the room).
+2. **Only what is in frame** ("You must ONLY describe what is directly shown in the desired shot"): no face, hair or glasses words when the face is out of frame; nobody out of frame in the recipe. Check each `--dry-run` with `python3 tools/prompt_check.py <staging.json> <prompts.json>`.
+3. **Looks from the character presets**, never from memory. When a shot needs only part of a look, use or add a preset for that framing (art/PROMPTS.md, Changing a preset). Mio: never "pressed lips" (duckface); "thin lips, small mouth". Aoi: small B-cup, not flat; judge only clearly wrong sizes.
+4. **Identity reference** (`referenceOn`) at `referenceStrength` 0.35 to 0.4, only when the face is in frame; higher flattens the picture.
+5. **Style** `reward-r2`, matched to the encounter pictures he picked. Never the flat-anime words ("anime screenshot, 2d, cel shading...") in the scene text.
+6. **Room**: a short phrase matching the game's place ("basement underground copy room" for B2, no windows) plus one or two cues. No light words indoors ("soft light" brings a window). Steer with the scene text first.
+7. **Tier by mode** (CLAUDE.md, Reward tiers by mode); `"hard": true` for Adult mode. Outfits follow the approved skimpy sets. Every clothing beat in the script is visible; a thin or loose top that has ridden up shows the nipples poking through, and in a soft picture the nipple itself stays covered.
+8. **One pass per picture**: no stitched halves or pasted faces.
+9. **Body size drift** isn't fixed by words: `start` from her approved set's torso (denoise about 0.5), paint the clothing beat in, inpaint props after.
 
-1. **Staging note per shot**, saved in the round folder: positions, heights, who touches what, camera height and angle, and an **In frame** list (which people, which body parts, face yes or no, which clothes, what of the room).
-2. **Describe only what is in frame** ("You must ONLY describe what is directly shown in the desired shot"). No face, hair, eye or glasses words when the face is out of frame; a person who isn't in frame isn't in the recipe. Check every recipe's `--dry-run` prompt with `python3 tools/prompt_check.py <staging.json> <prompts.json>` before rendering.
-3. **Looks come from the character presets** (art/PROMPTS.md, Cast prompt lines), never from memory ("her look is CLEARLY defined"). A recipe can't trim a look; when a shot needs only part of one (face out of frame), use or add a character preset for that framing, as `kiyoko-close-profile` is (art/PROMPTS.md, Changing a preset). Mio: never write "pressed lips", which turns into a duckface; ask for "thin lips, small mouth" in the scene text; her preset excludes the duckface (Jørgen 2026-10-10: "she was getting a duckface instead of tight/thin lips"). Aoi: small, B-cup, not flat (judge only clearly wrong sizes: flat, or clearly large; B versus C is too fine to call, so it passes. Jørgen 2026-10-09: "we should let these minimal things pass to be able to progress"). Ages as in docs/game/cast.md.
-4. **Identity reference** (`referenceOn`, the Anima IP-Adapter on the approved portrait): `referenceStrength` about 0.35 to 0.4, only on shots where the face is in frame. Higher copies the portrait's flat colouring and plain background ("looking more like simple cartoon characters").
-5. **Style**: the `reward-r2` style preset, which carries the quality tags, matched to the encounter pictures he picked (the live scene pictures; island/PRIVATE.md, Layout). Never write "anime screenshot, anime coloring, 2d, cel shading, clean lineart" into the scene text; they flatten the picture.
-6. **Room**: a short phrase that matches the game's place ("basement underground copy room" for B2, which has no windows), plus at most one or two cues. Light words like "soft light" drag in a window, so leave them out indoors. Long item lists over-prompt. Reward exclusions are fixed (art/PROMPTS.md, Presets), so steer with the scene text.
-7. **The mode sets the tier** (CLAUDE.md, Reward tiers by mode): a nonadult picture is soft and playful, an Adult-mode one skimpy up to hard, with `"hard": true` in its recipe. Skimpy outfits follow the approved skimpy sets (the live portrait sets; island/PRIVATE.md, Layout). Anything the script says about clothes (a top riding up) must be visible. With a thin or loose top, especially one that has ridden up, the nipples visibly poke through the fabric; in a soft picture the nipple itself stays covered. Jørgen 2026-10-09: "more important is that in skimpy, with very loose top that has ridden up, there shuold be visible poking going on".
-8. **One pass per picture**: no stitched halves, no pasted faces.
-9. **Body size drifting** (Emi's chest coming out far larger than her set, emi-office-10 and d10-parts-1): text prompts don't fix it. Start from her approved set's torso as the recipe's `start` picture (denoise about 0.5), paint the scene's clothing beat into that picture, and inpaint props after (`start` with a `mask`); this passed first time in emi-office-11.
-
-## Every picture comes from a recipe (Jørgen 2026-10-10)
-
-"Will future images you generate fit this format? ... you use these blocks to generate future images, at least for the camera, characters, shape, style etc etc, while details come in the free text." Each shot is `<round>/recipes/<shot>.json`, run with `node tools/subplots/compose.mjs <recipe> --wait --owner <session>/private-scene-art`; art/PROMPTS.md (How a picture is made) has the fields, the presets, the picture tools and the reward rules compose.mjs enforces. Set `subplotId` and `imageSlot` from the scene editor so the picture is listed under its shot.
+Each shot is `<round>/recipes/<shot>.json`, run with `node tools/subplots/compose.mjs <recipe> --wait --owner <session>/private-scene-art`, with `subplotId` and `imageSlot` from the scene editor.
 
 ## Rendering
 
-- The image service holds the GPU lock for its queue. Run the round's last recipe with `--end-session` so the GPU is freed. RAM is tight: one headless browser at a time, nothing big in /tmp.
+- The last recipe gets `--end-session`. One headless browser at a time, nothing big in /tmp.
 - At most 6 renders per setting change, one change at a time.
-- **The same fault twice in a row means change the method or stop** (Jørgen 2026-10-10: "wasting SO many cycles on the SAME issue, lime hair ... making 50x the same picture without learning anything"). If a fault survives two setting changes, don't reroll: (1) check the preset's words against the approved portrait's actual colours (sample them; e.g. Mio's underlayer is #1ACC98 mint-jade, which the words "bright green" turn into lime) and propose a new preset version citing the #n renders, (2) fix it deterministically in the recipe (a targeted inpaint, `start` with a `mask`, or a masked hue shift, `huefix`, the math round d5-log-1 used for Mio's hair and eyes and d2-noren-1 for a noren's colour; Mio's underlayer is hue about 167, while the cast-looks words land near 175 to 193, so plan on a hue fix for her), or (3) stop and report what you tried. Never a third pass on the same fault with the same method.
-- **Every attempt gets a verdict** in the dashboard: `python3 tools/verdict.py <image> --reject "<one line>"` or `--keep`. Jørgen reads them in the History viewer.
-- **Tag every rejection with its fault type**: `--fault hair-colour` (and/or eye-colour, identity, expression, lips, body, extra-limb, hands, outfit, background, framing, text, seam, flat-style, staging, other). Before each new pass run `python3 tools/verdict.py --tally <round dir>`: a fault marked REPEATED must get a concrete change aimed at that fault (see the rule above), not another reroll. Jørgen 2026-10-10: "keep track of the specific type of failure it is getting so that it can take more concrete action and dont let the same error pile up".
-- Check every candidate at full size beside the approved portraits. Reject only what is clearly off; don't fail a picture on differences too small to judge reliably.
+- The same fault twice means change the method or stop: sample the approved portrait's colours and propose a preset version citing the #n renders; or fix it in the recipe (a masked inpaint, or `huefix`: Mio's underlayer is hue about 167, mint-jade #1ACC98, while the words land near 175 to 193); or report what you tried.
+- Verdict, fault type and tally on every attempt (art/PROMPTS.md, Verdicts).
+- Check every candidate at full size beside the approved portraits. Reject only what is clearly off.
+- The private voice tool reuses old takes under the same line id (~/ai/private-voice/work/raw/<id>/); move them out before re-voicing changed text.
 
-## Voicing
+## Done
 
-- The private voice tool reuses old takes stored under the same line id (~/ai/private-voice/work/raw/<id>/). Before re-voicing a line whose text changed, move its old takes out (e.g. to work/stale/), or the check passes old audio for the old text.
-
-## A scene isn't done until a normal run reaches it (Jørgen 2026-10-10)
-
-"WHY WERE NONE OF THE SCENES AVAILABLE IN GAME?" Scenes had been built and checked only in the ?scene viewer, and no check noticed that nothing put them into a normal run. Every scene needs a normal-play entry: a days scene an event target in plugins/event-targets.js and a place plugin that calls installDays('<place>'); a day-1 scene from day1-scenes.src.mjs an `inline: { node, before }` (or `after`) in its META, installed by its place plugin with installInline. Before you report, run:
-
-- `node island/private/rewards/tools/normal-entry-check.mjs` (CPU, seconds): fails when a scene with its pictures on disk has no normal-play entry; `--table` lists every scene.
-- `ONLY=<scene id> node island/private/rewards/tools/normal-reach-browser.mjs --both` (one headless browser, GPU queue): starts a normal run (no ?scene) at the scene's day, period and place with private mode and Skimpy on, as Eric and as Carina, taps the pin or runs the host node, and passes when the scene starts. A scene still waiting for its pictures shows WIRED (pictures missing) for an inline scene, or isn't listed.
-
-## A scene isn't done until its characters are physically there (Jørgen 2026-10-10)
-
-"mio outside on a bench icon is visible, but she is not actually there, it just starts a conversation with an empty bench. Please do remember to place people in the scenes for it to make sense, making sure they are not in multiple places also." Before a scene's pictures go live, it has a cast in `island/private/plugins/stage.js` (STAGE): each person in it, with a seat or a spot and a pose at the pin, an approved crowd body for anyone unnamed. Place them where your pictures show them, so the 3D place and the picture agree. normal-entry-check fails when a reachable scene's speakers have no staged body; normal-reach-browser fails when a cast member has no drawn body within a few metres of the pin, or two.
-
-## Reporting
-
-- Renders stay in the round. A picture Jørgen picked reaches the game only through `node tools/assets/live.mjs promote <round file> <live path> --round <project>/<round> --review <id>` (`--replace` retires the one it replaces); never copy it into a live folder by hand (notes/asset-lifecycle.md; the private specifics are in rewards/docs/asset-lifecycle.md).
-
-- Anything Jørgen has to look at or choose (a comparison, a test, a pick) goes in a private review in island/private/rewards/reviews/, never only in the round's own index.html: the private Review page is the one place he checks (2026-10-09).
-- **Never post a round where nothing passed.** Keep going, or report back without posting.
-- Name every candidate by its dashboard number **#n** and its file id (`tools/imagegen/find.py <n>`).
-- Private review in island/private/rewards/reviews/<round>/ with one context line on top: what the scene is, where it plays, what he picks.
-- Log claims and releases in collab/private.md.
-- Report in a few plain lines, without describing image contents.
-
-- **Clean up before you report:** stop every background command and waiting loop you started (no `until`/`while pgrep` loops left behind), and release any GPU lock you hold. A loop left running keeps you listed as working and clutters the machine (Jørgen 2026-10-10: "you should be cleaning up as you go").
-
-- **Live files (2026-10-10, #419):** a new private plugin file or live picture goes through `node tools/assets/live.mjs promote|register`; `node tools/assets/live.mjs check --local` must pass before you report.
+- The scene is reachable in a normal run and its people are staged, with both checks passing (.claude/agents/private-scene-writer.md, "Done in a normal run").
+- A pick reaches the game only through `node tools/assets/live.mjs promote <round file> <live path> --round <project>/<round> --review <id>`; `node tools/assets/live.mjs check --local` passes.
+- What Jørgen judges goes in a private review in island/private/rewards/reviews/<round>/, with one context line on top (the scene, where it plays, what he picks). Never post a round where nothing passed. Name candidates by #n and file id.
+- Claims and releases in collab/private.md. Report in a few plain lines, without describing image contents.
+- GUIDE: Definition of done, including stopping every loop and background command you started and releasing any lock.

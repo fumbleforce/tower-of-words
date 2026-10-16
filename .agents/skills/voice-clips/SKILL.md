@@ -5,37 +5,38 @@ description: Generates, checks and exports the game's voice clips (game3d/audio/
 
 # Voice clips
 
-Voice rules are in GUIDE.md (Voices and audio: Local first, the Mio pitch guard, per-character loudness). The voices each person uses are in docs/game/art-and-sound.md.
+Voice rules: GUIDE.md (Voices and audio). Which voice each person uses: docs/game/art-and-sound.md.
 
 ## The pipeline
 
-One command does it: `sh tools/voice/run.sh`. It
+`sh tools/voice/run.sh` does it all:
 
-1. rewrites game3d/audio/manifest.json from the story (`node game3d/tools/voice-manifest.mjs`; keys `eric-<word>`, `word-<word>`, `ln-<hash>`, `oh-<hash>`, and another protagonist's own clips `carina-<word>` and `<key>-carina`, once that protagonist has a voice: docs/game/systems.md, Protagonists) and finds the lines with no clip for their current text (tools/voice/clips.json records the text of every exported clip);
-2. checks the setup before waiting for anything (`cfg.py setup`: the Python venvs, every clone reference wav, the transcript of each speaker in the batch, the Qwen model folder) and stops naming what's missing; then takes the GPU lock as `$LOCK_ME` (default game3d-voices), waiting while someone else holds it (GUIDE: GPU lock), and releases it when done or interrupted;
-3. makes three takes per line with Qwen3-TTS 1.7B Base clones (gen_takes.py, batched per speaker, checks the lock before every batch) and checks them (check_takes.py: tools/island_audio/check.py's Whisper reading check, pitch guard and WavLM similarity, and for English lines one voice throughout: segvoice.py), with up to two retry rounds of new seeds for lines with no passing take;
-4. exports the best passing take to game3d/audio/<key>.mp3 with per-speaker loudness (export.py), and stops with exit 1 if any line still has no passing take. Only with `EDGE_FALLBACK=1` does it voice those lines with edge-tts and record them in tools/voice/edge.json (edge.py; GUIDE: edge-tts only as a fallback, so say which lines it voiced);
-5. re-times known words in overheard clips if a new clip is overheard (spans.py, game3d/audio/spans.json), then runs `voice-manifest.mjs --check --voiced` (the protagonists with a voice), whose result is the exit code. A new protagonist's voice: set `voice.ref` in game3d/data/mc/<id>.json and add the speaker to cfg.py; the next run makes their clips (`voice-manifest.mjs --check --mc <id>` lists them).
+1. Rewrites game3d/audio/manifest.json from the story (`node game3d/tools/voice-manifest.mjs`) and finds lines with no clip for their current text (tools/voice/clips.json).
+2. Checks the setup (`cfg.py setup`: venvs, clone reference wavs, transcripts, model) and stops naming what's missing; takes the GPU lock as `$LOCK_ME` (default game3d-voices) and asks ComfyUI to unload its models.
+3. Makes three takes per line (gen_takes.py) and checks them (check_takes.py: Whisper reading, pitch guard, WavLM similarity, one voice throughout), with up to two retry rounds.
+4. Exports the best passing take with per-speaker loudness (export.py), and exits 1 if a line has no passing take. Only `EDGE_FALLBACK=1` voices those with edge-tts (recorded in tools/voice/edge.json; say which lines).
+5. Re-times known words in overheard clips (spans.py), then `voice-manifest.mjs --check --voiced` sets the exit code.
 
-A step that exits non-zero (gen_takes, check_takes, export, edge, spans: a crash, a missing model, a lost lock) stops the batch with exit 1 and prints the end of its output; its whole output is in `$GAME3D_VOICE_WORK/logs/<step>.out`. `sh tools/voice/run.sh --dry` lists the lines that need a clip and checks the setup without touching the GPU; `--no-manifest` skips step 1. Once it holds the lock, run.sh asks ComfyUI (port `COMFY_PORT`, default 8188) to unload its models, because a holder before it may have left them in VRAM (a batch on 2026-10-06 crashed with out of memory when that happened). After it, run the fast-qa skill and commit the new mp3s with game3d/audio/index.json and tools/voice/clips.json (and edge.json if it changed). A clip the new manifest no longer plays (an old take of a rewritten line) fails `npm run check`; retire it with `node tools/assets/live.mjs retire game3d/audio/<key>.mp3` (notes/asset-lifecycle.md).
+A failing step stops the batch and prints the end of its output; the full output is in `$GAME3D_VOICE_WORK/logs/<step>.out` (default ~/ai/game3d-voice/). `--dry` lists the lines needing a clip and checks the setup without the GPU; `--no-manifest` skips step 1.
 
-- Who speaks with which clone reference, loudness per speaker, TTS text fixes: tools/voice/cfg.py (references in tools/voice-refs/). A new speaker id in the story needs a line in `speakers()` there; gen_takes.py stops and names it otherwise.
-- A take picked by ear: put `"<key>": "<take>"` in tools/voice/force.json. Other English wording for a line that keeps failing: tools/voice/alt_text.json, then `~/ai/tts/qwen/venv/bin/python tools/voice/gen_takes.py 404,505,606 <key> --alt` under the lock.
-- To redo a clip whose text didn't change, delete its key from tools/voice/clips.json.
-- Lines from another worktree's story (a batch someone asked for): set `VOICE_MANIFEST=<that worktree>/game3d/audio/manifest.json` and pass the keys to gen_takes.py; check and export read the same manifest.
-- Takes, metrics, reports and run logs live in `$GAME3D_VOICE_WORK` (default ~/ai/game3d-voice/), outside git. Python venvs: ~/ai/tts/qwen/venv (takes), ~/ai/tts-bench/.venv (checks, export, spans), ~/ai/voice-pipeline/edge-venv (edge-tts); override with QWEN_PY, BENCH_PY, EDGE_PY.
-- The clone reference wavs in tools/voice-refs/ are not in git (their .txt transcripts are); on another machine, copy that folder over first. In a worktree, `tools/worktree.sh setup` links the wavs from the main checkout. The setup check in step 2 names any that are missing.
+After it: the fast-qa skill, then commit the new mp3s with game3d/audio/index.json and tools/voice/clips.json (and edge.json if changed). A clip the manifest no longer plays fails `npm run check`; retire it with `node tools/assets/live.mjs retire game3d/audio/<key>.mp3`.
+
+## Controls
+
+- Speakers, clone references, loudness and TTS text fixes: tools/voice/cfg.py (`speakers()`; references in tools/voice-refs/, linked into a worktree by `tools/worktree.sh setup`). A new speaker id needs a line there.
+- A take picked by ear: `"<key>": "<take>"` in tools/voice/force.json. Other English wording for a line that keeps failing: tools/voice/alt_text.json, then `~/ai/tts/qwen/venv/bin/python tools/voice/gen_takes.py 404,505,606 <key> --alt` under the lock.
+- Redo a clip whose text didn't change: delete its key from tools/voice/clips.json.
+- Lines from another worktree's story: `VOICE_MANIFEST=<that worktree>/game3d/audio/manifest.json`, keys to gen_takes.py.
+- A new protagonist's voice: `voice.ref` in game3d/data/mc/<id>.json and the speaker in cfg.py (docs/game/systems.md, Protagonists).
 
 ## Japanese must sound Japanese
 
-Jørgen, 2026-09-30: an English-mode clone reading Japanese "teaches the student the wrong pronunciation" (Mio's 待って, Eric's 止まって as "tomato"). So:
+An English-mode clone reading Japanese "teaches the student the wrong pronunciation". So:
 
-- Japanese is always generated with `language='Japanese'`, from kana/kanji text, for every speaker, Eric included. A clone whose reference speaks English (`cfg.XVEC_JA`: Eric) reads Japanese from its timbre only (Qwen's `x_vector_only_mode`, takes tagged `x`): with the English reference as a spoken prompt he said トマテ and ダシュイト (0 of 9 takes passed for 止まって and 出して); timbre-only, 62 of 66 takes read right with P(ja) 0.7 to 1.0 and the same voice (WavLM similarity 0.5 to 0.9, as before).
-- An English line with Japanese in it (kana, kanji, or a romaji word in `RO2JA` in cfg.py) is one take: read in English, with each Japanese word written in kana (`cfg.kana_reading`; a kanji word needs its reading in `cfg.JA_READ`, and `cfg.py setup` names any that is missing). check_takes.py finds each Japanese word in the take (`native.words_native`: English Whisper's word times, matched to the line's English words) and passes the take only if every word is heard and sounds Japanese there (P(ja) >= 0.5 on its stretch, and 0.8 if Whisper wrote it as something else; words of 2 kana or fewer only have to be heard); the English is checked against what Whisper heard around the Japanese (it translates おはようございます as "Good morning").
-- Why one take (Jørgen, 2026-10-10: "kenji's first dialogue is breaking into different voices when he talks english"): a separately made Japanese part spliced in was one way a line changed voice partway. Tested on 12 lines, 4 seeds each, P(ja) on the word: written in kana, in English mode, Emi's 泳ぐ came out Japanese in 3 of 4 takes (0.66 to 0.92; written 泳ぐ, 0.10 to 0.28, heard as "Ongu", "Unig"); Mio's すみません and 止まって 0.77 to 1.0; Kenji's みおさん 0.89 to 0.99. The older finding (2026-09-30: whole lines gave English-accented Japanese) was romaji or kanji, and judged on the whole clip.
-- Only a clone whose reference speaks English (`cfg.SPLICE`: Eric, Carina) can't say Japanese in an English take (none of 32 takes did, in English, Auto or Japanese mode, kanji or kana). Their lines are still cut at the Japanese by `cfg.parts()`, each part its own unit `<key>~<n>` (`cfg.units()`): English parts in English, Japanese parts in Japanese from the timbre alone. export.py picks the English parts' takes nearest the speaker's usual English pitch, tries the Japanese takes closest in voice (WavLM) to those first, and keeps the first joined clip (splice.py: parts trimmed, Japanese levelled to the English speech loudness within ±6 dB, pauses from the punctuation: 0.30 s after a full stop, 0.16 s after a comma, 0.07 s mid-sentence) that keeps one voice.
-- One voice from start to end (tools/voice/segvoice.py): every English take is cut at its pauses into stretches of half a second or more, and a stretch under 0.55 WavLM similarity to the reference and 0.25 under the rest of the clip is another voice, so the take doesn't pass (hums like "Mm" are skipped: WavLM can't place them). `~/ai/tts-bench/.venv/bin/python tools/voice/segvoice.py [--speaker kenji] [keys]` measures exported clips. On 2026-10-10 it found 17 of 1146 English clips changing voice partway, mostly a lone first or last word ("Ah...", "Chair...", "Gone."), and 3 at a splice.
-- The native check (tools/voice/native.py): Whisper large-v3-turbo's language guess on the audio. Word clips (`word-*`, `eric-*`) and Japanese parts only pass with P(ja) >= 0.5 as well as the kana reading check. Word clips also get a rough pitch-accent check (the first two morae against the Tokyo accent in `native.ACCENT`); a take with the right accent is preferred. `~/ai/tts-bench/.venv/bin/python tools/voice/native.py --words word-,eric-` measures the exported clips.
-- A tapped word in dialogue plays Mio's `word-<id>` clip (slow, Japanese); Eric's `eric-<id>` plays only when he says it.
+- Japanese is generated with `language='Japanese'` from kana or kanji, for every speaker. A clone whose reference speaks English (`cfg.XVEC_JA`) reads Japanese from its timbre only.
+- An English line with Japanese words in it is one take, read in English with each Japanese word written in kana (`cfg.kana_reading`; kanji words need a reading in `cfg.JA_READ`). check_takes.py passes it only if every Japanese word is heard and sounds Japanese.
+- Clones with an English reference (`cfg.SPLICE`: Eric, Carina) can't say Japanese in an English take: their lines are split at the Japanese (`cfg.parts()`), each part voiced in its language, and joined in one voice (splice.py).
+- Every English take keeps one voice start to end (segvoice.py). Word clips (`word-*`, `eric-*`) and Japanese parts pass only with P(ja) >= 0.5 (native.py), and a take with the right Tokyo pitch accent is preferred.
+- A tapped word plays Mio's `word-<id>` clip; Eric's `eric-<id>` plays only when he says it.
 
-New or changed voices (a new cast voice, a different timbre) are a Review item for Jørgen's ears (post-review-item), not a pipeline run.
+A new or changed voice is a Review item for Jørgen's ears (post-review-item), not a pipeline run.
