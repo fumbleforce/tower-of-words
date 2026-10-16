@@ -1,7 +1,7 @@
 // Held arm poses for Eric in the small evening scenes (the bicycle, the cat, the canteen chair), laid over whatever
-// clip he is playing with his own pose layers (mio.js poseLayer): each is a set of arm bones turned forward about his
+// clip he is playing with his own pose layers (held-pose.js poseLayer): each is a set of arm bones turned forward about his
 // side axis, eased in and out by the layer's weight and held for as long as it's on. A lean forward is his bow
-// (avatar.js pose.bow). The code-built chibi fallback has neither, so these do nothing on it.
+// (avatar.js pose.bow).
 const NO_CLIP = { name: 'hold', duration: 0, tracks: [] };
 const HOLDS = {
   // both hands out in front at waist height: a handlebar, the back of a chair

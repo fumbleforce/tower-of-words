@@ -2,7 +2,7 @@
 // walk on the spot, and slide when they move"): loads a place at lunch with its crowd, walks Eric round, walks Mio
 // (walkRig) and one of the place's people (the story's walkPerson) past him, stops them and turns them on the spot,
 // and reports everyone in view who stepped on the spot or slid. Real time (the fast test runs the same check sped up).
-//   node game3d/tools/gait-check.mjs [w h]     PLACES=plaza,forecourt SECS=14 QS=&chibi=0 BASE=<worktree>/game3d
+//   node game3d/tools/gait-check.mjs [w h]     PLACES=plaza,forecourt SECS=14 BASE=<worktree>/game3d
 //   RUN=1: Eric runs his legs (as a double tap does) instead of walking them.
 // Exits 1 when anyone is reported, or on a page error.
 import fs from 'node:fs';

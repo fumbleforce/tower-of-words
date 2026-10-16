@@ -6,10 +6,10 @@
 // trainDiscoveries before it reads their parts. If a body fails to load, the code-built passenger stays. The man with
 // a bag keeps the code-built one's visibility (places/train.js hides him).
 import * as THREE from 'three';
-import { EVERYDAY_ROLES } from './crowd/roles.js';
-import { proxyParts, roleBody, preparePlacePeople } from './chibi-crowd.js';
-import { bridgeOfficePose } from './crowd/office-pose.js';
-import { phoneLighter } from './perf/phone.js';
+import { EVERYDAY_ROLES } from './roles.js';
+import { proxyParts, roleBody, preparePlacePeople } from './bodies.js';
+import { bridgeOfficePose } from './office-pose.js';
+import { phoneLighter } from '../perf/phone.js';
 
 // How each passenger sits: the code-built passenger's hold (train/people.js armsHold), so the hands stay on the book
 // or phone, and a little shorter for the student. Which body each one gets is the shared role table's (crowd/roles.js).
@@ -55,7 +55,7 @@ function becomes(r, body) {
     });
 }
 
-export function chibiPassengers(people) {
+export function nativePassengers(people) {
   for (const [id, role] of Object.entries(POSE)) {
     const r = people[id];
     if (!r || r.meshy || !EVERYDAY_ROLES[id]) continue;

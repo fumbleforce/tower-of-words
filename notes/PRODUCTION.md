@@ -10,7 +10,7 @@ Only edit files you own. If you need a change in someone else's files, open a re
 |---|---|---|
 | builder (integrator) | js/main.js, js/engine.js, js/runner.js, js/story.js, js/testmode.js, tools/fast.mjs, tools/stamp.py (build.json is generated, never committed) | story text |
 | world | js/places/*, js/scenes/*, js/train/car.js, js/train/world.js, js/train/hull.js, js/train/kit.js, js/props.js, js/post.js | ui, story |
-| characters | assets/characters/, js/cast.js, js/train/people.js, js/avatar.js, js/mio.js, tools/characters/ | places, ui |
+| characters | assets/characters/, js/cast.js, js/train/people.js, js/avatar.js, js/held-pose.js, tools/characters/ | places, ui |
 | feel | js/cam.js, js/trips.js, js/train/audio.js, js/sfx.js, js/ambience.js, audio/ (except voices); animation blending in avatar code only by request to characters | ui.js, story |
 | story | story/*.js, story/STORY.md, story/VOICE.md, story/VOICE-DIRECTION.md | js/ |
 | shell | js/ui.js, css/, index.html, js/end.js, js/menu.js, js/settings.js | places, story |

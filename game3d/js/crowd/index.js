@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import { CROWD } from './data.js';
 import { makeBody } from './looks.js';
-import { prepareCrowdBodies } from '../chibi-crowd.js';
+import { prepareCrowdBodies } from './bodies.js';
 import { coarseGrid, routeBetween, snapFree, clearAt } from './paths.js';
 import { walkStep, stride, idleLife, stalled, gliding } from './motion.js';
 import { placeStill, stillSpots } from './still.js';

@@ -415,12 +415,12 @@ mio_model = (BIBLE.get('mio') or {}).get('model') or {}
 add('model/eric-meshy', 'model', 'Eric (Meshy)', ls('game3d/assets/eric') + ls('art/approved/mc/meshy', r'\.(glb|json|png)$'),
     FACT_STATUS.get(eric_model.get('status'), 'approved'), {'path': 'bible/facts.yaml', 'text': eric_model.get('note', '')},
     source='Meshy image-to-3D from ' + 'tools/characters/ref/eric-chibi-ref.png' + ', auto-rigged, ~1050 polygons (' + (eric_model.get('note', '').split('.')[0]) + '). The game loads game3d/assets/eric/ (slimmed by game3d/tools/slim_glb.py) with base.webp as a matte Lambert texture.',
-    who='eric', used=['The player, in every place (main.js loadEric; ?eric=chibi falls back to the code-built chibi)'],
+    who='eric', used=['The player, in every place (avatar.js playerBody)'],
     view={'type': 'meshy', 'id': 'eric', 'height': 1.2}, tags=['in game', 'rigged'])
-add('model/mio-meshy', 'model', 'Mio (Meshy)', ls('game3d/assets/mio') + ls('art/approved/mio/meshy'),
+add('model/mio-meshy', 'model', 'Mio (Meshy)', ls('game3d/assets/characters/mio2') + ls('art/approved/mio/meshy'),
     FACT_STATUS.get(mio_model.get('status'), 'approved'), {'path': 'bible/facts.yaml', 'text': mio_model.get('note', '')},
-    source="Jørgen's Meshy model (Neon Bun Guardian biped); only colour tweaks in the game (mio.js MIO_COLOURS)", who='mio',
-    used=['Mio, in every place (mio.js loadMio)'], view={'type': 'mio', 'height': 1.12}, tags=['in game', 'rigged'])
+    source="Review mio-meshy-2's mio-2, from Jørgen's Meshy model", who='mio',
+    used=['Mio, in every place (avatar.js mioBody)'], view={'type': 'meshy', 'id': 'mio2', 'height': 1.12}, tags=['in game', 'rigged'])
 mori_r = REVIEWS.get('mori-3d') or {}
 add('model/mori-meshy', 'model', 'Mr. Mori (Meshy test)', ls('game3d/assets/characters/mori', r'\.(glb|webp)$'),
     'approved' if 'mori' in cast3d_on else 'rejected', f"Review mori-3d: {mori_r.get('decision', '')}",
@@ -487,19 +487,19 @@ anim('eric-tosit', 'eric', 'Eric: to-sit', ['art/approved/mc/meshy/eric-tosit.gl
      ['Not loaded by the game (the sit clip is held on one frame)'], {'type': 'glb', 'src': 'art/approved/mc/meshy/eric-tosit.glb'})
 for who, st, why in [('eric', 'provisional', 'Retargeted gesture clips; in the game, never reviewed on their own'),
                      ('mori', 'rejected', f"Mori's model is parked (review mori-3d: {mori_r.get('decision', '')})"),
-                     ('mio', 'provisional', 'Retargeted phone pose; in the game, never reviewed on its own')]:
+                     ('mio2', 'provisional', 'Retargeted phone pose; in the game, never reviewed on its own')]:
     for g in ['bow', 'wave', 'shrug', 'nod', 'phone']:
         p = f'game3d/assets/characters/{who}/{g}.json'
         if exists(p):
-            view = {'type': 'mio', 'height': 1.12, 'phone': True} if who == 'mio' else {'type': 'meshy', 'id': who, 'height': 1.2, **({'phone': True} if g == 'phone' else {'gesture': g})}
-            anim(f'{who}-{g}', who, f"{NAMES.get(who)}: {g}", [p], st, why, "Meshy's gesture library, retargeted onto the rig as JSON (tools/characters/retarget.py)",
+            view = {'type': 'meshy', 'id': who, 'height': 1.12 if who == 'mio2' else 1.2, **({'phone': True} if g == 'phone' else {'gesture': g})}
+            person = 'mio' if who == 'mio2' else who
+            anim(f'{person}-{g}', person, f"{NAMES.get(person)}: {g}", [p], st, why, "Meshy's gesture library, retargeted onto the rig as JSON (tools/characters/retarget.py)",
                  [f"{g.title()} gesture (avatar.js GESTURES; story hook `gesture`)" if g != 'phone' else 'Looking at the phone (story hook `phone`)'], view)
-for clip in ['walk', 'run', 'sit', 'tosit']:
-    p = f'game3d/assets/mio/{clip}.glb'
+for clip in ['walk', 'run', 'sit']:
+    p = f'game3d/assets/characters/mio2/{clip}.glb'
     if exists(p):
         anim(f'mio-{clip}', 'mio', f'Mio: {clip}', [p], FACT_STATUS.get(mio_model.get('status'), 'approved'), {'path': 'bible/facts.yaml', 'text': mio_model.get('note', '')},
-             'Meshy animation library (Neon Bun Guardian biped)', [f'Mio {clip} state (mio.js loadMio)'] if clip != 'tosit' else ['Sitting down (mio.js)'],
-             {'type': 'mio', 'height': 1.12, 'play': 'sit' if clip == 'tosit' else clip})
+             'Meshy animation library', [f'Mio {clip} state (avatar.js mioBody)'], {'type': 'meshy', 'id': 'mio2', 'height': 1.12, 'play': clip})
 for clip in ['idle', 'walk', 'run', 'sit']:
     p = f'game3d/assets/characters/mori/{clip}.glb'
     if exists(p):

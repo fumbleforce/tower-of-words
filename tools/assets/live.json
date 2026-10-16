@@ -16,8 +16,8 @@
   "game3d/audio/sfx/levels.json"
  ],
  "coarse": {
-  "game3d/assets/**": "js/chibi.js playerBody: the protagonist's model folder, data/mc/<id>.json model.dir (each unit it can be names its loaded_by)",
-  "game3d/assets/characters/": "js/mio.js CDIR, joined with a cast id in avatar.js and cast3d.js (each unit names its loaded_by)",
+  "game3d/assets/**": "js/avatar.js playerBody: the protagonist's model folder, data/mc/<id>.json model.dir (each unit it can be names its loaded_by)",
+  "game3d/assets/characters/": "js/held-pose.js CDIR, joined with a cast id in avatar.js and cast3d.js (each unit names its loaded_by)",
   "game3d/assets/portraits/*-*.webp": "js/ui/portraits.js; the faces are checked one by one from js/ui/portrait-data.js and data/mc",
   "game3d/assets/portraits/*-neutral.webp": "js/end.js; the faces are checked one by one from js/ui/portrait-data.js and data/mc",
   "game3d/assets/portraits/*.webp": "opening/paint.js, the live opening player",
@@ -59,78 +59,6 @@
   "game3d/assets/characters/carina/": {
    "loaded_by": "game3d/data/mc/carina.json#characters/carina/"
   },
-  "game3d/assets/characters/chibi-aoi/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi.js#'chibi-'"
-  },
-  "game3d/assets/characters/chibi-emi/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi.js#'chibi-'"
-  },
-  "game3d/assets/characters/chibi-eric/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi.js#'chibi-'"
-  },
-  "game3d/assets/characters/chibi-gen-apron/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi-crowd.js#'gen-'"
-  },
-  "game3d/assets/characters/chibi-gen-blouse/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi-crowd.js#'gen-'"
-  },
-  "game3d/assets/characters/chibi-gen-cardigan/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi-crowd.js#'gen-'"
-  },
-  "game3d/assets/characters/chibi-gen-dock/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi-crowd.js#'gen-'"
-  },
-  "game3d/assets/characters/chibi-gen-hoodie/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi-crowd.js#'gen-'"
-  },
-  "game3d/assets/characters/chibi-gen-polo/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi-crowd.js#'gen-'"
-  },
-  "game3d/assets/characters/chibi-gen-shirt/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi-crowd.js#'gen-'"
-  },
-  "game3d/assets/characters/chibi-gen-suit/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi-crowd.js#'gen-'"
-  },
-  "game3d/assets/characters/chibi-guard/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi.js#'chibi-'"
-  },
-  "game3d/assets/characters/chibi-kenji/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi.js#'chibi-'"
-  },
-  "game3d/assets/characters/chibi-kuro/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi.js#'chibi-'"
-  },
-  "game3d/assets/characters/chibi-kuroda/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi.js#'chibi-'"
-  },
-  "game3d/assets/characters/chibi-mio/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi.js#'chibi-'"
-  },
-  "game3d/assets/characters/chibi-mori/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi.js#'chibi-'"
-  },
-  "game3d/assets/characters/chibi-rei/": {
-   "dev": "the Meshy chibi look, dropped 2026-10-04; loads only with ?chibi=1 (js/chibi.js)",
-   "loaded_by": "game3d/js/chibi.js#'chibi-'"
-  },
   "game3d/assets/characters/crowd-a/": {},
   "game3d/assets/characters/crowd-b/": {},
   "game3d/assets/characters/crowd-casual-1/": {
@@ -160,12 +88,8 @@
   "game3d/assets/characters/kuroda/": {
    "loaded_by": "game3d/js/cast3d.js#'kuroda'"
   },
-  "game3d/assets/characters/mio/": {
-   "dev": "the code-built Mio's phone pose, before Review mio-meshy-2; loads only with ?mio=legacy (js/mio.js loadMio)",
-   "loaded_by": "game3d/js/mio.js#'mio/phone.json'"
-  },
   "game3d/assets/characters/mio2/": {
-   "loaded_by": "game3d/js/chibi.js#'mio2'"
+   "loaded_by": "game3d/js/avatar.js#'mio2'"
   },
   "game3d/assets/characters/mori/": {
    "loaded_by": "game3d/js/cast3d.js#'mori'"
@@ -181,7 +105,6 @@
   "game3d/assets/characters/relaxed-idle-kenji.json": {},
   "game3d/assets/characters/relaxed-idle-kuro.json": {},
   "game3d/assets/characters/relaxed-idle-kuroda.json": {},
-  "game3d/assets/characters/relaxed-idle-mio.json": {},
   "game3d/assets/characters/relaxed-idle-mio2.json": {},
   "game3d/assets/characters/relaxed-idle-mori.json": {},
   "game3d/assets/characters/relaxed-idle-rei.json": {},
@@ -190,9 +113,6 @@
   "game3d/assets/characters/swimwear-eric/": {},
   "game3d/assets/characters/swimwear-kuro/": {},
   "game3d/assets/eric/": {},
-  "game3d/assets/mio/": {
-   "dev": "the code-built Mio's skin before Review mio-meshy-2; loads only with ?mio=legacy (js/chibi.js mioBody)"
-  },
   "game3d/assets/opening/copyroom.webp": {
    "dev": "the live opening player (opening/op.js) and its film renders; the game plays the film"
   },
@@ -1251,6 +1171,41 @@
    ],
    "round": "audio-route",
    "note": "the audio folder units split into one unit per file, each naming its source and licence (#628); game3d/audio/sfx/levels.json is a build record (source)"
+  },
+  {
+   "date": "2026-10-16",
+   "action": "retire",
+   "paths": [
+    "game3d/assets/characters/chibi-aoi/",
+    "game3d/assets/characters/chibi-emi/",
+    "game3d/assets/characters/chibi-eric/",
+    "game3d/assets/characters/chibi-gen-apron/",
+    "game3d/assets/characters/chibi-gen-blouse/",
+    "game3d/assets/characters/chibi-gen-cardigan/",
+    "game3d/assets/characters/chibi-gen-dock/",
+    "game3d/assets/characters/chibi-gen-hoodie/",
+    "game3d/assets/characters/chibi-gen-polo/",
+    "game3d/assets/characters/chibi-gen-shirt/",
+    "game3d/assets/characters/chibi-gen-suit/",
+    "game3d/assets/characters/chibi-guard/",
+    "game3d/assets/characters/chibi-kenji/",
+    "game3d/assets/characters/chibi-kuro/",
+    "game3d/assets/characters/chibi-kuroda/",
+    "game3d/assets/characters/chibi-mio/",
+    "game3d/assets/characters/chibi-mori/",
+    "game3d/assets/characters/chibi-rei/",
+    "game3d/assets/characters/mio/",
+    "game3d/assets/mio/"
+   ],
+   "to": "art/production/retired/2026-10-16/",
+   "note": "The Meshy chibi kit (dropped 2026-10-04) and the old Mio body (?mio=legacy, before Review mio-meshy-2), removed with their code for #643; copies in ../bk-jap/2026-10-16-characters/"
+  },
+  {
+   "date": "2026-10-16",
+   "action": "retire",
+   "path": "game3d/assets/characters/relaxed-idle-mio.json",
+   "to": "art/production/retired/2026-10-16/game3d/assets/characters/relaxed-idle-mio.json",
+   "note": "The old Mio's idle (?mio=legacy); Mio's body is mio2 with relaxed-idle-mio2.json. #643"
   }
  ]
 }

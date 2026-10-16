@@ -76,8 +76,7 @@
  },
  "model": {
   "dir": "eric",
-  "height": 1.2,
-  "chibi": "eric"
+  "height": 1.2
  },
  "lineVoice": "eric",
  "code": [
@@ -92,12 +91,6 @@
    "code": "B2 IT · ${MC.name}<",
    "expr": "`B2 IT · ${MC.name}`",
    "was": "B2 IT · Eric"
-  },
-  {
-   "file": "game3d/js/ui/settings-view.js",
-   "code": "`${MC.name}, Mio and the people they meet as chibi figures, from the next time the game loads`",
-   "expr": "`${MC.name}, Mio and the people they meet as chibi figures, from the next time the game loads`",
-   "was": "Eric, Mio and the people they meet as chibi figures, from the next time the game loads"
   },
   {
    "file": "game3d/js/map/screen.js",

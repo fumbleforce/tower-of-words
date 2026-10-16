@@ -1,6 +1,6 @@
 # VRoid editor and VRM proof
 
-For #171. [Live preview](../game3d/vrm-test.html), [Review char-vrm-1](../reviews/char-vrm-1/review.json). The preview is separate from the game. No cast model has been replaced or approved.
+For #171. [Review char-vrm-1](../reviews/char-vrm-1/review.json). No cast model was replaced or approved. The preview page, its modules, the three-vrm library and tools/characters/vrm_mio.py were removed on 2026-10-16 and are in `../bk-jap/2026-10-16-characters/` (notes/history/offline-archive.md).
 
 ## What we can use
 
@@ -12,7 +12,7 @@ The [Studio guidelines](https://vroid.com/en/studio/guidelines) permit editing e
 
 ## Change settings yourself
 
-The [VRM workbench](../game3d/vrm-test.html) now has live controls for each sample: hair/shirt/shorts/shoes tints, expression and strength, eye closure, head tilt, and the colour attempts' glasses. Animation and camera controls are alongside them. Body proportions, hair geometry and clothing geometry stay unchanged. White tint restores the original texture; colour tinting cannot lighten or repaint a dark texture.
+The VRM workbench had live controls for each sample: hair/shirt/shorts/shoes tints, expression and strength, eye closure, head tilt, and the colour attempts' glasses. Animation and camera controls are alongside them. Body proportions, hair geometry and clothing geometry stay unchanged. White tint restores the original texture; colour tinting cannot lighten or repaint a dark texture.
 
 Changes are saved in this browser separately for each sample. Download JSON keeps a portable copy; Copy JSON, Load settings JSON and the paste box share the same settings format. Reset restores that sample's defaults. Imports check the version, sample, known fields, allowed values and size before applying anything. Saved settings contain no model or game-save data, and importing one does not alter the source VRM files or their metadata.
 

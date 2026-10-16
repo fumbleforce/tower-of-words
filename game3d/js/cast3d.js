@@ -1,12 +1,11 @@
 // The 3D cast from the Meshy workflow (tools/characters/, assets/characters/<id>/), wrapped so the scenes can treat
-// them like the code-built people of cast.js. The Meshy chibis (chibi.js) come in here when that look is on: their
-// files load once, and every place that builds the person gets its own copy.
+// them like the code-built people of cast.js. Their files load once, and every place that builds the person gets its
+// own copy.
 import * as THREE from 'three';
 import { HIP } from './train/people.js';
 import { SEAT_Y } from './train/car.js';
 import { clone } from '../vendor/utils/SkeletonUtils.js';
 import { meshyFiles, meshyFrom } from './avatar.js';
-import { chibiFiles, chibiFrom, CHIBI_CAST } from './chibi.js';
 
 // Standing heights next to Mio (1.12) and Eric (1.2). While a model waits for Jørgen's approval it only loads with
 // ?cast3d=<id>[,<id>]; approved ids go in CAST3D_ON.
@@ -27,11 +26,9 @@ export const CAST3D = {
 // rig terrible"; art/candidates/rei-rig-1)
 const CAST3D_ON = ['kuro', 'aoi', 'emi', 'mori', 'guard', 'kuroda', 'kenji', 'rei'];
 const Q3 = new URLSearchParams(typeof location !== 'undefined' ? location.search : '');
-// only in a page: the unit tests import the cast in Node, where everyone stays code-built (as in chibi.js)
+// only in a page: the unit tests import the cast in Node, where nobody loads
 const PAGE = typeof addEventListener === 'function';
-const want3 = [...CAST3D_ON, ...(Q3.get('cast3d') || '').split(',')].filter(
-  (id) => PAGE && CAST3D[id] && !CHIBI_CAST.includes(id),
-);
+const want3 = [...CAST3D_ON, ...(Q3.get('cast3d') || '').split(',')].filter((id) => PAGE && CAST3D[id]);
 // The Meshy cast has no phone pose or library gestures: their scenes use the drawn ones (rig-gestures.js)
 const NO_EXTRAS = ['kuro', 'aoi', 'emi', 'mori', 'kenji', 'guard', 'kuroda', 'rei'];
 // Hand bones scaled at load (Jørgen on aoi-1: "her hands are larger than the others"; at 0.75 hers are between Kuro's
@@ -43,19 +40,18 @@ const warn = (id) => (e) => {
   console.warn('3D cast', id, e);
   return null;
 };
-await Promise.all([
-  ...want3.map(
+await Promise.all(
+  want3.map(
     async (id) =>
       (PRE3[id] = await meshyFiles(id, {
         extra: !NO_EXTRAS.includes(id),
       }).catch(warn(id))),
   ),
-  ...CHIBI_CAST.map(async (id) => (PRE3[id] = await chibiFiles(id).catch(warn(id)))),
-]);
+);
 // the ids cast.js asks for here first
-export const CAST3D_IDS = [...new Set([...Object.keys(CAST3D), ...CHIBI_CAST])];
-// Wrap a loaded Meshy character so the scenes can treat it like a chibi rig: the pose helpers (sit, walkPose, arms...)
-// switch its clips instead, the chibi parts they write to are harmless stand-ins (the head follows the real head bone,
+export const CAST3D_IDS = Object.keys(CAST3D);
+// Wrap a loaded Meshy character so the scenes can treat it like a code-built rig: the pose helpers (sit, walkPose,
+// arms...) switch its clips instead, the parts they write to are harmless stand-ins (the head follows the real head bone,
 // for labels and look-at), `seated` picks sit or idle, and it updates itself each frame it's drawn.
 export function meshyPerson(m) {
   const O = () => new THREE.Object3D();
@@ -88,7 +84,7 @@ export function meshyPerson(m) {
   m.model.traverse((o) => o.isSkinnedMesh && sks.push(o));
   // on the game's clock, which moves them (a sped-up or paused game, a slow frame): on the wall clock their steps
   // fell behind or ran ahead of their feet; the wall clock only where there is no game (a viewer)
-  // (on every mesh: a chibi draws only one of its tiers, chibi.js; the first drawn in a frame steps it)
+  // (on every mesh: the first drawn in a frame steps it)
   const step = () => {
     const G = globalThis.__game,
       now = G ? G.t : performance.now() / 1000;
@@ -134,9 +130,8 @@ function leanOver(m, bones) {
 export const meshy3 = (id) => {
   const p = PRE3[id];
   if (!p) return null;
-  if (CHIBI_CAST.includes(id)) return meshyPerson(chibiFrom(p));
   // a copy for each place that builds the person (Aoi is in the lobby and the office; each scales its own), its height
-  // measured once on the loaded original (a fresh clone's skinned bounds come out a hundredth of the size, chibi.js)
+  // measured once on the loaded original (a fresh clone's skinned bounds come out a hundredth of the size)
   const [walk, ...rest] = p;
   p.size ??= new THREE.Box3().setFromObject(walk.scene).getSize(new THREE.Vector3()).y;
   const m = meshyFrom(id, [{ ...walk, scene: clone(walk.scene) }, ...rest], {

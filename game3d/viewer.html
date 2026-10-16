@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Amakawa · Characters</title>
 <meta name="theme-color" content="#dfe4e8">
-<!-- The game's people, islanders and Tama in 3D, code-built or chibi, as the game builds them (js/viewer/). Turn, zoom and pan; the
+<!-- The game's people, islanders and Tama in 3D, as the game builds them (js/viewer/). Turn, zoom and pan; the
      address holds who is shown and what they do (js/viewer/main.js). -->
 <style>
 :root { --bg: #dfe4e8; --panel: rgba(250, 251, 252, 0.92); --line: rgba(29, 36, 48, 0.12); --text: #1d2430; --dim: #5d6773; --accent: #1f7f78; --accent-bg: rgba(31, 127, 120, 0.12); }
@@ -79,10 +79,6 @@ button[aria-pressed="true"] { border-color: var(--accent); background: var(--acc
 <main id="view">
   <canvas id="c" tabindex="0" aria-label="The characters in 3D"></canvas>
   <div id="top">
-    <div class="seg" role="group" aria-label="Look">
-      <button type="button" id="look-code">Code-built</button>
-      <button type="button" id="look-chibi">Chibi</button>
-    </div>
     <div class="seg" role="group" aria-label="How many">
       <button type="button" id="mode-row"><span class="long">Side by side</span><span class="short">Many</span></button>
       <button type="button" id="mode-one"><span class="long">One at a time</span><span class="short">One</span></button>
@@ -105,10 +101,6 @@ button[aria-pressed="true"] { border-color: var(--accent); background: var(--acc
   const imports = { three: './vendor/three/three.module.js', 'three/addons/': './vendor/' };
   for (const f of b.files) imports[new URL(f, location.href).href] = new URL(f + v, location.href).href;
   const map = document.createElement('script'); map.type = 'importmap'; map.textContent = JSON.stringify({ imports }); document.head.appendChild(map);
-  // chibi.js reads these as it loads: the finest mesh at every distance, and none of the game's crowd preloaded
-  // (js/viewer/main.js puts the address back)
-  const q = new URLSearchParams(location.search); q.set('chibi', '0'); q.set('chibitier', 'hi');
-  history.replaceState(null, '', location.pathname + '?' + q);
   const s = document.createElement('script'); s.type = 'module'; s.src = './js/viewer/main.js' + v; document.body.appendChild(s);
 })();
 </script>

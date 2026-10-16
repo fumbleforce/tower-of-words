@@ -184,8 +184,8 @@ async function inPage({ scene, TOL, phase, placed = [], seatIds, playerOnly }) {
     return [c, near];
   }
   const AX = [[0, 1, 0], [0, -1, 0], [1, 0, 0], [-1, 0, 0], [0, 0, 1], [0, 0, -1]];
-  // where the place meant the hips to go: the root for the Meshy people (sitAt keeps it over the seated hips) and the
-  // code-built ones, the root plus her seat offset for Mio (mio.js sitOff)
+  // where the place meant the hips to go: the root for the Meshy people (sitAt keeps it over the seated hips), the root
+  // plus a seat offset where a body has one (sitOff)
   const seatPoint = (r) => {
     const p = r.root.position.clone();
     if (r.sitOff) p.add(r.sitOff);

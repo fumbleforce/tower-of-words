@@ -17,11 +17,11 @@ const hooks = registerHooks({
     return resolved;
   },
 });
-globalThis.location = { search: '?chibi=0' };
+globalThis.location = { search: '' };
 const { GLTFLoader } = await import('../../vendor/loaders/GLTFLoader.js');
 const { prepareApprovedCrowd, approvedCrowd } = await import('../../js/crowd/approved-models.js');
 const { EVERYDAY_ROLES, prepareCrowdBodies, preparePlacePeople, crowdBody, generic, variant, roleBody } =
-  await import('../../js/chibi-crowd.js');
+  await import('../../js/crowd/bodies.js');
 const { tintUniforms, shadeTint } = await import('../../js/crowd/tint.js');
 
 const selected = {
@@ -112,10 +112,10 @@ test('place preload uses the shared staff role and reuses simultaneous downloads
   assert.equal(requests.filter((url) => url.includes('/crowd-service-1/')).length, 7);
 });
 
-test('selected staff keeps proxy parts and explicit apron colour with the chibi switch off', () => {
+test('selected staff keeps proxy parts and explicit apron colour', () => {
   const rig = generic('apron', 25, { proxy: true, tint: { top: '#668578' } });
   assert.equal(rig.approvedCrowd, 'service-1');
-  assert.ok(rig.chibi && rig.bridge);
+  assert.ok(rig.crowdRole && rig.bridge);
   assert.equal(rig.arms.length, 2);
   assert.ok(rig.torso && rig.headK);
   const meshes = [];
@@ -205,12 +205,12 @@ test('incomplete required assets leave the model unavailable for the caller fall
 async function isolatedRoles(tag) {
   const alias = registerHooks({
     resolve(specifier, context, next) {
-      if (context.parentURL?.endsWith('chibi-crowd.js?' + tag) && specifier === './crowd/approved-models.js')
-        return next(new URL('./crowd/approved-models.js?' + tag, context.parentURL).href, context);
+      if (context.parentURL?.endsWith('bodies.js?' + tag) && specifier === './approved-models.js')
+        return next(new URL('./approved-models.js?' + tag, context.parentURL).href, context);
       return next(specifier, context);
     },
   });
-  try { return await import('../../js/chibi-crowd.js?' + tag); }
+  try { return await import('../../js/crowd/bodies.js?' + tag); }
   finally { alias.deregister(); }
 }
 
@@ -234,7 +234,7 @@ test('train preload derives and deduplicates primaries and fallbacks from the sh
   assert.equal(requests.length, start + 20);
 });
 
-test('role factory preserves person identity and supports proxies, height and tint with chibi off', () => {
+test('role factory preserves person identity and supports proxies, height and tint', () => {
   const marker = { prop: 'reader book' }, into = { marker, unrelatedState: 7 };
   const rig = roleBody('reader', 4, { into, proxy: true, height: 1.25, tint: { top: '#4a4f5c' } });
   assert.ok(rig === into);
@@ -303,7 +303,7 @@ for (const [width, size] of [[1366, 1024], [390, 512]]) {
       },
     };
     try {
-      const { prepareTrainPassengers, chibiPassengers } = await import(`../../js/chibi-passengers.js?train-${width}`);
+      const { prepareTrainPassengers, nativePassengers } = await import(`../../js/crowd/passengers.js?train-${width}`);
       await prepareTrainPassengers();
       const firstMap = (rig) => {
         let map;
@@ -325,7 +325,7 @@ for (const [width, size] of [[1366, 1024], [390, 512]]) {
           cans: person.headK.children.filter((o) => o.isMesh && /Cylinder|Torus/.test(o.geometry.type)),
         });
       }
-      chibiPassengers(people);
+      nativePassengers(people);
       for (const [id, body] of [['reader', 'older-1'], ['music', 'casual-1'], ['bun', 'b']]) {
         const person = people[id], old = before.get(id), map = firstMap(person);
         assert.ok(person === old.person);
@@ -347,7 +347,7 @@ for (const [width, size] of [[1366, 1024], [390, 512]]) {
         assert.ok(person.model.getObjectByName('RightHand').matrixWorld.elements.every(Number.isFinite));
       }
       assert.equal(drawn.length, 3, 'one smaller texture per rendered body');
-      chibiPassengers(people);
+      nativePassengers(people);
       assert.equal(drawn.length, 3, 'repeat conversion is a no-op');
     } finally {
       Object.assign(globalThis, saved);

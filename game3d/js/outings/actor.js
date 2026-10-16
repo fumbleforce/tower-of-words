@@ -112,7 +112,7 @@ export function outingActor(game, { makeRig = PEOPLE.kenji, makeShadow = blob } 
     skin(P.name);
     P.space.add(rig.root, rig.blob);
     rig.root.scale.copy(baseScale);
-    if (!rig.meshy || rig.chibi) rig.root.scale.multiplyScalar(P.charScale || 1);
+    if (!rig.meshy || rig.crowdRole) rig.root.scale.multiplyScalar(P.charScale || 1);
     standPose(rig);
     rig.seatOut = null;
     rig.lookTarget = null;

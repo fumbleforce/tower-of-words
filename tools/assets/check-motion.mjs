@@ -23,7 +23,7 @@ await withBrowserJob('asset-library-motion', async browser => {
     for (const id of ['mio', 'kenji', 'carina']) {
       await page.evaluate(async id => {
         const t = globalThis.motionTest;
-        t.b = await t.buildAsset(id === 'mio' ? { type: 'mio' } : { type: 'meshy', id });
+        t.b = await t.buildAsset({ type: 'meshy', id: id === 'mio' ? 'mio2' : id });
         t.stage.show(t.b); t.stage.auto = false;
       }, id);
       for (const motion of ['walk', 'idle', 'run', 'idle', 'sit', 'walk']) {

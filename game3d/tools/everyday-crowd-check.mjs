@@ -38,8 +38,6 @@ const gameRoot = new URL('../', import.meta.url);
 const sourceRoot = process.env.EVERYDAY_SOURCE_ROOT
   ? pathToFileURL(path.resolve(process.env.EVERYDAY_SOURCE_ROOT) + path.sep) : gameRoot;
 assert.ok(sourceRoot.pathname.endsWith('/game3d/') && !sourceRoot.pathname.includes('/private/'), 'Public game source root');
-const chibi = process.env.CHIBI || 'default';
-assert.ok(['default', '0', '1'].includes(chibi));
 const out = process.env.EVERYDAY_OUT || fileURLToPath(new URL(
   `shots/everyday-crowd/${new Date().toISOString().replaceAll(':', '-')}-${process.pid}/`, gameRoot));
 fs.mkdirSync(out, { recursive: true });
@@ -59,7 +57,7 @@ if (textureComparison === 'corrected') {
   assert.ok(!process.env.SERVICE_REFERENCE_FILE, 'Corrected comparison must use the runtime atlas');
   assert.equal(referenceReport?.status, 'pass', 'Corrected comparison requires a completed original run');
   assert.equal(referenceReport.textureComparison, 'original');
-  for (const [key, value] of Object.entries({ base, mode, width, height, chibi }))
+  for (const [key, value] of Object.entries({ base, mode, width, height }))
     assert.equal(referenceReport[key], value, 'Texture comparison preserves ' + key);
 }
 const hash = (bytes) => crypto.createHash('sha256').update(bytes).digest('hex');
@@ -72,7 +70,7 @@ if (referenceTexture) {
   referenceBytes = fs.readFileSync(normalized);
   assert.equal(hash(referenceBytes), 'd104b0bb2da3f65a99cc997cd61517253e4d34adc4e046b7da529dec46a75993');
 }
-const report = { base, mode, width, height, chibi, sourceRoot: fileURLToPath(sourceRoot), publicOnly: true,
+const report = { base, mode, width, height, sourceRoot: fileURLToPath(sourceRoot), publicOnly: true,
   serviceWorkers: 'block', serviceTexture: referenceTexture ? { original: referenceTexture, sha256: hash(referenceBytes) } : 'runtime',
   textureComparison, referenceReport: process.env.CAMERA_REF || null, poseComparisons: [],
   cases: [], shots: [], sources: {}, errors: [] };
@@ -114,7 +112,7 @@ try {
       });
       try {
         await waitForGame(page, 60000, () => page.goto(
-          `http://127.0.0.1:8771/${base}/index.html?cap&place=${spec.place}&q=0${chibi === 'default' ? '' : '&chibi=' + chibi}`), 'play');
+          `http://127.0.0.1:8771/${base}/index.html?cap&place=${spec.place}&q=0`), 'play');
         await page.waitForFunction(() => globalThis.__done === true, null, { timeout: 60000 });
         const waitForVisibleGame = () => page.waitForFunction(() => {
           const hidden = (id) => {
@@ -323,7 +321,7 @@ try {
         save();
       }
     }
-    assert.ok(Object.keys(report.sources).some((file) => file === 'js/chibi-crowd.js'), 'runtime source loaded');
+    assert.ok(Object.keys(report.sources).some((file) => file === 'js/crowd/bodies.js'), 'runtime source loaded');
     assert.deepEqual(report.errors, []);
     report.status = 'pass';
     console.log(`PASS everyday native roles ${names.join(', ')} at ${width}; ${out}`);

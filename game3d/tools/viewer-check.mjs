@@ -9,7 +9,7 @@ const base = process.env.BASE || 'game3d',
   out = 'game3d/shots/viewer';
 fs.mkdirSync(out, { recursive: true });
 const CAST = 'eric,mio,kuro,mori,kenji,emi,guard,kuroda,aoi,rei'.split(',');
-const GEN = 'suit,shirt,blouse,cardigan,polo,hoodie,apron,dock'.split(',').map((b) => 'gen-' + b);
+const ISLANDERS = ['a', 'b', 'casual-1.2', 'older-1', 'service-1'];
 const MOVES = ['idle', 'walk', 'run', 'sit', 'phone', 'bow', 'wave', 'shrug', 'nod'];
 const CAT = ['sit', 'stand', 'sleep', 'eat', 'wash', 'walk'];
 const errors = [],
@@ -37,14 +37,10 @@ const moved = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
 
 async function size(browser, name, vp, phone) {
   let page, ctx;
-  // everyone at once, in each look: all load; then every move anyone shown has (the chibis have them all), and
-  // Tama's poses
-  for (const [look, keys, q] of [
-    ['code', [...CAST, 'worker.3', 'tama'], 'c=mio,eric,kenji,worker.2,tama'],
-    ['chibi', [...CAST, ...GEN, 'tama'], 'c=mio,eric,gen-suit.2,tama&look=chibi'],
-  ]) {
+  // everyone at once: all load; then every move anyone shown has, and Tama's poses
+  for (const [look, keys, q] of [['all', [...CAST, ...ISLANDERS, 'tama'], 'c=mio,eric,kenji,casual-1.2,tama']]) {
     if (page) await ctx.close();
-    ({ page, ctx } = await open(browser, vp, `c=${keys.join(',')}&look=${look}`, phone));
+    ({ page, ctx } = await open(browser, vp, `c=${keys.join(',')}`, phone));
     const shown = await page.evaluate(() => globalThis.__viewer.state.keys.length);
     const bad = await page.$$eval('.chip.bad', (l) => l.map((b) => b.dataset.key));
     ok(shown === keys.length && !bad.length, `${name} ${look}: all ${keys.length} load${bad.length ? ' (failed: ' + bad + ')' : ''}`);
@@ -54,7 +50,7 @@ async function size(browser, name, vp, phone) {
     for (const m of MOVES) {
       const b = page.locator(`#moves .chip[data-key="${m}"]`);
       if (!(await b.isVisible())) {
-        ok(look === 'code' && !['walk', 'run', 'sit'].includes(m), `${name} ${look}: no chip for ${m}`);
+        ok(!['idle', 'walk', 'run', 'sit'].includes(m), `${name} ${look}: no chip for ${m}`);
         continue;
       }
       await b.click();
@@ -71,10 +67,10 @@ async function size(browser, name, vp, phone) {
   }
   // one at a time, an islander, new colours
   await page.locator('#mode-one').click();
-  await page.locator('.chip[data-key="gen-hoodie"]').click();
+  await page.locator('.chip[data-key="casual-1"]').click();
   await wait(800);
   const one = await page.evaluate(() => globalThis.__viewer.state.keys);
-  ok(one.length === 1 && one[0].startsWith('gen-hoodie'), `${name}: one at a time (${one})`);
+  ok(one.length === 1 && one[0].startsWith('casual-1'), `${name}: one at a time (${one})`);
   await page.locator('#colours').click();
   await wait(800);
   const two = await page.evaluate(() => globalThis.__viewer.state.keys);
@@ -82,12 +78,6 @@ async function size(browser, name, vp, phone) {
   await page.locator('#reset').click();
   await wait(500);
   await page.screenshot({ path: `${out}/${name}-one.png` });
-  // to the code-built look: the islander becomes an office worker
-  await page.locator('#look-code').click();
-  await wait(1500);
-  const code = await page.evaluate(() => [globalThis.__viewer.state.look, ...globalThis.__viewer.state.keys]);
-  ok(code[0] === 'code' && code[1].startsWith('worker'), `${name}: look switch (${code})`);
-  await page.screenshot({ path: `${out}/${name}-one-code.png` });
 
   // pan and zoom
   const box = await page.locator('#c').boundingBox();
@@ -149,11 +139,11 @@ async function size(browser, name, vp, phone) {
   }
   await page.screenshot({ path: `${out}/${name}-panned.png` });
   // deep link
-  await page.goto(`http://127.0.0.1:8771/${base}/viewer.html?c=kenji,rei&a=wave&look=chibi`);
+  await page.goto(`http://127.0.0.1:8771/${base}/viewer.html?c=eric,kenji&a=wave`);
   await page.waitForFunction(() => globalThis.__viewerReady, null, { timeout: 90000 });
   await wait(1500);
   const link = await page.evaluate(() => [globalThis.__viewer.state.keys.join(), globalThis.__viewer.state.a, globalThis.location.search]);
-  ok(link[0] === 'kenji,rei' && link[1] === 'wave' && !link[2].includes('chibi=0'), `${name}: deep link (${link})`);
+  ok(link[0] === 'eric,kenji' && link[1] === 'wave' && link[2].includes('a=wave'), `${name}: deep link (${link})`);
   await page.screenshot({ path: `${out}/${name}-link.png` });
   await ctx.close();
 }

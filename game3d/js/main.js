@@ -18,9 +18,8 @@ import { scanTargets } from './gameplay/targeting.js';
 import { installSteer } from './movement/steer.js';
 import { installJump } from './movement/jump-input.js';
 import * as ambience from './ambience.js';
-import { mioBody, playerBody } from './chibi.js';
 import { reloadForMc } from './mc.js';
-import { makeAvatar } from './avatar.js';
+import { mioBody, playerBody } from './avatar.js';
 import { setSitLift } from './movement/sit-height.js';
 import { createTargets } from './narrative/hooks/targets.js';
 export { isPlayer } from './narrative/hooks/targets.js';
@@ -446,14 +445,8 @@ async function boot() {
   installSim(game); // bonds: bond, bondStep, remember, fact, relate hooks (js/bonds/)
   assertRegistered(GLOBAL_HOOKS, game.hooks, 'global hooks');
   if (Q.has('slift')) setSitLift(+Q.get('slift'));
-  // the player: the protagonist's Meshy model (mc.js); the code-built chibi is the fallback (?eric=chibi, or if loading fails)
-  game.player =
-    Q.get('eric') === 'chibi'
-      ? makeAvatar()
-      : await playerBody().catch((e) => {
-          console.warn('Meshy body failed, using the chibi', e);
-          return makeAvatar();
-        });
+  // the player: the protagonist's Meshy model (mc.js). If it fails to load, the game can't start (the error below).
+  game.player = await playerBody();
   game.player.blob = blob(0.55, 0.4);
   game.player.root.add(game.player.blob);
   installJump(game, { shadow: game.player.blob, ui }); // Space or the phone's button, and falls (movement/jump-input.js)

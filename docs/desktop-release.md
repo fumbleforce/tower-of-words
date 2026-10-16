@@ -41,7 +41,7 @@ The day scope removes the later story directories, club sessions, later finds, m
 - `game3d/index.html`: every query parameter except `?mc` is dropped before any module reads one, which covers test mode, captures, place and day jumps, the shell QA screens, the map's dev view, the chibi, cast and look switches; and the feedback window (F8) is never loaded.
 - `game3d/js/dev.js`: `DEV` is false (the title's Days, `?debug=1`).
 - The `app://game` host is never a local host, so the scene viewer, diag reports and the plugin cache reloads (`game3d/js/plugins.js`) stay off by their own checks.
-- Left out of the file list: test mode, shell QA, the feedback window, the map dev view, the showcase, scene viewer and VRM test pages and their modules, tools, tests, QA and shots folders, and the scene viewer's own plugin.
+- Left out of the file list: test mode, shell QA, the feedback window, the map dev view, the showcase and scene viewer pages and their modules, tools, tests, QA and shots folders, and the scene viewer's own plugin.
 - In the shell: DevTools off, the remote debugging, inspect and js-flags switches make the app exit, no menu (so no reload or DevTools accelerators), navigation and new windows locked to `app://game`, no network at all, permissions limited to fullscreen, pointer lock and the microphone for the speaking practice.
 
 ## Platforms

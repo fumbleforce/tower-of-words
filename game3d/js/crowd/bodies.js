@@ -1,22 +1,19 @@
-// Shared crowd roles and clothing variants. Review crowd-everyday-2 selects the
-// casual woman, older man and apron worker. Other generic roles use the switchable
-// chibi bodies. Each body shares meshes, textures and clips across its actors.
+// Shared crowd roles and clothing variants on the approved native bodies (crowd/approved-models.js): Review
+// crowd-pilot-5 selects the office pair A and B, crowd-everyday-2 the casual woman, older man and apron worker. Each
+// body shares meshes, textures and clips across its actors.
 //
 //   generic(base, i, { proxy, height, tint, into })   a person, variant i of a base (or these colours); proxy: parts the
 //                                         scenes can hang props on and move
 //   crowdBody(kind, i)                    a crowd body for crowd/looks.js (office | casual | elder | sport)
 //   hold(m, obj, at, bone)                obj on a bone, lined up with the body as it stands now
 import * as THREE from 'three';
-import { CHIBI_ON, chibiFiles, chibiFrom } from './chibi.js';
-import { meshyPerson } from './cast3d.js';
-import { PEOPLE } from './cast.js';
-import { S as CODE } from './train/people.js';
-import { approvedCrowd, prepareApprovedCrowd } from './crowd/approved-models.js';
-import { EVERYDAY_ROLES } from './crowd/roles.js';
-export { EVERYDAY_ROLES } from './crowd/roles.js';
+import { S as CODE } from '../train/people.js';
+import { approvedCrowd, prepareApprovedCrowd } from './approved-models.js';
+import { EVERYDAY_ROLES } from './roles.js';
+export { EVERYDAY_ROLES } from './roles.js';
 
-// base: standing height (tools/characters/chibi-bake.mjs has the same) and the colours each region comes in, the
-// first as made (null). The suit's trousers go with its jacket.
+// base: standing height and the colours each region comes in, the first as made (null). The suit's trousers go with
+// its jacket.
 export const GEN = {
   suit: {
     h: 1.1,
@@ -101,7 +98,7 @@ export function roleBody(role, i = 0, opt = {}) {
   }
   if (!native) return null;
   const m = opt.into ? Object.defineProperties(opt.into, Object.getOwnPropertyDescriptors(native)) : native;
-  Object.assign(m, { chibi: true, role, ph: i * 1.37 });
+  Object.assign(m, { crowdRole: true, role, ph: i * 1.37 });
   if (opt.proxy) proxyParts(m);
   return m;
 }
@@ -123,15 +120,6 @@ export function variant(base, i) {
   const top = g.top[t];
   return { hair: g.hair[h], top, bottom: g.bottom === 'top' ? top : g.bottom[b] };
 }
-
-export const GEN_ON = CHIBI_ON;
-const PRE = {};
-if (GEN_ON)
-  await Promise.all(
-    Object.keys(GEN).map(async (b) => {
-      PRE[b] = await chibiFiles('gen-' + b).catch((e) => console.warn('generic chibi', b, e) ?? null);
-    }),
-  );
 
 // scratch for the per-frame arm update (no allocation a frame: the garbage collector's pauses showed as hitches)
 const _v = new THREE.Vector3(),
@@ -226,28 +214,12 @@ export function proxyParts(m) {
   m.update(0);
 }
 
-// variant i of a base, as a person; null when its files didn't load
-// (opt.into: an existing person object that becomes this body, keeping its other fields: chibi-passengers.js)
+// variant i of a base, as a person; null when its body didn't load
+// (opt.into: an existing person object that becomes this body, keeping its other fields)
 export function generic(base, i = 0, opt = {}) {
-  if (GEN[base]) {
-    const native = roleBody(base, i, { ...opt, tint: opt.tint || variant(base, i) });
-    if (native) {
-      native.base = base;
-      return native;
-    }
-  }
-  const f = PRE[base];
-  if (!f) return null;
-  const tint = opt.tint || variant(base, i);
-  const a = chibiFrom(f, { tint, height: opt.height || GEN[base].h });
-  const m = meshyPerson(opt.into ? Object.defineProperties(opt.into, Object.getOwnPropertyDescriptors(a)) : a);
-  Object.assign(m, {
-    chibi: true,
-    base,
-    hairHex: tint.hair || f.regions.hair?.hex,
-  });
-  m.ph ??= i * 1.37;
-  if (opt.proxy) proxyParts(m);
+  if (!GEN[base]) return null;
+  const m = roleBody(base, i, { ...opt, tint: opt.tint || variant(base, i) });
+  if (m) m.base = base;
   return m;
 }
 
@@ -255,24 +227,7 @@ export function generic(base, i = 0, opt = {}) {
 export function crowdBody(kind, i) {
   const list = KIND[kind] || KIND.casual;
   const base = list[((i % list.length) + list.length) % list.length];
-  const native = roleBody(kind, i, { tint: variant(base, i) });
-  if (native) {
-    native.base = base;
-    return native;
-  }
-  return GEN_ON ? generic(base, i) : null;
-}
-
-// The background office workers (the gate's, the lift's Sales pair, the canteen's): every third a woman, as the
-// code-built ones (cast.js PEOPLE.worker), each a little taller or shorter
-export function worker(i = 0) {
-  const base = i % 3 === 1 ? ['blouse', 'cardigan'][(i >> 2) % 2] : ['suit', 'shirt'][(i >> 1) % 2];
-  return generic(base, i, {
-    proxy: true,
-    height: GEN[base].h * (0.97 + ((i * 37) % 7) / 100),
-  });
-}
-if (GEN_ON) {
-  const code = PEOPLE.worker;
-  PEOPLE.worker = (i = 0) => worker(i) || code(i);
+  const m = roleBody(kind, i, { tint: variant(base, i) });
+  if (m) m.base = base;
+  return m;
 }

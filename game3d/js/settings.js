@@ -39,7 +39,6 @@ export const DEFAULTS = {
   quality: 'auto', // 'auto' | 'low' | 'medium' | 'high' (post.js reads the tier; see qualityTier())
   frameCap: 'auto', // 'auto' | '30' | '60' | 'off': the most frames a second (see frameCap(), perf/view.js)
   surfaces: true, // Surface detail: patterns in floors, walls, fabric and metal (look/procedural.js)
-  chibi: false, // the Meshy chibis, from the next load (chibi.js; ?chibi=1 forces them). Off: Jørgen dropped the look, 2026-10-04
   reduceMotion: reduceDefault,
   cameraMode: 'overview', // desktop only: 'overview' | 'follow' (approved camera-plan-1 preset 1c)
   keySay: 'KeyQ',
@@ -59,14 +58,11 @@ export const CPS = { slow: 28, normal: 55, fast: 110, instant: 0 };
 export const AUTO_WAIT = { slow: [1800, 70], normal: [1300, 45], fast: [800, 28] };
 
 // One-time changes to saved settings, in order; v is the version they were saved at (missing = 0).
-//   1: the chibi cast became the default look (Jørgen, 2026-10-03), so a saved chibi: false from the old default
-//      is turned on once; turning it off in Settings afterwards sticks.
-//   2: the chibi look was dropped (Jørgen, 2026-10-04: "too creepy looking"), so it is turned off once.
-const VERSION = 2;
+//   1, 2: the chibi look's switch, on and then off (2026-10-03 and 10-04).
+//   3: the chibi look was removed, and its saved switch with it.
+const VERSION = 3;
 function migrate(s) {
-  const v = s.v || 0;
-  if (v < 1) s.chibi = true;
-  if (v < 2) s.chibi = false;
+  delete s.chibi;
   s.v = VERSION;
   return s;
 }

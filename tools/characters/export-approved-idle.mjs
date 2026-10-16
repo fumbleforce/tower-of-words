@@ -47,7 +47,7 @@ const results = await withBrowserJob('export-approved-idle', async (browser) => 
       const shared = (name) =>
         /^mixamorig/.test(name) ? map[name.replace(/^mixamorig:?/, '')] || name.replace(/^mixamorig:?/, '') : name;
       const out = {};
-      for (const id of onlyExtra ? extraIds : ['eric', 'mio', ...extraIds]) {
+      for (const id of onlyExtra ? extraIds : ['eric', ...extraIds]) {
         if (!lib.src[id])
           lib.src[id] = await loadSource(
             id,
@@ -59,8 +59,8 @@ const results = await withBrowserJob('export-approved-idle', async (browser) => 
           );
         const host = lib.src[id],
           ref = lib.src[lib.reference];
-        const nativeCast = !['eric', 'mio'].includes(id);
-        // A chibi's head_end position follows its skull shape, not its gaze.
+        const nativeCast = id !== 'eric';
+        // A Meshy cast member's head_end position follows its skull shape, not its gaze.
         // Keep the source face's forward orientation while retargeting limb axes.
         if (nativeCast) for (const name of ['Head', 'head_end', 'headfront']) host.B[name].copy(ref.B[name]);
         const { rig, bones } = makeRig(host, ref);
@@ -77,7 +77,7 @@ const results = await withBrowserJob('export-approved-idle', async (browser) => 
         const mixer = new THREE.AnimationMixer(rig);
         mixer.clipAction(clip).play();
         const gltf = await new GLTFLoader().loadAsync(
-          base + (['eric', 'mio'].includes(id) ? `game3d/assets/${id}/walk.glb` : `${characterDir}${id}/walk.glb`),
+          base + (id === 'eric' ? `game3d/assets/${id}/walk.glb` : `${characterDir}${id}/walk.glb`),
         );
         const model = gltf.scene;
         model.updateMatrixWorld(true);

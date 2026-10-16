@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { sit, idle } from '../../cast.js';
 import { SEAT_Y } from '../../train/car.js';
-import { roleBody } from '../../chibi-crowd.js';
+import { roleBody } from '../../crowd/bodies.js';
 import { K } from '../../scenes/office.js';
 import { READER } from '../../scenes/research-room/plan.js';
 import { blob } from '../../engine.js';

@@ -16,7 +16,7 @@ import { TERRACE_TABLES as T, chairAt, chairBlock, terraceChair, STACKED_Y } fro
 import { flags } from '../narrative/state.js';
 import { route } from './route.js';
 import { hold, lean } from './eric-hold.js';
-import { generic } from '../chibi-crowd.js';
+import { generic } from '../crowd/bodies.js';
 
 // the story's flag once he has helped (story/plaza.js canteen_table): a plaza built later that evening starts from it
 const HELPED = 'evening_canteen_helped';

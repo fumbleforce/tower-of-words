@@ -10,8 +10,7 @@ import { createRenderer, blob, Q } from '../engine.js';
 import { makePost } from '../post.js';
 import { RoomCam } from '../cam.js';
 import { liveScreens } from '../props.js';
-import { loadMio } from '../mio.js';
-import { loadEric } from '../avatar.js';
+import { loadEric, mioBody } from '../avatar.js';
 import { buildRoom, R, WIN, GRADE, SPOTS } from './room.js';
 import { buildDecals } from './decals.js';
 import { trimRoom } from './trim.js';
@@ -377,7 +376,7 @@ window.__bench = (n = 60) => {
 };
 
 async function boot() {
-  [eric, mio] = await Promise.all([loadEric(), loadMio({ height: 1.12 })]);
+  [eric, mio] = await Promise.all([loadEric(), mioBody()]);
   for (const c of [eric, mio]) {
     c.setState?.('idle');
     c.update?.(0.6);

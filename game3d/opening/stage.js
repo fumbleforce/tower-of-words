@@ -5,7 +5,7 @@
 import * as THREE from 'three';
 import { loadMonorail, monorailParts } from '../js/train/models.js';
 import { buildCar, buildBellows, LX, T, LZ, WIN, SEAT_Y } from '../js/train/car.js';
-import { playerBody, mioBody } from '../js/chibi.js';
+import { playerBody, mioBody } from '../js/avatar.js';
 import { SUN, SKY_UNIFORMS, buildSky, buildSea } from './sky.js';
 import { buildIsland, ANIME_ON, ANIME_PERIOD } from './island.js';
 import { applyLook } from '../js/look/index.js';
@@ -153,7 +153,7 @@ export async function buildStage(renderer, onProgress = null) {
     await Promise.all(
       list.map(async ([key, car, x]) => {
         try {
-          const p = key === 'eric' ? await playerBody() : await mioBody(); // the bodies the game boots with (chibi.js)
+          const p = key === 'eric' ? await playerBody() : await mioBody(); // the bodies the game boots with (avatar.js)
           p.sitAt(x, SEAT_Y, -(LZ - 0.24) + 0.02, 0);
           // Mio on her phone (the game's phone layer and prop), stepped until the pose is fully in
           if (key === 'mio' && p.phone) {

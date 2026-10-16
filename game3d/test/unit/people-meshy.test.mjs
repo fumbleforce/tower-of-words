@@ -11,7 +11,6 @@ import { parse } from 'espree';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const PEOPLE = 'game3d/js/train/people.js';
 const CALLERS = {
-  'game3d/js/avatar.js': 1,
   'game3d/js/cast.js': 12,
   'game3d/js/crowd/looks.js': 3,
   'game3d/js/train/people.js': 7,

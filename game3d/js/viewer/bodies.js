@@ -1,11 +1,7 @@
 // The character viewer's wrappers round the game's bodies, so the page can treat them alike:
 //   { key, label, kind, root, height, width, anims, play(name), update(dt) }
-// meshyBody: a person with clips (the chibis, the approved Eric and Mio models: avatar.js / mio.js);
-// codeBody: a code-built person (train/people.js chibi(), as cast.js PEOPLE makes them); catBody: Tama.
+// meshyBody: a person with clips (the cast's and the crowd's Meshy models: avatar.js); catBody: Tama.
 import * as THREE from 'three';
-import { sit as codeSit, walkPose } from '../train/people.js';
-import { idle as codeIdle } from '../cast.js';
-import { SEAT_Y } from '../train/car.js';
 import { makeCat } from '../creatures/cat.js';
 
 export const CAT_MOVES = ['sit', 'stand', 'sleep', 'eat', 'wash', 'walk'];
@@ -125,47 +121,6 @@ export function meshyBody(key, label, m, { height, phone = true }) {
     update(dt) {
       s.tm.step(dt);
       m.update(dt);
-    },
-  };
-}
-
-// a code-built person: idle breathing, train/people.js walkPose (quicker for a run; on the spot, so nothing moves
-// under it), and its sit pose on a stool
-export function codeBody(key, label, r) {
-  const s = shell(r.root);
-  const height = new THREE.Box3().setFromObject(r.root).getSize(new THREE.Vector3()).y;
-  let now = 'idle',
-    t = 0,
-    ph = 0,
-    amt = 0;
-  return {
-    key,
-    label,
-    kind: 'person',
-    root: s.holder,
-    height,
-    width: 0.78,
-    anims: ['idle', 'walk', 'run', 'sit'],
-    play(name) {
-      now = name;
-      s.seat(0);
-      r.seated = false;
-      r.root.position.set(0, 0, 0);
-      for (const l of [...r.legs, ...r.knees, ...r.arms]) l.rotation.set(0, 0, 0);
-      if (name !== 'sit') return;
-      codeSit(r); // seated for the train's seat (SEAT_Y): moved down so the feet are on the floor
-      const feet = lowest(r.root);
-      r.root.position.y -= feet;
-      s.seat(SEAT_Y - feet);
-    },
-    update(dt) {
-      t += dt;
-      if (now === 'sit') return codeIdle(r, t);
-      const moving = now === 'walk' || now === 'run';
-      amt += ((moving ? 1 : 0) - amt) * Math.min(1, dt * 10);
-      if (moving) ph += dt * 9.5 * (now === 'run' ? 1.5 : 1); // as avatar.js makeAvatar walks
-      walkPose(r, ph, amt);
-      if (amt < 0.02) codeIdle(r, t);
     },
   };
 }

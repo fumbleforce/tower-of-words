@@ -66,7 +66,7 @@ The check reads the code only to prove it matches the registry; nothing decides 
 - Both flavors: game3d/build.json's modules, the page shell (index.html, css, vendor, the opening page and its film, the minigames), and the public live units without `dev`.
 - Adult adds the local-only units without `dev` (plugins, voice clips, pictures, models) and public units marked `flavor: "adult"`.
 - Vanilla has no local-only file at all and no `flavor: "adult"` unit, and its dest paths must pass a word scan (adult, private, reward, nsfw, skimpy, discreet, explicit). No public asset serves only the optional content today, so no unit is marked; the private-mode hooks in the game code (js/plugins.js and the settings row) are code, and stripping them is #423.
-- Never in either: attempts, raw files, rounds, reviews, docs, tools, tests, QA, shots, dev pages (viewer.html, vrm-test.html, showcase.html), `dev` units (the scene viewer plugins among them) and the player's own folder.
+- Never in either: attempts, raw files, rounds, reviews, docs, tools, tests, QA, shots, dev pages (viewer.html, showcase.html), `dev` units (the scene viewer plugins among them) and the player's own folder.
 
 ## Local-only content
 

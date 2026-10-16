@@ -41,7 +41,7 @@ import { snapshotZones, restoreZones, suppressArrivalZones } from '../gameplay/z
 import { loadPlantModels } from '../scenes/outdoor/plant-models.js';
 import { loadStationModel, STATION_PLACES } from '../scenes/station-model.js';
 import { dressVegetation } from '../scenes/diorama/vegetation.js';
-import { preparePlacePeople } from '../chibi-crowd.js';
+import { preparePlacePeople } from '../crowd/bodies.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 // places the draw-call pass (js/perf/batch.js) runs on

@@ -6,7 +6,7 @@ import { chibi, SKINS, S as PROP_SCALE } from '../train/people.js';
 import { hull } from '../train/hull.js';
 import { PEOPLE, HK } from '../cast.js';
 import { K } from '../scenes/office.js';
-import { crowdBody, hold, boneAt } from '../chibi-crowd.js';
+import { crowdBody, hold, boneAt } from './bodies.js';
 import { approvedCrowd } from './approved-models.js';
 import { bagPose } from './bag-pose.js';
 
@@ -183,7 +183,7 @@ function palmAt(r) {
 }
 // A bag's parts share one material (vertex colours), so they draw as one mesh: a carried prop on a hand bone draws
 // on its own every frame, and twice on the desktop (its AO pass), #374. The parts stay in the bag, hidden, as the
-// carry checks read them (children[0] the body, children[1] the handle; tools/crowd-bag-check.mjs).
+// carry checks read them (children[0] the body, children[1] the handle).
 function oneMesh(bag) {
   const parts = bag.children.filter((o) => o.isMesh && o.material === mat);
   if (parts.length < 2) return;

@@ -12,7 +12,7 @@
 //              the held view shows the book's page and the printout side by side
 // Every state is kept in snapshot()/restore(), so Continue and a restarted scene put the props back.
 import * as THREE from 'three';
-import { chibiPassengers } from '../chibi-passengers.js';
+import { nativePassengers } from '../crowd/passengers.js';
 import { reminderScreen, bookPage, printoutSheet } from './held-screens.js';
 import { guitarVideo } from './screen-scenes.js';
 import { shopBag } from './shop-bag.js';
@@ -26,7 +26,7 @@ const texOf = (c) => {
   t.colorSpace = THREE.SRGBColorSpace;
   return t;
 };
-// a phone or sheet held in a chibi's hand, facing where the raised arm points: in the arm's frame, forward is -y and
+// a phone or sheet held in a person's hand, facing where the raised arm points: in the arm's frame, forward is -y and
 // up is +z. landscape: the long side across.
 function inHand(arm, obj, { landscape = true, sheet = false, tilt = 0 } = {}) {
   const hold = new THREE.Group();
@@ -46,7 +46,7 @@ const armState = (a) => [a.rotation.x, a.rotation.y, a.rotation.z];
 
 // car: the car's root (props go in its frame, as the passengers do); nav: its walk grid (the bag on the floor blocks it)
 export function trainDiscoveries(game, { people, car, nav, SEAT_Y }) {
-  chibiPassengers(people); // with the chibi look: the passengers become generic chibis first, their props moved over
+  nativePassengers(people); // the passengers take their native bodies first, their props moved over
   const { music, kuroda, reader, bun } = people;
   const st = { music: 'lap', kuroda: 'off', cup: 'on', bag: 0, printout: 'away' };
   const tween = (dur, fn) => game.tween(dur, (k) => fn(ease(k)));

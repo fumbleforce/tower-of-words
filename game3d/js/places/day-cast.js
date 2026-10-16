@@ -8,8 +8,8 @@
 // the place's, home(id) puts them back where the place keeps them, and only the place registers them.
 //   dayCast(game, { root, K, ids, have }) -> { people, thing(id), adopt, put, seat, home, hide, hideAll, shown, update }
 import { PEOPLE, idle } from '../cast.js';
-import { roleBody } from '../chibi-crowd.js';
-import { smallSkin } from '../chibi-passengers.js';
+import { roleBody } from '../crowd/bodies.js';
+import { smallSkin } from '../crowd/passengers.js';
 import { blob } from '../engine.js';
 import { makeCat } from '../creatures/cat.js';
 import { benchSit, standPose } from '../crowd/motion.js';
@@ -57,7 +57,7 @@ export function dayCast(game, { root, K = 1, ids = [], have = {} }) {
       continue;
     }
     const r = (BODY[id] || PEOPLE[id])();
-    if (!r.meshy || r.chibi) r.root.scale.multiplyScalar(K); // chibis stand at the body they replace
+    if (!r.meshy || r.crowdRole) r.root.scale.multiplyScalar(K); // crowd bodies stand at the body they replace
     r.root.visible = false;
     root.add(r.root);
     r.blob = blob(0.55, 0.38);

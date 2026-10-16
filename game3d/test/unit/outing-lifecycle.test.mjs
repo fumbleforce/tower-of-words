@@ -19,7 +19,7 @@ const modules = {
   '/scenes/outdoor/plant-models.js': noop('loadPlantModels'),
   '/scenes/station-model.js': noop('loadStationModel') + 'export const STATION_PLACES=new Set();',
   '/scenes/diorama/vegetation.js': noop('dressVegetation'),
-  '/chibi-crowd.js': noop('preparePlacePeople'),
+  '/crowd/bodies.js': noop('preparePlacePeople'),
   '/travel/pins.js': 'export const PINS={};',
   '/look/index.js': noop('lookSteps'),
   '/perf/slice.js': noop('sliced', 'setUrgent', 'nextFrame'),

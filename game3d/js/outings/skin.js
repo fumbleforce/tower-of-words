@@ -1,6 +1,6 @@
 import { SRGBColorSpace } from 'three';
 import { loadSkin } from '../perf/skin-tex.js';
-import { CDIR, V } from '../mio.js';
+import { CDIR, V } from '../held-pose.js';
 
 // The coast already holds its full resident cast. Reuse the approved world-size skin for
 // the extra travelling person there; phone keeps its existing 1024 copy via loadSkin.
@@ -13,7 +13,7 @@ if (coast) {
 
 export function outingSkin(rig) {
   const maps = new Map();
-  if (coast && rig.meshy && !rig.chibi)
+  if (coast && rig.meshy && !rig.crowdRole)
     rig.root.traverse((object) => {
       for (const material of [object.material].flat()) if (material?.map) maps.set(material, material.map);
     });

@@ -64,8 +64,8 @@ function collect(roots, camera, overrides) {
   for (const root of roots)
     root.traverse((o) => {
       if (!(o.isMesh || o.isPoints || o.isLine || o.isSprite) || !o.material) return;
-      // every texture, whatever the layer: a chibi's lighter tier (js/chibi.js) waits on a shadow-only layer, its
-      // colour mask in the material's userData, until it is drawn
+      // every texture, whatever the layer, and a crowd body's colour mask in the material's userData, before it is
+      // drawn
       for (const m of [].concat(o.material)) {
         for (const v of Object.values(m)) if (v && v.isTexture) textures.add(v);
         const tint = m.userData?.tint;

@@ -2,7 +2,7 @@
 // first talk, sitting on the examination bed, out again; then two falls (places/clinic-fall.js sendToClinic): the
 // fade, waking on the bed with the nurse beside it, the wake-up's lines and choice, and the second time's shorter one.
 //   node game3d/tools/clinic-check.mjs [width]     screenshots in game3d/shots/clinic/<width>-*.png
-// Q='&chibi=1' adds to the URL; STUB_MIO=1 lets a checkout without the Meshy bodies boot (below).
+// Q='&...' adds to the URL.
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import { withBrowserJob, gpuWaitOptions } from '../../tools/lib/browser-job.mjs';
@@ -22,17 +22,6 @@ await withBrowserJob(
     const errors = [],
       lines = [];
     page.on('pageerror', (e) => errors.push(e.message));
-    // STUB_MIO=1: a checkout without the Meshy bodies can't load Mio's; she gets the code-built avatar (as Eric
-    // does), served only to this page, so the clinic can still be checked. Mio plays no part in it.
-    if (process.env.STUB_MIO)
-      await page.route(/\/js\/chibi\.js/, async (route) => {
-        const res = await route.fetch(),
-          body = (await res.text()).replace(
-            "return CHIBI_ON ? loadChibi('mio').catch(fallback(mio)) : mio();",
-            "return (CHIBI_ON ? loadChibi('mio').catch(fallback(mio)) : mio()).catch(() => import('./avatar.js').then((m) => m.makeAvatar()));",
-          );
-        await route.fulfill({ response: res, body });
-      });
     await page.addInitScript(() =>
       globalThis.localStorage.setItem(
         'amakawa-settings',

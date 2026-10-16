@@ -14,7 +14,6 @@ const repo = (p) => new URL('../../' + p, import.meta.url).href;
 export async function buildAsset(view) {
   switch (view.type) {
     case 'meshy': return figure(await meshy(view), view);
-    case 'mio': return figure(await (await mod('mio.js')).loadMio({ height: view.height || 1.12 }), view);
     case 'glb': return glb(view);
     case 'chibi': return chibi(view);
     case 'piece': return (await import('./kit-view.js')).buildPiece(view);

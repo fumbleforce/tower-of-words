@@ -10,10 +10,10 @@ import { execFileSync } from 'node:child_process';
 // on the GPU), the opening (a page of its own in a frame over the title) and the side pages.
 const NO_PLACE = [
   /^game3d\/(test|shots|qa|design|audio|opening)\//,
-  /^game3d\/js\/(showcase|viewer|vrm)\//,
+  /^game3d\/js\/(showcase|viewer)\//,
   /^game3d\/tools\/(?!perf\/)/,
   /\.md$/i,
-  /^game3d\/(showcase|viewer|vrm-test)\.html$/,
+  /^game3d\/(showcase|viewer)\.html$/,
 ];
 // Outside game3d/, only the budget tool's own helpers and the npm packages (Playwright) matter.
 const ALL_OUTSIDE = /^(package(-lock)?\.json|tools\/lib\/(browser-job|browser-gpu-slots|static-server|build-stamp|place-source)\.mjs)$/;

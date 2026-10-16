@@ -38,7 +38,7 @@ import { makeCat } from '../creatures/cat.js';
 import { moveTrainCat } from './train-cat.js';
 import { PEOPLE } from '../cast.js';
 import { inSeat, dozing } from '../cast3d.js';
-import { prepareTrainPassengers } from '../chibi-passengers.js';
+import { prepareTrainPassengers } from '../crowd/passengers.js';
 import { Nav, blob } from '../engine.js';
 import { ui, sfx } from '../ui.js';
 import { walkPerson, stepPeople, lookAt } from '../story.js';
@@ -1612,7 +1612,7 @@ export async function trainPlace(game) {
       m.sitAt(2.1, SEAT_Y, -(LZ - 0.24) + 0.02, 0);
       m.seated = true;
       car.root.attach(laptop);
-      laptop.position.set(2.1, SEAT_Y + (m.chibi ? 0.1 : 0.2), -(LZ - 0.24) + 0.3);
+      laptop.position.set(2.1, SEAT_Y + 0.2, -(LZ - 0.24) + 0.3);
       laptop.rotation.set(0, 0, 0);
       laptop.seatMio(m);
     },

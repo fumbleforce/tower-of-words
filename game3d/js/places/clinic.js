@@ -13,7 +13,7 @@ import { roomView } from './room-view.js';
 import { canteenSave } from './canteen-state.js';
 import { walkIn, walkOut } from './edge-walk.js';
 import { route } from './route.js';
-import { generic } from '../chibi-crowd.js';
+import { generic } from '../crowd/bodies.js';
 import { PEOPLE, idle } from '../cast.js';
 import { walkPerson, stepPeople } from '../story.js';
 import { blob } from '../engine.js';
@@ -27,7 +27,7 @@ export function clinicPlace(game) {
     cam = new RoomCam({ elev: 50, yaw: 0.15, fov: 32 }),
     floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const nurse = generic('apron', 31, { proxy: true, tint: { top: TOP } }) || PEOPLE.worker(31);
-  if (!nurse.chibi && nurse.torso)
+  if (!nurse.crowdRole && nurse.torso)
     nurse.torso.add(rbox(0.25, 0.3, 0.02, TOP, { y: -0.15, z: 0.105, r: 0.008, seg: 1 }));
   nurse.root.scale.multiplyScalar(K);
   const shadow = blob(0.35, 0.25);

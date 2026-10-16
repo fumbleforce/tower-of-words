@@ -1,13 +1,6 @@
 {
   "defaultLines": 400,
   "exceptions": {
-    "game3d/js/avatar.js": {
-      "lines": 475,
-      "bytes": 15518,
-      "owner": "codex-tui",
-      "review": "C-0071; 2026-10-03 C-0384 loadMeshy split into the async load and a synchronous meshyFrom, so one set of chibi files makes several people (chibi.js); 2026-10-03 C-0402 the stride measurement and clip actions moved to movement/gait.js; C-0404 meshyFrom takes the height chibi.js measured once (a skinned box per copy stalled phones); 2026-10-05 C-0441 meshyFiles split out of loadMeshy, so cast3d.js makes a copy of Kuro, Aoi and Emi for each place; 2026-10-05 #240 sitAt goes straight into the seated frame (movement/gait.js holdNow); 2026-10-05 seat height (feedback 2026-10-05_192459): sitAt puts the measured underside on the seat top (movement/sit-height.js); X-0747 optional pool-owned root retains actor identity, exact byte ceiling lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered; 2026-10-09 #367 the material cache moved to kit/core/mat.js, ceiling lowered; 2026-10-09 #373 the skin loads through perf/skin-tex.js, one import line",
-      "reason": "Existing avatar loading, rig mapping and animation playback; keep the ceiling until the character pipeline split."
-    },
     "game3d/js/cast.js": {
       "lines": 424,
       "bytes": 12106,
@@ -23,8 +16,8 @@
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
-      "lines": 520,
-      "bytes": 18771,
+      "lines": 513,
+      "bytes": 18538,
       "owner": "codex-tui",
       "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line each for the dorms, plaza and dorm_court place factories; existing responsibility unchanged; 2026-09-30 game.overrideMaterials for the shader warm-up (notes/PERF.md); 2026-09-30 one step() line for the look/cue layers over the idles (C-0171); C-0210 close-only things lose close calls for the target (same line); 2026-10-01 issue #137: size passed to the place lifecycle (one line); 2026-10-02 issue #173: one import line for the shotengai place factory; 2026-10-02 issue #173: one import line for the east lane place factory (the gate and forecourt factories imported under their place names, so the registry stays on one line); 2026-10-02 issue #173: one import line for the east coast place factory; 2026-10-02 issue #173: one import line for the sports place factory; 2026-10-02 issue #173: one import line for the office quarter place factory, and the place registry one name a line (it no longer fits on one; the registration check needs plain keys); 2026-10-02 issue #173: one import line and one registry line for the harbour place factory; 2026-10-02 issue #173: one import line and one registry line for the works place factory; 2026-10-03 C-0378 day 2: Continue moved out to continue.js (ceiling lowered); ?day=N boot; 2026-10-04 C-0413: the per-frame target scan moved out to gameplay/targeting.js (ceiling lowered); 2026-10-04 C-0429: one import and one boot line for the local scene viewer hook (plugins.js installViewer); 2026-10-04 C-0439: hold to steer, one import, one install and two call lines (movement/steer.js); 2026-10-05 #227: one import line and one registry line for the pool deck place factory; 2026-10-05 #227: the same for the gym corner, the dorm common room and the karaoke desk and booth; 2026-10-05 #251: one import line and the Continue line that reloads into a save of another protagonist (mc.js); 2026-10-05 setSitLift imported from movement/sit-height.js (seat height fix); 2026-10-05 feedback 2026-10-05_224914: beat's closeTalk passes sceneOver, so the next scene's reply list never reopens the last scene's line and portrait (same line); 2026-10-06 #261 the map: one import and one install line for the minimap, the tick skips drawing while the map is open, no hurry from map taps (ui/minimap.js); 2026-10-06 #293 HUD composition and clock markup/update extracted into ui/hud.js and clock-button.js; ceilings lowered; 2026-10-06 #265 pointer picking extracted to gameplay/pointer-input.js for camera input ownership; ceilings lowered; 2026-10-07 #306 recovery dialog DOM extracted to ui/recovery-notice.js; ceilings lowered; X0707 extracts unchanged place constructor imports/table to places/factories.js, reducing the ceiling; 2026-10-08 #206: entry-zone dispatch and place-save snapshot extracted; ceilings lowered; 2026-10-10 #422: the save goes through storage.js (ceiling lowered); 2026-10-10 whole-target picking moved to gameplay/pick-volumes.js (ceiling lowered); 2026-10-11 the frame clock moved to movement/shared.js frameDt (ceiling lowered); 2026-10-12 jumping: one import, the player's blob kept as game.player.blob for the jump's shadow, one install and one step line (movement/jump-input.js, jump.js); 2026-10-14 #568: skip player physics at the title in the existing step line; 2026-10-14 #571: five-line guard skips hidden scene marker/control presentation while preserving clocks",
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
@@ -35,13 +28,6 @@
       "owner": "codex-tui",
       "review": "C-0089; 2026-10-03 C-0378 day 2: the title's Continue card names a later day; C-0401 the title's Day 2 entry (its code in ui/title-day2.js); 2026-10-04 C-0411 the Settings panel moved out to ui/settings-view.js (ceiling lowered); 2026-10-04 C-0432 saving and the saves screen moved out to saves/ (ceiling lowered); 2026-10-05 the title camera moved out to ui/title-camera.js (ceiling lowered); 2026-10-05 #229 day 3: the place's day-3 bodies, hooks and setup registered (places/day3/), a few lines each; 2026-10-06 #261: openLayer and closeLayer on the shell, so the map is a layer (one line); 2026-10-06 #265 captured mouse gets first Escape; header consolidated, ceilings lowered; 2026-10-09 #378 the title's Opening item (its code in ui/opening.js) and the shared el/$ helpers from ui/dom.js (ceiling lowered)",
       "reason": "Existing action menus and target selection; stage 4 interaction extraction is planned."
-    },
-    "game3d/js/mio.js": {
-      "lines": 821,
-      "bytes": 29299,
-      "owner": "codex-tui",
-      "review": "C-0071; 2026-10-05 #240 sitAt goes straight into the seated frame (movement/gait.js holdNow); 2026-10-09 #373 the skin loads through perf/skin-tex.js, one import line",
-      "reason": "Existing procedural character and animation implementation; changes require character review."
     },
     "game3d/js/perf/batch.js": {
       "lines": 1076,
@@ -73,7 +59,7 @@
     },
     "game3d/js/places/train.js": {
       "lines": 1733,
-      "bytes": 63609,
+      "bytes": 63591,
       "owner": "codex-tui",
       "review": "C-0076; C-0166 named sounds per door and machine; 2026-09-30 eleven wiring lines for the passengers' discovery props and hooks (train/discoveries.js, issue #89); 2026-10-01 issue #137: layout() split from fit() and the perfMovers list (notes/PERF.md); 2026-10-01 issue #145: car.cab in perfMovers, saved car parts restored only from the same build (notes/PERF.md); 2026-10-01 issue #144: the run in's speed moved to train/island.js with the island it shows; 2026-10-01 issue #156: WALK_X (the walkway out at the platform's south end) and the window's open-bay condition (#166); 2026-10-03 C-0378 day 2: the standing car, tester and walk in registered and installed (places/train-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 door_zone out on the platform, and the doorways (movement/doorways.js); 2026-10-05 C-0441 Aoi's Meshy model in her seat, and a walkRig way off the train for a Meshy passenger in alight; 2026-10-05 C-0444 the seat swaps moved to cast3d.js inSeat (Aoi, and Hamada dozing); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 Rei's Meshy model: her laptop and the cup she holds hang on `lap` (cast3d.js meshyPerson's anchor over a seated Meshy person's hips, or the code-built torso), one line; 2026-10-05 #229 day 3: the place's day-3 bodies, hooks and setup registered (places/day3/), a few lines each; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered; 2026-10-09 #355: two lines await the Blender-built monorail outside (train/models.js) before the car is built; 2026-10-09 #356: SUN_DIR imported from train/models.js (the car's reflections use it too), ceiling lowered; 2026-10-09 #361: setDoors calls train/doors.js slideLeaves, ceiling lowered; 2026-10-09 #353: two lines await the passengers' approved bodies (chibi-passengers.js) before they are built, and one line in alight standing a seated crowd body up before it walks off; 2026-10-14 #586: three wiring lines for the desktop shopping-bag camera helper (train/bun-camera.js); 2026-10-15 #574: awaitable arrival helper wiring, stop completion and leave cleanup (train/arrival.js); 2026-10-15 #574: phone-only arrival lesson framing helper wiring (train/arrival-view.js)",
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
@@ -119,13 +105,6 @@
       "owner": "codex-tui",
       "review": "C-0071",
       "reason": "Existing showcase decal geometry and material data; keep its visual composition intact."
-    },
-    "game3d/js/showcase/main.js": {
-      "lines": 401,
-      "bytes": 12974,
-      "owner": "codex-tui",
-      "review": "C-0071",
-      "reason": "Existing standalone showcase setup and controls; separate responsibility review before growth."
     },
     "game3d/js/showcase/trim.js": {
       "lines": 411,

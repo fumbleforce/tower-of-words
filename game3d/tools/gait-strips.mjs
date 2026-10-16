@@ -4,7 +4,7 @@
 // Writes game3d/shots/gait-strips/<tag>/: eric.png and mio.png (a close crop round each, frame by frame, left to
 // right) and crowd.png (the whole view at half size), plus the frames. Works on any checkout (BASE), so the same
 // strips can be made before and after a change.
-//   node game3d/tools/gait-strips.mjs [w h]     BASE=<worktree>/game3d QS=&chibi=0 TAG=before FRAMES=10 EVERY=110
+//   node game3d/tools/gait-strips.mjs [w h]     BASE=<worktree>/game3d TAG=before FRAMES=10 EVERY=110
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';

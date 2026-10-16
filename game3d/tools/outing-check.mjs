@@ -100,7 +100,7 @@ await withBrowserJob(`outing-${stem}`, async browser => {
   const state = () => page.evaluate(() => {
     const g = globalThis.__game, r = g.outing.actor.rig;
     const describe = rig => ({ position: rig.root.position.toArray(), yaw: rig.root.rotation.y, visible: rig.root.visible,
-      seated: !!rig.seated, seatOut: rig.seatOut, meshy: !!rig.meshy, chibi: !!rig.chibi, hips: !!rig.root.getObjectByName('Hips'),
+      seated: !!rig.seated, seatOut: rig.seatOut, meshy: !!rig.meshy, hips: !!rig.root.getObjectByName('Hips'),
       scale: rig.root.scale.toArray(), parent: rig.root.parent === g.place.space });
     const marker = g.markers.list.find(m => m.id === 'kenji'), anchor = r.root.position.clone();
     marker?.anchor(anchor);
@@ -249,8 +249,7 @@ await withBrowserJob(`outing-${stem}`, async browser => {
     await checkpoint('central-crossing-approach');
     if (!['story', 'storyarcade', 'arcadeview'].includes(mode)) assert.equal(await page.evaluate(() => globalThis.__game.outing.invite()), true, 'real visible scheduled Kenji must accept prototype invite');
     await page.waitForFunction(() => globalThis.__game.outing.actor.rig.meshy && globalThis.__game.player.meshy);
-    const invited = await checkpoint('invited');
-    assert.equal(invited.companion.chibi, false); assert.equal(invited.player.chibi, false);
+    await checkpoint('invited');
     if (mode === 'drinkcue') {
       await chat(); await finish([], 'Buy a drink at the convenience store.');
       await pick('Buy a drink at the convenience store.');

@@ -1,5 +1,5 @@
 import { PEOPLE } from '../../cast.js';
-import { roleBody } from '../../chibi-crowd.js';
+import { roleBody } from '../../crowd/bodies.js';
 import { blob } from '../../engine.js';
 import { sim } from '../../sim.js';
 import { flags } from '../../narrative/state.js';

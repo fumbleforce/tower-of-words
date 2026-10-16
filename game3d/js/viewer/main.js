@@ -1,23 +1,18 @@
 // The character viewer (viewer.html): pick people, islanders and Tama, side by side or one at a time, play their
-// animations, and turn, zoom and pan round them, in the code-built look or the chibi one (roster.js). Everything
-// shown is in the URL, so a view can be linked:
-//   ?c=mio,kuro,worker.2,tama     who (an islander's colours after the dot: worker, or gen-<base> in the chibi look)
+// animations, and turn, zoom and pan round them, as the game builds them (roster.js). Everything shown is in the URL,
+// so a view can be linked:
+//   ?c=mio,kuro,casual-1.2,tama   who (an islander's colours after the dot)
 //   &a=walk                       what the people do (idle walk run sit phone bow wave shrug nod)
 //   &cat=sleep                    what Tama does (sit stand sleep eat wash walk)
 //   &one=1                        one at a time
-//   &look=chibi                   the chibi look (the code-built people otherwise)
-// viewer.html loads this with ?chibi=0&chibitier=hi in the address for the moment chibi.js reads it (the finest mesh
-// at every distance; no preloading of the game's crowd), and this puts the address back.
 import { stage } from './stage.js';
-import { CAST, BASES, ANIMALS, MOVES, CAT_MOVES, LOOKS, make, parseKey, inLook, coloured, variants } from './roster.js';
+import { CAST, BASES, ANIMALS, MOVES, CAT_MOVES, make, parseKey, known, coloured, variants } from './roster.js';
 
 const Q0 = new URLSearchParams(location.search);
 const $ = (s) => document.querySelector(s);
 
-const look = LOOKS.includes(Q0.get('look')) ? Q0.get('look') : 'code';
 const state = {
-  look,
-  keys: (Q0.get('c') || 'eric,mio,kuro,tama').split(',').filter((k) => inLook(look, parseKey(k).id)),
+  keys: (Q0.get('c') || 'eric,mio,kuro,tama').split(',').filter((k) => known(parseKey(k).id)),
   a: MOVES.includes(Q0.get('a')) ? Q0.get('a') : 'idle',
   cat: CAT_MOVES.includes(Q0.get('cat')) ? Q0.get('cat') : 'sit',
   one: Q0.get('one') === '1',
@@ -32,7 +27,6 @@ function writeUrl() {
   if (state.a !== 'idle') q.set('a', state.a);
   if (state.cat !== 'sit') q.set('cat', state.cat);
   if (state.one) q.set('one', '1');
-  if (state.look !== 'code') q.set('look', state.look);
   history.replaceState(null, '', location.pathname + (q.size ? '?' + q.toString().replace(/%2C/g, ',') : ''));
 }
 writeUrl();
@@ -56,7 +50,7 @@ const chip = (parent, key, text, onClick) => {
 const whoChips = {};
 for (const [sel, list] of [
   ['#cast', CAST],
-  ['#islanders', [...BASES.chibi, ...BASES.code]],
+  ['#islanders', BASES],
   ['#animals', ANIMALS],
 ])
   for (const [id, name] of list) whoChips[id] = chip($(sel), id, name, () => pick(id));
@@ -89,22 +83,11 @@ $('#colours').onclick = () => {
   apply();
 };
 $('#reset').onclick = () => st.fit();
-for (const l of LOOKS)
-  $('#look-' + l).onclick = () => {
-    if (state.look === l) return;
-    // the islanders of one look aren't in the other: one of this look's stands in for them
-    const had = state.keys.some((k) => coloured(parseKey(k).id));
-    state.look = l;
-    state.keys = state.keys.filter((k) => inLook(l, parseKey(k).id));
-    const first = BASES[l][0][0];
-    if (had && !state.keys.some((k) => coloured(parseKey(k).id))) state.keys.push(first + '.' + (lastV[first] || 0));
-    apply();
-  };
 
 // ---- the stage ----
-const made = new Map(), // look|key -> Promise of the entity
-  ready = new Map(); // look|key -> the entity, once made
-const at = (key) => state.look + '|' + key;
+const made = new Map(), // key -> Promise of the entity
+  ready = new Map(); // key -> the entity, once made
+const at = (key) => key;
 const loading = new Set(),
   failed = new Set();
 function entity(key) {
@@ -113,7 +96,7 @@ function entity(key) {
     loading.add(k);
     made.set(
       k,
-      make(state.look, key)
+      make(key)
         .catch((e) => {
           console.error('viewer', key, e);
           failed.add(k);
@@ -147,7 +130,7 @@ async function apply() {
       labels.delete(e);
     }
   for (const k of ready.keys())
-    if (!state.keys.map(at).includes(k) && coloured(parseKey(k.split('|')[1]).id)) {
+    if (!state.keys.map(at).includes(k) && coloured(parseKey(k).id)) {
       made.delete(k);
       ready.delete(k);
     }
@@ -174,7 +157,6 @@ function paint() {
   const on = new Set(state.keys.map((k) => parseKey(k).id));
   for (const [id, b] of Object.entries(whoChips)) {
     b.setAttribute('aria-pressed', on.has(id));
-    b.hidden = !inLook(state.look, id);
     const key = state.keys.find((k) => parseKey(k).id === id);
     b.classList.toggle('busy', !!key && loading.has(at(key)));
     b.classList.toggle('bad', !!key && failed.has(at(key)));
@@ -190,7 +172,6 @@ function paint() {
   for (const [m, b] of Object.entries(catChips)) b.setAttribute('aria-pressed', m === state.cat);
   $('#cat-sec').hidden = !on.has('tama');
   $('#colours').hidden = ![...on].some(coloured);
-  for (const l of LOOKS) $('#look-' + l).setAttribute('aria-pressed', state.look === l);
   $('#mode-row').setAttribute('aria-pressed', !state.one);
   $('#mode-one').setAttribute('aria-pressed', state.one);
   $('#empty').hidden = state.keys.length > 0;

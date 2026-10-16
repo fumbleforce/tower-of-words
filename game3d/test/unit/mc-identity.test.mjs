@@ -52,7 +52,7 @@ test("the engine's own strings for Eric are what they were", () => {
   assert.deepEqual(PORTRAITS[eric.portrait.set], was.portrait.faces);
   assert.equal(eric.portrait.set, was.portrait.set);
   assert.deepEqual(eric.portrait.crop, was.portrait.crop);
-  assert.deepEqual({ dir: eric.model.id, height: eric.model.height, chibi: eric.model.chibi }, was.model);
+  assert.deepEqual({ dir: eric.model.id, height: eric.model.height }, was.model);
   assert.equal(eric.voice.lines, was.lineVoice);
   for (const c of was.code) {
     const src = fs.readFileSync(path.join(root, c.file), 'utf8');

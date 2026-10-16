@@ -1,7 +1,7 @@
 // The selected office pair also fills office roles inside the station and lift.
 // Keep the old worker's gender selection and the scene's scripted arm poses.
 import { PEOPLE } from '../cast.js';
-import { proxyParts } from '../chibi-crowd.js';
+import { proxyParts } from './bodies.js';
 import { approvedCrowd } from './approved-models.js';
 import { blob } from '../engine.js';
 import { bridgeOfficePose } from './office-pose.js';

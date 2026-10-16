@@ -95,14 +95,11 @@ await withBrowserJob('mio-default-' + width, async (browser) => {
         fs.writeFileSync(process.env.SAVE_TRAIN, JSON.stringify(world, null, 2));
       }
       report.cases.push(info);
-      if (process.env.QS?.includes('mio=legacy')) assert.notEqual(info.id, 'mio2');
-      else {
-        assert.equal(info.id, 'mio2');
-        assert.equal(info.phoneTracks, 13);
-        if (place !== 'forecourt') {
-          assert.equal(info.contacts?.length, 2, 'both working wrists must be measured');
-          for (const contact of info.contacts) assert(contact.gap < 0.025, 'keyboard wrist gap ' + contact.gap);
-        }
+      assert.equal(info.id, 'mio2');
+      assert.equal(info.phoneTracks, 13);
+      if (place !== 'forecourt') {
+        assert.equal(info.contacts?.length, 2, 'both working wrists must be measured');
+        for (const contact of info.contacts) assert(contact.gap < 0.025, 'keyboard wrist gap ' + contact.gap);
       }
       if (place === 'office' || place === 'train') assert.equal(info.seated, true);
       await shot(place + '-arrival');

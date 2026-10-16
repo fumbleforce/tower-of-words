@@ -10,7 +10,7 @@
 // error, or when Eric leaves the frame at any moment of the walk in and the camera letting go (his feet and head,
 // sampled every frame for ARRIVE_MS after the new place is up; GUIDE: the player always sees Eric).
 // With the recorder on (?perf), it ends with each place's frame times, draw calls and triangles over the walk.
-//   node game3d/tools/loop-check.mjs [outdir] [w] [h]      BASE=<worktree>/game3d for a worktree; Q=0|1|2 the tier; QS=&chibi=0 adds to the query (code-built people);
+//   node game3d/tools/loop-check.mjs [outdir] [w] [h]      BASE=<worktree>/game3d for a worktree; Q=0|1|2 the tier; QS=&... adds to the query;
 // START=<place> loads that place and walks from the first leg out of it (a part of the loop, under its own time)
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import fs from 'node:fs';

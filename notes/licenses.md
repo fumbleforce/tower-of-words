@@ -25,14 +25,13 @@ Needs action (could become blockers):
 10. **Desktop shell does not exist yet** (no desktop/ folder). When it does: ship Electron's LICENSE and `LICENSES.chromium.html` inside the app, and `LICENSES.txt` from this audit.
 11. **Reference images.** Nothing shipped is recorded as derived from art/refs (searched the asset library's sources). The opening's earlier exterior tests (tools/opening/layers.py, wan_pilot.py) used art/refs/monorail-bay-ref3.png, and the Blender monorail used a reference from Jørgen. The docs say the final opening is the game's own 3D. Confirm no frame of the rendered film comes from those tests.
 
-Attribution needed in the release (all in notes/credits-vanilla.txt): three.js, three-vrm, Electron/Chromium notices, the three font families (OFL text), RDBT (credit required by the creator), Meshy (free-plan credit line), Qwen3-TTS, Irodori-TTS, Stable Audio 3, Google Lyria and SynthID note, YuE2 (only if kept).
+Attribution needed in the release (all in notes/credits-vanilla.txt): three.js, Electron/Chromium notices, the three font families (OFL text), RDBT (credit required by the creator), Meshy (free-plan credit line), Qwen3-TTS, Irodori-TTS, Stable Audio 3, Google Lyria and SynthID note, YuE2 (only if kept).
 
 ## Code
 
 | Source | Licence | Free / paid | Attribution | Verdict |
 |---|---|---|---|---|
 | three.js r186 and examples/jsm addons (game3d/vendor) | [MIT](https://github.com/mrdoob/three.js/blob/dev/LICENSE) | yes / yes | Copyright notice and licence text | OK |
-| @pixiv/three-vrm 3.5.5 (game3d/vendor/vrm, preview page only) | [MIT](https://github.com/pixiv/three-vrm/blob/dev/LICENSE) | yes / yes | Copyright pixiv Inc. in the licence text | OK (leave the preview page out of the app, or keep the notice) |
 | npm runtime dependencies | none: package.json has devDependencies only (eslint, madge, playwright, prettier) and none ship | n/a | none | OK |
 | Electron | [MIT](https://github.com/electron/electron/blob/main/LICENSE), bundles Chromium (BSD and others) and FFmpeg | yes / yes | Ship LICENSE and LICENSES.chromium.html | OK once the shell exists |
 | Game code written here | ours | n/a | none | OK |
@@ -74,12 +73,12 @@ Generation tools: ComfyUI on the local GPU. The Anima family (RDBT, One Obsessio
 
 | Source | Licence or terms | Free / paid | Attribution | Verdict |
 |---|---|---|---|---|
-| Meshy image-to-3D models (Eric, Mio, Kuro, Aoi, Emi, Mori, Kenji, the guard, Hamada, Rei, Carina, the two crowd models, the chibis, swimwear) and Meshy auto-rig | [Meshy help: commercial use](https://intercom.help/meshy/en/articles/16102098-can-i-use-meshy-assets-commercially). Paid plan: you own it, no attribution, provided inputs infringe nobody and the model was not published to Meshy Community. Free plan: CC BY 4.0, commercial use allowed, credit Meshy | yes / yes either way | Free plan: "Model created with Meshy." | Needs action: confirm plan (item 4) and that nothing went to the Community page |
+| Meshy image-to-3D models (Eric, Mio, Kuro, Aoi, Emi, Mori, Kenji, the guard, Hamada, Rei, Carina, the crowd models, swimwear) and Meshy auto-rig | [Meshy help: commercial use](https://intercom.help/meshy/en/articles/16102098-can-i-use-meshy-assets-commercially). Paid plan: you own it, no attribution, provided inputs infringe nobody and the model was not published to Meshy Community. Free plan: CC BY 4.0, commercial use allowed, credit Meshy | yes / yes either way | Free plan: "Model created with Meshy." | Needs action: confirm plan (item 4) and that nothing went to the Community page |
 | Meshy animation library clips (walk, run, sit, gestures) | Same as above (Meshy output) | yes / yes | Same | Needs action: same |
 | Our idles, gestures on the rig and sit/phone poses (`relaxed-idle-*.json`, rig-gestures.js) | ours | n/a | none | OK |
 | Code-built chibis, rooms, props, world kit | ours | n/a | none | OK |
 | Mixamo | Bone names (`mixamorig`) appear in the rigs because Meshy uses that naming; no Mixamo clip is recorded as imported | n/a | none | OK. If a clip turns out to be from Mixamo, Adobe's [Mixamo FAQ](https://helpx.adobe.com/creative-cloud/faq/mixamo-faq.html) allows commercial use in games |
-| pixiv VRM sample (art/parts, VRM test page) | Prototype only, never in the game | n/a | n/a | OK, keep out of the app |
+| pixiv VRM sample (art/parts, the removed VRM test page) | Prototype only, never in the game | n/a | n/a | OK, keep out of the app |
 | TRELLIS.2 / Hunyuan3D meshes | Tested as guides; rejected for shipping per GUIDE | n/a | n/a | OK, not shipped |
 
 ## Voice
