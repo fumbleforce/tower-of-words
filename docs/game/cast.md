@@ -1,6 +1,6 @@
 # Cast
 
-Every person and their id: the Everyone table, then one section per person with age, work, home, routine, who they know, how they talk and their approved look (hair, eyes, 3D colours). Then the names shown on screen, what each person likes (for gifts), which portrait faces each has, and people in the code but in no storyline. Last checked against the game on 2026-09-29.
+Every person and their id: the Everyone table, then one section per person with age, work, home, routine, who they know, how they talk and their approved look (hair, eyes, 3D colours). Then the names shown on screen, what each person likes (for gifts), which portrait faces each has, and people in the code but in no storyline. Last checked against the game on 2026-10-16.
 
 Elsewhere: which storylines each person is in is in each storyline's Cast line ([stories/](stories/)); where the game puts people at each time of day is in [places.md](places.md); how to write their lines is in game3d/story/VOICE.md, and their voice settings in game3d/story/VOICE-DIRECTION.md; art history and candidates are in the bible. The current requested character plans are under [Personal plots and bond milestones](#personal-plots-and-bond-milestones), marked to build. Older ideas in notes/walkthrough/ remain unapproved.
 
@@ -74,7 +74,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 - Routine: looks after B2's old servers in the machine room, where she also eats lunch because "it's quiet, and nobody talks to me there". Hates bowing; that's why she's on B2. Anything reported broken goes on her list.
 - Mio is an asocial gamer. She values her privacy and alone time. A few people are exceptions (Jørgen, 2026-10-09). She is dry, busy and low on energy. On the train she reluctantly gets Eric up to speed. She will not let a teammate embarrass B2 through lack of preparation. She calls him 外人 as she would say "the new guy". Mori corrects her to 外国の方.
 - Knows: Mori (likes him), Kenji (barred him from the machine room).
-- Look: approved portrait art/approved/mio/mio-after.webp. Hair dark green bordering on black, with mint-jade green underneath (#1ACC98, a cool blue-green, not lime), as in the portrait (Jørgen; colour sampled from the portrait 2026-10-10). Eyes light tan, not brown; every expression keeps her exact glasses. Skin pale; she doesn't sunbathe (Jørgen, 2026-10-02: "she should not have a tan, she doesnt sunbathe, pretty pale"). 3D: Jørgen's Meshy model; game colours hair #13292f, underside and streaks #20a081, hoodie sampled from the portrait (approved, "yes this is sweet", commit df8f2f7). A remake made the way Kuro, Aoi and Emi were (Jørgen, 2026-10-05: "her design is falling behind in quality, it is not as accurate as the others") waits for his pick in reviews/mio-meshy-2 and loads only with `?mio=meshy2`.
+- Look: approved portrait art/approved/mio/mio-after.webp. Hair dark green bordering on black, with mint-jade green underneath (#1ACC98, a cool blue-green, not lime), as in the portrait (Jørgen; colour sampled from the portrait 2026-10-10). Eyes light tan, not brown; every expression keeps her exact glasses. Skin pale; she doesn't sunbathe (Jørgen, 2026-10-02: "she should not have a tan, she doesnt sunbathe, pretty pale"). In the 3D world, the Meshy model mio-2 (reviews/mio-meshy-2, picked 2026-10-06), in the game by default. `?mio=legacy` loads the older body ([art-and-sound.md](art-and-sound.md#people-in-the-world)).
 
 ### Mr. Mori (`mori`)
 
@@ -82,7 +82,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 - Routine: makes the tea; has corn soup from a can every afternoon. Opened the B2 copier's repair request when he was new ([stories/copier.md](stories/copier.md)) and has said 動いて to it every morning since. Went to the Lillehammer Olympics in 1994 and does the ski jump with his hands.
 - Speaks polite Japanese only. His warmth shows in what he does: bows, tea, making room.
 - Knows: Mio (likes her; corrects her 外人 gently, the only time he interrupts).
-- Look: approved portrait mori-new-713 (reviews/npc-base-1): neatly combed grey hair, dark grey suit, navy tie, empty hands. Copies in art/approved/mori/. In the 3D world a chibi figure in code; his Meshy model (loads with `?cast3d=mori`) is parked (Jørgen, 2026-09-29, review mori-3d: "none of these").
+- Look: approved portrait mori-new-713 (reviews/npc-base-1): neatly combed grey hair, dark grey suit, navy tie, empty hands. Copies in art/approved/mori/. In the 3D world, the Meshy model mori-1 (reviews/mori-meshy-1, picked 2026-10-05), in the game ([art-and-sound.md](art-and-sound.md#people-in-the-world)).
 
 ### Kenji (`kenji`)
 
@@ -113,7 +113,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 - Lives on the island. Falls asleep on the monorail every time he comes back from the mainland, and is late through every gate. Apologises constantly and talks to machines like animals.
 - Speaks Japanese only.
 - Knows: the guard (owes him; the guard gets him through every morning).
-- Look: approved portrait hamada-new-743 (reviews/npc-base-1): thin, tired face, black hair going grey at the temples, navy suit, hands in his pockets. In the 3D world a chibi figure in code. "Hamada is fine" (Jørgen).
+- Look: approved portrait hamada-new-743 (reviews/npc-base-1): thin, tired face, black hair going grey at the temples, navy suit, hands in his pockets. In the 3D world, the Meshy model kuroda-1 (reviews/kuroda-meshy-1, picked 2026-10-05), in the game ([art-and-sound.md](art-and-sound.md#people-in-the-world)). "Hamada is fine" (Jørgen).
 
 ### Kuro (`kuro`)
 

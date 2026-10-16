@@ -19,7 +19,7 @@
    "negative": "glasses", "portrait": "art/approved/carina/carina-neutral.webp"
   },
   {
-   "id": "mio", "checked": "efb1e1f4", "cast_md": "mio", "name": "Mio", "gender": "female", "age": 30, "who": "woman", "skin": "pale skin",
+   "id": "mio", "checked": "30053091", "cast_md": "mio", "name": "Mio", "gender": "female", "age": 30, "who": "woman", "skin": "pale skin",
    "hair": "very dark green hair bordering on black in a messy loose bun with bangs, mint-jade green underneath (#1ACC98, a cool blue-green, not lime) showing at the ends and nape",
    "eyes": "light tan eyes", "glasses": "thin-framed taupe-grey glasses with clear lenses", "extra": "",
    "build": "slim with soft curves", "signature": "big headphones around her neck",
@@ -29,7 +29,7 @@
    "portrait": "art/approved/mio/mio-after.webp"
   },
   {
-   "id": "mori", "checked": "cf8c266e", "cast_md": "mori", "name": "Mr. Mori", "gender": "male", "age": 58, "who": "Japanese man", "skin": "",
+   "id": "mori", "checked": "26671c54", "cast_md": "mori", "name": "Mr. Mori", "gender": "male", "age": 58, "who": "Japanese man", "skin": "",
    "hair": "neatly combed grey hair", "eyes": "", "glasses": "", "extra": "a lined, kind face",
    "build": "slim", "signature": "", "outfit": "a dark grey suit, a white shirt and a navy tie",
    "short": "Mr. Mori, 58, neatly combed grey hair, dark grey suit",
@@ -58,7 +58,7 @@
    "negative": "text, letters", "portrait": "art/approved/ishibashi/guard-guard-ink-2001-neutral.webp", "aliases": ["Ishibashi"]
   },
   {
-   "id": "hamada", "checked": "bc2d4eb4", "cast_md": "kuroda", "name": "Mr. Hamada", "gender": "male", "age": 54, "who": "Japanese man", "skin": "",
+   "id": "hamada", "checked": "04e632be", "cast_md": "kuroda", "name": "Mr. Hamada", "gender": "male", "age": 54, "who": "Japanese man", "skin": "",
    "hair": "short black hair going grey at the temples", "eyes": "", "glasses": "", "extra": "a thin, tired face",
    "build": "thin", "signature": "", "outfit": "a navy suit and tie",
    "short": "Mr. Hamada, 54, thin tired face, black hair grey at the temples, navy suit",
