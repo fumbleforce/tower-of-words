@@ -4,7 +4,7 @@ import { migrateForecourtSave } from './places/forecourt-save.js';
 import { createPlaceLifecycle } from './places/lifecycle.js';
 import { GLOBAL_HOOKS } from './narrative/hooks.js';
 import { installInteractions } from './gameplay/interactions.js';
-import { outlineMeshes, meshesNear } from './gameplay/highlight.js';
+import { outlineMeshes, meshesNear, peopleRoots } from './gameplay/highlight.js';
 import { PLACE_FILES, NEXT } from './places/definitions.js';
 import { assertRegistered } from './narrative/registration.js';
 import * as THREE from 'three';
@@ -229,8 +229,7 @@ function nearOf(id, t) {
   const P = game.place,
     key = P.name + ':' + id;
   if (!nearCache.has(key)) {
-    const skip = new Set([game.player?.root, game.mioNpc?.root]);
-    for (const r of Object.values(P.people || {})) skip.add(r?.root);
+    const skip = new Set([game.player?.root, game.mioNpc?.root, ...peopleRoots(P)]);
     for (const x of Object.values(P.things || {})) skip.add(x?.obj);
     nearCache.set(key, meshesNear(P.space, t.anchor(new THREE.Vector3()), skip));
   }

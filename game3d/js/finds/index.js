@@ -137,6 +137,7 @@ export function* findSpotSteps(game, place) {
       label: 'Photo',
       kind: 'thing',
       verb: 'Pick up',
+      outline: () => [mesh], // its own card: the outline and the pick are the print, not the floor under it
       anchor: (v) => place.space.localToWorld(v.set(x, y + 0.5, z)),
       spot: () => stand,
       face: () => [x, z],

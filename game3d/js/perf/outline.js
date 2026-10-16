@@ -12,7 +12,7 @@ import * as THREE from 'three';
 import { OutlinePass as ThreeOutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 
 // the layer the selection is drawn on for the mask (render below); nothing else uses it
-const MASK_BIT = 1 << 30;
+export const MASK_BIT = 1 << 30;
 const box = new THREE.Box3(),
   v = new THREE.Vector3(),
   rect = new THREE.Box2();
@@ -110,7 +110,7 @@ export class OutlinePass extends ThreeOutlinePass {
     this._depthCam = crop;
     const draw = renderer.render,
       mask = this.prepareMaskMaterial;
-    const tagged = [];
+    const tagged = new Map(); // mesh -> its layers mask before this draw
     if (depth) {
       // The mask draws the selected meshes only. Instead of hiding every other object in the scene and showing it
       // again (two walks of the whole scene graph a frame), the selection goes on a layer of its own for that draw.
@@ -126,8 +126,10 @@ export class OutlinePass extends ThreeOutlinePass {
       const camMask = this.renderCamera.layers.mask;
       for (const o of this.selectedObjects)
         o.traverse((m) => {
-          if ((m.isMesh || m.isSprite) && m.layers.mask & camMask) {
-            tagged.push([m, m.layers.mask]);
+          // once per mesh, however often the selection repeats it: a second tag would store the first tag's bit, and the
+          // restore would leave the mesh on the mask layer for good (issue #579: a commuter lit up beside the card reader)
+          if ((m.isMesh || m.isSprite) && m.layers.mask & camMask && !tagged.has(m)) {
+            tagged.set(m, m.layers.mask);
             m.layers.mask |= MASK_BIT;
           }
         });

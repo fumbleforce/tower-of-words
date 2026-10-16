@@ -193,6 +193,7 @@ export async function lobbyPlace(game) {
     },
     reader_l: {
       ...PLACE_DETAILS.gate.things.reader_l,
+      outline: () => [w.readers[0]],
       anchor: v3(-0.93, 1.0, BZ),
       ...at(-0.93, BZ + 0.48, -0.93, BZ),
       act: () => readerTap(0),
@@ -200,6 +201,7 @@ export async function lobbyPlace(game) {
     },
     reader_r: {
       ...PLACE_DETAILS.gate.things.reader_r,
+      outline: () => [w.readers[1]],
       anchor: v3(0.93, 1.0, BZ),
       ...at(0.93, BZ + 0.48, 0.93, BZ),
       act: () => readerTap(1),

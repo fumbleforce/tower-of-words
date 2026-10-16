@@ -46,7 +46,7 @@ export function pickablesOf(game, id) {
     }
     let p = o;
     while (p && p !== root) p = p.parent;
-    if (p) out.push(o);
+    if (p && !out.includes(o)) out.push(o); // a root registered twice (the crowd and the background people) counts once
   }
   return out;
 }
