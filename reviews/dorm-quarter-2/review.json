@@ -1,0 +1,53 @@
+{
+ "title": "Dorm quarter, round 2: three layouts for the residential area",
+ "date": "2026-10-16",
+ "by": "claude-main (dorm-quarter-sketch)",
+ "status": "open",
+ "issue": 661,
+ "question": "Which layout should the dorm quarter be built on (A rows, B park, C street), or what should change?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/candidates/dorm-quarter-2/0-today.webp",
+   "caption": "Top-down plans drawn to scale from the island layout in the code (1 unit = 1.5 m), north up, sun from the south. Nothing is built. Panel 0 is today: Eric's window faces dorm 1e's wall 1.7 m away, dorm 5 and dorm 6 run north-south so their windows face east and west, and dorm 3 (9 storeys) stands 8.6 m in front of dorm 4's balconies. What all three options follow, from Japanese danchi and company-dorm planning (Japan Housing Corporation estates such as Tokiwadaira and Hibarigaoka): blocks in east-west rows with balconies south and open corridors and doors north; each gap at least the height of the block on its sunny side (H in the labels; real estates aim for 1.5 to 2 H), so balconies look at the next block's corridor side across a garden, never window to window; one way in from each neighbouring place (plaza and east lane by the plaza lane carried straight on, the shop street by the dorm row, the east coast at the sea terrace, the sports ground up a north-south walk); a main walk, then footpaths along each block's door side, then park walks; the shared buildings on the main walk where everyone passes; and a park as the heart. The north residence (the more generous block) stays on the quiet north edge, and dorm 2 stays south of the row but drops from 7 storeys to 5 so it doesn't shade Eric's block."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-2/mood-0-today-window.webp",
+   "caption": "Today, eye level from Eric's window in 203: the neighbour's wall and window, 1.7 m out."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-2/mood-a-rows-window.webp",
+   "caption": "Eye level from Eric's window in 203 in A and B (his block sits in the same place in both): south over the garden and the dorm row, the ramen shop's back on the left, dorm 2 on the right, the sea between them. Plain blockout boxes. In every option 203 looks out over open ground, so the room's window line about the blocked sky and its billing as the worst room in the dorm would need new words."
+  }
+ ],
+ "options": [
+  {
+   "id": "a",
+   "label": "a. Rows on a green spine",
+   "image": "art/candidates/dorm-quarter-2/a-rows.webp",
+   "images": [
+    "art/candidates/dorm-quarter-2/mood-a-rows-door.webp"
+   ],
+   "note": "A classic danchi. Three rows of five-storey blocks run east-west, balconies south, and a green spine runs north-south from the dorm row to the courts walk. The plaza lane carries straight on east as the main walk, lined with cherries. Eric's court opens onto it. The common room stands on the square where the walk meets the spine, and the park (26 × 25 m) fills one bay of the grid, with allotments behind the north row. Second picture: eye level from the hall doors, looking across the main walk at the next row's balconies 23 m away. Floor space is about 82% of today's blocks. What moves: Eric's block turns a quarter and moves about 10 m east, which means the court and room chunks (place, turn 90 to 180) and the last leg of the plaza lane; the court keeps its own plan. Dorm 1e, 3, 4, 5, 6 and the small dorm go, four new blocks replace them, and dorm 2 drops from 7 storeys to 5. The common room's door moves (the room inside stays as it is). East coast loses the inner court. Size: large. Phone, a rough estimate that I have not measured: if the court, the main walk and the park are walked as one place, about 5.0 to 5.5 s (the court is 4.5 s today)."
+  },
+  {
+   "id": "b",
+   "label": "b. Park at the heart",
+   "image": "art/candidates/dorm-quarter-2/b-park.webp",
+   "images": [
+    "art/candidates/dorm-quarter-2/mood-b-park-door.webp"
+   ],
+   "note": "One big park (71 × 24 m) in the middle: a loop walk round a big lawn (ball games, hanami, radio taiso), a cherry with a ring seat on the north-south axis, a play corner, a wisteria shelter, and the common room as a pavilion on the promenade. The plaza lane carries straight on east as the promenade along the park's south side. Eric's court and S-E's door open onto it; the north blocks' balconies look south over the park, 46 m away. Second picture: eye level from the hall doors, looking over the promenade into the park. Window view as A. Floor space is about 70% of today's. What moves: the same as A for Eric's block, the chunks, the lane and dorm 2, but only three new blocks, and the biggest new park. Size: large. Phone, a rough estimate that I have not measured: the biggest walked area, about 5.5 to 6.0 s, right at the limit, so the park's planting has to stay lean."
+  },
+  {
+   "id": "c",
+   "label": "c. A street to the sea",
+   "image": "art/candidates/dorm-quarter-2/c-street.webp",
+   "images": [
+    "art/candidates/dorm-quarter-2/mood-c-street-door.webp",
+    "art/candidates/dorm-quarter-2/mood-c-street-window.webp"
+   ],
+   "note": "One straight street, the plaza lane carried on east, ends in a sea park on the coast with a lookout. The sento, coin laundry and common room share one building at the gate, so everyone passes it. Eric's block is next to it, with a smaller court in front of just the hall. The north blocks are offset from each other so none stands straight in front of another, and a seven-storey sea block closes the park's north end. Pictures: eye level from the hall doors (street trees, the stepped blocks), then from 203's window, where dorm 2 stands 14 m in front. Floor space is about 67% of today's. What moves: everything in A, plus the laundry and sento come off Eric's block into the new shared building, so the court is rebuilt (its laundry and sento fronts, the bath doorway and the private bath scene's spot all move). Size: the largest. Phone, a rough estimate that I have not measured: court about 4.8 to 5.2 s; the sea park adds to whichever place walks it."
+  }
+ ]
+}
