@@ -6,11 +6,12 @@ this tool keeps them honest.
                               [--source review:<id>,commit:<sha>,...] [--next "the next concrete step"] [--detail "..."]
     python3 tools/work.py set <#> [--state running] [--owner codex] [--next "..."] [--source ...] [--title ...]
                               [--done-ref <commit or showcase:id>] [--note "why"]
-    python3 tools/work.py touch <#> [--next "..."] [--note "..."]    still on it: resets the stale clock
+    python3 tools/work.py touch <#> [--next "..."] [--note "..."]    still wanted: resets the triage clock
     python3 tools/work.py done <#> [--ref <commit>] [--note "..."]   closes it (drop: set <#> --state dropped --note why)
     python3 tools/work.py list [--state s] [--owner o] [--kind k] [--all]   (closed ones only with --all or --state)
     python3 tools/work.py show <#>                 the issue, its history and comments (Jørgen comments there)
     python3 tools/work.py stale [--brief]          what is stuck or out of sync; exits 1 when anything is
+    python3 tools/work.py triage [--days 7]        todo and parked issues untouched for 7+ days, oldest first
     python3 tools/work.py labels                   create the labels (once per repo)
 
 An issue: title = what gets done, in plain English. Labels `work`, `state:<todo|running|blocked|parked|
@@ -25,12 +26,17 @@ todo:TODO.md (lines of the lists this replaced, in git at 9391af4).
 One home per fact: a Review item holds Jørgen's question and answer, its issue holds the work (owner, state, next
 step, done commit). `python3 tools/review.py set-status <id> decided` opens the follow-up issue, quotes the decision
 once with a link, and stores the number in review.json as `issue`; a later decision or new feedback on that review
-comments on the issue and reopens it. `stale` (also printed by `tools/review.py list`, the answers hook and after
-each commit) flags: a decided review without an issue; a review that changed after its issue's last update; a closed
-issue whose review is open again; todo, running or blocked issues untouched for 12 h; a decided review whose issues
-are all still todo an hour after the decision; a waiting-jorgen issue with no open Review item (he only checks
-the Review queue). Parked issues are postponed ideas and are never flagged. The stale clock is the time this
-tool last changed the issue (`touch` resets it), so a comment alone doesn't hide a stall.
+comments on the issue and reopens it.
+
+`stale` (also printed by `tools/review.py list`, the answers hook and after each commit) lists only what is stuck or
+out of sync, so it can be empty: a running issue with no commit naming it (#N) for 24 h, counted from the newest such
+commit or else from when it went running (a progress note is not progress); a blocked issue with no reason (give one
+with `set <#> --state blocked --note "waiting on ..."`); a waiting-jorgen issue with no open Review item (he only
+checks the Review queue); a decided review with no issue; a closed issue whose review is open again; a review that
+changed after its issue was last updated. A plain todo is never stale, and neither is a parked idea.
+
+`triage` is the backlog sweep: todo and parked issues this tool hasn't changed for 7+ days, oldest first. For each,
+keep it (`set` a concrete --next and owner, which resets the clock), park it or drop it with a one-line --note.
 
 The repo is public: every title, body and comment is refused if it names private paths (island/private, reward
 scenes, manifest.user.json) or if tools/check/secrets.sh finds a secret in it.
@@ -53,11 +59,12 @@ BIBLE_URL = 'https://fumbleforce.github.io/tower-of-words/bible/'  # the public 
 OLD_LISTS = '9391af4'  # the commit that still has notes/production-requests.md and TODO.md's open lists
 CACHE = '/tmp/claude-1000/work-issues.json'
 CACHE_SECONDS = 60
-ACTIVE_HOURS, DECISION_HOURS = 12, 1
+RUNNING_HOURS, TRIAGE_DAYS = 24, 7
 
 KINDS = ('decision-followup', 'request', 'task', 'parked', 'check-for-jorgen')
 STATES = ('todo', 'running', 'blocked', 'parked', 'waiting-jorgen', 'done', 'dropped')
 CLOSED = ('done', 'dropped')
+WHY_STATES = ('blocked', 'parked', 'dropped')  # states whose --note is kept in the body as the reason
 OWNER_RE = re.compile(r'^(claude-main|claude-agent:[a-z0-9][a-z0-9-]*|codex|grok|jorgen)$')
 PRIVATE_RE = re.compile(r'island/private|private/rewards|manifest\.user\.json|reward[ -]scenes?\b', re.I)
 FIELDS = 'number,title,labels,body,createdAt,updatedAt,state,url'
@@ -144,10 +151,12 @@ def ref_md(ref):
 
 
 def body(item):
-    meta = {k: item.get(k) for k in ('source', 'next', 'done_ref', 'reason', 'detail', 'updated') if item.get(k)}
+    meta = {k: item.get(k) for k in ('source', 'next', 'done_ref', 'reason', 'why', 'detail', 'updated', 'running_since') if item.get(k)}
     out = []
     if item.get('reason'):
         out.append(item['reason'])
+    if item.get('why') and item.get('state') in WHY_STATES:
+        out.append(f'**{item["state"].title()}:** {item["why"]}')
     if item.get('next'):
         out.append(f'**Next:** {item["next"]}')
     if item.get('done_ref'):
@@ -176,8 +185,9 @@ def to_item(i):
     return {'id': str(i['number']), 'title': i['title'], 'kind': pick('kind:', 'task'), 'owner': pick('owner:', 'claude-main'),
             'state': pick('state:', 'done' if i.get('state') == 'CLOSED' else 'todo'), 'open': i.get('state') == 'OPEN',
             'source': meta.get('source', []), 'next': meta.get('next', ''), 'done_ref': meta.get('done_ref', ''),
-            'reason': meta.get('reason', ''), 'detail': meta.get('detail', ''),
-            'created': i.get('createdAt'), 'updated': meta.get('updated') or i.get('updatedAt'), 'url': i.get('url')}
+            'reason': meta.get('reason', ''), 'why': meta.get('why', ''), 'detail': meta.get('detail', ''),
+            'created': i.get('createdAt'), 'updated': meta.get('updated') or i.get('updatedAt'),
+            'running_since': meta.get('running_since', ''), 'url': i.get('url')}
 
 
 def items(fresh=False):
@@ -222,6 +232,8 @@ def add(title, kind='task', owner='claude-main', state='todo', source=None, next
     check(kind, owner, state)
     item = {'title': title, 'kind': kind, 'owner': owner, 'state': state, 'source': source or [], 'next': next_step,
             'detail': detail, 'reason': reason, 'done_ref': done_ref, 'updated': updated or stamp()}
+    if state == 'running':
+        item['running_since'] = item['updated']
     b = body(item)
     guard(title, b)
     url = gh('issue', 'create', '--title', title, '--body-file', '-', *[a for lab in labels(item) for a in ('--label', lab)],
@@ -243,6 +255,13 @@ def update(num, note=None, comment=None, **fields):
         if v is not None:
             item[k] = v
     item['updated'] = stamp()
+    moved = item['state'] != old['state']
+    if moved and item['state'] == 'running':
+        item['running_since'] = item['updated']
+    if item['state'] not in WHY_STATES:
+        item['why'] = ''
+    elif note or moved:
+        item['why'] = note or ''
     b = body(item)
     say = comment
     if not say and (note or item['state'] != old['state']):
@@ -366,9 +385,6 @@ def stale(at=None, all_items=None):
             if not links:
                 flag(f'review:{rid}', r.get('title', rid), 'nobody', f'Review {rid} decided {age(h)} ago, no issue', h, url_r)
                 continue
-            if h >= DECISION_HOURS and all(i['state'] == 'todo' for i in links):
-                i = links[0]
-                flag(i['id'], i['title'], i['owner'], f'Review {rid} decided {age(h)} ago, follow-up not started', h, i['url'])
             ch = changed_at(r, fb)
             for i in links:
                 up = parse_time(i['updated'])
@@ -379,22 +395,34 @@ def stale(at=None, all_items=None):
             for i in links:
                 if not i['open']:
                     flag(i['id'], i['title'], i['owner'], f'closed, but Review {rid} is open again', 0, i['url'])
+    # A plain todo is not stuck (it waits its turn; `triage` sweeps old ones), and a parked idea never is.
     for i in all_items:
+        if not i['open']:
+            continue
         h = hours_since(i['updated'], at)
-        if i['state'] in ('todo', 'running', 'blocked') and h >= ACTIVE_HOURS:
-            flag(i['id'], i['title'], i['owner'], f'{i["state"]}, untouched for {age(h)}', h, i['url'])
-        elif i['state'] == 'running':
+        if i['state'] == 'running':
             # A progress note is not progress (Jørgen 2026-10-10): a running issue needs a commit that names it.
             c = last_commit_hours(i['id'], at)
-            since = c if c is not None else hours_since(i.get('created'), at)
-            if since >= ACTIVE_HOURS:
-                what = f'no commit naming #{i["id"]} for {age(since)}' if c is not None else f'no commit naming #{i["id"]} since it opened {age(since)} ago'
+            went = hours_since(i.get('running_since') or i.get('created'), at)
+            since = went if c is None else min(c, went)
+            if since >= RUNNING_HOURS:
+                what = f'no commit naming #{i["id"]} for {age(since)}' if c is not None and c <= went else \
+                    f'no commit naming #{i["id"]} since it went running {age(since)} ago'
                 flag(i['id'], i['title'], i['owner'], f'running, {what}', since, i['url'])
+        elif i['state'] == 'blocked' and not i.get('why'):
+            flag(i['id'], i['title'], i['owner'], 'blocked, but no reason given (set --state blocked --note "...")', h, i['url'])
         elif i['state'] == 'waiting-jorgen' and i['id'] not in asked:
             # Jørgen only checks the Review queue (2026-10-09): waiting on him without an open Review item is invisible to him.
             flag(i['id'], i['title'], i['owner'], 'waiting for Jørgen, but no open Review item asks him', h, i['url'])
-        # Parked items are postponed ideas, not stuck work (Jørgen, 2026-10-09), so they are never flagged.
     return sorted(out, key=lambda s: -s['hours'])
+
+
+def triage(at=None, all_items=None, days=TRIAGE_DAYS):
+    """Todo and parked issues this tool hasn't changed for `days` or more, oldest first."""
+    at = at or now()
+    all_items = items() if all_items is None else all_items
+    old = [i for i in all_items if i['open'] and i['state'] in ('todo', 'parked') and hours_since(i['updated'], at) >= days * 24]
+    return sorted(old, key=lambda i: -hours_since(i['updated'], at))
 
 
 def label_of(s):
@@ -483,6 +511,18 @@ def main(a):
             return 2
         print('\n'.join(lines) if lines else 'Nothing stuck.')
         return 1 if lines else 0
+    elif cmd == 'triage':
+        o, _ = opts(a, 'days')
+        try:
+            days = float(o.get('days', TRIAGE_DAYS))
+        except ValueError:
+            sys.exit('--days needs a number')
+        at = now()
+        rows = triage(at, days=days)
+        for i in rows:
+            print(f'{age(hours_since(i["updated"], at)):>8}  {i["state"]:7} #{i["id"]:<5} [{i["owner"]}] {i["title"][:90]}'
+                  + (f'\n{"":26}next: {i["next"]}' if i.get('next') else ''))
+        print(f'{len(rows)} todo or parked issues untouched for {days:g}+ days' + ('; keep (set --next/--owner), park or drop each' if rows else ''))
     elif cmd == 'labels':
         ensure_labels()
     else:

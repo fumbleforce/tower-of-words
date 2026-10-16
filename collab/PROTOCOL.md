@@ -27,7 +27,7 @@ No code freeze is active, and normal file claims apply. A freeze, when there is 
 ## Sharing the repo
 
 - The work tracker rule is in GUIDE (Process, Work tracker). Issues can be owned by `claude-main`, `claude-agent:<name>`, `codex`, `grok` or `jorgen`.
-- Ship small and often. Commit each working step in your worktree and land it the same day. A lane with no landed commit for a day isn't working, and another team may take it over. At most four lanes per team, and finish what you have before opening another. `tools/work.py stale` flags a running issue with no commit naming it for 12 h.
+- Ship small and often. Commit each working step in your worktree and land it the same day. A lane with no landed commit for a day isn't working, and another team may take it over. At most four lanes per team, and finish what you have before opening another. `tools/work.py stale` flags a running issue with no commit naming it for 24 h.
 - Code work happens in a worktree (`tools/worktree.sh new <name>` or the Agent tool's worktree isolation) and lands with `tools/land.sh` (land skill). The shared checkout is for docs, inboxes and review items only. A worktree goes as soon as its work is landed, dropped or handed over. When a worker stops, and at each check, run `tools/worktree.sh gone` and remove what it lists with `--remove`. Deal with anything it keeps.
 - Claim before editing a file another team may touch: a `claim` entry naming the files and the holder (`claude-main`, `claude-private`, `<session>/<agent>`, `codex-tui`, `codex-exec:<task>`, `grok-main`, `grok-agent:<task>`), then a `release` when committed. The first claim wins; ask before editing claimed files.
 - Commit messages say which team made them.
