@@ -111,6 +111,8 @@ Used (synced to R2; another machine gets these with `pull`). These are the roots
 
 On top of the roots, any file that the asset library (`tools/assets/scan.py`) marks approved or provisional is used, wherever it is. Today that covers 26 files outside the roots: 9 in portrait-candidates, the 5 round-9 world-look shots in game3d/shots/round-9, game3d/design/style/rough/style-0.jpg, legacy/proto2/gallery/M-02-it-guy-601.webp, 4 chibi refs in tools/characters/ref, and 6 Mio Meshy files in legacy/side/flat/meshy2 that are copies of art/approved/mio/meshy. So a picked file is backed up even if nobody moves it.
 
+Showcase and Review pictures are the exception: only the ones the public bible shows go up (the 20 newest Showcase entries and the open Review items), and when one leaves that feed the next `sync.py push` deletes it from R2 while it stays on this disk.
+
 Excluded from the roots: game3d/assets/portrait-candidates/, game3d/assets/portraits-v2/ and portraits-v2-sheet.png (all move out in stage 2), and *.blend1.
 
 Measured today, 1,358 files and 214 MB are used. R2 stores each file once by content, and copies such as eric-meshy share a blob, so that comes to 1,326 blobs and 148 MB.
@@ -126,9 +128,10 @@ This is one Python file that uses only the standard library, plus PyYAML for the
 | Command | What it does |
 |---|---|
 | `python3 tools/assets/sync.py status [--remote] [--all]` | Drift: used files not in the lock file, files changed since it, lock entries missing here, entries no longer used, used files outside the roots. With `--remote` it also lists lock entries whose blob isn't in R2. |
-| `python3 tools/assets/sync.py push [--dry-run] [--prune]` | Uploads every used file whose blob isn't in R2 (8 at a time, with the sha256 as the payload hash so R2 checks it), then rewrites the lock file. It drops entries for files that are no longer used. Entries for files missing on this disk are kept unless you pass `--prune`, so a half-pulled machine can't wipe the lock. It refuses to run if the asset library scan fails. |
+| `python3 tools/assets/sync.py push [--dry-run] [--prune]` | Uploads every used file whose blob isn't in R2 (8 at a time, with the sha256 as the payload hash so R2 checks it), then rewrites the lock file. It drops entries for files that are no longer used, and deletes their blobs from R2 when they were published pictures. Entries for files missing on this disk are kept unless you pass `--prune`, so a half-pulled machine can't wipe the lock. It refuses to run if the asset library scan fails. |
 | `python3 tools/assets/sync.py pull [PATH ...] [--force] [--dry-run]` | Fetches lock entries that are missing here or differ, checks each sha256 and writes atomically. Pass PATHs to fetch only those, e.g. `pull game3d` for just the game. It doesn't overwrite a file changed here unless you pass `--force`. |
 | `python3 tools/assets/sync.py check [--offline]` | Exits 1 if a used file isn't in the lock file, a used file changed without a push, a private path is in the lock file, the library scan failed, or (unless `--offline`) a lock entry's blob is missing from R2. Files missing here are only noted. |
+| `python3 tools/assets/sync.py trim [--list PATH \| --delete PATH]` | Lists the R2 blobs that no lock file names, no other checkout or unmerged branch adds, and that were published pictures with no game file among their paths (default list: `~/.cache/amakawa/r2-trim-list.txt`). `--delete` removes exactly the blobs a list names, and refuses a list that a fresh listing does not match. Pictures stay on disk. |
 
 Tested against a local S3 server (SeaweedFS with signature checking on). A wrong secret was refused. The full push (1,326 blobs, 148 MB) finished in about a second, and `check` came back OK. A pull into an empty folder fetched all 1,358 files and every one matched its sha256. Pulling only game3d/audio worked, a local change was kept until `--force`, and `check` caught a blob deleted from the bucket, which `push` then re-uploaded. The test lock file was removed afterwards. The first real push is part of stage 2.
 

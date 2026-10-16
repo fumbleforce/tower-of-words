@@ -7,15 +7,21 @@ list of each file under `lists` in sync.json (any type: the public creator's bod
 (WIP, candidates, rejected, screenshots, production, legacy). Anything private (island/private, any private/ folder)
 is never uploaded, whatever the config says.
 
-R2 stores each file once, by content: blobs/<first 2 of sha256>/<sha256>. A changed file is a new blob, so old
-versions stay until someone deletes them. The lock file maps each path to its size, sha256 and content type.
+R2 stores each file once, by content: blobs/<first 2 of sha256>/<sha256>. A changed file is a new blob. Only the Showcase
+and Review pictures the bible published (bible/pages-media.json) are ever deleted from R2: a push deletes the blobs of
+the lock entries it drops, and `trim` lists and deletes the older ones. Game files are never deleted. The lock file maps
+each path to its size, sha256 and content type.
 
 Usage:
   python3 tools/assets/sync.py status [--remote] [--all]   drift between disk, lock file and (with --remote) R2
   python3 tools/assets/sync.py push [--dry-run] [--prune] [--only PATH ...]
-                                                            upload new and changed used files, rewrite the lock file
+                                                            upload new and changed used files, rewrite the lock file,
+                                                            delete from R2 the published pictures' blobs it dropped
   python3 tools/assets/sync.py pull [PATH ...] [--force]    fetch missing or changed files (optionally under PATHs)
   python3 tools/assets/sync.py check [--offline]            exit 1 if a used file is not in the lock file or not in R2
+  python3 tools/assets/sync.py trim [--list PATH | --delete PATH]
+                                                            list the R2 blobs no lock file names, or delete exactly
+                                                            the ones a list file names (trim_plan says which may go)
   python3 tools/assets/sync.py forget PATH ...              drop lock entries of files retired from the live folders
                                                             (tools/assets/live.mjs retire calls it)
   python3 tools/assets/sync.py check --offline --staged    the commit hook: an unpushed file fails only if the commit
@@ -26,6 +32,7 @@ R2_ENDPOINT and R2_REGION override the endpoint (for testing against another S3 
 Only the Python standard library is needed (plus PyYAML for the asset library scan).
 """
 import argparse
+import collections
 import concurrent.futures
 import contextlib
 import datetime
@@ -59,6 +66,8 @@ TYPES = {'.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpe
          '.glb': 'model/gltf-binary', '.gltf': 'model/gltf+json', '.woff2': 'font/woff2', '.woff': 'font/woff',
          '.ttf': 'font/ttf', '.otf': 'font/otf', '.blend': 'application/x-blender'}
 WORKERS = 8
+sys.path.insert(0, os.path.join(ROOT, 'tools', 'lib'))
+import cachedir  # noqa: E402  (tool state lives under ~/.cache/amakawa, never in .git)
 
 
 # ------------------------------------------------------------------ which files are used
@@ -311,6 +320,10 @@ class R2:
                 os.unlink(tmp)
             raise
 
+    def delete(self, sha):
+        """Delete one blob. Only drop_from_r2 and cmd_trim call this, and only for published Showcase and Review pictures."""
+        self.request('DELETE', blob_key(sha)).read()
+
 
 # ------------------------------------------------------------------ drift
 def drift(remote=None):
@@ -432,6 +445,7 @@ def cmd_push(a):
     print(f'uploaded {len(done)} files; lock file has {len(files)} entries. Commit {LOCK_REL}.')
     if failed:
         raise SystemExit(f'{len(failed)} uploads failed; run push again')
+    drop_from_r2(r2, {p: lock[p] for p in d['dropped']}, {v['sha256'] for v in files.values()})
 
 
 def cmd_pull(a):
@@ -537,6 +551,197 @@ def cmd_forget(a):
     print(f'lock: {len(gone)} entr{"y" if len(gone) == 1 else "ies"} dropped')
 
 
+# ------------------------------------------------------------------ what leaves R2
+# A picture that drops off the public feed, or a closed Review's, leaves R2 with the next push; older ones leave with
+# trim. Only pictures the bible published ever leave, and the picture stays on this disk either way.
+LOCK_ENTRY =re.compile(r'^\+  "((?:[^"\\]|\\.)*)": \{"size": (\d+), "sha256": "([0-9a-f]{64})"', re.M)
+MEDIA_LIST = 'bible/pages-media.json'  # written by tools/bible/pages.py, one path per line
+MEDIA_ENTRY = re.compile(r'^\+"((?:[^"\\]|\\.)*)",?$', re.M)
+TRIM_LIST = os.path.join(cachedir.state_root(), 'r2-trim-list.txt')
+
+
+def is_game_path(p):
+    """A file under a library root (sync.json roots): the game's or the bible's, never deleted from R2."""
+    return p.startswith(tuple(CONF['roots']))
+
+
+def published_paths():
+    """Every path the bible's media list ever named on main: the Showcase and Review pictures the public site shows."""
+    out = set()
+    for m in MEDIA_ENTRY.finditer(git('log', '-p', '--format=', '--', MEDIA_LIST)):
+        out.add(json.loads(f'"{m.group(1)}"'))
+    return out
+
+
+def removable(paths, published):
+    """'' when a blob may leave R2, else why it stays: it has no known path, a game file is among its paths, or none of its
+    paths was ever published."""
+    if not paths:
+        return 'no known path'
+    if any(is_game_path(p) for p in paths):
+        return 'a game file'
+    if not any(p in published for p in paths):
+        return 'never a Showcase or Review picture'
+    return ''
+
+
+def git(*args, cwd=ROOT, check=True):
+    return subprocess.run(['git', *args], cwd=cwd, capture_output=True, encoding='utf-8', errors='replace',
+                          check=check).stdout
+
+
+def is_ancestor(sub, ref, cwd):
+    return subprocess.run(['git', 'merge-base', '--is-ancestor', sub, ref], cwd=cwd, capture_output=True).returncode == 0
+
+
+def lock_pairs(text):
+    """{(path, sha256)} of a lock file's text; no text names nothing."""
+    if not text.strip():
+        return set()
+    try:
+        return {(p, v['sha256']) for p, v in json.loads(text)['files'].items()}
+    except (ValueError, KeyError, TypeError, AttributeError) as ex:
+        raise SystemExit(f'cannot read a lock file ({ex}); nothing is deleted from R2 until it reads')
+
+
+def added_shas(text, rev, cwd):
+    """The sha256s of the entries a checkout or branch (rev, its lock file's text) adds to the lock file after its merge
+    base with main. An entry it inherited from that base is left out: if main has dropped it, a landing drops it too."""
+    base = git('merge-base', rev, 'main', cwd=cwd, check=False).strip()
+    old = lock_pairs(git('show', f'{base}:{LOCK_REL}', cwd=cwd, check=False)) if base else set()
+    return {sha for _, sha in lock_pairs(text) - old}
+
+
+def named_elsewhere():
+    """The sha256s another checkout or an unmerged branch adds to the lock file (added_shas). Such a blob stays: its
+    owner's check or landing would find it missing. This checkout's own branch and lock file are left out, since the
+    caller is changing them. A clean worktree whose HEAD main has merged adds nothing main lacks."""
+    shas, here = set(), os.path.realpath(ROOT)
+    for line in git('worktree', 'list', '--porcelain').splitlines():
+        path = line[len('worktree '):] if line.startswith('worktree ') else ''
+        if not os.path.isdir(path) or os.path.realpath(path) == here:  # a removed worktree names nothing
+            continue
+        if git('status', '--porcelain', '--', LOCK_REL, cwd=path).strip():  # uncommitted lock changes
+            text = ''
+            if os.path.isfile(os.path.join(path, LOCK_REL)):
+                with open(os.path.join(path, LOCK_REL), encoding='utf-8') as f:
+                    text = f.read()
+            shas |= added_shas(text, 'HEAD', path)
+        elif not is_ancestor('HEAD', 'main', path):  # detached, or work main does not have yet
+            shas |= added_shas(git('show', f'HEAD:{LOCK_REL}', cwd=path, check=False), 'HEAD', path)
+    current = git('symbolic-ref', '-q', 'HEAD', check=False).strip()
+    for ref in git('for-each-ref', '--no-merged=main', '--format=%(refname)', 'refs/heads').split():
+        if ref not in (current, 'refs/heads/main'):
+            shas |= added_shas(git('show', f'{ref}:{LOCK_REL}', check=False), ref, ROOT)
+    return shas
+
+
+def lock_history():
+    """{sha256: {path, ...}} for every lock entry this branch's history of the lock file ever added: the old paths of a
+    blob that no lock file names any more."""
+    out = {}
+    for m in LOCK_ENTRY.finditer(git('log', '-p', '--format=', '--', LOCK_REL)):
+        out.setdefault(m.group(3), set()).add(json.loads(f'"{m.group(1)}"'))
+    return out
+
+
+def gib(sizes):
+    return sum(sizes) / 2**30
+
+
+def drop_from_r2(r2, dropped, kept):
+    """Delete from R2 the blobs a push just took out of the lock file: pictures that left the Showcase feed, or closed
+    Reviews. dropped: {path: lock entry} as the push removed them; kept: the sha256s the new lock file holds. A blob stays
+    when the new lock file still names it, when another checkout or an unmerged branch names it, or when removable() says
+    it must (a game file, or never a published picture)."""
+    if not dropped:
+        return
+    blobs = {}
+    for p, v in dropped.items():
+        blobs.setdefault(v['sha256'], [v['size'], set()])[1].add(p)
+    named, published = named_elsewhere(), published_paths()
+    gone, stay = [], []
+    for sha, (size, paths) in sorted(blobs.items()):
+        if sha in kept:
+            why = 'the lock file still names it'
+        elif sha in named:
+            why = 'another checkout or an unmerged branch names it'
+        else:
+            why = removable(paths, published)
+        if why:
+            stay.append(why)
+        else:
+            gone.append((sha, size))
+    done, failed = run_parallel(lambda j: r2.delete(j[0]), gone, 'deleted') if gone else ([], [])
+    print(f'R2: deleted {len(done)} blobs ({gib(j[1] for j in done):.2f} GB) that left the lock file; '
+          f'pictures stay on this disk')
+    for why, n in collections.Counter(stay).most_common():
+        print(f'  kept {n}: {why}')
+    if failed:
+        raise SystemExit(f'{len(failed)} deletes failed; trim --list and trim --delete finish them')
+
+
+def trim_plan(remote, lock, named, history, published):
+    """The R2 blobs no lock file names and that may leave, as {sha: (size, paths)}, and the ones that stay, as
+    {sha: (size, why)}. A blob may leave when no lock file, other checkout or unmerged branch names it, and removable()
+    accepts its old paths (history: {sha: paths} from the lock file's history; published: published_paths())."""
+    locked = {v['sha256'] for v in lock.values()}
+    delete, keep = {}, {}
+    for sha, size in sorted(remote.items()):
+        if sha in locked:
+            continue
+        paths = sorted(history.get(sha, ()))
+        why = 'another checkout or an unmerged branch names it' if sha in named else removable(paths, published)
+        if why:
+            keep[sha] = (size, why)
+        else:
+            delete[sha] = (size, paths)
+    return delete, keep
+
+
+def cmd_trim(a):
+    """Blobs in R2 that no lock file names: --list writes the list of those that may leave, and --delete removes exactly
+    the blobs a list file names, when a fresh listing matches it. Pictures stay on this disk."""
+    r2 = R2(load_env())
+    remote = r2.list_blobs()
+    lock = load_lock()
+    locked = {v['sha256'] for v in lock.values()}
+    delete, keep = trim_plan(remote, lock, named_elsewhere(), lock_history(), published_paths())
+    if a.delete:
+        with open(a.delete, encoding='utf-8') as f:
+            listed = {line.split('\t', 1)[0] for line in f if line.strip() and not line.startswith('#')}
+        if listed != set(delete):
+            raise SystemExit(f'{a.delete} does not match a fresh listing: {len(listed - set(delete))} listed blobs no longer '
+                             f'qualify, {len(set(delete) - listed)} qualifying blobs are not listed. Run trim --list again.')
+        done, failed = run_parallel(lambda j: r2.delete(j[0]), [(s, delete[s][0]) for s in sorted(delete)], 'deleted')
+        after = r2.list_blobs()
+        missing = sorted(locked - set(after))
+        print(f'trim: deleted {len(done)} blobs ({gib(delete[j[0]][0] for j in done):.2f} GB). R2 now holds '
+              f'{len(after)} blobs, {mb(sum(after.values()))}; lock entries missing from R2: {len(missing)}')
+        if failed or missing:
+            raise SystemExit(f'{len(failed)} deletes failed and {len(missing)} lock entries are missing from R2')
+        return
+    now = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M')
+    lines = [f'# R2 trim list, made {now} UTC by tools/assets/sync.py trim --list',
+             f'# delete: {len(delete)} blobs, {gib(s for s, _ in delete.values()):.2f} GB. Each is in R2, no lock file, '
+             'other checkout or unmerged branch names it, was a published picture, and no path is a game file.',
+             f'# keep: {len(keep)} blobs, {gib(s for s, _ in keep.values()):.2f} GB, not listed here.',
+             '# format: sha256, bytes, first old path (+ the count of any others)']
+    for sha, (size, paths) in sorted(delete.items(), key=lambda kv: kv[1][1][0] if kv[1][1] else ''):
+        more = f' (+{len(paths) - 1})' if len(paths) > 1 else ''
+        lines.append(f"{sha}\t{size}\t{(paths[0] if paths else '') + more}")
+    os.makedirs(os.path.dirname(os.path.abspath(a.list)), exist_ok=True)
+    with open(a.list + '.tmp', 'w', encoding='utf-8') as f:
+        f.write('\n'.join(lines) + '\n')
+    os.replace(a.list + '.tmp', a.list)
+    print(f'R2 holds {len(remote)} blobs, {mb(sum(remote.values()))}; the lock file names {len(locked & set(remote))} of them')
+    print(f'delete: {len(delete)} blobs, {gib(s for s, _ in delete.values()):.2f} GB, listed in {a.list}')
+    print('checked: none is in the lock file; none is named by another checkout or an unmerged branch; '
+          'each was a published picture; none is a game file')
+    for why, n in collections.Counter(w for _, w in keep.values()).most_common():
+        print(f'keep: {n} blobs ({why})')
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     sub = ap.add_subparsers(dest='cmd', required=True)
@@ -559,8 +764,13 @@ def main():
                    help='fail on an unpushed file only if the staged commit uses it (the commit hook)')
     s = sub.add_parser('forget', help='drop the lock entries of retired files (gone from this disk)')
     s.add_argument('paths', nargs='+')
+    s = sub.add_parser('trim', help='list, or delete, the R2 blobs no lock file names (published pictures only)')
+    s.add_argument('--list', metavar='PATH', default=TRIM_LIST,
+                   help='write the blobs that may leave to this file (default: ~/.cache/amakawa/r2-trim-list.txt)')
+    s.add_argument('--delete', metavar='PATH', help='delete exactly the blobs this list file names, if a fresh listing matches')
     a = ap.parse_args()
-    {'status': cmd_status, 'push': cmd_push, 'pull': cmd_pull, 'check': cmd_check, 'forget': cmd_forget}[a.cmd](a)
+    {'status': cmd_status, 'push': cmd_push, 'pull': cmd_pull, 'check': cmd_check, 'forget': cmd_forget,
+     'trim': cmd_trim}[a.cmd](a)
 
 
 if __name__ == '__main__':
