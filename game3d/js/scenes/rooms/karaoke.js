@@ -15,6 +15,7 @@ import { Kit } from '../dorms/kit.js';
 import { shell, roomLights, roomNav } from './shell.js';
 import { terminal, songTerminal } from './machines.js';
 import { drinkDispenser, karaokeDeskDetail, boothBench, karaokeBoothDetail } from './karaoke-detail.js';
+import { doorHeight, PEOPLE_SCALE } from '../../movement/clearance.js';
 
 const C = {
   floor: '#4a4258',
@@ -210,7 +211,7 @@ export function buildKaraokeBooth() {
   scene.add(root);
   const kit = new Kit();
   const nav = roomNav(R);
-  shell(root, R, { holes: { e: [[BD[0], BD[1], 0, 1.2]] }, color: C.wallBooth, top: '#5a4f6c' });
+  shell(root, R, { holes: { e: [[BD[0], BD[1], 0, doorHeight(PEOPLE_SCALE)]] }, color: C.wallBooth, top: '#5a4f6c' });
   carpet(kit, R, '#3a3446', '#332e3e');
   // the door from the corridor, open against the wall, the corridor's light beyond it
   kit.box('#3a3146', 0.04, 1.18, BD[1] - BD[0], R.x1 + 0.2, 0, (BD[0] + BD[1]) / 2 + 0.55, { ry: 0.9, surf: 'door' });
@@ -279,7 +280,7 @@ export function buildKaraokeBooth() {
   // the mirror ball
   kit.cyl(C.steel, 0.005, 0.005, 0.3, -0.5, 1.1, -1.9, { seg: 4 });
   kit.add('#c9ccd1', new THREE.IcosahedronGeometry(0.1, 1).translate(-0.5, 1.05, -1.9), { surf: 'metal' });
-  karaokeBoothDetail(kit, R, root);
+  karaokeBoothDetail(kit, R, root, BD);
   kit.flush(root);
   const sun = roomLights(
     scene,

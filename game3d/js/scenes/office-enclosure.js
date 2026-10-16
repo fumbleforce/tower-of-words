@@ -1,5 +1,6 @@
 import { wall, rbox } from '../props.js';
 import { roomEnclosure } from './rooms/enclosure.js';
+import { doorHeight, PEOPLE_SCALE } from '../movement/clearance.js';
 
 // All B2 partitions use the exact existing wall calls and door openings, including Emi's office.
 export function officeWalls(root, bounds) {
@@ -17,15 +18,16 @@ export function officeWalls(root, bounds) {
   };
 }
 
-// The office-scale player capsule is 1.416m tall; both aperture and frame must clear it.
-export const OFFICE_DOOR_HEIGHT = 1.5;
+// The office's walkable doorways: the aperture, the frames and the lintels above them stand this high, which clears
+// the office-scaled player's head (1.416 m) with the margin (movement/clearance.js).
+export const OFFICE_DOOR_HEIGHT = doorHeight(PEOPLE_SCALE);
 export function officeEntryFrame(root, z, thickness, material) {
   for (const x of [-0.8, 0.3])
     root.add(rbox(0.08, OFFICE_DOOR_HEIGHT, thickness + 0.04, null, { x, z, m: material, r: 0.01 }));
   root.add(
     rbox(1.18, 0.08, thickness + 0.04, null, {
       x: -0.25,
-      y: OFFICE_DOOR_HEIGHT - 0.04,
+      y: OFFICE_DOOR_HEIGHT,
       z,
       m: material,
       r: 0.01,
@@ -41,7 +43,7 @@ export function machineDoorFrame(root, [x0, x1], z, depth, material) {
   root.add(
     rbox(x1 - x0 + 0.16, 0.08, depth, null, {
       x: (x0 + x1) / 2,
-      y: OFFICE_DOOR_HEIGHT - 0.04,
+      y: OFFICE_DOOR_HEIGHT,
       z,
       m: material,
       r: 0.02,

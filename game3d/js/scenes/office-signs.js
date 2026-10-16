@@ -1,4 +1,5 @@
 import { plane, rbox, textTexture } from '../props.js';
+import { OFFICE_DOOR_HEIGHT } from './office-enclosure.js';
 
 export function toiletSign(kind, wide = false) {
   const tex = textTexture(
@@ -41,14 +42,15 @@ export function corridorToiletSigns(root, corridorZ) {
     ['m', 2.6],
     ['f', 5.2],
   ]) {
+    // above the doorway's clear height, so the sign never hangs in a walkable opening (movement/clearance.js)
     const plaque = toiletSign(kind, true);
     plaque.rotation.y = Math.PI;
-    plaque.position.set(x, 1.58, corridorZ - 0.101);
+    plaque.position.set(x, OFFICE_DOOR_HEIGHT + 0.2, corridorZ - 0.101);
     enclosure.add(plaque);
     enclosure.add(
       rbox(0.7, 0.4, 0.025, '#c8ced6', {
         x,
-        y: 1.38,
+        y: OFFICE_DOOR_HEIGHT,
         z: corridorZ - 0.085,
         r: 0.018,
         cast: false,

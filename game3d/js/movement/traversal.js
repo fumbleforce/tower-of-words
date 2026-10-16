@@ -2,6 +2,7 @@
 // wall. Cast against the original static scene meshes, before batching, in the place's coordinate system.
 import * as THREE from 'three';
 import { capsuleHits, supportHit } from './capsule.js';
+import { capsuleHeight } from './clearance.js';
 
 const EPS = 0.025;
 
@@ -217,9 +218,9 @@ export function createTraversal(place, excluded = []) {
         pz = oz + ((z - oz) * (i - 1)) / n;
       const beforeFeet = previousFeet ?? feet;
       const previousBottom = new THREE.Vector3(px, beforeFeet + step + radius, pz);
-      const previousTop = new THREE.Vector3(px, beforeFeet + 1.2 * scale - radius, pz);
+      const previousTop = new THREE.Vector3(px, beforeFeet + capsuleHeight(scale) - radius, pz);
       const bottom = new THREE.Vector3(cx, feet + step + radius, cz),
-        top = new THREE.Vector3(cx, feet + 1.2 * scale - radius, cz);
+        top = new THREE.Vector3(cx, feet + capsuleHeight(scale) - radius, cz);
       const nearby = new Set(broad);
       for (let bx = Math.floor((cx - radius) / cell); bx <= Math.floor((cx + radius) / cell); bx++)
         for (let bz = Math.floor((cz - radius) / cell); bz <= Math.floor((cz + radius) / cell); bz++)
@@ -232,7 +233,7 @@ export function createTraversal(place, excluded = []) {
           b.max.z < cz - radius ||
           b.min.z > cz + radius ||
           b.max.y < feet + step ||
-          b.min.y > feet + 1.2 * scale
+          b.min.y > feet + capsuleHeight(scale)
         )
           continue;
         if (capsuleHits(mesh, bottom, top, radius, previousBottom, previousTop, previousFeet !== null)) return false;

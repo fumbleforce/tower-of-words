@@ -8,7 +8,7 @@ import { seatPoint } from '../../kit/core/seats.js';
 import * as THREE from 'three';
 import { tileFloor, textTexture, plane } from '../../props.js';
 import { lightPool } from '../../places/life.js';
-import { X0, X1, BACK, NEAR, H, LOW, T, PITCH, WIN, DOOR, SHARED_K, C } from './layout.js';
+import { X0, X1, BACK, NEAR, H, LOW, T, PITCH, WIN, DOOR, DOORWAY_H, SHARED_K, C } from './layout.js';
 import { Kit } from './kit.js';
 import { plates } from './plates.js';
 
@@ -91,15 +91,15 @@ function shell(kit, root, nav, sign) {
       [XB + T - d1, H - LOW, T, (d1 + XB + T) / 2, LOW, zf],
       [w1 - w0, 0.54 - LOW, T, (w0 + w1) / 2, LOW, zf],
       [w1 - w0, H - 0.9, T, (w0 + w1) / 2, 0.9, zf],
-      [d1 - d0, H - 1.3, T, DC, 1.3, zf],
+      [d1 - d0, H - DOORWAY_H, T, DC, DOORWAY_H, zf],
     ],
     { surf: 'plaster' },
   );
   tk.box(C.wallTop, XB - XA + 2 * T + 0.02, 0.035, T + 0.03, (XA + XB) / 2, H, zf, { cast: false });
   tk.boxes(C.frame, [
-    [0.04, 1.3 - LOW, T + 0.03, d0 - 0.02, LOW, zf],
-    [0.04, 1.3 - LOW, T + 0.03, d1 + 0.02, LOW, zf],
-    [0.68, 0.05, T + 0.03, DC, 1.28, zf],
+    [0.04, DOORWAY_H - LOW, T + 0.03, d0 - 0.02, LOW, zf],
+    [0.04, DOORWAY_H - LOW, T + 0.03, d1 + 0.02, LOW, zf],
+    [0.68, 0.05, T + 0.03, DC, DOORWAY_H, zf],
   ]);
   for (const s of [-1, 1])
     kit.box(C.wallTop, T + 0.02, 0.035, d, s < 0 ? XA - T / 2 : XB + T / 2, H, zc, { cast: false });
@@ -112,7 +112,7 @@ function shell(kit, root, nav, sign) {
   for (let i = 0; i < 5; i++) bars.push([0.012, 0.42, 0.012, w0 + 0.01 + i * 0.07, 0.51, NEAR + T + 0.04]);
   tk.boxes(C.alu, bars, { cast: false });
   const tall = tk.flush(new THREE.Group());
-  tall.add(plates([[sign, DC, 1.43, NEAR + T + 0.017, 0.3, 0.12]]));
+  tall.add(plates([[sign, DC + 0.5, 1.43, NEAR + T + 0.017, 0.3, 0.12]])); // beside the door, out of its headroom
   // its own materials: fading it fades nothing else; and out of the draw-call pass, which a fade would undo
   tall.traverse((o) => o.isMesh && ((o.material = o.material.clone()), (o.userData.noBatch = true)));
   root.add(tall);

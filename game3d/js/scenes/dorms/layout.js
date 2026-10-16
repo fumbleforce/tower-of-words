@@ -2,6 +2,7 @@
 // The camera looks north. The room is at the back (z BACK to PART), the entry strip in front (PART to NEAR), the
 // open-air corridor in front of that, and the next block's end wall behind the window, OUT.
 import * as PL from '../dorm-court/plan.js';
+import { doorHeight, PEOPLE_SCALE } from '../../movement/clearance.js';
 
 export const X0 = -1.05, // side walls (inner faces)
   X1 = 1.05,
@@ -19,7 +20,7 @@ export const X0 = -1.05, // side walls (inner faces)
 export const WIN = [-0.45, 0.3, 0.52, 1.24]; // window: x from, x to, sill, head
 export const DOOR = [-0.44, 0.16]; // the front door, x from and to
 export const DOORWAY = [-0.62, 0.34]; // the opening from the strip into the room
-export const DOORWAY_H = 1.48; // clear headroom for the default-scale protagonists, below the 1.55 ceiling
+export const DOORWAY_H = doorHeight(PEOPLE_SCALE); // clear for the protagonists' head and margin (movement/clearance.js)
 export const GENKAN_Z = 0.5; // the step up from the genkan tiles to the floor
 export const FRONT_LOW = 0.3; // the front wall and door, cut lower still so the genkan shows
 

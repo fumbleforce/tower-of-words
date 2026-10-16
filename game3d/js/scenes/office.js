@@ -35,11 +35,12 @@ import { drain } from '../perf/slice.js';
 import { emiOffice, emiOfficeBlocks, EMI_X, EMI_DOOR } from './office-emi.js';
 import { MC } from '../mc.js';
 import { officeWalls, officeEntryFrame, machineDoorFrame, OFFICE_DOOR_HEIGHT } from './office-enclosure.js';
+import { PEOPLE_SCALE } from '../movement/clearance.js';
 import { corridorToiletSigns, toiletSign } from './office-signs.js';
 import { referenceShelf } from './office-nook.js';
 export { EMI } from './office-emi.js';
 
-export const K = 1.18; // people scale in the office and lobby
+export const K = PEOPLE_SCALE; // people scale in the office and lobby, every place (clearance.js)
 const WH = 1.45,
   T = 0.16;
 export const X0 = -7,

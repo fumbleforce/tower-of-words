@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import { Kit } from './kit.js';
 import { plates } from './plates.js';
 import { textTexture, plane } from '../../props.js';
-import { X0, X1, NEAR, H, FRONT_LOW, T, DOOR, CORRIDOR, C } from './layout.js';
+import { X0, X1, NEAR, H, FRONT_LOW, T, DOOR, CORRIDOR, DOORWAY_H, C } from './layout.js';
 
 // the flats' numbers along a floor, by their place from Eric's (k), counted from the stairs: no 4
 export const FLATS = [2, 1, 0, -1, -2, -3];
@@ -42,13 +42,14 @@ export function tallFront() {
     z = NEAR + T / 2;
   kit.box(C.facade, d0 - (X0 - T), H - FRONT_LOW, T, (X0 - T + d0) / 2, FRONT_LOW, z, { surf: 'plaster' });
   kit.box(C.facade, X1 + T - d1, H - FRONT_LOW, T, (d1 + X1 + T) / 2, FRONT_LOW, z, { surf: 'plaster' });
-  kit.box(C.facade, d1 - d0, H - 1.3, T, DOOR_C, 1.3, z, { surf: 'plaster' });
+  kit.box(C.facade, d1 - d0, H - DOORWAY_H, T, DOOR_C, DOORWAY_H, z, { surf: 'plaster' });
   kit.box(C.wallTop, X1 - X0 + 2 * T, 0.035, T + 0.03, 0, H, z, { cast: false });
   const leafKit = new Kit();
-  neighbourDoor(kit, DOOR_C, zf, {}, leafKit);
+  neighbourDoor(kit, DOOR_C, zf, { top: DOORWAY_H }, leafKit);
   corridorLight(kit, DOOR_C, zf);
   const g = kit.flush(new THREE.Group());
-  g.add(plates([['203', DOOR_C, 1.43, zf + 0.017, 0.24, 0.12]]));
+  // the number on the wall beside the door, out of the opening's headroom (the lintel is DOORWAY_H under the cut at H)
+  g.add(plates([['203', DOOR[0] - 0.2, 1.43, zf + 0.017, 0.24, 0.12]]));
   const hinge = new THREE.Group(),
     hx = DOOR_C - 0.28,
     hz = zf + 0.025;
@@ -61,15 +62,15 @@ export function tallFront() {
 
 // a flat's front door at c: its frame and steel leaf (into `leaf`, Eric's own swings open), the kitchen window beside
 // it behind its grille, the meter box, and what's left at the door (`at`: umbrella, sandals, pot, parcel, crate,
-// cans, chime, boots)
-export function neighbourDoor(kit, c, zf, { lit = false, at = [] } = {}, leaf = kit) {
+// cans, chime, boots). top: the frame's height (the neighbours' 1.3; Eric's own door is DOORWAY_H)
+export function neighbourDoor(kit, c, zf, { lit = false, at = [], top = 1.3 } = {}, leaf = kit) {
   const z = zf + 0.02;
   kit.boxes(C.frame, [
-    [0.04, 1.3, 0.05, c - 0.3, 0, z],
-    [0.04, 1.3, 0.05, c + 0.3, 0, z],
-    [0.64, 0.05, 0.05, c, 1.28, z],
+    [0.04, top, 0.05, c - 0.3, 0, z],
+    [0.04, top, 0.05, c + 0.3, 0, z],
+    [0.64, 0.05, 0.05, c, top, z],
   ]);
-  leaf.box(C.steel, 0.56, 1.26, 0.03, c, 0.01, z + 0.005, { surf: 'door' });
+  leaf.box(C.steel, 0.56, top - 0.04, 0.03, c, 0.01, z + 0.005, { surf: 'door' });
   leaf.box('#c9cdd2', 0.1, 0.025, 0.04, c + 0.2, 0.62, z + 0.03, {
     r: 0.008,
     cast: false,

@@ -22,7 +22,8 @@ test('low overview rooms have continuous upper walls on all four sides without c
   const full = root.getObjectByName('follow-interior');
   assert.equal(full.userData.followEnclosure.height, INTERIOR_CEILING);
   full.visible = true; root.updateMatrixWorld(true);
-  for (const y of [1.5, 2.8, INTERIOR_CEILING - .05]) {
+  // 1.6: above the near wall's door, which stands 1.5 high (movement/clearance.js), so the probe never sits on its top edge
+  for (const y of [1.6, 2.8, INTERIOR_CEILING - .05]) {
     for (const direction of [[1,0,0], [-1,0,0], [0,0,1], [0,0,-1]]) {
       assert.ok(hit(full, [0,y,-2], direction), `wall at height ${y}, direction ${direction}`);
     }

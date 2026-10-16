@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { Kit } from '../dorms/kit.js';
+import { doorHeight, PEOPLE_SCALE } from '../../movement/clearance.js';
 
 const C = { dark: '#2a2630', trim: '#8b919b', pale: '#c6c0cd' };
 const metal = { surf: 'metal' },
@@ -103,7 +104,8 @@ export function boothBench(k, x0, x1, z0, z1) {
     );
 }
 
-export function karaokeBoothDetail(k, R, root) {
+// door: the east wall's door, z from and to; the east rail stops short of it, so the opening stays clear above the head
+export function karaokeBoothDetail(k, R, root, door) {
   // Shallow acoustic fabric panels sit above the bench backs, clear of the door and screen.
   for (const z of [-2.58, -1.65, -0.72]) {
     k.box('#655774', 0.035, 0.59, 0.79, -2.3825, 0.57, z, { surf: 'fabric' });
@@ -111,7 +113,12 @@ export function karaokeBoothDetail(k, R, root) {
   }
   for (const z of [-2.63, -0.65]) k.box('#655774', 0.035, 0.59, 0.61, 2.3825, 0.57, z, { surf: 'fabric' });
   k.box('#71637f', 4.7, 0.035, 0.025, 0, 1.33, -3.5875, laminate);
-  for (const x of [-2.3875, 2.3875]) k.box('#71637f', 0.025, 0.035, 3.55, x, 1.33, -1.775, laminate);
+  k.box('#71637f', 0.025, 0.035, 3.55, -2.3875, 1.33, -1.775, laminate);
+  for (const [z0, z1] of [
+    [-3.55, door[0] - 0.1],
+    [door[1] + 0.1, 0],
+  ])
+    k.box('#71637f', 0.025, 0.035, z1 - z0, 2.3875, 1.33, (z0 + z1) / 2, laminate);
   // Separate upholstery panels retain the authored seat tops and usable seating footprints.
   for (const z of [-2.39, -1.79, -1.19, -0.59])
     k.box('#a25b7b', 0.012, 0.34, 0.009, -2.254, 0.045, z, { surf: 'fabric' });
@@ -140,11 +147,13 @@ export function karaokeBoothDetail(k, R, root) {
   k.box('#55465e', 1.37, 0.055, 0.012, -0.5, 0.025, -1.495, laminate);
   basketRim(k, -1.05, 0.6, -2, 0.28, 0.16);
   for (const x of [0.08, -1.12]) k.cyl('#535265', 0.027, 0.027, 0.005, x, 0.648, -1.7, { seg: 10 });
-  // Door jambs live on the opening's edges, leaving the full route clear.
+  // Door jambs live on the opening's edges, and the lintel sits on them at the doorway's height, leaving the full route clear.
   const frame = new Kit(),
-    group = new THREE.Group();
-  for (const z of [-2.115, -1.285]) frame.box('#90839d', 0.048, 1.21, 0.026, R.x1 - 0.025, 0, z, laminate);
-  frame.box('#90839d', 0.048, 0.04, 0.85, R.x1 - 0.025, 1.2, -1.7, laminate);
+    group = new THREE.Group(),
+    top = doorHeight(PEOPLE_SCALE);
+  for (const z of [door[0] - 0.015, door[1] + 0.015])
+    frame.box('#90839d', 0.048, top, 0.026, R.x1 - 0.025, 0, z, laminate);
+  frame.box('#90839d', 0.048, 0.04, door[1] - door[0] + 0.05, R.x1 - 0.025, top, (door[0] + door[1]) / 2, laminate);
   frame.flush(group);
   group.traverse((o) => {
     o.userData.noOutline = true;

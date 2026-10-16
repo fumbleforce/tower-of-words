@@ -18,6 +18,7 @@ import { Nav } from '../../movement/navigation.js';
 import { wall } from '../../props.js';
 import { lightPool } from '../../places/life.js';
 import { roomEnclosure } from './enclosure.js';
+import { doorHeight, PEOPLE_SCALE } from '../../movement/clearance.js';
 
 export function shell(root, R, { holes = {}, color, top, entryDoor = false } = {}) {
   const { x0, x1, z0, z1, h, near, t } = R;
@@ -30,10 +31,11 @@ export function shell(root, R, { holes = {}, color, top, entryDoor = false } = {
   enclosure.wall('x', x0 - t, x1 + t, z0 - t / 2, h, t, o('n'));
   enclosure.wall('z', z0, z1, x0 - t / 2, h, t, o('w'));
   enclosure.wall('z', z0, z1, x1 + t / 2, h, t, o('e'));
-  const doorHeight = Math.min(1.95, h - 0.12);
-  enclosure.wall('x', x0 - t, x1 + t, z1 + t / 2, near, t, o('s'), doorHeight);
+  // the near wall's door: as tall as the wall allows, and never below a walkable doorway (movement/clearance.js)
+  const aperture = Math.max(doorHeight(PEOPLE_SCALE), Math.min(1.95, h - 0.12));
+  enclosure.wall('x', x0 - t, x1 + t, z1 + t / 2, near, t, o('s'), aperture);
   if (entryDoor)
-    for (const [lo, hi, bottom] of holes.s || []) if (bottom === 0) enclosure.door('x', lo, hi, z1 + t / 2, doorHeight);
+    for (const [lo, hi, bottom] of holes.s || []) if (bottom === 0) enclosure.door('x', lo, hi, z1 + t / 2, aperture);
 }
 
 export function plankFloor(kit, R, { color, seam, w = 0.2, along = 'z', y = 0 } = {}) {
