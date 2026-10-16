@@ -114,6 +114,13 @@ export function planPlaces(places, cache, candidate, impact) {
   return { measure, reused };
 }
 
+// The screens the frame tier measures besides the places (place-budgets.json `screens`: name -> the place it stands
+// in, or null for the shell alone) move with their place, and with everything when a change can move every place.
+export function withScreens(moved, screens) {
+  if (moved === 'all') return moved;
+  return new Set([...moved, ...Object.entries(screens).filter(([, place]) => place && moved.has(place)).map(([name]) => name)]);
+}
+
 // The git side: module graphs and changed files read straight from commits (no checkout).
 export function gitImpact(cwd) {
   const git = (args, input) => execFileSync('git', args, { cwd, input, encoding: 'utf8', maxBuffer: 256 << 20 });
@@ -150,7 +157,9 @@ export function gitImpact(cwd) {
     const files = git(['diff', '--name-only', '-z', '--no-renames', from, to]).split('\0').filter(Boolean);
     return files.flatMap(f => f === LOCK ? lockDelta(lockAt(from), lockAt(to)) : [f]);
   };
-  const impact = (from, to) => exists(from) ? affectedPlaces(changedFiles(from, to), [graphAt(to), graphAt(from)]) : 'all';
-  const placesAt = commit => Object.keys(graphAt(commit).places);
+  const screensAt = commit => { try { return JSON.parse(git(['show', `${commit}:game3d/tools/perf/place-budgets.json`])).screens || {}; } catch { return {}; } };
+  // places and screens alike: what the place budget check measures
+  const impact = (from, to) => withScreens(exists(from) ? affectedPlaces(changedFiles(from, to), [graphAt(to), graphAt(from)]) : 'all', screensAt(to));
+  const placesAt = commit => [...Object.keys(graphAt(commit).places), ...Object.keys(screensAt(commit))];
   return { impact, placesAt, changedFiles };
 }

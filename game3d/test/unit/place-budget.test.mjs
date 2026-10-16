@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { test } from 'node:test';
-import { overBudget, staleExceptions, describe, lower, limitFor } from '../../tools/perf/place-budget-lib.mjs';
+import { overBudget, staleExceptions, describe, lower, limitFor, table } from '../../tools/perf/place-budget-lib.mjs';
+import { SCREENS } from '../../tools/perf/frame-measure.mjs';
 import { PLACE_FILES } from '../../js/places/definitions.js';
 
 const budgets = {
@@ -46,10 +47,22 @@ test('a retry keeps the lower number of the two runs', () => {
   assert.deepEqual(lower({ error: 'x' }, { calls: 1 }), { calls: 1 });
 });
 
-test('the budgets file names an issue for every exception and only places the game has', () => {
+test('a frame time over its budget fails like any other number; a table shows only what a tier measured', () => {
+  const frame = { budgets: { '120hz': { p95Ms: 8.3 } }, places: { title: { '120hz': { p95Ms: { max: 13, issue: 625 } } } } };
+  const over = overBudget(frame, { '120hz': { office: { medianMs: 8.5, p95Ms: 10.7 }, title: { medianMs: 5.6, p95Ms: 11.7 } } });
+  assert.deepEqual(over.map(describe), ['office (120hz): 10.7 ms p95 frame, over the 120hz budget 8.3']);
+  const lines = table(frame, { '120hz': { office: { medianMs: 8.5, p95Ms: 10.7 }, title: { medianMs: 5.6, p95Ms: 11.7 } } }).split('\n');
+  assert.match(lines[0], /^place\s+120hz medianMs\s+120hz p95Ms$/);
+  assert.match(lines[1], /^office\s+8\.5\s+10\.7!$/);
+  assert.match(lines[2], /^title\s+5\.6\s+11\.7\*$/);
+});
+
+test('the budgets file names an issue for every exception and only places and screens the game has', () => {
   const file = JSON.parse(fs.readFileSync(new URL('../../tools/perf/place-budgets.json', import.meta.url), 'utf8'));
+  assert.deepEqual(Object.keys(file.screens), Object.keys(SCREENS), 'place-budgets.json screens and frame-measure.mjs SCREENS');
+  for (const place of Object.values(file.screens)) assert.ok(place === null || PLACE_FILES[place], `a screen stands in ${place}, not a place`);
   for (const [place, tiers] of Object.entries(file.places)) {
-    assert.ok(PLACE_FILES[place], `${place} is not a place`);
+    assert.ok(PLACE_FILES[place] || file.screens[place] !== undefined, `${place} is not a place or a screen`);
     for (const [tier, own] of Object.entries(tiers)) {
       assert.ok(file.tiers[tier], `${place}: no tier ${tier}`);
       for (const [metric, e] of Object.entries(own)) {

@@ -8,7 +8,7 @@ import path from 'node:path';
 import { execFileSync, spawn } from 'node:child_process';
 import { isolatedGitEnvironment } from '../../../tools/lib/git-environment.mjs';
 import { ahead, halves, landInHalves, ordered, pickBatch, recover } from '../../../tools/land/queue.mjs';
-import { affectedBy, affectedPlaces, buildGraph, importsOf, lockDelta, planPlaces } from '../../../tools/land/impact.mjs';
+import { affectedBy, affectedPlaces, buildGraph, importsOf, lockDelta, planPlaces, withScreens } from '../../../tools/land/impact.mjs';
 import { heldWarning, judgeOverages, worseLine } from '../../../tools/land/baseline.mjs';
 import { METRICS } from '../../tools/perf/place-budget-lib.mjs';
 
@@ -107,6 +107,13 @@ test('a change re-measures only the places it can move', () => {
   assert.deepEqual([...affectedPlaces(['notes/a.md', 'game3d/js/kit/fountain.js'], [g])], ['plaza']);
   assert.equal(affectedPlaces(['game3d/js/kit/fountain.js', 'game3d/js/engine.js'], [g]), 'all');
   assert.deepEqual(lockDelta({ files: { a: { sha256: '1' }, b: { sha256: '2' } } }, { files: { a: { sha256: '1' }, b: { sha256: '3' }, c: { sha256: '4' } } }), ['b', 'c']);
+});
+
+test('a screen moves with the place it stands in, and with everything', () => {
+  const screens = { title: 'train', 'office-idle': 'office', cg: null };
+  assert.deepEqual([...withScreens(new Set(['office', 'plaza']), screens)], ['office', 'plaza', 'office-idle']);
+  assert.deepEqual([...withScreens(new Set(['plaza']), screens)], ['plaza'], 'the shell alone moves only with everything');
+  assert.equal(withScreens('all', screens), 'all');
 });
 
 test('places nothing can move reuse their last pass', () => {
@@ -246,6 +253,53 @@ test('a place already over on main lands with a warning unless the branch makes 
   assert.equal(worse.code, 1, worse.out);
   assert.match(worse.out, /REFUSED: this land makes a place worse than main.*forecourt \(phone\): 240 draw calls.*main measures 231/s);
   assert.equal(git(main, 'log', '--format=%s', '-1', 'main'), 'same');
+});
+
+test('what a busy GPU kept from being measured is said loudly and measured by the next land', { timeout: 60000 }, async t => {
+  const { base, main, git, write, land } = fixture(t);
+  // The budget tool defers (exit 75, its frame tier unmeasured) while defer.txt says yes; it logs the places it measures.
+  const runs = path.join(base, 'budget-runs');
+  write(main, 'game3d/js/main.js', '// the game\n');
+  write(main, 'game3d/js/places/forecourt.js', '// forecourt\n');
+  write(main, 'game3d/js/places/gym.js', '// gym\n');
+  write(main, 'game3d/js/places/pool.js', '// pool\n');
+  write(main, 'game3d/js/places/definitions.js', "export const PLACE_FILES = { forecourt: 'game3d/js/places/forecourt.js', gym: 'game3d/js/places/gym.js', pool: 'game3d/js/places/pool.js' };\n");
+  write(main, 'defer.txt', 'yes\n');
+  write(main, 'game3d/tools/perf/place-budgets.json', JSON.stringify({ tiers: { '120hz': { frame: true } }, budgets: { '120hz': { p95Ms: 8.3 } } }));
+  write(main, 'game3d/tools/perf/place-budget.mjs', `
+    import fs from 'node:fs';
+    const at = process.argv.indexOf('--places'), places = at > 0 ? process.argv[at + 1] : 'all';
+    fs.appendFileSync(${JSON.stringify(runs)}, places + '\\n');
+    const json = process.argv[process.argv.indexOf('--json') + 1];
+    if (fs.readFileSync('defer.txt', 'utf8').trim() === 'yes') {
+      fs.writeFileSync(json, JSON.stringify({ results: {}, unmeasured: { '120hz': 'the GPU lock stayed busy' } }));
+      console.log('DEFERRED place budgets: the 120hz tier not measured');
+      process.exit(75);
+    }
+    fs.writeFileSync(json, JSON.stringify({ results: { '120hz': {} }, unmeasured: {} }));
+    console.log('PASS place budgets');
+  `);
+  write(main, 'tools/check/head-boot.mjs', "console.log('boot: PASS');\n");
+  git(main, 'add', '.');
+  git(main, 'commit', '--quiet', '-m', 'two places');
+  const change = (name, edits) => {
+    const wt = path.join(main, '.claude/worktrees', name);
+    git(main, 'worktree', 'add', '--quiet', '-b', name, wt, 'main');
+    for (const [file, text] of Object.entries(edits)) write(wt, file, text);
+    git(wt, 'commit', '--quiet', '-am', name);
+  };
+  change('first', { 'game3d/js/places/forecourt.js': '// forecourt, changed\n' });
+  const first = await land('first');
+  assert.equal(first.code, 0, first.out);
+  assert.match(first.out, /NOT MEASURED: Place budgets not measured on \w+ \(120hz\) for forecourt: 120hz: the GPU lock stayed busy/);
+  assert.match(first.out, /The work tracker could not be reached/);
+  // the next land moves only the gym, and measures the forecourt with it
+  change('second', { 'game3d/js/places/gym.js': '// gym, changed\n', 'defer.txt': 'no\n' });
+  const second = await land('second');
+  assert.equal(second.code, 0, second.out);
+  assert.match(second.out, /forecourt measured again: an earlier land couldn't measure them/);
+  assert.match(second.out, /everything earlier lands couldn't measure is measured now/);
+  assert.deepEqual(fs.readFileSync(runs, 'utf8').trim().split('\n'), ['forecourt', 'forecourt,gym']);
 });
 
 test('lands that queue up behind a running one land together, and a bad one is refused alone', { timeout: 60000 }, async t => {

@@ -29,6 +29,7 @@ land.sh queues the branch, rebases the batch onto main, runs the commit checks (
 - Rebase conflicts: `git rebase main` in the worktree and resolve conflicts in your own files only; if one is in another agent's file, stop and report it.
 - Commit checks failed: it's your branch (the batch was split). Fix, commit, land again.
 - Already in the land queue: another land.sh of the branch is running; wait.
-- A place is over budget and worse than on main: bring it down, or add a known exception with an issue in game3d/tools/perf/place-budgets.json (notes/PERF.md, "Place budgets"). Rerun one place: `node game3d/tools/perf/place-budget.mjs --places <place>`.
+- A place or screen is over budget (calls, triangles, memory, load, or p95 frame time at 120 Hz) and worse than on main: bring it down, or add a known exception with an issue in game3d/tools/perf/place-budgets.json (notes/PERF.md, "Place budgets"). Rerun one: `node game3d/tools/perf/place-budget.mjs --places <place or screen>`.
+- `NOT MEASURED` in the log is not a refusal: the GPU stayed busy, the land went through, the next land measures those places, and a work tracker issue holds them until then.
 - main could not fast-forward: someone has unsaved edits in a file you change. Don't touch them; report the files.
 - Kept the worktree for new asset files: sync or move them (notes/asset-lifecycle.md), then remove the worktree as printed. Don't leave worktrees behind (`tools/worktree.sh gone`).

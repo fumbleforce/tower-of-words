@@ -1,14 +1,18 @@
 // The place budget check's rules, apart from the browser so they can be unit tested (test/unit/place-budget.test.mjs).
 // place-budgets.json holds one budget per quality tier and, per place, tier and number, the known exceptions: a higher
 // ceiling (max) with the issue that will bring it down. An exception is a ratchet: the place may not get worse than it.
+// A frame tier (frame: true) measures frame time, for the places and for the screens (`screens`, frame-measure.mjs).
 
 export const METRICS = {
   calls: { label: 'draw calls', show: v => String(Math.round(v)) },
   tris: { label: 'triangles', show: v => `${Math.round(v / 1000)}k` },
   geoMB: { label: 'geometry MB', show: v => v.toFixed(1) },
   texMB: { label: 'texture MB', show: v => v.toFixed(1) },
-  loadMs: { label: 'load ms', show: v => String(Math.round(v)) },
+  loadMs: { label: 'load ms', show: v => String(Math.round(v)), timing: true },
+  medianMs: { label: 'ms median frame', show: v => v.toFixed(1), timing: true },
+  p95Ms: { label: 'ms p95 frame', show: v => v.toFixed(1), timing: true },
 };
+// timing: a number a busy machine stretches (place-budget.mjs only warns about it past its load limit)
 
 // The limit for one number: the place's exception if it has one, else the tier's budget.
 export function limitFor(budgets, tier, place, metric) {
@@ -69,12 +73,13 @@ export function lower(a, b) {
   return out;
 }
 
-// A fixed-width table of every place and tier, worst camera per number.
+// A fixed-width table of every place and tier, worst camera per number; a tier shows the numbers it measured.
 export function table(budgets, results) {
   const tiers = Object.keys(results);
+  const cols = tiers.flatMap(t => Object.keys(METRICS).filter(m => Object.values(results[t]).some(r => r?.[m] != null)).map(m => [t, m]));
   const places = [...new Set(tiers.flatMap(t => Object.keys(results[t])))];
-  const head = ['place', ...tiers.flatMap(t => Object.keys(METRICS).map(m => `${t} ${m}`))];
-  const rows = places.map(place => [place, ...tiers.flatMap(t => Object.keys(METRICS).map(metric => {
+  const head = ['place', ...cols.map(([t, m]) => `${t} ${m}`)];
+  const rows = places.map(place => [place, ...cols.map(([t, metric]) => {
     const r = results[t][place];
     if (!r) return '';
     if (r.error) return 'ERR';
@@ -82,7 +87,7 @@ export function table(budgets, results) {
     const rule = limitFor(budgets, t, place, metric);
     const flag = rule && r[metric] > rule.limit * (1 + (budgets.allowance?.[metric] || 0)) ? '!' : rule?.exception ? '*' : '';
     return METRICS[metric].show(r[metric]) + flag;
-  }))]);
+  })]);
   const widths = head.map((h, i) => Math.max(h.length, ...rows.map(r => r[i].length)));
   return [head, ...rows].map(r => r.map((c, i) => i ? c.padStart(widths[i]) : c.padEnd(widths[i])).join('  ')).join('\n');
 }

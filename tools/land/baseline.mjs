@@ -4,8 +4,9 @@
 // warning that names the overage and its issue. The overages come from the candidate's own place-budget-lib.mjs
 // (overBudget), and its METRICS name and format the numbers. Tested in game3d/test/unit/land-queue.test.mjs.
 
-// How much worse than main a number may measure and still count as the same (run-to-run noise: crowds, a busy machine).
-export const NOISE = { calls: 0.02, tris: 0.02, geoMB: 0.02, texMB: 0.02, loadMs: 0.15 };
+// How much worse than main a number may measure and still count as the same (run-to-run noise: crowds, a busy machine;
+// a p95 frame time varies up to a quarter between two runs of the same commit, notes/PERF.md).
+export const NOISE = { calls: 0.02, tris: 0.02, geoMB: 0.02, texMB: 0.02, loadMs: 0.15, medianMs: 0.25, p95Ms: 0.25 };
 
 // over: what overBudget() found on the tip ({ tier, place, metric, value, limit, issue, exception } or { error });
 // base: main's numbers for those places ({ tier: { place: result } }). Splits them into worse (refuse) and held (no

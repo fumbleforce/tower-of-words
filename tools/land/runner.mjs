@@ -5,7 +5,8 @@
 // checks are the ones tools/land.sh always ran, each from the candidate's own tree: the commit checks
 // (tools/check/commit-cpu.mjs, on exactly that commit), the place budgets when game3d/ changed (only the places the
 // batch can move; the others reuse their last pass, impact.mjs; a place over its ceiling is refused only when it is
-// worse than on main, baseline.mjs), then, once main has moved, the asset handoff
+// worse than on main, baseline.mjs; what a busy GPU kept from being measured is said loudly, tracked in the work
+// tracker and measured by the next land, unmeasured below), then, once main has moved, the asset handoff
 // (tools/check/landed-assets.mjs, per branch) and the boot check (tools/check/head-boot.mjs).
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -18,8 +19,8 @@ import { pathToFileURL } from 'node:url';
 
 const MOVES = 5;  // rounds when main moves during the checks (a commit straight to main)
 
-const run = (cmd, args, cwd) => {
-  const r = spawnSync(cmd, args, { cwd, encoding: 'utf8', maxBuffer: 64 << 20 });
+const run = (cmd, args, cwd, timeout) => {
+  const r = spawnSync(cmd, args, { cwd, encoding: 'utf8', maxBuffer: 64 << 20, timeout });
   return { code: r.status ?? 1, out: (r.stdout || '').trimEnd(), err: (r.stderr || '').trim() };
 };
 
@@ -203,18 +204,25 @@ export function createRunner({ main, mainWt, paths, logBase }) {
     if (!fs.existsSync(budgeter) || !git('diff', '--quiet', base, tip, '--', 'game3d/').code) return { ok: true };
     // Only the places this land can move: the others draw exactly what main draws, so it can't take them over.
     const impact = gitImpact(main), places = impact.placesAt(tip), moved = impact.impact(base, tip);
-    const movable = moved === 'all' ? places : places.filter(place => moved.has(place));
+    // a place an earlier land couldn't measure (GPU busy) is measured now, whatever this land changes
+    const pending = (cache().unmeasured?.names || []).filter(place => places.includes(place));
+    const movable = moved === 'all' ? places : places.filter(place => moved.has(place) || pending.includes(place));
     if (!movable.length) { say(chain, 'place budgets: nothing in this land can move a place (impact.mjs); not measured'); return { ok: true }; }
-    const { measure, reused } = planPlaces(movable, cache().budget || {}, tip, impact.impact);
-    if (movable.length < places.length) say(chain, `place budgets: ${places.length - movable.length} of ${places.length} places can't move in this land; not measured`);
+    if (pending.length) say(chain, `place budgets: ${pending.join(', ')} measured again: an earlier land couldn't measure them`);
+    const passes = Object.fromEntries(Object.entries(cache().budget || {}).filter(([place]) => !pending.includes(place)));
+    const { measure, reused } = planPlaces(movable, passes, tip, impact.impact);
+    if (movable.length < places.length) say(chain, `place budgets: ${places.length - movable.length} of ${places.length} places and screens can't move in this land; not measured`);
     if (Object.keys(reused).length) say(chain, `place budgets: ${Object.keys(reused).join(', ')} reuse an earlier pass (nothing since then can move them)`);
     if (!measure.length) return { ok: true };
     say(chain, `measuring ${measure.length === places.length ? 'every place' : measure.join(', ')} against its budget (game3d/tools/perf/place-budget.mjs)`);
     const started = Date.now(), log = `${logBase}.budget-${short(tip)}`, json = `${log}.json`;
     fs.rmSync(json, { force: true });
     const code = await longRun('node', [budgeter, ...(measure.length === places.length ? [] : ['--places', measure.join(',')]), '--json', json], cand, log);
-    for (const line of fs.readFileSync(log, 'utf8').split('\n').filter(l => /^(PASS|FAIL|DEFERRED|warning|note)|^ {2}/.test(l))) say(chain, line);
-    if (code === 75) { say(chain, `WARNING: the place budgets were deferred (machine or GPU busy), so ${short(tip)} is unmeasured; run: node game3d/tools/perf/place-budget.mjs`); return { ok: true }; }
+    for (const line of fs.readFileSync(log, 'utf8').split('\n').filter(l => /^(PASS|FAIL|DEFERRED|NOT MEASURED|warning|note)|^ {2}/.test(l))) say(chain, line);
+    let unmeasuredTiers = {};
+    try { unmeasuredTiers = JSON.parse(fs.readFileSync(json, 'utf8')).unmeasured || {}; } catch { /* no JSON: deferred before it measured */ }
+    if (code === 75 || Object.keys(unmeasuredTiers).length) unmeasured(chain, tip, measure, unmeasuredTiers);
+    if (code === 75) return { ok: true };
     let passed = measure;
     if (code) {
       // Over on the tip: refused only if the batch makes a place worse than main (baseline.mjs).
@@ -238,7 +246,42 @@ export function createRunner({ main, mainWt, paths, logBase }) {
     }
     say(chain, `place budgets passed in ${Math.round((Date.now() - started) / 1000)} s`);
     saveCache({ budget: { ...(cache().budget || {}), ...Object.fromEntries(passed.map(p => [p, tip])) } });
+    if (!Object.keys(unmeasuredTiers).length) measuredAgain(chain, tip, measure);
     return { ok: true };
+  };
+  // Measurements a busy GPU (or machine) kept from a land: said loudly in the land log, kept in the land cache
+  // (cache.unmeasured: { names, since, issue }) so the next land that changes game3d/ measures them whatever it
+  // changes, and tracked in one work tracker issue (tools/work.py) until they are measured.
+  const tracker = (...args) => {
+    const file = path.join(main, 'tools/work.py');
+    return fs.existsSync(file) ? run('python3', [file, ...args], main, 60000) : { code: 1, out: '', err: 'no tools/work.py' };
+  };
+  const unmeasured = (chain, tip, names, tiers) => {
+    const was = cache().unmeasured || {}, all = [...new Set([...(was.names || []), ...names])];
+    const why = Object.entries(tiers).map(([tier, reason]) => `${tier}: ${reason}`).join('; ') || 'the machine or the GPU stayed busy';
+    const note = `Place budgets not measured on ${short(tip)} (${Object.keys(tiers).join(', ') || 'every tier'}) for ${names.join(', ')}: ${why}. `
+      + 'The next land that changes game3d/ measures them first; or run: node game3d/tools/perf/place-budget.mjs --places ' + all.join(',');
+    let issue = was.issue;
+    if (issue && tracker('touch', String(issue), '--note', note).code) issue = null;
+    if (!issue) {
+      const r = tracker('add', 'Place budgets not measured on main (GPU busy at the land)', '--kind', 'task', '--owner', 'claude-main',
+        '--state', 'todo', '--source', `commit:${short(tip)}`, '--next', 'measure the places named in the latest note', '--detail', note);
+      issue = Number(/#(\d+)/.exec(r.out)?.[1]) || null;
+    }
+    saveCache({ unmeasured: { names: all, since: was.since || tip, issue } });
+    say(chain, '============================================================');
+    say(chain, `NOT MEASURED: ${note}`);
+    say(chain, issue ? `Tracked in #${issue} (tools/work.py show ${issue}).` : 'The work tracker could not be reached; the land cache keeps the list.');
+    say(chain, '============================================================');
+  };
+  const measuredAgain = (chain, tip, names) => {
+    const was = cache().unmeasured;
+    if (!was?.names?.length) return;
+    const left = was.names.filter(place => !names.includes(place));
+    if (left.length) return void saveCache({ unmeasured: { ...was, names: left } });
+    saveCache({ unmeasured: null });
+    say(chain, `place budgets: everything earlier lands couldn't measure is measured now${was.issue ? ` (closing #${was.issue})` : ''}`);
+    if (was.issue) tracker('done', String(was.issue), '--ref', tip, '--note', `measured on ${short(tip)}`);
   };
   // main's numbers for places over budget on the tip: { results: { tier: { place: result } } } or { error }. A place
   // reuses main's last measurement (cache.baseline: { place: { commit, results } }) while nothing since can move it.
@@ -261,9 +304,10 @@ export function createRunner({ main, mainWt, paths, logBase }) {
     const log = `${logBase}.budget-base-${short(base)}`, json = `${log}.json`;
     fs.rmSync(json, { force: true });
     const code = await longRun('node', [budgeter, '--places', measure.join(','), '--json', json], baseTree, log);
-    if (code === 75) return { error: `deferred (machine or GPU busy); log: ${log}` };
+    // deferred: the tiers it did measure still count (a number it has none for is judged worse, baseline.mjs)
     let measured;
-    try { measured = JSON.parse(fs.readFileSync(json, 'utf8')).results; } catch { return { error: `no numbers came out (log: ${log})` }; }
+    try { measured = JSON.parse(fs.readFileSync(json, 'utf8')).results; } catch { measured = null; }
+    if (!measured || (code === 75 && !Object.keys(measured).length)) return { error: code === 75 ? `deferred (machine or GPU busy); log: ${log}` : `no numbers came out (log: ${log})` };
     const fresh = {};
     for (const place of measure) {
       const byTier = Object.fromEntries(Object.entries(measured).filter(([, r]) => r[place]).map(([tier, r]) => [tier, r[place]]));

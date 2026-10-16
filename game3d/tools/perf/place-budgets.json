@@ -1,5 +1,5 @@
 {
-  "about": "Budgets per place and quality tier for game3d/tools/perf/place-budget.mjs (#372). Why these numbers, and how to add an exception: notes/PERF.md, Place budgets.",
+  "about": "Budgets per place and quality tier for game3d/tools/perf/place-budget.mjs (#372). Why these numbers, and how to add an exception: notes/PERF.md, Place budgets. The 120hz tier times frames at 2560x1440 on default settings, uncapped (8.3 ms is one 120 Hz refresh). screens: what it measures besides the places (frame-measure.mjs), each with the place it stands in (it moves with that place; null: the shell alone).",
   "tiers": {
     "phone": {
       "viewport": [390, 844],
@@ -14,17 +14,27 @@
       "q": 2,
       "cpu": 1,
       "cameras": ["overview", "follow"]
+    },
+    "120hz": {
+      "viewport": [2560, 1440],
+      "frame": true,
+      "seconds": 5
     }
   },
+  "screens": { "title": "train", "office-idle": "office", "pause": "office", "cg": null },
   "budgets": {
     "phone": { "calls": 200, "tris": 300000, "geoMB": 64, "texMB": 96, "loadMs": 6000 },
-    "desktop": { "calls": 500, "tris": 800000, "geoMB": 128, "texMB": 192, "loadMs": 4000 }
+    "desktop": { "calls": 500, "tris": 800000, "geoMB": 128, "texMB": 192, "loadMs": 4000 },
+    "120hz": { "p95Ms": 8.3 }
   },
   "allowance": { "loadMs": 0.15 },
   "places": {
     "east_coast": {
       "desktop": {
         "texMB": { "max": 230, "issue": 373, "reason": "the everyday crowd bodies (#353): the casual-1 and older-1 skins at 1024, measured 225.6 against main's 214.4" }
+      },
+      "120hz": {
+        "p95Ms": { "max": 15.5, "issue": 630, "reason": "p95 11.9 and 12.3 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
       }
     },
     "forecourt": {
@@ -35,11 +45,17 @@
       "desktop": {
         "calls": { "max": 547, "issue": 374, "reason": "street style detail for the desktop follow camera (coordinator, 2026-10-09)" },
         "tris": { "max": 978000, "issue": 374, "reason": "full forecourt vegetation on desktop (Jørgen 2026-10-09; 5f4c2b4d's leaf cards round the forecourt's edge): measured 931k, within 5%" }
+      },
+      "120hz": {
+        "p95Ms": { "max": 12, "issue": 630, "reason": "p95 9.5 and 9.2 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
       }
     },
     "office": {
       "desktop": {
         "texMB": { "max": 234, "issue": 373 }
+      },
+      "120hz": {
+        "p95Ms": { "max": 15.5, "issue": 630, "reason": "p95 8.1 and 12.2 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
       }
     },
     "plaza": {
@@ -50,6 +66,66 @@
     "shotengai": {
       "desktop": {
         "texMB": { "max": 266, "issue": 373, "reason": "the everyday crowd bodies (#353): the casual-1 and older-1 skins at 1024, measured 260.0 against main's 248.8" }
+      }
+    },
+    "title": {
+      "120hz": {
+        "p95Ms": { "max": 15, "issue": 630, "reason": "p95 11.6 and 11.9 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
+      }
+    },
+    "train": {
+      "120hz": {
+        "p95Ms": { "max": 37, "issue": 630, "reason": "p95 29.5 and 9.4 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
+      }
+    },
+    "gate": {
+      "120hz": {
+        "p95Ms": { "max": 11.5, "issue": 630, "reason": "p95 9.1 and 8.4 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
+      }
+    },
+    "campus": {
+      "120hz": {
+        "p95Ms": { "max": 12.5, "issue": 630, "reason": "p95 8.3 and 9.8 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
+      }
+    },
+    "dorm_court": {
+      "120hz": {
+        "p95Ms": { "max": 11.5, "issue": 630, "reason": "p95 9.1 and 8.5 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
+      }
+    },
+    "dorms": {
+      "120hz": {
+        "p95Ms": { "max": 12, "issue": 630, "reason": "p95 9.6 and 9.6 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
+      }
+    },
+    "east_lane": {
+      "120hz": {
+        "p95Ms": { "max": 15, "issue": 630, "reason": "p95 10 and 11.9 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
+      }
+    },
+    "sports": {
+      "120hz": {
+        "p95Ms": { "max": 12, "issue": 630, "reason": "p95 9.5 and 9.5 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
+      }
+    },
+    "office_quarter": {
+      "120hz": {
+        "p95Ms": { "max": 11, "issue": 630, "reason": "p95 8.7 and 8.3 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
+      }
+    },
+    "harbour": {
+      "120hz": {
+        "p95Ms": { "max": 11, "issue": 630, "reason": "p95 8.3 and 8.8 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
+      }
+    },
+    "works": {
+      "120hz": {
+        "p95Ms": { "max": 14, "issue": 630, "reason": "p95 10.9 and 9.7 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
+      }
+    },
+    "research_lab": {
+      "120hz": {
+        "p95Ms": { "max": 11.5, "issue": 630, "reason": "p95 9 and 9 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
       }
     }
   }

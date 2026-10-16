@@ -719,7 +719,7 @@ preserved outside the disposable worktree at `/tmp/perf-237-evidence/`.
 
 ## Place budgets (#372, 2026-10-09)
 
-`node game3d/tools/perf/place-budget.mjs` opens every place on its own (all 26 in `PLACE_FILES`, indoor and outdoor), measures it, and fails when a number goes over its budget. tools/land.sh runs it before main moves on any branch that changes game3d/, and refuses the landing with the place, the tier, the number and the budget, unless the place is just as far over on main (then it lands with a warning; land skill). It takes about 3.5 minutes on a quiet machine. `--places forecourt,plaza` and `--tiers phone` narrow a run, and `--json <file>` keeps every camera's numbers. The rules are in place-budget-lib.mjs, with unit tests in test/unit/place-budget.test.mjs.
+`node game3d/tools/perf/place-budget.mjs` opens every place on its own (every one in `PLACE_FILES`, indoor and outdoor) and the screens of its 120hz tier, measures it, and fails when a number goes over its budget. tools/land.sh runs it before main moves on any branch that changes game3d/, and refuses the landing with the place, the tier, the number and the budget, unless the place is just as far over on main (then it lands with a warning; land skill). It takes about 3.5 minutes on a quiet machine, plus about 7 for the 120hz tier. `--places forecourt,plaza` and `--tiers phone` narrow a run, and `--json <file>` keeps every camera's numbers. The rules are in place-budget-lib.mjs, with unit tests in test/unit/place-budget.test.mjs.
 
 What it measures, per place and tier (game3d/tools/perf/place-budgets.json, `tiers`):
 
@@ -728,8 +728,9 @@ What it measures, per place and tier (game3d/tools/perf/place-budgets.json, `tie
 - draw calls and triangles: whole frames (every pass), the median of four frames per view.
 - geometry and texture MB: every geometry and texture the place's scene reaches, each counted once, textures as uncompressed RGBA with mipmaps. Shadow maps and post-processing targets depend on the screen and are left out.
 - load: from navigation until the place has drawn its first frames, in the `?place=<name>&cap` start (no story, no next place being prepared).
+- 120hz (#625): frame time at 2560x1440 on default settings (Auto quality and limit), standing still for 5 s at the start spot, with headless Chrome's 60 Hz unpinned so frames come as fast as the GPU allows: the median and the 95th percentile time between presented frames. The budget is p95 8.3 ms, one refresh of a 120 Hz screen. The same tier measures four screens that aren't places (game3d/tools/perf/frame-measure.mjs, shared with refresh-rate.mjs): the title, B2 standing by the desks (`office-idle`), the pause menu over B2, and a fullscreen picture with a line under it (`cg`). `screens` in place-budgets.json names the place each stands in, so a land re-measures a screen when its place can move.
 
-The places are opened through a private server of the checkout the tool is in, so a worktree is measured exactly as it is. One place is open at a time, each in its own browser context that is closed before the next place opens, to keep memory down. A place over budget is measured once more and the lower numbers count, so a crowd walking into view doesn't fail a landing. A load time gets a 15% allowance for run-to-run noise (`allowance`), and when the machine's load average goes over 16 during the run a load over budget is only a warning. The check uses a browser GPU slot like the fast test. If the machine or the slots stay busy, it exits 75 and land.sh lands with a warning, as it does for the boot check.
+The places are opened through a private server of the checkout the tool is in, so a worktree is measured exactly as it is. One place is open at a time, each in its own browser context that is closed before the next place opens, to keep memory down. A place over budget is measured once more and the lower numbers count, so a crowd walking into view doesn't fail a landing. A load time gets a 15% allowance for run-to-run noise (`allowance`), and when the machine's load average goes over 16 during the run a load over budget is only a warning. The phone and desktop tiers use a browser GPU slot like the fast test. The 120hz tier takes the exclusive GPU lock through the queue, so nothing else draws on the card while it times frames, and waits up to 20 minutes for it (`GPU_WAIT`); it never stops another job. A load or frame time over budget while the machine's load average is over 16 is a warning only. If the machine, the slots or the lock stay busy, the tool exits 75 and names what it didn't measure; land.sh then lands with a `NOT MEASURED` block in the land log, keeps those places in its cache so the next land that changes game3d/ measures them whatever it changes, and keeps one work tracker issue open for them until they are measured. A p95 frame time varies by up to a quarter between two runs of the same commit (a crowd walking into view, a hitch), so the comparison with main allows 25% for it.
 
 The budgets:
 
@@ -741,6 +742,26 @@ The budgets:
 The phone calls, triangles and load are the phone budgets at the top of this file. The rest had no target before this, so these are starting values. iOS Safari allows a page about 224 to 384 MB of canvas and WebGL memory (notes/research/world-chunking.md), and 64 + 96 MB per place lets the place on screen and the next one prepared fit together. The desktop numbers are for a laptop with integrated graphics, not this machine's 3080: about two and a half times the phone's calls and triangles, and double its memory.
 
 Known exceptions: a place that is over today has its own higher ceiling for that number in `places`, with the issue that will bring it down. The ceiling is about 5% over what was measured (25% for load times), and the place may not go past it. When a place gets back under the budget, the check prints a note asking for its exception to be removed. Exceptions recorded on 2026-10-09: the forecourt's phone geometry (#372; its calls and triangles came under budget in stage 2, below); character skins at 2048x2048 that put most places over the texture budget (#373; the approved office-role models in 98609f13 took the gate to 187 MB and the office to 222 MB; the phone's came down in stage 4, below, the desktop's of shop street, east coast and office remain); and, for #374, the plaza's desktop triangles and the forecourt's phone calls and triangles and desktop calls and triangles (stage 3 says what is behind the forecourt's). The canteen, bakery and ferry terminal's calls, the office's calls, triangles, geometry and load, and the phone geometry of the forecourt, plaza (57 MB), east lane (40) and shop street (39) came under in stage 3, and those exceptions are gone.
+
+Frame times on 2026-10-16 (main 36f2c1e3, RTX 3080, two runs, the lower of a retry counting in each; ms, median / p95). Within 8.3 ms p95 in both runs: B2 by the desks 3.8 / 7.8, pause 0.1 / 0.3, picture 0.4 / 0.5, plaza, canteen, print shop, shop street, izakaya, bakery, konbini, clinic, karaoke and its booth, dorm commons, pool, gym and the ferry terminal (8.2 at most). Over in at least one run, each with an exception for #630 a quarter over its higher run:
+
+| place or screen | run 1 median / p95 | run 2 median / p95 |
+|---|--:|--:|
+| train | 9.5 / 29.5 | 6.4 / 9.4 |
+| east coast | 6.9 / 11.9 | 6.9 / 12.3 |
+| office (start spot) | 6.7 / 8.1 | 8.8 / 12.2 |
+| title | 5.8 / 11.6 | 5.6 / 11.9 |
+| east lane | 5.7 / 10.0 | 5.6 / 11.9 |
+| works | 5.3 / 10.9 | 5.2 / 9.7 |
+| campus | 4.9 / 8.3 | 4.9 / 9.8 |
+| dorms | 2.7 / 9.6 | 3.8 / 9.6 |
+| forecourt | 5.9 / 9.5 | 6.3 / 9.2 |
+| sports | 5.4 / 9.5 | 5.4 / 9.5 |
+| gate | 4.4 / 9.1 | 4.3 / 8.4 |
+| dorm court | 5.4 / 9.1 | 5.5 / 8.5 |
+| research lab | 4.6 / 9.0 | 4.6 / 9.0 |
+| harbour | 5.0 / 8.3 | 4.9 / 8.8 |
+| office quarter | 5.0 / 8.7 | 5.0 / 8.3 |
 
 To change a budget or add an exception, edit place-budgets.json in the same commit as the change that needs it, and say why in the commit message. An exception needs an issue (the unit test checks it).
 
