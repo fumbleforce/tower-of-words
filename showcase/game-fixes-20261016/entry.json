@@ -2,7 +2,7 @@
   "title": "Game fixes, 16 October",
   "date": "2026-10-16",
   "by": "claude-main/showcase-1016",
-  "caption": "Eight doorways and openings are raised or widened so you no longer clip or get stuck: the booth, dorm 203, the roof exit, the gym curtain, the lifts and the train doors. On a phone, Aoi stays in view at the day 3 notice board. The game holds 120 fps at 1440p on the 3080 in every place; the 95th percentile frame went from 29.5 to 7.9 ms on the train, 11.9 to 7.0 ms on the title and 12.2 to 7.0 ms in the office. The one visible change is that the thinnest contact shadows are a little lighter at 1440p. Give is now a row in a person's E menu and the brown button is gone, and walking to Talk carries on after a scene changes what Talk does. Mio's evening chat is rewritten and new day 2 and 3 lines are voiced. Tapping to walk from the forecourt lane into the station court works now, where it used to hit an invisible wall.",
+  "caption": "Doorways and openings are raised so you no longer clip or get stuck: the booth, dorm 203, the roof exit, the gym curtain, the lifts and the train doors. On a phone, Aoi stays in view at the day 3 notice board. The game holds 120 fps at 1440p on the 3080 in every place; the 95th percentile frame went from 29.5 to 7.9 ms on the train, 11.9 to 7.0 ms on the title and 12.2 to 7.0 ms in the office. The one visible change is that the thinnest contact shadows are a little lighter at 1440p. Give is now a row in a person's E menu and the brown button is gone, and walking to Talk carries on after a scene changes what Talk does. Mio's evening chat is rewritten and new day 2 and 3 lines are voiced. Tapping to walk from the forecourt lane into the station court works now, where it used to hit an invisible wall.",
   "result": [
     "train-door-after",
     "roof-exit-after",
@@ -18,7 +18,7 @@
         {
           "id": "train-door-after",
           "image": "game3d/shots/doorway-648/after/train-door-in-morning-desk.png",
-          "caption": "Train door, 1.25 m wide, with the rebuilt texture"
+          "caption": "Train door, now 1.25 m tall, with the rebuilt texture"
         },
         {
           "id": "roof-exit-after",
