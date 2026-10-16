@@ -29,6 +29,8 @@ const checks = [
   ['facts', ['tools/facts/check.mjs']],
   ['direct render', ['tools/facts/direct-render.mjs']],
   ['direct render test', ['--test', 'tools/facts/direct-render.test.mjs']],
+  ['art scripts', ['tools/facts/art-scripts.mjs']],
+  ['art scripts test', ['--test', 'tools/facts/art-scripts.test.mjs']],
   ['story map', ['tools/bible/story-map-check.mjs']],
   ['nav registry', ['tools/check/nav-registry.mjs']],
 ];

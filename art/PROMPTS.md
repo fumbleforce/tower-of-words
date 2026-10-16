@@ -39,7 +39,7 @@ When a preset's words are wrong or missing (a look drifts, or a shot needs an ex
 
 ### What still runs directly
 
-Video (the animate-still skill), audio, Blender blockout control renders (tools/blockout/) and background removal (tools/rmbg_local.py) still call ComfyUI themselves. Every other still is a recipe. `node tools/facts/direct-render.mjs`, part of `npm run check`, fails a new script that renders a still through tools/comfy.py, and an old one that renders more than it used to.
+Video (the animate-still skill), audio, Blender blockout control renders (tools/blockout/) and background removal (tools/rmbg_local.py) still call ComfyUI themselves. Every other still is a recipe. `node tools/facts/direct-render.mjs`, part of `npm run check`, fails a new script that renders a still through tools/comfy.py, and an old one that renders more than it used to. Scripts under art/ are not added to: `node tools/facts/art-scripts.mjs`, part of `npm run check`, fails a new one. Put reusable steps in tools/characters/steps/ and a model's settings in its recipe.
 
 ## Writing the scene text
 
