@@ -14,7 +14,7 @@ await withBrowserJob('codex-idle', async browser => {
   if(errors.length) throw Error(errors.join('\n'));
   const dir=path.join(root,'art/parts/candidates/idle-review'); fs.mkdirSync(dir,{recursive:true});
   for(const name of ['eric','mio']) await page.locator('section#'+name).screenshot({path:path.join(dir,name+'.png')});
-  const files=['art/parts/anim/idle.glb','art/parts/anim/walk.glb','art/parts/candidates/idle-neutral.glb','tools/creator/idle-review.html','tools/creator/recipe.js'];
+  const files=['art/parts/anim/idle.glb','art/parts/anim/walk.glb','art/parts/candidates/idle-neutral.glb','tools/creator/idle-review.html','tools/creator/recipe.js','tools/characters/idle/rig.js'];
   const hashes=Object.fromEntries(files.map(file=>[file,createHash('sha256').update(fs.readFileSync(path.join(root,file))).digest('hex')]));
   fs.writeFileSync(path.join(dir,'capture.json'),JSON.stringify({captured:new Date().toISOString(),hashes},null,2)+'\n');
   console.log('Captured Eric and Mio sheets:',dir);

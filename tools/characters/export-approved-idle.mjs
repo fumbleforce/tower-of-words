@@ -31,8 +31,8 @@ const results = await withBrowserJob('export-approved-idle', async (browser) => 
   const result = await page.evaluate(
     async ({ base, extraIds, characterDir, onlyExtra, retargetArms }) => {
       const THREE = await import('three');
-      const { loadLibrary, loadSource, makeRig, clipsFor } = await import(base + 'tools/creator/recipe.js');
-      const { retargetRotationValues } = await import(base + 'tools/creator/retarget.js');
+      const { loadLibrary, loadSource, makeRig, clipsFor } = await import(base + 'tools/characters/idle/rig.js');
+      const { retargetRotationValues } = await import(base + 'tools/characters/idle/retarget.js');
       const { GLTFLoader } = await import(base + 'game3d/vendor/loaders/GLTFLoader.js');
       const lib = await loadLibrary();
       lib.anims = { approved: 'candidates/idle-neutral-3.glb' };

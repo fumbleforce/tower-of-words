@@ -81,7 +81,7 @@ const bone = (ch, b) => { ch.root.updateMatrixWorld(true); return ch.bones[b].ge
 const IDS = ['mio', 'eric'], NAME = { mio: 'Mio', eric: 'Eric' };
 const ALL = { mio: ['hair', 'top', 'bottom', 'shoes'], eric: ['hair', 'top', 'bottom', 'shoes', 'stubble'] };
 const C = {};
-window.__sources = ['tools/creator/base/shots.html', 'tools/creator/base/base.js', 'tools/creator/recipe.js', 'tools/creator/retarget.js', 'art/parts/library.json', 'art/parts/anim/idle.glb', 'art/parts/anim/walk.glb'];
+window.__sources = ['tools/creator/base/shots.html', 'tools/creator/base/base.js', 'tools/creator/recipe.js', 'tools/characters/idle/rig.js', 'tools/characters/idle/retarget.js', 'art/parts/library.json', 'art/parts/anim/idle.glb', 'art/parts/anim/walk.glb'];
 if (CLEAN) window.__sources.push('art/parts/candidates/idle-neutral.glb');
 for (const id of IDS) {
   const base = CLEAN ? `clean-${id}-${CLEAN}` : id + '-base' + TAG;

@@ -19,18 +19,25 @@ def sources():
             continue
         yield f
 
+def shrink(f):
+    """<f>-1024.webp and <f>-512.webp beside a skin at least 2048 wide (the character build's package step too)."""
+    im = Image.open(f)
+    if im.width < 2048:
+        return
+    for s in SIZES:
+        out = f[:-5] + f'-{s}.webp'
+        if os.path.exists(out) and os.path.getmtime(out) >= os.path.getmtime(f):
+            continue
+        if os.path.exists(out):
+            os.chmod(out, 0o644)
+        im.convert('RGBA' if im.mode == 'RGBA' else 'RGB').resize((s, s), Image.LANCZOS).save(out, 'WEBP', quality=88, method=6)
+        print(os.path.relpath(out, ROOT), os.path.getsize(out) // 1024, 'KB')
+
+
 def main():
     for f in sources():
-        im = Image.open(f)
-        if im.width < 2048:
-            continue
-        for s in SIZES:
-            out = f[:-5] + f'-{s}.webp'
-            if os.path.exists(out) and os.path.getmtime(out) >= os.path.getmtime(f):
-                continue
-            if os.path.exists(out):
-                os.chmod(out, 0o644)
-            im.convert('RGBA' if im.mode == 'RGBA' else 'RGB').resize((s, s), Image.LANCZOS).save(out, 'WEBP', quality=88, method=6)
-            print(os.path.relpath(out, ROOT), os.path.getsize(out) // 1024, 'KB')
+        shrink(f)
 
-main()
+
+if __name__ == '__main__':
+    main()

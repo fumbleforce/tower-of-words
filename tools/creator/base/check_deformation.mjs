@@ -34,9 +34,11 @@ if (!ids.length) ids.push(`clean-eric-${DEFAULT_BASE_VERSION}`, `clean-mio-${DEF
 // Execute the checked-in implementation, only replacing its browser imports.
 // Loading a missing cache entry is an error, never an accidental network request.
 const unavailable = () => { throw Error('Unexpected browser asset loading in CPU probe'); };
-const helperCode = read('tools/creator/retarget.js').toString().replace(/^import .*;$/gm, '').replace(/^export /gm, '');
+const helperCode = read('tools/characters/idle/retarget.js').toString().replace(/^import .*;$/gm, '').replace(/^export /gm, '');
 const retargetRotationValues = new Function('THREE', helperCode + '\nreturn retargetRotationValues;')(THREE);
-const recipeCode = read('tools/creator/recipe.js').toString()
+// the sources and rig live in tools/characters/idle/rig.js (the idle bake's), the parts in recipe.js
+const recipeCode = (read('tools/characters/idle/rig.js').toString() + '\n' + read('tools/creator/recipe.js').toString())
+  .replace(/^export \{.*\} from .*;$/gm, '')
   .replace(/^import .*;$/gm, '')
   .replace(/^export /gm, '')
   .replace(/const ROOT = .*;/, `const ROOT = ${JSON.stringify(new URL('../../../art/parts/', import.meta.url).href)};`);
@@ -128,7 +130,7 @@ const lib = { ...manifest, retargetRest: hostRest, src: {}, clips: {}, anims: { 
 for (const [id, meta] of Object.entries(lib.sources)) lib.src[id] = source(id, meta);
 referenceNormalization(lib.src[lib.reference], loadGLB(`art/parts/${lib.sources[lib.reference].glb}`));
 for (const file of Object.values(lib.anims)) lib.clips[file] = loadGLB(`art/parts/${file}`);
-const provenance = Object.fromEntries(['tools/creator/recipe.js', 'tools/creator/base/base.js', 'tools/creator/retarget.js',
+const provenance = Object.fromEntries(['tools/characters/idle/rig.js', 'tools/creator/recipe.js', 'tools/creator/base/base.js', 'tools/characters/idle/retarget.js',
   ...Object.values(lib.anims).map(p => `art/parts/${p}`), ...Object.keys(lib.src).map(id => `art/parts/base/src-${id}.json`)]
   .map(path => [path, hash(path)]));
 const temporary = crossings || keepPoses ? mkdtempSync(join(tmpdir(), 'creator-deformation-')) : null;

@@ -1,14 +1,15 @@
 """Strip the embedded textures from the Meshy GLBs (the game uses the cleaned texture base-clean.webp),
 so each clip file is a few hundred KB instead of 4.5 MB. Mesh, skin and animation data are copied unchanged.
-Usage: python3 game3d/tools/slim_glb.py"""
+Usage: python3 game3d/tools/slim_glb.py [<src> <dst> ...]   (no pairs: Mio's approved Meshy clips)
+The character build's package step imports slim() (tools/characters/steps/package.py)."""
 import json, struct, os
+import sys
 SRC = 'art/approved/mio/meshy/Meshy_AI_Neon_Bun_Guardian_biped_Animation_{}_withSkin.glb'
 OUT = 'game3d/assets/mio/{}.glb'
-import sys
 CLIPS = {'Walking': 'walk', 'Running': 'run', 'Chair_Sit_Idle_F': 'sit', 'Step_to_Sit_Transition': 'tosit'}
-JOBS = [(SRC.format(s), OUT.format(d)) for s, d in CLIPS.items()]
-if len(sys.argv) > 2: JOBS = [(sys.argv[i], sys.argv[i + 1]) for i in range(1, len(sys.argv), 2)]   # src dst pairs
-for src_path, dst_path in JOBS:
+
+
+def slim(src_path, dst_path):
     b = open(src_path, 'rb').read()
     jl = struct.unpack('<I', b[12:16])[0]
     j = json.loads(b[20:20 + jl])
@@ -41,3 +42,10 @@ for src_path, dst_path in JOBS:
         f.write(struct.pack('<II', len(js), 0x4E4F534A)); f.write(js)
         f.write(struct.pack('<II', len(out), 0x004E4942)); f.write(out)
     print(dst_path, os.path.getsize(dst_path))
+
+
+if __name__ == '__main__':
+    JOBS = [(SRC.format(s), OUT.format(d)) for s, d in CLIPS.items()]
+    if len(sys.argv) > 2: JOBS = [(sys.argv[i], sys.argv[i + 1]) for i in range(1, len(sys.argv), 2)]   # src dst pairs
+    for src_path, dst_path in JOBS:
+        slim(src_path, dst_path)

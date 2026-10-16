@@ -53,6 +53,10 @@ __pycache__/
 /art/video/
 /art/music/
 /art/candidates/**/*.log
+# a character build's outputs (tools/characters/build.py): the recipe in tools/characters/recipes/ is the record
+/art/candidates/*/*/src/
+/art/candidates/*/*/meshy/
+/art/candidates/*/*/build/
 /game3d/assets/references/*.svg
 
 # Binary media, archives and model weights: no binary is tracked anywhere (notes/asset-storage-proposal.md).

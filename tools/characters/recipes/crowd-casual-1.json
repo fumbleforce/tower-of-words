@@ -1,0 +1,65 @@
+{
+ "id": "crowd-casual-1",
+ "name": "Casual walker (casual-1)",
+ "round": "crowd-everyday-2",
+ "review": "crowd-everyday-2",
+ "source": "art/parts/crowd-everyday-1/pics/casual-01.png",
+ "note": "Selected in Review crowd-everyday-2 (2026-10-09). Rebuilt from the round's cached Meshy files (import), with no Meshy call: walk, run, sit, base.webp, its phone copies and the idle come out byte for byte as the live game3d/assets/characters/crowd-casual-1/. The live mask.webp was made by a script that is not in the repo; region-mask makes its own.",
+ "import": {
+  "meshy/shape.glb": "art/parts/crowd-everyday-2/meshy/casual-1.glb",
+  "meshy/shape.json": "art/parts/crowd-everyday-2/meshy/casual-1-shape.json",
+  "meshy/shape-request.json": "art/parts/crowd-everyday-2/meshy/casual-1-shape-request.json",
+  "meshy/shape-front.png": "art/parts/crowd-everyday-2/meshy/casual-1-front.png",
+  "meshy/shape-left.png": "art/parts/crowd-everyday-2/meshy/casual-1-left.png",
+  "meshy/shape-right.png": "art/parts/crowd-everyday-2/meshy/casual-1-right.png",
+  "meshy/shape-back.png": "art/parts/crowd-everyday-2/meshy/casual-1-back.png",
+  "meshy/texture.glb": "art/parts/crowd-everyday-2/meshy/casual-1-tex.glb",
+  "meshy/texture.json": "art/parts/crowd-everyday-2/meshy/casual-1-retex.json",
+  "meshy/texture-request.json": "art/parts/crowd-everyday-2/meshy/casual-1-retex-request.json",
+  "meshy/rigged.glb": "art/parts/crowd-everyday-2/meshy/casual-1-rigged.glb",
+  "meshy/rig.json": "art/parts/crowd-everyday-2/meshy/casual-1-rig.json",
+  "meshy/rig-request.json": "art/parts/crowd-everyday-2/meshy/casual-1-rig-request.json",
+  "meshy/walking.glb": "art/parts/crowd-everyday-2/meshy/casual-1-walking.glb",
+  "meshy/running.glb": "art/parts/crowd-everyday-2/meshy/casual-1-running.glb",
+  "meshy/walking_armature.glb": "art/parts/crowd-everyday-2/meshy/casual-1-walking_armature.glb",
+  "meshy/running_armature.glb": "art/parts/crowd-everyday-2/meshy/casual-1-running_armature.glb",
+  "meshy/anim-sit.glb": "art/parts/crowd-everyday-2/meshy/casual-1-sit.glb",
+  "meshy/anim-sit.json": "art/parts/crowd-everyday-2/meshy/casual-1-sit.json",
+  "meshy/anim-sit-request.json": "art/parts/crowd-everyday-2/meshy/casual-1-sit-request.json"
+ },
+ "meshy": {
+  "shape": "01a12054-b65f-71ab-a063-8dac715fcd5b",
+  "texture": "01a12067-ff98-7025-bbbb-c809fc012ab9",
+  "rig": "01a12068-9cfd-7549-b899-ecd2b5fcadb8",
+  "anim-sit": "01a12069-1e19-7415-8b19-18707bf87c62",
+  "texture_rolls": [
+   {
+    "name": "texture",
+    "task": "01a12067-ff98-7025-bbbb-c809fc012ab9",
+    "marks": {"texels": 0, "triangles": 26, "ok": true, "band": [0.45, 0.69], "dark": 0.35, "limit": 40}
+   }
+  ]
+ },
+ "steps": [
+  {"step": "meshy-shape"},
+  {"step": "face-uv", "seed": 0.7},
+  {"step": "meshy-texture"},
+  {"step": "meshy-rig", "height": 1.1},
+  {"step": "meshy-anim", "name": "sit", "action": 32},
+  {"step": "reweight"},
+  {"step": "package"},
+  {"step": "idle", "file": "folder"},
+  {
+   "step": "region-mask",
+   "anchors": [
+    ["hair", "#3e221d", 0.55, 1.0],
+    ["top", "#808f7d", 0.25, 0.75],
+    ["bottom", "#21395a", 0.0, 0.45],
+    ["keep", "#f3d7c4", 0.0, 1.0],
+    ["keep", "#f4f4f2", 0.0, 1.0]
+   ]
+  },
+  {"step": "checks"},
+  {"step": "sheets"}
+ ]
+}

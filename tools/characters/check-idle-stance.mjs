@@ -1,5 +1,5 @@
 // Runtime regression for native cast idle export: floor contact, motion and transitions.
-// Serve the checkout at BASE_URL. Optional IDLE_DIR overrides only the baked JSONs.
+// Serve the checkout at BASE_URL. Optional IDLE_DIR overrides only the baked JSONs; MODEL_DIR a whole build.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -17,6 +17,15 @@ await withBrowserJob('check-idle-stance', async browser => {
   if (process.env.IDLE_DIR) await page.route('**/relaxed-idle-*.json*', route => {
     const file = path.join(process.env.IDLE_DIR, path.basename(new URL(route.request().url()).pathname));
     return fs.existsSync(file) ? route.fulfill({ path: file, contentType: 'application/json' }) : route.continue();
+  });
+  // MODEL_DIR: a character build's game folder (tools/characters/steps/checks.py), laid out as assets/characters/;
+  // its files stand in for the game's, and a crowd body's <id>/idle.json for relaxed-idle-<id>.json
+  if (process.env.MODEL_DIR) await page.route('**/assets/characters/**', route => {
+    const rel = decodeURIComponent(new URL(route.request().url()).pathname).split('/assets/characters/')[1];
+    let file = path.join(process.env.MODEL_DIR, rel);
+    const idle = rel.match(/^relaxed-idle-(.+)\.json$/);
+    if (idle && !fs.existsSync(file)) file = path.join(process.env.MODEL_DIR, idle[1], 'idle.json');
+    return fs.existsSync(file) ? route.fulfill({ path: file }) : route.continue();
   });
   await page.route('**/idle-stance-check', route => route.fulfill({ contentType: 'text/html', body:
     `<script type="importmap">{"imports":{"three":"${base}game3d/vendor/three/three.module.js","three/addons/":"${base}game3d/vendor/"}}</script>` }));

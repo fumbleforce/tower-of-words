@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import * as THREE from '../../game3d/vendor/three/three.core.js';
 
-const code = readFileSync(new URL('./retarget.js', import.meta.url), 'utf8')
+const code = readFileSync(new URL('../characters/idle/retarget.js', import.meta.url), 'utf8')
   .replace("from 'three'", `from '${new URL('../../game3d/vendor/three/three.core.js', import.meta.url).href}'`);
 const { retargetRotationValues } = await import(`data:text/javascript;base64,${Buffer.from(code).toString('base64')}`);
 const turn = (axis, angle) => new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(...axis), angle);
@@ -52,8 +52,8 @@ close(unitResult, hostChild.clone().multiply(motion));
 // Exercise the checked-in clipsFor implementation, with only its asset loader
 // replaced by a preloaded fixture. The armature turn does not commute with the
 // host correction, so moving correction before armQ makes this test fail.
-const recipeText = readFileSync(new URL('./recipe.js', import.meta.url), 'utf8');
-const clipsSource = recipeText.match(/export (async function clipsFor[\s\S]*?)\n\/\/ A recipe:/)?.[1];
+const recipeText = readFileSync(new URL('../characters/idle/rig.js', import.meta.url), 'utf8');
+const clipsSource = recipeText.match(/export (async function clipsFor[\s\S]*?\n})\n/)?.[1];
 assert.ok(clipsSource, 'Could not locate the actual clipsFor implementation');
 const clipsFor = new Function('THREE', 'BONES', 'ROOT', 'loadGLB', 'retargetRotationValues',
   `${clipsSource}\nreturn clipsFor;`)(THREE, ['Hips'], '',
