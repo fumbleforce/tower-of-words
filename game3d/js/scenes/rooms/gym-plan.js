@@ -2,6 +2,7 @@
 // "Gym"): the room, the lobby's and the hall's pieces, and where the day's people stand. In the room's own frame: x
 // east, z toward the camera, the origin the middle of the south wall, inside (the main doors' middle). Plain data, so
 // places/day3/plan.js reads the posts without the scene.
+import { doorHeight, PEOPLE_SCALE } from '../../movement/clearance.js';
 export const C = {
   maple: '#c4a882',
   seam: '#b39673',
@@ -33,7 +34,8 @@ export const HALL_DOOR = [-1.0, 1.0]; // its double doors, open
 export const PIER = [2.6, 4.0]; // the solid pier at its east end, the club board on it
 // the changing block: its front on the glass wall's line, its walls back into the hall; the doors in its front
 export const BLOCK = { x0: 4.0, x1: R.x1, z0: -8.3, z1: GLASS_Z };
-export const CHANGING = { men: 5.0, women: 6.65, pool: 8.45, w: 0.8, h: 1.35 };
+// h: the doors' opening; the noren's rod hangs 4 cm under its head, over a walkable doorway (movement/clearance.js)
+export const CHANGING = { men: 5.0, women: 6.65, pool: 8.45, w: 0.8, h: doorHeight(PEOPLE_SCALE) + 0.05 };
 // the reception counter along z, its front facing east into the lobby; the back counter along the west wall
 export const COUNTER = { x: -5.0, d: 0.55, h: 0.52, z0: -3.6, z1: -0.3 };
 export const BACK = { x0: R.x0, x1: R.x0 + 0.5, z0: -3.6, z1: -0.5 };

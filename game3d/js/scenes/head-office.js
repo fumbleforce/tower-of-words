@@ -23,8 +23,6 @@ import {
   T,
   at,
   inT,
-  GF,
-  AH,
   LU,
   LN,
   FW,
@@ -34,8 +32,6 @@ import {
   DOOR,
   DOOR_U,
   DOOR_W,
-  OUT,
-  CZ,
   CORE,
   TOP,
   parts,
@@ -43,21 +39,8 @@ import {
 } from './head-office/frame.js';
 import { upper, ground } from './head-office/tower.js';
 import { furniture, FURNITURE, RECEPTION, NOOKS, OFFICE_SPOTS } from './head-office/lobby.js';
-import { featureWall, core, liftLanding } from './head-office/core.js';
+import { featureWall, core, liftLanding, FORECOURT_LIFT_SITE } from './head-office/core.js';
 import { officeRoom, ROOM, ROOM_FURNITURE } from './head-office/office-room.js';
-
-export const FORECOURT_LIFT_SITE = {
-  x: OUT[0],
-  zBack: CZ - 0.09,
-  zFront: CZ + 0.09,
-  hole: [OUT[0] - 0.62, OUT[0] + 0.62],
-  wallH: GF,
-  topH: AH + 0.3, // the atrium's wall runs on over the doors to its top (places/lift-cut.js wallTop)
-  floor: '1',
-  out: [OUT[0], CZ + 0.85],
-  // no lid over the car: the atrium's wall hides it from every camera but the ride's
-  shaft: true,
-};
 
 // Eric in the lobby (past the door's threshold), the office or the lift: anywhere in the ground floor west of the
 // back office, since the rooms behind the back wall are closed but for those two

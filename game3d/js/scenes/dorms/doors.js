@@ -70,7 +70,7 @@ export function neighbourDoor(kit, c, zf, { lit = false, at = [], top = 1.3 } = 
     [0.04, top, 0.05, c + 0.3, 0, z],
     [0.64, 0.05, 0.05, c, top, z],
   ]);
-  leaf.box(C.steel, 0.56, top - 0.04, 0.03, c, 0.01, z + 0.005, { surf: 'door' });
+  leaf.box(C.steel, 0.56, top - 0.01, 0.03, c, 0.01, z + 0.005, { surf: 'door' }); // up to the frame's head: no slot over it
   leaf.box('#c9cdd2', 0.1, 0.025, 0.04, c + 0.2, 0.62, z + 0.03, {
     r: 0.008,
     cast: false,

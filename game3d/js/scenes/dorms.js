@@ -127,7 +127,7 @@ export function buildDorms() {
   const stair = stairs(kit, root);
   below(root);
   const levels = buildLevels(kit, root, nav);
-  dormEnclosures(root, front, levels);
+  const followLeaf = dormEnclosures(root, front, levels);
   // the four things Eric looks at get their own groups, for their outlines
   const obj = {
     window: new THREE.Group(),
@@ -178,6 +178,7 @@ export function buildDorms() {
     doorstep: [(DOOR[0] + DOOR[1]) / 2, NEAR + T + 0.3],
     front, // his front wall and door full height, as the corridor sees them; faded out as he goes in
     frontLeaf: front.userData.leaf, // its door's leaf: rotation.y below 0 swings it out onto the corridor
+    followLeaf, // the same leaf in the follow camera's copy of the front (dorms/enclosure.js), swung with it
     beside: [(DOOR[0] + DOOR[1]) / 2 + 0.44, NEAR + T + 0.3], // clear of the leaf as it swings out
     windowFront: [win[0], BACK + 0.45],
     window: win,

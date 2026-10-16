@@ -7,6 +7,7 @@ import { hull, icoPoints } from './hull.js';
 import { V } from './kit.js';
 import { monorailMesh, monorailParts, skyEnv } from './models.js';
 import { doorLeaf } from './door-leaf.js';
+import { doorHeight } from '../movement/clearance.js';
 
 export const LX = 4.0; // inner half length
 export const LZ = 1.2; // inner half width
@@ -42,11 +43,12 @@ export const BENCHES = [
 ];
 // #361: biparting doors 0.9 wide, each leaf sliding into a pocket in the wall either side, so the door sits far
 // enough in for the outer pocket to end on the straight wall, short of the rounded corner; the near benches end
-// short of the inner pocket
+// short of the inner pocket. The player walks through them: they clear his head at the car's scale, 1
+// (movement/clearance.js; tools/train/monorail.py cuts the Blender skin to the same numbers).
 export const DOOR_X = 2.65,
   DOOR_W = 0.9,
   DOOR_SILL = 0.035,
-  DOOR_TOP = 1.22;
+  DOOR_TOP = doorHeight(1);
 // The platform-side doorways' clear openings: the one definition the walls, stripes, frames and leaves are all
 // built from, whatever the wall height in the current framing (Jørgen, 2026-09-29: "STOP having the frame from the
 // cart overlap the doors"). game3d/test/unit/train-doorways.test.mjs checks that nothing of the body enters them.

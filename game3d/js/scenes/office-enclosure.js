@@ -21,6 +21,19 @@ export function officeWalls(root, bounds) {
 // The office's walkable doorways: the aperture, the frames and the lintels above them stand this high, which clears
 // the office-scaled player's head (1.416 m) with the margin (movement/clearance.js).
 export const OFFICE_DOOR_HEIGHT = doorHeight(PEOPLE_SCALE);
+// the lift lobby's north wall, taller than the rest: the lift's and the stair's doors in it, and the lift's floor
+// display over them
+export const LIFT_WALL_H = OFFICE_DOOR_HEIGHT + 0.28;
+// where the lift's car stands behind that wall (the fields: places/lift.js, SITES)
+export const OFFICE_LIFT_SITE = {
+  x: -5.45,
+  zBack: -3.48,
+  zFront: -3.22,
+  hole: [-5.95, -4.95],
+  wallH: LIFT_WALL_H,
+  floor: 'B2',
+  out: [-5.45, -2.4],
+};
 export function officeEntryFrame(root, z, thickness, material) {
   for (const x of [-0.8, 0.3])
     root.add(rbox(0.08, OFFICE_DOOR_HEIGHT, thickness + 0.04, null, { x, z, m: material, r: 0.01 }));

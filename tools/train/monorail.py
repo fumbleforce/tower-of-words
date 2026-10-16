@@ -33,7 +33,7 @@ LX, LZ, T, RI, HF = 4.0, 1.2, 0.1, 0.34, 1.45
 # windows (x, width) by the side's sign of z (#361: large, flush-glazed, slim frames; car.js WIN)
 WINS = {1: [(-0.86, 1.32), (0.86, 1.32)], -1: [(-2.65, 0.96), (-0.86, 1.32), (0.86, 1.32), (2.65, 0.96)]}
 WIN_Y0, WIN_Y1, WIN_R = 0.42, 1.24, 0.05
-DOOR_X, DOOR_W, DOOR_SILL, DOOR_TOP, DOOR_GAP = 2.65, 0.9, 0.035, 1.22, 0.025
+DOOR_X, DOOR_W, DOOR_SILL, DOOR_TOP, DOOR_GAP = 2.65, 0.9, 0.035, 1.25, 0.025  # DOOR_TOP: doorHeight(1), clearance.js
 DOORS = [(x - DOOR_W / 2, x + DOOR_W / 2) for x in (-DOOR_X, DOOR_X)]
 BEAM_TOP, SEA_Y = -0.16, -17.0  # the car rides low on the beam (#359): its skirt hangs 0.5 down either side
 HX, HZ, RP = LX + T, LZ + T, RI + T  # the skin's outer half length, half width and plan corner radius

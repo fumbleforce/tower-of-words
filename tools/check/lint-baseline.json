@@ -35,12 +35,6 @@
     {
       "file": "game3d/js/places/lift.js",
       "ruleId": "no-unused-vars",
-      "message": "'JP_FONT' is defined but never used.",
-      "context": "bcda265ce65c977362b188f41a35d6724f88e5e447d2171392f58cb673e3eecc"
-    },
-    {
-      "file": "game3d/js/places/lift.js",
-      "ruleId": "no-unused-vars",
       "message": "'cam' is assigned a value but never used.",
       "context": "c05785bf24a7a6ac8fdd684aaa81267feefd0fcd85e0093b761e200fffb086ff"
     },

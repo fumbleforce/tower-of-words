@@ -211,10 +211,17 @@ export function buildKaraokeBooth() {
   scene.add(root);
   const kit = new Kit();
   const nav = roomNav(R);
-  shell(root, R, { holes: { e: [[BD[0], BD[1], 0, doorHeight(PEOPLE_SCALE)]] }, color: C.wallBooth, top: '#5a4f6c' });
+  const dh = doorHeight(PEOPLE_SCALE); // a walkable doorway (movement/clearance.js)
+  shell(root, R, { holes: { e: [[BD[0], BD[1], 0, dh]] }, color: C.wallBooth, top: '#5a4f6c' });
   carpet(kit, R, '#3a3446', '#332e3e');
-  // the door from the corridor, open against the wall, the corridor's light beyond it
-  kit.box('#3a3146', 0.04, 1.18, BD[1] - BD[0], R.x1 + 0.2, 0, (BD[0] + BD[1]) / 2 + 0.55, { ry: 0.9, surf: 'door' });
+  // the door from the corridor, open against the wall, the corridor's light beyond it; its leaf as tall as the
+  // opening, a hair under the frame's head
+  const leafKit = new Kit();
+  leafKit.box('#3a3146', 0.04, dh - 0.01, BD[1] - BD[0], R.x1 + 0.2, 0, (BD[0] + BD[1]) / 2 + 0.55, {
+    ry: 0.9,
+    surf: 'door',
+  });
+  root.add(leafKit.flush(Object.assign(new THREE.Group(), { name: 'booth-door-leaf' })));
   kit.box('#f1e6c8', 0.6, 0.004, BD[1] - BD[0], R.x1 + 0.4, 0.002, (BD[0] + BD[1]) / 2, {
     opts: { emissive: '#f1e6c8', emissiveIntensity: 0.35 },
     cast: false,

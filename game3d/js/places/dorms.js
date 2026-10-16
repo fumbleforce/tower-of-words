@@ -140,6 +140,8 @@ export function dormsPlace(game) {
     },
   };
 
+  // his front door's leaves: the overview's tall front's, the follow camera's copy of it and the cut-low front's
+  const swing = (y) => (w.frontLeaf.rotation.y = w.followLeaf.rotation.y = w.door.rotation.y = y);
   // the front door's middle, the genkan floor in front of it, and a spot in the room to start a day on
   const DOOR_MID = (w.doorstep[0] + w.atDoor[0]) / 2 - 0.1,
     OUT_SPOT = [w.doorstep[0], b.near - 0.35],
@@ -241,7 +243,7 @@ export function dormsPlace(game) {
         await glide(g, eric.root, w.beside, 0.6);
         g.walker.faceTo?.(w.doorstep[0], b.near);
         sfx('door');
-        await g.tween(0.5, (k) => (w.frontLeaf.rotation.y = w.door.rotation.y = -1.4 * k * (2 - k)));
+        await g.tween(0.5, (k) => swing(-1.4 * k * (2 - k)));
         await glide(g, eric.root, w.doorstep, 0.5);
         st.inside = true;
         refit();
@@ -267,7 +269,7 @@ export function dormsPlace(game) {
         script(g);
         cam.closeOn(w.arrive.at, w.arrive.zoom);
         sfx('door');
-        await g.tween(0.4, (k) => (w.frontLeaf.rotation.y = w.door.rotation.y = -1.4 * k * (2 - k)));
+        await g.tween(0.4, (k) => swing(-1.4 * k * (2 - k)));
         eric.setState('walk');
         await glide(g, eric.root, w.doorstep, 0.9);
         st.inside = false;
@@ -277,7 +279,7 @@ export function dormsPlace(game) {
         await glide(g, eric.root, w.atDoor, 0.9);
         await fade;
         sfx('door');
-        g.tween(0.45, (k) => (w.frontLeaf.rotation.y = w.door.rotation.y = -1.4 * (1 - k * k)));
+        g.tween(0.45, (k) => swing(-1.4 * (1 - k * k)));
         unscript(g);
         st.entering = false;
         cam.release();

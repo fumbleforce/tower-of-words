@@ -6,6 +6,7 @@ import { X0, X1, BACK, NEAR, H, PART, LOW, T, BATH_X, DOORWAY, DOORWAY_H, C } fr
 
 // Match the fronts that the overview fades, without changing their state or materials.
 // Each ceiling applies only inside its own room; the outdoor corridor and roof stay open.
+// Returns the copy of his front door's leaf, which swings with the front's own (places/dorms.js).
 export function dormEnclosures(root, front, levels) {
   const add = (parent, x0, x1, source) => {
     const room = roomEnclosure(parent, { x0, x1, z0: BACK, z1: NEAR, h: H }, { color: C.wall });
@@ -18,9 +19,9 @@ export function dormEnclosures(root, front, levels) {
     room.wall('x', x0 - T, x1 + T, NEAR + T / 2, H, T);
     room.wall('z', BACK, NEAR, x0 - T / 2, H, T);
     room.wall('z', BACK, NEAR, x1 + T / 2, H, T);
-    return room;
+    return { room, copy };
   };
-  const own = add(root, X0, X1, front);
+  const { room: own, copy } = add(root, X0, X1, front);
   own.wall('x', X0, X1, PART, LOW, 0.08, {
     holes: [[...DOORWAY, 0, DOORWAY_H]],
   });
@@ -33,4 +34,5 @@ export function dormEnclosures(root, front, levels) {
       dx = parent.position.x;
     add(parent, entry.x0 - dx, entry.x1 - dx, entry.group);
   }
+  return copy.children[front.children.indexOf(front.userData.leaf)];
 }

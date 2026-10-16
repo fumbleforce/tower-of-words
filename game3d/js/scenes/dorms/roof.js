@@ -12,6 +12,7 @@ import { lightPool } from '../../places/life.js';
 import { BACK, T, CORR, RETURN, STAIR, OUT, STOREY, WEST_END, C } from './layout.js';
 import { Kit } from './kit.js';
 import * as PL from '../dorm-court/plan.js';
+import { doorHeight, PEOPLE_SCALE } from '../../movement/clearance.js';
 
 const DECK = '#7a8580',
   JOINT = '#6a746f',
@@ -21,7 +22,8 @@ const DECK = '#7a8580',
   W0 = WEST_END - T, // the roof's outer edges
   Z0 = BACK - T,
   Z1 = CORR[1] + 0.1,
-  SH = { x0: RETURN, x1: STAIR.east + T, z0: STAIR.back - T, z1: STAIR.half[1] + 0.1, h: 1.25 }, // the stair house
+  DH = doorHeight(PEOPLE_SCALE), // the stair house door's opening: a walkable doorway (movement/clearance.js)
+  SH = { x0: RETURN, x1: STAIR.east + T, z0: STAIR.back - T, z1: STAIR.half[1] + 0.1, h: DH + 0.15 }, // the stair house
   TANK = [4.3, -1.75], // the water tank, on its stand
   DOOR_Z = 1.45; // the middle of its door, on its west face
 export const ROOF = { x0: W0, x1: RETURN, z0: Z0, z1: Z1, door: [RETURN, DOOR_Z] };
@@ -39,7 +41,7 @@ export function roof(kit, root, nav) {
     door, // the stair house door's leaf: rotation.y below 0 swings it out onto the roof
     out: [RETURN - 0.45, DOOR_Z], // just out of the door
     in: [RETURN + 0.25, DOOR_Z], // just inside it
-    light: new THREE.Vector3(RETURN - 0.25, 1.3, DOOR_Z), // the bulkhead light's place
+    light: new THREE.Vector3(RETURN - 0.25, DH - 0.02, DOOR_Z), // the bulkhead light's place, under its fitting
     washing: { at: [-4.75, -1.0], spot: [-2.55, -0.55] }, // from the end of the lines, clear of the sheets
     planters: { at: [-7.9, 1.55], spot: [-7.9, 0.95] },
     bench: [-9.3, -1.25], // the nook: two chairs and a crate at the west end
@@ -90,7 +92,7 @@ function stairHouse(kit, root) {
   const { x0, x1, z0, z1, h } = SH,
     cx = (x0 + x1) / 2,
     cz = (z0 + z1) / 2;
-  // the walls round the door's opening (0.6 wide, 1.26 high), the roof slab and its cap
+  // the walls round the door's opening (0.6 wide, DH high), the roof slab and its cap
   const d0 = DOOR_Z - 0.3,
     d1 = DOOR_Z + 0.3;
   kit.boxes(
@@ -98,7 +100,7 @@ function stairHouse(kit, root) {
     [
       [T, h, d0 - z0, x0 + T / 2, 0, (z0 + d0) / 2],
       [T, h, z1 - d1, x0 + T / 2, 0, (d1 + z1) / 2],
-      [T, h - 1.3, d1 - d0, x0 + T / 2, 1.3, DOOR_Z],
+      [T, h - DH, d1 - d0, x0 + T / 2, DH, DOOR_Z],
       [x1 - x0, h, T, cx, 0, z0 + T / 2],
       [x1 - x0, h, T, cx, 0, z1 - T / 2],
       [T, h, z1 - z0, x1 - T / 2, 0, cz],
@@ -118,9 +120,9 @@ function stairHouse(kit, root) {
   );
   kit.box('#8d939b', 0.3, 0.2, 0.3, cx + 0.3, h + 0.12, z1 - 1.0, { r: 0.02 }); // a vent hood
   kit.boxes(C.frame, [
-    [T + 0.03, 1.3, 0.04, x0 + T / 2, 0, d0 - 0.02],
-    [T + 0.03, 1.3, 0.04, x0 + T / 2, 0, d1 + 0.02],
-    [T + 0.03, 0.05, d1 - d0 + 0.08, x0 + T / 2, 1.28, DOOR_Z],
+    [T + 0.03, DH + 0.05, 0.04, x0 + T / 2, 0, d0 - 0.02],
+    [T + 0.03, DH + 0.05, 0.04, x0 + T / 2, 0, d1 + 0.02],
+    [T + 0.03, 0.05, d1 - d0 + 0.08, x0 + T / 2, DH, DOOR_Z],
   ]);
   // a sign by the door: the roof's opening hours
   kit.box('#f4f3ee', 0.01, 0.16, 0.22, x0 - 0.006, 0.86, d0 - 0.25, { cast: false });
@@ -130,8 +132,8 @@ function stairHouse(kit, root) {
   for (let i = 0; i < 5; i++)
     kit.box(STEEL, 0.5 - i * 0.07, 0.015, 0.015, x1 - 0.4, h + 0.75 + i * 0.08, z0 + 0.5, { cast: false });
   kit.box(STEEL, 0.02, 0.7, 0.02, x0 + 0.3, h + 0.12, z1 - 0.3, { cast: false });
-  // the bulkhead light over the door, lit
-  kit.box('#eef2f8', 0.06, 0.08, 0.16, x0 - 0.04, 1.38, DOOR_Z, {
+  // the bulkhead light over the door, lit, on the wall above the frame's head
+  kit.box('#eef2f8', 0.06, 0.08, 0.16, x0 - 0.04, DH + 0.06, DOOR_Z, {
     r: 0.02,
     cast: false,
     opts: { emissive: '#dfe7f5', emissiveIntensity: 1.1 },
@@ -139,7 +141,7 @@ function stairHouse(kit, root) {
   root.add(lightPool(x0 - 0.6, DOOR_Z, 0.9, { color: '#dfe7f5', k: 0.2 }));
   // the door: hinged on its north edge, swinging out onto the roof
   const leaf = new Kit();
-  leaf.box(C.steel, 0.03, 1.26, 0.56, 0, 0.01, 0.28, { surf: 'door' });
+  leaf.box(C.steel, 0.03, DH - 0.02, 0.56, 0, 0.01, 0.28, { surf: 'door' }); // up to 1 cm under the head
   leaf.box('#c9cdd2', 0.04, 0.025, 0.1, -0.03, 0.62, 0.48, { r: 0.008, cast: false });
   const door = leaf.flush(new THREE.Group());
   door.position.set(x0 + 0.02, 0, d0 + 0.02);

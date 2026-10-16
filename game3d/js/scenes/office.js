@@ -34,7 +34,13 @@ import { liveScreens } from '../props.js';
 import { drain } from '../perf/slice.js';
 import { emiOffice, emiOfficeBlocks, EMI_X, EMI_DOOR } from './office-emi.js';
 import { MC } from '../mc.js';
-import { officeWalls, officeEntryFrame, machineDoorFrame, OFFICE_DOOR_HEIGHT } from './office-enclosure.js';
+import {
+  officeWalls,
+  officeEntryFrame,
+  machineDoorFrame,
+  OFFICE_DOOR_HEIGHT,
+  LIFT_WALL_H,
+} from './office-enclosure.js';
 import { PEOPLE_SCALE } from '../movement/clearance.js';
 import { corridorToiletSigns, toiletSign } from './office-signs.js';
 import { referenceShelf } from './office-nook.js';
@@ -643,10 +649,10 @@ export function* officeSteps() {
   W('x', X0 - T / 2, X1 + T / 2, Z1 + T / 2, 0.32, T);
   yield;
   // top row
-  W('x', X0, -4.2, -3.4, WH, T, {
+  W('x', X0, -4.2, -3.4, LIFT_WALL_H, T, {
     holes: [
-      [-6.75, -6.15, 0, 1.25],
-      [-5.95, -4.95, 0, 1.25],
+      [-6.75, -6.15, 0, OFFICE_DOOR_HEIGHT],
+      [-5.95, -4.95, 0, OFFICE_DOOR_HEIGHT],
     ],
   }); // lift lobby north: stair door, lift
   W('z', Z0, CN, -4.2, WH, T); // lobby / office
@@ -671,7 +677,7 @@ export function* officeSteps() {
 
   yield;
   // doors and plates on the corridor's north face (seen from the camera)
-  const sd = door(0.6, 1.25, { windows: true });
+  const sd = door(0.6, OFFICE_DOOR_HEIGHT, { windows: true });
   sd.position.set(-6.45, 0, -3.4 + T / 2);
   root.add(sd);
   yield;
@@ -710,7 +716,7 @@ export function* officeSteps() {
   };
   addPlate('ITサポート', -1.3, 1.0, CN + T / 2 + 0.005, { w: 0.56, h: 0.2, sub: 'IT SUPPORT' });
   addPlate('機械室', 5.95, 1.0, CN + T / 2 + 0.005, { w: 0.56, h: 0.2, sub: 'MACHINE ROOM' });
-  addPlate('階段', -6.45, 1.34, -3.4 + T / 2 + 0.005, { w: 0.4, h: 0.18, sub: 'STAIRS' });
+  addPlate('階段', -6.45, OFFICE_DOOR_HEIGHT + 0.16, -3.4 + T / 2 + 0.005, { w: 0.4, h: 0.18, sub: 'STAIRS' });
   addPlate('B2', -4.55, 1.05, -3.4 + T / 2 + 0.005, { w: 0.3, h: 0.3, bg: '#3b414c', fg: '#e9ecf0' });
   yield;
   // plates for the bottom rooms stand on the low wall tops, tilted up toward the camera
@@ -791,21 +797,23 @@ export function* officeSteps() {
   // ---- lift lobby ----
   const liftDoor = new THREE.Group();
   const leaves = [];
+  const DH = OFFICE_DOOR_HEIGHT, // the lift's doorway: its leaves run up to a hair under the head
+    face = -3.4 + T / 2;
   for (const s of [-1, 1]) {
-    const l = rbox(0.5, 1.22, 0.05, null, {
+    const l = rbox(0.5, DH - 0.01, 0.05, null, {
       x: s * 0.255,
       z: 0.02,
       r: 0.01,
       m: mat('#a2a8b0', { roughness: 0.5, metalness: 0.2 }),
     });
-    l.add(rbox(0.012, 1.16, 0.052, '#5d636d', { x: -s * 0.245, y: -0.58, r: 0.003, cast: false }));
+    l.add(rbox(0.012, DH - 0.07, 0.052, '#5d636d', { x: -s * 0.245, y: -(DH - 0.07) / 2, r: 0.003, cast: false }));
     liftDoor.add(l);
     leaves.push(l);
     yield;
   }
   liftDoor.position.set(-5.45, 0, -3.42);
   root.add(liftDoor); // leaves in the wall's thickness: they slide into the wall, not across the jambs
-  root.add(rbox(0.36, 0.12, 0.03, '#1d2027', { x: -5.45, y: 1.31, z: -3.4 + T / 2 + 0.02, r: 0.01, cast: false }));
+  root.add(rbox(0.36, 0.12, 0.03, '#1d2027', { x: -5.45, y: DH + 0.09, z: face + 0.02, r: 0.01, cast: false }));
   root.add(rbox(0.07, 0.13, 0.03, '#b9bec6', { x: -4.8, y: 0.62, z: -3.4 + T / 2 + 0.02, r: 0.01 }));
   const vm = vending(true);
   vm.scale.setScalar(0.82);
@@ -838,8 +846,8 @@ export function* officeSteps() {
     {
       const fm = mat('#4c515b');
       for (const sx of [-1, 1])
-        root.add(rbox(0.09, 1.3, 0.08, null, { x: -5.45 + sx * 0.55, z: -3.4 + T / 2 + 0.03, r: 0.015, m: fm }));
-      root.add(rbox(1.2, 0.07, 0.08, null, { x: -5.45, y: 1.21, z: -3.4 + T / 2 + 0.03, r: 0.015, m: fm }));
+        root.add(rbox(0.09, DH + 0.07, 0.08, null, { x: -5.45 + sx * 0.55, z: face + 0.03, r: 0.015, m: fm }));
+      root.add(rbox(1.2, 0.07, 0.08, null, { x: -5.45, y: DH, z: face + 0.03, r: 0.015, m: fm }));
       root.add(rbox(1.0, 0.012, 0.2, '#6d737d', { x: -5.45, y: 0.001, z: -3.4 + T / 2 + 0.06, r: 0.003, cast: false }));
       root.add(lightPool(-5.45, -3.0, 0.6, { k: 0.3, sx: 1.2, sz: 0.9, color: '#ffe2b8', y: 0.014 }));
       const cb = new THREE.Mesh(new THREE.CircleGeometry(0.022, 12), emissive('#ffe2b8', '#ffc680', 1.4));
@@ -1366,7 +1374,7 @@ export function* officeSteps() {
       56,
     );
     const ind = new THREE.Mesh(new THREE.PlaneGeometry(0.28, 0.1), new THREE.MeshBasicMaterial({ map: it }));
-    ind.position.set(-5.45, 1.37, -3.4 + T / 2 + 0.036);
+    ind.position.set(-5.45, OFFICE_DOOR_HEIGHT + 0.15, -3.4 + T / 2 + 0.036);
     root.add(ind);
   }
   {

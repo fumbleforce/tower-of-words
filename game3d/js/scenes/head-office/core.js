@@ -14,9 +14,11 @@ import { lightPool } from '../../places/life.js';
 import { GF, AH, LU, LN, FW, BACK, BU, OFFICE, OFFICE_DOOR, STAIR_U, LIFTS, T, OUT, CZ } from './frame.js';
 import { kit, C } from './kit.js';
 import { signMesh } from './signs.js';
+import { doorHeight, PEOPLE_SCALE } from '../../movement/clearance.js';
 
 const DOOR_H = 1.72; // the office door's opening
-const LIFT_H = 1.45, // the lift doorways (the B2 car's as places/lift.js builds its landing)
+// the lift doorways: walkable (movement/clearance.js), as high as the B2 car's (places/lift-car.js)
+const LIFT_H = doorHeight(PEOPLE_SCALE),
   STAIR_H = 1.55;
 // how far a door frame stands off the opening's faces it lines (docs/game/art-and-sound.md: at least a millimetre)
 const GAP = 0.003;
@@ -127,6 +129,20 @@ function frame(k, u0, u1, h) {
   k.B(C.steelDark, u0 - 0.02, u1 + 0.02, 0, 0.014, LN - 0.1, LN + 0.06, { cast: false }); // the sill
 }
 
+// the B2 car's place in the lobby (places/lift.js): the doorway in the back wall, the car behind it
+export const FORECOURT_LIFT_SITE = {
+  x: OUT[0],
+  zBack: CZ - 0.09,
+  zFront: CZ + 0.09,
+  hole: [OUT[0] - 0.62, OUT[0] + 0.62],
+  wallH: GF,
+  topH: AH + 0.3, // the atrium's wall runs on over the doors to its top (places/lift-cut.js wallTop)
+  floor: '1',
+  out: [OUT[0], CZ + 0.85],
+  // no lid over the car: the atrium's wall hides it from every camera but the ride's
+  shaft: true,
+};
+
 // the lift's landing doors, in the B2 car's doorway (they open with the car's)
 export function liftLanding(root) {
   const group = new THREE.Group();
@@ -143,7 +159,8 @@ export function liftLanding(root) {
   group.add(rbox(1.28, 0.012, 0.24, C.steelDark, { y: 0.003, seg: 1, r: 0.003 }));
   group.add(rbox(0.06, 0.16, 0.025, C.steelDark, { x: 0.88, y: 0.62, z: -0.01, seg: 1, m: dark }));
   const leaves = [-1, 1].map((s) => {
-    const leaf = rbox(0.6, 1.36, 0.045, C.steel, { x: s * 0.31, z: -0.03, seg: 1, m: steel });
+    // up to a hair under the head
+    const leaf = rbox(0.6, LIFT_H - 0.01, 0.045, C.steel, { x: s * 0.31, z: -0.03, seg: 1, m: steel });
     group.add(leaf);
     return leaf;
   });
