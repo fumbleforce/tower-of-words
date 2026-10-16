@@ -17,7 +17,7 @@ export default place(
         { do: 'noticeboard' }, { set: 'd3_board_read' }, { do: 'save' }, ...goal(),
       ],
       d3_aoi: [
-        { do: 'cam', on: 'aoi', zoom: 1.2 },
+        { do: 'cam', on: 'aoi', zoom: 1.2, conversation: 'aoi' },
         { do: 'boardVisit', state: 'slip' },
         { say: 'aoi', overheard: true, emo: 'casual', text: 'あ、どうぞ。私はテニスにします。', clear: ['テニス'] },
         { do: 'emote', who: 'aoi', kind: '!' },

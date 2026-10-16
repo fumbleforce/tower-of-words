@@ -4,6 +4,7 @@ import { PLAZA_DOOR } from '../scenes/canteen/plan.js';
 import { BASIN } from '../scenes/plaza/plan.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
+import { conversationCamera } from './conversation-camera.js';
 import { K } from '../scenes/office.js';
 import { lightPlace } from '../kit/light/rig.js';
 import { sim } from '../sim.js';
@@ -224,6 +225,10 @@ export async function plazaPlace(game) {
       east_lane: (g) => walkIn(g, cam, w.dormEdge, w.dormExit, -Math.PI / 2),
     },
   };
+  // Aoi at the notice board on day 3 (story/day3/plaza.js, d3_aoi). The board stands between the default camera, to the
+  // south, and the two of them, and she turns to Eric after the slip. The pair is shot from the north-east instead, where
+  // she faces the camera and the board stands off to one side, as the shop street's pair views do.
+  conversationCamera(game, P, { aoi: { yaw: 2.1, elev: 35, fov: 45, minDistance: 4.5, halfWidth: 1.2, height: 0.4 } });
   lightPlace(P, sim.period, sim.day);
   return P;
 }
