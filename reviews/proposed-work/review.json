@@ -3,7 +3,7 @@
  "date": "2026-10-16",
  "by": "claude-main",
  "status": "open",
- "updated": "2026-10-16T18:20:55+0200",
+ "updated": "2026-10-16T19:47:29+0200",
  "multi": true,
  "options": [
   {
@@ -14,13 +14,14 @@
   {
    "id": "p295",
    "label": "#295 Fill the dorm commons and the canteen with people who stay",
-   "note": "Today: In the dorm commons and the canteen at lunch, people mostly walk around with no purpose. Nobody sits, and you cannot talk to them. Found: Codex, from a review of the world on 6 Oct. Why it matters: Places feel empty or random when everyone only walks. A few people who sit and chat make a place feel lived in. Fix idea: Seat a few people, give each one a line to talk to, and thin out the walkers. One place at a time. (world, medium, issue #295.) Partly not reproduced on 6694372d: at lunch about five people sit in the canteen and have a Talk icon. The dorm common room is empty on day 1 afternoon, so nobody is there to talk to.",
+   "note": "Today: In the dorm commons and the canteen at lunch, people mostly walk around with no purpose. Nobody sits, and you cannot talk to them. Found: Codex, from a review of the world on 6 Oct. Why it matters: Places feel empty or random when everyone only walks. A few people who sit and chat make a place feel lived in. Fix idea: Seat a few people, give each one a line to talk to, and thin out the walkers. One place at a time. (world, medium, issue #295.) Partly seen on 4bd5870f: at lunch about five people already sit in the canteen with a Talk icon (left). The dorm common room is empty on day 1 in the morning, the afternoon (right), the evening and at night, so the common room still needs people, though it is empty rather than full of walkers.",
    "image": "reviews/proposed-work/p295-canteen-lunch-and-commons-desktop.webp"
   },
   {
    "id": "p363",
-   "label": "#363 Make the glow on the train doors light up the right doors",
-   "note": "Today: When the train stops, the glow that points at the open doors does not light the two doors on the left. Found: Claude, reading the train code on 9 Oct. Why it matters: The door glow tells a first-time player where to get off. If it is missing, the arrival is less clear. Fix idea: The code looks for the wrong part of each door. Point it at the right one and add a test. (world, small, issue #363.) No picture: a short glow on a door, which does not show in a still."
+   "label": "#363 Make the word rise over the train doors when you hold them",
+   "note": "Today: On day 1, when you say matte to hold the train doors, the doors shimmer, but the ring and the word 待って that should rise over them never appear. Found: Claude, reading the train code on 9 Oct. Why it matters: It is the first time a spoken word does something magic, so the moment should be easy to read. Fix idea: The code picks which doors to mark by a field the doors do not have, so it picks none. Pick the left doorway's doors and add a test. (world, small, issue #363.) Seen on 4bd5870f (desktop, day 1 train). Left: today. Right: the same moment in a test run that passes the left doors in, the way the code meant.",
+   "image": "reviews/proposed-work/p363-door-word-desktop.webp"
   },
   {
    "id": "p407",
@@ -36,13 +37,14 @@
   {
    "id": "p414",
    "label": "#414 Give five more outdoor places the same polish as the campus",
-   "note": "Today: The sports ground and campus got a polish pass. East lane, shop street, harbour, plaza and dorm court did not, and look plainer next to them. Found: Claude, after the sports and campus passes on 10 Oct. Why it matters: You walk through these places every day. Mixed quality is easy to notice. Fix idea: One place at a time, same method as before: fix the ground, planting and light. (world, large, issue #414.) Not clearly reproduced on 6694372d: at this size the east lane, shop street and harbour look close in quality to the campus and sports ground (desktop, default views).",
-   "image": "reviews/proposed-work/p414-outdoor-places-compare-desktop.webp"
+   "note": "Today: The sports ground and campus got a polish pass. East lane, shop street, harbour, plaza and dorm court did not, and look plainer next to them. Found: Claude, after the sports and campus passes on 10 Oct. Why it matters: You walk through these places every day. Mixed quality is easy to notice. Fix idea: One place at a time, same method as before: fix the ground, planting and light. (world, large, issue #414.) Not clearly seen on 4bd5870f: at their default desktop views the nine outdoor places look close in quality. The two polished ones are top left; judge the rest from the grid.",
+   "image": "reviews/proposed-work/p414-outdoor-places-desktop.webp"
   },
   {
    "id": "p415",
    "label": "#415 Light the sports ground at evening like the rest of the island",
-   "note": "Today: At evening the sports ground uses its own light switch, so it can look different from the campus and plaza at the same hour. Found: Claude, after the campus got the shared light on 10 Oct. Why it matters: Evening is when the clubs run, so people see this place most then. Fix idea: Switch it to the shared light setup and look at it at evening on phone and desktop. (world, small, issue #415.) No picture: tried on 6694372d: the sports ground and the plaza at evening differ only a little in tint, and no still makes it clear."
+   "note": "Today: At evening the sports ground uses its own light switch, so it can look different from the campus and plaza at the same hour. Found: Claude, after the campus got the shared light on 10 Oct. Why it matters: Evening is when the clubs run, so people see this place most then. Fix idea: Switch it to the shared light setup and look at it at evening on phone and desktop. (world, small, issue #415.) Not seen on 4bd5870f: at evening the sports ground gets the same sun and colour settings as the campus and the plaza, and looks about like the plaza. Suggest dropping it, or keeping it only as a code cleanup.",
+   "image": "reviews/proposed-work/p415-evening-light-desktop.webp"
   },
   {
    "id": "p416",
@@ -73,8 +75,8 @@
   {
    "id": "p499",
    "label": "#499 Stop two commuters overlapping at the station gate",
-   "note": "Today: On day 1 morning at the station gate two commuters can stand in the same spot and walk into each other. Found: Claude, in the screenshots on 11 Oct. Why it matters: People clipping through each other looks broken right at the start. Fix idea: Check the gate queue at both sizes, and give each queue place its own spot if they overlap. (world, small, issue #499.) Seen on 6694372d (desktop, day 1 morning): two commuters walk touching, one arm through the other. They do not share one spot in this run.",
-   "image": "reviews/proposed-work/p499-gate-commuters-overlap-desktop.webp"
+   "note": "Today: On day 1 morning at the station gate two commuters can stand in the same spot and walk into each other. Found: Claude, in the screenshots on 11 Oct. Why it matters: People clipping through each other looks broken right at the start. Fix idea: Check the gate queue at both sizes, and give each queue place its own spot if they overlap. (world, small, issue #499.) Seen on 4bd5870f (desktop, day 1 morning, a played run): two commuters wait in the gate queue half a metre apart, pressed into each other.",
+   "image": "reviews/proposed-work/p499-gate-queue-desktop.webp"
   },
   {
    "id": "p500",
@@ -97,7 +99,8 @@
   {
    "id": "p544",
    "label": "#544 Keep the camera above the fountain bowl",
-   "note": "Today: If you jump into the middle of the plaza fountain, the camera can end up below the edge of the bowl and you look at the wall. Found: An agent profiling jumps on 12 Oct. Why it matters: The plaza is on the first day. A camera under the bowl looks like a bug. Fix idea: Find how the camera follows into the fountain and keep it above the rim. (world, small, issue #544.) No picture: tried on 6694372d: the capture tools cannot make the jump into the bowl, so the camera under the rim could not be shown."
+   "note": "Today: If you jump into the middle of the plaza fountain, the camera can end up below the edge of the bowl and you look at the wall. Found: An agent profiling jumps on 12 Oct. Why it matters: The plaza is on the first day. A camera under the bowl looks like a bug. Fix idea: Find how the camera follows into the fountain and keep it above the rim. (world, small, issue #544.) Not seen on 4bd5870f: with the desktop follow camera on day 1, Eric jumped over the rim, walked to the centre and jumped back out, and the camera stayed 2.8 m up, above the rim, the whole time. The 12 Oct capture was on day 2. Suggest dropping it.",
+   "image": "reviews/proposed-work/p544-fountain-jump-desktop.webp"
   },
   {
    "id": "p550",
@@ -114,13 +117,14 @@
   {
    "id": "p567",
    "label": "#567 Fix the walk from the shop street to Kenji clipping a shop corner",
-   "note": "Today: When someone walks straight from the lunch spot to Kenji on the shop street, they stop at a shop corner and do not get through. Found: An agent testing walking routes on 13 Oct. Why it matters: People stuck at corners break scenes that depend on walking to a person. Fix idea: Make the walking path go around the corner, without weakening collisions. (world, small, issue #567.) Picture (desktop): blue is the lunch start, red is where the walk stops, green is Kenji under the glass roof. Marked from the numbers in the issue; the walk itself was not run again.",
-   "image": "reviews/proposed-work/p567-shop-corner-stop-desktop.webp"
+   "note": "Today: When someone walks straight from the lunch spot to Kenji on the shop street, they stop at a shop corner and do not get through. Found: An agent testing walking routes on 13 Oct. Why it matters: People stuck at corners break scenes that depend on walking to a person. Fix idea: Make the walking path go around the corner, without weakening collisions. (world, small, issue #567.) Not seen on 4bd5870f: the same walk, from the lunch spot to Kenji's spot with the numbers in the issue, got there in about 7 seconds without stopping (desktop, day 1). Suggest dropping it.",
+   "image": "reviews/proposed-work/p567-shop-walk-desktop.webp"
   },
   {
    "id": "p581",
    "label": "#581 Make the dorm kitchen and laundry doorways walkable",
-   "note": "Today: The doorways of the dorm kitchen and laundry are too low for the character, so you cannot walk in and out normally. Found: An agent auditing doorways on 14 Oct. Why it matters: You cannot enter two dorm rooms by walking. Fix idea: Raise the door openings and frames, then check entering and leaving with both main characters. (world, small, issue #581.) No picture: only shows as being unable to walk through; no still."
+   "note": "Today: The doorways of the dorm kitchen and laundry are too low for the character, so you cannot walk in and out normally. Found: An agent auditing doorways on 14 Oct. Why it matters: You cannot enter two dorm rooms by walking. Fix idea: Raise the door openings and frames, then check entering and leaving with both main characters. (world, small, issue #581.) Not seen on 4bd5870f: Eric walked from the corridor into the 2F kitchen and back out without stopping (desktop). The doorway was raised to 1.50 m on 16 Oct (f9343957), and the doorway test, which covers the kitchen and the 3F laundry, passes. Suggest dropping it.",
+   "image": "reviews/proposed-work/p581-kitchen-walk-desktop.webp"
   },
   {
    "id": "p585",
@@ -132,11 +136,6 @@
    "label": "#588 Make it clear how to send a typed word on the phone",
    "note": "Today: On the phone you can type a word, but the card only says \"Hold the mic and say it\". There is no visible button to send. The test player tried Enter and it worked. Found: An agent playing the train as a first-time player on 15 Oct. Why it matters: A phone player who cannot talk aloud on a train needs to know how to send the typed word. Fix idea: Add a visible send button or a hint under the text box. (ui, small, issue #588.)",
    "image": "reviews/proposed-work/p588-typed-word-phone.webp"
-  },
-  {
-   "id": "p611",
-   "label": "#611 Opening browser check fails at desktop size: Mio's pin is hidden while the bun scene runs",
-   "note": "Today: Opening browser check fails at desktop size: Mio's pin is hidden while the bun scene runs Found: by claude-main Why it matters: not said Fix idea: Find out whether the check should wait for the scene to end, or the desktop bun scene hides Mio's marker; fix the one that is wrong (other, small, issue #611.) No picture: none given."
   },
   {
    "id": "p612",
@@ -151,19 +150,26 @@
   {
    "id": "p646",
    "label": "#646 Let a walk reach its spot inside the B2 machine room",
-   "note": "Today: A character walking into the B2 machine room stops about 40 cm short of the target spot. Found: An agent testing walks on 16 Oct. Why it matters: Scenes that need a person at an exact spot would look slightly off. Fix idea: Trace why the walker gives up and fix that rule. (world, small, issue #646.) Picture (desktop): the green dot is the point inside the machine room the walk should reach. The 40 cm stop does not show in a still.",
-   "image": "reviews/proposed-work/p646-machine-room-target-desktop.webp"
+   "note": "Today: A character walking into the B2 machine room stops about 40 cm short of the target spot. Found: An agent testing walks on 16 Oct. Why it matters: Scenes that need a person at an exact spot would look slightly off. Fix idea: Trace why the walker gives up and fix that rule. (world, small, issue #646.) Not seen on 4bd5870f: with the door open, a walk from the corridor to the point in the issue ended on the point (desktop). Suggest dropping it.",
+   "image": "reviews/proposed-work/p646-machine-room-walk-desktop.webp"
   },
   {
    "id": "p650",
-   "label": "#650 Remove an invisible wall at the station door",
-   "note": "Today: While the station fades away, an invisible block still stops you walking out of the station door. Found: An agent surveying doorways on 16 Oct. Why it matters: It could block the very first exit on day 1. Fix idea: Let hidden solid parts stop blocking movement. (world, small, issue #650.) Picture (desktop): the red box marks where the invisible block sits, drawn from the numbers in the issue, just outside the station door.",
-   "image": "reviews/proposed-work/p650-invisible-block-station-door-desktop.webp"
+   "label": "#650 Remove an invisible ceiling just outside the station",
+   "note": "Today: Over a strip of pavement just outside the station's front wall, a hidden part of the faded station still blocks Eric: he can walk there, but a jump stops dead. Found: An agent surveying doorways on 16 Oct. Why it matters: A player who jumps right outside the station on day 1 hits a ceiling nobody can see. Fix idea: Let hidden station parts stop blocking movement, or move the part. (world, small, issue #650.) Seen on 4bd5870f (desktop). Walking along the strip works. Left: a jump two metres away. Right: the same jump under the hidden part, where he stays on the ground.",
+   "image": "reviews/proposed-work/p650-jump-under-station-desktop.webp"
   },
   {
    "id": "p657",
    "label": "#657 Give Kenji's favourite drink a different reaction on day 2",
-   "note": "Today: On day 2 any drink you give Kenji gets the same reply, so his favourite melon soda is not special. Found: Codex, checking Kenji lines on 16 Oct. Why it matters: Day 1 already reacts to the favourite, so day 2 feels flatter. Fix idea: Split the gift scene into melon soda and other drinks, then record the lines. (story, small, issue #657.) No picture: a dialogue reaction, text only."
+   "note": "Today: On day 2 any drink you give Kenji gets the same reply, so his favourite melon soda is not special. Found: Codex, checking Kenji lines on 16 Oct. Why it matters: Day 1 already reacts to the favourite, so day 2 feels flatter. Fix idea: Split the gift scene into melon soda and other drinks, then record the lines. (story, small, issue #657.) Seen on 4bd5870f (desktop, the story's own give step): melon soda on day 1 gets his favourite reaction, and on day 2 the plain thanks any drink gets.",
+   "image": "reviews/proposed-work/p657-kenji-gift-desktop.webp"
+  },
+  {
+   "id": "p673",
+   "label": "#673 Keep the music bubble clear of Eric",
+   "note": "Today: On desktop, the headphone passenger's music-note bubble overlaps the right side of Eric's hair when he stands in the usual spot for talking to the passenger. Found: Codex, while checking the train passengers for #665. The bubble sat there before that change too. Why it matters: The bubble covers part of the player character while he talks to the passenger. Fix idea: Place reaction bubbles clear of nearby people at the normal interaction distance. (ui, small, issue #673.)",
+   "image": "game3d/shots/train-passengers-665/music-bubble-desktop.png"
   },
   {
    "id": "p15",
@@ -235,6 +241,12 @@
    "id": "p610",
    "label": "#610 Fix the failing subplots round-trip test",
    "note": "Today: Nothing a player sees. A test fails on a duplicate entry for the campus route. Found: An agent landing another change on 16 Oct. Why it matters: A failing test hides new failures. Fix idea: Find where the duplicate comes from and remove it. (tooling, small, issue #610.) No picture: test failure."
+  },
+  {
+   "id": "p611",
+   "label": "#611 Fix the desktop opening check that clicks the woman with the bun",
+   "note": "Today: Nothing wrong in play. At desktop size the opening check clicks the floor next to the woman with the bun, which starts her short scene. Pins hide while a scene runs, so the check cannot find Mio's pin and fails. Found: Claude, running the opening check on 16 Oct. Why it matters: A check that always fails at desktop size hides real failures. Fix idea: Same cause as #513: click a floor spot that is always clear, or wait for the scene to end. It can be folded into #513. (tooling, small, issue #611.) Seen on 4bd5870f (desktop): the red ring is where the check clicks; on the right her scene plays and every pin is hidden, as it should be during a scene. Suggest dropping this one and fixing #513.",
+   "image": "reviews/proposed-work/p611-check-click-desktop.webp"
   },
   {
    "id": "p613",
