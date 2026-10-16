@@ -1,0 +1,39 @@
+{
+ "title": "The old works, walkable",
+ "date": "2026-10-02",
+ "by": "claude-agent:works",
+ "caption": "The seventh south-half district from island-half-1: north of the harbour, the old works. Walk up the works lane out of the supply yard, or up the works street off the office street, and back down either. The lane runs past the old power plant to the chimney's foot. The yard passes the works shed, the factory's chained gates, the empty gatehouse and the server hall, and the research walk ends at Amakawa Research. Five nooks are off the way, with nothing in them yet. It also loads with ?place=works. Every door is chained or shut.",
+ "sections": [
+  {
+   "title": "The works lane",
+   "caption": "Before: the lane stopped at bollards a few steps out of the supply yard, with plain blocks beyond. After: the lane runs on north between the harbour office and the server hall, past the power plant's chained door (はつでんしょ on a plate, ivy up the corner), and ends under the pipe bridge at the chimney's foot."
+  },
+  {
+   "title": "The works yard and the factory",
+   "caption": "Before: grass and grey boxes. After: worn, cracked concrete, an old siding coming out of the factory's teal gates (chained, 立入禁止, 安全第一 above) and running along the yard to a buffer stop. Also the works shed, the gatehouse with its barrier raised, the transformer lot, and the server hall's door on its east face (サーバーとう, shut)."
+  },
+  {
+   "title": "The works street and the research walk",
+   "caption": "Before: the street's mouth stopped at bollards. After: old asphalt with faded edge lines and patches, utility poles and their wires, the works' chain-link fence behind them, the recycling centre's door (リサイクルセンター, shut), and the research walk to Amakawa Research's door (けんきゅうじょ, shut)."
+  },
+  {
+   "title": "Nooks",
+   "caption": "Corners off the way for later secrets, encounters or collectibles, each reachable on foot, with nothing in them yet: the chimney's foot, the smoking corner behind the server hall, the transformer lot, and the weather station by Amakawa Research. The fifth, the gatehouse window, is in the factory gate pictures."
+  },
+  {
+   "title": "After work",
+   "caption": "The arm lamps and the server hall's door are lit. The factory, the plant and the gatehouse stay dark."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/index.html?place=works"
+  },
+  {
+   "label": "Places doc",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/places.md"
+  }
+ ],
+ "pictures_local": true
+}

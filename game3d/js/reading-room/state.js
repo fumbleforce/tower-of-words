@@ -1,0 +1,1 @@
+import{loadReading as r,readingAction as o}from"./model.js";export function readingState(t,a=()=>{}){let e=r(t.research_state);return{read:()=>structuredClone(e),reload(){e=r(t.research_state)},act(n){return e=o(e,n),t.research_state=structuredClone(e),a(),structuredClone(e)}}}

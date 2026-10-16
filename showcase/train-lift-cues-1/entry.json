@@ -1,0 +1,14 @@
+{
+ "title": "Train seat cue and lift glance",
+ "date": "2026-09-30",
+ "by": "codex",
+ "caption": "The first passenger points toward the lunchbox seat. The Sales rider turns toward Eric before the conversation stops.",
+ "commit": "e8bd725",
+ "links": [
+  {
+   "label": "Play day 1",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

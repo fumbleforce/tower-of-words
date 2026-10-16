@@ -1,0 +1,1 @@
+let l=!1;export async function readNote(a,n){if(!l){const e=document.createElement("link");e.rel="stylesheet",e.href=new URL("../../css/flavor-finds.css",import.meta.url).href,document.head.appendChild(e),l=!0}const t=document.querySelector("#talk");t.classList.add("flavor-written");try{await a.say(null,n)}finally{t.classList.remove("flavor-written")}}

@@ -1,0 +1,54 @@
+{
+ "title": "Continue at the lift",
+ "date": "2026-10-08",
+ "result": [
+  "native-candidate-eric-1366-continued",
+  "native-candidate-eric-1366-outside-continued"
+ ],
+ "updated": "2026-10-08T00:54:12.655906+00:00",
+ "by": "codex",
+ "caption": "Continue now keeps you where you saved after leaving the B2 lift. Walk away and back to use it again.",
+ "preview": "native-candidate-eric-1366-continued",
+ "sections": [
+  {
+   "title": "Before the fix",
+   "caption": "The original failure, reproduced from an arrival autosave."
+  },
+  {
+   "title": "First check — Eric, desktop",
+   "caption": "Earlier successful route, retained before the older-save walking guard was added."
+  },
+  {
+   "title": "First check — Carina, phone",
+   "caption": "Earlier successful route, retained before the older-save walking guard was added."
+  },
+  {
+   "title": "Final check — Eric, desktop",
+   "caption": "Continue stays at the landing. Leaving and walking back still activates the lift."
+  },
+  {
+   "title": "Final check — Carina, phone",
+   "caption": "Continue stays at the landing. Leaving and walking back still activates the lift."
+  },
+  {
+   "title": "Older-save and pending-entry checks",
+   "caption": "Controlled save variations, kept separate from the normal route."
+  },
+  {
+   "title": "Settled office — Eric, desktop",
+   "caption": "Additional capture after the entry transition settles; earlier fade captures remain above."
+  },
+  {
+   "title": "Settled office — Carina, phone",
+   "caption": "Additional capture after the entry transition settles; earlier fade captures remain above."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play locally",
+   "href": "game3d/"
+  }
+ ],
+ "commit": "97244c6b06723bfcba171d14443682fc5d1a7bdc",
+ "pictures_local": true
+}

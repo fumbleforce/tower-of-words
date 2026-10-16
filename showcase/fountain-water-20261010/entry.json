@@ -1,0 +1,33 @@
+{
+ "title": "Plaza fountain: the waterfall is back",
+ "date": "2026-10-10",
+ "by": "claude-agent:fountain-water",
+ "caption": "The separate jets are gone. Each bowl pours one even curtain over its lip into the water below, like the fountain before the anime look, now in the anime look's turquoise and white streaks.",
+ "result": [
+  "fix-zoom",
+  "fix-close",
+  "fix-side",
+  "fix-phone"
+ ],
+ "sections": [
+  {
+   "title": "Now",
+   "caption": "The anime look with the curtains back. Morning, desktop and phone."
+  },
+  {
+   "title": "Before the anime look",
+   "caption": "The fountain's own curtains, which these follow. Same views."
+  },
+  {
+   "title": "The separate jets this replaces",
+   "caption": "Main until now: one arc per jet, starting in the air off the lip."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

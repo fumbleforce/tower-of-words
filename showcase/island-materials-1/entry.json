@@ -1,0 +1,28 @@
+{
+ "title": "Island planting and roof materials",
+ "date": "2026-10-06",
+ "by": "codex",
+ "caption": "Lawns, planted beds, tree crowns and flat roofs now carry surface detail across the outdoor districts. The comparison uses the normal game camera.",
+ "sections": [
+  {
+   "title": "Pocket park"
+  },
+  {
+   "title": "Coast walk"
+  },
+  {
+   "title": "Small-block roofs"
+  },
+  {
+   "title": "Measured cost",
+   "caption": "Matched quality-1 views on RTX 3080: park draw calls 158→179 desktop and 61→67 phone; coast 112→130 and 51→54; small blocks 139→160 and 48→54. Median frame time stayed 16.7 ms in all six comparisons. These are short local measurements, not a guarantee for phone hardware. No new image textures or lights; surface groups add draws. Both full day-one routes passed at desktop and phone sizes. Roof and lawn patterns fade with distance. Navigation and existing building shapes remain unchanged apart from an inset roof membrane on generic blocks."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play the island",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

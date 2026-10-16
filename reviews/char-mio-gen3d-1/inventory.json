@@ -1,0 +1,380 @@
+{
+  "issue": 171,
+  "track": "B",
+  "paid_jobs": [
+    {
+      "attempt": "meshy-single",
+      "id": "01a0f7b9-8b7b-7120-9f22-74a924c5025b",
+      "type": "image-to-3d",
+      "status": "SUCCEEDED",
+      "consumed_credits": 30,
+      "_settings": {
+        "ai_model": "latest",
+        "should_remesh": false,
+        "should_texture": true,
+        "enable_pbr": false,
+        "image_enhancement": false,
+        "target_formats": [
+          "glb"
+        ]
+      },
+      "_inputs": [
+        "art/parts/style-concepts/mio-ref-clean/final-cutout.png"
+      ]
+    },
+    {
+      "attempt": "meshy-multi-t3",
+      "id": "01a0f7b9-8e96-73c7-a507-05291557fcbc",
+      "type": "multi-image-to-3d",
+      "status": "SUCCEEDED",
+      "consumed_credits": 30,
+      "_settings": {
+        "ai_model": "latest",
+        "should_remesh": false,
+        "should_texture": true,
+        "enable_pbr": false,
+        "image_enhancement": false,
+        "target_formats": [
+          "glb"
+        ]
+      },
+      "_inputs": [
+        "art/parts/style-concepts/mio-ref-clean/final-cutout.png",
+        "art/parts/style-concepts/claude-mioi2i/gen/t3/l90.png",
+        "art/parts/style-concepts/claude-mioi2i/gen/t3/back.png",
+        "art/parts/style-concepts/claude-mioi2i/gen/t3/r90.png"
+      ]
+    }
+  ],
+  "credits_spent_by_this_track": 60,
+  "meshy_status_check": {
+    "checked_at": "2026-10-01T14:12:21.152927+00:00",
+    "jobs": [
+      {
+        "id": "01a0f7b9-8b7b-7120-9f22-74a924c5025b",
+        "status": "SUCCEEDED",
+        "created_at": 1790862528411,
+        "consumed_credits": 30,
+        "type": "image-to-3d"
+      },
+      {
+        "id": "01a0f778-90b4-70cb-bf99-e7e9867afe69",
+        "status": "SUCCEEDED",
+        "created_at": 1790858269809,
+        "consumed_credits": 15,
+        "type": "image-to-3d"
+      },
+      {
+        "id": "01a0e953-8be0-74fc-98c9-9c3ad9e3d461",
+        "status": "SUCCEEDED",
+        "created_at": 1790620963294,
+        "consumed_credits": 5,
+        "type": "image-to-3d"
+      },
+      {
+        "id": "5c33a389-5cb9-4ab1-863a-bfb2ec2fb33c",
+        "status": "SUCCEEDED",
+        "created_at": 1790540096578,
+        "consumed_credits": 0,
+        "type": "image-to-3d"
+      },
+      {
+        "id": "125cbbc5-95b1-4485-81f6-6aef60accb72",
+        "status": "SUCCEEDED",
+        "created_at": 1790538379018,
+        "consumed_credits": 0,
+        "type": "image-to-3d"
+      },
+      {
+        "id": "01a0f7b9-8e96-73c7-a507-05291557fcbc",
+        "status": "SUCCEEDED",
+        "created_at": 1790862529754,
+        "consumed_credits": 30,
+        "type": "multi-image-to-3d"
+      }
+    ],
+    "balance": 1525
+  },
+  "unfinished": [
+    "No hand-placed rebuild, rig or animation",
+    "TRELLIS has input only; outcome unconfirmed"
+  ],
+  "hunyuan": {
+    "outputs_found": false,
+    "used_during_takeover": false,
+    "license": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2/blob/main/LICENSE",
+    "note": "Official 2.0 and 2.1 licences exclude EU, UK and South Korea. Norway is not an EU member; no conclusion about a particular deployment is implied. No new Hunyuan use is needed."
+  },
+  "files": [
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/faces.txt",
+      "bytes": 6,
+      "sha256": "027161a3f6ad9f7d96079230f6a28da93902696a1225f35158f9f5cd762e260a"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/input-0.png",
+      "bytes": 225530,
+      "sha256": "65db6549d4212c938341f3e8e94b8a1875ff8ddda1630ac1e9893f04b5a44f46"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/input-1.png",
+      "bytes": 227438,
+      "sha256": "d4e429134f62c5d2048b4da589e0b06d32bc2e9e191b7419ca5db20d731cc8e3"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/input-2.png",
+      "bytes": 258833,
+      "sha256": "472fc5baa6d44651489af335dce6a5753037cf01a8d8baac72ae96d78ba84a9e"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/input-3.png",
+      "bytes": 210214,
+      "sha256": "bc5277b04265dd50caae58f0db28c7a243ebccd141762b5368971e03345712d7"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/model.glb",
+      "bytes": 21866636,
+      "sha256": "391664251876423f6620fbae76a53cc97f936ddf70f8de6cbcb24666011b69d4"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/norm.glb",
+      "bytes": 21866392,
+      "sha256": "fe78531c655ee5569d4ea9db212384d8e6f33e8049630cd08d70232a6a67187a"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/preview.png",
+      "bytes": 63401,
+      "sha256": "527f357a9d3151efe308888ccb0c783f694924c7220891f399a22917e83c64fd"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/clay-back.png",
+      "bytes": 579145,
+      "sha256": "fa35b3be772198af4675e07ae0bea93956d2a19c9201282e9584c1020e489fc7"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/clay-front.png",
+      "bytes": 639181,
+      "sha256": "43c64f78cd323a644a4380113f9400d53481fc8f72fbbab93f9557e9e37120f5"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/clay-l40.png",
+      "bytes": 631882,
+      "sha256": "2ae2cb67fb50b809d414c54e53b17b780bed61ad8399c04148f60a3cf5d913cc"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/clay-l90.png",
+      "bytes": 566044,
+      "sha256": "89883765814421ed76aaab3fa44512edafb0b8d60d449a84734bfe8fb2ca6379"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/tex-back.png",
+      "bytes": 599496,
+      "sha256": "e12fc4af2ebdbbf80a7021eaf1e38a976e2e5cb0c21aeabb27c7e182612d8378"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/tex-front.png",
+      "bytes": 636939,
+      "sha256": "be1ccf15b00bc73ba6095ba46cdc4fce3c1a3e1037238e6dacd862c538466db8"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/tex-l40.png",
+      "bytes": 634579,
+      "sha256": "8dcdbb98f20b3424dc638abc7b8233b3ed0e555a3d35a904af932626f2070689"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/tex-l90.png",
+      "bytes": 584584,
+      "sha256": "3debd72cb1613d9d4e38c5803b92f7cdf53338fe8189d6a71c684ee383c58a00"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/task.json",
+      "bytes": 3173,
+      "sha256": "0f346c98fc5e48a4e9651e9a72c31da6a87bc911f0d4d41ba0d36881807951a4"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/faces.txt",
+      "bytes": 7,
+      "sha256": "2469c55183e071c8a89d8b63df403a5dc2d80c05d4be44cad326f7b1a329cad0"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/input-0.png",
+      "bytes": 225530,
+      "sha256": "65db6549d4212c938341f3e8e94b8a1875ff8ddda1630ac1e9893f04b5a44f46"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/model.glb",
+      "bytes": 39798540,
+      "sha256": "b73e0332ea1b93f474f4273e1f738eb7a7fa8c75fdd9e52f292629b500154bec"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/norm.glb",
+      "bytes": 39798308,
+      "sha256": "1345f5ba3796e76475356ca53cfc6c790ef5061d963e368db574fa8519f0a898"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/preview.png",
+      "bytes": 66378,
+      "sha256": "21d5d7399982cec846e2ac447ba9994e23340dde7273379108d0f9551a4a4935"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/clay-back.png",
+      "bytes": 572681,
+      "sha256": "d4dc54e3998d9afc6dc47b979271e04282a63a42d4fc3673b2ad6d71d49a3e6f"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/clay-front.png",
+      "bytes": 635830,
+      "sha256": "f3102a03a83d561027e8647f624b9b5f299c1877e6da6dbbac37c1853071d599"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/clay-l40.png",
+      "bytes": 620098,
+      "sha256": "0ff84887efb916b92cdfac6134e323da0e4b5b229206712736dfc5a5daa9454e"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/clay-l90.png",
+      "bytes": 554425,
+      "sha256": "4832f13179364904a38b1950d6945dc0a3b901a9220847b955b3f1c668ae0209"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/tex-back.png",
+      "bytes": 602697,
+      "sha256": "35c964048121a9b82d69980e8904f454c002c5e8214a747488fe22b76830637e"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/tex-front.png",
+      "bytes": 644903,
+      "sha256": "5304a6f9cccfa52053e1bd0d9fd94b98dfecb88b6e1c4200798700d6412c9e6f"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/tex-l40.png",
+      "bytes": 641970,
+      "sha256": "d76cfa76bab10e22692789996ef9e95b26b5c1f2a5e407783dc0d930f93f4570"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/tex-l90.png",
+      "bytes": 583834,
+      "sha256": "02ca190f4c043e4cc29ac82ddc2c4fc091dc848264fc384230c7436eb79d4959"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/task.json",
+      "bytes": 2989,
+      "sha256": "4a50fcd1779612bb6a8df933db3b482a6d74d93fa88b325625d73b0c2068e050"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/trellis-single/input-0.png",
+      "bytes": 225530,
+      "sha256": "65db6549d4212c938341f3e8e94b8a1875ff8ddda1630ac1e9893f04b5a44f46"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/triposg-single/input-0.png",
+      "bytes": 225530,
+      "sha256": "65db6549d4212c938341f3e8e94b8a1875ff8ddda1630ac1e9893f04b5a44f46"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/triposg-single/model.ply",
+      "bytes": 11036699,
+      "sha256": "2d78142f00c573da049e31f5d8e1cfa8c63508ad57fed78bf270b3972de197cd"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/triposg-single/task.json",
+      "bytes": 279,
+      "sha256": "6de4db5233dd5d6575a37114739179eba850787718b563c0e2bad7c780cb949b"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/triposg-single/viewer-receipt.json",
+      "bytes": 430,
+      "sha256": "e7dff5be42a042f928f35b4deceb9046b5f0b2cdd1692e58323ea666a867081d"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/raw/triposg-single/viewer.glb",
+      "bytes": 10456420,
+      "sha256": "673856ce09a76bdd047049a6c35d6060c999dce751f89634476a48ceb410f5c7"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/back.png",
+      "bytes": 513051,
+      "sha256": "8b8c347f7c664139ae4bb89c5de5e6ee06a54891c7834b0689dd8f222150e4af"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/front.png",
+      "bytes": 551184,
+      "sha256": "8dc5efa888f8bc7369312072788b40ac262843bc2d61f2c5dbf8e39f2ac91b06"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/l40.png",
+      "bytes": 551669,
+      "sha256": "5ef022c661864c2c547e91647d751fe7e539082b66e5419c70cde1b02f8332c9"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/l90.png",
+      "bytes": 496695,
+      "sha256": "a8e9444d8c8f9d2dd6fdf793536e3dc0990d9f9c4ec5092872f04812d038117d"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/r40.png",
+      "bytes": 535494,
+      "sha256": "5290a2a399f33eaf3a563e47f620a4a0545c01f2e820671ef79a43c3530aaf87"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/r90.png",
+      "bytes": 491179,
+      "sha256": "b9863ca8e7b798aae505e35dd2b4df5a40b253c19cf2be4244a49c81b4f7308d"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/u1/back-canvas.png",
+      "bytes": 440279,
+      "sha256": "5b384c042e30a0171f84ba300c18029b585ca2457668a2faa40da42585c1bc63"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/u1/back.png",
+      "bytes": 263650,
+      "sha256": "2623e03a65f3a32050f707789e76d7a0454c3d89567d187e98e70ffdd18f3399"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/u1/l40-canvas.png",
+      "bytes": 539004,
+      "sha256": "13849c106e03181e4a4d5e5ba4d6288a7d00cbd315473b36e566038fc1362cbe"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/u1/l40.png",
+      "bytes": 387601,
+      "sha256": "fcef6f85475f9a166429afeecf5c822e92d64002d2ca2ea7bd5cc3a578b27e04"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/u1/l90-canvas.png",
+      "bytes": 427324,
+      "sha256": "f250d0b31d8c504f2f801d266dbfd9bc42946dbb6d5f3d25dc386ceba18c9597"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/u1/l90.png",
+      "bytes": 260491,
+      "sha256": "cc216617f590391e657295381753885dcf20e8339674676ee3a75238dbb70eac"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/u1/prompts.json",
+      "bytes": 6735,
+      "sha256": "4b4d1133bd6ae3756966b9446d2562507f1963129e124a94b498e50e85552b8f"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/u1/r40-canvas.png",
+      "bytes": 500126,
+      "sha256": "7cb19d602fa3fef5d742b050e14732b3df4ff087d292ddcb31c952396a82e83b"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/u1/r40.png",
+      "bytes": 352653,
+      "sha256": "bad06498ce96fed547770844829168eb91869d674c115e2c41120cd6f02698cf"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/u1/r90-canvas.png",
+      "bytes": 445664,
+      "sha256": "cb7ab2a8bb7de109cc9314992acc91d17d84583bc77c84ff8b512387e0eb9fdd"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/views/u1/r90.png",
+      "bytes": 271484,
+      "sha256": "660f2c78e810c01521fee373cc7e7dcb103da3ea49a7f68b378b56e57f4fb4fc"
+    }
+  ]
+}

@@ -1,0 +1,596 @@
+[
+  {
+    "source": "game3d/shots/works-fidelity/baseline-20261007/research-desk.png",
+    "sourceSha256": "7a547bcebe77f525a10cd3bd38dc5bb9a97fe353fd758bd15d78c01f7852e2f6",
+    "image": "bible/shots/showcase/works-fidelity-20261007/baseline-20261007/research-desk.webp",
+    "sha256": "614e1ff764454e038a631f79fe45674230792f870733d5cbee7b2f6921babf1c",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/baseline-20261007/research-phone.png",
+    "sourceSha256": "91f7eb9cbfdd30a079eeb494aa055dae445ab92661e73d0aa9ddac21985a8cf2",
+    "image": "bible/shots/showcase/works-fidelity-20261007/baseline-20261007/research-phone.webp",
+    "sha256": "d5eec1ca86f417908ddd191adc3f9a67a0192e2060c8a9a7ddb12facef96406f",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/baseline-20261007/street-desk.png",
+    "sourceSha256": "29a2a02e3ac63e7c1529e935bd75cf3aa33fc2d027ccdf7bcddee1d6e0ea48f8",
+    "image": "bible/shots/showcase/works-fidelity-20261007/baseline-20261007/street-desk.webp",
+    "sha256": "e933df891edb204339699ba7e093d93ad9d47266df5661844ed6811fe2c16aa7",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/baseline-20261007/street-phone.png",
+    "sourceSha256": "1d56b246ee05f769f9bef23a77c6f068d97e3ab39c2164d173e6b4b9d467152c",
+    "image": "bible/shots/showcase/works-fidelity-20261007/baseline-20261007/street-phone.webp",
+    "sha256": "e1449f68bc17f7686eec06de85ec7df62de650a965b1fb129b260431c4b9e48f",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/baseline-20261007/yard-desk.png",
+    "sourceSha256": "a9733986a12155f9abaf650d214a2b58f4e3037873e36f0d58c07ad9a17c74ed",
+    "image": "bible/shots/showcase/works-fidelity-20261007/baseline-20261007/yard-desk.webp",
+    "sha256": "2dfb27c4c0a5bd6e68a8c71ed3ccdea39a58849bafc342cdc79a0c841e992039",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/baseline-20261007/yard-phone.png",
+    "sourceSha256": "ea1593f9e7123ff7f828a23a27ed904ad84ca0bdf171c90cc60b951ae9b2756d",
+    "image": "bible/shots/showcase/works-fidelity-20261007/baseline-20261007/yard-phone.webp",
+    "sha256": "b9e614649e9f3e673d95e07b1a97ea671eaef4fa7fb0ee19bea55a5a08b4e6f4",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round1/research-desk.png",
+    "sourceSha256": "3f8b0dbd7e51ba08b3eba6324516cb32ea046da06181a23b72512f088d36596a",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round1/research-desk.webp",
+    "sha256": "d92ccc5864df10b9b9dad1ab9a4ffc5e1c31ee3cde4999a1a9d279852c578d4a",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round1/research-phone.png",
+    "sourceSha256": "723c81e998d0809e9aefea40f579fe39575ce49b2609dd460d9921739ad7d761",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round1/research-phone.webp",
+    "sha256": "4d1e6e58e6bc60d3a4f83030d1ade70c03a3b325abe6d6cdc9a62d7578f14e97",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round1/street-desk.png",
+    "sourceSha256": "8454f7cc4cf673c19f3a5f33362cfbef8a921c62c59edfcf7ab260837c2e20a7",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round1/street-desk.webp",
+    "sha256": "4ce0854c599e321d5bceabd1a9770f1055786f953035ebd087e87dbba6584cc7",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round1/street-phone.png",
+    "sourceSha256": "79921a7e33fb295052ea10ad708ea9e20d6dab9c50d5d569163f53161b180028",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round1/street-phone.webp",
+    "sha256": "70f1085f539f20f34c3255040dd2cce657fd6548dd657f30819da08608ba0668",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round1/yard-desk.png",
+    "sourceSha256": "b57a2ab9cfedc5c91a14112e567d9392066aadd29c5e2f51f374a9dd9ad8df98",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round1/yard-desk.webp",
+    "sha256": "cdbb936b718ad4ce21bf4d494b0615da36c54f8c0bfbd660e606b9b98ecb6b14",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round1/yard-phone.png",
+    "sourceSha256": "8d8b41c090b5bcd386fc5b19970d81487a152a263f4951575398463c85db9f0f",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round1/yard-phone.webp",
+    "sha256": "77e29a03459869a5176077d8d09bbbfb6ba10a039df1d6b2466a334da46ce3e6",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/1366-bins-approach.png",
+    "sourceSha256": "dd81d59e1b3b65b945180113e53c025ef6ad7d0d5f4d348bb273c5407e5977ce",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-bins-approach.webp",
+    "sha256": "f0a578191dd480e58404faba80797f71b5bf8cacbda2e92b6eb984e2c36fb84b",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/1366-bins-middle.png",
+    "sourceSha256": "860dde5c156ed098f2f0acc1b4ceac6b96a4c11308ae2c2df60df3badf819d44",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-bins-middle.webp",
+    "sha256": "6b4f0e65bb05d8584116a3c410ceca5fb815863443f77f80168f0df0f34b7916",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/1366-bins-north.png",
+    "sourceSha256": "8a48a1989b00985a032c8ea5c1e0c8ba0a075b6838fc938eaed2b53143d074f7",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-bins-north.webp",
+    "sha256": "f6859d231c4d733a1de3a83458577b651a19bb362d426f0cff39b2d66247758e",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/1366-bins-south.png",
+    "sourceSha256": "eb615d260950dc7075e538178ba5f9752ea14f5e75ccc7a56073d8e6fe41adb3",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-bins-south.webp",
+    "sha256": "e147e9c25fbcc895238fff7274d5a8afdde116c05108adbece43bb9b5396576e",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/1366-bins-support-detail.png",
+    "sourceSha256": "66c07472b7ee021460c3b58a08f71252e034d521a4b4a8ce8c17c55c53149baa",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-bins-support-detail.webp",
+    "sha256": "e7afb57b3831d2b12b278412a8896d6b96dffeaca696d6a7b9b52904355bb6a3",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/1366-gate-approach.png",
+    "sourceSha256": "245489e7f70193199ef4e20f2bff5401d29b8939bad7debaab66db9ffc24f980",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-gate-approach.webp",
+    "sha256": "db82629718669ec685425806fb49165bf204f3c3dc89ae0995c6bb049406e88e",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/1366-gate-inside.png",
+    "sourceSha256": "8044abd6720897042b8dd4fc818f35219bf027df2811f50f038678ae861bbd24",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-gate-inside.webp",
+    "sha256": "e9195b460a9e3cfbf50a7b672b9cc06f6cf41e01fc56918bb62e03b84c769a82",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/1366-gate-return.png",
+    "sourceSha256": "51172e65be363aa275344e456973a86d092c53102a98e76511b09d1b1e0301e3",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-gate-return.webp",
+    "sha256": "afc6080560ab4039918ff5eee1d43d80b514b75dfa29c530f425483c183dd5f0",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/1366-instruments.png",
+    "sourceSha256": "e8d4096e8c143bda53e4cae7238bc480db743d5cec718e585718f4d2346915fc",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-instruments.webp",
+    "sha256": "29d5bce786d5cbc35176332193f6ab83fd7a21414406b0217d7a0df9d0e2cfa7",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/1366-station-support-detail.png",
+    "sourceSha256": "3d0f2141f0645ee75e9744fb2bc846111a5f903ac09679d671be411c2c9fe7f7",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-station-support-detail.webp",
+    "sha256": "70a14df98206cdb0b39bec5e0119404ad967827064f399e2a53bd8dc83e0049a",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/390-bins-approach.png",
+    "sourceSha256": "e93c0213eaf4a3327feb69db443ae454d81670ac07a5426652b9844f7b6448ec",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-bins-approach.webp",
+    "sha256": "a69c35a33285d45ab115111143be5bdbaf2d6d734e67a49a0428cd3f4bd2c4f7",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/390-bins-middle.png",
+    "sourceSha256": "c3221d99257bd6468d5fb64aed5cc6fac25ab7ddacb317138bbd7580aa08ea2b",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-bins-middle.webp",
+    "sha256": "b4012660743cf6936fea9018cce0b2f53c87fd3b3d454c6f59b5f635c1b9e367",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/390-bins-north.png",
+    "sourceSha256": "bae5c06eaf0ee795a78e0b9df7dae78e69acbdcda7acedd99849eb2d3701031e",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-bins-north.webp",
+    "sha256": "01f8ffb27cfc79f4b88542dc4678234f25bfcfcd5dc94b3b8f560d62c63c65b5",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/390-bins-south.png",
+    "sourceSha256": "172129b1b763da73370a626bf2370a78560927c90a4390477cab05e3e2582271",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-bins-south.webp",
+    "sha256": "d185fa0ae67bc3ca643767490afdd2af26fea2ed44941b4873e11c4d2c20ecff",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/390-bins-support-detail.png",
+    "sourceSha256": "92db936c3e7703f40d4e2f9f08e6fe4dd9af9328879ff6137e2d6d32d3916bc6",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-bins-support-detail.webp",
+    "sha256": "bba3081b1e271c13fdefc7c846a50f3c6f9f5ce589f0301aa49c38a35205e972",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/390-gate-approach.png",
+    "sourceSha256": "c76003a2d581c0e9f134ae98978a240e51caaf33e8db690ab2037600b10934b9",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-gate-approach.webp",
+    "sha256": "50d4bd5cd1ef029067580f370deb01f727629b1a3ad432112fd71b6e8fdfcbed",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/390-gate-inside.png",
+    "sourceSha256": "69bcd8b23d2105284a2754e43eed4116a7319b10b4ebae9182c0efa3765da5b9",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-gate-inside.webp",
+    "sha256": "76668fc5594a47086b1612e58891de54f96d164b51e19eac931cf182f5cc12a8",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/390-gate-return.png",
+    "sourceSha256": "69423964855246d32409787b5264267e16d5aea2af6c321ccce1432fcb1127d1",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-gate-return.webp",
+    "sha256": "6250637ab581a89e178713e789d2bc25f69619c8174c5a0d61fea7668e881f50",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/390-instruments.png",
+    "sourceSha256": "9db1e52b8cc5e4078bce9ed8b6317f833064c9583d502b03b741bb6c00c39be0",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-instruments.webp",
+    "sha256": "c44a23fbbe0ff8018d01f1c4c5b581f3f213c367fdc53285d254b91df7e17ad9",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round3/390-station-support-detail.png",
+    "sourceSha256": "939af3ec696ef8c51b9c9ff41f9989640c920fd623f2a188c5158630d6c022d9",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-station-support-detail.webp",
+    "sha256": "d6b13d80e6f19052cfdaf362411f221cd11029782e355eee2655db71bdc30005",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/1366-bins-approach.png",
+    "sourceSha256": "532232ffe6524c9c933358330d35341475d376d8a6c985d9435319f8be4ffb14",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-bins-approach.webp",
+    "sha256": "57985450830b2c428d7b181900c2c13fc34a8bb23ce87793486123c43e275afd",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/1366-bins-front-detail.png",
+    "sourceSha256": "859efac6e91b125692f1efe578bed6f1bb4478c40724b854c700a87d09b410bf",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-bins-front-detail.webp",
+    "sha256": "96f46254e2ebcfa087ba150a9a5bae62457ac31f799c62a1e0803f8965e4ea4b",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/1366-bins-middle.png",
+    "sourceSha256": "2682bc6197596dfd8d30cfbd0d2eda1a18ae21890ff67fa7030acb6061ec4a2a",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-bins-middle.webp",
+    "sha256": "ab96537cb5e84f10f2be17fd5e14e74190e90f8737b1a2efebf4ddd60337cc5f",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/1366-bins-north.png",
+    "sourceSha256": "317e612374d893d66105410fca34e7c36785d1be9a8ed7f629b1c920228a5804",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-bins-north.webp",
+    "sha256": "3712a7e73ffdec7cd88b909baaa7a3374c1c3aa3cedb2277967438eb57dc0a84",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/1366-bins-rear-detail.png",
+    "sourceSha256": "7fe60b43056c0afa83cf88765dd4aff5ee3e59f53f34d047b35efb83ee21a877",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-bins-rear-detail.webp",
+    "sha256": "b9cf6e3843819738eb6025d51e526e386aaf99f61df175a75cf5592f13ac1eb7",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/1366-bins-south.png",
+    "sourceSha256": "bda331ea0d5a30a5cb9c51b112359f3b41d4f7889d304f6cfc814df6fc982d8b",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-bins-south.webp",
+    "sha256": "14c940f43a18c40eb8cd1012a97fbb25886e0b52ac897bd9f1866ae8e21ec65d",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/1366-gate-approach.png",
+    "sourceSha256": "10a6f21b8b25be43daae1f3d35ddf78eee7d544359a65278f71e6f01522dc2b4",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-gate-approach.webp",
+    "sha256": "53f0d63adf2e2777d52b580d2bb42efb2dbfb334f1e47403c22453772b5ecb81",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/1366-gate-inside.png",
+    "sourceSha256": "b12f2d24cb94472efa2e63e84e1ecf862cad5b474beb83f561bfb9685b10a88b",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-gate-inside.webp",
+    "sha256": "fb91ad6edda56aaf548b1572f948fb14701c365fde66c48d3318d1baff6328b0",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/1366-gate-return.png",
+    "sourceSha256": "9762b2e7a187f623aa97e123865314ac1d24c373816bb48db43ab3fd3deab67b",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-gate-return.webp",
+    "sha256": "58850585134d3cdf40ec8971451d486e13cb58e005b776cd7f9d4c84a8b4597a",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/1366-instruments.png",
+    "sourceSha256": "bddf6f621edde060b654fda8c6cc8b92d77d74466998b534ca2a763e6446f96e",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-instruments.webp",
+    "sha256": "4761b27cf65cc6e197fe1aed716e3c513ebdc28120db42d80a1691a7a28e2d7f",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/1366-station-board-detail.png",
+    "sourceSha256": "4aa2811d2af406f02f6cdf42c1ecd296545a84ab69fc340e77fc691b33676d47",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-station-board-detail.webp",
+    "sha256": "558ad70aaab35d61a3b30a57e407694637a3d64ac78cb61579312ce01b40adc4",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/1366-station-feet-detail.png",
+    "sourceSha256": "cfc16b8ed09eb1b7822ca03de8d26fee5102969aad865aebce4ab669cd7c3701",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-station-feet-detail.webp",
+    "sha256": "dde092d9df22ff37fca45271617b80e9643fd931f26419b52843803fe2efa42b",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/390-bins-approach.png",
+    "sourceSha256": "b8056d099b6afcfa48defb653f89e4c1aae47063697bfd5300ab856bab57652a",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-bins-approach.webp",
+    "sha256": "e7a806b467092ef8b75925ea79003c2d1b3e634d666593a9dd2175097485075c",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/390-bins-front-detail.png",
+    "sourceSha256": "ff58e05834ce1e829489fc46852c0631b1cdda1cf88c3f0cc08a7e0d1099c096",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-bins-front-detail.webp",
+    "sha256": "f59e58135a74eeedac85aa1e03cce0df6d95c17f78ba97b68b516a5befbecd3c",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/390-bins-middle.png",
+    "sourceSha256": "ecb439d0a31c2272f09362a2aee5ebeb8841fbe1fd91468bdcbbe3726bfd9b61",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-bins-middle.webp",
+    "sha256": "891e28a64a3db7790c0ae68c27c610753b98b1dd3f818ea37bd5cf2676ce927b",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/390-bins-north.png",
+    "sourceSha256": "7486368401df9bcee09ac3bbdb54ed878e882e4c77b12e1df6cb23ff8da0f2bc",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-bins-north.webp",
+    "sha256": "14c82905093b6be920f6ae533da595d2f7a48888740a2e9a7f0e5e1e25f12e4b",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/390-bins-rear-detail.png",
+    "sourceSha256": "11ac1a4b416de32ab90c6c1e660330322355cba058a9e4b9ff9c15d1ea28bc63",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-bins-rear-detail.webp",
+    "sha256": "9acde2faed3ae1337c670dbb28156f19f507041335aa7c2d36086dc95cd6c497",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/390-bins-south.png",
+    "sourceSha256": "42e64a692d83a21c12fb31c48ef106893a5de0457b13cdcdd1dfe55c4326a2fc",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-bins-south.webp",
+    "sha256": "336ac1fa0105dd813f4e279631915a6a85cf90926ee8bec8d0165a273693603f",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/390-gate-approach.png",
+    "sourceSha256": "1c8f0ef0ef7358d5e9263e1ad749129d3e7f5e01b405d62b645cbfddc66c43e7",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-gate-approach.webp",
+    "sha256": "8e23f66ba3518b8ba673da09c615dc87d4719958aaa8de9d4ea29d8472b70bbe",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/390-gate-inside.png",
+    "sourceSha256": "aa9b576178bb28eb888c2916dd0cdebb9d693492bf5e7bf2b259a51e88fe544d",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-gate-inside.webp",
+    "sha256": "7d0882b997103e4618f820996aeab134b1d12f6174f954955e275aa6f8469808",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/390-gate-return.png",
+    "sourceSha256": "e26f50ce25ae4a5b1d23ba9d9fd98f6036d037e34128d6bc8a4938cdb0a22087",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-gate-return.webp",
+    "sha256": "0dee7f97915371d48036ef0cbe6291d3e46a53d0698251711dd55b715256cc95",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/390-instruments.png",
+    "sourceSha256": "609221340ad0eb4cb6419b64adcbc3dca970e41525a9eafee8b80612e5dc8367",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-instruments.webp",
+    "sha256": "dc7d2cf1f35581c0af3dba08edc3568403bfc6958e127b5dd5900ce4924a69c1",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/390-station-board-detail.png",
+    "sourceSha256": "5bc42790b54ff3b25ce31c35ba9fa4ec31b3100ac4e8c97d329820078034fbd4",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-station-board-detail.webp",
+    "sha256": "43ceb0389b461b0876d1a6e3908c227b9640147f3c1bcbd768066fcb928b1394",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round4/390-station-feet-detail.png",
+    "sourceSha256": "0f7dfcb5c47e7939854c2fc5a3e36fe03d3fe7b5af5fb60b3e9d71b2a92c5183",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-station-feet-detail.webp",
+    "sha256": "e8b1dcced682cf181750651b653d13beeb41d533f87e4a2024958a7895c3e30e",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round5-detail/1366-bins-front-detail.png",
+    "sourceSha256": "e258b8ce9be5316079a3a5604618c07aa6b9b302f4ed14c95b8e46544062eace",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/1366-bins-front-detail.webp",
+    "sha256": "b27125dd2cd408cd516a7e7bd4b5744c5c891ee6ea9390a6f8e88085be81c77a",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round5-detail/1366-bins-rear-detail.png",
+    "sourceSha256": "c5e3787d5295f7633f9856c514fa33320d6f8c1e7cfcee391934d89922785580",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/1366-bins-rear-detail.webp",
+    "sha256": "d442baf4c731a9269df4c71204e349fbec6c19b57d0cd9a59c010336ba680f10",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round5-detail/1366-station-board-detail.png",
+    "sourceSha256": "75aa6d0b5ba9ba035bd8e25740dfa7c1e1b0f27b97a03404e930c2874746cf60",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/1366-station-board-detail.webp",
+    "sha256": "e8fc89c1f10b3636864dd865c0f02beb313f7d251e49a585e697aa3e10ac0d08",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round5-detail/1366-station-feet-detail.png",
+    "sourceSha256": "7d2b9c62730b1e42a51af5c56a845cc22a2fddb55fda61b2e4826779379647ba",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/1366-station-feet-detail.webp",
+    "sha256": "8172ab07c7006c624b1b26b3f665f9063040d8941dac86eb3ed0dcb6f0262850",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round5-detail/390-bins-front-detail.png",
+    "sourceSha256": "8567c4603c25b43b8315b1112d723d41e2fc8d760aa62ec0adeb10a6d9764634",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/390-bins-front-detail.webp",
+    "sha256": "e4c5dc1ceae41d1ecc2a968d430f08bf58d3b1997f97f59e2472075373b9a42f",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round5-detail/390-bins-rear-detail.png",
+    "sourceSha256": "e2c9fc7cb9e880a4f557895548db012e3fbea184603825decdb187b32691e2a0",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/390-bins-rear-detail.webp",
+    "sha256": "9600c55cabf6e00784857b77e0de6e424596eaab8bf59c0f9ea7f2a205829cec",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round5-detail/390-station-board-detail.png",
+    "sourceSha256": "a4fb00343f53272dca994e525f62c6065fd6dab11a5bb0a6dee23004f1c68f4d",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/390-station-board-detail.webp",
+    "sha256": "656777bed76114d54b73074fd44c92209dbc4e42aa00a8e877dca1c37fa59b0e",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round5-detail/390-station-feet-detail.png",
+    "sourceSha256": "5ebff45fd2cd0aedb9c7704ccfe29688e1a25d4020878a51278af62e836fee63",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/390-station-feet-detail.webp",
+    "sha256": "31b1a2a901388596113d49b680051e1f161e262b6a37f747f3a9cff9cd3e8749",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round6-rear/1366-bins-rear-detail.png",
+    "sourceSha256": "c9edc88db834eb925a5ea2c69bcb093936c5c5a45dbb33acc7f8cd28286791c4",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round6-rear/1366-bins-rear-detail.webp",
+    "sha256": "6eb77b757117bea2c382e1a90b209ec89f96350d86e29c745d4e763b2c793ffa",
+    "width": 1366,
+    "height": 860,
+    "pixelIdentical": true
+  },
+  {
+    "source": "game3d/shots/works-fidelity/round6-rear/390-bins-rear-detail.png",
+    "sourceSha256": "492c973a413da2546e29aebf15e1450b95f058049c06a357044e9668472a9c24",
+    "image": "bible/shots/showcase/works-fidelity-20261007/round6-rear/390-bins-rear-detail.webp",
+    "sha256": "911a30f5e77a0dc58909ba914a9853105a2c087185fcd245586b23f73c9e2fa3",
+    "width": 390,
+    "height": 844,
+    "pixelIdentical": true
+  }
+]

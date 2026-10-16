@@ -1,0 +1,25 @@
+{
+ "title": "Crowds without waves: every way, own pace, stops and pairs",
+ "date": "2026-10-02",
+ "by": "claude-agent:crowd-mix",
+ "caption": "From your note on the phone: \"they come in waves and all walk the same way, it feels a bit artificial\". New people now set off at random gaps instead of in a rush (also after a scene), every period has people going against the commute and across it, everyone walks at their own pace, some stop on the way (a phone, a shop window, a shoe, a word together) and some walk in twos. Strips: the same phone view in the morning, one frame every 3 seconds, before and after.",
+ "sections": [
+  {
+   "title": "Station forecourt, morning (phone)"
+  },
+  {
+   "title": "Fountain plaza, morning (phone)"
+  },
+  {
+   "title": "Stops and pairs up close",
+   "caption": "Taken with every walker set to stop, so there is one in view; in the game 15 to 40% of walkers stop once, depending on the place and time."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

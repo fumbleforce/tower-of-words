@@ -1,0 +1,31 @@
+{
+ "title": "Island map, straight down",
+ "date": "2026-09-30",
+ "by": "claude-agent:island-topdown",
+ "caption": "A north-up, straight-down version of the picked island map for the builder to re-register the overlay and re-trace the layout on. Buildings sit on their footprints; nothing was redesigned.",
+ "sections": [
+  {
+   "title": "Before and after",
+   "caption": "Left: the picked map with the landmarks we check. Right: the top-down version with the same landmarks at their ground points."
+  },
+  {
+   "title": "Every attempt, in order",
+   "caption": "One change per attempt. The roof moves are the same in all of them; only the fill of the hidden ground changes."
+  }
+ ],
+ "links": [
+  {
+   "label": "The top-down map, full size (art/island/island-map-4-topdown.png) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "Scripts, roof outlines and frame",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/art/candidates/island-map-4-topdown"
+  },
+  {
+   "label": "Picked map (island-map-4) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/art/candidates/island-map-4"
+  }
+ ],
+ "pictures_local": true
+}

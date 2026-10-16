@@ -1,0 +1,39 @@
+{
+ "title": "East coast terrace and promenade detail",
+ "date": "2026-10-07",
+ "by": "codex/model_review",
+ "caption": "The terrace gains a readable vending display and fitted stone and drainage details; low planting groups finish the promenade verge. This is a bounded finish pass on the existing coast, with navigation and scene positions preserved. Matched afternoon samples: terrace draw calls 130→136 desktop and 56→61 phone; promenade 126→128 desktop and 52→55 phone. Median frame time stayed 16.7 ms in these short 92–93-frame captures; this is not a sustained performance benchmark. No performance budgets changed.",
+ "sections": [
+  {
+   "title": "Matched afternoon baseline",
+   "caption": "Existing terrace and promenade at the same positions and afternoon lighting used for comparison."
+  },
+  {
+   "title": "First pass",
+   "caption": "Early terrace detailing and isolated verge plants. Superseded by grouped planting fitted around the existing lamps."
+  },
+  {
+   "title": "Final afternoon views",
+   "caption": "Stocked vending display, fitted stone faces and joints, flush drainage, and small planted verge groups. Existing paths, benches and trees stay in place."
+  },
+  {
+   "title": "First evening input check",
+   "caption": "Preserved harness attempt: scenery loaded, but the frozen capture simulation prevented the walking assertion."
+  },
+  {
+   "title": "Second evening input check",
+   "caption": "Preserved harness attempt before enabling real-time simulation in capture mode. No different scenery revision."
+  },
+  {
+   "title": "Final evening views and walking",
+   "caption": "Normal evening lighting and real native click-to-walk along the promenade, on desktop and phone. Both players reached the target on walkable paving."
+  }
+ ],
+ "links": [
+  {
+   "label": "Walk along the east coast",
+   "href": "game3d/?place=east_coast"
+  }
+ ],
+ "pictures_local": true
+}

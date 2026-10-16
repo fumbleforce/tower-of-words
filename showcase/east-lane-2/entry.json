@@ -1,0 +1,39 @@
+{
+ "title": "East lane, walkable",
+ "date": "2026-10-02",
+ "by": "claude-agent:east-lane",
+ "caption": "The second south-half district from island-half-1 is now a place to walk: the east lane (backdrop since east-lane-1), with the pocket park, the café, the liquor and rice shop, the barber and Amakawa Travel. Reach it from the plaza in the morning: keep walking east along the lane past the cross walk. It also loads with ?place=east_lane. The shops are shut for now.",
+ "sections": [
+  {
+   "title": "Coming in along the lane",
+   "caption": "Before: the plaza's camera aimed at the pocket park, which no play camera reached. After: Eric walks on east from the plaza toward the jog, the park ahead. The camera here looks north-east, so the park and the north street's fronts face it."
+  },
+  {
+   "title": "The south walk: café and barber",
+   "caption": "Before: from the plaza only their backs showed. After: on the south walk the camera turns to look south-east, a little steeper, so the fronts face it and the lane's trees don't hide Eric. Signs (カフェ CAFE, とこや BARBER), the barber's striped pole, and each door shut with a 準備中 CLOSED card."
+  },
+  {
+   "title": "The liquor and rice shop",
+   "caption": "At the foot of the cross walk: さかや SAKE · RICE on a board standing on its tiled roof, a cedar ball by the door, the door shut."
+  },
+  {
+   "title": "Amakawa Travel",
+   "caption": "Up the north street past the family flats and the director's house, then west along the back lane to its door: あまかわトラベル AMAKAWA TRAVEL on the canopy, shut."
+  },
+  {
+   "title": "More",
+   "caption": "The north street, and the south walk after work."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/index.html?place=east_lane"
+  },
+  {
+   "label": "Places doc",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/places.md"
+  }
+ ],
+ "pictures_local": true
+}

@@ -1,0 +1,39 @@
+{
+ "title": "One system for light and time of day: the forecourt and Eric's room",
+ "date": "2026-10-09",
+ "by": "claude-agent:lighting",
+ "caption": "Stage 1 of #370. Every period's light now comes from one table, each place has one light rig, and everything that glows at night is switched by it. The forecourt and Eric's room look as before in each period, and now go back to morning when the clock does. The other places follow after you have seen this.",
+ "commit": "e29779a3",
+ "preview": "after-step-back-desk",
+ "result": [
+  "after-step-evening-desk",
+  "after-step-back-desk",
+  "after-step-back-phone",
+  "after-dorm-d2-back-desk"
+ ],
+ "sections": [
+  {
+   "title": "Stepping the clock in the forecourt, forward and back",
+   "caption": "Same camera, the clock moved to after work, back to morning, and to after work again. Before, morning never came back: the lamps, lit windows and dusk stayed. Now each step changes the light at once, and the colour grade with it."
+  },
+  {
+   "title": "Forecourt entered in the morning",
+   "caption": "The same light as before. Only the people differ between shots."
+  },
+  {
+   "title": "Forecourt entered after work",
+   "caption": "The same light as before: lamps, the lit tower and station glass, the skyline's windows."
+  },
+  {
+   "title": "Eric's room",
+   "caption": "Day 1 after work is unchanged. On day 2 the room used to switch to its dusk lights without its grade; now the grade follows, and morning comes back."
+  }
+ ],
+ "links": [
+  {
+   "label": "Design note",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/lighting-system.md"
+  }
+ ],
+ "pictures_local": true
+}

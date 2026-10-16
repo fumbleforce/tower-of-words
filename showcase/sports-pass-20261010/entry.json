@@ -1,0 +1,45 @@
+{
+ "title": "Sports ground: one ground for walking and kerbs, no blob beds, floodlit court",
+ "date": "2026-10-10",
+ "by": "claude-agent:sports-pass",
+ "caption": "The sports ground's kerbs now come from the same ground the walk grid uses, so he is stopped only where a kerb, a building, the courts' fence or a trip's start shows it. The free-shape beds are straight strips behind the kerbs, every bed is flush with the lawn, and the west tennis court has floodlight masts and a lights-off notice. Try it with ?place=sports.",
+ "commit": [
+  "4aab6e78e",
+  "e8b97d934"
+ ],
+ "result": [
+  "corner-top-after",
+  "corner-n-after",
+  "pavilion-n-after",
+  "gate-evening"
+ ],
+ "sections": [
+  {
+   "title": "The corner by the pool walk",
+   "caption": "The blob bed with its raised soil face is now a strip behind the lane's kerb, with shrubs loose on the lawn. The bench bays on the courts walk are walkable and kerbed."
+  },
+  {
+   "title": "Past the pavilion",
+   "caption": "The wood north of the gym stood on a raised plot of soil; its trees stand on the lawn now. A hedge closes the pool walk's end and trees fill the open grass north of it."
+  },
+  {
+   "title": "Edges elsewhere",
+   "caption": "The office street's wood by the gym's corner, and the courts walk by the north residence."
+  },
+  {
+   "title": "The tennis courts",
+   "caption": "Six masts on the run-off: the west court's four light up after work, the east court's two stay dark. A notice on the gate post says the lights go off at nine."
+  },
+  {
+   "title": "The north street, four ways",
+   "caption": "Follow camera from the arrival spot."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/index.html?place=sports"
+  }
+ ],
+ "pictures_local": true
+}

@@ -1,0 +1,45 @@
+{
+ "title": "Station garden with deliberate dead ends",
+ "date": "2026-10-13",
+ "by": "codex:island-builder",
+ "caption": "The garden paths end at planted seating and service courts. The redundant spur under the monorail is lawn, and the closed security circuit no longer appears to be a public route.",
+ "result": [
+  "round3-1366-morning-west-end",
+  "round3-1366-evening-feedback",
+  "round3-390-evening-station-end"
+ ],
+ "sections": [
+  {
+   "title": "Original station garden"
+  },
+  {
+   "title": "First bounded garden ends"
+  },
+  {
+   "title": "Continuous lawn and flowering troughs"
+  },
+  {
+   "title": "Light reaching the seating court"
+  }
+ ],
+ "links": [
+  {
+   "label": "Play the game",
+   "href": "game3d/"
+  },
+  {
+   "label": "Feedback and verification (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Visual audit (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "First-time phone playthrough (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  }
+ ],
+ "updated": "2026-10-12T22:40:59.547790+00:00",
+ "pictures_local": true
+}

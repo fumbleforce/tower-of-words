@@ -1,0 +1,60 @@
+{
+ "title": "Works lane and service yard",
+ "date": "2026-10-08",
+ "result": [
+  "r2-1366-works-lane",
+  "r2-1366-works-factory",
+  "r3-1366-works-loading-close-detail",
+  "r3-1366-works-server-close-detail"
+ ],
+ "updated": "2026-10-08T01:36:14.063553+00:00",
+ "by": "codex",
+ "caption": "Connected lane planting, a fitted server-hall entrance, and detailed pallets, crates and drums in the loading yard.",
+ "commit": "1dfa200814c4d4ba2d21c1258c6c13a8c9340974",
+ "preview": "r2-1366-works-lane",
+ "sections": [
+  {
+   "title": "Initial grounds audit",
+   "caption": "Original inspection attempts. Some positions sat on path edges; the campus-east and north-court views were incorrectly placed. Corrected views follow."
+  },
+  {
+   "title": "Corrected grounds audit",
+   "caption": "Walkable inspection positions using ordinary cameras. These views also record unfinished areas beyond this Works pass."
+  },
+  {
+   "title": "Works before the changes",
+   "caption": "Matched views of the lane, plant approach, factory loading area and server hall."
+  },
+  {
+   "title": "First candidate, phone",
+   "caption": "First candidate views. The initial desktop job stopped before capturing because its build identifier differed."
+  },
+  {
+   "title": "First candidate, desktop",
+   "caption": "Desktop views after correcting the capture setup."
+  },
+  {
+   "title": "Revised details",
+   "caption": "Final ordinary views and initial close-ups. Loading close-ups incorrectly place Eric on the pallet; those two views are retained as rejected setup attempts."
+  },
+  {
+   "title": "Corrected close-ups",
+   "caption": "Eric stands beside the loading props and in the server-hall approach. The camera is moved closer for inspection."
+  },
+  {
+   "title": "Approaching from the harbour",
+   "caption": "The same connected lane planting appears before entering the Works."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  },
+  {
+   "label": "Checks and capture notes (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  }
+ ],
+ "pictures_local": true
+}

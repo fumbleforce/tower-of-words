@@ -1,0 +1,152 @@
+{
+ "title": "Continuous close camera in tight interiors",
+ "date": "2026-10-07",
+ "by": "codex-exec:tight-follow",
+ "caption": "The local player fades briefly when a wall compresses the follow camera, then returns when there is room.",
+ "preview": "candidate8-video-eric-85-north-end",
+ "sections": [
+  {
+   "title": "probe1",
+   "caption": "Rejected fixture: entry transition had not finished."
+  },
+  {
+   "title": "probe2",
+   "caption": "Rejected fixture: entry transition had not finished."
+  },
+  {
+   "title": "probe3",
+   "caption": "Rejected fixture: follow enclosure was not active before pause."
+  },
+  {
+   "title": "probe4",
+   "caption": "Valid physical framing study; centered and shoulder compositions rejected."
+  },
+  {
+   "title": "probe5",
+   "caption": "Valid shoulder and wide-lens studies. Independent composition score 5/10; rejected."
+  },
+  {
+   "title": "probe6",
+   "caption": "Valid side-camera studies. Independent composition score 5/10; rejected."
+  },
+  {
+   "title": "candidate1",
+   "caption": "First centered fade. North crossing valid; second native mouse recapture timed out."
+  },
+  {
+   "title": "candidate2",
+   "caption": "Both Eric crossings completed; screenshot timing delayed key release past the precise endpoint assertion."
+  },
+  {
+   "title": "candidate3",
+   "caption": "Added backward traversal. Eric completed all four sequences; precise south endpoint assertion failed after native key-up latency."
+  },
+  {
+   "title": "candidate4",
+   "caption": "100% Eric and Carina: native forward/backward and both doorway directions pass. Full videos show fade timing."
+  },
+  {
+   "title": "candidate5-85",
+   "caption": "85% Eric and Carina: same native movement sequences pass."
+  },
+  {
+   "title": "sanity1",
+   "caption": "Phone overview and four native look directions in the train and karaoke booth."
+  },
+  {
+   "title": "baseline1",
+   "caption": "Existing hard-hide camera: matching native 100% walkthroughs for both protagonists."
+  },
+  {
+   "title": "candidate6-record",
+   "caption": "Shader hooks preserved. Native100 passes; diagnostic RECORD_ONLY still captured loop screenshots."
+  },
+  {
+   "title": "candidate7-record-85",
+   "caption": "Shader hooks preserved, native85 passes; same remaining screenshot guard limitation."
+  },
+  {
+   "title": "candidate8-video",
+   "caption": "Final screenshot-free native video, both actors at100% and85%. Independent rendered-transition review passes8/10. Stills here are frames extracted after recording."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play the game",
+   "href": "game3d/"
+  },
+  {
+   "label": "Evidence and limits",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/follow-tight-20261007.md"
+  },
+  {
+   "label": "candidate1: eric traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "candidate2: eric traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "candidate3: eric traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "candidate4: carina traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "candidate4: eric traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "candidate5-85: carina traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "candidate5-85: eric traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "baseline1: carina traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "baseline1: eric traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "candidate6-record: carina traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "candidate6-record: eric traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "candidate7-record-85: carina traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "candidate7-record-85: eric traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "candidate8-video: carina 100 traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "candidate8-video: carina 85 traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "candidate8-video: eric 100 traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  },
+  {
+   "label": "candidate8-video: eric 85 traversal (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/bible"
+  }
+ ],
+ "pictures_local": true
+}

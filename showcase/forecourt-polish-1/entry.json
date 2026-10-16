@@ -1,0 +1,36 @@
+{
+ "title": "Station forecourt: the phone's first view, the tower's plinth, the lift core's top and the station windows",
+ "date": "2026-09-30",
+ "by": "claude-agent:forecourt-polish",
+ "caption": "Fixes to the rebuilt forecourt. On a phone the camera now looks east from the station door, so head office is in view from the first step. The tower stands on a paved plinth turned with it, which the square court meets along one dark stone edge. The lift core's top shows the cut through the building, and the station's side windows have surrounds. Same spots before and after.",
+ "commit": "66f17d0",
+ "sections": [
+  {
+   "title": "Stepping out of the station (phone)",
+   "caption": "Before: the camera looked north, so the bottom half was the security room seen through the faded station, and head office was off to the right, out of frame. Now the camera turns east as Eric steps out: the court ahead, head office's door, canopy and lower floors at the top, and the station whole beside him. Eric stops a few paces from the door, clear of its canopy. Over the platform shed, its roof fades so it doesn't block the bottom of the frame."
+  },
+  {
+   "title": "Crossing the court (phone)",
+   "caption": "The camera keeps looking east across the court, then turns back to north over the bike court, so at the head office door, in the lobby and in the lift the phone view is the same as before."
+  },
+  {
+   "title": "Where the turned tower meets the square court",
+   "caption": "Before, a square paved patch lay under the turned tower, its corners showing round it, and the tower's apron and the lane poked into the court at an angle. Now the tower stands on a plinth turned with it, tiled on its grid, with a dark stone band round the edge; the court's paving runs up to that band. The worn line from the station turns at the band and runs up to the door. The lane starts at the bike court's corner with the same band and a lamp, the hedge starts at that lamp, and lawn turned with the tower lies round the plinth and south of the hedge."
+  },
+  {
+   "title": "The station's side windows",
+   "caption": "From the court the camera sees the station's east and west walls almost edge on, so their windows showed as thin slanted outlines. Each window now has a pale surround standing out from the wall (a hood, jambs and a sill), as do the upper windows on the south front."
+  },
+  {
+   "title": "The top of the lift core",
+   "caption": "When the tower fades over the lobby, the lift core's top was one flat pale slab. Now it shows where the building is cut: pale caps on the core's walls, the shafts dark below them, the lift's machine on two steel beams over the B2 shaft, the stair's upper flight and a riser with ducts."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

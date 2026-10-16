@@ -1,0 +1,36 @@
+{
+ "title": "Live creator idle comparison",
+ "date": "2026-09-29",
+ "by": "Codex",
+ "status": "superseded",
+ "question": "After playing the live comparison, should the creator use the neutral idle?",
+ "multi": false,
+ "links": [
+  {
+   "label": "Play the live comparison: orbit, zoom, pause and walk (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools"
+  },
+  {
+   "label": "Open with Eric (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools"
+  },
+  {
+   "label": "Earlier comparison and feedback",
+   "href": "#review/creator-idle-neutral"
+  }
+ ],
+ "options": [
+  {
+   "id": "neutral-v1",
+   "label": "neutral-v1: use the breathing idle",
+   "note": "Judge the motion in the live viewer above. These earlier sheets are supplementary. Both live panels use identical models and retarget settings."
+  },
+  {
+   "id": "keep-held",
+   "label": "keep-held: keep the current frozen pose",
+   "note": "In the live viewer, select Current creator: held at 0.4 s on the left. The full original clip is also available to play; it is currently frozen in the creator."
+  }
+ ],
+ "decision": "motion too small to see; arms relaxed, not A-pose",
+ "pictures_local": true
+}

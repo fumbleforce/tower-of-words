@@ -1,0 +1,42 @@
+{
+ "title": "Metal and glass reflect the sky everywhere",
+ "date": "2026-10-10",
+ "by": "claude-agent:metal",
+ "caption": "#366. The monorail's reflective steel is now one shared finish for the whole game: glass and steel reflect the sky of the place and the time of day (morning, day, dusk), with a low street round it. The monorail looks as it did. Lamps, signs, bins, drinks machines, rails, bike racks and roof plant are painted or bare steel; the sports hall, the north-street office and the harbour hut's glass show sky above and the street below.",
+ "result": [
+  "sports-r3-glass-morning-desk-after",
+  "harbour-hut-morning-desk-after",
+  "forecourt-lamps-evening-desk-after",
+  "train-neighbour-morning-desk-after"
+ ],
+ "preview": "sports-r3-glass-morning-desk-after",
+ "sections": [
+  {
+   "title": "The monorail, train place",
+   "caption": "The car skin before and after the move to the shared finish: the same picture."
+  },
+  {
+   "title": "Sports district: the hall and the north-street office",
+   "caption": "The glazing reflected a fixed hand-made pale map; now the period's sky above and a hazed street below, moving with the camera."
+  },
+  {
+   "title": "Harbour: the foreman's hut and the bike rack",
+   "caption": "The hut window takes the shared glass; the rack bar is painted steel and the hoops bare steel."
+  },
+  {
+   "title": "Forecourt: lamps and the station",
+   "caption": "Lamp posts are painted steel with a soft sheen of the sky; after work they catch the warm dusk on one edge."
+  },
+  {
+   "title": "Dorm courtyard: drinks machines and lamp",
+   "caption": "The machine housings and the lamp post are painted steel."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

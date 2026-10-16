@@ -1,0 +1,1 @@
+export function keepPatch(o){const{onBeforeCompile:n,customProgramCacheKey:e}=o;return o.clone=function(){const c=new this.constructor().copy(this);return Object.assign(c,{onBeforeCompile:n,customProgramCacheKey:e,clone:this.clone}),c},o}

@@ -1,0 +1,1 @@
+export function deliveryReturn(e,t,r,i){return t==="first"?e.d5_delivery_seen?null:r==="kotodama_first"?(e.d5_delivery_seen=!0,"kotodama_first"):r==="kotodama_cancel"?"kotodama_cancel":null:t!=="rounds"||!e.d5_team_witnessed||r!=="kotodama_exit"?null:(e.d5_last_recipient=["kenji","mori","mio"].includes(i)?i:"","kotodama_exit")}

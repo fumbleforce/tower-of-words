@@ -1,0 +1,31 @@
+{
+ "title": "The karaoke box: the front desk and one booth",
+ "date": "2026-10-05",
+ "by": "claude-agent:club-places",
+ "caption": "For the karaoke club (day 5 in the plan). The karaoke box's glass door at the shop street's east end (south row) now opens onto its front desk; the stairs at the back go up to one booth. It loads with ?place=karaoke or ?place=karaoke_booth. Nobody is there yet. On day 2 the door stays shut with the other shops.",
+ "sections": [
+  {
+   "title": "The door",
+   "caption": "Before and after: the door off the arcade. Its 準備中 card is now up only on day 2."
+  },
+  {
+   "title": "The front desk",
+   "caption": "The desk with the staff's terminal, baskets of microphones and the price board behind it; the drinks bar; the song catalogues and a waiting bench by the door; posters; the stairs up at the back."
+  },
+  {
+   "title": "The booth",
+   "caption": "Up the stairs: the screen with a song's words on it, benches round a low table, the song selector in its cradle, two microphones, a tambourine and the menu, a small mirror ball, coloured lights."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/index.html?place=karaoke"
+  },
+  {
+   "label": "Places doc",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/places.md"
+  }
+ ],
+ "pictures_local": true
+}

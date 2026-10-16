@@ -1,0 +1,1 @@
+import{attachSender as r}from"../investigations/sender/index.js";import{attachMioLunch as c}from"./mio-lunch/index.js";import{attachResearchOffice as f}from"./research-room/office.js";export function attachOfficeActivities(t,i,o){r(t,i,o),c(t,i),f(t,i)}

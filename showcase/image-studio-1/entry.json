@@ -1,0 +1,27 @@
+{
+ "title": "Image gen, shared editing workspace",
+ "date": "2026-10-11",
+ "by": "codex",
+ "caption": "Image gen uses the scene editor controls, with side-by-side prompts, image rows, and scene or character creation from a selected picture.",
+ "result": [
+  "preview-params",
+  "desktop",
+  "create-scene",
+  "create-character"
+ ],
+ "sections": [
+  {
+   "title": "Image workspace",
+   "caption": "Interface captures use test images and presets."
+  }
+ ],
+ "links": [
+  {
+   "label": "Open Image gen",
+   "href": "http://127.0.0.1:8772/"
+  }
+ ],
+ "commit": "2397c5e54",
+ "updated": "2026-10-11T22:09:03.816074+00:00",
+ "pictures_local": true
+}

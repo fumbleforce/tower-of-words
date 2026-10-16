@@ -1,0 +1,57 @@
+{
+ "title": "Gym windows and equipment storage",
+ "date": "2026-10-09",
+ "by": "codex-tui",
+ "caption": "The gym has framed wall openings, wheeled ball carts, an open bib shelf and carrying loops on the mats. The existing reception attendant and phone framing still need separate work.",
+ "result": [
+  "store-desktop",
+  "windows-desktop",
+  "window-phone",
+  "shelf-phone"
+ ],
+ "sections": [
+  {
+   "title": "Fixture details",
+   "caption": "Views of the window frames and equipment storage."
+  },
+  {
+   "title": "Before the fixture work",
+   "caption": "The original windows, carts and shelf, recorded at both sizes."
+  },
+  {
+   "title": "First fixture attempt",
+   "caption": "The first carts used smaller balls. The shelf and window details were revised after review."
+  },
+  {
+   "title": "Comparison with the unchanged gym",
+   "caption": "The same store approach also failed the broad bounding-box check on main."
+  },
+  {
+   "title": "Actual store arrivals",
+   "caption": "Eric and Carina retained their arrival headings. The probe also checked 16 rotated headings. It found no exact intersections, though Eric came within 25 mm of the panel at two headings."
+  },
+  {
+   "title": "First desktop route check",
+   "caption": "Routes, seats, booking actions and fixture checks passed. The driver omitted the Autosave-card click, so this attempt did not complete Continue."
+  },
+  {
+   "title": "Desktop route context",
+   "caption": "Routes and Continue passed. Overviews still show the existing reception placeholder, which the critic capped at 3/10. These are context views, not approval of the whole gym."
+  },
+  {
+   "title": "Phone route context",
+   "caption": "Routes and Continue passed. The existing reception placeholder and phone framing limits remain. Cropped details and transition frames are labelled below."
+  },
+  {
+   "title": "Settled Continue and closer phone views",
+   "caption": "The title fade finished before the Continue captures. The first shelf detail still needed wider framing."
+  },
+  {
+   "title": "First complete shelf framing",
+   "caption": "The full shelf fitted the screen, but the title had not finished fading."
+  }
+ ],
+ "commit": "ee45d6e49673bdf02d13870b43759b35b7254b80",
+ "updated": "2026-10-10T11:48:23+02:00",
+ "pictures_local": true
+}

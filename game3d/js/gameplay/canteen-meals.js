@@ -1,0 +1,1 @@
+export const CANTEEN_MEALS=Object.freeze({curry:Object.freeze({name:"Curry rice",ja:"カレー",price:420,dish:"curry"}),vegetables:Object.freeze({name:"Rice and vegetables",ja:"野菜定食",price:480,dish:"vegetables"})}),canteenServing=(r,e)=>e==="lunch",CANTEEN_SERVING="period_lunch";

@@ -1,0 +1,76 @@
+{
+ "title": "Kuro's four expression portraits and Mio's annoyed face",
+ "date": "2026-10-10",
+ "by": "art agent (expressions-kuro-mio-1)",
+ "status": "decided",
+ "multi": true,
+ "question": "Which face should Kuro use for flirtatious, teasing, pleased and polite, and is one of Mio's annoyed faces good enough (one each)?",
+ "options": [
+  {
+   "id": "kuro-kf3-d70-1-lip",
+   "label": "1. Kuro flirtatious smile: #1436",
+   "note": "slow closed-mouth smile, eyes open on the viewer; the warmer of the two. Words: \"flirtatious smile, closed mouth, half-lidded eyes, looking at the viewer\"; denoise 0.7, seed 1. Lips recoloured to the neutral's near-black (lips.py) after the render. Full prompt and negative in prompts.json. Checks: red rim 9.3% (fail, the same 9.3% as the installed kuro-neutral: her outline is the neutral's own pixels, the anchor's known thin red line down her left side, image right), face drift ccip 0.015 (pass), framing and matte the installed neutral's."
+  },
+  {
+   "id": "kuro-kf3-d70-3-lip",
+   "label": "2. Kuro flirtatious smile: #1438",
+   "note": "sly smile under heavy lids, the closest to her neutral's eyes. Words: \"flirtatious smile, closed mouth, half-lidded eyes, looking at the viewer\"; denoise 0.7, seed 3. Lips recoloured to the neutral's near-black (lips.py) after the render. Full prompt and negative in prompts.json. Checks: red rim 9.3% (fail, the same 9.3% as the installed kuro-neutral: her outline is the neutral's own pixels, the anchor's known thin red line down her left side, image right), face drift ccip 0.021 (pass), framing and matte the installed neutral's."
+  },
+  {
+   "id": "kuro-kt3-d70-1-lip",
+   "label": "3. Kuro teasing: #1439",
+   "note": "the widest one-sided smirk. Words: \"teasing playful smirk, one corner of the mouth raised, amused eyes, looking at the viewer\"; denoise 0.7, seed 1. Lips recoloured to the neutral's near-black (lips.py) after the render. Full prompt and negative in prompts.json. Checks: red rim 9.3% (fail, the same 9.3% as the installed kuro-neutral: her outline is the neutral's own pixels, the anchor's known thin red line down her left side, image right), face drift ccip 0.018 (pass), framing and matte the installed neutral's."
+  },
+  {
+   "id": "kuro-kt3-d70-3-lip",
+   "label": "4. Kuro teasing: #1441",
+   "note": "a smirk under heavy lids; more knowing than playful. Words: \"teasing playful smirk, one corner of the mouth raised, amused eyes, looking at the viewer\"; denoise 0.7, seed 3. Lips recoloured to the neutral's near-black (lips.py) after the render. Full prompt and negative in prompts.json. Checks: red rim 9.3% (fail, the same 9.3% as the installed kuro-neutral: her outline is the neutral's own pixels, the anchor's known thin red line down her left side, image right), face drift ccip 0.020 (pass), framing and matte the installed neutral's."
+  },
+  {
+   "id": "kuro-kp3-d70-1-lip",
+   "label": "5. Kuro pleased: #1442",
+   "note": "soft smile with a blush across both cheeks. Words: \"pleased, flattered by a compliment, soft happy smile, faint blush, looking at the viewer\"; denoise 0.7, seed 1. Lips recoloured to the neutral's near-black (lips.py) after the render. Full prompt and negative in prompts.json. Checks: red rim 9.3% (fail, the same 9.3% as the installed kuro-neutral: her outline is the neutral's own pixels, the anchor's known thin red line down her left side, image right), face drift ccip 0.015 (pass), framing and matte the installed neutral's."
+  },
+  {
+   "id": "kuro-kp3-d70-3-lip",
+   "label": "6. Kuro pleased: #1444",
+   "note": "smile with a light blush, heavy lids; a quieter pleased. Words: \"pleased, flattered by a compliment, soft happy smile, faint blush, looking at the viewer\"; denoise 0.7, seed 3. Lips recoloured to the neutral's near-black (lips.py) after the render. Full prompt and negative in prompts.json. Checks: red rim 9.3% (fail, the same 9.3% as the installed kuro-neutral: her outline is the neutral's own pixels, the anchor's known thin red line down her left side, image right), face drift ccip 0.016 (pass), framing and matte the installed neutral's."
+  },
+  {
+   "id": "kuro-kc3-d70-1-lip",
+   "label": "7. Kuro cool politeness: #1445",
+   "note": "small polite smile, calm open eyes. Words: \"cool polite professional expression, small polite closed-mouth smile, calm eyes, looking at the viewer\"; denoise 0.7, seed 1. Lips recoloured to the neutral's near-black (lips.py) after the render. Full prompt and negative in prompts.json. Checks: red rim 9.3% (fail, the same 9.3% as the installed kuro-neutral: her outline is the neutral's own pixels, the anchor's known thin red line down her left side, image right), face drift ccip 0.013 (pass), framing and matte the installed neutral's."
+  },
+  {
+   "id": "kuro-kc3-d70-3-lip",
+   "label": "8. Kuro cool politeness: #1447",
+   "note": "small polite smile, heavy lids; the coolest. Words: \"cool polite professional expression, small polite closed-mouth smile, calm eyes, looking at the viewer\"; denoise 0.7, seed 3. Lips recoloured to the neutral's near-black (lips.py) after the render. Full prompt and negative in prompts.json. Checks: red rim 9.3% (fail, the same 9.3% as the installed kuro-neutral: her outline is the neutral's own pixels, the anchor's known thin red line down her left side, image right), face drift ccip 0.018 (pass), framing and matte the installed neutral's."
+  },
+  {
+   "id": "mio-ma3-d70-1",
+   "label": "9. Mio mildly annoyed: #1448",
+   "note": "a slight frown, brows drawn in, mouth flat; the clearest annoyance. Words: \"mildly annoyed, slight frown, eyebrows drawn together a little, small flat pout, looking at the viewer\"; denoise 0.7, seed 1. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), glasses pass (cover 1.0), face drift ccip 0.005 (pass), framing and matte the installed neutral's."
+  },
+  {
+   "id": "mio-ma3-d70-2",
+   "label": "10. Mio mildly annoyed: #1449",
+   "note": "eyes a little narrowed, small pout; close to deadpan. Words: \"mildly annoyed, slight frown, eyebrows drawn together a little, small flat pout, looking at the viewer\"; denoise 0.7, seed 2. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), glasses pass (cover 1.0), face drift ccip 0.003 (pass), framing and matte the installed neutral's."
+  },
+  {
+   "id": "mio-ma3-d70-3",
+   "label": "11. Mio mildly annoyed: #1450",
+   "note": "brows drawn in, lips pressed; mild. Words: \"mildly annoyed, slight frown, eyebrows drawn together a little, small flat pout, looking at the viewer\"; denoise 0.7, seed 3. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), glasses pass (cover 0.999), face drift ccip 0.006 (pass), framing and matte the installed neutral's."
+  }
+ ],
+ "decided": [
+  "kuro-kf3-d70-1-lip",
+  "kuro-kt3-d70-1-lip",
+  "kuro-kp3-d70-3-lip",
+  "kuro-kc3-d70-3-lip",
+  "mio-ma3-d70-2"
+ ],
+ "decision": "Picked kuro-kf3-d70-1-lip (flirtatious), kuro-kt3-d70-1-lip (teasing), kuro-kp3-d70-3-lip (pleased), kuro-kc3-d70-3-lip (cool politeness), and mio-ma3-d70-2 (mildly annoyed). Install only these selected expression portraits.",
+ "decided_at": "2026-10-10T10:35:39+0200",
+ "issue": 400,
+ "pictures_local": true
+}

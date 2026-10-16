@@ -1,0 +1,45 @@
+{
+ "title": "Composer: Direct the shot as a staging tool",
+ "date": "2026-10-11",
+ "by": "claude-main/composer-staging",
+ "caption": "The composer reads left to right: who and where, then the shot, then the picture. Direct the shot sits at the top of the middle column: a stage where you drag stand-in figures into place, Shot, Angle and Lens tabs with drawings, and each person's facing, gaze, expression and height. The prompt parts follow below it, and the generated prompt is tall and tinted by block. A chosen setting, light and light direction fold to the choice. A shot with no picture shows a preview of its place. Keeping a face the same sits in that person's row in People.",
+ "commit": [
+  "52f9c0b87",
+  "2334f339d",
+  "b4c430d25",
+  "f311dd56",
+  "4979452a"
+ ],
+ "result": [
+  "r2-two-person-1366",
+  "r2-prompt-1366",
+  "r2-new-empty-1366",
+  "r2-from-picture-1366"
+ ],
+ "sections": [
+  {
+   "title": "Second round: the shot on top, a place preview, folded choices, a tinted prompt",
+   "caption": "After Jørgen's second round. The two-person shot has Office interior in evening light, its place previewed on the right before the shot exists. A new shot with nothing chosen says what to do instead of showing an empty box. A shot opened from its picture still fits at 1366 x 768."
+  },
+  {
+   "title": "First round",
+   "caption": "A two-person shot staged in the composer: Mio in front on the left turned toward Kenji, Kenji further back on the right, a cowboy shot, light from the left. Shot at 1366 x 768 (the left and middle columns fit without scrolling) and 2560 x 1440."
+  },
+  {
+   "title": "Close-ups",
+   "caption": "Direct the shot, Place and light, and People with one person in the shot."
+  },
+  {
+   "title": "What the words do",
+   "caption": "Renders of the staged shot through the image gen queue (RDBT Anima, the prompt the composer built, seeds 4242 and 4243), and an earlier test with placement words only."
+  }
+ ],
+ "links": [
+  {
+   "label": "Open the scene editor",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools/subplots/web"
+  }
+ ],
+ "updated": "2026-10-11T15:30:00+02:00",
+ "pictures_local": true
+}

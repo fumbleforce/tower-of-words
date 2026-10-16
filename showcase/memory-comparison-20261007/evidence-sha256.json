@@ -1,0 +1,322 @@
+[
+  {
+    "path": "game3d/shots/memory-comparison/round1/1366-before-learning.png",
+    "sha256": "afd1ba0a7c9fb4ec44e51a9d7619570f2457040cb2707112b3347b47c3145e5a"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round1/1366-comparison-open.png",
+    "sha256": "d7aa26eda28eba53074c716f39e5ae19b5f3dd89154673c1e39920108173589d"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round1/1366-current-reading.png",
+    "sha256": "f7a9f1a126883994b821cbd362d5a7ff0d1d266d1c47e97afbeee90be6bf73d1"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round1/1366-legacy.png",
+    "sha256": "685e6e5fee2240e679b859d5c30348e681dad001167fc58e39d27d173e900e75"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round1/390-before-learning.png",
+    "sha256": "87e95778a2f0c75dfafc5430bb3ffea746ab4b7f94300d1139435b82a4fb3001"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round1/390-comparison-open.png",
+    "sha256": "a34fc9c43505bbf91639511fc310f36b6b1fc43c54e82d694d051a1fd6c32b86"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round1/390-current-reading.png",
+    "sha256": "32e9f7e903ecefa03519fbd57a75ba7f71e3bd3a4c2ef334c1a9d54883542095"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round1/390-legacy.png",
+    "sha256": "32c473e16d75fe4416790a220749e608b41a4d9d66d68d92f87b7f177cb022e3"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round1/report.json",
+    "sha256": "7572eae47cd191c7c9ce904522747213725b7046fa427a1430a2f688c65364fa"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round2/1366-before-learning.png",
+    "sha256": "ffa1c6d463c922f0c24dc283ff1a10902640ced8e9a1b8ffb8539cc79d5fa636"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round2/1366-comparison-open.png",
+    "sha256": "802b2dc26bdf07c8617a84e7ef70026e0a650c8b7c432c18af8c4021e604b436"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round2/1366-current-reading.png",
+    "sha256": "8503f87f31bd6fd57a6bbfd7a5db749621aedb93fbe7e58316d35f50e03ae351"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round2/1366-legacy.png",
+    "sha256": "58cd44e7efcb7a8a61511080108820f55464b1133a427e665425f01b03b7b237"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round2/390-before-learning.png",
+    "sha256": "057de5c82ecbe91ba794054b19053c584e3d5daa91b67cecbb5b28ec6911905f"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round2/390-comparison-open.png",
+    "sha256": "25b725547a90d596cdd65697566d965c0f87b5c974c397619f990f139a6e6e95"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round2/390-current-reading.png",
+    "sha256": "6ed749405c52061aca33f652543b0bcc95e71d8eb55d6e095990b402e3269e23"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round2/390-legacy.png",
+    "sha256": "c3db88616550a0df4ac8b90f47fd1da689f1002d6220eb269ae6688ee60a5c07"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round2/report.json",
+    "sha256": "7572eae47cd191c7c9ce904522747213725b7046fa427a1430a2f688c65364fa"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round3/1366-before-learning.png",
+    "sha256": "986c18e0e7c7fab2d4bdefee5c097e945a9d239cef6735c158c6606365c5f250"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round3/1366-comparison-open.png",
+    "sha256": "ea9c121b6999f84b911265a77623c0e58ffab414f3877292dd1f5ae0f0eb1cf2"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round3/1366-current-reading.png",
+    "sha256": "64a4ce3db75ffe08c9421d1bfd8a70ba263c936f0d2667ea46467ea61581590c"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round3/1366-legacy.png",
+    "sha256": "d840c8ee96b513a6071c896f481566b7c40c93f609cd7754f3202e467bf40ca5"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round3/1366-several-remarks.png",
+    "sha256": "86721c119e01bfdceecfe582b8aa33bc00bd86013321e12a40159e6ad6c8c82a"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round3/390-before-learning.png",
+    "sha256": "b7b1fae21e5815df9f6fd1b8e10e97b25fe69f8710b32a91809a55e1aa2d5fd6"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round3/390-comparison-open.png",
+    "sha256": "d8b7204f048bc71e3a7d1e1339f3b7813c26436b2be5870b41c86182bdb6efb7"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round3/390-current-reading.png",
+    "sha256": "7edbb2e1cc1e3d579e00b0eb3bf2c70e4fd0e846b03a5a5c6a752045e2f3d15e"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round3/390-legacy.png",
+    "sha256": "7097a1e7c229be87738c8ad335bab72cf0be25b1e1ab257a9cb4f20b8de3dc77"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round3/390-several-remarks.png",
+    "sha256": "1958f06cadd1b6c62f243f0f7da581364d5a1f79646fcf01be80be5299cdc75d"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round3/report.json",
+    "sha256": "7572eae47cd191c7c9ce904522747213725b7046fa427a1430a2f688c65364fa"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round4/1366-before-learning.png",
+    "sha256": "bcfd55cd367253c9f62536ae862e2744331851c5677b22008eebc0beb1c87ee6"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round4/1366-comparison-open.png",
+    "sha256": "524127e988a255fc0f7627cb19a8bf2b636d747829c2c30e5eb832ecc1396502"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round4/1366-current-reading.png",
+    "sha256": "29b9549015e91b6f93f1acccd5e109bc3b2562a329004d9ffbc72be526f495cd"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round4/1366-legacy.png",
+    "sha256": "47069b7387564ecdac16dc6f435d472bbe24beec94bfa9c42f9dd0cd397d5883"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round4/1366-several-remarks.png",
+    "sha256": "7a315c2b01d3129ac3720784a0c549125b3b74f864ab155104c91a0d884e6a3e"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round4/390-before-learning.png",
+    "sha256": "166faddbc749efd93aaa81a910318ab1e88b5640e6df511b3f640109d2c45547"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round4/390-comparison-open.png",
+    "sha256": "3ed3ee72b9dddca81b8124c67095086bb0f50c2b801b7cb8db8dff5576b882b1"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round4/390-current-reading.png",
+    "sha256": "cbf298f329792d7cdd172e7826fd1dfb657bb8ea4bf191c9f0a96dfe630a1790"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round4/390-legacy.png",
+    "sha256": "719efce1d861bee96e7772635d47dfe9bb1debd07324969263ea0a692de9ff26"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round4/390-several-remarks.png",
+    "sha256": "5e0b2e685f5e7488636aa239e9f30850ed3045d12821cb4d319c74d105f3437d"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round4/report.json",
+    "sha256": "7572eae47cd191c7c9ce904522747213725b7046fa427a1430a2f688c65364fa"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round5/1366-before-learning.png",
+    "sha256": "fe4d0deb5ac611766b1f742db48e60a8fdb0a1a75de084ad4f7557b420d02e6a"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round5/1366-comparison-open.png",
+    "sha256": "cf15e0467bd04645f48b43ef0de298d4511e7dab9d5b8c100bff58fc876cf117"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round5/1366-current-reading.png",
+    "sha256": "d56d377ab3da40a874b5ec65780f0631f77571294ff1b719084f97f3d1269c34"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round5/1366-legacy.png",
+    "sha256": "ddce78dc11e4660c8707b94fc71d40c8e1014223180a4498c2f4bf8a756dc2e6"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round5/1366-several-remarks.png",
+    "sha256": "5b4a012dc49b0159ef26d740e2f8364353272540254248667dc6769837fc3262"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round5/390-before-learning.png",
+    "sha256": "cc794c0cfdb184d2dadc38c829264cc896e811691b530b0297e856ed49500ca4"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round5/390-comparison-open.png",
+    "sha256": "a142434cac1c03d58548b1a1af53def24815a0cb2428b26453a9fd1a0a33bbf2"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round5/390-current-reading.png",
+    "sha256": "187a39dbfe389f0b054406e1f80e7f636324f5ca0b079815afb71671cf860eab"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round5/390-legacy.png",
+    "sha256": "0f34b61605e8dd0680f9145de5c4338f00b6ffd69b45e02d61e93ae6569385bc"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round5/390-several-remarks.png",
+    "sha256": "1ff46a8fe13a7e986b6f8f6d51be6a63d1fc8fd743584b7ec93292e92b7a7476"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/round5/report.json",
+    "sha256": "7572eae47cd191c7c9ce904522747213725b7046fa427a1430a2f688c65364fa"
+  },
+  {
+    "path": "game3d/shots/fast/2026-10-07T14-07-52-899Z-3073196/1366x860.png",
+    "sha256": "957f9d921ec583a9fd37234fc39ad057b28a21ddd3b099d2a96cc922f5d7d671"
+  },
+  {
+    "path": "game3d/shots/fast/2026-10-07T14-07-52-899Z-3073196/perf.json",
+    "sha256": "744675fc95fe226a15f00806ea869411a31b5b3abf7f58744e93bb2b6b30e875"
+  },
+  {
+    "path": "game3d/shots/fast/2026-10-07T14-07-52-899Z-3073196/result.json",
+    "sha256": "4cdf4350cb049e9c13cccaf1a571a6ed3b55555bf6589044c093529f87e5d9c3"
+  },
+  {
+    "path": "game3d/shots/fast/2026-10-07T14-07-54-055Z-3074172/390x844.png",
+    "sha256": "076c479ef57d1233b0cb4e22254cff2d978d75a1724759b74bd07ae9308cb22b"
+  },
+  {
+    "path": "game3d/shots/fast/2026-10-07T14-07-54-055Z-3074172/perf.json",
+    "sha256": "6fcdf845e36f449d4e1f6f2a5173f4aa5da4deaeaf6d434b1e6e675d43555c4f"
+  },
+  {
+    "path": "game3d/shots/fast/2026-10-07T14-07-54-055Z-3074172/result.json",
+    "sha256": "f58d725abbea8f3e0e59108040d407c336a556b71c689e68996cb52e3b3c1f1c"
+  },
+  {
+    "path": "game3d/shots/fast/2026-10-07T14-10-42-764Z-3100111/1366x860.png",
+    "sha256": "bd6bfc33615b4f873cb52098f8445096ca15425fe97f143ccef1deb19fef15ad"
+  },
+  {
+    "path": "game3d/shots/fast/2026-10-07T14-10-42-764Z-3100111/perf.json",
+    "sha256": "cb59cad1c126baa519edcfb8a5e8c7c4850d5fbd109e58f4c4f65e6d6623a2fe"
+  },
+  {
+    "path": "game3d/shots/fast/2026-10-07T14-10-42-764Z-3100111/result.json",
+    "sha256": "5ea6185458fd612a74b927a78acfd382e52a9a01e004ee992146718d01349ec9"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-cpu1.log",
+    "sha256": "e563f3676689d287706ae3255e6876e2836a0b271a717c4c7d04b03ed0edd52f"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-cpu2.log",
+    "sha256": "17588961ae59721cda3e62f387aec13492851c2ba5c5fcc7e2adf416947c9c35"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-fast-1366-repeat.log",
+    "sha256": "6abd43f3995aba73dc6a8eb4b5ef34f752e71f8991277c7e7108d24add2028f8"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-fast-1366.log",
+    "sha256": "86d1e3f2b84682e0d1a30e8bff2edcd03a1229bf5b515ad39b03f29cfd540f91"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-fast-390.log",
+    "sha256": "59ca60cbc8435852cc80342f9f833cdd0e2d9f13be13237ecf0d7eea217148a9"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-native1.log",
+    "sha256": "ac53a301957048b58fe161a1a49a7f723eaca9d41db958f4ddf1989d3db820e7"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-native2.log",
+    "sha256": "ef89066ad7e1195c31e029c82550642116286d15cef98d8b872b72f19056a22e"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-native3.log",
+    "sha256": "0b1fec52c5e2b7feb2b68e5a5d55bea9dd983adce3bad98a2b3232b0fce477a3"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-native4.log",
+    "sha256": "b5f02cf3bb602b52ee37b519fa57ed82db7c241ee834614b278777c9faac5b16"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-native5.log",
+    "sha256": "08c1af9ad8e4f5ec1c757474f16a53518c8800955275d350aa2b0572044a2337"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-package.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-review.md",
+    "sha256": "b00f869a8ed9eebb6aac5bb18134fea60af2b658f0c49c5fdfb52535268bb815"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-showcase-attempt2.log",
+    "sha256": "4afaaca47a20211e9be0bcf503b79f3f74ad1a7f15e47651e71fc0298658da47"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-showcase-attempt3.log",
+    "sha256": "25dc1eb2df03a74706114b939fce970109265e176613a34db24b9a64c1c177ee"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-showcase-check.mjs",
+    "sha256": "5d5db262e403964ade16df9deff45d9dd0f1d1265df1afa11e5fa3f80e3005f6"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-showcase.log",
+    "sha256": "de7623fbcf5c77dd5db990a6c773d68687fccb56217b2d29acdfb52ed4abca95"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/validation/codex-memory336-showcase-attempt1.log",
+    "sha256": "7355b55110261a12e52278af1bcc34cfcaac499266afe2b22a27cffee186b6fa"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/showcase-check/report.json",
+    "sha256": "315af090405762529feefa3fda402a1a835462a445ae35564fc71fa109ceda9b"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/showcase-check/1366-entry.png",
+    "sha256": "e8f047beb71ffbcbe862ce3c8d074ead0f76ce0f69b64de89432ba5a354bdc27"
+  },
+  {
+    "path": "game3d/shots/memory-comparison/showcase-check/390-entry.png",
+    "sha256": "2ba002bebda81f75c5d0c75521a7d8b697d5f8e5e456c00d5e92a8dd74d9ff5e"
+  }
+]

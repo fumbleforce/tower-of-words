@@ -1,0 +1,19 @@
+{
+ "title": "Room for the perspective camera",
+ "date": "2026-10-12",
+ "by": "codex",
+ "caption": "Higher ceilings and complete upper walls give the perspective camera room inside, while overhead views remain open.",
+ "commit": "8c9a4a579",
+ "result": [
+  "bakery",
+  "commons",
+  "pool"
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

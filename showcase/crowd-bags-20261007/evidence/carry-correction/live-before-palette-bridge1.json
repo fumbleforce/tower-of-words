@@ -1,0 +1,495 @@
+{
+  "mode": "bridge",
+  "sourceDir": "/home/jorgen/repo/japanese/game3d/shots/crowd-bags/live-before-palette-source",
+  "sourceSha256": {
+    "looks": "35f518fc9488f91182d87707a60aa4cc91978424c9825c6298eadcc3d4196c25",
+    "motion": "25dd60c281a027b8b21f9c72e1768a33ff3a75dcf685a11ec1b85539a7787d5a",
+    "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75",
+    "bag-pose": "1a5283253d86dc0af9e53c7396953292f2689d8de65d858f450dfae6f245d874"
+  },
+  "errors": [],
+  "blocked": [
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/clips.json?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/model.glb?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/regions.json?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/model-lo.glb?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/regions-lo.json?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/model-far.glb?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/regions-far.json?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/base.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/mask.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/base-lo.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/mask-lo.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/base-far.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/mask-far.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-a/walk.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-a/run.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-a/idle.json",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-a/sit.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-b/walk.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-b/run.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-b/idle.json",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-b/sit.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-a/base.webp",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-b/base.webp"
+  ],
+  "frames": [
+    {
+      "file": "00-live.png",
+      "focus": {
+        "id": 13,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          6.375418644996577,
+          0,
+          1.4149784545505817
+        ]
+      }
+    },
+    {
+      "file": "01-live.png",
+      "focus": {
+        "id": 13,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          6.375418644996577,
+          0,
+          1.4149784545505817
+        ]
+      }
+    },
+    {
+      "file": "02-live.png",
+      "focus": {
+        "id": 13,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          6.375418644996577,
+          0,
+          1.4149784545505817
+        ]
+      }
+    },
+    {
+      "file": "03-live.png",
+      "focus": {
+        "id": 13,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          6.375418644996577,
+          0,
+          1.4149784545505817
+        ]
+      }
+    },
+    {
+      "file": "04-live.png",
+      "focus": {
+        "id": 13,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          6.375418644996577,
+          0,
+          1.4149784545505817
+        ]
+      }
+    },
+    {
+      "file": "05-live.png",
+      "focus": {
+        "id": 13,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          6.375418644996577,
+          0,
+          1.4149784545505817
+        ]
+      }
+    }
+  ],
+  "setup": {
+    "period": "morning",
+    "gpu": "ANGLE (NVIDIA, Vulkan 1.4.341 (NVIDIA NVIDIA GeForce RTX 3080 (0x00002206)), NVIDIA)",
+    "actors": [
+      {
+        "id": 1,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": true,
+        "meshy": true,
+        "scale": [
+          1.1327999999999998,
+          1.1327999999999998,
+          1.1327999999999998
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 2,
+        "kind": "office",
+        "variant": 1,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.18,
+          1.18,
+          1.18
+        ],
+        "state": "still",
+        "visible": true,
+        "seated": true,
+        "position": [
+          7.708878128495739,
+          0.2952860226306082,
+          -7.4810749545404125
+        ]
+      },
+      {
+        "id": 3,
+        "kind": "office",
+        "variant": 2,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.2272,
+          1.2272,
+          1.2272
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 5,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.1918,
+          1.1918,
+          1.1918
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 6,
+        "kind": "office",
+        "variant": 1,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.2389999999999999,
+          1.2389999999999999,
+          1.2389999999999999
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 7,
+        "kind": "office",
+        "variant": 2,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.1563999999999999,
+          1.1563999999999999,
+          1.1563999999999999
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 9,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.121,
+          1.121,
+          1.121
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 10,
+        "kind": "office",
+        "variant": 1,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.1682,
+          1.1682,
+          1.1682
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 11,
+        "kind": "office",
+        "variant": 2,
+        "approved": null,
+        "bridge": false,
+        "meshy": false,
+        "scale": [
+          1.1880534999999999,
+          1.1880534999999999,
+          1.1880534999999999
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 13,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.18,
+          1.18,
+          1.18
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          6.375418644996577,
+          0,
+          1.4149784545505817
+        ]
+      },
+      {
+        "id": 14,
+        "kind": "office",
+        "variant": 1,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.2272,
+          1.2272,
+          1.2272
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 15,
+        "kind": "office",
+        "variant": 2,
+        "approved": null,
+        "bridge": true,
+        "meshy": true,
+        "scale": [
+          1.1445999999999998,
+          1.1445999999999998,
+          1.1445999999999998
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          15.959334439844362,
+          0,
+          -0.6541875409247517
+        ]
+      },
+      {
+        "id": 17,
+        "kind": "casual",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.2389999999999999,
+          1.2389999999999999,
+          1.2389999999999999
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 19,
+        "kind": "casual",
+        "variant": 2,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.2036,
+          1.2036,
+          1.2036
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          14.921594184149921,
+          0,
+          -0.37276855943377957
+        ]
+      },
+      {
+        "id": 21,
+        "kind": "casual",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.1682,
+          1.1682,
+          1.1682
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 23,
+        "kind": "casual",
+        "variant": 2,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.1327999999999998,
+          1.1327999999999998,
+          1.1327999999999998
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  "rawReport": {
+    "path": "/home/jorgen/repo/japanese/game3d/shots/crowd-bags/live-before-palette-bridge1/report.json",
+    "sha256": "38c019a73dcc2f6b0fa89cd382e2903e83aba846397d7b2ffb44cfba9d959770",
+    "bytes": 9114661
+  },
+  "measurements": {
+    "rows": 914,
+    "clearanceSamples": 0,
+    "intersectingSamples": 0,
+    "maximumDepth": 0,
+    "maximumPaletteError": 6.637024441147332e-08,
+    "maximumSameFrameGripGap": null
+  }
+}

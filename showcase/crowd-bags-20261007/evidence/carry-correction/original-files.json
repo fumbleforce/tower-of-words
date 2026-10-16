@@ -1,0 +1,3318 @@
+[
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-0-idle-front.png",
+    "sha256": "cf4566e98d2cdd3a4a3a1ff0c26002cd877bfedcc9762e6d05a8957d04b0342e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-0-idle-side.png",
+    "sha256": "326538805644136b29a9feaadd65ea3ef4253ce1770bb963186a53067e584648"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-0-phone-front.png",
+    "sha256": "0cf9f22a1528bfa4339bdcec1cebb113dbb08b1f902f4a807ec0e10923b8816a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-0-phone-side.png",
+    "sha256": "003f55589ceba0f97ff67df1b69b5d88fcfe03fdc6866310460a4ffe54deff39"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-0-restore-front.png",
+    "sha256": "d9e2c8fc01d922817df1cd110845466c17c7289f24c1a8d9c5bc3bc23b1108fd"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-0-restore-side.png",
+    "sha256": "44791865ab1ffa2d0db9bed2170bb71be7bd19f96a9b95807c0620f4e3b7fed5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-0-shoe-front.png",
+    "sha256": "76c66adf92df77fd437154028fb368c06d45db06b846125dcd01333b3eb49b58"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-0-shoe-side.png",
+    "sha256": "50056f1fbe0c1c371a2d8d33c0a4ac2840f269b4f027c471b1d0f6f40d31cd65"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-0-sit-front.png",
+    "sha256": "c3b03add8a403ff96643f5e74ea4a93d1ceb83cae089b5cf8f41410453ff9870"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-0-sit-side.png",
+    "sha256": "cb245ee643d0e45ad2bd6769a1990086f1460851913f648cea3edd9932a98703"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-0-walk-front.png",
+    "sha256": "f9d0e3afb3cc17509cc96ee927927f28284d4438052d0d952d6bc177118ca90a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-0-walk-side.png",
+    "sha256": "8ee382654d960527b9210128d9b2e26df53cff62dc286aeb420188a0b367aba5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-1-idle-front.png",
+    "sha256": "db27947678d53dcb2d83626f7af2d6d78ddd6d08cbae678b14bf0e8bfb44e28c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-1-idle-side.png",
+    "sha256": "d022568248bba3d4b22f2e222c849eedd684905dd9bfe02ffb668ed71c4ba237"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-1-phone-front.png",
+    "sha256": "67a4073dd86e8a5d59b560a17535f9a07149054c25462849ee7cf06d430accc2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-1-phone-side.png",
+    "sha256": "414cbc17d4ef265527941d1ab9b92a2c7691f14422b20381d4628b87f04896a2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-1-restore-front.png",
+    "sha256": "92dab8bb8f3048bbd147400576e145355d0b75d9368531f729035032d49cb9b5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-1-restore-side.png",
+    "sha256": "7c488a3762f67f12eeaa94b5efe80b5791fd7b3b52657fbb84841fd9ffe30b42"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-1-shoe-front.png",
+    "sha256": "5a9bd34e330a3b0c3313eb7716926329b94dbbb6edb73cd2045530d07b81e312"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-1-shoe-side.png",
+    "sha256": "e24b50f65567b7d0f0d2a977c86bb53e8faa1b79f84bfd7b57b98b9b6cf70523"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-1-sit-front.png",
+    "sha256": "7a65138ab959fe81f19558d046ba5873777475f64f3b13792f7eca81c844e3d5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-1-sit-side.png",
+    "sha256": "01503475cbccb4c10e141378a72e7cdade805b2fd9b30f4eeac89e8af73d8869"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-1-walk-front.png",
+    "sha256": "446992755889bd26c0ee77bd2b284c2beeebc544cddc38ad19df386ba06342b5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-1-walk-side.png",
+    "sha256": "664c52dd6c81d2217e7d12d19c2df7110ee9fc8883b9be6fd7230c245f2d55d8"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-2-idle-front.png",
+    "sha256": "2017ae1356805cb8774ed11edc73d8736023372c90b30c2b9fb9caa3feb05000"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-2-idle-side.png",
+    "sha256": "8dae1ce3af74657b74eaa023e31bb1ab34f2cf6dbf52315dbafe040563e88598"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-2-phone-front.png",
+    "sha256": "dfd97765dc2c4f94dfa8a00ddb9b2480c95efbb1b5df7801b57967de3358674b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-2-phone-side.png",
+    "sha256": "7018fbdd3cd280c7ef6cfb5d63bf616014a115fc71d5a68b9d6baa523696b1e3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-2-restore-front.png",
+    "sha256": "02e2fe807651505982b5917aa3a3f25643ea72516122a7651b4c9bec2583fedc"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-2-restore-side.png",
+    "sha256": "7d8ff03be6f1a010f445803b230cfe6c304699b564dc00a5a97e514065194c64"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-2-shoe-front.png",
+    "sha256": "5857dc71a30f2de69edace98e0d15add9a459aa69df3aea04ece718ac9841e5f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-2-shoe-side.png",
+    "sha256": "d94704498c33efb5a7967a5c03bb6475ee73dc486937fc4c78387b85b55de733"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-2-sit-front.png",
+    "sha256": "99fa243c29b81388b5afa05cd753c4fd8704f40063ca2ff024269a5ef6b2f5ab"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-2-sit-side.png",
+    "sha256": "ac5781a1972d38299e1d7e615fb0367f9c505e392f6ec121f709e62342e02ab8"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-2-walk-front.png",
+    "sha256": "96075aedc8616d7f8d1a53e7f4fdc3a20c82cb00faa52f62d644070a5145f122"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/office-2-walk-side.png",
+    "sha256": "be6a349342342d8af1bca6d6d36311a2a71a3471c7fdb7849a8eff6e4146917f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-100/report.json",
+    "sha256": "2b800dc3ea3858698de48197e02308bb273cd3dc92244b75366213b4577f7953"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-0-idle-front.png",
+    "sha256": "abd21e452ba0222b42a73146cd91fcd6316ac4ade2bcaac35cab8460c91828a9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-0-idle-side.png",
+    "sha256": "9b41617c8dc70192cb02fa41db42924db7d132ce09a04df02604d0f1dd903f94"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-0-phone-front.png",
+    "sha256": "b956d424432a1adbae312ca5d1a15cbc2b62ba117723b2ba4037e2ccd102f3d2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-0-phone-side.png",
+    "sha256": "0a53af766d3d10ea8bbb94eafd779a9a1ffc768f94640e39f2e15a0b8e1f3955"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-0-restore-front.png",
+    "sha256": "6ad9383eefd2faca10723c16c2e711ca420b941e5ec4513d7a8c9b3db40145cb"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-0-restore-side.png",
+    "sha256": "a61fe3205100df36e70ca597ab8e929812302556a30745b46f10dff16fa1687b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-0-shoe-front.png",
+    "sha256": "f0217ab2f95fee37bf5a4130f6635ce4dee2258f110f1f4558826cdb70b7edbb"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-0-shoe-side.png",
+    "sha256": "440cff6e7b3d2e37089e296390d9e12ef37db7d8627a89b9a9d9ef4335f83270"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-0-sit-front.png",
+    "sha256": "1cc3721778c5f0f4f612bf26c4b64392bfc373a533b98fea8f49a74a780a8a09"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-0-sit-side.png",
+    "sha256": "68bb18d7bdc5d0ac777cf3481f3cea785ad3883ffe52cc6c9d7bf4074f533cb7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-0-walk-front.png",
+    "sha256": "d6de8697fec860fa4565845d057109b82486e4bf34763518d38c452f7a1ca811"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-0-walk-side.png",
+    "sha256": "37c83e6f2d7ab339c56da71a3c14433708e3776955a2a498a34fbb747a76107b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-1-idle-front.png",
+    "sha256": "abc6aab93b53acd608c11157b19deefca1dfbd879772252001d83ba6cd96fb7a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-1-idle-side.png",
+    "sha256": "1d8e7fc9c3f668895556c0cb501034f8c32eb0927f012ff46839f6ff4ea7d2ff"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-1-phone-front.png",
+    "sha256": "b2b224937b654a5823ae8b08260ae69576003046f5b3a3ff75fc4e5bfa83b5d9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-1-phone-side.png",
+    "sha256": "0532da56720104ae693b0eaf6a1a54581a3df32df70502d51689476b35946072"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-1-restore-front.png",
+    "sha256": "2d2adbe7cb123914cd61d4e13801e60dbd42c8011009e40a011e1748c3fbfbbb"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-1-restore-side.png",
+    "sha256": "fd8ab954bdbe2b6e31ae2ad61d87ca424650ed6ee1c39342a140848c6f08e2c6"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-1-shoe-front.png",
+    "sha256": "14e4cdb65ac3fdd1297a09a5500987de9e0d088ee82447d48b7dd0c0c4a36765"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-1-shoe-side.png",
+    "sha256": "8ce1f8f08250bd1590268f084563f1b96421e4d2a94daa064b50bd847d860c6e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-1-sit-front.png",
+    "sha256": "d7eb6ab23131dcaf64d5ed53c167aae18ab8ed2ff03e4b3ecd61e66e70a36c1e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-1-sit-side.png",
+    "sha256": "51add92b01132f8cc8f445adc7a0ec4753138184f902a3cf95330a40c0985146"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-1-walk-front.png",
+    "sha256": "2a9ccccb13466e50a5bafafa8720491b4bd47fb286129f154f61ea67884fdd33"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-1-walk-side.png",
+    "sha256": "a12e2bac52c9e7653e05508f083395b95f6b8bef268c7a1841b028267aa1e6a4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-2-idle-front.png",
+    "sha256": "4fc5f0267713601f2321ed21441f14ff27d2ec0959927f7f4379604b86940942"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-2-idle-side.png",
+    "sha256": "64139bb4c354ca5c4733a729055ca780a95e47ac005d1a3d241fd91cee121528"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-2-phone-front.png",
+    "sha256": "cf0a90e02a387d74259edde7de5444fca0121c0845b3196f0b58d8ce3f899f53"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-2-phone-side.png",
+    "sha256": "bc7e9698c42054fb2e4903f866b7306388fc877263b6bdc23f0232bcf10ec13c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-2-restore-front.png",
+    "sha256": "58d8790c7e81fef54ce4b38c9334e5352125d2a56ca4c8f1c67179996c1db65a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-2-restore-side.png",
+    "sha256": "57eef048ced46da5c9bfd0d8238a39f40d9e44c30fc0a7e1f3941ec2693615ff"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-2-shoe-front.png",
+    "sha256": "e094f0137ea0ee3977ce92aa89adeefe12a3ea72551bb8e0a818af9995e13a11"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-2-shoe-side.png",
+    "sha256": "0833220e450f3357185ad0fa42af728c590ef60af256114bb0f135f0fca09380"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-2-sit-front.png",
+    "sha256": "9e5e407a005c5bfc5b56b1259c5643b1504d3a9a0ddac043e88eb434db3e0b6d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-2-sit-side.png",
+    "sha256": "61beec0b7a417712d279144c0de4c83af63f7b3116a1c80943f1d85fb8c56903"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-2-walk-front.png",
+    "sha256": "6bfcce132af9e4aedb95153eb18ad6d8d65d6dbd24df42e6fb2dbea52c334044"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/office-2-walk-side.png",
+    "sha256": "3a3cc4e2d1d024d0925426c14ce5ed4b7a6760c4f5bec9ed06fc4a521d72fa3e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-fallback-85/report.json",
+    "sha256": "31aec78c98cfc9cc04015d8aa3a56d4b5b0337e36a9776cfee7fef1a1bca7145"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-0-idle-front.png",
+    "sha256": "a702400b20a677d228de6c9739b25736ac59373dc7b57d02ec61cceb07a54866"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-0-idle-side.png",
+    "sha256": "66f0442ffdc876a08fa8c190e2efa01965f6eccb6710029d1ba8a738482026f0"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-0-phone-front.png",
+    "sha256": "33fb499972276d691a14537492e2542fb5bac4c2a55178d80adf92a0aba76d05"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-0-phone-side.png",
+    "sha256": "59e6b0100f741c74af3890a0038ea7a3cb706fc0bf5a2f19d21b3d1f1e1250da"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-0-restore-front.png",
+    "sha256": "52500dcf3c77994f8c0e66481c202a9886c0d70f1c68d20836e674fb7677d804"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-0-restore-side.png",
+    "sha256": "cef72ae67ea48b21b38250e5d8f3baf8ab35bf3a86279a5be5035e904d24a1a0"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-0-shoe-front.png",
+    "sha256": "88d5d9886d522e83307dcd89e5f7e9a9eae60cc146048bd4e303e0d0428e81e2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-0-shoe-side.png",
+    "sha256": "881ba76a041f693da41f32c435f220fe81fe864cdd01dd648daac27608b62590"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-0-sit-front.png",
+    "sha256": "de0865e5532bdfcbd9c6018e5eb3c7c85944cac73bc46f41c88b95d14a2a9e41"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-0-sit-side.png",
+    "sha256": "40b0bce597818a13ab2bf1af23ead390d882ba815140d65f0274f5b8f18b648c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-0-walk-front.png",
+    "sha256": "c18d070b9cb6bc1e55cf4324d49bf9ea0850bb51cec4134d4aba95403aa7100a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-0-walk-side.png",
+    "sha256": "09bdcd02e2bbd14c48afefa4a7ec60b07be7417f582644e08f4ee384ac33b5a7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-2-idle-front.png",
+    "sha256": "39d582fa0fe134fcb32c84d9ea1c53755eaf53693fd0d55e31d4b5536aa3cfe4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-2-idle-side.png",
+    "sha256": "9437748682bbf605ab1179f135063a57676f7f93231c5dc28e3584a81548ab82"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-2-phone-front.png",
+    "sha256": "b9940701162a4c0030b4e08940505a35a65a9a3a9af49588e82a4a1adc715c64"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-2-phone-side.png",
+    "sha256": "9489717d9e214ee7d871bca731f7cc2bb48199cd056ed74229e644cad0692d7a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-2-restore-front.png",
+    "sha256": "47ddc196c04ad2986ada0cb2c628a3f38ddcf7ddca9284be6081ee0f9c4e911d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-2-restore-side.png",
+    "sha256": "888ff8c6bab03873e25740b48fa5713a07a8bffaae8de01e8001d40286feaa48"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-2-shoe-front.png",
+    "sha256": "4dbed2f0ed230b76ed226ff37cf23a303931254a9f82560c5be12748d7337c6e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-2-shoe-side.png",
+    "sha256": "87c33ed0db1a84756f1fc869949c7f01629cf35a63f4c63d8f31f92b33bb265d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-2-sit-front.png",
+    "sha256": "94556e4a054547e0e75f658be36256f9402b725e3614e5c1240597b3af0bfae2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-2-sit-side.png",
+    "sha256": "2d98d7938ea2df95e914fd3d082e5f60f0aa6f677c5058e77187e57418db0aa4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-2-walk-front.png",
+    "sha256": "c9875a1713b8a96d39e8efc142155eb7b20eae9c06398f86c555bee89362e929"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/casual-2-walk-side.png",
+    "sha256": "dc3112602234a7b8b4753971b25f9d733a22a4cf073677230496fac342c59d37"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/elder-1-idle-front.png",
+    "sha256": "0671f8be447610b95fafa4608621a23091382ac87ee0e2b55bc61ed0ce8f74ca"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/elder-1-idle-side.png",
+    "sha256": "b1262ecf89199ecc74a702402ba4870f002c517977f840e3f25d3715834e497d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/elder-1-phone-front.png",
+    "sha256": "17275ca50514489fc04f0edd6f5b354a4a7d1fdce42f8d73485df4ec91c40131"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/elder-1-phone-side.png",
+    "sha256": "b5541bdadadd7b9b2d0f15acefc488ccd613839393272552d5032968cd90393a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/elder-1-restore-front.png",
+    "sha256": "e9efa3ef922973db93c54b9436c93b43a0d521eeb129c12f6764e976732fb605"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/elder-1-restore-side.png",
+    "sha256": "cf320658560534aeed13ca6d29aed524e97bf9d762ee7d1cce592c523790919f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/elder-1-shoe-front.png",
+    "sha256": "1b13dd9ae11ace1c0715c6a274f4a593d76722b1c677973934812c5534fcd339"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/elder-1-shoe-side.png",
+    "sha256": "12cd5fbd96c5fa9e7b494936b3489ed80c69c22ead3983e2f7d78530fdd2681f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/elder-1-sit-front.png",
+    "sha256": "35f82fba0e386c1fff62d4e999e4ff6a6a109aee26f9c1ff10620067cd1ff1d3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/elder-1-sit-side.png",
+    "sha256": "6d7c5bb1995154a1a81e93002ba38907787ad6c93cd8ff35dcf13593e1752122"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/elder-1-walk-front.png",
+    "sha256": "303781397bb63ebf67ccb8e4bb90389ff5dcfcf6bd571df650d48eb21a90cf5d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/elder-1-walk-side.png",
+    "sha256": "a54b24d81706725a62b9b98b49c176d2b127f8a09e29b35e4e303f9b0120e42b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-generated-85/report.json",
+    "sha256": "80521966cd152479c89abd8e01d0b12df9f94ce70cbd24b4304a34eb057bdadb"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-0-idle-front.png",
+    "sha256": "81170b5bc1493b6f084277ef2f17c4ca9eb48816ec336c2cc08c5c6605c49794"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-0-idle-side.png",
+    "sha256": "df8381aa420b3848be06003bf5d409de2dfff43f3e3790ed945485bbdb4c9732"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-0-phone-front.png",
+    "sha256": "4fb4e0449c6ae3ebf5e915debc6332ab549ab595ea9a88d02ccd342c1489827b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-0-phone-side.png",
+    "sha256": "2730fa65a1c720f65385935d0ce54d991cf3fecef47dac323d3b8decd90dbc37"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-0-restore-front.png",
+    "sha256": "846b83bb7172239938ba74e682e78f6c960b713aab555e4487106f50e96b242c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-0-restore-side.png",
+    "sha256": "64eec8d4173f2e3dc54548c3d92a6ac68a756130073e54763b7b7c357cb52257"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-0-shoe-front.png",
+    "sha256": "c50cf979fdfe0eb684997f126239caee71e9efa65a9f29eb660dde63da1ea31e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-0-shoe-side.png",
+    "sha256": "79912c9ffe51a0a9bfb5802db05ee94de6cd935bf21ed3d07e0f68323746d89e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-0-sit-front.png",
+    "sha256": "c38eb0285c254e07c5abf5ade6c703e468c8b69ae97c2c3a26ee8f9d63db7384"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-0-sit-side.png",
+    "sha256": "8fbad4a5ee4e4fb11a8374a1d93cb47075a4a65a423d342963fb568593720358"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-0-walk-front.png",
+    "sha256": "5766acf34e38b5d13f061dc83fe66b2cdf52b45812715c50ec302446015ae655"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-0-walk-side.png",
+    "sha256": "cf204e303969ccf234d4dc6fb572b2933b82d96e4a2da9e9e08bf402f28b8fd8"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-2-idle-front.png",
+    "sha256": "b971221660d6be2fef2bd4d702a6d8fc4579d97b5b18f5afcc8170a109aab476"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-2-idle-side.png",
+    "sha256": "5807955c7fba9a53607ab30933e0839df9a4ac4811acf001e0ea1a2d594106a5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-2-phone-front.png",
+    "sha256": "4cc677d16935360f50ec663e403c2a3f6a0befa782856786444d796aad6837fe"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-2-phone-side.png",
+    "sha256": "b122412b0cdcc8dc68364fc7fbafc05715f2d018a47e786718d6676eff0ebb62"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-2-restore-front.png",
+    "sha256": "f3111a8db7f86a8c2a01c2adaeccd22a451eeb96490f91e92b1d79bcbe7c8477"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-2-restore-side.png",
+    "sha256": "26ea7d5eecc3ff8cd9e6dfb31e91bc411e7153faaa615c6752ed4073226d7e85"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-2-shoe-front.png",
+    "sha256": "6720659e7b07966db9111ee8a637a0b3dbed0f4ce56039277c448e0092fb6ebf"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-2-shoe-side.png",
+    "sha256": "84adfbb5ba79bcb022dde9aa021487db1b7a47ebf0a5ba04e17bb59cec9436a3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-2-sit-front.png",
+    "sha256": "c7e7ab9f8af66f172430b55f434bbc63ab1c2691589bcbf3a4dbee154d42d526"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-2-sit-side.png",
+    "sha256": "73c31148ce7407eea9f7dfb3618e811a48384904358496e223880a06ac0e525b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-2-walk-front.png",
+    "sha256": "3474c14384a697921d74883a918d010b3f21673a18f469373c74aea4742b4823"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/casual-2-walk-side.png",
+    "sha256": "f49e04afe80e5388afd65cbc93e3a0b4fdc349b6fc524344f73fb89e088e94ab"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/elder-1-idle-front.png",
+    "sha256": "2d95064bd178ea7d8dcf41668357727af374a4f769d5daae221d30b9fd2794a4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/elder-1-idle-side.png",
+    "sha256": "6250a98db702d821fbbab8e3c9f1d6db8020b2b345b8ce3ca41bb140bd3546d1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/elder-1-phone-front.png",
+    "sha256": "4823116646880d82da0f72a16917eec4d76e76dac59c3f49f6d4f7219baf1d92"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/elder-1-phone-side.png",
+    "sha256": "bdd8bee53ddb1780b07dd6ec48e4ebb087a93a20f681218a1a78836fb43cb2b5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/elder-1-restore-front.png",
+    "sha256": "bd66b660429455e9e60a60c73707041d77062d7c8c7b175cbf4b779a779ec625"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/elder-1-restore-side.png",
+    "sha256": "1d66a4e7fce376ecde8036879b99f0db6021d0cd1253ea1fa01aabf2e85a3b90"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/elder-1-shoe-front.png",
+    "sha256": "2d1a498070a0c1812af0a75b4375d9065ec8329e2f36f9319ecd5aad7d213e1d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/elder-1-shoe-side.png",
+    "sha256": "38425fbecdc35b56641d000e94938fef5f822be80dffef2d98ac24246250b31a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/elder-1-sit-front.png",
+    "sha256": "4329e45d514afad2e07ea99da9d979e1cab72bddf8d2d68a3bec9676819cd394"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/elder-1-sit-side.png",
+    "sha256": "bb4a51778faf457666c2aa55ee021377aac750a669fb842c4af624ba8018d442"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/elder-1-walk-front.png",
+    "sha256": "edfeb62bad58ae2a4cacdd0f1e4780f28387106da0e4e1dbc9db2722c533fc9d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/elder-1-walk-side.png",
+    "sha256": "e8b02b356889984dd4a7744e6c81b67eb47450560ced73cf9dc219a98e69ee0a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-0-idle-front.png",
+    "sha256": "29c6f9bcda5c9bac31dd2be978bd531a1de235f7dee67b102774c8baedbc5f94"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-0-idle-side.png",
+    "sha256": "60ec0ae386ebd636c9fe255d361bd73e198ca87963faaf07812d371fe89a0642"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-0-phone-front.png",
+    "sha256": "ba2b1056d2d357c0973775dad756a2d9061e13de31abf54148c1999a6b3f9dc6"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-0-phone-side.png",
+    "sha256": "d45da99ff6754bcc0861659c9da6d9b7a5916478a0443cd8b75dd4de61f4a8da"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-0-restore-front.png",
+    "sha256": "ff8ca211da4ac38f92d0213b721b4df8c1e201f43319296c738ff20db80823f1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-0-restore-side.png",
+    "sha256": "c8cde3e25e7fbc91b71ec8a55057f515c5e5ccc68ee527de7e50755bab086056"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-0-shoe-front.png",
+    "sha256": "0bb8e28ccab4cda816a28621c5269ee2d931d054942c86fa884e57ef48b5af7b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-0-shoe-side.png",
+    "sha256": "e45c62f70c6ccaaa4ca111fb13b01dcd7c85732e6acaae5e44fc2a4c715e0eed"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-0-sit-front.png",
+    "sha256": "12d754886efb8a11ec77932b0925aba0199549cd82501d875f81ed9093f35953"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-0-sit-side.png",
+    "sha256": "138ebb8e2d36e9bd610947616e389bd2f76c228e83e07934caaf4b233ae1d744"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-0-walk-front.png",
+    "sha256": "9af25af34a9b17bcebc96cc46489df74f70c7ab023038f1728b20e59377c349e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-0-walk-side.png",
+    "sha256": "2b52ab5012d0d492991b5078246a12d5dd5fac462ed03ba1c540355f54af6042"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-1-idle-front.png",
+    "sha256": "eadfca2a3a444cbfc9fc3ce5465533ae1bdee3274696b576c7b131f36e9b7bce"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-1-idle-side.png",
+    "sha256": "350d0fcf4ec1f9bc2910d452684a28f2d4ba9fd4f06dc59acfdd553f2bdf061a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-1-phone-front.png",
+    "sha256": "620eec1a41e49879148cf5c0f0fae1ff6b30f13085cef9ba094a18be30864663"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-1-phone-side.png",
+    "sha256": "bee7cbaa054635995fdab5221cc92da115f870d597e032692bea60cafe1d5d82"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-1-restore-front.png",
+    "sha256": "f00583be101edce9b6868f5a33ad4d3e775aafd65520c00f0b928ce398e0c0f4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-1-restore-side.png",
+    "sha256": "f590ca3a66d425128cdefc375fdf02d6db9dfb680e2b6a630965f0397a786cd8"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-1-shoe-front.png",
+    "sha256": "c66ed2a8b33443af3913ee3dc87bf778d76c5af50b4767cff4b78c3bd4639d2f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-1-shoe-side.png",
+    "sha256": "8fced40e6d400a0834add812350f61caa220b86e4587a595b816a726114cb29d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-1-sit-front.png",
+    "sha256": "e1ae88e3cd61727387e43c5d6fc3de6138c20dfe747a723a74f4842b962e62fe"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-1-sit-side.png",
+    "sha256": "a4123f8701a0460f9a604a87fcb16e27bb811daa789bd18b47ccbaee3b88be35"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-1-walk-front.png",
+    "sha256": "7d90cb105635fe0c2c5cc4cedbf29a8c644dc14adfd120bd450e627adfe75a54"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-1-walk-side.png",
+    "sha256": "f20673f63587e89c0a4b141e3d01f8dbb06f22db633431ee3ea4cc10ace09e84"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-2-idle-front.png",
+    "sha256": "d29be7effc49f756052d1e1bb4d4e9ebdd64fca81b5eeac48f14bbfba813b4d9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-2-idle-side.png",
+    "sha256": "fea34f38735944045d7b9ac10e10dd5e8bed65b4e6dc78d5e31743523ff30c08"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-2-phone-front.png",
+    "sha256": "6ac3544593e4f4bffe3cf0f0375279b5d318404d4986c478949108d4830522b2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-2-phone-side.png",
+    "sha256": "6c7bf47100076195fb72e875953f1330d5d5e66a4a46af561a2c87cd00f2a57c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-2-restore-front.png",
+    "sha256": "8a6b99b154af2b800d3ee8ca368bf9ac687a01a0ae0927b61c2cbd7494bbecf6"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-2-restore-side.png",
+    "sha256": "abb52e826a7a827fb7b357e08b38c2d36a8c197f69b1fb60942e81fc9d873f04"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-2-shoe-front.png",
+    "sha256": "28c8d66ebec843f9bac0f279853670f47d859015868ade5b9b9de4bb4ec19d71"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-2-shoe-side.png",
+    "sha256": "584fac91eb34e6c7e80411e650fdacf0248c94749360ac35a32e4adb9c472fb5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-2-sit-front.png",
+    "sha256": "f2ae75b4e00b0bccfd664f3c17b07f690b682c177bdc799bb7b71c0a92aec0ef"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-2-sit-side.png",
+    "sha256": "cffb49ded2a36f5699c5e37f578db51bd19246cdae3494abc495deaa1440efea"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-2-walk-front.png",
+    "sha256": "8d6da2cb8b3a057e7d0fe4d0f419a2d9a837eb202f7739f5385783c9174609c7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/office-2-walk-side.png",
+    "sha256": "c76a316933dbea4ab43c0fc9bdc0366f7832d1e6d44d4806c36008e2d01bde88"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-100/report.json",
+    "sha256": "f4145b7164ccd477ea3301d97989d8a2e399c5cbed6f6829edee46599699bb99"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-0-idle-front.png",
+    "sha256": "7bc7f90cf69707863299a59685663ccb9730e29d442982939046bc6e398d559d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-0-idle-side.png",
+    "sha256": "8fe86cb10568bf1b9a0644b170d69a284930d6f84be2a1a3db90532a99aef951"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-0-phone-front.png",
+    "sha256": "9955b1aa19d8039d3712ab0118946b5208ebbcccb68867533ea2a283e65962e0"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-0-phone-side.png",
+    "sha256": "3f52afbd5de6350bbb0660e1ab6db868effb91524911f912333d48ef5dce2f2e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-0-restore-front.png",
+    "sha256": "8b9f469617beb0185bbcded17040923a88581fb9f3cb8ef16d4df3841792b263"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-0-restore-side.png",
+    "sha256": "1e1c33bb4b5f80a679feca662d7e30fd6563813ee4475ca7dbb95cb76ca0191c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-0-shoe-front.png",
+    "sha256": "9dada9d24d35b8b0b1c092613203ea102d6c72c61d883122e509ab2978777686"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-0-shoe-side.png",
+    "sha256": "225bd2c163d325263d9973a0a58cba56fbc8b813bd1ca1cbf3f410a49d69512b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-0-sit-front.png",
+    "sha256": "b47962113d1aa5d23495e4c069ca270814eff07033360e00dbea38a4ed187d1a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-0-sit-side.png",
+    "sha256": "2e6ff12344ae22cf5ed65fdd0afbb389396a9d0071f3e2f286d4a2adf58f22ff"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-0-walk-front.png",
+    "sha256": "4bbda91b65fae3c6bb74e373d66e885751d517b5a555cc62c82f6a3cc8e595bc"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-0-walk-side.png",
+    "sha256": "a4065b42504cce73ddcab029a848c79ee4333a1e78b2cd9ba2e8b68e5d3412c1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-2-idle-front.png",
+    "sha256": "700986cf50f72f99660e0ec09959d9622d404057dceee76c1561d10b5b046ece"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-2-idle-side.png",
+    "sha256": "24834396da53808cb182dc7728a581415a10db125aba27ac44ca867d1ddd6f5b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-2-phone-front.png",
+    "sha256": "e07449b2fe32e69ca6d90f43c79048f5e82856d8bb1daf8671cd4dfe11d3c1c3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-2-phone-side.png",
+    "sha256": "f27e9719b4318686063ebdbfc9a07fc87c353ed29fca63cd73a66a70f02046ed"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-2-restore-front.png",
+    "sha256": "c5ac43312b5d301d2c66273a0c6441e7a69e054ad49c3d3874e19918184e54c4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-2-restore-side.png",
+    "sha256": "f02000fa59916fd667e0ed07081e30afe88fba7ed33512882253492c53f56bea"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-2-shoe-front.png",
+    "sha256": "d61e6877ce0ac4791740728a749d4962ebce5988c98804dd731fe4e0b30ff073"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-2-shoe-side.png",
+    "sha256": "76637225bee27ded11ccd94bec1a86913f81280d28e88b34a8a2741ed320949e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-2-sit-front.png",
+    "sha256": "9e2997311b4ee59a6b05d4faf9419052a313db5c02eba126b9216044e3179e6b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-2-sit-side.png",
+    "sha256": "f9fa1e65263bb7eb958556cf7d771fed051528065d7bbd2c6bb17f3110c80ad9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-2-walk-front.png",
+    "sha256": "2cfb2121f7e9199d02a8faf558ecab0a0d570f9c86318dc168a7a1e61ba762a1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/casual-2-walk-side.png",
+    "sha256": "d8e75b05ac1fb59ec8a08425754b9667e30a01fdd2d4e18c1044169568e448c5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/elder-1-idle-front.png",
+    "sha256": "c838469d40429f31a22942ec3560885b372c059e75dad77893485db8baf98da4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/elder-1-idle-side.png",
+    "sha256": "20a25ffde7bf91d996975639d67e114efee085010a651fd6342c4e906e8bfcaf"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/elder-1-phone-front.png",
+    "sha256": "2d137ed552202cf345e897ab74847e5a1c7d0d12e793d609eefa78637e78b156"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/elder-1-phone-side.png",
+    "sha256": "3f5731c0c6fe023beec3392d60bcb5e40956eee765339d437299f41af69d1f00"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/elder-1-restore-front.png",
+    "sha256": "a69b71cf2e09bacd64f76c02b1c27a94f4b2aa0545911f7b2fcd3da4b77ba13e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/elder-1-restore-side.png",
+    "sha256": "10ea5156a78a6d9944e03d0d672aa0f5a6576a3d7cf6afef545578c70e9c11f6"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/elder-1-shoe-front.png",
+    "sha256": "38f96835a8c66c7a2bc6af9271d5da9ed6f8ec98fe288df827a0ab2e5eea0e4a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/elder-1-shoe-side.png",
+    "sha256": "b1ee516b678232a6e72167a10c136fcadf77f5e3f00da821d7417f917569b234"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/elder-1-sit-front.png",
+    "sha256": "af092d8fbef711ae2ec58032d360793c077af26747fd834b1a87ed84a66a04da"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/elder-1-sit-side.png",
+    "sha256": "8d3b68742326f965009d42019a2f00954eb2071408f7c7ad49f28fbcfe04c603"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/elder-1-walk-front.png",
+    "sha256": "b71c4cf0421f66ee3efc5094228565b0e65d5e21caea1628426b834b967c2bdd"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/elder-1-walk-side.png",
+    "sha256": "cd4262cba728e2ab3f9f660835d9cb77245b14a3e44044510f37cac4d92524b4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-0-idle-front.png",
+    "sha256": "e3ce169a524642dc1303d4980505667f0ee2ee035e94a8b959e86a7be272f732"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-0-idle-side.png",
+    "sha256": "46b23885ef03f5f0d4694a309987324952700645fc4832a77414add6246cb6ff"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-0-phone-front.png",
+    "sha256": "51bae1946c772e089789cc665be292e248e19a5abbe993567aa4c86e38abf36c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-0-phone-side.png",
+    "sha256": "f958598ce049bab4fd940c615947d69a01c1b91fc8510d7b61818e98cb87fb67"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-0-restore-front.png",
+    "sha256": "ec25340a4baed0f4ba2bc3c10b9790607d7abc881106081fd2fd996dcde3307d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-0-restore-side.png",
+    "sha256": "bc94a3a7312b9e210421b9d8f4f02ed4a267fb903a03c2649efd10356e84db6e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-0-shoe-front.png",
+    "sha256": "828a45e40f03e8cde4ea2ba08e9a6956e015b3fb02ce56dafa4b4d4a05643e8d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-0-shoe-side.png",
+    "sha256": "9aecce5c6dd11dab58268932c5a9f25ffbb4734055472544b4cd658bff048c49"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-0-sit-front.png",
+    "sha256": "5ed5307f69fa67302566df8de724d22c329a08be5e29673b1a526fbdd3bc2745"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-0-sit-side.png",
+    "sha256": "05a3099497b8cc2a50689d9c6d36cbfb2da79b365ca26191b9896debff81d0ba"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-0-walk-front.png",
+    "sha256": "5710cb5e43304f599ea8751246ba0a9c8a407c62cbf69d37629dec26536ab13a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-0-walk-side.png",
+    "sha256": "5432083ad41313fe4c34a44a3331396fd46db0cea55baec32d4441637906f1a0"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-1-idle-front.png",
+    "sha256": "006644dab2078fde8549bda79b71af5161c2c61e07a09be7a1a15392cdc1599c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-1-idle-side.png",
+    "sha256": "ad5ba78a34e2e4cf1f3efb771a3b2fb6b37abc07192c790ac4478821f0624103"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-1-phone-front.png",
+    "sha256": "533244d36cb432989ef0706c36280844a02ad6953c3362d66d380877fad02535"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-1-phone-side.png",
+    "sha256": "f989311c650b95e2dd4d048348e56b535393ad5b7602379206392ba80947d2ae"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-1-restore-front.png",
+    "sha256": "6f5968d9f60ce59993c105bcbeb7878e4ef2287d3d9e9185af77349aa6af2e04"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-1-restore-side.png",
+    "sha256": "31be417d9646f4f99abd79c2e0de83a16e689811da729ff3b1f8b76737ffba0f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-1-shoe-front.png",
+    "sha256": "070676d5a3409a53194344b3a5c03742942b44ad2316c1b3b1570fbe473019d3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-1-shoe-side.png",
+    "sha256": "d809a8191bac87a7ddb4e62cdcfcd0c2af56a1ad2fbbb88277fe0d9d0cc2ef42"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-1-sit-front.png",
+    "sha256": "e78583d8cb8f94c5048c02fb882c07dbc743bcc9000d72f30df993ff88504ed2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-1-sit-side.png",
+    "sha256": "182087ed7195b372b72e6b15e8337172fb7f87605efd71887f70110065ed271f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-1-walk-front.png",
+    "sha256": "a5095ed1056cb9777469bb9aebdcd9266a4dd80d64498c6c2d55e642f88111af"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-1-walk-side.png",
+    "sha256": "02f4b5bf91cd3f8bdb75be10a27e0066e944a273d78b5214f0720405155c559e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-2-idle-front.png",
+    "sha256": "e71952ff0ef009f068699c83894cea56d45e3f369007917f8b332551696298bf"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-2-idle-side.png",
+    "sha256": "b19ae9fc87baced8641ceaff4fe10caf0f0d9a7cfa53721920408edcb22b41e7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-2-phone-front.png",
+    "sha256": "8901dee9c1873103a5ed49d59586a43579c347276616ba9d7c5ddea8eac2b9a4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-2-phone-side.png",
+    "sha256": "0904a2b8b936a755776d6636d1bf9b3920b2688c5f88151b5f539186c9aff073"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-2-restore-front.png",
+    "sha256": "8da7d9b3b0fef7709e2f5679e5392147bdadec5a95fbcf67422683edef0dd821"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-2-restore-side.png",
+    "sha256": "561ac7703e5c29aa2ab809819a8dc503e5ba3eab1c9dffe15a7f4492948973af"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-2-shoe-front.png",
+    "sha256": "e0c7ba164a1598fb4a51c6cab4b16586c048d2b6ef1eb7d1baf9a4f18c08a6fa"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-2-shoe-side.png",
+    "sha256": "a7b210d17ed5d281424bd267587e2e9de18702950e20db46034ae2164b7f7daf"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-2-sit-front.png",
+    "sha256": "1f0a5c73294a85f71429eec881447468a601623e055fa46a76be98f95833f307"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-2-sit-side.png",
+    "sha256": "110fdfe6616022cba314011c34e176fac87d0a59408aeb3e63b5e64b3cf586c0"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-2-walk-front.png",
+    "sha256": "eaa1a3c81a5fdb42f905aed8ced0312fff295df11de1fbdc7fd8ff700bc54a1d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/office-2-walk-side.png",
+    "sha256": "1f11ea9173157ce18e06d8bd5417f02139ee366baf9dc6880014c0ac9b38a1c3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-accepted-normal-85/report.json",
+    "sha256": "cc1cd942e3cd03c515d49e21bca556fabea27875a9e5d79bfe0526bd95c784f6"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-baseline-85/report.json",
+    "sha256": "8c21061699ee8229a26075512f81a8f4ce154c2ec4bc9ff967ec5bba42e14aef"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-cardigan-envelope-85/office-4-walk-front.png",
+    "sha256": "b7f5dbce45f989260444bc7f1c5832088cd0e1eb5dcff99ac51bf1bd39fe92fc"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-cardigan-envelope-85/office-4-walk-side.png",
+    "sha256": "597a856e86f43a5ff263d85d0d95bb8a8131bc4cb7614a977049fdf89a5f9a6f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-cardigan-envelope-85/report.json",
+    "sha256": "01364bf8108f7b197b0490c614beedbe45e67f4e97aadae697b8be2faf7945d8"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-cardigan-envelope-85/sources/bag-pose.js",
+    "sha256": "d4bb7a3f67acc397d3562ff63f766f94cb23a246dec28c48041632ad5bf43ed1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-cardigan-envelope-85/sources/looks.js",
+    "sha256": "35f518fc9488f91182d87707a60aa4cc91978424c9825c6298eadcc3d4196c25"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-cardigan-envelope-85/sources/motion.js",
+    "sha256": "25dd60c281a027b8b21f9c72e1768a33ff3a75dcf685a11ec1b85539a7787d5a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-cardigan-envelope-85/sources/stops.js",
+    "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-0-idle-front.png",
+    "sha256": "68d9be2faa9db8d318c0b13a04e7ae155a3672cf258577b721ec48d70b1af34e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-0-idle-side.png",
+    "sha256": "03f06a89c1c602eed9299c0d4bdd37fa28844791b48649e9928f22e673be6c32"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-0-restore-front.png",
+    "sha256": "68d9be2faa9db8d318c0b13a04e7ae155a3672cf258577b721ec48d70b1af34e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-0-restore-side.png",
+    "sha256": "03f06a89c1c602eed9299c0d4bdd37fa28844791b48649e9928f22e673be6c32"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-0-sit-front.png",
+    "sha256": "6c3428c82e5e56227ed3e04a126664577b9eb037ff4bff2686c4eae6f8fe9a74"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-0-sit-side.png",
+    "sha256": "6fa0d9e1ad736e8fef6df9f2b5fe29c8465e97fe04f5d45fa0a074c29c6d860f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-0-walk-front.png",
+    "sha256": "bb15d4efecf54ee4c4b37e2d13176acf8055cf65ecb5a11221720dcd2de9710b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-0-walk-side.png",
+    "sha256": "42db8a28f9c809fcd49d58d3763ceab7d2f72c50117032bf7b3a48e89f2a78d3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-2-idle-front.png",
+    "sha256": "37a2e3d90c6c4ba4738a4c318cf38fd6b7d307e14b11466a4df330c94d83b782"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-2-idle-side.png",
+    "sha256": "68b3aa2e7c2bb956eec8bf987cde7cc43171d17f298ac03755fa134587d3bd9e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-2-restore-front.png",
+    "sha256": "37a2e3d90c6c4ba4738a4c318cf38fd6b7d307e14b11466a4df330c94d83b782"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-2-restore-side.png",
+    "sha256": "68b3aa2e7c2bb956eec8bf987cde7cc43171d17f298ac03755fa134587d3bd9e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-2-sit-front.png",
+    "sha256": "375824d165e09767db2133a7587170ed5b34e9a7636a206b1a6fd5c2731af84b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-2-sit-side.png",
+    "sha256": "0dd33db07a05ac05368210fdbec21953c0cbd451eb4321dff0497608aa30a824"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-2-walk-front.png",
+    "sha256": "da59a536665e49f83d42adcb378db2b0b670a03c7c340f409f6bdb02846a382e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/casual-2-walk-side.png",
+    "sha256": "d307882e3079581fbf3ba7d4b6dab8775772f6daad068ddec310661cccc598ad"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/elder-1-idle-front.png",
+    "sha256": "5d289cf097fb37e63c9ddc523c167d09f3cbddcc0ca618644d06590ccdd3f6ee"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/elder-1-idle-side.png",
+    "sha256": "16ffa13fc356bdba9a14666d1159a3a884893304ffc9e29e66a7eec2bb51c3cb"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/elder-1-restore-front.png",
+    "sha256": "5d289cf097fb37e63c9ddc523c167d09f3cbddcc0ca618644d06590ccdd3f6ee"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/elder-1-restore-side.png",
+    "sha256": "16ffa13fc356bdba9a14666d1159a3a884893304ffc9e29e66a7eec2bb51c3cb"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/elder-1-sit-front.png",
+    "sha256": "09dfcf936e4ad66b0c6107964af88598cfb7d35af3f657491436f5b74033b261"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/elder-1-sit-side.png",
+    "sha256": "59b43acdd38e90588dbcf6b6411e2ebcaa216d320f3bf29c6530e089fbb7c4cd"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/elder-1-walk-front.png",
+    "sha256": "09289215b00f8f676be44733421f73291de292979ab192d06a2fb309fd9b5026"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/elder-1-walk-side.png",
+    "sha256": "83833963c99e90096b5e410d3eac007bf3f664b3057b64dd498f63260a647f76"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-0-idle-front.png",
+    "sha256": "1cddd73376092e0e79577a1f326bb71fb12b2e06ba3e419ba26169d71ecb61e6"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-0-idle-side.png",
+    "sha256": "d7718b5383494984295eeb586dc0eb56922d598ad45789de56e31cdabd48c61e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-0-restore-front.png",
+    "sha256": "9d79b5c2cdbabbb2dec4c89634efdcb03e2259b4234e1eb1b2cf104991a9ec24"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-0-restore-side.png",
+    "sha256": "f016c4b025917adca1cfdd3a0ae39619bada39347a114da0f7e0367a31f5d663"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-0-sit-front.png",
+    "sha256": "2bf1f0815bf500afc378c2d09c275719cd4461d2e53c03d951965ef07ba08167"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-0-sit-side.png",
+    "sha256": "a71ebcb6b3e1c89b20faf00be0ce682dd63e70e6dad738b373bac6cd2931c532"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-0-walk-front.png",
+    "sha256": "a3fcdba92cea7be746962ec1b019f824ad1bb305d6f042d4428796b10ce3e9a4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-0-walk-side.png",
+    "sha256": "f8de954f58119c742794d13f5c8e6befb40f9a373c95d0deb7fcf999424361ed"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-1-idle-front.png",
+    "sha256": "f0d9eea68a4889f730d6c4c551677bcdfcb8bc24432b568c0e554cd6771ec72c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-1-idle-side.png",
+    "sha256": "1e730de329524fb292086cfe5f147873c3d4160d7c9fb63534aac83f41c40d36"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-1-restore-front.png",
+    "sha256": "9e43e9978490acfc373ceed278cd6116a175303d02e8781c9c55ea2d4d819da4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-1-restore-side.png",
+    "sha256": "a4d35cf9c1d402de528891f164f2ddab0050ddefa6eec78258a9e305ed060465"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-1-sit-front.png",
+    "sha256": "4ad8457861e330fa094300fd17a57d1aa476e68a4ed5cfd78554763dc9f3bcca"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-1-sit-side.png",
+    "sha256": "8c34d1d258b60246728b5fb763b38030b67f1b1df516515f82b00d11bf7456bf"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-1-walk-front.png",
+    "sha256": "7ea847d12534095ec3045ac30991ff8a7b97b0b99e1e1dad546ab79d02394558"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-1-walk-side.png",
+    "sha256": "511e5f8de0b53afeda2b6893b2732adc46ff53375b6f56dd3589a041e538fc82"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-2-idle-front.png",
+    "sha256": "fcdc1ea3702cc0fa55bb8c7d312ee876c2423bc233361188456a958f7a2ab616"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-2-idle-side.png",
+    "sha256": "96f1b499ccfa20706de2cc9c640f10f44538cc4faf3b3eddbe2b8919773f9c24"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-2-restore-front.png",
+    "sha256": "ec0e591f5917ff3601f5daeaf6f00c204953ef775afd0c681b91fda9f6947bbb"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-2-restore-side.png",
+    "sha256": "39cf2b00fa55e5920e6bf698f8967a48118ac2010c78814ecd484919a51f0f47"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-2-sit-front.png",
+    "sha256": "816beef62aef9e4102931b4fecdce2f5a8e5c32282fb641c406a0d5017042797"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-2-sit-side.png",
+    "sha256": "3b02fabb82864954c26307feb82f6869bbd6efed5555b40f7711df2deb69e486"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-2-walk-front.png",
+    "sha256": "c6701721e5a7579e7d5fed527c747dd42bf654e3102ae4e42485966a4d2c2aa9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/office-2-walk-side.png",
+    "sha256": "ce3b0289142f82dcc0729e898cad69acf4f23a4c3a274d21d636ec2f5697653e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-current-85/report.json",
+    "sha256": "91c4cc3a1f42ead3fdee99198f78b0d4227ac050d1df7d2ba54c7c1d424fd4a1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/office-0-phone-front.png",
+    "sha256": "43d22ed578eec28e5b3880f4d5b77b6719333821f702ae6a3914088268a3c68c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/office-0-phone-side.png",
+    "sha256": "6da053f8d24d264614d0a04a7fc1f9deb8a6992357c98a4380fe26ebead136ac"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/office-0-walk-front.png",
+    "sha256": "d74264ec142009193de6996221235e0edac51c71bb4e66180b31051848fe65d1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/office-0-walk-side.png",
+    "sha256": "e0954cc5c4f1de5c8dd62e913f7cb9cb4258b251682d83fe6d8315b46ca42f3a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/office-1-phone-front.png",
+    "sha256": "2f342d1c25f33576161e1c587c08f75f613a860a4688438f78f9d421a8195090"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/office-1-phone-side.png",
+    "sha256": "a63b9988d39a1cd5f65eb678168a96668377e820aef0fd8fc3d0bf64b5c72e1d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/office-1-walk-front.png",
+    "sha256": "614a2333763eec946248c44c12d67203e6e3934e46bb1962a283a2536604ca89"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/office-1-walk-side.png",
+    "sha256": "969dd3f2ee056f2540b126c2e6953f06351d6875699abd500be05eab178be3dd"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/office-4-phone-front.png",
+    "sha256": "e430d8c1fb86340bfd2a3eebc16ead3fd8c0fe2d600a92e5476e049140ddcf94"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/office-4-phone-side.png",
+    "sha256": "acf067b6c4389fb7464e3ab10e1171787bf51c0281f0268911329860669a27ee"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/office-4-walk-front.png",
+    "sha256": "f12dfa380fb4a1b52980ea1ccb209e0d7f1511270248cf57176eb655f93f681f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/office-4-walk-side.png",
+    "sha256": "cbfb1c81965be2ef20882484f4434d2655671a17b44972e6866b4dc64f4afbd5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/report.json",
+    "sha256": "3ecb6e58983dcf56bfc02c75b707ebdf19fda46d4ca4cab9c72b4b5af012beb8"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/sources/bag-pose.js",
+    "sha256": "d4bb7a3f67acc397d3562ff63f766f94cb23a246dec28c48041632ad5bf43ed1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/sources/looks.js",
+    "sha256": "35f518fc9488f91182d87707a60aa4cc91978424c9825c6298eadcc3d4196c25"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/sources/motion.js",
+    "sha256": "25dd60c281a027b8b21f9c72e1768a33ff3a75dcf685a11ec1b85539a7787d5a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-envelope-diagnosis-85/sources/stops.js",
+    "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-0-idle-front.png",
+    "sha256": "cc27ca221d841e34fcf4a3e1f4057d44501e9796a52df9d17d311377cfe62530"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-0-idle-side.png",
+    "sha256": "7390468f7194ab118a19c38ba729e176982fdc7d04df6f94bfbb0c5d9e1ffd8f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-0-restore-front.png",
+    "sha256": "cc27ca221d841e34fcf4a3e1f4057d44501e9796a52df9d17d311377cfe62530"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-0-restore-side.png",
+    "sha256": "7390468f7194ab118a19c38ba729e176982fdc7d04df6f94bfbb0c5d9e1ffd8f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-0-sit-front.png",
+    "sha256": "105b94bdd632bc2dfcad889d879c787fd661411f869a228d58b19260a70c4015"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-0-sit-side.png",
+    "sha256": "12bd2057ab0851b262632f02641516550603e4b6e548fcaf8b3d15e3974252ab"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-0-walk-front.png",
+    "sha256": "52b797bf7d036d7ae6a4175c4eef3c0edfb19b360533f57ed31a1cd01100b3fc"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-0-walk-side.png",
+    "sha256": "3ded8e220225fc933b748aef1b96af9bcee19cbcac2020f9bcfddd73ca8c34aa"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-2-idle-front.png",
+    "sha256": "3304873221e4cdd24c023a24b40cc788dc198c8fc1b95fae27845b44f02bfc1d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-2-idle-side.png",
+    "sha256": "4cd0a4803e67e34cfc4c2dcd0e77bfc2e6fa583fb9d79055c2e62df9147644fc"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-2-restore-front.png",
+    "sha256": "3304873221e4cdd24c023a24b40cc788dc198c8fc1b95fae27845b44f02bfc1d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-2-restore-side.png",
+    "sha256": "4cd0a4803e67e34cfc4c2dcd0e77bfc2e6fa583fb9d79055c2e62df9147644fc"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-2-sit-front.png",
+    "sha256": "d94ebf775684f97fceafdba794d98ae02f547568e218c73622b39aa9f1e66e11"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-2-sit-side.png",
+    "sha256": "851ffe477af493a89aac8810557d1d12a520af4a8daf3ca31ff2cde6120b0735"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-2-walk-front.png",
+    "sha256": "b001aa3c98ad93699126da226b94135388ac47c37db3d724cd1fa2f9b816d0c6"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/casual-2-walk-side.png",
+    "sha256": "145e694e23a4d1fab5c18234273c0e1aa11cf0b030e3d1bd1554376139243b11"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/elder-1-idle-front.png",
+    "sha256": "aefbe7b915b46617ac470def8740cb9c06ccb3d6740d2c2643ee8dcafcf1ab87"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/elder-1-idle-side.png",
+    "sha256": "ce422796e883994084f6af758a552967996775cae68a8d29f1925355b91c0238"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/elder-1-restore-front.png",
+    "sha256": "aefbe7b915b46617ac470def8740cb9c06ccb3d6740d2c2643ee8dcafcf1ab87"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/elder-1-restore-side.png",
+    "sha256": "ce422796e883994084f6af758a552967996775cae68a8d29f1925355b91c0238"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/elder-1-sit-front.png",
+    "sha256": "b585279ddb55b595301bf05f9531181055aef3fa7bbb0d4042312f2fabd4e65c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/elder-1-sit-side.png",
+    "sha256": "1bb1006001333b8fc405537681a5f28668c4633e0abf19d2b01bb3d5e5e08357"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/elder-1-walk-front.png",
+    "sha256": "86cbb083de12be11b54fb8458ba51fbe29387af11f35f90234a17761e060257f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/elder-1-walk-side.png",
+    "sha256": "e2deb63b005d48453aee03b81608f07a9a07366f69833d6acb444000fd6c2644"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-0-idle-front.png",
+    "sha256": "e3db97f5eef9b60084700be79e1ac1fb1d4a4e3ff12e3bda757069c75aef6c67"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-0-idle-side.png",
+    "sha256": "293f16dca748331d83e131b0d2e9a7a48c1f0bfa37141d4a19966eb09c821cad"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-0-restore-front.png",
+    "sha256": "c74d016e38a6409bdf79e178ce715f770ff54eefa7e553d2fd3f710ad871c92e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-0-restore-side.png",
+    "sha256": "062ee5ea55303898ef4ae0632011187251ff77d02661a00a128e82b8e02c1b1c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-0-sit-front.png",
+    "sha256": "1bbf38990f1e7892f33e2dce0523a5cbf7c88ff1fd9b50542208dc1ba66b9c40"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-0-sit-side.png",
+    "sha256": "f066c70473291fb228a4dbab567ded1c8a2e25edd0be2d128f2e34f334b397ca"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-0-walk-front.png",
+    "sha256": "9a613f6b8c44073886591d4ae42fd8204039012daa4e079a5d36a726b2ec4ed1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-0-walk-side.png",
+    "sha256": "b30f9b17f07ef539ed2a8eeb1c20c74334af3e44f8b8d624731e5e7204a46c7e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-1-idle-front.png",
+    "sha256": "31c54c5274a0e92241949fb2d4d71c9d6f72f6b8994c86ef868ccf3c3d3fe812"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-1-idle-side.png",
+    "sha256": "aea1ae14844ea85f25b94dcd87e3839ab160caafe33954587164e5a0bd062b6b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-1-restore-front.png",
+    "sha256": "c18a6894d94d155af05338aaa7ff57c0971260289540ded10087dfe171ba3aad"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-1-restore-side.png",
+    "sha256": "68593543a644f0cb5c47e286dc3d4dc217f3d6200850f8d47da5968308ee0388"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-1-sit-front.png",
+    "sha256": "aaaf8eb2122d4d5bce6bb2f3a0e9ea7c4d0ebe7a2f93547dd5b68933ab79b9d8"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-1-sit-side.png",
+    "sha256": "3973107aa5964a1ee78c2248157b4bf360e5e10e881fc0807d6ec38f3d57f96f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-1-walk-front.png",
+    "sha256": "4823db6b971f2d78ca51355b704367d322fc0d8b01a8e87d3e3202fb091117a3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-1-walk-side.png",
+    "sha256": "b412f9a87cca8640f1918b71462cd6c462761996f8803b743ad035bddff356f5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-2-idle-front.png",
+    "sha256": "51a30eeb7da619cdb6f50876e9905fcc32b041e4d0f1ae36174e4f9f8d5b77b5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-2-idle-side.png",
+    "sha256": "b038afc4a486e3d2d9bada6dccf4ae4d8e473fea0436b05e65a3ef234cde34a5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-2-restore-front.png",
+    "sha256": "874a0bef8eb3292df8da7ea92315dbb4f26767063a26833a56dee1badad064c5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-2-restore-side.png",
+    "sha256": "11f36614d034c64e3d8b904f99af3010cade6394b6770f0a034b4394a416d8c7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-2-sit-front.png",
+    "sha256": "9387a2ac52bee14af0081775db7db7af53892073d7b50b68474b9f19052fb249"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-2-sit-side.png",
+    "sha256": "1dd6315678436c4635ce70c63690b12dffd0de1f94b8c9f6296c67625867e17e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-2-walk-front.png",
+    "sha256": "48c2a87ba8fed7bea4b551379b0dd3abd81d3a6a6c2306dfac3bd5b9622978a4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/office-2-walk-side.png",
+    "sha256": "a3700020883bd01052b70121dabec677404eea4040a54c1ca0807fcaa7cd3d9c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-final-normal-85/report.json",
+    "sha256": "f30ba6fe3d243b2326c2103c4ac1a85ed80c2c844b2bdfe3631e47dc46fbc8ae"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-0-idle-front.png",
+    "sha256": "4db086438acd972dfdda5a0734a073646feb14d404b10ef915e1f56c9149fe51"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-0-idle-side.png",
+    "sha256": "6373916933d802ddddd03c2e0a1c68c615ff83d4c0146f9d1bfaa609bc6ca9e4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-0-restore-front.png",
+    "sha256": "4db086438acd972dfdda5a0734a073646feb14d404b10ef915e1f56c9149fe51"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-0-restore-side.png",
+    "sha256": "6373916933d802ddddd03c2e0a1c68c615ff83d4c0146f9d1bfaa609bc6ca9e4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-0-sit-front.png",
+    "sha256": "8f4a824fc78656bfd81979cd06fec8812c480e420ee7baac964d3670bd3d84fd"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-0-sit-side.png",
+    "sha256": "693c0835fc9e5d30bce7ab0d2e72192ab7cee8d564ed07e124a0482a5aee8594"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-0-walk-front.png",
+    "sha256": "12130f24d524ed63cece94d16353ffdf9b60dd01a97c9e8dee505cb916876ebc"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-0-walk-side.png",
+    "sha256": "2ad1eca4772c8b0eb4910cf046bfd72b47039c41ce00a1fab5db4a8b3745f366"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-2-idle-front.png",
+    "sha256": "ad821d3e2aba7526f263fab06fc6a9224f88855639f6420e8403fa13555ee826"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-2-idle-side.png",
+    "sha256": "0fcdd363a7f6e501f8637ed5cf2c1afcc4fec782e1e5371119eab1632026e836"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-2-restore-front.png",
+    "sha256": "ad821d3e2aba7526f263fab06fc6a9224f88855639f6420e8403fa13555ee826"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-2-restore-side.png",
+    "sha256": "0fcdd363a7f6e501f8637ed5cf2c1afcc4fec782e1e5371119eab1632026e836"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-2-sit-front.png",
+    "sha256": "a140216e800e586f8300d630cbeb051d37187423b1b558cf21db96f25a5f99c5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-2-sit-side.png",
+    "sha256": "c5b6b1fcb01ff5644f78fc028be1868804848991281f067fc825b7ce62d97c17"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-2-walk-front.png",
+    "sha256": "9bc85615e440a741828a9b197e963bff605962a5bf89cb50b98ea19b1d2c63d4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/casual-2-walk-side.png",
+    "sha256": "cfc0faa4850e20d49a81853d5147a10612cafeb9e8634ca6dc3f607304d11b57"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/elder-1-idle-front.png",
+    "sha256": "1f73ffa74f916629351df7a506b5348ae15cd7bcefcd8a186dcfc77057e0e7d1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/elder-1-idle-side.png",
+    "sha256": "1478191656b306113c147cddaf7ad2ce0bede29fa69c1dc4f30bd8e67e4e7918"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/elder-1-restore-front.png",
+    "sha256": "1f73ffa74f916629351df7a506b5348ae15cd7bcefcd8a186dcfc77057e0e7d1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/elder-1-restore-side.png",
+    "sha256": "1478191656b306113c147cddaf7ad2ce0bede29fa69c1dc4f30bd8e67e4e7918"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/elder-1-sit-front.png",
+    "sha256": "bba6954f17383210383b05318c7c32a511fd3e2a9982fd4d25b42f213ae69d46"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/elder-1-sit-side.png",
+    "sha256": "326d62fd37637d2c999be3feb5e00e63d912e0aa83d3713152453b1a12795f93"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/elder-1-walk-front.png",
+    "sha256": "b9c8a75721418bd9769511ba5a1b851904ef106718f53416f42a6452b4f96b9d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/elder-1-walk-side.png",
+    "sha256": "95e6cc5ce57cf41408298c48a6808184221dd8622e5f4cd1393eedae31bae24a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-0-idle-front.png",
+    "sha256": "c66f2fff8db92dc13e0a9c44ef03424a02d8bb5fe9f4a64730abbfd63a54581f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-0-idle-side.png",
+    "sha256": "d8a64b2fa51e943fa490df1150204db6d3f4242476dadb8ad8d9d3f015352a2f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-0-restore-front.png",
+    "sha256": "e38a8c61d1d68f8ad0b2064bc883d5b2aedcbb89add74489d9bc70a5f9373c4d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-0-restore-side.png",
+    "sha256": "223812f3c3865d3f6994a1c61ce7a9c6067939e5652098962d4d424bbdb7009a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-0-sit-front.png",
+    "sha256": "798b206ebde185e8d2868eb61f8fa37b2331f13d2df2bf9e2e0fe53b3b1e3f21"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-0-sit-side.png",
+    "sha256": "b4bd15c65cc1292431773d07e4329ee3c37a1ec8a0018f40b0fc2e49a1c4712b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-0-walk-front.png",
+    "sha256": "ef69a4fa51ba5e61dd1724f9f46c24a23bc2f528ef9b2293fe8bd54f25408776"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-0-walk-side.png",
+    "sha256": "e4db9fa793f899423250069659676a45cffcfce8f4d86a5186b285f88f5e4933"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-1-idle-front.png",
+    "sha256": "e49e57966bc9b1efbd69cd8a8713d3a2eb7716c02e501f7c93cfd17fd0850084"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-1-idle-side.png",
+    "sha256": "20cdd2fb3ca4b3402142106d8116c69844451fad1ddb79bb2581e06ef24ef4c9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-1-restore-front.png",
+    "sha256": "a7dfe3750913f73233d5ca930686d5fdda52c93f658f174403246645c82a33a8"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-1-restore-side.png",
+    "sha256": "f135c9d98bcb6ecbcb4b545d2bc282bd06e45096edf371d69b38a44b123cd26c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-1-sit-front.png",
+    "sha256": "bfac78b50ab501c7e11a7da660b3e2788f11d28603254acace110306d3fac3fb"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-1-sit-side.png",
+    "sha256": "833b5b51a792b8eff974cd932ee8a89df18b32ba128c04ff2151b9ae21bdab8b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-1-walk-front.png",
+    "sha256": "a82fe16e9d75aa44276af12577ea886757c5859165591109641293f569c936ed"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-1-walk-side.png",
+    "sha256": "d0544be49f36ff863a7487e9ba84b760aef2ad8ef5afd3109690632bf4bc10c1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-2-idle-front.png",
+    "sha256": "a08a498c873a811b7e79208b7a26efb9e61507214bd9381c26a87b6daf14b209"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-2-idle-side.png",
+    "sha256": "1b3690e5c8d15998bcf053d3d5d08a9928165b7bdefde2293dea30852f1854f3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-2-restore-front.png",
+    "sha256": "6a2042ba2c64be5b11994b35bab4199dc038cd33598775f380ff558fde628c8e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-2-restore-side.png",
+    "sha256": "66999252beb773579b3ab27b12bb0ee17f802be2be5ef4b23953a451a1cb9c5a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-2-sit-front.png",
+    "sha256": "8ce241c209d12b6e7d655f2d454416e96f809cd05f1a31bb7731e7848afc2894"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-2-sit-side.png",
+    "sha256": "14934bafd9e27c4ce46cc97719509097b4f38089d2b1cd92046b660c4959faa1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-2-walk-front.png",
+    "sha256": "ed73d49dca443eb42191ac59e796b8d217dd6a5a62977ae294492ace9b28fc72"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/office-2-walk-side.png",
+    "sha256": "5fed9c3e804608d8328d9e06970512c80adb44140a99cc0d26e5089b67fee0e5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-frozen-current-85/report.json",
+    "sha256": "fff62146d642e37050a9675822e4b1391ca7e1795949074888f5fcf2e05e9b9c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/casual-2-idle-front.png",
+    "sha256": "969516bf87009eaa2aa962099ce256a4c3a309d2c44ff6f01c7f3b77dd5accc4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/casual-2-idle-side.png",
+    "sha256": "613cab7c70c6add8713244b997c6eb6616044d15eb85ae3fa29f035b3b37da7f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/casual-2-phone-front.png",
+    "sha256": "5c3fab73fb8fa35faa04e1074a838ded29c33cb42cc2ff57cf2827aef5230016"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/casual-2-phone-side.png",
+    "sha256": "6a19c0a3ba3647d38ff8d561112f3b8b079d90bb230aeb758463af7b7833cb05"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/casual-2-restore-front.png",
+    "sha256": "66b3916d4c01b90ca9685cf78532e90debaae04aa97f5434c301cf037fbcd6b3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/casual-2-restore-side.png",
+    "sha256": "1b026de6cd6023b71fcc63716cf5f2409e6f99d6b6bf48378e9239dd9040bc01"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/casual-2-shoe-front.png",
+    "sha256": "da758261be13464d2eac2254b72b68250b05bb76edcc5777329cfa0f3d281931"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/casual-2-shoe-side.png",
+    "sha256": "8d87bf3737e4a9bc8ac951be3e18c99e283fd7626600f2c6fb21666fc82ebdd6"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/casual-2-sit-front.png",
+    "sha256": "3860db8a2c8691da28616128719a8fc53c777d0e8c82c1162162f75ae2581a31"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/casual-2-sit-side.png",
+    "sha256": "770e80e36376a4593d82855a152e07fb05332fcb49941ae88fc78021328195f8"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/casual-2-walk-front.png",
+    "sha256": "a7059d35d6fee9eafaf82b6a29abf9322e3431b9f99cf651b0c431fbeac1c399"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/casual-2-walk-side.png",
+    "sha256": "5f2ee4cc6439917744048b0c8908823c92bad2bc5505a26729712a5bd5a76fd3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/elder-1-idle-front.png",
+    "sha256": "c43a4bd0a93988fc38b5f9d0d79d6ffd2fdeda4f6a489a23ed6f79e64f66d70e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/elder-1-idle-side.png",
+    "sha256": "43cd7d4813cf20410ca43f63da17ff81f273399b1bcfc242907690353b554cd3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/elder-1-phone-front.png",
+    "sha256": "5ea0fd784c36aa7afa5f2a7a5e4c6275bc8e46f43b2fc341a08a1bb626e41b8f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/elder-1-phone-side.png",
+    "sha256": "a08d75aa37694146a8f0d44a917ed6832b4e8251d6adaf591c696cb7a51f165a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/elder-1-restore-front.png",
+    "sha256": "60edf2222dd0455602638c70e23ce7533e7af23bafb6fa10bbea84c931ac9a37"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/elder-1-restore-side.png",
+    "sha256": "e75cb5c13086ce2c31382998c56c9dd41168337eab761738b21da3648741e0a9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/elder-1-shoe-front.png",
+    "sha256": "3d35a0a788d7620db23649915f9dde86fa82e0169cd44f94f31d909a91d70ae7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/elder-1-shoe-side.png",
+    "sha256": "7c7f3892eb69a472e0f78858ff6cfbcd518347b6b746724bba5e63d6c48f931b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/elder-1-sit-front.png",
+    "sha256": "e03ecfd922eb3f5be38272c71a084aff137a94a2ef37e25d94190a0bb403f3dc"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/elder-1-sit-side.png",
+    "sha256": "494cac7d515a03092d8f5c185de329d3e6b4727a8f1bed45365b828b1a0e197f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/elder-1-walk-front.png",
+    "sha256": "03a9f2747dc8e8c0dc4fa9fa7c4b6d97489c954fa989f6d643c91f8a04f5cd2c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/elder-1-walk-side.png",
+    "sha256": "9029c403d755e471c7c6a3ac39c7052bc0d45d76ead4aa70ba03e3df81a0d8eb"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/report.json",
+    "sha256": "eb5f6cb4756f88a13c337943db727bfadbdc3b36520b53b625d0899636120d2c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/sources/bag-pose.js",
+    "sha256": "d4bb7a3f67acc397d3562ff63f766f94cb23a246dec28c48041632ad5bf43ed1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/sources/looks.js",
+    "sha256": "35f518fc9488f91182d87707a60aa4cc91978424c9825c6298eadcc3d4196c25"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/sources/motion.js",
+    "sha256": "25dd60c281a027b8b21f9c72e1768a33ff3a75dcf685a11ec1b85539a7787d5a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-generated-85/sources/stops.js",
+    "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-0-idle-front.png",
+    "sha256": "63dadd088b0556806f48c974f052d561bfbfffbe1ae146c77bd551be4d529ec3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-0-idle-side.png",
+    "sha256": "840b9ad8c05f47c65b2a760ffbbfdc9a8ba09697b3e1276f309ecf2f8493be6a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-0-phone-front.png",
+    "sha256": "a5bf8973dcbce648ec6f04763676bee1b4d6ac1c1226ecc18416751a5fbc03e4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-0-phone-side.png",
+    "sha256": "c644f8bf34afbfdd3bcdd15f1b71df94aac11d4136b90cabaf66d5f71bc8b12c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-0-restore-front.png",
+    "sha256": "31721084d423b708078653b5cbb7fa03472d88c306897cc80a964cc362bc5b10"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-0-restore-side.png",
+    "sha256": "728def56bbd58e43f950c0bf5769f92e37e010f55a0c032101624a53d01cbcc7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-0-shoe-front.png",
+    "sha256": "149138a1585509979ebd7063958d0278ea1bcc58e9015227eeaeab0802a3830c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-0-shoe-side.png",
+    "sha256": "e8a2fb5ee87c5028f81ffbcbded29af1f81ebb07e48284c84eb05ec083e0b37a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-0-sit-front.png",
+    "sha256": "cd5f78a4ef0387c412a42215671b7a80b6f7e19d92825d5cc29acaf6db88f73f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-0-sit-side.png",
+    "sha256": "25f302888bb8bda07448209eebeafccd1ff9765a14182b3a8b8270f4695636db"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-0-walk-front.png",
+    "sha256": "4f068ccd4c45e5abe3a190eac5006b19d029d447a0e88c7896f7b13d1e65dafe"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-0-walk-side.png",
+    "sha256": "89425b5348a48df1b063988094a26bbd16ba2a377e12a40019562251b3e3eb2c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-1-idle-front.png",
+    "sha256": "c978dcb4582968ff27b8888e01dd277e4e4f1aa913efb8c821f3fdf0665a3ec3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-1-idle-side.png",
+    "sha256": "9216434f2fa6887387b101495a15332bf1c5c15a3c57a24c84e15452d6c24654"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-1-phone-front.png",
+    "sha256": "034bfd5647cfe65ded22f12e2397f0691310cb47d3326ec2105657d4107edcf2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-1-phone-side.png",
+    "sha256": "c6595b53b9a16e90f040dbb34346a39e9305ad45fc6c06bbaeb087402bdb14f6"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-1-restore-front.png",
+    "sha256": "c60aaa2e10b70ddf33a7834b7f3d06607d434909dea04327e5f08c3226143a72"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-1-restore-side.png",
+    "sha256": "c0cce4dd521e5301916b5d96d5d953c10d547d477012d610da4d9fc73fe3f801"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-1-shoe-front.png",
+    "sha256": "aceb49be7d3f3f0c6974cf72defc1977e7a8af13313e8dfbedfe9d1bba8329ea"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-1-shoe-side.png",
+    "sha256": "49753066c7f47a8bcd3d41271fb4400541c7c5015c63e9db922de451240a4400"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-1-sit-front.png",
+    "sha256": "4bea2f77bc35d8568e7e77435b1c4f76a80c7fcb14e6e6fd92178ce57e1b6eac"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-1-sit-side.png",
+    "sha256": "23f6b45070ff7ba3821ef11201a72a9b7df6dd2b7b5ab393a6406f9e7fa17679"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-1-walk-front.png",
+    "sha256": "58724dc320f477aa8dbcdea483396d91599c88094aabd481362e22867fdfa4a9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-1-walk-side.png",
+    "sha256": "03cc66a4b623124c9d95d41954ef50804b5ba1b3b05d4e4edbb1cd4606df85ff"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-2-idle-front.png",
+    "sha256": "4e976cc1c4cf4c79793b47974f15ba248511095ed58eeb6a9b8379f15e65a875"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-2-idle-side.png",
+    "sha256": "e742b3e9f32ce5109e2b74eec4a542dae274b5f933a1bbe023b124fee6493ca8"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-2-phone-front.png",
+    "sha256": "ebc3ff1ba30905862ed2ad3e796cbe9bf2302a5e7b302ef7869b04846c403d6d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-2-phone-side.png",
+    "sha256": "c38801615233016e301beceead42e7d428967be33cca2b7ffe4cba16bf7003e3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-2-restore-front.png",
+    "sha256": "178e2082af548b5bc2917603d0a026d9f8e76acee98732a2ac227da3e2f4666f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-2-restore-side.png",
+    "sha256": "1f771fc8fb89d79bb98875ba364ca9a2d929f9f055f2c7e3acb1e0e42dd546a3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-2-shoe-front.png",
+    "sha256": "f86ce622d769ca0db4cdc5fb7b4d9172ca1e13b9b4128499280f8e1c5b43d0dd"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-2-shoe-side.png",
+    "sha256": "3c293df3d6923b70b6de6827964b87f9ea3bf070ee1c619e7a865d98fb0cfc1c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-2-sit-front.png",
+    "sha256": "ebbd863185c62565a1156095ec405c60949d6506f3c89104532b7b9beb71d8a1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-2-sit-side.png",
+    "sha256": "86bb8709fa8209a29d0faf599a29b8d69cc40ba28812a92c17287ff9677d9860"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-2-walk-front.png",
+    "sha256": "c6161dbc4a7e0912826b677fc6726ea7332053cd427ce4e5919ffe82f049f280"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-2-walk-side.png",
+    "sha256": "cc54bdcfdbc26bebfc232ece631ace7bdce2735a44075e154f9e8f27f5eeaacb"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-4-idle-front.png",
+    "sha256": "0930cf5e7dc27a7df982c8ca5b062f97242b4368b34f42437742072baa601c21"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-4-idle-side.png",
+    "sha256": "0b7619fd4e4e75804c2a5ffed6bbf4517ae856a0877a3b9853d323dd4d067779"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-4-phone-front.png",
+    "sha256": "60a843129be9a08ff881aae3ca2b00881e31fd4e778d2cca2bc4d2403647f0f7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-4-phone-side.png",
+    "sha256": "83ebe87e341787e52b2bd95d89812081f8ab725793d66906148c0b974a02bdbb"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-4-restore-front.png",
+    "sha256": "0fca4a25205d1efd03ee843e9828d6d5b97cfd4fa42532a87b60a6b20a4c5828"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-4-restore-side.png",
+    "sha256": "77566bffdd4e72b3bab7acbcccdf5689e434ddf8ca08c5e70a80d943487252fb"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-4-shoe-front.png",
+    "sha256": "05748e19e46b7aaf06e58b3c54fcdcb9840a78780f8472116437c0da63761ef9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-4-shoe-side.png",
+    "sha256": "03d9a47d8cb40be4c30371544ed217ffe6b498b09f774a0f9e27070daeac21e1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-4-sit-front.png",
+    "sha256": "76299334f7bcf876d7c91b8b4fb6fde0141aeebf4e8f9936478b25ae74297ad2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-4-sit-side.png",
+    "sha256": "914dfaeccb74f1de38a7c3b8edb3a94adc5499ead719aa73a5b6ea2979ecdf28"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-4-walk-front.png",
+    "sha256": "b5d7b18c8d2353ef1213c672002eb6052edd5257be915e8ee4c5847662337547"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/office-4-walk-side.png",
+    "sha256": "985ca405bbc47f69a198af5748294a0a43a543ad5eed4e19930400e3cc93866f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/report.json",
+    "sha256": "c5b559e398f582cc39d23e108bb8ae356852e3bfc1a7f6b4a7c68696f2a13fc1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/sources/bag-pose.js",
+    "sha256": "d4bb7a3f67acc397d3562ff63f766f94cb23a246dec28c48041632ad5bf43ed1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/sources/looks.js",
+    "sha256": "35f518fc9488f91182d87707a60aa4cc91978424c9825c6298eadcc3d4196c25"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/sources/motion.js",
+    "sha256": "25dd60c281a027b8b21f9c72e1768a33ff3a75dcf685a11ec1b85539a7787d5a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-palm-fit-offices-85/sources/stops.js",
+    "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-0-idle-front.png",
+    "sha256": "7f0034fbba74dc7e644534ec989d1c4bc20a5679784ffb9115a59b157ad84a2a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-0-idle-side.png",
+    "sha256": "f9f3bea4e6aee6a2931160cbd3f45cff31010ac3e70223744e07b6f066fcb22d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-0-restore-front.png",
+    "sha256": "7f0034fbba74dc7e644534ec989d1c4bc20a5679784ffb9115a59b157ad84a2a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-0-restore-side.png",
+    "sha256": "f9f3bea4e6aee6a2931160cbd3f45cff31010ac3e70223744e07b6f066fcb22d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-0-sit-front.png",
+    "sha256": "ad40d5ab51374472a39eaf46d5bede042398e6697144296bcb8a28572cab4e61"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-0-sit-side.png",
+    "sha256": "6e986042fe51b739016b29c3492a5190d3ea8b8c7229fcc8c9fccb857c6e654a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-0-walk-front.png",
+    "sha256": "12b43ef8bc603767caf986150f29dd2f0d5c734732b69ac80dd67c669eaaf0eb"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-0-walk-side.png",
+    "sha256": "998c3f196af383e357f480ffc782a355241d786dc69ada91498cc449892e92da"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-2-idle-front.png",
+    "sha256": "8eb4fcb79a37a0ff5c458d0867def8109d9918a10e458cb83d7c1cbf1fc8c9e5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-2-idle-side.png",
+    "sha256": "b6de2b159a70b9bbb6efd368565d788247d8f29bfcc1bb4a1aa34bda7128e5de"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-2-restore-front.png",
+    "sha256": "8eb4fcb79a37a0ff5c458d0867def8109d9918a10e458cb83d7c1cbf1fc8c9e5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-2-restore-side.png",
+    "sha256": "b6de2b159a70b9bbb6efd368565d788247d8f29bfcc1bb4a1aa34bda7128e5de"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-2-sit-front.png",
+    "sha256": "5d63631f4d8f6cc8278e5d217859e32257a9d14ef1a3df20fe680277a620ecec"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-2-sit-side.png",
+    "sha256": "1048ead1eb31dbfd1b4c4b23eb9ebb224375aa24f705d8f276a8653ebd1e436d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-2-walk-front.png",
+    "sha256": "c082210aca57a83f01ce1ac4a70c425d153697b9de9e360214cc0033773c64c5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/casual-2-walk-side.png",
+    "sha256": "e085d3ec90eed911da337ec2ba69dd7f76fca090eef4828db35c31d7c620307a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/elder-1-idle-front.png",
+    "sha256": "2c490af9fb621bb56a05f4a009c21717aa9dbca9a7dd753a409b29f3fe6bf88f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/elder-1-idle-side.png",
+    "sha256": "17e283fd38dace985844719bc68cc412688c46acb4be247d1287f8f5b07b67dc"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/elder-1-restore-front.png",
+    "sha256": "2c490af9fb621bb56a05f4a009c21717aa9dbca9a7dd753a409b29f3fe6bf88f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/elder-1-restore-side.png",
+    "sha256": "17e283fd38dace985844719bc68cc412688c46acb4be247d1287f8f5b07b67dc"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/elder-1-sit-front.png",
+    "sha256": "818a8d4cceb187816a72d47598f6fc58893c2d84debe4d9a7388f6fe7f71893c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/elder-1-sit-side.png",
+    "sha256": "58d017c1d9dd2ed62cae425191069691ca9b0dfef37878cc522fbc9aca50802f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/elder-1-walk-front.png",
+    "sha256": "9a57e0bc01c8f042cd0a56e223381ac265db67bd6dea669c98371f754340f363"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/elder-1-walk-side.png",
+    "sha256": "4ac60ecca9770d53c059f34262ad3fe4fc8d9bd003cf4b6ff8f6db57fc559533"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-0-idle-front.png",
+    "sha256": "b683e172fe45c54844b8ea9ec0261691c795185127437d28c1c50c5a93e33ae3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-0-idle-side.png",
+    "sha256": "413755e24b59248df1e5f385f269f6cac53b98ff8a9b9a9fe3c749e84d4af692"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-0-restore-front.png",
+    "sha256": "6502f7c5d284aaa0dd1066048be4ee2b0f4279722a31c6611b0448c79129d05e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-0-restore-side.png",
+    "sha256": "124cd6eaca5e591143182d5202e549f6af2dc740d53948ff5cb2914fc466a346"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-0-sit-front.png",
+    "sha256": "f51f1e2bf7c532087eb67c29f520ebea65bbe474984858a08290a105f59466da"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-0-sit-side.png",
+    "sha256": "4254b191ba27d465ddbae168cce2b72d0dc2b93cf3638b8ac4a403ae5f507408"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-0-walk-front.png",
+    "sha256": "e16a2c12b3cf3feb38c032691cb7882f261f8cec8660c3375ee0fe3551caee9b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-0-walk-side.png",
+    "sha256": "4e2ae44c6542d3d7449b8675165f91b1d16285adc87cd7850a1886218abf1b14"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-1-idle-front.png",
+    "sha256": "eea5cd1d01492ef04bd415800087971d208df862649ae32c39d7a556e3dab24a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-1-idle-side.png",
+    "sha256": "9eed651c3f826c359da81f8fc7ced56c1ede432c6c4059a047b09f6a32228942"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-1-restore-front.png",
+    "sha256": "4bb45cb11a04faa73b41f80412f200a6b102a02983c0f34d8ee6a93094808dc2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-1-restore-side.png",
+    "sha256": "6e504dcd7c5c0a6dcec9e76b23741e3ec47c6cb4b14f2f8dbcb261adb8e65130"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-1-sit-front.png",
+    "sha256": "a2159acd12efdf70482d8769ca221e023959ae486807fd02256678ddae7dc623"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-1-sit-side.png",
+    "sha256": "f6fd68208a3ade549dcdebef936e59be3c953ddf68f4cad34a37665e96691cb8"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-1-walk-front.png",
+    "sha256": "12c2fb94b3fe77d3b020dd79070692974b7e6c005db617fae9f23bfc317a0d19"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-1-walk-side.png",
+    "sha256": "ef32e97402db8c965624180de7c154221d31e8d7553d7743ce6e1efde464dec9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-2-idle-front.png",
+    "sha256": "0351a3e776f444f811a0e79fa58df0cc1f9495a36f85083de1df278682a139fa"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-2-idle-side.png",
+    "sha256": "58c47884c9dc55a8a0d415aebff78c40b4e9fa2f5bb4e6f5682a32665df01485"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-2-restore-front.png",
+    "sha256": "b81955c9ca660991bf74d8b653d707a132b7604723209c61e74dc4752697fdc5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-2-restore-side.png",
+    "sha256": "eac3bda44f70aebb61d745403df2d757d5a40e88ed169e581d427e77905d16b4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-2-sit-front.png",
+    "sha256": "f1a52773f9049fbacd5d5ddee59d183e3c701513c356830ac772092d3b8dc59c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-2-sit-side.png",
+    "sha256": "d07a2f2da5c0d6ce992478b8ac110ba3951aa32ba6d73ff4e80ec7c6d0040915"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-2-walk-front.png",
+    "sha256": "ccd618a01c1d67b3a4692227ecf3bcbc4f86975360461500d463e6110af89e1a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/office-2-walk-side.png",
+    "sha256": "d243389f0c297e6abbd04b6dcf637220d1aea4c6b526ed469a37e360c385834e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round3-85/report.json",
+    "sha256": "1481a34315e0bceeaacbba140256ea53dec1ec1874351ca38450aebe97c870d2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-0-idle-front.png",
+    "sha256": "9ecd3bf0d4333efc39cfcf692b61aea68dda77d01da1550125aca8bfeef5d39e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-0-idle-side.png",
+    "sha256": "08b1397b97f86f6ae1bf00c6a321f2939b98c23c9c1f642316a668be9b594240"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-0-phone-front.png",
+    "sha256": "29112c3549430ff99826a55120d67a14b4502dc9ac256914a142a759e763dd8f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-0-phone-side.png",
+    "sha256": "66637b226782169f0730be35dc7884ab5f18d84c5f02801d5fe89e3f27410f49"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-0-restore-front.png",
+    "sha256": "b254657475b5ad92299ce08d6f3ed72160f054a98d0b86fdf134004982d5f975"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-0-restore-side.png",
+    "sha256": "3b82cfccbabd0bf2f2a6257d0d167118771ef7b4452a25981fe6fb9038266f36"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-0-sit-front.png",
+    "sha256": "42ce80e4ac5687b427fa7564b4aa6f4cddebea3ebe925884cace075cd406cf62"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-0-sit-side.png",
+    "sha256": "f3a80a4c3679a55afa76c9835b4b15e8d6d2cbfb89dc2e3b427c29bcfe78107e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-0-walk-front.png",
+    "sha256": "0886c5a8d4d1d8565c72f8a89a9f6ff271b36198c8f1004288117a21911240e9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-0-walk-side.png",
+    "sha256": "be79eba61ca4d32856defc5a64fdfd8f364ec20d4df53316ef2167f967e87b9f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-2-idle-front.png",
+    "sha256": "62404de09df1cd3ddb10f298b9e4748b4b00a87a80936dc6c22eb78ca5716841"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-2-idle-side.png",
+    "sha256": "245e671d20ad37b0ed511d138edf045e6b99bb536ba830e66e3e0d6bde50a7ff"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-2-phone-front.png",
+    "sha256": "9f18e762a7d5c8a487add75c2dcf372f2fbdc98cfe30f527f811e358d45bb73c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-2-phone-side.png",
+    "sha256": "180006887cbc5df2ae9a91c9f7df2149822aa5492240c03d56701b8be10928c5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-2-restore-front.png",
+    "sha256": "138d0fc49f6d6c665dc81f30fdfac451e73d616711ee1d6fd9b9094fed4a78af"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-2-restore-side.png",
+    "sha256": "92fc58cfc6d54939f8d551a50ad3a12df80e8637ea2dcc167d9a18309ca9da24"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-2-sit-front.png",
+    "sha256": "d43a78f7b48f7e1bd77ff2ecc57741b288b38878c21b54a8eecf3de0d21013e1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-2-sit-side.png",
+    "sha256": "803c3f478ce0a3fd88a293d943c969726588a42aab2ceaf605825fa695c9489e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-2-walk-front.png",
+    "sha256": "16c0a6ce02a59911797d4764ec17fbf93907874dcd97646ebdcb320296b44238"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/casual-2-walk-side.png",
+    "sha256": "71aa01026e707dcd0c326848c4902bc27bce9e3ea05c7686c4ea3569ec6847f5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/elder-1-idle-front.png",
+    "sha256": "63e8805c42ff5627f57d46e5e1943b603f773a4117a1d5704f2503341a4486f5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/elder-1-idle-side.png",
+    "sha256": "afbbb8a00cc5dc36b6af1b7e809652c4d4f0664e0d9aa6624839717753c58021"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/elder-1-phone-front.png",
+    "sha256": "0f9271b9a126609e2eaa156e9f6b770766ed18e8376d8f7b62acb7b562992ef9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/elder-1-phone-side.png",
+    "sha256": "5167b06ccfa9b4c901081a086cfb2b74cc6c700201bf2a6a46e63a0a2d69de5d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/elder-1-restore-front.png",
+    "sha256": "f3aaa3dc880d4cfbe78526fa65190a519aaf463e8e3641d0bea227de2604d770"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/elder-1-restore-side.png",
+    "sha256": "7f6114147caf1a46ed3f0a9e5c535981921955a7026d901fe3a1332f5fb506d5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/elder-1-sit-front.png",
+    "sha256": "96a97d19afa6b8373c57ee156906996d85afb1f31ab6b3307c4458f3613f27f9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/elder-1-sit-side.png",
+    "sha256": "ba5517bec88b0ef6b634507127e5e602330ea77bad036bbadb4b20a52a8bf444"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/elder-1-walk-front.png",
+    "sha256": "90883985f99d959685c90fede76e12bb5c136cdb19fd1a567d5276e01930151e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/elder-1-walk-side.png",
+    "sha256": "b0a7f67ea9c2b40c89bccf88ef3fa5dc4f92cfc5340692de290d33a8cc8c1665"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-0-idle-front.png",
+    "sha256": "defdb46d1c36ff74e7234dd20bd95f5b4ef4c31dde51f3a4049fcf259188dc0d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-0-idle-side.png",
+    "sha256": "5e17de7f05f5a2f120b5a4a80f36129837927427abb9d389c0f655916f2aff7f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-0-phone-front.png",
+    "sha256": "ef2a5cdc5e9af8f79df012439a488f2935bff42566ef9c53f3342e91c1305e7d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-0-phone-side.png",
+    "sha256": "9454570d52c3eb21934606851107dbedc62101c6f0bf97af10296e5eba2d5999"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-0-restore-front.png",
+    "sha256": "d26ee4a1733d69c229291f6e2f0e1f66033dd770d0f37e021f30effb57fbfc97"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-0-restore-side.png",
+    "sha256": "7934231640ec5632a697600f7603c2231077593c3b24aade5112b09887210510"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-0-sit-front.png",
+    "sha256": "5e625f1fe8eb07eb5bfc5a656f20bead096b940548c26dae131a0704d45f5c64"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-0-sit-side.png",
+    "sha256": "0543f24b337f959480e77924198dfbefaf8db47bc38230c243851984b9bf1c8a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-0-walk-front.png",
+    "sha256": "2bde5194a651ea08889e057463cc722b78fdee159924c5b44f5b0f9c14b98141"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-0-walk-side.png",
+    "sha256": "fce9eecbd9ecd438b0368482e47f2f8ee7c20bb8cb5a9099416b0cc6452b253c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-1-idle-front.png",
+    "sha256": "855c66772b1692a39f782db2fbcd36f6f09c9c9ac9e92a5406f99fe415394ec1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-1-idle-side.png",
+    "sha256": "284f328daf947616a9d8fb4aa2bb74aa13213743689409e72f4ce803e1e5411b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-1-phone-front.png",
+    "sha256": "55b2359b0fb81fddd045a2a6643c8f558fce5c05d12930c50ee54a277ce3ba69"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-1-phone-side.png",
+    "sha256": "2a7633a033d7b2a8465fd467201490dd91a969c5f99c7b20fabd66c0ca252758"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-1-restore-front.png",
+    "sha256": "5b0a6d7dd694f1390cd9974f05748450c4a3b62ee9f7d3bcd263352b8d17530b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-1-restore-side.png",
+    "sha256": "3d1da44713b02af23743eb982329c557367590f74cfdccbf201ddcb82ba1a6f5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-1-sit-front.png",
+    "sha256": "72d22a7d8651c23482cc7ba811781b37f59df041e538fc048477c19accd4dc78"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-1-sit-side.png",
+    "sha256": "21120cd6747c049aebcf5d5ac5b44c6d64f65cd15146f48a0aee0edb49734449"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-1-walk-front.png",
+    "sha256": "9210e7b162a9689ef589d0d71c60af4cbaece08e598b3a5cb54a8b881be3fd02"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-1-walk-side.png",
+    "sha256": "1bb60c99dcd4e94f44f70b5fe0912164368d87e3c8f13aeefbb2db17b170edf9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-2-idle-front.png",
+    "sha256": "07ec43dcb740e9a5e33aaa001e232e2192980bbc768824b2e2e63543e06e3124"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-2-idle-side.png",
+    "sha256": "10d6af85eeb8d7f3dcc9b2971bdcc6f1cd19859d8ea7c7432633994eaa419eee"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-2-phone-front.png",
+    "sha256": "cd8b4a2b73b554e24ec6c2bbfaa3c46fc65cfb6baa41c0435f47d6e7c2cb88a7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-2-phone-side.png",
+    "sha256": "017c0e134dbdd0539c37c7d0c809ff31329240daad6ae2aac8bd49f856819bc7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-2-restore-front.png",
+    "sha256": "a00a41b0238e1610f8e85bfa7e43f581f4c50efa9f2a55324a4ef28f281a24a2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-2-restore-side.png",
+    "sha256": "7c5e5e6d332a147782a783ee9cb6c7ffb0972b2da3e46bdf6632134aaba4b87f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-2-sit-front.png",
+    "sha256": "560d040754af6f81bd678b782394da2609238407b0ffe875dc87ac25a071bc83"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-2-sit-side.png",
+    "sha256": "b9accb62b7211e2b725f10489d3592940fcd6a67ffabc0898a2ecbad32b5999d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-2-walk-front.png",
+    "sha256": "094d31be99f78d7635bc5d8e3e9ac156df3aca67f6af9382f2d1bff766bdf531"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/office-2-walk-side.png",
+    "sha256": "52d1ca960904551beb0bb1d6054cd57f2b980cafe18690a8f6c7ece287360457"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round4-normal-85/report.json",
+    "sha256": "21726b5b3e29675cf214d9dfda1f1745bc2be9688d6fe85f1b6f4f180b603ab2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-0-idle-front.png",
+    "sha256": "761c04c9324baffe9dce51028b1b542343f246b7680bf9caa5f9ac96e8cc6b6d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-0-idle-side.png",
+    "sha256": "4265e83359374c3a9b1360de64c20f3b4d877c1191706aa93946a5eb7b4061e7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-0-phone-front.png",
+    "sha256": "c792f5dcb16cb1a455a0de235c6e4f7cdf8ad508a048685ae56811998966e9e2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-0-phone-side.png",
+    "sha256": "9a7578249cb12f03a61bb44382758943a67f284c0ad3a33f8874a72c10534965"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-0-restore-front.png",
+    "sha256": "d7966f74f2aef0aa92c7aa75c698e4c3218e00b4daf428dcc70e2f592b5564e3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-0-restore-side.png",
+    "sha256": "10f63fc5899bf304b697ba14b1d5fea150ebffb5b8c93e88ccf528ac21799e70"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-0-shoe-front.png",
+    "sha256": "fb4992d75c66485d5ea32050fcd86548c32502c8d5c59c2275d4e34c56b9723a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-0-shoe-side.png",
+    "sha256": "43363db39956e086043599a795cae28c4350d2df5e70fafac2fc20f372657cc9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-0-sit-front.png",
+    "sha256": "3396b69338f22560df583efc63c7fab1f7cbba4940e8a750d80b1951b72dce82"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-0-sit-side.png",
+    "sha256": "f12d67d4fc2552fbdc05c6d40cabcab528c6606a5b45ade9ff509e3f512d28b5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-0-walk-front.png",
+    "sha256": "809150cfc01bee239a34d470d31876c7b728e70cf8082a05cd51db439eb9149b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-0-walk-side.png",
+    "sha256": "d097c7d25e60f60c5b25527635f5fe9bcad23ca724048b0f6504fcfeddbd416c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-2-idle-front.png",
+    "sha256": "3518607d76e7de6495f2104d6dd8d73ab6dfb36965dcd3d820fdcc9914d351c6"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-2-idle-side.png",
+    "sha256": "7e7e46d309924719cf8361bec7c8d929f1b5ad089e3be0cae9012f605a6d46de"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-2-phone-front.png",
+    "sha256": "66cefe36012de76aaf873fde57a851e67877e7d8fadbafed170acb192174847c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-2-phone-side.png",
+    "sha256": "97f5661ca8a1a2a9323699a2fa0468818dbb5cae79fb92cd32f33c939dd19faf"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-2-restore-front.png",
+    "sha256": "cdab860f56b5088a5939a8fe189924f55fbd36c7f2a0c330f568186fa37877b7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-2-restore-side.png",
+    "sha256": "ef5d5b0a0965824bfd74729d11c586ada21c10277fec6ed1c91b2449ad5dc687"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-2-shoe-front.png",
+    "sha256": "3f01d4e1e75242fd0536a8fc44e75f0366ed0d41b9efe9ec47f2f0b542d0b874"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-2-shoe-side.png",
+    "sha256": "c7d29d1e0730715a9230ae44433104bca8942c30985d89d8fd3963032db66799"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-2-sit-front.png",
+    "sha256": "9c2a06f61163f9546ac157304efa36d77148a299cce4e570fb8b12f0677e3540"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-2-sit-side.png",
+    "sha256": "dfac913c5cdc08ff5a112fb7853580e67b7db3cd4bc3fd88582d0b95ba049002"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-2-walk-front.png",
+    "sha256": "3f85222010455e8f208fbc68ffad3ec5378e160b68f7f3d806cf7402e1e87ed7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/casual-2-walk-side.png",
+    "sha256": "f16ad133cec87152c82fa1d5bcf4ec5f955797ebfafc74d2df07194bfe569967"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/elder-1-idle-front.png",
+    "sha256": "174d673b0a2ed06b73b9ab46bf519db98a42280a2b21cd5049d9c07023d8a833"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/elder-1-idle-side.png",
+    "sha256": "db76e5212c060aaeb45802d01a761679599b0e918a366ce178c54977a9b3dda5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/elder-1-phone-front.png",
+    "sha256": "a5e3f4406f7f09a73b9e661b6ad85e989b2bc8d82ba85f60a058e0c522645f44"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/elder-1-phone-side.png",
+    "sha256": "cc08893f3fe276ba6f74c2c0d29dba360626749832e25570a0085b608d70ba0b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/elder-1-restore-front.png",
+    "sha256": "534f852542a4744b7e47708f942d81d81013411cc176ce61b8711108dfbdf6f7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/elder-1-restore-side.png",
+    "sha256": "47f0f46bc9e7b7dd8ddacf410a27916c665d34b20ba3fc390d9c5a8cd1eb303c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/elder-1-shoe-front.png",
+    "sha256": "6c4f2f9861573141a47fc6ee5a965e3f232cd3ae3e881f354a71e877b086f2aa"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/elder-1-shoe-side.png",
+    "sha256": "94ca9fef4e9d4ea23d23dbf582aa53038aa86dd69f37859a98c2adde1e8ecc53"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/elder-1-sit-front.png",
+    "sha256": "e40f94ff349711b33a2b43bd29ff4183b1730bd6e3497d0c632e0b803bcdbda9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/elder-1-sit-side.png",
+    "sha256": "56f24aaf397c758e92ebff38fca3dc131bcfa5d35738ad4fd1190eb7fc4570da"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/elder-1-walk-front.png",
+    "sha256": "e9426092939c1842ad4082b48454da02d79f5f6554d9541a5957e9dcc09bc8a2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/elder-1-walk-side.png",
+    "sha256": "01eadb2f0894854d6d921b6cb7a378a416f8bad7fe75a5f54fb13d045b405297"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-0-idle-front.png",
+    "sha256": "8039a6360b6304433927ff7260819ffd10cc6da358ea8240b3e0ffc5dfb09878"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-0-idle-side.png",
+    "sha256": "616c956d7250f21fb928287da72ea4f17cdb7bac10aad195baa40a61e667aef9"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-0-phone-front.png",
+    "sha256": "205ae4529c20cae01b31bc26ff00823865a6f69322758eea5e6bdb4d92dc1f90"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-0-phone-side.png",
+    "sha256": "e345e9c90882332f16e59e8c66a36ed14e5e02f213e4a330cd27da0055b622af"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-0-restore-front.png",
+    "sha256": "ed193b32b4a7fdaa45b0c7b20f0d04a8cda3f68a9494e62ca69eba5be84fdad2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-0-restore-side.png",
+    "sha256": "a3e204372599fb7ab730f9a27b7bcf416235574ebde88bad1cee8a0ef13ebb1e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-0-shoe-front.png",
+    "sha256": "69a40b0ff264e9726567c160aab4d48f62a384a31075b77313522fb3c8d71a9f"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-0-shoe-side.png",
+    "sha256": "0d89937b06dbf3b1446dc4693c6a3077040ddc21a21966b64ee180a563267e73"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-0-sit-front.png",
+    "sha256": "2b0cfceb56772f43340a635a653862972376ef140c4d2362e1b10922e0b0aea5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-0-sit-side.png",
+    "sha256": "5df109ea8ef6d0b667e792944049a67bb752bbf87daaca2a6a025833db89f58b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-0-walk-front.png",
+    "sha256": "d74c96a1c683c418b2125ac79781db74d7e3362a9552143b73a6b24f9ad140c1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-0-walk-side.png",
+    "sha256": "d48fe519c8f1e3b66a55152a0dd3329d439388c76f22a06b5615e1d6aa77908e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-1-idle-front.png",
+    "sha256": "99e97f02192946b50851907e413db4924cfbba088b599d04d6e18c7331a6e425"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-1-idle-side.png",
+    "sha256": "83f17eff5e2e1b38bffd841bacc0d4e9e56cd332d60a5e98b383fdec29029ae7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-1-phone-front.png",
+    "sha256": "e2dcd2caf5fc823fcccb4fbdd9936f962b7de6a5a3504bee0fd05e364bfdfa4c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-1-phone-side.png",
+    "sha256": "4f08ff8ada3de2973a582582d9be61cd212e65aa3dfadc62ad0a8ae35a508d10"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-1-restore-front.png",
+    "sha256": "88caccef06c7694de8346d3f9a7533ea6bb6658badf0a684e4920272646acc0d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-1-restore-side.png",
+    "sha256": "4524b566540035a75f97917f89b85651be4ae991f21c061b0baaba433d12f49d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-1-shoe-front.png",
+    "sha256": "4d690b417bec70e61ffa560faace47119b168becef487d8b5334bd47e2cb0ff7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-1-shoe-side.png",
+    "sha256": "afda5b9084eeb17beb495ab48c50e86f5d609cf5df0126436914b50b3a713db4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-1-sit-front.png",
+    "sha256": "6ec73ed59002f52be3de3049322d52a4830ac845518128bf5eefeca229a1c837"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-1-sit-side.png",
+    "sha256": "dae4369728055dea5912e871ea4579d654f3d0df4ad084ff0286b951e6cf3ba7"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-1-walk-front.png",
+    "sha256": "3ae3428df0a7797027768b1f76a1f67ce8c91eb59f5f23a8aff243aa1fabc979"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-1-walk-side.png",
+    "sha256": "c67ceff07d65c3f7dfdbbfd36970cfd2a73ebb137dcef57542407b8580d3a3be"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-2-idle-front.png",
+    "sha256": "f01b961a5959defeebecb2bad35f9106402401778e8c93aa805fe6f716497b1e"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-2-idle-side.png",
+    "sha256": "3398d2c1a2b2ec9478233d26a5f7dc7a48a7f5c09dab95dc33356a9d54d405e4"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-2-phone-front.png",
+    "sha256": "9e45052f25e3adc785cac8e21cea70ac56b58fd96dc3b6d56262268781404dba"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-2-phone-side.png",
+    "sha256": "fdcb9b74d8d5b333ee9cdf5cf25e96c20c41e1d36a78fef4da318e4063439f15"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-2-restore-front.png",
+    "sha256": "08910e1d149c114b1cd3e67e8fc12d6dbbd29942f5fd9826422fc1baf9459d12"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-2-restore-side.png",
+    "sha256": "9f9d1e9b9e06f3c16bd6eca6e632e88c58edb0ccf02ad13f2cf627146702db0d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-2-shoe-front.png",
+    "sha256": "120d317c8a88999b7b2afe351a7e17a9e706a74b04bf7dd164f513d9b5aaeeaa"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-2-shoe-side.png",
+    "sha256": "4b9274d8d13c023077b153d3d66830f6d36adbf62b6373b32277623d8cc49414"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-2-sit-front.png",
+    "sha256": "c93ca27e21e93505dda1f883b1ec26297494009866df17af41627c4398d21a65"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-2-sit-side.png",
+    "sha256": "c8173dfbe4b516815a63e6400a4c546301c9d28b462727a162de18f56d96d70a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-2-walk-front.png",
+    "sha256": "bd992bccf3a8ca4fc4f465807c805569c777ac09333ca27ef63deeaf06e35c89"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/office-2-walk-side.png",
+    "sha256": "dc7ecff7b9b08b84100bc2c8ee1e95b4f4355948ee995a2ce3d1a1de026cfc3c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-round5-normal-85/report.json",
+    "sha256": "c5a330523dbbc9ca1d3692dd7199dd3ffb20c03c84779f09491cd263f7ecce3b"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-shoe-fix-85/casual-0-shoe-front.png",
+    "sha256": "8982aff97f48ecb24b03d3c621d53df0e9100b523c443ed4fc7cbb45066f0696"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-shoe-fix-85/casual-0-shoe-side.png",
+    "sha256": "00b14cb088ba2e1c231a383a14f1aa7c030c56ab7294d7ff6d8bf9a5f1a268ff"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-shoe-fix-85/casual-2-shoe-front.png",
+    "sha256": "dcf9b50eae4130b17d824f6399fd72548ff424c1fe3f3b3e1058f3ff181560ca"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-shoe-fix-85/casual-2-shoe-side.png",
+    "sha256": "9ce452ded5b516072fe1e9bcef4328e5edf742a5a3dbbd240829f608071cc8ea"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-shoe-fix-85/elder-1-shoe-front.png",
+    "sha256": "c3f8e7a6097af9e7f9773c91e685723bd47327f6a41460869c17d5211112eb48"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-shoe-fix-85/elder-1-shoe-side.png",
+    "sha256": "887bde2a368edff258bda2d668da183e7d6d2af66b308b1b1b84671449cabd1d"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-shoe-fix-85/report.json",
+    "sha256": "2a9482cc746d2ee0d5c30f61353665b386b004a94c309576f55a51c816479952"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-true-baseline-85/report.json",
+    "sha256": "f1e77006c98896c2c8b784ff8c767144e66935032b03190ccf1ab60182e9f314"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/casual-2-idle-front.png",
+    "sha256": "fb4f6ca59be78c24bc01ec4a5aeb6bdc0fe7d19451b2ba3f16c9004d14d5c0f2"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/casual-2-idle-side.png",
+    "sha256": "e9e2c11db9d72381a132b57d328e71a3584ab70e9579a7c3b40f2964a558231a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/casual-2-phone-front.png",
+    "sha256": "c3bbe0ea840ab99f54bc69cf65d9b8737a9a077fd9c57fd0aff19326d2838131"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/casual-2-phone-side.png",
+    "sha256": "e291c9f7b72132e0410e64c5e94643771632acb336efa743a9449560651346a6"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/casual-2-restore-front.png",
+    "sha256": "edebd3b52a79f3d5e0fb56f8ec98274e5d133c5382c3a87e395f212a1611aef1"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/casual-2-restore-side.png",
+    "sha256": "2176ef2f220717479b7fcd6854545df472e178f90cf03315daa3671893d24380"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/casual-2-shoe-front.png",
+    "sha256": "0731eb0f8bfa1d530af19050355ff68ba1ba28f531a47a0f30605c37815bc318"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/casual-2-shoe-side.png",
+    "sha256": "7f454bd762550773edd36397e9c2ece132c2fed54429f50dcd7efb3ce782a1cb"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/casual-2-sit-front.png",
+    "sha256": "9a4b4371457986cc3b88990d2fd9296781f2d94e247c28265c9aa6d6a9102551"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/casual-2-sit-side.png",
+    "sha256": "e29a8b62b5c98a947be335d4bf7876faf8756ad62a9af99404c05b9f9d41f0e5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/casual-2-walk-front.png",
+    "sha256": "b7694e78a4a74fbdac0050539ab14036b9f3eafe3c5830b1a880335d3ef7acfd"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/casual-2-walk-side.png",
+    "sha256": "f6c20e1b100edd0892d42b1a12213b6f139d1877db65f64d3cab6bc819f1cc71"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/elder-1-idle-front.png",
+    "sha256": "ffa183162bb204061f153c8bc83a099495760987984d79d66528da1745da20d5"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/elder-1-idle-side.png",
+    "sha256": "7e303a6c930e075c905c1b774b323fb3f666418935b9de70cec0ac0170bb31cd"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/elder-1-phone-front.png",
+    "sha256": "9363c01d9112e25c3bb58f54697daa81cc77286c5d70b0a1181dd617aae1474a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/elder-1-phone-side.png",
+    "sha256": "d9198eb1b36ec869d4aa80d7141a7bbe896b11225faf4bd00a7aaf3f73b797c8"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/elder-1-restore-front.png",
+    "sha256": "002a34f2fd2928eaf1e0d2ba34c4e9c81b0ab0b42b904a734bcab539e3f538b3"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/elder-1-restore-side.png",
+    "sha256": "bea2064aa2192939e51e4b1d8be558cd299a9bf697915981e4a8bcb9e75becf0"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/elder-1-shoe-front.png",
+    "sha256": "4d7097ed10a0f014ba0eabf3cd3b1de65813f891ce7b38ae705959381d895d43"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/elder-1-shoe-side.png",
+    "sha256": "2d6326fca330cf2c515b2e12edfbf8e39bc818dbc048b98874e5b6b179737e45"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/elder-1-sit-front.png",
+    "sha256": "518402a6de5da42dead48932f4ca9eb5a43a804684e1e1ee6c7f75702997da11"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/elder-1-sit-side.png",
+    "sha256": "7bc386813862b76eb0595cbf0218135867a831597ecef0d79d2af2edfb0a3355"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/elder-1-walk-front.png",
+    "sha256": "d693ac89fbbd95328efe9cbdfa856818f783159d9faba2087068c23b057c2120"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/elder-1-walk-side.png",
+    "sha256": "9d5254b22008dd290ddbc28ef857c12146ecfc6a0b9c39a499500f1814637a34"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/report.json",
+    "sha256": "e17b9df1a8c861c86a8c4aba2c65429e8dbc28b0ee02bc9b36102faf8fe4a77c"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/sources/bag-pose.js",
+    "sha256": "95863adf00bbdf5465f98356c22af3d98eacacb224adbe51aee5325080bcef34"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/sources/looks.js",
+    "sha256": "35f518fc9488f91182d87707a60aa4cc91978424c9825c6298eadcc3d4196c25"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/sources/motion.js",
+    "sha256": "25dd60c281a027b8b21f9c72e1768a33ff3a75dcf685a11ec1b85539a7787d5a"
+  },
+  {
+    "path": "game3d/shots/crowd-bags/legcheck-wide-arm-generated-85/sources/stops.js",
+    "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-0-idle-front.png",
+    "sha256": "c0338ff55f0e8fcfbcf6f5db3a678d29d3db7af8ad4c2a3ad6de4aa608d3cb4b"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-0-idle-side.png",
+    "sha256": "839331ca78cc5bfb3bd33e90c075720548d83e94471a582f98225a642568c04d"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-0-restore-front.png",
+    "sha256": "c0338ff55f0e8fcfbcf6f5db3a678d29d3db7af8ad4c2a3ad6de4aa608d3cb4b"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-0-restore-side.png",
+    "sha256": "839331ca78cc5bfb3bd33e90c075720548d83e94471a582f98225a642568c04d"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-0-sit-front.png",
+    "sha256": "37c1d047f2d60471f4d0c2f262f75fd50583b5a7fd94082bffd4a6090b5c9367"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-0-sit-side.png",
+    "sha256": "cd084ef1ae0466bfe1716482f58c233511d085a98540d739f15a63b201e4fd0c"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-0-walk-front.png",
+    "sha256": "fc2550c37a1a42674acfa2ffe421ff5499077d5c5b207dc1f75ff691aedb1313"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-0-walk-side.png",
+    "sha256": "db852131e472967d0c2086c6b0108ccb170bd1208622eb2b4fdc47ff057860ea"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-2-idle-front.png",
+    "sha256": "1a8760ada4733e1f16e6d059cfeb61618a8a05689a9c48b4e2e787037b068dfa"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-2-idle-side.png",
+    "sha256": "d3a7c486491bb1f22b56738daf5c938e196734c7559116dfe307e14f6515312c"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-2-restore-front.png",
+    "sha256": "1a8760ada4733e1f16e6d059cfeb61618a8a05689a9c48b4e2e787037b068dfa"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-2-restore-side.png",
+    "sha256": "d3a7c486491bb1f22b56738daf5c938e196734c7559116dfe307e14f6515312c"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-2-sit-front.png",
+    "sha256": "0c7a02ae60dd7ecc2813df71f27823b064dd25333375a0d11e6111f7d36103b5"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-2-sit-side.png",
+    "sha256": "b359a0a7502a9bb0f2d19473716c2235f0ed303ecf2b65b391ebc6653fb1a3e9"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-2-walk-front.png",
+    "sha256": "0ae5fd3f801b9452275a16f96f087afe288ea124c3a7d6febeaab06f02a047bd"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/casual-2-walk-side.png",
+    "sha256": "74ca9c9f98df68cf5a906644bf4317d900685f0f1993385047afcfa322b4789f"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/elder-1-idle-front.png",
+    "sha256": "30cbe83e7878c90e9bc98017d5af53ed7cfaeb07e8fe8b6db7023772dd5b56ef"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/elder-1-idle-side.png",
+    "sha256": "b3b476bdaf60bf57a516499d3051d0787ae400aa3b6c7f11b78ed2a8bac5171d"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/elder-1-restore-front.png",
+    "sha256": "30cbe83e7878c90e9bc98017d5af53ed7cfaeb07e8fe8b6db7023772dd5b56ef"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/elder-1-restore-side.png",
+    "sha256": "b3b476bdaf60bf57a516499d3051d0787ae400aa3b6c7f11b78ed2a8bac5171d"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/elder-1-sit-front.png",
+    "sha256": "d534be7d33edecd3f99f5f075712aea110fa2ae243cb156c2f09e3a67d6e5117"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/elder-1-sit-side.png",
+    "sha256": "79c6e9fed89501c1cc1efbb9f43708a1d881ad1b6a654f45f1a480f1d3f127e0"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/elder-1-walk-front.png",
+    "sha256": "134f02fe88e66d684282485d47adb9fd730930063ac53d956cb92d97b1d6a4cf"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/elder-1-walk-side.png",
+    "sha256": "6052347d7fd304195c1e12fe37edd35ae4ca204d832613c53e5b614ff7448e16"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-0-idle-front.png",
+    "sha256": "bb8402c1d06acfc005fc81b7ace340c18c98a1c5a2be88e4a384cd2589f71c6d"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-0-idle-side.png",
+    "sha256": "9a439b829e158cbd6ee209ee2f2c4b99b406df82b0faf7eade60ea165f69e6c7"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-0-restore-front.png",
+    "sha256": "366b6b29d755c499fb952dbfc3fa8c57195a0a7eabb998ee4cf256172b590e8c"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-0-restore-side.png",
+    "sha256": "6f9a22e0efc59387c7bbd599127b1a7f1f4540fc7562bc8a9f440f98081357a4"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-0-sit-front.png",
+    "sha256": "fd507dfc067bd3225c3d32693f8a6f79b8568634f645803c2e4fc2f94c513a6a"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-0-sit-side.png",
+    "sha256": "acc0894e0b1b041bc780463b4c34c176ebe8aa0d913f32c1717e41e41ef75145"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-0-walk-front.png",
+    "sha256": "02095631b8406e24424cd2c46ac8b8d525a0bfb4afb129cde5df0cee7416cf18"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-0-walk-side.png",
+    "sha256": "16919f48ff5c21f15ab3448ffe85041c7281af8ef55d565f11fca585945c0346"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-1-idle-front.png",
+    "sha256": "83c70b988087800752089214e1d9fc021469dfd35050e3d65d57d5026074d65e"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-1-idle-side.png",
+    "sha256": "6b17b128fad50a45bd650e9788e9e80b7c490efff93c16e0b5c10147ddbb602e"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-1-restore-front.png",
+    "sha256": "610bf2454385eac82276081544908fd16c45f0b9882a97da7547e1dbc5dd18c2"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-1-restore-side.png",
+    "sha256": "657377553d96980950db84c9492d657b527226345cfd89cda0ec6547ca3fdeac"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-1-sit-front.png",
+    "sha256": "860e84d25e58a95ca48d1b922e13c76ba3359d3ea57478c2ad83f86aff831d9d"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-1-sit-side.png",
+    "sha256": "294b89e14d5361badd4f68bc854ce2426bfd104763c296b0cf132a5f38776c44"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-1-walk-front.png",
+    "sha256": "4d20f65d3f779e971ff63635698ecb3c007f09a33367bdaeb88157a9221f57e8"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-1-walk-side.png",
+    "sha256": "55bf0bbe0c9e20d2b644fb2997a9820e6055291655cb53fc1ed75a7e224f1a21"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-2-idle-front.png",
+    "sha256": "3ca52a6d8fa7d2313832ea801adf82e0440dd8c2b26052ed29e4a60049337e1a"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-2-idle-side.png",
+    "sha256": "4f90393425fb8cadbffd8a96bb07aacd9ff8950384f7b6cc73212d2258871633"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-2-restore-front.png",
+    "sha256": "476c9a4b457bd0ee388e5d7fff09d8cf82dac2d19fd3cdb9ec9b00cb51e4552a"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-2-restore-side.png",
+    "sha256": "9b730e1796208bc7e73e7a39ba4786399cfd4e4214f02e223e87ea56dfc321af"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-2-sit-front.png",
+    "sha256": "a349e76ced8a5672fd18ef5f6ca248c0be927b770b1ab1d0ed7379521c6a41ef"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-2-sit-side.png",
+    "sha256": "b3e87d055ac2ebf41f47e221885cbddb322cc7cf0a822635624f43a783f9285e"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-2-walk-front.png",
+    "sha256": "db0da9004cfacdb6276d443126ba22068746318b480b57650ed42108b9d7ea35"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/office-2-walk-side.png",
+    "sha256": "cc40aecbb54e17eb862507a1e3721e534bfaac3e702c28b2c29e41ba8906455b"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation1-85/report.json",
+    "sha256": "c0347053414c0d8891748329adaaab5f3f4e728758bbc732a258d62dbef038c6"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-0-idle-front.png",
+    "sha256": "96870190a977c21c8256d6794dd2aa39f07cfae1338d3e794e0f313895986ea5"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-0-idle-side.png",
+    "sha256": "a90eda8d64947253512c21f7a0440c77008cb37d0b38abae5c372545168f8c42"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-0-restore-front.png",
+    "sha256": "96870190a977c21c8256d6794dd2aa39f07cfae1338d3e794e0f313895986ea5"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-0-restore-side.png",
+    "sha256": "a90eda8d64947253512c21f7a0440c77008cb37d0b38abae5c372545168f8c42"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-0-sit-front.png",
+    "sha256": "7b872cb407472fe00dc0cbe4a31cad2450acf71523dba730bcb07160370be4f7"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-0-sit-side.png",
+    "sha256": "b4132ea847e573c11a71218798bf90d9a84d51b6d076727d41088680884f98da"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-0-walk-front.png",
+    "sha256": "f3e100761a54e5e622c6b5822970079b184d7a81286b58b38b8ffe6675ab1889"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-0-walk-side.png",
+    "sha256": "bb837f11e150b1fc7e3221c69084221d1176cd6909fc80b3690262fa40b284a3"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-2-idle-front.png",
+    "sha256": "9e005d1779453878600ffb61ebf0876bccea8bddc62dd3c6d87c65e7dfb9e706"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-2-idle-side.png",
+    "sha256": "4c552c232af14f310800d5af9a2eb92f00fcbc3cda75ab4179736f6606db115d"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-2-restore-front.png",
+    "sha256": "9e005d1779453878600ffb61ebf0876bccea8bddc62dd3c6d87c65e7dfb9e706"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-2-restore-side.png",
+    "sha256": "4c552c232af14f310800d5af9a2eb92f00fcbc3cda75ab4179736f6606db115d"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-2-sit-front.png",
+    "sha256": "9ea1c646aed1aa502788d72f21ac00012c4c17f1a9a1029ae85975cb9f427cdd"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-2-sit-side.png",
+    "sha256": "a3664be1ab18320b0a34aa023c7dcd8c5895815d8033ac2ce4565f5d01757f14"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-2-walk-front.png",
+    "sha256": "130ee15e2a510b640e5250d253587ff0a4afc2a11cd054e25c044325a42817b0"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/casual-2-walk-side.png",
+    "sha256": "737b571d480bbd245d221146d9a8e085156316134360393195aadc01cde64d32"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/elder-1-idle-front.png",
+    "sha256": "d2b1777bc2f26eb53d2e8f058b9127c8f4982ee323f986c1fff44e977567d6fa"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/elder-1-idle-side.png",
+    "sha256": "37c5d37ac6ecb39daf1ae4ed60d14ac0261a59678560a241628d75fab5f90666"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/elder-1-restore-front.png",
+    "sha256": "d2b1777bc2f26eb53d2e8f058b9127c8f4982ee323f986c1fff44e977567d6fa"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/elder-1-restore-side.png",
+    "sha256": "37c5d37ac6ecb39daf1ae4ed60d14ac0261a59678560a241628d75fab5f90666"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/elder-1-sit-front.png",
+    "sha256": "217dbd436af8c5131586320933e6404b92ec3f4dfd1e732f798235608ddfbcfa"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/elder-1-sit-side.png",
+    "sha256": "83a77bb6d741d53276703206594d0762ab80bcedb5d5e0ab24a4744dc1463e97"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/elder-1-walk-front.png",
+    "sha256": "2867d853c010971f9c0ad66fcae693f5d214ef755b3b42e3680dd4c2b6f4f158"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/elder-1-walk-side.png",
+    "sha256": "a1fea0bcf92b2fa57ab1ce034bb578e4f6f0a7443f6a96b36d8c4f7cfc92abf3"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-0-idle-front.png",
+    "sha256": "a3335fc372841e2f2d2a89bf24c5262b94f0f03828494f7c8becafba7309b867"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-0-idle-side.png",
+    "sha256": "66efc9f8b321362520c81b971dee0bed6ba6e43a347fd1a1789d4e19d7a1a3ab"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-0-restore-front.png",
+    "sha256": "a523c507675ed08b647527fe45635a36d058623acd17eaa07b5816bf3f78e094"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-0-restore-side.png",
+    "sha256": "4f8465f83a2d8cea2d00e777d9721b1b69f83c1fb92ac06587d6fc5479b081c6"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-0-sit-front.png",
+    "sha256": "3100a7ce383c904d271fbad8b267926a6f09b9c436c7146962e9ff81d0bcb70d"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-0-sit-side.png",
+    "sha256": "fece10217a144175c39d70d9539ba7c763e75ff75b7ba16c60403f1488e63c99"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-0-walk-front.png",
+    "sha256": "a05f87dd4345a0bb489c60992e7c3afbbc82e5e8da3304da3f53404330ddc5c9"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-0-walk-side.png",
+    "sha256": "841332ef1b323791e15431ce5ebd1343e1ac0f24bf59bf04767375a9f8f66343"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-1-idle-front.png",
+    "sha256": "6ac7d4bf21d1bd2a9b64bdb221c9b28adf2fe746da542c4f3407e5275151b530"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-1-idle-side.png",
+    "sha256": "95916d88f2d511a9dc8ede89160c2682bd60ebc4fe22fa494cb08fcae0dde369"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-1-restore-front.png",
+    "sha256": "7e6beee1558e241b18938a1a57f5d4e9037a31e4cc6856e294e0558e618e3d34"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-1-restore-side.png",
+    "sha256": "6de2f6670c1485d3657a2989fe9a39cf291ca92df5ffe5a62a9b5b28d81a65e0"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-1-sit-front.png",
+    "sha256": "6d466b994c7944ceadd1662d3e9b8883dd54a05dfe2a63fd3db740795add8cc3"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-1-sit-side.png",
+    "sha256": "810e0514756024be187e60bf0958933cd73e9407437c1021a97b8376d3696ffa"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-1-walk-front.png",
+    "sha256": "1250fa900a8b8614b89c92b75eed999ec4520b3368b43e71bba512d99d3df0a3"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-1-walk-side.png",
+    "sha256": "e2c50553b5faad6f1a2c8f139b64eff08ea3cd9767deaa9e021b214886ad9b52"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-2-idle-front.png",
+    "sha256": "8ba9caf703020b58edc3699ecd9e87c5ba20398d7ee3d9e66a26fa513fd410f4"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-2-idle-side.png",
+    "sha256": "fc0497fa469ba3c8e6c21770e7fcb72b46edc97a7b5196e433fcc1dcc13f7cae"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-2-restore-front.png",
+    "sha256": "10e5514e1dea6af97a6c7081535f1d1c8696fb469f8c433312d28db8831eb5ad"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-2-restore-side.png",
+    "sha256": "09ce1bebf68d47724a2d956bb3ca9b65e3dfea558aead762ae29f59b8449ae34"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-2-sit-front.png",
+    "sha256": "8234dcf321b59b12e3229ff3ed487616fc5a68971f082ddf7c92b5eb5ce2dec2"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-2-sit-side.png",
+    "sha256": "a717074d09be1ee1fa8047ef0e5f4d0e3771bc35333bb1705ece8dd6b72ffc45"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-2-walk-front.png",
+    "sha256": "48a0b1f01a0ed65550cc9d623873fd5831b9a83f651e44f5895926cb0388fb13"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/office-2-walk-side.png",
+    "sha256": "ea1f10e485a5a2663fe8aa430adc575749289511658ce78809636644fc334fdd"
+  },
+  {
+    "path": "game3d/shots/briefcase-carry/rotation2-85/report.json",
+    "sha256": "4f7d206e76964e269a5fa95b4329f7543b474b90d1c7badc5d5cfa89170a08b4"
+  }
+]

@@ -1,0 +1,1 @@
+export const OUTING_PLACES=new Set(["shotengai","plaza","east_lane","east_coast","dorm_commons"]),COMPANION={label:"Kenji",kind:"person"};export function extendOutingCatalog(e){for(const n of OUTING_PLACES)e[n].people.includes("kenji")||e[n].people.push("kenji"),e[n].things.kenji||=COMPANION}

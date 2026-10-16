@@ -1,0 +1,67 @@
+{
+ "title": "Creator base bodies, round 1",
+ "date": "2026-09-29",
+ "by": "creator base agent",
+ "status": "superseded",
+ "question": "Mio and Eric undressed to closed skin-only bodies, with hair, stubble and clothes as separate layers on top. Which attempt is closest, and should the next round keep generating the body or build one clean base body by hand to these proportions?",
+ "multi": true,
+ "options": [
+  {
+   "id": "base-a7",
+   "label": "base-a7: pushed under the clothes",
+   "note": "Least skin showing through the clothes. Bodies are thin and lumpy where they were pushed in; Eric's forehead has a ridge where the face meets the skull."
+  },
+  {
+   "id": "base-a8",
+   "label": "base-a8: a7 smoothed",
+   "note": "Smoother surfaces, but thinner still and the feet shrink to points. Not dressed or walked."
+  },
+  {
+   "id": "base-a6",
+   "label": "base-a6: before the push",
+   "note": "Fuller bodies, but skin shows through Eric's jacket at the shoulders; Mio's forehead has a band."
+  },
+  {
+   "id": "base-a5",
+   "label": "base-a5",
+   "note": "Skull follows a smoothed hair line; lip at Eric's hairline."
+  },
+  {
+   "id": "base-a4",
+   "label": "base-a4",
+   "note": "First fully working set (spikes fixed). Game camera here was the far desktop distance."
+  },
+  {
+   "id": "base-a3",
+   "label": "base-a3 (broken)",
+   "note": "A strip of Eric's hand stretched above his head: wrong skin weights from a solidify bug."
+  },
+  {
+   "id": "base-a2",
+   "label": "base-a2 (broken)",
+   "note": "Same bug, and hair colour baked onto Mio's scalp. The very first render (heads with a face mask on a small skull) was overwritten before I kept it."
+  },
+  {
+   "id": "next-hand-built",
+   "label": "next-hand-built: build one clean base by hand",
+   "note": "Next round: one hand-built low-poly chibi body in Blender (planes, not generated blobs) at Mio's and Eric's proportions, their own faces kept, and clothes refitted to it."
+  },
+  {
+   "id": "next-generated",
+   "label": "next-generated: keep generating",
+   "note": "Next round: keep this generator and work on the body shapes, the forehead and Eric's shoulders."
+  }
+ ],
+ "links": [
+  {
+   "label": "How it works (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools"
+  },
+  {
+   "label": "Previous round",
+   "href": "#review/creator-parts"
+  }
+ ],
+ "decision": "Rejected: 'absolutely horrifying... emaciated wrinkly corpses', too many points. Codex makes smooth, simple base models.",
+ "pictures_local": true
+}

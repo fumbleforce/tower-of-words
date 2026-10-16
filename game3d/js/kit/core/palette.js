@@ -1,0 +1,1 @@
+export const STEEL={dark:"#3e434d",mid:"#5b616b",pale:"#9aa0aa"},PAINT={green:"#4e6152",blue:"#4d5f73",red:"#7a4a42",cream:"#d8d2c4"},TIMBER={pale:"#a8957c",mid:"#8f7a62",dark:"#6f5c49"},STONE={granite:"#7f8186",pale:"#a9a7a0",concrete:"#a3a29c",dark:"#5f6268"},TRIM={frame:"#4f565f",sill:"#c9cccf",canopy:"#aab0b7",fascia:"#3f454d",frost:"#c5cfd6"};

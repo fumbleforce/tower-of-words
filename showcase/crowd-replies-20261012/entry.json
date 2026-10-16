@@ -1,0 +1,18 @@
+{
+ "title": "Crowds talk and react",
+ "date": "2026-10-12",
+ "by": "codex",
+ "caption": "People respond when you jump nearby or block their path. You can talk to them and practise everyday words.",
+ "commit": "99b7c0574",
+ "result": [
+  "reaction",
+  "conversation"
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

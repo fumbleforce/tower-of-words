@@ -1,0 +1,52 @@
+{
+ "title": "Creator: straight legs, chunky hair, clothes with volume",
+ "date": "2026-09-30",
+ "by": "Claude (claude-agent:creator8)",
+ "status": "superseded",
+ "question": "Do the legs, the hair and the clothes look right now next to Mio's and Eric's originals?",
+ "multi": false,
+ "options": [
+  {
+   "id": "base-ok",
+   "label": "base-ok",
+   "note": "Good enough to build new characters on. Legs: upright columns with a small gap, feet under the hips, in idle and walk (base source18, made by tools/creator/base/column_legs.py from source17). Hair: all seven styles rebuilt from a shell and a few broad clumps. Clothes: every top and bottom now has looseness (sleeves, body, trouser legs), raised bands on the hoodie, bigger hood, chunkier shoes. The eyes are unchanged. Also fixed: long sleeves stopped short of the hands (the bases' forearms run past the wrist joint); the fine stripes on made hair and clothes were shadow artefacts in the viewer's light and are gone; under Mio's and Eric's own shoes the base's feet fold away (they stand closer together now than the original shoes)."
+  },
+  {
+   "id": "needs-work",
+   "label": "needs-work",
+   "note": "Tell me what to fix first. What I can still see: the made clothes are still simpler than the originals (no zip or big cargo pockets on the trousers, and Mio's hoodie has more oversized bulk than the made one); in a walk the legs cross a little in front view, which comes from the walk clip (the originals do it too, hidden by baggy trousers); at the far end of a stride the forward thigh still grazes the pleated skirt's hem; the made hair shows the flat shading of big facets like Mio's, which on Eric's smooth-shaded body reads a little harder than his own hair; the hands are still the originals' blocky hands."
+  }
+ ],
+ "links": [
+  {
+   "label": "The live creator (drag to turn it, Idle or Walk, Original puts the game model beside it) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools"
+  },
+  {
+   "label": "The same creator online, for your phone",
+   "href": "https://fumbleforce.github.io/tower-of-words/creator/"
+  },
+  {
+   "label": "Example: school look on Mio's body (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools"
+  },
+  {
+   "label": "Example: hoodie look on Eric's body (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools"
+  },
+  {
+   "label": "Example: spiky hair and blazer on Eric's body (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools"
+  },
+  {
+   "label": "The creator's bodies from last round (the legs before), for comparing (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools"
+  },
+  {
+   "label": "Previous round and your feedback",
+   "href": "#review/creator-base-7"
+  }
+ ],
+ "decision": "Broken bodies (see chat 2026-09-30: neck, hood inside, double brows, stubble, clothes); hair alternatives look like tentacles. Superseded by the Blender rebuild (creator-blender-1).",
+ "pictures_local": true
+}

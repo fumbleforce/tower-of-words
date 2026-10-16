@@ -1,0 +1,27 @@
+{
+ "title": "North campus loop and print shop",
+ "date": "2026-10-07",
+ "by": "codex",
+ "caption": "A walkable loop behind head office and a usable print shop with a saved island directory. The far northern island and other building interiors remain unfinished.",
+ "sections": [
+  {
+   "title": "North campus foot loop",
+   "caption": "Walk behind head office through the office streets and along the west-coast connection."
+  },
+  {
+   "title": "Usable print shop",
+   "caption": "A furnished ground floor with presses, a proof counter, paper stock and a waiting chair."
+  },
+  {
+   "title": "Print and keep the directory",
+   "caption": "Press the control, collect the output and read current venue locations. The saved paper can be reopened from the Bag."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

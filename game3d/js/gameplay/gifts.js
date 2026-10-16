@@ -1,0 +1,1 @@
+import{ITEMS as o}from"./items.js";import{flagKeys as s}from"../narrative/engine-flags.js";const n=s("game3d/js/gameplay/gifts.js");export function giveItem({runner:i,flags:g,take:t},e,r){if(o[e]?.giftable===!1)return null;const f=[`give:${e}:${r}`,`give:*:${r}`].find(l=>i.has(l));return f?(i.entry(f,{peek:!0}).keep||(t(e),g[n.gave+e+"_"+r]=!0),i.trigger(f),f):null}

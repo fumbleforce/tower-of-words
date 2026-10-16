@@ -1,0 +1,294 @@
+{
+ "title": "Proposed work",
+ "date": "2026-10-16",
+ "by": "claude-main",
+ "status": "open",
+ "updated": "2026-10-16T19:47:29+0200",
+ "multi": true,
+ "options": [
+  {
+   "id": "p276",
+   "label": "#276 Play the small personal scenes with each character",
+   "note": "Today: The 27 short personal scenes between Eric and the cast are written but nothing in the game starts them, so they never appear. Found: Codex, while closing out the cast design on 6 Oct. Why it matters: They are the first warm moments with each character, so a new player would meet them early if they played. Fix idea: Build the part that offers a scene when you talk to someone, puts people in place, and uses the existing voices. (story, large, issue #276.) No picture: the scenes are not wired in, so there is nothing to photograph."
+  },
+  {
+   "id": "p295",
+   "label": "#295 Fill the dorm commons and the canteen with people who stay",
+   "note": "Today: In the dorm commons and the canteen at lunch, people mostly walk around with no purpose. Nobody sits, and you cannot talk to them. Found: Codex, from a review of the world on 6 Oct. Why it matters: Places feel empty or random when everyone only walks. A few people who sit and chat make a place feel lived in. Fix idea: Seat a few people, give each one a line to talk to, and thin out the walkers. One place at a time. (world, medium, issue #295.) Partly seen on 4bd5870f: at lunch about five people already sit in the canteen with a Talk icon (left). The dorm common room is empty on day 1 in the morning, the afternoon (right), the evening and at night, so the common room still needs people, though it is empty rather than full of walkers.",
+   "image": "reviews/proposed-work/p295-canteen-lunch-and-commons-desktop.webp.webp"
+  },
+  {
+   "id": "p363",
+   "label": "#363 Make the word rise over the train doors when you hold them",
+   "note": "Today: On day 1, when you say matte to hold the train doors, the doors shimmer, but the ring and the word 待って that should rise over them never appear. Found: Claude, reading the train code on 9 Oct. Why it matters: It is the first time a spoken word does something magic, so the moment should be easy to read. Fix idea: The code picks which doors to mark by a field the doors do not have, so it picks none. Pick the left doorway's doors and add a test. (world, small, issue #363.) Seen on 4bd5870f (desktop, day 1 train). Left: today. Right: the same moment in a test run that passes the left doors in, the way the code meant.",
+   "image": "reviews/proposed-work/p363-door-word-desktop.webp.webp"
+  },
+  {
+   "id": "p407",
+   "label": "#407 Build the campus canteen outside properly",
+   "note": "Today: Seen from far away, the north campus canteen is still a plain flat box. The station building also has odd shading on its walls. Found: Claude, at the end of the campus polish on 10 Oct. Why it matters: The campus is part of day 2 and 3. A box next to finished buildings stands out. Fix idea: Model the canteen exterior with windows and a roof, and rebuild the station mesh so its walls shade correctly. (world, medium, issue #407.) Picture (desktop): the canteen from outside is a flat box with rows of windows, a plain roof and no door or entrance. The station wall shading was not captured.",
+   "image": "reviews/proposed-work/p407-canteen-box-desktop.webp.webp"
+  },
+  {
+   "id": "p413",
+   "label": "#413 Build the open relationship scenes for Mio, Kuro and Rei",
+   "note": "Today: The step scenes that grow each friendship are written, but the game does not play them yet. Found: Claude, listing what was left after the relationship plan on 10 Oct. Why it matters: These scenes are the main reason to keep talking to the cast over the days. Fix idea: Start with Rei step 3, drop the cut line, then do Kuro once the words she needs are taught outside the opening. (story, large, issue #413.) No picture: scenes not built yet."
+  },
+  {
+   "id": "p414",
+   "label": "#414 Give five more outdoor places the same polish as the campus",
+   "note": "Today: The sports ground and campus got a polish pass. East lane, shop street, harbour, plaza and dorm court did not, and look plainer next to them. Found: Claude, after the sports and campus passes on 10 Oct. Why it matters: You walk through these places every day. Mixed quality is easy to notice. Fix idea: One place at a time, same method as before: fix the ground, planting and light. (world, large, issue #414.) Not clearly seen on 4bd5870f: at their default desktop views the nine outdoor places look close in quality. The two polished ones are top left; judge the rest from the grid.",
+   "image": "reviews/proposed-work/p414-outdoor-places-desktop.webp.webp"
+  },
+  {
+   "id": "p415",
+   "label": "#415 Light the sports ground at evening like the rest of the island",
+   "note": "Today: At evening the sports ground uses its own light switch, so it can look different from the campus and plaza at the same hour. Found: Claude, after the campus got the shared light on 10 Oct. Why it matters: Evening is when the clubs run, so people see this place most then. Fix idea: Switch it to the shared light setup and look at it at evening on phone and desktop. (world, small, issue #415.) Not seen on 4bd5870f: at evening the sports ground gets the same sun and colour settings as the campus and the plaza, and looks about like the plaza. Suggest dropping it, or keeping it only as a code cleanup.",
+   "image": "reviews/proposed-work/p415-evening-light-desktop.webp.webp"
+  },
+  {
+   "id": "p416",
+   "label": "#416 Make the forecourt and plaza run smoother on phones",
+   "note": "Today: On phones and weaker computers the forecourt and the plaza run below the frame rate we aim for. They are the first places a new player walks through. Found: Claude, from the speed checks on 10 Oct. Why it matters: A slow first walk is a bad first impression, mostly on phones. Fix idea: Draw the crowd people in groups, trim the lift cut-away, and limit which things cast shadows. (performance, large, issue #416.) No picture: frame rates, not a picture."
+  },
+  {
+   "id": "p465",
+   "label": "#465 Make the game start faster",
+   "note": "Today: The game loads all eight characters and all 26 places before the title is useful, even though you only need a few at first. Found: A speed report on 11 Oct, written by an agent. Why it matters: A long load on the title is the first thing a new player waits through, mostly on phones. Fix idea: Load only what the first scene needs and the next place, the rest in the background. (performance, medium, issue #465.) No picture: load time, not a picture."
+  },
+  {
+   "id": "p466",
+   "label": "#466 Stop the game using more memory the longer you travel",
+   "note": "Today: Every place you visit stays in memory. After a long session on a phone it could slow down or crash. Found: A speed report on 11 Oct, written by an agent. Why it matters: Long play sessions would end badly on small phones. Fix idea: Drop places you left a while ago, keeping story state and shared assets. (performance, medium, issue #466.) No picture: memory use, not a picture."
+  },
+  {
+   "id": "p494",
+   "label": "#494 Match one private scene line to its picture",
+   "note": "Today: In one private scene the narration says she puts both hair sticks on the counter. The chosen picture still shows them in her hair. Found: The private scene agent on 11 Oct, while checking pictures against text. Why it matters: Text and picture disagree, which breaks the scene. Fix idea: Change the narration line (and the line after it) to fit the picture. (story, small, issue #494.) No picture: a private picture, kept out of the public repo."
+  },
+  {
+   "id": "p498",
+   "label": "#498 Fix the forecourt direction sign that cuts off its own words",
+   "note": "Today: At the station exit, the sign pointing to Head office and Plaza shows \"za · Dorms\" instead of \"Plaza · Dorms\". The picture is a close-up of the sign. Found: Claude, in the full set of screenshots on 11 Oct. Why it matters: It is one of the first signs a new player sees after leaving the station. Fix idea: Make the text row shorter or wrap it so it fits the sign. (world, small, issue #498.) Reproduced on 6694372d (desktop close-up): the post hides the start of \"Plaza\", so the sign reads \"za · Dorms\".",
+   "image": "reviews/proposed-work/p498-forecourt-sign-closeup-desktop.webp.webp"
+  },
+  {
+   "id": "p499",
+   "label": "#499 Stop two commuters overlapping at the station gate",
+   "note": "Today: On day 1 morning at the station gate two commuters can stand in the same spot and walk into each other. Found: Claude, in the screenshots on 11 Oct. Why it matters: People clipping through each other looks broken right at the start. Fix idea: Check the gate queue at both sizes, and give each queue place its own spot if they overlap. (world, small, issue #499.) Seen on 4bd5870f (desktop, day 1 morning, a played run): two commuters wait in the gate queue half a metre apart, pressed into each other.",
+   "image": "reviews/proposed-work/p499-gate-queue-desktop.webp"
+  },
+  {
+   "id": "p500",
+   "label": "#500 Make Mio visible on the dorm bench at night",
+   "note": "Today: On day 1 evening on the dorm courtyard bench, Mio's body looks almost black. Found: Claude, in the screenshots on 11 Oct. Why it matters: A key evening scene with Mio would look wrong. Fix idea: Light the bench from the courtyard lamp or raise her body brightness there. (world, small, issue #500.) Reproduced on 6694372d (desktop, evening, Mio placed on the bench): her body reads as a black silhouette.",
+   "image": "reviews/proposed-work/p500-mio-dark-on-bench-desktop.webp"
+  },
+  {
+   "id": "p501",
+   "label": "#501 Hide the \"Lift to B2\" label when the lift is not your goal",
+   "note": "Today: After work on day 1 the \"Lift to B2\" label stays at the top right on the forecourt, although you are heading home. Found: Claude, in the screenshots on 11 Oct. Why it matters: A label for the wrong goal confuses a first-time player about where to go. Fix idea: Hide it the way other labels for non-goals are hidden. (ui, small, issue #501.)",
+   "image": "reviews/proposed-work/p501-forecourt-lift-chip-desktop.webp.webp"
+  },
+  {
+   "id": "p541",
+   "label": "#541 Show fewer markers at the start of the train on the phone",
+   "note": "Today: On the phone, many passengers and the cat already have markers, and the Jump button is there before you have moved. The opening plan says only movement first and one target. Found: An agent playing the opening as a first-time player on 12 Oct. Why it matters: Too many things to tap at once overwhelms a new player. Fix idea: Remove the distant passenger and cat markers until the first goal is done. (ui, small, issue #541.)",
+   "image": "reviews/proposed-work/p541-train-opening-phone.webp"
+  },
+  {
+   "id": "p544",
+   "label": "#544 Keep the camera above the fountain bowl",
+   "note": "Today: If you jump into the middle of the plaza fountain, the camera can end up below the edge of the bowl and you look at the wall. Found: An agent profiling jumps on 12 Oct. Why it matters: The plaza is on the first day. A camera under the bowl looks like a bug. Fix idea: Find how the camera follows into the fountain and keep it above the rim. (world, small, issue #544.) Not seen on 4bd5870f: with the desktop follow camera on day 1, Eric jumped over the rim, walked to the centre and jumped back out, and the camera stayed 2.8 m up, above the rim, the whole time. The 12 Oct capture was on day 2. Suggest dropping it.",
+   "image": "reviews/proposed-work/p544-fountain-jump-desktop.webp.webp"
+  },
+  {
+   "id": "p550",
+   "label": "#550 Stop gulls landing on rocks at the harbour",
+   "note": "Today: At the harbour some gulls land on rocks and foam instead of the water, at four spots. Found: An agent surveying the harbour surfaces on 12 Oct. Why it matters: A small thing, but it spoils the harbour view for anyone who looks. Fix idea: Move the four spots onto the sea and check the landings. (world, small, issue #550.) Picture (desktop): red discs are the gull water spots from the survey. They sit on the quay edge, not on open water. Only three of the four are in this view.",
+   "image": "reviews/proposed-work/p550-harbour-gull-spots-desktop.webp.webp"
+  },
+  {
+   "id": "p553",
+   "label": "#553 Keep the player visible behind the East lane barber roof",
+   "note": "Today: On the phone in East lane, the player walks behind the barber shop roof and disappears. Only the destination marker shows. The picture is the moment it happens. Found: An agent testing phone routes on 13 Oct. Why it matters: A hero who vanishes while you walk makes you think the game froze. Fix idea: Raise or tilt the phone camera around that corner, and check both directions. (world, small, issue #553.)",
+   "image": "reviews/proposed-work/p553-east-lane-hidden-player-phone.webp.webp"
+  },
+  {
+   "id": "p567",
+   "label": "#567 Fix the walk from the shop street to Kenji clipping a shop corner",
+   "note": "Today: When someone walks straight from the lunch spot to Kenji on the shop street, they stop at a shop corner and do not get through. Found: An agent testing walking routes on 13 Oct. Why it matters: People stuck at corners break scenes that depend on walking to a person. Fix idea: Make the walking path go around the corner, without weakening collisions. (world, small, issue #567.) Not seen on 4bd5870f: the same walk, from the lunch spot to Kenji's spot with the numbers in the issue, got there in about 7 seconds without stopping (desktop, day 1). Suggest dropping it.",
+   "image": "reviews/proposed-work/p567-shop-walk-desktop.webp.webp"
+  },
+  {
+   "id": "p581",
+   "label": "#581 Make the dorm kitchen and laundry doorways walkable",
+   "note": "Today: The doorways of the dorm kitchen and laundry are too low for the character, so you cannot walk in and out normally. Found: An agent auditing doorways on 14 Oct. Why it matters: You cannot enter two dorm rooms by walking. Fix idea: Raise the door openings and frames, then check entering and leaving with both main characters. (world, small, issue #581.) Not seen on 4bd5870f: Eric walked from the corridor into the 2F kitchen and back out without stopping (desktop). The doorway was raised to 1.50 m on 16 Oct (f9343957), and the doorway test, which covers the kitchen and the 3F laundry, passes. Suggest dropping it.",
+   "image": "reviews/proposed-work/p581-kitchen-walk-desktop.webp"
+  },
+  {
+   "id": "p585",
+   "label": "#585 Recheck the forecourt loading time after the copy-room change",
+   "note": "Today: The forecourt took about 1 second longer to load on a phone in one test. A second landing passed, but the timing was not remeasured. Found: An agent landing the copy-room change on 14 Oct. Why it matters: The forecourt is the first place a new player walks through. Fix idea: Rerun the speed check on a quiet machine and compare. (performance, small, issue #585.) No picture: load time."
+  },
+  {
+   "id": "p588",
+   "label": "#588 Make it clear how to send a typed word on the phone",
+   "note": "Today: On the phone you can type a word, but the card only says \"Hold the mic and say it\". There is no visible button to send. The test player tried Enter and it worked. Found: An agent playing the train as a first-time player on 15 Oct. Why it matters: A phone player who cannot talk aloud on a train needs to know how to send the typed word. Fix idea: Add a visible send button or a hint under the text box. (ui, small, issue #588.)",
+   "image": "reviews/proposed-work/p588-typed-word-phone.webp"
+  },
+  {
+   "id": "p612",
+   "label": "#612 Keep Mio's glasses without gluing a frame on the picture",
+   "note": "Today: The way we add Mio's glasses still pastes a frame over the picture, which the rules forbid. Found: Claude, finishing the picture docs on 16 Oct. Why it matters: The pasted frame can look wrong and breaks our own rule. Fix idea: Find a settings-only way to keep the glasses on. (art, small, issue #612.) No picture: a picture recipe; no still."
+  },
+  {
+   "id": "p630",
+   "label": "#630 Make every place and the title run at 120 frames per second",
+   "note": "Today: On a 2560x1440 screen, 12 of 30 places and screens run just under 120 frames a second on the RTX 3080. Found: Codex, from the new speed check on 16 Oct. Why it matters: Smooth motion matters most when you walk and look around. Fix idea: Fix the slowest places or drop the 120 target for some. (performance, large, issue #630.) No picture: frame times."
+  },
+  {
+   "id": "p646",
+   "label": "#646 Let a walk reach its spot inside the B2 machine room",
+   "note": "Today: A character walking into the B2 machine room stops about 40 cm short of the target spot. Found: An agent testing walks on 16 Oct. Why it matters: Scenes that need a person at an exact spot would look slightly off. Fix idea: Trace why the walker gives up and fix that rule. (world, small, issue #646.) Not seen on 4bd5870f: with the door open, a walk from the corridor to the point in the issue ended on the point (desktop). Suggest dropping it.",
+   "image": "reviews/proposed-work/p646-machine-room-walk-desktop.webp.webp"
+  },
+  {
+   "id": "p650",
+   "label": "#650 Remove an invisible ceiling just outside the station",
+   "note": "Today: Over a strip of pavement just outside the station's front wall, a hidden part of the faded station still blocks Eric: he can walk there, but a jump stops dead. Found: An agent surveying doorways on 16 Oct. Why it matters: A player who jumps right outside the station on day 1 hits a ceiling nobody can see. Fix idea: Let hidden station parts stop blocking movement, or move the part. (world, small, issue #650.) Seen on 4bd5870f (desktop). Walking along the strip works. Left: a jump two metres away. Right: the same jump under the hidden part, where he stays on the ground.",
+   "image": "reviews/proposed-work/p650-jump-under-station-desktop.webp.webp"
+  },
+  {
+   "id": "p657",
+   "label": "#657 Give Kenji's favourite drink a different reaction on day 2",
+   "note": "Today: On day 2 any drink you give Kenji gets the same reply, so his favourite melon soda is not special. Found: Codex, checking Kenji lines on 16 Oct. Why it matters: Day 1 already reacts to the favourite, so day 2 feels flatter. Fix idea: Split the gift scene into melon soda and other drinks, then record the lines. (story, small, issue #657.) Seen on 4bd5870f (desktop, the story's own give step): melon soda on day 1 gets his favourite reaction, and on day 2 the plain thanks any drink gets.",
+   "image": "reviews/proposed-work/p657-kenji-gift-desktop.webp.webp"
+  },
+  {
+   "id": "p673",
+   "label": "#673 Keep the music bubble clear of Eric",
+   "note": "Today: On desktop, the headphone passenger's music-note bubble overlaps the right side of Eric's hair when he stands in the usual spot for talking to the passenger. Found: Codex, while checking the train passengers for #665. The bubble sat there before that change too. Why it matters: The bubble covers part of the player character while he talks to the passenger. Fix idea: Place reaction bubbles clear of nearby people at the normal interaction distance. (ui, small, issue #673.)",
+   "image": "game3d/shots/train-passengers-665/music-bubble-desktop.png.webp"
+  },
+  {
+   "id": "p15",
+   "label": "#15 Make the game files smaller",
+   "note": "Today: Nothing changes in play. The game folder carries meshes and animation files more than once. Found: An agent tidying the to-do list on 30 Sep. Why it matters: Only matters if the desktop download gets too big. Nobody has complained about size. Fix idea: Share the meshes and keep only the animations that are used. (tooling, medium, issue #15.) No picture: file sizes, not something you see."
+  },
+  {
+   "id": "p319",
+   "label": "#319 Look into walking checks that fail in the office basement and campus",
+   "note": "Today: Nothing a player notices. The walking test says feet move too fast in B2 and on the campus, but real play looks fine. Found: Codex, running the travel test on 7 Oct. Why it matters: It might be a real animation glitch or only a test being too strict. Two fix tries were dropped already. Fix idea: Only try again with a fix that can land in a day; look first at the plaza crowd slide. (tooling, medium, issue #319.) No picture: a test measurement."
+  },
+  {
+   "id": "p429",
+   "label": "#429 Stop issues from waiting on you with no Review question",
+   "note": "Today: Nothing a player sees. An issue was marked as waiting for you without any question in Review, so you could not see it. Found: Claude, in a quality check on 10 Oct. Why it matters: You only look in Review, so a wait with no question there is invisible. Fix idea: The tracker refuses the waiting state unless a Review item exists. (tooling, small, issue #429.) No picture: tracker rule."
+  },
+  {
+   "id": "p495",
+   "label": "#495 Make new private scenes from templates in the scene editor",
+   "note": "Today: Nothing a player sees. In the scene editor you cannot yet add a new scene from a template. Found: Claude, after building the editor on 11 Oct. Why it matters: It would make private scenes faster to build. Fix idea: Add a template choice in the editor that creates the scene entry and runs the usual checks. (tooling, medium, issue #495.) No picture: editor feature."
+  },
+  {
+   "id": "p497",
+   "label": "#497 Fix the cut-off tabs in the scene editor map",
+   "note": "Today: In the editor map at laptop size the place tabs are cut off on the left, and route lines run over cards. Found: Claude, looking at its own screenshots on 11 Oct. Why it matters: Only you and I use the editor, but it makes the map hard to read. Fix idea: Fix the tab layout and the line drawing at 1366 wide, with before and after pictures. (tooling, small, issue #497.)",
+   "image": "bible/shots/showcase/scene-editor-map-1/map-office-1366.webp.webp"
+  },
+  {
+   "id": "p513",
+   "label": "#513 Fix the opening test that clicks a passenger",
+   "note": "Today: Nothing a player sees. The test of the opening on desktop clicks on a passenger instead of the floor, and then fails. Found: Claude, while joining changes on 12 Oct. Why it matters: It blocks the desktop opening check, so real problems could pass unnoticed. Fix idea: Pick a floor spot that is always clear. (tooling, small, issue #513.) No picture: test script."
+  },
+  {
+   "id": "p537",
+   "label": "#537 Repair four broken links on the public bible pages",
+   "note": "Today: Nothing in the game. Four links on the public bible pages lead nowhere. Found: Claude, running the bible link check on 12 Oct. Why it matters: Broken links on a public page look careless. Fix idea: Fix the empty quote, the missing file link, and two bad sources. (tooling, small, issue #537.) No picture: bible link check."
+  },
+  {
+   "id": "p551",
+   "label": "#551 Show the market room in the asset library preview",
+   "note": "Today: Nothing in the game. The asset library cannot preview the shop-street market room and shows an error. Found: An agent refreshing library thumbnails on 12 Oct. Why it matters: You use the library to look at pieces, and one is missing. Fix idea: Add the market room to the preview. (tooling, small, issue #551.) No picture: asset library preview."
+  },
+  {
+   "id": "p552",
+   "label": "#552 Fix the apartment roof preview in the asset library",
+   "note": "Today: Nothing in the game. The roof deck preview in the asset library gets a wrong height, so it shows nothing right. Found: An agent refreshing library thumbnails on 13 Oct. Why it matters: The library is how you check the pieces. Fix idea: Declare the missing height so the preview builds. (tooling, small, issue #552.) No picture: asset library preview."
+  },
+  {
+   "id": "p556",
+   "label": "#556 Stop a joining verb before a comma being read as a command",
+   "note": "Today: Nothing visible yet. In a Japanese line like \"open the door, went in\", the word \"open\" could be treated as a spoken command. Found: Codex, in a cross-check on 13 Oct. Why it matters: It could mark wrong words as commands in the word tools. Fix idea: Add this sentence as a test and tell joining forms from commands. (tooling, small, issue #556.) No picture: language tool."
+  },
+  {
+   "id": "p570",
+   "label": "#570 Keep removing assets in a worktree from touching the shared copy",
+   "note": "Today: Nothing in the game. Removing old clips in a work area also moved the shared copies before the change was approved. They were restored. Found: An agent retiring old clips on 14 Oct. Why it matters: It could lose files for everyone else working at the same time. Fix idea: Make the worktree move only its own files and defer the shared ones to landing. (tooling, small, issue #570.) No picture: asset tool."
+  },
+  {
+   "id": "p589",
+   "label": "#589 Count each kind of walking fault separately",
+   "note": "Today: Nothing a player sees. The walking check mixes different kinds of faults and reports a longer slide than there was. Found: An agent studying a recorded walk on 15 Oct. Why it matters: It gives false alarms that waste time. Fix idea: Restart the count when the kind of fault changes. (tooling, small, issue #589.) No picture: test measurement."
+  },
+  {
+   "id": "p594",
+   "label": "#594 Make the bible link check finish",
+   "note": "Today: Nothing in the game. The bible link checker times out and complains about old local routes. Found: An agent running the full bible check on 15 Oct. Why it matters: A check that never finishes does not protect anything. Fix idea: Point it at the current local routes. (tooling, small, issue #594.) No picture: bible link check."
+  },
+  {
+   "id": "p610",
+   "label": "#610 Fix the failing subplots round-trip test",
+   "note": "Today: Nothing a player sees. A test fails on a duplicate entry for the campus route. Found: An agent landing another change on 16 Oct. Why it matters: A failing test hides new failures. Fix idea: Find where the duplicate comes from and remove it. (tooling, small, issue #610.) No picture: test failure."
+  },
+  {
+   "id": "p611",
+   "label": "#611 Fix the desktop opening check that clicks the woman with the bun",
+   "note": "Today: Nothing wrong in play. At desktop size the opening check clicks the floor next to the woman with the bun, which starts her short scene. Pins hide while a scene runs, so the check cannot find Mio's pin and fails. Found: Claude, running the opening check on 16 Oct. Why it matters: A check that always fails at desktop size hides real failures. Fix idea: Same cause as #513: click a floor spot that is always clear, or wait for the scene to end. It can be folded into #513. (tooling, small, issue #611.) Seen on 4bd5870f (desktop): the red ring is where the check clicks; on the right her scene plays and every pin is hidden, as it should be during a scene. Suggest dropping this one and fixing #513.",
+   "image": "reviews/proposed-work/p611-check-click-desktop.webp.webp"
+  },
+  {
+   "id": "p613",
+   "label": "#613 Move tool folders out of the git folder",
+   "note": "Today: Nothing a player sees. Several tools keep their state inside the git folder. Found: Codex, noting this on 16 Oct. Why it matters: Tool state should live in the cache folder. Fix idea: Give each tool a cache folder name and move it. (tooling, small, issue #613.) No picture: repo housekeeping."
+  },
+  {
+   "id": "p622",
+   "label": "#622 Fix the dates shown on Showcase entries",
+   "note": "Today: On Showcase an entry shows the date of its newest edit, not the day it was first posted. Found: An agent checking Showcase dates on 16 Oct. Why it matters: Entries look newer than they are. Fix idea: Decide which date is right, then fix the date tool. (tooling, small, issue #622.) No picture: bible tool."
+  },
+  {
+   "id": "p623",
+   "label": "#623 Add one rule to the architecture doc",
+   "note": "Today: Nothing a player sees. A line about generated files is missing in ARCHITECTURE.md. Found: An agent on 16 Oct. Why it matters: Keeps tool outputs consistent. Fix idea: Add one bullet once another change to that file lands. (tooling, small, issue #623.) No picture: docs."
+  },
+  {
+   "id": "p639",
+   "label": "#639 Make landings faster",
+   "note": "Today: Nothing a player sees. Every landing now takes about 11 minutes longer because of the new speed check. Found: An agent on 16 Oct. Why it matters: Slow landings slow every change. Fix idea: Measure only the places a change can affect, and run the full check overnight. (tooling, medium, issue #639.) No picture: land check."
+  },
+  {
+   "id": "p642",
+   "label": "#642 Stop the texture mark check flagging a clean Carina picture",
+   "note": "Today: Nothing in the game. The check flags Carina round 2 as having marks, but you saw it as clean. Found: An agent, from your comment on the picture on 16 Oct. Why it matters: Each false alarm triggers a redo that costs credits. Fix idea: Compare scores on pictures with real marks and with clean ones, and adjust. (tooling, small, issue #642.) No picture: art check tool."
+  },
+  {
+   "id": "p643",
+   "label": "#643 Finish the cleanup of the 3D route",
+   "note": "Today: Nothing a player sees. A few leftover steps remain from the 3D character route work. Found: An agent on 16 Oct. Why it matters: Loose ends make the tools confusing. Fix idea: Add the missing promote option, then close it. (tooling, medium, issue #643.) No picture: asset tools."
+  },
+  {
+   "id": "p652",
+   "label": "#652 Fix the day 4 and day 5 test that sometimes fails on two overlapping people",
+   "note": "Today: Nothing a player sees. In rare runs two people overlap in the day 4 or day 5 test, and it passes on retry. Found: An agent landing a change on 16 Oct. Why it matters: It could be a rare real overlap. Fix idea: Rerun ten times, capture the failures, and fix the cause. (tooling, small, issue #652.) No picture: test run that passes on rerun."
+  },
+  {
+   "id": "p653",
+   "label": "#653 Update the day 2 and 3 tests for the Interact menu",
+   "note": "Today: Nothing a player sees. The day 2 test stops at the new Interact menu and fails. Found: An agent on 16 Oct. Why it matters: Without it the days 2 and 3 are not fully tested. Fix idea: Teach the test to pick the Story row and add the optional pool words. (tooling, small, issue #653.) No picture: test script."
+  }
+ ],
+ "question": "Which of these should become work? Pick (approve) the ones to do and reject the ones to drop; anything you leave alone stays proposed. Tooling ones are at the bottom.",
+ "media": []
+}

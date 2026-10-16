@@ -1,0 +1,36 @@
+{
+ "title": "Destination arrows stay clear of the objective",
+ "date": "2026-10-07",
+ "by": "Codex",
+ "caption": "The destination arrow adjusts to the current HUD height when the interface grows or a hint wraps.",
+ "preview": "round1-2560-1-arrival",
+ "sections": [
+  {
+   "title": "Initial diagnostic: ordinary overview",
+   "caption": "No collision here; retained before matching the reported lens."
+  },
+  {
+   "title": "Reproduced overlap",
+   "caption": "Three enlarged or wide-screen cases put the destination over the objective."
+  },
+  {
+   "title": "Rendered HUD clearance",
+   "caption": "Destination stays below the current HUD bounds through resizing, enlarged UI and wrapped hints."
+  },
+  {
+   "title": "Additional directions: diagnostic mismatch",
+   "caption": "No HUD overlaps. The direction assertion compared against the ticket pin while another exit was shown; this failed diagnostic is retained."
+  },
+  {
+   "title": "Other destination directions",
+   "caption": "Existing office and plaza exits isolated as the goal. All ten arrows clear the HUD and retain the projected direction, including mirrored right-side labels."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

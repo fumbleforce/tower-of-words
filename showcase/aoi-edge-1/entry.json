@@ -1,0 +1,13 @@
+{
+ "title": "Aoi's portrait without the cream edge",
+ "date": "2026-09-30",
+ "by": "claude-agent:aoi-edge",
+ "caption": "The pale cream band along her left side (image right), on her hair, collar and jacket, is repainted in the hair's pink and the jacket's teal, with the dark outline kept. Alpha and everything else are unchanged. Script: art/candidates/portraits/aoi-edge-1/fix.py.",
+ "links": [
+  {
+   "label": "Review cast-faces-1",
+   "href": "#review/cast-faces-1"
+  }
+ ],
+ "pictures_local": true
+}

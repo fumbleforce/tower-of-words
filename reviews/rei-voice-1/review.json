@@ -1,0 +1,52 @@
+{
+ "title": "Rei's voice",
+ "date": "2026-10-09",
+ "by": "voice agent",
+ "status": "decided",
+ "multi": false,
+ "question": "Which of these is Rei?",
+ "options": [
+  {
+   "id": "a",
+   "label": "a. Low, cold and clipped",
+   "note": "Design prompt: \"A Japanese woman of forty-one, a sales manager. Native Japanese speaker. Medium-low voice, cool and clipped, crisp consonants, no warmth, speaks quickly and expects to be obeyed. Not husky, not breathy.\" Reference pitch about 260 Hz. Every line passed the reading check. Takes: seeds 404, 505 and 606 per line, picked by the check, then closeness to the reference (for the quiet line, the calmest take): ja1 606, ja2 505, English 505, 大丈夫です 606 with English 404."
+  },
+  {
+   "id": "b",
+   "label": "b. Sharp and fast",
+   "note": "Design prompt: \"A Japanese woman of forty-one, a sales manager. Native Japanese speaker. Medium pitch, sharp, brisk and impatient, quick tempo, a strict boss scolding her team, clear and cutting. Not husky.\" Reference pitch about 268 Hz. Every line passed the reading check. Takes: seeds 404, 505 and 606 per line, picked by the check, then closeness to the reference (for the quiet line, the calmest take): ja1 404, ja2 606, English 606, 大丈夫です 505 with English 505."
+  },
+  {
+   "id": "c",
+   "label": "c. Deep and commanding",
+   "note": "Design prompt: \"A Japanese woman of forty-one, a sales manager. Native Japanese speaker. Low, steady, firm voice with heavy authority, a little rough at the edges, unhurried but never soft, a woman used to giving orders. Not breathy, not seductive.\" Reference pitch about 234 Hz. Every line passed the reading check. Takes: seeds 404, 505 and 606 per line, picked by the check, then closeness to the reference (for the quiet line, the calmest take): ja1 404, ja2 404, English 505, 大丈夫です 404 with English 606."
+  },
+  {
+   "id": "d",
+   "label": "d. Cool and smooth, dry amusement",
+   "note": "Design prompt: \"A Japanese woman of forty-one, a sales manager. Native Japanese speaker. Medium-low, polished and controlled, composed, a faint dry amusement under it, never raises her voice because she never needs to. Precise diction. Not husky.\" Reference pitch about 217 Hz. Every line passed the reading check. Takes: seeds 404, 505 and 606 per line, picked by the check, then closeness to the reference (for the quiet line, the calmest take): ja1 404, ja2 404, English 505, 大丈夫です 606 with English 404."
+  },
+  {
+   "id": "e",
+   "label": "e. Clear and strict",
+   "note": "Design prompt: \"A Japanese woman of forty-one, a sales manager. Native Japanese speaker. Medium-high, clear, strong projection, like a strict teacher in front of a class, brisk and precise, firm endings on every sentence.\" Reference pitch about 280 Hz. Every line passed the reading check. Takes: seeds 404, 505 and 606 per line, picked by the check, then closeness to the reference (for the quiet line, the calmest take): ja1 505, ja2 505, English 505, 大丈夫です 606 with English 606."
+  },
+  {
+   "id": "0",
+   "label": "0. Today (borrowed: the shop clerk voice)",
+   "note": "Her borrowed voice today (the shop clerk, made for a twenty-year-old), for comparison. Reference pitch about 280 Hz. Every line passed the reading check. Takes: seeds 404, 505 and 606 per line, picked by the check, then closeness to the reference (for the quiet line, the calmest take): ja1 404, ja2 606, English 404, 大丈夫です 404 with English 606."
+  },
+  {
+   "id": "p",
+   "label": "p. The old prototype's Rei",
+   "note": "The Rei voice from the old prototype (a MiniMax preset, \"ColdQueen\"), cloned the same way, for comparison. Reference pitch about 226 Hz. Every line passed the reading check. Takes: seeds 404, 505 and 606 per line, picked by the check, then closeness to the reference (for the quiet line, the calmest take): ja1 606, ja2 606, English 505, 大丈夫です 404 with English 606."
+  }
+ ],
+ "decided": [
+  "d"
+ ],
+ "decision": "d: cool and smooth, dry amusement. Installed as tools/voice-refs/rei-design (cfg.py), all her lines re-voiced.",
+ "decided_at": "2026-10-09T23:32:31+0200",
+ "issue": 257,
+ "pictures_local": true
+}

@@ -1,0 +1,47 @@
+{
+ "title": "Northern print-shop approach",
+ "date": "2026-10-08",
+ "result": [
+  "final-1366-north",
+  "final-1366-print",
+  "final-1366-junction",
+  "final-1366-north-evening"
+ ],
+ "by": "codex",
+ "caption": "Low planted beds connect the northern print-shop approach to the shed-street gardens. Original trees and walking routes remain in place.",
+ "commit": "8bf21056",
+ "preview": "final-1366-north",
+ "sections": [
+  {
+   "title": "Failed initial capture",
+   "caption": "The review server was not yet running. These are the retained failure images, not a design candidate."
+  },
+  {
+   "title": "Before the northern beds",
+   "caption": "Native overview before this change, including the earlier shed-street planting."
+  },
+  {
+   "title": "First attempt",
+   "caption": "The pointed shrub crowns were revised after desktop and phone inspection."
+  },
+  {
+   "title": "Second attempt",
+   "caption": "Rounded shrubs remained; diamond-shaped low cover was revised in the final pass."
+  },
+  {
+   "title": "Northern approach gardens",
+   "caption": "A low entrance border and an opposite planted crescent keep the doorway, junction and lamp pocket clear. Existing trees remain in place."
+  }
+ ],
+ "links": [
+  {
+   "label": "Walk the north campus",
+   "href": "game3d/index.html?day=3&place=campus&mc=eric&q=0"
+  },
+  {
+   "label": "Validation and remaining limits (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  }
+ ],
+ "pictures_local": true
+}

@@ -1,0 +1,26 @@
+{
+ "title": "Eric's portrait: shoulder no longer cut straight",
+ "date": "2026-09-29",
+ "by": "art agent (eric-canvas-1)",
+ "status": "decided",
+ "multi": false,
+ "question": "Should the game use the wider cut, where his shoulder and arm end inside the picture?",
+ "options": [
+  {
+   "id": "eric-canvas-648",
+   "label": "eric-canvas-648: wider cut",
+   "note": "No outpaint or new render was needed: the approved render r4-909 already has his whole arm, and the game crop stopped at source x 735. This is the same crop (scale 1.051125 from source x 167.30, y -47.35) taken 51 px wider, 648x768 instead of 597x768. Only the new strip x 597 to 647 is added to each approved file; the rest, face and expressions included, is today's pixels. The arm ends at x 626. In the game only FACE.eric's width changes (597 to 648); its face box [112,208,348,399] stays. Scripts: art/candidates/portraits/eric-canvas-1/make.py, sheet.py, ingame.py; shots: game3d/tools/eric-canvas-shots.mjs."
+  },
+  {
+   "id": "eric-canvas-keep",
+   "label": "eric-canvas-keep: keep today's cut",
+   "note": "The current 597x768 files, unchanged."
+  }
+ ],
+ "decided": [
+  "eric-canvas-648"
+ ],
+ "decision": "eric-canvas-648, wider cut",
+ "issue": 18,
+ "pictures_local": true
+}

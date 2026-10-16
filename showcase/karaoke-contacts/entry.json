@@ -1,0 +1,59 @@
+{
+ "title": "Karaoke hand contacts",
+ "date": "2026-10-13",
+ "by": "Codex",
+ "caption": "Microphones stay in the participants’ hands during pickup and passing. Hamada lifts, turns and returns the receipt to the table. The full club session still awaits an approved song.",
+ "result": [
+  "mic-player",
+  "paper-table",
+  "paper-held"
+ ],
+ "sections": [
+  {
+   "title": "Finished contact repair",
+   "images": [
+    {
+     "id": "mic-player",
+     "image": "game3d/shots/finish-karaoke/contact-desktop/passMicrophone-eric.png.webp",
+     "caption": "The player holds the microphone after Hamada passes it."
+    },
+    {
+     "id": "paper-table",
+     "image": "game3d/shots/finish-karaoke/landing3-phone/receipt-table-contact-side.png.webp",
+     "caption": "The returned receipt lies flat on the table, seen from the side."
+    },
+    {
+     "id": "paper-held",
+     "image": "game3d/shots/finish-karaoke/contact-phone/receiptBack-.png.webp",
+     "caption": "Hamada holds the receipt by its upper corner."
+    }
+   ]
+  },
+  {
+   "title": "Checks and earlier framing",
+   "images": [
+    {
+     "id": "pickup-before",
+     "image": "game3d/shots/finish-karaoke/trajectory-desktop/receiptFront-sheet.jpg.webp",
+     "caption": "Earlier pickup framing lost Hamada at the right edge."
+    },
+    {
+     "id": "pickup-after",
+     "image": "game3d/shots/finish-karaoke/final-desktop/receiptFront-sheet.jpg.webp",
+     "caption": "The wider camera keeps him in view during the pickup."
+    },
+    {
+     "id": "return-after",
+     "image": "game3d/shots/finish-karaoke/landing3-phone/landing-sheet.jpg.webp",
+     "caption": "Hamada reaches the table before releasing the receipt, keeping the numbered side upward."
+    }
+   ]
+  }
+ ],
+ "commit": [
+  "c3c9abfa5",
+  "e886001b6",
+  "04a3ade9f"
+ ],
+ "media": []
+}

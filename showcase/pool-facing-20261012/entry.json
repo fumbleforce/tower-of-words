@@ -1,0 +1,18 @@
+{
+ "title": "Walking direction stays correct near the pool",
+ "date": "2026-10-12",
+ "by": "codex",
+ "caption": "Preparing and changing swimwear preserves the character’s facing direction.",
+ "commit": "fa1b3aba5",
+ "result": [
+  "dressed",
+  "swimwear"
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

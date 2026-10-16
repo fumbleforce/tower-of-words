@@ -1,0 +1,45 @@
+{
+ "title": "Natural hedges and bushes, real tree trunks and a proper park bench",
+ "date": "2026-10-09",
+ "by": "claude-agent:planting",
+ "caption": "Trees, bushes, hedges and benches outdoors are now Blender models. Trunks taper, flare at the roots and fork into limbs. Hedges and bushes are leafy clumps with no repeating leaf grid, and benches have timber slats on cast-iron ends. This is in every outdoor place, in both the default and the street style. Paths, kerbs, steps and beds are a separate job.",
+ "result": [
+  "after-street-hedges-desk",
+  "closeup-bench",
+  "after-street-wide-desk",
+  "models-closeup"
+ ],
+ "sections": [
+  {
+   "title": "Close-ups of the new models",
+   "caption": "The Blender models on their own, then the trunk, bench and hedge in the game (street style, desktop)."
+  },
+  {
+   "title": "Your hedge view: the garden court looking south",
+   "caption": "Same player spot and camera before and after, both styles, desktop and phone."
+  },
+  {
+   "title": "Your lantern deck view, from above",
+   "caption": "Same player spot and camera before and after, both styles, desktop and phone."
+  },
+  {
+   "title": "Wide street view: the lane east toward the plaza",
+   "caption": "Same spot before and after, both styles, desktop and phone."
+  },
+  {
+   "title": "The garden bench and the lane trees",
+   "caption": "Desktop, both styles."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play the street style",
+   "href": "game3d/index.html?place=forecourt&diorama=1"
+  },
+  {
+   "label": "Issue #362",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/362"
+  }
+ ],
+ "pictures_local": true
+}

@@ -1,0 +1,1 @@
+import*as o from"three";export async function loadRelaxedIdle(a,t=""){const r=new URL(`../assets/characters/relaxed-idle-${a}.json`,import.meta.url),e=await fetch(r.href+t);if(!e.ok)throw new Error(`Approved idle: ${e.status} ${r.pathname}`);return o.AnimationClip.parse(await e.json())}

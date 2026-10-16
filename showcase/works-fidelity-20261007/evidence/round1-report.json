@@ -1,0 +1,263 @@
+{
+  "errors": [],
+  "reports": [
+    {
+      "name": "yard",
+      "width": 1366,
+      "height": 860,
+      "position": {
+        "x": 15,
+        "z": 0
+      },
+      "geometries": 46,
+      "textures": 32,
+      "perf": {
+        "layout": "desktop",
+        "viewport": [
+          1366,
+          860
+        ],
+        "gl": "gpu",
+        "gpu": "ANGLE (NVIDIA, Vulkan 1.4.341 (NVIDIA NVIDIA GeForce RTX 3080 (0x00002206)), NVIDIA)",
+        "quality": 1,
+        "sampleEvery": 10,
+        "places": {
+          "works": {
+            "frames": 92,
+            "medianMs": 16.7,
+            "p99Ms": 66.7,
+            "worstMs": 66.7,
+            "samples": 9,
+            "calls": 103,
+            "callsMax": 103,
+            "callsMaxAt": {
+              "calls": 103,
+              "ms": 217,
+              "visit": 1,
+              "x": 15,
+              "z": 0,
+              "trip": false
+            },
+            "tris": 137606,
+            "trisMax": 137606
+          }
+        }
+      }
+    },
+    {
+      "name": "research",
+      "width": 1366,
+      "height": 860,
+      "position": {
+        "x": 40,
+        "z": 0.3
+      },
+      "geometries": 46,
+      "textures": 32,
+      "perf": {
+        "layout": "desktop",
+        "viewport": [
+          1366,
+          860
+        ],
+        "gl": "gpu",
+        "gpu": "ANGLE (NVIDIA, Vulkan 1.4.341 (NVIDIA NVIDIA GeForce RTX 3080 (0x00002206)), NVIDIA)",
+        "quality": 1,
+        "sampleEvery": 10,
+        "places": {
+          "works": {
+            "frames": 92,
+            "medianMs": 16.7,
+            "p99Ms": 50,
+            "worstMs": 50,
+            "samples": 9,
+            "calls": 103,
+            "callsMax": 103,
+            "callsMaxAt": {
+              "calls": 103,
+              "ms": 83,
+              "visit": 1,
+              "x": 40,
+              "z": 0.3,
+              "trip": false
+            },
+            "tris": 131942,
+            "trisMax": 131942
+          }
+        }
+      }
+    },
+    {
+      "name": "street",
+      "width": 1366,
+      "height": 860,
+      "position": {
+        "x": 33.5,
+        "z": 15
+      },
+      "geometries": 47,
+      "textures": 32,
+      "perf": {
+        "layout": "desktop",
+        "viewport": [
+          1366,
+          860
+        ],
+        "gl": "gpu",
+        "gpu": "ANGLE (NVIDIA, Vulkan 1.4.341 (NVIDIA NVIDIA GeForce RTX 3080 (0x00002206)), NVIDIA)",
+        "quality": 1,
+        "sampleEvery": 10,
+        "places": {
+          "works": {
+            "frames": 94,
+            "medianMs": 16.7,
+            "p99Ms": 50,
+            "worstMs": 50,
+            "samples": 10,
+            "calls": 105,
+            "callsMax": 105,
+            "callsMaxAt": {
+              "calls": 105,
+              "ms": 67,
+              "visit": 1,
+              "x": 33.5,
+              "z": 15,
+              "trip": false
+            },
+            "tris": 146974,
+            "trisMax": 146974
+          }
+        }
+      }
+    },
+    {
+      "name": "yard",
+      "width": 390,
+      "height": 844,
+      "position": {
+        "x": 15,
+        "z": 0
+      },
+      "geometries": 39,
+      "textures": 26,
+      "perf": {
+        "layout": "phone",
+        "viewport": [
+          390,
+          844
+        ],
+        "gl": "gpu",
+        "gpu": "ANGLE (NVIDIA, Vulkan 1.4.341 (NVIDIA NVIDIA GeForce RTX 3080 (0x00002206)), NVIDIA)",
+        "quality": 1,
+        "sampleEvery": 10,
+        "places": {
+          "works": {
+            "frames": 92,
+            "medianMs": 16.7,
+            "p99Ms": 50,
+            "worstMs": 50,
+            "samples": 9,
+            "calls": 48,
+            "callsMax": 48,
+            "callsMaxAt": {
+              "calls": 48,
+              "ms": 83,
+              "visit": 1,
+              "x": 15,
+              "z": 0,
+              "trip": false
+            },
+            "tris": 68935,
+            "trisMax": 68935
+          }
+        }
+      }
+    },
+    {
+      "name": "research",
+      "width": 390,
+      "height": 844,
+      "position": {
+        "x": 40,
+        "z": 0.3
+      },
+      "geometries": 38,
+      "textures": 26,
+      "perf": {
+        "layout": "phone",
+        "viewport": [
+          390,
+          844
+        ],
+        "gl": "gpu",
+        "gpu": "ANGLE (NVIDIA, Vulkan 1.4.341 (NVIDIA NVIDIA GeForce RTX 3080 (0x00002206)), NVIDIA)",
+        "quality": 1,
+        "sampleEvery": 10,
+        "places": {
+          "works": {
+            "frames": 93,
+            "medianMs": 16.7,
+            "p99Ms": 50,
+            "worstMs": 50,
+            "samples": 10,
+            "calls": 47,
+            "callsMax": 47,
+            "callsMaxAt": {
+              "calls": 47,
+              "ms": 67,
+              "visit": 1,
+              "x": 40,
+              "z": 0.3,
+              "trip": false
+            },
+            "tris": 71507,
+            "trisMax": 71507
+          }
+        }
+      }
+    },
+    {
+      "name": "street",
+      "width": 390,
+      "height": 844,
+      "position": {
+        "x": 33.5,
+        "z": 15
+      },
+      "geometries": 42,
+      "textures": 23,
+      "perf": {
+        "layout": "phone",
+        "viewport": [
+          390,
+          844
+        ],
+        "gl": "gpu",
+        "gpu": "ANGLE (NVIDIA, Vulkan 1.4.341 (NVIDIA NVIDIA GeForce RTX 3080 (0x00002206)), NVIDIA)",
+        "quality": 1,
+        "sampleEvery": 10,
+        "places": {
+          "works": {
+            "frames": 92,
+            "medianMs": 16.7,
+            "p99Ms": 50,
+            "worstMs": 50,
+            "samples": 9,
+            "calls": 51,
+            "callsMax": 51,
+            "callsMaxAt": {
+              "calls": 51,
+              "ms": 83,
+              "visit": 1,
+              "x": 33.5,
+              "z": 15,
+              "trip": false
+            },
+            "tris": 79661,
+            "trisMax": 79661
+          }
+        }
+      }
+    }
+  ]
+}

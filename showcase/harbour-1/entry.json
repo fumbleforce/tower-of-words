@@ -1,0 +1,39 @@
+{
+ "title": "The harbour, walkable",
+ "date": "2026-10-02",
+ "by": "claude-agent:harbour",
+ "caption": "The sixth south-half district from island-half-1: the office street goes on west past Amakawa Trading into the harbour. The supply yard with its warehouse, containers, crane and the foreman's hut; the supply pier with a freighter alongside; the ferry landing with the terminal and a ferry alongside its pier; the harbour office; and the harbour walk south along the rocks. Reach it in the morning from the office street: walk west past Amakawa Trading. It also loads with ?place=harbour. The terminal and the harbour office are shut for now. The ships don't move.",
+ "sections": [
+  {
+   "title": "The office street's west end",
+   "caption": "Before: the street stopped at a row of bollards in front of Amakawa Trading. After: the bollards are gone and the street goes on west to the harbour. The finger sign now points west to the harbour too (Harbour 港)."
+  },
+  {
+   "title": "The supply yard",
+   "caption": "Before: open sea with a grey box standing in it (the island's coast stopped short of the harbour). After: a concrete yard on quays, containers in two blocks, a green footway painted across it to the landing, and the warehouse with にあげば SUPPLY QUAY over its roller doors."
+  },
+  {
+   "title": "The ferry landing and pier",
+   "caption": "Before: open sea. After: the landing in pale granite with benches over the water, the terminal's door with フェリーのりば FERRY TERMINAL on its canopy (shut, 準備中), and the ferry moored along the pier with a gangway down to it."
+  },
+  {
+   "title": "The harbour walk",
+   "caption": "Before: bare lawn. After: the coast walk carried north to the office street, with a bay of two benches looking west over the rocks, lamps and trees. It ends at bollards where the coast walk goes on south to the station (not walkable yet)."
+  },
+  {
+   "title": "After work",
+   "caption": "The lamps, the terminal's front, the floodlights and the ships' windows lit."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/index.html?place=harbour"
+  },
+  {
+   "label": "Places doc",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/places.md"
+  }
+ ],
+ "pictures_local": true
+}

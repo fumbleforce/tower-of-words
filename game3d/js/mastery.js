@@ -1,0 +1,6 @@
+import{flagKeys as s}from"./narrative/engine-flags.js";const i=s("game3d/js/mastery.js");import{flags as a}from"./narrative/state.js";import{settings as c}from"./settings.js";export const MASTERY_DEFAULT=3;export function masteryNeeded(){const e=Math.round(+(c&&c.masteryUses));return Number.isFinite(e)&&e>=0?e:MASTERY_DEFAULT}export const practiced=e=>+a[i.practice+e]||0,needsPractice=e=>practiced(e)<masteryNeeded();export function notePractice(e,t="typed"){const r=practiced(e),o=r+1;return a[i.practice+e]=o,t==="voice"&&(a[i.voiced+e]=!0),{count:o,mastered:r<masteryNeeded()&&o>=masteryNeeded()}}export function pipsHTML(e){const t=masteryNeeded(),r=Math.min(practiced(e),t);if(!t)return"";if(r>=t)return'<span class="mp done" title="You can pick it straight from the Say menu now">by heart</span>';let o="";for(let n=0;n<t;n++)o+=`<i class="${n<r?"on":""}"></i>`;return`<span class="mp" role="img" aria-label="Said or typed ${r} of ${t} times">${o}</span>`}export const MASTERY_CSS=`
+.mp { display: inline-flex; gap: 4px; align-items: center; margin-left: auto; flex: none; }
+.mp i { width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid rgba(111, 208, 198, .6); }
+.mp i.on { background: var(--accent, #6fd0c6); border-color: var(--accent, #6fd0c6); }
+.mp.done { font-size: 12px; color: var(--accent, #6fd0c6); letter-spacing: .02em; }
+`;

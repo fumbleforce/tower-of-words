@@ -1,0 +1,32 @@
+{
+ "title": "Dorm courtyard upgrade: Eric's block, the cluster, dusk",
+ "date": "2026-09-30",
+ "by": "claude-agent:dorm-court",
+ "caption": "The dorm courtyard rebuilt against island-map-4: the court now sits on the open ground west of the dorm blocks and looks east at them. Before and after, same camera.",
+ "commit": "cc08de5",
+ "sections": [
+  {
+   "title": "Arriving (desktop)",
+   "caption": "Eric's block is five storeys and runs past both edges of the frame, with a balcony for every room, washing on a few, some rooms lit, and a return coming forward on the right. The bike shelter moved east so it no longer hides Eric's legs where he arrives; an open rack took its place."
+  },
+  {
+   "title": "Arriving (phone)",
+   "caption": "Same moment on a phone."
+  },
+  {
+   "title": "Pulled back",
+   "caption": "A wider camera than the game uses, to show what stands around the court: the other dorm blocks and the shops now come from the island layout instead of two plain boxes. The sento chimney rises past the roof. Dusk is darker and bluer, with a low orange sun; the forecourt and plaza share this evening light."
+  },
+  {
+   "title": "Eric's room window",
+   "caption": "The window used to show dark glass. It now shows the next block's concrete wall about two metres out, in the evening light."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it (the courtyard on its own)",
+   "href": "game3d/index.html?place=dorm_court"
+  }
+ ],
+ "pictures_local": true
+}

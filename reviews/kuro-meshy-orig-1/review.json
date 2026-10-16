@@ -1,0 +1,27 @@
+{
+ "title": "Kuro made with your original 3D workflow (ChatGPT chibi, then Meshy)",
+ "date": "2026-10-04",
+ "by": "Claude (kuro-meshy-orig agent)",
+ "status": "superseded",
+ "question": "The first sheets are pictures (the chibi picture steps), the rest are renders of a real rigged 3D model; open the live 3D link to turn her and watch her idle and walk beside the in-game Eric and Mio. Does Kuro fit next to them, and should the other characters go through the same steps?",
+ "multi": false,
+ "options": [
+  {
+   "id": "kuro-1",
+   "label": "kuro-1",
+   "note": "The rigged model from d-412: smart topology, 1,078 triangles, textured in a second pass, auto-rigged at 1.1 m. 20 credits in all. Her head is smaller against her body than Eric's and Mio's, and her eyes are teal-green where the portrait's are grey. No glasses, no hair sticks."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live 3D: Kuro beside the in-game Eric and Mio (turn, zoom, idle, walk) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools/characters"
+  },
+  {
+   "label": "Eric and Mio in the game's character viewer (Kuro isn't there; she's not in the game)",
+   "href": "game3d/viewer.html?c=eric,mio&look=code"
+  }
+ ],
+ "decision": "Bad; redo with his exact process via ChatGPT's image model (kuro-meshy-orig-2)",
+ "pictures_local": true
+}

@@ -1,0 +1,27 @@
+{
+ "title": "Optional desktop camera",
+ "date": "2026-10-07",
+ "by": "codex-exec:day5_build",
+ "caption": "Settings → Controls now offers a desktop third-person view with mouse look and camera-relative movement. Overview remains the default and the phone camera.",
+ "sections": [
+  {
+   "title": "Exploration",
+   "caption": "Click Mouse look, move with WASD and hold Shift to run. Escape releases the mouse."
+  },
+  {
+   "title": "Inside the buildings",
+   "caption": "The free camera stays below physical ceilings and outside walls. Overview and dialogue keep their original cutaways."
+  },
+  {
+   "title": "Dialogue and phone",
+   "caption": "Authored scenes keep their own camera. Phone play keeps the overview and touch controls."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

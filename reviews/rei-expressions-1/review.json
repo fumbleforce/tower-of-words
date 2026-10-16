@@ -1,0 +1,74 @@
+{
+ "title": "Rei's four expression portraits",
+ "date": "2026-10-09",
+ "by": "art agent (rei-expressions-1)",
+ "status": "decided",
+ "multi": true,
+ "question": "Which face should Rei use for scolding, cold, smug and caught off guard (one each)?",
+ "options": [
+  {
+   "id": "rei-s2-d70-1",
+   "label": "1. scolding: #1367",
+   "note": "mouth open mid-word, eyes narrowed; the strongest scolding of the three. Words: \"scolding, sharp displeased look, eyebrows drawn down, narrowed eyes, mouth open mid-word, looking at the viewer\"; denoise 0.7, seed 1. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), face drift ccip 0.011 (pass), cut-out uses the installed matte."
+  },
+  {
+   "id": "rei-s2-d70-2",
+   "label": "2. scolding: #1368",
+   "note": "mouth barely open, a displeased sneer; the quietest. Words: \"scolding, sharp displeased look, eyebrows drawn down, narrowed eyes, mouth open mid-word, looking at the viewer\"; denoise 0.7, seed 2. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), face drift ccip 0.008 (pass), cut-out uses the installed matte."
+  },
+  {
+   "id": "rei-s2-d70-3",
+   "label": "3. scolding: #1369",
+   "note": "mouth open mid-word, narrowed eyes. Words: \"scolding, sharp displeased look, eyebrows drawn down, narrowed eyes, mouth open mid-word, looking at the viewer\"; denoise 0.7, seed 3. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), face drift ccip 0.008 (pass), cut-out uses the installed matte."
+  },
+  {
+   "id": "rei-c-d70-1",
+   "label": "4. cold: #1352",
+   "note": "flat stare with a slight downturn at the mouth. Words: \"cold unimpressed stare, heavy-lidded eyes, expressionless, mouth closed in a flat line, looking down at the viewer\"; denoise 0.7, seed 1. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), face drift ccip 0.009 (pass), cut-out uses the installed matte."
+  },
+  {
+   "id": "rei-c-d70-2",
+   "label": "5. cold: #1353",
+   "note": "heaviest lids, flat closed mouth. Words: \"cold unimpressed stare, heavy-lidded eyes, expressionless, mouth closed in a flat line, looking down at the viewer\"; denoise 0.7, seed 2. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), face drift ccip 0.007 (pass), cut-out uses the installed matte."
+  },
+  {
+   "id": "rei-c-d70-3",
+   "label": "6. cold: #1354",
+   "note": "flat mouth, but her left eye (image right) more open, so a little less unimpressed. Words: \"cold unimpressed stare, heavy-lidded eyes, expressionless, mouth closed in a flat line, looking down at the viewer\"; denoise 0.7, seed 3. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), face drift ccip 0.008 (pass), cut-out uses the installed matte."
+  },
+  {
+   "id": "rei-m-d70-1",
+   "label": "7. smug: #1355",
+   "note": "the clearest one-sided smirk. Words: \"smug thin knowing smile, closed mouth, half-lidded eyes, looking at the viewer\"; denoise 0.7, seed 1. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), face drift ccip 0.007 (pass), cut-out uses the installed matte."
+  },
+  {
+   "id": "rei-m-d70-2",
+   "label": "8. smug: #1356",
+   "note": "thin smile, half-lidded. Words: \"smug thin knowing smile, closed mouth, half-lidded eyes, looking at the viewer\"; denoise 0.7, seed 2. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), face drift ccip 0.008 (pass), cut-out uses the installed matte."
+  },
+  {
+   "id": "rei-m-d70-3",
+   "label": "9. smug: #1357",
+   "note": "thin smile, the most restrained. Words: \"smug thin knowing smile, closed mouth, half-lidded eyes, looking at the viewer\"; denoise 0.7, seed 3. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), face drift ccip 0.008 (pass), cut-out uses the installed matte."
+  },
+  {
+   "id": "rei-o-d70-1",
+   "label": "10. caught off guard: #1358",
+   "note": "widest eyes, lips parted, blush; the strongest flicker. Words: \"caught off guard, slightly widened eyes, eyebrows raised, lips slightly parted, faint blush, looking at the viewer\"; denoise 0.7, seed 1. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), face drift ccip 0.019 (pass), cut-out uses the installed matte."
+  },
+  {
+   "id": "rei-o-d70-2",
+   "label": "11. caught off guard: #1359",
+   "note": "eyes a little wider, lips parted; the subtlest. Words: \"caught off guard, slightly widened eyes, eyebrows raised, lips slightly parted, faint blush, looking at the viewer\"; denoise 0.7, seed 2. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), face drift ccip 0.011 (pass), cut-out uses the installed matte."
+  },
+  {
+   "id": "rei-o-d70-3",
+   "label": "12. caught off guard: #1360",
+   "note": "wide eyes, parted lips, a little more blush. Words: \"caught off guard, slightly widened eyes, eyebrows raised, lips slightly parted, faint blush, looking at the viewer\"; denoise 0.7, seed 3. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), face drift ccip 0.015 (pass), cut-out uses the installed matte."
+  }
+ ],
+ "decision": "Installed as rei-scolding (s2-d70-1), rei-cold (c-d70-1), rei-smug (m-d70-2), rei-offguard (o-d70-3). Scolding on her 'too casual' register reactions and the serve warning; cold on 'don't partner me', the court-clearing line and the score-display request; smug on 'You say that one properly' and 'you'll be asking someone else'. Offguard is registered but unused until a line is that rare moment.",
+ "decided_at": "2026-10-09T23:43:16+0200",
+ "issue": 386,
+ "pictures_local": true
+}

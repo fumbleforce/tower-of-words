@@ -1,0 +1,2189 @@
+{
+  "translations": {
+    "カードを、どうぞ。": [
+      "Kādo o, dōzo.",
+      "Your card, please."
+    ],
+    "はい、{yoroshiku}。": [
+      "Hai, yoroshiku onegaishimasu.",
+      "Yes, nice to meet you."
+    ],
+    "{ohayo}。カードを、どうぞ。": [
+      "Ohayō gozaimasu. Kādo o, dōzo.",
+      "Good morning. Your card, please."
+    ],
+    "はい、{yoroshiku}。カードを、どうぞ。": [
+      "Hai, yoroshiku onegaishimasu. Kādo o, dōzo.",
+      "Yes, nice to meet you. Your card, please."
+    ],
+    "カードを確認できません。係員にお声がけください。": [
+      "Kādo o kakunin dekimasen. Kakariin ni okoegake kudasai.",
+      "Unable to verify your card. Please speak to a member of staff."
+    ],
+    "新しいカードですね。申し訳ありません、登録は九時からです。": [
+      "Atarashii kādo desu ne. Mōshiwake arimasen, tōroku wa kuji kara desu.",
+      "It's a new card, I see. I'm sorry; registration starts at nine."
+    ],
+    "あちらで、お待ちください。": [
+      "Achira de, omachi kudasai.",
+      "Please wait over there."
+    ],
+    "{sumimasen}、{sumimasen}、通ります！": [
+      "Sumimasen, sumimasen, tōrimasu!",
+      "Excuse me, excuse me, coming through!"
+    ],
+    "共連れを検知しました！": [
+      "Tomozure o kenchi shimashita!",
+      "Tailgating detected!"
+    ],
+    "お願い、{akete}…いい子だから…": [
+      "Onegai, akete… ii ko dakara…",
+      "Please, open… be good, won't you…"
+    ],
+    "はい、アマカワ{honsha}、正面ゲートです。…はい。待ちます。": [
+      "Hai, Amakawa honsha, shōmen gēto desu. …Hai. Machimasu.",
+      "Yes, Amakawa head office, main gate. …Yes. I'll wait."
+    ],
+    "あ…すみません、ゲートが…": [
+      "A… sumimasen, gēto ga…",
+      "Ah… excuse me, the gate…"
+    ],
+    "Say 開けて (akete, open) with him": [
+      "Akete.",
+      "Open."
+    ],
+    "え？今の…？": [
+      "E? Ima no…?",
+      "Huh? What was that just now…?"
+    ],
+    "…あ、もしもし。いえ…開きました。": [
+      "…A, moshi moshi. Ie… akimashita.",
+      "…Ah, hello. No… it opened."
+    ],
+    "はい？": [
+      "Hai?",
+      "Yes?"
+    ],
+    "はい、わかってます。二人だと思ってるんです。": [
+      "Hai, wakattemasu. Futari da to omotterun desu.",
+      "Yes, I know. It thinks there are two people."
+    ],
+    "浜田さん！かばん、頭の上！": [
+      "Hamada-san! Kaban, atama no ue!",
+      "Mr. Hamada! Your bag, above your head!"
+    ],
+    "…無理ですね。": [
+      "…Muri desu ne.",
+      "…That won't work, will it."
+    ],
+    "ははっ。": [
+      "Haha.",
+      "Ha ha."
+    ],
+    "ありがとうございます！本当に、{sumimasen}…": [
+      "Arigatō gozaimasu! Hontō ni, sumimasen…",
+      "Thank you! I'm really sorry…"
+    ],
+    "どうぞ、どうぞ。": [
+      "Dōzo, dōzo.",
+      "Go ahead, go ahead."
+    ],
+    "猫はいません。": [
+      "Neko wa imasen.",
+      "There is no cat."
+    ],
+    "十時の会議、四番目の議題見た？": [
+      "Jūji no kaigi, yonbanme no gidai mita?",
+      "Did you see the fourth item on the agenda for the ten o'clock meeting?"
+    ],
+    "B2のやつでしょ。コンサルタントが来るって。": [
+      "Bī tsū no yatsu desho. Konsarutanto ga kuru tte.",
+      "The B2 thing, right? I hear a consultant's coming."
+    ],
+    "え、今日から？": [
+      "E, kyō kara?",
+      "Huh, starting today?"
+    ],
+    "{ohayo}。森と申します。ITサポートへ、ようこそ。": [
+      "Ohayō gozaimasu. Mori to mōshimasu. Ai tī sapōto e, yōkoso.",
+      "Good morning. My name is Mori. Welcome to IT support."
+    ],
+    "こちらこそ、{yoroshiku}。": [
+      "Kochira koso, yoroshiku onegaishimasu.",
+      "Likewise, nice to meet you."
+    ],
+    "あ！新しい人！": [
+      "A! Atarashii hito!",
+      "Ah! The new person!"
+    ],
+    "…三十年。": [
+      "…Sanjūnen.",
+      "…Thirty years."
+    ]
+  },
+  "baseline": {
+    "commit": "52144e90d7873882d8f3111451c364bed9a41e7b",
+    "sha256": {
+      "gate": "59ae37906ef3bf458628fe670e81bc8db6ad383f0b00554bd0d7e641c458930a",
+      "office": "9a5b66b4f6d1cb90104ec7cd2a0e6d474d5eca0a181317ac99c77efc02bb6210",
+      "transitions": "1903dff2890d4525ef221c0dd851b591830f43ad029b5a4c71f6ec1d0672ae71"
+    }
+  },
+  "note": "Each comparison shows one proposed change against the original scene. Other proposals remain unchanged in its context. Action frames describe controls or staging; dialogue and narration reproduce the story. Route alternatives are labelled. No story changes are applied by this review.",
+  "sections": [
+    {
+      "id": "gate",
+      "title": "Lobby gate",
+      "changes": [
+        {
+          "id": "g01",
+          "title": "Greeting and card request",
+          "summary": "Combine the guard’s reply and card request. Both greetings still work, with the same bows and pointing.",
+          "kind": "merge",
+          "before": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "If you say good morning to the guard:"
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "{ohayo}。",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You and the guard bow. He points to the reader."
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "カードを、どうぞ。",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Tap your card on the reader."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Or, if you introduce yourself instead:"
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "はい、{yoroshiku}。",
+              "face": "amused",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The guard bows and points to the reader."
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "カードを、どうぞ。",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Tap your card on the reader."
+            }
+          ],
+          "after": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "If you say good morning to the guard:"
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "{ohayo}。カードを、どうぞ。",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You and the guard bow. He points to the reader."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Tap your card on the reader."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Or, if you introduce yourself instead:"
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "はい、{yoroshiku}。カードを、どうぞ。",
+              "face": "amused",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The guard bows and points to the reader."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Tap your card on the reader."
+            }
+          ],
+          "source": "gate.md G1–G3; ohayo_guard[3], yoroshiku_guard[3], guard_points_reader[1]"
+        },
+        {
+          "id": "g04",
+          "title": "A commuter apologises",
+          "summary": "Remove the commuter’s extra apology after your card is refused. The guard still beckons you over. This shows his reply if you greeted him.",
+          "kind": "remove",
+          "before": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You tap your card. The reader turns red."
+            },
+            {
+              "speaker": "gatev",
+              "kind": "line",
+              "text": "カードを確認できません。係員にお声がけください。"
+            },
+            {
+              "speaker": "commuter",
+              "kind": "line",
+              "text": "…{sumimasen}。",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The guard beckons you to his desk."
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "新しいカードですね。申し訳ありません、登録は九時からです。",
+              "face": "neutral"
+            }
+          ],
+          "after": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You tap your card. The reader turns red."
+            },
+            {
+              "speaker": "gatev",
+              "kind": "line",
+              "text": "カードを確認できません。係員にお声がけください。"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The guard beckons you to his desk."
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "新しいカードですね。申し訳ありません、登録は九時からです。",
+              "face": "neutral"
+            }
+          ],
+          "source": "gate.md G4; card_red[2]; polite registration response shown"
+        },
+        {
+          "id": "g05",
+          "title": "The guard points to the bench",
+          "summary": "Remove his separate waiting instruction. He still shows nine, points at the bench, and you go over to it.",
+          "kind": "remove",
+          "before": [
+            {
+              "speaker": "eric",
+              "kind": "line",
+              "text": "Right, Mio did say nine."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The guard points to the bench."
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "あちらで、お待ちください。",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Wait on the bench until nine."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Eric sits on the bench."
+            }
+          ],
+          "after": [
+            {
+              "speaker": "eric",
+              "kind": "line",
+              "text": "Right, Mio did say nine."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The guard points to the bench."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Wait on the bench until nine."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Eric sits on the bench."
+            }
+          ],
+          "source": "gate.md G5; card_red[13]"
+        },
+        {
+          "id": "g06",
+          "title": "The exact time on the bench",
+          "summary": "Remove the separate 8:52 text. Your card still becomes valid at nine.",
+          "kind": "remove",
+          "before": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Eric sits on the bench."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "8:52.",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The man from the train arrives."
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "{sumimasen}、{sumimasen}、通ります！",
+              "face": "panicked"
+            }
+          ],
+          "after": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Eric sits on the bench."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The man from the train arrives."
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "{sumimasen}、{sumimasen}、通ります！",
+              "face": "panicked"
+            }
+          ],
+          "source": "gate.md G6; bench_wait[3]"
+        },
+        {
+          "id": "g07",
+          "title": "The gate’s fault announcement",
+          "summary": "Remove the machine’s Japanese fault message. The red gate and the explanation of its count remain.",
+          "kind": "remove",
+          "before": [
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "{sumimasen}、{sumimasen}、通ります！",
+              "face": "panicked"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The gate jams around the man and his briefcase."
+            },
+            {
+              "speaker": "gatev",
+              "kind": "line",
+              "text": "共連れを検知しました！",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "The little screen on the gate counts two people, him and his briefcase."
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "{akete}...",
+              "face": "panicked"
+            }
+          ],
+          "after": [
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "{sumimasen}、{sumimasen}、通ります！",
+              "face": "panicked"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The gate jams around the man and his briefcase."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "The little screen on the gate counts two people, him and his briefcase."
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "{akete}...",
+              "face": "panicked"
+            }
+          ],
+          "source": "gate.md G7; bench_wait[10]"
+        },
+        {
+          "id": "g08",
+          "title": "Explain why he is stuck",
+          "summary": "Name the counting error and its result in the same line.",
+          "kind": "replace",
+          "before": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The gate jams."
+            },
+            {
+              "speaker": "gatev",
+              "kind": "line",
+              "text": "共連れを検知しました！"
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "The little screen on the gate counts two people, him and his briefcase.",
+              "focus": true
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "{akete}...",
+              "face": "panicked"
+            }
+          ],
+          "after": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The gate jams."
+            },
+            {
+              "speaker": "gatev",
+              "kind": "line",
+              "text": "共連れを検知しました！"
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "The gate counts the man and his briefcase as two people. He's stuck.",
+              "focus": true
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "{akete}...",
+              "face": "panicked"
+            }
+          ],
+          "source": "gate.md G8; bench_wait[11]"
+        },
+        {
+          "id": "g09",
+          "title": "Hamada repeats “open”",
+          "summary": "Keep one slow “open” and the meaning cue. Remove his two further attempts. You still type the word if you help him.",
+          "kind": "merge",
+          "before": [
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "The little screen on the gate counts two people, him and his briefcase."
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "{akete}...",
+              "face": "panicked",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "He mimes hauling two heavy doors apart, then pats the gate like a nervous horse."
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "{akete}...",
+              "focus": true
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "お願い、{akete}…いい子だから…",
+              "face": "panicked",
+              "focus": true
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "はい、アマカワ{honsha}、正面ゲートです。…はい。待ちます。",
+              "face": "stern"
+            }
+          ],
+          "after": [
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "The little screen on the gate counts two people, him and his briefcase."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "He says the next word slowly."
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "{akete}...",
+              "face": "panicked",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "He mimes hauling two heavy doors apart, then pats the gate like a nervous horse."
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "はい、アマカワ{honsha}、正面ゲートです。…はい。待ちます。",
+              "face": "stern"
+            }
+          ],
+          "source": "gate.md G9; bench_wait[13,15,16]; retained [13] gets slow:true"
+        },
+        {
+          "id": "g10",
+          "title": "Hamada’s gesture",
+          "summary": "Shorten the description of his attempt to open the gate.",
+          "kind": "replace",
+          "before": [
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "{akete}...",
+              "face": "panicked"
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "He mimes hauling two heavy doors apart, then pats the gate like a nervous horse.",
+              "focus": true
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "{akete}..."
+            }
+          ],
+          "after": [
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "{akete}...",
+              "face": "panicked"
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "He mimes pulling the gate open.",
+              "focus": true
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "{akete}..."
+            }
+          ],
+          "source": "gate.md G10; bench_wait[14]"
+        },
+        {
+          "id": "g11",
+          "title": "Mio’s phone messages",
+          "summary": "Combine her two messages. Keep her suspicion and point you toward the guard.",
+          "kind": "merge",
+          "before": [
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "はい、アマカワ{honsha}、正面ゲートです。…はい。待ちます。",
+              "face": "stern"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Mio sends you a message."
+            },
+            {
+              "speaker": "miotext",
+              "kind": "line",
+              "text": "the chat says the lobby gate is broken again. is that you?",
+              "focus": true
+            },
+            {
+              "speaker": "miotext",
+              "kind": "line",
+              "text": "if the guard ignores you say {sumimasen} and point at stuff. loud",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The man is stuck. Help him, or get the guard."
+            }
+          ],
+          "after": [
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "はい、アマカワ{honsha}、正面ゲートです。…はい。待ちます。",
+              "face": "stern"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Mio sends you a message."
+            },
+            {
+              "speaker": "miotext",
+              "kind": "line",
+              "text": "the lobby gate again? is that you? say {sumimasen} to the guard and show him",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The man is stuck. Help him, or get the guard."
+            }
+          ],
+          "source": "gate.md G11; bench_wait[22,23]; C-0092 correction"
+        },
+        {
+          "id": "g12",
+          "title": "Talk to the stuck man",
+          "summary": "Replace his repeated explanation with a prompt on the choice. Helping him and leaving him alone remain available.",
+          "kind": "flow",
+          "before": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You talk to the man caught in the gate. He turns toward you."
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "あ…すみません、ゲートが…",
+              "face": "panicked",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "choice",
+              "text": "Choose a reply",
+              "options": [
+                "Say 開けて (akete, open) with him",
+                "Leave him to it"
+              ],
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "If you choose to help:"
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "prompt",
+              "text": "{akete}...",
+              "options": [
+                "Type akete"
+              ]
+            }
+          ],
+          "after": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You talk to the man caught in the gate. He turns toward you."
+            },
+            {
+              "speaker": null,
+              "kind": "choice",
+              "text": "He's still stuck in the gate.",
+              "options": [
+                "Say 開けて (akete, open) with him",
+                "Leave him to it"
+              ],
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "If you choose to help:"
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "prompt",
+              "text": "{akete}...",
+              "options": [
+                "Type akete"
+              ]
+            }
+          ],
+          "source": "gate.md G12; hamada_stuck[2,4]"
+        },
+        {
+          "id": "g13",
+          "title": "Your word opens the gate",
+          "summary": "Add a direct line about the gate opening at your word; remove the guard’s second phone exchange. Eric still connects it to the train.",
+          "kind": "replace",
+          "before": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You say {akete}. The gate snaps open with the word’s effect."
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "え？今の…？",
+              "face": "neutral"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Hamada gets through the gate."
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "…あ、もしもし。いえ…開きました。",
+              "face": "stern",
+              "focus": true
+            },
+            {
+              "speaker": "eric",
+              "kind": "line",
+              "text": "The train doors, and now this..."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The guard points you toward the lift."
+            }
+          ],
+          "after": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You say {akete}. The gate snaps open with the word’s effect."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "The gate snaps open at your word.",
+              "focus": true
+            },
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "え？今の…？",
+              "face": "neutral"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Hamada gets through. The guard ends his call."
+            },
+            {
+              "speaker": "eric",
+              "kind": "line",
+              "text": "The train doors, and now this..."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The guard points you toward the lift."
+            }
+          ],
+          "source": "gate.md G13; word_say after[2], delete[10]"
+        },
+        {
+          "id": "g14",
+          "title": "Show the guard how to free the man",
+          "summary": "Offer the useful mime immediately. Remove the two pointing choices, his explanation of the count, and the repeated description after you choose to lift. The squeeze and cat detours remain.",
+          "kind": "flow",
+          "before": [
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "はい？"
+            },
+            {
+              "speaker": null,
+              "kind": "choice",
+              "text": "You don't have the words for this.",
+              "options": [
+                "Point at the briefcase",
+                "Point at the man",
+                "Point at the cat under his desk"
+              ],
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You point at the briefcase."
+            },
+            {
+              "speaker": null,
+              "kind": "choice",
+              "text": "You don't have the words for this.",
+              "options": [
+                "Point at the man",
+                "Point at the cat under his desk"
+              ],
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You point at the man. He bows to the guard."
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "はい、わかってます。二人だと思ってるんです。",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "choice",
+              "text": "You don't have the words for this.",
+              "options": [
+                "Point at the cat under his desk",
+                "Mime squeezing sideways through a gap",
+                "Mime lifting something over your head"
+              ],
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You choose to mime lifting."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "You lift an invisible briefcase high over your head.",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The guard understands and gestures to Hamada."
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "浜田さん！かばん、頭の上！"
+            }
+          ],
+          "after": [
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "はい？"
+            },
+            {
+              "speaker": null,
+              "kind": "choice",
+              "text": "You don't have the words for this.",
+              "options": [
+                "Mime lifting the briefcase over the gate",
+                "Mime squeezing sideways through a gap",
+                "Point at the cat under his desk"
+              ],
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You choose to mime lifting. Eric makes the gesture."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The guard understands and gestures to Hamada."
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "浜田さん！かばん、頭の上！"
+            }
+          ],
+          "source": "gate.md G14,G15,G17; mime_menu, pt_case, pt_man, guard_knows, mime_lift[1]; shortest social route, optional cat/squeeze not taken"
+        },
+        {
+          "id": "g16",
+          "title": "Try squeezing through",
+          "summary": "Name the briefcase in the optional failed mime.",
+          "kind": "replace",
+          "before": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You choose “Mime squeezing sideways through a gap”."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "You turn sideways and suck your stomach in.",
+              "focus": true
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "…無理ですね。"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The mime choices return."
+            }
+          ],
+          "after": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You choose “Mime squeezing sideways through a gap”."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "You mime squeezing past the briefcase.",
+              "focus": true
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "…無理ですね。"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The mime choices return."
+            }
+          ],
+          "source": "gate.md G16; mime_squeeze[2]"
+        },
+        {
+          "id": "g18",
+          "title": "The guard laughs",
+          "summary": "If you greeted him, remove his separate laugh after he understands your mime. His warmer permission at the end remains.",
+          "kind": "remove",
+          "before": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You greeted the guard earlier. You now mime lifting the briefcase."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "You lift an invisible briefcase high over your head."
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "ははっ。",
+              "face": "amused",
+              "focus": true
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "浜田さん！かばん、頭の上！"
+            }
+          ],
+          "after": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You greeted the guard earlier. You now mime lifting the briefcase."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "You lift an invisible briefcase high over your head."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The guard understands."
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "浜田さん！かばん、頭の上！"
+            }
+          ],
+          "source": "gate.md G18; mime_lift[3].else[0]; greeted route only"
+        },
+        {
+          "id": "g19",
+          "title": "Eric thanks the guard",
+          "summary": "Remove Eric’s final thanks. Hamada’s thanks, bow and the guard’s permission stay. This shows the warmer permission after greeting him.",
+          "kind": "remove",
+          "before": [
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "ありがとうございます！本当に、{sumimasen}…",
+              "face": "neutral"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Hamada bows and leaves."
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "どうぞ、どうぞ。",
+              "face": "amused"
+            },
+            {
+              "speaker": "eric",
+              "kind": "line",
+              "text": "Arigatō.",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Take the lift down to B2."
+            }
+          ],
+          "after": [
+            {
+              "speaker": "kuroda",
+              "kind": "line",
+              "text": "ありがとうございます！本当に、{sumimasen}…",
+              "face": "neutral"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Hamada bows and leaves."
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "どうぞ、どうぞ。",
+              "face": "amused"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Take the lift down to B2."
+            }
+          ],
+          "source": "gate.md G19; mime_lift[23]; warm permission shown; curt route unchanged too"
+        },
+        {
+          "id": "g20",
+          "title": "Ask Tama to wait",
+          "summary": "Name Tama in the description of her stopping at the bowl.",
+          "kind": "replace",
+          "before": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You say {matte} to Tama."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "She freezes with her head in the bowl.",
+              "focus": true
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "猫はいません。",
+              "face": "stern"
+            }
+          ],
+          "after": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You say {matte} to Tama."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "Tama freezes with her head in the bowl.",
+              "focus": true
+            },
+            {
+              "speaker": "guard",
+              "kind": "line",
+              "text": "猫はいません。",
+              "face": "stern"
+            }
+          ],
+          "source": "gate.md G20; tama_matte[0]"
+        },
+        {
+          "id": "g21",
+          "title": "The visitor book",
+          "summary": "Shorten the line that reveals Tama signed in first.",
+          "kind": "replace",
+          "before": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You read the visitor book."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "The first name in the visitor book today, in careful capitals, is TAMA.",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You can explore the lobby again."
+            }
+          ],
+          "after": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You read the visitor book."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "TAMA is the first name in today's visitor book.",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You can explore the lobby again."
+            }
+          ],
+          "source": "gate.md G21; signin[0]"
+        }
+      ]
+    },
+    {
+      "id": "lift",
+      "title": "Lift to B2",
+      "changes": [
+        {
+          "id": "l01",
+          "title": "Someone pressed five",
+          "summary": "Remove the floor-button narration. The lift still stops at five before B2.",
+          "kind": "remove",
+          "before": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The lift doors close."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "Someone has pressed 5.",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The lift rises toward floor 3."
+            },
+            {
+              "speaker": "sales1",
+              "kind": "line",
+              "text": "十時の会議、四番目の議題見た？"
+            },
+            {
+              "speaker": "sales2",
+              "kind": "line",
+              "text": "B2のやつでしょ。コンサルタントが来るって。"
+            }
+          ],
+          "after": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The lift doors close."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The lift rises toward floor 3."
+            },
+            {
+              "speaker": "sales1",
+              "kind": "line",
+              "text": "十時の会議、四番目の議題見た？"
+            },
+            {
+              "speaker": "sales2",
+              "kind": "line",
+              "text": "B2のやつでしょ。コンサルタントが来るって。"
+            }
+          ],
+          "source": "gate.md L1; transitions gate_to_office.ride[1]"
+        },
+        {
+          "id": "l02",
+          "title": "Sales reacts to the newcomer",
+          "summary": "Remove the man’s extra question. The meeting gossip and their reaction to your card stay.",
+          "kind": "remove",
+          "before": [
+            {
+              "speaker": "sales1",
+              "kind": "line",
+              "text": "十時の会議、四番目の議題見た？"
+            },
+            {
+              "speaker": "sales2",
+              "kind": "line",
+              "text": "B2のやつでしょ。コンサルタントが来るって。"
+            },
+            {
+              "speaker": "sales1",
+              "kind": "line",
+              "text": "え、今日から？",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "One of them glances at the card on your lanyard, and they stop talking."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The lift opens at floor 5."
+            }
+          ],
+          "after": [
+            {
+              "speaker": "sales1",
+              "kind": "line",
+              "text": "十時の会議、四番目の議題見た？"
+            },
+            {
+              "speaker": "sales2",
+              "kind": "line",
+              "text": "B2のやつでしょ。コンサルタントが来るって。"
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "One of them glances at the card on your lanyard, and they stop talking."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The lift opens at floor 5."
+            }
+          ],
+          "source": "gate.md L2; transitions gate_to_office.ride[5]"
+        },
+        {
+          "id": "l03",
+          "title": "They notice your card",
+          "summary": "Shorten the line about why the conversation stops.",
+          "kind": "replace",
+          "before": [
+            {
+              "speaker": "sales2",
+              "kind": "line",
+              "text": "B2のやつでしょ。コンサルタントが来るって。"
+            },
+            {
+              "speaker": "sales1",
+              "kind": "line",
+              "text": "え、今日から？"
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "One of them glances at the card on your lanyard, and they stop talking.",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The lift opens at floor 5, then continues to B2."
+            }
+          ],
+          "after": [
+            {
+              "speaker": "sales2",
+              "kind": "line",
+              "text": "B2のやつでしょ。コンサルタントが来るって。"
+            },
+            {
+              "speaker": "sales1",
+              "kind": "line",
+              "text": "え、今日から？"
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "They notice your card and stop talking.",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The lift opens at floor 5, then continues to B2."
+            }
+          ],
+          "source": "gate.md L3; transitions gate_to_office.ride[6]"
+        }
+      ]
+    },
+    {
+      "id": "office",
+      "title": "First day in B2",
+      "changes": [
+        {
+          "id": "o01",
+          "title": "Mori waits for a greeting",
+          "summary": "Remove “He waits.” Mori still bows and the greeting control remains.",
+          "kind": "remove",
+          "before": [
+            {
+              "speaker": "mori",
+              "kind": "line",
+              "text": "{ohayo}。森と申します。ITサポートへ、ようこそ。",
+              "face": "smile"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Mori bows deeply."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "He waits.",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Greet Mr. Mori."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "If you introduce yourself:"
+            },
+            {
+              "speaker": "mori",
+              "kind": "line",
+              "text": "こちらこそ、{yoroshiku}。",
+              "face": "smile"
+            }
+          ],
+          "after": [
+            {
+              "speaker": "mori",
+              "kind": "line",
+              "text": "{ohayo}。森と申します。ITサポートへ、ようこそ。",
+              "face": "smile"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Mori bows deeply."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Greet Mr. Mori."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "If you introduce yourself:"
+            },
+            {
+              "speaker": "mori",
+              "kind": "line",
+              "text": "こちらこそ、{yoroshiku}。",
+              "face": "smile"
+            }
+          ],
+          "source": "office.md O1; office_in[5]"
+        },
+        {
+          "id": "o02",
+          "title": "Kenji introduces himself",
+          "summary": "Merge his introduction and chair apology. Keep the forest-cat detour and Mio’s ban.",
+          "kind": "merge",
+          "before": [
+            {
+              "speaker": "kenji",
+              "kind": "line",
+              "text": "あ！新しい人！",
+              "face": "grin"
+            },
+            {
+              "speaker": "kenji",
+              "kind": "line",
+              "text": "Eric-san? I am Kenji! I am new also, two months. So now I am not the newest.",
+              "face": "grin",
+              "focus": true
+            },
+            {
+              "speaker": "kenji",
+              "kind": "line",
+              "text": "Ah, sorry, sorry. Your chair... I borrowed it. Mine is broken.",
+              "face": "sheepish",
+              "focus": true
+            },
+            {
+              "speaker": "kenji",
+              "kind": "line",
+              "text": "I bring it back for you! It's in machine room, with the cat. Norway has the big forest cats, right? I see on YouTube, they are so big, like...",
+              "face": "grin"
+            },
+            {
+              "speaker": "kenji",
+              "kind": "line",
+              "text": "...Ah, no. Mio-san says I can't go in machine room anymore. Sorry! You go?",
+              "face": "sheepish"
+            }
+          ],
+          "after": [
+            {
+              "speaker": "kenji",
+              "kind": "line",
+              "text": "あ！新しい人！",
+              "face": "grin"
+            },
+            {
+              "speaker": "kenji",
+              "kind": "line",
+              "text": "Eric-san? I am Kenji! Two months here, so now I am not the newest. Ah, sorry, your chair... I borrowed it. Mine is broken.",
+              "face": "grin",
+              "focus": true
+            },
+            {
+              "speaker": "kenji",
+              "kind": "line",
+              "text": "I bring it back for you! It's in machine room, with the cat. Norway has the big forest cats, right? I see on YouTube, they are so big, like...",
+              "face": "grin"
+            },
+            {
+              "speaker": "kenji",
+              "kind": "line",
+              "text": "...Ah, no. Mio-san says I can't go in machine room anymore. Sorry! You go?",
+              "face": "sheepish"
+            }
+          ],
+          "source": "office.md O2; kenji_first[5,6]"
+        },
+        {
+          "id": "o04",
+          "title": "From the cat chair to your first request",
+          "summary": "Let Mio give you the request while you are already talking. Remove the invitation and extra Talk action, and bridge into the request. Keep the 1996 card and Eric’s reaction.",
+          "kind": "flow",
+          "before": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You roll your chair out, with Tama still on it."
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Ah, that's your chair? Sorry. She comes with it, I think.",
+              "face": "deadpan"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Oh, and come here a second. I have a job for you.",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Talk to Mio.",
+              "focus": true
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Okay, your first repair request. I changed your screen to English, by the way.",
+              "face": "neutral",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "REPAIR REQUEST #1. Copier, B2 copy room. Eats paper. Opened 1 April 1996."
+            },
+            {
+              "speaker": "eric",
+              "kind": "line",
+              "text": "Nineteen ninety-six?",
+              "face": "surprised"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Yeah. Mori-san opened it when he was new here, I think. Nobody closes it, it's like... tradition. He can show you."
+            }
+          ],
+          "after": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You roll your chair out, with Tama still on it."
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Ah, that's your chair? Sorry. She comes with it, I think.",
+              "face": "deadpan"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Oh, and... I put your screen in English. Here, your first repair request.",
+              "face": "neutral",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "REPAIR REQUEST #1. Copier, B2 copy room. Eats paper. Opened 1 April 1996."
+            },
+            {
+              "speaker": "eric",
+              "kind": "line",
+              "text": "Nineteen ninety-six?",
+              "face": "surprised"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Yeah. Mori-san opened it when he was new here, I think. Nobody closes it, it's like... tradition. He can show you."
+            }
+          ],
+          "source": "office.md O4,O5; chair_push[3,4], ticket[2]"
+        },
+        {
+          "id": "o06",
+          "title": "Mori’s copier gesture",
+          "summary": "Move the gesture description into the typing prompt. Keep both pronunciations and your submission.",
+          "kind": "flow",
+          "before": [
+            {
+              "speaker": "mori",
+              "kind": "line",
+              "text": "{ugoite}."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The copier does not respond."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "He rolls his hands over each other, slowly, like winding up an old engine.",
+              "focus": true
+            },
+            {
+              "speaker": "mori",
+              "kind": "line",
+              "text": "{ugoite}..."
+            },
+            {
+              "speaker": null,
+              "kind": "prompt",
+              "text": "Mori looks at you, then at the copier.",
+              "options": [
+                "Type ugoite"
+              ],
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You say the word. The copier runs."
+            },
+            {
+              "speaker": "mori",
+              "kind": "line",
+              "text": "…三十年。",
+              "face": "neutral"
+            }
+          ],
+          "after": [
+            {
+              "speaker": "mori",
+              "kind": "line",
+              "text": "{ugoite}."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The copier does not respond."
+            },
+            {
+              "speaker": "mori",
+              "kind": "line",
+              "text": "{ugoite}..."
+            },
+            {
+              "speaker": null,
+              "kind": "prompt",
+              "text": "Mori rolls his hands like an engine turning. Try saying it to the copier.",
+              "options": [
+                "Type ugoite"
+              ],
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You say the word. The copier runs."
+            },
+            {
+              "speaker": "mori",
+              "kind": "line",
+              "text": "…三十年。",
+              "face": "neutral"
+            }
+          ],
+          "source": "office.md O6; copier[13,15]"
+        },
+        {
+          "id": "o07",
+          "title": "Tell Mio the copier is fixed",
+          "summary": "Merge her reply and move into lunch. Keep her echo of “asked it nicely” and the connection to the train doors.",
+          "kind": "merge",
+          "before": [
+            {
+              "speaker": "eric",
+              "kind": "line",
+              "text": "The copier's fixed."
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Eh? The B2 copier? Three companies came to look at it, and they all said buy a new one.",
+              "face": "surprised"
+            },
+            {
+              "speaker": "eric",
+              "kind": "line",
+              "text": "I asked it nicely."
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "...Asked it nicely. Like the doors, this morning?",
+              "face": "deadpan",
+              "focus": true
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Okay. Okay, I'll close it. Um. It's lunch anyway.",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "12:10."
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "I usually eat in the machine room. It's quiet, and nobody talks to me there.",
+              "face": "neutral"
+            }
+          ],
+          "after": [
+            {
+              "speaker": "eric",
+              "kind": "line",
+              "text": "The copier's fixed."
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Eh? The B2 copier? Three companies came to look at it, and they all said buy a new one.",
+              "face": "surprised"
+            },
+            {
+              "speaker": "eric",
+              "kind": "line",
+              "text": "I asked it nicely."
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "...Asked it nicely. Like the doors this morning? Okay, I'll close it. It's lunch anyway.",
+              "face": "deadpan",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "12:10."
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "I usually eat in the machine room. It's quiet, and nobody talks to me there.",
+              "face": "neutral"
+            }
+          ],
+          "source": "office.md O7; ticket_done[5,6]"
+        },
+        {
+          "id": "o08",
+          "title": "Mio’s rack-alarm gesture",
+          "summary": "At lunch with Mio, move the flat-palm description into the typing prompt. Both pronunciations and the result remain. Her warmer reply is shown here; her cooler reply also stays.",
+          "kind": "flow",
+          "before": [
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "No, no, not now...",
+              "face": "tired"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Wait. You try it. {tomatte}, it means stop. ...I want to see something.",
+              "face": "neutral"
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "She holds her hand flat over the blinking rack, as if she could press the noise back down into it.",
+              "focus": true
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "{tomatte}..."
+            },
+            {
+              "speaker": "mio",
+              "kind": "prompt",
+              "text": "Go on.",
+              "options": [
+                "Type tomatte"
+              ],
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You say the word. The rack alarm stops."
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "...Okay. You can eat here tomorrow also, if you want.",
+              "face": "embarrassed"
+            }
+          ],
+          "after": [
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "No, no, not now...",
+              "face": "tired"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Wait. You try it. {tomatte}, it means stop. ...I want to see something.",
+              "face": "neutral"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "{tomatte}..."
+            },
+            {
+              "speaker": null,
+              "kind": "prompt",
+              "text": "Mio holds a flat palm over the rack alarm. Try saying it to the rack.",
+              "options": [
+                "Type tomatte"
+              ],
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "You say the word. The rack alarm stops."
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "...Okay. You can eat here tomorrow also, if you want.",
+              "face": "embarrassed"
+            }
+          ],
+          "source": "office.md O8; mio_bond[7,9]; warm response shown; cool response retained"
+        },
+        {
+          "id": "o09",
+          "title": "Mori’s pouring gesture",
+          "summary": "At lunch with Mori, move his pouring mime into the typing prompt. Keep the seven cups and his response to them.",
+          "kind": "flow",
+          "before": [
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "There are seven cups on the tray behind him. Three of them are dusty."
+            },
+            {
+              "speaker": "mori",
+              "kind": "line",
+              "text": "{irete}."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The pot does not respond."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "He tips an invisible pot over his cup, very carefully, the way you pour for a guest.",
+              "focus": true
+            },
+            {
+              "speaker": "mori",
+              "kind": "line",
+              "text": "{irete}..."
+            },
+            {
+              "speaker": null,
+              "kind": "prompt",
+              "text": "He looks at you, then at the pot.",
+              "options": [
+                "Type irete"
+              ],
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "It fills his cup, then yours, then all seven, the dusty ones too."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "Mori looks at the seven cups for a while. Then he picks up a dusty one and starts to wash it."
+            }
+          ],
+          "after": [
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "There are seven cups on the tray behind him. Three of them are dusty."
+            },
+            {
+              "speaker": "mori",
+              "kind": "line",
+              "text": "{irete}."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "The pot does not respond."
+            },
+            {
+              "speaker": "mori",
+              "kind": "line",
+              "text": "{irete}..."
+            },
+            {
+              "speaker": null,
+              "kind": "prompt",
+              "text": "Mori mimes pouring tea into his cup. Try saying it to the pot.",
+              "options": [
+                "Type irete"
+              ],
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "It fills his cup, then yours, then all seven, the dusty ones too."
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "Mori looks at the seven cups for a while. Then he picks up a dusty one and starts to wash it."
+            }
+          ],
+          "source": "office.md O9; mori_bond[6,8]"
+        },
+        {
+          "id": "o10",
+          "title": "Mio’s evening opening",
+          "summary": "Merge her goodbye and the way she addresses you. She still uses your name if you ate together.",
+          "kind": "merge",
+          "before": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "If you had lunch with Mio:"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Okay, I'm going home.",
+              "face": "tired",
+              "focus": true
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Um. Eric.",
+              "face": "neutral",
+              "focus": true
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "On the train you said {matte} and the doors just stopped. And Mori-san says {ugoite} to that copier every morning for thirty years, and today it works for you."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Or, if you had lunch with Mori:"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Okay, I'm going home.",
+              "face": "tired",
+              "focus": true
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Hey, {gaijin}.",
+              "face": "neutral",
+              "focus": true
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "On the train you said {matte} and the doors just stopped. And Mori-san says {ugoite} to that copier every morning for thirty years, and today it works for you."
+            }
+          ],
+          "after": [
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "If you had lunch with Mio:"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Okay, I'm going home. Um... Eric?",
+              "face": "neutral",
+              "focus": true
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "On the train you said {matte} and the doors just stopped. And Mori-san says {ugoite} to that copier every morning for thirty years, and today it works for you."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Or, if you had lunch with Mori:"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Okay, I'm going home. Hey, {gaijin}.",
+              "face": "neutral",
+              "focus": true
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "On the train you said {matte} and the doors just stopped. And Mori-san says {ugoite} to that copier every morning for thirty years, and today it works for you."
+            }
+          ],
+          "source": "office.md O10; ending[2,3,4]"
+        },
+        {
+          "id": "o11",
+          "title": "The sensor excuse, again",
+          "summary": "Remove Mio’s repeated instruction after the new request card. Keep the card and both goodbyes.",
+          "kind": "remove",
+          "before": [
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Ah... great. The station sent a repair request about the doors. I told them it's the sensor, so now they want B2 to check the sensor.",
+              "face": "tired"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "It was supposed to go on my list. ...Okay, I'm putting it on yours.",
+              "face": "embarrassed"
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "REPAIR REQUEST #2. Train doors, Honsha station. Assigned to: ERIC."
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "You're the IT guy. You tell them it's the sensor.",
+              "face": "deadpan",
+              "focus": true
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "If Mio warmed to you:"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Tomorrow morning you go down to the station, okay? I'll come too. I want to see how you, um... fix a sensor.",
+              "face": "smile"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Otherwise:"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "It's the station, tomorrow morning. And if anybody asks, it was the sensor. Don't sleep through it, {gaijin}.",
+              "face": "deadpan"
+            }
+          ],
+          "after": [
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Ah... great. The station sent a repair request about the doors. I told them it's the sensor, so now they want B2 to check the sensor.",
+              "face": "tired"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "It was supposed to go on my list. ...Okay, I'm putting it on yours.",
+              "face": "embarrassed"
+            },
+            {
+              "speaker": null,
+              "kind": "line",
+              "text": "REPAIR REQUEST #2. Train doors, Honsha station. Assigned to: ERIC."
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "If Mio warmed to you:"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "Tomorrow morning you go down to the station, okay? I'll come too. I want to see how you, um... fix a sensor.",
+              "face": "smile"
+            },
+            {
+              "speaker": null,
+              "kind": "action",
+              "text": "Otherwise:"
+            },
+            {
+              "speaker": "mio",
+              "kind": "line",
+              "text": "It's the station, tomorrow morning. And if anybody asks, it was the sensor. Don't sleep through it, {gaijin}.",
+              "face": "deadpan"
+            }
+          ],
+          "source": "office.md O11; end_ticket[8]"
+        }
+      ]
+    }
+  ]
+}

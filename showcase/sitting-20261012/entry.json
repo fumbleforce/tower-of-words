@@ -1,0 +1,18 @@
+{
+ "title": "Sit on chairs and benches",
+ "date": "2026-10-12",
+ "by": "codex",
+ "caption": "Use free chairs and benches, then stand up to keep exploring. Occupied seats stay occupied, and seated saves restore your place.",
+ "commit": "be071fb41",
+ "result": [
+  "ferry",
+  "stand"
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

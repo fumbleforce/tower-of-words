@@ -1,0 +1,35 @@
+{
+ "title": "Copy-room doorway entry",
+ "date": "2026-10-14",
+ "by": "codex/copy-room-block",
+ "caption": "The B2 copy-room doorway clears the player in both camera views. Walking inside starts Mori’s copier scene.",
+ "commit": "6bdca0431",
+ "result": [
+  "desktop-scene",
+  "phone-scene"
+ ],
+ "images": [
+  {
+   "id": "desktop-scene",
+   "image": "game3d/shots/copy-room-entry-20261014/desktop-copier-scene.png.webp",
+   "caption": "Carina reaches the copier scene after walking through the doorway, desktop."
+  },
+  {
+   "id": "phone-scene",
+   "image": "game3d/shots/copy-room-entry-20261014/phone-copier-scene.png.webp",
+   "caption": "Carina reaches the copier scene after tapping the visible room floor, phone."
+  },
+  {
+   "id": "desktop-inside",
+   "image": "game3d/shots/copy-room-entry-20261014/desktop-inside.png.webp",
+   "caption": "Inside the copy room after native keyboard movement."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

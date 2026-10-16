@@ -1,0 +1,1 @@
+const o=new URLSearchParams(globalThis.location?.search||""),l=/^(localhost|127\.0\.0\.1|\[?::1\]?)$/.test(globalThis.location?.hostname||"")||globalThis.location?.protocol==="file:";export const DEV=globalThis.desktop?.release!==!0&&(o.get("debug")==="1"||l);

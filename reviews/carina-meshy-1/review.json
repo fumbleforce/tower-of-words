@@ -1,0 +1,49 @@
+{
+ "title": "Carina: her 3D model, made the way Kuro, Aoi, Emi and Rei were",
+ "date": "2026-10-05",
+ "by": "Claude (carina-meshy agent)",
+ "status": "superseded",
+ "question": "The sheets marked ChatGPT pictures are pictures; every other sheet is a render of a real rigged model, which you can turn and play in the live viewer (first link). carina-2 is made from your approved picture of her and is her body in the game now; is she right?",
+ "multi": false,
+ "options": [
+  {
+   "id": "carina-2",
+   "label": "carina-2 (from your picture, in the game)",
+   "note": "From ChatGPT picture nd1 (your picture of her, steps 1-3 and the angle prompt). Meshy smart topology 1,050, A-pose; our face-first UVs; Meshy retexture styled from nd1; our rig with Emi's walk, run and sit and the relaxed-3 idle. 1.12 tall. Her body in the game when she plays (game3d/data/mc/carina.json). No phone pose or gestures yet. Meshy 20 credits, pictures $1.00."
+  },
+  {
+   "id": "carina-1",
+   "label": "carina-1 (from round 6, before your pick)",
+   "note": "From ChatGPT picture d1 (round 6 tile 3). Same settings and our rig. Superseded by your approved picture; not in the game. Meshy 20 credits, pictures $1.49."
+  }
+ ],
+ "links": [
+  {
+   "label": "Round 2: requested fixes and trouser colours",
+   "href": "#review/carina-meshy-2"
+  },
+  {
+   "label": "Live 3D: carina-2 beside the in-game Eric, Mio, Kuro, Aoi and Emi (turn, zoom, idle, walk; switch attempts to compare; on the local server) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools/characters"
+  },
+  {
+   "label": "Live 3D: carina-2 alone (turn, zoom, idle, walk) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools/characters"
+  },
+  {
+   "label": "Play as Carina (public game, ?mc=carina)",
+   "href": "https://fumbleforce.github.io/tower-of-words/game3d/?mc=carina"
+  },
+  {
+   "label": "Rei's rig, the same method (rei-meshy-1)",
+   "href": "#review/rei-meshy-1"
+  }
+ ],
+ "decided": [
+  "carina-2"
+ ],
+ "decision": "carina-2 picked with fixes: waist seam, head 15% smaller, trouser colour; fix round running",
+ "decided_at": "2026-10-05T23:11:13+0200",
+ "issue": 268,
+ "pictures_local": true
+}

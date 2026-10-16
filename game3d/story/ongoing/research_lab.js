@@ -1,0 +1,1 @@
+import e from"../research_lab.js";import{interactions as a,place as r}from"./shared.js";export default r("research_lab",{...a(e,["talk:research_reader","talk:research_books","talk:research_archive","talk:research_side_seat","talk:research_end_seat","talk:research_table_seat","talk:research_window_seat"]),arrivalGoal:!1});

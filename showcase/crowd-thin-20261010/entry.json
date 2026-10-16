@@ -1,0 +1,22 @@
+{
+ "title": "Thinner early-morning crowd, and people walk in through the doors",
+ "date": "2026-10-10",
+ "by": "claude-agent:crowd-thin",
+ "caption": "The early forecourt has 6 walkers instead of 17, and commuters now walk into head office's lobby instead of vanishing at the door.",
+ "result": [
+  "after-desk",
+  "after-phone",
+  "lobby-desk"
+ ],
+ "sections": [
+  {
+   "title": "After",
+   "caption": "Early forecourt, day 1 morning."
+  },
+  {
+   "title": "Before",
+   "caption": "17 walkers."
+  }
+ ],
+ "pictures_local": true
+}

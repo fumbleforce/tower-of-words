@@ -1,0 +1,63 @@
+{
+ "title": "Everyday people: first 3D models (casual woman, older man, apron worker)",
+ "date": "2026-10-09",
+ "by": "Claude (art round, #328)",
+ "status": "decided",
+ "issue": 328,
+ "question": "These are real rigged 3D models, not pictures: background people for the island who are still code-built placeholders. The casual woman and the older man would walk the paths and plazas; the apron worker would stand at shop and canteen counters. Each was made from the source picture you approved in crowd-everyday-1, twice, with the same Meshy settings, rig, walk, run, sit and idle as the office pair A and B now in the game. Which ones should go in? Pick any; after your pick Codex puts the picked ones in the game. Nothing is in the game yet.",
+ "multi": true,
+ "options": [
+  {
+   "id": "casual-1",
+   "label": "casual-1",
+   "note": "Shape roll 1. Clean face, bob and sweatshirt read as the picture. No faults found in the turn, walk or sit. 1,107 triangles (A has 1,114, B 1,099). Source picture casual-01. Meshy image-to-3D: meshy-t2 smart topology, 1,050 polygons, A-pose, no texture (5 credits); Meshy retexture styled from the source picture: meshy-7, our face-first UVs kept, 2k, no PBR (the settings that made the selected a-image and b-image) (10); Meshy auto-rig at 1.1 m with its walk and run (5); Chair_Sit_Idle_F (3)."
+  },
+  {
+   "id": "casual-2",
+   "label": "casual-2",
+   "note": "Shape roll 2: fuller bob, the hair lower on the cheeks. A small pale fleck where the hair meets the cheek, visible when she turns. 1,124 triangles (A has 1,114, B 1,099). Source picture casual-01. Meshy image-to-3D: meshy-t2 smart topology, 1,050 polygons, A-pose, no texture (5 credits); Meshy retexture styled from the source picture: meshy-7, our face-first UVs kept, 2k, no PBR (the settings that made the selected a-image and b-image) (10); Meshy auto-rig at 1.1 m with its walk and run (5); Chair_Sit_Idle_F (3)."
+  },
+  {
+   "id": "older-1",
+   "label": "older-1",
+   "note": "Shape roll 1. Grey hair, grey brows and painted forehead and cheek lines. No faults found in the turn, walk or sit. 1,091 triangles (A has 1,114, B 1,099). Source picture older-01. Meshy image-to-3D: meshy-t2 smart topology, 1,050 polygons, A-pose, no texture (5 credits); Meshy retexture styled from the source picture: meshy-7, our face-first UVs kept, 2k, no PBR (the settings that made the selected a-image and b-image) (10); Meshy auto-rig at 1.1 m with its walk and run (5); Chair_Sit_Idle_F (3)."
+  },
+  {
+   "id": "older-2",
+   "label": "older-2",
+   "note": "Shape roll 2: rounder head, the same face paint. No faults found in the turn, walk or sit. 1,091 triangles (A has 1,114, B 1,099). Source picture older-01. Meshy image-to-3D: meshy-t2 smart topology, 1,050 polygons, A-pose, no texture (5 credits); Meshy retexture styled from the source picture: meshy-7, our face-first UVs kept, 2k, no PBR (the settings that made the selected a-image and b-image) (10); Meshy auto-rig at 1.1 m with its walk and run (5); Chair_Sit_Idle_F (3)."
+  },
+  {
+   "id": "service-1",
+   "label": "service-1",
+   "note": "Shape roll 1. Clean face and apron from the front. Fault: a skin-coloured patch on his back between the apron straps (from behind). 1,121 triangles (A has 1,114, B 1,099). Source picture service-01. Meshy image-to-3D: meshy-t2 smart topology, 1,050 polygons, A-pose, no texture (5 credits); Meshy retexture styled from the source picture: meshy-7, our face-first UVs kept, 2k, no PBR (the settings that made the selected a-image and b-image) (10); Meshy auto-rig at 1.1 m with its walk and run (5); Chair_Sit_Idle_F (3)."
+  },
+  {
+   "id": "service-2",
+   "label": "service-2",
+   "note": "Shape roll 2. Faults: Meshy made his eyes as two loose pieces in front of the face (the round-1 office man problem), so the face got almost no texture space; white smears on the apron bib; in the idle his arms stick out forward and twist. The walk is fine. 1,073 triangles (A has 1,114, B 1,099). Source picture service-01. Meshy image-to-3D: meshy-t2 smart topology, 1,050 polygons, A-pose, no texture (5 credits); Meshy retexture styled from the source picture: meshy-7, our face-first UVs kept, 2k, no PBR (the settings that made the selected a-image and b-image) (10); Meshy auto-rig at 1.1 m with its walk and run (5); Chair_Sit_Idle_F (3)."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live 3D viewer: all six beside A and B (turn, walk, run, sit) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/reviews/crowd-everyday-2/viewer.html"
+  },
+  {
+   "label": "Exact Meshy requests, source hashes and credits (138 used)",
+   "href": "reviews/crowd-everyday-2/credits.json"
+  },
+  {
+   "label": "Your source-picture decision",
+   "href": "#review/crowd-everyday-1"
+  }
+ ],
+ "decided": [
+  "casual-1",
+  "older-1",
+  "service-1"
+ ],
+ "decision": "Picked casual-1, older-1, service-1; service-2 rejected (\"super deformed, unusable\"). Codex integrates under #353.",
+ "decided_at": "2026-10-09T14:19:02+0200",
+ "pictures_local": true
+}

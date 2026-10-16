@@ -1,0 +1,260 @@
+{
+  "starting_credits": 85,
+  "spent_credits": 85,
+  "remaining_credits": 0,
+  "request_settings": [
+    {
+      "candidate": "kuro",
+      "stage": "shape",
+      "source_sha256": "0e928781ed7e613333e36583c6a3cd2669d07133ae760e6538522b6f4b0df63f",
+      "settings": {
+        "ai_model": "meshy-t2",
+        "model_type": "smart-topology",
+        "target_polycount": 1050,
+        "should_texture": false,
+        "pose_mode": "a-pose",
+        "target_formats": [
+          "glb"
+        ],
+        "multi_view_thumbnails": true
+      },
+      "task_id": "01a11332-56a2-7791-92d7-9bfef7bb28d4",
+      "estimated_credits": 5,
+      "balance_before": {
+        "balance": 85
+      },
+      "status": "SUCCEEDED"
+    },
+    {
+      "candidate": "kuro-b",
+      "stage": "shape",
+      "source_sha256": "0e928781ed7e613333e36583c6a3cd2669d07133ae760e6538522b6f4b0df63f",
+      "settings": {
+        "ai_model": "meshy-t2",
+        "model_type": "smart-topology",
+        "target_polycount": 1050,
+        "should_texture": false,
+        "pose_mode": "a-pose",
+        "target_formats": [
+          "glb"
+        ],
+        "multi_view_thumbnails": true
+      },
+      "task_id": "01a11333-b827-7732-a4e9-d0d824c6d181",
+      "estimated_credits": 5,
+      "balance_before": {
+        "balance": 75
+      },
+      "status": "SUCCEEDED"
+    },
+    {
+      "candidate": "kuro-b",
+      "stage": "texture",
+      "source_sha256": "5df2cbb395d96b19b9f6ba76397194ed1ae381474755bf34f0e977ccc9e609b3",
+      "guide_sha256": "0e928781ed7e613333e36583c6a3cd2669d07133ae760e6538522b6f4b0df63f",
+      "settings": {
+        "ai_model": "meshy-7",
+        "enable_original_uv": true,
+        "enable_pbr": false,
+        "texture_resolution": "2k",
+        "target_formats": [
+          "glb"
+        ]
+      },
+      "task_id": "01a11336-169f-7618-b121-9d85cc8095d7",
+      "estimated_credits": 10,
+      "balance_before": {
+        "balance": 60
+      },
+      "status": "SUCCEEDED"
+    },
+    {
+      "candidate": "kuro-b",
+      "stage": "rig",
+      "settings": {
+        "input_task_id": "01a11336-169f-7618-b121-9d85cc8095d7",
+        "height_meters": 1.12
+      },
+      "task_id": "01a11338-401b-7357-8054-74388a5eb5ca",
+      "estimated_credits": 5,
+      "balance_before": {
+        "balance": 35
+      },
+      "status": "SUCCEEDED"
+    },
+    {
+      "candidate": "emi",
+      "stage": "shape",
+      "source_sha256": "529f4130843a0507bc43edd9a9f380c82e0a001752cea94b0ea14183412e3044",
+      "settings": {
+        "ai_model": "meshy-t2",
+        "model_type": "smart-topology",
+        "target_polycount": 1050,
+        "should_texture": false,
+        "pose_mode": "a-pose",
+        "target_formats": [
+          "glb"
+        ],
+        "multi_view_thumbnails": true
+      },
+      "task_id": "01a11332-616c-7144-9de8-be21d050849d",
+      "estimated_credits": 5,
+      "balance_before": {
+        "balance": 80
+      },
+      "status": "SUCCEEDED"
+    },
+    {
+      "candidate": "emi",
+      "stage": "texture",
+      "source_sha256": "d769b80ee1e9605fb5ade5a833b7488710749cc98b02239af487b3c11cc8c21e",
+      "guide_sha256": "529f4130843a0507bc43edd9a9f380c82e0a001752cea94b0ea14183412e3044",
+      "settings": {
+        "ai_model": "meshy-7",
+        "enable_original_uv": true,
+        "enable_pbr": false,
+        "texture_resolution": "2k",
+        "target_formats": [
+          "glb"
+        ]
+      },
+      "task_id": "01a11336-0f4b-7717-8c18-8bb0646f9e21",
+      "estimated_credits": 10,
+      "balance_before": {
+        "balance": 70
+      },
+      "status": "SUCCEEDED"
+    },
+    {
+      "candidate": "emi",
+      "stage": "rig",
+      "settings": {
+        "input_task_id": "01a11336-0f4b-7717-8c18-8bb0646f9e21",
+        "height_meters": 1.09
+      },
+      "task_id": "01a11338-311a-77cc-95f0-f53b0dc68b25",
+      "estimated_credits": 5,
+      "balance_before": {
+        "balance": 40
+      },
+      "status": "SUCCEEDED"
+    },
+    {
+      "candidate": "eric",
+      "stage": "shape",
+      "source_sha256": "98a71db2ed72650d9f7e87ea4b8bffb754cf2de5fe0b41317c7f44ba00203d17",
+      "settings": {
+        "ai_model": "meshy-t2",
+        "model_type": "smart-topology",
+        "target_polycount": 1050,
+        "should_texture": false,
+        "pose_mode": "a-pose",
+        "target_formats": [
+          "glb"
+        ],
+        "multi_view_thumbnails": true
+      },
+      "task_id": "01a11337-d20f-73e0-a2b9-3adf4c26ee43",
+      "estimated_credits": 5,
+      "balance_before": {
+        "balance": 50
+      },
+      "status": "SUCCEEDED"
+    },
+    {
+      "candidate": "eric",
+      "stage": "texture",
+      "source_sha256": "8da692ed848bbb94f36baebbfc4e34fc0bdcaa82a827e60997c5a19cebcb08c3",
+      "guide_sha256": "98a71db2ed72650d9f7e87ea4b8bffb754cf2de5fe0b41317c7f44ba00203d17",
+      "settings": {
+        "ai_model": "meshy-7",
+        "enable_original_uv": true,
+        "enable_pbr": false,
+        "texture_resolution": "2k",
+        "target_formats": [
+          "glb"
+        ]
+      },
+      "task_id": "01a1133a-f923-77b3-8696-a4e2f6c274b0",
+      "estimated_credits": 10,
+      "balance_before": {
+        "balance": 30
+      },
+      "status": "SUCCEEDED"
+    },
+    {
+      "candidate": "eric",
+      "stage": "rig",
+      "settings": {
+        "input_task_id": "01a1133a-f923-77b3-8696-a4e2f6c274b0",
+        "height_meters": 1.2
+      },
+      "task_id": "01a1133c-d2b4-771f-bbb8-64b66f950601",
+      "estimated_credits": 5,
+      "balance_before": {
+        "balance": 20
+      },
+      "status": "SUCCEEDED"
+    },
+    {
+      "candidate": "carina",
+      "stage": "shape",
+      "source_sha256": "d037ae5b526d0fb5f51b031d0d206b24bc44abbab1fcfb5791cf0d70542bd0c9",
+      "settings": {
+        "ai_model": "meshy-t2",
+        "model_type": "smart-topology",
+        "target_polycount": 1050,
+        "should_texture": false,
+        "pose_mode": "a-pose",
+        "target_formats": [
+          "glb"
+        ],
+        "multi_view_thumbnails": true
+      },
+      "task_id": "01a11337-dc03-7393-810c-5129146255ea",
+      "estimated_credits": 5,
+      "balance_before": {
+        "balance": 45
+      },
+      "status": "SUCCEEDED"
+    },
+    {
+      "candidate": "carina",
+      "stage": "texture",
+      "source_sha256": "1db6feb89fe55c8d4b8c1ba8e5de6cae30bcf2902f38b595760c03df1912bdce",
+      "guide_sha256": "d037ae5b526d0fb5f51b031d0d206b24bc44abbab1fcfb5791cf0d70542bd0c9",
+      "settings": {
+        "ai_model": "meshy-7",
+        "enable_original_uv": true,
+        "enable_pbr": false,
+        "texture_resolution": "2k",
+        "target_formats": [
+          "glb"
+        ]
+      },
+      "task_id": "01a1133e-6fd6-7281-8280-e7db9d4afa51",
+      "estimated_credits": 10,
+      "balance_before": {
+        "balance": 15
+      },
+      "status": "SUCCEEDED"
+    },
+    {
+      "candidate": "carina",
+      "stage": "rig",
+      "settings": {
+        "input_task_id": "01a1133e-6fd6-7281-8280-e7db9d4afa51",
+        "height_meters": 1.12
+      },
+      "task_id": "01a1133f-f120-75e5-8657-e1b401b9757c",
+      "estimated_credits": 5,
+      "balance_before": {
+        "balance": 5
+      },
+      "status": "SUCCEEDED"
+    }
+  ],
+  "automatic_paid_retries": false,
+  "installed": false,
+  "note": "Five shape requests, four texture requests, four native rigs. First Kuro shape rejected before texturing. Image edits used built-in image generation, outside Meshy credits. No texture painting or geometry repair."
+}

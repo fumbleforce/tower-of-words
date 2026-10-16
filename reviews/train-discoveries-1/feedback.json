@@ -1,0 +1,38 @@
+{
+ "sent": "2026-09-30T07:19:24+0200",
+ "picked": [],
+ "options": {
+  "train-aoi": {
+   "star": false,
+   "reject": true,
+   "comment": ""
+  },
+  "train-bun": {
+   "star": false,
+   "reject": false,
+   "comment": "\"the free seat\" makes no sense, there are like 4 free seats, the one where the lunchbox is is the least likely \"free\" seat. I dont want more text early on, but sometthing interesting to find"
+  }
+ },
+ "comment": "Frame review: picked = apply the shown revision; reject = keep the original; absent = undecided.",
+ "read": true,
+ "history": [
+  {
+   "sent": "2026-09-30T07:19:03+0200",
+   "picked": [],
+   "options": {
+    "train-aoi": {
+     "star": false,
+     "reject": true,
+     "comment": ""
+    },
+    "train-bun": {
+     "star": false,
+     "reject": false,
+     "comment": "\"the free seat\" makes no sense, there are like 4 free seats, the one where the lunchbox is is the least likely \"free\" seat"
+    }
+   },
+   "comment": "Frame review: picked = apply the shown revision; reject = keep the original; absent = undecided.",
+   "read": true
+  }
+ ]
+}

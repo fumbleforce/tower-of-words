@@ -1,0 +1,46 @@
+{
+ "title": "Trees everywhere get the forecourt's leafy crowns, with the limbs inside them",
+ "date": "2026-10-09",
+ "by": "claude-agent:trees-fix",
+ "caption": "Jørgen: \"do you mean these disconnected brown sticks that are supposed to be trees?\" and \"for desktop we need the proper forecourt vegetation everywhere.\" Every tree and hedge on the island is now the forecourt's: a crown round the end of every limb, brown bark, and the same leaf cards, crown mass, hedge leaves and lawn grass near where you walk. Phones get the lighter version the forecourt has (the crown mass, no leaf cards or grass). Left of each pair: before; right: after.",
+ "preview": "office_quarter-eye-desk",
+ "result": [
+  "office_quarter-eye-desk",
+  "east_lane-game-desk",
+  "plaza-game-desk",
+  "sports-game-phone"
+ ],
+ "sections": [
+  {
+   "title": "The fountain plaza",
+   "caption": "Same spot and camera: main before the change on the left, after on the right."
+  },
+  {
+   "title": "The north campus",
+   "caption": "Same spot and camera: main before the change on the left, after on the right."
+  },
+  {
+   "title": "The sports lane",
+   "caption": "Same spot and camera: main before the change on the left, after on the right."
+  },
+  {
+   "title": "The east lane",
+   "caption": "Same spot and camera: main before the change on the left, after on the right."
+  },
+  {
+   "title": "The office quarter",
+   "caption": "Same spot and camera: main before the change on the left, after on the right."
+  },
+  {
+   "title": "The forecourt (already street style, for comparison)",
+   "caption": "Same spot and camera: main before the change on the left, after on the right."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

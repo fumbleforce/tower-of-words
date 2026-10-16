@@ -1,0 +1,18 @@
+{
+ "title": "Edit image prompts for one shot",
+ "date": "2026-10-11",
+ "by": "codex",
+ "caption": "Setting, lighting, pose, camera and style words can be adapted for one shot. The shot mode controls its exclusions, and the picture library puts the newest pictures first.",
+ "result": [
+  "editor-desktop",
+  "setting-phone",
+  "direction-phone"
+ ],
+ "links": [
+  {
+   "label": "Open the scene editor",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools/subplots/web"
+  }
+ ],
+ "pictures_local": true
+}

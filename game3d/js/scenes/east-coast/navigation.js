@@ -1,0 +1,1 @@
+import{Nav as f}from"../../movement/navigation.js";import{BOUNDS as m,WALKS as s,FURNITURE as x,inRect as N}from"./plan.js";export function coastNavigation(){const[n,r,c,a]=m,o=new f(n-.2,r+.2,c-.2,a+.2,.16);o.extra=(t,e)=>s.some(i=>N(t,e,i,-.02));for(const t of x)o.block(...t);return o}

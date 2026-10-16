@@ -1,0 +1,39 @@
+{
+ "title": "Fountain plaza redesigned on the outdoor kit",
+ "date": "2026-09-30",
+ "by": "claude-agent:plaza-kit",
+ "caption": "The plaza rebuilt with the forecourt's kit. The circle is paved in rings with a border and stops cleanly at the lane. The lane carries on from the forecourt's, planting and the canteen terrace frame the plaza, and the water moves. Before on the left of each pair, after on the right.",
+ "sections": [
+  {
+   "title": "The plan",
+   "caption": "Seen from straight above. The lane wraps round the plaza on three sides, with a short link straight into it at each turn. A ring bed with cherries runs round the north half, corner gardens sit either side of the open south edge, and the terrace is to the north."
+  },
+  {
+   "title": "Arriving from the forecourt",
+   "caption": "The same brick, pale borders, hedge, zelkova avenue and lamps as the forecourt's lane. The plaza's edge meets the lane's border in a straight line."
+  },
+  {
+   "title": "The fountain",
+   "caption": "Glints drift over the water, the curtains fall and ripples spread (stills only show one moment). The coin sign is now set into the rim's face, off to the side so Eric doesn't stand in front of it. Pigeons by the rim."
+  },
+  {
+   "title": "Where the lane turns",
+   "caption": "Before, a square slab sat under the circle and a kerb ended in mid-air. Now the lane's west and east turns hold corner gardens (cosmos, grasses, cherries), and a link carries straight on into the plaza."
+  },
+  {
+   "title": "The canteen side",
+   "caption": "The canteen now has striped awnings, and its doors sit on the fountain's axis. The terrace has teal and pale umbrellas, a seat-height wall and planted ends. Benches come in pairs with a tree behind each and a lamp between."
+  },
+  {
+   "title": "Evening",
+   "caption": "The lamps still light up with pools of light, now along the lane, round the plaza's edge and by the canteen doors. The basin glows from under the water, so the coins keep their shine."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

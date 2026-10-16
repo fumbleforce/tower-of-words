@@ -1,0 +1,47 @@
+{
+ "title": "A walk with Kenji",
+ "date": "2026-10-14",
+ "by": "codex-agent:finish-kenji",
+ "caption": "Invite Kenji for a walk, stop at the shop or seafront bench, and continue the outing from a save.",
+ "preview": "bench-phone",
+ "result": [
+  "bench-desktop",
+  "bench-phone",
+  "stand-phone",
+  "shop-cue"
+ ],
+ "sections": [
+  {
+   "title": "The finished outing",
+   "images": [
+    {
+     "id": "bench-desktop",
+     "image": "game3d/shots/kenji-outing/finish-kenji-final/1366-eric-geometry-geometry-seated.png.webp",
+     "caption": "Sit together on the seafront bench, desktop."
+    },
+    {
+     "id": "bench-phone",
+     "image": "game3d/shots/kenji-outing/finish-kenji-phone-standcut/390-carina-storybench-ui-bench-controls.png.webp",
+     "caption": "Choose whether to stay or continue the walk, phone."
+    },
+    {
+     "id": "stand-phone",
+     "image": "game3d/shots/kenji-outing/finish-kenji-phone-standcut/390-carina-storybench-ui-standing.png.webp",
+     "caption": "Both companions stay in view after getting up, phone."
+    },
+    {
+     "id": "shop-cue",
+     "image": "game3d/shots/kenji-outing/finish-kenji-visible-cue/390-carina-drinkcue-shop-departure-visible.png.webp",
+     "caption": "Directions remain visible as Kenji heads to the shop, phone."
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play Amakawa",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

@@ -1,0 +1,1 @@
+import{place as o}from"./shared.js";export default o({sports:["talk:changing_room"]},{on:{"talk:pool_notice":"d5_pool_notice"},nodes:{d5_pool_notice:["> “Swimming club meets here on Saturday evenings.”"]}});

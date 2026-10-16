@@ -1,0 +1,31 @@
+{
+ "title": "East lane: the blocks between the fountain plaza and the dorms",
+ "date": "2026-10-01",
+ "by": "claude-agent:east-lane",
+ "caption": "The first of the island's neighbour blocks (work issue #139): the lane past the fountain plaza on to the dorm street, built as backdrop in the plaza's palette. Day 1 doesn't walk it; you see it from the plaza's east exit and on the island map (M).",
+ "sections": [
+  {
+   "title": "The plaza's east exit, before and after",
+   "caption": "Where the lawn was bare, an office block's front now closes the view: its door, a bike rack and a walk crossing the lane between the avenue's zelkovas."
+  },
+  {
+   "title": "The island map",
+   "caption": "The plaza's tile now runs east to the dorm courtyard, so the gap between them is gone."
+  },
+  {
+   "title": "Close up (Eric placed where the player can't go)",
+   "caption": "The lane's jog, the pocket park with its gravel square, and the office block with the north street behind."
+  },
+  {
+   "title": "Follow-up (#162): the training centre up the cross walk",
+   "caption": "The block at the top of the cross walk is the company's new-staff training centre, with a sign on its canopy (けんしゅう NEW STAFF TRAINING). Eric can now walk the lane on past the cross walk and up it to the door. Its menu says Go in; the door is locked, and one line says why. The same line plays in the morning and after work, when its windows stay dark."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

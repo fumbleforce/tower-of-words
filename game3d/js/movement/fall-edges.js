@@ -1,0 +1,1 @@
+const h=.35;export function edgeAhead(d,[t,e],[i,s],g){for(const o of d||[]){const[a,c]=o.out,n=-((t-o.a[0])*a+(e-o.a[1])*c);if(n<-.05||n>g||i*a+s*c<.35)continue;const l=o.b[0]-o.a[0],r=o.b[1]-o.a[1],u=Math.hypot(l,r),f=((t-o.a[0])*l+(e-o.a[1])*r)/(u||1);if(f>=0&&f<=u)return{edge:o,d:n}}return null}

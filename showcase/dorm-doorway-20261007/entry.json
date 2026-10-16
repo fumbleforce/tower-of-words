@@ -1,0 +1,68 @@
+{
+ "title": "Room 203 doorway clearance",
+ "date": "2026-10-07",
+ "by": "codex-exec:dorm-doorway",
+ "caption": "The kitchen-to-bedroom passage is wider and clears both protagonists at their default size.",
+ "preview": "candidate8-2560-eric-south-01",
+ "sections": [
+  {
+   "title": "baseline1",
+   "caption": "Harness failure: settings migration selected overview."
+  },
+  {
+   "title": "baseline2",
+   "caption": "Movement passed; native camera direction was not checked."
+  },
+  {
+   "title": "candidate1",
+   "caption": "Movement passed; native camera direction was not checked."
+  },
+  {
+   "title": "candidate2",
+   "caption": "Harness rejected the native camera direction."
+  },
+  {
+   "title": "baseline3",
+   "caption": "Original passage, camera directions verified."
+  },
+  {
+   "title": "candidate3",
+   "caption": "Wider and taller passage, camera directions verified."
+  },
+  {
+   "title": "baseline4",
+   "caption": "Original passage, final performance-recorded comparison."
+  },
+  {
+   "title": "candidate4",
+   "caption": "Wider and taller passage, final performance-recorded comparison."
+  },
+  {
+   "title": "candidate5",
+   "caption": "Harness failure: native turn reached the 1600px test-display edge at the larger viewport."
+  },
+  {
+   "title": "candidate6",
+   "caption": "Harness failure: native turn reached the 1600px test-display edge at the larger viewport."
+  },
+  {
+   "title": "candidate7",
+   "caption": "Partial larger capture: Carina’s second native pointer capture timed out after viewport resize."
+  },
+  {
+   "title": "candidate8",
+   "caption": "Final 2560×1440 walkthroughs of both protagonists, with native turns at 1366×860 before restoring the larger viewport; phone overview also passes."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play room 203",
+   "href": "game3d/?place=dorms"
+  },
+  {
+   "label": "Check notes",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/dorm-doorway-20261007.md"
+  }
+ ],
+ "pictures_local": true
+}

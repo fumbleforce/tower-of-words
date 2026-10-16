@@ -1,0 +1,157 @@
+{
+ "title": "Approved office people at the station and in the lift",
+ "date": "2026-10-08",
+ "by": "codex",
+ "caption": "The station workers, commuters and lift Sales pair use the approved office models. The parcel carrier holds a smaller taped carton on his left hand and forearm, with his right hand free.",
+ "preview": "raised-parcel-phone-through",
+ "sections": [
+  {
+   "title": "Original procedural workers",
+   "caption": "Before replacement, held station introduction. The parcel hold in these earlier captures is superseded."
+  },
+  {
+   "title": "First office-body integration",
+   "caption": "Before the native head/spine adapter and parcel correction. The parcel hold in these earlier captures is superseded."
+  },
+  {
+   "title": "First detail cameras",
+   "caption": "Phone targets are cropped; these captures are retained as failed framing attempts. Lift states are frozen diagnostic fixtures. The parcel hold in these earlier captures is superseded."
+  },
+  {
+   "title": "Actual station and lift route",
+   "caption": "Both native viewports: all seven approved roles, queue, ticket tap, gate passage and completed lift ride. Before the parcel grip correction. The parcel hold in these earlier captures is superseded."
+  },
+  {
+   "title": "Phone closeups: first framing",
+   "caption": "Diagnostic held cameras. Parcel penetration and stationary overlap exposed; lift states are frozen fixtures. The parcel hold in these earlier captures is superseded."
+  },
+  {
+   "title": "Phone oblique closeups",
+   "caption": "Parcel penetration confirmed. Stationary view hits a wall; retained failed framing. Lift states are frozen fixtures. The parcel hold in these earlier captures is superseded."
+  },
+  {
+   "title": "Stationary pair: corrected phone view",
+   "caption": "Native queue followed by a diagnostic held camera showing both stationary roles."
+  },
+  {
+   "title": "Corrected parcel contact",
+   "caption": "The box stays level and meets the native hand at its rear rim. Oblique diagnostic camera. The unrelated stationary view is still obstructed; lift states are frozen fixtures. This earlier parcel version was rejected after the user reported its size and body intersection. The parcel hold in these earlier captures is superseded."
+  },
+  {
+   "title": "Corrected parcel in actual motion",
+   "caption": "Diagnostic camera tracks the parcel carrier through the ordinary automated station route. Doorway and tap views are partly occluded; queue and passage show contact clearly. Later lift views use the native camera. This earlier parcel version was rejected after the user reported its size and body intersection. The parcel hold in these earlier captures is superseded."
+  },
+  {
+   "title": "Restart verification on preserved source",
+   "caption": "Phone 390 × 844. The tracked checker followed the station queue and completed the lift ride on the preserved implementation before rebasing. The parcel hold in these earlier captures is superseded."
+  },
+  {
+   "title": "Rebased full-day desktop check",
+   "caption": "The day completed with no overlap or spin errors. Strict movement checks failed on four ambient or named people outside the seven replacement roles. This attempt is retained for comparison with the unchanged baseline."
+  },
+  {
+   "title": "Rebased full-day phone check",
+   "caption": "The strict phone check completed the day with no movement or page errors."
+  },
+  {
+   "title": "Native route before queue-neutral correction",
+   "caption": "Phone 390 × 844 on the rebased implementation. The check verified the selected models and finite poses for all seven roles. Commuters passed through the gate, and the player completed the lift ride to B2. A later source review found that queued commuters kept their shoulders raised after the gate opened. These captures predate that correction. The parcel hold in these earlier captures is superseded."
+  },
+  {
+   "title": "Unchanged desktop baseline comparison",
+   "caption": "The same strict day test passed on commit 8325fae4 without this office change. It did not reproduce the four movement episodes from the earlier candidate run. Those intermittent episodes remain with issue #319."
+  },
+  {
+   "title": "Corrected station and lift route",
+   "caption": "Phone 390 × 844 after correcting the queue shoulders. The checker verified all seven selected bodies and finite poses, the commuters passed through the gate, and the player completed the lift ride to B2. The parcel hold in these earlier captures is superseded."
+  },
+  {
+   "title": "Corrected queue and parcel close-up",
+   "caption": "Actual phone route with a diagnostic camera following the carrier in the station. The entrance and tapping views are partly obscured. The queue and passage views show the hand and level parcel. The lift uses the native camera. This earlier parcel version was rejected after the user reported its size and body intersection. The parcel hold in these earlier captures is superseded."
+  },
+  {
+   "title": "Corrected desktop day check",
+   "caption": "The strict desktop check passed after the queue-neutral correction. No overlap, spin or gait episode was reported. The earlier intermittent movement failures are retained above."
+  },
+  {
+   "title": "Corrected phone day check",
+   "caption": "The strict phone check passed after the queue-neutral correction: no overlap, spin or long gait episode; one short episode remains in the report. The earlier deferred attempt is retained in the verification record."
+  },
+  {
+   "title": "Superseded: parcel correction: phone route",
+   "caption": "The lower hold in this attempt let forearm faces cross the carton. The raised hold below replaces it. All route originals are retained. Measured body clearance and palm support passed. Walking, queue and through views passed visual review. These captures do not establish reader contact."
+  },
+  {
+   "title": "Superseded: parcel correction: desktop route",
+   "caption": "The lower hold in this attempt let forearm faces cross the carton. The raised hold below replaces it. All route originals are retained. Measured body clearance and palm support passed. Walking, queue and through views passed visual review. These captures do not establish reader contact."
+  },
+  {
+   "title": "Superseded: first supplemental tap views",
+   "caption": "The lower hold in this attempt let forearm faces cross the carton. The raised hold below replaces it. These four camera attempts did not expose the supporting hand clearly enough. They remain here as rejected framing attempts. The commuter was frozen during the actual tap phase."
+  },
+  {
+   "title": "Superseded: close tap views",
+   "caption": "The lower hold in this attempt let forearm faces cross the carton. The raised hold below replaces it. The dialogue finished through normal UI before capture. Each viewport froze an actual tap pose. Only the camera moved between its two views. The left-side views show the hand beneath the carton and a bent forearm, with no visible torso or leg penetration. Reader contact remains unverified."
+  },
+  {
+   "title": "Superseded: parcel correction: desktop day check",
+   "caption": "The lower hold in this attempt let forearm faces cross the carton. The raised hold below replaces it. The strict day check passed without page errors, overlaps, spins or long gait failures. Complete logs retain performance warnings and the earlier deferred desktop attempt."
+  },
+  {
+   "title": "Superseded: parcel correction: phone day check",
+   "caption": "The lower hold in this attempt let forearm faces cross the carton. The raised hold below replaces it. The strict day check passed without page errors, overlaps, spins or long gait failures. Three short gait episodes remain in the phone report. Complete logs retain performance warnings and the earlier deferred desktop attempt."
+  },
+  {
+   "title": "Raised parcel hold: phone route",
+   "caption": "The higher hold keeps the forearm beneath the carton. Walking, waiting and passing through the gate show the corrected carry. Lift and office frames retain the rest of the route for context."
+  },
+  {
+   "title": "Raised parcel hold: desktop route",
+   "caption": "The higher hold keeps the forearm beneath the carton. Walking, waiting and passing through the gate show the corrected carry. Lift and office frames retain the rest of the route for context."
+  },
+  {
+   "title": "Raised parcel hold at the reader",
+   "caption": "The left hand supports the carton and the bent forearm stays underneath it. These are actual tap poses held still for two camera views. The right arm remains free, but these pictures do not establish contact with the reader. The phone menu covers the lower legs; the route pictures show them."
+  },
+  {
+   "title": "Raised parcel hold: desktop day check",
+   "caption": "The strict day check passed without page errors, overlaps, spins or long gait failures. The report retains 7 short gait warnings and performance warnings."
+  },
+  {
+   "title": "Raised parcel hold: phone day check",
+   "caption": "The strict day check passed without page errors, overlaps, spins or long gait failures. The report retains 1 short gait warning and performance warnings."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play the station",
+   "href": "game3d/?day=1&place=gate"
+  },
+  {
+   "label": "Office replacement work",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/353"
+  },
+  {
+   "label": "Verification record (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Parcel correction checks and retained attempts (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  }
+ ],
+ "result": [
+  "neutral-parcel-390-gate-through",
+  "raised-parcel-phone-through",
+  "raised-parcel-390-tap-close-left",
+  "raised-parcel-1366-tap-close-left"
+ ],
+ "commit": [
+  "d78bb594",
+  "04b2d287",
+  "6903a16e",
+  "29720865"
+ ],
+ "updated": "2026-10-09T13:20:50.620825+00:00",
+ "pictures_local": true
+}

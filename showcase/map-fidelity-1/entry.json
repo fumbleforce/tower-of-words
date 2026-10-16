@@ -1,0 +1,28 @@
+{
+ "title": "Island map: grounds, coast and destinations",
+ "date": "2026-10-07",
+ "by": "codex-exec:model_review",
+ "caption": "Actual planted grounds, distinct roof groups and pedestrian routes make the drawn map easier to read. Destination coordinates and fast-travel rules are unchanged.",
+ "sections": [
+  {
+   "title": "Island overview on desktop"
+  },
+  {
+   "title": "Local map on phone"
+  },
+  {
+   "title": "Whole mapped coast on phone"
+  },
+  {
+   "title": "Destination controls",
+   "caption": "Desktop and phone native selection, zoom, keyboard, pause and fast travel passed. Mean cached map painting measured 0.48–0.58 ms over 30 draws at 1000×800; the 3D office planting is byte-identical after sharing its plan. Northern terrain remains outside this map detail pass."
+  }
+ ],
+ "links": [
+  {
+   "label": "Open the game and press M",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

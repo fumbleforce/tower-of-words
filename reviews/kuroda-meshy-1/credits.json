@@ -1,0 +1,64 @@
+[
+ {
+  "service": "meshy",
+  "part": "kuroda-1",
+  "task": "01a10b29-9d19-73e6-885b-a4420994b88b",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 292,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/kuroda-meshy-1/pics/e1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "kuroda-1-tex",
+  "task": "01a10b2a-ed48-7554-926e-bd5f45a63915",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 282,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/kuroda-meshy-1/meshy/kuroda-1-uv.glb"
+  },
+  "input": "art/parts/kuroda-meshy-1/pics/e1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "kuroda-1-tex-rig",
+  "task": "01a10b2c-9045-76ac-9ae8-b8e4a61abc4d",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "input_task_id": "01a10b2a-ed48-7554-926e-bd5f45a63915",
+   "height_meters": 1.1
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "kuroda-sit",
+  "task": "01a10b2c-e3d6-7098-9c1f-091e6d9bfe3f",
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 274,
+  "settings": {
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  },
+  "note": "for the game: tools/characters/meshy.py anim kuroda <rig task> 32 sit"
+ }
+]

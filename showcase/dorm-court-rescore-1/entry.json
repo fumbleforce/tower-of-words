@@ -1,0 +1,27 @@
+{
+ "title": "Dorm courtyard: the lane home, the gate, the front bed and the roofs",
+ "date": "2026-09-30",
+ "by": "claude-agent:dorm-court-rescore",
+ "caption": "The plaza's brick lane now runs on past the dorm courtyard as its street, and Eric turns in through a gate in the front bed on the hall doors' axis. The front bed is pale raked gravel with planted groups instead of hedge blocks, the bikes are all under the shelter roof, and the laundry, hall and sento have proper roofs (the sento's in grey tiles). Always evening here.",
+ "sections": [
+  {
+   "title": "The plan",
+   "caption": "From straight above, before and after. Two axes: the way in runs north-south from the lane through the gate, across the walk and up to the hall doors; the walk runs east-west from the garden to the bike shelter. The court is closed by walled beds on the west and south, open only at the gate."
+  },
+  {
+   "title": "Walking in",
+   "caption": "The walk from the plaza hands over on the same brick lane; he walks on along it, turns in through the gate and up toward the doors, then the camera lets go."
+  },
+  {
+   "title": "The court, before and after",
+   "caption": "Same spots as the critic's shots. The drinks machines, laundry, hall, sento door and bike sign are unchanged."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/?place=dorm_court"
+  }
+ ],
+ "pictures_local": true
+}

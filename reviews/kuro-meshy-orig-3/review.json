@@ -1,0 +1,29 @@
+{
+ "title": "Kuro round 3: a smaller head, and her face textured as one piece",
+ "date": "2026-10-04",
+ "by": "Claude (kuro-meshy-orig-3 agent)",
+ "status": "decided",
+ "question": "The first sheet is ChatGPT pictures; every sheet after it is a render of a real rigged 3D model, and the live 3D link (below) lets you turn her and watch her idle and walk beside the in-game Eric and Mio. Is her head the right size now, and are her eyes clean enough?",
+ "multi": false,
+ "options": [
+  {
+   "id": "kuro-3",
+   "label": "kuro-3",
+   "note": "The rigged model from e5 (round 2's chat a1, b5, c3, d2, then the head edit): smart topology, 1,050 polygons (2nd roll), our UV layout with the face in one piece, Meshy retexture styled from e5, auto-rig at 1.1 m. Head share of height 0.41 (Eric 0.46, Mio 0.52). 25 Meshy credits; the six ChatGPT pictures cost $1.49."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live 3D: Kuro round 3 beside the in-game Eric and Mio (turn, zoom, idle, walk; round 2 is attempt kuro-2) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools/characters"
+  },
+  {
+   "label": "Last round (kuro-meshy-orig-2)",
+   "href": "#review/kuro-meshy-orig-2"
+  }
+ ],
+ "decision": "Approved: 'Yes, very good. The only thing that stands out is black discoloration under her cheek'. Fix the cheek, put her in the game; same approach for Aoi and Emi.",
+ "decided_at": "2026-10-04T22:16:05+0200",
+ "issue": 222,
+ "pictures_local": true
+}

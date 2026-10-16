@@ -1,0 +1,1 @@
+import{flags as n}from"../../narrative/state.js";export function diningAction(t,c,i){let e=0;return async o=>{const a=++e;n.canteen_dining_complete=!1;const l=await i(o);t.place===c&&a===e&&(n.canteen_dining_complete=l===!0)}}

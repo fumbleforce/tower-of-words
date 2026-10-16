@@ -1,0 +1,40 @@
+{
+ "title": "Smooth chibi bases — work in progress",
+ "date": "2026-09-29",
+ "by": "Codex",
+ "status": "superseded",
+ "question": "Are these base-body proportions a direction you want to keep?",
+ "multi": false,
+ "options": [
+  {
+   "id": "keep-direction",
+   "label": "Keep developing these proportions",
+   "note": "Keep the base direction while fixing the remaining layer fit and animation contact. This is not approval to replace the game assets."
+  },
+  {
+   "id": "adjust-shape",
+   "label": "Change the base shape",
+   "note": "Comment on the head, torso, shoulders or limbs to change. All earlier attempts are linked below."
+  },
+  {
+   "id": "reject-direction",
+   "label": "Try a different base direction",
+   "note": "The original models remain in the game."
+  }
+ ],
+ "links": [
+  {
+   "label": "Rotate, zoom, and toggle layers (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools"
+  },
+  {
+   "label": "Every captured attempt and walk loop (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/reviews/creator-base-2/attempts.html"
+  },
+  {
+   "label": "Animation checks and known limits",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/clean-base-deformation.md"
+  }
+ ],
+ "pictures_local": true
+}

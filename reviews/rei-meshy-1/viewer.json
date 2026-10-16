@@ -1,0 +1,57 @@
+{
+ "title": "Rei (rei-meshy-1)",
+ "blurb": "A real rigged 3D model, made the way Kuro, Aoi and Emi were: Meshy smart topology (1,050 polygons, A-pose) from the ChatGPT picture, textured in a second pass on a UV layout with the face as one piece, Meshy auto-rig at 1.1 m. Idle and walk are the game's. Beside him or her: the in-game Eric, Mio, Kuro, Aoi and Emi. Drag to turn, wheel to zoom. rei-1 is Meshy's auto-rig (twisted); rei-1-rig2 is the same model, untouched, on a rig of ours: the game's Meshy skeleton placed inside her body, with Emi's bone orientations so Meshy's walk, run and sit play on her as on Emi, and the ponytail weighted to her head and neck.",
+ "attempts": {
+  "rei-1": "/art/parts/rei-meshy-1/meshy/rei-1-tex-rigged.glb",
+  "rei-1-rig2": "/art/parts/rei-meshy-1/rig2/rei-walk.glb"
+ },
+ "compare": {
+  "Eric, Mio, Kuro, Aoi and Emi": [
+   {
+    "glb": "/game3d/assets/eric/walk.glb",
+    "tex": "/game3d/assets/eric/base.webp"
+   },
+   {
+    "glb": "/game3d/assets/mio/walk.glb",
+    "tex": "/game3d/assets/mio/base-clean.webp"
+   },
+   {
+    "glb": "/game3d/assets/characters/kuro/walk.glb",
+    "tex": "/game3d/assets/characters/kuro/base.webp"
+   },
+   {
+    "glb": "/game3d/assets/characters/aoi/walk.glb",
+    "tex": "/game3d/assets/characters/aoi/base.webp"
+   },
+   {
+    "glb": "/game3d/assets/characters/emi/walk.glb",
+    "tex": "/game3d/assets/characters/emi/base.webp"
+   }
+  ],
+  "Kuro, Aoi and Emi": [
+   {
+    "glb": "/game3d/assets/characters/kuro/walk.glb",
+    "tex": "/game3d/assets/characters/kuro/base.webp"
+   },
+   {
+    "glb": "/game3d/assets/characters/aoi/walk.glb",
+    "tex": "/game3d/assets/characters/aoi/base.webp"
+   },
+   {
+    "glb": "/game3d/assets/characters/emi/walk.glb",
+    "tex": "/game3d/assets/characters/emi/base.webp"
+   }
+  ],
+  "Eric and Mio (in game)": [
+   {
+    "glb": "/game3d/assets/eric/walk.glb",
+    "tex": "/game3d/assets/eric/base.webp"
+   },
+   {
+    "glb": "/game3d/assets/mio/walk.glb",
+    "tex": "/game3d/assets/mio/base-clean.webp"
+   }
+  ]
+ },
+ "refs": []
+}

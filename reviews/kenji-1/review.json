@@ -1,0 +1,200 @@
+{
+ "title": "Kenji with a little more realism, round 1",
+ "date": "2026-10-16",
+ "by": "claude-main/art-round",
+ "status": "open",
+ "question": "Which of these, if any, should become Kenji's new base portrait?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/candidates/portraits/kenji-1/lineup.webp.webp",
+   "caption": "At the size the game shows portraits (desktop, every face the same height, chins level): Mio, Emi, Aoi, Kuro, Mori and Kenji as they are now, then the five renders I kept. Mori's reworked candidates are in Review mori-2."
+  },
+  {
+   "image": "art/candidates/portraits/kenji-1/sheet.webp.webp",
+   "caption": "Every render of this round in order, framed at the game's portrait scale, after the current portrait. The one change is a little more realism, after your \"Kenji is fine, maybe give him a little bit more realism\". Passes 1 to 3 drew him fresh from words: the faces got more realistic, but all 12 came out with bodybuilder arms and chest, and neither the muscle exclusion (pass 2) nor softer build words (pass 3) changed that. Passes 4 and 5 start from the current portrait instead (img2img at 0.6 and 0.7), which keeps him and his soft build and lets the face, neck and shirt become more natural. Hair, shirt, tie and lanyard are as now; seeds 1 to 4 in every pass. The badges carry random letters, as the current one does."
+  }
+ ],
+ "options": [
+  {
+   "id": "k1-s1",
+   "label": "k1-s1",
+   "image": "art/candidates/portraits/kenji-1/k1-r261016-194930-b5f-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k1-r261016-194930-b5f-1-s1.webp.webp"
+   ],
+   "note": "Kenji, pass 1, text-to-image: candidate preset kenji-real v1 (face: \"a soft, friendly face with full cheeks, realistic adult proportions\"; build: \"overweight, heavyset build with a soft belly and thick neck\"), heavy body exclusion off. Recipe art/candidates/portraits/kenji-1/recipes/k1.json, seed 1, RDBT, portrait style, no-props. Red rim 1.0%. Framing: 6 to 9% missing above the game crop; the framed preview fills it flat, a pick would get a real outpaint. Dashboard #2421. My verdict, rejected: bodybuilder arms and broad chest, reads strong rather than soft; face more real and friendly; stubble; badge reads 21"
+  },
+  {
+   "id": "k1-s2",
+   "label": "k1-s2",
+   "image": "art/candidates/portraits/kenji-1/k1-r261016-194930-b5f-2-s2-framed.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k1-r261016-194930-b5f-2-s2.webp.webp"
+   ],
+   "note": "Kenji, pass 1, text-to-image: candidate preset kenji-real v1 (face: \"a soft, friendly face with full cheeks, realistic adult proportions\"; build: \"overweight, heavyset build with a soft belly and thick neck\"), heavy body exclusion off. Recipe art/candidates/portraits/kenji-1/recipes/k1.json, seed 2, RDBT, portrait style, no-props. Red rim 0.5%. Framing: 6 to 9% missing above the game crop; the framed preview fills it flat, a pick would get a real outpaint. Dashboard #2422. My verdict, rejected: muscular arms and chest above the belly; face more real, still him; badge reads 21"
+  },
+  {
+   "id": "k1-s3",
+   "label": "k1-s3",
+   "image": "art/candidates/portraits/kenji-1/k1-r261016-194930-b5f-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k1-r261016-194930-b5f-3-s3.webp.webp"
+   ],
+   "note": "Kenji, pass 1, text-to-image: candidate preset kenji-real v1 (face: \"a soft, friendly face with full cheeks, realistic adult proportions\"; build: \"overweight, heavyset build with a soft belly and thick neck\"), heavy body exclusion off. Recipe art/candidates/portraits/kenji-1/recipes/k1.json, seed 3, RDBT, portrait style, no-props. Red rim 0.0%. Framing: 6 to 9% missing above the game crop; the framed preview fills it flat, a pick would get a real outpaint. Dashboard #2423. My verdict, rejected: thick muscular forearms and biceps, wrestler build; face closest to Kenji with real proportions; stubble; badge reads 20"
+  },
+  {
+   "id": "k1-s4",
+   "label": "k1-s4",
+   "image": "art/candidates/portraits/kenji-1/k1-r261016-194930-b5f-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k1-r261016-194930-b5f-4-s4.webp.webp"
+   ],
+   "note": "Kenji, pass 1, text-to-image: candidate preset kenji-real v1 (face: \"a soft, friendly face with full cheeks, realistic adult proportions\"; build: \"overweight, heavyset build with a soft belly and thick neck\"), heavy body exclusion off. Recipe art/candidates/portraits/kenji-1/recipes/k1.json, seed 4, RDBT, portrait style, no-props. Red rim 1.0%. Framing: 6 to 9% missing above the game crop; the framed preview fills it flat, a pick would get a real outpaint. Dashboard #2424. My verdict, rejected: veined muscular arms; soft belly and shirt fit good; friendly face"
+  },
+  {
+   "id": "k2-s1",
+   "label": "k2-s1",
+   "image": "art/candidates/portraits/kenji-1/k2-r261016-200136-da6-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k2-r261016-200136-da6-1-s1.webp.webp"
+   ],
+   "note": "Kenji, pass 2: as pass 1 with the muscle exclusion on. Recipe art/candidates/portraits/kenji-1/recipes/k2.json, seed 1, RDBT, portrait style, no-props. Red rim 0.3%. Framing: 6 to 9% missing above the game crop; the framed preview fills it flat, a pick would get a real outpaint. Dashboard #2425. My verdict, rejected: almost the same as k1-s1: muscular arms and chest; muscle exclusion did little; badge reads 8"
+  },
+  {
+   "id": "k2-s2",
+   "label": "k2-s2",
+   "image": "art/candidates/portraits/kenji-1/k2-r261016-200136-da6-2-s2-framed.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k2-r261016-200136-da6-2-s2.webp.webp"
+   ],
+   "note": "Kenji, pass 2: as pass 1 with the muscle exclusion on. Recipe art/candidates/portraits/kenji-1/recipes/k2.json, seed 2, RDBT, portrait style, no-props. Red rim 0.1%. Framing: 6 to 9% missing above the game crop; the framed preview fills it flat, a pick would get a real outpaint. Dashboard #2426. My verdict, rejected: same as k1-s2: muscular hairy forearms, broad chest; badge reads 21"
+  },
+  {
+   "id": "k2-s3",
+   "label": "k2-s3",
+   "image": "art/candidates/portraits/kenji-1/k2-r261016-200136-da6-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k2-r261016-200136-da6-3-s3.webp.webp"
+   ],
+   "note": "Kenji, pass 2: as pass 1 with the muscle exclusion on. Recipe art/candidates/portraits/kenji-1/recipes/k2.json, seed 3, RDBT, portrait style, no-props. Red rim 0.7%. Framing: 6 to 9% missing above the game crop; the framed preview fills it flat, a pick would get a real outpaint. Dashboard #2427. My verdict, rejected: same as k1-s3: wrestler arms; face still closest; badge reads 20"
+  },
+  {
+   "id": "k2-s4",
+   "label": "k2-s4",
+   "image": "art/candidates/portraits/kenji-1/k2-r261016-200136-da6-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k2-r261016-200136-da6-4-s4.webp.webp"
+   ],
+   "note": "Kenji, pass 2: as pass 1 with the muscle exclusion on. Recipe art/candidates/portraits/kenji-1/recipes/k2.json, seed 4, RDBT, portrait style, no-props. Red rim 0.6%. Framing: 6 to 9% missing above the game crop; the framed preview fills it flat, a pick would get a real outpaint. Dashboard #2428. My verdict, rejected: same as k1-s4: muscular arms; belly and shirt fit good"
+  },
+  {
+   "id": "k3-s1",
+   "label": "k3-s1",
+   "image": "art/candidates/portraits/kenji-1/k3-r261016-200345-19c-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k3-r261016-200345-19c-1-s1.webp.webp"
+   ],
+   "note": "Kenji, pass 3: as pass 2 with new build words (kenji-real v2: \"overweight, soft out-of-shape build with a round belly and soft, fleshy arms\"). Recipe art/candidates/portraits/kenji-1/recipes/k3.json, seed 1, RDBT, portrait style, no-props. Red rim 0.2%. Framing: 6 to 9% missing above the game crop; the framed preview fills it flat, a pick would get a real outpaint. Dashboard #2429. My verdict, rejected: build words changed little: still muscular forearms and broad chest"
+  },
+  {
+   "id": "k3-s2",
+   "label": "k3-s2",
+   "image": "art/candidates/portraits/kenji-1/k3-r261016-200345-19c-2-s2-framed.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k3-r261016-200345-19c-2-s2.webp.webp"
+   ],
+   "note": "Kenji, pass 3: as pass 2 with new build words (kenji-real v2: \"overweight, soft out-of-shape build with a round belly and soft, fleshy arms\"). Recipe art/candidates/portraits/kenji-1/recipes/k3.json, seed 2, RDBT, portrait style, no-props. Red rim 0.6%. Framing: 6 to 9% missing above the game crop; the framed preview fills it flat, a pick would get a real outpaint. Dashboard #2430. My verdict, rejected: muscular hairy forearms; badge reads 21"
+  },
+  {
+   "id": "k3-s3",
+   "label": "k3-s3",
+   "image": "art/candidates/portraits/kenji-1/k3-r261016-200345-19c-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k3-r261016-200345-19c-3-s3.webp.webp"
+   ],
+   "note": "Kenji, pass 3: as pass 2 with new build words (kenji-real v2: \"overweight, soft out-of-shape build with a round belly and soft, fleshy arms\"). Recipe art/candidates/portraits/kenji-1/recipes/k3.json, seed 3, RDBT, portrait style, no-props. Red rim 0.1%. Framing: 6 to 9% missing above the game crop; the framed preview fills it flat, a pick would get a real outpaint. Dashboard #2431. My verdict, rejected: muscular arms; face friendly, more real"
+  },
+  {
+   "id": "k3-s4",
+   "label": "k3-s4",
+   "image": "art/candidates/portraits/kenji-1/k3-r261016-200345-19c-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k3-r261016-200345-19c-4-s4.webp.webp"
+   ],
+   "note": "Kenji, pass 3: as pass 2 with new build words (kenji-real v2: \"overweight, soft out-of-shape build with a round belly and soft, fleshy arms\"). Recipe art/candidates/portraits/kenji-1/recipes/k3.json, seed 4, RDBT, portrait style, no-props. Red rim 1.2%. Framing: 6 to 9% missing above the game crop; the framed preview fills it flat, a pick would get a real outpaint. Dashboard #2432. My verdict, rejected: muscular arms; red lanyard strap, not his blue"
+  },
+  {
+   "id": "k4-s1",
+   "label": "k4-s1",
+   "image": "art/candidates/portraits/kenji-1/k4-r261016-200613-97d-1-s1-framed.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k4-r261016-200613-97d-1-s1.webp.webp"
+   ],
+   "note": "Kenji, pass 4, method change: img2img from the current portrait at denoise 0.6 with the pass 3 words. Recipe art/candidates/portraits/kenji-1/recipes/k4.json, seed 1, RDBT, portrait style, no-props. Red rim 0.2%. Dashboard #2433. My verdict, kept: still clearly Kenji; face with a real nose, chin and soft double chin instead of button features; shirt folds and fits; soft belly. Flaw: chin stubble his look doesn't have; arm as thick as the approved one"
+  },
+  {
+   "id": "k4-s2",
+   "label": "k4-s2",
+   "image": "art/candidates/portraits/kenji-1/k4-r261016-200613-97d-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k4-r261016-200613-97d-2-s2.webp.webp"
+   ],
+   "note": "Kenji, pass 4, method change: img2img from the current portrait at denoise 0.6 with the pass 3 words. Recipe art/candidates/portraits/kenji-1/recipes/k4.json, seed 2, RDBT, portrait style, no-props. Red rim 0.2%. Dashboard #2434. My verdict, kept: still Kenji, open smile; more natural face and neck; shirt fit real. Flaw: chin stubble"
+  },
+  {
+   "id": "k4-s3",
+   "label": "k4-s3",
+   "image": "art/candidates/portraits/kenji-1/k4-r261016-200613-97d-3-s3-framed.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k4-r261016-200613-97d-3-s3.webp.webp"
+   ],
+   "note": "Kenji, pass 4, method change: img2img from the current portrait at denoise 0.6 with the pass 3 words. Recipe art/candidates/portraits/kenji-1/recipes/k4.json, seed 3, RDBT, portrait style, no-props. Red rim 0.3%. Dashboard #2435. My verdict, rejected: light brown patch on top of the black hair (carried from the approved highlight), two-tone; stubble"
+  },
+  {
+   "id": "k4-s4",
+   "label": "k4-s4",
+   "image": "art/candidates/portraits/kenji-1/k4-r261016-200613-97d-4-s4-framed.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k4-r261016-200613-97d-4-s4.webp.webp"
+   ],
+   "note": "Kenji, pass 4, method change: img2img from the current portrait at denoise 0.6 with the pass 3 words. Recipe art/candidates/portraits/kenji-1/recipes/k4.json, seed 4, RDBT, portrait style, no-props. Red rim 0.1%. Dashboard #2436. My verdict, kept: cleanest: still Kenji, no stubble, natural nose and soft double chin, shirt pulls at the belly; arm as thick as the approved one"
+  },
+  {
+   "id": "k5-s1",
+   "label": "k5-s1",
+   "image": "art/candidates/portraits/kenji-1/k5-r261016-200831-725-1-s1-framed.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k5-r261016-200831-725-1-s1.webp.webp"
+   ],
+   "note": "Kenji, pass 5: as pass 4 at denoise 0.7. Recipe art/candidates/portraits/kenji-1/recipes/k5.json, seed 1, RDBT, portrait style, no-props. Red rim 0.3%. Dashboard #2437. My verdict, kept: still Kenji, closed-mouth smile; real nose and soft double chin; shirt fit real. Flaw: chin stubble"
+  },
+  {
+   "id": "k5-s2",
+   "label": "k5-s2",
+   "image": "art/candidates/portraits/kenji-1/k5-r261016-200831-725-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k5-r261016-200831-725-2-s2.webp.webp"
+   ],
+   "note": "Kenji, pass 5: as pass 4 at denoise 0.7. Recipe art/candidates/portraits/kenji-1/recipes/k5.json, seed 2, RDBT, portrait style, no-props. Red rim 0.3%. Dashboard #2438. My verdict, rejected: at 0.7 the arm turns into a bodybuilder bicep; stubble"
+  },
+  {
+   "id": "k5-s3",
+   "label": "k5-s3",
+   "image": "art/candidates/portraits/kenji-1/k5-r261016-200831-725-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k5-r261016-200831-725-3-s3.webp.webp"
+   ],
+   "note": "Kenji, pass 5: as pass 4 at denoise 0.7. Recipe art/candidates/portraits/kenji-1/recipes/k5.json, seed 3, RDBT, portrait style, no-props. Red rim 0.6%. Dashboard #2439. My verdict, kept: best of the round: still Kenji with an open smile, natural face and proportions, soft arms, no stubble, shirt pulls at the belly"
+  },
+  {
+   "id": "k5-s4",
+   "label": "k5-s4",
+   "image": "art/candidates/portraits/kenji-1/k5-r261016-200831-725-4-s4-framed.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-1/k5-r261016-200831-725-4-s4.webp.webp"
+   ],
+   "note": "Kenji, pass 5: as pass 4 at denoise 0.7. Recipe art/candidates/portraits/kenji-1/recipes/k5.json, seed 4, RDBT, portrait style, no-props. Red rim 0.3%. Dashboard #2440. My verdict, rejected: at 0.7 the arm turns into a bodybuilder bicep"
+  }
+ ]
+}

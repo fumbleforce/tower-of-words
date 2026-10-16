@@ -1,0 +1,94 @@
+{
+ "title": "Crowd pilot round 3: office man (A) and woman (B)",
+ "blurb": "Real 3D review candidates with repainted eyes and mouths. Round 2\u2019s rigs, walk, run and sit are kept; idle posture now follows each rig\u2019s own joints. Move on a treadmill or round a loop; choose a face view to compare with the cast. These models are not in the game.",
+ "rigs": {
+  "a": {
+   "id": "crowd3-a",
+   "label": "A, office man",
+   "dir": "art/parts/crowd-pilot-3/game/a/",
+   "idle": "art/parts/crowd-pilot-3/game/a/idle.json",
+   "height": 1.09
+  },
+  "b": {
+   "id": "crowd3-b",
+   "label": "B, office woman",
+   "dir": "art/parts/crowd-pilot-3/game/b/",
+   "idle": "art/parts/crowd-pilot-3/game/b/idle.json",
+   "height": 1.06
+  },
+  "kenji": {
+   "id": "kenji",
+   "label": "Kenji (in game)",
+   "dir": "game3d/assets/characters/kenji/",
+   "idle": "game3d/assets/characters/relaxed-idle-kenji.json",
+   "height": 1.12
+  },
+  "kuro": {
+   "id": "kuro",
+   "label": "Kuro (in game)",
+   "dir": "game3d/assets/characters/kuro/",
+   "idle": "game3d/assets/characters/relaxed-idle-kuro.json",
+   "height": 1.12
+  },
+  "aoi": {
+   "id": "aoi",
+   "label": "Aoi (in game)",
+   "dir": "game3d/assets/characters/aoi/",
+   "idle": "game3d/assets/characters/relaxed-idle-aoi.json",
+   "height": 1.09
+  },
+  "emi": {
+   "id": "emi",
+   "label": "Emi (in game)",
+   "dir": "game3d/assets/characters/emi/",
+   "idle": "game3d/assets/characters/relaxed-idle-emi.json",
+   "height": 1.09
+  }
+ },
+ "scenes": {
+  "pair": {
+   "label": "A and B",
+   "items": [
+    {
+     "rig": "a"
+    },
+    {
+     "rig": "b"
+    }
+   ],
+   "gap": 0.9
+  },
+  "cast": {
+   "label": "Beside the cast",
+   "items": [
+    {
+     "rig": "kenji"
+    },
+    {
+     "rig": "a"
+    },
+    {
+     "rig": "kuro"
+    },
+    {
+     "rig": "aoi"
+    },
+    {
+     "rig": "b"
+    },
+    {
+     "rig": "emi"
+    }
+   ],
+   "gap": 0.85
+  }
+ },
+ "closeups": [
+  "a",
+  "b",
+  "kenji",
+  "kuro",
+  "aoi",
+  "emi"
+ ]
+}

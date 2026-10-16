@@ -1,0 +1,1 @@
+export function referenceEligibility(o,r,i,t,a){const e=o?.people?.mori,n=!!(a>=2&&o?.name==="office"&&e?.root.visible&&e.root.parent===o.space&&!e._walk&&e.seated);return{available:n,understood:n&&i.ready("mori_old_reference",t),notesRecognized:!!r.d2_shift_done||i.has("mio_old_copier_explanation")}}

@@ -1,0 +1,20 @@
+{
+ "title": "Gym store doorway clearance",
+ "date": "2026-10-09",
+ "by": "codex",
+ "caption": "Eric now reaches the equipment store without standing inside its sliding door.",
+ "preview": "desktop-close",
+ "result": [
+  "desktop-close"
+ ],
+ "sections": [
+  {
+   "title": "Doorway closeups",
+   "caption": "Diagnostic camera views after walking to the store. Only the camera moves closer."
+  },
+  {
+   "title": "Normal play views"
+  }
+ ],
+ "pictures_local": true
+}

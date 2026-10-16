@@ -1,0 +1,23 @@
+{
+ "title": "Selected office crowd in the island",
+ "date": "2026-10-07",
+ "by": "codex",
+ "caption": "Your selected a-image and b-image now appear among the ambient office crowd. B’s reported fringe patch is corrected; the selected faces, native rigs and motion are retained.",
+ "sections": [
+  {
+   "title": "Selected models and ordinary play",
+   "caption": "Other crowd categories and named workers keep their established appearances. Counts and routes are unchanged."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live models, motion and correction history (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/reviews/crowd-pilot-5/viewer.html"
+  },
+  {
+   "label": "Original selection and feedback",
+   "href": "#review/crowd-pilot-5"
+  }
+ ],
+ "pictures_local": true
+}

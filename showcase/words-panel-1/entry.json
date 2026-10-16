@@ -1,0 +1,37 @@
+{
+ "title": "Words panel, rebuilt",
+ "date": "2026-10-10",
+ "by": "claude-agent:words-panel",
+ "caption": "The Words chip now opens a panel that fits the screen at every size, with the list scrolling inside it. Words are grouped by day or by kind. A search box filters as you type in Japanese, kana, rōmaji or English. Tap a word to hear Mio say it. Each word shows its kana, its reading, its meaning and where you learned it, and words you could say to whoever is in reach right now are marked. Only words you have learned are listed. Play pauses while the panel is open.",
+ "result": [
+  "desk-day5",
+  "phone-day1",
+  "wide-search",
+  "desk-day1"
+ ],
+ "sections": [
+  {
+   "title": "Day 1 on the monorail, beside the cat",
+   "caption": "Eight words from day 1. Good morning and wait would both do something to the cat right now, so their rows say so."
+  },
+  {
+   "title": "A week of words on day 5, by day",
+   "caption": "Today comes first. Words learned today are marked New today."
+  },
+  {
+   "title": "The same words by kind",
+   "caption": "Phrases, commands, words you understand, and the ticket app's labels, each with a line on what they are. The second picture is the bottom of the list."
+  },
+  {
+   "title": "Searching",
+   "caption": "Typing \"to\" leaves the five words that match it."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

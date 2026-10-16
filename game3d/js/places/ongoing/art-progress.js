@@ -1,0 +1,1 @@
+import{flagKeys as i}from"../../narrative/engine-flags.js";const e=i("game3d/js/places/ongoing/art-progress.js");export function completeFirstPage(t,r){if(!Number.isSafeInteger(r)||r<1)throw new Error("Invalid art visit day");t[e.art_first_day]||(t[e.art_first_day]=r)}

@@ -1,0 +1,1 @@
+import e from"../clinic.js";import{interactions as i,place as o}from"./shared.js";const t=i(e,["talk:clinic_nurse","talk:exam_bed"]);export default o("clinic",{...t,nodes:{...t.nodes,...Object.fromEntries(Object.entries(e.nodes).filter(([r])=>r.startsWith("wake")))},arrive:e.nodes.arrive});

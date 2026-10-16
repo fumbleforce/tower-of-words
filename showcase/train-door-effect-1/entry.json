@@ -1,0 +1,13 @@
+{
+ "title": "Train door effect",
+ "date": "2026-10-01",
+ "by": "Codex",
+ "caption": "The door effect keeps its translucent surface instead of becoming too bright or turning black.",
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

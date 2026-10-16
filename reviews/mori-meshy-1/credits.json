@@ -1,0 +1,64 @@
+[
+ {
+  "service": "meshy",
+  "part": "mori-1",
+  "task": "01a10a98-3aab-74a2-acb2-8d7e3448000f",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 361,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/mori-meshy-1/pics/d1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "mori-1-tex",
+  "task": "01a10a99-e487-75e7-be2d-c3e6f3b1d533",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 351,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/mori-meshy-1/meshy/mori-1-uv.glb"
+  },
+  "input": "art/parts/mori-meshy-1/pics/d1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "mori-1-tex-rig",
+  "task": "01a10a9a-8e04-7427-b7e5-0be04fa69443",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "input_task_id": "01a10a99-e487-75e7-be2d-c3e6f3b1d533",
+   "height_meters": 1.1
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "mori-sit",
+  "task": "01a10a9b-a32c-7227-89b5-09f59c2f3e23",
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 343,
+  "settings": {
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  },
+  "note": "for the game: tools/characters/meshy.py anim mori <rig task> 32 sit"
+ }
+]

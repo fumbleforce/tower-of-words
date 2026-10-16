@@ -1,0 +1,38 @@
+{
+ "title": "One outdoor look: the street style is the forecourt's only look",
+ "date": "2026-10-09",
+ "by": "claude-agent:one-look",
+ "caption": "After Review street-style-default-1 the street style (leafy crowns, clipped hedges, brick and limestone, broad office panels, meadow) is the forecourt's look for everyone, with no ?diorama=1 switch. The other places never had a street-style version, so they look as before until the world kit (#367) builds one for them. The phone's overview leaves out the leaf cards, grass and bed cover cards and has a coarser crown, to stay near its budget. Left of each pair: main before the change; right: after, same spot and camera.",
+ "preview": "sbs-forecourt-bikes-desk",
+ "result": [
+  "sbs-forecourt-bikes-desk",
+  "sbs-forecourt-lane-desk",
+  "sbs-forecourt-phone",
+  "sbs-forecourt-garden-phone"
+ ],
+ "sections": [
+  {
+   "title": "The forecourt, desktop",
+   "caption": "Same spot and camera, before (left) and after (right). The desktop pictures are from the switch commit d11235f3; the later commits change the phone and the crowns' shadow."
+  },
+  {
+   "title": "The forecourt, phone",
+   "caption": "Before (left), after on the final build (right): the phone's lighter street style."
+  },
+  {
+   "title": "Other places, unchanged",
+   "caption": "They have no street-style version yet; the world kit (#367) brings it."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  },
+  {
+   "label": "The outdoor plan",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/outdoor-plan.md"
+  }
+ ],
+ "pictures_local": true
+}

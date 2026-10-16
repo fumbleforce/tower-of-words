@@ -1,0 +1,21 @@
+{
+ "title": "Eric's portrait: original style or 734",
+ "date": "2026-09-29",
+ "by": "art agent (Eric old style)",
+ "status": "superseded",
+ "multi": false,
+ "question": "You said the old portraits matched the cast better. This is the original approved portrait with his eyes opened and the red rim removed. Use this set, or keep 734?",
+ "options": [
+  {
+   "id": "oldstyle",
+   "label": "Original style, eyes open (neutral 831 at 0.6, surprised 831, tired 833)",
+   "note": "Beard drawn a little fuller; cream highlights in the hair remain"
+  },
+  {
+   "id": "keep734",
+   "label": "Keep 734 (in the game now)"
+  }
+ ],
+ "decision": "No: wanted the old, ancient first ones that look like anime figures, not this graphic-novel style",
+ "pictures_local": true
+}

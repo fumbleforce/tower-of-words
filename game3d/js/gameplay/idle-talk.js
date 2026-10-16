@@ -1,0 +1,1 @@
+import{PLAYER_ID as n}from"../mc.js";const s=(o,r)=>o.place?.people[r]||o.place?.extras?.[r];export const isPerson=(o,r)=>/person/.test(r.kind||"")&&!!s(o,r.id);export function idleTalk(o,r){if(o.runner.trigger("idle:"+r))return;const e=s(o,r),t=e&&(e.arms||e.meshy||e.gesture);o.beat(()=>t?o.hooks.gesture({who:r,kind:"nod",to:n}):o.hooks.emote({who:r,kind:"♪",ms:1400}))}

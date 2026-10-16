@@ -1,0 +1,473 @@
+{
+ "title": "Briefcases carried beside the leg",
+ "date": "2026-10-07",
+ "updated": "2026-10-07T20:57:24.607542+00:00",
+ "by": "codex",
+ "caption": "Briefcases hang beside the leg, with the handle held in the fingers and the carrying arm close to the body. Bags rest beside seated people. The false shadow shape behind the wrist is removed; all earlier attempts remain available.",
+ "preview": "resume-ao05-normal-85-office-0-phone-front",
+ "sections": [
+  {
+   "title": "ao05 normal 85",
+   "caption": "Accepted AO depth thickness 0.5 with current carry pose. Phone, walking and seated views; other lighting settings unchanged."
+  },
+  {
+   "title": "live briefcase",
+   "caption": "Current arm target and AO correction on a live, unpaused crowd route. Raw draw matrices and skin palettes are measured without repairing them."
+  },
+  {
+   "title": "live briefcase b",
+   "caption": "Current arm target and AO correction on a live, unpaused crowd route. Raw draw matrices and skin palettes are measured without repairing them."
+  },
+  {
+   "title": "live tote",
+   "caption": "Current arm target and AO correction on a live, unpaused crowd route. Raw draw matrices and skin palettes are measured without repairing them."
+  },
+  {
+   "title": "live bridge",
+   "caption": "Current arm target and AO correction on a live, unpaused crowd route. Raw draw matrices and skin palettes are measured without repairing them."
+  },
+  {
+   "title": "lobby candidate",
+   "caption": "Actual head-office lobby interior comparison at desktop and phone high quality; place cutaway has finished updating."
+  },
+  {
+   "title": "env candidate",
+   "caption": "Environment comparison: B2, outdoor greenery, seating and head-office EXTERIOR at desktop/phone high quality. The interior follow-up is separate."
+  },
+  {
+   "title": "ao015 normal 85",
+   "caption": "Diagnostic alternative; not selected. Smaller AO depth thickness removes more broad contact shading."
+  },
+  {
+   "title": "ao03 normal 85",
+   "caption": "Diagnostic alternative; not selected. Smaller AO depth thickness removes more broad contact shading."
+  },
+  {
+   "title": "arm solve 85",
+   "caption": "Diagnostic capture; original source and report retained."
+  },
+  {
+   "title": "arm target normal 85",
+   "caption": "Diagnostic capture; original source and report retained."
+  },
+  {
+   "title": "baseline phone 85",
+   "caption": "Committed baseline phone pose. Original bag/leg intersection reproduced; this rejected baseline is retained."
+  },
+  {
+   "title": "env baseline",
+   "caption": "Environment comparison: B2, outdoor greenery, seating and head-office EXTERIOR at desktop/phone high quality. The interior follow-up is separate."
+  },
+  {
+   "title": "final bridge 100",
+   "caption": "Current arm target: full gait and transition geometry check. These captures predate the final AO depth-thickness correction, except the frozen generated 85% repeat."
+  },
+  {
+   "title": "final bridge 85",
+   "caption": "Current arm target: full gait and transition geometry check. These captures predate the final AO depth-thickness correction, except the frozen generated 85% repeat."
+  },
+  {
+   "title": "final fallback 100",
+   "caption": "Current arm target: full gait and transition geometry check. These captures predate the final AO depth-thickness correction, except the frozen generated 85% repeat."
+  },
+  {
+   "title": "final fallback 85",
+   "caption": "Current arm target: full gait and transition geometry check. These captures predate the final AO depth-thickness correction, except the frozen generated 85% repeat."
+  },
+  {
+   "title": "final generated 100",
+   "caption": "Current arm target: full gait and transition geometry check. These captures predate the final AO depth-thickness correction, except the frozen generated 85% repeat."
+  },
+  {
+   "title": "final generated 85",
+   "caption": "Current arm target: full gait and transition geometry check. These captures predate the final AO depth-thickness correction, except the frozen generated 85% repeat."
+  },
+  {
+   "title": "final generated 85 frozen",
+   "caption": "Current arm target: full gait and transition geometry check. These captures predate the final AO depth-thickness correction, except the frozen generated 85% repeat."
+  },
+  {
+   "title": "final generated office 100",
+   "caption": "Current arm target: full gait and transition geometry check. These captures predate the final AO depth-thickness correction, except the frozen generated 85% repeat."
+  },
+  {
+   "title": "final generated office 85",
+   "caption": "Current arm target: full gait and transition geometry check. These captures predate the final AO depth-thickness correction, except the frozen generated 85% repeat."
+  },
+  {
+   "title": "final normal 100",
+   "caption": "Current arm target: full gait and transition geometry check. These captures predate the final AO depth-thickness correction, except the frozen generated 85% repeat."
+  },
+  {
+   "title": "final normal 85",
+   "caption": "Current arm target: full gait and transition geometry check. These captures predate the final AO depth-thickness correction, except the frozen generated 85% repeat."
+  },
+  {
+   "title": "lobby baseline",
+   "caption": "Actual head-office lobby interior comparison at desktop and phone high quality; place cutaway has finished updating."
+  },
+  {
+   "title": "palm target 85",
+   "caption": "Diagnostic capture; original source and report retained."
+  },
+  {
+   "title": "surface noao 85",
+   "caption": "Rejected diagnostic setup: changing quality disturbed the camera/projection. This is not visual acceptance evidence."
+  },
+  {
+   "title": "surface noao camera 85",
+   "caption": "Rejected diagnostic setup: changing quality disturbed the camera/projection. This is not visual acceptance evidence."
+  },
+  {
+   "title": "surface probe 85",
+   "caption": "Diagnostic capture; original source and report retained."
+  },
+  {
+   "title": "surface zeroao 85",
+   "caption": "Diagnostic capture; original source and report retained."
+  },
+  {
+   "title": "Earlier outward-arm pose: normal-85",
+   "caption": "Passed geometric checks, but later rejected visually for the wide carrying arm and false AO lobe. Preserved with original image IDs."
+  },
+  {
+   "title": "Final live renderer — live-wrist-offset-briefcase-b",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Final live renderer — live-wrist-offset-briefcase",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Final live renderer — live-wrist-offset-bridge",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Bridge runs deliberately block approved and suit assets and assign an existing route to the bridge carrier. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Final live renderer — live-wrist-offset-tote",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Earlier outward-arm pose: generated-office-100",
+   "caption": "Passed geometric checks, but later rejected visually for the wide carrying arm and false AO lobe. Preserved with original image IDs."
+  },
+  {
+   "title": "Earlier outward-arm pose: generated-office-85",
+   "caption": "Passed geometric checks, but later rejected visually for the wide carrying arm and false AO lobe. Preserved with original image IDs."
+  },
+  {
+   "title": "Earlier outward-arm pose: generated-100",
+   "caption": "Passed geometric checks, but later rejected visually for the wide carrying arm and false AO lobe. Preserved with original image IDs."
+  },
+  {
+   "title": "Earlier outward-arm pose: fallback-100",
+   "caption": "Passed geometric checks, but later rejected visually for the wide carrying arm and false AO lobe. Preserved with original image IDs."
+  },
+  {
+   "title": "Earlier outward-arm pose: generated-85",
+   "caption": "Passed geometric checks, but later rejected visually for the wide carrying arm and false AO lobe. Preserved with original image IDs."
+  },
+  {
+   "title": "Earlier outward-arm pose: fallback-85",
+   "caption": "Passed geometric checks, but later rejected visually for the wide carrying arm and false AO lobe. Preserved with original image IDs."
+  },
+  {
+   "title": "Earlier outward-arm pose: normal-100",
+   "caption": "Passed geometric checks, but later rejected visually for the wide carrying arm and false AO lobe. Preserved with original image IDs."
+  },
+  {
+   "title": "Earlier outward-arm pose: bridge-100",
+   "caption": "Passed geometric checks, but later rejected visually for the wide carrying arm and false AO lobe. Preserved with original image IDs."
+  },
+  {
+   "title": "Earlier outward-arm pose: bridge-85",
+   "caption": "Passed geometric checks, but later rejected visually for the wide carrying arm and false AO lobe. Preserved with original image IDs."
+  },
+  {
+   "title": "Passing intermediate check — legcheck-loaded-arm-generated-office-100",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Superseded live renderer — live-final-review-tote",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Rejected candidate — legcheck-loaded-arm-bridge-100",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Passing intermediate check — legcheck-loaded-arm-generated-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Rejected candidate — legcheck-loaded-arm-bridge-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Superseded live renderer — live-final-review-briefcase-b",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Superseded live renderer — live-final-review-bridge",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Bridge runs deliberately block approved and suit assets and assign an existing route to the bridge carrier. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Superseded live renderer — live-final-review-briefcase",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Passing intermediate check — legcheck-loaded-arm-generated-100",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Passing intermediate check — legcheck-loaded-arm-fallback-100",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Passing intermediate check — legcheck-loaded-arm-fallback-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Passing intermediate check — legcheck-loaded-arm-normal-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Passing intermediate check — legcheck-loaded-arm-office-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Rejected candidate — legcheck-steady-wrist-office-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Superseded live renderer — live-reviewed-tote",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Superseded live renderer — live-reviewed-bridge",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Bridge runs deliberately block approved and suit assets and assign an existing route to the bridge carrier. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Superseded live renderer — live-reviewed-briefcase",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Passing intermediate check — legcheck-phone-relax-normal-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Rejected candidate — legcheck-phone-relax-generated-office-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Passing intermediate check — finger10-phone-relax-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Passing intermediate check — legcheck-finger-fit-generated-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Rejected candidate — legcheck-finger-fit-offices-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Rejected candidate — legcheck-cardigan-envelope-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Rejected candidate — legcheck-envelope-diagnosis-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Superseded live renderer — live-final-bridge-route2",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Bridge runs deliberately block approved and suit assets and assign an existing route to the bridge carrier. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Rejected candidate — legcheck-palm-fit-offices-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Rejected candidate — legcheck-palm-fit-generated-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Excluded live attempt — live-drawstep-bridge1",
+   "caption": "Setup failure or frozen game clock; this attempt cannot demonstrate live walking. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Excluded live attempt — live-drawstep-normal1",
+   "caption": "Setup failure or frozen game clock; this attempt cannot demonstrate live walking. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Excluded live attempt — live-after-palette-bridge1",
+   "caption": "Setup failure or frozen game clock; this attempt cannot demonstrate live walking. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Excluded live attempt — live-after-palette-normal1",
+   "caption": "Setup failure or frozen game clock; this attempt cannot demonstrate live walking. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Excluded live attempt — live-before-palette-bridge2",
+   "caption": "Setup failure or frozen game clock; this attempt cannot demonstrate live walking. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Excluded live attempt — live-before-palette-normal2",
+   "caption": "Setup failure or frozen game clock; this attempt cannot demonstrate live walking. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Excluded live attempt — live-before-palette-bridge1",
+   "caption": "Setup failure or frozen game clock; this attempt cannot demonstrate live walking. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Excluded live attempt — live-before-palette-normal1",
+   "caption": "Setup failure or frozen game clock; this attempt cannot demonstrate live walking. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Superseded live renderer — live-final-bridge-route1",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Bridge runs deliberately block approved and suit assets and assign an existing route to the bridge carrier. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Superseded live renderer — live-final-native-tote1",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Superseded live renderer — live-final-native-briefcase1",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Superseded live renderer — live-drawstep-bridge2",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Superseded live renderer — live-drawstep-normal2",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Rejected candidate — legcheck-wide-arm-generated-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Superseded live renderer — live-after-palette-normal2",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Superseded live renderer — live-before-palette-normal3",
+   "caption": "Advancing production crowd and renderer, with a diagnostic following camera. Every original frame and the source/report hashes are preserved."
+  },
+  {
+   "title": "Rejected candidate — legcheck-accepted-generated-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Passing intermediate check — legcheck-accepted-fallback-100",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Passing intermediate check — legcheck-accepted-fallback-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Passing intermediate check — legcheck-accepted-normal-100",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Passing intermediate check — legcheck-accepted-normal-85",
+   "caption": "Preserved native frames for this bounded attempt. Its outcome does not certify later source changes or the complete carrier matrix; see the report for source hashes and selected cases."
+  },
+  {
+   "title": "Carry correction — targeted shoe fix",
+   "caption": "A slightly raised carrying arm gives the procedural bags 18.6–20.2 mm of clearance while bending, preserving hand contact."
+  },
+  {
+   "title": "Carry correction — shoe clearance rejected",
+   "caption": "Expanded shoe-bending checks find procedural bags only 0.175–2.526 mm above paving, below the unchanged 5 mm minimum."
+  },
+  {
+   "title": "Carry correction — phone pose coverage",
+   "caption": "Intermediate coverage adds phone-idle motion and partial-download support. Shoe bending and render-time synchronization were still under review."
+  },
+  {
+   "title": "Carry correction — intermediate turn check",
+   "caption": "This filename predates the expanded acceptance set. Straight/turning gait and sitting transitions pass; phone and shoe poses were not yet included."
+  },
+  {
+   "title": "Carry correction — carrying pose and seat support",
+   "caption": "Intermediate carrying pose passes straight gait and static sitting/standing checks. Later rounds add turns, phone use, shoe bending and live render checks."
+  },
+  {
+   "title": "Carry correction — frozen-source failure",
+   "caption": "The versioned source request and SHA confirm the rotated candidate. Native knees and procedural legs still intersect bags."
+  },
+  {
+   "title": "Carry correction — leg intersections found",
+   "caption": "Triangle checks reject the rotated bags during gait and sitting. Source provenance was confirmed by the next run."
+  },
+  {
+   "title": "Carry correction — revised fit before leg tests",
+   "caption": "The old grip/floor/seat checks passed. Later triangle checks showed that a free arm swing could still take the bag through a leg."
+  },
+  {
+   "title": "Carry correction — first orientation attempt",
+   "caption": "The long axis turns along the walking direction. This first fit failed paving clearance for a procedural tote."
+  },
+  {
+   "title": "Historical grip correction: Current — selected 85% character size",
+   "caption": "Earlier attachment pass, before the carry and AO correction above. Approved A/B and procedural casual/elder carriers. Final grip and prop fit, shown idle, walking and seated."
+  },
+  {
+   "title": "Historical grip correction: Current — 100% comparison",
+   "caption": "Earlier attachment pass, before the carry and AO correction above. The same final mounting at the earlier character size."
+  },
+  {
+   "title": "Historical grip correction: Current optional bodies — seated fix at 85%",
+   "caption": "Earlier attachment pass, before the carry and AO correction above. The shirt carrier rests its tote on the bench and takes it back when standing. Other generated bodies retain their hand-held seated poses."
+  },
+  {
+   "title": "Historical grip correction: Current optional bodies — seated fix at 100%",
+   "caption": "Earlier attachment pass, before the carry and AO correction above. The same seated support and return-to-hand checks at the legacy size."
+  },
+  {
+   "title": "Approved assets unavailable — 85% fallback",
+   "caption": "Approved model requests deliberately return 404. Existing procedural office workers keep working with attached bags."
+  },
+  {
+   "title": "Approved assets unavailable — 100% fallback",
+   "caption": "The same procedural office fallback at 100%."
+  },
+  {
+   "title": "Attempt 2 — optional bodies at 85%",
+   "caption": "Not accepted: the shirt seated tote intersects the bench. Preserved for comparison with the seated fix."
+  },
+  {
+   "title": "Attempt 2 — optional bodies at 100%",
+   "caption": "Not accepted: the same seated shirt/bench intersection at 100%. Preserved for comparison."
+  },
+  {
+   "title": "Before — original floating bags",
+   "caption": "Untouched source. Handles sit above the hands."
+  },
+  {
+   "title": "Attempt 1 — correct grip, oversized props at 100%",
+   "caption": "Not accepted: lowering the original prop into the hand exposed ground intersection on generated carriers."
+  },
+  {
+   "title": "Attempt 1 — correct grip, oversized props at 85%",
+   "caption": "Not accepted: generated bags crossed the paving because their sizing did not follow the smaller carrier."
+  },
+  {
+   "title": "Attempt 2 — first fitted-prop closeups",
+   "caption": "Same final attachment and size fit, captured before the 180-frame gait assertions were added. Retained as an earlier capture pass."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play at 85%",
+   "href": "game3d/?day=2&place=plaza&charscale=85"
+  },
+  {
+   "label": "Change and validation notes",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/crowd-bags-20261007.md"
+  }
+ ],
+ "pictures_local": true
+}

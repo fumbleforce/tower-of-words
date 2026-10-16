@@ -1,0 +1,1 @@
+export function stationSight(r){return([x,u,c],M=0)=>l=>{let o=0,a=1/0;const n=[l.x,.05,l.z],f=[r.x,r.y,r.z],b=[x,[u[0]-M,u[1]],c];for(let t=0;t<3;t++){const[s,h]=b[t];if(Math.abs(f[t])<1e-6){if(n[t]<s||n[t]>h)return!1;continue}let e=(s-n[t])/f[t],i=(h-n[t])/f[t];if(e>i&&([e,i]=[i,e]),o=Math.max(o,e),a=Math.min(a,i),o>a)return!1}return!0}}

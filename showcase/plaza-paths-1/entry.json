@@ -1,0 +1,31 @@
+{
+ "title": "Fountain plaza: paths re-laid",
+ "date": "2026-09-30",
+ "by": "claude-agent:plaza-paths",
+ "caption": "The plaza's paths laid out again from a plan. The lane comes in and goes out on one straight axis through the fountain, the loop round the plaza is gone, and the canteen has its own terrace with a wall and one link to the plaza on its door's axis. The lane, fountain, paving and canteen themselves are unchanged.",
+ "sections": [
+  {
+   "title": "The plan",
+   "caption": "Seen from straight above, before and after, and the plan drawing it was built from. Two axes cross at the fountain: the lane east-west, the canteen door north-south. The ring bed runs all round the plaza, open only for the two lanes and the link."
+  },
+  {
+   "title": "Coming in from head office",
+   "caption": "Eric arrives on the lane just short of the circle and walks in along the axis toward the fountain. The circle's dark border ring crosses the lane's mouth."
+  },
+  {
+   "title": "The canteen link",
+   "caption": "The terrace ends in its seat-height wall along its whole front, open only on the door's axis. A short link in the lane's brick and borders crosses a strip of lawn and the ring bed to the circle, a lamp and a maple either side."
+  },
+  {
+   "title": "Out toward the dorms",
+   "caption": "The lane leaves the circle on the same axis it came in on, in the same brick, and the walk to the dorm courtyard starts on it."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/?place=plaza"
+  }
+ ],
+ "pictures_local": true
+}

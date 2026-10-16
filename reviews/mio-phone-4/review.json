@@ -1,0 +1,42 @@
+{
+ "title": "Mio looking at her phone, round 4 (left lens frame made solid)",
+ "date": "2026-09-29",
+ "by": "art agent (Mio phone 4)",
+ "status": "superseded",
+ "multi": false,
+ "question": "Is the frame solid all the way round now?",
+ "options": [
+  {
+   "id": "blendk20-3501-exact-3401-v2",
+   "label": "blendk20-3501-exact-3401-v2",
+   "note": "Round 3 pick, fixed. The top bar of the left lens is solid now. A few grey strokes show through the lens just under that bar."
+  },
+  {
+   "id": "blendk25-3501-exact-3401-v2",
+   "label": "blendk25-3501-exact-3401-v2",
+   "note": "Same at 0.25."
+  },
+  {
+   "id": "exact-3401-v2",
+   "label": "exact-3401-v2",
+   "note": "Without the light blend: the portrait frame pixels on the bare face."
+  },
+  {
+   "id": "blendk20-3501-exact-3403-v2",
+   "label": "blendk20-3501-exact-3403-v2",
+   "note": "Same method on the other bare face, exact-3403-v2. It has a small teal fleck above her left eye."
+  },
+  {
+   "id": "redo",
+   "label": "Redo it (say what to change)"
+  }
+ ],
+ "links": [
+  {
+   "label": "Round 3",
+   "href": "#review/mio-phone-3"
+  }
+ ],
+ "decision": "left means HER left (the lens on the image's right); none of round 4 fixed it. Round 5: mio-phone-5",
+ "pictures_local": true
+}

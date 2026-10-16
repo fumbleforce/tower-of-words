@@ -1,0 +1,17 @@
+{
+ "title": "Edit a person for one shot",
+ "date": "2026-10-11",
+ "by": "codex",
+ "caption": "Clothing and appearance can be edited for one picture without changing the shared character template. Adult and Nonadult buttons sit at the top.",
+ "result": [
+  "people-desktop",
+  "people-phone"
+ ],
+ "links": [
+  {
+   "label": "Open the scene editor",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools/subplots/web"
+  }
+ ],
+ "pictures_local": true
+}

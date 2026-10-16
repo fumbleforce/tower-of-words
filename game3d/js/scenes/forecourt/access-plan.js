@@ -1,0 +1,1 @@
+import{BUILDINGS as i}from"../island-layout.js";const t=i.find(o=>o.id==="station").rect,c=i.find(o=>o.id==="head_office_wing").rect,n=-7.55;export const STAFF_GATE=[[t[0],n],[t[0]+3,n]],STAFF_FENCE=[[STAFF_GATE[1],[c[0]+.08,n]],[STAFF_GATE[0],[t[0],t[1]+.1]]];

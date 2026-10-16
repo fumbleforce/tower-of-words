@@ -1,0 +1,44 @@
+{
+ "title": "Crowd pilot: office man (A) and office woman (B), each on two rigs",
+ "date": "2026-10-05",
+ "by": "Claude (crowd-pilot agent, #232)",
+ "status": "decided",
+ "question": "The first two sheets are ChatGPT pictures; every sheet after them shows real rigged 3D models, which you can turn, pan and play in the live viewer (first link). Which rig do you want for the crowd, (a) ours or (b) Meshy's, and are the office man and office woman right?",
+ "multi": true,
+ "options": [
+  {
+   "id": "rig-a",
+   "label": "rig-a: our rig",
+   "note": "Rig (a), as on Rei: the game's Meshy skeleton placed inside the model, a cast donor's bone orientations, bone-heat weights, and the cast's own Meshy walk, run and sit (Hamada's for men, Emi's for women). 0 credits per model, so each new archetype costs 15 (shape and texture) instead of 23. Every crowd body walks with exactly the cast's clips."
+  },
+  {
+   "id": "rig-b",
+   "label": "rig-b: Meshy's auto-rig",
+   "note": "Rig (b): Meshy's auto-rig at 1.1 m with its walk and run, and its Chair_Sit_Idle_F: 8 credits per model (rig 5, sit 3). On these two it placed the bones well; on Rei it put them in her ponytail."
+  },
+  {
+   "id": "model-a",
+   "label": "model-a: office man",
+   "note": "From a-d1: grey suit, dark tie, short dark hair, 1.09 tall. His eyes are smeared (Meshy made them as loose shells in front of the face). 40 credits so far (shape 5, three textures 30, rig 5); pictures $0.99. Ways on, your choice: a new shape from a-d1 (15 credits with its texture, the eyes may come out painted on the face like B's), or repaint his eyes on the texture from a-d1 (no credits)."
+  },
+  {
+   "id": "model-b",
+   "label": "model-b: office woman",
+   "note": "From b-d1: navy blazer and knee-length skirt, dark brown hair in a low bun at the back on her left (image right), 1.06 tall. First shape, first texture. 18 credits (shape 5, texture 10, sit 3) plus the rig's 5; pictures $0.98."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live 3D: both rigs side by side, beside the cast, and the variety (turn, pan, zoom; idle, walk, run, sit) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/reviews/crowd-pilot-1/viewer.html"
+  },
+  {
+   "label": "Rei's rig round, the method rig (a) follows (rei-meshy-1)",
+   "href": "#review/rei-meshy-1"
+  }
+ ],
+ "decision": "Failed round: broken walk, broken eyes, rig too exaggerated; crowd-pilot-2 redoes it",
+ "decided_at": "2026-10-05T23:12:24+0200",
+ "issue": 232,
+ "pictures_local": true
+}

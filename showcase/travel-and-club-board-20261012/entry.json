@@ -1,0 +1,18 @@
+{
+ "title": "Clearer travel blocks and working club slips",
+ "date": "2026-10-12",
+ "by": "codex",
+ "caption": "The map names the action blocking travel and offers Return to game. Club slips respond and show Joined with the meeting details.",
+ "commit": "42e361623",
+ "result": [
+  "map",
+  "joined"
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

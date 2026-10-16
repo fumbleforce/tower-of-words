@@ -1,0 +1,35 @@
+{
+ "title": "Conversations that remember your replies",
+ "date": "2026-10-14",
+ "by": "codex:finish-conversation",
+ "caption": "Mio and Emi ask follow-up questions in ordinary Chat, remember your replies, and let you change them later.",
+ "commit": "4325e7d8e",
+ "result": [
+  "mio-phone",
+  "emi-desktop"
+ ],
+ "sections": [
+  {
+   "title": "Optional Chat",
+   "images": [
+    {
+     "id": "mio-phone",
+     "image": "game3d/shots/conversation-reciprocity-final/mio-phone.png.webp",
+     "caption": "Phone: choosing a reply in ordinary Chat."
+    },
+    {
+     "id": "emi-desktop",
+     "image": "game3d/shots/conversation-reciprocity-final/emi-desktop.png.webp",
+     "caption": "Desktop: an optional conversation with Emi."
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

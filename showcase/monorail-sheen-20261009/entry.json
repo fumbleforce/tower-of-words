@@ -1,0 +1,54 @@
+{
+ "title": "Monorail outside: brushed steel, reflections and baked wear",
+ "date": "2026-10-09",
+ "by": "claude-agent:monorail",
+ "caption": "The car's stainless now looks like brushed metal. It picks up the sky, the warm horizon and the sea, and it has grime, drips, thin rust runs and rubbed edges baked in Blender. Shape, colours, interior, doors and play are the same as before.",
+ "preview": "after-close-desk",
+ "result": [
+  "after-close-desk",
+  "after-corner-desk",
+  "after-under-desk",
+  "after-corner-phone"
+ ],
+ "sections": [
+  {
+   "title": "Close on the car side",
+   "caption": "Before and after, desktop and phone."
+  },
+  {
+   "title": "Over the bay, from above the platform side",
+   "caption": "Before and after, desktop and phone."
+  },
+  {
+   "title": "Level with the cars",
+   "caption": "Before and after, desktop and phone."
+  },
+  {
+   "title": "From below",
+   "caption": "Before and after, desktop and phone."
+  },
+  {
+   "title": "The car ends and bellows",
+   "caption": "Before and after, desktop and phone."
+  },
+  {
+   "title": "The play camera (cut-away car)",
+   "caption": "Unchanged inside; the neighbour cars show the new steel."
+  },
+  {
+   "title": "Halfway through the cut-away fade",
+   "caption": "The navy door panels and frames fade with the steel and stay visible."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  },
+  {
+   "label": "The earlier rebuild",
+   "href": "#showcase/monorail-upgrade-20261009"
+  }
+ ],
+ "pictures_local": true
+}

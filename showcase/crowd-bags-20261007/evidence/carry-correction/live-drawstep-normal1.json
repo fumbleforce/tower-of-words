@@ -1,0 +1,27 @@
+{
+  "mode": "normal",
+  "sourceDir": "/home/jorgen/repo/japanese/.claude/worktrees/codex-briefcase-carry/game3d/js/crowd/",
+  "sourceSha256": {
+    "looks": "35f518fc9488f91182d87707a60aa4cc91978424c9825c6298eadcc3d4196c25",
+    "motion": "25dd60c281a027b8b21f9c72e1768a33ff3a75dcf685a11ec1b85539a7787d5a",
+    "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75",
+    "bag-pose": "95863adf00bbdf5465f98356c22af3d98eacacb224adbe51aee5325080bcef34"
+  },
+  "errors": [],
+  "blocked": [],
+  "frames": [],
+  "error": "page.evaluate: Error: No leg triangles found; cannot claim bag clearance\n    at legClearance (http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/tools/crowd-bag-clearance.mjs:57:29)\n    at eval (eval at evaluate (:311:30), <anonymous>:24:22)\n    at SkinnedMesh.traverse (http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/vendor/three/three.core.js:12974:3)\n    at Group.traverse (http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/vendor/three/three.core.js:12980:18)\n    at eval (eval at evaluate (:311:30), <anonymous>:17:12)\n    at async <anonymous>:337:30\n    at withBrowserJob.timeoutMs (/home/jorgen/repo/japanese/.claude/worktrees/codex-briefcase-carry/game3d/tools/crowd-bag-live-check.mjs:29:27)\n    at async withBrowserJob (/home/jorgen/repo/japanese/.claude/worktrees/codex-briefcase-carry/tools/lib/browser-job.mjs:164:12)\n    at async file:///home/jorgen/repo/japanese/.claude/worktrees/codex-briefcase-carry/game3d/tools/crowd-bag-live-check.mjs:17:1",
+  "rawReport": {
+    "path": "/home/jorgen/repo/japanese/game3d/shots/crowd-bags/live-drawstep-normal1/report.json",
+    "sha256": "0e29d142df78024224917b400951491099d9d25b0e04cf839771a56de4346960",
+    "bytes": 1568
+  },
+  "measurements": {
+    "rows": 0,
+    "clearanceSamples": 0,
+    "intersectingSamples": 0,
+    "maximumDepth": 0,
+    "maximumPaletteError": 0,
+    "maximumSameFrameGripGap": null
+  }
+}

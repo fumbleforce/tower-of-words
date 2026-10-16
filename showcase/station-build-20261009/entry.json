@@ -1,0 +1,31 @@
+{
+ "title": "Honsha station built properly, from every side",
+ "date": "2026-10-09",
+ "by": "claude-agent:station",
+ "caption": "The station and its platform shed are now one Blender model, finished on every side. The station has brick walls on a stone plinth, stone corners and bands, a window with a sill, head and steel frame in every opening, canopies over the exit and the glass front, and a roof with its plant, rails and the name board. The shed has one track down the middle with a platform on each side, matching what you see from the train. It has a curved roof on columns, a glazed back wall on the sea side, a railing on the town side, a glazed north end with buffers, and stairs down to the covered walkway. The station still fades when it hides Eric.",
+ "preview": "after-final-above-sw-desk",
+ "result": [
+  "after-final-above-sw-desk",
+  "after-final-behind-desk",
+  "after-final-low-court-nw-desk",
+  "after-play-court-phone"
+ ],
+ "sections": [
+  {
+   "title": "Seen from the sea, from behind and from above",
+   "caption": "These are the sides the play camera never showed, which had been left unfinished."
+  },
+  {
+   "title": "Walking round it at eye height"
+  },
+  {
+   "title": "The play camera",
+   "caption": "On the court the station stands whole at the bottom left. At its door it fades, and the security room shows as a cut-away as before."
+  },
+  {
+   "title": "The train arriving",
+   "caption": "The game's arrival shows the train's own platforms from above. That view is unchanged, and the shed now has the same layout."
+  }
+ ],
+ "pictures_local": true
+}

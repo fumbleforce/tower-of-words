@@ -1,0 +1,1 @@
+export async function replayWorldHook(o,a,e,p,n){const l=p+":hook",r=e.frame.done.includes(l);if(r&&!e.replaying)return;const d=await o(a,{completedReplay:e.replaying&&r});!r&&d?.worldComplete!==!1&&e.frame.done.push(l),n()}

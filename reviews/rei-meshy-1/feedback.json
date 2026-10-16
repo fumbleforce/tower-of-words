@@ -1,0 +1,16 @@
+{
+ "sent": "2026-10-05T17:58:01+0200",
+ "picked": [
+  "rei-1"
+ ],
+ "options": {
+  "rei-1": {
+   "star": false,
+   "reject": false,
+   "comment": "model good, rig terrible"
+  }
+ },
+ "comment": "",
+ "read": true,
+ "history": []
+}

@@ -1,0 +1,33 @@
+{
+ "title": "Scene editor: pictures on the beat",
+ "date": "2026-10-11",
+ "by": "claude-agent:scene-editor-stage2",
+ "caption": "Stage 2 of the scene editor. A picture beat now makes new versions of its picture, repaints a painted part, compares two versions side by side and picks one, and a private scene can get a picture beat of its own. Public saves run the story checks and the voice manifest. These shots use the test scene's stand-in picture; the editor shows the real ones.",
+ "result": [
+  "versions-1366",
+  "compare-1366",
+  "repaint-1366",
+  "story-check-1366"
+ ],
+ "sections": [
+  {
+   "title": "Versions of a shot",
+   "caption": "Picture tab: New version and Repaint a part, then every version of the shot. Clicking one opens Compare."
+  },
+  {
+   "title": "A picture beat of its own",
+   "caption": "The + between beats adds a Picture in a private scene. It waits for a picture to be composed or picked; Save needs one."
+  },
+  {
+   "title": "Checks on a public save",
+   "caption": "A day-2 office scene saved in a test copy. A save the story check refuses is not written, and the finding sits on the beat. A changed line says it has no voice clip yet."
+  }
+ ],
+ "links": [
+  {
+   "label": "Open the scene editor",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools/subplots/web"
+  }
+ ],
+ "pictures_local": true
+}

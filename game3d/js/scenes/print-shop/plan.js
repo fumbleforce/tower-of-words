@@ -1,0 +1,1 @@
+import{BUILDINGS as r}from"../island-layout.js";const o=r.find(t=>t.id==="w3").rect;export const R={x0:-(o[3]-o[1])/2+.16,x1:(o[3]-o[1])/2-.16,z0:-(o[2]-o[0])+.16,z1:0,h:2.2,near:.22,t:.14},DOOR={edge:[0,.12],in:[0,-.9],out:[0,-.55]},SEAT={x:1.22,z:-1.65,top:.34,ry:-Math.PI/2,out:[.5,-1.65]},SPOTS={directory:[-.25,-3.1],proof:[.45,-5.8],press:[-.1,-7.25]};

@@ -1,0 +1,232 @@
+{
+ "head": {
+  "source": "/home/jorgen/repo/japanese/art/parts/style-concepts/mio-ref-clean/final-cutout.png",
+  "method": "alpha cut: above the neck line plus her right front lock; cropped, padded square, 1024",
+  "neck_line": [
+   [
+    1100,
+    860
+   ],
+   [
+    1300,
+    860
+   ],
+   [
+    1400,
+    805
+   ],
+   [
+    1490,
+    805
+   ],
+   [
+    1495,
+    830
+   ],
+   [
+    1582,
+    830
+   ],
+   [
+    1590,
+    805
+   ],
+   [
+    1700,
+    800
+   ],
+   [
+    1760,
+    842
+   ],
+   [
+    2000,
+    852
+   ]
+  ],
+  "lock": [
+   [
+    1245,
+    860
+   ],
+   [
+    1293,
+    915
+   ],
+   [
+    1290,
+    1045
+   ],
+   [
+    1350,
+    1098
+   ],
+   [
+    1356,
+    1066
+   ],
+   [
+    1418,
+    1074
+   ],
+   [
+    1405,
+    960
+   ],
+   [
+    1400,
+    800
+   ],
+   [
+    1290,
+    830
+   ]
+  ]
+ },
+ "strands": {
+  "source": "/home/jorgen/repo/japanese/art/parts/style-concepts/mio-ref-clean/final-cutout.png",
+  "crop": [
+   1060,
+   700,
+   1700,
+   1340
+  ],
+  "crop_px": 1024,
+  "model": "rdbtAnima.safetensors + anima-lllite-inpainting-v2",
+  "seed": 401,
+  "denoise": 1.0,
+  "steps": 30,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, oversized black hoodie, shoulder and chest of the hoodie, low poly 3d game character, faceted flat-shaded polygons, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, hair, green hair, strand of hair, (rim light, red rim light, red outline, backlighting:1.4), drawstrings, realistic, photorealistic",
+  "mask": "her right front lock below the neck line, grown 4 px",
+  "workflow": "workflow-strands.json"
+ },
+ "strands-s402": {
+  "source": "/home/jorgen/repo/japanese/art/parts/style-concepts/mio-ref-clean/final-cutout.png",
+  "crop": [
+   1060,
+   700,
+   1700,
+   1340
+  ],
+  "crop_px": 1024,
+  "model": "rdbtAnima.safetensors + anima-lllite-inpainting-v2",
+  "seed": 402,
+  "denoise": 1.0,
+  "steps": 30,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, oversized black hoodie, shoulder and chest of the hoodie, low poly 3d game character, faceted flat-shaded polygons, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, hair, green hair, strand of hair, (rim light, red rim light, red outline, backlighting:1.4), drawstrings, realistic, photorealistic",
+  "mask": "her right front lock below the neck line, grown 4 px",
+  "workflow": "workflow-strands.json"
+ },
+ "strands-s403": {
+  "source": "/home/jorgen/repo/japanese/art/parts/style-concepts/mio-ref-clean/final-cutout.png",
+  "crop": [
+   1060,
+   700,
+   1700,
+   1340
+  ],
+  "crop_px": 1024,
+  "model": "rdbtAnima.safetensors + anima-lllite-inpainting-v2",
+  "seed": 403,
+  "denoise": 1.0,
+  "steps": 30,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, oversized black hoodie, shoulder and chest of the hoodie, low poly 3d game character, faceted flat-shaded polygons, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, hair, green hair, strand of hair, (rim light, red rim light, red outline, backlighting:1.4), drawstrings, realistic, photorealistic",
+  "mask": "her right front lock below the neck line, grown 4 px",
+  "workflow": "workflow-strands.json"
+ },
+ "strands-s404": {
+  "source": "/home/jorgen/repo/japanese/art/parts/style-concepts/mio-ref-clean/final-cutout.png",
+  "crop": [
+   1060,
+   700,
+   1700,
+   1340
+  ],
+  "crop_px": 1024,
+  "model": "rdbtAnima.safetensors + anima-lllite-inpainting-v2",
+  "seed": 404,
+  "denoise": 1.0,
+  "steps": 30,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, oversized black hoodie, shoulder and chest of the hoodie, low poly 3d game character, faceted flat-shaded polygons, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, hair, green hair, strand of hair, (rim light, red rim light, red outline, backlighting:1.4), drawstrings, realistic, photorealistic",
+  "mask": "her right front lock below the neck line, grown 4 px",
+  "workflow": "workflow-strands.json"
+ },
+ "strands-s405": {
+  "source": "/home/jorgen/repo/japanese/art/parts/style-concepts/mio-ref-clean/final-cutout.png",
+  "crop": [
+   1060,
+   700,
+   1700,
+   1340
+  ],
+  "crop_px": 1024,
+  "model": "rdbtAnima.safetensors + anima-lllite-inpainting-v2",
+  "seed": 405,
+  "denoise": 0.85,
+  "steps": 30,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, oversized black hoodie, shoulder and chest of the hoodie, low poly 3d game character, faceted flat-shaded polygons, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, hair, green hair, strand of hair, (rim light, red rim light, red outline, backlighting:1.4), drawstrings, realistic, photorealistic",
+  "mask": "her right front lock below the neck line, grown 4 px; from s405 the head area shown as background and the lock pre-filled with the hoodie colour",
+  "workflow": "workflow-strands.json"
+ },
+ "strands-s406": {
+  "source": "/home/jorgen/repo/japanese/art/parts/style-concepts/mio-ref-clean/final-cutout.png",
+  "crop": [
+   1060,
+   700,
+   1700,
+   1340
+  ],
+  "crop_px": 1024,
+  "model": "rdbtAnima.safetensors + anima-lllite-inpainting-v2",
+  "seed": 406,
+  "denoise": 0.85,
+  "steps": 30,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, oversized black hoodie, shoulder and chest of the hoodie, low poly 3d game character, faceted flat-shaded polygons, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, hair, green hair, strand of hair, (rim light, red rim light, red outline, backlighting:1.4), drawstrings, realistic, photorealistic",
+  "mask": "her right front lock below the neck line, grown 4 px; from s405 the head area shown as background and the lock pre-filled with the hoodie colour",
+  "workflow": "workflow-strands.json"
+ },
+ "body": {
+  "source": "no-lock.png (= no-lock-s405.png, picked: the cleanest hoodie where the lock was)",
+  "method": "alpha cut: below the neck line, hair outside the shoulder removed; padded square, 2048",
+  "outside": [
+   [
+    1100,
+    850
+   ],
+   [
+    1300,
+    850
+   ],
+   [
+    1293,
+    918
+   ],
+   [
+    1240,
+    1062
+   ],
+   [
+    1100,
+    1062
+   ]
+  ]
+ }
+}

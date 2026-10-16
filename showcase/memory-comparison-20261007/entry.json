@@ -1,0 +1,36 @@
+{
+ "title": "Revisit Japanese with the words you know now",
+ "date": "2026-10-07",
+ "by": "codex",
+ "caption": "Remembered remarks can show what you understood when you first heard them. New vocabulary stays hidden in that original reading.",
+ "preview": "round5-390-comparison-open",
+ "sections": [
+  {
+   "title": "round5",
+   "caption": "Final native UI: original/current/legacy readings, several remarks, keyboard Space and controller Close activation."
+  },
+  {
+   "title": "round4",
+   "caption": "Close activation correction verified with keyboard Enter and controller A; retained attempt."
+  },
+  {
+   "title": "round3",
+   "caption": "Earlier multi-remark and controller checks, before focused Close activation was corrected."
+  },
+  {
+   "title": "round2",
+   "caption": "Settled rendering; prior to the multi-remark and controller-navigation coverage."
+  },
+  {
+   "title": "round1",
+   "caption": "Initial captures; legacy views caught mid-fade."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

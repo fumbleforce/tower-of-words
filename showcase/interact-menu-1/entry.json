@@ -1,0 +1,33 @@
+{
+ "title": "One Interact on E, with the story option first",
+ "date": "2026-10-10",
+ "by": "claude-main/talk-merge",
+ "caption": "Talk and Chat are one action now, Interact, on E or a tap. When someone has story to move on and things to chat about, Interact opens one menu: the story option first in teal with a Story tag, then the chat topics, then Leave. With only one option it just happens. E now shows on the pin and in the menu wherever Q does.",
+ "result": [
+  "copier-menu-desk",
+  "copier-menu-phone",
+  "copier-act-desk",
+  "guard-desk"
+ ],
+ "sections": [
+  {
+   "title": "Mio, day 1, the copier fixed",
+   "caption": "The moment from your report. E opens the menu with the story row focused, and E again tells her."
+  },
+  {
+   "title": "One option: no menu",
+   "caption": "Kenji before you have met him has only his story, so it starts at once. Mori on day 2 has only chat topics, so Interact goes straight into them."
+  },
+  {
+   "title": "The guard at the gate, before the good morning",
+   "caption": "The goal says Japanese and a hint under it says how, also after Continue. Interact on him opens Say, and he has no Chat until you have greeted him."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

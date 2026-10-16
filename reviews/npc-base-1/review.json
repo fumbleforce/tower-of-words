@@ -1,0 +1,138 @@
+{
+ "title": "Base portraits: Mr. Mori, Mr. Hamada, the guard (no props)",
+ "date": "2026-09-30",
+ "by": "claude-agent:npc-portraits",
+ "status": "decided",
+ "multi": true,
+ "question": "Which base portrait for Mr. Mori, for Mr. Hamada and for the guard? Pick one per person; their expressions come after your pick.",
+ "options": [
+  {
+   "id": "mori-new-713",
+   "label": "Mori · mori-new-713",
+   "note": "Fresh render, the provisional seed. Arms hang at his sides; the hands are below the game crop. Eyes open, gentle smile. Method: fresh render; seed 713. Red rim 0.3% (pass); face drift from the portrait in the game ccip 0.021. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "mori-new-741",
+   "label": "Mori · mori-new-741",
+   "note": "Fresh render. Same pose; narrower eyes, slimmer face. Method: fresh render; seed 741. Red rim 0.4% (pass); face drift from the portrait in the game ccip 0.022. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "mori-new-742",
+   "label": "Mori · mori-new-742",
+   "note": "Fresh render. Eyes closed in the smile. Method: fresh render; seed 742. Red rim 0.6% (pass); face drift from the portrait in the game ccip 0.026. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "mori-new-743",
+   "label": "Mori · mori-new-743",
+   "note": "Fresh render. Eyes closed in the smile, lighter grey hair. Method: fresh render; seed 743. Red rim 0.0% (pass); face drift from the portrait in the game ccip 0.036. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "hamada-new-721",
+   "label": "Hamada · hamada-new-721",
+   "note": "Fresh render, the provisional seed. Arms at his sides, hands at his pockets. Method: fresh render; seed 721. Red rim 0.1% (pass); face drift from the portrait in the game ccip 0.049. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "hamada-new-741",
+   "label": "Hamada · hamada-new-741",
+   "note": "Fresh render. Hands in his pockets; face a little longer. Method: fresh render; seed 741. Red rim 0.2% (pass); face drift from the portrait in the game ccip 0.051. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "hamada-new-742",
+   "label": "Hamada · hamada-new-742",
+   "note": "Fresh render. Stands a bit closer (bigger in the raw render); hands in his pockets. Method: fresh render; seed 742. Red rim 0.0% (pass); face drift from the portrait in the game ccip 0.047. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "hamada-new-743",
+   "label": "Hamada · hamada-new-743",
+   "note": "Fresh render. Hands in his pockets. Method: fresh render; seed 743. Red rim 0.0% (pass); face drift from the portrait in the game ccip 0.032. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "mori-arm-1",
+   "label": "Mori · mori-arm-1",
+   "note": "The provisional portrait (seed 713) with only the part below the tie knot redrawn: face, hair and shoulders are his current ones. Hands in his trouser pockets, below the crop. Method: repaint below the collar; seed 1, denoise 1.0 over the source mori-713.png. Red rim 0.0% (pass); face drift from the portrait in the game ccip 0.008. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "mori-arm-2",
+   "label": "Mori · mori-arm-2",
+   "note": "Same as arm-1, another seed: hands behind his back. Method: repaint below the collar; seed 2, denoise 1.0 over the source mori-713.png. Red rim 0.0% (pass); face drift from the portrait in the game ccip 0.008. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "hamada-arm-1",
+   "label": "Hamada · hamada-arm-1",
+   "note": "The provisional portrait (seed 721) with only the part below the collar redrawn: face and hair are his current ones, pinstripes kept. Hands in his pockets. Method: repaint below the collar; seed 1, denoise 1.0 over the source hamada-721.png. Red rim 0.5% (pass); face drift from the portrait in the game ccip 0.008. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "hamada-arm-2",
+   "label": "Hamada · hamada-arm-2",
+   "note": "Same as arm-1, another seed. Both shoulders have a bump where the old, wider shoulder line meets the new one. Method: repaint below the collar; seed 2, denoise 1.0 over the source hamada-721.png. Red rim 0.4% (pass); face drift from the portrait in the game ccip 0.008. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "guard-arm-1",
+   "label": "Guard · guard-arm-1",
+   "note": "The approved concept with only the part below the tie knot redrawn (whole width). Arms at his sides, white gloves empty. A pale smudge in the lower-left background, gone in the cut-out. Method: repaint below the collar; seed 1, denoise 1.0 over the source ishibashi.png. Red rim 1.9% (pass); face drift from the portrait in the game ccip 0.019. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "guard-arm-2",
+   "label": "Guard · guard-arm-2",
+   "note": "Arms at his sides. A pale wall panel drawn into the background (gone in the cut-out); garbled \"GATEE GUSD\" name tag. Method: repaint below the collar; seed 2, denoise 1.0 over the source ishibashi.png. Red rim 2.1% (warn); face drift from the portrait in the game ccip 0.018. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "guard-arm-3",
+   "label": "Guard · guard-arm-3",
+   "note": "A white panel behind him, and his right shoulder (image left) is cut flat where the repaint starts. Reject. Method: repaint below the collar; seed 3, denoise 1.0 over the source ishibashi.png. Red rim 1.8% (pass); face drift from the portrait in the game ccip 0.017. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "guard-arm-4",
+   "label": "Guard · guard-arm-4",
+   "note": "Arms at his sides; the background turns to a sunset gradient at the bottom (gone in the cut-out). Method: repaint below the collar; seed 4, denoise 1.0 over the source ishibashi.png. Red rim 1.8% (pass); face drift from the portrait in the game ccip 0.016. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "guard-arm-5",
+   "label": "Guard · guard-arm-5",
+   "note": "Arms at his sides; a bump on his left shoulder (image right) at the repaint line; \"SOCRITY\" tag. Method: repaint below the collar; seed 5, denoise 1.0 over the source ishibashi.png. Red rim 2.4% (warn); face drift from the portrait in the game ccip 0.018. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "guard-arm-6",
+   "label": "Guard · guard-arm-6",
+   "note": "His left sleeve (image right) is cut off at the repaint line. Reject. Method: repaint below the collar; seed 6, denoise 1.0 over the source ishibashi.png. Red rim 3.0% (warn); face drift from the portrait in the game ccip 0.017. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "guard-fig-1",
+   "label": "Guard · guard-fig-1",
+   "note": "Repaint kept to his figure, so the background stays the concept's. Arms at his sides, gloves empty. Clean shoulders. Method: repaint below the collar, kept to his figure; seed 1, denoise 1.0 over the source ishibashi.png. Red rim 2.2% (warn); face drift from the portrait in the game ccip 0.017. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "guard-fig-2",
+   "label": "Guard · guard-fig-2",
+   "note": "A step in his right shoulder (image left) at the repaint line. Method: repaint below the collar, kept to his figure; seed 2, denoise 1.0 over the source ishibashi.png. Red rim 2.1% (warn); face drift from the portrait in the game ccip 0.018. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "guard-fig-3",
+   "label": "Guard · guard-fig-3",
+   "note": "A pale patch beside his right arm (image left), gone in the cut-out; small step at the shoulder. Method: repaint below the collar, kept to his figure; seed 3, denoise 1.0 over the source ishibashi.png. Red rim 2.0% (warn); face drift from the portrait in the game ccip 0.018. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "guard-fig-4",
+   "label": "Guard · guard-fig-4",
+   "note": "Arms at his sides, clean shoulders and belt. Method: repaint below the collar, kept to his figure; seed 4, denoise 1.0 over the source ishibashi.png. Red rim 2.2% (warn); face drift from the portrait in the game ccip 0.018. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "guard-fig-5",
+   "label": "Guard · guard-fig-5",
+   "note": "A step in his right shoulder (image left); \"SEFIRTY\" tag. Method: repaint below the collar, kept to his figure; seed 5, denoise 1.0 over the source ishibashi.png. Red rim 2.5% (warn); face drift from the portrait in the game ccip 0.019. Full prompt and negative: prompts.json in the round folder."
+  },
+  {
+   "id": "guard-fig-6",
+   "label": "Guard · guard-fig-6",
+   "note": "Short sleeves over dark green undersleeves: off his uniform. Reject. Method: repaint below the collar, kept to his figure; seed 6, denoise 1.0 over the source ishibashi.png. Red rim 2.2% (warn); face drift from the portrait in the game ccip 0.022. Full prompt and negative: prompts.json in the round folder."
+  }
+ ],
+ "decided": [
+  "mori-new-713",
+  "hamada-new-743"
+ ],
+ "decision": "Mori: mori-new-713; Hamada: hamada-new-743 (guard picked in style-align-1)",
+ "decided_at": "2026-09-30T18:52:24+0200",
+ "issue": 7,
+ "pictures_local": true
+}

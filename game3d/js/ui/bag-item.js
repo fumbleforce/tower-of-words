@@ -1,0 +1,1 @@
+const l=t=>String(t).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");export function bagItemHTML(t,e){const a=e?.document?`<button type="button" data-read-item="${l(t)}">Read</button>`:"";return`<li>${l(e?.name||t)}${a}</li>`}

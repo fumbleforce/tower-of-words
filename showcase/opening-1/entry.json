@@ -1,0 +1,70 @@
+{
+ "title": "Anime opening, tenth cut",
+ "date": "2026-10-09",
+ "by": "claude-main",
+ "caption": "The 70-second opening to the opening theme, made in code, now in the game's anime look with the rebuilt station. In the title menu as Opening, and on its own at game3d/opening/.",
+ "commit": [
+  "5c6fc400",
+  "a6251477",
+  "0cae61b6",
+  "af2eb480",
+  "e8261beca",
+  "1aa53f732",
+  "4418b1b83",
+  "f77db8f37",
+  "8aba584c7",
+  "444486d24"
+ ],
+ "result": [
+  "v5-031-0",
+  "v5-039-0",
+  "v10-058-9",
+  "v5-063-0"
+ ],
+ "sections": [
+  {
+   "title": "Tenth cut (2026-10-10): the fountain clean again",
+   "caption": "The forecourt's new full vegetation reached over the plaza (crowns in the basin, a lamp on the tiles, grass in steps); each place's short props now draw only on its own ground, and the plaza claims its whole circle."
+  },
+  {
+   "title": "Eighth and ninth cuts (2026-10-10): critic passes (7/10, then 8/10)",
+   "caption": "The chorus slam in colour, the gate without the blocky guard figure, daylight through the exit doors (they slide into the wall), the pool from a lower angle, Aoi fading out like the others. Ninth cut: the lineup straight out of the black, buildings through the exit, the gate framed lower, less glare on the town shot."
+  },
+  {
+   "title": "Sixth and seventh cuts (2026-10-10): fixes from a critic pass",
+   "caption": "The sea and clouds smooth far out, 「てつだって」 off the faces, the one-beat tower readable, a stronger title, the riders lit from inside the cars, the ID card moving with the bars, the aerial drifting. Seventh cut: the window view frames the whole island, and the anime look follows the game (toon, outline, paint, fountain water)."
+  },
+  {
+   "title": "Fifth cut (2026-10-10): the anime look, the rebuilt station, your notes",
+   "caption": "The game's anime look throughout (toon light, outlines, leaf shade, soft crowns, the fountain's water), the Blender-built station, the gate going through to the exit, one はじめまして, Carina's longer card, the copy room painted from inside, more places instead of repeated faces, no flicker on the locations."
+  },
+  {
+   "title": "Intro (0:00 to 0:12)",
+   "caption": "Morning over the bay, the train crossing toward the island, then under, beside and above it as the band comes in. The title lands on the bar."
+  },
+  {
+   "title": "Verse (0:12 to 0:38)",
+   "caption": "Following the lyric: the morning monorail, the town shining across the water, the ID card, Honsha, the gate and the guard. The window seats use the new pictures from Review opening-window-1, which are still waiting for your pick."
+  },
+  {
+   "title": "Chorus (0:38 to 1:04)",
+   "caption": "The band stops for はじめ, then the island seen whole from above as the chorus comes in. Then the roll call: Eric or Carina, kotodama, Mio, the B2 team on 「てつだって」, the island people, a run of faces, and everyone together."
+  },
+  {
+   "title": "Title (1:04 to 1:10)",
+   "caption": "The title over the train as the interlude starts and the music fades."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it (on this machine)",
+   "href": "game3d/opening/"
+  },
+  {
+   "label": "The 1080p video, tenth cut (on this machine) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  }
+ ],
+ "updated": "2026-10-10T10:14:43+02:00",
+ "pictures_local": true
+}

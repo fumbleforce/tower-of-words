@@ -1,0 +1,1 @@
+import r from"../ferry_terminal.js";import{interactions as e,place as t}from"./shared.js";export default t("ferry_terminal",e(r,["talk:ferry_staff","talk:ferry_reader","talk:ferry_traveller","talk:ferry_window_seat","talk:ferry_quiet_seat","talk:ferry_landing_seat","talk:ferry_notice_seat"]));

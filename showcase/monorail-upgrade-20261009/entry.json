@@ -1,0 +1,62 @@
+{
+ "title": "Monorail outside, rebuilt to your reference",
+ "date": "2026-10-09",
+ "result": [
+  "after-cruise-out-bay-desk",
+  "after-cruise-out-close-desk",
+  "after-cruise-out-low-desk",
+  "after-cruise-out-under-desk"
+ ],
+ "by": "claude-agent:monorail",
+ "caption": "The cars, beam and pillars are now one Blender model made after art/refs/monorail/jorgen-suggestion-20261009.png: weathered stainless with panel lines, a navy skirt and line, dark window frames, roof units, bellows, a chunky beam and rust-streaked pillars. The interior, the doors and play are unchanged.",
+ "preview": "after-cruise-out-bay-desk",
+ "sections": [
+  {
+   "title": "Over the bay, from above the platform side",
+   "caption": "Before and after, desktop and phone."
+  },
+  {
+   "title": "Close on the car side: frames, panel lines, streaks, roof unit, door lamp",
+   "caption": "Before and after, desktop and phone."
+  },
+  {
+   "title": "Level with the cars",
+   "caption": "Before and after, desktop and phone."
+  },
+  {
+   "title": "From below: navy skirt, beam flange, joints and rust",
+   "caption": "Before and after, desktop and phone."
+  },
+  {
+   "title": "The car end, skirt and bellows",
+   "caption": "After only; this view was added during the work."
+  },
+  {
+   "title": "At Honsha platform, doors open",
+   "caption": "Before and after, desktop and phone."
+  },
+  {
+   "title": "The play camera (cut-away car) on the bay",
+   "caption": "Before and after, desktop and phone."
+  },
+  {
+   "title": "The play camera at the platform",
+   "caption": "Before and after, desktop and phone."
+  },
+  {
+   "title": "Departure framing: the closed car from above",
+   "caption": "Before and after, desktop and phone."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it (the train is the first place)",
+   "href": "game3d/"
+  },
+  {
+   "label": "Issue #355",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/355"
+  }
+ ],
+ "pictures_local": true
+}

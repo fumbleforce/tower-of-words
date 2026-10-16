@@ -1,0 +1,1 @@
+const a=new URLSearchParams(location.search),e=a.has("plainlook");export const LOOK={surf:a.has("surf")?a.get("surf")!=="0":e?!1:null,bake:a.has("bake")?a.get("bake"):e?"0":"soft",detail:a.has("detail")?a.get("detail")!=="0":!e};

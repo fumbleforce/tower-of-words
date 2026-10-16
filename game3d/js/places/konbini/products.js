@@ -1,0 +1,1 @@
+import{ITEMS as e}from"../../gameplay/items.js";export const PRODUCT_IDS=["milk","riceball","tea","coffee"],product=o=>PRODUCT_IDS.includes(o)?e[o]:null;export{PACKAGING}from"../../gameplay/grocery-labels.js";

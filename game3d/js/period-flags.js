@@ -1,0 +1,1 @@
+import{flags as s}from"./narrative/state.js";import{flagKeys as e}from"./narrative/engine-flags.js";const i=e("game3d/js/period-flags.js");export function markPeriod(r,f){for(const o of f)s[i.period+o]=o===r}

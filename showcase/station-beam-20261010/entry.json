@@ -1,0 +1,33 @@
+{
+ "title": "Honsha station: the walkway no longer runs under the monorail beam",
+ "date": "2026-10-10",
+ "by": "claude-agent:station-beam",
+ "caption": "The car's beam crossed the covered walkway's west end 1.38 m above the paving, right where people came down the west platform's stair. Any stair down from the west platform lands between the two beams, so that stair is gone. The two platforms now join on a cross deck along the north end, over the ends of the beams, with a railing along its edge. The covered walkway starts at the east stair and ends a step short of the beam behind a glass screen. The train's approach and the beam's height are unchanged. The forecourt stays within its budget.",
+ "preview": "after-walk-west-desk",
+ "result": [
+  "after-walk-west-desk",
+  "after-gable-in-desk",
+  "after-above-sw-desk"
+ ],
+ "links": [
+  {
+   "label": "Issue #403",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/403"
+  }
+ ],
+ "sections": [
+  {
+   "title": "Looking west along the walkway"
+  },
+  {
+   "title": "Where the west stair came down"
+  },
+  {
+   "title": "The north end"
+  },
+  {
+   "title": "From outside, and in the opening"
+  }
+ ],
+ "pictures_local": true
+}

@@ -1,0 +1,1 @@
+import{known as r}from"../lang.js";import{KNOW_PREFIX as t}from"./engine-flags.js";import{createConditionEvaluator as n}from"./conditions.js";export const flags={},cond=n(o=>o.startsWith(t)?r.has(o.slice(t.length)):flags[o]??0);

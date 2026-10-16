@@ -1,0 +1,54 @@
+{
+ "title": "Monorail cars straddle the beam",
+ "date": "2026-10-09",
+ "by": "claude-agent:monorail",
+ "caption": "The cars now hug the beam instead of sitting on top of it. The navy skirt comes down both sides of the beam, so the car rides lower on it, and there is a guide-wheel housing either side at each bogie. The floor, doors, windows and inside of the car are unchanged.",
+ "preview": "after-wrap-desk",
+ "result": [
+  "after-beam-desk",
+  "after-wrap-desk",
+  "after-low-desk",
+  "after-beam-phone"
+ ],
+ "sections": [
+  {
+   "title": "Straight along the beam",
+   "caption": "The neighbour cars are hidden here so the beam runs out clear. Before, the car sat on top of the beam. Now the navy skirt comes down both sides of it."
+  },
+  {
+   "title": "Low by the car end",
+   "caption": "The skirt wraps the top half of the beam. Under it, a guide-wheel housing at each bogie, its wheels against the beam."
+  },
+  {
+   "title": "Level with the cars",
+   "caption": "From the side, at car height."
+  },
+  {
+   "title": "From below",
+   "caption": "The guide-wheel housings either side of the beam."
+  },
+  {
+   "title": "Over the bay",
+   "caption": "From above the platform side."
+  },
+  {
+   "title": "By the gangway",
+   "caption": "The near car and its neighbour."
+  },
+  {
+   "title": "The play camera",
+   "caption": "The cut-away car is unchanged. The floor stays level with the platform."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  },
+  {
+   "label": "Issue #359",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/359"
+  }
+ ],
+ "pictures_local": true
+}

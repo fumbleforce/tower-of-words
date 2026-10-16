@@ -1,0 +1,152 @@
+[
+  {
+    "run": "resume-final-bridge-100",
+    "scale": "100",
+    "mode": "bridge",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "fbe82581f1735af73b01f7c3fa34adcafd19f9661a2ec44832e8ed3e9b5d0d96",
+    "images": 12,
+    "carriers": 1,
+    "gaitFrames": 270,
+    "transitionFrames": 120
+  },
+  {
+    "run": "resume-final-bridge-85",
+    "scale": "85",
+    "mode": "bridge",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "c62d409f11c28491f26b04284f45c88317d81694d6a293d2c4abc87f7f4b072b",
+    "images": 12,
+    "carriers": 1,
+    "gaitFrames": 270,
+    "transitionFrames": 120
+  },
+  {
+    "run": "resume-final-fallback-100",
+    "scale": "100",
+    "mode": "fallback",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "e0584780d6297ec84c73f22d87fa4b1bb07e20a63cb94f1f6ce0f1747112cc69",
+    "images": 36,
+    "carriers": 3,
+    "gaitFrames": 810,
+    "transitionFrames": 360
+  },
+  {
+    "run": "resume-final-fallback-85",
+    "scale": "85",
+    "mode": "fallback",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "cbe79ab88c66ef7276ce8e8c24ca6de71aac75d687c9fa747d05a4b697611076",
+    "images": 36,
+    "carriers": 3,
+    "gaitFrames": 810,
+    "transitionFrames": 360
+  },
+  {
+    "run": "resume-final-generated-100",
+    "scale": "100",
+    "mode": "generated",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "98ad7c22fa50417a58ccf173a09f3057b75053cca66da71a2a4daee03fcaca10",
+    "images": 36,
+    "carriers": 3,
+    "gaitFrames": 810,
+    "transitionFrames": 360
+  },
+  {
+    "run": "resume-final-generated-85-frozen",
+    "scale": "85",
+    "mode": "generated",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "5d441de95e803e4aa86163e3c70d8c1d52f60cb5c55a7c6b2d0a35bc9abc93fb",
+    "images": 36,
+    "carriers": 3,
+    "gaitFrames": 810,
+    "transitionFrames": 360
+  },
+  {
+    "run": "resume-final-generated-office-100",
+    "scale": "100",
+    "mode": "generated-office",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "5d4a8b729f88d4a41145553882487be64606b432eb6fc926bce0c17e429e36af",
+    "images": 48,
+    "carriers": 4,
+    "gaitFrames": 1080,
+    "transitionFrames": 480
+  },
+  {
+    "run": "resume-final-generated-office-85",
+    "scale": "85",
+    "mode": "generated-office",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "5597682a810123f8643ee48703675af7d50ec7fc20cfcf607f7d917d8a039732",
+    "images": 48,
+    "carriers": 4,
+    "gaitFrames": 1080,
+    "transitionFrames": 480
+  },
+  {
+    "run": "resume-final-normal-100",
+    "scale": "100",
+    "mode": "normal",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "5388f10423f229c97d485271d87ff0f5b7ea33d2f9acb765669c3a4fb0024dfe",
+    "images": 72,
+    "carriers": 6,
+    "gaitFrames": 1620,
+    "transitionFrames": 720
+  },
+  {
+    "run": "resume-final-normal-85",
+    "scale": "85",
+    "mode": "normal",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "023f580c58bd12473efe7d8d766e03930a0dcc70fd2752075c15fcca4b3fba4d",
+    "images": 72,
+    "carriers": 6,
+    "gaitFrames": 1620,
+    "transitionFrames": 720
+  }
+]

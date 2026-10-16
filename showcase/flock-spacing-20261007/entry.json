@@ -1,0 +1,35 @@
+{
+ "title": "Birds leave room for each other",
+ "date": "2026-10-07",
+ "by": "Codex",
+ "caption": "Ground pigeons and sparrows use separate landing spots and leave room along walking and hopping paths. Checked in the Works district at phone and desktop sizes.",
+ "preview": "final3-390-native-feeding",
+ "sections": [
+  {
+   "title": "Before the spacing fix"
+  },
+  {
+   "title": "First spacing pass"
+  },
+  {
+   "title": "First final check: return assertion later corrected"
+  },
+  {
+   "title": "Pigeon return verified; phone close-up still cropped"
+  },
+  {
+   "title": "Accepted spacing and full-flock framing"
+  }
+ ],
+ "links": [
+  {
+   "label": "Works district",
+   "href": "game3d/?day=6&place=works"
+  },
+  {
+   "label": "Checks and remaining limits",
+   "href": "#doc/showcase/flock-spacing-20261007/evidence/acceptance.md"
+  }
+ ],
+ "pictures_local": true
+}

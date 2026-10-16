@@ -1,0 +1,37 @@
+{
+ "title": "Crowd pilot round 3: repaired faces, walking models",
+ "date": "2026-10-06",
+ "updated": "2026-10-06T10:33:41+02:00",
+ "by": "Claude crowd pilot, recovered and checked by Codex",
+ "status": "superseded",
+ "issue": 232,
+ "question": "Real 3D models with repainted eyes and mouths, repaired hair seams and corrected idle posture. Independent face critic: A 8/10, B 8/10. Try both in the live viewer below. Would you use either as an office crowd model?",
+ "multi": true,
+ "options": [
+  {
+   "id": "crowd-a-3",
+   "label": "crowd-a-3: office man",
+   "note": "Final A-t10. Brown irises, readable closed mouth, dark hair underside instead of grey strips. Independent face score 8/10; minor hair-edge aliasing remains close up. Existing round-2 model and Meshy rig retained. No new Meshy credits. Review candidate only."
+  },
+  {
+   "id": "crowd-b-3",
+   "label": "crowd-b-3: office woman",
+   "note": "Final B-t9. Blue irises, readable closed mouth and the pale hair-part strip recoloured. Independent face score 8/10; minor hair-edge aliasing remains close up. Existing round-2 model and Meshy rig retained. No new Meshy credits. Review candidate only."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live 3D: turn, zoom, compare faces, idle, walk, run and sit (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/reviews/crowd-pilot-3/viewer.html"
+  },
+  {
+   "label": "Round 2 and its diagnostic history",
+   "href": "#review/crowd-pilot-2"
+  },
+  {
+   "label": "Round 1 and original models",
+   "href": "#review/crowd-pilot-1"
+  }
+ ],
+ "pictures_local": true
+}

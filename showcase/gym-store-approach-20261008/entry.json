@@ -1,0 +1,29 @@
+{
+ "title": "Gym equipment-store approach",
+ "date": "2026-10-08",
+ "result": [
+  "store-correction-1366-gym_store",
+  "store-correction-390-gym_store"
+ ],
+ "by": "codex",
+ "caption": "The equipment-store destination moves out of the ball-cart blocker to the clear space just inside its open door. Original baseline and native return checks are retained.",
+ "preview": "store-correction-390-gym_store",
+ "sections": [
+  {
+   "title": "Current gym before the approach correction",
+   "caption": "Native walking views of the recovered gym. The store destination is inside the ball-cart blocker, so both runs stop about 0.473 m short; this is retained baseline evidence, not a route pass."
+  },
+  {
+   "title": "Clear doorway approach and return",
+   "caption": "The destination moves just inside the same open door, before the carts. Actual walking reaches within 0.028 m at both sizes and returns to the lobby; furniture and collision geometry are unchanged."
+  },
+  {
+   "title": "Strict day-one route checks",
+   "caption": "Both required runs passed in 74 seconds with no movement overlaps or spins and no overrides. Focused store and lobby walking above verifies the changed location."
+  }
+ ],
+ "commit": [
+  "8463ed89"
+ ],
+ "pictures_local": true
+}

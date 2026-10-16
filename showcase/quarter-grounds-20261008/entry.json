@@ -1,0 +1,76 @@
+{
+ "title": "Bank-to-campus grounds",
+ "date": "2026-10-08",
+ "result": [
+  "candidate-final-1366-morning-campus-east",
+  "candidate-final-1366-morning-junction",
+  "candidate-final-1366-morning-bank",
+  "candidate-final-1366-evening-junction"
+ ],
+ "updated": "2026-10-08T04:36:05+02:00",
+ "by": "codex",
+ "caption": "Connected planting beds, bank foundation drainage and a clear street edge, with matching map outlines. Earlier attempts are included below.",
+ "commit": "bc7994d8f2a8cd6e8a04632aedd534db5fd23f46",
+ "preview": "candidate-final-1366-morning-campus-east",
+ "sections": [
+  {
+   "title": "Bank and campus grounds",
+   "caption": "Final views at desktop, phone and wide desktop sizes, with morning and evening lighting. Route views use the real crossing in both directions; foundation close-ups use diagnostic cameras. The wider southern lawns and existing pavement planting still need work."
+  },
+  {
+   "title": "Before this pass",
+   "caption": "Matched views before the grounds changes, including the route across the boundary."
+  },
+  {
+   "title": "Attempt 1",
+   "caption": "Rejected: repeated cover shapes and angular bed corners."
+  },
+  {
+   "title": "Attempt 2",
+   "caption": "Rejected: lower cover still formed tiled rows."
+  },
+  {
+   "title": "Attempt 3",
+   "caption": "Rejected: rows were gone, but the individual shapes still looked like flat discs."
+  },
+  {
+   "title": "Attempt 4",
+   "caption": "Rejected: continuous cover produced long triangular facets."
+  },
+  {
+   "title": "Attempt 5",
+   "caption": "The faceted shrub kit restored volume and clear gaps around trees and the lamp. Final views above include the subsequent drain correction."
+  },
+  {
+   "title": "Capture diagnostics: wide view",
+   "caption": "Rejected capture setup: the test driver moved the player before the shot. These images do not establish a gameplay defect."
+  },
+  {
+   "title": "Capture diagnostics: first route attempt",
+   "caption": "Retained displaced-camera captures. Some initial files were overwritten during a failed housekeeping step; the evidence report records that gap."
+  },
+  {
+   "title": "Capture diagnostics: second route attempt",
+   "caption": "Retained route captures before the test driver was reliably held. The final route views above use the corrected capture setup."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  },
+  {
+   "label": "Visual review and remaining grounds work (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Capture settings and baseline limitations (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Source review (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  }
+ ],
+ "pictures_local": true
+}

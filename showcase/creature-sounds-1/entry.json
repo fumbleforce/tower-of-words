@@ -1,0 +1,32 @@
+{
+ "title": "Crow caws, gull calls and the harbour's water",
+ "date": "2026-10-10",
+ "by": "claude-agent:sound-177",
+ "caption": "A crow caws when scared off a perch, gulls cry near you, and the harbour has water lapping at the quay. These are sounds, so the pictures are their spectrograms; walk to the forecourt or the harbour to hear them.",
+ "result": [
+  "crow-caw",
+  "gull-call",
+  "harbour-bed"
+ ],
+ "sections": [
+  {
+   "title": "Chosen takes (Stable Audio 3, best of four each, scored with CLAP)",
+   "caption": "Crow: two or three harsh caws. Gull: a long cry, then a short one. Harbour: calm lapping, the steadiest of four, looped without a seam."
+  }
+ ],
+ "links": [
+  {
+   "label": "crow_caw",
+   "href": "game3d/audio/sfx/crow_caw.mp3"
+  },
+  {
+   "label": "gull_call",
+   "href": "game3d/audio/sfx/gull_call.mp3"
+  },
+  {
+   "label": "bed_harbour",
+   "href": "game3d/audio/amb/bed_harbour.mp3"
+  }
+ ],
+ "pictures_local": true
+}

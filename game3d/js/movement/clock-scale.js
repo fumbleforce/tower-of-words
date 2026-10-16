@@ -1,0 +1,1 @@
+export function movementClockScale(r,t,e){return r.hurry&&!r.busy&&r.setHurry(!1),t*(r.busy&&r.hurry?e:1)}export function playerMovementDt(r,t,e){return r.hurry&&!r.player.scripted&&!r.walker.path?.scripted?t/e:t}

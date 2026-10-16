@@ -1,0 +1,47 @@
+{
+ "title": "Carina's voice",
+ "date": "2026-10-06",
+ "by": "voice agent",
+ "status": "decided",
+ "multi": false,
+ "question": "Which of these is Carina?",
+ "options": [
+  {
+   "id": "a",
+   "label": "a. Tired and quiet",
+   "note": "Matches carina.json (\"tired woman in her thirties, quiet and polite\"). Reference pitch about 184 Hz. It's low enough that her lines would need the pitch check for drift (under 190 Hz, the same check Mio has). Design prompt: \"A woman in her thirties, quiet and polite, a little tired. Soft medium-low voice, gentle and reserved, unhurried, slightly weary at the end of a long day but kind. Neutral, standard English with no regional or foreign accent.\" Takes: seeds 404, 505 and 606 for each line, picked with Whisper (the text it heard, P(ja) over 0.9 for Japanese, then the pitch closest to the reference): en1 606, en2 404, ここ 606 with English 505, word 404."
+  },
+  {
+   "id": "b",
+   "label": "b. Dry and level",
+   "note": "Close to carina.json, drier: the IT support side of her. Reference pitch about 227 Hz. Design prompt: \"A woman in her thirties with a dry, level, matter-of-fact voice. Medium-low pitch, understated, little emotion, even pace, quietly deadpan and polite, a practical tech support engineer. Neutral, standard English with no regional or foreign accent.\" Takes: seeds 404, 505 and 606 for each line, picked with Whisper (the text it heard, P(ja) over 0.9 for Japanese, then the pitch closest to the reference): en1 606, en2 505, ここ 505 with English 404, word 404."
+  },
+  {
+   "id": "c",
+   "label": "c. Relaxed, slightly husky",
+   "note": "The confident, relaxed direction (late twenties, slightly husky, calm, a little amused). Reference pitch about 222 Hz. Design prompt: \"A confident, relaxed woman in her late twenties. Low-medium pitch with a slightly husky texture, warm and calm, a little amused, unhurried, never shy, not girlish. Neutral, standard English with no regional or foreign accent.\" Takes: seeds 404, 505 and 606 for each line, picked with Whisper (the text it heard, P(ja) over 0.9 for Japanese, then the pitch closest to the reference): en1 404, en2 505, ここ 606 with English 606, word 606."
+  },
+  {
+   "id": "d",
+   "label": "d. Warm, easy, amused",
+   "note": "The confident, relaxed direction, brighter and warmer. Reference pitch about 291 Hz. Design prompt: \"A relaxed, self-assured woman in her late twenties. Medium pitch, warm and clear, an easy smile in the voice, lightly amused, calm and natural pace, not girlish. Neutral, standard English with no regional or foreign accent.\" Takes: seeds 404, 505 and 606 for each line, picked with Whisper (the text it heard, P(ja) over 0.9 for Japanese, then the pitch closest to the reference): en1 505, en2 505, ここ 404 with English 606, word 404."
+  },
+  {
+   "id": "e",
+   "label": "e. Low, husky, weary",
+   "note": "The lowest: carina.json's tired and quiet, taken down into a husky register. Reference pitch about 173 Hz. It's low enough that her lines would need the pitch check for drift (under 190 Hz, the same check Mio has). Design prompt: \"A woman in her thirties with a low, husky, slightly smoky voice. Calm and quiet, tired, slow and deliberate, polite, a little dry. Neutral, standard English with no regional or foreign accent.\" Takes: seeds 404, 505 and 606 for each line, picked with Whisper (the text it heard, P(ja) over 0.9 for Japanese, then the pitch closest to the reference): en1 505, en2 404, ここ 606 with English 606, word 505."
+  },
+  {
+   "id": "f",
+   "label": "f. Bright and clear",
+   "note": "The brightest, for range. Reference pitch about 346 Hz. Design prompt: \"A woman around thirty with a bright, clear, crisp voice. Medium-high pitch, polite and friendly, quick and articulate, composed. Neutral, standard English with no regional or foreign accent.\" Takes: seeds 404, 505 and 606 for each line, picked with Whisper (the text it heard, P(ja) over 0.9 for Japanese, then the pitch closest to the reference): en1 404, en2 404, ここ 404 with English 404, word 404."
+  }
+ ],
+ "decided": [
+  "a"
+ ],
+ "decision": "Jørgen picked a, Tired and quiet, with no comment. Apply the selected reference to the currently playable public Carina lines and words.",
+ "decided_at": "2026-10-06T11:48:13+0200",
+ "issue": 277,
+ "pictures_local": true
+}

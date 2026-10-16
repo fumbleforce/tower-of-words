@@ -1,0 +1,46 @@
+{
+ "title": "Creator rebuilt in Blender: simple bodies, their own hair, two outfits",
+ "date": "2026-09-30",
+ "by": "Claude (claude-agent:creator-blender)",
+ "status": "decided",
+ "question": "Is this the right base to build the creator on: Blender-made bodies with one skin colour, their own hair, and clothes as separate pieces?",
+ "multi": false,
+ "options": [
+  {
+   "id": "base-ok",
+   "label": "base-ok",
+   "note": "Build on this. Next would be more hair styles and clothes made the same way in Blender, each checked against Mio's and Eric's originals before it goes up."
+  },
+  {
+   "id": "needs-work",
+   "label": "needs-work",
+   "note": "Tell me what to change first. What I can see myself: their own hair keeps the original's shape (taken off the original head as its own piece, given thickness and flat colours, no texture), so it is not newly modelled; the old made hair styles, eye styles and the other clothes are gone from the creator until they are rebuilt this way. Mio's eyes keep her painted design with the navy turned dark brown and the teal turned pale tan; she shows no brows (hers were always under the fringe). The clothes are plainer than the originals (no pockets on the trousers, plain sneakers). The body's parts overlap where they meet, one skin colour hides the join, but it is not one welded surface. These are CPU (Cycles) renders, not EEVEE: the GPU was busy with the voice batch."
+  }
+ ],
+ "links": [
+  {
+   "label": "The live creator (drag to turn it, Idle or Walk, Original puts the game model beside it) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools"
+  },
+  {
+   "label": "The same creator online, for your phone",
+   "href": "https://fumbleforce.github.io/tower-of-words/creator/"
+  },
+  {
+   "label": "Eric in the shirt and skirt (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools"
+  },
+  {
+   "label": "Bare bodies, no hair (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools"
+  },
+  {
+   "label": "Previous round",
+   "href": "#review/creator-base-8"
+  }
+ ],
+ "decision": "Not usable as is: 80% there but looks creepy; Jørgen doesn't think it can reach the finish. Superseded by Astra's bases (creator-astra-1).",
+ "decided_at": "2026-10-01T08:35:59+0200",
+ "issue": 96,
+ "pictures_local": true
+}

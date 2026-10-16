@@ -1,0 +1,35 @@
+{
+ "title": "Arcade shop displays",
+ "date": "2026-10-07",
+ "by": "codex-exec:day5_build",
+ "caption": "Bread, stocked shelves and bicycle repair displays give three existing shops physical frontage detail. Shop interiors remain a separate task.",
+ "sections": [
+  {
+   "title": "Before",
+   "caption": "Opaque ground-floor panes on the same three shop bays."
+  },
+  {
+   "title": "Desktop exploration",
+   "caption": "Recessed displays beside the existing doors, using the production follow camera."
+  },
+  {
+   "title": "Phone approach",
+   "caption": "Low bread and drink cases remain visible from overview. The roofs still hide most tall display detail."
+  },
+  {
+   "title": "Door interactions",
+   "caption": "Each existing door and closed card still works from its native marker."
+  },
+  {
+   "title": "Earlier checks",
+   "caption": "The first recesses were hard to see from phone. Low cases were then added; the drink case was moved away from the waiting queue before the final check."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

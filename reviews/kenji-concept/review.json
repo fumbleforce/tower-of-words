@@ -1,0 +1,36 @@
+{
+ "title": "Kenji concept round",
+ "date": "2026-09-28",
+ "by": "characters agent",
+ "status": "superseded",
+ "multi": true,
+ "question": "Kenji is about 21, inexperienced, eager to help and easily distracted. Which direction is him? Two seeds and a full body each.",
+ "options": [
+  {
+   "id": "a",
+   "label": "a. Trains"
+  },
+  {
+   "id": "b",
+   "label": "b. Gashapon"
+  },
+  {
+   "id": "c",
+   "label": "c. City pop"
+  },
+  {
+   "id": "d",
+   "label": "d. Climber"
+  },
+  {
+   "id": "e",
+   "label": "e. Plants"
+  },
+  {
+   "id": "f",
+   "label": "f. Rookie suit"
+  }
+ ],
+ "decision": "Rejected: hobby costumes ('way out of whacko land... he is at work'); replaced by kenji-concept-2",
+ "pictures_local": true
+}

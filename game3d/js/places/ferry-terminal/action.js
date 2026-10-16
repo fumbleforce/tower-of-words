@@ -1,0 +1,1 @@
+import{flags as t}from"../../narrative/state.js";export function terminalAction(o,r,c){let e=0;return async n=>{const a=++e;t.ferry_action_complete=!1;const i=await c(n);o.place===r&&a===e&&(t.ferry_action_complete=i===!0)}}

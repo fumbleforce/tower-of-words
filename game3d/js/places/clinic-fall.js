@@ -1,0 +1,1 @@
+import{flags as l}from"../narrative/state.js";export async function sendToClinic(a,e=a.place?.name){return l.fell_from=e||"outside",l.falls=(l.falls||0)+1,await a.ui.fade("","",300),await a.travel("clinic",{fast:!0,via:"plaza"})!==!1?!0:(l.fell_from=!1,await a.ui.unfade(),!1)}

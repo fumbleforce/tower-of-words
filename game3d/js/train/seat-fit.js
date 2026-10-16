@@ -1,0 +1,1 @@
+export const SEAT_FIT={fwd:.07,legs:{ahead:.2,height:.075}},AOI_FIT={...SEAT_FIT,fwd:.12,lean:[.3,-.15]};export function seatOffset(t,e=SEAT_FIT.fwd){return[Math.sin(t)*e,Math.cos(t)*e]}export function sitFitted(t,e,o,d,s,n=SEAT_FIT){const[a,c]=seatOffset(s,n.fwd);t.sitAt(e+a,o,d+c,s,n.legs)}

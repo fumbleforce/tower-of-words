@@ -1,0 +1,31 @@
+{
+ "title": "The pool deck, through the shower pavilion",
+ "date": "2026-10-05",
+ "by": "claude-agent:club-places",
+ "caption": "For the swimming club's last outdoor session of the season (days 3 to 5). The pavilion's door at the end of the pool walk now opens: Eric walks in and comes out of the men's changing room onto the deck, and goes back the same way. It also loads with ?place=pool. Nobody is there yet; the swim itself will be a scene.",
+ "sections": [
+  {
+   "title": "The pavilion's door",
+   "caption": "Before: the door at the pool walk's end was shut with a 準備中 card. After: the card is gone and Go in takes Eric through to the deck."
+  },
+  {
+   "title": "Out of the changing room",
+   "caption": "Where the trip puts him: outside the men's changing room, the pace clock on the wall between the showers."
+  },
+  {
+   "title": "The deck",
+   "caption": "Before: the deck could only be seen through the fence. After: walkable all round the pool. The steps down into the first lane with their rails, the winter cover on its reel against the south fence, two benches and the lifeguard's chair under the NO DIVING board on the west side, the loungers on the east side, the kickboard rack and pull buoys, the attendant's table with the lost-property tub."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/index.html?place=pool"
+  },
+  {
+   "label": "Places doc",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/places.md"
+  }
+ ],
+ "pictures_local": true
+}

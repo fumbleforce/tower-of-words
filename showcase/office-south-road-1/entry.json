@@ -1,0 +1,17 @@
+{
+ "title": "Walk south from head office to the shops",
+ "date": "2026-10-06",
+ "by": "codex",
+ "caption": "The bicycle aisle now continues into the shopping street’s west passage. Walk through in either direction, or use its travel marker. The island map shows the same connection.",
+ "links": [
+  {
+   "label": "Start at head office",
+   "href": "game3d/?place=forecourt"
+  },
+  {
+   "label": "Start on the shopping street",
+   "href": "game3d/?place=shotengai"
+  }
+ ],
+ "pictures_local": true
+}

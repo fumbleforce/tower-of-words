@@ -1,0 +1,23 @@
+{
+ "title": "Continuous model previews and corrected idle stance",
+ "date": "2026-10-06",
+ "by": "codex",
+ "caption": "Walk and run previews keep moving. The corrected idle stance removes the backward lean. Gym, sports and dorm room previews now fit the screen.",
+ "commit": [
+  "594493ca",
+  "68bbd09e",
+  "c1e24957",
+  "5446e1e6"
+ ],
+ "links": [
+  {
+   "label": "Mio live viewer (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/reviews/crowd-pilot-1/viewer.html"
+  },
+  {
+   "label": "Asset library",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools/assets"
+  }
+ ],
+ "pictures_local": true
+}

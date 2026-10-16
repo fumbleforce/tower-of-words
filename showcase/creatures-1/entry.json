@@ -1,0 +1,55 @@
+{
+ "title": "Birds and small animals outdoors",
+ "date": "2026-10-02",
+ "by": "claude-agent:creatures",
+ "caption": "Pigeons, sparrows, crows, gulls, island cats, butterflies and red dragonflies in the outdoor places, by time of day; flocks scatter when Eric walks up. Sparrows and wind by day, crickets after work.",
+ "sections": [
+  {
+   "title": "Scattering, and up close",
+   "caption": "Walk up to a flock and it takes off."
+  },
+  {
+   "title": "Station forecourt",
+   "caption": "Pigeons on the paving by the head office, sparrows by the benches, crows on the roofs."
+  },
+  {
+   "title": "Fountain plaza",
+   "caption": "Pigeons round the fountain, sparrows, a crow on the fountain top, butterflies and red dragonflies over the lawns."
+  },
+  {
+   "title": "Shop street",
+   "caption": "Pigeons and sparrows by the planter, the ginger shop cat by a wall, a crow on a roof, gulls over the sea."
+  },
+  {
+   "title": "East lane",
+   "caption": "Sparrows, butterflies and dragonflies over the verges."
+  },
+  {
+   "title": "East coast",
+   "caption": "Gulls circling and sitting on the blocks, sparrows, insects over the grass."
+  },
+  {
+   "title": "Gym and pool",
+   "caption": "Pigeons on the sports lane, dragonflies."
+  },
+  {
+   "title": "Office street",
+   "caption": "A pigeon flock and sparrows on the street."
+  },
+  {
+   "title": "Harbour",
+   "caption": "Gulls over the harbour, the ginger harbour cat."
+  },
+  {
+   "title": "After work",
+   "caption": "Pigeons, sparrows and insects are gone after work; crows stay, and the cats come out."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

@@ -1,0 +1,37 @@
+{
+ "title": "The walk home: forecourt, plaza, dorm courtyard, room",
+ "date": "2026-09-30",
+ "by": "Claude",
+ "caption": "The four places built overnight, from the station to Eric's room, in the game camera with the interface hidden (build 0930-0524-38755d9).",
+ "commit": [
+  "c7f3d4f",
+  "1382043",
+  "7a6016c",
+  "7d63226",
+  "3bed266",
+  "9a5a525"
+ ],
+ "sections": [
+  {
+   "title": "Where they are",
+   "caption": "The route on the island map you picked (island-map-4): station forecourt, fountain plaza, dorm courtyard, Eric's room."
+  },
+  {
+   "title": "Station forecourt (forecourt)",
+   "caption": "The court between the station's north door and the head office entrance, with bike racks, a bench, a planted bed and the 本社 sign. Eric crosses it to the lift in the morning and walks east along the lane after work."
+  },
+  {
+   "title": "Fountain plaza (plaza)",
+   "caption": "East of the forecourt: the fountain with its no-coins sign, two benches, the canteen terrace behind and the shop roofs in front. A side trip in the morning, on the way home after work."
+  },
+  {
+   "title": "Dorm courtyard (dorm_court)",
+   "caption": "Outside Eric's dorm at dusk: the entrance hall with its 24 mailboxes, the coin laundry on the left, the sento on the right and the bike shelter in front."
+  },
+  {
+   "title": "Eric's room (dorms)",
+   "caption": "His tiny room: bed, desk, two shipped boxes and one window onto a concrete wall, with the kitchenette and unit bath by the door. The day ends here."
+  }
+ ],
+ "pictures_local": true
+}

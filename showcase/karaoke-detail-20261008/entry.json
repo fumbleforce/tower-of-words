@@ -1,0 +1,51 @@
+{
+ "title": "Karaoke reception and booth details",
+ "date": "2026-10-08",
+ "result": [
+  "final-2-1366-eric-02-desk-arrival",
+  "final-2-1366-eric-04-desk-drinks",
+  "final-2-1366-eric-07-booth-arrival",
+  "final-2-1366-eric-08-booth-screen"
+ ],
+ "by": "codex",
+ "caption": "Open drink dispensers, cupboard joinery, a connected stair rail, separate cushions and AV fittings add detail to both public rooms. Every retained render attempt appears by round and capture time. Save and return checks pass; existing stage contact failures remain tracked in #349.",
+ "preview": "final-2-1366-eric-02-desk-arrival",
+ "sections": [
+  {
+   "title": "Original rooms",
+   "caption": "Native door and stair interactions with scripted walking approaches. Original fixtures and recovered booth layout before the detail pass; some early side cameras faced outside the cutaway."
+  },
+  {
+   "title": "First fixture pass",
+   "caption": "Open dispenser bays, counter joinery, supported stair rail, padded benches and AV detail. Review requested wall-panel contact and isolation of the new door frame from the interaction outline."
+  },
+  {
+   "title": "Frame correction and first activity attempt",
+   "caption": "Door-frame highlight correction and wall-panel contact fixes. This shortened stage harness failed a microphone contact check; Continue was not reached. These are retained failed-attempt originals."
+  },
+  {
+   "title": "Final room details and full stage attempt",
+   "caption": "Final fixture source: reception and booth reviewed at 8/10 at both sizes. Existing stage actions were invoked directly, not triggered through the story. Contact assertions failed before Continue; route and save proof follows below."
+  },
+  {
+   "title": "Strict desktop and phone day tests",
+   "caption": "Both strict day-one fast runs passed. End-of-day frames supplement the focused room checks."
+  },
+  {
+   "title": "Same-harness unchanged-room comparison",
+   "caption": "The identical full stage harness against unchanged main reproduces the receipt pickup failure. Original room source; no detail pass present."
+  },
+  {
+   "title": "Existing canonical stage test on unchanged main",
+   "caption": "The existing canonical checker also records four failed pickup/handoff distances. It injects stage actions and sample dialogue, including English test text, rather than playing a story. First launch was GPU-deferred without images; these originals are from the retry."
+  },
+  {
+   "title": "Continue and native return with contact failures retained",
+   "caption": "Final room source, existing stage invoked directly. Actual quicksave, title Continue, held-microphone/queue restoration and native exits to reception and street passed at both sizes. Scripted walking approaches lead to real pin/menu clicks. Overall checker remains failed because all four existing contact limits are exceeded; failure frames are taken after the successful return. Tracked in issue #349: https://github.com/fumbleforce/tower-of-words/issues/349."
+  }
+ ],
+ "commit": [
+  "9a53313daaef29042c251215bc3f4408e4596093"
+ ],
+ "pictures_local": true
+}

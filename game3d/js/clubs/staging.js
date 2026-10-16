@@ -1,0 +1,1 @@
+const a={art:"artClub",karaoke:"karaokeClub",swimming:"swimmingClub"};export function clubStageReady(t,r,n){if(t<=5||!a[r])return!0;const e=n?.[a[r]];return r==="karaoke"&&e?.performanceReady!==!0?!1:typeof e?.ready=="function"?e.ready()===!0:e?.ready===!0}

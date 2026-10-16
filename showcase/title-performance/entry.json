@@ -1,0 +1,123 @@
+{
+ "title": "Title frame rate limits",
+ "date": "2026-10-14",
+ "by": "codex/title-performance",
+ "caption": "The title now honors 60 and None in Settings. Auto still uses 30 fps to save power. The performance overlay states the limit, and the title skips player collision scans. High-quality desktop testing measured 60 fps on the RTX 3080.",
+ "commit": [
+  "8400b878a",
+  "21ffa931f"
+ ],
+ "result": [
+  "desktop-60",
+  "phone-auto",
+  "phone-settings"
+ ],
+ "sections": [
+  {
+   "title": "Implemented",
+   "images": [
+    {
+     "id": "desktop-60",
+     "image": "game3d/shots/title-performance-20261014/title-performance-desktop-1792007417617-60.png.webp",
+     "caption": "60 fps selected, high quality, RTX 3080, 2327 × 1196 at DPR 1.1. The measured draw rate is 60 fps."
+    },
+    {
+     "id": "phone-auto",
+     "image": "game3d/shots/title-performance-20261014/title-performance-phone-auto.png.webp",
+     "caption": "Auto keeps the title at 30 fps to save power. The performance overlay now states the active limit."
+    },
+    {
+     "id": "phone-settings",
+     "image": "game3d/shots/title-performance/cold/phone-graphics-settled.png.webp",
+     "caption": "Graphics Settings explain the Auto limit. Choosing 60 or None now applies to the title too."
+    },
+    {
+     "id": "desktop-settings",
+     "image": "game3d/shots/title-performance/cold/desktop-graphics.png.webp",
+     "caption": "Desktop Graphics Settings."
+    }
+   ]
+  },
+  {
+   "title": "Other captures and earlier attempts",
+   "images": [
+    {
+     "id": "capture-title-performance-desktop-1792007417617-30",
+     "image": "game3d/shots/title-performance-20261014/title-performance-desktop-1792007417617-30.png.webp",
+     "caption": "desktop-1792007417617-30. Earlier captures can retain samples from the previous frame limit in the average."
+    },
+    {
+     "id": "capture-title-performance-desktop-1792007417617-auto",
+     "image": "game3d/shots/title-performance-20261014/title-performance-desktop-1792007417617-auto.png.webp",
+     "caption": "desktop-1792007417617-auto. Earlier captures can retain samples from the previous frame limit in the average."
+    },
+    {
+     "id": "capture-title-performance-desktop-1792007417617-off",
+     "image": "game3d/shots/title-performance-20261014/title-performance-desktop-1792007417617-off.png.webp",
+     "caption": "desktop-1792007417617-off. Earlier captures can retain samples from the previous frame limit in the average."
+    },
+    {
+     "id": "capture-title-performance-desktop-1792007417617-started",
+     "image": "game3d/shots/title-performance-20261014/title-performance-desktop-1792007417617-started.png.webp",
+     "caption": "desktop-1792007417617-started. Earlier captures can retain samples from the previous frame limit in the average."
+    },
+    {
+     "id": "capture-title-performance-desktop-30",
+     "image": "game3d/shots/title-performance-20261014/title-performance-desktop-30.png.webp",
+     "caption": "desktop-30. Earlier captures can retain samples from the previous frame limit in the average."
+    },
+    {
+     "id": "capture-title-performance-desktop-60",
+     "image": "game3d/shots/title-performance-20261014/title-performance-desktop-60.png.webp",
+     "caption": "desktop-60. Earlier captures can retain samples from the previous frame limit in the average."
+    },
+    {
+     "id": "capture-title-performance-desktop-auto",
+     "image": "game3d/shots/title-performance-20261014/title-performance-desktop-auto.png.webp",
+     "caption": "desktop-auto. Earlier captures can retain samples from the previous frame limit in the average."
+    },
+    {
+     "id": "capture-title-performance-desktop-off",
+     "image": "game3d/shots/title-performance-20261014/title-performance-desktop-off.png.webp",
+     "caption": "desktop-off. Earlier captures can retain samples from the previous frame limit in the average."
+    },
+    {
+     "id": "capture-title-performance-desktop-started",
+     "image": "game3d/shots/title-performance-20261014/title-performance-desktop-started.png.webp",
+     "caption": "desktop-started. Earlier captures can retain samples from the previous frame limit in the average."
+    },
+    {
+     "id": "capture-title-performance-phone-30",
+     "image": "game3d/shots/title-performance-20261014/title-performance-phone-30.png.webp",
+     "caption": "phone-30. Earlier captures can retain samples from the previous frame limit in the average."
+    },
+    {
+     "id": "capture-title-performance-phone-60",
+     "image": "game3d/shots/title-performance-20261014/title-performance-phone-60.png.webp",
+     "caption": "phone-60. Earlier captures can retain samples from the previous frame limit in the average."
+    },
+    {
+     "id": "capture-title-performance-phone-off",
+     "image": "game3d/shots/title-performance-20261014/title-performance-phone-off.png.webp",
+     "caption": "phone-off. Earlier captures can retain samples from the previous frame limit in the average."
+    },
+    {
+     "id": "capture-title-performance-phone-started",
+     "image": "game3d/shots/title-performance-20261014/title-performance-phone-started.png.webp",
+     "caption": "phone-started. Earlier captures can retain samples from the previous frame limit in the average."
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  },
+  {
+   "label": "Measurements and checks (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  }
+ ],
+ "media": []
+}

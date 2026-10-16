@@ -1,0 +1,1 @@
+export function freeMerged(e,o,s){const a=new Set;e.traverse(r=>{r.geometry&&r.layers.mask!==s&&a.add(r.geometry)});for(const r of o){const t=r.geometry;!t||a.has(t)||t.userData.perfFreed||(t.dispose(),t.userData.perfFreed=!0)}}export const unfree=e=>{e.geometry&&e.geometry.userData.perfFreed&&delete e.geometry.userData.perfFreed};

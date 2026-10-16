@@ -1,0 +1,35 @@
+{
+ "sent": "2026-09-29T14:59:35+0200",
+ "picked": [
+  "worktrees",
+  "commit-gate",
+  "feedback-log",
+  "agent-defs",
+  "project-skills",
+  "gpu-slots",
+  "codex-wake",
+  "guide-diet",
+  "telemetry",
+  "image-qa"
+ ],
+ "options": {
+  "nightly-qa": {
+   "star": false,
+   "reject": true,
+   "comment": ""
+  },
+  "telemetry": {
+   "star": false,
+   "reject": false,
+   "comment": "no but performance metrics would be good, as well as a feedback window to give in-app feedback rather than having to screenshot and post to claude, just a modal with text field and send, that also takes a screenshot there and then "
+  },
+  "story-props": {
+   "star": false,
+   "reject": false,
+   "comment": "dont understand what this means"
+  }
+ },
+ "comment": "",
+ "read": true,
+ "history": []
+}

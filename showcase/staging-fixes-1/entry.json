@@ -1,0 +1,39 @@
+{
+ "title": "Unfinished staging: the bench, the gate screen, the chair, Mio's desk, the seat goal",
+ "date": "2026-09-30",
+ "by": "claude-agent:unfinished-staging",
+ "caption": "Staging requests the audit found unfinished, now on screen. No lines changed. Before is main as it was, after is this change, same camera.",
+ "sections": [
+  {
+   "title": "Eric sits on the gate bench",
+   "caption": "\"Wait on the bench until nine\": before, Eric stood in front of the bench; now he sits on it, and stands back up onto the floor in front of it when Hamada arrives."
+  },
+  {
+   "title": "The gate's count screen",
+   "caption": "When Hamada jams the gate, the screen shows a person and a briefcase and a red 2 (before: two people), and the camera moves in on it while the gate's voice and the narration line play, then back."
+  },
+  {
+   "title": "Eric pushes his chair back",
+   "caption": "Before, the chair rolled and spun to his desk by itself while Eric stayed in the machine room. Now he walks behind it and pushes it there, Tama riding on it."
+  },
+  {
+   "title": "Mio in the afternoon",
+   "caption": "Before, she stood beside her chair; now she sits at her desk. In the evening she stands beside Eric's desk (a new spot) instead of right behind his chair."
+  },
+  {
+   "title": "\"Sit by the lunchbox\" marks the seat",
+   "caption": "The goal now puts the teal goal pin over the free seat by Mio (nothing drawn on the floor); tapping it walks Eric there."
+  },
+  {
+   "title": "Gestures and labels",
+   "caption": "Gestures that did nothing now move: Eric's point, lift and squeeze, the guard's beckon and lift, Hamada's lift (his briefcase goes up with his hand), Kenji's high five and fist bump. From the high camera they are small. The woman on her phone on the train is labelled \"Woman on her phone\" instead of Aoi, since nobody names her."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

@@ -1,0 +1,46 @@
+{
+ "title": "Mio looking at her phone, round 5 (top of her left lens)",
+ "date": "2026-09-29",
+ "by": "art agent (Mio phone 5)",
+ "status": "decided",
+ "multi": false,
+ "question": "Is the top of her left lens solid now?",
+ "options": [
+  {
+   "id": "blendk20-3501-exact-3401-v2",
+   "label": "blendk20-3501-exact-3401-v2",
+   "note": "The round 3 pick. The top bar of her left lens now runs unbroken from the corner to the hinge."
+  },
+  {
+   "id": "blendk25-3501-exact-3401-v2",
+   "label": "blendk25-3501-exact-3401-v2",
+   "note": "Same at 0.25."
+  },
+  {
+   "id": "exact-3401-v2",
+   "label": "exact-3401-v2",
+   "note": "Without the light blend."
+  },
+  {
+   "id": "blendk20-3501-exact-3403-v2",
+   "label": "blendk20-3501-exact-3403-v2",
+   "note": "The same method on the other bare face. It has a small teal fleck above her right eye."
+  },
+  {
+   "id": "redo",
+   "label": "Redo it (say what to change)"
+  }
+ ],
+ "links": [
+  {
+   "label": "Round 4",
+   "href": "#review/mio-phone-4"
+  }
+ ],
+ "decided": [
+  "blendk25-3501-exact-3401-v2"
+ ],
+ "decision": "blendk25-3501-exact-3401-v2: 'close enough... dont stress it'",
+ "issue": 37,
+ "pictures_local": true
+}

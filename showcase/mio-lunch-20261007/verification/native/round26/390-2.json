@@ -1,0 +1,710 @@
+{
+  "before": {
+    "sender": {
+      "v": 1,
+      "offered": true,
+      "awake": true,
+      "acknowledged": [
+        24,
+        26,
+        27
+      ],
+      "held": 25,
+      "attempts": [
+        {
+          "id": 1,
+          "rows": [
+            {
+              "id": "1:0",
+              "item": 24,
+              "status": "acknowledged"
+            },
+            {
+              "id": "1:1",
+              "item": 25,
+              "status": "started"
+            },
+            {
+              "id": "1:2",
+              "item": null,
+              "status": "restart"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "rows": [
+            {
+              "id": "2:0",
+              "item": 25,
+              "status": "started"
+            },
+            {
+              "id": "2:1",
+              "item": null,
+              "status": "restart"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "rows": [
+            {
+              "id": "3:0",
+              "item": 26,
+              "status": "started"
+            },
+            {
+              "id": "3:1",
+              "item": 26,
+              "status": "acknowledged"
+            },
+            {
+              "id": "3:2",
+              "item": 27,
+              "status": "started"
+            },
+            {
+              "id": "3:3",
+              "item": 27,
+              "status": "acknowledged"
+            }
+          ]
+        }
+      ],
+      "selected": [
+        "1:1",
+        "2:0"
+      ],
+      "pinned": {
+        "item": 25,
+        "rows": [
+          "1:1",
+          "2:0"
+        ]
+      },
+      "active": null,
+      "failures": 0
+    },
+    "flags": {
+      "sender_state": {
+        "v": 1,
+        "offered": true,
+        "awake": true,
+        "acknowledged": [
+          24,
+          26,
+          27
+        ],
+        "held": 25,
+        "attempts": [
+          {
+            "id": 1,
+            "rows": [
+              {
+                "id": "1:0",
+                "item": 24,
+                "status": "acknowledged"
+              },
+              {
+                "id": "1:1",
+                "item": 25,
+                "status": "started"
+              },
+              {
+                "id": "1:2",
+                "item": null,
+                "status": "restart"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "rows": [
+              {
+                "id": "2:0",
+                "item": 25,
+                "status": "started"
+              },
+              {
+                "id": "2:1",
+                "item": null,
+                "status": "restart"
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "rows": [
+              {
+                "id": "3:0",
+                "item": 26,
+                "status": "started"
+              },
+              {
+                "id": "3:1",
+                "item": 26,
+                "status": "acknowledged"
+              },
+              {
+                "id": "3:2",
+                "item": 27,
+                "status": "started"
+              },
+              {
+                "id": "3:3",
+                "item": 27,
+                "status": "acknowledged"
+              }
+            ]
+          }
+        ],
+        "selected": [
+          "1:1",
+          "2:0"
+        ],
+        "pinned": {
+          "item": 25,
+          "rows": [
+            "1:1",
+            "2:0"
+          ]
+        },
+        "active": null,
+        "failures": 0
+      },
+      "sender_offered": true,
+      "sender_partial": true,
+      "sender_delivered": true,
+      "sender_compared": true
+    },
+    "offered": 2,
+    "monitors": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -2,
+        0.42,
+        -3.14,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        4.2,
+        0.5,
+        -1.3,
+        1
+      ]
+    ]
+  },
+  "after": {
+    "busy": false,
+    "period": "afternoon",
+    "flags": {
+      "gate_magic": true,
+      "dorm_room_known": true,
+      "going_home": true,
+      "lunch_mio": true,
+      "mio_warm": 2,
+      "d2_started": true,
+      "d2_station_seen": true,
+      "d2_checked": true,
+      "d2_ticket_done": true,
+      "d2_order_sensor": true,
+      "d2_brief_done": true,
+      "d2_shift_done": true,
+      "d2_met_kenji": true,
+      "d2_ate": true,
+      "d2_food": "riceball",
+      "d2_party_done": true,
+      "d2_complete": true,
+      "ticket_T0001": "done",
+      "ticket_T0002": "progress",
+      "ticketread_T0001": true,
+      "ticketread_T0002": true,
+      "d3_complete": true,
+      "d4_complete": true,
+      "day": 5,
+      "period": "afternoon",
+      "place": "office",
+      "machineOpen": true,
+      "mio_lunch_offer": 0,
+      "bond_mio": 6,
+      "step_mio": 2,
+      "bondready_mio": 0,
+      "bond2_mio": true,
+      "period_early": false,
+      "period_morning": false,
+      "period_lunch": false,
+      "period_afternoon": true,
+      "period_evening": false,
+      "sender_state": {
+        "v": 1,
+        "offered": true,
+        "awake": true,
+        "acknowledged": [
+          24,
+          26,
+          27
+        ],
+        "held": 25,
+        "attempts": [
+          {
+            "id": 1,
+            "rows": [
+              {
+                "id": "1:0",
+                "item": 24,
+                "status": "acknowledged"
+              },
+              {
+                "id": "1:1",
+                "item": 25,
+                "status": "started"
+              },
+              {
+                "id": "1:2",
+                "item": null,
+                "status": "restart"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "rows": [
+              {
+                "id": "2:0",
+                "item": 25,
+                "status": "started"
+              },
+              {
+                "id": "2:1",
+                "item": null,
+                "status": "restart"
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "rows": [
+              {
+                "id": "3:0",
+                "item": 26,
+                "status": "started"
+              },
+              {
+                "id": "3:1",
+                "item": 26,
+                "status": "acknowledged"
+              },
+              {
+                "id": "3:2",
+                "item": 27,
+                "status": "started"
+              },
+              {
+                "id": "3:3",
+                "item": 27,
+                "status": "acknowledged"
+              }
+            ]
+          }
+        ],
+        "selected": [
+          "1:1",
+          "2:0"
+        ],
+        "pinned": {
+          "item": 25,
+          "rows": [
+            "1:1",
+            "2:0"
+          ]
+        },
+        "active": null,
+        "failures": 0
+      },
+      "sender_offered": true,
+      "sender_partial": true,
+      "sender_delivered": true,
+      "sender_compared": true,
+      "met_mio": true,
+      "met_guard": true,
+      "met_kuroda": true,
+      "met_emi": true,
+      "met_kenji": true,
+      "met_mori": true,
+      "ms2_mio": true,
+      "rem_mio_milestone2": true,
+      "talked_mio": true
+    },
+    "points": 6,
+    "stage": {
+      "state": null,
+      "phase": "idle",
+      "day": 5,
+      "cableParked": true,
+      "props": {
+        "items": {
+          "food": {
+            "visible": true,
+            "position": [
+              5.95,
+              0.245,
+              -2.17
+            ],
+            "rotation": [
+              0,
+              -1.5707963267948966,
+              0,
+              "XYZ"
+            ],
+            "scale": [
+              1.35,
+              1.35,
+              1.35
+            ],
+            "parent": "root"
+          },
+          "sheet": {
+            "visible": false,
+            "position": [
+              5.12,
+              0.85,
+              -2.935
+            ],
+            "rotation": [
+              1.5707963267948966,
+              0,
+              0,
+              "XYZ"
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "parent": "root"
+          },
+          "pencil": {
+            "visible": true,
+            "position": [
+              0,
+              0.03,
+              -0.1
+            ],
+            "rotation": [
+              0,
+              1.5707963267948966,
+              0,
+              "XYZ"
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "parent": "sheet"
+          },
+          "cable": {
+            "visible": true,
+            "position": [
+              4.34,
+              0.225,
+              -2.09
+            ],
+            "rotation": [
+              1.5707963267948966,
+              0,
+              0,
+              "XYZ"
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "parent": "root"
+          },
+          "sticks": {
+            "visible": true,
+            "position": [
+              0.11,
+              0.034,
+              0
+            ],
+            "rotation": [
+              0,
+              0.2,
+              0,
+              "XYZ"
+            ],
+            "scale": [
+              0.7407407407407407,
+              0.7407407407407407,
+              0.7407407407407407
+            ],
+            "parent": "food"
+          }
+        },
+        "lid": true,
+        "mark": false,
+        "bite": false,
+        "visible": false
+      },
+      "hands": [],
+      "bow": 0
+    },
+    "contacts": [
+      {
+        "id": "chopsticks-pickup",
+        "gap": 0.0014605299402349174,
+        "hand": [
+          5.818563965972001,
+          0.3398739890043677,
+          -2.190407646319376
+        ],
+        "target": [
+          5.819601331556825,
+          0.3409,
+          -2.190473386615901
+        ]
+      },
+      {
+        "id": "rice-pickup",
+        "gap": 0.0010982229592754885,
+        "from": [
+          5.7993633247604395,
+          0.3670451258941491,
+          -2.3825144401080705
+        ],
+        "to": [
+          5.8,
+          0.36789999999999995,
+          -2.38225
+        ]
+      },
+      {
+        "id": "bite-hand",
+        "gap": 0.0012449982754051151,
+        "hand": [
+          5.8332020913557034,
+          0.5281468063516003,
+          -2.103407590905079
+        ],
+        "target": [
+          5.832185332559035,
+          0.5283519703085413,
+          -2.1027190199167762
+        ]
+      },
+      {
+        "id": "bite-mouth",
+        "gap": 0.0012449982754058405,
+        "from": [
+          5.756494005179031,
+          0.5316468063516002,
+          -2.2438208008075384
+        ],
+        "to": [
+          5.7554772463823625,
+          0.5318519703085413,
+          -2.2431322298192358
+        ]
+      },
+      {
+        "id": "chopsticks-return",
+        "gap": 0.001461726807239364,
+        "hand": [
+          5.818563041856864,
+          0.33987322335247105,
+          -2.1904075878769627
+        ],
+        "target": [
+          5.819601331556825,
+          0.3409,
+          -2.190473386615901
+        ]
+      }
+    ],
+    "proof": {
+      "lines": [
+        "Thanks. Is this where you usually eat?",
+        "Usually. If someone comes in, I can pretend I was working before they arrived."
+      ],
+      "contactCount": 5,
+      "capture": null,
+      "done": false,
+      "errors": [],
+      "choices": [],
+      "routes": [],
+      "routeShots": []
+    },
+    "sender": {
+      "v": 1,
+      "offered": true,
+      "awake": true,
+      "acknowledged": [
+        24,
+        26,
+        27
+      ],
+      "held": 25,
+      "attempts": [
+        {
+          "id": 1,
+          "rows": [
+            {
+              "id": "1:0",
+              "item": 24,
+              "status": "acknowledged"
+            },
+            {
+              "id": "1:1",
+              "item": 25,
+              "status": "started"
+            },
+            {
+              "id": "1:2",
+              "item": null,
+              "status": "restart"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "rows": [
+            {
+              "id": "2:0",
+              "item": 25,
+              "status": "started"
+            },
+            {
+              "id": "2:1",
+              "item": null,
+              "status": "restart"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "rows": [
+            {
+              "id": "3:0",
+              "item": 26,
+              "status": "started"
+            },
+            {
+              "id": "3:1",
+              "item": 26,
+              "status": "acknowledged"
+            },
+            {
+              "id": "3:2",
+              "item": 27,
+              "status": "started"
+            },
+            {
+              "id": "3:3",
+              "item": 27,
+              "status": "acknowledged"
+            }
+          ]
+        }
+      ],
+      "selected": [
+        "1:1",
+        "2:0"
+      ],
+      "pinned": {
+        "item": 25,
+        "rows": [
+          "1:1",
+          "2:0"
+        ]
+      },
+      "active": null,
+      "failures": 0
+    },
+    "monitors": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -2,
+        0.42,
+        -3.14,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        4.2,
+        0.5,
+        -1.3,
+        1
+      ]
+    ]
+  },
+  "continued": true,
+  "errors": [],
+  "captures": [
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-layout.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-cable-pickup.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-cable-hook.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-line-1.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-line-2.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-line-3.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-chopsticks-pickup.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-rice-pickup.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-bite-mouth.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-continued-start.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-continued-line-1.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-continued-line-2.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-continued-chopsticks-pickup.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-continued-rice-pickup.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-continued-bite-mouth.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-continued-chopsticks-return.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//390-2-finished.png"
+  ]
+}

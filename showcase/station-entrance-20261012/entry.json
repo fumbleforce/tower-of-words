@@ -1,0 +1,18 @@
+{
+ "title": "Station entrance restored",
+ "date": "2026-10-12",
+ "by": "codex",
+ "caption": "Station surfaces are lit correctly at normal quality, and the approach and glass entrance stay visible.",
+ "commit": "62994e02a",
+ "result": [
+  "entrance",
+  "approach"
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

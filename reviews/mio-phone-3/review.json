@@ -1,0 +1,157 @@
+{
+ "title": "Mio looking at her phone, round 3 (ipa7a-1001 with her own glasses)",
+ "date": "2026-09-29",
+ "by": "art agent (Mio phone 3)",
+ "status": "superseded",
+ "multi": false,
+ "question": "Which one has her glasses right?",
+ "options": [
+  {
+   "id": "comp",
+   "label": "mio-phone3-comp",
+   "note": "The portrait's frame pixels warped onto her face; her silver frame rubbed out on the CPU. Smudges where the old frame was."
+  },
+  {
+   "id": "clean-3101",
+   "label": "mio-phone3-clean-3101",
+   "note": "comp, then the old frame's leftovers repainted; portrait frame pasted back. Old line still across her left eye, smudged hinge."
+  },
+  {
+   "id": "clean-3102",
+   "label": "mio-phone3-clean-3102",
+   "note": "Same, another seed. Same faults."
+  },
+  {
+   "id": "clean-3103",
+   "label": "mio-phone3-clean-3103",
+   "note": "Same, another seed. Same faults."
+  },
+  {
+   "id": "ipa-3201",
+   "label": "mio-phone3-ipa-3201",
+   "note": "Diffusion only, IP-Adapter on the portrait plus words. Black frames and green eyes: off-model."
+  },
+  {
+   "id": "ipa-3202",
+   "label": "mio-phone3-ipa-3202",
+   "note": "Same, another seed. Green-grey frames, green eyes: off-model."
+  },
+  {
+   "id": "dip-3301",
+   "label": "mio-phone3-dip-3301",
+   "note": "Diffusion only, the portrait's head beside hers (diptych). Frame close to the portrait, but her eyes were repainted too."
+  },
+  {
+   "id": "dip-3302",
+   "label": "mio-phone3-dip-3302",
+   "note": "Same, another seed. Rounder lenses; green glint in one eye."
+  },
+  {
+   "id": "clean2-3111",
+   "label": "mio-phone3-clean2-3111",
+   "note": "comp cleaned by the diptych repaint. Broke her eyes."
+  },
+  {
+   "id": "clean2-3112",
+   "label": "mio-phone3-clean2-3112",
+   "note": "Same, another seed. Broke her eyes."
+  },
+  {
+   "id": "clean2-3113",
+   "label": "mio-phone3-clean2-3113",
+   "note": "Same, another seed. Broke her eyes."
+  },
+  {
+   "id": "dipk-3301",
+   "label": "mio-phone3-dipk-3301",
+   "note": "Diptych repaint with her eyes kept. Clean; a redrawn copy, not the portrait's own pixels."
+  },
+  {
+   "id": "dipk-3302",
+   "label": "mio-phone3-dipk-3302",
+   "note": "Same, another seed. Taller, rounder lenses than the portrait."
+  },
+  {
+   "id": "dipk-3303",
+   "label": "mio-phone3-dipk-3303",
+   "note": "Same, another seed. Thicker, darker frame."
+  },
+  {
+   "id": "dipk-3304",
+   "label": "mio-phone3-dipk-3304",
+   "note": "Same, another seed. Darker frame."
+  },
+  {
+   "id": "exact-3401",
+   "label": "mio-phone3-exact-3401",
+   "note": "Glasses taken off first, then the portrait's frame pixels put on. Her old nose pads kept, with grey stubs; dark blot at the hinge."
+  },
+  {
+   "id": "exact-3402",
+   "label": "mio-phone3-exact-3402",
+   "note": "Same, another seed. Also a stray glint over her eyes."
+  },
+  {
+   "id": "exact-3403",
+   "label": "mio-phone3-exact-3403",
+   "note": "Same, another seed. Stray glints."
+  },
+  {
+   "id": "exact-3401-v2",
+   "label": "mio-phone3-exact-3401-v2",
+   "note": "As exact, but with the portrait's nose pads and no hair pixels in the frame. The frame is the portrait's own pixels; a few rough edges at the hinge."
+  },
+  {
+   "id": "exact-3403-v2",
+   "label": "mio-phone3-exact-3403-v2",
+   "note": "Same, another seed."
+  },
+  {
+   "id": "exact-3404-v2",
+   "label": "mio-phone3-exact-3404-v2",
+   "note": "Same, another seed."
+  },
+  {
+   "id": "blend20-3501-exact-3401-v2",
+   "label": "mio-phone3-blend20-3501-exact-3401-v2",
+   "note": "exact-3401-v2 with a light repaint (0.2) over the glasses and eyes. Clean edges; her irises shift a little."
+  },
+  {
+   "id": "blend20-3501-exact-3403-v2",
+   "label": "mio-phone3-blend20-3501-exact-3403-v2",
+   "note": "Same on exact-3403-v2."
+  },
+  {
+   "id": "blend30-3501-exact-3401-v2",
+   "label": "mio-phone3-blend30-3501-exact-3401-v2",
+   "note": "Stronger (0.3): frame gets thicker and glossier than the portrait."
+  },
+  {
+   "id": "blend30-3501-exact-3403-v2",
+   "label": "mio-phone3-blend30-3501-exact-3403-v2",
+   "note": "Same on exact-3403-v2, thicker frame."
+  },
+  {
+   "id": "blendk20-3501-exact-3401-v2",
+   "label": "mio-phone3-blendk20-3501-exact-3401-v2",
+   "note": "My pick: exact-3401-v2 with a light repaint (0.2) over the glasses only, her eyes kept. Portrait's frame shape, size and taupe colour, clean hinge."
+  },
+  {
+   "id": "blendk25-3501-exact-3401-v2",
+   "label": "mio-phone3-blendk25-3501-exact-3401-v2",
+   "note": "Same at 0.25. Slightly softer frame edges."
+  },
+  {
+   "id": "redo",
+   "label": "Redo it (say what to change)"
+  }
+ ],
+ "links": [
+  {
+   "label": "Round 2",
+   "href": "#review/mio-phone-2"
+  }
+ ],
+ "decision": "pick blendk20-3501-exact-3401-v2 direction, fix transparent top of left frame (round 4: mio-phone-4)",
+ "pictures_local": true
+}

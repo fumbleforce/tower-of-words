@@ -1,0 +1,105 @@
+{
+  "thickness": 1.5,
+  "sourceSha256": "7e32a19a250f08c4b1a3712e1d0b9601688dcf63cab86350d7bd10b004286272",
+  "quality": 2,
+  "frames": [
+    {
+      "file": "b2-2560.png",
+      "width": 2560,
+      "height": 1440,
+      "position": [
+        -0.2,
+        0,
+        -2.1
+      ],
+      "spot": "mio_by_desk",
+      "found": true
+    },
+    {
+      "file": "lobby-2560.png",
+      "width": 2560,
+      "height": 1440,
+      "position": [
+        15.58,
+        0,
+        -5.05
+      ],
+      "spot": "lobby_island_w",
+      "found": true
+    },
+    {
+      "file": "greenery-2560.png",
+      "width": 2560,
+      "height": 1440,
+      "position": [
+        -7.8,
+        0,
+        -0.27
+      ],
+      "spot": null,
+      "found": false
+    },
+    {
+      "file": "seating-2560.png",
+      "width": 2560,
+      "height": 1440,
+      "position": [
+        30.279999999999998,
+        0,
+        -1.5199999999999998
+      ],
+      "spot": "bench",
+      "found": true
+    },
+    {
+      "file": "b2-390.png",
+      "width": 390,
+      "height": 844,
+      "position": [
+        -0.2,
+        0,
+        -2.1
+      ],
+      "spot": "mio_by_desk",
+      "found": true
+    },
+    {
+      "file": "lobby-390.png",
+      "width": 390,
+      "height": 844,
+      "position": [
+        15.58,
+        0,
+        -5.05
+      ],
+      "spot": "lobby_island_w",
+      "found": true
+    },
+    {
+      "file": "greenery-390.png",
+      "width": 390,
+      "height": 844,
+      "position": [
+        -7.8,
+        0,
+        -0.27
+      ],
+      "spot": null,
+      "found": false
+    },
+    {
+      "file": "seating-390.png",
+      "width": 390,
+      "height": 844,
+      "position": [
+        30.279999999999998,
+        0,
+        -1.5199999999999998
+      ],
+      "spot": "bench",
+      "found": true
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

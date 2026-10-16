@@ -1,0 +1,35 @@
+{
+ "title": "Train passenger update",
+ "date": "2026-10-16",
+ "by": "codex",
+ "caption": "The passengers stay occupied with their own trip. Play the opening to see the writing change.",
+ "commit": "39610f7c",
+ "result": [
+  "opening-phone",
+  "opening-desktop"
+ ],
+ "sections": [
+  {
+   "title": "Opening",
+   "images": [
+    {
+     "id": "opening-phone",
+     "image": "game3d/shots/train-passengers-665/opening-phone.png.webp",
+     "caption": "Opening, phone"
+    },
+    {
+     "id": "opening-desktop",
+     "image": "game3d/shots/train-passengers-665/opening-desktop.png.webp",
+     "caption": "Opening, desktop"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

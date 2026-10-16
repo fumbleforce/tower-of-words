@@ -1,0 +1,45 @@
+{
+ "title": "Works recycling bay and weather station details",
+ "date": "2026-10-07",
+ "updated": "2026-10-07T15:20:52.124623+00:00",
+ "by": "codex",
+ "caption": "Four labelled, lidded bins stand on a drained wash pad. Weather instruments have footings, a clear service path and a sign fastened to the existing fence. Desktop and phone walks use the existing gate and street.",
+ "preview": "round4-1366-gate-approach",
+ "sections": [
+  {
+   "title": "Current — normal player camera and support details",
+   "caption": "Q1 real mouse/touch routes and focused diagnostics. The two rear-labelled attempts still face the front and are retained for comparison."
+  },
+  {
+   "title": "Current — rear wheel and drain inspection",
+   "caption": "Q1 diagnostic view from southeast, showing the rear wheels supported by the wash pad and the grated drain. This is a camera inspection, not the player camera."
+  },
+  {
+   "title": "Before — original frontage",
+   "caption": "Original q1 normal camera views: plain cube bins and bare weather enclosure."
+  },
+  {
+   "title": "First construction pass",
+   "caption": "Initial q1 normal camera views before the station-board support repair."
+  },
+  {
+   "title": "Route and framing attempt — low quality",
+   "caption": "Q0 mouse/touch routes passed. Diagnostic station and bin closeups were rejected for missing details, especially on phone."
+  },
+  {
+   "title": "Inspection framing attempt",
+   "caption": "Q1 board, footings and bin fronts. The rear view was rejected because the building blocked the lens."
+  }
+ ],
+ "links": [
+  {
+   "label": "Visit Works",
+   "href": "game3d/?day=6&place=works"
+  },
+  {
+   "label": "Implementation and QA notes",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/works-fidelity-20261007.md"
+  }
+ ],
+ "pictures_local": true
+}

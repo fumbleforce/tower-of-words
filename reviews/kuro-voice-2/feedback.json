@@ -1,0 +1,31 @@
+{
+ "sent": "2026-10-05T17:56:14+0200",
+ "picked": [
+  "b"
+ ],
+ "options": {
+  "0": {
+   "star": false,
+   "reject": false,
+   "comment": "too young"
+  },
+  "a": {
+   "star": true,
+   "reject": false,
+   "comment": "very good voice we should keep for a warm person"
+  },
+  "b": {
+   "star": false,
+   "reject": false,
+   "comment": "bit loud but right tone"
+  },
+  "d": {
+   "star": false,
+   "reject": false,
+   "comment": "too young/cute"
+  }
+ },
+ "comment": "",
+ "read": true,
+ "history": []
+}

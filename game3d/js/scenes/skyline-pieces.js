@@ -1,0 +1,1 @@
+import{marketFootprints as o}from"./market-route.js";export function skylinePieces(e){const r=o(e);return r.length===1?r:r.map((t,n)=>({...t,renderId:`${e.id}:part:${n}`}))}export const skylinePieceId=e=>e.renderId||e.id;

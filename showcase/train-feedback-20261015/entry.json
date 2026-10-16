@@ -1,0 +1,72 @@
+{
+ "title": "Train camera and exit repairs",
+ "date": "2026-10-15",
+ "by": "codex",
+ "caption": "The camera returns after the cat conversation. The arrival sequence keeps the player at the door, including after Continue.",
+ "commit": "1a91efd1651e4ed9c1843c306bc62e5c8b9fc3e2",
+ "result": [
+  "cat-desktop",
+  "cat-phone",
+  "arrival-phone",
+  "arrival-desktop"
+ ],
+ "sections": [
+  {
+   "title": "After talking to the cat",
+   "images": [
+    {
+     "id": "cat-desktop",
+     "image": "bible/shots/showcase/train-feedback-20261015/cat-desktop.webp.webp",
+     "caption": "Desktop: the train overview returns after the conversation. Captured on be3456ca3, with the cat camera and story code unchanged in the landed repair."
+    },
+    {
+     "id": "cat-phone",
+     "image": "bible/shots/showcase/train-feedback-20261015/cat-phone.webp",
+     "caption": "Phone: the player and the route back to Mio remain visible. Captured on the be3456ca3 repair candidate."
+    }
+   ]
+  },
+  {
+   "title": "At the exit",
+   "images": [
+    {
+     "id": "arrival-phone",
+     "image": "bible/shots/showcase/train-feedback-20261015/arrival-phone.webp",
+     "caption": "Phone: the player and open doorway stay above Mio’s portrait. This final framing candidate has the same runtime files as landed repair 1a91efd1."
+    },
+    {
+     "id": "arrival-desktop",
+     "image": "bible/shots/showcase/train-feedback-20261015/arrival-desktop.webp.webp",
+     "caption": "Desktop: the player has stepped onto the platform. This is the same final framing candidate."
+    }
+   ]
+  },
+  {
+   "title": "Before and rejected framing",
+   "caption": "These earlier captures are retained for comparison. The separate opening feedback about early markers, the blurred passenger and submitting a typed word remains open in #540, #541 and #588.",
+   "images": [
+    {
+     "id": "before-cat",
+     "image": "bible/shots/showcase/train-feedback-20261015/before-cat.webp.webp",
+     "caption": "Before, base 824f3b701: the camera stayed close to the cat after the conversation ended."
+    },
+    {
+     "id": "attempt-phone-framing",
+     "image": "bible/shots/showcase/train-feedback-20261015/attempt-phone-framing.webp",
+     "caption": "Rejected phone attempt on be3456ca3: Mio’s portrait covered the player and exit. The corrected result is shown above."
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Cat camera feedback #573",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/573"
+  },
+  {
+   "label": "Train exit feedback #574",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/574"
+  }
+ ],
+ "media": []
+}

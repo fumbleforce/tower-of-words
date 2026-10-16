@@ -1,0 +1,1 @@
+import{PATHS as t,toIsland as r}from"../../scenes/island-layout.js";import{CROSS as o}from"../../scenes/forecourt/cross-plan.js";export const MAP_PATHS=[...t,{id:"tower_cross_street",kind:"lane",rect:[...r("forecourt",o[0],o[2]),...r("forecourt",o[1],o[3])]}];

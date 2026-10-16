@@ -1,0 +1,27 @@
+{
+ "title": "Station forecourt redesigned, with a shared outdoor kit",
+ "date": "2026-09-30",
+ "by": "claude-agent:forecourt-kit",
+ "caption": "The forecourt rebuilt on a new outdoor kit (patterned paving with borders, kerbs, a family of trees and shrubs, lamps and benches laid on lines). Before on the left of each pair, after on the right. The plaza and the dorm courtyard can use the same kit next.",
+ "sections": [
+  {
+   "title": "Arriving out of the station",
+   "caption": "One walk from the station door to the head office door: dark granite with a pale border and the yellow guide line. The station's cut shows the gate room's arch, readers, desks and benches."
+  },
+  {
+   "title": "Head office door and lobby",
+   "caption": "Pines either side of the door, stone piers under every fin, AMAKAWA over the canopy. In the lobby the lift shafts are capped and the room next door is closed."
+  },
+  {
+   "title": "The lane to the plaza",
+   "caption": "Brick between pale borders, a zelkova avenue set back so it never hides Eric, bench bays, a sign to the plaza and dorms, gateposts where the grounds end."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

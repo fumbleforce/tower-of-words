@@ -1,0 +1,69 @@
+{
+ "title": "Izakaya fixtures and joinery",
+ "date": "2026-10-08",
+ "result": [
+  "review-fix-1366-eric-native-lunch-service",
+  "review-fix-1366-eric-native-lunch-east",
+  "review-fix-1366-eric-native-evening-west",
+  "review-fix-1366-eric-native-food"
+ ],
+ "by": "codex",
+ "caption": "The izakaya now has a recessed serving hatch, stocked shelves, framed windows, cupboard joinery and entrance storage. Earlier attempts are included below.",
+ "preview": "review-fix-1366-eric-native-lunch-service",
+ "sections": [
+  {
+   "title": "Original room: first inspection: desktop",
+   "caption": "Original baseline; the arrival overlay and failed first harness reset are retained."
+  },
+  {
+   "title": "Original room: clear detail views: desktop",
+   "caption": "Second baseline inspection after fixing the camera harness."
+  },
+  {
+   "title": "First fixture pass: superseded: desktop",
+   "caption": "Early hatch, window and shelf details. The desktop run still had a solid hatch infill and umbrella stand; the phone run reloaded during a correction. These mixed-source views are retained, not final evidence."
+  },
+  {
+   "title": "First fixture pass: superseded: phone",
+   "caption": "Early hatch, window and shelf details. The desktop run still had a solid hatch infill and umbrella stand; the phone run reloaded during a correction. These mixed-source views are retained, not final evidence."
+  },
+  {
+   "title": "Recess and umbrella correction: superseded: desktop",
+   "caption": "Corrected hatch recess and hollow umbrella stand. Shelf supports and cup surfaces were refined afterward. The preceding candidate-2 desktop and this round’s phone attempt were GPU_DEFERRED and produced no images."
+  },
+  {
+   "title": "PASS: earlier-source desktop strict check",
+   "caption": "Full day route passed before the cup surface correction; retained as an earlier attempt."
+  },
+  {
+   "title": "Shelf support correction: superseded: desktop",
+   "caption": "Shelves have wall-connected brackets; the close views exposed coplanar cup surfaces, fixed in the next round. This round’s phone attempt was GPU_DEFERRED and produced no images."
+  },
+  {
+   "title": "PASS: earlier-source phone strict check",
+   "caption": "Full day route passed before the cup surface correction. Its preceding phone attempt was GPU_DEFERRED and produced no render."
+  },
+  {
+   "title": "Final fixtures and native dining route: desktop",
+   "caption": "Final source: cup surface flicker corrected. Native entry, dining, save/Continue, departure and door exit passed at both sizes. Day and evening close views inspected in their original captures."
+  },
+  {
+   "title": "Final fixtures and native dining route: phone",
+   "caption": "Final source: cup surface flicker corrected. Native entry, dining, save/Continue, departure and door exit passed at both sizes. Day and evening close views inspected in their original captures."
+  },
+  {
+   "title": "FAIL: final-source desktop train gait",
+   "caption": "The route completed, but strict gait checking detected Tama sliding in the train for three seconds. This failure is retained; the unchanged-source repeat passed."
+  },
+  {
+   "title": "PASS: final-source phone strict check",
+   "caption": "Full day route passed at 390 × 844 with no overrides."
+  },
+  {
+   "title": "PASS: final-source desktop repeat",
+   "caption": "Unchanged source passed the full strict route at 1366 × 860 with no overrides and no gait failure."
+  }
+ ],
+ "commit": "09701c96",
+ "pictures_local": true
+}

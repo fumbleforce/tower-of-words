@@ -1,0 +1,18 @@
+[
+  {
+    "path": "game3d/js/scenes/works/service-details.js",
+    "sha256": "2687bee92b2ba84bec9975a572f2f2355a30d984e777996f64fd0d5cd5e7e298"
+  },
+  {
+    "path": "game3d/js/scenes/works/props.js",
+    "sha256": "9db12af367edaff0c06c58a5ba9c0ad2d014d7bb88298bebf42aae6333de83e9"
+  },
+  {
+    "path": "game3d/tools/works-fidelity-check.mjs",
+    "sha256": "4cfbe3c21bb4f9d20fe3e5f2e76ab61afd7357c85c038f6978f870f4f2e79e43"
+  },
+  {
+    "path": "docs/game/places.md",
+    "sha256": "edd1d2b57b37ed30629df1a77588ffd30d4cb91b24c2d25a1f0dfcf19fad0794"
+  }
+]

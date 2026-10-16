@@ -1,0 +1,19 @@
+{
+ "title": "Jumping and the clinic",
+ "date": "2026-10-12",
+ "by": "codex",
+ "caption": "Jump with Space while moving, or use Jump on the phone. The clinic opens from the fountain plaza, with visitors staying in front of the reception counter.",
+ "commit": "2704dba10",
+ "result": [
+  "clinic-room",
+  "reception-phone",
+  "dorm-jump"
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

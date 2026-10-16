@@ -1,0 +1,31 @@
+{
+ "title": "Honsha station polish: lighter shed, the north end, stairs and walkway",
+ "date": "2026-10-10",
+ "by": "claude-agent:station-polish",
+ "caption": "Seen from the platforms, the stairs and the walkway at eye height. The shed's steel is now the world kit's pale grey, and the roof's underside, the walkway's roof and the steel in their shade catch the light off the platforms instead of going near black. The north end has pale panels, one to each bay of the glass, with the mullions running down them, and its glass now shows the shed through it. A round platform clock hangs over the track. The stairs have pale stone treads with dark nosings on a solid flight with a smooth underside, yellow warning rows at the top and bottom, and solid side walls with a stone coping and a handrail on posts. Before, the side walls only showed their edges. The covered walkway has down-lights under its roof and a yellow tactile guide path from the east stair to the station doors. The station has slightly fewer triangles than before.",
+ "preview": "after-plat-east-north-desk",
+ "result": [
+  "after-plat-east-north-desk",
+  "after-gable-out-desk",
+  "after-stairs-foot-desk",
+  "after-walk-east-desk"
+ ],
+ "sections": [
+  {
+   "title": "On the platforms"
+  },
+  {
+   "title": "The north end and the roof from outside"
+  },
+  {
+   "title": "The stairs"
+  },
+  {
+   "title": "The covered walkway"
+  },
+  {
+   "title": "The play camera"
+  }
+ ],
+ "pictures_local": true
+}

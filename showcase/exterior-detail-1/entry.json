@@ -1,0 +1,31 @@
+{
+ "title": "Exterior materials and facade detail",
+ "date": "2026-10-06",
+ "by": "codex",
+ "caption": "Lawns and building panels have visible material variation; nearby facades gain attached drainage and the canteen gains window sills. Existing paving, trees, routes and entrances stay in place.",
+ "sections": [
+  {
+   "title": "Cladding and lawn beside the training centre",
+   "caption": "Actual game rendering. Closer inspection camera."
+  },
+  {
+   "title": "Canteen window sills",
+   "caption": "Actual game rendering. Closer inspection camera."
+  },
+  {
+   "title": "Pocket park at the play camera",
+   "caption": "Actual game rendering at the ordinary play camera."
+  }
+ ],
+ "links": [
+  {
+   "label": "Walk the east lane",
+   "href": "game3d/?place=east_lane&skip"
+  },
+  {
+   "label": "Canteen exterior",
+   "href": "game3d/?place=plaza&skip&mx=0&mz=-15"
+  }
+ ],
+ "pictures_local": true
+}

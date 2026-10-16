@@ -1,0 +1,13 @@
+{
+ "title": "Optional looks around the island",
+ "date": "2026-10-06",
+ "by": "codex:flavor-finds",
+ "caption": "Ordinary objects can be inspected where they sit, with readable notes and small return actions.",
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

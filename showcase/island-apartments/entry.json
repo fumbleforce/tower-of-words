@@ -1,0 +1,76 @@
+{
+ "title": "Apartment upper floors and finished roofs",
+ "date": "2026-10-13",
+ "by": "codex",
+ "caption": "Open galleries, framed upper windows and a finished L-shaped roof now match across the courtyard and neighbouring island views. Every retained capture attempt is included below.",
+ "commit": [
+  "10b7344e84be4e330f97632a44781fd73f6918a5",
+  "c9d81782a890ea34c9edc859af1db3971b46843d",
+  "28f7541cd62343a920b74d38417bfb39666cd018",
+  "1720e68419b4048b5c933d713f9dc964f455c30c"
+ ],
+ "result": [
+  "after-palette-dorm-court-roof-evening-desk",
+  "after-palette-dorm-court-roof-evening-phone",
+  "after-palette-plaza-cluster-evening-desk",
+  "after-palette-plaza-cluster-evening-phone"
+ ],
+ "preview": "after-palette-dorm-court-roof-evening-desk",
+ "sections": [
+  {
+   "title": "First baseline attempt",
+   "caption": "Eleven retained desktop frames from f1eef49a2. The capture stopped at the dorm opening dialogue before phone views; this was a harness timing failure."
+  },
+  {
+   "title": "Complete baseline",
+   "caption": "Thirty frames from f1eef49a2: staged player approaches, elevated court details and the playable upper corridor and roof. Court detail views use a diagnostic camera; the approaches use the desktop follow or phone overview camera."
+  },
+  {
+   "title": "Baseline building comparisons",
+   "caption": "Twenty-four diagnostic architecture views from f1eef49a2, in morning and evening. These are elevated fixed cameras; the phone camera is widened to fit the building, rather than the normal player view."
+  },
+  {
+   "title": "First apartment milestone",
+   "caption": "Thirty frames after 10b7344e8: staged player approaches, court details and existing corridor/roof access. Later review found the blank return-end face in neighbouring views; the repair is shown below."
+  },
+  {
+   "title": "First model attempt, before repair",
+   "caption": "Twenty-four elevated diagnostic views after 10b7344e8. Independent review rejected twelve for blank wing faces. These failed views remain here alongside the repaired attempt."
+  },
+  {
+   "title": "Repaired upper floors and neighbouring views",
+   "caption": "Twenty-four diagnostic views of the framed end windows, floor lines and corrected sento roof. Captured from the staged source committed unchanged as c9d81782a; the generated build stamp still showed 10b. Independent apartment review: 8/10. Phone camera widened for the model comparison."
+  },
+  {
+   "title": "Repaired buildings from the playable approach",
+   "caption": "Four fresh c9d81782a approaches from the east coast, morning and evening, desktop follow and phone overview. Independent apartment review: 8/10. The preceding deferred after-2 job produced no PNG frames; its log remains in the evidence."
+  },
+  {
+   "title": "Final roof finish, diagnostic views",
+   "caption": "Eight native views from committed 28f7541cd. Structural roof finishes use neutral grey so physical surface checks classify them as roof rather than foliage. Geometry is unchanged. Independent review: 8/10 throughout. These are elevated diagnostic cameras, widened on phone. The generated build stamp still showed c9; morning phone frames retain a faint objective-card animation edge, so the evening frames are the final highlights."
+  },
+  {
+   "title": "Desktop corridor and roof interaction attempt",
+   "caption": "Five retained screenshots from real room/corridor/stair/roof checks. The subsequent courtyard-return harness call timed out because it called a marker callback outside the game interaction lifecycle; the corrected run follows. These controlled interaction checks are separate from the approach captures."
+  },
+  {
+   "title": "Corrected door, cutaway and courtyard return",
+   "caption": "Six native screenshots from the real game interaction lifecycle on desktop and phone: door 203, room cutaway, corridor and courtyard return pass. This short run checks the return route; the upper-stair and roof checks are shown separately above. Earlier harness reference/timing attempts produced no PNG frames and remain logged in the evidence."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play the courtyard",
+   "href": "game3d/?day=2&place=dorm_court"
+  },
+  {
+   "label": "Evidence, checks and attempt history (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Final apartment visual audit (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  }
+ ],
+ "pictures_local": true
+}

@@ -1,0 +1,1 @@
+export const PRINT_APRONS=[{id:"print_arrival_n",kind:"plaza",rect:[-24.3,-45.25,-21.6,-44.1],detail:"Level north side of the print-shop entrance apron."},{id:"print_arrival_s",kind:"plaza",rect:[-24.3,-42.5,-21.6,-41.05],detail:"Level south side of the print-shop entrance apron."}];

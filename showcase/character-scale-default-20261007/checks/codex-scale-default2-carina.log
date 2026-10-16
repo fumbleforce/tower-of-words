@@ -1,0 +1,12 @@
+character-scale-390: GPU slot 2
+captured canteen 100 1.3215999999999997 {
+  top: 0.34,
+  underside: 0.33055727931961165,
+  delta: -0.009442720680388372
+}
+captured canteen default 1.1233599999999997 {
+  top: 0.34,
+  underside: 0.3305559257627768,
+  delta: -0.00944407423722321
+}
+PASS /home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/game3d/shots/character-scale/default2-carina-390/

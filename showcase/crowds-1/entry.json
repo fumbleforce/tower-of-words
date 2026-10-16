@@ -1,0 +1,51 @@
+{
+ "title": "People about the island, by time of day",
+ "date": "2026-10-02",
+ "by": "claude-agent:crowds",
+ "caption": "Every outdoor place now has islanders going about their day: walking between the street ends and open doors, sitting on benches, talking in pairs, waiting at the konbini, jogging. Morning, lunch and after work each have their own mix. They are background (no pin, no talk) and step round Eric. Shots: desktop at high quality, phone at medium; phones show fewer people.",
+ "sections": [
+  {
+   "title": "Station forecourt",
+   "caption": "Office workers cross the court to the head office door in the morning and leave it after work, some to their bikes."
+  },
+  {
+   "title": "Fountain plaza",
+   "caption": "People cross between head office, the dorms, the canteen and the shop street; some sit on the benches round the circle."
+  },
+  {
+   "title": "Shop street",
+   "caption": "People down the arcade both ways, three waiting at the shut konbini in the morning, strollers and a jogger on the promenade."
+  },
+  {
+   "title": "East lane",
+   "caption": "Out of the dorm gate and the dorm row toward head office in the morning, home along the lane after work."
+  },
+  {
+   "title": "East coast",
+   "caption": "Joggers along the dorm row and the coast walk, people going to and from the onsen after work."
+  },
+  {
+   "title": "Gym and pool",
+   "caption": "Joggers round the lane and the courts walk, people to the pool and up the north street."
+  },
+  {
+   "title": "Office street",
+   "caption": "Office workers along the street and up the quarter street, east toward the gym after work."
+  },
+  {
+   "title": "Harbour",
+   "caption": "Dock workers in from the street to the works lane and the piers, a few sitting on the quay after work."
+  },
+  {
+   "title": "Dorm courtyard",
+   "caption": "After work only: two or three residents between the street gate and the hall."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

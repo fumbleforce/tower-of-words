@@ -1,0 +1,30 @@
+{
+ "title": "Street and garden style trial",
+ "date": "2026-10-07",
+ "by": "Codex",
+ "caption": "An opt-in forecourt trial with fuller trees, clipped hedges, detailed paving and revised station and office windows. The Review contains every earlier attempt.",
+ "sections": [
+  {
+   "title": "Window correction"
+  },
+  {
+   "title": "Daylight"
+  },
+  {
+   "title": "Evening and materials"
+  }
+ ],
+ "links": [
+  {
+   "label": "All attempts and style feedback",
+   "href": "#review/diorama-street-1"
+  },
+  {
+   "label": "Try the optional street style",
+   "href": "game3d/index.html?day=2&place=forecourt&mc=eric&q=2&diorama=1"
+  }
+ ],
+ "preview": "windows-20261007-office-day",
+ "updated": "2026-10-07T12:56:42.543850+00:00",
+ "pictures_local": true
+}

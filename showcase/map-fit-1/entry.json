@@ -1,0 +1,17 @@
+{
+ "title": "A clearer island overview",
+ "date": "2026-10-07",
+ "by": "codex",
+ "caption": "The map fits around its header and controls, with more labels visible on phones.",
+ "links": [
+  {
+   "label": "Open the game map",
+   "href": "game3d/"
+  },
+  {
+   "label": "Validation and retained attempts",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/map-fit-qa.md"
+  }
+ ],
+ "pictures_local": true
+}

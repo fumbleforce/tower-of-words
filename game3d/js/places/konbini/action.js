@@ -1,0 +1,1 @@
+import{flags as o}from"../../narrative/state.js";export function konbiniAction(t,e,i){let n=0;return async c=>{const a=++n;o.konbini_action_complete=!1;const l=await i(c);t.place===e&&n===a&&(o.konbini_action_complete=l===!0)}}

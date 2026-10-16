@@ -1,0 +1,1 @@
+export function followAvailable({width:l,height:n,coarse:o=!1,pointerLock:r=!0}){return r&&!o&&l>=700&&n>=600&&l/n>=.8}export function followAllowed(l,n){return!!(n&&l.place&&l.player&&l.saveEnabled&&!l.busy&&!l.paused&&!l.mapOpen&&!l.saying&&!l.transition&&!l.player.scripted&&!l.place.cam?.close&&!l.place.cam?.releasing&&!l.ui.talking&&l.ui.menuClosed())}

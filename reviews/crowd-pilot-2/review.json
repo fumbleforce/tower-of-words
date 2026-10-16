@@ -1,0 +1,32 @@
+{
+ "title": "Crowd pilot round 2: office man (A) and office woman (B) on Meshy's rig",
+ "date": "2026-10-06",
+ "by": "Claude (crowd-pilot agent, #232)",
+ "status": "superseded",
+ "question": "Round 1 failed because its viewer never moved the people, so the game's gait (which times the walk to how far they go) held the walk's first frame with a leg up and then stood them back up, and because the man's eyes were loose shells that the texture smeared; this round both walk and run where they actually move (in the game and in a new viewer), both are on Meshy's own rig and clips with mended skin weights, and the man is a new shape with flat painted eyes. Are these two right to go ahead with the other five archetypes?",
+ "multi": true,
+ "options": [
+  {
+   "id": "crowd-a-2",
+   "label": "crowd-a-2: office man",
+   "note": "New shape from a-e1 (painted eyes), face-first UVs, Meshy texture, Meshy auto-rig at 1.1 m with its walk, run and Chair_Sit_Idle_F, skin weights mended. 23 credits (shape 5, texture 10, rig 5, sit 3); pictures $0.53. Checks: walk, run and idle in the game, in step, no episodes; face clean in close-ups; walk and run measure as the cast (planted-foot slip 0.16 walk, 0.35 run; Kenji 0.20, 0.33; Hamada 0.17, 0.52). A cold critic (a fresh Claude session given only the sheets) gave 6.5 of 10, under the 8 pass mark: eyes 'clean but crude', black slots simpler than the cast's; head large and hair a flat dark mass; legs slim next to Kenji and Emi; run 'leggy, high back-kick'. The run is the same Meshy clip as the cast's and measures the same (thigh -22 to +38 degrees, Kenji -23 to +38)."
+  },
+  {
+   "id": "crowd-b-2",
+   "label": "crowd-b-2: office woman",
+   "note": "Round 1's shape and texture kept (her face was clean). Only the rig is new: Meshy's own auto-rig, walk, run and sit from round 1, weights mended (her shins had been on the thigh bones), and thin dark streaks behind her knees repainted in skin. No new credits. Checks: in step in the game, no episodes; walk and run measure as the cast (slip 0.17 walk, 0.21 run; Emi 0.16, 0.21). Cold critic: 6 of 10."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live 3D: A and B, and beside the cast (turn, pan, zoom; idle, walk, run, sit; walking on a treadmill or round a loop) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/reviews/crowd-pilot-2/viewer.html"
+  },
+  {
+   "label": "Round 1 (crowd-pilot-1), history",
+   "href": "#review/crowd-pilot-1"
+  }
+ ],
+ "decision": "Pulled before his pick: critic 6.5 (A) and 6 (B), below the 8 bar. Round 3 fixes the eyes and B's hair parting first.",
+ "pictures_local": true
+}

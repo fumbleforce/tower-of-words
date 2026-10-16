@@ -1,0 +1,116 @@
+{
+ "title": "Old works: recessed windows and doors",
+ "date": "2026-10-13",
+ "by": "codex:finish-works",
+ "caption": "The factory, power plant, shed and gatehouse have recessed glazing and doors. The same buildings appear from the harbour.",
+ "result": [
+  "factory",
+  "plant-phone",
+  "windows",
+  "roof"
+ ],
+ "sections": [
+  {
+   "title": "Completed exteriors",
+   "images": [
+    {
+     "id": "factory",
+     "image": "game3d/shots/finish-works/leaves/1366-factory.png.webp",
+     "caption": "Factory gates, hangers and wall windows."
+    },
+    {
+     "id": "plant-phone",
+     "image": "game3d/shots/finish-works/complete/390-plant.png.webp",
+     "caption": "Power-plant windows and the name above its door, phone."
+    },
+    {
+     "id": "windows",
+     "image": "game3d/shots/finish-works/leaves/1366-windows.png.webp",
+     "caption": "Steel grids and deep window reveals."
+    },
+    {
+     "id": "roof",
+     "image": "game3d/shots/finish-works/leaves/1366-roof.png.webp",
+     "caption": "Four glazed north lights under the saw-tooth roof."
+    },
+    {
+     "id": "shed",
+     "image": "game3d/shots/finish-works/leaves/1366-shed.png.webp",
+     "caption": "Recessed roller and personnel doors."
+    },
+    {
+     "id": "kiosk",
+     "image": "game3d/shots/finish-works/leaves/1366-kiosk.png.webp",
+     "caption": "Gatehouse counter window and shelf."
+    },
+    {
+     "id": "plant-door",
+     "image": "game3d/shots/finish-works/complete/1366-plant-door.png.webp",
+     "caption": "The chained steel door remains closed, clear of concrete piers."
+    },
+    {
+     "id": "harbour",
+     "image": "game3d/shots/finish-works/complete/1366-harbour-backdrop.png.webp",
+     "caption": "The same exteriors seen up the lane from the harbour."
+    },
+    {
+     "id": "factory-evening",
+     "image": "game3d/shots/finish-works/leaves/1366-factory-evening.png.webp",
+     "caption": "Factory after work."
+    },
+    {
+     "id": "kiosk-phone-evening",
+     "image": "game3d/shots/finish-works/leaves/390-kiosk-evening.png.webp",
+     "caption": "Gatehouse glazing after work, phone."
+    },
+    {
+     "id": "plant-phone-evening",
+     "image": "game3d/shots/finish-works/complete/390-plant-door-evening.png.webp",
+     "caption": "Painted door and chained lock after work, phone."
+    }
+   ]
+  },
+  {
+   "title": "Checks that led to corrections",
+   "images": [
+    {
+     "id": "before-plant",
+     "image": "game3d/shots/finish-works/final/1366-plant-door.png.webp",
+     "caption": "The first port exposed an old pier across the inset door. The completed version moves that support above the doorway."
+    },
+    {
+     "id": "before-slit",
+     "image": "game3d/shots/finish-works/first/1366-factory.png.webp",
+     "caption": "A narrow slit between the closed gate leaves was sealed with an overlapping stile."
+    },
+    {
+     "id": "before-framing",
+     "image": "game3d/shots/finish-works/first/1366-windows.png.webp",
+     "caption": "Rejected test capture: the camera was inside the shed. The completed close-up is taken from the gap between buildings."
+    },
+    {
+     "id": "before-ivy",
+     "image": "game3d/shots/finish-works/acceptance/390-ivy.png.webp",
+     "caption": "The old solid ivy blocks were replaced with leaves using the existing foliage builder."
+    },
+    {
+     "id": "before-phone-leaves",
+     "image": "game3d/shots/finish-works/leaves/390-ivy.png.webp",
+     "caption": "The first leaf mesh was coarsened by the phone canopy pass. Finished ivy now keeps its leaf shapes on both sizes."
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Visit the old works",
+   "href": "game3d/?place=works"
+  },
+  {
+   "label": "Visit the harbour",
+   "href": "game3d/?place=harbour"
+  }
+ ],
+ "commit": "ea7d6b308981e9862fe5cdecc14c825a85dd6669",
+ "media": []
+}

@@ -1,0 +1,18 @@
+{
+ "title": "A finished station platform",
+ "date": "2026-10-12",
+ "by": "codex",
+ "caption": "The platform has a complete canopy, walkway and surrounding buildings, with camera clearance outside the train.",
+ "commit": "cf1e7b6ff",
+ "result": [
+  "west",
+  "east"
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

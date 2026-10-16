@@ -1,0 +1,1 @@
+import a from"../works.js";import{interactions as r,place as t}from"./shared.js";export default t("works",{...r(a,["talk:weather_station","talk:old_power_plant","talk:old_factory","talk:server_hall","talk:recycling_centre","talk:research_lab"]),arrivalGoal:{do:"ongoingGoal",keepExisting:!0}});

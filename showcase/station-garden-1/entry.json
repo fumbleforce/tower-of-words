@@ -1,0 +1,63 @@
+{
+ "title": "Station south garden",
+ "date": "2026-10-07",
+ "by": "codex-station-garden",
+ "caption": "A walkable planted loop beside the station, two usable benches, and a grounds worker with a visible maintenance routine. Earlier correction rounds are retained below.",
+ "sections": [
+  {
+   "title": "First layout and contact",
+   "caption": "Earlier diagnostic round, retained for comparison."
+  },
+  {
+   "title": "Paving and moving tools corrected",
+   "caption": "Earlier diagnostic round, retained for comparison."
+  },
+  {
+   "title": "Walked loop and station boundary",
+   "caption": "Earlier diagnostic round, retained for comparison."
+  },
+  {
+   "title": "First activity checkpoint",
+   "caption": "Earlier diagnostic round, retained for comparison."
+  },
+  {
+   "title": "Continue correction",
+   "caption": "Earlier diagnostic round, retained for comparison."
+  },
+  {
+   "title": "Bench facing and morning reset",
+   "caption": "Earlier diagnostic round, retained for comparison."
+  },
+  {
+   "title": "Phone and desktop lifecycle",
+   "caption": "Earlier diagnostic round, retained for comparison."
+  },
+  {
+   "title": "Registration and seated Continue checkpoint",
+   "caption": "Earlier diagnostic round, retained for comparison."
+  },
+  {
+   "title": "Final garden interactions",
+   "caption": "Native phone and desktop; real bench and conversation Continue, completed work, evening and next morning."
+  },
+  {
+   "title": "Corrected phone maintenance approach",
+   "caption": "Real walking approach with both actors present, followed by closer native diagnostic contact views. These replace final2 phone contact images, where the worker was outside the camera. No scene geometry or actor is hidden."
+  },
+  {
+   "title": "Ordinary phone approach after the gull passes",
+   "caption": "Second ordinary approach frame keeps the player camera and all wildlife. The worker, hand, tools and litter are now unobstructed. Diagnostic close views and the movement assertion are retained from the same run."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play the shop street",
+   "href": "game3d/index.html?place=shotengai"
+  },
+  {
+   "label": "Implementation and QA notes",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/station-garden-20261007.md"
+  }
+ ],
+ "pictures_local": true
+}

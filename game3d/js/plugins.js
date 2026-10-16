@@ -1,0 +1,1 @@
+export function diag(){}export function addPlaceInstaller(){}export async function installPlacePlugin(){return!1}export async function installViewer(){return null}export async function localPlugin(){return null}export function setPortraitSource(){}export function portraitSource(){return null}export async function installBoot(){return!1}export function watchPlacePlugins(){}

@@ -1,0 +1,1909 @@
+
+> check
+> node tools/check/run.mjs
+
+Robots: 123 tracked HTML pages, 0 failures
+PASS robots: 0.08s
+syntax: 1387 active JS files, 0 failures (vendor, dependencies and legacy excluded)
+PASS syntax: 17.00s
+lint: 1387 files; 31 inventoried unused bindings; no new findings
+PASS lint: 3.67s
+runtime format: 662 files verified; 0 need formatting
+PASS runtime format: 3.76s
+module budgets: 664 runtime modules; 25 documented existing exceptions
+PASS module budgets: 0.03s
+dependencies: 866 modules; 1 existing cycle paths; 2 nonliteral imports reported
+dynamic import: game3d/js/plugins.js: href
+dynamic import: game3d/js/runner.js: p
+PASS dependencies: 0.83s
+✔ selected crowd a retains original rig and all native motion (6.597603ms)
+✔ selected crowd b retains original rig and all native motion (6.425668ms)
+✔ selected A texture remains untouched (2.132141ms)
+(node:84865) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ art narrative entry requires an explicitly approved loaded photograph (9.615023ms)
+✔ both actual table chairs have safe connected approaches outside blocked seats (53.24313ms)
+✔ saved activity and camera restore without retaining rig objects; legacy load clears activity (4.946258ms)
+✔ leaving an in-flight drawing cancels late arm writes and restores original actors (4.156158ms)
+✔ teapot stays on a real wrist across the dialogue pause and serialized Continue (5.390656ms)
+✔ early practice draws only the player page and preserves it through serialization (6.120102ms)
+✔ pour keeps the real spout above the cup opening and restores a full cup (19.627596ms)
+(node:84866) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/definitions.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ asset source data includes the actual words, cast, music, sounds and style metadata (1648.071751ms)
+✔ the full public scanner registers parsed metadata and preserves existing icon IDs (2431.615984ms)
+✔ all asset metadata survives formatting of every runtime and story source in both quote modes (7272.653665ms)
+✔ missing and dynamic asset tables fail visibly and computed cast calls are recognized (1196.708427ms)
+(node:84872) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/ui/backlog.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ an older-day raw line survives the real next-day save and becomes readable after learning (3.244097ms)
+✔ legacy history keeps its original day without inventing historical knowledge or source (0.260632ms)
+✔ duplicate suppression is scoped to the encounter and never drops the same line on a later day (0.176613ms)
+✔ history stays bounded and loading another slot replaces rather than merges its conversations (4.492142ms)
+✔ new entries snapshot mutable clear data and vocabulary instead of keeping live references (0.263627ms)
+✔ authored remarks survive rolling-history eviction and real save reload (7.446434ms)
+(node:84873) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/narrative/conditions.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the actual daytime street trigger and map agree; a plain route cannot bypass closed hours (15.74309ms)
+✔ bread cannot fall through a drink-only wildcard gift branch (0.759082ms)
+✔ actual Runner stops the selected order after place cancellation, before checkout, payment or dialogue (2.149644ms)
+✔ a completed physical action continues to the authored price and cancellation choice (1.005407ms)
+(node:84884) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/runner.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ checkout commits once across serialized reload and repeated paid hooks (0.866594ms)
+✔ cancel and insufficient funds never debit or add stock; new deliberate orders can repeat (0.155754ms)
+✔ a removed purchase cannot be consumed again or mutate relationship data (0.066065ms)
+✔ shop hours preserve day one and two closures and permit later daytime visits (0.080632ms)
+✔ real counter, shelf and chair approaches connect to the entrance without crossing furnishings (6.087991ms)
+✔ older bread remains edible after another order, and consuming one never removes both (0.209094ms)
+(node:84885) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/bakery/trade.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+east_coast 28546 eastLane 8878/6, sportsGrounds 5386/8, lawn 7380/3, lawn 1640/3, fronts 5262/10 ids r8 ramen housing_n dorm_6
+shotengai 11158 eastLane 9194/6, lawn 1964/3 ids r8
+east_lane 16722 sportsGrounds 9968/10, lawn 1584/3, fronts 5170/10 ids dorm_5 housing_n
+sports 29092 officeLawns 3288/3, lawn 1076/3, eastLane 7064/6, coastWalk 7622/9, lawn 4872/3, fronts 5170/10 ids r9 dorm_5 housing_n
+office_quarter 2904 lawn 2904/3 ids
+(node:84896) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ every place builds its bands inside the triangle budget (700.359348ms)
+(node:84907) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a band clips paving to its rects on the field origin and keeps only geometry and lamps that reach in (31.390969ms)
+✔ the bands table names real places, builders and blocks, and no band covers a rect twice (12.410675ms)
+✔ trace observers preserve callbacks, actual resolution count and once peeks (1.334467ms)
+✔ successful autosaves and events share an ordered timeline with immutable flags (1.349415ms)
+✔ the same seed supplies the same random stream without fixing time (0.788788ms)
+✔ presentation observes rendered text while preserving the original promise and exceptions (0.615561ms)
+✔ Bible QA blocks protected sources, including encoded links, before requesting them (0.800519ms)
+✔ HTTP reads and browser requests deny protected URLs before sending anything (0.669332ms)
+✔ both transports refuse redirects and the browser never fulfills one (0.961012ms)
+✔ controlled shutdown catches a late fulfillment rejection (0.634487ms)
+✔ cached public font revalidation is fulfilled without treating 304 as a redirect (0.193305ms)
+(node:84921) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/bonds/model.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ gate declarations match the model after successive per-step story overrides (1.008902ms)
+✔ importing facts data does not run the command or print a report (104.454658ms)
+✔ Continue retains earlier story gate overrides and slot loads discard stale overrides (0.578741ms)
+✔ transition gates use the departing story for walk/ride and destination for arrive (15.983082ms)
+✔ story map and facts record the same custom and default gate writes as the game (4.72445ms)
+✔ deadlines and successful parent exit both stop grandchildren (1849.538001ms)
+✔ abort, spawn failure and nonzero exit fail explicitly (117.803503ms)
+✔ three browsers share the legacy lock, reuse slots and release it only when empty (5.299654ms)
+✔ exclusive owners and a busy pool mutex are left untouched (0.924604ms)
+✔ competing processes never admit more than three GPU browsers (562.851436ms)
+✔ a slot whose owner died is reclaimed on the next acquire, and its Chromium killed (18.722208ms)
+✔ reclaim frees the lock for an exclusive job; old-format, reused-pid and pid-less slots (76.192439ms)
+✔ a pool mutex left by a killed process is cleared after a few seconds (2.334091ms)
+✔ a SIGKILLed slot holder is reclaimed by the next process (56.665794ms)
+(node:84951) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/scenes/campus.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ campus paths connect every exit, print door and the usable bench approach (505.117065ms)
+✔ each pedestrian seam has the identical island endpoint and arrivals land beyond its own trigger (5.046086ms)
+✔ opening and continuing weeks retain native campus routes at real loader paths (15.962744ms)
+✔ campus lighting reverses and keeps navigation stable (327.327949ms)
+✔ print shop occupies w3 and keeps all usable approaches connected around solid equipment (19.791254ms)
+✔ campus landscaping preserves the nine tree identities and all existing crossing/seat approaches (244.569387ms)
+✔ both new print apron wings are real reachable paving beside the original door path (125.339434ms)
+✔ physical garden boundary and map boundary use the exact same shared polygon (12.663712ms)
+✔ the actual print-stock hardstanding supports the trolley and keeps equipment out of the walking apron (138.246996ms)
+✔ the low planted layer overlaps into groups while keeping its edges within the shared outline (1.928477ms)
+(node:84957) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual procedural worker carries with uncrossed arms and keeps the same physical rear grip through delivery (52.496742ms)
+✔ undelivered receipt cannot animate hidden staff or fulfil hot service outside lunch (4.029639ms)
+(node:84963) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/conversations/memory.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the actual heard recommendation and prior or later knowledge unlock the same saved topic without granting vocabulary (1.636997ms)
+✔ authored cardigan recommendation points with her arm to her actual side dish (4.341117ms)
+✔ real payment checkpoint replays collection without charging twice (15.249809ms)
+✔ cancelling the physical bite prevents receipt completion and subsequent dialogue (1.175486ms)
+✔ a cancelled old action cannot replace a newer completion result (0.194327ms)
+✔ a first greeting from the shared chair never asks permission to occupy it again (2.492771ms)
+✔ paid checkpoint outside lunch preserves entitlement and gives the approved collection reply instead of hidden service (0.555538ms)
+(node:84965) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/runner.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:84975) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/canteen/meal-state.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ payment and physical collection survive replay without a second charge or lost meal (1.361528ms)
+✔ failed payment and early cancellation preserve money, and a seated tray remains where saved (1.935149ms)
+✔ the approved menu prices are canonical and hot service is lunch only across continuing days (0.156315ms)
+✔ water parks an existing entitlement durably without reopening payment (0.169329ms)
+(node:84986) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/scenes/canteen/plan.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ every authored staff-only segment clears the actual counter and service-end surface with an unchanged body radius (1.479239ms)
+(node:84988) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/scenes/canteen/room.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual furnished floor has connected door, service and chair approaches; furniture stays solid (183.542899ms)
+✔ lighting returns to daylight after evening and floor geometry remains unchanged (26.198898ms)
+✔ normal story travel enters and leaves the canteen on every playable day, with no dialogue added (4.913536ms)
+✔ saved seated players restore on either real chair; stale seats recover standing on free floor (25.10772ms)
+✔ Carina takes use the standard female drift guard and every Japanese word receives native checks (38.31656ms)
+✔ Carina uses the exact approved reference and owns both word and line keys (0.71098ms)
+(node:85001) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/roles.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a cast spec: a set, role=person pairs, or both (0.91716ms)
+✔ a fixed role, an unknown role or set, and two sets refuse (0.333629ms)
+✔ --mc and --cast come out of argv, env fills in, and the page query carries both (0.400926ms)
+✔ late movement failures are included in the final verdict (0.817321ms)
+✔ missing completion, page errors and warnings cannot look like a full pass (0.557491ms)
+✔ startup failure reports the actual script error and removes its listener (0.495074ms)
+✔ missing startup modules fail with their URL instead of waiting for readiness (0.234332ms)
+✔ caught asynchronous boot failures report the visible startup error (0.273706ms)
+✔ normal play readiness waits for title departure to finish (0.205046ms)
+✔ default syntax discovery includes browser and story JavaScript (70.544318ms)
+✔ real syntax checker rejects malformed JavaScript without running it (66.964556ms)
+✔ real story checker rejects a missing destination in an isolated copy (140.266966ms)
+✔ restart the unfinished leaf dialogue without repeating increments (4.321791ms)
+✔ resume called scene and then caller tail, omitting earlier parent dialogue (1.46377ms)
+✔ go replaces the called frame while preserving its caller (1.865638ms)
+✔ nested branch callers continue their saved path after the condition changes (1.665661ms)
+✔ choice keeps its original index even when its mutation hides that option (1.467227ms)
+✔ completed child scene is omitted when its parent restarts (0.548905ms)
+✔ purchase and bond autosaves include their completed operation before replay (1.797079ms)
+✔ node entry autosave names the child, and completion saves once and talk state (0.894698ms)
+✔ legacy or invalid execution data resumes idle without running arbitrary nodes (0.482871ms)
+✔ an event queued during dialogue survives its once trigger being consumed (1.3468ms)
+✔ busy events retain their selected conditions and FIFO order across saving (0.997231ms)
+✔ without a staging snapshot, a completed physical action is not repeated (0.62029ms)
+✔ resume starts walks after staging restore, or directly when no staging was saved (1.149087ms)
+✔ continuing a parent restores only the unfinished child staging (0.755455ms)
+✔ leaf replay restores the train before dialogue and repeats departure without repeating purchases (1.154137ms)
+✔ replayed parent restores completed child staging without repeating child dialogue or rewards (0.721491ms)
+✔ completed period change restores scheduled movement without rerunning durable period effects (1.107078ms)
+✔ a second reload retains the original scene entry rather than its last replay state (0.841658ms)
+✔ reject stale choice indices and invalid caller cursors before replaying any step (3.840483ms)
+✔ story edits cannot reuse positional journals or overwrite the original save (1.033369ms)
+✔ checkpoint version, place, depth and suspended caller are validated before any effect (3.537381ms)
+✔ a failed nested scene retains its cursor stack without leaving dead live frames (0.838411ms)
+✔ a throwing durable effect cannot save a half-applied purchase (0.326175ms)
+✔ an entry callback failure also removes its frame and preserves the previous save (0.263718ms)
+✔ a completed typing prompt never asks again and saves its award atomically (0.452583ms)
+✔ a completed word offer does not ask the player to pick it again (0.847799ms)
+✔ restarting an unset followed by set preserves the saved final flag value (0.29705ms)
+(node:85014) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/runner.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ art: actual action cancellation stops authored Runner progression (36.453777ms)
+✔ art: successful free is accepted and stale place result cannot overwrite a new scene (17.946444ms)
+✔ winter: actual action cancellation stops authored Runner progression (19.191012ms)
+✔ winter: successful free is accepted and stale place result cannot overwrite a new scene (8.477698ms)
+✔ winter milestone cancels at the actual participant turn immediately before the award (4.824188ms)
+✔ completed real art action reaches its authored milestone and memory exactly once (11.194752ms)
+✔ every nested art/winter physical action has an immediate completion guard (0.706763ms)
+(node:85016) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:85028) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/clubs/staging.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ missing or unapproved ongoing stages cannot consume a club visit (0.683429ms)
+✔ the original swim and tennis sessions retain their existing eligibility (0.086353ms)
+✔ physical karaoke staging alone cannot start an unheard performance (0.134914ms)
+✔ the story clubs are complete: places, weekly meetings, members through roles, session nodes (3.366128ms)
+✔ members come through the cast layer: another person in a role is in the club (0.427015ms)
+✔ the schedule: next meeting by weekday, today until its period has passed or he went, season lines (0.9541ms)
+✔ posters are up from day 3; joining takes the slip once (0.520972ms)
+✔ a session is due only for a member, at its place, in its period, once that day; progress counts up (0.543625ms)
+✔ a special event runs instead of the week’s session once it is due, and only once (0.655526ms)
+✔ membership and progress survive a save and a restore (0.724907ms)
+✔ day 3: its ways allowed, its ids, hooks and nodes real (3.0063ms)
+(node:85035) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/sim.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:85036) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ terrace finish stays within existing solid walls or below walking clearance (13.557598ms)
+✔ promenade planting does not enter a walk or a bench bay (18.976718ms)
+✔ vending display fits the existing cabinet and remains static scenery (1.710235ms)
+✔ real coast builder installs the promenade finishes (60.308114ms)
+✔ binary gate uses staged policy/bytes and refuses private or nonregular entries (206.815257ms)
+✔ Facts identifies a retained staged document and allows attribution trailers after it (0.80589ms)
+✔ comparison allows source changes but retains vendor and harness fingerprints (4.843004ms)
+✔ stale served code and missing route provenance cannot support a comparison (1.204301ms)
+✔ comparison preserves event and known-word order, save timing, and physical state (0.230545ms)
+✔ failed captures and missing input provenance cannot compare as a pass (0.207511ms)
+✔ driver actions, practice counts and heard words are part of behavior evidence (0.285318ms)
+(node:85088) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/narrative/conditions.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ compiler and graph validation accept runtime expressions beyond the analysis subset (4.019069ms)
+✔ analysis binds unary negation before comparisons and preserves explicit parentheses (0.220405ms)
+✔ analysis never accepts expressions rejected by shared character or compilation checks (0.342506ms)
+✔ opaque trigger expressions retain reads without inventing missing prerequisites (2.212022ms)
+✔ Runner re-exports the same state object and bound evaluator (0.924082ms)
+✔ condition facade retains JavaScript precedence, coercion and flag lookup rules (0.674672ms)
+✔ compiled expressions see later flag and canonical knowledge changes (0.142228ms)
+✔ invalid characters warn each time, invalid syntax once, and failed lookups return false (1.196286ms)
+✔ ordered once resolution leaves peeks untouched and keeps keys independent (0.458535ms)
+(node:85094) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/runner.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:85111) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/ongoing/calendar.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ continuing calendar keeps actual weekdays across weeks and months (0.793977ms)
+✔ a recurring resident has one location in each period, including deferred station checks (45.106475ms)
+✔ club hosts return on their weekday without the introductory date (0.940544ms)
+✔ all continuing destinations connect to home, including the western island and B2 (1.692292ms)
+✔ art progress respects completed milestone saves and separates consecutive meetings (2.524471ms)
+✔ Mori stops promising a missing photograph once the player has actually seen it (0.929203ms)
+✔ sleep carries personal progress into the next week without replaying the opening day (52.687021ms)
+✔ later-week map includes every public route and next morning clears one-time preview selectors (3.837066ms)
+✔ reused repair endings use the current calendar while keeping specific next steps (2.341736ms)
+(node:85117) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/conversations/memory.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ learning later unlocks a heard remark without changing its original interpretation (2.129246ms)
+✔ knowing a word before meeting its speaker still requires hearing the evidence (0.236797ms)
+✔ Continue retains the first source and loading another slot replaces its memories (0.311748ms)
+✔ malformed and unknown saved remarks cannot create conversation evidence (0.142278ms)
+✔ legacy history preserves unknown original comprehension after new words are learned (0.159851ms)
+✔ remembered remarks retain only their original contextual glosses and voice (0.213683ms)
+✔ Hamada's booking survives Continue with word learned after hearing it (0.227369ms)
+✔ Hamada's booking survives Continue with word learned before hearing it (0.401167ms)
+(node:85156) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/conversations/index.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a learned word opens a follow-up only after meeting and hearing the speaker (1.120864ms)
+✔ shared questions preserve authored place overrides and ordinary Talk (3.484141ms)
+✔ recurring voice coverage includes reused day-specific lines on every day (2.596757ms)
+✔ Hamada retains ordinary conversation after a remembered booking becomes understandable (1.948415ms)
+✔ mio shared Chat survives either learning order without replacing ordinary Talk (false) (1.441348ms)
+✔ mio shared Chat survives either learning order without replacing ordinary Talk (true) (3.725576ms)
+✔ guard shared Chat survives either learning order without replacing ordinary Talk (false) (0.9491ms)
+✔ guard shared Chat survives either learning order without replacing ordinary Talk (true) (1.329838ms)
+✔ kuro shared Chat survives either learning order without replacing ordinary Talk (false) (1.215332ms)
+✔ kuro shared Chat survives either learning order without replacing ordinary Talk (true) (4.003319ms)
+✔ aoi shared Chat survives either learning order without replacing ordinary Talk (false) (1.128698ms)
+✔ aoi shared Chat survives either learning order without replacing ordinary Talk (true) (1.366487ms)
+✔ rei shared Chat survives either learning order without replacing ordinary Talk (false) (0.856114ms)
+✔ rei shared Chat survives either learning order without replacing ordinary Talk (true) (0.76323ms)
+✔ Emi has ordinary Chat without a word prerequisite (0.096623ms)
+(node:85168) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a walker giving way at a door for Eric stays on the walk grid (#179) (8.668067ms)
+✔ a walker already in a wall margin is never pushed further in (#179) (0.915687ms)
+✔ a walker stepping aside to stop never walks into someone standing there (#182) (8.360567ms)
+✔ someone new along a street appears out of view, where they actually stand (#183) (14.215449ms)
+(node:85178) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a passer-by giving way to a glide never steps into a fixed actor (51.341663ms)
+✔ with nobody beside them, a passer-by still steps out of the glide's way (1.668477ms)
+(node:85185) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/continue.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a fresh Day 2 jump keeps sample knowledge and blurs the unlearned dinner greeting (2.12644ms)
+✔ a completed own save keeps its words and choices without adding sample knowledge (0.507006ms)
+✔ an unfinished earlier save uses the documented sample without leaking its vocabulary (1.47913ms)
+(node:85199) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/saves/day2.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ old d2_supper moves to the restaurant with durable progress intact (2.337589ms)
+✔ old d2_take_food moves to the restaurant with durable progress intact (0.227939ms)
+✔ old d2_drink_word moves to the restaurant with durable progress intact (0.179508ms)
+✔ old d2_mori_rest moves to the restaurant with durable progress intact (0.169019ms)
+✔ finished party street walk stays on the street, while old active coda relocates (0.298523ms)
+✔ station dialogue restarts safely without undoing report or payments (0.158038ms)
+✔ queued party scenes migrate, unrelated checkpoints and days stay intact (0.210477ms)
+(node:85206) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/day4/shot.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Continue restores the physical action frame on a rebuilt camera at another viewport fit (1.457218ms)
+(node:85210) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/day4/index.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Sunday supplements preserve the place receiver, absolute clock and saved-state arguments (1.460154ms)
+(node:85243) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/day5/delivery-state.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ pre-delivery cancellation leaves reveal unseen and cannot award world resources (2.452014ms)
+✔ delivery persists independently of witness consent and cannot replay first can (0.1748ms)
+✔ every actual last recipient, including no deliveries, returns without rewards (0.221267ms)
+✔ guided scene creates only one request and emits success only after delivery callback (0.945082ms)
+✔ rounds report the actual last fulfilled request, preserving it after a wrong delivery (0.625751ms)
+(node:85245) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/day4/index.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Stacked Sunday and Monday supplements preserve the place receiver, absolute clock and saved-state arguments (1.085096ms)
+✔ dependency resolution includes static, re-export and literal dynamic imports (12.475157ms)
+✔ Three import-map aliases resolve to real vendor files and typos fail (1.530165ms)
+✔ nonliteral imports are reported and private/outside paths reject before filesystem access (1.518784ms)
+✔ removed cycles must also retire their allowance (0.220917ms)
+✔ runtime imports cannot cross into tools or archived code (0.404973ms)
+(node:85271) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/narrative/engine-flags.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ named engine flags expose their declared strings and reject typos before a write (1.838668ms)
+✔ actual engine writes and event calls agree with declarations (1111.948291ms)
+✔ actual source mutations fail the declaration guard before the game runs (4054.912753ms)
+✔ declaration guards survive formatting of all actual owner files (3122.995798ms)
+unknown hook sender
+unknown hook sender
+unknown hook sender
+unknown hook sender
+unknown hook sender
+✔ all new entry menus preserve the canonical introduction boundary (3.301056ms)
+✔ Kuro defers only actual workday reception mornings and retains off-duty topics (1.915342ms)
+✔ unknown swimming stays an untranslated remark and does not leak through repeat labels (2.823325ms)
+✔ Aoi again depends on completed physical tennis, not an earlier rally choice (0.929633ms)
+✔ Rei catch-up can be declined; choosing it teaches through the actual type hook and responds (0.780913ms)
+✔ Rei preserves a reversible conversational preference without inventing a played game (0.619278ms)
+✔ all local node references resolve and Kuro/Aoi speech has no translated subtitle bypass (0.443507ms)
+✔ proposed exact remarks survive save and accept either order without inventing knowledge at hearing (2.313874ms)
+✔ working mornings defer Mio and Emi, while days off keep their full menus (1.548971ms)
+✔ Mio quote is Japanese, learning is optional, and later follow-up does not invent an outing (1.121475ms)
+✔ Emi teaches only after a requested practice and never awards a club milestone (0.555658ms)
+✔ the guard does not mention a cat before meeting Tama or translate his full reply (0.598519ms)
+✔ actual Runner replays both participants facing before each Chat camera (3.003093ms)
+(node:85275) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/runner.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:85294) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ shared ground keeps one batch per colour and distinguishes lawn, road and paving (3.199153ms)
+✔ mixed skyline ground applies lawn detail and paving detail without changing sea or its draw budget (1.987187ms)
+✔ facade hardware stays attached, clear of front doors and batched once across buildings (3.448684ms)
+✔ planted trees, hedges and ground cover retain distinct batched leaf, bark and soil surfaces (10.010909ms)
+✔ generic roof membrane is inset within the building and above its solid roof (16.392925ms)
+✔ small-block flat roof keeps its existing slab and uses the shared membrane finish (0.547522ms)
+✔ facts check reports an unknown documented object with its actual place source (185.390333ms)
+(node:85311) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/testmode.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the fast driver finishes Say practice and voice before choosing another action (7.723154ms)
+✔ late page errors during capture fail the otherwise complete route (3.81289ms)
+✔ lifecycle deadline after route completion produces only FAIL and keeps route evidence (1.075307ms)
+✔ load admission is reported as deferred with its own exit status (1.009634ms)
+✔ completed lifecycle reports one passing result (0.878227ms)
+✔ actual traveller story cannot offer the occupied seat or speak completion after a cancelled bag move (4.121913ms)
+✔ an older terminal action cannot overwrite a newer place result (0.259239ms)
+✔ actual meal node checkpoint after consumption cannot prepare a second identical item on Continue (5.680122ms)
+(node:85333) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/runner.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:85337) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/ferry-terminal/food-state.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a prepared meal changes inventory only on completed consumption and survives Continue replay once (1.201526ms)
+✔ unsupported or missing food never becomes an inventory action; leaving selected food does not consume it (0.237548ms)
+(node:85345) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/scenes/harbour/ships.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ extracting the terminal window builders preserves every original outdoor ship/quay primitive and paving call (34.830025ms)
+(node:85374) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/scenes/ferry-terminal/room.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ terminal room fits the actual facade and connects every public approach and both bag handling positions (111.110921ms)
+✔ actual story loaders and travel rules keep terminal access in opening and continuing weeks (8.05469ms)
+✔ every registered place has a finite real player/goal map frame; terminal door matches the existing harbour facade (1.673105ms)
+(node:85383) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/flavor-finds/model.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ each find respects its first date, final date and pool membership/period boundary (1.984413ms)
+✔ only authored paper captions change presentation; dialogue, return action and final flags are retained (0.566688ms)
+✔ interrupted looks save no resumable scene; unrelated checkpoints and final flags are untouched (0.5515ms)
+(node:85392) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/flavor-finds/index.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ optional finds preserve place clocks, receivers and period/restore arguments before their first day (1.382778ms)
+(node:85399) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/camera/policy.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ desktop opt-in never overrides phone, authored shots, dialogue or menus (2.085874ms)
+✔ follow restores exact authored lens/pose without changing scene-camera state or shared actor materials (3.79108ms)
+✔ camera-relative controls use parent-local yaw and never change the avatar heading (0.574574ms)
+✔ wall centre and lens corners block camera, hidden layers/actors do not, material sides are preserved (4.265324ms)
+✔ batched source walls and moved doors retain exact collision while render batches are ignored (3.4997ms)
+✔ instanced walls use the instance bounds rather than the prototype at the origin (1.609164ms)
+✔ render batching narrows the broad phase without hiding released collision sources (1.148295ms)
+✔ large triangle lookup matches exact transformed geometry, draw range and changed vertices (172.277213ms)
+✔ ambient crowd bodies do not push the lens away from the player (1.686491ms)
+✔ bounds invalidate on replacement attributes and instanced geometry vertex edits (2.940285ms)
+✔ animation culling keeps the rendered follow frustum while authored lens is restored (0.589271ms)
+✔ interior closure preserves doorway aperture and releases its ceiling for overview (9.461603ms)
+✔ separate dorm room ceilings activate in their own translated frame only (1.237273ms)
+✔ station enclosure closes cutaway sides but keeps its real glass-entry opening (4.422681ms)
+✔ tight-space player visibility scales with the rig and restores before authored rendering (0.900648ms)
+(node:85408) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/forecourt-save.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ saves from before the forecourt continue on the new route (1.162081ms)
+✔ format proof permits spelling changes while retaining literals and short-circuit order (43.663053ms)
+✔ format proof rejects changed operands, string values, template whitespace and operators (4.765988ms)
+(node:85415) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ gait windows do not interpret a changed local coordinate origin as foot sliding (13.448241ms)
+✔ changing carriers within the same place also starts a fresh measurement frame (6.051122ms)
+✔ the same sampler still reports real sliding within one coordinate frame (5.717793ms)
+(node:85424) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ running fades into idle without inserting a full-weight walking pose, then walking resumes (4.14656ms)
+✔ sanitized subprocesses cannot stage files into a parent hook index (31.139315ms)
+✔ private subtrees are excluded before their tree objects are requested (1.327182ms)
+✔ replacement refs cannot change staged identities or materialized bytes in either Git object format (245.526852ms)
+✔ snapshot copies exact staged bytes and modes with isolated tracked metadata, then cleans up (109.17009ms)
+(node:85448) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/gameplay/gifts.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ interaction gift UI delegates acceptance and refusal before changing inventory (196.359369ms)
+✔ gift integration catches bypassed delegation and a dropped successful return (11.743907ms)
+✔ a live priority file blocks browser GPU slots; a dead or reused writer does not (38.206613ms)
+✔ a pool lock whose browser jobs died is freed even while the dashboard waits for it (35.111345ms)
+✔ Python waiters free a dead pool lock and never touch the dashboard or an exclusive owner (238.185347ms)
+✔ the GPU watchdog never removes the dashboard's lock, however old (62.928555ms)
+✔ Python reads the same priority file, and a job stops only for a live dashboard (300.275851ms)
+✔ a yield request names the lock owner it is for (148.221297ms)
+✔ the dashboard writes and removes its files; another live writer's files stay (67.243613ms)
+✔ ComfyUI batch clients stop with exit 75 for the dashboard, between images and on an interrupt (186.181604ms)
+✔ the queue goes by rank, then by time, the same in Python and JavaScript (445.789191ms)
+✔ dead tickets and tickets of a reused pid are dropped and do not hold anyone up (152.510465ms)
+✔ the queue command shows rank, owner, waiting time, live or dead, and the holder (67.946809ms)
+✔ acquire waits its turn, gives up on its timeout and leaves no ticket behind (139.836113ms)
+✔ the dashboard keeps its preemption: nobody else takes the lock or a slot while gpu.priority is live (92.951405ms)
+✔ browser slots and exclusive jobs cannot keep each other out (120.206905ms)
+(node:85468) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/ui/dialogue-text.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the guard line shows neither 本社 nor はい as known before they are taught (1.35182ms)
+✔ a taught word in an overheard line stays sharp and glossed (0.18601ms)
+✔ every -te word in the Words panel names its form, and the panel has a line on what -te does (0.243609ms)
+(node:85469) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/ui/dialogue-text.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Mori's introduction shows his name with its romaji before anything is taught (1.575862ms)
+✔ an honorific after a name stays with it (1.96196ms)
+✔ every name in NAMES is readable in a line, and only as a whole word (0.409733ms)
+(node:85493) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ moving instance bounds exclude empty slots and follow departure, return, rotation and scale (3.610048ms)
+✔ posed birds retain every wing vertex at camera edges across repeated flap and fold cycles (135.804019ms)
+(node:85494) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/izakaya/actions.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ leaving cancels nested dining awaits without applying their later actor or food changes (0.845204ms)
+✔ cancelling parallel toast hands leaves no continuation, while real errors remain visible (0.588259ms)
+(node:85505) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/scenes/izakaya/plan.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ izakaya respects the real facade footprint and fits all five table places (40.452428ms)
+(node:85509) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ three named seats and actual queue/receipt state survive a serializable paused-scene restore (19.626934ms)
+✔ cancelling a pending actual prop reach restores actors and wrappers and prevents late ownership changes (2.833414ms)
+✔ a new visit cannot continue a cancelled microphone pickup or duplicate its ownership (1.862041ms)
+✔ missing real participants rejects a start without revealing props or modifying existing people (1.220932ms)
+✔ fresh Continue and inactive restore return avoidance flags to their own original values (2.846718ms)
+✔ handoffs measure the selected receiving wrist and preserve that side through Continue (2.793088ms)
+✔ phone group shots cover the requested speaker or current holder, while desktop retains the trio (1.550795ms)
+✔ making room on a later visit retains Hamada without inventing an unqueued Kenji song (2.479145ms)
+(node:85542) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/narrative/conditions.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the actual daytime street trigger and map agree; a plain route cannot bypass closed hours (29.43446ms)
+✔ groceries cannot fall through a drink-only wildcard gift branch (0.786233ms)
+✔ owned grocery labels supply plain multiline pages to the shared Bag reader (0.293073ms)
+✔ continuing shop keeps the complete service and guarded street doorway without resetting receipts (3.182001ms)
+✔ actual Runner stops the selected order after place cancellation, before checkout, payment or dialogue (2.975712ms)
+✔ completed physical action reaches normal browsing without awarding inventory (1.09204ms)
+✔ a stale completion cannot replace a newer shop action result (0.265731ms)
+✔ an old room cannot write the flag after a new place starts its own action (0.126288ms)
+(node:85549) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/runner.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:85556) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/konbini/trade.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a saved basket has three distinct selections and uses canonical item prices (1.529645ms)
+✔ confirmed basket payment and resumed collection award each selected item once (0.356843ms)
+✔ return, cancellation and insufficient money never award unpaid groceries (0.199506ms)
+✔ an eaten grocery is removed once across replay, without stats or gift effects (0.283655ms)
+✔ the real entrance reaches fridge, till and perch without crossing furnishings (16.633789ms)
+(node:85557) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/minigames/kotodama/grammar.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ particles decide the roles, whatever the order (1.59598ms)
+✔ incomplete commands say what is missing (0.188906ms)
+✔ と serves two people in one command, scored 2 × 2 (0.698467ms)
+✔ a swapped particle puts the person out of the machine (0.29165ms)
+✔ にも repeats the last command for someone else, free, and grows the combo (0.300697ms)
+✔ people speak politely, the way colleagues do at work (0.356312ms)
+✔ every action is a tap: nothing in Kotodama drags (2.861897ms)
+✔ every dispense animation targets a part its machine draws (329.024919ms)
+✔ heard-text declarations require data and survive quotes and wrapping (194.025447ms)
+✔ unrendered metadata and other object rows cannot supply a translation (4.736933ms)
+✔ text contexts keep translations together and unrelated labels apart (19.793478ms)
+✔ the actual language audit preserves findings after formatting all runtime sources (8091.328222ms)
+(node:85572) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/narrative/legacy-opening.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ old pre-opening saves recover each place opening despite flags from earlier places (3.192631ms)
+✔ authored progress and engine-only place progress prevent an opening restart (4.811995ms)
+✔ current idle saves and explicit execution states never use legacy inference (0.220897ms)
+✔ a nested increment alone establishes local legacy progress (0.149222ms)
+(node:85585) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a morning ride, then the evening relight, then the ride home give the place its own background back (44.604047ms)
+(node:85596) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ lift clipping stays on selected meshes and shares each clone only within its attachment (2.933582ms)
+✔ release restores assignments, preserves later swaps and disposes only owned clones once (0.430011ms)
+(node:85617) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/lift-turn.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a scripted half-turn is monotonic and stays below the stationary-spin speed (2.28528ms)
+✔ crossing the angle wrap takes the short turn and does not slow tiny adjustments (0.200879ms)
+✔ turning another lift rider cannot alter the player walker (0.186201ms)
+✔ lint inventory survives whitespace and quote formatting, and detects new debt (81.295563ms)
+✔ undefined names, parse failures and inline suppressions cannot be inventoried away (4.503012ms)
+✔ runtime browser modules do not inherit Node globals, capture tools have both contexts (25.09158ms)
+✔ a lock file changed but left unstaged fails the asset sync check (17.24944ms)
+✔ a locked asset that links outside the checkouts is refused before it is read (17.572609ms)
+✔ a worktree asset linked into the main checkout is copied (24.684852ms)
+(node:85649) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/scenes/island-layout.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ map planting keeps exact world tree positions and irregular land cover inside its source regions (7.516926ms)
+✔ scale ruler and cursor mapping retain the real 1.5 metre island frame at phone and desktop zooms (0.348737ms)
+✔ geographic captions yield to real destination labels and controls (0.416916ms)
+✔ office map beds use the unchanged real grounds belt rectangles (0.291159ms)
+(node:85652) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/ui/map/labels.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ phone labels avoid pin touch targets, each other, screen edges and controls (1.067353ms)
+✔ crowded or covered labels hide without moving their geographic pin (0.638734ms)
+(node:85674) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/scenes/island-layout.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the map leaves all three built shop-street alleys open (1.688074ms)
+✔ shop roof detail never changes unrelated map footprints or building identities (2.063812ms)
+(node:85678) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/scenes/outdoor/parts.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ shared map planting plan preserves the actual pre-extraction office geometry, colours and normals (173.440897ms)
+(node:85691) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/ui/map/where.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ staged dorm floors share the player and goal island coordinates and heading (1.271488ms)
+(node:85701) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/ui/map/viewport.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ island fit keeps every canonical corner between the real header and lower controls (0.951915ms)
+✔ zoomed panning reaches each geographic edge at the usable viewport edge (0.290678ms)
+✔ expanded phone Places retains a usable island to the left of its toolbar (0.338378ms)
+(node:85716) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/mc.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Eric is the default and the player id stays eric (0.730508ms)
+✔ the engine's own strings for Eric are what they were (1.471194ms)
+✔ every story line that named Eric renders the same for Eric (19.372064ms)
+✔ every {mc.*} token in the story resolves for every protagonist (284.810667ms)
+✔ protagonist configs have the same fields as Eric (0.585514ms)
+✔ old saves play Eric with the default cast (0.646569ms)
+(node:85722) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/mc.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Carina introduces herself by name and keeps the saved train reply node (2.928663ms)
+✔ colleagues, paper labels and the mailbox use the chosen protagonist (2.523038ms)
+✔ public day 1–5 scene text contains no Eric identity when Carina plays (117.108642ms)
+✔ newly personalized lines have Carina keys and retain their original NPC speakers (252.645887ms)
+(node:85736) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/mc.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Eric's manifest is the same with every protagonist in it as on its own (482.14832ms)
+✔ Eric's keys are the old ones (0.515643ms)
+✔ Carina gets her own keys for player lines, words and token lines, and shares the rest (0.637302ms)
+✔ the game picks the protagonist’s own clip, else the stand-in (0.160122ms)
+✔ approved Carina casting uses own Monday lines and emits no Eric stand-in additions (176.445233ms)
+✔ stand-in validation preserves authored token hashes and overheard keys (0.569525ms)
+✔ collecting cached nested stories never consumes protagonist tokens (2.117713ms)
+✔ identical Japanese from different speakers cannot silently replace one voice (1.336821ms)
+✔ actual Runner saves Mio step 2, memory, gate and period together (4.653617ms)
+✔ actual Runner saves Mio step 3, memory, gate and period together (1.440376ms)
+✔ rejected physical completion leaves live flags, gate, memory and storage untouched (1.891748ms)
+✔ duplicate completion outside the scene never consumes another period or memory (1.056413ms)
+(node:85747) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/runner.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:85755) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ missing and partial older saves preserve canonical resting prop parents and geometry (31.414434ms)
+✔ resting and held chopsticks round-trip local and world scale along with their ownership (17.40296ms)
+✔ pre-scale saved utensils use the correct canonical scale for held versus resting parents (5.439348ms)
+(node:85779) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/mio-lunch/eligibility.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Mio weekday lunch needs the actual place, time, introduction and existing bond readiness (0.820277ms)
+✔ Trusted handover takes priority without making the earlier lunch expression a gate (0.149672ms)
+✔ a refused or interrupted lunch cannot complete; sitting alone is not a meal (0.522265ms)
+✔ Continue preserves each physical handover stage and cannot skip the returned sheet (0.389816ms)
+✔ weekday Mio lunch placement changes only after the completed checklist scene (53.843773ms)
+✔ module limits catch new oversized files and growth by either lines or bytes (2.673131ms)
+✔ exceptions require provenance and disappear when the module fits or is removed (0.794689ms)
+✔ runtime budgets include modules regardless of JavaScript extension (1.481624ms)
+(node:85805) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ only a seated conversation gets the pair shot; release and another authored close retain normal camera (2.376842ms)
+✔ a serialized conversation shot restores without changing home angles (0.464646ms)
+✔ listener overlay is bounded over held mixer pose and fades out after cancellation (13.620787ms)
+✔ Emi shot and listener never activate Mio listener, and vice versa (2.15271ms)
+✔ saved pair lens uses current projection and restores on release, ordinary shot and leave (1.727578ms)
+✔ resize retains home fit distance, updates lens projection and leaves ordinary resize untouched (6.305962ms)
+(node:85811) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/scenes/forecourt/south-link.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ both directions meet at one island position and arrive clear of their exit zones (0.915837ms)
+✔ actual authored routes support markers and walking both ways on every day (12.365049ms)
+(node:85818) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/story/ongoing/index.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ continuing ferry_terminal has staged, reachable story references (5.320564ms)
+✔ continuing konbini has staged, reachable story references (1.377528ms)
+✔ continuing bakery has staged, reachable story references (0.818203ms)
+✔ continuing campus has staged, reachable story references (0.242066ms)
+✔ continuing print_shop has staged, reachable story references (0.218643ms)
+✔ continuing train has staged, reachable story references (1.079135ms)
+✔ continuing gate has staged, reachable story references (1.175838ms)
+✔ continuing forecourt has staged, reachable story references (0.819315ms)
+✔ continuing office has staged, reachable story references (2.911501ms)
+✔ continuing plaza has staged, reachable story references (2.731872ms)
+✔ continuing canteen has staged, reachable story references (1.746454ms)
+✔ continuing dorm_court has staged, reachable story references (0.275169ms)
+✔ continuing dorms has staged, reachable story references (0.531191ms)
+✔ continuing east_lane has staged, reachable story references (0.255221ms)
+✔ continuing east_coast has staged, reachable story references (0.554205ms)
+✔ continuing sports has staged, reachable story references (1.377798ms)
+✔ continuing pool has staged, reachable story references (0.229282ms)
+✔ continuing gym has staged, reachable story references (1.931903ms)
+✔ continuing shotengai has staged, reachable story references (0.923582ms)
+✔ continuing izakaya has staged, reachable story references (0.156265ms)
+✔ continuing karaoke has staged, reachable story references (0.122781ms)
+✔ continuing karaoke_booth has staged, reachable story references (0.507037ms)
+✔ continuing dorm_commons has staged, reachable story references (1.373691ms)
+✔ continuing office_quarter has staged, reachable story references (0.182975ms)
+✔ continuing harbour has staged, reachable story references (0.210266ms)
+✔ continuing works has staged, reachable story references (0.117231ms)
+✔ default startup preserves fresh onboarding and enters through the title (3.609417ms)
+✔ fast route startup is explicit and does not dismiss a title (0.369828ms)
+✔ touch and preloaded history are explicit; the real Start action owns reset (0.302771ms)
+✔ navigation failure closes the context and includes HTTP status (0.829024ms)
+✔ cleanup failure preserves the original startup error (0.296008ms)
+✔ trace setup runs before navigation and its failure closes the context (0.165442ms)
+(node:85843) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ outdoor parts preserve indexed vertex opacity and separate RGB and RGBA batches (58.730268ms)
+(node:85853) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/story/people.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual Talk keeps an unnamed later cast member out of People until the authored introduction (1.448191ms)
+✔ a baseline taken from a run gives no warnings for that run (1.234519ms)
+✔ warns only past the tolerance, and names the number (1.983611ms)
+✔ frame times compare only with the same GL; calls compare always (0.255051ms)
+✔ a different quality tier is not compared (0.136828ms)
+✔ a tier above 0 has its own baseline under <layout>-q<tier> (0.320664ms)
+✔ summary line lists every place (0.196801ms)
+(node:85863) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/catalog.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ every travel kind and every other pin has a symbol (0.761817ms)
+✔ the travel table names only things the catalog has, with a known kind (0.22753ms)
+✔ a thing whose verb goes somewhere is a way out, and never has the eye (0.448065ms)
+✔ the kinds: doors, stairs, the lift, ways out and walk-to spots (0.195158ms)
+✔ every pin the story uses to change place is a way out (51.832739ms)
+✔ the tooltip says the verb and what it is (0.607135ms)
+✔ a private pin says nothing private while private mode is off (0.734385ms)
+(node:85868) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/scenes/sports/changing-room.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ both changing routes connect entrance, locker, shower and deck on free floor (61.324941ms)
+✔ four actual floodlights illuminate at evening and switch off again in daylight (13.532971ms)
+✔ swimmer waterline follows actual head height without cumulative drift and releases the pose (4.554099ms)
+✔ a scripted swimmer turns toward their listener without the paused walking controller (0.377311ms)
+✔ leaving a pool action cancels pending waits and late tween frames (0.20126ms)
+✔ Continue preserves water and valid benches, but safely retires old submerged saves (1.119982ms)
+✔ repeated pool visits restore the persistent actor update and held props follow its real hand (0.728164ms)
+✔ pool crows cannot select the removed pavilion roof or any interior perch (0.622224ms)
+✔ water dialogue framing survives Continue and restores walking angles on release and leave (0.91711ms)
+(node:85900) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ real machine feed and output complete before one persistent directory, repeated service only reads (11.324867ms)
+✔ actual action cancellation during feed grants no document and late tween cannot revive paper (0.914264ms)
+✔ leaving during the paper view closes it and cannot open subsequent pages in a new place (4.782029ms)
+✔ printed venue names follow canonical map parents, without fabricated numeric opening times (0.427407ms)
+✔ interrupted physical pickup grants nothing and restores the original arm updater (0.729385ms)
+✔ the published game does not contain a private scene (0.85385ms)
+✔ a place can take a plugin, and a missing one changes nothing (0.215897ms)
+✔ a plugin can serve its own voice clips; with none set the public audio/<key>.mp3 path is used (0.944812ms)
+(node:85911) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the actual Continue branch migrates old openings after hydration and preserves current idle saves (22.760133ms)
+✔ real staging boundary restores world, camera and prompts while retaining durable flags (7.814698ms)
+✔ the real beat boundary keeps recovery locked and does not run deferred work (0.391188ms)
+✔ the real recovery notice freezes updates and offers a working return to title (0.373054ms)
+✔ menu capture cannot unpause recovery and preserves native button activation (12.293433ms)
+(node:85923) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ people's batches and their outline twins keep every posed vertex inside their culling sphere (610.663473ms)
+(node:85925) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ counter activity keeps cloth on actual hand without moving feet and releases its pose across repeated visits (23.551686ms)
+✔ busy conversations release automatic wiping; cancelled in-flight wiping cannot reinstall its pose (0.876022ms)
+✔ staff counter and sofa approach keep the player on connected floor clear of the seated actor (167.571879ms)
+✔ the actual default canteen worker moves its drawn hand, without requiring a Meshy rig (36.456212ms)
+unknown hook sender
+(node:85941) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/runner.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ unknown-word choice stays gated and filtering preserves original branch selection (4.701546ms)
+✔ known reply renders existing word spans and escapes authored text without teaching (0.457162ms)
+✔ actual remembered Mio menu renders its learned-word follow-up without changing knowledge (2.660728ms)
+(node:85944) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/bible/live.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual bible loader preserves the complete portrait table (124.756254ms)
+✔ actual asset scanner preserves portraits and all previous prop labels and previews (1265.916435ms)
+✔ real factory mutations fail CPU registration checks (129.774509ms)
+✔ factory checks and asset reads survive mechanical formatting (2020.624086ms)
+✔ day-three sample and saved history preserve known colleagues in story conditions (3.915324ms)
+✔ a later-day place preview restores the same location into narrative conditions (6.768194ms)
+✔ actual Continue retains derived meeting flags after place restoration and before arrival story (3.012652ms)
+✔ meeting an existing People entry repairs its missing story flag without another bond award (1.046123ms)
+✔ loading a different met collection removes stale met flags but preserves unrelated flags (0.671757ms)
+✔ simulation saves earlier-place gates and restores them before entering the current story (0.8271ms)
+✔ whole simulation save restores words, inventory, flags, relationships and one-shot state (2.410426ms)
+✔ legacy commute saves migrate periods and numeric bonds without clearing existing flags or words (0.356803ms)
+✔ save loading rejects corrupt and unsupported versions; disabled storage stays nonfatal (0.553334ms)
+✔ real menu slots retain separate saves and thumbnails, and loading stages Continue (2.077378ms)
+✔ restored schedule applies its real instant placement, seating and hide operations (0.499312ms)
+✔ autosave at the title continues directly; manual slot reload consumes its Continue flag once (1.026206ms)
+✔ restore preserves zero yen and replaces existing one-shot state (0.397219ms)
+✔ unknown purchases leave money and inventory unchanged (0.214835ms)
+✔ boot suppression preserves the existing autosave and real saves retain once triggers and room state (2.809689ms)
+✔ save retains pending travel, destination opening and the completed-day state (0.389515ms)
+✔ quick save keeps the game, progress after it counts as unsaved, and quick load restores it exactly (0.99688ms)
+✔ period flags: only the current period is true, through period changes, a load and a new day (3.745023ms)
+✔ bond2_<id> is set when a person reaches step 2 and stays set (0.395976ms)
+✔ later cast introductions create persistent People cards without awarding repeat points (0.676185ms)
+✔ legacy completed later-cast introductions recover met state and preserve points (0.300657ms)
+(node:85958) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/sim.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:85976) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/saves/store.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ twelve manual slots and the quick slot each keep their own save, picture and details (3.822839ms)
+✔ the autosave is its own entry; loading a slot makes it the autosave with its picture (0.475416ms)
+✔ old three-slot saves migrate: data untouched, pictures moved to IndexedDB only once stored (2.845106ms)
+✔ without IndexedDB the picture stays in the record; a full storage refuses the save (0.328609ms)
+✔ progress compares what a load would lose, not where people stand (0.544267ms)
+(node:85977) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/saved-people.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ people round trip retains seated pose and an unfinished walk destination (1.613583ms)
+✔ a pending walk resumes once and completion saves the final seated destination (4.631184ms)
+✔ completion of a superseded walk cannot clear or save the new destination (0.316027ms)
+✔ restoring a pose invalidates outstanding scripted movement and facing (0.157477ms)
+✔ Continue retains a seated player exit and clears it when loading a standing save (0.327648ms)
+(node:85988) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/gameplay/interactions.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a click during the practice prompt is ignored and the word still lands (12.911008ms)
+✔ a click while Eric is voicing the word is ignored (0.510603ms)
+✔ arriving at a target after a Say started does not talk (0.494242ms)
+✔ saying never sticks: a failed word clears it and clicks work again (0.54051ms)
+✔ a superseded walk stops before moving or setting the new walk idle (2.931107ms)
+✔ pose hydration cancellation resolves an old walk without moving the restored root (1.053868ms)
+✔ changing place or reparenting a shared actor cancels its old movement (0.537043ms)
+✔ a named train cushion wins over an adjacent armrest in either ray order (0.721351ms)
+✔ a deeply sunken sitter still measures the named cushion above its hips (0.162637ms)
+✔ an unknown seat retains the highest surface below the hips with existing slack (0.090571ms)
+(node:86008) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/investigations/sender/camera.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ sender saves only its active camera and reacquires it on restore (1.390853ms)
+(node:86035) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/investigations/sender/hook.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ sender availability recomputes across office, other places and loaded outside saves (0.87984ms)
+(node:86042) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/investigations/sender/model.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ inspection requires actual matching occurrences in distinct records, in either order (3.07543ms)
+✔ wrong hold, replacement, successful retry, release and failure conserve all items across every Continue (2.972436ms)
+✔ retry is single-flight and cannot change held item midway through delivery (0.634907ms)
+✔ actions leave previous snapshots untouched and corrupt imports reset safely (0.30216ms)
+(node:86048) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/investigations/sender/state.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ unoffered console adds no synthetic investigation to an ordinary legacy save (1.427823ms)
+✔ offered model survives global save hydration while other progression remains unchanged (1.804753ms)
+(node:86056) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/scenes/shotengai/shopfront-plan.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ display openings have real depth while doors and upper walls remain solid (6.528091ms)
+✔ fitted goods stay within declared display footprints and central door clearance (17.487319ms)
+✔ display blockers preserve all door approaches and the central pedestrian strip (0.377301ms)
+✔ low carts match their physical blockers without occupying doors, poles or the store queue (5.236154ms)
+(node:86059) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/scenes/shotengai.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual shop-street route detours around the held conversation in both directions without changing nav (5.900257ms)
+✔ a fresh route on a reused crowd body is detoured; moving actors and waiting doorway walkers keep ownership (1.836343ms)
+✔ a completely blocked corridor has no route rather than crossing occupied space (2.37544ms)
+✔ both sides of every seaside bench retain reachable standing floor and sea-side knee room (12.60951ms)
+(node:86075) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/ui/dialogue.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Skip holds while the game is paused and stops when turned off meanwhile (1608.714538ms)
+(node:86082) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/crowd/data-south.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ closed sports approach keeps the population on distinct open routes (1.705937ms)
+✔ CPU checks run staged files and lockfile in their own repository, preserving working files and index (733.965435ms)
+✔ staged syntax reads the index, checks each language, and leaves work untouched (475.804536ms)
+✔ staged contents and review digest ignore unstaged edits but detect index changes (200.93098ms)
+✔ raw Git records preserve unusual filenames, deletions and mode changes (97.729155ms)
+✔ private paths, symlinks and oversized staged objects fail closed (64.443763ms)
+✔ snapshot leaves a stale shared index untouched even while another writer holds its lock (46.908484ms)
+✔ snapshot respects alternate and split indexes (98.068654ms)
+✔ interrupted-index cleanup only removes old directories owned by dead processes (21.367967ms)
+(node:86113) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/story/shotengai.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ asset reader resolves the actual imported garden wrapper, shared branches and unchanged place nodes (11.837384ms)
+✔ unresolved imports, dynamic wrapper bodies and dynamic story values fail visibly (8.135513ms)
+3D cast kuro TypeError: document.createElementNS is not a function
+    at createElementNS (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:1873:18)
+    at ImageLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:45666:17)
+    at TextureLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:46067:10)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44858:10
+    at new Promise (<anonymous>)
+    at TextureLoader.loadAsync (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44856:10)
+    at meshyFiles (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/avatar.js:267:31)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:49:25
+    at Array.map (<anonymous>)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:47:12
+3D cast aoi TypeError: document.createElementNS is not a function
+    at createElementNS (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:1873:18)
+    at ImageLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:45666:17)
+    at TextureLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:46067:10)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44858:10
+    at new Promise (<anonymous>)
+    at TextureLoader.loadAsync (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44856:10)
+    at meshyFiles (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/avatar.js:267:31)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:49:25
+    at Array.map (<anonymous>)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:47:12
+3D cast emi TypeError: document.createElementNS is not a function
+    at createElementNS (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:1873:18)
+    at ImageLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:45666:17)
+    at TextureLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:46067:10)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44858:10
+    at new Promise (<anonymous>)
+    at TextureLoader.loadAsync (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44856:10)
+    at meshyFiles (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/avatar.js:267:31)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:49:25
+    at Array.map (<anonymous>)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:47:12
+3D cast mori TypeError: document.createElementNS is not a function
+    at createElementNS (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:1873:18)
+    at ImageLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:45666:17)
+    at TextureLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:46067:10)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44858:10
+    at new Promise (<anonymous>)
+    at TextureLoader.loadAsync (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44856:10)
+    at meshyFiles (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/avatar.js:267:31)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:49:25
+    at Array.map (<anonymous>)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:47:12
+3D cast guard TypeError: document.createElementNS is not a function
+    at createElementNS (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:1873:18)
+    at ImageLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:45666:17)
+    at TextureLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:46067:10)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44858:10
+    at new Promise (<anonymous>)
+    at TextureLoader.loadAsync (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44856:10)
+    at meshyFiles (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/avatar.js:267:31)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:49:25
+    at Array.map (<anonymous>)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:47:12
+3D cast kuroda TypeError: document.createElementNS is not a function
+    at createElementNS (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:1873:18)
+    at ImageLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:45666:17)
+    at TextureLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:46067:10)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44858:10
+    at new Promise (<anonymous>)
+    at TextureLoader.loadAsync (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44856:10)
+    at meshyFiles (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/avatar.js:267:31)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:49:25
+    at Array.map (<anonymous>)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:47:12
+3D cast kenji TypeError: document.createElementNS is not a function
+    at createElementNS (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:1873:18)
+    at ImageLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:45666:17)
+    at TextureLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:46067:10)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44858:10
+    at new Promise (<anonymous>)
+    at TextureLoader.loadAsync (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44856:10)
+    at meshyFiles (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/avatar.js:267:31)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:49:25
+    at Array.map (<anonymous>)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:47:12
+3D cast rei TypeError: document.createElementNS is not a function
+    at createElementNS (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:1873:18)
+    at ImageLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:45666:17)
+    at TextureLoader.load (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:46067:10)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44858:10
+    at new Promise (<anonymous>)
+    at TextureLoader.loadAsync (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.core.js:44856:10)
+    at meshyFiles (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/avatar.js:267:31)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:49:25
+    at Array.map (<anonymous>)
+    at file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/cast3d.js:47:12
+(node:86115) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/movement/navigation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ both entrances and both actual bench approaches form one walkable garden loop (31.638867ms)
+✔ canonical covered approach is reachable but the station and platform remain excluded (10.418458ms)
+✔ the map draws the same connector and every worker patch has free floor (0.938379ms)
+✔ southern bench return clears a 0.6-wide body and keeps every route in the expanded chunk (7.958859ms)
+✔ moving tool meshes survive the actual static merge and remain anchored to a real hand (75.017193ms)
+✔ cached place re-entry resumes its routine and evening/Continue retain completed collection (10.814946ms)
+✔ worker yields to both residents and ambient people before continuing its actual patch route (7.433469ms)
+(node:86121) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/station-garden/state.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Continue keeps completed collection and routine progress without retaining mutable save references (1.457268ms)
+✔ a person at either seat excludes that bench while hidden people do not (0.623306ms)
+(node:86134) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ letting go of a steer stops Eric after a detour round someone (333.302515ms)
+✔ the actual story checker rejects invalid condition syntax and characters (243.949598ms)
+(node:86145) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/mc.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ shared literals and complete place registrations match the pre-extraction runtime (2.589744ms)
+✔ structural migration preserves ordered graph IDs, edges and engine declarations (107.509208ms)
+✔ missing and unexpected runtime registrations fail before play (0.497588ms)
+✔ completed place validation detects a missing object, hook or coordinate registration (0.569704ms)
+(node:86162) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ water avoids ground checks; dry sliding/furniture and swimmer pair overlaps still fail (17.617975ms)
+ticket: unknown ticket T-9999
+✔ a ticket goes new, in progress, done; its status is a flag conditions can read (3.00122ms)
+✔ a ticket closes itself when its done condition holds, and the list is in id order (0.770282ms)
+✔ tickets survive a save and a restore (0.781624ms)
+✔ closing a ticket pays Eric once, by hook or by its condition, and never on taking it (0.335693ms)
+✔ the story tickets have the fields the app shows (0.550017ms)
+(node:86176) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/sim.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:86213) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/ui/time-policy.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ clock preserves authored day-one and day-two progression (1.419577ms)
+✔ free days offer only later periods, not tomorrow or a backward jump (0.273416ms)
+✔ opening messages, active scenes and completed days cannot be skipped (2.285591ms)
+✔ performance placement follows scaled/wrapped HUD and ignores hidden boxes (0.231467ms)
+✔ clock preloads transition data before advancing and does not serialize scenes (5.044272ms)
+✔ stop cancels a stuck preparation wait without advancing another frame (6.38416ms)
+✔ wall deadline interrupts a stuck preparation promise (23.398436ms)
+✔ stopping before navigation removes the start listener (0.764862ms)
+✔ stop between scheduling and executing an RPC prevents it from starting (2.800992ms)
+✔ stop does not wait for an already-sent tick and never starts a subsequent tick (5.043571ms)
+✔ pinned clock origin reset rejects live timers and unpaused or unknown implementations (3.666244ms)
+(node:86248) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the recorded petting position gets a clear hop instead of the colliding fixed landing (1.67527ms)
+✔ an unoccupied landing stays put; an occupied aisle never returns an unsafe fallback (1.375173ms)
+✔ train car (land): no part of the body crosses a doorway (125.51769ms)
+✔ train car (port): no part of the body crosses a doorway (62.582913ms)
+✔ train car (closed): no part of the body crosses a doorway (43.26901ms)
+✔ train door sets: frame posts, lamps and thresholds stay out of the doorways, the leaves fill them (11.545153ms)
+(node:86250) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:86268) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ train passengers retain seated status even when the seat pose puts the root below floor height (88.762906ms)
+(node:86280) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/narrative/conditions.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ day 1 morning at the forecourt: the plaza and the east lane go, the dorm courtyard opens after work (17.952396ms)
+✔ day 1 in B2 at work: nothing goes; after work only the lift leaves (4.962088ms)
+✔ day 1 on the train: no way out, so nothing goes (1.395743ms)
+✔ while something runs, a place that would go waits with its reason (4.727505ms)
+✔ day 3 harbour opens through campus; day 2 sports retains its gate (13.353252ms)
+✔ a place he has not been to can still be travelled to (any open place, 4b) (2.14255ms)
+✔ a trigger a private plugin adds opens no way (0.39734ms)
+✔ a way with lines or a next move is a scene; a plain walk is not (0.205868ms)
+✔ route check: every go is a chain of plain ways open now, never the lift (48.075455ms)
+✔ the route is the shortest by the pins, and an unreachable place has none (0.313761ms)
+✔ every place has a pin or a place it is inside, and a name (0.132059ms)
+✔ visited: saved as a list; an older save is seeded from its day and place (0.251304ms)
+✔ discovered B2 is a direct map destination on days 2–5, still gated before discovery (27.141225ms)
+✔ B2 shortcut preserves first-day introduction, work and after-work return gates (11.212075ms)
+✔ fast lift arrival and resumed fast arrival use free landings without changing progression (0.663271ms)
+(node:86284) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ all winter drill/organizer approaches connect through the real gym, never through the net (131.932788ms)
+✔ ordinary organizer paper is not taken from Emi or mutated by the special handoff (6.138206ms)
+✔ winter restore keeps actual hand ownership, serializable camera and native actor wrappers (3.279034ms)
+✔ actual racket flights clear the existing net and meet both real contact points (10.23386ms)
+✔ readiness requires visible real hand rigs and never reveals props when a participant is absent (1.833127ms)
+✔ cancelling an actual in-flight racket action cannot restore a late hand overlay or shuttle (2.038845ms)
+✔ opposite paper edge grips preserve the visible sheet when ownership changes (1.007359ms)
+ℹ tests 633
+ℹ suites 0
+ℹ pass 633
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12725.648731
+PASS unit: 12.75s
+choice-check: ok
+(node:87056) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/gameplay/gifts.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS choices: 0.08s
+story check: ok
+(node:87064) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/narrative/conditions.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS story: 0.06s
+day 2 draft: 293 nodes, 9 new words, 144 complete branch routes passed
+Build requests registered and trips in the engine; the voice clips are still to make (voice-manifest.mjs --check --day 2).
+(node:87071) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/story/day2/index.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS day 2 story: 0.07s
+Day 3 authoring: 342 contextual nodes; routes, branches, tokens and once-only payments pass. Physical staging is checked separately.
+day 3: 24 places; build requests registered, trips in the engine, words in lang.js
+(node:87078) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/story/day3/index.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS day 3 story: 0.06s
+Words taught on day 1, in story order:
+  外人 (gaijin): typed at train/sit#9; later lines 4, Say targets 0
+  おはようございます (ohayo): typed at train/lesson2#5; later lines 15, Say targets 15 (train:bun, train:music, train:tama, train:mio, train:aoi, train:reader, train:kuroda, gate:guard, gate:gate, gate:kuroda, gate:tama, office:mori, office:kenji, office:mio, office:tama)
+  よろしくおねがいします (yoroshiku): typed at train/lesson3#11; later lines 3, Say targets 6 (train:kuroda, gate:guard, gate:kuroda, office:mori, office:kenji, office:mio)
+  すみません (sumimasen): typed at train/arrival#7; later lines 8, Say targets 8 (train:kuroda, gate:kuroda, gate:gate, gate:tama, gate:guard, office:mori, office:kenji, office:mio)
+  待って (matte): typed at train/platform#19; later lines 2, Say targets 5 (train:tama, gate:kuroda, gate:gate, gate:tama, office:clock)
+  動いて (ugoite): typed at office/copier#14; later lines 1, Say targets 3 (office:copier, office:vending, office:coffee_machine)
+  止まって (tomatte): typed at office/mio_bond#8 [some routes only]; later lines 2, Say targets 1 (office:fan)
+  入れて (irete): typed at office/mori_bond#7 [some routes only]; later lines 1, Say targets 1 (office:kettle)
+  開けて (akete): typed at gate/word_type#0 [some routes only]; later lines 0, Say targets 6 (gate:guard, gate:gate, gate:kuroda, gate:reader_l, gate:reader_r, office:machine_door)
+
+WARN (14)
+  [builder] office/mori_irete_echo#2: voice: 入れて is sharp on screen but stays muffled in the clip (no span in audio/spans.json)
+      "…{irete}。"
+  [language] transitions/gate_to_office: MAIN in lang-audit.mjs names a node that no longer exists; skipped (update MAIN)
+  [story] gate/idle_commuter_1#1: clear: ゲート (no gloss) readable, outside the taught set
+      "ゲート、まだみたいですね…"
+  [story] gate/idle_commuter_2#1: clear: ゲート (no gloss) readable, outside the taught set
+      "ゲート、まだみたいですね…"
+  [story] gate/idle_commuter_3#1: clear: ゲート (no gloss) readable, outside the taught set
+      "ゲート、まだみたいですね…"
+  [story] gate/mime_lift#12: clear: ありがとう (thank you) readable, outside the taught set
+      "ありがとうございます！本当に、すみません…"
+  [story] office/copier#20: clear: 三十年 (thirty years) readable, outside the taught set
+      "…三十年。"
+  [story] office/gift_kenji_other#1: clear: ありがとう (thank you) readable, outside the taught set
+      "あ、ありがとう…"
+  [story] office/gift_mori_cornsoup#2: clear: ありがとう (thank you) readable, outside the taught set
+      "ああ、ちょうど飲みたかった。ありがとうございます。"
+  [story] office/lunch_end#6.then#0: clear: ゲート (gate) readable, outside the taught set
+      "朝、ゲートが勝手に開いたって。"
+  [story] office/lunch_mori#3: clear: ノルウェー (Norway) readable, outside the taught set
+      "ノルウェーから、ですね。私、1994年にリレハンメルへ行きました。"
+  [story] office/lunch_mori#3: clear: リレハンメル (Lillehammer) readable, outside the taught set
+      "ノルウェーから、ですね。私、1994年にリレハンメルへ行きました。"
+  [story] office/ticket#8: clear: 外国の方 (person from abroad, polite) readable, outside the taught set
+      "外国の方、ですよ。"
+  [story] train/lesson#6 "“ありがとう (arigatō, thanks)": ありがとう hand-glossed in the text, outside the taught set
+      "“ありがとう (arigatō, thanks). That's about it.”"
+
+INFO (308)
+  [builder] js/bonds/day1.js:12: shows taught word おはようございます (ohayo) with English beside it
+  [builder] js/bonds/day1.js:21: shows taught word 待って (matte) with English beside it
+  [builder] js/bonds/day1.js:22: shows taught word 待って (matte) with English beside it
+  [builder] js/bonds/day1.js:36: shows glossed word 開けて (akete) with English beside it
+  [builder] js/bonds/day1.js:51: shows taught word よろしくおねがいします (yoroshiku) with English beside it
+  [builder] js/bonds/day1.js:52: shows taught word おはようございます (ohayo) with English beside it
+  [builder] js/bonds/day1.js:55: おはよう has English or romaji beside it
+      "Says plain おはよう is fine with him."
+  [builder] js/bonds/day1.js:58: shows taught word おはようございます (ohayo) with English beside it
+  [builder] js/bonds/day1.js:68: shows taught word 動いて (ugoite) with English beside it
+  [builder] js/bonds/day1.js:81: 止まって has English or romaji beside it
+      "You stopped the rack alarm with 止まって when she asked."
+  [builder] js/bonds/day1.js:91: 入れて has English or romaji beside it
+      "You filled all seven cups with 入れて."
+  [builder] js/clubs/model.js:16: 日曜日 has English or romaji beside it
+      "日曜日"
+  [builder] js/clubs/model.js:17: 月曜日 has English or romaji beside it
+      "月曜日"
+  [builder] js/clubs/model.js:18: 火曜日 has English or romaji beside it
+      "火曜日"
+  [builder] js/clubs/model.js:19: 水曜日 has English or romaji beside it
+      "水曜日"
+  [builder] js/clubs/model.js:20: 木曜日 has English or romaji beside it
+      "木曜日"
+  [builder] js/clubs/model.js:21: 金曜日 has English or romaji beside it
+      "金曜日"
+  [builder] js/clubs/model.js:22: 土曜日 has English or romaji beside it
+      "土曜日"
+  [builder] js/finds/prints.js:42: パン has English or romaji beside it
+      "パン"
+  [builder] js/gameplay/canteen-meals.js:11: 野菜定食 has English or romaji beside it
+      "野菜定食"
+  [builder] js/gameplay/canteen-meals.js:5: カレー has English or romaji beside it
+      "カレー"
+  [builder] js/gameplay/grocery-labels.js:2: 牛乳 has English or romaji beside it
+      "牛乳 · MILK"
+  [builder] js/gameplay/grocery-labels.js:3: 塩むすび has English or romaji beside it
+      "塩むすび · SALTED RICE BALL"
+  [builder] js/shell-qa.js:121: shows glossed word 開けて (akete), no gloss (fine: he knows it by then)
+  [builder] js/tickets/words.js:10: 対応中 has English or romaji beside it
+      "対応中"
+  [builder] js/tickets/words.js:11: 完了 has English or romaji beside it
+      "完了"
+  [builder] js/tickets/words.js:12: 報酬 has English or romaji beside it
+      "報酬"
+  [builder] js/tickets/words.js:14: 担当する has English or romaji beside it
+      "担当する"
+  [builder] js/tickets/words.js:20: 戻る has English or romaji beside it
+      "戻る"
+  [builder] js/tickets/words.js:21: 閉じる has English or romaji beside it
+      "閉じる"
+  [builder] js/tickets/words.js:6: 件名 has English or romaji beside it
+      "件名"
+  [builder] js/tickets/words.js:7: 依頼者 has English or romaji beside it
+      "依頼者"
+  [builder] js/tickets/words.js:8: 状態 has English or romaji beside it
+      "状態"
+  [builder] js/tickets/words.js:9: 未対応 has English or romaji beside it
+      "未対応"
+  [builder] js/ui/tickets-view.js:60: 天川 has English or romaji beside it
+      "">
+        <header class="tk-head">
+          <span class="tk-logo"><b lang="ja">天川</b><…"
+  [builder] office/ambient:kenji_mori#0: no voice clip oh-zp8urw.mp3 yet (run tools/voices.py)
+      "森さん、新しい人、どうですか。"
+  [builder] office/ambient:kenji_mori#1: no voice clip oh-1xigw7b.mp3 yet (run tools/voices.py)
+      "礼儀正しい人ですよ。"
+  [language] lang.js daijoubu: 大丈夫 is in lang.js but not taught on day 1
+  [language] lang.js dashite: 出して is in lang.js but not taught on day 1
+  [language] lang.js gamen: 画面 is in lang.js but not taught on day 1
+  [language] lang.js honsha: 本社 is in lang.js but not taught on day 1
+  [language] lang.js hoshu: 報酬 is in lang.js but not taught on day 1
+  [language] lang.js ikitai: 行きたい is in lang.js but not taught on day 1
+  [language] lang.js iraisha: 依頼者 is in lang.js but not taught on day 1
+  [language] lang.js isshoni: いっしょに is in lang.js but not taught on day 1
+  [language] lang.js jotai: 状態 is in lang.js but not taught on day 1
+  [language] lang.js kanpai: 乾杯 is in lang.js but not taught on day 1
+  [language] lang.js kanryo: 完了 is in lang.js but not taught on day 1
+  [language] lang.js kenmei: 件名 is in lang.js but not taught on day 1
+  [language] lang.js kite: 来て is in lang.js but not taught on day 1
+  [language] lang.js koko: ここ is in lang.js but not taught on day 1
+  [language] lang.js kotodama: 言霊 is in lang.js but not taught on day 1
+  [language] lang.js mada: まだ is in lang.js but not taught on day 1
+  [language] lang.js mitai: 見たい is in lang.js but not taught on day 1
+  [language] lang.js mitaio: 未対応 is in lang.js but not taught on day 1
+  [language] lang.js modoru: 戻る is in lang.js but not taught on day 1
+  [language] lang.js mouichido: もう一度 is in lang.js but not taught on day 1
+  [language] lang.js nomitai: 飲みたい is in lang.js but not taught on day 1
+  [language] lang.js oishii: おいしい is in lang.js but not taught on day 1
+  [language] lang.js otsukare: お疲れさまです is in lang.js but not taught on day 1
+  [language] lang.js oyogu: 泳ぐ is in lang.js but not taught on day 1
+  [language] lang.js tabetai: 食べたい is in lang.js but not taught on day 1
+  [language] lang.js taiochu: 対応中 is in lang.js but not taught on day 1
+  [language] lang.js tanto: 担当する is in lang.js but not taught on day 1
+  [language] lang.js tojiru: 閉じる is in lang.js but not taught on day 1
+  [language] lang.js tsugiwa: つぎは is in lang.js but not taught on day 1
+  [language] lang.js yasumi: 休み is in lang.js but not taught on day 1
+  [language] lang.js yoyaku: 予約 is in lang.js but not taught on day 1
+  [story] gate/bench_wait#18: {honsha} isn't taught yet here, so it shows as gibberish
+      "はい、アマカワ{honsha}、正面ゲートです。…はい。待ちます。"
+  [story] gate/hamada_stuck#3 "Say 開けて (akete, open) wi": glossed earlier: word 開けて written raw, without its gloss (use {akete})
+      "Say 開けて (akete, open) with him"
+  [story] gate/mime_lift#5: name 浜田さん readable as (Hamada-san)
+      "浜田さん！かばん、頭の上！"
+  [story] gate/word_type#0: 開けて (akete) never appears in a later line (only as a Say target: 6)
+  [story] gate/word_type#0: 開けて (akete) is only taught on some routes
+  [story] office/ambient:kenji_mori#0: name 森さん readable as (Mori-san)
+      "森さん、新しい人、どうですか。"
+  [story] office/lunch_end#5.then#1: name 浜田さん readable as (Hamada-san)
+      "経理の浜田さんから？珍しい。"
+  [story] office/mio_bond#8: 止まって (tomatte) is only taught on some routes
+  [story] office/mori_bond#7: 入れて (irete) is only taught on some routes
+  [story] office/mori_irete_echo#2: {irete} isn't taught yet here, so it shows as gibberish
+      "…{irete}。"
+  [story] office/office_in#3: name 森 readable as (Mori)
+      "おはようございます。森と申します。ITサポートへ、ようこそ。"
+  [story] office/ohayo_kenji#2: clear entry おはよう is already a taught word (not needed)
+      "おはよう。"
+  [story] office/ohayo_mio#0: taught word おはよう written raw, without its gloss (use {ohayo})
+      "Ha, too polite. I'm not your boss. Just おはよう (ohayō) is fine."
+  [story] office/ticket#7: name 森さん readable as (Mori-san)
+      "森さん、外人にコピー機お願い。"
+  [story] office/yoroshiku_kenji#1: clear entry よろしく is already a taught word (not needed)
+      "よろしく！"
+  [story] train/lesson2#2: interjection えっと shown readable in an English line
+      "えっと, okay. First one, {ohayo}. You say it to everybody in the morning. The guard at the …"
+  [story] train/mio_phone#1: interjection あー shown readable in an English line
+      "あー, no, no... the server's down again. Sorry, I have to run."
+  [world] js/places/canteen.js:26: お水 has English or romaji beside it
+      "お水"
+  [world] js/places/canteen.js:27: 返却 has English or romaji beside it
+      "返却"
+  [world] js/places/canteen/meal-props.js:44: カレー has English or romaji beside it
+      "カレー / やさい"
+  [world] js/places/canteen/meal-props.js:44: やさい has English or romaji beside it
+      "カレー / やさい"
+  [world] js/places/day3/board.js:12: ここ has English or romaji beside it
+      "ここ"
+  [world] js/places/ferry-terminal/food.js:24: メロン has English or romaji beside it
+      "メロン"
+  [world] js/places/ferry-terminal/food.js:24: コーン has English or romaji beside it
+      "コーン"
+  [world] js/places/ongoing/karaoke-props.js:100: 曲番号 has English or romaji beside it
+      "曲番号"
+  [world] js/places/ongoing/karaoke-props.js:101: 名前 has English or romaji beside it
+      "名前"
+  [world] js/places/ongoing/karaoke-props.js:112: 浜田 has English or romaji beside it
+      "浜田"
+  [world] js/places/ongoing/karaoke-props.js:112: ケンジ has English or romaji beside it
+      "ケンジ"
+  [world] js/places/ongoing/karaoke-props.js:34: 曲番号 has English or romaji beside it
+      "曲番号"
+  [world] js/places/ongoing/karaoke-props.js:46: ベーカリー has English or romaji beside it
+      "ベーカリー"
+  [world] js/places/ongoing/karaoke-props.js:48: パン has English or romaji beside it
+      "パン  2点"
+  [world] js/places/ongoing/karaoke-props.js:48: 点 has English or romaji beside it
+      "パン  2点"
+  [world] js/places/ongoing/karaoke-props.js:53: ありがとうございます has English or romaji beside it
+      "ありがとうございます"
+  [world] js/places/ongoing/karaoke-props.js:97: 予約リスト has English or romaji beside it
+      "予約リスト"
+  [world] js/places/train.js:500: shows glossed word 本社 (honsha) with English beside it
+  [world] js/places/train.js:558: 本社ビル has English or romaji beside it
+      "← 本社ビル"
+  [world] js/scenes/bakery/room.js:75: お取り置き has English or romaji beside it
+      "お取り置き"
+  [world] js/scenes/bakery/room.js:91: 焼きたてパン has English or romaji beside it
+      "焼きたてパン"
+  [world] js/scenes/campus/fronts.js:51: いんさつ has English or romaji beside it
+      "いんさつ"
+  [world] js/scenes/dorm-court/court.js:238: 社員寮 has English or romaji beside it
+      "社員寮"
+  [world] js/scenes/dorm-court/frontages.js:130: コインランドリー has English or romaji beside it
+      "コインランドリー"
+  [world] js/scenes/dorm-court/frontages.js:193: ゆ has English or romaji beside it
+      "ゆ"
+  [world] js/scenes/dorm-court/hall.js:127: パン has English or romaji beside it
+      "パン"
+  [world] js/scenes/dorm-court/hall.js:190: 管理人室 has English or romaji beside it
+      "管理人室"
+  [world] js/scenes/east-coast/onsen.js:216: 準備中 has English or romaji beside it
+      "準備中"
+  [world] js/scenes/east-coast/onsen.js:218: 本日休業 has English or romaji beside it
+      "本日休業"
+  [world] js/scenes/east-coast/onsen.js:220: ボイラー修理のため has English or romaji beside it
+      "ボイラー修理のため"
+  [world] js/scenes/east-coast/onsen.js:37: おんせん has English or romaji beside it
+      "おんせん"
+  [world] js/scenes/east-coast/walk.js:73: 温泉 has English or romaji beside it
+      "温泉"
+  [world] js/scenes/east-coast/walk.js:74: 温泉 has English or romaji beside it
+      "温泉"
+  [world] js/scenes/ferry-terminal/details.js:17: おねがい has English or romaji beside it
+      "おねがい"
+  [world] js/scenes/ferry-terminal/details.js:18: ごみはこちら has English or romaji beside it
+      "ごみはこちら"
+  [world] js/scenes/ferry-terminal/details.js:19: やすんでどうぞ has English or romaji beside it
+      "やすんでどうぞ"
+  [world] js/scenes/ferry-terminal/details.js:34: ごあんない has English or romaji beside it
+      "ごあんない"
+  [world] js/scenes/ferry-terminal/details.js:37: 係員のいる時間 has English or romaji beside it
+      "係員のいる時間"
+  [world] js/scenes/ferry-terminal/details.js:38: ご自由にどうぞ has English or romaji beside it
+      "ご自由にどうぞ"
+  [world] js/scenes/ferry-terminal/waiting.js:117: にもつおき has English or romaji beside it
+      "にもつおき"
+  [world] js/scenes/forecourt/court.js:221: shows glossed word 本社 (honsha) with English beside it
+  [world] js/scenes/forecourt/court.js:222: 噴水広場 has English or romaji beside it
+      "噴水広場"
+  [world] js/scenes/forecourt/lane.js:112: 噴水広場 has English or romaji beside it
+      "噴水広場"
+  [world] js/scenes/forecourt/lane.js:113: 社員寮 has English or romaji beside it
+      "社員寮"
+  [world] js/scenes/harbour/grounds.js:60: フェリー has English or romaji beside it
+      "フェリー"
+  [world] js/scenes/harbour/grounds.js:61: 事務所 has English or romaji beside it
+      "事務所"
+  [world] js/scenes/harbour/grounds.js:98: 事務所 has English or romaji beside it
+      "事務所"
+  [world] js/scenes/harbour/plan.js:106: みなとじむしょ has English or romaji beside it
+      "みなとじむしょ"
+  [world] js/scenes/harbour/plan.js:244: みなと has English or romaji beside it
+      "みなと"
+  [world] js/scenes/harbour/plan.js:98: フェリーのりば has English or romaji beside it
+      "フェリーのりば"
+  [world] js/scenes/harbour/ships.js:205: あまかわ has English or romaji beside it
+      "あまかわ"
+  [world] js/scenes/harbour/yard.js:97: にあげば has English or romaji beside it
+      "にあげば"
+  [world] js/scenes/head-office/signs.js:44: 受付 has English or romaji beside it
+      "受付"
+  [world] js/scenes/head-office/signs.js:56: 階段 has English or romaji beside it
+      "階段"
+  [world] js/scenes/head-office/tower.js:191: shows glossed word 本社 (honsha) with English beside it
+  [world] js/scenes/head-office/tower.js:205: shows glossed word 本社 (honsha) with English beside it
+  [world] js/scenes/island-plan.js:101: カラオケ has English or romaji beside it
+      "カラオケ"
+  [world] js/scenes/island-plan.js:102: 居酒屋 has English or romaji beside it
+      "居酒屋"
+  [world] js/scenes/island-plan.js:103: ラーメン屋 has English or romaji beside it
+      "ラーメン屋"
+  [world] js/scenes/island-plan.js:107: 海辺の遊歩道 has English or romaji beside it
+      "海辺の遊歩道"
+  [world] js/scenes/island-plan.js:110: 浜辺 has English or romaji beside it
+      "浜辺"
+  [world] js/scenes/island-plan.js:115: 研修センター has English or romaji beside it
+      "研修センター"
+  [world] js/scenes/island-plan.js:118: カフェ has English or romaji beside it
+      "カフェ"
+  [world] js/scenes/island-plan.js:119: 酒屋 has English or romaji beside it
+      "酒屋"
+  [world] js/scenes/island-plan.js:120: 床屋 has English or romaji beside it
+      "床屋"
+  [world] js/scenes/island-plan.js:121: 小さな公園 has English or romaji beside it
+      "小さな公園"
+  [world] js/scenes/island-plan.js:125: 天川トラベル has English or romaji beside it
+      "天川トラベル"
+  [world] js/scenes/island-plan.js:128: 家族寮 has English or romaji beside it
+      "家族寮"
+  [world] js/scenes/island-plan.js:129: 所長の家 has English or romaji beside it
+      "所長の家"
+  [world] js/scenes/island-plan.js:131: 寮の前庭 has English or romaji beside it
+      "寮の前庭"
+  [world] js/scenes/island-plan.js:135: コインランドリー has English or romaji beside it
+      "コインランドリー"
+  [world] js/scenes/island-plan.js:138: 銭湯 has English or romaji beside it
+      "銭湯"
+  [world] js/scenes/island-plan.js:139: 社員寮 has English or romaji beside it
+      "社員寮"
+  [world] js/scenes/island-plan.js:143: 共用棟 has English or romaji beside it
+      "共用棟"
+  [world] js/scenes/island-plan.js:146: 中庭 has English or romaji beside it
+      "中庭"
+  [world] js/scenes/island-plan.js:147: 社員寮 has English or romaji beside it
+      "社員寮"
+  [world] js/scenes/island-plan.js:151: 北レジデンス has English or romaji beside it
+      "北レジデンス"
+  [world] js/scenes/island-plan.js:154: 海のテラス has English or romaji beside it
+      "海のテラス"
+  [world] js/scenes/island-plan.js:156: 体育館 has English or romaji beside it
+      "体育館"
+  [world] js/scenes/island-plan.js:157: プール has English or romaji beside it
+      "プール"
+  [world] js/scenes/island-plan.js:161: テニスコート has English or romaji beside it
+      "テニスコート"
+  [world] js/scenes/island-plan.js:164: 温泉 has English or romaji beside it
+      "温泉"
+  [world] js/scenes/island-plan.js:168: 東の海岸道 has English or romaji beside it
+      "東の海岸道"
+  [world] js/scenes/island-plan.js:175: フェリー乗り場 has English or romaji beside it
+      "フェリー乗り場"
+  [world] js/scenes/island-plan.js:178: 荷揚げ場 has English or romaji beside it
+      "荷揚げ場"
+  [world] js/scenes/island-plan.js:182: 港の事務所 has English or romaji beside it
+      "港の事務所"
+  [world] js/scenes/island-plan.js:186: 旧工場 has English or romaji beside it
+      "旧工場"
+  [world] js/scenes/island-plan.js:187: 旧発電所 has English or romaji beside it
+      "旧発電所"
+  [world] js/scenes/island-plan.js:191: 旧サーバー棟 has English or romaji beside it
+      "旧サーバー棟"
+  [world] js/scenes/island-plan.js:194: 工場跡の広場 has English or romaji beside it
+      "工場跡の広場"
+  [world] js/scenes/island-plan.js:198: リサイクルセンター has English or romaji beside it
+      "リサイクルセンター"
+  [world] js/scenes/island-plan.js:201: 天川研究所 has English or romaji beside it
+      "天川研究所"
+  [world] js/scenes/island-plan.js:31: 本社駅 has English or romaji beside it
+      "本社駅"
+  [world] js/scenes/island-plan.js:35: ホーム has English or romaji beside it
+      "ホーム"
+  [world] js/scenes/island-plan.js:38: 駅前広場 has English or romaji beside it
+      "駅前広場"
+  [world] js/scenes/island-plan.js:39: 駐輪場 has English or romaji beside it
+      "駐輪場"
+  [world] js/scenes/island-plan.js:40: shows glossed word 本社 (honsha) with English beside it
+  [world] js/scenes/island-plan.js:44: 総務部 has English or romaji beside it
+      "総務部"
+  [world] js/scenes/island-plan.js:50: 施設課 has English or romaji beside it
+      "施設課"
+  [world] js/scenes/island-plan.js:56: 海沿いの道 has English or romaji beside it
+      "海沿いの道"
+  [world] js/scenes/island-plan.js:60: 天川商事 has English or romaji beside it
+      "天川商事"
+  [world] js/scenes/island-plan.js:61: 印刷所 has English or romaji beside it
+      "印刷所"
+  [world] js/scenes/island-plan.js:62: 天川食品 has English or romaji beside it
+      "天川食品"
+  [world] js/scenes/island-plan.js:63: 天川電機 has English or romaji beside it
+      "天川電機"
+  [world] js/scenes/island-plan.js:64: 天川物流 has English or romaji beside it
+      "天川物流"
+  [world] js/scenes/island-plan.js:68: 天川建設 has English or romaji beside it
+      "天川建設"
+  [world] js/scenes/island-plan.js:71: 天川生命 has English or romaji beside it
+      "天川生命"
+  [world] js/scenes/island-plan.js:72: 人事部 has English or romaji beside it
+      "人事部"
+  [world] js/scenes/island-plan.js:73: 天川銀行 has English or romaji beside it
+      "天川銀行"
+  [world] js/scenes/island-plan.js:75: 噴水広場 has English or romaji beside it
+      "噴水広場"
+  [world] js/scenes/island-plan.js:76: 社員食堂 has English or romaji beside it
+      "社員食堂"
+  [world] js/scenes/island-plan.js:80: 搬入口 has English or romaji beside it
+      "搬入口"
+  [world] js/scenes/island-plan.js:83: クリニック has English or romaji beside it
+      "クリニック"
+  [world] js/scenes/island-plan.js:84: 木立の広場 has English or romaji beside it
+      "木立の広場"
+  [world] js/scenes/island-plan.js:86: 商店街 has English or romaji beside it
+      "商店街"
+  [world] js/scenes/island-plan.js:90: コンビニ has English or romaji beside it
+      "コンビニ"
+  [world] js/scenes/island-plan.js:93: パン屋 has English or romaji beside it
+      "パン屋"
+  [world] js/scenes/island-plan.js:94: 自転車屋 has English or romaji beside it
+      "自転車屋"
+  [world] js/scenes/island-plan.js:98: ゲームセンター has English or romaji beside it
+      "ゲームセンター"
+  [world] js/scenes/island-south.js:188: じてんしゃ has English or romaji beside it
+      "じてんしゃ"
+  [world] js/scenes/island-south.js:189: じてんしゃ has English or romaji beside it
+      "じてんしゃ"
+  [world] js/scenes/island-south.js:196: コンビニ has English or romaji beside it
+      "コンビニ"
+  [world] js/scenes/island-south.js:197: コンビニ has English or romaji beside it
+      "コンビニ"
+  [world] js/scenes/island-south.js:199: パン has English or romaji beside it
+      "パン"
+  [world] js/scenes/island-south.js:205: ゲームセンター has English or romaji beside it
+      "ゲームセンター"
+  [world] js/scenes/island-south.js:206: ゲーム has English or romaji beside it
+      "ゲーム"
+  [world] js/scenes/island-south.js:208: カラオケ has English or romaji beside it
+      "カラオケ"
+  [world] js/scenes/izakaya/room.js:63: 居酒屋 has English or romaji beside it
+      "居酒屋"
+  [world] js/scenes/konbini/products.js:13: 牛乳 has English or romaji beside it
+      "牛乳"
+  [world] js/scenes/konbini/products.js:14: 塩むすび has English or romaji beside it
+      "塩むすび"
+  [world] js/scenes/konbini/products.js:15: 紅茶 has English or romaji beside it
+      "紅茶"
+  [world] js/scenes/konbini/products.js:16: コーヒー has English or romaji beside it
+      "コーヒー"
+  [world] js/scenes/konbini/products.js:30: 牛乳 has English or romaji beside it
+      "牛乳"
+  [world] js/scenes/konbini/products.js:62: 塩 has English or romaji beside it
+      "塩"
+  [world] js/scenes/konbini/room.js:88: 日用品 has English or romaji beside it
+      "日用品"
+  [world] js/scenes/lobby.js:425: 階段 has English or romaji beside it
+      "階段"
+  [world] js/scenes/lobby.js:443: shows glossed word 本社 (honsha) with English beside it
+  [world] js/scenes/lobby.js:684: 受付 has English or romaji beside it
+      "受付"
+  [world] js/scenes/lobby.js:727: 忘れ物 has English or romaji beside it
+      "忘れ物"
+  [world] js/scenes/office-emi.js:159: エミ has English or romaji beside it
+      "エミ"
+  [world] js/scenes/office-quarter/link.js:60: 事務所 has English or romaji beside it
+      "事務所"
+  [world] js/scenes/office-quarter/link.js:61: 銀行 has English or romaji beside it
+      "銀行"
+  [world] js/scenes/office-quarter/link.js:62: プール has English or romaji beside it
+      "プール"
+  [world] js/scenes/office-quarter/plan.js:100: でんき has English or romaji beside it
+      "でんき"
+  [world] js/scenes/office-quarter/plan.js:107: ぶつりゅう has English or romaji beside it
+      "ぶつりゅう"
+  [world] js/scenes/office-quarter/plan.js:114: けんせつ has English or romaji beside it
+      "けんせつ"
+  [world] js/scenes/office-quarter/plan.js:121: せいめい has English or romaji beside it
+      "せいめい"
+  [world] js/scenes/office-quarter/plan.js:128: ぎんこう has English or romaji beside it
+      "ぎんこう"
+  [world] js/scenes/office-quarter/plan.js:248: 港 has English or romaji beside it
+      "港"
+  [world] js/scenes/office-quarter/plan.js:249: 体育館 has English or romaji beside it
+      "体育館"
+  [world] js/scenes/office-quarter/plan.js:250: プール has English or romaji beside it
+      "プール"
+  [world] js/scenes/office-quarter/plan.js:86: しょうじ has English or romaji beside it
+      "しょうじ"
+  [world] js/scenes/office-quarter/plan.js:93: しょくひん has English or romaji beside it
+      "しょくひん"
+  [world] js/scenes/office-quarter/row.js:41: 準備中 has English or romaji beside it
+      "準備中"
+  [world] js/scenes/office.js:244: 行動予定表 has English or romaji beside it
+      "行動予定表"
+  [world] js/scenes/office.js:735: サポート has English or romaji beside it
+      "ITサポート"
+  [world] js/scenes/office.js:736: 機械室 has English or romaji beside it
+      "機械室"
+  [world] js/scenes/office.js:737: 階段 has English or romaji beside it
+      "階段"
+  [world] js/scenes/office.js:742: マネージャー has English or romaji beside it
+      "マネージャー"
+  [world] js/scenes/office.js:743: コピー室 has English or romaji beside it
+      "コピー室"
+  [world] js/scenes/office.js:744: 給湯室 has English or romaji beside it
+      "給湯室"
+  [world] js/scenes/outdoor/nook-kits.js:169: みはらし has English or romaji beside it
+      "みはらし"
+  [world] js/scenes/outdoor/nook-kits.js:49: つめたい has English or romaji beside it
+      "つめたい"
+  [world] js/scenes/outdoor/nook-kits.js:49: のみもの has English or romaji beside it
+      "のみもの"
+  [world] js/scenes/outdoor/nook-yards.js:172: きつえんじょ has English or romaji beside it
+      "きつえんじょ"
+  [world] js/scenes/plaza-buildings.js:153: しょくどう has English or romaji beside it
+      "しょくどう"
+  [world] js/scenes/plaza/east-lane.js:382: 商店街 has English or romaji beside it
+      "商店街"
+  [world] js/scenes/plaza/east-plan.js:65: けんしゅう has English or romaji beside it
+      "けんしゅう"
+  [world] js/scenes/plaza/east-plan.js:75: さかや has English or romaji beside it
+      "さかや"
+  [world] js/scenes/plaza/east-plan.js:83: カフェ has English or romaji beside it
+      "カフェ"
+  [world] js/scenes/plaza/east-plan.js:92: とこや has English or romaji beside it
+      "とこや"
+  [world] js/scenes/plaza/east-shops.js:91: 準備中 has English or romaji beside it
+      "準備中"
+  [world] js/scenes/plaza/east-shops.js:92: 本日休業 has English or romaji beside it
+      "本日休業"
+  [world] js/scenes/plaza/fountain.js:251: コインを入れないで has English or romaji beside it
+      "コインを入れないで"
+  [world] js/scenes/plaza/north-clinic.js:148: クリニック has English or romaji beside it
+      "クリニック"
+  [world] js/scenes/plaza/north-clinic.js:160: クリニック has English or romaji beside it
+      "クリニック"
+  [world] js/scenes/plaza/north-clinic.js:170: 診療時間 has English or romaji beside it
+      "診療時間"
+  [world] js/scenes/plaza/north-clinic.js:174: 月 has English or romaji beside it
+      "月〜金"
+  [world] js/scenes/plaza/north-clinic.js:174: 金 has English or romaji beside it
+      "月〜金"
+  [world] js/scenes/plaza/north-clinic.js:175: 土 has English or romaji beside it
+      "土"
+  [world] js/scenes/plaza/north-clinic.js:176: 休診 has English or romaji beside it
+      "休診"
+  [world] js/scenes/plaza/north-clinic.js:194: 内科・小児科 has English or romaji beside it
+      "内科・小児科"
+  [world] js/scenes/plaza/north-clinic.js:203: クリニック has English or romaji beside it
+      "クリニック"
+  [world] js/scenes/plaza/north-plan.js:43: あまかわトラベル has English or romaji beside it
+      "あまかわトラベル"
+  [world] js/scenes/print-shop/room.js:71: 案内 has English or romaji beside it
+      "案内"
+  [world] js/scenes/print-shop/room.js:72: 校正 has English or romaji beside it
+      "校正"
+  [world] js/scenes/print-shop/room.js:73: 印刷 has English or romaji beside it
+      "印刷"
+  [world] js/scenes/rooms/gym-lobby.js:128: 受付 has English or romaji beside it
+      "受付"
+  [world] js/scenes/rooms/gym-lobby.js:131: 受付 has English or romaji beside it
+      "受付"
+  [world] js/scenes/rooms/gym.js:162: アリーナ has English or romaji beside it
+      "アリーナ"
+  [world] js/scenes/rooms/gym.js:210: 男子更衣室 has English or romaji beside it
+      "男子更衣室"
+  [world] js/scenes/rooms/gym.js:211: 女子更衣室 has English or romaji beside it
+      "女子更衣室"
+  [world] js/scenes/rooms/gym.js:221: プール has English or romaji beside it
+      "プール"
+  [world] js/scenes/shotengai.js:128: 本日貸切 has English or romaji beside it
+      "本日貸切"
+  [world] js/scenes/shotengai/street.js:134: カラオケ has English or romaji beside it
+      "カラオケ"
+  [world] js/scenes/shotengai/street.js:79: 準備中 has English or romaji beside it
+      "準備中"
+  [world] js/scenes/shotengai/street.js:84: 本日休業 has English or romaji beside it
+      "本日休業"
+  [world] js/scenes/sports/changing-room.js:98: 更衣室 has English or romaji beside it
+      "更衣室 女"
+  [world] js/scenes/sports/changing-room.js:98: 女 has English or romaji beside it
+      "更衣室 女"
+  [world] js/scenes/sports/changing-room.js:98: 男 has English or romaji beside it
+      "更衣室 男"
+  [world] js/scenes/sports/courts.js:150: テニスコート has English or romaji beside it
+      "テニスコート"
+  [world] js/scenes/sports/grounds.js:163: 体育館 has English or romaji beside it
+      "体育館"
+  [world] js/scenes/sports/grounds.js:164: プール has English or romaji beside it
+      "プール"
+  [world] js/scenes/sports/grounds.js:166: 温泉 has English or romaji beside it
+      "温泉"
+  [world] js/scenes/sports/grounds.js:186: きたレジデンス has English or romaji beside it
+      "きたレジデンス"
+  [world] js/scenes/sports/gym.js:159: たいいくかん has English or romaji beside it
+      "たいいくかん"
+  [world] js/scenes/sports/pool.js:195: 飛び込み禁止 has English or romaji beside it
+      "飛び込み禁止"
+  [world] js/scenes/sports/pool.js:282: プール has English or romaji beside it
+      "プール"
+  [world] js/scenes/station-exterior.js:107: 本社駅 has English or romaji beside it
+      "本社駅"
+  [world] js/scenes/station-fitout.js:69: 本日のお知らせ has English or romaji beside it
+      "本日のお知らせ"
+  [world] js/scenes/station-fitout.js:70: 本日のお知らせ has English or romaji beside it
+      "本日のお知らせ"
+  [world] js/scenes/station-fitout.js:71: 本日のお知らせ has English or romaji beside it
+      "本日のお知らせ"
+  [world] js/scenes/station-fittings.js:60: 出口 has English or romaji beside it
+      "出口"
+  [world] js/scenes/works/buildings.js:138: 立入禁止 has English or romaji beside it
+      "立入禁止"
+  [world] js/scenes/works/buildings.js:139: 安全第一 has English or romaji beside it
+      "安全第一"
+  [world] js/scenes/works/buildings.js:193: はつでんしょ has English or romaji beside it
+      "はつでんしょ"
+  [world] js/scenes/works/buildings.js:299: うけつけ has English or romaji beside it
+      "うけつけ"
+  [world] js/scenes/works/buildings.js:361: サーバーとう has English or romaji beside it
+      "サーバーとう"
+  [world] js/scenes/works/plan.js:194: 研究所 has English or romaji beside it
+      "研究所"
+  [world] js/scenes/works/plan.js:195: 港 has English or romaji beside it
+      "港"
+  [world] js/scenes/works/plan.js:83: リサイクルセンター has English or romaji beside it
+      "リサイクルセンター"
+  [world] js/scenes/works/plan.js:91: けんきゅうじょ has English or romaji beside it
+      "けんきゅうじょ"
+  [world] js/scenes/works/props.js:191: きつえんじょ has English or romaji beside it
+      "きつえんじょ"
+
+0 errors, 14 warnings, 308 notes.
+(node:87085) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/places/definitions.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS language: 0.68s
+bonds test: 14 passed
+(node:87109) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/bonds/model.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS bonds: 0.02s
+
+Pending (decided, not done yet):
+  docs/game/cast.md: `yui` is still in the code (to remove)
+  docs/game/cast.md: `sota` is still in the code (to remove)
+  docs/game/cast.md: `nao` is still in the code (to remove)
+  docs/game/cast.md: `hiro` is still in the code (to remove)
+
+facts check: ok (4 pending)
+(node:87116) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/game3d/js/narrative/contracts.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS facts: 0.07s
+story map: train 54, gate 44, forecourt 12, office 84, plaza 11, canteen 33, campus 6, print_shop 6, dorm_court 4, dorms 7, shotengai 10, izakaya 2, bakery 19, konbini 30, karaoke 3, karaoke_booth 2, east_lane 8, east_coast 5, dorm_commons 2, sports 6, pool 2, gym 2, office_quarter 5, harbour 8, ferry_terminal 31, works 5 nodes; 380 edges; 159 flags; place order train → gate → forecourt → office → plaza → canteen → campus → print_shop → dorm_court → dorms → shotengai → izakaya → bakery → konbini → karaoke → karaoke_booth → east_lane → east_coast → dorm_commons → sports → pool → gym → office_quarter → harbour → ferry_terminal → works
+
+Unreachable nodes (4)
+  train:first_stander: no trigger, start, go or call leads here
+  train:stander: no trigger, start, go or call leads here
+  train:ohayo_stander: no trigger, start, go or call leads here
+  canteen:room_water: no trigger, start, go or call leads here
+
+Flags read but never set (2)
+  know_tabetai: read at canteen:meal_confirm
+  know_oishii: read at canteen:eat_meal
+
+Flags set but never read (12)
+  passengers: set in train:nod_seat
+  chat1: set in train:chat1_end
+  held_doors: set in train:platform
+  late_greet: set in gate:jam_greet
+  kenji_laughed: set in office:kenji_small
+  door_magic: set in office:akete_machine
+  copier_started: set in office:copier
+  lunch_on: set in office:lunch_start, office:lunch_end
+  mio_bond_done: set in office:mio_bond
+  mori_bond_done: set in office:mori_bond
+  bakery_visited: set in bakery:arrive
+  konbini_visited: set in konbini:arrive
+
+story map: every story file loads and parses (405 nodes)
+(node:87123) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/bible/story-graph.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-mori-photo/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS story map: 0.09s

@@ -1,0 +1,2330 @@
+{
+ "title": "Southwest coastal lookouts",
+ "date": "2026-10-13",
+ "by": "codex-agent:southwest-corner",
+ "caption": "The south promenade now reaches two sea lookouts, six usable benches and a pine rest bay with jumping stones, ending at a clear northern maintenance boundary.",
+ "commit": [
+  "7906421c915fd55ed2c4b1501a4d770c1c572071",
+  "f545b8c45576dd79ec68e95c98b73343d90e241f",
+  "8da797060ab523d676007ac913456a6166805ae5",
+  "adef962c05649e3ebd444441f818a8eaa05d1083",
+  "e5466c31701c14b150d40c04cbab764da895259a",
+  "7e3d5fbce6ff2a5acc0b69e606282ab11c2852b5",
+  "f55fe58ba3e1eefb0429c6a790216f0434b36425"
+ ],
+ "preview": "after-final-12-corner-seaward-morning-desktop",
+ "result": [
+  "after-final-12-corner-seaward-morning-desktop",
+  "after-final-12-approach-morning-phone",
+  "after-final-12-rest-bay-evening-desktop",
+  "after-final-12-northern-stop-evening-phone"
+ ],
+ "sections": [
+  {
+   "title": "Finished southwest coast",
+   "caption": "Final committed native morning/evening views of the promenade, lookouts, pine rest bay and maintenance boundary; phone 390×844 and desktop 1366×860.",
+   "images": [
+    {
+     "id": "after-final-12-approach-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/approach-evening-desktop.png.webp",
+     "caption": "approach · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-approach-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/approach-evening-phone.png.webp",
+     "caption": "approach · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-approach-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/approach-morning-desktop.png.webp",
+     "caption": "approach · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-approach-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/approach-morning-phone.png.webp",
+     "caption": "approach · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-coast-join-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/coast-join-evening-desktop.png.webp",
+     "caption": "coast · join · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-coast-join-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/coast-join-evening-phone.png.webp",
+     "caption": "coast · join · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-coast-join-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/coast-join-morning-desktop.png.webp",
+     "caption": "coast · join · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-coast-join-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/coast-join-morning-phone.png.webp",
+     "caption": "coast · join · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-corner-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/corner-evening-desktop.png.webp",
+     "caption": "corner · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-corner-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/corner-evening-phone.png.webp",
+     "caption": "corner · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-corner-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/corner-morning-desktop.png.webp",
+     "caption": "corner · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-corner-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/corner-morning-phone.png.webp",
+     "caption": "corner · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-corner-seaward-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/corner-seaward-evening-desktop.png.webp",
+     "caption": "corner · seaward · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-corner-seaward-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/corner-seaward-evening-phone.png.webp",
+     "caption": "corner · seaward · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-corner-seaward-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/corner-seaward-morning-desktop.png.webp",
+     "caption": "corner · seaward · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-corner-seaward-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/corner-seaward-morning-phone.png.webp",
+     "caption": "corner · seaward · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-northern-stop-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/northern-stop-evening-desktop.png.webp",
+     "caption": "northern · stop · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-northern-stop-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/northern-stop-evening-phone.png.webp",
+     "caption": "northern · stop · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-northern-stop-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/northern-stop-morning-desktop.png.webp",
+     "caption": "northern · stop · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-northern-stop-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/northern-stop-morning-phone.png.webp",
+     "caption": "northern · stop · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-rail-crossing-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/rail-crossing-evening-desktop.png.webp",
+     "caption": "rail · crossing · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-rail-crossing-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/rail-crossing-evening-phone.png.webp",
+     "caption": "rail · crossing · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-rail-crossing-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/rail-crossing-morning-desktop.png.webp",
+     "caption": "rail · crossing · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-rail-crossing-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/rail-crossing-morning-phone.png.webp",
+     "caption": "rail · crossing · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-rest-bay-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/rest-bay-evening-desktop.png.webp",
+     "caption": "rest · bay · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-rest-bay-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/rest-bay-evening-phone.png.webp",
+     "caption": "rest · bay · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-rest-bay-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/rest-bay-morning-desktop.png.webp",
+     "caption": "rest · bay · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-rest-bay-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/rest-bay-morning-phone.png.webp",
+     "caption": "rest · bay · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-underpass-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/underpass-evening-desktop.png.webp",
+     "caption": "underpass · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-underpass-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/underpass-evening-phone.png.webp",
+     "caption": "underpass · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-underpass-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/underpass-morning-desktop.png.webp",
+     "caption": "underpass · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-underpass-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/underpass-morning-phone.png.webp",
+     "caption": "underpass · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-west-lookout-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/west-lookout-evening-desktop.png.webp",
+     "caption": "west · lookout · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-west-lookout-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/west-lookout-evening-phone.png.webp",
+     "caption": "west · lookout · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-12-west-lookout-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-12/west-lookout-morning-desktop.png.webp",
+     "caption": "west · lookout · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-12-west-lookout-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-12/west-lookout-morning-phone.png.webp",
+     "caption": "west · lookout · morning · phone · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Matched before",
+   "caption": "Same nine positions before the work, on f80c486df with runtime identical to f1eef49a2. Native camera bounds alone extended to frame the formerly unreachable corner.",
+   "images": [
+    {
+     "id": "before-final-matched-approach-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/approach-evening-desktop.png.webp",
+     "caption": "approach · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-approach-evening-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/approach-evening-phone.png.webp",
+     "caption": "approach · evening · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-approach-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/approach-morning-desktop.png.webp",
+     "caption": "approach · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-approach-morning-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/approach-morning-phone.png.webp",
+     "caption": "approach · morning · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-coast-join-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/coast-join-evening-desktop.png.webp",
+     "caption": "coast · join · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-coast-join-evening-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/coast-join-evening-phone.png.webp",
+     "caption": "coast · join · evening · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-coast-join-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/coast-join-morning-desktop.png.webp",
+     "caption": "coast · join · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-coast-join-morning-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/coast-join-morning-phone.png.webp",
+     "caption": "coast · join · morning · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-corner-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/corner-evening-desktop.png.webp",
+     "caption": "corner · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-corner-evening-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/corner-evening-phone.png.webp",
+     "caption": "corner · evening · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-corner-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/corner-morning-desktop.png.webp",
+     "caption": "corner · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-corner-morning-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/corner-morning-phone.png.webp",
+     "caption": "corner · morning · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-corner-seaward-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/corner-seaward-evening-desktop.png.webp",
+     "caption": "corner · seaward · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-corner-seaward-evening-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/corner-seaward-evening-phone.png.webp",
+     "caption": "corner · seaward · evening · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-corner-seaward-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/corner-seaward-morning-desktop.png.webp",
+     "caption": "corner · seaward · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-corner-seaward-morning-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/corner-seaward-morning-phone.png.webp",
+     "caption": "corner · seaward · morning · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-northern-stop-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/northern-stop-evening-desktop.png.webp",
+     "caption": "northern · stop · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-northern-stop-evening-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/northern-stop-evening-phone.png.webp",
+     "caption": "northern · stop · evening · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-northern-stop-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/northern-stop-morning-desktop.png.webp",
+     "caption": "northern · stop · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-northern-stop-morning-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/northern-stop-morning-phone.png.webp",
+     "caption": "northern · stop · morning · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-rail-crossing-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/rail-crossing-evening-desktop.png.webp",
+     "caption": "rail · crossing · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-rail-crossing-evening-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/rail-crossing-evening-phone.png.webp",
+     "caption": "rail · crossing · evening · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-rail-crossing-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/rail-crossing-morning-desktop.png.webp",
+     "caption": "rail · crossing · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-rail-crossing-morning-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/rail-crossing-morning-phone.png.webp",
+     "caption": "rail · crossing · morning · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-rest-bay-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/rest-bay-evening-desktop.png.webp",
+     "caption": "rest · bay · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-rest-bay-evening-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/rest-bay-evening-phone.png.webp",
+     "caption": "rest · bay · evening · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-rest-bay-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/rest-bay-morning-desktop.png.webp",
+     "caption": "rest · bay · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-rest-bay-morning-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/rest-bay-morning-phone.png.webp",
+     "caption": "rest · bay · morning · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-underpass-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/underpass-evening-desktop.png.webp",
+     "caption": "underpass · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-underpass-evening-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/underpass-evening-phone.png.webp",
+     "caption": "underpass · evening · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-underpass-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/underpass-morning-desktop.png.webp",
+     "caption": "underpass · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-underpass-morning-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/underpass-morning-phone.png.webp",
+     "caption": "underpass · morning · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-west-lookout-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/west-lookout-evening-desktop.png.webp",
+     "caption": "west · lookout · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-west-lookout-evening-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/west-lookout-evening-phone.png.webp",
+     "caption": "west · lookout · evening · phone · 390×844"
+    },
+    {
+     "id": "before-final-matched-west-lookout-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-final-matched/west-lookout-morning-desktop.png.webp",
+     "caption": "west · lookout · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-final-matched-west-lookout-morning-phone",
+     "image": "game3d/shots/island-southwest/before-final-matched/west-lookout-morning-phone.png.webp",
+     "caption": "west · lookout · morning · phone · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Final physical route, seating and jumping",
+   "caption": "Actual walking and running through the widened support bypass, both lookouts, seats, jump detour and return. Both native sizes passed on f55fe58ba.",
+   "images": [
+    {
+     "id": "route-final-7-1366-coast-join",
+     "image": "game3d/shots/island-southwest/route-final-7/1366-coast-join.png.webp",
+     "caption": "1366 · coast · join · 1366×860"
+    },
+    {
+     "id": "route-final-7-1366-corner",
+     "image": "game3d/shots/island-southwest/route-final-7/1366-corner.png.webp",
+     "caption": "1366 · corner · 1366×860"
+    },
+    {
+     "id": "route-final-7-1366-inland-bypass",
+     "image": "game3d/shots/island-southwest/route-final-7/1366-inland-bypass.png.webp",
+     "caption": "1366 · inland · bypass · 1366×860"
+    },
+    {
+     "id": "route-final-7-1366-jump",
+     "image": "game3d/shots/island-southwest/route-final-7/1366-jump.png.webp",
+     "caption": "1366 · jump · 1366×860"
+    },
+    {
+     "id": "route-final-7-1366-lookout",
+     "image": "game3d/shots/island-southwest/route-final-7/1366-lookout.png.webp",
+     "caption": "1366 · lookout · 1366×860"
+    },
+    {
+     "id": "route-final-7-1366-rail",
+     "image": "game3d/shots/island-southwest/route-final-7/1366-rail.png.webp",
+     "caption": "1366 · rail · 1366×860"
+    },
+    {
+     "id": "route-final-7-1366-rest",
+     "image": "game3d/shots/island-southwest/route-final-7/1366-rest.png.webp",
+     "caption": "1366 · rest · 1366×860"
+    },
+    {
+     "id": "route-final-7-1366-return",
+     "image": "game3d/shots/island-southwest/route-final-7/1366-return.png.webp",
+     "caption": "1366 · return · 1366×860"
+    },
+    {
+     "id": "route-final-7-1366-southwest_bench_1",
+     "image": "game3d/shots/island-southwest/route-final-7/1366-southwest_bench_1.png.webp",
+     "caption": "1366 · bench 1 · 1366×860"
+    },
+    {
+     "id": "route-final-7-1366-southwest_bench_5",
+     "image": "game3d/shots/island-southwest/route-final-7/1366-southwest_bench_5.png.webp",
+     "caption": "1366 · bench 5 · 1366×860"
+    },
+    {
+     "id": "route-final-7-1366-stones",
+     "image": "game3d/shots/island-southwest/route-final-7/1366-stones.png.webp",
+     "caption": "1366 · stones · 1366×860"
+    },
+    {
+     "id": "route-final-7-1366-turn",
+     "image": "game3d/shots/island-southwest/route-final-7/1366-turn.png.webp",
+     "caption": "1366 · turn · 1366×860"
+    },
+    {
+     "id": "route-final-7-390-coast-join",
+     "image": "game3d/shots/island-southwest/route-final-7/390-coast-join.png.webp",
+     "caption": "390 · coast · join · 390×844"
+    },
+    {
+     "id": "route-final-7-390-corner",
+     "image": "game3d/shots/island-southwest/route-final-7/390-corner.png.webp",
+     "caption": "390 · corner · 390×844"
+    },
+    {
+     "id": "route-final-7-390-inland-bypass",
+     "image": "game3d/shots/island-southwest/route-final-7/390-inland-bypass.png.webp",
+     "caption": "390 · inland · bypass · 390×844"
+    },
+    {
+     "id": "route-final-7-390-jump",
+     "image": "game3d/shots/island-southwest/route-final-7/390-jump.png.webp",
+     "caption": "390 · jump · 390×844"
+    },
+    {
+     "id": "route-final-7-390-lookout",
+     "image": "game3d/shots/island-southwest/route-final-7/390-lookout.png.webp",
+     "caption": "390 · lookout · 390×844"
+    },
+    {
+     "id": "route-final-7-390-rail",
+     "image": "game3d/shots/island-southwest/route-final-7/390-rail.png.webp",
+     "caption": "390 · rail · 390×844"
+    },
+    {
+     "id": "route-final-7-390-rest",
+     "image": "game3d/shots/island-southwest/route-final-7/390-rest.png.webp",
+     "caption": "390 · rest · 390×844"
+    },
+    {
+     "id": "route-final-7-390-return",
+     "image": "game3d/shots/island-southwest/route-final-7/390-return.png.webp",
+     "caption": "390 · return · 390×844"
+    },
+    {
+     "id": "route-final-7-390-southwest_bench_1",
+     "image": "game3d/shots/island-southwest/route-final-7/390-southwest_bench_1.png.webp",
+     "caption": "390 · bench 1 · 390×844"
+    },
+    {
+     "id": "route-final-7-390-southwest_bench_5",
+     "image": "game3d/shots/island-southwest/route-final-7/390-southwest_bench_5.png.webp",
+     "caption": "390 · bench 5 · 390×844"
+    },
+    {
+     "id": "route-final-7-390-stones",
+     "image": "game3d/shots/island-southwest/route-final-7/390-stones.png.webp",
+     "caption": "390 · stones · 390×844"
+    },
+    {
+     "id": "route-final-7-390-turn",
+     "image": "game3d/shots/island-southwest/route-final-7/390-turn.png.webp",
+     "caption": "390 · turn · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Repaired railway: structural close-ups",
+   "caption": "All 16 structural diagnostic views passed independent visual review at 8/10. Shed running-track and outer-track positions deliberately stand outside public walks to inspect joints; actor occlusion there is diagnostic.",
+   "images": [
+    {
+     "id": "station-joins-3-bay-track-supports-evening-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-3/bay-track-supports-evening-desktop.png.webp",
+     "caption": "bay · track · supports · evening · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-3-bay-track-supports-evening-phone",
+     "image": "game3d/shots/island-southwest/station-joins-3/bay-track-supports-evening-phone.png.webp",
+     "caption": "bay · track · supports · evening · phone · 390×844"
+    },
+    {
+     "id": "station-joins-3-bay-track-supports-morning-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-3/bay-track-supports-morning-desktop.png.webp",
+     "caption": "bay · track · supports · morning · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-3-bay-track-supports-morning-phone",
+     "image": "game3d/shots/island-southwest/station-joins-3/bay-track-supports-morning-phone.png.webp",
+     "caption": "bay · track · supports · morning · phone · 390×844"
+    },
+    {
+     "id": "station-joins-3-shed-outer-track-evening-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-3/shed-outer-track-evening-desktop.png.webp",
+     "caption": "shed · outer · track · evening · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-3-shed-outer-track-evening-phone",
+     "image": "game3d/shots/island-southwest/station-joins-3/shed-outer-track-evening-phone.png.webp",
+     "caption": "shed · outer · track · evening · phone · 390×844"
+    },
+    {
+     "id": "station-joins-3-shed-outer-track-morning-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-3/shed-outer-track-morning-desktop.png.webp",
+     "caption": "shed · outer · track · morning · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-3-shed-outer-track-morning-phone",
+     "image": "game3d/shots/island-southwest/station-joins-3/shed-outer-track-morning-phone.png.webp",
+     "caption": "shed · outer · track · morning · phone · 390×844"
+    },
+    {
+     "id": "station-joins-3-shed-running-track-evening-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-3/shed-running-track-evening-desktop.png.webp",
+     "caption": "shed · running · track · evening · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-3-shed-running-track-evening-phone",
+     "image": "game3d/shots/island-southwest/station-joins-3/shed-running-track-evening-phone.png.webp",
+     "caption": "shed · running · track · evening · phone · 390×844"
+    },
+    {
+     "id": "station-joins-3-shed-running-track-morning-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-3/shed-running-track-morning-desktop.png.webp",
+     "caption": "shed · running · track · morning · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-3-shed-running-track-morning-phone",
+     "image": "game3d/shots/island-southwest/station-joins-3/shed-running-track-morning-phone.png.webp",
+     "caption": "shed · running · track · morning · phone · 390×844"
+    },
+    {
+     "id": "station-joins-3-turn-track-supports-evening-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-3/turn-track-supports-evening-desktop.png.webp",
+     "caption": "turn · track · supports · evening · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-3-turn-track-supports-evening-phone",
+     "image": "game3d/shots/island-southwest/station-joins-3/turn-track-supports-evening-phone.png.webp",
+     "caption": "turn · track · supports · evening · phone · 390×844"
+    },
+    {
+     "id": "station-joins-3-turn-track-supports-morning-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-3/turn-track-supports-morning-desktop.png.webp",
+     "caption": "turn · track · supports · morning · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-3-turn-track-supports-morning-phone",
+     "image": "game3d/shots/island-southwest/station-joins-3/turn-track-supports-morning-phone.png.webp",
+     "caption": "turn · track · supports · morning · phone · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Northern lookout lamp repair",
+   "caption": "Moved the lamp along the inland verge so its bright head and pole clear Eric in the phone standing view. Superseded by the complete final set.",
+   "images": [
+    {
+     "id": "lamp-repair-11-northern-stop-evening-desktop",
+     "image": "game3d/shots/island-southwest/lamp-repair-11/northern-stop-evening-desktop.png.webp",
+     "caption": "northern · stop · evening · desktop · 1366×860"
+    },
+    {
+     "id": "lamp-repair-11-northern-stop-evening-phone",
+     "image": "game3d/shots/island-southwest/lamp-repair-11/northern-stop-evening-phone.png.webp",
+     "caption": "northern · stop · evening · phone · 390×844"
+    },
+    {
+     "id": "lamp-repair-11-northern-stop-morning-desktop",
+     "image": "game3d/shots/island-southwest/lamp-repair-11/northern-stop-morning-desktop.png.webp",
+     "caption": "northern · stop · morning · desktop · 1366×860"
+    },
+    {
+     "id": "lamp-repair-11-northern-stop-morning-phone",
+     "image": "game3d/shots/island-southwest/lamp-repair-11/northern-stop-morning-phone.png.webp",
+     "caption": "northern · stop · morning · phone · 390×844"
+    },
+    {
+     "id": "lamp-repair-11-west-lookout-evening-desktop",
+     "image": "game3d/shots/island-southwest/lamp-repair-11/west-lookout-evening-desktop.png.webp",
+     "caption": "west · lookout · evening · desktop · 1366×860"
+    },
+    {
+     "id": "lamp-repair-11-west-lookout-evening-phone",
+     "image": "game3d/shots/island-southwest/lamp-repair-11/west-lookout-evening-phone.png.webp",
+     "caption": "west · lookout · evening · phone · 390×844"
+    },
+    {
+     "id": "lamp-repair-11-west-lookout-morning-desktop",
+     "image": "game3d/shots/island-southwest/lamp-repair-11/west-lookout-morning-desktop.png.webp",
+     "caption": "west · lookout · morning · desktop · 1366×860"
+    },
+    {
+     "id": "lamp-repair-11-west-lookout-morning-phone",
+     "image": "game3d/shots/island-southwest/lamp-repair-11/west-lookout-morning-phone.png.webp",
+     "caption": "west · lookout · morning · phone · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Before lamp and curve repairs",
+   "caption": "The crowd-clear inland turn worked, but review found a northern phone lamp overlap and torn curved railway joints in structural close-ups. Both repaired in the final set.",
+   "images": [
+    {
+     "id": "after-final-10-approach-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/approach-evening-desktop.png.webp",
+     "caption": "approach · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-approach-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/approach-evening-phone.png.webp",
+     "caption": "approach · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-approach-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/approach-morning-desktop.png.webp",
+     "caption": "approach · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-approach-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/approach-morning-phone.png.webp",
+     "caption": "approach · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-coast-join-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/coast-join-evening-desktop.png.webp",
+     "caption": "coast · join · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-coast-join-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/coast-join-evening-phone.png.webp",
+     "caption": "coast · join · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-coast-join-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/coast-join-morning-desktop.png.webp",
+     "caption": "coast · join · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-coast-join-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/coast-join-morning-phone.png.webp",
+     "caption": "coast · join · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-corner-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/corner-evening-desktop.png.webp",
+     "caption": "corner · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-corner-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/corner-evening-phone.png.webp",
+     "caption": "corner · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-corner-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/corner-morning-desktop.png.webp",
+     "caption": "corner · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-corner-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/corner-morning-phone.png.webp",
+     "caption": "corner · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-corner-seaward-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/corner-seaward-evening-desktop.png.webp",
+     "caption": "corner · seaward · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-corner-seaward-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/corner-seaward-evening-phone.png.webp",
+     "caption": "corner · seaward · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-corner-seaward-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/corner-seaward-morning-desktop.png.webp",
+     "caption": "corner · seaward · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-corner-seaward-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/corner-seaward-morning-phone.png.webp",
+     "caption": "corner · seaward · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-northern-stop-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/northern-stop-evening-desktop.png.webp",
+     "caption": "northern · stop · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-northern-stop-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/northern-stop-evening-phone.png.webp",
+     "caption": "northern · stop · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-northern-stop-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/northern-stop-morning-desktop.png.webp",
+     "caption": "northern · stop · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-northern-stop-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/northern-stop-morning-phone.png.webp",
+     "caption": "northern · stop · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-rail-crossing-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/rail-crossing-evening-desktop.png.webp",
+     "caption": "rail · crossing · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-rail-crossing-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/rail-crossing-evening-phone.png.webp",
+     "caption": "rail · crossing · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-rail-crossing-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/rail-crossing-morning-desktop.png.webp",
+     "caption": "rail · crossing · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-rail-crossing-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/rail-crossing-morning-phone.png.webp",
+     "caption": "rail · crossing · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-rest-bay-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/rest-bay-evening-desktop.png.webp",
+     "caption": "rest · bay · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-rest-bay-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/rest-bay-evening-phone.png.webp",
+     "caption": "rest · bay · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-rest-bay-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/rest-bay-morning-desktop.png.webp",
+     "caption": "rest · bay · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-rest-bay-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/rest-bay-morning-phone.png.webp",
+     "caption": "rest · bay · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-underpass-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/underpass-evening-desktop.png.webp",
+     "caption": "underpass · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-underpass-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/underpass-evening-phone.png.webp",
+     "caption": "underpass · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-underpass-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/underpass-morning-desktop.png.webp",
+     "caption": "underpass · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-underpass-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/underpass-morning-phone.png.webp",
+     "caption": "underpass · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-west-lookout-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/west-lookout-evening-desktop.png.webp",
+     "caption": "west · lookout · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-west-lookout-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/west-lookout-evening-phone.png.webp",
+     "caption": "west · lookout · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-10-west-lookout-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-10/west-lookout-morning-desktop.png.webp",
+     "caption": "west · lookout · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-10-west-lookout-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-10/west-lookout-morning-phone.png.webp",
+     "caption": "west · lookout · morning · phone · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "First complete coast",
+   "caption": "Usable terraces and physical route. Superseded by the crowd-clear turn, lamp and continuous curve repairs.",
+   "images": [
+    {
+     "id": "after-final-9-approach-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/approach-evening-desktop.png.webp",
+     "caption": "approach · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-approach-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/approach-evening-phone.png.webp",
+     "caption": "approach · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-approach-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/approach-morning-desktop.png.webp",
+     "caption": "approach · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-approach-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/approach-morning-phone.png.webp",
+     "caption": "approach · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-coast-join-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/coast-join-evening-desktop.png.webp",
+     "caption": "coast · join · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-coast-join-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/coast-join-evening-phone.png.webp",
+     "caption": "coast · join · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-coast-join-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/coast-join-morning-desktop.png.webp",
+     "caption": "coast · join · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-coast-join-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/coast-join-morning-phone.png.webp",
+     "caption": "coast · join · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-corner-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/corner-evening-desktop.png.webp",
+     "caption": "corner · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-corner-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/corner-evening-phone.png.webp",
+     "caption": "corner · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-corner-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/corner-morning-desktop.png.webp",
+     "caption": "corner · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-corner-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/corner-morning-phone.png.webp",
+     "caption": "corner · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-corner-seaward-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/corner-seaward-evening-desktop.png.webp",
+     "caption": "corner · seaward · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-corner-seaward-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/corner-seaward-evening-phone.png.webp",
+     "caption": "corner · seaward · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-corner-seaward-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/corner-seaward-morning-desktop.png.webp",
+     "caption": "corner · seaward · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-corner-seaward-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/corner-seaward-morning-phone.png.webp",
+     "caption": "corner · seaward · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-northern-stop-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/northern-stop-evening-desktop.png.webp",
+     "caption": "northern · stop · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-northern-stop-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/northern-stop-evening-phone.png.webp",
+     "caption": "northern · stop · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-northern-stop-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/northern-stop-morning-desktop.png.webp",
+     "caption": "northern · stop · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-northern-stop-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/northern-stop-morning-phone.png.webp",
+     "caption": "northern · stop · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-rail-crossing-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/rail-crossing-evening-desktop.png.webp",
+     "caption": "rail · crossing · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-rail-crossing-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/rail-crossing-evening-phone.png.webp",
+     "caption": "rail · crossing · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-rail-crossing-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/rail-crossing-morning-desktop.png.webp",
+     "caption": "rail · crossing · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-rail-crossing-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/rail-crossing-morning-phone.png.webp",
+     "caption": "rail · crossing · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-rest-bay-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/rest-bay-evening-desktop.png.webp",
+     "caption": "rest · bay · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-rest-bay-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/rest-bay-evening-phone.png.webp",
+     "caption": "rest · bay · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-rest-bay-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/rest-bay-morning-desktop.png.webp",
+     "caption": "rest · bay · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-rest-bay-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/rest-bay-morning-phone.png.webp",
+     "caption": "rest · bay · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-underpass-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/underpass-evening-desktop.png.webp",
+     "caption": "underpass · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-underpass-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/underpass-evening-phone.png.webp",
+     "caption": "underpass · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-underpass-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/underpass-morning-desktop.png.webp",
+     "caption": "underpass · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-underpass-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/underpass-morning-phone.png.webp",
+     "caption": "underpass · morning · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-west-lookout-evening-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/west-lookout-evening-desktop.png.webp",
+     "caption": "west · lookout · evening · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-west-lookout-evening-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/west-lookout-evening-phone.png.webp",
+     "caption": "west · lookout · evening · phone · 390×844"
+    },
+    {
+     "id": "after-final-9-west-lookout-morning-desktop",
+     "image": "game3d/shots/island-southwest/after-final-9/west-lookout-morning-desktop.png.webp",
+     "caption": "west · lookout · morning · desktop · 1366×860"
+    },
+    {
+     "id": "after-final-9-west-lookout-morning-phone",
+     "image": "game3d/shots/island-southwest/after-final-9/west-lookout-morning-phone.png.webp",
+     "caption": "west · lookout · morning · phone · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Original baseline framing",
+   "caption": "Retained original views; the first desktop heading was wrong and corrected in before-matched.",
+   "images": [
+    {
+     "id": "before-approach-evening-desktop",
+     "image": "game3d/shots/island-southwest/before/approach-evening-desktop.png.webp",
+     "caption": "approach · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-approach-evening-phone",
+     "image": "game3d/shots/island-southwest/before/approach-evening-phone.png.webp",
+     "caption": "approach · evening · phone · 390×844"
+    },
+    {
+     "id": "before-approach-morning-desktop",
+     "image": "game3d/shots/island-southwest/before/approach-morning-desktop.png.webp",
+     "caption": "approach · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-approach-morning-phone",
+     "image": "game3d/shots/island-southwest/before/approach-morning-phone.png.webp",
+     "caption": "approach · morning · phone · 390×844"
+    },
+    {
+     "id": "before-corner-evening-desktop",
+     "image": "game3d/shots/island-southwest/before/corner-evening-desktop.png.webp",
+     "caption": "corner · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-corner-evening-phone",
+     "image": "game3d/shots/island-southwest/before/corner-evening-phone.png.webp",
+     "caption": "corner · evening · phone · 390×844"
+    },
+    {
+     "id": "before-corner-morning-desktop",
+     "image": "game3d/shots/island-southwest/before/corner-morning-desktop.png.webp",
+     "caption": "corner · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-corner-morning-phone",
+     "image": "game3d/shots/island-southwest/before/corner-morning-phone.png.webp",
+     "caption": "corner · morning · phone · 390×844"
+    },
+    {
+     "id": "before-rail-crossing-evening-desktop",
+     "image": "game3d/shots/island-southwest/before/rail-crossing-evening-desktop.png.webp",
+     "caption": "rail · crossing · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-rail-crossing-evening-phone",
+     "image": "game3d/shots/island-southwest/before/rail-crossing-evening-phone.png.webp",
+     "caption": "rail · crossing · evening · phone · 390×844"
+    },
+    {
+     "id": "before-rail-crossing-morning-desktop",
+     "image": "game3d/shots/island-southwest/before/rail-crossing-morning-desktop.png.webp",
+     "caption": "rail · crossing · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-rail-crossing-morning-phone",
+     "image": "game3d/shots/island-southwest/before/rail-crossing-morning-phone.png.webp",
+     "caption": "rail · crossing · morning · phone · 390×844"
+    },
+    {
+     "id": "before-west-lookout-evening-desktop",
+     "image": "game3d/shots/island-southwest/before/west-lookout-evening-desktop.png.webp",
+     "caption": "west · lookout · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-west-lookout-evening-phone",
+     "image": "game3d/shots/island-southwest/before/west-lookout-evening-phone.png.webp",
+     "caption": "west · lookout · evening · phone · 390×844"
+    },
+    {
+     "id": "before-west-lookout-morning-desktop",
+     "image": "game3d/shots/island-southwest/before/west-lookout-morning-desktop.png.webp",
+     "caption": "west · lookout · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-west-lookout-morning-phone",
+     "image": "game3d/shots/island-southwest/before/west-lookout-morning-phone.png.webp",
+     "caption": "west · lookout · morning · phone · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Corrected original baseline",
+   "caption": "Corrected native desktop headings before the final southern lookout relocation.",
+   "images": [
+    {
+     "id": "before-matched-approach-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-matched/approach-evening-desktop.png.webp",
+     "caption": "approach · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-matched-approach-evening-phone",
+     "image": "game3d/shots/island-southwest/before-matched/approach-evening-phone.png.webp",
+     "caption": "approach · evening · phone · 390×844"
+    },
+    {
+     "id": "before-matched-approach-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-matched/approach-morning-desktop.png.webp",
+     "caption": "approach · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-matched-approach-morning-phone",
+     "image": "game3d/shots/island-southwest/before-matched/approach-morning-phone.png.webp",
+     "caption": "approach · morning · phone · 390×844"
+    },
+    {
+     "id": "before-matched-corner-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-matched/corner-evening-desktop.png.webp",
+     "caption": "corner · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-matched-corner-evening-phone",
+     "image": "game3d/shots/island-southwest/before-matched/corner-evening-phone.png.webp",
+     "caption": "corner · evening · phone · 390×844"
+    },
+    {
+     "id": "before-matched-corner-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-matched/corner-morning-desktop.png.webp",
+     "caption": "corner · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-matched-corner-morning-phone",
+     "image": "game3d/shots/island-southwest/before-matched/corner-morning-phone.png.webp",
+     "caption": "corner · morning · phone · 390×844"
+    },
+    {
+     "id": "before-matched-northern-stop-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-matched/northern-stop-evening-desktop.png.webp",
+     "caption": "northern · stop · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-matched-northern-stop-evening-phone",
+     "image": "game3d/shots/island-southwest/before-matched/northern-stop-evening-phone.png.webp",
+     "caption": "northern · stop · evening · phone · 390×844"
+    },
+    {
+     "id": "before-matched-northern-stop-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-matched/northern-stop-morning-desktop.png.webp",
+     "caption": "northern · stop · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-matched-northern-stop-morning-phone",
+     "image": "game3d/shots/island-southwest/before-matched/northern-stop-morning-phone.png.webp",
+     "caption": "northern · stop · morning · phone · 390×844"
+    },
+    {
+     "id": "before-matched-rail-crossing-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-matched/rail-crossing-evening-desktop.png.webp",
+     "caption": "rail · crossing · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-matched-rail-crossing-evening-phone",
+     "image": "game3d/shots/island-southwest/before-matched/rail-crossing-evening-phone.png.webp",
+     "caption": "rail · crossing · evening · phone · 390×844"
+    },
+    {
+     "id": "before-matched-rail-crossing-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-matched/rail-crossing-morning-desktop.png.webp",
+     "caption": "rail · crossing · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-matched-rail-crossing-morning-phone",
+     "image": "game3d/shots/island-southwest/before-matched/rail-crossing-morning-phone.png.webp",
+     "caption": "rail · crossing · morning · phone · 390×844"
+    },
+    {
+     "id": "before-matched-rest-bay-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-matched/rest-bay-evening-desktop.png.webp",
+     "caption": "rest · bay · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-matched-rest-bay-evening-phone",
+     "image": "game3d/shots/island-southwest/before-matched/rest-bay-evening-phone.png.webp",
+     "caption": "rest · bay · evening · phone · 390×844"
+    },
+    {
+     "id": "before-matched-rest-bay-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-matched/rest-bay-morning-desktop.png.webp",
+     "caption": "rest · bay · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-matched-rest-bay-morning-phone",
+     "image": "game3d/shots/island-southwest/before-matched/rest-bay-morning-phone.png.webp",
+     "caption": "rest · bay · morning · phone · 390×844"
+    },
+    {
+     "id": "before-matched-west-lookout-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-matched/west-lookout-evening-desktop.png.webp",
+     "caption": "west · lookout · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-matched-west-lookout-evening-phone",
+     "image": "game3d/shots/island-southwest/before-matched/west-lookout-evening-phone.png.webp",
+     "caption": "west · lookout · evening · phone · 390×844"
+    },
+    {
+     "id": "before-matched-west-lookout-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-matched/west-lookout-morning-desktop.png.webp",
+     "caption": "west · lookout · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-matched-west-lookout-morning-phone",
+     "image": "game3d/shots/island-southwest/before-matched/west-lookout-morning-phone.png.webp",
+     "caption": "west · lookout · morning · phone · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "New lookout location before work",
+   "caption": "Matched baseline at the open seaward pocket chosen after the railway occlusion tests.",
+   "images": [
+    {
+     "id": "before-lookout-matched-corner-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-lookout-matched/corner-evening-desktop.png.webp",
+     "caption": "corner · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-lookout-matched-corner-evening-phone",
+     "image": "game3d/shots/island-southwest/before-lookout-matched/corner-evening-phone.png.webp",
+     "caption": "corner · evening · phone · 390×844"
+    },
+    {
+     "id": "before-lookout-matched-corner-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-lookout-matched/corner-morning-desktop.png.webp",
+     "caption": "corner · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-lookout-matched-corner-morning-phone",
+     "image": "game3d/shots/island-southwest/before-lookout-matched/corner-morning-phone.png.webp",
+     "caption": "corner · morning · phone · 390×844"
+    },
+    {
+     "id": "before-lookout-matched-corner-seaward-evening-desktop",
+     "image": "game3d/shots/island-southwest/before-lookout-matched/corner-seaward-evening-desktop.png.webp",
+     "caption": "corner · seaward · evening · desktop · 1366×860"
+    },
+    {
+     "id": "before-lookout-matched-corner-seaward-evening-phone",
+     "image": "game3d/shots/island-southwest/before-lookout-matched/corner-seaward-evening-phone.png.webp",
+     "caption": "corner · seaward · evening · phone · 390×844"
+    },
+    {
+     "id": "before-lookout-matched-corner-seaward-morning-desktop",
+     "image": "game3d/shots/island-southwest/before-lookout-matched/corner-seaward-morning-desktop.png.webp",
+     "caption": "corner · seaward · morning · desktop · 1366×860"
+    },
+    {
+     "id": "before-lookout-matched-corner-seaward-morning-phone",
+     "image": "game3d/shots/island-southwest/before-lookout-matched/corner-seaward-morning-phone.png.webp",
+     "caption": "corner · seaward · morning · phone · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "First coast attempt: rejected lookout",
+   "caption": "Approach and rest bay were promising, but the southern lookout stood under the railway. Rejected and relocated.",
+   "images": [
+    {
+     "id": "attempt-4-approach-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-4/approach-evening-desktop.png.webp",
+     "caption": "approach · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-4-approach-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-4/approach-evening-phone.png.webp",
+     "caption": "approach · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-4-approach-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-4/approach-morning-desktop.png.webp",
+     "caption": "approach · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-4-approach-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-4/approach-morning-phone.png.webp",
+     "caption": "approach · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-4-corner-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-4/corner-evening-desktop.png.webp",
+     "caption": "corner · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-4-corner-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-4/corner-evening-phone.png.webp",
+     "caption": "corner · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-4-corner-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-4/corner-morning-desktop.png.webp",
+     "caption": "corner · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-4-corner-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-4/corner-morning-phone.png.webp",
+     "caption": "corner · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-4-northern-stop-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-4/northern-stop-evening-desktop.png.webp",
+     "caption": "northern · stop · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-4-northern-stop-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-4/northern-stop-evening-phone.png.webp",
+     "caption": "northern · stop · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-4-northern-stop-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-4/northern-stop-morning-desktop.png.webp",
+     "caption": "northern · stop · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-4-northern-stop-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-4/northern-stop-morning-phone.png.webp",
+     "caption": "northern · stop · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-4-rail-crossing-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-4/rail-crossing-evening-desktop.png.webp",
+     "caption": "rail · crossing · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-4-rail-crossing-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-4/rail-crossing-evening-phone.png.webp",
+     "caption": "rail · crossing · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-4-rail-crossing-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-4/rail-crossing-morning-desktop.png.webp",
+     "caption": "rail · crossing · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-4-rail-crossing-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-4/rail-crossing-morning-phone.png.webp",
+     "caption": "rail · crossing · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-4-rest-bay-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-4/rest-bay-evening-desktop.png.webp",
+     "caption": "rest · bay · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-4-rest-bay-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-4/rest-bay-evening-phone.png.webp",
+     "caption": "rest · bay · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-4-rest-bay-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-4/rest-bay-morning-desktop.png.webp",
+     "caption": "rest · bay · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-4-rest-bay-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-4/rest-bay-morning-phone.png.webp",
+     "caption": "rest · bay · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-4-west-lookout-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-4/west-lookout-evening-desktop.png.webp",
+     "caption": "west · lookout · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-4-west-lookout-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-4/west-lookout-evening-phone.png.webp",
+     "caption": "west · lookout · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-4-west-lookout-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-4/west-lookout-morning-desktop.png.webp",
+     "caption": "west · lookout · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-4-west-lookout-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-4/west-lookout-morning-phone.png.webp",
+     "caption": "west · lookout · morning · phone · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Railway fade experiment: rejected",
+   "caption": "Camera fading detached the beam visually from its support heads. Rejected; all fading removed.",
+   "images": [
+    {
+     "id": "attempt-5-approach-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-5/approach-evening-desktop.png.webp",
+     "caption": "approach · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-5-approach-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-5/approach-evening-phone.png.webp",
+     "caption": "approach · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-5-approach-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-5/approach-morning-desktop.png.webp",
+     "caption": "approach · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-5-approach-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-5/approach-morning-phone.png.webp",
+     "caption": "approach · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-5-corner-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-5/corner-evening-desktop.png.webp",
+     "caption": "corner · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-5-corner-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-5/corner-evening-phone.png.webp",
+     "caption": "corner · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-5-corner-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-5/corner-morning-desktop.png.webp",
+     "caption": "corner · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-5-corner-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-5/corner-morning-phone.png.webp",
+     "caption": "corner · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-5-northern-stop-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-5/northern-stop-evening-desktop.png.webp",
+     "caption": "northern · stop · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-5-northern-stop-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-5/northern-stop-evening-phone.png.webp",
+     "caption": "northern · stop · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-5-northern-stop-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-5/northern-stop-morning-desktop.png.webp",
+     "caption": "northern · stop · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-5-northern-stop-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-5/northern-stop-morning-phone.png.webp",
+     "caption": "northern · stop · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-5-rail-crossing-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-5/rail-crossing-evening-desktop.png.webp",
+     "caption": "rail · crossing · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-5-rail-crossing-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-5/rail-crossing-evening-phone.png.webp",
+     "caption": "rail · crossing · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-5-rail-crossing-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-5/rail-crossing-morning-desktop.png.webp",
+     "caption": "rail · crossing · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-5-rail-crossing-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-5/rail-crossing-morning-phone.png.webp",
+     "caption": "rail · crossing · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-5-rest-bay-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-5/rest-bay-evening-desktop.png.webp",
+     "caption": "rest · bay · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-5-rest-bay-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-5/rest-bay-evening-phone.png.webp",
+     "caption": "rest · bay · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-5-rest-bay-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-5/rest-bay-morning-desktop.png.webp",
+     "caption": "rest · bay · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-5-rest-bay-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-5/rest-bay-morning-phone.png.webp",
+     "caption": "rest · bay · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-5-west-lookout-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-5/west-lookout-evening-desktop.png.webp",
+     "caption": "west · lookout · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-5-west-lookout-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-5/west-lookout-evening-phone.png.webp",
+     "caption": "west · lookout · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-5-west-lookout-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-5/west-lookout-morning-desktop.png.webp",
+     "caption": "west · lookout · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-5-west-lookout-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-5/west-lookout-morning-phone.png.webp",
+     "caption": "west · lookout · morning · phone · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Further railway fade probe: rejected",
+   "caption": "Rejected camera-fade experiment. Final railway is solid from every viewpoint.",
+   "images": [
+    {
+     "id": "attempt-6-corner-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-6/corner-evening-desktop.png.webp",
+     "caption": "corner · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-6-corner-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-6/corner-evening-phone.png.webp",
+     "caption": "corner · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-6-corner-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-6/corner-morning-desktop.png.webp",
+     "caption": "corner · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-6-corner-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-6/corner-morning-phone.png.webp",
+     "caption": "corner · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-6-corner-seaward-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-6/corner-seaward-evening-desktop.png.webp",
+     "caption": "corner · seaward · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-6-corner-seaward-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-6/corner-seaward-evening-phone.png.webp",
+     "caption": "corner · seaward · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-6-corner-seaward-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-6/corner-seaward-morning-desktop.png.webp",
+     "caption": "corner · seaward · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-6-corner-seaward-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-6/corner-seaward-morning-phone.png.webp",
+     "caption": "corner · seaward · morning · phone · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Solid railway, old lookout: rejected",
+   "caption": "Headroom and fitted bearings improved, but the old lookout still lay under the outer track. Rejected location.",
+   "images": [
+    {
+     "id": "attempt-7-approach-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-7/approach-evening-desktop.png.webp",
+     "caption": "approach · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-7-approach-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-7/approach-evening-phone.png.webp",
+     "caption": "approach · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-7-approach-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-7/approach-morning-desktop.png.webp",
+     "caption": "approach · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-7-approach-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-7/approach-morning-phone.png.webp",
+     "caption": "approach · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-7-corner-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-7/corner-evening-desktop.png.webp",
+     "caption": "corner · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-7-corner-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-7/corner-evening-phone.png.webp",
+     "caption": "corner · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-7-corner-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-7/corner-morning-desktop.png.webp",
+     "caption": "corner · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-7-corner-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-7/corner-morning-phone.png.webp",
+     "caption": "corner · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-7-corner-seaward-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-7/corner-seaward-evening-desktop.png.webp",
+     "caption": "corner · seaward · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-7-corner-seaward-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-7/corner-seaward-evening-phone.png.webp",
+     "caption": "corner · seaward · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-7-corner-seaward-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-7/corner-seaward-morning-desktop.png.webp",
+     "caption": "corner · seaward · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-7-corner-seaward-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-7/corner-seaward-morning-phone.png.webp",
+     "caption": "corner · seaward · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-7-northern-stop-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-7/northern-stop-evening-desktop.png.webp",
+     "caption": "northern · stop · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-7-northern-stop-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-7/northern-stop-evening-phone.png.webp",
+     "caption": "northern · stop · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-7-northern-stop-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-7/northern-stop-morning-desktop.png.webp",
+     "caption": "northern · stop · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-7-northern-stop-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-7/northern-stop-morning-phone.png.webp",
+     "caption": "northern · stop · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-7-rail-crossing-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-7/rail-crossing-evening-desktop.png.webp",
+     "caption": "rail · crossing · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-7-rail-crossing-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-7/rail-crossing-evening-phone.png.webp",
+     "caption": "rail · crossing · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-7-rail-crossing-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-7/rail-crossing-morning-desktop.png.webp",
+     "caption": "rail · crossing · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-7-rail-crossing-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-7/rail-crossing-morning-phone.png.webp",
+     "caption": "rail · crossing · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-7-rest-bay-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-7/rest-bay-evening-desktop.png.webp",
+     "caption": "rest · bay · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-7-rest-bay-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-7/rest-bay-evening-phone.png.webp",
+     "caption": "rest · bay · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-7-rest-bay-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-7/rest-bay-morning-desktop.png.webp",
+     "caption": "rest · bay · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-7-rest-bay-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-7/rest-bay-morning-phone.png.webp",
+     "caption": "rest · bay · morning · phone · 390×844"
+    },
+    {
+     "id": "attempt-7-west-lookout-evening-desktop",
+     "image": "game3d/shots/island-southwest/attempt-7/west-lookout-evening-desktop.png.webp",
+     "caption": "west · lookout · evening · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-7-west-lookout-evening-phone",
+     "image": "game3d/shots/island-southwest/attempt-7/west-lookout-evening-phone.png.webp",
+     "caption": "west · lookout · evening · phone · 390×844"
+    },
+    {
+     "id": "attempt-7-west-lookout-morning-desktop",
+     "image": "game3d/shots/island-southwest/attempt-7/west-lookout-morning-desktop.png.webp",
+     "caption": "west · lookout · morning · desktop · 1366×860"
+    },
+    {
+     "id": "attempt-7-west-lookout-morning-phone",
+     "image": "game3d/shots/island-southwest/attempt-7/west-lookout-morning-phone.png.webp",
+     "caption": "west · lookout · morning · phone · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Open lookout clearance probe",
+   "caption": "Confirmed full native camera and capsule clearance in the seaward pocket before moving the canonical terrace.",
+   "images": [
+    {
+     "id": "lookout-probe-8-corner-evening-desktop",
+     "image": "game3d/shots/island-southwest/lookout-probe-8/corner-evening-desktop.png.webp",
+     "caption": "corner · evening · desktop · 1366×860"
+    },
+    {
+     "id": "lookout-probe-8-corner-evening-phone",
+     "image": "game3d/shots/island-southwest/lookout-probe-8/corner-evening-phone.png.webp",
+     "caption": "corner · evening · phone · 390×844"
+    },
+    {
+     "id": "lookout-probe-8-corner-morning-desktop",
+     "image": "game3d/shots/island-southwest/lookout-probe-8/corner-morning-desktop.png.webp",
+     "caption": "corner · morning · desktop · 1366×860"
+    },
+    {
+     "id": "lookout-probe-8-corner-morning-phone",
+     "image": "game3d/shots/island-southwest/lookout-probe-8/corner-morning-phone.png.webp",
+     "caption": "corner · morning · phone · 390×844"
+    },
+    {
+     "id": "lookout-probe-8-corner-seaward-evening-desktop",
+     "image": "game3d/shots/island-southwest/lookout-probe-8/corner-seaward-evening-desktop.png.webp",
+     "caption": "corner · seaward · evening · desktop · 1366×860"
+    },
+    {
+     "id": "lookout-probe-8-corner-seaward-evening-phone",
+     "image": "game3d/shots/island-southwest/lookout-probe-8/corner-seaward-evening-phone.png.webp",
+     "caption": "corner · seaward · evening · phone · 390×844"
+    },
+    {
+     "id": "lookout-probe-8-corner-seaward-morning-desktop",
+     "image": "game3d/shots/island-southwest/lookout-probe-8/corner-seaward-morning-desktop.png.webp",
+     "caption": "corner · seaward · morning · desktop · 1366×860"
+    },
+    {
+     "id": "lookout-probe-8-corner-seaward-morning-phone",
+     "image": "game3d/shots/island-southwest/lookout-probe-8/corner-seaward-morning-phone.png.webp",
+     "caption": "corner · seaward · morning · phone · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Railway close-ups before joint repair",
+   "caption": "Structural diagnostic views exposed triangular gaps between independently rotated beam segments. Rejected and repaired with a continuous profile sweep.",
+   "images": [
+    {
+     "id": "station-joins-2-bay-track-supports-evening-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-2/bay-track-supports-evening-desktop.png.webp",
+     "caption": "bay · track · supports · evening · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-2-bay-track-supports-evening-phone",
+     "image": "game3d/shots/island-southwest/station-joins-2/bay-track-supports-evening-phone.png.webp",
+     "caption": "bay · track · supports · evening · phone · 390×844"
+    },
+    {
+     "id": "station-joins-2-bay-track-supports-morning-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-2/bay-track-supports-morning-desktop.png.webp",
+     "caption": "bay · track · supports · morning · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-2-bay-track-supports-morning-phone",
+     "image": "game3d/shots/island-southwest/station-joins-2/bay-track-supports-morning-phone.png.webp",
+     "caption": "bay · track · supports · morning · phone · 390×844"
+    },
+    {
+     "id": "station-joins-2-shed-outer-track-evening-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-2/shed-outer-track-evening-desktop.png.webp",
+     "caption": "shed · outer · track · evening · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-2-shed-outer-track-evening-phone",
+     "image": "game3d/shots/island-southwest/station-joins-2/shed-outer-track-evening-phone.png.webp",
+     "caption": "shed · outer · track · evening · phone · 390×844"
+    },
+    {
+     "id": "station-joins-2-shed-outer-track-morning-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-2/shed-outer-track-morning-desktop.png.webp",
+     "caption": "shed · outer · track · morning · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-2-shed-outer-track-morning-phone",
+     "image": "game3d/shots/island-southwest/station-joins-2/shed-outer-track-morning-phone.png.webp",
+     "caption": "shed · outer · track · morning · phone · 390×844"
+    },
+    {
+     "id": "station-joins-2-shed-running-track-evening-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-2/shed-running-track-evening-desktop.png.webp",
+     "caption": "shed · running · track · evening · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-2-shed-running-track-evening-phone",
+     "image": "game3d/shots/island-southwest/station-joins-2/shed-running-track-evening-phone.png.webp",
+     "caption": "shed · running · track · evening · phone · 390×844"
+    },
+    {
+     "id": "station-joins-2-shed-running-track-morning-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-2/shed-running-track-morning-desktop.png.webp",
+     "caption": "shed · running · track · morning · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-2-shed-running-track-morning-phone",
+     "image": "game3d/shots/island-southwest/station-joins-2/shed-running-track-morning-phone.png.webp",
+     "caption": "shed · running · track · morning · phone · 390×844"
+    },
+    {
+     "id": "station-joins-2-turn-track-supports-evening-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-2/turn-track-supports-evening-desktop.png.webp",
+     "caption": "turn · track · supports · evening · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-2-turn-track-supports-evening-phone",
+     "image": "game3d/shots/island-southwest/station-joins-2/turn-track-supports-evening-phone.png.webp",
+     "caption": "turn · track · supports · evening · phone · 390×844"
+    },
+    {
+     "id": "station-joins-2-turn-track-supports-morning-desktop",
+     "image": "game3d/shots/island-southwest/station-joins-2/turn-track-supports-morning-desktop.png.webp",
+     "caption": "turn · track · supports · morning · desktop · 1366×860"
+    },
+    {
+     "id": "station-joins-2-turn-track-supports-morning-phone",
+     "image": "game3d/shots/island-southwest/station-joins-2/turn-track-supports-morning-phone.png.webp",
+     "caption": "turn · track · supports · morning · phone · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Physical route attempt 1",
+   "caption": "Retained failed route exposed a pine blocking the walking line; canonical planting moved clear.",
+   "images": [
+    {
+     "id": "route-attempt-1-390-rail",
+     "image": "game3d/shots/island-southwest/route-attempt-1/390-rail.png.webp",
+     "caption": "390 · rail · 390×844"
+    },
+    {
+     "id": "route-attempt-1-390-turn-FAILED",
+     "image": "game3d/shots/island-southwest/route-attempt-1/390-turn-FAILED.png.webp",
+     "caption": "390 · turn · FAILED · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Physical route attempt 2",
+   "caption": "Retained failed route exposed a lamp in the walking line; canonical lamp moved clear.",
+   "images": [
+    {
+     "id": "route-attempt-2-390-rail",
+     "image": "game3d/shots/island-southwest/route-attempt-2/390-rail.png.webp",
+     "caption": "390 · rail · 390×844"
+    },
+    {
+     "id": "route-attempt-2-390-turn-FAILED",
+     "image": "game3d/shots/island-southwest/route-attempt-2/390-turn-FAILED.png.webp",
+     "caption": "390 · turn · FAILED · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Physical route attempt 3",
+   "caption": "Retained failed route exposed insufficient beam headroom; running top retained while the beam underside and fitted bearings were corrected.",
+   "images": [
+    {
+     "id": "route-attempt-3-390-rail",
+     "image": "game3d/shots/island-southwest/route-attempt-3/390-rail.png.webp",
+     "caption": "390 · rail · 390×844"
+    },
+    {
+     "id": "route-attempt-3-390-turn-FAILED",
+     "image": "game3d/shots/island-southwest/route-attempt-3/390-turn-FAILED.png.webp",
+     "caption": "390 · turn · FAILED · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Physical route attempt 4",
+   "caption": "Retained failed route identified the actual support head collider. The planner and visible path now pass around its footprint.",
+   "images": [
+    {
+     "id": "route-attempt-4-390-rail",
+     "image": "game3d/shots/island-southwest/route-attempt-4/390-rail.png.webp",
+     "caption": "390 · rail · 390×844"
+    },
+    {
+     "id": "route-attempt-4-390-turn-FAILED",
+     "image": "game3d/shots/island-southwest/route-attempt-4/390-turn-FAILED.png.webp",
+     "caption": "390 · turn · FAILED · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "First complete physical route",
+   "caption": "Both native sizes passed movement, lookout/rest seats, jumping and return before the crowd-grid widening.",
+   "images": [
+    {
+     "id": "route-attempt-5-1366-coast-join",
+     "image": "game3d/shots/island-southwest/route-attempt-5/1366-coast-join.png.webp",
+     "caption": "1366 · coast · join · 1366×860"
+    },
+    {
+     "id": "route-attempt-5-1366-corner",
+     "image": "game3d/shots/island-southwest/route-attempt-5/1366-corner.png.webp",
+     "caption": "1366 · corner · 1366×860"
+    },
+    {
+     "id": "route-attempt-5-1366-jump",
+     "image": "game3d/shots/island-southwest/route-attempt-5/1366-jump.png.webp",
+     "caption": "1366 · jump · 1366×860"
+    },
+    {
+     "id": "route-attempt-5-1366-lookout",
+     "image": "game3d/shots/island-southwest/route-attempt-5/1366-lookout.png.webp",
+     "caption": "1366 · lookout · 1366×860"
+    },
+    {
+     "id": "route-attempt-5-1366-rail",
+     "image": "game3d/shots/island-southwest/route-attempt-5/1366-rail.png.webp",
+     "caption": "1366 · rail · 1366×860"
+    },
+    {
+     "id": "route-attempt-5-1366-rest",
+     "image": "game3d/shots/island-southwest/route-attempt-5/1366-rest.png.webp",
+     "caption": "1366 · rest · 1366×860"
+    },
+    {
+     "id": "route-attempt-5-1366-return",
+     "image": "game3d/shots/island-southwest/route-attempt-5/1366-return.png.webp",
+     "caption": "1366 · return · 1366×860"
+    },
+    {
+     "id": "route-attempt-5-1366-southwest_bench_1",
+     "image": "game3d/shots/island-southwest/route-attempt-5/1366-southwest_bench_1.png.webp",
+     "caption": "1366 · bench 1 · 1366×860"
+    },
+    {
+     "id": "route-attempt-5-1366-southwest_bench_5",
+     "image": "game3d/shots/island-southwest/route-attempt-5/1366-southwest_bench_5.png.webp",
+     "caption": "1366 · bench 5 · 1366×860"
+    },
+    {
+     "id": "route-attempt-5-1366-stones",
+     "image": "game3d/shots/island-southwest/route-attempt-5/1366-stones.png.webp",
+     "caption": "1366 · stones · 1366×860"
+    },
+    {
+     "id": "route-attempt-5-1366-turn",
+     "image": "game3d/shots/island-southwest/route-attempt-5/1366-turn.png.webp",
+     "caption": "1366 · turn · 1366×860"
+    },
+    {
+     "id": "route-attempt-5-390-coast-join",
+     "image": "game3d/shots/island-southwest/route-attempt-5/390-coast-join.png.webp",
+     "caption": "390 · coast · join · 390×844"
+    },
+    {
+     "id": "route-attempt-5-390-corner",
+     "image": "game3d/shots/island-southwest/route-attempt-5/390-corner.png.webp",
+     "caption": "390 · corner · 390×844"
+    },
+    {
+     "id": "route-attempt-5-390-jump",
+     "image": "game3d/shots/island-southwest/route-attempt-5/390-jump.png.webp",
+     "caption": "390 · jump · 390×844"
+    },
+    {
+     "id": "route-attempt-5-390-lookout",
+     "image": "game3d/shots/island-southwest/route-attempt-5/390-lookout.png.webp",
+     "caption": "390 · lookout · 390×844"
+    },
+    {
+     "id": "route-attempt-5-390-rail",
+     "image": "game3d/shots/island-southwest/route-attempt-5/390-rail.png.webp",
+     "caption": "390 · rail · 390×844"
+    },
+    {
+     "id": "route-attempt-5-390-rest",
+     "image": "game3d/shots/island-southwest/route-attempt-5/390-rest.png.webp",
+     "caption": "390 · rest · 390×844"
+    },
+    {
+     "id": "route-attempt-5-390-return",
+     "image": "game3d/shots/island-southwest/route-attempt-5/390-return.png.webp",
+     "caption": "390 · return · 390×844"
+    },
+    {
+     "id": "route-attempt-5-390-southwest_bench_1",
+     "image": "game3d/shots/island-southwest/route-attempt-5/390-southwest_bench_1.png.webp",
+     "caption": "390 · bench 1 · 390×844"
+    },
+    {
+     "id": "route-attempt-5-390-southwest_bench_5",
+     "image": "game3d/shots/island-southwest/route-attempt-5/390-southwest_bench_5.png.webp",
+     "caption": "390 · bench 5 · 390×844"
+    },
+    {
+     "id": "route-attempt-5-390-stones",
+     "image": "game3d/shots/island-southwest/route-attempt-5/390-stones.png.webp",
+     "caption": "390 · stones · 390×844"
+    },
+    {
+     "id": "route-attempt-5-390-turn",
+     "image": "game3d/shots/island-southwest/route-attempt-5/390-turn.png.webp",
+     "caption": "390 · turn · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Crowd-clear inland route",
+   "caption": "Both native sizes passed the wider inland bypass, lookout/rest seats, jumping and return. Superseded by final geometry recheck.",
+   "images": [
+    {
+     "id": "route-attempt-6-1366-coast-join",
+     "image": "game3d/shots/island-southwest/route-attempt-6/1366-coast-join.png.webp",
+     "caption": "1366 · coast · join · 1366×860"
+    },
+    {
+     "id": "route-attempt-6-1366-corner",
+     "image": "game3d/shots/island-southwest/route-attempt-6/1366-corner.png.webp",
+     "caption": "1366 · corner · 1366×860"
+    },
+    {
+     "id": "route-attempt-6-1366-inland-bypass",
+     "image": "game3d/shots/island-southwest/route-attempt-6/1366-inland-bypass.png.webp",
+     "caption": "1366 · inland · bypass · 1366×860"
+    },
+    {
+     "id": "route-attempt-6-1366-jump",
+     "image": "game3d/shots/island-southwest/route-attempt-6/1366-jump.png.webp",
+     "caption": "1366 · jump · 1366×860"
+    },
+    {
+     "id": "route-attempt-6-1366-lookout",
+     "image": "game3d/shots/island-southwest/route-attempt-6/1366-lookout.png.webp",
+     "caption": "1366 · lookout · 1366×860"
+    },
+    {
+     "id": "route-attempt-6-1366-rail",
+     "image": "game3d/shots/island-southwest/route-attempt-6/1366-rail.png.webp",
+     "caption": "1366 · rail · 1366×860"
+    },
+    {
+     "id": "route-attempt-6-1366-rest",
+     "image": "game3d/shots/island-southwest/route-attempt-6/1366-rest.png.webp",
+     "caption": "1366 · rest · 1366×860"
+    },
+    {
+     "id": "route-attempt-6-1366-return",
+     "image": "game3d/shots/island-southwest/route-attempt-6/1366-return.png.webp",
+     "caption": "1366 · return · 1366×860"
+    },
+    {
+     "id": "route-attempt-6-1366-southwest_bench_1",
+     "image": "game3d/shots/island-southwest/route-attempt-6/1366-southwest_bench_1.png.webp",
+     "caption": "1366 · bench 1 · 1366×860"
+    },
+    {
+     "id": "route-attempt-6-1366-southwest_bench_5",
+     "image": "game3d/shots/island-southwest/route-attempt-6/1366-southwest_bench_5.png.webp",
+     "caption": "1366 · bench 5 · 1366×860"
+    },
+    {
+     "id": "route-attempt-6-1366-stones",
+     "image": "game3d/shots/island-southwest/route-attempt-6/1366-stones.png.webp",
+     "caption": "1366 · stones · 1366×860"
+    },
+    {
+     "id": "route-attempt-6-1366-turn",
+     "image": "game3d/shots/island-southwest/route-attempt-6/1366-turn.png.webp",
+     "caption": "1366 · turn · 1366×860"
+    },
+    {
+     "id": "route-attempt-6-390-coast-join",
+     "image": "game3d/shots/island-southwest/route-attempt-6/390-coast-join.png.webp",
+     "caption": "390 · coast · join · 390×844"
+    },
+    {
+     "id": "route-attempt-6-390-corner",
+     "image": "game3d/shots/island-southwest/route-attempt-6/390-corner.png.webp",
+     "caption": "390 · corner · 390×844"
+    },
+    {
+     "id": "route-attempt-6-390-inland-bypass",
+     "image": "game3d/shots/island-southwest/route-attempt-6/390-inland-bypass.png.webp",
+     "caption": "390 · inland · bypass · 390×844"
+    },
+    {
+     "id": "route-attempt-6-390-jump",
+     "image": "game3d/shots/island-southwest/route-attempt-6/390-jump.png.webp",
+     "caption": "390 · jump · 390×844"
+    },
+    {
+     "id": "route-attempt-6-390-lookout",
+     "image": "game3d/shots/island-southwest/route-attempt-6/390-lookout.png.webp",
+     "caption": "390 · lookout · 390×844"
+    },
+    {
+     "id": "route-attempt-6-390-rail",
+     "image": "game3d/shots/island-southwest/route-attempt-6/390-rail.png.webp",
+     "caption": "390 · rail · 390×844"
+    },
+    {
+     "id": "route-attempt-6-390-rest",
+     "image": "game3d/shots/island-southwest/route-attempt-6/390-rest.png.webp",
+     "caption": "390 · rest · 390×844"
+    },
+    {
+     "id": "route-attempt-6-390-return",
+     "image": "game3d/shots/island-southwest/route-attempt-6/390-return.png.webp",
+     "caption": "390 · return · 390×844"
+    },
+    {
+     "id": "route-attempt-6-390-southwest_bench_1",
+     "image": "game3d/shots/island-southwest/route-attempt-6/390-southwest_bench_1.png.webp",
+     "caption": "390 · bench 1 · 390×844"
+    },
+    {
+     "id": "route-attempt-6-390-southwest_bench_5",
+     "image": "game3d/shots/island-southwest/route-attempt-6/390-southwest_bench_5.png.webp",
+     "caption": "390 · bench 5 · 390×844"
+    },
+    {
+     "id": "route-attempt-6-390-stones",
+     "image": "game3d/shots/island-southwest/route-attempt-6/390-stones.png.webp",
+     "caption": "390 · stones · 390×844"
+    },
+    {
+     "id": "route-attempt-6-390-turn",
+     "image": "game3d/shots/island-southwest/route-attempt-6/390-turn.png.webp",
+     "caption": "390 · turn · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "All six seats and initial fence input",
+   "caption": "All six seats passed approach/sit/stand at both sizes. Initial fence input moved away from the fence and is invalid; retained and superseded by fence-input-2.",
+   "images": [
+    {
+     "id": "interactions-1-1366-fence-run-jump",
+     "image": "game3d/shots/island-southwest/interactions-1/1366-fence-run-jump.png.webp",
+     "caption": "1366 · fence · run · jump · 1366×860"
+    },
+    {
+     "id": "interactions-1-1366-southwest_bench_1",
+     "image": "game3d/shots/island-southwest/interactions-1/1366-southwest_bench_1.png.webp",
+     "caption": "1366 · bench 1 · 1366×860"
+    },
+    {
+     "id": "interactions-1-1366-southwest_bench_2",
+     "image": "game3d/shots/island-southwest/interactions-1/1366-southwest_bench_2.png.webp",
+     "caption": "1366 · bench 2 · 1366×860"
+    },
+    {
+     "id": "interactions-1-1366-southwest_bench_3",
+     "image": "game3d/shots/island-southwest/interactions-1/1366-southwest_bench_3.png.webp",
+     "caption": "1366 · bench 3 · 1366×860"
+    },
+    {
+     "id": "interactions-1-1366-southwest_bench_4",
+     "image": "game3d/shots/island-southwest/interactions-1/1366-southwest_bench_4.png.webp",
+     "caption": "1366 · bench 4 · 1366×860"
+    },
+    {
+     "id": "interactions-1-1366-southwest_bench_5",
+     "image": "game3d/shots/island-southwest/interactions-1/1366-southwest_bench_5.png.webp",
+     "caption": "1366 · bench 5 · 1366×860"
+    },
+    {
+     "id": "interactions-1-1366-southwest_bench_6",
+     "image": "game3d/shots/island-southwest/interactions-1/1366-southwest_bench_6.png.webp",
+     "caption": "1366 · bench 6 · 1366×860"
+    },
+    {
+     "id": "interactions-1-390-fence-run-jump",
+     "image": "game3d/shots/island-southwest/interactions-1/390-fence-run-jump.png.webp",
+     "caption": "390 · fence · run · jump · 390×844"
+    },
+    {
+     "id": "interactions-1-390-southwest_bench_1",
+     "image": "game3d/shots/island-southwest/interactions-1/390-southwest_bench_1.png.webp",
+     "caption": "390 · bench 1 · 390×844"
+    },
+    {
+     "id": "interactions-1-390-southwest_bench_2",
+     "image": "game3d/shots/island-southwest/interactions-1/390-southwest_bench_2.png.webp",
+     "caption": "390 · bench 2 · 390×844"
+    },
+    {
+     "id": "interactions-1-390-southwest_bench_3",
+     "image": "game3d/shots/island-southwest/interactions-1/390-southwest_bench_3.png.webp",
+     "caption": "390 · bench 3 · 390×844"
+    },
+    {
+     "id": "interactions-1-390-southwest_bench_4",
+     "image": "game3d/shots/island-southwest/interactions-1/390-southwest_bench_4.png.webp",
+     "caption": "390 · bench 4 · 390×844"
+    },
+    {
+     "id": "interactions-1-390-southwest_bench_5",
+     "image": "game3d/shots/island-southwest/interactions-1/390-southwest_bench_5.png.webp",
+     "caption": "390 · bench 5 · 390×844"
+    },
+    {
+     "id": "interactions-1-390-southwest_bench_6",
+     "image": "game3d/shots/island-southwest/interactions-1/390-southwest_bench_6.png.webp",
+     "caption": "390 · bench 6 · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Corrected boundary input",
+   "caption": "Held northward run and jump stop at the maintenance fence at both native sizes; no unfinished northern access.",
+   "images": [
+    {
+     "id": "fence-input-2-1366-fence-run-jump",
+     "image": "game3d/shots/island-southwest/fence-input-2/1366-fence-run-jump.png.webp",
+     "caption": "1366 · fence · run · jump · 1366×860"
+    },
+    {
+     "id": "fence-input-2-390-fence-run-jump",
+     "image": "game3d/shots/island-southwest/fence-input-2/390-fence-run-jump.png.webp",
+     "caption": "390 · fence · run · jump · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Held running and jumping under the railway",
+   "caption": "Native held run and jump cross the real beam/support bypass at both sizes; solid beam, no fading.",
+   "images": [
+    {
+     "id": "underpass-input-1-1366-underpass-run-jump",
+     "image": "game3d/shots/island-southwest/underpass-input-1/1366-underpass-run-jump.png.webp",
+     "caption": "1366 · underpass · run · jump · 1366×860"
+    },
+    {
+     "id": "underpass-input-1-390-underpass-run-jump",
+     "image": "game3d/shots/island-southwest/underpass-input-1/390-underpass-run-jump.png.webp",
+     "caption": "390 · underpass · run · jump · 390×844"
+    }
+   ]
+  },
+  {
+   "title": "Triangle diagnosis: failed filter",
+   "caption": "Retained diagnostic view. Its first inventory filter referenced a nonexistent camera property and collected no rows; corrected in profile 2.",
+   "images": [
+    {
+     "id": "triangle-profile-1-follow3",
+     "image": "game3d/shots/island-southwest/triangle-profile-1/follow3.png.webp",
+     "caption": "follow3 · 1366×860"
+    }
+   ]
+  },
+  {
+   "title": "Combined triangle diagnosis",
+   "caption": "Actual offending north-facing camera on combined f812bb801. Large district-wide merged statics drew the seaward coast unnecessarily.",
+   "images": [
+    {
+     "id": "triangle-profile-2-follow3",
+     "image": "game3d/shots/island-southwest/triangle-profile-2/follow3.png.webp",
+     "caption": "follow3 · 1366×860"
+    }
+   ]
+  },
+  {
+   "title": "Matched triangle baseline",
+   "caption": "Same north-facing diagnostic camera before the southwest work. Separate regional desktop meshes now preserve every vertex while allowing correct culling.",
+   "images": [
+    {
+     "id": "triangle-profile-baseline-follow3",
+     "image": "game3d/shots/island-southwest/triangle-profile-baseline/follow3.png.webp",
+     "caption": "follow3 · 1366×860"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Matched evidence, attempts and QA (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Final native physical route (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Combined-geometry creature perch checks (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Railway structural visual audit (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Play Amakawa",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

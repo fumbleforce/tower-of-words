@@ -1,0 +1,58 @@
+{
+ "title": "Soft steam in the B2 kitchenette",
+ "date": "2026-10-08",
+ "result": [
+  "candidate-20261008-day2-1366-q2-kitchen-close",
+  "candidate-20261008-day2-1366-q2-overview"
+ ],
+ "updated": "2026-10-08T01:08:06.687995+00:00",
+ "by": "codex",
+ "caption": "Steam above the kettle, coffee maker and cup now stays soft when ambient occlusion is enabled.",
+ "preview": "candidate-20261008-day2-1366-q2-kitchen-close",
+ "sections": [
+  {
+   "title": "Original captures",
+   "caption": "The first close-up attempt was too tight; it is retained here."
+  },
+  {
+   "title": "Steam visibility check, 1366 pixels",
+   "caption": "Temporary diagnostic control: hiding steam identifies the affected objects. The hidden-steam view is not the fix."
+  },
+  {
+   "title": "Steam visibility check, 390 pixels",
+   "caption": "Temporary diagnostic control: hiding steam identifies the affected objects. The hidden-steam view is not the fix."
+  },
+  {
+   "title": "Day-one check",
+   "caption": "The same problem also appears on day one. The dialogue remains in these captures."
+  },
+  {
+   "title": "Cause check, high quality at 1366 pixels",
+   "caption": "Temporary diagnostic control removes steam from the ambient-occlusion pass only, then restores the original rendering."
+  },
+  {
+   "title": "Cause check, high quality at 390 pixels",
+   "caption": "Temporary diagnostic control removes steam from the ambient-occlusion pass only, then restores the original rendering."
+  },
+  {
+   "title": "High quality after the fix",
+   "caption": "Normal game rendering with the source correction. Close-ups change only camera framing."
+  },
+  {
+   "title": "Medium quality after the fix",
+   "caption": "Normal game rendering with the source correction. Close-ups change only camera framing."
+  },
+  {
+   "title": "Low quality after the fix",
+   "caption": "Normal game rendering with the source correction. Close-ups change only camera framing."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play locally",
+   "href": "game3d/"
+  }
+ ],
+ "commit": "dfffe4a61ea355d4a372da74624cfe3a8106807d",
+ "pictures_local": true
+}

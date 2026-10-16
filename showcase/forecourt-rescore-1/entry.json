@@ -1,0 +1,34 @@
+{
+ "title": "Forecourt: the lobby, the station hall and the lane gardens",
+ "date": "2026-09-30",
+ "by": "claude-agent:forecourt-rescore",
+ "caption": "The three things the critic held the forecourt back on: the blank slab round the lobby, the empty station hall and the flat lawns along the lane. Before on the left of each pair, after on the right; the plan from above at the end.",
+ "commit": [
+  "c70083c"
+ ],
+ "sections": [
+  {
+   "title": "Arriving out of the station",
+   "caption": "The station's cut now shows the security room as it is inside: its banded floor, the gate line, the guard's desk, the counter and shelf, benches, the welcome stand, the cleaning cart, all ten plants and the lamps' light on the floor, inside walls that stay up to the ground storey where they can't hide Eric. A sign where the walk turns points to head office and the plaza."
+  },
+  {
+   "title": "Head office lobby",
+   "caption": "Only the glass front, the canopy and the three storeys over the lobby fade now; the rest of the tower stands round it, so the lobby reads as a room cut into the foot of the tower instead of a room under a blank slab. The walk carries on inside as a runner to the lifts, with the guide line to reception."
+  },
+  {
+   "title": "The lane",
+   "caption": "The avenue stands in one kerbed bed with azaleas between the trees. Either side a garden in bands: a strip of lawn, a raised border with a cherry or maple at every other avenue tree, a pine at the east end in line with the gateposts, and a belt of taller trees behind. The lane's brick gets a pale border where it leaves the court."
+  },
+  {
+   "title": "From above",
+   "caption": "The gardens run in bands parallel to the lane, their ends on the court's edge and the gateposts. The service way north of the court now stops at the tower's service door, on the line of the tower's north face, instead of running off the island. The after plan is taken a little further out."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

@@ -1,0 +1,61 @@
+{
+ "title": "Crowd pilot round 4: two anime eye treatments",
+ "date": "2026-10-06",
+ "updated": "2026-10-06T21:24:50+02:00",
+ "by": "Codex",
+ "status": "decided",
+ "issue": 232,
+ "multi": true,
+ "question": "Which eye treatment, if any, fits the cast: calm or open?",
+ "options": [
+  {
+   "id": "a-calm",
+   "label": "a-calm: office man",
+   "note": "Calmer, lower lid opening. Flat dark iris, one highlight. Same R3 body, mouth, hair and animations. Candidate only; choosing an option does not install it automatically."
+  },
+  {
+   "id": "a-open",
+   "label": "a-open: office man",
+   "note": "More open, expressive lid opening. Flat dark iris, one highlight. Same R3 body, mouth, hair and animations. Candidate only; choosing an option does not install it automatically."
+  },
+  {
+   "id": "b-calm",
+   "label": "b-calm: office woman",
+   "note": "Calmer, lower lid opening. Flat dark iris, one highlight. Same R3 body, mouth, hair and animations. Candidate only; choosing an option does not install it automatically."
+  },
+  {
+   "id": "b-open",
+   "label": "b-open: office woman",
+   "note": "More open, expressive lid opening. Flat dark iris, one highlight. Same R3 body, mouth, hair and animations. Candidate only; choosing an option does not install it automatically."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live 3D: all four, cast comparisons and sustained walking (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/reviews/crowd-pilot-4/viewer.html"
+  },
+  {
+   "label": "Round 3 and your original feedback",
+   "href": "#review/crowd-pilot-3"
+  },
+  {
+   "label": "a-calm: exact settings, source hashes and preservation results",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/art/parts/crowd-pilot-4/takes/a-calm/settings.json"
+  },
+  {
+   "label": "a-open: exact settings, source hashes and preservation results",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/art/parts/crowd-pilot-4/takes/a-open/settings.json"
+  },
+  {
+   "label": "b-calm: exact settings, source hashes and preservation results",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/art/parts/crowd-pilot-4/takes/b-calm/settings.json"
+  },
+  {
+   "label": "b-open: exact settings, source hashes and preservation results",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/art/parts/crowd-pilot-4/takes/b-open/settings.json"
+  }
+ ],
+ "decision": "Rejected. Use Meshy to texture the approved crowd meshes; do not repeat the projected eye-paint approach.",
+ "decided_at": "2026-10-06T22:46:36+0200",
+ "pictures_local": true
+}

@@ -1,0 +1,36 @@
+{
+ "sent": "2026-10-05T22:40:57+0200",
+ "picked": [
+  "02-neutral-asis-2",
+  "06-surprised-3",
+  "09-tired-3"
+ ],
+ "options": {
+  "02-neutral-asis-2": {
+   "star": false,
+   "reject": false,
+   "comment": "should be mirrored"
+  }
+ },
+ "comment": "",
+ "read": true,
+ "history": [
+  {
+   "sent": "2026-10-05T22:40:47+0200",
+   "picked": [
+    "02-neutral-asis-2",
+    "06-surprised-3",
+    "09-tired-3"
+   ],
+   "options": {
+    "02-neutral-asis-2": {
+     "star": false,
+     "reject": false,
+     "comment": "should be mirrored"
+    }
+   },
+   "comment": "",
+   "read": false
+  }
+ ]
+}

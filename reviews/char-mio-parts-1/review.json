@@ -1,0 +1,86 @@
+{
+ "title": "Mio from parts: head and body generated separately, joined and rigged",
+ "date": "2026-10-02",
+ "by": "Claude (char-mio-parts agent)",
+ "status": "superseded",
+ "issue": 171,
+ "question": "Is the parts model (a11) closer to the picture than meshy-single, and worth building on?",
+ "multi": true,
+ "options": [
+  {
+   "id": "a01",
+   "label": "a01",
+   "note": "Parts: head = Meshy image-to-3D (latest model, no remesh, textured in the same task, image enhancement off, 4k texture; 30 credits) from the head cut of the target picture; body = the same settings from the headless body cut, pose_mode a-pose asked (Meshy kept her arms down; 30 credits). Assembly: body scaled by its sleeve-to-sleeve width against the picture, head by its hair width, hair top where it is in the picture, neck centred on the body's neck. Nothing trimmed: Meshy closed the hood up round the missing head, so the hood swallows her chin and the green under the jaw."
+  },
+  {
+   "id": "a02",
+   "label": "a02",
+   "note": "a01 plus one change: body vertices above the picture's collar line (850 px) across the whole hair width deleted. Chin and green hem show, but there are see-through holes beside the neck and white flecks."
+  },
+  {
+   "id": "a03",
+   "label": "a03",
+   "note": "a02 with the trim narrowed to the face width (1400-1680 px). Smaller holes under her right jaw (image left)."
+  },
+  {
+   "id": "a04",
+   "label": "a04",
+   "note": "a02 with the trim narrowed to the neck only (1470-1610 px). No holes, but the hood sides cover the green hem again."
+  },
+  {
+   "id": "a05",
+   "label": "a05",
+   "note": "a03 plus a dark band (hood lining) round the back of the neck, open 35° each side at the front. It sat in front of the green underside of the back hair and covered it."
+  },
+  {
+   "id": "a06",
+   "label": "a06",
+   "note": "a05 with the band open 80° each side. Still in front of the green."
+  },
+  {
+   "id": "a07",
+   "label": "a07",
+   "note": "a03 plus a flat dark card just behind the back hair, from the collar up to 740 px, instead of the band. Green hem visible, holes filled. Rigged: in the live viewer."
+  },
+  {
+   "id": "a08",
+   "label": "a08",
+   "note": "Same head, Smart Topology body (4,000 faces) instead, same trim and card as a07. The low-poly body has an open V-neck like the picture; the trim tore holes in its big faces."
+  },
+  {
+   "id": "a09",
+   "label": "a09",
+   "note": "Smart Topology head (meshy-t2, 3,000 faces; 15 credits) on the Smart Topology body, a07's trim and card. The low-poly head loses the face: the nose juts and the eyelashes stick out as spikes."
+  },
+  {
+   "id": "a10",
+   "label": "a10",
+   "note": "a08 without the trim (the Smart Topology body's collar already sits at the neck). Closest to the picture so far. Rigged: in the live viewer."
+  },
+  {
+   "id": "a11",
+   "label": "a11",
+   "note": "a10 with the dark card one-sided, so it no longer shows over the hair from behind. Rigged, 104k faces in the viewer (head decimated from 1.86M faces; the stills use the full head). White flecks at the hair's back hem remain."
+  }
+ ],
+ "links": [
+  {
+   "label": "meshy-single moving: a real rigged 3D model (Meshy auto-rig), playing the game's idle and walk beside the in-game Mio (live 3D, drag to turn) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools/characters"
+  },
+  {
+   "label": "Turn a11, a10 and a07, play idle and walk, meshy-single beside her (live 3D) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools/characters"
+  },
+  {
+   "label": "Credits spent (Meshy 95; the rig was 5, balance now 480; Tripo none)",
+   "href": "reviews/char-mio-parts-1/credits.json"
+  },
+  {
+   "label": "How the part pictures were cut and painted",
+   "href": "reviews/char-mio-parts-1/inputs.json"
+  }
+ ],
+ "decision": "On hold: 'lets put this style on hold' (2026-10-05)",
+ "pictures_local": true
+}

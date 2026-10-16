@@ -1,0 +1,56 @@
+{
+ "title": "Office CRT monitors",
+ "date": "2026-10-07",
+ "by": "codex-exec:office-crt-finish",
+ "caption": "The office monitors have beige tube housings, and Mori’s screen and keyboard face his chair. Includes every CRT housing and orientation attempt.",
+ "preview": "isolated-desktop-1-1366-cart-oblique",
+ "sections": [
+  {
+   "title": "Earlier attempt: crt-housing-1",
+   "caption": "Original order retained, including the reversed chief desk and incomplete captures. These are diagnostic prop views."
+  },
+  {
+   "title": "Earlier attempt: crt-housing-2",
+   "caption": "Original order retained, including the reversed chief desk and incomplete captures. These are diagnostic prop views."
+  },
+  {
+   "title": "Earlier attempt: crt-housing-final-1",
+   "caption": "Original order retained, including the reversed chief desk and incomplete captures. These are diagnostic prop views."
+  },
+  {
+   "title": "Earlier attempt: crt-orientation-after-1",
+   "caption": "Original order retained, including the reversed chief desk and incomplete captures. These are diagnostic prop views."
+  },
+  {
+   "title": "Earlier attempt: crt-orientation-after-settled-1",
+   "caption": "Original order retained, including the reversed chief desk and incomplete captures. These are diagnostic prop views."
+  },
+  {
+   "title": "Earlier attempt: crt-orientation-before-1",
+   "caption": "Original order retained, including the reversed chief desk and incomplete captures. These are diagnostic prop views."
+  },
+  {
+   "title": "Earlier attempt: crt-orientation-before-2",
+   "caption": "Original order retained, including the reversed chief desk and incomplete captures. These are diagnostic prop views."
+  },
+  {
+   "title": "Isolated correction, desktop",
+   "caption": "All nine monitors and chief keyboard order passed. The phone chief views crop Mori and are prop close-ups."
+  },
+  {
+   "title": "Isolated correction, phone",
+   "caption": "All nine monitors and chief keyboard order passed. The phone chief views crop Mori and are prop close-ups."
+  }
+ ],
+ "links": [
+  {
+   "label": "Correction and checks",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/office-crt-20261007.md"
+  },
+  {
+   "label": "Play the office",
+   "href": "game3d/?day=2&place=office"
+  }
+ ],
+ "pictures_local": true
+}

@@ -1,0 +1,48 @@
+{
+ "title": "The Research reading room",
+ "date": "2026-10-14",
+ "by": "codex-agent:finish-research",
+ "caption": "Read and bookmark the Research books, learn a word from the reader, and follow up with Mori about an old record.",
+ "commit": "4d526f36b",
+ "preview": "room",
+ "result": [
+  "room",
+  "papers",
+  "reader",
+  "mori"
+ ],
+ "sections": [
+  {
+   "title": "The finished room and reference trail",
+   "images": [
+    {
+     "id": "room",
+     "image": "game3d/shots/finish-research-317/final-batched-room/1366-room.png.webp",
+     "caption": "The Research reading room, with two reference books and four places to sit."
+    },
+    {
+     "id": "papers",
+     "image": "game3d/shots/finish-research-317/final-papers/390-weather-1-papers.png.webp",
+     "caption": "Keep a reference page in Papers and return to it later, phone."
+    },
+    {
+     "id": "reader",
+     "image": "game3d/shots/finish-research-317/final-reader-pointing/390-carina-line-11.png.webp",
+     "caption": "Ask the reader about the cover word, phone."
+    },
+    {
+     "id": "mori",
+     "image": "game3d/shots/finish-research-317/office-eric-motion/1366-eric-copy-received.png.webp",
+     "caption": "Receive a copy of the old copier record from Mori."
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play Amakawa",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

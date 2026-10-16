@@ -1,0 +1,39 @@
+{
+ "title": "The gym, the pool and the courts walk, walkable",
+ "date": "2026-10-02",
+ "by": "claude-agent:sports",
+ "caption": "The fourth south-half district from island-half-1: the north street's top, the sports lane past the gym, the pool walk to the shower pavilion and the courts walk to the onsen path. Reach it from the east lane in the morning: walk on up the north street past the back lane. The courts walk joins the east coast at the onsen path, so you can now walk a loop and come back along the dorm row. It also loads with ?place=sports. The gym and the pool are shut for now.",
+ "sections": [
+  {
+   "title": "The north street's top",
+   "caption": "Before: the street ended at the back lane, backdrop past it. After: Eric walks on north to where it turns into the sports lane, a finger sign there pointing west to the gym and the pool."
+  },
+  {
+   "title": "The gym",
+   "caption": "Before: a plain box with windows on a lawn. After: a hall under a shallow barrel roof with clerestory glass, its glass front and doors on the sports lane under a canopy with たいいくかん GYM, the doors shut with a 準備中 card."
+  },
+  {
+   "title": "The pool",
+   "caption": "Before: lawn. After: the pool walk between the gym and the pool's fence; behind it a 25 m pool of six lanes with lane ropes, starting blocks, a lifeguard's chair and loungers. At the walk's end the shower pavilion's door with プール POOL over it, shut."
+  },
+  {
+   "title": "The courts walk",
+   "caption": "Before: lawn between the courts and the north residence. After: the walk east along the courts' fence, the courts' gate on one side with テニスコート on a board, the north residence's door on the other with its name on a low wall. The camera looks along the walk so the residence doesn't hide Eric."
+  },
+  {
+   "title": "After work",
+   "caption": "The gym's glass, the canopy lights and the lamps lit."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/index.html?place=sports"
+  },
+  {
+   "label": "Places doc",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/places.md"
+  }
+ ],
+ "pictures_local": true
+}

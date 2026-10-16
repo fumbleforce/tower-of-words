@@ -1,0 +1,82 @@
+{
+ "title": "Dorm common-room detail",
+ "date": "2026-10-08",
+ "result": [
+  "sink-fix-1366-01-entry",
+  "sink-fix-1366-04-commons_kitchen",
+  "sink-fix-1366-02-commons_books",
+  "sink-fix-1366-03-commons_sofa"
+ ],
+ "by": "codex",
+ "caption": "Window recesses, kitchen fixtures, shared storage and a fridge approach that matches the room. Art seats and walking routes remain usable.",
+ "commit": [
+  "37ad760c",
+  "2fc86b25"
+ ],
+ "preview": "sink-fix-1366-01-entry",
+ "sections": [
+  {
+   "title": "Final kitchen, shelves and windows — desktop",
+   "caption": "Revised basin and shelf spacing."
+  },
+  {
+   "title": "Final kitchen, shelves and windows — phone",
+   "caption": "Revised basin and shelf spacing."
+  },
+  {
+   "title": "Final room walk — desktop",
+   "caption": "Revised basin and shelf spacing."
+  },
+  {
+   "title": "Final room walk — phone",
+   "caption": "Revised basin and shelf spacing."
+  },
+  {
+   "title": "Recessed sink detail — desktop",
+   "caption": "Revised basin and shelf spacing."
+  },
+  {
+   "title": "Discarded camera angles — desktop",
+   "caption": "Rejected diagnostic framing: camera safety kept following the player."
+  },
+  {
+   "title": "Discarded camera angles — phone",
+   "caption": "Rejected diagnostic framing: camera safety kept following the player."
+  },
+  {
+   "title": "Earlier detail angles — desktop",
+   "caption": "Retained earlier attempt; revised basin and shelf spacing appear above."
+  },
+  {
+   "title": "Earlier detail angles — phone",
+   "caption": "Retained earlier attempt; revised basin and shelf spacing appear above."
+  },
+  {
+   "title": "Earlier room walk — desktop",
+   "caption": "Retained earlier attempt; revised basin and shelf spacing appear above."
+  },
+  {
+   "title": "Earlier room walk — phone",
+   "caption": "Retained earlier attempt; revised basin and shelf spacing appear above."
+  },
+  {
+   "title": "First attempt — desktop",
+   "caption": "Retained earlier attempt; revised basin and shelf spacing appear above."
+  },
+  {
+   "title": "First attempt — phone",
+   "caption": "Retained earlier attempt; revised basin and shelf spacing appear above."
+  },
+  {
+   "title": "baseline",
+   "caption": "Common room before this detail pass."
+  }
+ ],
+ "links": [
+  {
+   "label": "Common room",
+   "href": "game3d/?day=3&place=dorm_commons"
+  }
+ ],
+ "pictures_local": true
+}

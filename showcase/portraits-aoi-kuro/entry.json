@@ -1,0 +1,26 @@
+{
+ "title": "Aoi and Kuro, your picks in the game",
+ "date": "2026-10-01",
+ "by": "claude-agent:portraits-aoi-kuro",
+ "caption": "Aoi is fill-d65-s1 from Review aoi-edge-2 (the cream edge gone). Kuro is kuro-body-c-s11 from Review kuro-body-1, down to the waist, and shown 15% smaller than before so she matches the others (your note: \"15% too large / zoomed in\"). Kuro has only the one face, so there are no other expressions to change.",
+ "sections": [
+  {
+   "title": "Desktop 1366x860",
+   "caption": "The same line set up on the train, one speaker at a time (the fast test doesn't reach Kuro's desk)."
+  },
+  {
+   "title": "Phone 390x844"
+  }
+ ],
+ "links": [
+  {
+   "label": "Review aoi-edge-2",
+   "href": "#review/aoi-edge-2"
+  },
+  {
+   "label": "Review kuro-body-1",
+   "href": "#review/kuro-body-1"
+  }
+ ],
+ "pictures_local": true
+}

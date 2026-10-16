@@ -1,0 +1,23 @@
+{
+ "title": "Kenji without the screwdriver",
+ "date": "2026-09-30",
+ "by": "claude-agent:kenji-noprop",
+ "caption": "Jørgen: \"could you redo him without the skrewdriver ... base portraits should NEVER have props\". Only his right arm (image left) is repainted: it hangs empty at his side, the hand below the frame. Faces, hair, shirt, framing and FACE.kenji are unchanged, and all three faces share the same new arm. Installed in the game and art/approved/kenji/. The pocket snack and the sleeve sticky note are still on him (not in his hands; say if they should go too).",
+ "sections": [
+  {
+   "title": "Before and after",
+   "caption": "The three game portraits, before (top) and after (bottom), at game size on the dark game colour."
+  },
+  {
+   "title": "Every attempt, in order",
+   "caption": "RDBT Anima masked img2img at 896x1152 on h4 (euler_ancestral normal, 30 steps, CFG 5). Prompt: h4's own with \"holding a screwdriver up in his right hand\" swapped for \"his right arm hanging relaxed at his side, empty hand\"; negative: h4's plus \"holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book\". Full prompts: art/candidates/portraits/kenji-noprop-1/prompts.json. Each image: h4's arm on the left, the attempt on the right."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

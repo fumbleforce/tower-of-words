@@ -1,0 +1,55 @@
+{
+ "title": "Phone image viewer stays within the screen",
+ "date": "2026-10-15",
+ "by": "codex",
+ "caption": "Long source checksums and filenames wrap within Review cards and image captions. Images and their controls stay inside the phone screen.",
+ "commit": "cb0bac2a1",
+ "result": [
+  "phone-after"
+ ],
+ "sections": [
+  {
+   "title": "Phone result",
+   "caption": "Public test card at its native 390 × 844 viewport. The full image, Close and both arrows remain visible.",
+   "images": [
+    {
+     "id": "phone-after",
+     "image": "bible/shots/showcase/review-phone-images-20261015/phone-after.png",
+     "caption": "After: layout width stays 390 pixels."
+    },
+    {
+     "id": "phone-caption-after",
+     "image": "bible/shots/showcase/review-phone-images-20261015/phone-caption-after.png",
+     "caption": "A long filename wraps below the complete image."
+    }
+   ]
+  },
+  {
+   "title": "Before and desktop check",
+   "caption": "These captures use public SVG test fixtures. No game artwork is involved.",
+   "images": [
+    {
+     "id": "phone-before",
+     "image": "bible/shots/showcase/review-phone-images-20261015/phone-before.png",
+     "caption": "Before: an unbroken checksum expanded the layout to 492 pixels on a 390-pixel screen. The right edge and controls were offscreen."
+    },
+    {
+     "id": "desktop-after",
+     "image": "bible/shots/showcase/review-phone-images-20261015/desktop-after.png",
+     "caption": "Desktop at 1366 × 860: the portrait and controls fit."
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Review",
+   "href": "#review"
+  },
+  {
+   "label": "Fix and verification",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/595"
+  }
+ ],
+ "media": []
+}

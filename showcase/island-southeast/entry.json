@@ -1,0 +1,92 @@
+{
+ "title": "Southeast coastal garden",
+ "date": "2026-10-13",
+ "by": "codex-agent:southeast-corner",
+ "caption": "A public loop now joins the pergola, open lawn, jumping stones and sea-facing benches, with clear paths back to the dorm row and terrace.",
+ "commit": [
+  "ee36d87211bf3184530009e35b2d452e3c892a5f",
+  "61f52b7d28b7c75c6fe4f31f30cf7e75275653c2",
+  "cd52567714275251597ab82cdb425ac19ed53304",
+  "4b1e404db2914e06da915c91d7bbe2e9463d0598"
+ ],
+ "preview": "round3-1366-morning-rest-court",
+ "result": [
+  "round3-1366-morning-rest-court",
+  "round3-390-morning-garden",
+  "round3-1366-evening-shore",
+  "routes-nav-fixed-390-seated"
+ ],
+ "sections": [
+  {
+   "title": "Finished garden: morning and evening",
+   "caption": "All 28 final southeast views passed personal inspection and independent visual review at 8/10 or better."
+  },
+  {
+   "title": "Using the garden with the final navigation",
+   "caption": "Both native formats repeat the bench, running jump, stable stone landing and east-lane, sports and commons return routes after the navigation repair."
+  },
+  {
+   "title": "Original lookout remains available",
+   "caption": "Focused day-two checks preserve the lookout and shrine paths, Hamada’s after-shift availability and the existing sports closure."
+  },
+  {
+   "title": "Before: dense planting and unused southern grounds",
+   "caption": "The original approach, pergola, shore, rest-court site, building join, terrace and horizon at both native formats and times of day."
+  },
+  {
+   "title": "First captured attempt: rejected",
+   "caption": "Paths and seating were useful, but phone roofs and trees obscured approaches, the desktop terrace hid the actor, and the sea looked flat. These pictures led to another pass."
+  },
+  {
+   "title": "Second captured attempt: revised again",
+   "caption": "The sea and shore/building views improved. Personal inspection still rejected the phone approach roof and the compressed desktop terrace camera."
+  },
+  {
+   "title": "Jump input attempt 1: missed landing",
+   "caption": "The first desktop jump reached the stone too late. Seating passed; this jump attempt did not."
+  },
+  {
+   "title": "Jump input attempt 2: overshot",
+   "caption": "The desktop jump cleared the stone but continued beyond it. Input timing was adjusted; the scene and physics stayed unchanged."
+  },
+  {
+   "title": "Jump input attempt 3: stopped early",
+   "caption": "The desktop jump stopped before the stone face. Retained as a failed input attempt."
+  },
+  {
+   "title": "Focused jump attempt 4: passed",
+   "caption": "The first successful focused sitting, jumping and stable stone landing at both native formats. Full route reproduction follows below."
+  },
+  {
+   "title": "Full recreation and return routes: passed",
+   "caption": "The complete first successful route run shows sitting, jumping, landing and returns at both native formats. The final-navigation rerun is shown above."
+  },
+  {
+   "title": "Startup attempt: no captures",
+   "caption": "The initial round1 startup stopped because the three new public spots lacked catalog declarations. Those declarations were fixed before round1-attempt2; no pictures were produced. The navigation regression has a report and no additional screenshots."
+  }
+ ],
+ "links": [
+  {
+   "label": "Matching before/after and QA reports (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Play Amakawa",
+   "href": "game3d/"
+  },
+  {
+   "label": "Final native navigation: all 90 directed routes (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Final physical route report (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Final combined-geometry perch check (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  }
+ ],
+ "pictures_local": true
+}

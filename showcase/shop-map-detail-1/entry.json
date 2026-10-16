@@ -1,0 +1,27 @@
+{
+ "title": "Shop street and map detail",
+ "date": "2026-10-06",
+ "by": "codex-exec:day5_build",
+ "caption": "Fitted shop windows and crane cabinets, with separate shop roofs and open alleys on the map.",
+ "sections": [
+  {
+   "title": "Street approach",
+   "caption": "The same ordinary play camera before and after the detail pass."
+  },
+  {
+   "title": "Arcade",
+   "caption": "Cabinet prizes and the hanging claw are visible through the fitted front. The normal phone camera still sees the shopfronts at an angle."
+  },
+  {
+   "title": "Map landmarks",
+   "caption": "Roof groups follow the built arcade; the three south-row alleys remain open. Pool and tennis markings use the playable geometry."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

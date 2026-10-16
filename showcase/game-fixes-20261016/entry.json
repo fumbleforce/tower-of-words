@@ -1,0 +1,214 @@
+{
+ "title": "Game fixes, 16 October",
+ "date": "2026-10-16",
+ "by": "claude-main/showcase-1016",
+ "caption": "Doorways and openings are raised so you no longer clip or get stuck: the booth, dorm 203, the roof exit, the gym curtain, the lifts and the train doors. On a phone, Aoi stays in view at the day 3 notice board. The game holds 120 fps at 1440p on the 3080 in every place; the 95th percentile frame went from 29.5 to 7.9 ms on the train, 11.9 to 7.0 ms on the title and 12.2 to 7.0 ms in the office. The one visible change is that the thinnest contact shadows are a little lighter at 1440p. Give is now a row in a person's E menu and the brown button is gone, and walking to Talk carries on after a scene changes what Talk does. Mio's evening chat is rewritten and new day 2 and 3 lines are voiced. Tapping to walk from the forecourt lane into the station court works now, where it used to hit an invisible wall.",
+ "result": [
+  "train-door-after",
+  "roof-exit-after",
+  "dorms-door-after",
+  "aoi-390-choice-after"
+ ],
+ "preview": "train-door-after",
+ "sections": [
+  {
+   "title": "Result",
+   "caption": "What you see now.",
+   "images": [
+    {
+     "id": "train-door-after",
+     "image": "game3d/shots/doorway-648/after/train-door-in-morning-desk.png.webp",
+     "caption": "Train door, now 1.25 m tall, with the rebuilt texture"
+    },
+    {
+     "id": "roof-exit-after",
+     "image": "game3d/shots/doorway-648/after/roof-exit-morning-desk.png.webp",
+     "caption": "Roof exit"
+    },
+    {
+     "id": "dorms-door-after",
+     "image": "game3d/shots/doorway-648/after/dorms-front-door-morning-desk.png.webp",
+     "caption": "Dorm front door"
+    },
+    {
+     "id": "aoi-390-choice-after",
+     "image": "game3d/shots/aoi-632/after-390-choice.png.webp",
+     "caption": "Day 3 notice board on a phone, Aoi in view"
+    }
+   ]
+  },
+  {
+   "title": "Doorways, before and after",
+   "caption": "Desktop and phone.",
+   "images": [
+    {
+     "id": "booth-door-in-after-desk",
+     "image": "game3d/shots/doorway-648/after/booth-door-in-morning-desk.png.webp",
+     "caption": "Booth door, now, desktop"
+    },
+    {
+     "id": "booth-door-in-before-desk",
+     "image": "game3d/shots/doorway-648/before/booth-door-in-morning-desk.png.webp",
+     "caption": "Booth door, before, desktop"
+    },
+    {
+     "id": "booth-door-in-after-phone",
+     "image": "game3d/shots/doorway-648/after/booth-door-in-morning-phone.png.webp",
+     "caption": "Booth door, now, phone"
+    },
+    {
+     "id": "booth-door-in-before-phone",
+     "image": "game3d/shots/doorway-648/before/booth-door-in-morning-phone.png.webp",
+     "caption": "Booth door, before, phone"
+    },
+    {
+     "id": "roof-exit-before-desk",
+     "image": "game3d/shots/doorway-648/before/roof-exit-morning-desk.png.webp",
+     "caption": "Roof exit, before, desktop"
+    },
+    {
+     "id": "roof-exit-after-phone",
+     "image": "game3d/shots/doorway-648/after/roof-exit-morning-phone.png.webp",
+     "caption": "Roof exit, now, phone"
+    },
+    {
+     "id": "roof-exit-before-phone",
+     "image": "game3d/shots/doorway-648/before/roof-exit-morning-phone.png.webp",
+     "caption": "Roof exit, before, phone"
+    },
+    {
+     "id": "dorms-front-door-before-desk",
+     "image": "game3d/shots/doorway-648/before/dorms-front-door-morning-desk.png.webp",
+     "caption": "Dorm front door, before, desktop"
+    },
+    {
+     "id": "dorms-front-door-after-phone",
+     "image": "game3d/shots/doorway-648/after/dorms-front-door-morning-phone.png.webp",
+     "caption": "Dorm front door, now, phone"
+    },
+    {
+     "id": "dorms-front-door-before-phone",
+     "image": "game3d/shots/doorway-648/before/dorms-front-door-morning-phone.png.webp",
+     "caption": "Dorm front door, before, phone"
+    },
+    {
+     "id": "gym-changing-after-desk",
+     "image": "game3d/shots/doorway-648/after/gym-changing-morning-desk.png.webp",
+     "caption": "Gym curtain, now, desktop"
+    },
+    {
+     "id": "gym-changing-before-desk",
+     "image": "game3d/shots/doorway-648/before/gym-changing-morning-desk.png.webp",
+     "caption": "Gym curtain, before, desktop"
+    },
+    {
+     "id": "gym-changing-after-phone",
+     "image": "game3d/shots/doorway-648/after/gym-changing-morning-phone.png.webp",
+     "caption": "Gym curtain, now, phone"
+    },
+    {
+     "id": "gym-changing-before-phone",
+     "image": "game3d/shots/doorway-648/before/gym-changing-morning-phone.png.webp",
+     "caption": "Gym curtain, before, phone"
+    },
+    {
+     "id": "office-lift-after-desk",
+     "image": "game3d/shots/doorway-648/after/office-lift-morning-desk.png.webp",
+     "caption": "Office lift, now, desktop"
+    },
+    {
+     "id": "office-lift-before-desk",
+     "image": "game3d/shots/doorway-648/before/office-lift-morning-desk.png.webp",
+     "caption": "Office lift, before, desktop"
+    },
+    {
+     "id": "office-lift-after-phone",
+     "image": "game3d/shots/doorway-648/after/office-lift-morning-phone.png.webp",
+     "caption": "Office lift, now, phone"
+    },
+    {
+     "id": "office-lift-before-phone",
+     "image": "game3d/shots/doorway-648/before/office-lift-morning-phone.png.webp",
+     "caption": "Office lift, before, phone"
+    },
+    {
+     "id": "lobby-lift-after-desk",
+     "image": "game3d/shots/doorway-648/after/lobby-lift-morning-desk.png.webp",
+     "caption": "Lobby lift, now, desktop"
+    },
+    {
+     "id": "lobby-lift-before-desk",
+     "image": "game3d/shots/doorway-648/before/lobby-lift-morning-desk.png.webp",
+     "caption": "Lobby lift, before, desktop"
+    },
+    {
+     "id": "lobby-lift-after-phone",
+     "image": "game3d/shots/doorway-648/after/lobby-lift-morning-phone.png.webp",
+     "caption": "Lobby lift, now, phone"
+    },
+    {
+     "id": "lobby-lift-before-phone",
+     "image": "game3d/shots/doorway-648/before/lobby-lift-morning-phone.png.webp",
+     "caption": "Lobby lift, before, phone"
+    },
+    {
+     "id": "train-door-in-before-desk",
+     "image": "game3d/shots/doorway-648/before/train-door-in-morning-desk.png.webp",
+     "caption": "Train door, before, desktop"
+    },
+    {
+     "id": "train-door-in-after-phone",
+     "image": "game3d/shots/doorway-648/after/train-door-in-morning-phone.png.webp",
+     "caption": "Train door, now, phone"
+    },
+    {
+     "id": "train-door-in-before-phone",
+     "image": "game3d/shots/doorway-648/before/train-door-in-morning-phone.png.webp",
+     "caption": "Train door, before, phone"
+    }
+   ]
+  },
+  {
+   "title": "Aoi at the notice board",
+   "caption": "Phone at 390 wide and desktop at 1366 wide.",
+   "images": [
+    {
+     "id": "aoi-390-first-after",
+     "image": "game3d/shots/aoi-632/after-390-first-line.png.webp",
+     "caption": "Phone, first line, now"
+    },
+    {
+     "id": "aoi-390-first-before",
+     "image": "game3d/shots/aoi-632/before-390-first-line.png.webp",
+     "caption": "Phone, first line, before"
+    },
+    {
+     "id": "aoi-390-choice-before",
+     "image": "game3d/shots/aoi-632/before-390-choice.png.webp",
+     "caption": "Phone, choice, before"
+    },
+    {
+     "id": "aoi-1366-choice-after",
+     "image": "game3d/shots/aoi-632/after-1366-choice.png.webp",
+     "caption": "Desktop, choice, now"
+    },
+    {
+     "id": "aoi-1366-choice-before",
+     "image": "game3d/shots/aoi-632/before-1366-choice.png.webp",
+     "caption": "Desktop, choice, before"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Listen: Carina, day 3 pool scene",
+   "href": "game3d/audio/ln-1ghlstg-carina.mp3"
+  },
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

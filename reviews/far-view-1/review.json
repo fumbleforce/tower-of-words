@@ -1,0 +1,42 @@
+{
+ "title": "Far view test: sky, haze and a model of the whole island",
+ "date": "2026-10-09",
+ "by": "claude-agent:farview",
+ "status": "decided",
+ "question": "Should this far view go to every outdoor place, or what should change first?",
+ "multi": false,
+ "options": [
+  {
+   "id": "far-roll-out",
+   "label": "far-roll-out: roll it out to every outdoor place",
+   "note": "Every outdoor place gets the sky, haze, island model and full-height buildings, and the ?far=1 flag goes away. The places themselves need no change; it is one list in game3d/js/look/far-flag.js."
+  },
+  {
+   "id": "far-change",
+   "label": "far-change: change something first",
+   "note": "Say what in the comment: the sky colours for a time of day, how thick or close the haze is, the trees or buildings in the distance, the mainland on the horizon, or anything else."
+  }
+ ],
+ "links": [
+  {
+   "label": "Old works with the far view (desktop, third-person camera)",
+   "href": "game3d/?place=works&far=1"
+  },
+  {
+   "label": "Shop street with the far view",
+   "href": "game3d/?place=shotengai&far=1"
+  },
+  {
+   "label": "Harbour with the far view",
+   "href": "game3d/?place=harbour&far=1"
+  },
+  {
+   "label": "Harbour as it is now, to compare",
+   "href": "game3d/?place=harbour"
+  }
+ ],
+ "decision": "Roll out as a first step: \"Works well as a first step. Still a lot of exterior areas that are just not built for this yet that seem super empty, but that is for pass 2\". Pass 2 is #375.",
+ "decided_at": "2026-10-09T13:21:26+0200",
+ "issue": 375,
+ "pictures_local": true
+}

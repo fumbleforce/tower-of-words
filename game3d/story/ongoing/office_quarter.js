@@ -1,0 +1,1 @@
+import o from"../office_quarter.js";import{interactions as t,place as f}from"./shared.js";export default f("office_quarter",t(o,["talk:trading_office","talk:foods_office","talk:electric_office","talk:logistics_office","talk:construction_office","talk:insurance_office","talk:bank"]));

@@ -1,0 +1,30 @@
+{
+ "title": "Jumping and walking across the town",
+ "date": "2026-10-12",
+ "by": "codex",
+ "caption": "Jump onto curbs, benches and the fountain rim, then walk off. The third consecutive jump becomes a somersault, and walking stays at normal speed after entering an area.",
+ "commit": [
+  "99b7c0574",
+  "9c7ead8ba"
+ ],
+ "result": [
+  "flip",
+  "landing",
+  "rim-landed",
+  "rim-exit"
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "updated": "2026-10-12T23:52:49+02:00",
+ "sections": [
+  {
+   "title": "Fountain and curb movement repair",
+   "caption": "Jumping beside an edge works, and birds and water effects do not block movement. Desktop Auto/High jump CPU time fell from 41.7 to 1.2 ms in the measured test; both desktop and phone playthroughs passed."
+  }
+ ],
+ "pictures_local": true
+}

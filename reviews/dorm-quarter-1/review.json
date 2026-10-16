@@ -1,0 +1,33 @@
+{
+ "title": "Dorm quarter: park and second block",
+ "date": "2026-10-16",
+ "by": "claude-main (dorm-quarter-sketch)",
+ "status": "superseded",
+ "issue": 661,
+ "question": "Pick one from A (how the park joins the courtyard) and one from B (where the second block goes).",
+ "multi": true,
+ "options": [
+  {
+   "id": "a1",
+   "label": "a1. Full merge: one dorm quarter",
+   "note": "Courtyard, east lane, park, dorm row and inner court become one walkable place (about 86 × 78 m). The loop goes dorm street, courtyard, park, inner court, dorm row and back with no fade. Measured cost: phone load about 6.3 to 7 s against the 6 s limit, so it needs trimming before it ships."
+  },
+  {
+   "id": "a2",
+   "label": "a2. Park only: the courtyard grows north",
+   "note": "The courtyard and the park are one place (about 43 × 57 m); the east lane stays separate and the gate fade stays. The same loop is there on the ground but crosses three fades. Lighter on the phone than a1."
+  },
+  {
+   "id": "b1",
+   "label": "b1. Dorm 5 becomes the new hires' dorm",
+   "note": "Dorm 5 already stands here as scenery. It gets a ground floor and a door on the park's east-west axis. Its rooms face east over the park, which fits Aoi's bio (single room in the new hires' dorm, facing east)."
+  },
+  {
+   "id": "b2",
+   "label": "b2. A new block north of the park",
+   "note": "A new three-storey block (about 21 × 8 m) on the park's north side, its door on the park's north-south axis. Its rooms face south, so only an end room would face east for Aoi. One more building to model and load."
+  }
+ ],
+ "decision": "Superseded by dorm-quarter-2. Jørgen: \"the layout is completely nonsensical, 2 blocks that are close to each other, facing each other, you'd be looking straight into the neighbour's apartment out of your window. The layout don't make sense as is, and you have not changed the position of eric's apartment to be a natural part of a larger area.\"",
+ "pictures_local": true
+}

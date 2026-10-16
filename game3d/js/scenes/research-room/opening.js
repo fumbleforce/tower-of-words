@@ -1,0 +1,1 @@
+export function remainingCore([e,a,t,r],[h,c,s,u]){const i=Math.max(e,h),n=Math.min(a,c),o=Math.max(t,s),m=Math.min(r,u);if(i>=n||o>=m)throw new Error("Interior must intersect its building");return[[e,i,t,r],[n,a,t,r],[i,n,t,o],[i,n,m,r]].filter(([M,f,x,b])=>f>M&&b>x)}

@@ -1,0 +1,1 @@
+export function trainArrival(o,i=()=>!0){let r=null,l=null;const n=t=>{const e=l;l=r=null,e?.(t)};return{begin(t){if(!i())return{worldComplete:!1};if(!o.arrived){if(!r){r=new Promise(e=>{l=e});try{t()}catch(e){throw n({worldComplete:!1}),e}}return r}},stopped(){n()},leave(){n({worldComplete:!1})}}}

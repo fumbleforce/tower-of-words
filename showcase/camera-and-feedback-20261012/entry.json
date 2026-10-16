@@ -1,0 +1,18 @@
+{
+ "title": "Camera reset and feedback screenshots",
+ "date": "2026-10-12",
+ "by": "codex",
+ "caption": "Reset view appears after you change the camera. Feedback attachments now include the world and minimap, including while paused.",
+ "commit": "1c6bccd05",
+ "result": [
+  "gameplay",
+  "attachment"
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

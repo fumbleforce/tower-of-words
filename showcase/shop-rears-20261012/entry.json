@@ -1,0 +1,18 @@
+{
+ "title": "Shop backs and service paths",
+ "date": "2026-10-12",
+ "by": "codex",
+ "caption": "The rear shop walls now have fitted windows, service doors and equipment; bicycles leave the doorways clear.",
+ "commit": "b5b3cbcf",
+ "result": [
+  "rear",
+  "fountain"
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

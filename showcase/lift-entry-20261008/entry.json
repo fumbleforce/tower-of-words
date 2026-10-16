@@ -1,0 +1,43 @@
+{
+ "title": "Stop and turn before entering the lift",
+ "date": "2026-10-08",
+ "result": [
+  "eric-lift-facing-1-facing-door",
+  "eric-lift-facing-1-entry-walking",
+  "carina-lift-facing-1-entry-walking"
+ ],
+ "by": "codex",
+ "caption": "Both protagonists stop and face the opening before walking into the lift. Earlier rejected attempts remain below. This corrects the lift approach; other movement findings remain open.",
+ "preview": "eric-lift-facing-1-entry-walking",
+ "sections": [
+  {
+   "title": "Original approach — Carina",
+   "caption": "Baseline route rejected: walking continued during the lift wait. These are the retained route captures; the movement report records the timing fault."
+  },
+  {
+   "title": "First correction — Carina, rejected",
+   "caption": "Stopping the walk was insufficient: the stopping blend and turning entry still failed the movement check."
+  },
+  {
+   "title": "First correction — Eric, rejected",
+   "caption": "The same incomplete correction also failed for Eric. This attempt is preserved."
+  },
+  {
+   "title": "Corrected entry — Carina",
+   "caption": "Stand, turn toward the opening, then enter. The sequence and both completed journeys are retained."
+  },
+  {
+   "title": "Corrected entry — Eric",
+   "caption": "The same stop and turn works for Eric. The sequence and both completed journeys are retained."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play locally",
+   "href": "game3d/"
+  }
+ ],
+ "commit": "f012948d3fb2a7c3dd6c496247a99c04e7610174",
+ "updated": "2026-10-07T23:38:23.238142+00:00",
+ "pictures_local": true
+}

@@ -1,0 +1,45 @@
+{
+ "title": "Far island model: plan buildings only where the plan has them, trees on trunks",
+ "date": "2026-10-09",
+ "by": "claude-agent:farview",
+ "caption": "After Jørgen's screenshot outside the dorm: the far model now leaves out anything that would stand on a place's own ground, street or buildings, starts past where the haze begins, and every far tree stands on a trunk. The dorm courtyard no longer lays a lawn over the east lane, so the buildings across the street stand by their own walks, and the house that stood on the court's street is gone.",
+ "result": [
+  "door-after",
+  "trees-after",
+  "dorm-top-after",
+  "plaza-west-after"
+ ],
+ "sections": [
+  {
+   "title": "Outside Eric's dorm",
+   "caption": "Jørgen's screenshot spot, before and after."
+  },
+  {
+   "title": "Dorm courtyard",
+   "caption": "The four facings from the start spot, before and after."
+  },
+  {
+   "title": "Fountain plaza",
+   "caption": "The four facings from the start spot, before and after."
+  },
+  {
+   "title": "Sports lane",
+   "caption": "The four facings from the start spot, before and after."
+  },
+  {
+   "title": "North campus",
+   "caption": "The four facings from the start spot, before and after."
+  },
+  {
+   "title": "Harbour",
+   "caption": "The four facings from the start spot, before and after."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

@@ -1,0 +1,13 @@
+{
+ "title": "Foam at the coast",
+ "date": "2026-10-01",
+ "by": "Claude and Codex",
+ "caption": "Broken foam edges follow the rocks and sea wall. The broad pale patches are gone.",
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

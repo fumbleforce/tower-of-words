@@ -1,0 +1,23 @@
+{
+ "title": "Mio reference, clean and high res",
+ "date": "2026-10-01",
+ "by": "claude-agent:mio-ref-clean",
+ "caption": "Your char-face-1 pick (mio-front-d60) at 3072x3072, with no floor shadow, no hoodie drawstrings and no glasses. One change per step; pose, hair, face shape and colours are kept. The full PNGs, every attempt and the scripts are in art/parts/style-concepts/mio-ref-clean/.",
+ "sections": [
+  {
+   "title": "Final",
+   "caption": "3072x3072, plain pale grey background, and a transparent cut-out."
+  },
+  {
+   "title": "Steps",
+   "caption": "Each step changes one thing in the step before it."
+  }
+ ],
+ "links": [
+  {
+   "label": "Review char-face-1",
+   "href": "#review/char-face-1"
+  }
+ ],
+ "pictures_local": true
+}

@@ -1,0 +1,1 @@
+export function installSenderHook(e,n){e.hooks.sender=async o=>{n.sender_action_ok=!1,e.place?.sender?await e.place.sender.act(o):n.sender_available=!1}}export function senderReady(e,n,o){const t=s=>{const r=e.people[s];return r?.root.visible&&r.root.parent===e.space&&!r._walk};return!!(t("mio")&&t("mori")&&(n.d2_ticket_done||o))}

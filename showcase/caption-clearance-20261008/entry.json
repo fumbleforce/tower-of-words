@@ -1,0 +1,53 @@
+{
+ "title": "Captions beside conversations",
+ "date": "2026-10-08",
+ "result": [
+  "round4-desktop-10-timed-overlap",
+  "round4-phone-10-timed-overlap"
+ ],
+ "by": "codex",
+ "caption": "Ambient captions stay clear of dialogue, portraits and the player, and remain readable above the phone backdrop. Earlier attempts and the native opening checks are included.",
+ "preview": "round4-phone-10-timed-overlap",
+ "sections": [
+  {
+   "title": "Original overlap",
+   "caption": "The ambient caption was behind the continuation prompt."
+  },
+  {
+   "title": "First layout checks",
+   "caption": "Placeholder dialogue tests at three screen sizes. The largest desktop text size exposed player overlap."
+  },
+  {
+   "title": "Portrait spacing",
+   "caption": "Longer placeholder captions test speaker changes. Player overlap remained at the largest desktop text size."
+  },
+  {
+   "title": "Player clearance",
+   "caption": "Placeholder captions and choices clear the player at normal and enlarged text sizes, including window resizing."
+  },
+  {
+   "title": "First native check",
+   "caption": "Actual opening play exposed a remaining phone issue: the dialogue gradient darkened the caption."
+  },
+  {
+   "title": "Caption above the backdrop",
+   "caption": "Actual opening play after the backdrop correction. Captions and dialogue remain readable; keyboard and touch continuation work."
+  },
+  {
+   "title": "Opening-check diagnosis",
+   "caption": "A visible click reaches the seating choice through its nearby-seat trigger."
+  },
+  {
+   "title": "Full-day checks",
+   "caption": "Completed route captures from the earlier and final caption checks."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "commit": "34df7eaa",
+ "pictures_local": true
+}

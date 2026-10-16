@@ -1,0 +1,27 @@
+{
+ "title": "Phone dialogue names and controls",
+ "date": "2026-10-07",
+ "by": "codex-tui",
+ "caption": "Speaker names and roles occupy their own column beside the dialogue controls. Full names wrap on narrow screens. Earlier attempts are included.",
+ "sections": [
+  {
+   "title": "Before",
+   "caption": "UI fixture captures; the office behind the dialogue is not scene staging."
+  },
+  {
+   "title": "After",
+   "caption": "UI fixture captures; the office behind the dialogue is not scene staging."
+  },
+  {
+   "title": "Final",
+   "caption": "UI fixture captures; the office behind the dialogue is not scene staging."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

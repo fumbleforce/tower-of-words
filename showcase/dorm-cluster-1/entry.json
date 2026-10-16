@@ -1,0 +1,31 @@
+{
+ "title": "Dorm cluster: the blocks round the inner court, past Eric's dorm courtyard",
+ "date": "2026-10-01",
+ "by": "claude-agent:dorm-cluster",
+ "caption": "The third of the island's neighbour blocks (work issue #141): the rest of the dorm cluster east of the dorm courtyard, built as backdrop. Day 1 doesn't walk it; you see it on the island map (M), and from the plaza the ground past the dorm street is no longer bare lawn. The courtyard you play in looks the same as before.",
+ "sections": [
+  {
+   "title": "The island map",
+   "caption": "The dorm courtyard's tile now covers the whole cluster: the dorm row, the inner court, the back walk and the woods round the edges."
+  },
+  {
+   "title": "From the plaza, past the dorm street",
+   "caption": "Where the plaza used to show lawn east of the dorm street, it now shows the courtyard's front bed, its paving and Eric's block with balconies."
+  },
+  {
+   "title": "Close up (the courtyard's camera aimed where the player can't go, after work)",
+   "caption": "The inner court, the dorm row and its garden, the back walk with the bike shelter, and the row's end at dorm_3's door with the terrace beyond."
+  },
+  {
+   "title": "The courtyard you play in",
+   "caption": "Unchanged, apart from its front bed now ending where the dorm row leaves the street, out of frame."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

@@ -1,0 +1,39 @@
+{
+ "title": "Forecourt: the blocks north of the court",
+ "date": "2026-10-01",
+ "by": "claude-agent:forecourt-north",
+ "caption": "The top left of the day's first outdoor frames was a plain box on bare lawn. Head office's wing is now a building with a glazed ground floor and its own doors, a street runs north up the platform shed, and a second street runs behind the wing and the tower. Backdrop only (issue #140). Same cameras before and after.",
+ "sections": [
+  {
+   "title": "Stepping out of the station (desktop)",
+   "caption": "Top left: the street leaving the court's north-west corner, the wing with its lawn and hedge, and its staff door's porch."
+  },
+  {
+   "title": "Crossing the court (desktop)",
+   "caption": "A few steps up the street, three bollards with yellow-and-black chains close it."
+  },
+  {
+   "title": "Stepping out of the station (phone)",
+   "caption": "The phone looks up the court, so it sees the tower's wall along the service yard; that wall now has windows and a vent."
+  },
+  {
+   "title": "At the chains",
+   "caption": "Eric can walk up the street as far as the chains."
+  },
+  {
+   "title": "After work",
+   "caption": "The wing's ground floor and some of its windows are lit, with the windows in the tower's yard wall."
+  },
+  {
+   "title": "From above",
+   "caption": "The island map's view of the forecourt. After: the street up the shed, the square junction, the cross street behind the wing and the tower, the wing's paths to its door and its bike shelter."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

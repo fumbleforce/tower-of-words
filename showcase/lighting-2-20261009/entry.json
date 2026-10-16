@@ -1,0 +1,44 @@
+{
+ "title": "Light and time of day, stage 2: the walk home",
+ "date": "2026-10-09",
+ "by": "claude-agent:lighting",
+ "caption": "Stage 2 of #370. The fountain plaza, the shop street, the east lane and the dorm courtyard now take their light from the same period table as the forecourt. They look as before in each period, and now go back to morning when the clock does. The dorm courtyard no longer shows a day sky over a dusk court.",
+ "result": [
+  "plaza-after-back-to-morning-desk",
+  "east-after-back-to-morning-desk",
+  "court2-after-back-to-morning-phone",
+  "plaza-after-after-work-again-phone"
+ ],
+ "preview": "plaza-after-back-to-morning-desk",
+ "sections": [
+  {
+   "title": "Fountain plaza, day 1: the clock forward and back",
+   "caption": "Same camera at the fountain. Before, moving the clock back to morning left the dusk, the lamps and the lit basin on. Now each step changes the light, and after work looks as it did."
+  },
+  {
+   "title": "Fountain plaza entered after work",
+   "caption": "Entered at dusk on day 1: the same light as before."
+  },
+  {
+   "title": "Fountain plaza, day 2",
+   "caption": "Day 2's brighter dusk with the plaza's own pools and grade, as before; back to morning now works."
+  },
+  {
+   "title": "Shop street, day 1: the clock forward and back",
+   "caption": "The shop street could already go back to morning; it now does it through the same system, and the pictures match."
+  },
+  {
+   "title": "East lane, day 1: the clock forward and back",
+   "caption": "Before, the dusk stayed when the clock went back. Now it goes back to morning."
+  },
+  {
+   "title": "Dorm courtyard, day 2: the clock forward and back",
+   "caption": "The bug: back to morning, the court stayed lit for dusk under a day sky. Now it goes back to morning. After work it now has the court's own dusk (the one you see on the walk home), not the town's."
+  },
+  {
+   "title": "Dorm courtyard, day 1",
+   "caption": "On day 1 Eric is only here after work, so the court stays at dusk, as his room does; the sky now stays at dusk with it."
+  }
+ ],
+ "pictures_local": true
+}

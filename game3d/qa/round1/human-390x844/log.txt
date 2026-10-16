@@ -1,0 +1,132 @@
+002s SHOT 000-t002-title.png
+005s SHOT 001-t005-first-screen.png
+007s SHOT 002-t007-walked.png
+007s SHOT 003-t007-place-train.png
+007s USE tama
+010s SHOT 004-t010-act-aoi.png
+010s USE aoi
+011s LINE Aoi あ、フこぺ、さレぬべロほリ。 Tap this area to continue
+011s SHOT 005-t011-line.png
+015s LINE A nod at the empty seat. Tap this area to continue
+015s SHOT 006-t015-line.png
+018s GOAL Sit down.
+018s SHOT 007-t018-goal.png
+020s SHOT 008-t020-act-music.png
+022s SHOT 009-t022-act-mio.png
+022s USE mio
+023s SHOT 010-t023-every15s.png
+023s LINE The train lurches. The woman's lunch bag slides to the edge of the seat and wobbles there. Tap this area to continue
+023s SHOT 011-t023-line.png
+029s USE mio
+031s LINE Woman with a laptop Ah... okay, I got it. Sorry. Tap this area to continue
+031s SHOT 012-t031-line.png
+035s LINE Woman with a laptop Eh... B2? You're going to B2?
+035s SHOT 013-t035-line.png
+039s SHOT 014-t039-every15s.png
+039s LINE Eric you Yeah, IT support. I'm the contractor, it's my first day.
+039s SHOT 015-t039-line.png
+043s LINE Mio programmer Ahh, you're the support contract? Mori-san said a 外人 (gaijin, foreigner) is coming to help with the old machines. Amakawa never replaces anything
+043s SHOT 016-t043-line.png
+049s LINE Mio programmer I'm Mio. I'm also B2, so... same team, I guess.
+050s SHOT 017-t049-line.png
+054s LINE I'm Mio. I'm also B2, so... same team, I guess. 1 “I'm Eric.” 2 “Were you visiting your mum?” 3 Just nod
+054s SHOT 018-t054-choice.png
+059s SHOT 019-t059-every15s.png
+059s LINE Mio programmer Mm, I know. It's on your card.
+059s SHOT 020-t059-line.png
+063s GOAL Talk to Mio again when you like.
+063s SHOT 021-t063-goal.png
+063s SHOT 022-t063-act-reader.png
+063s GAVE UP reaching mio {"player":[1.58,-0.94],"spot":[1.96,0.06],"xy":[175,451],"under":"c","path":0,"keys":[]}
+063s SHOT 023-t063-cant-reach-mio.png
+065s SHOT 024-t064-act-mio.png
+065s USE mio
+066s LINE Mio programmer Ne... sorry. Where are you from?
+066s SHOT 025-t066-line.png
+069s LINE Eric you Norway.
+070s SHOT 026-t069-line.png
+072s LINE Mio programmer Norway... okay. And Japanese? You speak it, like, at all?
+072s SHOT 027-t072-line.png
+076s SHOT 028-t076-every15s.png
+076s LINE Norway... okay. And Japanese? You speak it, like, at all? 1 “ありがとう (arigatō, thanks). That's about it.” 2 “Not really.”
+076s SHOT 029-t076-choice.png
+082s LINE Mio programmer Okay, arigatō is good. You'll use that one a lot.
+082s SHOT 030-t082-line.png
+086s LINE Mio programmer You know it's all Amakawa people on the island, right? Nobody speaks English. Even at the supermarket.
+087s SHOT 031-t086-line.png
+093s SHOT 032-t092-every15s.png
+093s LINE Mio programmer And Mori-san is going to be so polite with you, and you'll just stand there.
+093s SHOT 033-t093-line.png
+098s LINE Mio programmer えっと, okay. First one, おはようございます (ohayō gozaimasu, good morning). You say it to everybody in the morning. The guard at the gate is really strict a
+098s SHOT 034-t098-line.png
+104s LINE She lifts two fingers off her laptop in a lazy wave, and nods.
+104s SHOT 035-t104-line.png
+108s SHOT 036-t108-every15s.png
+108s LINE Mio programmer おはようございます (ohayō gozaimasu, good morning)...
+109s SHOT 037-t108-line.png
+112s SHOT 038-t112-type-prompt.png
+112s TYPE ohayō gozaimasu
+117s SHOT 039-t117-typed.png
+117s LINE Mio Say it to me, it's fine. おはようございます ohayō gozaimasu good morning
+117s SHOT 040-t117-line.png
+121s LINE Mio programmer Try the cat, over there. She rides this train every morning, she won't judge you.
+121s SHOT 041-t121-line.png
+127s GOAL Say good morning to the cat.
+127s SHOT 042-t127-goal.png
+127s SHOT 043-t127-every15s.png
+127s SHOT 044-t127-act-youth.png
+129s SHOT 045-t128-act-music.png
+130s SHOT 046-t130-say-menu.png
+130s SAYMENU 1 おはようございます ohayō gozaimasu · good morning
+132s SHOT 047-t132-type-prompt.png
+132s TYPE ohayō gozaimasu
+137s SHOT 048-t137-typed.png
+137s SHOT 049-t137-act-tama.png
+137s SAY at tama
+139s SHOT 050-t139-say-menu.png
+139s SAYMENU 1 おはようございます ohayō gozaimasu · good morning
+141s SHOT 051-t141-say-menu.png
+141s SAYMENU 1 おはようございます ohayō gozaimasu · good morning
+143s GOAL Talk to Mio when you like.
+143s SHOT 052-t143-goal.png
+143s SHOT 053-t143-every15s.png
+143s SHOT 054-t143-say-menu.png
+143s SAYMENU 1 おはようございます ohayō gozaimasu · good morning
+146s SHOT 055-t146-type-prompt.png
+146s TYPE ohayō gozaimasu
+150s SHOT 056-t150-typed.png
+152s LINE A slow blink.
+152s SHOT 057-t152-line.png
+154s GOAL Talk to Mio when you like.
+154s SHOT 058-t154-goal.png
+156s SHOT 059-t156-act-reader.png
+159s SHOT 060-t159-every15s.png
+171s GAVE UP reaching mio {"player":[0.67,-0.48],"spot":[1.37,-0.63],"xy":[231,232],"under":"c","path":0,"keys":[]}
+172s SHOT 061-t171-cant-reach-mio.png
+175s SHOT 062-t175-every15s.png
+190s SHOT 063-t190-every15s.png
+192s GAVE UP reaching mio {"player":[0.67,-0.48],"spot":[1.37,-0.63],"xy":[229,234],"under":"c","path":0,"keys":[]}
+192s SHOT 064-t192-cant-reach-mio.png
+206s SHOT 065-t206-every15s.png
+212s GAVE UP reaching mio {"player":[0.67,-0.48],"spot":[1.37,-0.63],"xy":[230,233],"under":"c","path":0,"keys":[]}
+212s SHOT 066-t212-cant-reach-mio.png
+221s SHOT 067-t221-every15s.png
+232s GAVE UP reaching mio {"player":[0.67,-0.48],"spot":[1.37,-0.63],"xy":[229,234],"under":"c","path":0,"keys":[]}
+232s SHOT 068-t232-cant-reach-mio.png
+237s SHOT 069-t237-every15s.png
+243s STUCK? no change for a while
+243s SHOT 070-t243-stuck.png
+253s SHOT 071-t252-every15s.png
+253s GAVE UP reaching mio {"player":[0.67,-0.48],"spot":[1.37,-0.63],"xy":[231,233],"under":"c","path":0,"keys":[]}
+253s SHOT 072-t253-cant-reach-mio.png
+268s SHOT 073-t268-every15s.png
+273s GAVE UP reaching mio {"player":[0.67,-0.48],"spot":[1.37,-0.63],"xy":[231,233],"under":"c","path":0,"keys":[]}
+273s SHOT 074-t273-cant-reach-mio.png
+284s SHOT 075-t284-every15s.png
+293s GAVE UP reaching mio {"player":[0.67,-0.48],"spot":[1.37,-0.63],"xy":[229,233],"under":"c","path":0,"keys":[]}
+293s SHOT 076-t293-cant-reach-mio.png
+299s SHOT 077-t299-every15s.png
+301s SHOT 078-t301-final.png
+
+ERRORS:
+

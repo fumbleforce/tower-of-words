@@ -1,0 +1,19 @@
+{
+ "title": "A clearer B2 office layout",
+ "date": "2026-10-12",
+ "by": "codex",
+ "caption": "Two unused desks are gone. The table, whiteboard and reference shelf form a meeting corner, and the restroom signs are visible above the doors.",
+ "commit": "bfef3322e",
+ "result": [
+  "nook",
+  "overview",
+  "sign"
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

@@ -1,0 +1,1 @@
+export const TRICKS=["toon","outline","paint","water"];const t=new URLSearchParams(globalThis.location?.search||"").get("anime"),e=+(new URLSearchParams(globalThis.location?.search||"").get("style")||0)>0,s=e||t==="0"?[]:t==null||t==="1"||t==="all"?TRICKS:t.split(",");export const ANIME=Object.fromEntries(TRICKS.map(o=>[o,s.includes(o)]));ANIME.on=TRICKS.some(o=>ANIME[o]);

@@ -1,0 +1,80 @@
+{
+ "title": "Southern quarter street and campus views",
+ "date": "2026-10-08",
+ "result": [
+  "47159483273c36e5",
+  "603a28baa840a9e3",
+  "aa6185de88784718",
+  "8d5e02d8e59a7c11"
+ ],
+ "updated": "2026-10-08T05:37:09+02:00",
+ "by": "codex",
+ "caption": "New planting reaches the tower cross street, with a clear junction, matching map and camera views that keep Eric visible.",
+ "commit": "4b09eeb14a5d4fae9b062b7c8ed95aec9a479de1",
+ "sections": [
+  {
+   "title": "Southern quarter street",
+   "caption": "Planting continues from the back lane to the tower cross street. The street opening is clear, and its connecting path appears on the map."
+  },
+  {
+   "title": "After work",
+   "caption": "Phone and desktop views after entering campus in the evening."
+  },
+  {
+   "title": "Phone and desktop",
+   "caption": "The same junction and southern opening in the overview and third-person views."
+  },
+  {
+   "title": "Walking through the district",
+   "caption": "Office quarter, campus, the tower cross street and the forecourt, then back."
+  },
+  {
+   "title": "Third-person route",
+   "caption": "Walking the same loop. At the wall the existing close-camera fade hides Eric; turning with Mouse look restores him."
+  },
+  {
+   "title": "Continue from a save",
+   "caption": "Restoring the southern campus and western forecourt positions on phone and desktop. Immediate frames show the title crossfade; settled frames show the playable view."
+  },
+  {
+   "title": "Completed day test",
+   "caption": "The full first-day route passed at both sizes, including the lift return."
+  },
+  {
+   "title": "Earlier planting attempts",
+   "caption": "Retained attempts before the smaller clusters and wider soil gaps."
+  },
+  {
+   "title": "Earlier route checks",
+   "caption": "These attempts exposed the wing hiding Eric on the return route. The final route is above."
+  },
+  {
+   "title": "Forecourt camera trials",
+   "caption": "Baseline and intermediate approaches, including the rejected tree-obscured southward step."
+  },
+  {
+   "title": "Before this change",
+   "caption": "The previous southern junction and camera views, followed by temporary camera probes."
+  },
+  {
+   "title": "Earlier evening capture setup",
+   "caption": "These captures changed the time in place and omitted the character lighting applied on entry. The corrected after-work views are above."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  },
+  {
+   "label": "Visual review (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Camera coverage (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  }
+ ],
+ "preview": "47159483273c36e5",
+ "pictures_local": true
+}

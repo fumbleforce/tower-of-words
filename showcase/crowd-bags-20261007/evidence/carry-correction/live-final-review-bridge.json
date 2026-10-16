@@ -1,0 +1,607 @@
+{
+  "mode": "bridge",
+  "fixture": "bridge-route",
+  "focusKind": "briefcase",
+  "sourceDir": "/home/jorgen/repo/japanese/.claude/worktrees/codex-briefcase-carry/game3d/js/crowd/",
+  "observerSha256": "7bf277d511cd70c7823875fc3716c4fd0d397e4058b5604cbb651a7b4b4001c3",
+  "sourceSha256": {
+    "looks": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d",
+    "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+    "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75",
+    "bag-pose": "0b52ab89f91cce767d523e3deb77c08e41ebb5386bf24f2f3d63159ae318edc4"
+  },
+  "errors": [],
+  "blocked": [
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/clips.json?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/model.glb?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/regions.json?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/model-lo.glb?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/regions-lo.json?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/model-far.glb?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/regions-far.json?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/base.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/mask.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/base-lo.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/mask-lo.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/base-far.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/mask-far.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-a/walk.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-a/run.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-a/idle.json",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-a/sit.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-b/walk.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-b/run.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-b/idle.json",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-b/sit.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-a/base.webp",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-b/base.webp"
+  ],
+  "frames": [
+    {
+      "file": "00-live.png",
+      "focus": {
+        "id": 1,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": true,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          -4.7596651939974475,
+          0,
+          -4.489023496356895
+        ]
+      }
+    },
+    {
+      "file": "01-live.png",
+      "focus": {
+        "id": 1,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": true,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          -3.390468161820106,
+          0,
+          -4.657084324800038
+        ]
+      }
+    },
+    {
+      "file": "02-live.png",
+      "focus": {
+        "id": 1,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": true,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          -2.0210520056061996,
+          0,
+          -4.825172049421194
+        ]
+      }
+    },
+    {
+      "file": "03-live.png",
+      "focus": {
+        "id": 1,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": true,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          -0.6516358493922938,
+          0,
+          -4.993259774042352
+        ]
+      }
+    },
+    {
+      "file": "04-live.png",
+      "focus": {
+        "id": 1,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": true,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          0.7178898689051969,
+          0,
+          -5.161360946760533
+        ]
+      }
+    },
+    {
+      "file": "05-live.png",
+      "focus": {
+        "id": 1,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": true,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          1.8825274144287112,
+          0,
+          -4.723265097058002
+        ]
+      }
+    },
+    {
+      "file": "06-live.png",
+      "focus": {
+        "id": 1,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": true,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          2.918916540609775,
+          0,
+          -3.8367149955831272
+        ]
+      }
+    },
+    {
+      "file": "07-live.png",
+      "focus": {
+        "id": 1,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": true,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          3.952038340367756,
+          0,
+          -2.921934872449906
+        ]
+      }
+    }
+  ],
+  "setup": {
+    "routeFixture": {
+      "target": 1,
+      "donor": 3,
+      "fromState": "still",
+      "line": [
+        [
+          -16.775,
+          -0.34499999999999886
+        ],
+        [
+          -11.056570921791366,
+          -0.08533215084652035
+        ],
+        [
+          -6.075945346743752,
+          -4.327457901533757
+        ],
+        [
+          1.6369283266518952,
+          -5.2741674756604695
+        ],
+        [
+          6.340513486644286,
+          -0.8070539465771398
+        ],
+        [
+          22.725,
+          -0.34499999999999886
+        ],
+        [
+          27.723012986756707,
+          -0.20405254804950382
+        ]
+      ]
+    },
+    "paused": false,
+    "period": "early",
+    "periodFixture": "actual early-period population configuration",
+    "characterScale": 0.85,
+    "gpu": "ANGLE (NVIDIA, Vulkan 1.4.341 (NVIDIA NVIDIA GeForce RTX 3080 (0x00002206)), NVIDIA)",
+    "actors": [
+      {
+        "id": 1,
+        "base": "shirt",
+        "index": 4480,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": true,
+        "meshy": true,
+        "scale": [
+          1.1327999999999998,
+          1.1327999999999998,
+          1.1327999999999998
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          -4.7854122775014405,
+          0,
+          -4.485863194309793
+        ]
+      },
+      {
+        "id": 2,
+        "base": "blouse",
+        "index": 4481,
+        "kind": "office",
+        "variant": 1,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.18,
+          1.18,
+          1.18
+        ],
+        "state": "still",
+        "visible": true,
+        "seated": false,
+        "position": [
+          -4.502698333107598,
+          0,
+          7.662483960692567
+        ]
+      },
+      {
+        "id": 3,
+        "base": "shirt",
+        "index": 4482,
+        "kind": "office",
+        "variant": 2,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.2272,
+          1.2272,
+          1.2272
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          -4.850711263710682,
+          0,
+          -4.4778481303994
+        ]
+      },
+      {
+        "id": 5,
+        "base": "cardigan",
+        "index": 4484,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.1918,
+          1.1918,
+          1.1918
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          -12.973977341496147,
+          0,
+          -0.7698542458957988
+        ]
+      },
+      {
+        "id": 6,
+        "base": "shirt",
+        "index": 4485,
+        "kind": "office",
+        "variant": 1,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.2389999999999999,
+          1.2389999999999999,
+          1.2389999999999999
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          0.6410803363453839,
+          0,
+          5.439054040277472
+        ]
+      },
+      {
+        "id": 7,
+        "base": "blouse",
+        "index": 4486,
+        "kind": "office",
+        "variant": 2,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.1563999999999999,
+          1.1563999999999999,
+          1.1563999999999999
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          17.519925871127697,
+          0,
+          -0.12705320214212906
+        ]
+      },
+      {
+        "id": 9,
+        "base": "blouse",
+        "index": 4488,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.121,
+          1.121,
+          1.121
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          8.660398192832375,
+          0,
+          -0.49313466730775146
+        ]
+      },
+      {
+        "id": 10,
+        "base": "shirt",
+        "index": 4489,
+        "kind": "office",
+        "variant": 1,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.1682,
+          1.1682,
+          1.1682
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          -3.029537488326787,
+          0,
+          -5.682463027725594
+        ]
+      },
+      {
+        "id": 11,
+        "base": null,
+        "index": 4490,
+        "kind": "office",
+        "variant": 2,
+        "approved": null,
+        "bridge": false,
+        "meshy": false,
+        "scale": [
+          1.1880534999999999,
+          1.1880534999999999,
+          1.1880534999999999
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          -2.5173539065035846,
+          0,
+          -6.404769657709745
+        ]
+      },
+      {
+        "id": 13,
+        "base": "shirt",
+        "index": 4492,
+        "kind": "office",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.18,
+          1.18,
+          1.18
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          6.375418644996577,
+          0,
+          1.4149784545505817
+        ]
+      },
+      {
+        "id": 14,
+        "base": "blouse",
+        "index": 4493,
+        "kind": "office",
+        "variant": 1,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.2272,
+          1.2272,
+          1.2272
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          -5.318970106871844,
+          0,
+          -3.7675357138035293
+        ]
+      },
+      {
+        "id": 15,
+        "base": "cardigan",
+        "index": 4494,
+        "kind": "office",
+        "variant": 2,
+        "approved": null,
+        "bridge": true,
+        "meshy": true,
+        "scale": [
+          1.1445999999999998,
+          1.1445999999999998,
+          1.1445999999999998
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          15.959334439844362,
+          0,
+          -0.6541875409247517
+        ]
+      },
+      {
+        "id": 17,
+        "base": "hoodie",
+        "index": 4496,
+        "kind": "casual",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.2389999999999999,
+          1.2389999999999999,
+          1.2389999999999999
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          17.780576500486244,
+          0,
+          2.6785141268084893
+        ]
+      },
+      {
+        "id": 19,
+        "base": "shirt",
+        "index": 4498,
+        "kind": "casual",
+        "variant": 2,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.2036,
+          1.2036,
+          1.2036
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          14.921594184149921,
+          0,
+          -0.37276855943377957
+        ]
+      },
+      {
+        "id": 21,
+        "base": "cardigan",
+        "index": 4500,
+        "kind": "casual",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.1682,
+          1.1682,
+          1.1682
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          -4.099836834959382,
+          0,
+          -8.099485141011176
+        ]
+      },
+      {
+        "id": 23,
+        "base": "hoodie",
+        "index": 4502,
+        "kind": "casual",
+        "variant": 2,
+        "approved": null,
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.1327999999999998,
+          1.1327999999999998,
+          1.1327999999999998
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          16.930596118844715,
+          0,
+          -0.8085244546367564
+        ]
+      }
+    ]
+  },
+  "live": {
+    "firstTime": 0.05959999996423721,
+    "lastTime": 10.082399999976145,
+    "walkingRows": 5167
+  },
+  "rawReport": {
+    "path": "/home/jorgen/repo/japanese/game3d/shots/crowd-bags/live-final-review-bridge/report.json",
+    "sha256": "880e333ea26027f5016060a73fcc62d4a3928de79377ce99fa69ec834d7f50c3",
+    "bytes": 33360237
+  },
+  "measurements": {
+    "rows": 5169,
+    "clearanceSamples": 150,
+    "intersectingSamples": 0,
+    "maximumDepth": 0,
+    "maximumPaletteError": 9.52184862512695e-07,
+    "maximumSameFrameGripGap": 3.178356823322166e-07
+  }
+}

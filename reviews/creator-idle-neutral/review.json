@@ -1,0 +1,31 @@
+{
+ "title": "Creator neutral idle",
+ "date": "2026-09-29",
+ "by": "Codex",
+ "status": "superseded",
+ "question": "Use this forward-facing neutral idle for the creator characters?",
+ "multi": false,
+ "options": [
+  {
+   "id": "neutral-v1",
+   "label": "neutral-v1: forward-facing with gentle breathing",
+   "note": "Four-second loop; pelvis/head yaw stays at zero in source measurements, legs remain planted. The arms rest a little away from the clothes. Sampled transition frames show no large turn; final motion feel is still yours to judge."
+  },
+  {
+   "id": "keep-held",
+   "label": "keep-held: retain the existing frozen pose",
+   "note": "The first frame in each sheet shows the current held 0.4-second source idle. The full source clip turns and bends; it is currently frozen in the creator."
+  }
+ ],
+ "links": [
+  {
+   "label": "Full-resolution comparison page (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools"
+  },
+  {
+   "label": "Measurements and provenance",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/creator-animation-audit.md"
+  }
+ ],
+ "pictures_local": true
+}

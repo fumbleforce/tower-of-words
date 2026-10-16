@@ -1,0 +1,29 @@
+{
+ "title": "Kuro again with your original 3D workflow, this time in ChatGPT's image model with your exact words",
+ "date": "2026-10-04",
+ "by": "Claude (kuro-meshy-orig-2 agent)",
+ "status": "decided",
+ "question": "The first sheets are ChatGPT pictures (your picture steps, word for word); the rest are renders of a real rigged 3D model, and the live 3D link lets you turn her and watch her idle and walk beside the in-game Eric and Mio. Does this Kuro fit next to them?",
+ "multi": false,
+ "options": [
+  {
+   "id": "kuro-2",
+   "label": "kuro-2",
+   "note": "The rigged model from d2 (ChatGPT picture path a1, b5, c3, d2): smart topology, 1,050 polygons, textured in a second pass, auto-rigged at 1.1 m. 20 Meshy credits; the 14 ChatGPT pictures cost $3.43. No glasses, no hair sticks."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live 3D: Kuro beside the in-game Eric and Mio (turn, zoom, idle, walk) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools/characters"
+  },
+  {
+   "label": "Last round (local FLUX, paraphrased steps)",
+   "href": "#review/kuro-meshy-orig-1"
+  }
+ ],
+ "decision": "it's a good attempt but she came out a bit fucked still. Her head is a little too big compared to body, when comparing to eric and mio. The reference image are quite good and look good besides that, but the texturing was botched and her eyes came out terrible",
+ "decided_at": "2026-10-04T22:03:25+0200",
+ "issue": 221,
+ "pictures_local": true
+}

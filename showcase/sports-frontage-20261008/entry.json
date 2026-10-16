@@ -1,0 +1,61 @@
+{
+ "title": "Sports frontage and shared north-street gardens",
+ "date": "2026-10-08",
+ "result": [
+  "final-10-1366-arrival",
+  "final-10-1366-office",
+  "final-10-1366-bench",
+  "final-10-1366-office-evening"
+ ],
+ "by": "codex",
+ "caption": "The gym and north-street office have recessed reflective glazing, grounded planting and clear approaches. Shared views retain the original trees and use the same beds. All design and capture attempts remain visible below. The existing desktop day-three pool gait failure is tracked separately in work issue #350.",
+ "commit": "143378d1f5dfd742e65e81d8b305f791ba847c98",
+ "preview": "final-10-1366-arrival",
+ "sections": [
+  {
+   "title": "Native outdoor audit",
+   "caption": "Sports, harbour and east-coast comparisons before choosing the sports frontage. Original native camera and actual walking routes."
+  },
+  {
+   "title": "First frontage assembly",
+   "caption": "Physical openings introduced; the flat cyan glass and tall uniform groundcover were rejected in review."
+  },
+  {
+   "title": "Reflection material trial",
+   "caption": "Intermediate glass response and lower planting; retained for comparison."
+  },
+  {
+   "title": "Reflection and cover refinement",
+   "caption": "Intermediate material and planting composition."
+  },
+  {
+   "title": "Local reflected horizon",
+   "caption": "A quiet reflected sky and ground gradient replaces blank glass; planting remains under review."
+  },
+  {
+   "title": "Pane-scale reflection and quieter cover",
+   "caption": "Correct per-pane UVs make the reflected horizon readable; grouped shrubs and lower cover are being refined."
+  },
+  {
+   "title": "Native routes, first harness attempt",
+   "caption": "Improved facade and planting. The route failed at an unreachable bench destination; phone also stopped short at a transient pool crowd. Failure originals retained."
+  },
+  {
+   "title": "Native routes, revised bench destination",
+   "caption": "The revised bench target remained outside the authored walking rectangles. The harness was corrected to use the adjacent courts walk; movement thresholds were not relaxed."
+  },
+  {
+   "title": "Grounded soil and day/evening inspection",
+   "caption": "Routes completed, but an unsupported evening-to-morning hook changed the HUD without restoring the materials. Images labelled morning-restored and the subsequent detail views show evening materials. The old corner-bed border and shared street mismatch remained under review."
+  },
+  {
+   "title": "Fresh morning, grounded perimeter and gym joins",
+   "caption": "Fresh-load morning details demonstrate physical recesses. The old corner-bed underlay is removed and gym foundation planting is shared with office quarter. The east-lane view exposed the remaining r3 garden mismatch, corrected in the next round."
+  },
+  {
+   "title": "Final shared gardens and native paths",
+   "caption": "The office beds and original three trees now belong to the shared frontage, matching sports and east lane. Both native routes completed with no console errors, overlaps, spins or gait episodes. The gym and oblique facade details from round 9 are unchanged."
+  }
+ ],
+ "pictures_local": true
+}

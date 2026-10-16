@@ -1,0 +1,29 @@
+{
+ "title": "Kuro's four new faces and Mio's annoyed face, in the game",
+ "date": "2026-10-10",
+ "by": "claude-agent:expressions-kuro-mio",
+ "caption": "Your picks from expressions-kuro-mio-1 are installed: Kuro flirtatious, teasing, pleased and cool politeness, and Mio mildly annoyed. Teasing, polite, pleased and annoyed are on lines that fit; flirtatious has no scene yet.",
+ "result": [
+  "kuro-teasing",
+  "kuro-pleased",
+  "kuro-polite",
+  "mio-annoyed"
+ ],
+ "sections": [
+  {
+   "title": "The five faces",
+   "caption": "The installed portraits."
+  },
+  {
+   "title": "In the dialogue box",
+   "caption": "A real scene for each face, desktop and phone."
+  }
+ ],
+ "links": [
+  {
+   "label": "Review that picked them",
+   "href": "reviews/expressions-kuro-mio-1/review.json"
+  }
+ ],
+ "pictures_local": true
+}

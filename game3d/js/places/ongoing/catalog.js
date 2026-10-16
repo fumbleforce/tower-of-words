@@ -1,0 +1,1 @@
+export const EXTRA={karaoke_booth:{kuroda:{label:"Man from the train",kind:"person"}}};export function extendOngoingCatalog(o){for(const[e,t]of Object.entries(EXTRA))for(const[n,r]of Object.entries(t))o[e].people.includes(n)||o[e].people.push(n),o[e].things[n]=r}

@@ -1,0 +1,1 @@
+export const TERMINAL_PERIODS=["early","morning","lunch","afternoon","evening"],TERMINAL_STAFF_PERIODS=["morning","lunch","afternoon"],terminalOpen=(n,o)=>TERMINAL_PERIODS.includes(o),terminalStaffed=(n,o)=>TERMINAL_STAFF_PERIODS.includes(o),TERMINAL_OPEN=TERMINAL_PERIODS.map(n=>"period_"+n).join(" || ");

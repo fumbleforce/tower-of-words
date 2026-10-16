@@ -1,0 +1,1 @@
+export const SPORTS_CLOSED_DAYS=[];export function sportsCrowd(o,i){if(!SPORTS_CLOSED_DAYS.includes(i))return o;const s=e=>e==="office_street"?"onsen_path":e;return{...o,periods:Object.fromEntries(Object.entries(o.periods).map(([e,n])=>[e,{...n,flows:n.flows.map(([r,t,...f])=>[s(r),s(t),...f]).filter(([r,t])=>r!==t)}]))}}

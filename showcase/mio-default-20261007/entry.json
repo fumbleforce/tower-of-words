@@ -1,0 +1,164 @@
+{
+ "title": "Selected Mio in the game",
+ "date": "2026-10-07",
+ "by": "codex",
+ "caption": "Selected Mio using her phone, laptop and desk keyboard, with native lunch contacts. Final highlights come first; the complete capture history follows in expandable sections. History frames follow capture order, including the ten final highlights again to keep each run complete. Older named contact checkpoints can be occluded or captured after release; held-detail views show the accepted contact proof.",
+ "preview": "phone85",
+ "sections": [
+  {
+   "title": "Phone and seated work",
+   "caption": "Desktop at 85% size. Close views are diagnostic cameras; the gameplay camera is unchanged. Keyboard contact applies during idle work, while authored gestures keep control during dialogue."
+  },
+  {
+   "title": "Lunch contacts",
+   "caption": "Native actions paused before release, with a diagnostic view of the real contact. Both sizes pass; the lunch sequence and hand solver limits are unchanged."
+  },
+  {
+   "title": "Attempt 1: round1-1366",
+   "caption": "Initial selected-body integration. The laptop and desk hands still need correction."
+  },
+  {
+   "title": "Attempt 2: round2-1366",
+   "caption": "Phone pose retained; laptop floats above the lap and desk hands sit above the keyboard."
+  },
+  {
+   "title": "Attempt 3: round2-390",
+   "caption": "Phone-size baseline before laptop and keyboard corrections."
+  },
+  {
+   "title": "Attempt 4: contacts3-1366",
+   "caption": "Scene initialization failed while sampling the thigh surface; no image was produced. The failure report is linked below."
+  },
+  {
+   "title": "Attempt 5: contacts4-1366",
+   "caption": "Second scene initialization failure while sampling the thigh surface; no image was produced. The failure report is linked below."
+  },
+  {
+   "title": "Attempt 6: contacts5-1366",
+   "caption": "Laptop support corrected; the office keyboard is still too far from the wrists."
+  },
+  {
+   "title": "Attempt 7: mio335-85-1366-1",
+   "caption": "Retained failed lunch contact check: cable hook target too low; the old mouth coordinate also misses the new face."
+  },
+  {
+   "title": "Attempt 8: contacts6-390",
+   "caption": "The 100% contact measurement exposes the distant office keyboard."
+  },
+  {
+   "title": "Attempt 9: contacts7-1366",
+   "caption": "85% office keyboard moved to its reachable near edge."
+  },
+  {
+   "title": "Attempt 10: mio335-85-1366-2",
+   "caption": "Retained diagnostic attempt before the cable and native mouth corrections."
+  },
+  {
+   "title": "Attempt 11: contacts8-390",
+   "caption": "100% laptop and desk keyboard contact check."
+  },
+  {
+   "title": "Attempt 12: mio335-85-1366-3",
+   "caption": "85% lunch after correcting the cable rim and selected rig’s lower-lip target."
+  },
+  {
+   "title": "Attempt 13: mio335-100-1366-final",
+   "caption": "100% lunch sequence on desktop."
+  },
+  {
+   "title": "Attempt 14: mio335-85-390-final",
+   "caption": "85% lunch sequence on the phone viewport."
+  },
+  {
+   "title": "Attempt 15: mio335-100-390-final",
+   "caption": "100% lunch sequence on the phone viewport."
+  },
+  {
+   "title": "Attempt 16: mio335-85-1366-step3",
+   "caption": "Retained failed box-centre pickup measurement, before moving the grip to its side."
+  },
+  {
+   "title": "Attempt 17: mio335-85-1366-step3-2",
+   "caption": "85% checklist and departure sequence after moving bento pickup to the box side."
+  },
+  {
+   "title": "Attempt 18: mio335-100-390-step3",
+   "caption": "100% checklist and departure sequence on the phone viewport."
+  },
+  {
+   "title": "Attempt 19: final85-1366",
+   "caption": "85% phone pose, seated work and sustained walk/run before the laptop ownership correction."
+  },
+  {
+   "title": "Attempt 20: final100-390",
+   "caption": "100% phone pose, seated work and sustained walk/run before the laptop ownership correction."
+  },
+  {
+   "title": "Attempt 21: final85b-1366",
+   "caption": "85% selected Mio with car-owned laptop and stand/reparent checks."
+  },
+  {
+   "title": "Attempt 22: legacy85-390",
+   "caption": "The prior body through the legacy query, with train and desk comparisons."
+  },
+  {
+   "title": "Attempt 23: final100b-390-390",
+   "caption": "100% selected Mio with car-owned laptop and stand/reparent checks."
+  },
+  {
+   "title": "Attempt 24: mio335-85-390-continue",
+   "caption": "Actual Save/Continue during the native bite action."
+  },
+  {
+   "title": "Attempt 25: legacy100-save-390",
+   "caption": "The prior body at 100%; this run supplies the full train snapshot for migration checks."
+  },
+  {
+   "title": "Attempt 26: legacy-upgrade85-1366",
+   "caption": "Retained failed full legacy snapshot restore: the outer saved-actor decorator overwrites the corrected seat."
+  },
+  {
+   "title": "Attempt 27: legacy-upgrade85b-1366",
+   "caption": "Second retained full-snapshot failure used to identify the outer actor restore."
+  },
+  {
+   "title": "Attempt 28: legacy-upgrade85c-1366",
+   "caption": "Deferred legacy seat migration reaches the selected rig’s correct seat position."
+  },
+  {
+   "title": "Attempt 29: legacy-upgrade85-final-1366",
+   "caption": "Full legacy snapshot migration also preserves hidden visibility and later selected-rig saved positions."
+  },
+  {
+   "title": "Attempt 30: mio335-85-1366-held",
+   "caption": "85% native contacts held before release, with separate diagnostic detail views."
+  },
+  {
+   "title": "Attempt 31: mio335-100-390-held",
+   "caption": "100% native contacts held before release, with separate diagnostic detail views."
+  },
+  {
+   "title": "Attempt 32: integrated-default-390",
+   "caption": "Rebased source at the 85% default, with no size query: phone, seated work, sustained motion and prop lifecycle."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  },
+  {
+   "label": "Integration and validation",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/mio-default-20261007.md"
+  },
+  {
+   "label": "contacts3-1366 initialization failure report (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "contacts4-1366 initialization failure report (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  }
+ ],
+ "pictures_local": true
+}

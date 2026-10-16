@@ -1,0 +1,115 @@
+[
+ {
+  "service": "meshy",
+  "part": "emi-1",
+  "task": "01a108ad-f0cc-7796-8452-81a7ab10d953",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 442,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/emi-meshy-1/pics/c1.png",
+  "note": "aoi-1 and emi-1 ran at the same time; Meshy reports 5 credits each (452 before, 442 after both)"
+ },
+ {
+  "service": "meshy",
+  "part": "emi-1-tex",
+  "task": "01a108bf-c01f-72dc-887f-162eb9577ece",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 422,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/emi-meshy-1/meshy/emi-1-uv.glb"
+  },
+  "input": "art/parts/emi-meshy-1/pics/c1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "emi-1-tex-rig",
+  "task": "01a108c1-2c01-74e8-ad61-fb10885c3d07",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "input_task_id": "01a108bf-c01f-72dc-887f-162eb9577ece",
+   "height_meters": 1.1
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "emi-2",
+  "task": "01a1090b-d945-71d9-92b7-7e680820c94a",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 402,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/emi-meshy-1/pics/c3.png",
+  "note": "round 2: aoi-2 and emi-2 ran at the same time; Meshy reports 5 credits each (412 before, 402 after both)"
+ },
+ {
+  "service": "meshy",
+  "part": "emi-2-tex",
+  "task": "01a10925-8492-7061-8927-df57acf76b38",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 382,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/emi-meshy-1/meshy/emi-2-uv.glb"
+  },
+  "input": "art/parts/emi-meshy-1/pics/c3.png"
+ },
+ {
+  "service": "meshy",
+  "part": "emi-2-tex-rig",
+  "task": "01a10926-1ee6-70df-870c-094b6c3d5014",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "input_task_id": "01a10925-8492-7061-8927-df57acf76b38",
+   "height_meters": 1.1
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "emi-2-tex-rig-sit",
+  "task": "01a10930-13c9-71d4-8486-cd1fa2b7640b",
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 366,
+  "settings": {
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  },
+  "note": "for the game, as Kuro: tools/characters/meshy.py anim; 372 before both, 366 after"
+ }
+]

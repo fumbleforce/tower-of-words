@@ -1,0 +1,40 @@
+{
+ "title": "Friday drinks: the giving game, made into a puzzle",
+ "date": "2026-10-04",
+ "by": "claude-agent:give-fun",
+ "status": "superseded",
+ "question": "This is a playable prototype, not pictures: play it at https://fumbleforce.github.io/tower-of-words/game3d/minigames/give.html (phone or desktop, about 3 minutes; the first version is still at give-v1.html). It is the giving game from minigames-1, redesigned after \"it's a starting point, but they are not particularly fun\". Is this fun now, and should the other two get the same treatment? Pick friday-drinks if it is fun, and pick each of the others you want redone this way.",
+ "multi": true,
+ "options": [
+  {
+   "id": "friday-drinks",
+   "label": "friday-drinks: the new giving game (give.html)",
+   "note": "What changed: each of the four rounds is a small puzzle. Everyone at the table gave one drink and got one, and sits with the one they got. People say what happened from their own side (the giver says あげました, the one who got it says くれました or もらいました, dropping わたし the way people do), and one person never says anything, so the last arrow has to be worked out. You draw all the arrows, then press Thank them: everyone thanks whoever your drawing says gave them theirs. A wrong arrow sends a thank-you to the wrong person, who reacts (Kenji takes the credit), and Mio points at the line that gave it away. Run counter, ticks and crosses on whoever was thanked, two endings depending on how many thank-yous went wrong, and two rounds end with Eric saying his own hand-over. 15 arrows, 38 steps on a clean run instead of 44, no timers, English shown in round 1 and one tap away after. Screens are from a headless run that got every third arrow wrong on purpose, so the mix-ups show; the last three are desktop."
+  },
+  {
+   "id": "redo-lunch-run",
+   "label": "redo-lunch-run: give comparing (compare.html) the same treatment",
+   "note": "The first version, unchanged. Pick to have it redesigned the same way (a decision to make, a payoff that depends on your answers, fewer lines)."
+  },
+  {
+   "id": "redo-favours",
+   "label": "redo-favours: give wanting (want.html) the same treatment",
+   "note": "The first version, unchanged. Pick to have it redesigned the same way."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play Friday drinks (published)",
+   "href": "https://fumbleforce.github.io/tower-of-words/game3d/minigames/give.html"
+  },
+  {
+   "label": "The first version, for comparison",
+   "href": "https://fumbleforce.github.io/tower-of-words/game3d/minigames/give-v1.html"
+  },
+  {
+   "label": "Locally",
+   "href": "game3d/minigames/give.html"
+  }
+ ],
+ "pictures_local": true
+}

@@ -1,0 +1,28 @@
+{
+ "title": "Captions stay on screen in close views",
+ "date": "2026-10-09",
+ "by": "codex",
+ "caption": "Captions stay above the conversation when a close view leaves no room above the player. These layout checks use existing train text in the office.",
+ "preview": "1366-interior-close",
+ "result": [
+  "1366-interior-close",
+  "390-interior-close"
+ ],
+ "sections": [
+  {
+   "title": "Office layout checks",
+   "caption": "Layout fixtures reuse train dialogue to test caption placement. These are not story scenes."
+  },
+  {
+   "title": "Train layout checks",
+   "caption": "Layout fixtures reuse train dialogue to test caption placement. These are not story scenes."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

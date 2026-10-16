@@ -1,0 +1,114 @@
+{
+ "title": "Day-one island and the direct beach path",
+ "date": "2026-10-12",
+ "by": "codex:island-builder",
+ "caption": "Fuller greenery and matching neighbouring scenery from the forecourt through the residential court and market. A straight path now runs south from the fountain, splits the market into two halves, and reaches the beach.",
+ "result": [
+  "phone-arrival-forecourt-morning-phone",
+  "budget-finish-plaza-morning-north",
+  "final-combined-shotengai-morning-west",
+  "route-finish-1366-sand"
+ ],
+ "sections": [
+  {
+   "title": "Original views"
+  },
+  {
+   "title": "First crown pass"
+  },
+  {
+   "title": "Neighbouring scenery"
+  },
+  {
+   "title": "Residential planting"
+  },
+  {
+   "title": "Ground and planting pass"
+  },
+  {
+   "title": "Smooth canopy pass"
+  },
+  {
+   "title": "Rounded canopy pass"
+  },
+  {
+   "title": "First complete landscape"
+  },
+  {
+   "title": "First crossing checks"
+  },
+  {
+   "title": "Leaf colour trial"
+  },
+  {
+   "title": "Softer leaf colour trial"
+  },
+  {
+   "title": "Middle-distance crown trial"
+  },
+  {
+   "title": "Combined world checks"
+  },
+  {
+   "title": "Broad leaf clusters"
+  },
+  {
+   "title": "Final distant crowns"
+  },
+  {
+   "title": "Plaza detail measurement"
+  },
+  {
+   "title": "Combined final views"
+  },
+  {
+   "title": "Final plaza views"
+  },
+  {
+   "title": "Final beach route checks"
+  },
+  {
+   "title": "Independent player walkthrough"
+  },
+  {
+   "title": "Market route: repair phone"
+  },
+  {
+   "title": "Market route: repair route"
+  },
+  {
+   "title": "Market route: repair2"
+  },
+  {
+   "title": "Market route: repair2 phone"
+  },
+  {
+   "title": "Market route: repair2 route"
+  },
+  {
+   "title": "Forecourt phone arrival and return",
+   "caption": "A steeper phone view clears the foreground tree and keeps the player visible from the station door to the main walk. Morning, evening and desktop checks."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play day one",
+   "href": "game3d/"
+  },
+  {
+   "label": "Independent walkthrough (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Visual review (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Verification and known issues (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  }
+ ],
+ "updated": "2026-10-12T22:12:33.989033+00:00",
+ "commit": "21b71de8a",
+ "pictures_local": true
+}

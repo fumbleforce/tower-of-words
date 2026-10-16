@@ -1,0 +1,17 @@
+{
+ "title": "A harbour waiting room",
+ "date": "2026-10-07",
+ "by": "codex",
+ "caption": "A usable harbour shelter with seated residents, ordinary conversations, a ferry outlook and room-local food and reading.",
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  },
+  {
+   "label": "Implementation and retained review history",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/ferry-terminal/qa.md"
+  }
+ ],
+ "pictures_local": true
+}

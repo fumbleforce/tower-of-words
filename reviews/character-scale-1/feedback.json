@@ -1,0 +1,24 @@
+{
+ "sent": "2026-10-07T13:51:21+0200",
+ "picked": [
+  "carina13-390-85"
+ ],
+ "options": {
+  "carina13-390-85": {
+   "star": false,
+   "reject": false,
+   "comment": "yeah looks good"
+  }
+ },
+ "comment": "this was too much, maybe 15% instead",
+ "read": true,
+ "history": [
+  {
+   "sent": "2026-10-07T10:55:46+0200",
+   "picked": [],
+   "options": {},
+   "comment": "this was too much, maybe 15% instead",
+   "read": true
+  }
+ ]
+}

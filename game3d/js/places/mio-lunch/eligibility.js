@@ -1,0 +1,1 @@
+import{isWeekend as o}from"../ongoing/calendar.js";export function mioLunchOffer({day:r,period:i,place:n,flags:e,available:m=!0}){return!Number.isInteger(r)||r<5||o(r)||i!=="lunch"||n!=="office"||!m||!e.met_mio||e.ms3_mio?null:e.bondready_mio===3?3:e.step_mio>=2&&!e.ms2_mio?2:null}

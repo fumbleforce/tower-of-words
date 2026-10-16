@@ -1,0 +1,38 @@
+{
+ "title": "The far view is on in every outdoor place",
+ "date": "2026-10-09",
+ "by": "claude-agent:farview",
+ "caption": "Every outdoor place now has the sky, the haze and the far island model from far-view-1. You no longer need ?far=1; ?far=0 turns it off to compare. The sky's colours now come from the same period table as the rest of the light, so they change with it. The island model is drawn once a frame instead of twice, and phones don't build it. The empty ground in some places is for pass 2 (#375).",
+ "preview": "plaza-evening-after-west",
+ "result": [
+  "plaza-evening-after-west",
+  "sports-morning-after-north",
+  "east-coast-evening-after-west",
+  "dorm-court-evening-after-west"
+ ],
+ "sections": [
+  {
+   "title": "The plaza",
+   "caption": "Same spot and camera, the far view off and on."
+  },
+  {
+   "title": "The east coast",
+   "caption": "Same spot and camera, the far view off and on."
+  },
+  {
+   "title": "The sports street",
+   "caption": "Same spot and camera, the far view off and on. The empty ground past the street is for the second pass (#375)."
+  },
+  {
+   "title": "The dorm court",
+   "caption": "Eric only comes here after work on day 1, so both views are at dusk."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "pictures_local": true
+}

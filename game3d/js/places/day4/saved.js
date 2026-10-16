@@ -1,0 +1,1 @@
+export const captureObjects=r=>r.map(t=>({p:t.position.toArray(),r:t.rotation.toArray(),s:t.scale.toArray(),v:t.visible}));export function restoreObjects(r,t=[]){t.forEach((a,o)=>{r[o]&&(r[o].position.fromArray(a.p),r[o].rotation.fromArray(a.r),a.s&&r[o].scale.fromArray(a.s),r[o].visible=a.v)})}
