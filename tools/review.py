@@ -247,7 +247,10 @@ def cmd_set_status(rid, status, decision=None):
     save(rid, 'review.json', r)
     print(f'{rid}: {status}')
     try:
-        if status == 'decided':
+        if status == 'decided' and rid == work.PROPOSAL_REVIEW:
+            ok, no = work.apply_decisions(r, fb)
+            print(f'approved to todo: {ok or "none"}; rejected to dropped: {no or "none"}')
+        elif status == 'decided':
             issue, new = work.followup_for(rid, r)
             r['issue'] = int(issue['id'])
             save(rid, 'review.json', r)

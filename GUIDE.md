@@ -141,7 +141,7 @@ Methods, tests and music: art/SOUND.md. Approved voices and tracks: docs/game/ar
 
 - Say each fact once. Give each fact one home and link to it from elsewhere.
 - One focused task per agent: different kinds of work go to separate, fresh agents. The main thread coordinates and never waits. Implementation runs in background subagents with clear file ownership.
-- Work tracker: every task, request, decision follow-up and parked item is a GitHub issue labelled work, kept with `python3 tools/work.py` (`--help` has the rules). Update it when you start, park or finish. A commit that finishes one says "Fixes #N". Run `work.py stale` before reporting. Issues are public: nothing private in them.
+- Work tracker: every task, request, decision follow-up and parked item is a GitHub issue labelled work, kept with `python3 tools/work.py`. Agent-found issues start as `proposed` and wait for his approval in Review. A commit that finishes one says "Fixes #N". Run `work.py stale` before reporting. Issues are public: nothing private in them.
 - Sharing work with Codex and Grok, lanes, and committing as you go: [collab/PROTOCOL.md](collab/PROTOCOL.md).
 - Validate each fix in isolation: render a close-up of the exact thing he flagged, in every state it can be in, look at it, and show him.
 - Storyboard a new opening screen by screen and get it approved before building.

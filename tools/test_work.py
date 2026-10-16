@@ -109,5 +109,60 @@ class Reason(unittest.TestCase):
         self.assertEqual(self.update(issue(3, 'parked', why='later'), next='x')['why'], 'later')
 
 
+PLAIN_TEXT = {'plain': 'p', 'sees': 's', 'found': 'f', 'matters': 'm', 'fix': 'x'}
+PLAIN = {'no_picture': 'tooling only', **PLAIN_TEXT}
+
+
+class Proposed(unittest.TestCase):
+    def add(self, **kw):
+        made = {}
+
+        def gh(*a, **k):
+            made['body'] = k.get('stdin')
+            made['labels'] = [a[i + 1] for i, x in enumerate(a) if x == '--label']
+            return 'https://example/99'
+        with patch.object(work, 'gh', side_effect=gh), patch.object(work, 'guard'), patch.object(work, 'drop_cache'):
+            return work.add('t', **kw), made
+
+    def test_agent_found_starts_proposed_and_needs_a_picture_or_a_reason(self):
+        with self.assertRaises(SystemExit):
+            self.add(source=['msg:C-1'])
+        i, made = self.add(source=['msg:C-1'], proposal=PLAIN)
+        self.assertEqual(i['state'], 'proposed')
+        self.assertIn('state:proposed', made['labels'])
+        i, _ = self.add(state='parked', proposal=PLAIN)
+        self.assertEqual(i['state'], 'proposed')
+
+    def test_his_sources_stay_todo(self):
+        self.assertEqual(self.add(source=['file:notes/feedback-game/2026-10-14_1/text.md'])[0]['state'], 'todo')
+        self.assertEqual(self.add(detail='Jørgen 2026-10-14: "the loop drives me insane"')[0]['state'], 'todo')
+        self.assertEqual(self.add(jorgen=True)[0]['state'], 'todo')
+        self.assertEqual(self.add(state='running', detail='x')[0]['state'], 'running')
+        with patch('builtins.open', side_effect=OSError):
+            self.assertFalse(work.from_jorgen(['review:nope'], 'Jørgen said it'))
+
+    def test_proposed_is_never_stale_or_triaged(self):
+        old = [issue(1, 'proposed', updated=24 * 90)]
+        self.assertEqual(stale(old), {})
+        self.assertEqual(work.triage(AT, old), [])
+
+    def test_review_item_has_one_card_each_tooling_last(self):
+        a = issue(5, 'proposed', proposal={'picture': 'x.webp', 'plain': 'Sign', 'sees': 'A sign is cut off.', 'found': 'a tester', 'matters': 'm', 'fix': 'f', 'category': 'outdoor', 'size': 'small'})
+        b = issue(3, 'proposed', proposal={'no_picture': 'test tool', 'category': 'tooling', **PLAIN_TEXT})
+        r = work.proposal_review([b, a, issue(9, 'todo')])
+        self.assertEqual([o['id'] for o in r['options']], ['p5', 'p3'])
+        self.assertEqual(r['options'][0]['image'], 'x.webp')
+        self.assertIn('No picture: test tool', r['options'][1]['note'])
+        self.assertEqual(r['status'], 'open')
+
+    def test_decision_moves_picked_to_todo_and_rejected_to_dropped(self):
+        live = [issue(5, 'proposed'), issue(6, 'proposed'), issue(7, 'proposed')]
+        fb = {'picked': ['p5'], 'options': {'p6': {'reject': True, 'comment': 'not now'}}}
+        calls = []
+        with patch.object(work, 'update', side_effect=lambda n, *a, **k: calls.append((n, k.get('state'), k.get('note')))):
+            self.assertEqual(work.apply_decisions({}, fb, live), (['5'], ['6']))
+        self.assertEqual(calls, [('6', 'dropped', 'not now'), ('5', 'todo', None)])
+
+
 if __name__ == '__main__':
     unittest.main()

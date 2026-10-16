@@ -11,10 +11,11 @@ this tool keeps them honest.
     python3 tools/work.py list [--state s] [--owner o] [--kind k] [--all]   (closed ones only with --all or --state)
     python3 tools/work.py show <#>                 the issue, its history and comments (Jørgen comments there)
     python3 tools/work.py stale [--brief]          what is stuck or out of sync; exits 1 when anything is
+    python3 tools/work.py proposals [--post]       agent-found issues waiting for Jørgen; --post puts them in Review ("Proposed work")
     python3 tools/work.py triage [--days 7]        todo and parked issues untouched for 7+ days, oldest first
     python3 tools/work.py labels                   create the labels (once per repo)
 
-An issue: title = what gets done, in plain English. Labels `work`, `state:<todo|running|blocked|parked|
+An issue: title = what gets done, in plain English. Labels `work`, `state:<proposed|todo|running|blocked|parked|
 waiting-jorgen|done|dropped>`, `kind:<decision-followup|request|task|parked|check-for-jorgen>`, `owner:<claude-main|
 claude-agent:<name>|codex|grok|jorgen>`. The body is written by this tool from its hidden `work` block (source, next step,
 done ref, the reason); edit issues through this tool, not by hand, or the next change overwrites the body. Done and
@@ -37,6 +38,14 @@ changed after its issue was last updated. A plain todo is never stale, and neith
 
 `triage` is the backlog sweep: todo and parked issues this tool hasn't changed for 7+ days, oldest first. For each,
 keep it (`set` a concrete --next and owner, which resets the clock), park it or drop it with a one-line --note.
+
+Agent-found issues start as `proposed` (Jørgen 2026-10-16: many are things he hasn't noticed). `add` makes an issue `todo`
+or `parked` only when its source is his: a notes/feedback-game/ entry, a decided review:<id>, a request:<line>, his words
+in --detail quoted with "Jørgen", or `--from-jorgen`. Anything else is proposed, needs `--screenshot <path>` (what a player
+would see, phone 390x844 or desktop 1366x860) or `--no-picture "reason"`, and takes plain-words fields `--plain` (title), `--sees` (what the player sees today),
+`--found` (who and how), `--matters` and `--fix`, plus `--category` and `--size`. Proposed issues are never dispatched and `stale` and `triage` skip them. `proposals --post` writes the Review
+item `proposed-work` (one approve/reject card each); `review.py set-status proposed-work decided` moves approved ones to
+todo and rejected ones to dropped with his note.
 
 The repo is public: every title, body and comment is refused if it names private paths (island/private, reward
 scenes, manifest.user.json) or if tools/check/secrets.sh finds a secret in it.
@@ -62,11 +71,13 @@ CACHE_SECONDS = 60
 RUNNING_HOURS, TRIAGE_DAYS = 24, 7
 
 KINDS = ('decision-followup', 'request', 'task', 'parked', 'check-for-jorgen')
-STATES = ('todo', 'running', 'blocked', 'parked', 'waiting-jorgen', 'done', 'dropped')
+STATES = ('proposed', 'todo', 'running', 'blocked', 'parked', 'waiting-jorgen', 'done', 'dropped')
 CLOSED = ('done', 'dropped')
 WHY_STATES = ('blocked', 'parked', 'dropped')  # states whose --note is kept in the body as the reason
 OWNER_RE = re.compile(r'^(claude-main|claude-agent:[a-z0-9][a-z0-9-]*|codex|grok|jorgen)$')
 PRIVATE_RE = re.compile(r'island/private|private/rewards|manifest\.user\.json|reward[ -]scenes?\b', re.I)
+PROPOSAL_REVIEW = 'proposed-work'
+SIZES = ('small', 'medium', 'large')
 FIELDS = 'number,title,labels,body,createdAt,updatedAt,state,url'
 
 
@@ -151,7 +162,7 @@ def ref_md(ref):
 
 
 def body(item):
-    meta = {k: item.get(k) for k in ('source', 'next', 'done_ref', 'reason', 'why', 'detail', 'updated', 'running_since') if item.get(k)}
+    meta = {k: item.get(k) for k in ('source', 'next', 'done_ref', 'reason', 'why', 'detail', 'proposal', 'updated', 'running_since') if item.get(k)}
     out = []
     if item.get('reason'):
         out.append(item['reason'])
@@ -164,6 +175,8 @@ def body(item):
     shown = [s for s in item.get('source') or [] if not (s.startswith('review:') and f'/{s[7:]}/review.json' in (item.get('reason') or ''))]
     if shown:
         out.append('From ' + ', '.join(ref_md(s) for s in shown) + '.')
+    if item.get('state') == 'proposed':
+        out.append('**Proposed:** waits for Jørgen in Review (python3 tools/work.py proposals).')
     if item.get('detail'):
         out.append('\n'.join('> ' + line for line in item['detail'].split('\n')))
     out.append('<!-- work ' + json.dumps(meta, ensure_ascii=False).replace('--', '- -') + ' -->')
@@ -185,7 +198,7 @@ def to_item(i):
     return {'id': str(i['number']), 'title': i['title'], 'kind': pick('kind:', 'task'), 'owner': pick('owner:', 'claude-main'),
             'state': pick('state:', 'done' if i.get('state') == 'CLOSED' else 'todo'), 'open': i.get('state') == 'OPEN',
             'source': meta.get('source', []), 'next': meta.get('next', ''), 'done_ref': meta.get('done_ref', ''),
-            'reason': meta.get('reason', ''), 'why': meta.get('why', ''), 'detail': meta.get('detail', ''),
+            'reason': meta.get('reason', ''), 'why': meta.get('why', ''), 'detail': meta.get('detail', ''), 'proposal': meta.get('proposal') or {},
             'created': i.get('createdAt'), 'updated': meta.get('updated') or i.get('updatedAt'),
             'running_since': meta.get('running_since', ''), 'url': i.get('url')}
 
@@ -225,13 +238,48 @@ def check(kind=None, owner=None, state=None):
         sys.exit('owner must be claude-main, claude-agent:<name>, codex, grok or jorgen')
 
 
+def from_jorgen(source=None, detail='', flag=False):
+    """True when an issue comes from Jørgen: his feedback note, a decided review, an old request line, his quoted words in
+    the detail, or the explicit flag. Everything else is agent-found."""
+    if flag:
+        return True
+    for s in source or []:
+        if s.startswith(('file:notes/feedback-game/', 'request:L')):
+            return True
+        if s.startswith('review:'):
+            try:
+                if json.load(open(os.path.join(REVIEWS, s[7:], 'review.json'), encoding='utf-8')).get('status') == 'decided':
+                    return True
+            except (OSError, ValueError):
+                pass
+    return bool(re.search(r'Jørgen[^\n]{0,40}["“‘][^\n]+', detail or ''))
+
+
+def check_proposal(p):
+    if not (p.get('picture') or p.get('no_picture')):
+        sys.exit('work: an agent-found issue needs --screenshot <path> (what a player would see) or --no-picture "reason"')
+    if p.get('picture') and not os.path.isfile(os.path.join(ROOT, p['picture'])):
+        sys.exit(f'work: screenshot {p["picture"]} does not exist')
+    missing = [k for k in ('plain', 'sees', 'found', 'matters', 'fix') if not p.get(k)]
+    if missing:
+        sys.exit('work: an agent-found issue needs plain words for Jørgen: ' + ', '.join(f'--{k}' for k in missing)
+                 + ' (--plain title, --sees what the player sees today, --found who found it and how, --matters, --fix idea)')
+    if p.get('size') and p['size'] not in SIZES:
+        sys.exit(f'--size must be one of: {", ".join(SIZES)}')
+
+
 def add(title, kind='task', owner='claude-main', state='todo', source=None, next_step='', detail='', reason='', done_ref='',
-        updated=None):
+        updated=None, jorgen=False, proposal=None):
     """Open one issue (closed straight away for done or dropped) and return it as an item. `updated` backdates the
     stale clock (for work moved in from older lists)."""
     check(kind, owner, state)
+    if state in ('todo', 'parked') and not from_jorgen(source, detail, jorgen):
+        state = 'proposed'
+    if state == 'proposed':
+        proposal = dict(proposal or {})
+        check_proposal(proposal)
     item = {'title': title, 'kind': kind, 'owner': owner, 'state': state, 'source': source or [], 'next': next_step,
-            'detail': detail, 'reason': reason, 'done_ref': done_ref, 'updated': updated or stamp()}
+            'detail': detail, 'proposal': proposal or {}, 'reason': reason, 'done_ref': done_ref, 'updated': updated or stamp()}
     if state == 'running':
         item['running_since'] = item['updated']
     b = body(item)
@@ -441,6 +489,61 @@ def stale_lines(limit=12):
     return lines
 
 
+# ---------------------------------------------------------------- proposals
+def proposed(all_items=None):
+    return sorted((i for i in (items() if all_items is None else all_items) if i['open'] and i['state'] == 'proposed'),
+                  key=lambda i: (i['proposal'].get('category') == 'tooling', int(i['id'])))
+
+
+def ref_plain(s):
+    kind, _, v = str(s).partition(':')
+    return v if kind in ('commit', 'file', 'review', 'showcase', 'msg') else s
+
+
+def proposal_option(i):
+    """One approve/reject card: title, what a player would see, where it was found and by whom, category, size, picture."""
+    p = i['proposal']
+    pic = '' if p.get('picture') else f' No picture: {p.get("no_picture") or "none given"}.'
+    note = (f'Today: {p.get("sees") or i["title"]} Found: {p.get("found") or "by " + i["owner"]} '
+            f'Why it matters: {p.get("matters") or "not said"} Fix idea: {p.get("fix") or i["next"] or "not said"} '
+            f'({p.get("category") or "other"}, {p.get("size") or "small"}, issue #{i["id"]}.){pic}')
+    o = {'id': f'p{i["id"]}', 'label': f'#{i["id"]} {p.get("plain") or i["title"]}', 'note': note}
+    if p.get('picture'):
+        o['image'] = p['picture']
+    return o
+
+
+def proposal_review(all_items=None, old=None):
+    """The Review item `proposed-work` for every proposed issue; tooling ones come last."""
+    r = dict(old or {})
+    r.update({'title': 'Proposed work', 'date': (old or {}).get('date') or stamp()[:10], 'by': 'claude-main', 'status': 'open',
+              'updated': stamp(), 'multi': True, 'options': [proposal_option(i) for i in proposed(all_items)],
+              'question': 'Which of these should become work? Pick (approve) the ones to do and reject the ones to drop; '
+                          'anything you leave alone stays proposed. Tooling ones are at the bottom.'})
+    r.pop('decided', None)
+    r.pop('decision', None)
+    return r
+
+
+def apply_decisions(r, fb, all_items=None):
+    """His answer on `proposed-work`: picked -> todo, rejected -> dropped with his note. Returns (approved, rejected)."""
+    ok, no = [], []
+    live = {i['id']: i for i in (items(True) if all_items is None else all_items)}
+    opts_ = (fb or {}).get('options') or {}
+    for oid, o in opts_.items():
+        num = oid[1:]
+        if oid.startswith('p') and o.get('reject') and live.get(num, {}).get('state') == 'proposed':
+            update(num, state='dropped', note=(o.get('comment') or '').strip() or 'rejected by Jørgen in Review')
+            no.append(num)
+    for oid in (fb or {}).get('picked') or []:
+        num = oid[1:]
+        if oid.startswith('p') and num not in no and live.get(num, {}).get('state') == 'proposed':
+            note = (opts_.get(oid, {}).get('comment') or '').strip()
+            update(num, state='todo', comment='Approved by Jørgen in Review' + (f': {note}' if note else '.'))
+            ok.append(num)
+    return ok, no
+
+
 # ---------------------------------------------------------------- CLI
 def row(i):
     return f'{i["state"]:14} #{i["id"]:<5} [{i["owner"]}] {i["title"][:90]}' + (f'\n{"":21}next: {i["next"]}' if i.get('next') and i['open'] else '')
@@ -451,7 +554,7 @@ def opts(a, *names):
     while k < len(a):
         if a[k].startswith('--') and a[k][2:] in names:
             flag = a[k][2:]
-            if flag in ('all', 'brief'):
+            if flag in ('all', 'brief', 'post', 'from-jorgen'):
                 out[flag] = True
                 k += 1
                 continue
@@ -476,11 +579,18 @@ def main(a):
         return 0
     cmd, a = a[0], a[1:]
     if cmd == 'add':
-        o, pos = opts(a, 'kind', 'owner', 'state', 'source', 'next', 'detail')
+        o, pos = opts(a, 'kind', 'owner', 'state', 'source', 'next', 'detail', 'from-jorgen', 'screenshot', 'no-picture', 'sees',
+                      'category', 'size', 'plain', 'found', 'matters', 'fix')
         if len(pos) != 1:
             sys.exit('add needs one title')
+        prop = {'picture': o.get('screenshot'), 'no_picture': o.get('no-picture'), 'sees': o.get('sees'),
+                'category': o.get('category'), 'size': o.get('size'), 'plain': o.get('plain'), 'found': o.get('found'),
+                'matters': o.get('matters'), 'fix': o.get('fix')}
         i = add(pos[0], o.get('kind', 'task'), o.get('owner', 'claude-main'), o.get('state', 'todo'), split(o.get('source')),
-                o.get('next', ''), o.get('detail', ''))
+                o.get('next', ''), o.get('detail', ''), jorgen=bool(o.get('from-jorgen')),
+                proposal={k: v for k, v in prop.items() if v})
+        if i['state'] == 'proposed':
+            print('proposed: waits for Jørgen in Review (python3 tools/work.py proposals --post)')
         print(f'#{i["id"]} {i["url"]}')
     elif cmd in ('set', 'touch', 'done'):
         o, pos = opts(a, 'state', 'owner', 'next', 'source', 'title', 'done-ref', 'note', 'kind', 'ref')
@@ -492,7 +602,7 @@ def main(a):
         print(f'#{i["id"]}: {i["state"]}')
     elif cmd == 'list':
         o, _ = opts(a, 'state', 'owner', 'kind', 'all')
-        order = {s: n for n, s in enumerate(('running', 'blocked', 'waiting-jorgen', 'todo', 'parked', 'done', 'dropped'))}
+        order = {s: n for n, s in enumerate(('running', 'proposed', 'blocked', 'waiting-jorgen', 'todo', 'parked', 'done', 'dropped'))}
         rows = [i for i in items() if (o.get('all') or o.get('state') or i['state'] not in CLOSED)
                 and all(not o.get(k) or i.get(k) == o[k] or (k == 'owner' and i['owner'].startswith(o[k])) for k in ('state', 'owner', 'kind'))]
         for i in sorted(rows, key=lambda i: (order.get(i['state'], 9), int(i['id']))):
@@ -511,6 +621,18 @@ def main(a):
             return 2
         print('\n'.join(lines) if lines else 'Nothing stuck.')
         return 1 if lines else 0
+    elif cmd == 'proposals':
+        o, _ = opts(a, 'post')
+        rows = proposed()
+        for i in rows:
+            print(row(i))
+        print(f'{len(rows)} proposed')
+        if o.get('post'):
+            p = os.path.join(REVIEWS, PROPOSAL_REVIEW, 'review.json')
+            old = json.load(open(p, encoding='utf-8')) if os.path.exists(p) else None
+            os.makedirs(os.path.dirname(p), exist_ok=True)
+            json.dump(proposal_review(old=old), open(p, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+            print(f'wrote {p}; commit it')
     elif cmd == 'triage':
         o, _ = opts(a, 'days')
         try:
