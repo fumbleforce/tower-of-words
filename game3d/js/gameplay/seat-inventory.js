@@ -60,7 +60,19 @@ export function seatInventory(place) {
 }
 
 // Try the front first, then either side. Dining chairs often face a table, so their front is blocked.
+// The markers, the targets and the menus ask for a seat's way out several times a frame, each try a walk over every
+// blocker in the place: the answer is kept until the seat or the walk grid's blockers change (#630).
+const exits = new WeakMap();
 export function seatExit(place, seat) {
+  const nav = place.nav;
+  if (!Array.isArray(nav.rects)) return findExit(place, seat); // a walk grid without blockers to key on
+  const key = [nav, nav.free, nav.rects, nav.rects.length, nav.extra, seat.x, seat.z, seat.ry, seat.out],
+    kept = exits.get(seat);
+  if (!kept || key.some((v, i) => v !== kept.key[i])) exits.set(seat, { key, at: findExit(place, seat) });
+  const at = exits.get(seat).at;
+  return at && [...at];
+}
+function findExit(place, seat) {
   if (seat.out && Math.hypot(seat.out[0] - seat.x, seat.out[1] - seat.z) < 1.5 && place.nav.free(...seat.out))
     return [...seat.out];
   for (const distance of [0.55, 0.75, 1, 1.25])
