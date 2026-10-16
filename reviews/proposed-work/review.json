@@ -3,7 +3,7 @@
  "date": "2026-10-16",
  "by": "claude-main",
  "status": "open",
- "updated": "2026-10-16T19:47:29+0200",
+ "updated": "2026-10-16T20:15:34+0200",
  "multi": true,
  "options": [
   {
@@ -164,6 +164,21 @@
    "label": "#657 Give Kenji's favourite drink a different reaction on day 2",
    "note": "Today: On day 2 any drink you give Kenji gets the same reply, so his favourite melon soda is not special. Found: Codex, checking Kenji lines on 16 Oct. Why it matters: Day 1 already reacts to the favourite, so day 2 feels flatter. Fix idea: Split the gift scene into melon soda and other drinks, then record the lines. (story, small, issue #657.) Seen on 4bd5870f (desktop, the story's own give step): melon soda on day 1 gets his favourite reaction, and on day 2 the plain thanks any drink gets.",
    "image": "reviews/proposed-work/p657-kenji-gift-desktop.webp"
+  },
+  {
+   "id": "p666",
+   "label": "#666 Mori’s travel topic hides his day-3 gym greeting",
+   "note": "Today: Mori’s travel topic hides his day-3 gym greeting Found: by claude-main Why it matters: not said Fix idea: Keep local NPC scene dialogue reachable when a conversation topic is available. (other, small, issue #666.) No picture: none given."
+  },
+  {
+   "id": "p669",
+   "label": "#669 Follow camera at the canteen's plaza door loses Eric",
+   "note": "Today: Follow camera at the canteen's plaza door loses Eric Found: by claude-main Why it matters: not said Fix idea: not said (other, small, issue #669.) No picture: none given."
+  },
+  {
+   "id": "p670",
+   "label": "#670 Refresh branch QA for Interact menus and current day-2/day-3 fixtures",
+   "note": "Today: Refresh branch QA for Interact menus and current day-2/day-3 fixtures Found: by claude-main Why it matters: not said Fix idea: Handle Story/topic Interact rows in branch QA, then update the stale route fixtures and inherited-choice coverage. (other, small, issue #670.) No picture: none given."
   },
   {
    "id": "p673",
