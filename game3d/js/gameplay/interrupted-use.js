@@ -1,7 +1,8 @@
 // A story may interrupt a walk to an interaction. Resume only the original unfinished request.
 export function resumeInterruptedUse(game, use) {
   // a scene that starts while he walks to something he clicked (a zone he crossed, a queued event) stops that walk: he
-  // carries on to it once the scenes are over, unless they already fulfilled that request.
+  // carries on to it once the scenes are over, unless the scene that click was for has already run and done the job.
+  // What Talk does on the target by then is read again on arrival, so a scene that moves it on doesn't cancel the walk.
   let cutUse = null;
   const onNode = game.onNode;
   game.onNode = (node, phase) => {
@@ -24,10 +25,7 @@ export function resumeInterruptedUse(game, use) {
       this.story === u.story &&
       !this.walker.path &&
       this.markers.list.includes(u.item) &&
-      u.item.enabled() &&
-      this.runner.resolve(u.options.trigger || 'talk:' + u.item.id, {
-        peek: true,
-      }) === u.node
+      u.item.enabled()
     )
       use(u.item, u.options);
   };

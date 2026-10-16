@@ -90,7 +90,41 @@ test('an interruption fulfilling an unconditional request does not repeat it', a
   assert.deepEqual(visited, ['hello']);
 });
 
-for (const change of ['place', 'story', 'removed target', 'disabled target', 'changed target scene', 'new walk', 'new use']) {
+// Talk to Mio is 'hello' until a flag moves it on: a zone scene on the way sets that flag
+const moving = {
+  on: { 'talk:mio': [{ node: 'moved', if: 'aisle_seen' }, 'hello'], 'zone:aisle': 'aisle' },
+  nodes: { hello: [{ set: 'said_hello' }], aisle: [{ set: 'aisle_seen' }], moved: [{ set: 'said_moved' }] },
+};
+
+test('an unrelated zone scene that moves Talk on still lets the walk carry on to Mio', async () => {
+  const { game, target, visited } = setup(moving);
+  game.use(target());
+  await game.beat(() => game.runner.run(game.runner.resolve('zone:aisle'), { trigger: 'zone:aisle' }));
+  assert.equal(game.runner.resolve('talk:mio', { peek: true }), 'moved');
+  assert.ok(game.walker.arrive, 'the walk to Mio carries on');
+  arrive(game);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.deepEqual(visited, ['aisle', 'moved']);
+  assert.equal(flags.said_moved, true); assert.equal(flags.said_hello, undefined);
+});
+
+test('a request whose own scene already ran is dropped, even when that scene moves Talk on', async () => {
+  const afterHello = {
+    on: { 'talk:mio': [{ node: 'moved', if: 'said_hello' }, 'hello'] },
+    nodes: { hello: [{ set: 'said_hello' }], moved: [{ set: 'said_moved' }] },
+  };
+  const { game, target, visited } = setup(afterHello);
+  game.use(target());
+  await game.beat(() => game.runner.run('hello'));
+  assert.equal(game.walker.arrive, null);
+  assert.deepEqual(visited, ['hello']);
+  game.use(target()); assert.ok(game.walker.arrive, 'a deliberate second Talk remains available');
+  arrive(game);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.deepEqual(visited, ['hello', 'moved']);
+});
+
+for (const change of ['place', 'story', 'removed target', 'disabled target', 'new walk', 'new use']) {
   test(`a ${change} during interruption cancels the old request`, async () => {
     const story = structuredClone(simple), { game, target, visited } = setup(story), mio = target();
     game.use(mio);
@@ -100,7 +134,6 @@ for (const change of ['place', 'story', 'removed target', 'disabled target', 'ch
       if (change === 'story') game.story = { ...game.story };
       if (change === 'removed target') game.markers.list = [];
       if (change === 'disabled target') mio.enabled = () => false;
-      if (change === 'changed target scene') story.on['talk:mio'] = 'other';
       if (change === 'new walk') game.walker.goTo(3, 3);
       if (change === 'new use') { game.busy = false; game.use(target('other')); }
     });
