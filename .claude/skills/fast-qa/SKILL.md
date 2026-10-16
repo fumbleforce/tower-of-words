@@ -37,6 +37,7 @@ Evening discoveries are skipped by the day test; when they change, also run `nod
 - Page errors: check the file on the committed snapshot before blaming your change.
 - The route stalls: a softlock or unreachable goal, which is a bug even if a human could get past it.
 - Day 3 `station job not done` or `never took him into gate`: the route never got into the station, so the door sign-off and the monitor repair did not run. The `route: skipped` lines in the log show the steps it missed. Check the walk into the station door from the forecourt first.
+- Day 5 `required beat not done`: the run never got to the Kuro label fix (`d5_label_done`) or to the B2 evening reveal (`d5_reveal_done`, reached through the head office door). The `route:` lines in the artifacts' result.json show the step that never started.
 - Overlaps or spins: people walking through each other or turning in place; look at the shots.
 - "Render deferred" (exit 75): the machine was busy. It is not a pass: rerun with `GPU_WAIT=1800` (`python3 tools/gpu_priority.py queue` shows the holder) until PASS or FAIL. Never land on it, and don't fall back to `GL=soft`.
 - PASS WITH OVERRIDES: a check was switched off by an env variable; report which.

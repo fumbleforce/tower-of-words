@@ -1,7 +1,8 @@
 // Fast QA run: the whole day in test mode (?test=fast). node game3d/tools/fast.mjs [w] [h] [seconds]
 // DAY=2 plays day 2 instead (?day=2: from a plain finished day 1; HISTORY=mori|cold for the other day-1 histories);
 // DAY=3 plays day 3 from a plain finished day 2 (HISTORY=keep: the old sensor kept; testmode-day3.js is its route, and
-// it fails unless both station jobs are done: DAY3_STATION_BEATS).
+// it fails unless both station jobs are done: DAY3_STATION_BEATS). DAY=5 plays Monday (testmode-day5.js) and fails
+// unless the Kuro label fix and the B2 evening reveal are done: DAY5_REQUIRED_BEATS.
 // Runs at quality tier 0; QUALITY=1 (or 2) runs the day at that tier, with its own perf baseline (phone-q1).
 // --mc <id> plays another protagonist (?mc=), --cast <set or role=person,...> another cast (?cast=); or MC=, CAST=.
 // GPU_WAIT=seconds: how long to wait in the GPU queue (default 900) before the run is DEFERRED (exit 75).

@@ -1,5 +1,6 @@
 // Monday fast route: reception, lunch booth, optional B2 delivery, then an explicit Sleep.
 import { day3Tick } from './testmode-day3.js';
+import { missingBeats } from './testmode-beats.js';
 export const DAY5_ROUTE = [
   ['dorms', 'door_out'],
   ['dorms', 'stairs_down'],
@@ -32,7 +33,8 @@ export const DAY5_ROUTE = [
   ['dorm_court', 'street_gate'],
   ['east_lane', 'plaza_lane'],
   ['plaza', 'office_lane'],
-  ['forecourt', 'lift'],
+  // from day 3 the forecourt has no lift pin (story/day5/forecourt.js): the head office door takes him to the lift
+  ['forecourt', 'office_entrance'],
   ['office', 'vending', ['Yes, if they want', 'Finish with that first drink']],
   ['office', 'lift'],
   ['forecourt', 'plaza_lane'],
@@ -41,6 +43,16 @@ export const DAY5_ROUTE = [
   ['dorm_court', 'stairs'],
   ['dorms', 'bed', ['Sleep.']],
 ];
+// Monday's required beats: the label fix with Kuro at reception (T-0007, morning or afternoon) and the lift down to B2
+// for the evening reveal (d5_reveal_done is set when the reveal ends with both colleagues watching). A run passes only
+// when the game has recorded both as done. testmode.js asks for them at the end of the day, as it does for day 3.
+export const DAY5_REQUIRED_BEATS = [
+  { flag: 'd5_label_done', beat: 'the label fix with Kuro at reception (T-0007)', place: 'forecourt' },
+  { flag: 'd5_reveal_done', beat: 'the lift down to B2 and the evening reveal with Kenji and Mori', place: 'office' },
+];
+export function day5MissingBeats(flags, places) {
+  return missingBeats(DAY5_REQUIRED_BEATS, flags, places, 'day 5 required beat');
+}
 export function day5Tick(game, T, R) {
   const sleepOnly = new URLSearchParams(location.search).get('route') === 'sleep';
   const route = sleepOnly

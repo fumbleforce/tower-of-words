@@ -1,3 +1,4 @@
+import { missingBeats } from './testmode-beats.js';
 // ?test=fast on day 3: Saturday has no single goal to follow (story/day3/README.md), so the driver plays a route
 // through the day the way a player might: the room's computer, the board (Aoi, the swimming slip, the map's word),
 // the station (the witnessed door check, the monitor), the gym's booking terminal and printer, home to rest until
@@ -50,11 +51,7 @@ export const DAY3_STATION_BEATS = [
   { flag: 'd3_monitor_done', beat: 'the monitor repair at the station desk (T-0003)', place: 'gate' },
 ];
 export function day3MissingBeats(flags, places) {
-  return DAY3_STATION_BEATS.filter((b) => !flags[b.flag]).map(
-    (b) =>
-      `day 3 station job not done: ${b.beat} (${b.flag} not set)` +
-      (places.includes(b.place) ? '' : `; the run never reached the ${b.place}`),
-  );
+  return missingBeats(DAY3_STATION_BEATS, flags, places, 'day 3 station job');
 }
 
 // A walk into a way out with no pin (the station's door from the forecourt) is followed until the place it leads to:

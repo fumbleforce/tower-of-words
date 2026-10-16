@@ -6,7 +6,7 @@ import { known, SAYABLE } from './lang.js';
 import { flags } from './narrative/state.js';
 import { doorwayAt } from './movement/doorways.js';
 import { day3Tick, preferred, day3MissingBeats } from './testmode-day3.js';
-import { day5Tick, day5DeliveryTick } from './testmode-day5.js';
+import { day5Tick, day5DeliveryTick, day5MissingBeats } from './testmode-day5.js';
 import { DAY4_ROUTE } from './testmode-day4.js';
 
 export function start(game) {
@@ -51,6 +51,7 @@ export function start(game) {
       T.day = game.sim?.day || 1;
       if (!T.practice && T.day === 1) T.errors.push('the Say practice prompt was never passed');
       if (T.day === 3) T.errors.push(...day3MissingBeats(flags, T.places)); // the station jobs are required beats
+      if (T.day === 5) T.errors.push(...day5MissingBeats(flags, T.places)); // the Kuro and B2 lift beats are required
       T.done = true;
       return;
     }
