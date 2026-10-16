@@ -91,6 +91,11 @@ async function inPage({ scene, TOL, phase, placed = [], seatIds, playerOnly }) {
     return h || r.hips || r.root;
   };
   const world = (o) => o.getWorldPosition(new THREE.Vector3());
+  // a seat's fit (train/seat-fit.js, the same as the place's sit): the hips' offset from the seat point and the legs
+  const seatFit = (s, x, z) => {
+    const f = s.fit && s.local !== false ? [Math.sin(s.ry || 0) * s.fit.fwd, Math.cos(s.ry || 0) * s.fit.fwd] : [0, 0];
+    return { x: x + f[0], z: z + f[1], legs: s.fit?.legs ?? s.legs ?? null };
+  };
   // the body: every vertex of every drawn mesh of the rig, posed (skinned)
   function body(r) {
     r.root.updateMatrixWorld(true);
@@ -362,11 +367,11 @@ async function inPage({ scene, TOL, phase, placed = [], seatIds, playerOnly }) {
   }
   // every model body on every seat
   const seats = {};
-  for (const [k, s] of Object.entries(P.seats || {})) if (s && s.top !== undefined) seats[k] = { x: s.x, z: s.z, top: s.top, ry: s.ry, out: s.out };
+  for (const [k, s] of Object.entries(P.seats || {})) if (s && s.top !== undefined) seats[k] = { x: s.x, z: s.z, top: s.top, ry: s.ry, out: s.out, fit: s.fit };
   for (const p of placed)
     if (p.seatTop !== null) {
       const r = rigs[p.id];
-      seats['at_' + p.id] = { x: p.at[0], z: p.at[1], top: p.seatTop, ry: r.root.rotation.y, local: false };
+      seats['at_' + p.id] = { x: p.at[0], z: p.at[1], top: p.seatTop, ry: r.root.rotation.y, local: false, legs: r.seatLegs ?? null };
     }
   if (scene.office) {
     P.capState?.('sit'); // Eric's chair back at his desk (on day 1 it starts in the machine room)
@@ -397,7 +402,8 @@ async function inPage({ scene, TOL, phase, placed = [], seatIds, playerOnly }) {
       if (sitter) sitter.root.visible = false;
       r.setState?.('idle');
       r.root.visible = true;
-      r.sitAt(x, s.top, z, s.ry || 0);
+      const fitted = seatFit(s, x, z);
+      r.sitAt(fitted.x, s.top, fitted.z, s.ry || 0, fitted.legs);
       r.seated = true;
       const knees = [];
       r.model?.traverse(o => { if (o.isBone && /leg|knee|thigh/i.test(o.name)) { const p = o.getWorldPosition(new THREE.Vector3()); r.root.worldToLocal(p); knees.push({name:o.name,at:p.toArray()}); } });
@@ -421,10 +427,15 @@ async function closeShot(page, file, { who, seat }) {
       if (!r) return false;
       if (!document.getElementById('seat-check-style'))
         document.head.insertAdjacentHTML('beforeend', '<style id="seat-check-style">.mark{display:none!important}</style>');
+      const seatFit = (s, x, z) => {
+        const f = s.fit && s.local !== false ? [Math.sin(s.ry || 0) * s.fit.fwd, Math.cos(s.ry || 0) * s.fit.fwd] : [0, 0];
+        return { x: x + f[0], z: z + f[1], legs: s.fit?.legs ?? s.legs ?? null };
+      };
       if (seat) {
         r.setState?.('idle');
         r.root.visible = true;
-        r.sitAt(seat.x, seat.top, seat.z, seat.ry || 0);
+        const fitted = seatFit(seat, seat.x, seat.z);
+        r.sitAt(fitted.x, seat.top, fitted.z, seat.ry || 0, fitted.legs);
         r.seated = true;
       }
       const v = r.root.getWorldPosition(new (r.root.position.constructor)());

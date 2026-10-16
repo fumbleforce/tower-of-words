@@ -4,6 +4,7 @@
 import * as THREE from 'three';
 import { HIP, missing } from './train/people.js';
 import { SEAT_Y } from './train/car.js';
+import { seatOffset } from './train/seat-fit.js';
 import { clone } from '../vendor/utils/SkeletonUtils.js';
 import { meshyFiles, meshyFrom } from './avatar.js';
 
@@ -101,7 +102,7 @@ export function meshyPerson(m) {
   m.stepNow = step; // a gesture tween takes the frame's step first (rig-gestures.js boneTween)
   // seat the hips on the chair under the root (train and office seats: SEAT_Y), keeping x, z and facing
   m.sitHere = () => {
-    m.sitAt(m.root.position.x, SEAT_Y, m.root.position.z, m.root.rotation.y);
+    m.sitAt(m.root.position.x, SEAT_Y, m.root.position.z, m.root.rotation.y, m.seatLegs);
   };
   return m;
 }
@@ -149,13 +150,16 @@ export const meshy3 = (id) => {
 };
 
 // A Meshy model in a passenger's seat (train/people.js buildPassengers), facing the same way, with an optional act
-// (train.js); the stand-in, never drawn, if the model did not load
-export function inSeat(id, r, act) {
+// (train.js) and the seat's fit (train/seat-fit.js: the hips' offset and where the legs go); the stand-in, never drawn,
+// if the model did not load
+export function inSeat(id, r, act, fit = null) {
   const m = meshy3(id);
   if (!m) return missing(r, id);
-  m.root.position.set(r.root.position.x, 0, r.root.position.z);
+  const [dx, dz] = fit ? seatOffset(r.root.rotation.y) : [0, 0];
+  m.root.position.set(r.root.position.x + dx, 0, r.root.position.z + dz);
   m.root.rotation.copy(r.root.rotation);
   m.seated = true;
+  m.seatLegs = fit ? fit.legs : null;
   if (act) m.act = act;
   return m;
 }

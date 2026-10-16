@@ -38,6 +38,7 @@ import { makeCat } from '../creatures/cat.js';
 import { moveTrainCat } from './train-cat.js';
 import { PEOPLE } from '../cast.js';
 import { inSeat, dozing } from '../cast3d.js';
+import { SEAT_FIT, sitFitted } from '../train/seat-fit.js';
 import { prepareTrainPassengers } from '../crowd/passengers.js';
 import { Nav, blob } from '../engine.js';
 import { ui, sfx } from '../ui.js';
@@ -148,8 +149,8 @@ export async function trainPlace(game) {
   // passengers, cat and bags as in side/train
   const list = buildPassengers(LZ, SEAT_Y);
   // Meshy models in passengers' seats (cast3d.js): Aoi (no phone: no props on models), Hamada asleep
-  list[1] = inSeat('aoi', list[1]);
-  list[0] = inSeat('kuroda', list[0], dozing);
+  list[1] = inSeat('aoi', list[1], null, SEAT_FIT);
+  list[0] = inSeat('kuroda', list[0], dozing, SEAT_FIT);
   const [kuroda, aoi, reader, music, stander, bun] = list;
   const blobs = {};
   for (const p of list) {
@@ -792,11 +793,12 @@ export async function trainPlace(game) {
   // what the passengers can show Eric: their phone and bag hooks (train/discoveries.js)
   const finds = trainDiscoveries(game, { people, car: car.root, nav, SEAT_Y });
   const seats = {
-    seat_aoi: { x: -1.25, z: -(LZ - 0.24), side: -1, bag: 1, top: SEAT_Y, ry: 0 },
-    seat_far_r: { x: 1.58, z: -(LZ - 0.24), side: -1, props: true, top: SEAT_Y, ry: 0 },
-    seat_near_l: { x: -1.3, z: LZ - 0.24, side: 1, bag: 4, top: SEAT_Y, ry: Math.PI },
-    seat_near_r: { x: 1.92, z: LZ - 0.24, side: 1, bag: 5, top: SEAT_Y, ry: Math.PI },
-    seat_mio: { x: 2.1, z: -(LZ - 0.24), side: -1, top: SEAT_Y, ry: 0 },
+    seat_aoi: { x: -1.25, z: -(LZ - 0.24), side: -1, bag: 1, top: SEAT_Y, ry: 0, fit: SEAT_FIT },
+    seat_far_r: { x: 1.58, z: -(LZ - 0.24), side: -1, props: true, top: SEAT_Y, ry: 0, fit: SEAT_FIT },
+    seat_near_l: { x: -1.3, z: LZ - 0.24, side: 1, bag: 4, top: SEAT_Y, ry: Math.PI, fit: SEAT_FIT },
+    // the door pocket's pole stands in front of this seat, so its fit keeps the hips 3 cm forward, not 7
+    seat_near_r: { x: 1.92, z: LZ - 0.24, side: 1, bag: 5, top: SEAT_Y, ry: Math.PI, fit: { ...SEAT_FIT, fwd: 0.03 } },
+    seat_mio: { x: 2.1, z: -(LZ - 0.24), side: -1, top: SEAT_Y, ry: 0, fit: SEAT_FIT },
   };
   const spots = {
     aisle: [0.4, 0.1],
@@ -1098,7 +1100,7 @@ export async function trainPlace(game) {
         await game.walkTo(s.x, s.z + (s.side < 0 ? 0.55 : -0.55));
         const m = game.player;
         m.seated = true;
-        m.sitAt(s.x, SEAT_Y, s.z - s.side * 0.02, s.side < 0 ? 0 : Math.PI);
+        sitFitted(m, s.x, SEAT_Y, s.z - s.side * 0.02, s.side < 0 ? 0 : Math.PI, s.fit);
         game.walker.facing = m.root.rotation.y;
         return;
       }
@@ -1609,7 +1611,7 @@ export async function trainPlace(game) {
       rei.blob.visible = false;
       if (list.includes(rei)) list.splice(list.indexOf(rei), 1);
       m.root.visible = true;
-      m.sitAt(2.1, SEAT_Y, -(LZ - 0.24) + 0.02, 0);
+      sitFitted(m, 2.1, SEAT_Y, -(LZ - 0.24) + 0.02, 0);
       m.seated = true;
       car.root.attach(laptop);
       laptop.position.set(2.1, SEAT_Y + 0.2, -(LZ - 0.24) + 0.3);
@@ -1642,7 +1644,7 @@ export async function trainPlace(game) {
         cup.visible = false;
         const m = game.player;
         m.seated = true;
-        m.sitAt(q.x, SEAT_Y, q.z + 0.02, 0);
+        sitFitted(m, q.x, SEAT_Y, q.z + 0.02, 0);
         game.walker.facing = 0;
       }
     },

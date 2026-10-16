@@ -23,6 +23,7 @@ const { prepareApprovedCrowd, approvedCrowd } = await import('../../js/crowd/app
 const { EVERYDAY_ROLES, prepareCrowdBodies, preparePlacePeople, crowdBody, generic, variant, roleBody } =
   await import('../../js/crowd/bodies.js');
 const { tintUniforms, shadeTint } = await import('../../js/crowd/tint.js');
+const { SEAT_FIT, seatOffset } = await import('../../js/train/seat-fit.js');
 
 const selected = {
   'casual-1': {
@@ -320,7 +321,7 @@ for (const [width, size] of [[1366, 1024], [390, 512]]) {
       for (const [id, person] of Object.entries(people)) {
         parent.add(person.root);
         before.set(id, {
-          person, act: person.act, root: person.root, x: person.root.position.x, z: person.root.position.z,
+          person, act: person.act, root: person.root, x: person.root.position.x, z: person.root.position.z, ry: person.root.rotation.y,
           props: person.torso.children.filter((o) => o.isGroup && o !== person.head && !person.arms.includes(o)),
           cans: person.headK.children.filter((o) => o.isMesh && /Cylinder|Torus/.test(o.geometry.type)),
         });
@@ -335,8 +336,10 @@ for (const [width, size] of [[1366, 1024], [390, 512]]) {
         assert.equal(person.seated, true);
         assert.equal(person.root.parent, parent);
         assert.ok(old.root.parent === null);
-        assert.equal(person.root.position.x, old.x);
-        assert.equal(person.root.position.z, old.z);
+        // seated: the hips sit a little toward the aisle from the stand-in's place (train/seat-fit.js)
+        const [fx, fz] = seatOffset(old.ry, SEAT_FIT.fwd);
+        assert.ok(Math.abs(person.root.position.x - old.x - fx) < 1e-9);
+        assert.ok(Math.abs(person.root.position.z - old.z - fz) < 1e-9);
         for (const prop of old.props) assert.equal(prop.parent, person.torso);
         for (const can of old.cans) assert.equal(can.parent, person.headK);
         assert.equal(map.image.width, size);

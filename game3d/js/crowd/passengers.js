@@ -11,6 +11,7 @@ import { proxyParts, roleBody, preparePlacePeople } from './bodies.js';
 import { bridgeOfficePose } from './office-pose.js';
 import { phoneLighter } from '../perf/phone.js';
 import { missing } from '../train/people.js';
+import { SEAT_FIT, seatOffset } from '../train/seat-fit.js';
 
 // How each passenger sits: the stand-in's hold (train/people.js armsHold), so the hands stay on the book
 // or phone, and a little shorter for the student. Which body each one gets is the shared role table's (crowd/roles.js).
@@ -91,6 +92,11 @@ export function nativePassengers(people) {
       continue;
     }
     n.seated = true;
+    // the hips a little forward and the feet in front of the bench (train/seat-fit.js)
+    const [dx, dz] = seatOffset(n.root.rotation.y);
+    n.root.position.x += dx;
+    n.root.position.z += dz;
+    n.seatLegs = SEAT_FIT.legs;
     n.sitHere();
     proxyParts(n);
     // the passenger's head nod and turn (its act) reach the real head

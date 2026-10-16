@@ -11,6 +11,7 @@ import { meshyGait, clipAction, clipActions, holdNow } from './movement/gait.js'
 import { calmSitTime, V as ver, poseLayer, addPhone, API_PHONE_BONES, CDIR } from './held-pose.js';
 import { loadRelaxedIdle } from './relaxed-idle.js';
 import { seatUnderside, sitRootY } from './movement/sit-height.js';
+import { solveSeatLegs } from './movement/sit-legs.js';
 import { loadSkin } from './perf/skin-tex.js';
 import { MC } from './mc.js';
 const EDIR = new URL('../assets/eric/', import.meta.url).href;
@@ -115,6 +116,7 @@ export function meshyFrom(id, [walk, run, idle, sitG, tex, phone, ...gj], { heig
     }
   });
   let gesturing = null;
+  const sitState = { legs: null }; // where a seated body's legs go (movement/sit-legs.js), set by sitAt
   let cur = null,
     curName = '',
     bt = 0,
@@ -206,6 +208,7 @@ export function meshyFrom(id, [walk, run, idle, sitG, tex, phone, ...gj], { heig
       spine.rotateX(pose.bow * 0.6);
       spine2 && spine2.rotateX(pose.bow * 0.4);
     }
+    if (curName === 'sit' && sitState.legs) solveSeatLegs({ model, root }, sitState.legs);
     layers.step(dt);
     ph.place();
   }
@@ -247,11 +250,20 @@ export function meshyFrom(id, [walk, run, idle, sitG, tex, phone, ...gj], { heig
       return curName;
     },
     // seated on the seat top at (x, z), facing ry, straight into the seated frame (gait.js holdNow)
-    sitAt(x, seatTop, z, ry) {
+    sitAt(x, seatTop, z, ry, legs = null) {
       root.position.set(x, sitRootY(seatTop, sitUnder, root.scale.x), z);
       root.rotation.y = ry;
       setState('sit');
       holdNow(mixer, cur, [...Object.values(actions), ...Object.values(gact)], restoreBones, snapBones);
+      sitState.legs = legs;
+      if (legs) solveSeatLegs({ model, root }, legs);
+    },
+    // {ahead, height}: the legs go where movement/sit-legs.js puts them while seated; null leaves the clip's legs
+    get seatLegs() {
+      return sitState.legs;
+    },
+    set seatLegs(v) {
+      sitState.legs = v;
     },
   };
   return a;
