@@ -12,7 +12,8 @@ versions stay until someone deletes them. The lock file maps each path to its si
 
 Usage:
   python3 tools/assets/sync.py status [--remote] [--all]   drift between disk, lock file and (with --remote) R2
-  python3 tools/assets/sync.py push [--dry-run] [--prune]   upload new and changed used files, rewrite the lock file
+  python3 tools/assets/sync.py push [--dry-run] [--prune] [--only PATH ...]
+                                                            upload new and changed used files, rewrite the lock file
   python3 tools/assets/sync.py pull [PATH ...] [--force]    fetch missing or changed files (optionally under PATHs)
   python3 tools/assets/sync.py check [--offline]            exit 1 if a used file is not in the lock file or not in R2
   python3 tools/assets/sync.py forget PATH ...              drop lock entries of files retired from the live folders
@@ -395,6 +396,15 @@ def cmd_push(a):
     if d['problems'] and not a.dry_run:
         raise SystemExit('not pushing while the used set may be incomplete')
     have, used, lock = d['have'], d['used'], d['lock']
+    if a.only:
+        # a targeted push (the commit hook, tools/bible/pages.py register): only these used files are uploaded and
+        # locked; no other lock entry changes, so nothing is dropped
+        absent = [p for p in a.only if p not in used]
+        if absent:
+            raise SystemExit(f'not used here (listed or in a root, and on this disk): {", ".join(absent[:5])}')
+        used = {p: used[p] for p in a.only}
+        d = dict(d, new=[p for p in used if p not in lock],
+                 changed=[p for p in used if p in lock and have[p][1] != lock[p]['sha256']], dropped=[], missing=[])
     jobs, seen = [], set()
     for p in sorted(used):
         size, sha = have[p]
@@ -536,6 +546,7 @@ def main():
     s = sub.add_parser('push', help='upload new and changed used files and rewrite the lock file')
     s.add_argument('--dry-run', action='store_true')
     s.add_argument('--prune', action='store_true', help='drop lock entries whose file is gone from this disk')
+    s.add_argument('--only', nargs='+', metavar='PATH', help='push just these used files; no other lock entry changes')
     s.add_argument('--all', action='store_true')
     s = sub.add_parser('pull', help='fetch files that are missing or different here')
     s.add_argument('paths', nargs='*', help='only under these paths')

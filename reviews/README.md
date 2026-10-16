@@ -48,7 +48,7 @@ To post a review item, write `reviews/<id>/review.json` as in Adding an item bel
 | `decision` | when decided | One line: what was decided, in his words where possible. |
 | `decided_at`, `issue` | set by review.py | When it was decided, and the GitHub issue that holds the work on it (tools/work.py). |
 
-4. Check it shows: open http://127.0.0.1:8771/bible/#review/<id>. Every image and audio path must resolve (`node tools/bible/check.mjs` checks them). For the public site, run `python3 tools/bible/pages.py push` and commit bible/pages-media.json and the lock file with the item (Answering from the public site).
+4. Check it shows: open http://127.0.0.1:8771/bible/#review/<id>. Every image and audio path must resolve (`node tools/bible/check.mjs` checks them). For the public site, commit the item: the commit registers its pictures (Answering from the public site).
 5. Tell the main agent the id. Don't paste the candidates into chat.
 
 ## Reading his answers
@@ -80,6 +80,6 @@ python3 tools/review.py pull              # in the main checkout: write each ans
 
 `pull` imports only issues he opened, oldest first, saves them exactly as the local Send would (earlier sends go to `history`, `sent` is when he opened the issue), comments "Imported" and closes each issue. `review.py list` says when answers are waiting. Commit the feedback.json files as usual.
 
-New items reach the public site with the next deploy. Their pictures must be in the asset store first: `python3 tools/bible/pages.py push` (lists them in bible/pages-media.json and runs `tools/assets/sync.py push`), then commit that list and tools/assets/assets.lock.json. The deploy leaves out, with a warning, any picture that isn't pushed.
+New items reach the public site with the next deploy. Committing the item registers its pictures: the commit hook (tools/check/showcase-media.mjs, which runs `tools/bible/pages.py register`) pushes the new ones to the asset store and stages bible/pages-media.json and tools/assets/assets.lock.json with the item. The commit is refused when a picture is in neither the lock file nor a checkout. The deploy leaves out, with a warning, any picture that isn't pushed.
 
 When he has decided, set the item's `status` to `decided` with `decided` and `decision` through `review.py set-status` (it opens the follow-up GitHub issue and stores its number), move the approved files where they belong (art/approved/, the game), and update GUIDE.md and bible/facts.yaml as usual.

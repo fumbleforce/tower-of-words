@@ -5,6 +5,7 @@
     python3 tools/bible/pages.py deny <site>     only the deny check: exit 1 if anything private is in <site>
     python3 tools/bible/pages.py media           write bible/pages-media.json, the media list tools/assets/sync.py pushes
     python3 tools/bible/pages.py push            media, then tools/assets/sync.py push; commit the list and the lock file
+    python3 tools/bible/pages.py register        the commit hook's step (tools/check/showcase-media.mjs): see cmd_register
 
 The site gets bible/ (index, app.js, live.js, work.js, app.css) in remote mode and every committed file under reviews/
 and showcase/: the text of every item, with Jørgen's feedback. Pictures, audio, 3D models and live viewers go up only for
@@ -249,17 +250,22 @@ def referenced(base, pub):
     return refs
 
 
+def write_list(paths):
+    """Write the media list (LIST) with these paths, sorted."""
+    data = {'about': 'Images and audio the public bible shows: open Review items and the newest Showcase entries '
+                     '(tools/bible/pages.py media writes this; tools/assets/sync.py pushes every file listed). Do not edit by hand.',
+            'data': sorted(paths)}
+    with open(os.path.join(ROOT, LIST), 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=0)
+        f.write('\n')
+
+
 def cmd_media():
     pub = published(ROOT, showcase_dates(ROOT))
     refs = referenced(ROOT, pub)
     have = sorted(p for p in refs if os.path.isfile(os.path.join(ROOT, p)))
     missing = sorted(set(refs) - set(have))
-    data = {'about': 'Images and audio the public bible shows: open Review items and the newest Showcase entries '
-                     '(tools/bible/pages.py media writes this; tools/assets/sync.py pushes every file listed). Do not edit by hand.',
-            'data': have}
-    with open(os.path.join(ROOT, LIST), 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=0)
-        f.write('\n')
+    write_list(have)
     print(f'{LIST}: {len(have)} files' + (f'; {len(missing)} named by an item but not on this disk' if missing else ''))
     for p in missing[:10]:
         print(f'  not here: {p} ({", ".join(refs[p][:3])})')
@@ -269,6 +275,95 @@ def cmd_push():
     cmd_media()
     subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'assets', 'sync.py'), 'push'], cwd=ROOT, check=True)
     print(f'Now commit {LIST} and tools/assets/assets.lock.json.')
+
+
+# ------------------------------------------------------------------ registered on commit (tools/check/showcase-media.mjs)
+def main_checkout():
+    """The main checkout: the folder that holds the shared .git. A worktree copies the pictures it lacks from there."""
+    return os.path.dirname(git('rev-parse', '--path-format=absolute', '--git-common-dir').strip())
+
+
+def touched_items():
+    """The Showcase entries and Review items the staged commit adds, changes or removes, as 'showcase/<id>'. Only their
+    entry.json or review.json counts: feedback and answers change no picture and no publication time."""
+    out = set()
+    for name in git('diff', '--cached', '--name-only', '-z').split('\0'):
+        parts = name.split('/')
+        if len(parts) == 3 and parts[0] in ('showcase', 'reviews') and parts[2] in ('entry.json', 'review.json'):
+            out.add(f'{parts[0]}/{parts[1]}')
+    return out
+
+
+def commit_dates(touched):
+    """The publication times as the commit leaves them: HEAD's, with each Showcase entry the commit changes at now (so
+    a new entry is the newest, as it will be once committed)."""
+    dates = showcase_dates(ROOT)
+    now = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    for item in touched:
+        if item.startswith('showcase/'):
+            dates[item.split('/', 1)[1]] = now
+    return dates
+
+
+def plan_copies(refs, here, in_main, lock, touched):
+    """What the hook does about the published pictures this disk lacks. refs: {path: [item, ...]}; here and in_main: the
+    paths on this disk and in the main checkout; lock: the lock file's entries; touched: the items the commit changes.
+    Returns (copy, absent): copy = paths to copy from the main checkout; absent = pictures of touched items that are in
+    neither the lock file nor a checkout, so the entry would show without them."""
+    copy = sorted(p for p in refs if p not in here and p in in_main)
+    absent = sorted(p for p, items in refs.items()
+                    if p not in here and p not in in_main and p not in lock and touched.intersection(items))
+    return copy, absent
+
+
+def plan_push(lock, shas):
+    """The pictures to upload and lock: those on this disk that the lock file does not hold with this sha256.
+    shas: {path: sha256} for the files on this disk."""
+    return sorted(p for p, sha in shas.items() if p not in lock or lock[p]['sha256'] != sha)
+
+
+def cmd_register():
+    """The commit hook's step for a commit that adds or changes a Showcase entry or a Review item, or this file. The bible
+    shows the pictures of the open Review items and the newest Showcase entries, as the commit will leave them. Here:
+    copy the published pictures this disk lacks from the main checkout (a copy, so either checkout can change its own),
+    push the ones the asset store does not hold (sync.py push --only), write the list and stage it with the lock file.
+    Refused when a picture of an item the commit adds or changes is in no checkout and not in the lock file: the entry
+    would show without it. Nothing is staged then."""
+    import sync  # tools/assets/sync.py: the lock file, the sha cache and the R2 upload
+    touched = touched_items()
+    pub = published(ROOT, commit_dates(touched))
+    refs = referenced(ROOT, pub)
+    main = main_checkout()
+    here = {p for p in refs if os.path.isfile(os.path.join(ROOT, p))}
+    in_main = {p for p in refs if p not in here and os.path.isfile(os.path.join(main, p))}
+    lock = sync.load_lock()
+    copy, absent = plan_copies(refs, here, in_main, lock, touched)
+    if absent:
+        sys.exit(f'bible pictures: {len(absent)} picture(s) of the items this commit changes are in neither the asset store '
+                 f'(tools/assets/assets.lock.json) nor a checkout, so the entry would show without them: '
+                 + ', '.join(absent[:5]) + (' ...' if len(absent) > 5 else '')
+                 + '. Put the captures in this checkout (game3d/shots/<job>/), then commit again.')
+    for p in copy:
+        dest = os.path.join(ROOT, p)
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        shutil.copyfile(os.path.join(main, p), dest)
+    cache = sync.load_cache()
+    have = sync.local_state(sorted(here | set(copy)), cache)
+    sync.save_cache(cache)
+    push = plan_push(lock, {p: v[1] for p, v in have.items()})
+    write_list(list(have))
+    if push:
+        subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'assets', 'sync.py'), 'push', '--only', *push],
+                       cwd=ROOT, check=True)
+    subprocess.run(['git', 'add', '--', LIST, sync.LOCK_REL], cwd=ROOT, check=True)
+    pushed = sum(have[p][0] for p in push)
+    print(f'bible pictures: {len(have)} on this disk for {len(pub)} published items; copied {len(copy)} from the main checkout; '
+          + (f'pushed {len(push)} new or changed ({pushed / 2**20:.1f} MB)' if push else 'nothing new to push')
+          + f'; {LIST} and the lock file are staged')
+    unlisted = sorted(p for p in refs if p not in here and p not in in_main and p not in lock)
+    if unlisted:  # not this commit's items, so not refused: their pages show without these pictures until they exist
+        print(f'bible pictures: {len(unlisted)} published picture(s) are in neither the lock file nor a checkout: '
+              + ', '.join(unlisted[:5]) + (' ...' if len(unlisted) > 5 else ''))
 
 
 # ------------------------------------------------------------------ staging
@@ -484,6 +579,8 @@ def main(a):
         cmd_media()
     elif a == ['push']:
         cmd_push()
+    elif a == ['register']:
+        cmd_register()
     else:
         sys.exit(__doc__)
 

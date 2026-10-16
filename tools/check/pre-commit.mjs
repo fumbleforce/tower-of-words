@@ -2,12 +2,16 @@ import { checkStagedSyntax } from './staged.mjs';
 import { checkStagedAssets } from './staged-assets.mjs';
 import { checkStagedCpu } from './staged-cpu.mjs';
 import { checkAssetSync } from './locked-assets.mjs';
+import { checkShowcaseMedia } from './showcase-media.mjs';
 
 const controller = new AbortController();
 const stop = signal => controller.abort(new Error(`Commit checks interrupted by ${signal}`));
 process.on('SIGINT', stop); process.on('SIGTERM', stop);
 try {
-  const cwd = process.cwd(), snapshot = checkStagedSyntax(cwd);
+  const cwd = process.cwd();
+  const media = checkShowcaseMedia(cwd);  // before the snapshot: it stages the media list and the lock file
+  if (media) console.log(media);
+  const snapshot = checkStagedSyntax(cwd);
   if (snapshot.failures.length) throw new Error(snapshot.failures.map(failure => `${failure.file}: ${failure.error}`).join('\n'));
   checkStagedAssets(cwd, snapshot);
   checkAssetSync(cwd);

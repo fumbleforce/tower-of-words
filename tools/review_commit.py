@@ -2,7 +2,8 @@
 
 The public bible (game3d/tools/deploy-pages.sh, tools/bible/pages.py stage) is built from committed files only, so
 review.json, entry.json and feedback.json edits made by tools/review.py and tools/review_server.py commit their own
-change at once. Only those paths go in, with "Facts: none". The commit is skipped, with a warning, in a worktree
+change at once. Only those paths go in, with "Facts: none" (and the bible's media list and lock file, when the commit
+hook registers new pictures: tools/check/showcase-media.mjs). The commit is skipped, with a warning, in a worktree
 (the change would be lost with it), when the index already holds other staged changes (they are someone else's
 work), or for files outside reviews/ and showcase/ (private items stay out of git).
 """
@@ -14,6 +15,7 @@ import threading
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 NAMES = ('review.json', 'entry.json', 'feedback.json')
 FOLDERS = ('reviews', 'showcase')
+MEDIA = ('bible/pages-media.json', 'tools/assets/assets.lock.json')  # staged by the commit hook for new pictures
 _LOCK = threading.Lock()  # the review server saves from several threads; one git index at a time
 
 
@@ -63,4 +65,7 @@ def commit(paths, subject, root=ROOT):
             _git(root, 'reset', '-q', '--', *rels)  # leave nothing staged for someone else's commit
             _warn(f'git failed, {", ".join(rels)} not committed: {(r.stderr or r.stdout).strip()[-400:]}')
             return False
+        # git commit -- paths runs the hook on a private index: what the hook staged is in the commit, but this index
+        # still holds the old media files. Take them back to HEAD so a later commit cannot revert them.
+        _git(root, 'reset', '-q', '--', *MEDIA)
         return True

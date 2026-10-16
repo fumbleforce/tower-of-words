@@ -95,5 +95,50 @@ class Pictures(unittest.TestCase):
             self.assertEqual(sorted(os.listdir(folder)), ['data.json', 'notes.md', 'review.json', 'shared.webp'])
 
 
+class Registration(unittest.TestCase):
+    """The commit hook's rule (pages.py register): copy what main has, refuse only what no checkout and no lock file has."""
+
+    def test_a_picture_this_disk_lacks_is_copied_from_main(self):
+        refs = {'game3d/shots/a/x.png': ['showcase/one'], 'game3d/shots/b/y.png': ['showcase/two']}
+        copy, absent = pages.plan_copies(refs, here={'game3d/shots/b/y.png'}, in_main={'game3d/shots/a/x.png'},
+                                         lock={}, touched=set())
+        self.assertEqual(copy, ['game3d/shots/a/x.png'])
+        self.assertEqual(absent, [])
+
+    def test_a_changed_entry_with_a_picture_in_no_checkout_and_no_lock_is_refused(self):
+        refs = {'game3d/shots/a/x.png': ['showcase/new'], 'game3d/shots/c/z.png': ['showcase/old']}
+        copy, absent = pages.plan_copies(refs, here=set(), in_main=set(), lock={}, touched={'showcase/new'})
+        self.assertEqual(absent, ['game3d/shots/a/x.png'])  # the untouched entry is not this commit's problem
+
+    def test_a_picture_the_lock_file_holds_is_never_refused(self):
+        refs = {'game3d/shots/a/x.png': ['showcase/new']}
+        copy, absent = pages.plan_copies(refs, here=set(), in_main=set(),
+                                         lock={'game3d/shots/a/x.png': {'sha256': 'aa'}}, touched={'showcase/new'})
+        self.assertEqual((copy, absent), ([], []))
+
+    def test_only_pictures_the_lock_file_lacks_or_holds_with_another_sha_are_pushed(self):
+        lock = {'a.webp': {'sha256': 'aa'}, 'b.webp': {'sha256': 'bb'}}
+        self.assertEqual(pages.plan_push(lock, {'a.webp': 'aa', 'b.webp': 'cc', 'c.webp': 'dd'}), ['b.webp', 'c.webp'])
+
+    def test_only_an_entry_or_a_review_file_counts_as_touched(self):
+        real = pages.git
+        pages.git = lambda *args: 'showcase/a/entry.json\0showcase/b/feedback.json\0reviews/c/review.json\0reviews/d/answer.md\0\0'
+        try:
+            touched = pages.touched_items()
+        finally:
+            pages.git = real
+        self.assertEqual(touched, {'showcase/a', 'reviews/c'})
+
+    def test_the_commit_makes_a_changed_entry_the_newest(self):
+        real = pages.showcase_dates
+        pages.showcase_dates = lambda root: {'old': '2026-01-01T00:00:00+00:00', 'kept': '2026-02-01T00:00:00+00:00'}
+        try:
+            dates = pages.commit_dates({'showcase/old', 'reviews/other'})
+        finally:
+            pages.showcase_dates = real
+        self.assertGreater(pages.stamp(dates['old']), pages.stamp('2026-02-01'))
+        self.assertEqual(dates['kept'], '2026-02-01T00:00:00+00:00')
+
+
 if __name__ == '__main__':
     unittest.main()
