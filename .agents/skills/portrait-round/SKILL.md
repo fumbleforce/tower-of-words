@@ -15,7 +15,7 @@ The art rules live in GUIDE.md (Art) and art/PROMPTS.md. This skill is the order
 
 ## Render
 
-4. The round folder is art/candidates/portraits/<round>/, with the recipes in its `recipes/`. Run each recipe with `node tools/subplots/compose.mjs <recipe> --wait --owner <your name>`, with the same `--seed` for every option so the change is the only difference; the webp pictures land in the round folder. An expression is a face-only repaint of the approved source: `start` with a `mask` over the face. Keep a prompts.json log there (from `--dry-run`).
+4. The round folder is art/candidates/portraits/<round>/, with the recipes in its `recipes/`. Run each recipe with `node tools/subplots/compose.mjs <recipe> --wait --owner codex-exec:<task>`, with the same `--seed` for every option so the change is the only difference; the webp pictures land in the round folder. An expression is a face-only repaint of the approved source: `start` with a `mask` over the face. Keep a prompts.json log there (from `--dry-run`).
 5. Give the last recipe `--end-session` so the image service frees the GPU. It holds the GPU lock itself.
 
 ## Check each render

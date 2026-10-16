@@ -19,7 +19,7 @@ These rules come from Jørgen's own corrections. Each one exists because a round
 
 ## Every picture comes from a recipe (Jørgen 2026-10-10)
 
-"Will future images you generate fit this format? ... you use these blocks to generate future images, at least for the camera, characters, shape, style etc etc, while details come in the free text." Each shot is `<round>/recipes/<shot>.json`, run with `node tools/subplots/compose.mjs <recipe> --wait`; art/PROMPTS.md (How a picture is made) has the fields, the presets, the picture tools and the reward rules compose.mjs enforces. Set `subplotId` and `imageSlot` from the scene editor so the picture is listed under its shot.
+"Will future images you generate fit this format? ... you use these blocks to generate future images, at least for the camera, characters, shape, style etc etc, while details come in the free text." Each shot is `<round>/recipes/<shot>.json`, run with `node tools/subplots/compose.mjs <recipe> --wait --owner codex-exec:<task>`; art/PROMPTS.md (How a picture is made) has the fields, the presets, the picture tools and the reward rules compose.mjs enforces. Set `subplotId` and `imageSlot` from the scene editor so the picture is listed under its shot.
 
 ## Rendering
 

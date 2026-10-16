@@ -7,10 +7,10 @@ The main image model is RDBT Anima in local ComfyUI, with One Obsession for open
 Every still picture goes through the image service (tools/imagegen/). Jørgen makes his in Image Gen (http://127.0.0.1:8772/) or in the Scene Editor's composer. Agents write a recipe, `<round>/recipes/<shot>.json`, and queue it:
 
 ```
-node tools/subplots/compose.mjs <round>/recipes/<shot>.json --wait
+node tools/subplots/compose.mjs <round>/recipes/<shot>.json --wait --owner <session>/<agent>
 ```
 
-`--wait` saves each picture as webp in the round folder (the one above `recipes/`); the master PNG stays in the image service. `--owner <your name>` shows who made the renders in the dashboard's Made by. Add `--end-session` to the round's last recipe so the GPU is freed. `--dry-run` prints the assembled prompt and settings without sending anything; feed that to tools/prompt_check.py. The service takes the GPU lock itself. A recipe's picture opens in the editor with every block filled in.
+`--wait` saves each picture as webp in the round folder (the one above `recipes/`); the master PNG stays in the image service. `--owner` names who made the renders, shown as Made by in the dashboard: your session and agent, such as `claude-main/art-round`, `claude-private/private-scene-art` or `codex-exec:<task>`. Add `--end-session` to the round's last recipe so the GPU is freed. `--dry-run` prints the assembled prompt and settings without sending anything; feed that to tools/prompt_check.py. The service takes the GPU lock itself. A recipe's picture opens in the editor with every block filled in.
 
 A recipe is the composer's composition as JSON. The header of tools/subplots/compose.mjs lists every field:
 

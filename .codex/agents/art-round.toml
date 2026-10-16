@@ -27,7 +27,7 @@ You make one art round: render or build the candidates, check them, and put ever
 
 ## Recipe
 
-Every still is a recipe in the round folder, `<round>/recipes/<candidate>.json`, run with `node tools/subplots/compose.mjs <recipe> --wait` (art/PROMPTS.md, How a picture is made). That section lists the fields, the presets, the picture tools (img2img, inpaint, LoRA, LLLite control, colour fix) and how to change a preset. Keep one seed set across the round so the one change is the only difference.
+Every still is a recipe in the round folder, `<round>/recipes/<candidate>.json`, run with `node tools/subplots/compose.mjs <recipe> --wait --owner codex-exec:<task>` (art/PROMPTS.md, How a picture is made). That section lists the fields, the presets, the picture tools (img2img, inpaint, LoRA, LLLite control, colour fix) and how to change a preset. Keep one seed set across the round so the one change is the only difference.
 
 ## Skills
 
