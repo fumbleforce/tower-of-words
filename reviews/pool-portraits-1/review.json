@@ -2,7 +2,7 @@
  "title": "Pool swimwear dialogue portraits, round 1",
  "date": "2026-10-16",
  "by": "claude-main/art-round",
- "status": "open",
+ "status": "superseded",
  "question": "Which swimwear set should each of Kuro, Emi, Eric and Carina use for the pool dialogue, if any?",
  "multi": true,
  "media": [
@@ -988,5 +988,6 @@
    ],
    "note": "pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-carina-neutral.json, seed 4, dashboard #2520. Red rim 0.7%. My verdict, rejected: dark shading shapes on the suit; strap edges uneven."
   }
- ]
+ ],
+ "decision": "Withdrawn: Jørgen saw twisted necks and disjointed bodies; swim pictures off the table until he asks again."
 }
