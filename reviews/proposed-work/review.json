@@ -3,7 +3,7 @@
  "date": "2026-10-16",
  "by": "claude-main",
  "status": "open",
- "updated": "2026-10-16T20:15:34+0200",
+ "updated": "2026-10-16T23:44:02+0200",
  "multi": true,
  "options": [
   {
@@ -167,24 +167,26 @@
   },
   {
    "id": "p666",
-   "label": "#666 Mori’s travel topic hides his day-3 gym greeting",
-   "note": "Today: Mori’s travel topic hides his day-3 gym greeting Found: by claude-main Why it matters: not said Fix idea: Keep local NPC scene dialogue reachable when a conversation topic is available. (other, small, issue #666.) No picture: none given."
+   "label": "#666 Mori's travel talk replaces his greeting at the gym",
+   "note": "Today: On day 3 in the afternoon, Eric stands beside Mori at the gym counter and presses E. The travel talk starts straight away. Mori's greeting never plays, and no menu opens, because the travel talk is the only option. Found: Codex, in the #662 Mori writing QA. It used Mori at the gym as someone Eric already knows. Why it matters: Mori's greeting is skipped whenever he has a topic. The same rule covers every person with a topic, so other greetings could be skipped too (checked in the code, not in play). Fix idea: Keep a person's plain Talk row when they also have a topic, so the greeting can play and the topic sits beside it. The menu code drops that row today. This changes the menu rule, and the writing stays as it is. (ui, small, issue #666.) Reproduced on b713305b (desktop, 1366x860, day 3 afternoon, Eric beside Mori at the gym counter): one press of E starts the travel talk, with no greeting and no menu. The art-club state makes no difference. The arrow marks the line that starts.",
+   "image": "reviews/proposed-work/p666-gym-greeting-desktop.webp"
   },
   {
    "id": "p669",
-   "label": "#669 Follow camera at the canteen's plaza door loses Eric",
-   "note": "Today: Follow camera at the canteen's plaza door loses Eric Found: by claude-main Why it matters: not said Fix idea: not said (other, small, issue #669.) No picture: none given."
-  },
-  {
-   "id": "p670",
-   "label": "#670 Refresh branch QA for Interact menus and current day-2/day-3 fixtures",
-   "note": "Today: Refresh branch QA for Interact menus and current day-2/day-3 fixtures Found: by claude-main Why it matters: not said Fix idea: Handle Story/topic Interact rows in branch QA, then update the stale route fixtures and inherited-choice coverage. (other, small, issue #670.) No picture: none given."
+   "label": "#669 The camera loses Eric at the canteen's plaza door",
+   "note": "Today: On desktop, Eric steps out of the canteen onto the plaza terrace, facing the fountain. The follow camera ends up about 0.6 m behind him. At that distance Eric is hidden, and the fountain's top tier is cut off at the top edge of the screen. Found: The visual critic, on the fountain sightline captures for #658. The bug is the same before and after that change. Why it matters: Eric is the character the player controls, so losing him from view makes the first steps onto the plaza hard to follow. Fix idea: Let the camera sit farther back at the terrace edge, so Eric shows and the top of the fountain fits in the frame. (ui, small, issue #669.) Reproduced on b713305b (desktop, 1366x860, day 1 early morning, Eric out of the canteen door onto the plaza terrace): the camera is about 0.6 m behind him, so Eric is hidden, and the fountain's top is cut at the top edge. The arrows mark both.",
+   "image": "reviews/proposed-work/p669-plaza-camera-desktop.webp"
   },
   {
    "id": "p673",
    "label": "#673 Keep the music bubble clear of Eric",
    "note": "Today: On desktop, the headphone passenger's music-note bubble overlaps the right side of Eric's hair when he stands in the usual spot for talking to the passenger. Found: Codex, while checking the train passengers for #665. The bubble sat there before that change too. Why it matters: The bubble covers part of the player character while he talks to the passenger. Fix idea: Place reaction bubbles clear of nearby people at the normal interaction distance. (ui, small, issue #673.)",
    "image": "game3d/shots/train-passengers-665/music-bubble-desktop.png"
+  },
+  {
+   "id": "p675",
+   "label": "#675 When a line keeps its id but its words change (private scene lines have fixed ids), the voice tool reuses the old recorded takes, so the clip can say the old words.",
+   "note": "Today: After a private line is rewritten, its voice clip may still speak the old sentence. Found: The Mio voice agent, while re-voicing the copier lines on 16 Oct Why it matters: Wrong audio for rewritten private lines; public lines get new ids so they're less affected Fix idea: Key takes on the text as well as id and seed (other, small, issue #675.) No picture: voice tool; heard, not seen."
   },
   {
    "id": "p15",
@@ -302,6 +304,11 @@
    "id": "p653",
    "label": "#653 Update the day 2 and 3 tests for the Interact menu",
    "note": "Today: Nothing a player sees. The day 2 test stops at the new Interact menu and fails. Found: An agent on 16 Oct. Why it matters: Without it the days 2 and 3 are not fully tested. Fix idea: Teach the test to pick the Story row and add the optional pool words. (tooling, small, issue #653.) No picture: test script."
+  },
+  {
+   "id": "p670",
+   "label": "#670 Refresh the route test for Interact menus and the day 2 and 3 fixtures",
+   "note": "Today: Nothing a player sees. The route test rejects some correct menus as unexpected, such as a story row beside a topic. On day 2, 20 of 35 routes pass. The rest of the failures are old fixtures that time out. Found: Codex, in the #662 Mori writing QA, running the route tests on days 1 to 3. Why it matters: The day 2 route test fails on menus that work, so it cannot show real breaks there. Fix idea: Teach the route test to accept story rows that come with a topic or a stand-up option. Then update the old day 2 and day 3 fixtures and cover the menu options they skip. (tooling, medium, issue #670.) No picture: test tooling."
   }
  ],
  "question": "Which of these should become work? Pick (approve) the ones to do and reject the ones to drop; anything you leave alone stays proposed. Tooling ones are at the bottom."

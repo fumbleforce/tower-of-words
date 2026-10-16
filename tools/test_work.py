@@ -3,6 +3,8 @@
 Run: python3 -m unittest discover -s tools -p 'test_work.py'
 """
 import datetime as dt
+import os
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -162,6 +164,47 @@ class Proposed(unittest.TestCase):
         with patch.object(work, 'update', side_effect=lambda n, *a, **k: calls.append((n, k.get('state'), k.get('note')))):
             self.assertEqual(work.apply_decisions({}, fb, live), (['5'], ['6']))
         self.assertEqual(calls, [('6', 'dropped', 'not now'), ('5', 'todo', None)])
+
+
+class CardEdit(unittest.TestCase):
+    def setUp(self):
+        self.dir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.dir.cleanup)
+        open(os.path.join(self.dir.name, 'pic.webp'), 'w').close()
+        patcher = patch.object(work, 'ROOT', self.dir.name)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def edit(self, old, o):
+        with patch.object(work, 'load', return_value=old):
+            return work.card_edit(old['id'], o)
+
+    def test_no_card_flag_changes_nothing(self):
+        self.assertIsNone(self.edit(issue(1, 'proposed', proposal=PLAIN), {'state': 'todo'}))
+
+    def test_flags_merge_into_the_card_the_issue_has(self):
+        old = issue(2, 'proposed', proposal={'no_picture': 'test tooling', 'category': 'other', **PLAIN_TEXT})
+        card = self.edit(old, {'screenshot': 'pic.webp', 'sees': 'A camera cuts the fountain.', 'size': 'small'})
+        self.assertEqual(card['picture'], 'pic.webp')
+        self.assertNotIn('no_picture', card)
+        self.assertEqual((card['sees'], card['size'], card['plain'], card['category']), ('A camera cuts the fountain.', 'small', 'p', 'other'))
+        card = self.edit(issue(2, 'proposed', proposal=card), {'no-picture': 'test tooling'})
+        self.assertEqual(card['no_picture'], 'test tooling')
+        self.assertNotIn('picture', card)
+
+    def test_a_proposed_card_stays_complete_and_valid(self):
+        with self.assertRaises(SystemExit):
+            self.edit(issue(3, 'proposed', proposal={'no_picture': 'x'}), {'plain': 'only the title'})
+        with self.assertRaises(SystemExit):
+            self.edit(issue(3, 'proposed', proposal=PLAIN), {'size': 'huge'})
+        with self.assertRaises(SystemExit):
+            self.edit(issue(3, 'proposed', proposal=PLAIN), {'screenshot': 'missing.webp'})
+        with self.assertRaises(SystemExit):
+            self.edit(issue(3, 'proposed', proposal=PLAIN), {'screenshot': 'pic.webp', 'no-picture': 'x'})
+
+    def test_a_card_for_an_issue_that_is_not_proposed_needs_no_words(self):
+        self.assertEqual(self.edit(issue(4, 'todo'), {'plain': 'only the title'}), {'plain': 'only the title'})
+        self.assertEqual(self.edit(issue(4, 'proposed', proposal=PLAIN), {'state': 'todo', 'fix': 'later'})['fix'], 'later')
 
 
 if __name__ == '__main__':

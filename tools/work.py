@@ -43,7 +43,7 @@ Agent-found issues start as `proposed` (Jørgen 2026-10-16: many are things he h
 or `parked` only when its source is his: a notes/feedback-game/ entry, a decided review:<id>, a request:<line>, his words
 in --detail quoted with "Jørgen", or `--from-jorgen`. Anything else is proposed, needs `--screenshot <path>` (what a player
 would see, phone 390x844 or desktop 1366x860) or `--no-picture "reason"`, and takes plain-words fields `--plain` (title), `--sees` (what the player sees today),
-`--found` (who and how), `--matters` and `--fix`, plus `--category` and `--size`. Proposed issues are never dispatched and `stale` and `triage` skip them. `proposals --post` writes the Review
+`--found` (who and how), `--matters` and `--fix`, plus `--category` and `--size`. `set <#>` takes the same card flags for a proposed issue (merged into the card it has, so a picture can come later). Proposed issues are never dispatched and `stale` and `triage` skip them. `proposals --post` writes the Review
 item `proposed-work` (one approve/reject card each); `review.py set-status proposed-work decided` moves approved ones to
 todo and rejected ones to dropped with his note.
 
@@ -266,6 +266,31 @@ def check_proposal(p):
                  + ' (--plain title, --sees what the player sees today, --found who found it and how, --matters, --fix idea)')
     if p.get('size') and p['size'] not in SIZES:
         sys.exit(f'--size must be one of: {", ".join(SIZES)}')
+
+
+CARD_FIELDS = ('plain', 'sees', 'found', 'matters', 'fix', 'category', 'size')
+CARD_OPTS = CARD_FIELDS + ('screenshot', 'no-picture')
+
+
+def card_edit(num, o):
+    """The Review card of an issue, changed with the card flags of `set`. They are merged into the card the issue has,
+    and a proposed issue's card is checked the way `add` checks it. None when no card flag is given."""
+    if not any(k in o for k in CARD_OPTS):
+        return None
+    if 'screenshot' in o and 'no-picture' in o:
+        sys.exit('work: give --screenshot or --no-picture, not both')
+    old = load(num)
+    card = dict(old.get('proposal') or {})
+    card.update({k: o[k] for k in CARD_FIELDS if k in o})
+    if 'screenshot' in o:
+        card.pop('no_picture', None)
+        card['picture'] = o['screenshot']
+    if 'no-picture' in o:
+        card.pop('picture', None)
+        card['no_picture'] = o['no-picture']
+    if o.get('state', old['state']) == 'proposed':
+        check_proposal(card)
+    return card
 
 
 def add(title, kind='task', owner='claude-main', state='todo', source=None, next_step='', detail='', reason='', done_ref='',
@@ -610,11 +635,12 @@ def main(a):
             print('proposed: waits for Jørgen in Review (python3 tools/work.py proposals --post)')
         print(f'#{i["id"]} {i["url"]}')
     elif cmd in ('set', 'touch', 'done'):
-        o, pos = opts(a, 'state', 'owner', 'next', 'source', 'title', 'done-ref', 'note', 'kind', 'ref')
+        o, pos = opts(a, 'state', 'owner', 'next', 'source', 'title', 'done-ref', 'note', 'kind', 'ref', *CARD_OPTS)
         if len(pos) != 1:
             sys.exit(f'{cmd} needs one issue number')
         f = {'state': 'done' if cmd == 'done' else o.get('state'), 'owner': o.get('owner'), 'next': o.get('next'),
-             'title': o.get('title'), 'kind': o.get('kind'), 'done_ref': o.get('done-ref') or o.get('ref'), 'source': split(o.get('source'))}
+             'title': o.get('title'), 'kind': o.get('kind'), 'done_ref': o.get('done-ref') or o.get('ref'), 'source': split(o.get('source')),
+             'proposal': card_edit(pos[0], o)}
         i = update(pos[0], o.get('note'), comment=('still on it' + (f': {o["note"]}' if o.get('note') else '')) if cmd == 'touch' else None, **f)
         print(f'#{i["id"]}: {i["state"]}')
     elif cmd == 'list':
