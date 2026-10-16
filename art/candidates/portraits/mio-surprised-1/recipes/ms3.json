@@ -1,0 +1,26 @@
+{
+ "details": "Mio surprised, round 1 pass 3 (#576). One change from ms2: the lips came out glossy with white highlights on all eight earlier renders (her neutral's and annoyed face's are matte), so glossy, shiny lips and lip gloss go in the scene's exclusions, the words Kuro's picked faces used (expressions-kuro-mio-1 round 3). Everything else as ms2.",
+ "characters": [
+  "mio"
+ ],
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "mildly surprised and a little flustered, eyebrows raised slightly, eyes opened a little wider than usual, lips slightly parted, faint blush, looking at the viewer",
+ "extra": "close-up of her face, plain light grey background, soft even studio light",
+ "sectionNegatives": {
+  "scene": "shocked, horrified, scared, wide eyes, staring, small pupils, constricted pupils, shaded eyes, screaming, teeth, fang, smile, grin, crying, tears, brown eyes, amber eyes, orange eyes, dark eyes, glossy lips, shiny lips, lip gloss"
+ },
+ "width": 1024,
+ "height": 1024,
+ "start": {
+  "image": "art/candidates/portraits/mio-surprised-1/start/crop.png",
+  "denoise": 0.7,
+  "mask": "art/candidates/portraits/mio-surprised-1/start/mask.png"
+ },
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ]
+}

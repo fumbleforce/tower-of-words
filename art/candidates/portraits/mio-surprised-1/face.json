@@ -1,0 +1,77 @@
+{
+ "about": "Mio's surprised face, round 1 (#576): face-only repaint of the installed neutral's source render, as expressions-kuro-mio-1 ma3 (her picked annoyed face). Used by tools/characters/steps/face_expr.py.",
+ "source": "art/production/PC/mio/mio-v3-neutral-823.png",
+ "game": "game3d/assets/portraits/mio-neutral.webp",
+ "crop": [
+  300,
+  380,
+  600,
+  680
+ ],
+ "poly": [
+  [
+   354,
+   447
+  ],
+  [
+   420,
+   432
+  ],
+  [
+   470,
+   425
+  ],
+  [
+   510,
+   420
+  ],
+  [
+   545,
+   420
+  ],
+  [
+   546,
+   440
+  ],
+  [
+   546,
+   560
+  ],
+  [
+   530,
+   580
+  ],
+  [
+   505,
+   605
+  ],
+  [
+   482,
+   618
+  ],
+  [
+   462,
+   616
+  ],
+  [
+   430,
+   595
+  ],
+  [
+   400,
+   565
+  ],
+  [
+   378,
+   540
+  ],
+  [
+   354,
+   528
+  ]
+ ],
+ "frame": "mio",
+ "grow": 9,
+ "blur": 10,
+ "staging": "Beat: Mio is caught off guard by something Eric says or does (train platform, 'Ha, okay. Your turn to look stupid.' and similar); Jørgen 2026-10-14: 'the surprised look from Mio looks deranged, she needs a new surprised face'. Camera and shot are the neutral's, fixed: head and shoulders, eye level, three-quarter turn towards her right (image left), headphones round her neck, plain light background, soft even light. Only the face below the fringe moves: brows (mostly under the fringe) lifted a little, eyes slightly wider than her neutral with normal round irises and pupils (not shrunk), lips a little parted, a faint flush; mild and a bit flustered, not shocked. Eyeline: at the viewer, as the neutral. Glasses frame kept identical (pasted back). Physical sense: irises stay light tan and inside the lenses, both eyes match, no second lens rim."
+}

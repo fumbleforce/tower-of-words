@@ -1,0 +1,26 @@
+{
+ "details": "Mio surprised, round 1 (#576), the one change from her installed surprised face: mild, a little flustered surprise instead of 'eyes wide behind her glasses'. Face-only repaint of the neutral's source (face.json, tools/characters/steps/face_expr.py), the method of her picked annoyed face (expressions-kuro-mio-1 ma3, denoise 0.7).",
+ "characters": [
+  "mio"
+ ],
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "mildly surprised and a little flustered, eyebrows raised slightly, eyes opened a little wider than usual, lips slightly parted, faint blush, looking at the viewer",
+ "extra": "close-up of her face, plain light grey background, soft even studio light",
+ "sectionNegatives": {
+  "scene": "shocked, horrified, scared, wide eyes, staring, small pupils, constricted pupils, shaded eyes, screaming, teeth, fang, smile, grin, crying, tears"
+ },
+ "width": 1024,
+ "height": 1024,
+ "start": {
+  "image": "art/candidates/portraits/mio-surprised-1/start/crop.png",
+  "denoise": 0.7,
+  "mask": "art/candidates/portraits/mio-surprised-1/start/mask.png"
+ },
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ]
+}

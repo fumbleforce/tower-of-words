@@ -1,0 +1,966 @@
+{
+ "character": "mio",
+ "ref": "game3d/assets/portraits/mio-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   192,
+   214,
+   361,
+   383
+  ]
+ ],
+ "ref_face_detected": [
+  192.0,
+  214.0,
+  361.0,
+  383.0
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/mio-surprised-1/ms1-r261016-162008-e24-1-s1.webp",
+   "kind": "render",
+   "size": [
+    1024,
+    1024
+   ],
+   "face": [
+    241.0,
+    271.0,
+    931.0,
+    881.0
+   ],
+   "eyes": [
+    [
+     295.5,
+     352.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0212
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.651,
+    "worst": 0.075,
+    "worst_part": "her right lens inner",
+    "dE": 12.5,
+    "parts": {
+     "her right lens top": 0.986,
+     "her right lens bottom": 0.25,
+     "her right lens outer": 0.952,
+     "her right lens inner": 0.075,
+     "her left lens top": 0.827,
+     "her left lens bottom": 0.318,
+     "her left lens outer": 0.819,
+     "her left lens inner": 0.476
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.0,
+    "zoom": 0.369,
+    "top": 0.181,
+    "bottom_short": 0.45,
+    "hair_top_game": 138,
+    "hair_top_ref": 96,
+    "crop": [
+     -412.0,
+     -501.4,
+     1742.8,
+     2270.6
+    ],
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.028,
+    "ssim": 0.061
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/mio-surprised-1/ms1-r261016-162008-e24-2-s2.webp",
+   "kind": "render",
+   "size": [
+    1024,
+    1024
+   ],
+   "face": [
+    247.0,
+    244.0,
+    926.0,
+    882.0
+   ],
+   "eyes": [
+    [
+     306.5,
+     357.5
+    ],
+    [
+     732.0,
+     272.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.019
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.819,
+    "worst": 0.397,
+    "worst_part": "her left lens bottom",
+    "dE": 3.6,
+    "parts": {
+     "her right lens top": 0.962,
+     "her right lens bottom": 0.477,
+     "her right lens outer": 0.948,
+     "her right lens inner": 0.911,
+     "her left lens top": 0.822,
+     "her left lens bottom": 0.397,
+     "her left lens outer": 0.835,
+     "her left lens inner": 0.989
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.0,
+    "zoom": 0.353,
+    "top": 0.194,
+    "bottom_short": 0.452,
+    "hair_top_game": 149,
+    "hair_top_ref": 96,
+    "crop": [
+     -457.3,
+     -563.9,
+     1796.4,
+     2335.4
+    ],
+    "eyes": -0.281,
+    "tilt": 1.2,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.029,
+    "ssim": 0.082
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/mio-surprised-1/ms1-r261016-162008-e24-3-s3.webp",
+   "kind": "render",
+   "size": [
+    1024,
+    1024
+   ],
+   "face": [
+    248.0,
+    256.0,
+    933.0,
+    884.0
+   ],
+   "eyes": [
+    [
+     301.0,
+     355.0
+    ],
+    [
+     724.0,
+     272.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0199
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.813,
+    "worst": 0.43,
+    "worst_part": "her right lens bottom",
+    "dE": 2.8,
+    "parts": {
+     "her right lens top": 0.952,
+     "her right lens bottom": 0.43,
+     "her right lens outer": 0.876,
+     "her right lens inner": 0.915,
+     "her left lens top": 0.822,
+     "her left lens bottom": 0.434,
+     "her left lens outer": 0.869,
+     "her left lens inner": 0.968
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.0,
+    "zoom": 0.359,
+    "top": 0.189,
+    "bottom_short": 0.452,
+    "hair_top_game": 145,
+    "hair_top_ref": 96,
+    "crop": [
+     -437.0,
+     -539.2,
+     1781.5,
+     2314.7
+    ],
+    "eyes": -0.3,
+    "tilt": 1.5,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.031,
+    "ssim": 0.07
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/mio-surprised-1/ms1-r261016-162008-e24-4-s4.webp",
+   "kind": "render",
+   "size": [
+    1024,
+    1024
+   ],
+   "face": [
+    257.0,
+    274.0,
+    920.0,
+    880.0
+   ],
+   "eyes": [
+    [
+     307.5,
+     362.0
+    ],
+    [
+     734.5,
+     275.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0193
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.836,
+    "worst": 0.412,
+    "worst_part": "her left lens bottom",
+    "dE": 4.3,
+    "parts": {
+     "her right lens top": 0.933,
+     "her right lens bottom": 0.551,
+     "her right lens outer": 0.948,
+     "her right lens inner": 0.919,
+     "her left lens top": 0.959,
+     "her left lens bottom": 0.412,
+     "her left lens outer": 0.849,
+     "her left lens inner": 0.989
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.0,
+    "zoom": 0.372,
+    "top": 0.179,
+    "bottom_short": 0.449,
+    "hair_top_game": 137,
+    "hair_top_ref": 96,
+    "crop": [
+     -403.0,
+     -493.4,
+     1737.7,
+     2260.5
+    ],
+    "eyes": -0.319,
+    "tilt": 1.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.036,
+    "ssim": 0.073
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/mio-surprised-1/ms1-r261016-162008-e24-1-s1-full.webp",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    324.0,
+    359.0,
+    611.0,
+    646.0
+   ],
+   "eyes": [
+    [
+     386.0,
+     484.5
+    ],
+    [
+     510.0,
+     454.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.3,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.126,
+    "zoom": 0.994,
+    "top": 0.003,
+    "bottom_short": 0.003,
+    "hair_top_game": 98,
+    "hair_top_ref": 96,
+    "crop": [
+     -2.1,
+     -4.4,
+     1011.8,
+     1299.8
+    ],
+    "eyes": -0.007,
+    "tilt": -1.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.012,
+    "ssim": 0.717
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/mio-surprised-1/ms1-r261016-162008-e24-2-s2-full.webp",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    327.0,
+    361.0,
+    609.0,
+    646.0
+   ],
+   "eyes": [
+    [
+     388.5,
+     485.5
+    ],
+    [
+     514.0,
+     461.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.3,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.126,
+    "zoom": 1.001,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 96,
+    "hair_top_ref": 96,
+    "crop": [
+     1.7,
+     0.1,
+     1008.5,
+     1295.3
+    ],
+    "eyes": 0.002,
+    "tilt": 1.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.01,
+    "ssim": 0.644
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/mio-surprised-1/ms1-r261016-162008-e24-3-s3-full.webp",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    326.0,
+    361.0,
+    609.0,
+    646.0
+   ],
+   "eyes": [
+    [
+     387.5,
+     485.5
+    ],
+    [
+     512.5,
+     461.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.4,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.126,
+    "zoom": 1.001,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 96,
+    "hair_top_ref": 96,
+    "crop": [
+     1.2,
+     0.1,
+     1008.0,
+     1295.3
+    ],
+    "eyes": 0.002,
+    "tilt": 1.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.011,
+    "ssim": 0.815
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/mio-surprised-1/ms1-r261016-162008-e24-4-s4-full.webp",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    326.0,
+    360.0,
+    609.0,
+    646.0
+   ],
+   "eyes": [
+    [
+     390.0,
+     485.5
+    ],
+    [
+     515.5,
+     461.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.3,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.126,
+    "zoom": 0.997,
+    "top": 0.002,
+    "bottom_short": 0.001,
+    "hair_top_game": 97,
+    "hair_top_ref": 96,
+    "crop": [
+     -0.4,
+     -2.2,
+     1009.9,
+     1297.5
+    ],
+    "eyes": 0.005,
+    "tilt": 1.7,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.01,
+    "ssim": 0.764
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/mio-surprised-1/ms1-r261016-162008-e24-1-s1-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    192.0,
+    213.0,
+    362.0,
+    383.0
+   ],
+   "eyes": [
+    [
+     228.5,
+     287.5
+    ],
+    [
+     302.0,
+     269.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.3,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "note": "ms1-r261016-162008-e24-1-s1.webp is framed differently from the cut-out; holes not graded",
+    "holes": 12,
+    "holes_px": 3361,
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 255,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 0.994,
+    "top": 0.003,
+    "bottom_short": 0.003,
+    "hair_top_game": 97,
+    "hair_top_ref": 96,
+    "crop": [
+     -1.1,
+     -2.3,
+     599.4,
+     770.3
+    ],
+    "eyes": -0.007,
+    "tilt": -1.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.006,
+    "ssim": 0.668
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/mio-surprised-1/ms1-r261016-162008-e24-2-s2-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    194.0,
+    214.0,
+    360.0,
+    383.0
+   ],
+   "eyes": [
+    [
+     230.0,
+     288.0
+    ],
+    [
+     304.5,
+     273.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 0.999,
+    "worst": 0.989,
+    "worst_part": "her left lens inner",
+    "dE": 0.1,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 0.993,
+     "her left lens outer": 1.0,
+     "her left lens inner": 0.989
+    },
+    "flipped": false
+   },
+   "matte": {
+    "note": "ms1-r261016-162008-e24-2-s2.webp is framed differently from the cut-out; holes not graded",
+    "holes": 12,
+    "holes_px": 3361,
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 255,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 96,
+    "hair_top_ref": 96,
+    "crop": [
+     0.5,
+     0.0,
+     597.5,
+     768.0
+    ],
+    "eyes": 0.003,
+    "tilt": 1.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.004,
+    "ssim": 0.881
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/mio-surprised-1/ms1-r261016-162008-e24-3-s3-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    193.0,
+    214.0,
+    361.0,
+    383.0
+   ],
+   "eyes": [
+    [
+     229.5,
+     288.0
+    ],
+    [
+     303.5,
+     273.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.0,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "note": "ms1-r261016-162008-e24-3-s3.webp is framed differently from the cut-out; holes not graded",
+    "holes": 12,
+    "holes_px": 3361,
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 255,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 96,
+    "hair_top_ref": 96,
+    "crop": [
+     0.5,
+     0.0,
+     597.5,
+     768.0
+    ],
+    "eyes": 0.001,
+    "tilt": 1.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.007,
+    "ssim": 0.876
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/mio-surprised-1/ms1-r261016-162008-e24-4-s4-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    193.0,
+    214.0,
+    361.0,
+    383.0
+   ],
+   "eyes": [
+    [
+     231.0,
+     288.0
+    ],
+    [
+     305.0,
+     273.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 0.999,
+    "worst": 0.993,
+    "worst_part": "her left lens bottom",
+    "dE": 0.1,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 0.993,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "note": "ms1-r261016-162008-e24-4-s4.webp is framed differently from the cut-out; holes not graded",
+    "holes": 12,
+    "holes_px": 3361,
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 255,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 96,
+    "hair_top_ref": 96,
+    "crop": [
+     0.5,
+     0.0,
+     597.5,
+     768.0
+    ],
+    "eyes": 0.003,
+    "tilt": 1.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.006,
+    "ssim": 0.883
+   },
+   "status": "pass"
+  }
+ ]
+}
