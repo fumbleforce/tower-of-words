@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-14 02:06",
+ "generated": "2026-10-16 07:38",
  "characters": [
   {
    "id": "mc",
@@ -92,8 +92,8 @@
     "status": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:168",
-     "line": 168,
+     "label": "GUIDE.md:169",
+     "line": 169,
      "phrase": "3D character workflow"
     },
     "note": "Meshy task 01a0e731-1faf-70a7-98e4-c0f2d163c246. The game loads slimmed copies from game3d/assets/eric/. Approved (Jørgen, 2026-09-28: \"of course we need Mio and Eric's Meshy models\").",
@@ -166,8 +166,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:168",
-      "line": 168,
+      "label": "GUIDE.md:169",
+      "line": 169,
       "phrase": "3D character workflow (Jørgen, 2026-09-28; worked first try for Eric)"
      }
     }
@@ -405,8 +405,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:190",
-      "line": 190,
+      "label": "GUIDE.md:191",
+      "line": 191,
       "phrase": "Mio: voice A from legacy/proto2/voice-mio"
      }
     },
@@ -415,8 +415,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:171",
-      "line": 171,
+      "label": "GUIDE.md:172",
+      "line": 172,
       "phrase": "Low-poly Mio paused"
      }
     }
@@ -447,8 +447,8 @@
      "s": "rejected",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:170",
-      "line": 170,
+      "label": "GUIDE.md:171",
+      "line": 171,
       "phrase": "simplifying an inherently broken model"
      }
     },
@@ -487,8 +487,8 @@
      "s": "rejected",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:190",
-      "line": 190,
+      "label": "GUIDE.md:191",
+      "line": 191,
       "phrase": "The original casting clip (mio-3) is retired"
      }
     }
@@ -2424,8 +2424,8 @@
    "s": "approved",
    "src": {
     "path": "GUIDE.md",
-    "label": "GUIDE.md:166",
-    "line": 166,
+    "label": "GUIDE.md:167",
+    "line": 167,
     "phrase": "The cast stays (Jørgen",
     "n": 2
    }
@@ -2435,8 +2435,8 @@
    "s": "approved",
    "src": {
     "path": "GUIDE.md",
-    "label": "GUIDE.md:165",
-    "line": 165,
+    "label": "GUIDE.md:166",
+    "line": 166,
     "phrase": "Cast palette"
    }
   },
@@ -2455,8 +2455,8 @@
    "s": "approved",
    "src": {
     "path": "GUIDE.md",
-    "label": "GUIDE.md:164",
-    "line": 164,
+    "label": "GUIDE.md:165",
+    "line": 165,
     "phrase": "Expression sets must keep everything"
    }
   },
@@ -2558,8 +2558,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/controls-and-ui.md",
-      "label": "docs/game/controls-and-ui.md:156",
-      "line": 156,
+      "label": "docs/game/controls-and-ui.md:160",
+      "line": 160,
       "phrase": "Overview keeps the player character in view"
      }
     }
@@ -3000,8 +3000,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/controls-and-ui.md",
-      "label": "docs/game/controls-and-ui.md:63",
-      "line": 63,
+      "label": "docs/game/controls-and-ui.md:65",
+      "line": 65,
       "phrase": "Every control is introduced the first time"
      }
     }
@@ -3089,8 +3089,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/controls-and-ui.md",
-      "label": "docs/game/controls-and-ui.md:85",
-      "line": 85,
+      "label": "docs/game/controls-and-ui.md:87",
+      "line": 87,
       "phrase": "Direction 1, \"faded\""
      }
     },
@@ -3109,8 +3109,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/controls-and-ui.md",
-      "label": "docs/game/controls-and-ui.md:69",
-      "line": 69,
+      "label": "docs/game/controls-and-ui.md:71",
+      "line": 71,
       "phrase": "Markers: every interactable thing on screen"
      }
     },
@@ -3154,8 +3154,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:205",
-      "line": 205,
+      "label": "GUIDE.md:206",
+      "line": 206,
       "phrase": "Validate each fix in isolation"
      }
     },
@@ -3313,8 +3313,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:168",
-     "line": 168,
+     "label": "GUIDE.md:169",
+     "line": 169,
      "phrase": "3D character workflow (Jørgen, 2026-09-28"
     }
    },
@@ -3323,8 +3323,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:169",
-     "line": 169,
+     "label": "GUIDE.md:170",
+     "line": 170,
      "phrase": "Meshy parts (Jørgen, 2026-09-27, round 14)"
     }
    },
@@ -3363,8 +3363,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:160",
-     "line": 160,
+     "label": "GUIDE.md:161",
+     "line": 161,
      "phrase": "The main prompt rule"
     }
    },
@@ -3373,8 +3373,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:161",
-     "line": 161,
+     "label": "GUIDE.md:162",
+     "line": 162,
      "phrase": "Don't overcorrect"
     }
    },
@@ -3383,8 +3383,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:179",
-     "line": 179,
+     "label": "GUIDE.md:180",
+     "line": 180,
      "phrase": "Perspective is not an anatomy fault"
     }
    },
@@ -3393,8 +3393,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:167",
-     "line": 167,
+     "label": "GUIDE.md:168",
+     "line": 168,
      "phrase": "Consistent characters (Jørgen, 2026-09-27)"
     }
    }
@@ -3435,8 +3435,8 @@
     "s": "rejected",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:170",
-     "line": 170,
+     "label": "GUIDE.md:171",
+     "line": 171,
      "phrase": "Shrinking or recolouring a generated mesh"
     }
    },
@@ -3445,8 +3445,8 @@
     "s": "rejected",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:167",
-     "line": 167,
+     "label": "GUIDE.md:168",
+     "line": 168,
      "phrase": "we don't want to train models"
     }
    },
@@ -3455,8 +3455,8 @@
     "s": "rejected",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:162",
-     "line": 162,
+     "label": "GUIDE.md:163",
+     "line": 163,
      "phrase": "Jørgen's own images (art/refs"
     }
    },
@@ -3485,8 +3485,8 @@
     "s": "rejected",
     "src": {
      "path": "docs/game/controls-and-ui.md",
-     "label": "docs/game/controls-and-ui.md:160",
-     "line": 160,
+     "label": "docs/game/controls-and-ui.md:164",
+     "line": 164,
      "phrase": "Ceiling light fixtures are not shown"
     }
    }
@@ -3521,8 +3521,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:189",
-     "line": 189,
+     "label": "GUIDE.md:190",
+     "line": 190,
      "phrase": "Local first (Jørgen, 2026-09-28)"
     }
    },
@@ -3541,8 +3541,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:190",
-     "line": 190,
+     "label": "GUIDE.md:191",
+     "line": 191,
      "phrase": "Mio: voice A from legacy/proto2/voice-mio"
     }
    },
@@ -3551,8 +3551,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:191",
-     "line": 191,
+     "label": "GUIDE.md:192",
+     "line": 192,
      "phrase": "Per-character loudness is normalised"
     }
    }
@@ -4698,8 +4698,8 @@
     "t": "The character look in the 3D rooms.",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:168",
-     "line": 168,
+     "label": "GUIDE.md:169",
+     "line": 169,
      "phrase": "3D character workflow (Jørgen, 2026-09-28; worked first try for Eric)"
     }
    },
@@ -4707,8 +4707,8 @@
     "t": "Low-poly Mio round 10.",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:171",
-     "line": 171,
+     "label": "GUIDE.md:172",
+     "line": 172,
      "phrase": "Low-poly Mio paused",
      "n": 1
     }
@@ -4717,8 +4717,8 @@
     "t": "Local voices waiting for his ears.",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:189",
-     "line": 189,
+     "label": "GUIDE.md:190",
+     "line": 190,
      "phrase": "Local first (Jørgen, 2026-09-28)",
      "n": 1
     }
@@ -4776,8 +4776,8 @@
     "t": "The dialogue overlay direction.",
     "src": {
      "path": "docs/game/controls-and-ui.md",
-     "label": "docs/game/controls-and-ui.md:85",
-     "line": 85,
+     "label": "docs/game/controls-and-ui.md:87",
+     "line": 87,
      "phrase": "Direction 1, \"faded\"",
      "n": 1
     }
@@ -5207,6 +5207,7 @@
    "carina-recovery/",
    "carina-voice-approved/",
    "cat-strips/",
+   "cg-performance-20261014/",
    "character-backgrounds/",
    "character-scale/",
    "club-before/",
@@ -5271,6 +5272,7 @@
    "conversation-reciprocity-20261008/",
    "conversation-reciprocity-final/",
    "conversations/",
+   "copy-room-entry-20261014/",
    "crowd-bags/",
    "crowd-everyday-integration-20261009/",
    "crowd-pilot-2/",
@@ -5400,6 +5402,7 @@
    "mc/",
    "memory-comparison/",
    "met-restore/",
+   "mic-repair-20261014/",
    "minimap-recovery/",
    "mio-default/",
    "mio-grade/",
@@ -5415,6 +5418,7 @@
    "office-clipping/",
    "office-crt-isolated-20261007/",
    "office-fan/",
+   "office-idle-performance-20261014/",
    "office-people-20261008/",
    "office-south-final/",
    "office-south-initial/",
@@ -5426,6 +5430,7 @@
    "people-shadows-20261009/",
    "perf/",
    "perf-overlay/",
+   "performance-cold-20261014/",
    "performance-report-20261011/",
    "phone-msg/",
    "phone-quality/",
@@ -5439,6 +5444,7 @@
    "plaza-planting-after3/",
    "plaza-planting-before/",
    "plaza-south/",
+   "pool-acceptance-20261015/",
    "pool-club-evening/",
    "pool-club-handling/",
    "pool-club-initial/",
@@ -5470,6 +5476,7 @@
    "research-final-independent-review/",
    "research-reading-room/",
    "restart-20261008/",
+   "review-acceptance-20261015/",
    "room-life/",
    "round-1/",
    "round-2/",
@@ -5504,14 +5511,18 @@
    "style-in-game/",
    "subplot-editor/",
    "subplot-editor-2/",
+   "swimming-feedback/",
    "talk-clicks/",
    "tama-approach/",
    "target-ring/",
    "that-guy/",
+   "title-performance/",
+   "title-performance-20261014/",
    "town-detail/",
    "train-arrival-fixes/",
    "train-closed-2026-09-28/",
    "train-doors/",
+   "train-feedback-20261015/",
    "train-handles/",
    "train-people-20261009/",
    "train-reader-340/",

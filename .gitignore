@@ -1648,3 +1648,17 @@ collab/.post.lock
 # Research integration evidence stays local.
 /game3d/shots/finish-research-317/
 /game3d/shots/research-cold/
+# capture jobs, 2026-10-14/15 (outputs stay local, like the earlier jobs above)
+/game3d/shots/cg-performance-20261014/
+/game3d/shots/mic-repair-20261014/
+/game3d/shots/office-idle-performance-20261014/
+/game3d/shots/performance-cold-20261014/
+/game3d/shots/pool-acceptance-20261015/
+/game3d/shots/review-acceptance-20261015/
+/game3d/shots/swimming-feedback/
+/game3d/shots/title-performance-20261014/
+/game3d/shots/title-performance/
+/game3d/shots/train-feedback-20261015/
+# the private layout doc stays local with the private folder
+/island/PRIVATE.md
+/notes/feedback-game/2026-10-14_221423/

@@ -1,0 +1,198 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "rdbtAnima.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen_3_06b_base.safetensors",
+      "type": "stable_diffusion"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart. Mio, a 30-year-old programmer seated at her IT desk. Her half-lidded light tan eyes glance sideways toward the viewer as if briefly interrupted. Her mouth is closed and neutral, her expression dry and mildly inconvenienced. Thin taupe-grey glasses with clear lenses. Her right forearm, on image left, stays low beside the keyboard, with her right hand resting on the computer mouse. The raised greeting hand is gone and the office wall is visible above the desk. She wears the same opaque black camisole, loose open teal hoodie and teal-and-white headphones. Keep the existing desk, two dark monitors, chair and cool office lighting.",
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "worst quality, low quality, blurry, bad anatomy, bad hands, missing fingers, extra fingers, extra hands, extra arms, long fingernails, claws, smile, smiling, grin, teeth, open mouth, blush, blushing, raised hand, waving, greeting, welcoming gesture, open palm, sunglasses, tinted glasses, text, watermark, signature, 3d, realistic, photorealistic, nude, nipples, genitals, transparent clothing, sexual action, child, loli",
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "S",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "A",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "5",
+        0
+      ],
+      "latent_image": [
+        "MN",
+        0
+      ],
+      "seed": 1873025,
+      "steps": 30,
+      "cfg": 5,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "denoise": 0.88
+    }
+  },
+  "8": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "7",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "8",
+        0
+      ],
+      "filename_prefix": "marketing-local-outfits-1/05-mio-interrupted-inpaint"
+    }
+  },
+  "S": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "04-mio-desk.png"
+    }
+  },
+  "M": {
+    "class_type": "LoadImageMask",
+    "inputs": {
+      "image": "05-mio-expression-and-work-hand.png",
+      "channel": "red"
+    }
+  },
+  "MN": {
+    "class_type": "SetLatentNoiseMask",
+    "inputs": {
+      "samples": [
+        "6",
+        0
+      ],
+      "mask": [
+        "M",
+        0
+      ]
+    }
+  },
+  "RI": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "05-mio-deadpan-reference.png"
+    }
+  },
+  "IPL": {
+    "class_type": "AnimaIPAdapterLoader",
+    "inputs": {
+      "ip_adapter_name": "ip_adapter-Character_Reference-10.safetensors",
+      "auto_download": false
+    }
+  },
+  "IPA": {
+    "class_type": "AnimaIPAdapterApply",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "ip_adapter": [
+        "IPL",
+        0
+      ],
+      "ref_image": [
+        "RI",
+        0
+      ],
+      "strength": 0.5,
+      "ref_image_size": 512,
+      "siglip_layer": -1,
+      "ip_cfg_scale": 4.0,
+      "ip_cfg_separate": false,
+      "gray_null": false,
+      "use_lora": true
+    }
+  },
+  "P": {
+    "class_type": "ModelPatchLoader",
+    "inputs": {
+      "name": "anima-lllite-inpainting-v2.safetensors"
+    }
+  },
+  "A": {
+    "class_type": "AnimaLLLiteApply",
+    "inputs": {
+      "model": [
+        "IPA",
+        0
+      ],
+      "model_patch": [
+        "P",
+        0
+      ],
+      "image": [
+        "S",
+        0
+      ],
+      "mask": [
+        "M",
+        0
+      ],
+      "strength": 1.0,
+      "start_percent": 0.0,
+      "end_percent": 1.0
+    }
+  }
+}

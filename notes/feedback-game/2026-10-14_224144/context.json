@@ -1,0 +1,47 @@
+{
+ "time": "2026-10-14T20:41:00.084Z",
+ "build": "1014-2002-6b5b9108b",
+ "url": "/game3d/?mc=carina",
+ "screen": "playing",
+ "place": "office",
+ "placeName": "IT support, B2",
+ "period": "morning",
+ "periodName": "Morning at work",
+ "date": "Thu 1 Oct",
+ "node": "chat_mio_try_evening",
+ "nodeStack": [
+  "chat_mio_try_evening"
+ ],
+ "goal": "Go to the copy room with Mr. Mori.",
+ "line": {
+  "who": "",
+  "text": "Oh. I keep answering before you finish because it’s faster. You can tell me to wait, you know."
+ },
+ "typed": [],
+ "near": "",
+ "busy": true,
+ "player": {
+  "x": 0.26,
+  "y": 0,
+  "z": -1.49,
+  "heading": 2.47
+ },
+ "viewport": {
+  "width": 2327,
+  "height": 1230,
+  "dpr": 1.100000023841858,
+  "layout": "desktop"
+ },
+ "graphics": {
+  "gpu": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 3080/PCIe/SSE2, OpenGL 4.5.0)",
+  "software": false,
+  "integrated": false,
+  "quality": 2,
+  "frameLimit": 0,
+  "frameLimitSetting": "off"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-14T22:41:44+0200",
+ "folder": "notes/feedback-game/2026-10-14_224144",
+ "shot": true
+}

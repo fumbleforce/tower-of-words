@@ -1,0 +1,34 @@
+{
+ "time": "2026-10-14T19:43:00.006Z",
+ "build": "1014-1933-3780920d1",
+ "url": "/game3d/?mc=carina",
+ "screen": "playing",
+ "place": "train",
+ "placeName": "Monorail",
+ "period": "early",
+ "periodName": "Early morning",
+ "date": "Thu 1 Oct",
+ "node": "",
+ "nodeStack": [],
+ "goal": "",
+ "line": null,
+ "typed": [],
+ "near": "Sleeping man",
+ "busy": false,
+ "player": {
+  "x": -2.47,
+  "y": 0,
+  "z": -0.05,
+  "heading": -0.58
+ },
+ "viewport": {
+  "width": 2327,
+  "height": 1196,
+  "dpr": 1.100000023841858,
+  "layout": "desktop"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-14T21:43:08+0200",
+ "folder": "notes/feedback-game/2026-10-14_214308",
+ "shot": true
+}

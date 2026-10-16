@@ -1,5 +1,5 @@
 {
-"generated":"2026-10-14T02:06:09+02:00",
+"generated":"2026-10-15T16:09:00+02:00",
 "kinds":{
 "portrait":"Portraits and expressions",
 "model":"3D models",
@@ -759,19 +759,19 @@
 "prop":231,
 "piece":196,
 "room":17,
-"voice":1987,
+"voice":1959,
 "voice-ref":89,
 "music":6,
 "ambience":8,
 "sfx":36,
 "icon":46,
-"style":87
+"style":92
 },
 "status":{
 "approved":562,
-"provisional":2312,
-"candidate":37,
-"legacy":69,
+"provisional":2286,
+"candidate":42,
+"legacy":67,
 "rejected":1482
 },
 "kind_status":{
@@ -806,8 +806,7 @@
 },
 "voice":{
 "approved":259,
-"provisional":1726,
-"legacy":2
+"provisional":1700
 },
 "voice-ref":{
 "approved":7,
@@ -831,7 +830,7 @@
 "style":{
 "approved":19,
 "provisional":1,
-"candidate":28,
+"candidate":33,
 "legacy":30,
 "rejected":9
 }
@@ -8114,7 +8113,7 @@
 "type":"image",
 "src":"art/references/eric-ancient/M-02-it-guy-601.webp"
 },
-"thumb":null
+"thumb":"tools/assets/thumbs/96ff86d8730b8546.webp"
 },
 {
 "id":"portrait/mc-eric-sheet-v2",
@@ -8931,7 +8930,7 @@
 "type":"image",
 "src":"art/references/eric-ancient/A-mc-magic.webp"
 },
-"thumb":null
+"thumb":"tools/assets/thumbs/40ceb82d52f025ce.webp"
 },
 {
 "id":"portrait/A-mc-nervous",
@@ -8953,7 +8952,7 @@
 "type":"image",
 "src":"art/references/eric-ancient/A-mc-nervous.webp"
 },
-"thumb":null
+"thumb":"tools/assets/thumbs/627ded5594ee94b4.webp"
 },
 {
 "id":"portrait/A-mc-neutral",
@@ -8975,7 +8974,7 @@
 "type":"image",
 "src":"art/references/eric-ancient/A-mc-neutral.webp"
 },
-"thumb":null
+"thumb":"tools/assets/thumbs/891c6dd3f87b8055.webp"
 },
 {
 "id":"portrait/A-mc-s101",
@@ -8997,7 +8996,7 @@
 "type":"image",
 "src":"art/references/eric-ancient/A-mc-s101.webp"
 },
-"thumb":null
+"thumb":"tools/assets/thumbs/e703b13da3d85d90.webp"
 },
 {
 "id":"portrait/A-mc-s102",
@@ -9019,7 +9018,7 @@
 "type":"image",
 "src":"art/references/eric-ancient/A-mc-s102.webp"
 },
-"thumb":null
+"thumb":"tools/assets/thumbs/bf1afaa67a612b8c.webp"
 },
 {
 "id":"portrait/A-mc-smile",
@@ -9041,7 +9040,7 @@
 "type":"image",
 "src":"art/references/eric-ancient/A-mc-smile.webp"
 },
-"thumb":null
+"thumb":"tools/assets/thumbs/339fcb0f603c63ac.webp"
 },
 {
 "id":"portrait/bg-s2-d60-1",
@@ -50843,7 +50842,7 @@
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":249,
+"line":260,
 "call":true
 }
 ],
@@ -51924,7 +51923,7 @@
 "used":[
 {
 "file":"game3d/js/scenes/sports.js",
-"line":110,
+"line":111,
 "call":true
 }
 ],
@@ -53272,22 +53271,32 @@
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":93,
+"line":94,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":101,
+"line":102,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":112,
+"line":113,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":127,
+"line":128,
+"call":false
+},
+{
+"file":"game3d/js/scenes/sports/changing-room.js",
+"line":99,
+"call":false
+},
+{
+"file":"game3d/js/scenes/sports/pool-lights.js",
+"line":19,
 "call":false
 },
 {
@@ -53620,17 +53629,17 @@
 },
 {
 "file":"game3d/js/places/train.js",
-"line":395,
+"line":398,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":445,
+"line":448,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":459,
+"line":462,
 "call":true
 },
 {
@@ -54903,7 +54912,7 @@
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":189,
+"line":191,
 "call":true
 }
 ],
@@ -58543,22 +58552,22 @@
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":246,
+"line":257,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":279,
+"line":290,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":280,
+"line":291,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":281,
+"line":292,
 "call":false
 }
 ],
@@ -60548,12 +60557,12 @@ true
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":103,
+"line":104,
 "call":true
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":115,
+"line":116,
 "call":true
 },
 {
@@ -62682,17 +62691,17 @@ true
 },
 {
 "file":"game3d/js/scenes/sports/changing-room.js",
-"line":94,
+"line":110,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/changing-room.js",
-"line":107,
+"line":129,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/changing-room.js",
-"line":108,
+"line":130,
 "call":false
 },
 {
@@ -62792,32 +62801,27 @@ true
 },
 {
 "file":"game3d/js/scenes/sports/pool-lights.js",
-"line":17,
+"line":24,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool-lights.js",
-"line":18,
+"line":25,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool-lights.js",
-"line":35,
+"line":46,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":81,
+"line":90,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":83,
-"call":false
-},
-{
-"file":"game3d/js/scenes/sports/pool.js",
-"line":136,
+"line":92,
 "call":false
 },
 {
@@ -62827,37 +62831,37 @@ true
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":165,
+"line":158,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":166,
+"line":176,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":167,
+"line":177,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":169,
+"line":178,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":199,
+"line":180,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":201,
+"line":210,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":225,
+"line":212,
 "call":false
 },
 {
@@ -62867,27 +62871,32 @@ true
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":264,
+"line":247,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":278,
+"line":275,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":296,
+"line":289,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":297,
+"line":307,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":312,
+"line":308,
+"call":false
+},
+{
+"file":"game3d/js/scenes/sports/pool.js",
+"line":324,
 "call":false
 },
 {
@@ -63212,7 +63221,7 @@ true
 },
 {
 "file":"game3d/js/scenes/sports/changing-room.js",
-"line":99,
+"line":121,
 "call":true
 },
 {
@@ -63227,7 +63236,7 @@ true
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":149,
+"line":160,
 "call":true
 }
 ],
@@ -64498,12 +64507,12 @@ true
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":90,
+"line":91,
 "call":true
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":125,
+"line":126,
 "call":true
 },
 {
@@ -64630,27 +64639,27 @@ true
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":136,
+"line":147,
 "call":true
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":165,
+"line":176,
 "call":true
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":166,
+"line":177,
 "call":true
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":169,
+"line":180,
 "call":true
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":191,
+"line":202,
 "call":true
 },
 {
@@ -66323,7 +66332,7 @@ true
 },
 {
 "file":"game3d/js/scenes/sports/pool.js",
-"line":49,
+"line":57,
 "call":false
 }
 ],
@@ -70946,7 +70955,7 @@ true
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":113,
+"line":114,
 "call":true
 }
 ],
@@ -73218,12 +73227,12 @@ true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":376,
+"line":379,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":428,
+"line":431,
 "call":true
 },
 {
@@ -73926,22 +73935,22 @@ true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":364,
+"line":367,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":419,
+"line":422,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":500,
+"line":503,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":546,
+"line":549,
 "call":true
 },
 {
@@ -74257,17 +74266,17 @@ true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":308,
+"line":311,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":448,
+"line":451,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":453,
+"line":456,
 "call":true
 },
 {
@@ -74683,7 +74692,7 @@ true
 },
 {
 "file":"game3d/js/places/day3/booking.js",
-"line":99,
+"line":98,
 "call":true
 },
 {
@@ -74987,21 +74996,6 @@ true
 "call":true
 },
 {
-"file":"game3d/js/places/ongoing/winter-props.js",
-"line":36,
-"call":true
-},
-{
-"file":"game3d/js/places/ongoing/winter-props.js",
-"line":39,
-"call":true
-},
-{
-"file":"game3d/js/places/ongoing/winter-props.js",
-"line":96,
-"call":true
-},
-{
 "file":"game3d/js/places/room-activity.js",
 "line":10,
 "call":true
@@ -75053,17 +75047,12 @@ true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":223,
+"line":226,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":248,
-"call":true
-},
-{
-"file":"game3d/js/places/train.js",
-"line":249,
+"line":251,
 "call":true
 },
 {
@@ -75073,37 +75062,27 @@ true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":265,
+"line":255,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":269,
+"line":268,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":270,
+"line":272,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":285,
+"line":273,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":298,
-"call":true
-},
-{
-"file":"game3d/js/places/train.js",
-"line":299,
-"call":true
-},
-{
-"file":"game3d/js/places/train.js",
-"line":300,
+"line":288,
 "call":true
 },
 {
@@ -75113,52 +75092,62 @@ true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":321,
+"line":302,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":323,
+"line":303,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":331,
+"line":304,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":363,
+"line":324,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":375,
+"line":326,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":383,
+"line":334,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":391,
+"line":366,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":406,
+"line":378,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":407,
+"line":386,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":415,
+"line":394,
+"call":true
+},
+{
+"file":"game3d/js/places/train.js",
+"line":409,
+"call":true
+},
+{
+"file":"game3d/js/places/train.js",
+"line":410,
 "call":true
 },
 {
@@ -75168,37 +75157,37 @@ true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":427,
+"line":421,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":435,
+"line":430,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":497,
+"line":438,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":498,
+"line":500,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":503,
+"line":501,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":513,
+"line":506,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":514,
+"line":516,
 "call":true
 },
 {
@@ -75208,12 +75197,17 @@ true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":530,
+"line":520,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":551,
+"line":533,
+"call":true
+},
+{
+"file":"game3d/js/places/train.js",
+"line":554,
 "call":true
 },
 {
@@ -77592,7 +77586,7 @@ true
 },
 {
 "file":"game3d/js/places/day3/booking.js",
-"line":18,
+"line":17,
 "call":true
 },
 {
@@ -77637,17 +77631,17 @@ true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":344,
+"line":347,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":465,
+"line":468,
 "call":true
 },
 {
 "file":"game3d/js/places/train.js",
-"line":531,
+"line":534,
 "call":true
 },
 {
@@ -78984,7 +78978,17 @@ true
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":91,
+"line":92,
+"call":true
+},
+{
+"file":"game3d/js/scenes/sports/changing-room.js",
+"line":100,
+"call":true
+},
+{
+"file":"game3d/js/scenes/sports/changing-room.js",
+"line":134,
 "call":true
 },
 {
@@ -79344,12 +79348,12 @@ true
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":69,
+"line":70,
 "call":false
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":141,
+"line":142,
 "call":false
 },
 {
@@ -79580,7 +79584,7 @@ true
 },
 {
 "file":"game3d/js/places/pool.js",
-"line":137,
+"line":140,
 "call":true
 },
 {
@@ -79934,7 +79938,7 @@ true
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":71,
+"line":72,
 "call":true
 },
 {
@@ -80162,12 +80166,12 @@ true
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":72,
+"line":73,
 "call":true
 },
 {
 "file":"game3d/js/scenes/sports.js",
-"line":202,
+"line":204,
 "call":true
 },
 {
@@ -82033,7 +82037,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-10kcuae.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/a09ed676b7bbc8f2.png",
 "text":"Still finding enough time for yourself? Somebody always wants me to look at something."
 },
 {
@@ -82411,7 +82415,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-17vdyir.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/84a4d169e0e6d9e7.png",
 "text":"Okay. I’ll stop jumping in."
 },
 {
@@ -82519,7 +82523,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-18hdr05.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/8c8982d5f802d196.png",
 "text":"Yes, and I say it’s fine. Then she asks what I’ve eaten, and I have to give an actual answer."
 },
 {
@@ -83626,7 +83630,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1kjioqf.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/363b8b242f308a44.png",
 "text":"Mm, I usually go straight home and start a game."
 },
 {
@@ -83707,7 +83711,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1l1qyo3.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/553d121d5f972b89.png",
 "text":"Mm, okay. I thought you wanted help with something."
 },
 {
@@ -84382,7 +84386,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1vpqglq.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/eeb48e61347be1bc.png",
 "text":"Oh. I keep answering before you finish because it’s faster. You can tell me to wait, you know."
 },
 {
@@ -85381,7 +85385,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-afmmmo.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/3a6efa7401e8523a.png",
 "text":"She’s packing food while she tells me. I’ve tried pointing that out."
 },
 {
@@ -85516,7 +85520,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-boyu7l.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/16b270823fc841fd.png",
 "text":"Then I look up and it’s one in morning, so..."
 },
 {
@@ -85570,7 +85574,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-ckltol.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/7d74b6595ab99ad6.png",
 "text":"Okay, I remember. Go on."
 },
 {
@@ -85678,7 +85682,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-ds0qww.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/55e4e98afe39667c.png",
 "text":"Mm, see you."
 },
 {
@@ -86002,7 +86006,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-gvou1m.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/f868af69ab53b25c.png",
 "text":"So, have you found anything to do here yet?"
 },
 {
@@ -86245,7 +86249,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-jkrw3n.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/222ea791c7e9ee1c.png",
 "text":"Mm, okay. I mostly just go home and play something."
 },
 {
@@ -87028,7 +87032,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-q4eml0.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/eb860c1b101d094a.png",
 "text":"What do you do after work here, anyway? Have you found anything?"
 },
 {
@@ -87325,7 +87329,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-thr863.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/31a85177d3e1c8a5.png",
 "text":"Then she asks if I don’t want it. So I take the food."
 },
 {
@@ -87946,7 +87950,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-z4jjfa.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/b02570e40ca1ed53.png",
 "text":"Mm, we can just talk. What is it?"
 },
 {
@@ -88771,7 +88775,7 @@ true
 "type":"audio",
 "src":"game3d/audio/word-shiryou.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/73e40c4eb5c72dea.png",
 "text":"資料。"
 },
 {
@@ -89204,34 +89208,6 @@ true
 "overheard"
 ],
 "text":"おはようございます。"
-},
-{
-"id":"voice/oh-1al5j7p",
-"kind":"voice",
-"name":"プール、今夜が最後ですよ！",
-"who":"aoi",
-"place":null,
-"paths":[
-"game3d/audio/oh-1al5j7p.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'bright' (VOICE-DIRECTION.md)",
-"used":[
-"Aoi: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-1al5j7p.mp3"
-},
-"thumb":"tools/assets/thumbs/3f53118f53edb194.png",
-"tags":[
-"overheard"
-],
-"text":"プール、今夜が最後ですよ！"
 },
 {
 "id":"voice/oh-1em5oka",
@@ -90158,6 +90134,34 @@ true
 "text":"テニス、また来ますよね？"
 },
 {
+"id":"voice/oh-lr27k5",
+"kind":"voice",
+"name":"あ、プールのサークル、今夜ですよ！",
+"who":"aoi",
+"place":null,
+"paths":[
+"game3d/audio/oh-lr27k5.mp3"
+],
+"status":"provisional",
+"status_from":{
+"text":"Generated from the story line; the speaker's voice isn't approved yet"
+},
+"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'bright' (VOICE-DIRECTION.md)",
+"used":[
+"Aoi: overheard line"
+],
+"review":null,
+"view":{
+"type":"audio",
+"src":"game3d/audio/oh-lr27k5.mp3"
+},
+"thumb":"tools/assets/thumbs/fd5cdec28afbd211.png",
+"tags":[
+"overheard"
+],
+"text":"あ、プールのサークル、今夜ですよ！"
+},
+{
 "id":"voice/oh-oglr9y",
 "kind":"voice",
 "name":"18時……六時からです。",
@@ -90656,34 +90660,6 @@ true
 "text":"朝から、ずっとこのままなんです。今日の分をプリントしたいんですけど……"
 },
 {
-"id":"voice/oh-1itr97j",
-"kind":"voice",
-"name":"このあたりは自由に使えます。マットは、そこの棚です。",
-"who":"attendant",
-"place":null,
-"paths":[
-"game3d/audio/oh-1itr97j.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'polite' (VOICE-DIRECTION.md)",
-"used":[
-"attendant: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-1itr97j.mp3"
-},
-"thumb":"tools/assets/thumbs/71cb5515de53b761.png",
-"tags":[
-"overheard"
-],
-"text":"このあたりは自由に使えます。マットは、そこの棚です。"
-},
-{
 "id":"voice/oh-1lbvcth",
 "kind":"voice",
 "name":"はい、予約です。",
@@ -90908,34 +90884,6 @@ true
 "text":"はい、置いておきます。"
 },
 {
-"id":"voice/oh-5ztdsp",
-"kind":"voice",
-"name":"来週から体育館です。室内用の靴を持ってきてくださいね。",
-"who":"attendant",
-"place":null,
-"paths":[
-"game3d/audio/oh-5ztdsp.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'polite' (VOICE-DIRECTION.md)",
-"used":[
-"attendant: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-5ztdsp.mp3"
-},
-"thumb":"tools/assets/thumbs/70d6d9f57287cbab.png",
-"tags":[
-"overheard"
-],
-"text":"来週から体育館です。室内用の靴を持ってきてくださいね。"
-},
-{
 "id":"voice/oh-7f0bza",
 "kind":"voice",
 "name":"あ、先にこっちを……",
@@ -91046,34 +90994,6 @@ true
 "overheard"
 ],
 "text":"そうですか。では、六時にプールで。"
-},
-{
-"id":"voice/oh-guamfy",
-"kind":"voice",
-"name":"はい、こちらで聞いておきます。どうぞ。",
-"who":"attendant",
-"place":null,
-"paths":[
-"game3d/audio/oh-guamfy.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'polite' (VOICE-DIRECTION.md)",
-"used":[
-"attendant: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-guamfy.mp3"
-},
-"thumb":"tools/assets/thumbs/1ce97844ad8bbd94.png",
-"tags":[
-"overheard"
-],
-"text":"はい、こちらで聞いておきます。どうぞ。"
 },
 {
 "id":"voice/oh-gyxi3m",
@@ -92798,7 +92718,7 @@ true
 "type":"audio",
 "src":"game3d/audio/carina-shiryou.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/ccb91151f8cfd5bd.png",
 "text":"資料。"
 },
 {
@@ -93248,7 +93168,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-10w2scy-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/4df58aef42798848.png",
 "text":"Shall we carry on with our walk?"
 },
 {
@@ -93523,7 +93443,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-12n13l8-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/be776dfb0d32bab1.png",
 "text":"Oh, that one."
 },
 {
@@ -94548,7 +94468,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-18pclfp-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/1ef25ac5eb45971c.png",
 "text":"The crane game you were telling me about?"
 },
 {
@@ -94573,7 +94493,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-18rowme-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/dd0459ce185ca2fb.png",
 "text":"There's no room for both of us. Let's keep walking."
 },
 {
@@ -94850,31 +94770,6 @@ true
 },
 "thumb":"tools/assets/thumbs/2211a58be0f2dec1.png",
 "text":"Let me stand a bit closer this time."
-},
-{
-"id":"voice/ln-1axk4v1-carina",
-"kind":"voice",
-"name":"I’ll remember that for next time.",
-"who":"carina",
-"place":null,
-"paths":[
-"game3d/audio/ln-1axk4v1-carina.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'warm' (VOICE-DIRECTION.md)",
-"used":[
-"carina: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-1axk4v1-carina.mp3"
-},
-"thumb":"tools/assets/thumbs/a1e1607d6d3f429f.png",
-"text":"I’ll remember that for next time."
 },
 {
 "id":"voice/ln-1axoo9i-carina",
@@ -95223,7 +95118,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1cegffi-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/57fc3c56b158c11e.png",
 "text":"If I keep asking, won’t you think I can’t do this?"
 },
 {
@@ -95598,7 +95493,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1etooo9-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/645d37505b3937f6.png",
 "text":"Did it jam again?"
 },
 {
@@ -95848,7 +95743,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1g6j3dw-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/6201c6983075e270.png",
 "text":"Could you hear me out before giving me advice?"
 },
 {
@@ -96073,7 +95968,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1gu8n8q-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/b3fbba62d4f85613.png",
 "text":"休み… Does your mother take her own advice?"
 },
 {
@@ -96198,7 +96093,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1hz66h1-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/2bba967ac6228ab3.png",
 "text":"It's closed. Let's keep going."
 },
 {
@@ -96573,7 +96468,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1kkjbtd-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/911f98f7b38059d4.png",
 "text":"Does your mother ask how you’re doing?"
 },
 {
@@ -96748,7 +96643,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1lz5jg5-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/92e4b054879801b5.png",
 "text":"Thanks for waiting while I got my drink."
 },
 {
@@ -96773,7 +96668,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1m52ok3-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/e710ff019a8a3fa6.png",
 "text":"Sure. I'll have a look too."
 },
 {
@@ -97673,7 +97568,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1rmhq3p-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/0183148f6f62084f.png",
 "text":"I like having some time to myself."
 },
 {
@@ -97798,7 +97693,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1srwsx0-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/085b70ddb4ae4cf2.png",
 "text":"This is the same diagram Mori gave me."
 },
 {
@@ -97948,7 +97843,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1u3ba00-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/3dabce311c5aa345.png",
 "text":"Shall we keep going?"
 },
 {
@@ -98273,7 +98168,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1vn0xk-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/805e6f20c6ffaf18.png",
 "text":"いっしょに……行きたい。"
 },
 {
@@ -98823,7 +98718,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-2ru1xw-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/cc6d5597e127ecd0.png",
 "text":"May I look through these?"
 },
 {
@@ -98923,7 +98818,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-349wi7-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/426701410a787ea3.png",
 "text":"Did you want to go into the game centre when we stopped there?"
 },
 {
@@ -99198,7 +99093,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-4zrltu-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/2c33e4e2839ff433.png",
 "text":"So that’s the trouble Mio had with it."
 },
 {
@@ -99223,7 +99118,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-511d7k-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/e8590d0f9707e3c0.png",
 "text":"Okay, I'll ask you later."
 },
 {
@@ -99398,7 +99293,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-5zaf4a-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/8f4b80a135d063e0.png",
 "text":"Sure. Take your time."
 },
 {
@@ -99448,7 +99343,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-61fz68-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/6edc31038aa8fd17.png",
 "text":"I’m still learning what people are asking for."
 },
 {
@@ -99648,7 +99543,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-801803-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/b49231852c85b5e5.png",
 "text":"That bench had a good view."
 },
 {
@@ -99748,7 +99643,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-8brz9k-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/205d8919cc715a70.png",
 "text":"I’d like to talk more. It takes me a while to get started."
 },
 {
@@ -100023,7 +99918,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-awstep-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/f732a8d3a8d18c2c.png",
 "text":"What does this say?"
 },
 {
@@ -100173,7 +100068,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-bl86yu-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/47cc4b468ae4376b.png",
 "text":"Do you mind if I look at these?"
 },
 {
@@ -100523,7 +100418,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-dh46pw-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/194667f9172f057b.png",
 "text":"I should get going. See you later."
 },
 {
@@ -101348,7 +101243,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-jjqbx3-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/887390e2c0c2c272.png",
 "text":"I'm going to get a drink."
 },
 {
@@ -101375,31 +101270,6 @@ true
 },
 "thumb":"tools/assets/thumbs/c864ae4cd5531f3c.png",
 "text":"Nothing new."
-},
-{
-"id":"voice/ln-jxavey-carina",
-"kind":"voice",
-"name":"もう一度？",
-"who":"carina",
-"place":null,
-"paths":[
-"game3d/audio/ln-jxavey-carina.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'warm' (VOICE-DIRECTION.md)",
-"used":[
-"carina: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-jxavey-carina.mp3"
-},
-"thumb":"tools/assets/thumbs/44240c01b8813b9c.png",
-"text":"もう一度？"
 },
 {
 "id":"voice/ln-k12nub-carina",
@@ -101548,7 +101418,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-kvsg0y-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/8fd70452992252e7.png",
 "text":"Would you like to come for a walk?"
 },
 {
@@ -101748,7 +101618,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-mf4e9g-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/eb81f2dc76a48bd0.png",
 "text":"Is that the rain gauge?"
 },
 {
@@ -102273,7 +102143,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-qchtji-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/e056b7ff1f4e2e5d.png",
 "text":"I’m all right with it. I just wanted to check we still agree."
 },
 {
@@ -103073,7 +102943,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-vnnoog-carina.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/79efcb27c6261ce8.png",
 "text":"Could I have a copy of the 資料 you mentioned?"
 },
 {
@@ -104599,8 +104469,33 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-11ganwz.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/a64b2cd5aee675a3.png",
 "text":"Yes. Sorry, I went straight into sorting it out. Was there more you wanted to say?"
+},
+{
+"id":"voice/ln-124yy1z",
+"kind":"voice",
+"name":"He’s given me the booking sheet. I should check who’s coming next week before we get in.",
+"who":"emi",
+"place":null,
+"paths":[
+"game3d/audio/ln-124yy1z.mp3"
+],
+"status":"provisional",
+"status_from":{
+"text":"Generated from the story line; the speaker's voice isn't approved yet"
+},
+"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'casual' (VOICE-DIRECTION.md)",
+"used":[
+"Emi: line"
+],
+"review":null,
+"view":{
+"type":"audio",
+"src":"game3d/audio/ln-124yy1z.mp3"
+},
+"thumb":"tools/assets/thumbs/c31e1b76b333f05f.png",
+"text":"He’s given me the booking sheet. I should check who’s coming next week before we get in."
 },
 {
 "id":"voice/ln-12552q0",
@@ -104753,56 +104648,6 @@ true
 "text":"What would you like to see?"
 },
 {
-"id":"voice/ln-16hb9fa",
-"kind":"voice",
-"name":"He’s given me the booking sheet. I should check who’s coming next week before we start.",
-"who":"emi",
-"place":null,
-"paths":[
-"game3d/audio/ln-16hb9fa.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'casual' (VOICE-DIRECTION.md)",
-"used":[
-"Emi: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-16hb9fa.mp3"
-},
-"thumb":"tools/assets/thumbs/1e2a306a74166aac.png",
-"text":"He’s given me the booking sheet. I should check who’s coming next week before we start."
-},
-{
-"id":"voice/ln-16yqtyl",
-"kind":"voice",
-"name":"Saturday evenings in the gym. Kuro comes too. I need someone to make me leave the office.",
-"who":"emi",
-"place":null,
-"paths":[
-"game3d/audio/ln-16yqtyl.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'casual' (VOICE-DIRECTION.md)",
-"used":[
-"Emi: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-16yqtyl.mp3"
-},
-"thumb":"tools/assets/thumbs/28029c36a8b29736.png",
-"text":"Saturday evenings in the gym. Kuro comes too. I need someone to make me leave the office."
-},
-{
 "id":"voice/ln-172moty",
 "kind":"voice",
 "name":"Ask them to show you. They know what they were doing when it stopped working.",
@@ -104824,7 +104669,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-172moty.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/1e8c47726321a1fc.png",
 "text":"Ask them to show you. They know what they were doing when it stopped working."
 },
 {
@@ -105049,7 +104894,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1c0mvrc.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/8fc1ba3f63ca31ae.png",
 "text":"Please do. I may need a moment to change what I was going to tell upstairs."
 },
 {
@@ -105174,7 +105019,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1foqipp.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/3a3b47e931dff020.png",
 "text":"You asked me to hear you out first. Were you going to say more, or shall I answer?"
 },
 {
@@ -105274,7 +105119,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1gos7gn.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/f5c10bf486e8756c.png",
 "text":"You can tell me you didn’t understand someone. I need to know that before I send you off with another request."
 },
 {
@@ -105353,81 +105198,6 @@ true
 "text":"I did ask her to remind me. Just not in front of everybody."
 },
 {
-"id":"voice/ln-1knpnpe",
-"kind":"voice",
-"name":"Oh. That’s colder than it was in August.",
-"who":"emi",
-"place":null,
-"paths":[
-"game3d/audio/ln-1knpnpe.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'surprised' (VOICE-DIRECTION.md)",
-"used":[
-"Emi: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-1knpnpe.mp3"
-},
-"thumb":"tools/assets/thumbs/1123d4d00115003e.png",
-"text":"Oh. That’s colder than it was in August."
-},
-{
-"id":"voice/ln-1l0afpr",
-"kind":"voice",
-"name":"We’ve got this end of the hall. Kuro’s showing me how to keep it low. Mine keeps going up ",
-"who":"emi",
-"place":null,
-"paths":[
-"game3d/audio/ln-1l0afpr.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'warm' (VOICE-DIRECTION.md)",
-"used":[
-"Emi: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-1l0afpr.mp3"
-},
-"thumb":"tools/assets/thumbs/77a20d21ce60aaed.png",
-"text":"We’ve got this end of the hall. Kuro’s showing me how to keep it low. Mine keeps going up towards the lights."
-},
-{
-"id":"voice/ln-1lf08x1",
-"kind":"voice",
-"name":"See you next Saturday, if you’re free. We’ll be in the gym by then.",
-"who":"emi",
-"place":null,
-"paths":[
-"game3d/audio/ln-1lf08x1.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'warm' (VOICE-DIRECTION.md)",
-"used":[
-"Emi: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-1lf08x1.mp3"
-},
-"thumb":"tools/assets/thumbs/f4e10b5ed710629d.png",
-"text":"See you next Saturday, if you’re free. We’ll be in the gym by then."
-},
-{
 "id":"voice/ln-1pocn7f",
 "kind":"voice",
 "name":"もう一度. Once more.",
@@ -105474,33 +105244,8 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1prghgr.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/1ac938181838b302.png",
 "text":"You know how to look after the machines. If the Japanese is holding things up, tell me. I can help with that."
-},
-{
-"id":"voice/ln-1qgvyhu",
-"kind":"voice",
-"name":"We’re indoors for the winter. You missed the last outdoor swim, but so did half the club.",
-"who":"emi",
-"place":null,
-"paths":[
-"game3d/audio/ln-1qgvyhu.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'bright' (VOICE-DIRECTION.md)",
-"used":[
-"Emi: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-1qgvyhu.mp3"
-},
-"thumb":"tools/assets/thumbs/805a9890d094e74c.png",
-"text":"We’re indoors for the winter. You missed the last outdoor swim, but so did half the club."
 },
 {
 "id":"voice/ln-1r2r5kh",
@@ -105574,8 +105319,33 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1sxdi2z.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/7054cdc0adb552f1.png",
 "text":"Good. And I’ll ask what you’ve checked before I tell anyone it’s finished."
+},
+{
+"id":"voice/ln-1t1fbh0",
+"kind":"voice",
+"name":"Fancy a swim? Or you can sit with us by the water.",
+"who":"emi",
+"place":null,
+"paths":[
+"game3d/audio/ln-1t1fbh0.mp3"
+],
+"status":"provisional",
+"status_from":{
+"text":"Generated from the story line; the speaker's voice isn't approved yet"
+},
+"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'warm' (VOICE-DIRECTION.md)",
+"used":[
+"Emi: line"
+],
+"review":null,
+"view":{
+"type":"audio",
+"src":"game3d/audio/ln-1t1fbh0.mp3"
+},
+"thumb":"tools/assets/thumbs/2ed54fff57b1a487.png",
+"text":"Fancy a swim? Or you can sit with us by the water."
 },
 {
 "id":"voice/ln-1tozhxb",
@@ -105728,31 +105498,6 @@ true
 "text":"I know. I keep meaning to. Could we have lunch next week?"
 },
 {
-"id":"voice/ln-1wyfipz",
-"kind":"voice",
-"name":"All right, my turn. Kuro, keep it about there again?",
-"who":"emi",
-"place":null,
-"paths":[
-"game3d/audio/ln-1wyfipz.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'warm' (VOICE-DIRECTION.md)",
-"used":[
-"Emi: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-1wyfipz.mp3"
-},
-"thumb":"tools/assets/thumbs/b1de07c08035ac6d.png",
-"text":"All right, my turn. Kuro, keep it about there again?"
-},
-{
 "id":"voice/ln-1yywwuz",
 "kind":"voice",
 "name":"There you are. How were the doors?",
@@ -105849,7 +105594,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-5rcikf.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/439a925c635b28df.png",
 "text":"Would that help, or is there something else you need from me?"
 },
 {
@@ -105926,31 +105671,6 @@ true
 },
 "thumb":"tools/assets/thumbs/a3e62e8ad2d8431a.png",
 "text":"You must be Carina. Emi, I run this lot. Sorry I wasn't about, I've been upstairs since seven begging for money."
-},
-{
-"id":"voice/ln-7edg8a",
-"kind":"voice",
-"name":"Mine are in here somewhere. Shall we find out what we’re doing?",
-"who":"emi",
-"place":null,
-"paths":[
-"game3d/audio/ln-7edg8a.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'casual' (VOICE-DIRECTION.md)",
-"used":[
-"Emi: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-7edg8a.mp3"
-},
-"thumb":"tools/assets/thumbs/36898dff3c6e541e.png",
-"text":"Mine are in here somewhere. Shall we find out what we’re doing?"
 },
 {
 "id":"voice/ln-8jd46d",
@@ -106053,31 +105773,6 @@ true
 "text":"Where would you like to go?"
 },
 {
-"id":"voice/ln-bftv8e",
-"kind":"voice",
-"name":"Last evening at this pool. The water’s fine once you’re in, apparently.",
-"who":"emi",
-"place":null,
-"paths":[
-"game3d/audio/ln-bftv8e.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'casual' (VOICE-DIRECTION.md)",
-"used":[
-"Emi: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-bftv8e.mp3"
-},
-"thumb":"tools/assets/thumbs/69daad65ef9e0b8e.png",
-"text":"Last evening at this pool. The water’s fine once you’re in, apparently."
-},
-{
 "id":"voice/ln-btfm6m",
 "kind":"voice",
 "name":"He’s taking the leftovers home. I said I’d help with the bags.",
@@ -106101,31 +105796,6 @@ true
 },
 "thumb":"tools/assets/thumbs/0bb2f70335f687f9.png",
 "text":"He’s taking the leftovers home. I said I’d help with the bags."
-},
-{
-"id":"voice/ln-c32ryv",
-"kind":"voice",
-"name":"Gym from next week, he says, and bring indoor shoes. They really do send you home without ",
-"who":"emi",
-"place":null,
-"paths":[
-"game3d/audio/ln-c32ryv.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'casual' (VOICE-DIRECTION.md)",
-"used":[
-"Emi: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-c32ryv.mp3"
-},
-"thumb":"tools/assets/thumbs/b337c573ab1ab8ae.png",
-"text":"Gym from next week, he says, and bring indoor shoes. They really do send you home without them."
 },
 {
 "id":"voice/ln-cm4y2e",
@@ -106174,8 +105844,33 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-esne9p.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/5bc09c61007e1b9d.png",
 "text":"Yes, we do. You can give me the bad news. I may need a moment before I pass it on."
+},
+{
+"id":"voice/ln-f4o8pf",
+"kind":"voice",
+"name":"We swim on Saturday evenings. Kuro comes too. I need someone to make me leave the office.",
+"who":"emi",
+"place":null,
+"paths":[
+"game3d/audio/ln-f4o8pf.mp3"
+],
+"status":"provisional",
+"status_from":{
+"text":"Generated from the story line; the speaker's voice isn't approved yet"
+},
+"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'casual' (VOICE-DIRECTION.md)",
+"used":[
+"Emi: line"
+],
+"review":null,
+"view":{
+"type":"audio",
+"src":"game3d/audio/ln-f4o8pf.mp3"
+},
+"thumb":"tools/assets/thumbs/6b37516aeeebaeb6.png",
+"text":"We swim on Saturday evenings. Kuro comes too. I need someone to make me leave the office."
 },
 {
 "id":"voice/ln-fbfene",
@@ -106199,7 +105894,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-fbfene.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/4add0abd3aea10fa.png",
 "text":"I’d rather you asked again than guessed. We can allow time for that."
 },
 {
@@ -106226,31 +105921,6 @@ true
 },
 "thumb":"tools/assets/thumbs/e2c09d9aedf0d4fa.png",
 "text":"Less than I’d like. I come down to ask for something, and then I’m off upstairs again."
-},
-{
-"id":"voice/ln-fuzrmx",
-"kind":"voice",
-"name":"Could we do that again? I think I know where to stand now.",
-"who":"emi",
-"place":null,
-"paths":[
-"game3d/audio/ln-fuzrmx.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'amused' (VOICE-DIRECTION.md)",
-"used":[
-"Emi: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-fuzrmx.mp3"
-},
-"thumb":"tools/assets/thumbs/a072cf33a7966a0b.png",
-"text":"Could we do that again? I think I know where to stand now."
 },
 {
 "id":"voice/ln-fw472o",
@@ -106303,6 +105973,31 @@ true
 "text":"Thank you. Just take them over to him by the steps."
 },
 {
+"id":"voice/ln-gpo36b",
+"kind":"voice",
+"name":"I’m here for the pool keys. We’re swimming tonight.",
+"who":"emi",
+"place":null,
+"paths":[
+"game3d/audio/ln-gpo36b.mp3"
+],
+"status":"provisional",
+"status_from":{
+"text":"Generated from the story line; the speaker's voice isn't approved yet"
+},
+"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'bright' (VOICE-DIRECTION.md)",
+"used":[
+"Emi: line"
+],
+"review":null,
+"view":{
+"type":"audio",
+"src":"game3d/audio/ln-gpo36b.mp3"
+},
+"thumb":"tools/assets/thumbs/ceb9ca8fb2e71889.png",
+"text":"I’m here for the pool keys. We’re swimming tonight."
+},
+{
 "id":"voice/ln-i1d37q",
 "kind":"voice",
 "name":"I made it. Sorry, I had to wait for someone to stop talking.",
@@ -106328,6 +106023,31 @@ true
 "text":"I made it. Sorry, I had to wait for someone to stop talking."
 },
 {
+"id":"voice/ln-iaaant",
+"kind":"voice",
+"name":"Swimming, actually. I haven’t even got in yet.",
+"who":"emi",
+"place":null,
+"paths":[
+"game3d/audio/ln-iaaant.mp3"
+],
+"status":"provisional",
+"status_from":{
+"text":"Generated from the story line; the speaker's voice isn't approved yet"
+},
+"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'hesitant' (VOICE-DIRECTION.md)",
+"used":[
+"Emi: line"
+],
+"review":null,
+"view":{
+"type":"audio",
+"src":"game3d/audio/ln-iaaant.mp3"
+},
+"thumb":"tools/assets/thumbs/e47438041d8ef5c2.png",
+"text":"Swimming, actually. I haven’t even got in yet."
+},
+{
 "id":"voice/ln-ixk6jl",
 "kind":"voice",
 "name":"We said you’d bring me the results, even the bad ones. Have I made that difficult?",
@@ -106349,8 +106069,33 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-ixk6jl.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/cb62e30c46943a00.png",
 "text":"We said you’d bring me the results, even the bad ones. Have I made that difficult?"
+},
+{
+"id":"voice/ln-m4p3i1",
+"kind":"voice",
+"name":"Thank you. I’d like to get a length in before I find something else to do.",
+"who":"emi",
+"place":"train",
+"paths":[
+"game3d/audio/ln-m4p3i1.mp3"
+],
+"status":"provisional",
+"status_from":{
+"text":"Generated from the story line; the speaker's voice isn't approved yet"
+},
+"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'bright' (VOICE-DIRECTION.md)",
+"used":[
+"Emi: line in Train"
+],
+"review":null,
+"view":{
+"type":"audio",
+"src":"game3d/audio/ln-m4p3i1.mp3"
+},
+"thumb":"tools/assets/thumbs/43c870f883392fcd.png",
+"text":"Thank you. I’d like to get a length in before I find something else to do."
 },
 {
 "id":"voice/ln-ofd9fi",
@@ -106478,31 +106223,6 @@ true
 "text":"I’ll be upstairs this afternoon. Kenji knows how to reach me if you need anything."
 },
 {
-"id":"voice/ln-qliz7b",
-"kind":"voice",
-"name":"This, actually. I haven’t even picked up a racket yet.",
-"who":"emi",
-"place":null,
-"paths":[
-"game3d/audio/ln-qliz7b.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'hesitant' (VOICE-DIRECTION.md)",
-"used":[
-"Emi: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-qliz7b.mp3"
-},
-"thumb":"tools/assets/thumbs/71993b100ad8c41d.png",
-"text":"This, actually. I haven’t even picked up a racket yet."
-},
-{
 "id":"voice/ln-qs0kux",
 "kind":"voice",
 "name":"He’s going to find the photos for you.",
@@ -106578,29 +106298,29 @@ true
 "text":"Mori’s booked a table for all of us. I’ll meet you there when I get out of this meeting."
 },
 {
-"id":"voice/ln-s1602m",
+"id":"voice/ln-sdqdfa",
 "kind":"voice",
-"name":"Thank you. Right, I’d like a turn before I find something else to do.",
+"name":"See you at the pool next Saturday, if you’re free.",
 "who":"emi",
-"place":"train",
+"place":null,
 "paths":[
-"game3d/audio/ln-s1602m.mp3"
+"game3d/audio/ln-sdqdfa.mp3"
 ],
 "status":"provisional",
 "status_from":{
 "text":"Generated from the story line; the speaker's voice isn't approved yet"
 },
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'bright' (VOICE-DIRECTION.md)",
+"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'warm' (VOICE-DIRECTION.md)",
 "used":[
-"Emi: line in Train"
+"Emi: line"
 ],
 "review":null,
 "view":{
 "type":"audio",
-"src":"game3d/audio/ln-s1602m.mp3"
+"src":"game3d/audio/ln-sdqdfa.mp3"
 },
-"thumb":"tools/assets/thumbs/a150e263f5653280.png",
-"text":"Thank you. Right, I’d like a turn before I find something else to do."
+"thumb":"tools/assets/thumbs/83cdce212cbcb803.png",
+"text":"See you at the pool next Saturday, if you’re free."
 },
 {
 "id":"voice/ln-sfkuxf",
@@ -106774,7 +106494,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-ve6ig2.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/2fa61bb8059da255.png",
 "text":"That doesn’t mean I wish you’d kept quiet."
 },
 {
@@ -106801,31 +106521,6 @@ true
 },
 "thumb":"tools/assets/thumbs/2ac7863410c31aac.png",
 "text":"I’m staying a bit longer. I’ve only just got comfortable."
-},
-{
-"id":"voice/ln-vla143",
-"kind":"voice",
-"name":"I’m here for the pool keys. We’ve got one last swim outdoors tonight.",
-"who":"emi",
-"place":null,
-"paths":[
-"game3d/audio/ln-vla143.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'bright' (VOICE-DIRECTION.md)",
-"used":[
-"Emi: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-vla143.mp3"
-},
-"thumb":"tools/assets/thumbs/ef223d0588d90009.png",
-"text":"I’m here for the pool keys. We’ve got one last swim outdoors tonight."
 },
 {
 "id":"voice/ln-wqtvg2",
@@ -106999,7 +106694,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-z8l9rk.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/91281365d3ba3910.png",
 "text":"All right. Thanks for telling me."
 },
 {
@@ -107049,7 +106744,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-zvukg1.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/d2878536ceb73f15.png",
 "text":"You were having trouble understanding the requests. Are people giving you time to ask?"
 },
 {
@@ -107107,34 +106802,6 @@ true
 "overheard"
 ],
 "text":"すみません、リスト、テーブルに置いてもらえますか？"
-},
-{
-"id":"voice/oh-ygq8rj",
-"kind":"voice",
-"name":"すみません、これ、お願いしてもいいですか。私も少し打ちたいので。",
-"who":"emi",
-"place":null,
-"paths":[
-"game3d/audio/oh-ygq8rj.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'polite' (VOICE-DIRECTION.md)",
-"used":[
-"Emi: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-ygq8rj.mp3"
-},
-"thumb":"tools/assets/thumbs/9f2be23b49e45a11.png",
-"tags":[
-"overheard"
-],
-"text":"すみません、これ、お願いしてもいいですか。私も少し打ちたいので。"
 },
 {
 "id":"voice/eric-akete",
@@ -107683,7 +107350,7 @@ true
 "type":"audio",
 "src":"game3d/audio/eric-shiryou.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/7330541611d4eb7b.png",
 "text":"資料。"
 },
 {
@@ -108133,7 +107800,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-10w2scy.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/4c3c786017dce1aa.png",
 "text":"Shall we carry on with our walk?"
 },
 {
@@ -108408,7 +108075,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-12n13l8.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/6bea332cd04e995e.png",
 "text":"Oh, that one."
 },
 {
@@ -109408,7 +109075,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-18pclfp.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/25e6b0e4b36c890f.png",
 "text":"The crane game you were telling me about?"
 },
 {
@@ -109433,7 +109100,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-18rowme.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/8f23065f8e79bfb5.png",
 "text":"There's no room for both of us. Let's keep walking."
 },
 {
@@ -109685,31 +109352,6 @@ true
 },
 "thumb":"tools/assets/thumbs/1b59e1ca12e038bd.png",
 "text":"Let me stand a bit closer this time."
-},
-{
-"id":"voice/ln-1axk4v1",
-"kind":"voice",
-"name":"I’ll remember that for next time.",
-"who":"eric",
-"place":null,
-"paths":[
-"game3d/audio/ln-1axk4v1.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'warm' (VOICE-DIRECTION.md)",
-"used":[
-"Eric: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-1axk4v1.mp3"
-},
-"thumb":"tools/assets/thumbs/1609d87a493b00fe.png",
-"text":"I’ll remember that for next time."
 },
 {
 "id":"voice/ln-1axoo9i",
@@ -110058,7 +109700,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1cegffi.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/1256440101b6193c.png",
 "text":"If I keep asking, won’t you think I can’t do this?"
 },
 {
@@ -110408,7 +110050,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1etooo9.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/bcfc99a5899dd526.png",
 "text":"Did it jam again?"
 },
 {
@@ -110658,7 +110300,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1g6j3dw.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/49f76d63687b1b05.png",
 "text":"Could you hear me out before giving me advice?"
 },
 {
@@ -110883,7 +110525,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1gu8n8q.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/058a6168ce123791.png",
 "text":"休み… Does your mother take her own advice?"
 },
 {
@@ -111008,7 +110650,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1hz66h1.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/1087786071088c78.png",
 "text":"It's closed. Let's keep going."
 },
 {
@@ -111383,7 +111025,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1kkjbtd.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/24709ab47e44a79d.png",
 "text":"Does your mother ask how you’re doing?"
 },
 {
@@ -111558,7 +111200,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1lz5jg5.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/d145844294c35a9a.png",
 "text":"Thanks for waiting while I got my drink."
 },
 {
@@ -111583,7 +111225,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1m52ok3.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/f739d279ec0dfd08.png",
 "text":"Sure. I'll have a look too."
 },
 {
@@ -112508,7 +112150,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1rmhq3p.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/32323a7f0fa6b698.png",
 "text":"I like having some time to myself."
 },
 {
@@ -112633,7 +112275,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1srwsx0.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/2e51a5b47f8f58db.png",
 "text":"This is the same diagram Mori gave me."
 },
 {
@@ -112783,7 +112425,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1u3ba00.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/e9dcab60319aecee.png",
 "text":"Shall we keep going?"
 },
 {
@@ -113108,7 +112750,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1vn0xk.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/0347144118ab9ebc.png",
 "text":"いっしょに……行きたい。"
 },
 {
@@ -113658,7 +113300,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-2ru1xw.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/10b7899f2b21945d.png",
 "text":"May I look through these?"
 },
 {
@@ -113758,7 +113400,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-349wi7.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/35c90c94f784dfc1.png",
 "text":"Did you want to go into the game centre when we stopped there?"
 },
 {
@@ -114033,7 +113675,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-4zrltu.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/abf13baa76ef9ec2.png",
 "text":"So that’s the trouble Mio had with it."
 },
 {
@@ -114058,7 +113700,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-511d7k.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/b4e26989ef12a370.png",
 "text":"Okay, I'll ask you later."
 },
 {
@@ -114233,7 +113875,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-5zaf4a.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/753f5ca231fd3ac8.png",
 "text":"Sure. Take your time."
 },
 {
@@ -114283,7 +113925,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-61fz68.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/bd4990fc3988743b.png",
 "text":"I’m still learning what people are asking for."
 },
 {
@@ -114508,7 +114150,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-801803.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/4836d6eab93cfb0e.png",
 "text":"That bench had a good view."
 },
 {
@@ -114608,7 +114250,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-8brz9k.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/07ee8b8927e11fd5.png",
 "text":"I’d like to talk more. It takes me a while to get started."
 },
 {
@@ -114883,7 +114525,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-awstep.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/c6ff409c5b5c2811.png",
 "text":"What does this say?"
 },
 {
@@ -115033,7 +114675,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-bl86yu.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/ebed0ce1e431cd32.png",
 "text":"Do you mind if I look at these?"
 },
 {
@@ -115383,7 +115025,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-dh46pw.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/1621826e05ee958c.png",
 "text":"I should get going. See you later."
 },
 {
@@ -116208,7 +115850,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-jjqbx3.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/34a917130f944a1f.png",
 "text":"I'm going to get a drink."
 },
 {
@@ -116235,31 +115877,6 @@ true
 },
 "thumb":"tools/assets/thumbs/14086fa918670cf8.png",
 "text":"Nothing new."
-},
-{
-"id":"voice/ln-jxavey",
-"kind":"voice",
-"name":"もう一度？",
-"who":"eric",
-"place":null,
-"paths":[
-"game3d/audio/ln-jxavey.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Local TTS from the story line (GUIDE, Local first); listed in game3d/audio/manifest.json; delivery tag 'warm' (VOICE-DIRECTION.md)",
-"used":[
-"Eric: line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-jxavey.mp3"
-},
-"thumb":"tools/assets/thumbs/babc9394786996bc.png",
-"text":"もう一度？"
 },
 {
 "id":"voice/ln-k12nub",
@@ -116383,7 +116000,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-kvsg0y.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/b6925269f34356d9.png",
 "text":"Would you like to come for a walk?"
 },
 {
@@ -116583,7 +116200,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-mf4e9g.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/ff4d3cc27d43ac89.png",
 "text":"Is that the rain gauge?"
 },
 {
@@ -117133,7 +116750,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-qchtji.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/1e53c41a03b0f2ee.png",
 "text":"I’m all right with it. I just wanted to check we still agree."
 },
 {
@@ -117958,7 +117575,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-vnnoog.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/3748a844d2dd56a5.png",
 "text":"Could I have a copy of the 資料 you mentioned?"
 },
 {
@@ -122650,7 +122267,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-11ii7pg.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/80e84bc4ac8d9ec5.png",
 "tags":[
 "overheard"
 ],
@@ -122706,7 +122323,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-128as5q.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/e048951e96b50f86.png",
 "tags":[
 "overheard"
 ],
@@ -122790,7 +122407,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-18a5ilj.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/62d5a77b9908549d.png",
 "tags":[
 "overheard"
 ],
@@ -123322,7 +122939,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-1icp1di.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/904d28c9e4da04a8.png",
 "tags":[
 "overheard"
 ],
@@ -123406,7 +123023,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-1n974oy.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/09f6789c397996b3.png",
 "tags":[
 "overheard"
 ],
@@ -123686,7 +123303,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-257o15.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/cbe189ccf08d1f21.png",
 "tags":[
 "overheard"
 ],
@@ -123770,7 +123387,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-2mcygb.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/1a8a1c4f1b310520.png",
 "tags":[
 "overheard"
 ],
@@ -124078,7 +123695,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-bdpdpw.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/ede6f2cbf9b4d1a8.png",
 "tags":[
 "overheard"
 ],
@@ -124246,7 +123863,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-k8lqww.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/49b542f94a15a6cd.png",
 "tags":[
 "overheard"
 ],
@@ -124386,7 +124003,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-lhr33a.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/4ccc1b3593439e0f.png",
 "tags":[
 "overheard"
 ],
@@ -124470,7 +124087,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-n53ijm.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/03bc0bc79faca806.png",
 "tags":[
 "overheard"
 ],
@@ -124498,7 +124115,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-nf2xz1.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/265ccddbf4bac357.png",
 "tags":[
 "overheard"
 ],
@@ -124526,7 +124143,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-o6z9lb.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/541bde7ee541862d.png",
 "tags":[
 "overheard"
 ],
@@ -124722,7 +124339,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-vwruuw.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/7135848f01c151db.png",
 "tags":[
 "overheard"
 ],
@@ -124778,7 +124395,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-x1tx6q.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/bef66fd24e4658ad.png",
 "tags":[
 "overheard"
 ],
@@ -125352,34 +124969,6 @@ true
 "text":"すみません。お話は、あとでもいいですか。"
 },
 {
-"id":"voice/oh-181egj4",
-"kind":"voice",
-"name":"このプール、今日で最後なんですよ。",
-"who":"kuro",
-"place":null,
-"paths":[
-"game3d/audio/oh-181egj4.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'warm' (VOICE-DIRECTION.md)",
-"used":[
-"Kuro: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-181egj4.mp3"
-},
-"thumb":"tools/assets/thumbs/3b9558a6482e1276.png",
-"tags":[
-"overheard"
-],
-"text":"このプール、今日で最後なんですよ。"
-},
-{
 "id":"voice/oh-1auzlpv",
 "kind":"voice",
 "name":"玖路です。受付です。",
@@ -125688,34 +125277,6 @@ true
 "text":"来たんですね。……忘れると思ってました。"
 },
 {
-"id":"voice/oh-1j2qeia",
-"kind":"voice",
-"name":"プール、今日で最後ですよ。来週はジムで。",
-"who":"kuro",
-"place":null,
-"paths":[
-"game3d/audio/oh-1j2qeia.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'teasing' (VOICE-DIRECTION.md)",
-"used":[
-"Kuro: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-1j2qeia.mp3"
-},
-"thumb":"tools/assets/thumbs/19631a7a89d8e7a5.png",
-"tags":[
-"overheard"
-],
-"text":"プール、今日で最後ですよ。来週はジムで。"
-},
-{
 "id":"voice/oh-1jvvl78",
 "kind":"voice",
 "name":"さすがですね。",
@@ -125742,34 +125303,6 @@ true
 "overheard"
 ],
 "text":"さすがですね。"
-},
-{
-"id":"voice/oh-1l4dtns",
-"kind":"voice",
-"name":"はい、同じところで。",
-"who":"kuro",
-"place":null,
-"paths":[
-"game3d/audio/oh-1l4dtns.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'warm' (VOICE-DIRECTION.md)",
-"used":[
-"Kuro: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-1l4dtns.mp3"
-},
-"thumb":"tools/assets/thumbs/b9fd2fdabaa4ee89.png",
-"tags":[
-"overheard"
-],
-"text":"はい、同じところで。"
 },
 {
 "id":"voice/oh-1laklbf",
@@ -125996,34 +125529,6 @@ true
 "text":"玖路です。"
 },
 {
-"id":"voice/oh-1sdccw7",
-"kind":"voice",
-"name":"寒い……靴下、もっと厚いのにすればよかった。",
-"who":"kuro",
-"place":null,
-"paths":[
-"game3d/audio/oh-1sdccw7.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'tired' (VOICE-DIRECTION.md)",
-"used":[
-"Kuro: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-1sdccw7.mp3"
-},
-"thumb":"tools/assets/thumbs/adbb24163c6a4a3f.png",
-"tags":[
-"overheard"
-],
-"text":"寒い……靴下、もっと厚いのにすればよかった。"
-},
-{
 "id":"voice/oh-1taj04z",
 "kind":"voice",
 "name":"ちゃんと言ってくれるんですね。",
@@ -126106,62 +125611,6 @@ true
 "overheard"
 ],
 "text":"荷物は、自分で。"
-},
-{
-"id":"voice/oh-1u3qion",
-"kind":"voice",
-"name":"はい。もう一度、ここから打ちますね。",
-"who":"kuro",
-"place":null,
-"paths":[
-"game3d/audio/oh-1u3qion.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'warm' (VOICE-DIRECTION.md)",
-"used":[
-"Kuro: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-1u3qion.mp3"
-},
-"thumb":"tools/assets/thumbs/66da9c96656b0344.png",
-"tags":[
-"overheard"
-],
-"text":"はい。もう一度、ここから打ちますね。"
-},
-{
-"id":"voice/oh-1u64h57",
-"kind":"voice",
-"name":"また土曜日に。",
-"who":"kuro",
-"place":null,
-"paths":[
-"game3d/audio/oh-1u64h57.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'polite' (VOICE-DIRECTION.md)",
-"used":[
-"Kuro: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-1u64h57.mp3"
-},
-"thumb":"tools/assets/thumbs/92254de4278472b4.png",
-"tags":[
-"overheard"
-],
-"text":"また土曜日に。"
 },
 {
 "id":"voice/oh-1v28myw",
@@ -126470,34 +125919,6 @@ true
 "overheard"
 ],
 "text":"今日は、泳ぐ？"
-},
-{
-"id":"voice/oh-99tttq",
-"kind":"voice",
-"name":"持ってきちゃいました。",
-"who":"kuro",
-"place":null,
-"paths":[
-"game3d/audio/oh-99tttq.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'amused' (VOICE-DIRECTION.md)",
-"used":[
-"Kuro: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-99tttq.mp3"
-},
-"thumb":"tools/assets/thumbs/2dc670a6eb7be1a0.png",
-"tags":[
-"overheard"
-],
-"text":"持ってきちゃいました。"
 },
 {
 "id":"voice/oh-a4e6eg",
@@ -126920,34 +126341,6 @@ true
 "text":"待ってください。"
 },
 {
-"id":"voice/oh-ndoq16",
-"kind":"voice",
-"name":"ラケット、もう一本ありますよ。よかったら使ってください。",
-"who":"kuro",
-"place":null,
-"paths":[
-"game3d/audio/oh-ndoq16.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'warm' (VOICE-DIRECTION.md)",
-"used":[
-"Kuro: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-ndoq16.mp3"
-},
-"thumb":"tools/assets/thumbs/636739a7851f7851.png",
-"tags":[
-"overheard"
-],
-"text":"ラケット、もう一本ありますよ。よかったら使ってください。"
-},
-{
 "id":"voice/oh-npl3pd",
 "kind":"voice",
 "name":"こんばんは。玖路です。本社の受付です。",
@@ -127060,34 +126453,6 @@ true
 "text":"はい。ここでは、私も休んでますから。"
 },
 {
-"id":"voice/oh-qcn3qr",
-"kind":"voice",
-"name":"泳げば、少し温かくなりますよ。",
-"who":"kuro",
-"place":null,
-"paths":[
-"game3d/audio/oh-qcn3qr.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'warm' (VOICE-DIRECTION.md)",
-"used":[
-"Kuro: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-qcn3qr.mp3"
-},
-"thumb":"tools/assets/thumbs/9dc5cd9697bbc60b.png",
-"tags":[
-"overheard"
-],
-"text":"泳げば、少し温かくなりますよ。"
-},
-{
 "id":"voice/oh-qicr44",
 "kind":"voice",
 "name":"エミさん、泳ぎに来たんでしょう？",
@@ -127114,34 +126479,6 @@ true
 "overheard"
 ],
 "text":"エミさん、泳ぎに来たんでしょう？"
-},
-{
-"id":"voice/oh-th2io9",
-"kind":"voice",
-"name":"ゆっくり打ちますね。まず、見ていてください。",
-"who":"kuro",
-"place":null,
-"paths":[
-"game3d/audio/oh-th2io9.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'warm' (VOICE-DIRECTION.md)",
-"used":[
-"Kuro: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-th2io9.mp3"
-},
-"thumb":"tools/assets/thumbs/032a8e73020c9a03.png",
-"tags":[
-"overheard"
-],
-"text":"ゆっくり打ちますね。まず、見ていてください。"
 },
 {
 "id":"voice/oh-tvmgua",
@@ -127282,34 +126619,6 @@ true
 "overheard"
 ],
 "text":"こんにちは。カウンターがないと、変な感じですね。"
-},
-{
-"id":"voice/oh-wesb6v",
-"kind":"voice",
-"name":"大丈夫でしたか。",
-"who":"kuro",
-"place":null,
-"paths":[
-"game3d/audio/oh-wesb6v.mp3"
-],
-"status":"provisional",
-"status_from":{
-"text":"Generated from the story line; the speaker's voice isn't approved yet"
-},
-"source":"Overheard line, played muffled; game3d/tools/voices.py (heard lines) and the voice pipeline; delivery tag 'polite' (VOICE-DIRECTION.md)",
-"used":[
-"Kuro: overheard line"
-],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/oh-wesb6v.mp3"
-},
-"thumb":"tools/assets/thumbs/3652387304391ba6.png",
-"tags":[
-"overheard"
-],
-"text":"大丈夫でしたか。"
 },
 {
 "id":"voice/oh-xmgjsi",
@@ -128678,7 +127987,7 @@ true
 "type":"audio",
 "src":"game3d/audio/mori-reference-dozo.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/bdaedf1446ff0eeb.png",
 "tags":[
 "overheard"
 ],
@@ -129238,7 +128547,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-1fe112e.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/744e26e15202a51d.png",
 "tags":[
 "overheard"
 ],
@@ -129574,7 +128883,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-1kthmyy.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/eafcc514e65aad1c.png",
 "tags":[
 "overheard"
 ],
@@ -130806,7 +130115,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-p8ptyj.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/75b7292fc6a441fd.png",
 "tags":[
 "overheard"
 ],
@@ -132917,7 +132226,7 @@ true
 "type":"audio",
 "src":"game3d/audio/ln-1j3qmcd.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/4200fce029ea0e1c.png",
 "text":"資料。"
 },
 {
@@ -132942,7 +132251,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-11mu5ym.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/69165ec394d68a49.png",
 "tags":[
 "overheard"
 ],
@@ -132970,7 +132279,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-1fg741a.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/46e714223cc6cda1.png",
 "tags":[
 "overheard"
 ],
@@ -132998,7 +132307,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-1k85h5e.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/2fc8f52651e120bc.png",
 "tags":[
 "overheard"
 ],
@@ -133026,7 +132335,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-1nfgvbu.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/6d48e8d35b251c2f.png",
 "tags":[
 "overheard"
 ],
@@ -133054,7 +132363,7 @@ true
 "type":"audio",
 "src":"game3d/audio/oh-lkhpf9.mp3"
 },
-"thumb":null,
+"thumb":"tools/assets/thumbs/908563979ec16b04.png",
 "tags":[
 "overheard"
 ],
@@ -133759,50 +133068,6 @@ true
 "overheard"
 ],
 "text":"あ、すみません、今ちょっと…"
-},
-{
-"id":"voice/ln-ho9reh",
-"kind":"voice",
-"name":"ln-ho9reh",
-"who":null,
-"place":null,
-"paths":[
-"game3d/audio/ln-ho9reh.mp3"
-],
-"status":"legacy",
-"status_from":{
-"text":"Not in game3d/audio/manifest.json and not referenced: an older take (edge-tts, game3d/tools/voices.py)"
-},
-"source":"edge-tts (game3d/tools/voices.py LINES)",
-"used":[],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-ho9reh.mp3"
-},
-"thumb":"tools/assets/thumbs/b18b5d1398792dd8.png"
-},
-{
-"id":"voice/ln-if476k",
-"kind":"voice",
-"name":"ln-if476k",
-"who":null,
-"place":null,
-"paths":[
-"game3d/audio/ln-if476k.mp3"
-],
-"status":"legacy",
-"status_from":{
-"text":"Not in game3d/audio/manifest.json and not referenced: an older take (edge-tts, game3d/tools/voices.py)"
-},
-"source":"edge-tts (game3d/tools/voices.py LINES)",
-"used":[],
-"review":null,
-"view":{
-"type":"audio",
-"src":"game3d/audio/ln-if476k.mp3"
-},
-"thumb":"tools/assets/thumbs/b537c08f8df2aa89.png"
 },
 {
 "id":"voice-ref/eric-voice",
@@ -138982,6 +138247,116 @@ true
 "place":null,
 "paths":[
 "tools/workflows/karaoke-song-2-a7-audio.json"
+],
+"status":"candidate",
+"status_from":{
+"text":"Saved workflow"
+},
+"source":"tools/workflows/README.md",
+"used":[],
+"review":null,
+"view":{},
+"thumb":null,
+"tags":[
+"ComfyUI workflow"
+]
+},
+{
+"id":"style/workflow-marketing-local-outfits-1-01-kuro-invitation",
+"kind":"style",
+"name":"ComfyUI: marketing-local-outfits-1-01-kuro-invitation",
+"who":null,
+"place":null,
+"paths":[
+"tools/workflows/marketing-local-outfits-1-01-kuro-invitation.json"
+],
+"status":"candidate",
+"status_from":{
+"text":"Saved workflow"
+},
+"source":"tools/workflows/README.md",
+"used":[],
+"review":null,
+"view":{},
+"thumb":null,
+"tags":[
+"ComfyUI workflow"
+]
+},
+{
+"id":"style/workflow-marketing-local-outfits-1-02-rei-lounge",
+"kind":"style",
+"name":"ComfyUI: marketing-local-outfits-1-02-rei-lounge",
+"who":null,
+"place":null,
+"paths":[
+"tools/workflows/marketing-local-outfits-1-02-rei-lounge.json"
+],
+"status":"candidate",
+"status_from":{
+"text":"Saved workflow"
+},
+"source":"tools/workflows/README.md",
+"used":[],
+"review":null,
+"view":{},
+"thumb":null,
+"tags":[
+"ComfyUI workflow"
+]
+},
+{
+"id":"style/workflow-marketing-local-outfits-1-03-kuro-reception-inpaint",
+"kind":"style",
+"name":"ComfyUI: marketing-local-outfits-1-03-kuro-reception-inpaint",
+"who":null,
+"place":null,
+"paths":[
+"tools/workflows/marketing-local-outfits-1-03-kuro-reception-inpaint.json"
+],
+"status":"candidate",
+"status_from":{
+"text":"Saved workflow"
+},
+"source":"tools/workflows/README.md",
+"used":[],
+"review":null,
+"view":{},
+"thumb":null,
+"tags":[
+"ComfyUI workflow"
+]
+},
+{
+"id":"style/workflow-marketing-local-outfits-1-04-mio-desk",
+"kind":"style",
+"name":"ComfyUI: marketing-local-outfits-1-04-mio-desk",
+"who":null,
+"place":null,
+"paths":[
+"tools/workflows/marketing-local-outfits-1-04-mio-desk.json"
+],
+"status":"candidate",
+"status_from":{
+"text":"Saved workflow"
+},
+"source":"tools/workflows/README.md",
+"used":[],
+"review":null,
+"view":{},
+"thumb":null,
+"tags":[
+"ComfyUI workflow"
+]
+},
+{
+"id":"style/workflow-marketing-local-outfits-1-05-mio-interrupted",
+"kind":"style",
+"name":"ComfyUI: marketing-local-outfits-1-05-mio-interrupted",
+"who":null,
+"place":null,
+"paths":[
+"tools/workflows/marketing-local-outfits-1-05-mio-interrupted.json"
 ],
 "status":"candidate",
 "status_from":{

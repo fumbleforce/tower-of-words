@@ -1,0 +1,42 @@
+{
+ "time": "2026-10-14T20:16:28.499Z",
+ "build": "1014-2002-6b5b9108b",
+ "url": "/game3d/?mc=carina",
+ "screen": "playing",
+ "place": "office",
+ "placeName": "IT support, B2",
+ "period": "morning",
+ "periodName": "Morning at work",
+ "date": "Thu 1 Oct",
+ "node": "",
+ "nodeStack": [],
+ "goal": "Go to the copy room with Mr. Mori.",
+ "line": null,
+ "typed": [],
+ "near": "Cat",
+ "busy": false,
+ "player": {
+  "x": 0.08,
+  "y": 0,
+  "z": -3.31,
+  "heading": 0
+ },
+ "viewport": {
+  "width": 2327,
+  "height": 1196,
+  "dpr": 1.100000023841858,
+  "layout": "desktop"
+ },
+ "graphics": {
+  "gpu": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 3080/PCIe/SSE2, OpenGL 4.5.0)",
+  "software": false,
+  "integrated": false,
+  "quality": 2,
+  "frameLimit": 0,
+  "frameLimitSetting": "off"
+ },
+ "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+ "saved": "2026-10-14T22:17:18+0200",
+ "folder": "notes/feedback-game/2026-10-14_221718",
+ "shot": true
+}

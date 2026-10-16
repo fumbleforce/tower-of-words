@@ -1,0 +1,137 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "rdbtAnima.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen_3_06b_base.safetensors",
+      "type": "stable_diffusion"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart. Close three-quarter waist-up view of one 30-year-old woman seated in a desk chair on the right side. Mio turns from her IT desk to meet the viewer with a warm amused smile and one relaxed open hand inviting conversation. Her face is large, with clear space above her whole hair bun. She has pale skin, very dark green hair in a messy loose bun with bangs, mint-jade underneath at the nape, light tan eyes and thin taupe-grey glasses with clear lenses. She wears an opaque black cropped camisole, a loose open dark teal hoodie and teal-and-white headphones around her neck. Two dark computer monitors and an ordinary keyboard occupy the desk on image left. Behind them is a simple slate-blue office wall. Cool indoor light illuminates her face.",
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "worst quality, low quality, blurry, bad anatomy, bad hands, extra fingers, extra hands, extra arms, long fingernails, claws, text, watermark, letters, signature, 3d, realistic, photorealistic, western cartoon, flat vector, thick outlines, poster art, pop art, nude, nipples, genitals, transparent clothing, sexual action, child, loli, sunset, plain cyan background, tan, tanned skin, sunglasses, tinted glasses, lime hair, yellow-green hair, hair streaks, pink lipstick, empty featureless background",
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1536,
+      "height": 864,
+      "batch_size": 1
+    }
+  },
+  "7": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "IPA",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "5",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ],
+      "seed": 1873024,
+      "steps": 30,
+      "cfg": 5,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "denoise": 1.0
+    }
+  },
+  "8": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "7",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "8",
+        0
+      ],
+      "filename_prefix": "marketing-local-outfits-1/04-mio-desk"
+    }
+  },
+  "IPL": {
+    "class_type": "AnimaIPAdapterLoader",
+    "inputs": {
+      "ip_adapter_name": "ip_adapter-Character_Reference-10.safetensors",
+      "auto_download": false
+    }
+  },
+  "RI": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "04-mio-desk-reference.png"
+    }
+  },
+  "IPA": {
+    "class_type": "AnimaIPAdapterApply",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "ip_adapter": [
+        "IPL",
+        0
+      ],
+      "ref_image": [
+        "RI",
+        0
+      ],
+      "strength": 0.65,
+      "ref_image_size": 512,
+      "siglip_layer": -1,
+      "ip_cfg_scale": 4.0,
+      "ip_cfg_separate": false,
+      "gray_null": false,
+      "use_lora": true
+    }
+  }
+}
