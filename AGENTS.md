@@ -10,7 +10,7 @@ At the start of a main Codex session, run `python3 tools/collab/codex_wake.py bi
 
 Jørgen, 2026-10-16: "In the public nonadult mode, rewards are at maximum soft, and are more playful, funny and fun than sexy. In the adult mode, rewards are at minimum skimpy / partly revealing / very teasing, up to hard rewards. This way we segment players, and the commuters would play the safe nonadult mode. It should be possible to toggle on and off part way through, enabling / disabling the extra scenes."
 
-The soft rules below are for nonadult-mode rewards. Adult-mode reward recipes use Adult mode and its configured exclusions, with no extra negative words (GUIDE).
+The soft rules below are for nonadult-mode rewards. Adult-mode reward recipes use Adult mode and its configured exclusions. The rating exclusions are fixed defaults that a recipe can't remove or edit. Content exclusions stay manual and per section (a clothing negative, a background negative, and so on), e.g. "window" for a windowless room (Jørgen, 2026-10-16: "of course we need some manual control over exclusion for scenery, but not for sensitivity levels that we have defaults for").
 
 ## Reward scenes, soft
 
