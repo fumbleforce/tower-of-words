@@ -58,7 +58,7 @@ export default {
     ],
     chat_mio_settling_choice: [{ choice: [
       { text: 'I like having some time to myself.', go: 'chat_mio_quiet_evening' },
-      { text: 'I’d like to talk more. It takes me a while to get started.', go: 'chat_mio_try_evening' },
+      { text: 'Not much yet. I’d like to get to know a few people here.', go: 'chat_mio_try_evening' },
       { text: 'I’m still working that out.', go: 'chat_mio_not_sure' },
     ] }],
     chat_mio_quiet_evening: [
@@ -68,21 +68,23 @@ export default {
       { set: { chat_mio_evenings: 'quiet' } }, { go: 'chat_mio_settling_memory' },
     ],
     chat_mio_try_evening: [
-      { say: 'eric', emo: 'hesitant', text: 'I’d like to talk more. It takes me a while to get started.' },
-      { say: 'mio', emo: 'casual', text: 'Oh. I keep answering before you finish because it’s faster. You can tell me to wait, you know.' },
+      { say: 'eric', emo: 'hesitant', text: 'Not much yet. I’d like to get to know a few people here.' },
+      { say: 'mio', emo: 'casual', text: 'Oh. Um, honestly I’m the wrong person to ask. After work I go home and I don’t talk to anybody until the morning, and then it’s mostly about servers.' },
       { choice: [
-        { text: 'Give me a moment to get it out.', go: 'chat_mio_wait_for_me' },
-        { text: 'It’s fine. I just wanted to say it.', go: 'chat_mio_talk_fine' },
+        { text: 'Well, you’re here. Can I ask you something?', go: 'chat_mio_wait_for_me' },
+        { text: 'Then I’ll start by saying hello to you more often.', go: 'chat_mio_talk_fine' },
       ] },
     ],
     chat_mio_wait_for_me: [
-      { say: 'mio', emo: 'casual', text: 'Okay. I’ll stop jumping in.' },
+      { say: 'eric', emo: 'casual', text: 'Well, you’re here. Can I ask you something?' },
+      { say: 'mio', emo: 'amused', text: 'Ah... okay, that’s fair, I said that. Um, what is it?' },
       { set: { chat_mio_evenings: 'try' } },
       { do: 'remember', who: 'mio', id: 'settling_in', text: 'You talked about what you do after work.' },
       { go: 'chat_mio_return_questions' },
     ],
     chat_mio_talk_fine: [
-      { say: 'mio', emo: 'casual', text: 'Mm, okay. I thought you wanted help with something.' },
+      { say: 'eric', emo: 'casual', text: 'Then I’ll start by saying hello to you more often.' },
+      { say: 'mio', emo: 'casual', text: 'Mm, okay, hello is fine. If I don’t look up, it’s because I’m reading a log, it’s not you, so...' },
       { set: { chat_mio_evenings: 'talk' } }, { go: 'chat_mio_settling_memory' },
     ],
     chat_mio_not_sure: [
@@ -96,11 +98,11 @@ export default {
     chat_mio_settling_again: [
       { if: '!chat_mio_checkin_offered', then: [{ go: 'chat_mio_settling' }] },
       { if: "chat_mio_evenings == 'quiet'", then: [
-        { say: 'mio', emo: 'casual', text: 'Still finding enough time for yourself? Somebody always wants me to look at something.' },
+        { say: 'mio', emo: 'amused', text: 'Oh, hi. I thought you were the time-to-yourself type, like me. Okay, what is it?' },
       ], else: [{ if: "chat_mio_evenings == 'try'", then: [
-        { say: 'mio', emo: 'casual', text: 'Okay, I remember. Go on.' },
+        { say: 'mio', emo: 'casual', text: 'You have another question? Okay, go on.' },
       ], else: [{ if: "chat_mio_evenings == 'talk'", then: [
-        { say: 'mio', emo: 'casual', text: 'Mm, we can just talk. What is it?' },
+        { say: 'mio', emo: 'dry', text: 'Hello. See, I looked up this time. So, what is it?' },
       ], else: [
         { say: 'mio', emo: 'curious', text: 'So, have you found anything to do here yet?' },
       ] }] }] },

@@ -52,9 +52,9 @@ async function play(who, node, { state = {}, words = [], picks = [], restore, me
 
 test('Mio asks back, accepts each preference, and recalls saved choices without assigning player history', async () => {
   const variants = [
-    ['time to myself', [], 'quiet', 'time for yourself'],
-    ['talk more', ['moment to get it out'], 'try', 'I remember'],
-    ['talk more', ['It’s fine.'], 'talk', 'we can just talk'],
+    ['time to myself', [], 'quiet', 'time-to-yourself type'],
+    ['get to know a few people', ['Can I ask you something'], 'try', 'another question'],
+    ['get to know a few people', ['saying hello to you'], 'talk', 'I looked up this time'],
   ];
   for (const [first, rest, value, recall] of variants) {
     const start = await play('mio', 'chat_mio_mainland', { picks: ['That sounds nice', first, ...rest] });
@@ -138,7 +138,7 @@ test('Continue from a preference choice restores the actual Runner frames and ho
   const first = await play('mio', 'chat_mio_settling', { picks: ['time to myself'] });
   const checkpoint = first.checkpoints[0];
   const restored = await play('mio', 'chat_mio_settling', {
-    state: checkpoint.state, restore: checkpoint.frames, picks: ['talk more', 'It’s fine.'],
+    state: checkpoint.state, restore: checkpoint.frames, picks: ['get to know a few people', 'saying hello to you'],
   });
   assert.equal(restored.state.chat_mio_evenings, 'talk');
   assert.equal(restored.memory.length, 1);

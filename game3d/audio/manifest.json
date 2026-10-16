@@ -14560,9 +14560,9 @@
   "emo": "casual"
  },
  {
-  "key": "ln-8brz9k",
+  "key": "ln-1cxrwz6",
   "speaker": "eric",
-  "text": "I’d like to talk more. It takes me a while to get started.",
+  "text": "Not much yet. I’d like to get to know a few people here.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -14570,9 +14570,9 @@
   "emo": "hesitant"
  },
  {
-  "key": "ln-1vpqglq",
+  "key": "ln-ela2fi",
   "speaker": "mio",
-  "text": "Oh. I keep answering before you finish because it’s faster. You can tell me to wait, you know.",
+  "text": "Oh. Um, honestly I’m the wrong person to ask. After work I go home and I don’t talk to anybody until the morning, and then it’s mostly about servers.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -14580,9 +14580,9 @@
   "emo": "casual"
  },
  {
-  "key": "ln-17vdyir",
-  "speaker": "mio",
-  "text": "Okay. I’ll stop jumping in.",
+  "key": "ln-wwko7f",
+  "speaker": "eric",
+  "text": "Well, you’re here. Can I ask you something?",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -14590,9 +14590,29 @@
   "emo": "casual"
  },
  {
-  "key": "ln-1l1qyo3",
+  "key": "ln-1v6k22p",
   "speaker": "mio",
-  "text": "Mm, okay. I thought you wanted help with something.",
+  "text": "Ah... okay, that’s fair, I said that. Um, what is it?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-gan4jo",
+  "speaker": "eric",
+  "text": "Then I’ll start by saying hello to you more often.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-6qfvmc",
+  "speaker": "mio",
+  "text": "Mm, okay, hello is fine. If I don’t look up, it’s because I’m reading a log, it’s not you, so...",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -14610,9 +14630,19 @@
   "emo": "casual"
  },
  {
-  "key": "ln-10kcuae",
+  "key": "ln-1rrngjp",
   "speaker": "mio",
-  "text": "Still finding enough time for yourself? Somebody always wants me to look at something.",
+  "text": "Oh, hi. I thought you were the time-to-yourself type, like me. Okay, what is it?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-c2vyg6",
+  "speaker": "mio",
+  "text": "You have another question? Okay, go on.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -14620,24 +14650,14 @@
   "emo": "casual"
  },
  {
-  "key": "ln-ckltol",
+  "key": "ln-79ksno",
   "speaker": "mio",
-  "text": "Okay, I remember. Go on.",
+  "text": "Hello. See, I looked up this time. So, what is it?",
   "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
-  "emo": "casual"
- },
- {
-  "key": "ln-z4jjfa",
-  "speaker": "mio",
-  "text": "Mm, we can just talk. What is it?",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "casual"
+  "emo": "dry"
  },
  {
   "key": "ln-gvou1m",
@@ -21383,14 +21403,34 @@
   "emo": "casual"
  },
  {
-  "key": "ln-8brz9k-carina",
+  "key": "ln-1cxrwz6-carina",
   "speaker": "carina",
-  "text": "I’d like to talk more. It takes me a while to get started.",
+  "text": "Not much yet. I’d like to get to know a few people here.",
   "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
   "emo": "hesitant"
+ },
+ {
+  "key": "ln-wwko7f-carina",
+  "speaker": "carina",
+  "text": "Well, you’re here. Can I ask you something?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-gan4jo-carina",
+  "speaker": "carina",
+  "text": "Then I’ll start by saying hello to you more often.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-1gu8n8q-carina",

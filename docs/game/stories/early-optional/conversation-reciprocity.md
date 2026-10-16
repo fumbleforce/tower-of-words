@@ -8,7 +8,7 @@ These extensions use Mio and Emi's ordinary conversation menus and their existin
 
 ## Beats
 
-Mio's established conversation about her mother's food now turns back to the player: how is life here after work? The player can ask for quiet, time to get started, or ordinary conversation, or defer without choosing a feeling. Choosing time to get started immediately opens a reply menu and leaves it waiting for input. A later visit recalls the answer. The player can revise it or just say hello. Existing saves that already heard the mother topic can reach the check-in through the normal menu.
+Mio's established conversation about her mother's food now turns back to the player: how is life here after work? The player can say they like time to themselves, say they would like to get to know a few people, or defer without choosing. If they want to get to know people, Mio says she is the wrong person for that. The player can then ask her something straight away, which opens the question menu, or say they will start by saying hello to her more often, and she tells them not to mind if she doesn't look up from a log. A later visit recalls the answer. The player can revise it or just say hello. Existing saves that already heard the mother topic can reach the check-in through the normal menu.
 
 The follow-up about her mother's advice requires both learned `yasumi` and the completed understanding of the earlier Japanese remark. Another question about her mother is available without vocabulary. This keeps the earlier language discovery intact.
 
