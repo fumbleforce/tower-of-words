@@ -1,0 +1,24 @@
+{
+ "details": "Mori base portrait, round 2 pass 2 (#662). One change from m1: m1 came out chest-up on all four seeds (zoom 0.54 to 0.69) after \"standing upright\" left the scene words, so \"standing at ease\" goes back in. Build (mori-mature v3, muscle exclusion) and bearing words as m1. Staging: ../staging.md.",
+ "characters": [
+  "mori-mature"
+ ],
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "gentle eyes and a mild, warm smile, standing at ease with soft, slightly rounded shoulders, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props",
+  "muscle"
+ ],
+ "people": {
+  "mori-mature": {
+   "appearanceNegative": "spiky hair, messy hair, hair standing up"
+  }
+ },
+ "outfit": {
+  "mori-mature": true
+ }
+}

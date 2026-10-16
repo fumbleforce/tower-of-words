@@ -1,14 +1,14 @@
 {
- "title": "Mori and Hamada as attractive mature men, round 1",
+ "title": "Hamada as an attractive mature man, round 1 (Mori's part superseded by mori-2)",
  "date": "2026-10-16",
  "by": "claude-main/art-round",
  "status": "open",
- "question": "Which of these, if any, should become Mori's and Hamada's new base portraits? If you prefer, the current portraits can stay as the non-adult version and a pick here would be the Adult-mode look.",
+ "question": "Which of these, if any, should become Hamada's new base portrait? If you prefer, the current portrait can stay as the non-adult version and a pick here would be the Adult-mode look. Mori's renders here are superseded by round mori-2.",
  "multi": true,
  "media": [
   {
    "image": "art/approved/mori/mori-mori-new-713-neutral.webp",
-   "caption": "Mori now (mori-new-713, npc-base-1)"
+   "caption": "Superseded by mori-2. Mori now (mori-new-713, npc-base-1)"
   },
   {
    "image": "art/approved/hamada/kuroda-hamada-new-743-neutral.webp",
@@ -16,7 +16,7 @@
   },
   {
    "image": "art/candidates/portraits/mori-hamada-1/sheet-mori.webp",
-   "caption": "Mori: the current portrait, then all 16 renders in order, framed at the game's portrait scale. Pass 1 new face words; pass 2 adds age words (pass 1 read 35 to 50); pass 3 stops the spiky hair; pass 4 is the cardigan you mentioned. Seeds 1 to 4 in every pass."
+   "caption": "Superseded by mori-2. Mori: the current portrait, then all 16 renders in order, framed at the game's portrait scale. Pass 1 new face words; pass 2 adds age words (pass 1 read 35 to 50); pass 3 stops the spiky hair; pass 4 is the cardigan you mentioned. Seeds 1 to 4 in every pass."
   },
   {
    "image": "art/candidates/portraits/mori-hamada-1/sheet-hamada.webp",
@@ -26,7 +26,7 @@
  "options": [
   {
    "id": "mo1-s1",
-   "label": "mo1-s1",
+   "label": "superseded (mori-2): mo1-s1",
    "image": "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-1-s1-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-1-s1.webp"
@@ -35,7 +35,7 @@
   },
   {
    "id": "mo1-s2",
-   "label": "mo1-s2",
+   "label": "superseded (mori-2): mo1-s2",
    "image": "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-2-s2-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-2-s2.webp"
@@ -44,7 +44,7 @@
   },
   {
    "id": "mo1-s3",
-   "label": "mo1-s3",
+   "label": "superseded (mori-2): mo1-s3",
    "image": "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-3-s3-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-3-s3.webp"
@@ -53,7 +53,7 @@
   },
   {
    "id": "mo1-s4",
-   "label": "mo1-s4",
+   "label": "superseded (mori-2): mo1-s4",
    "image": "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-4-s4-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo1-r261016-163707-fa3-4-s4.webp"
@@ -62,7 +62,7 @@
   },
   {
    "id": "mo2-s1",
-   "label": "mo2-s1",
+   "label": "superseded (mori-2): mo2-s1",
    "image": "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-1-s1-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-1-s1.webp"
@@ -71,7 +71,7 @@
   },
   {
    "id": "mo2-s2",
-   "label": "mo2-s2",
+   "label": "superseded (mori-2): mo2-s2",
    "image": "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-2-s2-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-2-s2.webp"
@@ -80,7 +80,7 @@
   },
   {
    "id": "mo2-s3",
-   "label": "mo2-s3",
+   "label": "superseded (mori-2): mo2-s3",
    "image": "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-3-s3-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-3-s3.webp"
@@ -89,7 +89,7 @@
   },
   {
    "id": "mo2-s4",
-   "label": "mo2-s4",
+   "label": "superseded (mori-2): mo2-s4",
    "image": "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-4-s4-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo2-r261016-164244-887-4-s4.webp"
@@ -98,7 +98,7 @@
   },
   {
    "id": "mo3-s1",
-   "label": "mo3-s1",
+   "label": "superseded (mori-2): mo3-s1",
    "image": "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-1-s1-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-1-s1.webp"
@@ -107,7 +107,7 @@
   },
   {
    "id": "mo3-s2",
-   "label": "mo3-s2",
+   "label": "superseded (mori-2): mo3-s2",
    "image": "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-2-s2-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-2-s2.webp"
@@ -116,7 +116,7 @@
   },
   {
    "id": "mo3-s3",
-   "label": "mo3-s3",
+   "label": "superseded (mori-2): mo3-s3",
    "image": "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-3-s3-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-3-s3.webp"
@@ -125,7 +125,7 @@
   },
   {
    "id": "mo3-s4",
-   "label": "mo3-s4",
+   "label": "superseded (mori-2): mo3-s4",
    "image": "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-4-s4-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo3-r261016-164751-4be-4-s4.webp"
@@ -134,7 +134,7 @@
   },
   {
    "id": "mo4-s1",
-   "label": "mo4-s1",
+   "label": "superseded (mori-2): mo4-s1",
    "image": "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-1-s1-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-1-s1.webp"
@@ -143,7 +143,7 @@
   },
   {
    "id": "mo4-s2",
-   "label": "mo4-s2",
+   "label": "superseded (mori-2): mo4-s2",
    "image": "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-2-s2-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-2-s2.webp"
@@ -152,7 +152,7 @@
   },
   {
    "id": "mo4-s3",
-   "label": "mo4-s3",
+   "label": "superseded (mori-2): mo4-s3",
    "image": "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-3-s3-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-3-s3.webp"
@@ -161,7 +161,7 @@
   },
   {
    "id": "mo4-s4",
-   "label": "mo4-s4",
+   "label": "superseded (mori-2): mo4-s4",
    "image": "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-4-s4-framed.webp",
    "images": [
     "art/candidates/portraits/mori-hamada-1/mo4-r261016-165220-931-4-s4.webp"
@@ -282,5 +282,6 @@
    "label": "Staging note for the round",
    "href": "art/candidates/portraits/mori-hamada-1/staging.md"
   }
- ]
+ ],
+ "updated": "2026-10-16T17:40:00+0200"
 }

@@ -1,0 +1,38 @@
+{
+ "m1": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old middle-aged Japanese man, mature male, neatly combed grey hair and a handsome, well-kept face with a few fine lines and warm, expressive dark eyes, slender, slightly soft build, narrow sloping shoulders, slim neck, wearing a dark grey suit, a white shirt and a navy tie, gentle eyes and a mild, warm smile, relaxed posture with soft, slightly rounded shoulders, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, muscular, bodybuilder, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), spiky hair, messy hair, hair standing up",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "count": 4,
+  "seed": 1
+ },
+ "m2": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old middle-aged Japanese man, mature male, neatly combed grey hair and a handsome, well-kept face with a few fine lines and warm, expressive dark eyes, slender, slightly soft build, narrow sloping shoulders, slim neck, wearing a dark grey suit, a white shirt and a navy tie, gentle eyes and a mild, warm smile, standing at ease with soft, slightly rounded shoulders, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, muscular, bodybuilder, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), spiky hair, messy hair, hair standing up",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "count": 4,
+  "seed": 1
+ },
+ "m3": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old middle-aged Japanese man, mature male, neatly combed grey hair and a handsome, well-kept face with a few fine lines and warm, expressive dark eyes, slender, slightly soft build, narrow sloping shoulders, slim neck, wearing a neat charcoal grey knit cardigan over a white shirt and a navy tie, dark grey trousers, gentle eyes and a mild, warm smile, standing at ease with soft, slightly rounded shoulders, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, muscular, bodybuilder, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), spiky hair, messy hair, hair standing up",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "count": 4,
+  "seed": 1
+ }
+}

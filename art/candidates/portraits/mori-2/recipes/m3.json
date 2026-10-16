@@ -1,0 +1,24 @@
+{
+ "details": "Mori base portrait, round 2 pass 3 (#662). Same as m2 with the cardigan option (mori-cardigan), as round 1's mo4. Staging: ../staging.md.",
+ "characters": [
+  "mori-mature"
+ ],
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "gentle eyes and a mild, warm smile, standing at ease with soft, slightly rounded shoulders, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props",
+  "muscle"
+ ],
+ "people": {
+  "mori-mature": {
+   "appearanceNegative": "spiky hair, messy hair, hair standing up"
+  }
+ },
+ "outfit": {
+  "mori-mature": "mori-cardigan"
+ }
+}

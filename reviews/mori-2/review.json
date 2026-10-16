@@ -1,0 +1,136 @@
+{
+ "title": "Mori as a mild, gentle older man, round 2",
+ "date": "2026-10-16",
+ "by": "claude-main/art-round",
+ "status": "open",
+ "question": "Which of these, if any, should become Mori's new base portrait?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/candidates/portraits/mori-2/lineup-suit.webp",
+   "caption": "Suit, at the size the game shows portraits (desktop, every face the same height, chins level): Mio, Kenji, Hamada and Mori as they are now, then two suit renders I kept in round 1 (mo3-s3, mo3-s4), then the three kept suit renders of this round."
+  },
+  {
+   "image": "art/candidates/portraits/mori-2/lineup-cardigan.webp",
+   "caption": "Cardigan, the same way: the current cast, two cardigan renders I kept in round 1 (mo4-s2, mo4-s4), then all four cardigan renders of this round."
+  },
+  {
+   "image": "art/candidates/portraits/mori-2/sheet.webp",
+   "caption": "Every render of this round in order, framed at the game's portrait scale, after the current portrait. The one change from round 1 is his build and bearing, after your \"mori looks jacked, not the mild mannered grandpa type\". Pass 1 came out chest-up, so pass 2 puts \"standing\" back in the pose words; pass 3 is the cardigan. Grey hair, the suit and cardigan options and the framing are as round 1. Seeds 1 to 4 in every pass."
+  },
+  {
+   "image": "art/candidates/portraits/mori-hamada-1/sheet-mori.webp",
+   "caption": "Round 1 (mori-hamada-1) for comparison: the current portrait and all 16 Mori renders."
+  }
+ ],
+ "options": [
+  {
+   "id": "m1-s1",
+   "label": "m1-s1",
+   "image": "art/candidates/portraits/mori-2/m1-r261016-171906-2a5-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-2/m1-r261016-171906-2a5-1-s1.webp"
+   ],
+   "note": "Mori, pass 1, suit: new build words (preset mori-mature v3: slender, slightly soft build, narrow sloping shoulders, slim neck), the muscle exclusion, and bearing words (gentle eyes, a mild warm smile, relaxed posture). Recipe art/candidates/portraits/mori-2/recipes/m1.json, seed 1, RDBT, portrait style, no-props. Red rim 0.9%. Framing: 12% missing above the game crop and 34% below (his waist is out of the render); the framed preview fills it flat, a pick gets a real outpaint. Dashboard #2409. My verdict, rejected: chest-up close-up, not waist-up; face mild and warm, neck slimmer than round 1, shoulders still wide."
+  },
+  {
+   "id": "m1-s2",
+   "label": "m1-s2",
+   "image": "art/candidates/portraits/mori-2/m1-r261016-171906-2a5-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-2/m1-r261016-171906-2a5-2-s2.webp"
+   ],
+   "note": "Mori, pass 1, suit: new build words (preset mori-mature v3: slender, slightly soft build, narrow sloping shoulders, slim neck), the muscle exclusion, and bearing words (gentle eyes, a mild warm smile, relaxed posture). Recipe art/candidates/portraits/mori-2/recipes/m1.json, seed 2, RDBT, portrait style, no-props. Red rim 0.1%. Framing: 11% missing above the game crop and 22% below (his waist is out of the render); the framed preview fills it flat, a pick gets a real outpaint. Dashboard #2410. My verdict, rejected: chest-up close-up, not waist-up; slimmer neck and softer face than round 1, still square-shouldered."
+  },
+  {
+   "id": "m1-s3",
+   "label": "m1-s3",
+   "image": "art/candidates/portraits/mori-2/m1-r261016-171906-2a5-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-2/m1-r261016-171906-2a5-3-s3.webp"
+   ],
+   "note": "Mori, pass 1, suit: new build words (preset mori-mature v3: slender, slightly soft build, narrow sloping shoulders, slim neck), the muscle exclusion, and bearing words (gentle eyes, a mild warm smile, relaxed posture). Recipe art/candidates/portraits/mori-2/recipes/m1.json, seed 3, RDBT, portrait style, no-props. Red rim 0.8%. Framing: 12% missing above the game crop and 20% below (his waist is out of the render); the framed preview fills it flat, a pick gets a real outpaint. Dashboard #2411. My verdict, rejected: chest-up close-up; stubble his look doesn't have, broad neck."
+  },
+  {
+   "id": "m1-s4",
+   "label": "m1-s4",
+   "image": "art/candidates/portraits/mori-2/m1-r261016-171906-2a5-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-2/m1-r261016-171906-2a5-4-s4.webp"
+   ],
+   "note": "Mori, pass 1, suit: new build words (preset mori-mature v3: slender, slightly soft build, narrow sloping shoulders, slim neck), the muscle exclusion, and bearing words (gentle eyes, a mild warm smile, relaxed posture). Recipe art/candidates/portraits/mori-2/recipes/m1.json, seed 4, RDBT, portrait style, no-props. Red rim 0.2%. Framing: 12% missing above the game crop and 19% below (his waist is out of the render); the framed preview fills it flat, a pick gets a real outpaint. Dashboard #2412. My verdict, rejected: chest-up close-up; gentle smile, slim neck, narrower shoulders."
+  },
+  {
+   "id": "m2-s1",
+   "label": "m2-s1",
+   "image": "art/candidates/portraits/mori-2/m2-r261016-172341-748-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-2/m2-r261016-172341-748-1-s1.webp"
+   ],
+   "note": "Mori, pass 2, suit: as pass 1 with \"standing at ease\" back in the pose words (pass 1 came out chest-up). Recipe art/candidates/portraits/mori-2/recipes/m2.json, seed 1, RDBT, portrait style, no-props. Red rim 0.0%. Framing: 11% missing above the game crop and 12% below (his waist is out of the render); the framed preview fills it flat, a pick gets a real outpaint. Dashboard #2413. My verdict, kept: slim build, narrow sloping shoulders, slim neck, mild warm smile, reads late 50s. Flaw: grey on top, near-black at the sides, like a shaved undercut."
+  },
+  {
+   "id": "m2-s2",
+   "label": "m2-s2",
+   "image": "art/candidates/portraits/mori-2/m2-r261016-172341-748-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-2/m2-r261016-172341-748-2-s2.webp"
+   ],
+   "note": "Mori, pass 2, suit: as pass 1 with \"standing at ease\" back in the pose words (pass 1 came out chest-up). Recipe art/candidates/portraits/mori-2/recipes/m2.json, seed 2, RDBT, portrait style, no-props. Red rim 0.2%. Framing: 12% missing above the game crop and 22% below (his waist is out of the render); the framed preview fills it flat, a pick gets a real outpaint. Dashboard #2414. My verdict, rejected: chest-up again, square broad shoulders filling the frame."
+  },
+  {
+   "id": "m2-s3",
+   "label": "m2-s3",
+   "image": "art/candidates/portraits/mori-2/m2-r261016-172341-748-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-2/m2-r261016-172341-748-3-s3.webp"
+   ],
+   "note": "Mori, pass 2, suit: as pass 1 with \"standing at ease\" back in the pose words (pass 1 came out chest-up). Recipe art/candidates/portraits/mori-2/recipes/m2.json, seed 3, RDBT, portrait style, no-props. Red rim 0.0%. Framing: 10% missing above the game crop and 5% below (his waist is out of the render); the framed preview fills it flat, a pick gets a real outpaint. Dashboard #2415. My verdict, kept: slim, relaxed, gentle smile, narrow shoulders; reads about 50. Flaw: near-black sides under the grey top."
+  },
+  {
+   "id": "m2-s4",
+   "label": "m2-s4",
+   "image": "art/candidates/portraits/mori-2/m2-r261016-172341-748-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-2/m2-r261016-172341-748-4-s4.webp"
+   ],
+   "note": "Mori, pass 2, suit: as pass 1 with \"standing at ease\" back in the pose words (pass 1 came out chest-up). Recipe art/candidates/portraits/mori-2/recipes/m2.json, seed 4, RDBT, portrait style, no-props. Red rim 0.1%. Framing: 12% missing above the game crop and 8% below (his waist is out of the render); the framed preview fills it flat, a pick gets a real outpaint. Dashboard #2416. My verdict, kept: slim, narrow shoulders, kind eyes and a mild smile, reads mid-50s. Flaw: dark sides under the grey top."
+  },
+  {
+   "id": "m3-s1",
+   "label": "m3-s1",
+   "image": "art/candidates/portraits/mori-2/m3-r261016-172612-e6e-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-2/m3-r261016-172612-e6e-1-s1.webp"
+   ],
+   "note": "Mori, pass 3, cardigan: as pass 2 in the cardigan outfit (mori-cardigan). Recipe art/candidates/portraits/mori-2/recipes/m3.json, seed 1, RDBT, portrait style, no-props. Red rim 0.0%. Framing: 12% missing above the game crop; the framed preview fills it flat, a pick gets a real outpaint. Dashboard #2417. My verdict, kept: slim frame in a loose cable-knit cardigan, narrow sloping shoulders, kind eyes, all-grey combed hair, reads late 50s; hands in his trouser pockets."
+  },
+  {
+   "id": "m3-s2",
+   "label": "m3-s2",
+   "image": "art/candidates/portraits/mori-2/m3-r261016-172612-e6e-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-2/m3-r261016-172612-e6e-2-s2.webp"
+   ],
+   "note": "Mori, pass 3, cardigan: as pass 2 in the cardigan outfit (mori-cardigan). Recipe art/candidates/portraits/mori-2/recipes/m3.json, seed 2, RDBT, portrait style, no-props. Red rim 0.8%. Framing: 12% missing above the game crop; the framed preview fills it flat, a pick gets a real outpaint. Dashboard #2418. My verdict, kept: slim, soft and relaxed, gentle smile, reads about 58, grey hair with a little dark at the sides; hands in pockets."
+  },
+  {
+   "id": "m3-s3",
+   "label": "m3-s3",
+   "image": "art/candidates/portraits/mori-2/m3-r261016-172612-e6e-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-2/m3-r261016-172612-e6e-3-s3.webp"
+   ],
+   "note": "Mori, pass 3, cardigan: as pass 2 in the cardigan outfit (mori-cardigan). Recipe art/candidates/portraits/mori-2/recipes/m3.json, seed 3, RDBT, portrait style, no-props. Red rim 0.0%. Framing: 13% missing above the game crop; the framed preview fills it flat, a pick gets a real outpaint. Dashboard #2419. My verdict, kept: slim and relaxed, warm smile, lined but well kept, reads about 60; hands going into his pockets at the waist cut."
+  },
+  {
+   "id": "m3-s4",
+   "label": "m3-s4",
+   "image": "art/candidates/portraits/mori-2/m3-r261016-172612-e6e-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/mori-2/m3-r261016-172612-e6e-4-s4.webp"
+   ],
+   "note": "Mori, pass 3, cardigan: as pass 2 in the cardigan outfit (mori-cardigan). Recipe art/candidates/portraits/mori-2/recipes/m3.json, seed 4, RDBT, portrait style, no-props. Red rim 0.0%. Framing: 11% missing above the game crop; the framed preview fills it flat, a pick gets a real outpaint. Dashboard #2420. My verdict, kept: slim, mild smile, reads mid-50s. Flaw: grey top over near-black sides, like a shaved undercut."
+  }
+ ]
+}

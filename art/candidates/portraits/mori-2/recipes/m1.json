@@ -1,0 +1,24 @@
+{
+ "details": "Mori base portrait, round 2 pass 1 (#662). The one change from round 1 (mori-hamada-1 mo3): his build and bearing, after Jørgen's \"mori looks jacked, not the mild mannered grandpa type\". Build words in preset mori-mature v3 (slender, slightly soft build, narrow sloping shoulders, slim neck; was \"slim\"), the muscle exclusion preset, and bearing in the scene words (gentle eyes, mild warm smile, relaxed posture; was \"standing upright\"). Suit, hair, style and seeds as round 1. Staging: ../staging.md.",
+ "characters": [
+  "mori-mature"
+ ],
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "gentle eyes and a mild, warm smile, relaxed posture with soft, slightly rounded shoulders, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props",
+  "muscle"
+ ],
+ "people": {
+  "mori-mature": {
+   "appearanceNegative": "spiky hair, messy hair, hair standing up"
+  }
+ },
+ "outfit": {
+  "mori-mature": true
+ }
+}

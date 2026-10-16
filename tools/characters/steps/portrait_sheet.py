@@ -9,8 +9,16 @@ The sheet puts the approved portrait first, then every render in the order given
     ~/ai/consist/.venv/bin/python tools/characters/steps/portrait_sheet.py <out-sheet.webp> --approved <approved.webp> \
         --qa <dir with imgqa.json> [--qa ...] <label=render.webp ...> [--cols 4]
 
+Lineup (--lineup <who>): the cast's game portraits (--cast mio,eric,...) and the given framed previews side by side at
+the size the game shows them on a 1080p desktop: every face 124 px high, chins level, cut at the waist 2.25 face heights
+below the chin (layoutStage and FACE in game3d/js/ui/portraits.js). Framed previews use <who>'s face box, the box
+the framing matched them to.
+
+    python3 tools/characters/steps/portrait_sheet.py <out-lineup.webp> --lineup mori --cast mio,eric,kenji,kuroda,mori \
+        <label=render-framed.webp ...> [--cols N]
+
 First made for round art/candidates/portraits/mori-hamada-1 (#662)."""
-import argparse, json, os
+import argparse, json, os, re
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
@@ -30,14 +38,55 @@ def framed(path, crop):
     return canvas.resize((GW, GH), Image.LANCZOS)
 
 
+def faces():
+    """The FACE table of game3d/js/ui/portraits.js: who -> (W, H, [x0, y0, x1, y1], size)."""
+    js = open(os.path.join(REPO, 'game3d/js/ui/portraits.js')).read()
+    out = {}
+    for m in re.finditer(r"^  (\w+): \{ W: (\d+), H: (\d+), f: \[([\d, ]+)\](?:, size: ([\d.]+))? \}", js, re.M):
+        out[m[1]] = (int(m[2]), int(m[3]), [int(v) for v in m[4].split(',')], float(m[5] or 1))
+    return out
+
+
+def lineup(out, who, cast, items, cols=0, F=124, cut=2.25):
+    """Every picture placed as the game's desktop stage places it, side by side on its grey."""
+    fb = faces()
+    cells = [(c, os.path.join(REPO, f'game3d/assets/portraits/{c}-neutral.webp'), fb[c]) for c in cast]
+    cells += [(lab, path, (GW, GH, fb[who][2], 1)) for lab, path in (i.split('=', 1) for i in items)]
+    placed = []
+    for lab, path, (W, H, f, size) in cells:
+        im = Image.open(path).convert('RGBA')
+        k = F * size / (f[3] - f[1]) * im.width / W
+        im = im.resize((round(im.width * k), round(im.height * k)), Image.LANCZOS)
+        cx, chin = (f[0] + f[2]) / 2 * im.width / W, f[3] * im.height / H
+        placed.append((lab, im, cx, chin))
+    top, cw, head = max(p[3] for p in placed), round(3.6 * F), 34
+    h, cols = round(top + cut * F), cols or len(placed)
+    rows = (len(placed) + cols - 1) // cols
+    sheet = Image.new('RGB', (cw * min(cols, len(placed)), rows * (h + head)), 'white')
+    d, font = ImageDraw.Draw(sheet), ImageFont.truetype(FONT, 20)
+    for n, (lab, im, cx, chin) in enumerate(placed):
+        x, y = (n % cols) * cw, (n // cols) * (h + head)
+        cell = Image.new('RGB', (cw, h), (217, 220, 224))
+        cell.paste(im, (round(cw / 2 - cx), round(top - chin)), im)
+        sheet.paste(cell, (x, y + head))
+        d.text((x + 8, y + 6), lab, fill='black', font=font)
+    sheet.save(out, quality=90)
+    print(out, sheet.size, len(placed), 'portraits')
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('out')
     ap.add_argument('items', nargs='+', help='label=render.webp, in order')
-    ap.add_argument('--approved', required=True)
+    ap.add_argument('--approved')
+    ap.add_argument('--lineup', metavar='WHO', help="a lineup at game size; framed previews sit on WHO's face box")
+    ap.add_argument('--cast', default='', help='game portraits first in the lineup, comma separated')
     ap.add_argument('--qa', action='append', default=[])
-    ap.add_argument('--cols', type=int, default=4)
+    ap.add_argument('--cols', type=int, help='per row (sheet: 4; lineup: all in one row)')
     a = ap.parse_args()
+    if a.lineup:
+        return lineup(a.out, a.lineup, [c for c in a.cast.split(',') if c], a.items, a.cols or 0)
+    a.cols = a.cols or 4
     boxes = {}
     for q in a.qa:
         for i in json.load(open(os.path.join(q, 'imgqa.json')))['images']:
