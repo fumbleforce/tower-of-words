@@ -1,5 +1,5 @@
 {
-  "_about": "The layout rules for island/private/ (git-ignored). Prose and reasons: island/PRIVATE.md, Layout. Read by tools/private_layout.py (the report and the check) and .claude/hooks/private_guard.py (the Write/Edit guard). Names only; nothing private is described here. game/ holds only what the game loads, registered in game/live.json (notes/asset-lifecycle.md); rewards/ is the generated area, and rewards/retired/<date>/<original path> holds replaced live files. Rounds nest under a project (rewards/<project>/<topic>-<n>/). The flat rounds were moved on 2026-10-05; `moved` is the old-to-new name map for reading older records.",
+  "_about": "The layout rules for island/private/ (git-ignored). Prose and reasons: island/PRIVATE.md, Layout. Read by tools/private_layout.py (the report and the check) and .claude/hooks/private_guard.py (the Write/Edit guard). Names only; nothing private is described here. game/ holds only what the game loads, registered in game/live.json (notes/asset-lifecycle.md); rewards/ is the generated area, and rewards/retired/<date>/<original path> holds replaced live files. Rounds nest under a project (rewards/<project>/<topic>-<n>/). The flat rounds were moved on 2026-10-05; `moved` is the old-to-new name map for reading older records (`python3 tools/private_layout.py resolve <path>` reads it).",
   "top": [
     "game",
     "plugins",
@@ -41,6 +41,7 @@
       "characters": "designs of private-only characters (the gate guard)",
       "library": "scenes made but not used yet",
       "days": "the pictures of the witnessed hard scenes of days 2 to 5 (rounds <scene>-<n>) and the promoted set per scene in d<N>/<scene id>/<n>.webp",
+      "marketing": "marketing renders and banners for the release, one round per topic; built-in renders are recorded through import receipts",
       "archive": "September's gallery, round-27, round-28 and everything else retired"
     },
     "project_dirs": {
@@ -76,7 +77,11 @@
       "log.json": "archive/log.json",
       "notes.json": "archive/notes.json",
       "picks.json": "archive/picks.json",
-      "day1-hard-1.md": "docs/day1-scenes.md"
+      "day1-hard-1.md": "docs/day1-scenes.md",
+      "library/marketing-1": "marketing/command-1",
+      "library/marketing-2": "marketing/motifs-1",
+      "library/marketing-3": "marketing/motifs-2",
+      "docs/marketing-1-staging.md": "docs/marketing-command-1-staging.md"
     }
   },
   "game": {

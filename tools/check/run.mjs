@@ -10,6 +10,7 @@ const unitTests = fs.readdirSync(path.join(root, 'game3d/test/unit'), { recursiv
 const checks = [
   ['robots', ['tools/check/robots.py'], 'python3'],
   ['private layout', ['tools/private_layout.py'], 'python3'],
+  ['private layout rules', ['tools/check/test_private_layout.py'], 'python3'],
   ['outputs prune', ['tools/outputs_test.py'], 'python3'],
   ['worktree links', ['-m', 'unittest', 'discover', '-s', 'tools/assets', '-p', 'test_worktree_links.py'], 'python3'],
   ['R2 trim rules', ['-m', 'unittest', 'discover', '-s', 'tools/assets', '-p', 'test_trim.py'], 'python3'],

@@ -3,6 +3,7 @@
 
   python3 tools/private_layout.py           check: exit 1 on a new top-level violation (legacy names pass)
   python3 tools/private_layout.py --report  list everything that does not conform, legacy included
+  python3 tools/private_layout.py resolve <path>  the place an older name now has (the `moved` map), printed under island/private/
 
 Never opens, lists or reads island/private/user/. Passes when island/private/ does not exist (a fresh checkout, CI).
 Imported by .claude/hooks/private_layout.py for the Write/Edit guard.
@@ -50,6 +51,26 @@ def project_entry_problem(project, name, s, is_file):
     if pd and re.match(pd, name):
         return None  # the promoted pictures: d<N>/<scene id>/<n>.webp
     return f'a round inside {project}/ is named <topic>-<n> (for example aoi-2): lower-case, dashes, a number at the end'
+
+
+def resolve(path, s=None):
+    """The current place of `path` (under island/private/, with or without that prefix). Only a name in the `moved` map of
+    rewards/ changes; a current file at the top of rewards/ (index.html, the redirect) never does. Text only: no file is read."""
+    s = s or spec()
+    rel = path.replace('\\', '/').strip('/')
+    if rel.startswith('island/private/'):
+        rel = rel[len('island/private/'):]
+    if not rel.startswith('rewards/'):
+        return rel
+    r = s['rewards']
+    parts = rel[len('rewards/'):].split('/')
+    if len(parts) == 1 and parts[0] in r['fixed_files']:
+        return rel
+    for i in range(len(parts), 0, -1):
+        key = '/'.join(parts[:i])
+        if key in r['moved']:
+            return '/'.join(['rewards', r['moved'][key]] + parts[i:])
+    return rel
 
 
 def path_problem(rel, s=None):
@@ -145,6 +166,9 @@ def scan():
 
 
 def main():
+    if sys.argv[1:2] == ['resolve'] and len(sys.argv) == 3:
+        print('island/private/' + resolve(sys.argv[2]))
+        return 0
     report = '--report' in sys.argv
     errors, notes = scan()
     for path, why in errors:

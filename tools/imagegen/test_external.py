@@ -82,6 +82,21 @@ class ExternalHistory(unittest.TestCase):
         self.assertEqual(row['at'],row['imported_at'])
         self.assertEqual(external.import_render(receipt)['id'],row['id'])
 
+    def test_a_round_of_the_private_rewards_area_makes_its_record_private(self):
+        public = external.import_render(dict(self.receipt, import_id='round-public-1', round='fixture'))
+        self.assertFalse(public['private'])
+        marketing = external.import_render(dict(self.receipt, import_id='round-marketing-1', round='marketing/motifs-2'))
+        self.assertTrue(marketing['private'])
+        self.assertEqual(marketing['round'], 'marketing/motifs-2')
+        self.assertEqual(len(server.history({}, private=False)), 1)
+        self.assertEqual(len(server.history({}, private=True)), 2)
+
+    def test_private_round_names_follow_the_layout(self):
+        self.assertTrue(privacy.is_private_round('marketing/motifs-2'))
+        self.assertTrue(privacy.is_private_round('skimpy/aoi-3/round-1'))
+        for name in ('fixture', 'marketing', '', None):
+            self.assertFalse(privacy.is_private_round(name), name)
+
     def test_protected_paths_and_symlinks_are_rejected_before_reading(self):
         protected = self.root/'protected'
         with self.assertRaisesRegex(ValueError,'Protected'):

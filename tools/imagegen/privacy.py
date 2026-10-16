@@ -5,8 +5,9 @@ seed blocks are in one git-ignored file, island/private/imagegen/private.json, r
    "seeds": [{"id", "type", "data", "message"?}, ...]}
 
 A render is private when its rating is one of `ratings`, its file is under one of `paths`, its negative holds one of
-`negative_terms` or its prompt one of `positive_terms` (case-insensitive). Without the file, renders rated above safe
-and anything filed under island/private/ count as private. Private blocks are the ones in the private preset folder
+`negative_terms` or its prompt one of `positive_terms` (case-insensitive), or its round is a private round (a project of
+the private rewards area, is_private_round). Without the file, renders rated above safe and anything filed under
+island/private/ count as private. Private blocks are the ones in the private preset folder
 (store.py). Private mode itself is the /private cookie (tools/review_server.py), checked in server.py."""
 import json, os
 
@@ -18,6 +19,8 @@ except ImportError:
 FILE = os.path.join(store.ROOT, 'private.json')
 DEFAULT = dict(ratings=['sensitive', 'nsfw'], paths=['island/private/'], negative_terms=[], positive_terms=[])
 _cache = {'stamp': None, 'data': {}}
+LAYOUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'private-layout.json')
+_layout = {'stamp': None, 'projects': frozenset()}
 
 
 def config():
@@ -53,7 +56,27 @@ def is_private_render(r):
     neg, pos = (r.get('negative') or '').lower(), (r.get('positive') or '').lower()
     path = r.get('out_path') or ''
     return (bool(r.get('private')) or r.get('rating') in rule['ratings'] or any(path.startswith(p) for p in rule['paths'])
-            or any(t.lower() in neg for t in rule['negative_terms']) or any(t.lower() in pos for t in rule['positive_terms']))
+            or any(t.lower() in neg for t in rule['negative_terms']) or any(t.lower() in pos for t in rule['positive_terms'])
+            or is_private_round(r.get('round')))
+
+
+def layout_projects():
+    """The projects of the private rewards area (rewards/<project>/), from tools/private-layout.json; read again when it changes."""
+    try:
+        stamp = os.stat(LAYOUT).st_mtime_ns
+    except OSError:
+        return frozenset()
+    if _layout['stamp'] != stamp:
+        with open(LAYOUT, encoding='utf-8') as f:
+            _layout.update(stamp=stamp, projects=frozenset(json.load(f)['rewards']['projects']))
+    return _layout['projects']
+
+
+def is_private_round(name):
+    """A round named the way the private layout names it, <project>/<round> (marketing/motifs-2, skimpy/aoi-3/round-1), is
+    private: everything in the private rewards area is."""
+    parts = str(name or '').replace('\\', '/').strip('/').split('/')
+    return len(parts) >= 2 and parts[0] in layout_projects()
 
 
 def is_private_block(p):

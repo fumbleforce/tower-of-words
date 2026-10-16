@@ -674,7 +674,7 @@ SKIP_DIRS = {'cut', 'ref', 'ctl', 'web', 'work', '__pycache__', 'rejected_thumbs
 # only produce false matches); name a round on the command line to check it anyway
 SKIP_TOP = {'user', 'imagegen', 'tools', 'workflows', 'reviews', 'story', 'docs', 'archive'}
 # the rounds sit in rewards/<project>/<topic>-<n>/ (island/PRIVATE.md, Layout); archive/ is not checked
-PROJECTS = ('skimpy', 'peeks', 'day1', 'characters', 'library')
+PROJECTS = ('skimpy', 'peeks', 'day1', 'characters', 'library', 'marketing')
 
 
 def round_images(rd):
