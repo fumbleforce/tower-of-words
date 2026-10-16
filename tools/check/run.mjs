@@ -25,6 +25,8 @@ const checks = [
   ['blur', ['game3d/tools/blur-check.mjs']],
   ['bonds', ['game3d/js/bonds/test.mjs']],
   ['facts', ['tools/facts/check.mjs']],
+  ['direct render', ['tools/facts/direct-render.mjs']],
+  ['direct render test', ['--test', 'tools/facts/direct-render.test.mjs']],
   ['story map', ['tools/bible/story-map-check.mjs']],
   ['nav registry', ['tools/check/nav-registry.mjs']],
 ];

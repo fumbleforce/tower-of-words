@@ -1,0 +1,82 @@
+{
+ "about": "Scripts that still call tools/comfy.py for pictures, with their call counts, as the record of what ran; nothing new goes here (tools/facts/direct-render.mjs).",
+ "files": {
+  "art/candidates/crowd-pilot-4/build.py": 2,
+  "art/candidates/crowd-selected-1/hair.py": 2,
+  "art/candidates/island-map-4-topdown/gen.py": 1,
+  "art/candidates/photos-1/gen.py": 2,
+  "art/candidates/photos-1/save_workflows.py": 2,
+  "art/candidates/portraits/aoi-edge-2/edge.py": 1,
+  "art/candidates/portraits/carina-5/inpaint.py": 1,
+  "art/candidates/portraits/cast-faces-1/gen.py": 1,
+  "art/candidates/portraits/eric-oldstyle/make.py": 1,
+  "art/candidates/portraits/expressions-kuro-mio-1/gen.py": 1,
+  "art/candidates/portraits/group-1/gen.py": 4,
+  "art/candidates/portraits/kenji-concept2/gen.py": 2,
+  "art/candidates/portraits/kenji-concept3/gen.py": 2,
+  "art/candidates/portraits/kenji-expressions-1/gen.py": 1,
+  "art/candidates/portraits/kenji-noprop-1/gen.py": 1,
+  "art/candidates/portraits/kuro-body-1/gen.py": 1,
+  "art/candidates/portraits/mio-phone-2/mio_phone2.py": 2,
+  "art/candidates/portraits/mio-phone-3/mio_phone3.py": 4,
+  "art/candidates/portraits/mio-phone/mio_phone.py": 1,
+  "art/candidates/portraits/npc-base-1/gen.py": 3,
+  "art/candidates/portraits/opening-window-1/gen.py": 4,
+  "art/candidates/portraits/opening-window-1/glasses.py": 2,
+  "art/candidates/portraits/opening-window-1/look.py": 2,
+  "art/candidates/portraits/rei-body-1/gen.py": 1,
+  "art/candidates/portraits/rei-expressions-1/gen.py": 1,
+  "art/candidates/portraits/rei-portrait-1/gen.py": 2,
+  "art/candidates/portraits/style-align-1/gen.py": 3,
+  "art/parts/style-concepts/mio-ref-clean/gen.py": 2,
+  "tools/blockout/composite.py": 4,
+  "tools/characters/parts/inputs.py": 1,
+  "tools/days25_assets.py": 4,
+  "tools/decide2.py": 1,
+  "tools/emi2.py": 2,
+  "tools/eric_anime2.py": 2,
+  "tools/eric_anime3.py": 2,
+  "tools/eric_anime4.py": 4,
+  "tools/eric_anime5.py": 2,
+  "tools/likeforlike.py": 1,
+  "tools/local_cast.py": 3,
+  "tools/local_refine.py": 2,
+  "tools/local_round2.py": 3,
+  "tools/local_round3.py": 3,
+  "tools/local_round4.py": 2,
+  "tools/local_round5.py": 3,
+  "tools/local_round6.py": 2,
+  "tools/locations1.py": 1,
+  "tools/locations2.py": 1,
+  "tools/opening/comfy_op.py": 1,
+  "tools/portrait_candidates.py": 9,
+  "tools/production.py": 2,
+  "tools/promptlab.py": 2,
+  "tools/puppet_frames.py": 1,
+  "tools/reframe.py": 1,
+  "tools/slice_assets.py": 3,
+  "tools/style-concepts/face_gen.py": 4,
+  "tools/style-concepts/mio_gen3d_turn.py": 2,
+  "tools/style-concepts/mio_i2i_gen.py": 2,
+  "tools/style-concepts/mio_i2i_turn.py": 3,
+  "tools/tsubasa_face.py": 1
+ },
+ "exempt": {
+  "tools/blockout/control_render.py": {
+   "kind": "blockout control",
+   "calls": 1
+  },
+  "tools/blockout/shots.py": {
+   "kind": "blockout control",
+   "calls": 1
+  },
+  "tools/rmbg_local.py": {
+   "kind": "rembg",
+   "calls": 1
+  },
+  "tools/test_comfy_log.py": {
+   "kind": "test of tools/comfy.py (mocked, renders nothing)",
+   "calls": 1
+  }
+ }
+}
