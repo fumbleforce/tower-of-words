@@ -13,7 +13,7 @@
 // a triple-quoted string included) don't count, a call written beside a string does, and the braces of an f-string are
 // code. In other scripts a "//" comment line doesn't count.
 // Not counted, and how they are recognised:
-//   video: comfy.run_video, comfy.wan22_i2v, comfy.causal_forcing_i2v (tools/video2.py, tools/video_test.py). They make no
+//   video: comfy.run_video, comfy.wan22_i2v, comfy.causal_forcing_i2v. They make no
 //          still call, so the count is zero. A video script that starts calling comfy.run or a still builder is counted.
 //   audio and SFX: they submit their own graphs with comfy._post (music, YuE, SA3, karaoke). No still call either.
 //   EXEMPT_PATHS: tools/comfy.py, the image service tools/imagegen/, and this check's own files.

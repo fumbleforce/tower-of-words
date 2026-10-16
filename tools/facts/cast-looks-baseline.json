@@ -1,16 +1,12 @@
 {
  "about": "Old round scripts that keep their own cast looks, as the record of what ran; nothing new goes here (tools/facts/cast-looks.mjs).",
  "files": {
-  "tools/castfixed_page.py": 2,
   "tools/creator/base/build_review.py": 1,
   "tools/days25_assets.py": 4,
   "tools/emi2.py": 1,
   "tools/imgqa_scene.py": 1,
-  "tools/mc_options.py": 2,
   "tools/portrait_candidates.py": 15,
-  "tools/puppet_frames.py": 1,
   "tools/reframe.py": 1,
-  "tools/round6_retry.py": 3,
   "tools/slice_assets.py": 4
  }
 }

@@ -9,7 +9,7 @@ picture FACE in game3d/js/ui/portraits.js describes). Checks, each with pass / w
            `worst` = the same for the weakest part (top, bottom, inner, outer of each lens; a gap where the face shows
            through), `dE` = colour difference of what is drawn on that line (CIELAB).
   matte    cut-outs only: `frame` = share of the frame line that is see-through (alpha < 250) in its worst part,
-           `holes` = see-through blobs inside the silhouette (tools/alpha_holes.py, blobs over 40 px at game size).
+           `holes` = see-through blobs inside the silhouette (blobs over 40 px at game size).
   framing  `headroom` above the hair; `zoom` = how much the picture must be scaled so the face matches the game's face
            box (1.00 = a plain resize fits), `top` = picture missing above the game crop (needs an outpaint), `eyes` = eye
            line offset from the approved portrait, in % of face height.
@@ -385,7 +385,7 @@ def check_matte(ref, img, fit, source=None, see=64):
     if not img['cut']:
         return None
     a = img['alpha']
-    # see-through pixels inside the silhouette (tools/alpha_holes.py), counted as blobs over 40 px at game size. Gaps
+    # see-through pixels inside the silhouette, counted as blobs over 40 px at game size. Gaps
     # between hair strands are see-through too, so with the render the cut-out came from, only pixels where the render
     # shows the figure (far from the local background colour) count.
     solid = a > 128

@@ -1,4 +1,4 @@
-// Which character and text each file in legacy/game/audio/voice/ belongs to, using the same keys as tools/slice_voices.mjs
+// Which character and text each file in legacy/game/audio/voice/ belongs to, using the same keys as the archived slice_voices script.
 // (key = fnv(char|text)). Prints JSON {key: [char, text]} for the lines that have a file on disk.
 // Used by refs.py to build 8 to 15 s clone references for Emi, Rei and the player from the old game's lines.
 import fs from 'node:fs';

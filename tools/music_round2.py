@@ -1,5 +1,5 @@
 """Round 2 of legacy/proto2/music: turn the raw takes from tools/music_inst.py into loops, soften the opening theme,
-measure the vocals in everything, and write legacy/proto2/music/round2.json for tools/music_page.py.
+measure the vocals in everything, and write legacy/proto2/music/round2.json for the old music page (archived).
 Run with ~/ai/sep/bin/python tools/music_round2.py (needs demucs + librosa, CPU only)."""
 import os, json, subprocess, sys
 sys.path.insert(0, os.path.dirname(__file__))

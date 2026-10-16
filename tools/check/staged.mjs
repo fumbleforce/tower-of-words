@@ -41,7 +41,7 @@ export function checkStagedSyntax(cwd, { env = process.env } = {}) {
       const kind = language(file, source);
       if (!kind) continue;
       if (kind === 'javascript') {
-        const commonjs = file.endsWith('.cjs') || ['tools/audio-list.js', 'tools/opening/capture.js'].includes(file);
+        const commonjs = file.endsWith('.cjs') || ['tools/opening/capture.js'].includes(file);
         parse(source, { ecmaVersion: 'latest', sourceType: commonjs ? 'commonjs' : 'module' });
       } else if (kind === 'json') JSON.parse(source);
       else {

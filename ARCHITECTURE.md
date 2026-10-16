@@ -53,8 +53,9 @@ no GPU work, and each group has a 55-second deadline. Browser scenarios are
 separate: `npm run browser:install`, then `npm run check:browser`.
 
 It covers syntax, lint, format, module budgets, dependencies, unit tests, choices,
-story, language, bonds, facts and the story map. Single groups: `check:syntax`,
-`check:lint`, `check:format`, `check:budgets`, `check:dependencies`.
+story, language, bonds, facts and the story map. `tools/` holds one folder per
+pipeline or service, `npm run check` refuses any other loose file, and a
+one-off goes in the scratchpad.
 
 - ESLint enforces undefined names and unused bindings. Browser runtime modules
   get no Node globals, and plain tools get no DOM globals (`eslint.config.mjs`).

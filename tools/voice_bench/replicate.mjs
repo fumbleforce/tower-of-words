@@ -1,4 +1,4 @@
-// Render the benchmark lines with the game's current Replicate voices (same settings as tools/slice_voices.mjs, one take, no retries).
+// Render the benchmark lines with the game's current Replicate voices (same settings as the archived slice_voices script, one take, no retries).
 import fs from 'node:fs';
 import { run, spent } from '/home/jorgen/repo/japanese/tools/rep.mjs';
 const L = JSON.parse(fs.readFileSync('/home/jorgen/ai/tts-bench/lines.json'));

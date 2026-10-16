@@ -53,11 +53,11 @@ export default [
     'tools/assets/render3d.mjs', 'tools/assets/shots.mjs', 'tools/bible/check.mjs', 'tools/bible/showcase-check.mjs', 'tools/bible/lightbox-check.mjs',
     'tools/characters/snap.mjs', 'tools/characters/parts/viewer-shots.mjs', 'tools/check/behavior-trace.mjs', 'tools/check/*-browser.mjs',
     'tools/creator/base/check_preview.mjs', 'tools/creator/base/run.mjs',
-    'tools/creator/capture_idle.mjs', 'tools/creator/run.mjs', 'tools/day1_playtest.mjs',
+    'tools/creator/capture_idle.mjs', 'tools/creator/run.mjs',
     'tools/feel/movement-scenes.mjs', 'tools/feel/rec.mjs', 'tools/feel/seq.mjs',
     'tools/figures/posecheck.mjs', 'tools/figures/reproject.mjs', 'tools/figures/room.mjs', 'tools/figures/views.mjs',
   ], languageOptions: { globals: browser } },
-  { files: ['tools/audio-list.js', 'tools/opening/capture.js'],
+  { files: ['tools/opening/capture.js'],
     languageOptions: { sourceType: 'commonjs', globals: { ...node, ...browser,
       __dirname: 'readonly', __filename: 'readonly' } } },
   // Globals published by the archived opening page, read inside page.evaluate.

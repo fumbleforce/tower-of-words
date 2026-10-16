@@ -153,30 +153,6 @@
       "context": "57bd599463d9ff7bd84f8c1a79b0aaa8f38e4bc184bd5865ad9dde5005626996"
     },
     {
-      "file": "tools/day1_playtest.mjs",
-      "ruleId": "no-unused-vars",
-      "message": "'devices' is assigned a value but never used.",
-      "context": "efc86065636eccde464b85803b86aa821e9ad35ab59edd2ab53d8c34dace793f"
-    },
-    {
-      "file": "tools/slice_voices.mjs",
-      "ruleId": "no-unused-vars",
-      "message": "'R2' is assigned a value but never used.",
-      "context": "fdab2fe8b07921d20de5b8175a00dee1adfbbb4234a45aecfcc5f446e30bfe4d"
-    },
-    {
-      "file": "tools/slice_voices.mjs",
-      "ruleId": "no-unused-vars",
-      "message": "'RETRY_STYLE' is assigned a value but never used.",
-      "context": "453b7140d33e6be69566c0907ad9087c54ff3c0d7d843c6f2a8782614b631af4"
-    },
-    {
-      "file": "tools/slice_voices.mjs",
-      "ruleId": "no-unused-vars",
-      "message": "'walk2' is assigned a value but never used.",
-      "context": "08ccad57b8d60b52314cf6842a7825640717e3f580012c7288e0d1fe8b6d4d7f"
-    },
-    {
       "file": "tools/tests/ruby-test.cjs",
       "ruleId": "no-unused-vars",
       "message": "'html' is assigned a value but never used.",

@@ -13,3 +13,7 @@ The `source-recipes/` backup holds obsolete figure tools and island scene trials
 ## Render scripts
 
 On 2026-10-16 the dead one-off image render scripts moved out of the checkout to `../bk-jap/2026-10-16-render-scripts/`, each under its original repository path, with a `manifest.json` of sha256 checksums. Scripts that the game, the checks, the skills or the anime opening still depend on stayed in place, and so did every output, saved ComfyUI workflow and Review viewer. Notes and bible citations keep the old paths.
+
+## Loose tools scripts
+
+On 2026-10-16 thirty-one loose files in `tools/` moved out of the checkout to `../bk-jap/2026-10-16-tools/`, each under its original repository path, with a `SHA256SUMS` manifest. Nothing live ran or imported them, and none had changed since 2026-10-02. They were the prompt-lab batch with its monorail page, the Replicate voice slicer and its helpers, the video test scripts, and several one-off page builders. The top of `tools/` and `game3d/tools/` is listed in each folder's `layout.json`, and `npm run check` refuses a new loose file there. Notes and bible citations keep the old paths.

@@ -16,6 +16,7 @@ const checks = [
   ['runtime format', ['tools/check/format-runtime.mjs', '--check']],
   ['module budgets', ['tools/check/module-budgets.mjs']],
   ['doc budgets', ['tools/check/doc-budgets.mjs']],
+  ['layout', ['tools/check/layout.mjs']],
   ['dependencies', ['tools/check/dependencies.mjs']],
   ['unit', ['--test', ...unitTests]],
   ['choices', ['game3d/tools/choice-check.mjs']],

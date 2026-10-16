@@ -33,12 +33,9 @@
   "tools/characters/parts/inputs.py": 1,
   "tools/days25_assets.py": 4,
   "tools/emi2.py": 2,
-  "tools/likeforlike.py": 1,
   "tools/locations1.py": 1,
   "tools/portrait_candidates.py": 9,
   "tools/production.py": 2,
-  "tools/promptlab.py": 2,
-  "tools/puppet_frames.py": 1,
   "tools/reframe.py": 1,
   "tools/slice_assets.py": 3
  },
