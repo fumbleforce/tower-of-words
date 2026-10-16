@@ -30,7 +30,7 @@ What works and what doesn't, with the settings and Jørgen's verdicts, is in art
 ## Puppet rig (Three.js)
 
 1. Silhouette with birefnet. Cut the layers by hand from zoomed grids: each limb as one polygon including the joint strip, the head with its hair, the body as one mesh. Check that skin and cloth edges land in the right layer: no skin left on the shirt, no shirt on the arm.
-2. Inpaint only what moving parts uncover (a clean background plate, the body behind the arms, a strip under the frame edge, a blink). Never fade redrawn poses over the body; her body is only ever the source's own pixels.
+2. Inpaint only what moving parts uncover (a clean background plate, the body behind the arms, a strip under the frame edge, a blink). Each inpaint is a recipe, `start` with a `mask` (art/PROMPTS.md, How a picture is made); the reference round's `inpaint.py` predates that. Never fade redrawn poses over the body; her body is only ever the source's own pixels.
 3. Rig: joint-side weights, IK for a hand that rests on something, the prop lagging its forearm. Plain sine curves on the beat with lags between channels. No springs or squash on the body. Play on twos by default with a smooth toggle.
 4. Reference implementation: `cut.py`, `inpaint.py`, `assemble.py`, `rig.js`, `render.mjs` in the puppet reference round (animate-private lists it). Render headless with software GL.
 

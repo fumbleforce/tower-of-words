@@ -9,7 +9,7 @@ You make one art round: render or build the candidates, check them, and put ever
 ## Read first
 
 - GUIDE.md: Art, and Process.
-- art/PROMPTS.md: the section for the character or shot, the Structure and Negative prompt base sections, and any glasses or red-rim notes that apply.
+- art/PROMPTS.md: How a picture is made, the section for the character or shot, and any glasses or red-rim notes that apply.
 - docs/game/cast.md for the person, and docs/game/art-and-sound.md for what is approved.
 - The previous round's reviews/<id>/review.json and feedback.json (`python3 tools/review.py show <id>`).
 - The shot-staging skill (~/.agents/skills/shot-staging/SKILL.md) before any prompt.
@@ -18,19 +18,18 @@ You make one art round: render or build the candidates, check them, and put ever
 
 - Use Jørgen's words from the brief as they are, and change one thing per round (GUIDE: Don't overcorrect; Process: Relay feedback as given).
 - Show every attempt, in order, with the prompt and settings
-- A cast member's look comes from art/cast-looks.json through tools/cast_looks.py, never typed into the script (art/PROMPTS.md, Cast prompt lines).
+- A cast member's look comes from their character preset, never typed into the recipe (art/PROMPTS.md, Cast prompt lines).
 - Required: every attempt you reject gets its one-line reason in the dashboard with `python3 tools/verdict.py <image> --reject "<reason>"` (art/PROMPTS.md, Verdicts).
 - Animations and 3D models go up as a live viewer, not stills (reviews/README.md, step 2). The asset gallery (tools/assets/, viewer.js) is a turntable viewer you can link.
 - GPU lock and freeing VRAM: GUIDE (GPU lock). Meshy credits: GUIDE (Budget).
 - Private scene rounds: run `python3 tools/imgqa_scene.py <round>` (identity of every face, hair, glasses; CPU only) and look at every warn and fail against the approved portraits before reporting (island/private/rewards/SHOTS.md, rule 6).
 - Never open images or pages on Jørgen's screen
-- Renders go into the round folder or art/production/ (their binaries stay off git), never into a live folder (game3d/assets, game3d/audio, the local-only game folder): tools/comfy.py refuses. A pick reaches the game only through `node tools/assets/live.mjs promote`, and the file it replaces leaves through `retire` (notes/asset-lifecycle.md).
+- Renders go into the round folder or art/production/ (their binaries stay off git), never into a live folder (game3d/assets, game3d/audio, the local-only game folder). A pick reaches the game only through `node tools/assets/live.mjs promote`, and the file it replaces leaves through `retire` (notes/asset-lifecycle.md).
 - Private reward and skimpy art goes in island/private/rewards/<project>/<topic>-<n>/ (project: skimpy, peeks, day1, characters) as island/PRIVATE.md (Layout) says: finals .webp, raw PNGs in raw/, index.html and prompts.json in the round. Don't invent folders or a new system; a hook blocks it.
 
 ## Recipe
 
-Every new picture is rendered from a recipe through `node tools/subplots/compose.mjs <round>/recipes/<candidate>.json --wait --end-session` (header of tools/subplots/compose.mjs lists the fields). The recipe is the scene editor composer's composition: `characters`, `cameras`, `framing` (picture shape), `style`, `model`, `rating`, `outfit` from blocks; what happens, props and mood in `scene` and `extra` (free text); `negative` for more to avoid; `reference*` and `faceFix*` for the identity reference and face fix; `subplotId` is the scene id, so the editor lists the picture under its scene. Save the recipe file in the round folder. The command assembles the prompt with the editor's own code and stores the blocks on the job, so opening the picture in the editor fills every field. The standing soft-scene negative is added for Mature and Adult automatically (`"hard": true` only for a hard scene). `--dry-run` prints the assembled prompt and settings and sends nothing; use it to feed prompt_check.py and any script that still renders by itself.
-What the blocks can't do yet (img2img start image and denoise, inpaint, huefix, LoRA weights, ControlNet or pose) goes in the recipe's `details` text, which is stored and shown with the picture. Those passes still run through tools/comfy.py; take their prompt from `--dry-run` and write the pass into `details`, so the picture's recipe still says how it was made.
+Every still is a recipe in the round folder, `<round>/recipes/<candidate>.json`, run with `node tools/subplots/compose.mjs <recipe> --wait` (art/PROMPTS.md, How a picture is made). That section lists the fields, the presets, the picture tools (img2img, inpaint, LoRA, LLLite control, colour fix) and how to change a preset. Keep one seed set across the round so the one change is the only difference.
 
 ## Skills
 
@@ -39,7 +38,7 @@ What the blocks can't do yet (img2img start image and denoise, inpaint, huefix, 
 
 ## Done
 
-GUIDE: Definition of done. For you that also means the Review item is posted and `node tools/bible/check.mjs` passes, the GPU lock is released with ComfyUI's VRAM freed, and the commit holds only the round's candidates, sheets, scripts and review.json (raw renders stay in git-ignored folders).
+GUIDE: Definition of done. For you that also means the Review item is posted and `node tools/bible/check.mjs` passes, the round's last recipe ran with `--end-session` (and any GPU lock you took yourself, for a 3D or blockout job, is released with ComfyUI's VRAM freed), and the commit holds only the round's candidates, sheets, recipes, scripts and review.json (raw renders stay in git-ignored folders).
 
 - Every rejected attempt gets `tools/verdict.py <image> --reject "<reason>" --fault <type>`; run `tools/verdict.py --tally <round dir>` before each new pass and change the method for any REPEATED fault instead of rerolling.
 

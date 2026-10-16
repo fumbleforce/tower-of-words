@@ -11,33 +11,32 @@ The art rules live in GUIDE.md (Art) and art/PROMPTS.md. This skill is the order
 
 1. Read the brief's feedback as Jørgen wrote it, and the last round's item (`python3 tools/review.py show <id>`). Pick the ONE change this round makes (GUIDE: Don't overcorrect). Sides are hers: "her left (image right)" (GUIDE: Left and right on a character mean hers).
 2. Write the staging note with the shot-staging skill (~/.agents/skills/shot-staging/SKILL.md). It is for checking; it doesn't go into the prompt (GUIDE: Prompt style).
-3. Build the prompt from art/PROMPTS.md: take the look from art/cast-looks.json through tools/cast_looks.py (`line(<id>)`, `negative(<id>)`), never typed in (Cast prompt lines); then the character's section (e.g. "Eric (mc) portrait", "Mio's glasses"), Structure, and Negative prompt base. Keep the quality tags (tools/production.py `Q`); the build line is part of the look. Include the weighted red-rim negative from art/PROMPTS.md ("Eric (mc) portrait") on every portrait. Base portraits hold no props; the rule and the negative words are in art/PROMPTS.md "Negative prompt base". Glasses: Mio's are fixed by the method in art/PROMPTS.md "Mio's glasses", not by words; Kuro's lenses are clear (GUIDE: Scope).
+3. Write one recipe per candidate, `<round>/recipes/<candidate>.json` (art/PROMPTS.md, How a picture is made): the `portrait` style, the character preset with its default outfit, and the expression or the one change as the scene text. The style brings the quality tags, the red-rim negative and the `no-props` negative; leave `no-props` off only for a state or action portrait (art/PROMPTS.md, Portraits, expressions and cutouts). Read the character's section too (e.g. "Eric (mc) portrait"). Glasses: Mio's are fixed by the method in art/PROMPTS.md "Mio's glasses", not by words; Kuro's lenses are clear (GUIDE: Scope).
 
 ## Render
 
-4. Take the GPU lock (GUIDE: GPU lock). Check nvidia-smi.
-5. Write the round's gen.py next to its candidates in art/candidates/portraits/<round>/, on tools/comfy.py and tools/production.py, keeping one seed set so the change is the only difference. Examples: kenji-concept3/gen.py (one phrase swapped per option), eric-expressions-1 (face-only repaint). Raw PNGs go to art/production/ (git-ignored); webp copies and a prompts.json log go in the round folder.
-6. Release the lock when the renders are done: free ComfyUI's VRAM (POST http://127.0.0.1:8188/free with `{"unload_models": true, "free_memory": true}`), then remove the lock only if the owner file has your name.
+4. The round folder is art/candidates/portraits/<round>/, with the recipes in its `recipes/`. Run each recipe with `node tools/subplots/compose.mjs <recipe> --wait --owner <your name>`, with the same `--seed` for every option so the change is the only difference; the webp pictures land in the round folder. An expression is a face-only repaint of the approved source: `start` with a `mask` over the face. Keep a prompts.json log there (from `--dry-run`).
+5. Give the last recipe `--end-session` so the image service frees the GPU. It holds the GPU lock itself.
 
 ## Check each render
 
-7. Run the image QA on every render of the round, straight after rendering: `python3 tools/imgqa.py <renders...> --character <who>` (it re-runs itself in ~/ai/consist/.venv; CPU only, about 3 s an image). It compares each picture with the approved game portrait (game3d/assets/portraits/<who>-neutral.webp, or `--ref`) and gives pass / warn / fail with a number for red rim, glasses, matte (cut-outs), framing and face drift. It writes imgqa.json and imgqa-sheet.webp next to the first image (or `--out DIR`). Put the red-rim number and any warn or fail in the option's note. See "Reading imgqa" below.
-8. Look at the sheet's glasses insets: red dots are places on the approved frame line where this picture has no frame (or, on a cut-out, a see-through one). Glasses need a reference mask (tools/imgqa-ref/<who>-glasses.json, made with `tools/imgqa.py make-ref <who>`); Mio and Eric have one. For Mio the fix is the method in art/PROMPTS.md "Mio's glasses", not words.
-9. Look at each one yourself for anatomy and physical sense (GUIDE: Never open images or pages on his screen). Perspective is not a fault (GUIDE: Scope). The check flags; it filters nothing out: rejects and fails still go on the page.
-10. Required: give every attempt you reject its one-line reason in the dashboard, `python3 tools/verdict.py <image> --reject "<reason>"`, so it shows in the History viewer's reject-reason field (art/PROMPTS.md, Verdicts).
+6. Run the image QA on every render of the round, straight after rendering: `python3 tools/imgqa.py <renders...> --character <who>` (it re-runs itself in ~/ai/consist/.venv; CPU only, about 3 s an image). It compares each picture with the approved game portrait (game3d/assets/portraits/<who>-neutral.webp, or `--ref`) and gives pass / warn / fail with a number for red rim, glasses, matte (cut-outs), framing and face drift. It writes imgqa.json and imgqa-sheet.webp next to the first image (or `--out DIR`). Put the red-rim number and any warn or fail in the option's note. See "Reading imgqa" below.
+7. Look at the sheet's glasses insets: red dots are places on the approved frame line where this picture has no frame (or, on a cut-out, a see-through one). Glasses need a reference mask (tools/imgqa-ref/<who>-glasses.json, made with `tools/imgqa.py make-ref <who>`); Mio and Eric have one. For Mio the fix is the method in art/PROMPTS.md "Mio's glasses", not words.
+8. Look at each one yourself for anatomy and physical sense (GUIDE: Never open images or pages on his screen). Perspective is not a fault (GUIDE: Scope). The check flags; it filters nothing out: rejects and fails still go on the page.
+9. Required: give every attempt you reject its one-line reason in the dashboard, `python3 tools/verdict.py <image> --reject "<reason>"`, so it shows in the History viewer's reject-reason field (art/PROMPTS.md, Verdicts).
 
 ## Cut-out, if the round needs one
 
-11. `python3 tools/rmbg_local.py --method isnet-anime <in.png> --out <dir>` (birefnet-hr-matting for soft hair), refine with tools/matte_refine.py, then run tools/imgqa.py on the cut-outs too (name them `<render>-cut.webp` next to the render, so the matte check can tell hair gaps from holes) (GUIDE: Cutouts).
+10. `python3 tools/rmbg_local.py --method isnet-anime <in.png> --out <dir>` (birefnet-hr-matting for soft hair), refine with tools/matte_refine.py, then run tools/imgqa.py on the cut-outs too (name them `<render>-cut.webp` next to the render, so the matte check can tell hair gaps from holes) (GUIDE: Cutouts).
 
 ## Sheet and review
 
-12. Make a contact sheet of every attempt in order, labelled, beside the approved portrait at the same scale. imgqa-sheet.webp is one (approved first, then the images in the order given); for a side-by-side at the same scale, copy the pattern of art/candidates/portraits/mio-phone-3/sheet.py.
-13. Post the round with the post-review-item skill: the sheet as `media`, each attempt as an option with prompt, seed and red-rim number in its note.
+11. Make a contact sheet of every attempt in order, labelled, beside the approved portrait at the same scale. imgqa-sheet.webp is one (approved first, then the images in the order given); for a side-by-side at the same scale, copy the pattern of art/candidates/portraits/mio-phone-3/sheet.py.
+12. Post the round with the post-review-item skill: the sheet as `media`, each attempt as an option with prompt, seed and red-rim number in its note.
 
 ## When Jørgen picks
 
-14. Install the pick with `node tools/assets/live.mjs promote <round file> game3d/assets/portraits/<who>-<face>.webp --round <round> --review <id>` (`--replace` when a face is being replaced: the old file goes to art/production/retired/). Then `python3 tools/assets/sync.py push` and commit tools/assets/live.json with the lock file (notes/asset-lifecycle.md). Never render or cut out straight into game3d/assets.
+13. Install the pick with `node tools/assets/live.mjs promote <round file> game3d/assets/portraits/<who>-<face>.webp --round <round> --review <id>` (`--replace` when a face is being replaced: the old file goes to art/production/retired/). Then `python3 tools/assets/sync.py push` and commit tools/assets/live.json with the lock file (notes/asset-lifecycle.md). Never render or cut out straight into game3d/assets.
 
 ## Reading imgqa
 

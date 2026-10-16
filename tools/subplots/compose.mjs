@@ -13,9 +13,10 @@
 // framing, style, model, rating, hard, scene, pose, angle, environment, light, stage (who stands where, facing and
 // looking at what: web/image-stage.js), extra (more prompt words),
 // negatives (selected exclusion preset ids), reference/referenceOn/referenceStrength/referenceCutout (identity
-// reference), faceFix/faceStrength, width, height, steps, cfg, count, seed. Also `subplotId` (the scene the
-// picture belongs to, full scene editor id) together with `imageSlot` (the exact shot id) and `details` (free notes for what the blocks
-// cannot say yet: img2img start, inpaint, hue fix, LoRA weights, ControlNet; stored and shown, never sent).
+// reference), faceFix/faceStrength, width, height, steps, cfg, count, seed, and the picture tools start ({image,
+// denoise, mask}: img2img, or an inpaint with a mask), loras, control (an LLLite guide picture) and huefix. Also
+// `subplotId` (the scene the picture belongs to, full scene editor id) together with `imageSlot` (the exact shot id)
+// and `details` (free notes; stored and shown, never sent).
 // --dry-run prints the assembled job and sends nothing. --wait waits for the pictures, saves each as webp in the
 // round folder (or in --out) and prints the paths; --end-session then ends the image gen session so the GPU is freed,
 // but only when nothing else is queued or running (other agents' jobs are never cancelled); it cancels only this
