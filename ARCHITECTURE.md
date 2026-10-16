@@ -66,6 +66,7 @@ story, language, bonds, facts and the story map. Single groups: `check:syntax`,
   Existing oversized modules have exact ceilings with a reason and owner in
   `tools/check/module-budgets.json`. Shrinking a file means lowering its ceiling.
   Story data is outside the budget.
+- Always-read docs and agent files have byte ceilings in `tools/check/doc-budgets.json`.
 - Dependency checks cover static imports, re-exports and literal dynamic imports.
   Existing cycles are listed in `tools/check/cycle-baseline.json`; new ones fail,
   and a removed cycle loses its allowance. Nonliteral imports are reported for

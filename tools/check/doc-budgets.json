@@ -1,0 +1,16 @@
+{
+  "unit": "bytes; 1 KB is 1000 bytes",
+  "limits": {
+    "GUIDE.md": 20000,
+    "CLAUDE.md": 3000,
+    "AGENTS.md": 3000,
+    "collab/PROTOCOL.md": 7000,
+    "ARCHITECTURE.md": 8000,
+    "notes/PRODUCTION.md": 3000,
+    "art/PROMPTS.md": 13000,
+    ".claude/agents/*.md": 4500,
+    ".codex/agents/*.toml": 4500,
+    ".claude/skills/*/SKILL.md": 4500,
+    ".agents/skills/*/SKILL.md": 4500
+  }
+}
