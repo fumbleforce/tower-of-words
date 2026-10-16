@@ -64,7 +64,7 @@ export default withStationGarden(
           {
             if: 'd2_mori_rest_seen',
             then: [
-              { say: 'eric', emo: 'warm', text: 'I’ll still help you carry those boxes back on Monday.' },
+              { say: 'eric', emo: 'warm', text: 'I’m still looking forward to those Norway photos.' },
               { do: 'gesture', who: 'mori', kind: 'nod', to: 'eric' },
             ],
           },
@@ -143,7 +143,7 @@ export default withStationGarden(
         d3_bench: [
           {
             if: 'd2_party_done',
-            then: [{ say: 'eric', emo: 'warm', text: 'Four of us fitted along here last night.' }],
+            then: [{ say: 'eric', emo: 'warm', text: 'I’m glad Mori booked that table in the izakaya. All five of us on this bench would have been a squeeze.' }],
             else: [{ say: 'eric', emo: 'warm', text: 'I could eat out here.' }],
           },
         ],

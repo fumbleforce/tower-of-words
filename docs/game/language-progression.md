@@ -87,7 +87,8 @@ Day references below identify the current scripts where a first encounter is sta
 | yoyaku — booking | Day 3 booking-terminal repair | Day 4 Rei's court reservation | Day-3 introduction, day-4 reservation reference and Hamada’s persistent booking/invitation connection implemented |
 | koko — here | Optional day-3 map interaction | Point at the map on days 4 and 5 | Existing inherited interaction; later spoken direction remains a separate follow-up |
 | oyogu — swim | One optional reply in the pool scene | Recognise Kuro’s later question about swimming; use it in later club conversations | One optional lesson implemented, with Kuro’s later swimming question. Further club conversation use is planned; watching reuses known mitai |
-| puru / yukkuri / miru — pool / slowly / watch | Contextual pool speech only | Recognise location or pace while the scene continues | No forced lessons or learned flags just for hearing them |
+| puru — pool | Optional question to Emi at the pool, `club_swimming_pool_word`: slow model, typed attempt, then Eric names the place | After the session, Eric asks Kuro about the same pool next Saturday in `d3_kuro_pool` | Implemented; returns to the activity menu without requiring a swim or another lesson. Hearing the loanword alone never learns it |
+| yukkuri / miru — slowly / watch | Contextual pool speech only | Recognise pace or activity while the scene continues | No forced lessons or learned flags just for hearing them |
 
 ## Acceptance before landing a story change
 

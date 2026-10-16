@@ -116,13 +116,26 @@ export default {
       { say: 'kuro', face: 'teasing', name: 'Kuro', overheard: true, emo: 'teasing', text: 'エミさん、泳ぎに来たんでしょう？' },
       { say: 'emi', emo: 'warm', text: 'Yes, I did come here to swim. You’re quite right.' },
       { say: 'kuro', name: 'Kuro', overheard: true, emo: 'curious', text: '今日は、{oyogu}？' },
+      { go: 'club_swimming_choose' },
+    ],
+    club_swimming_choose: [
       { choice: [
         { text: 'Swim with Kuro.', go: 'club_swimming_join' },
         { text: 'Ask how to say you’ll swim.', if: '!know_oyogu', go: 'club_swimming_word' },
+        { text: 'Ask what “pool” is in Japanese.', if: '!know_puru', go: 'club_swimming_pool_word' },
         { text: 'Carry Emi’s bags to the attendant.', go: 'club_swimming_bags' },
         { text: 'Sit on the deck and watch.', go: 'club_swimming_watch' },
         { text: 'Leave them to their evening.', go: 'club_swimming_leave_early' },
       ] },
+    ],
+    club_swimming_pool_word: [
+      { say: 'eric', emo: 'curious', text: 'What do you call the pool in Japanese?' },
+      { say: 'emi', emo: 'casual', text: '{puru}. It’s from English, so you’re nearly there already.' },
+      { say: 'emi', emo: 'slow', slow: true, text: '{puru}。' },
+      { do: 'type', word: 'puru', from: 'emi', prompt: 'Try the word for the pool you’re visiting: puru.' },
+      { say: 'eric', emo: 'warm', text: '{puru}. I think I can remember that one.' },
+      { say: 'emi', emo: 'warm', text: 'Yes. So, are you coming in?' },
+      { go: 'club_swimming_choose' },
     ],
     club_swimming_word: [
       { say: 'emi', emo: 'casual', text: 'She’s asking you too. {oyogu} means swim. Or you can sit with us, there’s no test.' },

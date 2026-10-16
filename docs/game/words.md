@@ -28,6 +28,7 @@ Checked against game3d/js/lang.js. Kana is the word in kana where it is written 
 | `koko` | ここ |  | koko | here | phrase |
 | `gamen` | 画面 | がめん | gamen | screen | phrase |
 | `yoyaku` | 予約 | よやく | yoyaku | booking | phrase |
+| `puru` | プール |  | pūru | pool | phrase |
 | `oyogu` | 泳ぐ | およぐ | oyogu | swim | phrase |
 | `matte` | 待って | まって | matte | wait | command |
 | `akete` | 開けて | あけて | akete | open | command |
@@ -92,7 +93,7 @@ The **-tai form** expresses what the speaker wants to do. The Words panel pairs 
 
 The [day-3 set](../../game3d/story/day3/README.md) adds `gamen` (screen) and `yoyaku` (booking) through separate repair requests, with a typed model before using each in the request and result. The printer's existing `dashite` lesson follows the completed ordinary print. These are the three new words on the core repair route; learning does not itself produce magic.
 
-`koko` remains optional at the map (`d3_map`, `d3_koko_word`). Two more optional words prepare Kuro’s invitation: Aoi reads the swimming slip’s 18時 out as `rokuji` (six o’clock) at the board (`d3_aoi_name`), and Kuro asks for a table for `futari` (two people) at the shotengai bakery counter at lunch (`d3_kuro_futari`). Like watashi and anata they are typed and understood, never said from the Say menu. At the swimming club, asking how to say you will swim teaches `oyogu`, then follows the choice into the water. Swimming, helping, watching and leaving all work without this lesson. Watching can reuse already-known `mitai`. The contextual pool and pace glosses do not mark words learned.
+`koko` remains optional at the map (`d3_map`, `d3_koko_word`). Two more optional words prepare Kuro’s invitation: Aoi reads the swimming slip’s 18時 out as `rokuji` (six o’clock) at the board (`d3_aoi_name`), and Kuro asks for a table for `futari` (two people) at the shotengai bakery counter at lunch (`d3_kuro_futari`). Like watashi and anata they are typed and understood, never said from the Say menu. At the swimming club, asking how to say you will swim teaches `oyogu`, then follows the choice into the water. Swimming, helping, watching and leaving all work without this lesson. Watching can reuse already-known `mitai`. A separate optional question about the place teaches `puru` (pool) from Emi in `club_swimming_pool_word`, with a slow model, typing and Eric’s reply before returning to the activity choices. Once the session is finished, `d3_kuro_pool` reuses known `puru` when Eric asks about next Saturday. The pace gloss does not mark a word learned.
 
 Known `gamen` returns during the court display inspection (`d4_display`) and at the karaoke screen (`d5_screen`); `yoyaku` returns in the tennis reservation conversation (`d4_tennis_offer`). A later pool talk (`d3_kuro_pool`) reuses `oyogu`. Unknown-word branches retain ordinary English. `dashite` prepares the later guided vending request, with a completed-printer catch-up if it was missed. These scene locations describe current authored opportunities, not limits on when vocabulary can matter.
 

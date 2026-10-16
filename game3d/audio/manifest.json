@@ -448,6 +448,22 @@
   "slow": true
  },
  {
+  "key": "word-puru",
+  "speaker": "mio",
+  "text": "プール。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "puru",
+    "プール"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
   "key": "word-rokuji",
   "speaker": "mio",
   "text": "六時。",
@@ -739,6 +755,15 @@
   "key": "eric-oyogu",
   "speaker": "eric",
   "text": "泳ぐ。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "eric-puru",
+  "speaker": "eric",
+  "text": "プール。",
   "lang": "ja",
   "overheard": false,
   "words": [],
@@ -5032,7 +5057,12 @@
   "text": "プール、行きます。泳げますか？",
   "lang": "ja",
   "overheard": true,
-  "words": [],
+  "words": [
+   [
+    "puru",
+    "プール"
+   ]
+  ],
   "clear": [
    "プール"
   ],
@@ -6032,6 +6062,46 @@
   "words": [],
   "clear": [],
   "emo": "bright"
+ },
+ {
+  "key": "ln-k0p6rb",
+  "speaker": "mio",
+  "text": "Oh, thanks. I’ll put it here until I can stop for a minute.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-czmdpt",
+  "speaker": "mori",
+  "text": "あ、ありがとうございます。あとでいただきます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1mmzl7n",
+  "speaker": "kenji",
+  "text": "For me? Thank you, Eric-san.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-b65ru1",
+  "speaker": "emi",
+  "text": "Oh, thank you, but keep it. I’m about to go upstairs.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
  },
  {
   "key": "oh-1wd7qfc",
@@ -7931,7 +8001,12 @@
   "text": "あ、プールのサークル、今夜ですよ！",
   "lang": "ja",
   "overheard": true,
-  "words": [],
+  "words": [
+   [
+    "puru",
+    "プール"
+   ]
+  ],
   "clear": [
    "プール"
   ],
@@ -8140,6 +8215,21 @@
   "words": [],
   "clear": [],
   "emo": "bright"
+ },
+ {
+  "key": "ln-1ghlstg",
+  "speaker": "eric",
+  "text": "Same プール next Saturday, then?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "puru",
+    "プール"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
  },
  {
   "key": "oh-u58aeh",
@@ -8606,6 +8696,10 @@
   "lang": "ja",
   "overheard": true,
   "words": [
+   [
+    "puru",
+    "プール"
+   ],
    [
     "rokuji",
     "六時"
@@ -9087,9 +9181,9 @@
   "emo": "polite"
  },
  {
-  "key": "ln-1qovs1t",
+  "key": "ln-aoom9k",
   "speaker": "eric",
-  "text": "I’ll still help you carry those boxes back on Monday.",
+  "text": "I’m still looking forward to those Norway photos.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -9274,9 +9368,9 @@
   "emo": "curt"
  },
  {
-  "key": "ln-9hlyte",
+  "key": "ln-10tj482",
   "speaker": "eric",
-  "text": "Four of us fitted along here last night.",
+  "text": "I’m glad Mori booked that table in the izakaya. All five of us on this bench would have been a squeeze.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -12508,6 +12602,72 @@
   "key": "ln-1dx8kgf",
   "speaker": "emi",
   "text": "Yes, I did come here to swim. You’re quite right.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-ojzb7i",
+  "speaker": "eric",
+  "text": "What do you call the pool in Japanese?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1k92lvb",
+  "speaker": "emi",
+  "text": "プール. It’s from English, so you’re nearly there already.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "puru",
+    "プール"
+   ]
+  ],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-6d80e6",
+  "speaker": "emi",
+  "text": "プール。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "puru",
+    "プール"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "ln-1m7j0ba",
+  "speaker": "eric",
+  "text": "プール. I think I can remember that one.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "puru",
+    "プール"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-8mnqg5",
+  "speaker": "emi",
+  "text": "Yes. So, are you coming in?",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -16919,6 +17079,15 @@
   "clear": []
  },
  {
+  "key": "carina-puru",
+  "speaker": "carina",
+  "text": "プール。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
   "key": "carina-rokuji",
   "speaker": "carina",
   "text": "六時。",
@@ -18258,6 +18427,16 @@
   "emo": "warm"
  },
  {
+  "key": "ln-1aqn0a0-carina",
+  "speaker": "kenji",
+  "text": "For me? Thank you, Carina-san.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
   "key": "oh-ydb8oh-carina",
   "speaker": "kenji",
   "text": "あ、カリーナさん！こちらです。",
@@ -19018,6 +19197,21 @@
   "emo": "bright"
  },
  {
+  "key": "ln-1ghlstg-carina",
+  "speaker": "carina",
+  "text": "Same プール next Saturday, then?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "puru",
+    "プール"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
   "key": "ln-1y0l09s-carina",
   "speaker": "carina",
   "text": "Not tonight. I’ll stay here a bit longer.",
@@ -19408,9 +19602,9 @@
   "emo": "polite"
  },
  {
-  "key": "ln-1qovs1t-carina",
+  "key": "ln-aoom9k-carina",
   "speaker": "carina",
-  "text": "I’ll still help you carry those boxes back on Monday.",
+  "text": "I’m still looking forward to those Norway photos.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -19453,9 +19647,9 @@
   "emo": "warm"
  },
  {
-  "key": "ln-9hlyte-carina",
+  "key": "ln-10tj482-carina",
   "speaker": "carina",
-  "text": "Four of us fitted along here last night.",
+  "text": "I’m glad Mori booked that table in the izakaya. All five of us on this bench would have been a squeeze.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -20695,6 +20889,31 @@
   "lang": "en",
   "overheard": false,
   "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-ojzb7i-carina",
+  "speaker": "carina",
+  "text": "What do you call the pool in Japanese?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1m7j0ba-carina",
+  "speaker": "carina",
+  "text": "プール. I think I can remember that one.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "puru",
+    "プール"
+   ]
+  ],
   "clear": [],
   "emo": "warm"
  },

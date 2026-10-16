@@ -1206,6 +1206,18 @@
    "path": "game3d/assets/characters/relaxed-idle-mio.json",
    "to": "art/production/retired/2026-10-16/game3d/assets/characters/relaxed-idle-mio.json",
    "note": "The old Mio's idle (?mio=legacy); Mio's body is mio2 with relaxed-idle-mio2.json. #643"
+  },
+  {
+   "date": "2026-10-16",
+   "action": "retire",
+   "paths": [
+    "game3d/audio/ln-1qovs1t.mp3",
+    "game3d/audio/ln-1qovs1t-carina.mp3",
+    "game3d/audio/ln-9hlyte.mp3",
+    "game3d/audio/ln-9hlyte-carina.mp3"
+   ],
+   "to": "art/production/retired/2026-10-16/",
+   "note": "Replaced day-3 bench and Mori shopping callbacks for #631 and #637."
   }
  ]
 }
