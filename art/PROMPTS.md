@@ -31,7 +31,7 @@ Reusable prompt words live only in versioned presets in the dashboard. They are 
 - Negatives: `base` (quality), `heavy` (body) and `limits` are on by default. The others are `drift` (style drift), `text`, `muscle`, `clothed`, `no-props` for base portraits, and `implied`, the soft preset.
 - Models: `rdbt`, `oneobsession` and the rest, each with its sampler, steps and CFG. Framings: `portrait` (896×1152), `landscape` (1216×832), `landscape-r` (1152×896) and `square`.
 
-A recipe kept under island/private/rewards/, or run with `--reward`, is a reward recipe, and compose.mjs holds it to the reward exclusion rule in GUIDE (Art). `"hard": true` marks an Adult-mode reward; leave it out for a nonadult one. Which tier a reward is: CLAUDE.md, Reward tiers by mode.
+A recipe kept under island/private/rewards/, or run with `--reward`, is a reward recipe, and compose.mjs holds it to the configured exclusions, with no extra negative words or preset sets. A nonadult reward also gets the soft negative preset. `"hard": true` marks an Adult-mode reward; leave it out for a nonadult one. Which tier a reward is: CLAUDE.md, Reward tiers by mode.
 
 ### Changing a preset
 
@@ -192,6 +192,12 @@ Droplets on skin, a ribbon around one wrist, nail colour, an anklet: one or two 
 
 The tiers and the soft and hard rules are in CLAUDE.md (Reward tiers by mode). The exclusions a reward recipe gets are under "How a picture is made". Soft pictures are never shown on the train (discreet mode) and never on public pages.
 
+- Make reward scenes whenever the GPU is idle, with real creativity and direct spice: revealing outfits, bath and onsen scenes, suggestive poses and angles, and compromising situations that come out of play.
+- Many varied concepts in the round-2 onsen style; leave the style alone. Ordinary scenes can be sexy too. Couples of any kind, women with each other included; don't assume anyone's orientation.
+- RDBT only for reward scenes. No style variants of one concept; spend renders on new concepts.
+- Perspective is not an anatomy fault. Reject for anatomy only for real errors: extra or missing limbs, fused fingers, a joint bending the wrong way.
+- Limit test for soft pictures: reject only when a nipple, areola or genitals are clearly drawn and visible. Hints, shading and show-through don't count, and points showing through a braless top are fine and wanted, so never negative-prompt them away. Explicit adult nudity is allowed in private mode. Anyone who isn't clearly an adult is rejected. Critics use the same tests.
+- Everything spicy stays private (island/private/rewards/) until he picks, never on a public page or in the public repo. Discreet mode is on by default on the phone.
 - Hard framing (Jørgen, 2026-10-04): hard scenes are not wide room shots and not one frame that shows everything; use a dramatic angle per image (kotodama_01143_ is the reference) and detail close-ups from different angles. The shot and camera menu is in island/private/rewards/SHOTS.md.
 
 ## Negative prompt base

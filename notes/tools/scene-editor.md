@@ -2,7 +2,11 @@
 
 Jørgen asked for this on 2026-10-10. The editor should let an author make whole scenes, or edit ours, the way a professional content tool does. It has to be easy to use and hide how the scenes are stored. Images are edited in place, with history and regeneration, and names, places and looks come from the bible. Every save keeps a revision. His words are in notes/feedback-log/. This page holds the design and the stage plan. How to run the editor and how its adapters work is in [tools/subplots/README.md](../../tools/subplots/README.md).
 
-The URL is http://127.0.0.1:8771/tools/subplots/web/ (start the server with `./start`). It works only on this computer.
+The URL is http://127.0.0.1:8771/tools/subplots/web/ (start the server with `./start`). It works only on this computer, and it works without an agent session.
+
+His brief, word for word: "a fully blown scene editor like what a professional content editor would see, super easy to use, hiding implementation detail, making it easy to edit scenes and images in-place, change order, change and add narrative text, see it in context, re-generate and edit existing images, maybe generate videos for the images, set restrictions and place in story, fully integrated with data from the bible to avoid drift, keep revisions". On privacy: "this is private mode eligible so no restrictions, just labelling on what goes where".
+
+The author is not technical. Show the actual scene images with the English and Japanese text together. Cast, locations, staging and conditions are readable choices from the bible and the image generator. Internal keys, helper calls and code expressions stay out of the normal editing view.
 
 ## Codex's version (judged 2026-10-10)
 

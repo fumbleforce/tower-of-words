@@ -1,6 +1,24 @@
 # Image gen dashboard
 
-`tools/imagegen/run.sh`, then http://127.0.0.1:8772/ (`--restart` loads new code and keeps his GPU session). The rules for using it are in GUIDE.md (Engineering, "Image gen dashboard").
+`tools/imagegen/run.sh`, then http://127.0.0.1:8772/ (`--restart` loads new code and keeps his GPU session).
+
+## Rules for agents
+
+- Its GPU session holds the lock as `imagegen-dashboard` and ends after 20 idle minutes. While it holds the lock, Jørgen is using the GPU, so wait ([notes/tools/gpu.md](../../notes/tools/gpu.md)).
+- Load new code with `tools/imagegen/run.sh --restart`. It waits for the queue and keeps his session. Never stop the server with SIGTERM or Ctrl+C while he is using it.
+- The code is committed. The presets ("blocks", each with its "note to Claude") are local configuration and never committed (the table below).
+- The render log (island/private/imagegen/log.jsonl, with his stars, rejects and notes) and the outputs are in island/private/imagegen/. Every render is in the History tab with its full prompt, negative and settings.
+- To help him tune, read the log and his notes, then change presets as art/PROMPTS.md (Changing a preset) says.
+
+## What Jørgen asked for
+
+- Prompt fields (clothing, appearance, setting, light) are editable for one shot without changing shared templates. Presets are starting points, and template editing is explicit.
+- The composer's Adult / Nonadult switch controls its exclusion setting. Browsing adult content is a separate library setting.
+- Pictures below Generate a picture appear in strict reverse time order, including pictures within one batch.
+- Standalone Image gen uses the scene editor's image framework without a scene attachment, with Prompt and Negative side by side and image rows below. Both flows stay at feature parity, including recording, showing and restoring each image's settings.
+- External tool outputs are registered in the same history with their exact request and references. Settings the tool doesn't expose are marked unavailable.
+- A selected image can start a scene draft or a reusable image-tool character.
+- Keep code checkpoints and local data backups before changing the editing suite (Backups, below).
 
 ComfyUI started by the dashboard leaves 2 GB of VRAM alone (`--reserve-vram`, `IMAGEGEN_RESERVE_VRAM` in gpu.py), so the browser keeps headroom while a render runs. A ComfyUI that was already running keeps whatever it was started with.
 

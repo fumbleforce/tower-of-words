@@ -1,16 +1,17 @@
 # Codex: start here
 
-Read GUIDE.md (everything about the game and how Jørgen wants work done) and collab/PROTOCOL.md (how to work with Claude and Grok, who also work in this repo). Check collab/to-codex.md at the start of every turn.
-Verify each new user message is in the daily feedback log. Until the native `.codex/hooks.json` handlers are trusted and observed running, call `python3 tools/collab/codex_hooks.py prompt` with JSON stdin (`prompt`, `session_id`, `turn_id`, `cwd`); use a stable turn id when retrying. Use its `check` mode at session/turn start for Review/Showcase, in-game feedback and stale-work notifications. The shared hook/workflow audit and native activation limits are in tools/collab/README.md. Claude's hook configuration is not inherited by Codex. Track actionable requests with `tools/work.py` and record lasting rules in GUIDE.md. Review packets and reports go in the cache folder that ARCHITECTURE.md (Tool state and outputs) names, never under `.git`.
-Grok's inbox is collab/to-grok.md. He writes here with G- ids. Reply to him there. Reward scenes and private mode moved to Claude on 2026-10-05; their collab is in collab/private.md (git-ignored, append only), not the inboxes.
+Read GUIDE.md (the game and how Jørgen wants work done) and collab/PROTOCOL.md (how to work with Claude and Grok). Check collab/to-codex.md at the start of every turn. Reward scenes and private mode belong to Claude; their collab is in collab/private.md, not the inboxes.
 
-At the start of a main Codex session, run `python3 tools/collab/codex_wake.py bind` to receive inbox wakeups (details: tools/collab/README.md). Subagents, reviewers and headless workers must not bind.
+- Every new user message must be in the feedback log. Until the native `.codex/hooks.json` handlers are trusted and seen running, call `python3 tools/collab/codex_hooks.py prompt` with JSON stdin (`prompt`, `session_id`, `turn_id`, `cwd`), and use its `check` mode at session and turn start for Review, Showcase, in-game feedback and stale work. Details: tools/collab/README.md. Claude's hooks don't apply to Codex.
+- A main Codex session runs `python3 tools/collab/codex_wake.py bind` at start to receive inbox wakeups. Subagents, reviewers and headless workers must not bind.
+- Review packets and reports go in the cache folder named in ARCHITECTURE.md (Tool state and outputs), never under `.git`.
 
 ## Reward tiers by mode
 
-Jørgen, 2026-10-16: "In the public nonadult mode, rewards are at maximum soft, and are more playful, funny and fun than sexy. In the adult mode, rewards are at minimum skimpy / partly revealing / very teasing, up to hard rewards. This way we segment players, and the commuters would play the safe nonadult mode. It should be possible to toggle on and off part way through, enabling / disabling the extra scenes."
-
-The soft rules below are for nonadult-mode rewards. Adult-mode reward recipes use Adult mode and its configured exclusions. The rating exclusions are fixed defaults that a recipe can't remove or edit. Content exclusions stay manual and per section (a clothing negative, a background negative, and so on), e.g. "window" for a windowless room (Jørgen, 2026-10-16: "of course we need some manual control over exclusion for scenery, but not for sensitivity levels that we have defaults for").
+- Nonadult (public) mode: rewards are soft at most, and more playful, funny and fun than sexy. The soft rules below apply.
+- Adult mode: rewards start at skimpy, partly revealing or very teasing, and go up to hard.
+- The player can switch modes partway through, which turns the extra scenes on or off.
+- Adult-mode reward recipes use Adult mode and its configured exclusions. The rating exclusions are fixed defaults that a recipe can't remove or edit. Content exclusions stay manual and per section (a clothing negative, a background negative), e.g. "window" for a windowless room.
 
 ## Reward scenes, soft
 

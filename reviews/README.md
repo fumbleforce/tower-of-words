@@ -8,6 +8,7 @@ To post a review item, write `reviews/<id>/review.json` as in Adding an item bel
 
 1. Pick an id: lower case, digits and hyphens, unique (`kenji-concept`, `style-rough-2`). A new round is a new id, not an edit of the old one; mark the old one `superseded`.
 2. Put the candidates anywhere in the repo (usually next to the work, e.g. `art/candidates/portraits/`). Paths in review.json are relative to the repo root. Show every attempt, including the ones you'd reject (GUIDE, Show every attempt). Animations and 3D models go up as a live viewer he can play and rotate, linked under `links`, not as stills or frame sheets (Jørgen, 2026-09-29: "i need to be able to see the live animation, not pictures of animation").
+   The page layout he asked for: every option has its unique id as its card heading (e.g. sales-8301) so he can name his pick, large grids (images at least about 480 to 520 px, not two per row), a lightbox with arrow keys, and the full prompt under each title. The item's first line says what the options are (pictures, renders of real 3D models, a playable build) and where to try the real thing.
 3. Write `reviews/<id>/review.json`:
 
 ```json

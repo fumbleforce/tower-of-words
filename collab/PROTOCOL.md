@@ -1,63 +1,59 @@
 # Claude, Codex and Grok: how we work together
 
-Three teams work on this repo: Claude (Claude Code, the main session plus its subagents), Codex (the Codex session plus `codex exec` runs) and Grok (Grok Build, this machine). Jørgen directs all three. This file holds who owns the code right now (the code freeze), how to message the other teams (the inboxes), how to claim files, and who leads and who reviews each area. Everything about the game and how he wants work done is in GUIDE.md.
+Three teams work in this repo: Claude (the main sessions and their subagents), Codex (the Codex session and `codex exec` runs) and Grok (Grok Build). Jørgen directs all three.
 
 ## Right now
 
-- Refactor freeze released by Codex in X-0128 (2026-09-29), through stage 5 commit `42e65dd`. Normal file claims apply again. Codex owns the creator follow-ups named in that entry; Claude may resume the queued engine/UI work. Refactor evidence: notes/refactor-progress.md.
+No code freeze is active, and normal file claims apply. A freeze, when there is one, is announced here.
 
 ## Channels
 
-- To message Codex, append an entry to `collab/to-codex.md` (Claude agents use `python3 tools/collab/post.py`, which takes the next id under a lock). Codex writes to Claude in `collab/to-claude.md`. To message Grok, append to `collab/to-grok.md`. Grok writes to Claude in `collab/to-claude.md` and to Codex in `collab/to-codex.md`. One inbox each, append only; never edit or delete an earlier entry. The receiver answers in the sender's inbox, quoting the message id.
+- One inbox per team, append only. Never edit or delete an earlier entry. To Claude: `collab/to-claude.md`. To Codex: `collab/to-codex.md`. To Grok: `collab/to-grok.md`. The receiver answers in the sender's inbox, quoting the message id. Claude agents post with `python3 tools/collab/post.py`, which takes the next id under a lock.
 - Entry format:
   ```
   ## C-0007 · 2026-09-29 14:05 · review
   refs: game3d/story/train.js (commit 5f8bec9)
   Body in plain sentences. What you need, by when, and what "done" means.
   ```
-  Ids: `C-` from Claude, `X-` from Codex, `G-` from Grok. Claude and Codex number in order in their own file. Grok uses one sequence across both inboxes, and a note posted to both teams keeps the same id. Types: `ask` (do a task), `review` (check work), `answer`, `claim` (I'm taking these files), `release`, `done`, `blocked`.
-- Size limits (Jørgen, 2026-10-16: "limit the sizes of inter agent comms"). An entry body is at most 1,500 characters. Put longer details in a local note, `collab/notes/<id>.md`, and link it in `refs`. `post.py` refuses a longer body. When an inbox file passes 150 KB, `post.py` moves its oldest entries, word for word, to `collab/archive/<inbox>-<yyyy-mm>.md` until the file is under 100 KB. `python3 tools/collab/post.py --rotate` does that without a post. Archived entries stay valid, and their ids are never reused. `post.py` enforces the limits for Claude; Codex and Grok keep to them by hand.
-- The inboxes are local. Under `collab/`, only this file is tracked. The inbox files, `collab/notes/` and `collab/archive/` are git-ignored and stay in the main checkout, so nothing in them reaches git.
-- Claude watches `to-claude.md` and wakes on every new entry. Codex reads `to-codex.md` at the start of each turn and before starting new work; main Codex sessions register for automatic wake delivery as described in [tools/collab/README.md](../tools/collab/README.md). Grok reads `to-grok.md` at the start of each turn and before starting new work; a main Grok session wakes from new entries when its turn ends, as described in [tools/collab/README.md](../tools/collab/README.md).
-- Fast path: Claude can run a headless Codex job directly (`codex exec -C /home/jorgen/repo/japanese -s workspace-write "..."`). Use it for self-contained asks and reviews that need an answer in minutes. The job's final message is its answer; it also appends a `done` entry to `to-claude.md`.
-- Waking Codex: append the entry to `collab/to-codex.md`; the installed watcher queues the pointer automatically. Installation, session binding, delivery behavior and controls: [tools/collab/README.md](../tools/collab/README.md). The inbox stays the record; the queued message is only a nudge.
-- Waking Grok: append the entry to `collab/to-grok.md`. The session hook delivers the new ids when Grok's turn ends, and does not interrupt a running turn. Details: [tools/collab/README.md](../tools/collab/README.md). The inbox stays the record.
-- Private work (reward scenes, encounters, private mode, the private folder) has its own append-only channel, `collab/private.md`, git-ignored. Don't mention its content in these inboxes or any public doc.
-- Decisions for Jørgen go to the Review section (reviews/README.md), never into these inboxes.
+  Types: `ask`, `review`, `answer`, `claim`, `release`, `done`, `blocked`.
+- An entry body is at most 1,500 characters. Put longer details in a local note, `collab/notes/<id>.md`, and link it in `refs`. When an inbox passes 150 KB, `post.py` moves its oldest entries word for word to `collab/archive/<inbox>-<yyyy-mm>.md` until it is under 100 KB (`post.py --rotate` does that without a post). Archived ids are never reused. `post.py` enforces this for Claude, and Codex and Grok keep to it by hand.
+- Under `collab/`, only this file is tracked. The inboxes, notes and archive are git-ignored and stay in the main checkout.
+- Ids: `claude-main` (the game, tools, engine) uses `C-`, and `claude-private` (reward scenes, encounters, private mode) uses `CP-`. Codex uses `X-`. Grok uses `G-`, one sequence across both inboxes. Each Claude session names itself in the first line of every entry body ("claude-main: ..."), and its agents write as `<session>/<agent>`. Never reuse an id; fix a clash with a new entry.
+- Claude wakes on every new entry in its inbox. Codex and Grok read theirs at the start of each turn and before new work. The wake hooks only nudge, and the inbox is the record ([tools/collab/README.md](../tools/collab/README.md)).
+- Fast path: Claude can run a headless Codex job (`codex exec -C /home/jorgen/repo/japanese -s workspace-write "..."`) for a self-contained ask or review. Its final message is its answer.
+- Private work (reward scenes, encounters, private mode) uses its own git-ignored, append-only channel, `collab/private.md`. Its content never goes in these inboxes or any public doc.
+- Decisions for Jørgen go to Review (reviews/README.md), never into the inboxes.
 
 ## Sharing the repo
 
-- Every task, request, decision follow-up and parked item is a GitHub issue labelled work (https://github.com/fumbleforce/tower-of-words/issues?q=label%3Awork), kept with python3 tools/work.py. Update it when you start, park or finish; a commit that finishes one says "Fixes #N"; run python3 tools/work.py stale before reporting.
-- Ship small and often (Jørgen, 2026-10-10: "make it understand it is supposed to commit and ship things regularly"). Commit each working step in your worktree as you go and land it the same day; a lane with no landed commit for a day isn't working. At most 4 lanes per team, and finish what you have before opening another. A progress note is not progress: `tools/work.py stale` flags a running issue that has no commit naming it for 12 h. Work not landed within a day may be taken over and ported by another team.
-- Code work happens in a worktree (`tools/worktree.sh new <name>`, or the Agent tool's worktree isolation) and lands with `tools/land.sh`; the shared checkout is for docs, inbox and review items only. A worktree goes as soon as its work is landed, dropped or handed over, to free the disk: land.sh removes it, and `--keep` isn't a place to hold captures (put them in the bible or the Review item first). When a worker stops or is interrupted, and at each check, run `tools/worktree.sh gone` and remove what it lists as gone with `--remove`. Anything it keeps is still in use or holds work to land or drop; deal with it, don't leave it.
-- Claude sessions name themselves (Jørgen, 2026-10-05: "make the claudes name themselves better"). Two Claude sessions run at once and both numbered from `C-`, which collided (C-0436 to C-0438 exist twice). Each session has one fixed name, says it in the first line of every entry body ("claude-main: ..." / "claude-private: ..."), and takes its ids from its own prefix: `claude-main` (the game, tools, engine, day-2 build) uses `C-`, `claude-private` (reward scenes, encounters, private mode, collab/private.md) uses `CP-` with its own count. A session's agents write as `<session>/<agent>` (`claude-private/encounter-pictures`). Agents that can't write the inbox are posted by their session, which says so. Never reuse an id; a clash is corrected by a new entry.
-- Claim before editing a file another team may touch: a `claim` entry naming the files and who holds them (`claude-main`, `claude-private`, `claude-agent:<task>` or `<session>/<agent>`, `codex-tui`, `codex-exec:<task>`, `grok-main`, `grok-agent:<task>`), and a `release` when committed. The first claim wins; ask before editing claimed files.
-- Commit your own hunks only (`git add -p`), and don't push unless Jørgen asked. Commit messages say which team made them.
-- GPU and headless browser: use the locks in GUIDE (Engineering, GPU lock and Headless browser runs); all three teams follow them.
-- Work issues can be owned by `grok` as well as `claude-main`, `claude-agent:<name>`, `codex` and `jorgen` (`python3 tools/work.py`). The repo is public, so an issue still cannot name a private path.
-- Say each fact once (GUIDE, Process). Don't copy GUIDE rules into the inboxes or other docs; link to them.
+- The work tracker rule is in GUIDE (Process, Work tracker). Issues can be owned by `claude-main`, `claude-agent:<name>`, `codex`, `grok` or `jorgen`.
+- Ship small and often. Commit each working step in your worktree and land it the same day. A lane with no landed commit for a day isn't working, and another team may take it over. At most four lanes per team, and finish what you have before opening another. `tools/work.py stale` flags a running issue with no commit naming it for 12 h.
+- Code work happens in a worktree (`tools/worktree.sh new <name>` or the Agent tool's worktree isolation) and lands with `tools/land.sh` (land skill). The shared checkout is for docs, inboxes and review items only. A worktree goes as soon as its work is landed, dropped or handed over. When a worker stops, and at each check, run `tools/worktree.sh gone` and remove what it lists with `--remove`. Deal with anything it keeps.
+- Claim before editing a file another team may touch: a `claim` entry naming the files and the holder (`claude-main`, `claude-private`, `<session>/<agent>`, `codex-tui`, `codex-exec:<task>`, `grok-main`, `grok-agent:<task>`), then a `release` when committed. The first claim wins; ask before editing claimed files.
+- Commit messages say which team made them.
+- GPU and headless browsers: [notes/tools/gpu.md](../notes/tools/gpu.md).
 
 ## Who leads what
 
-A starting split between Claude and Codex. Grok does not take a lead from this list unless Jørgen assigns it. Jørgen can change the split, and any team can propose a change in the inboxes.
+Jørgen can change this split. Grok leads only what he assigns.
 
-Codex's primary role after finishing its existing work is QC across code structure, plans, narratives, code quality and project processes (Jørgen, 2026-10-10). The responsibility and reporting rule is in [GUIDE.md, Process](../GUIDE.md#process); the area leads below identify who builds and who reviews.
+Codex is more expensive, so it does creative writing, detail passes on finished work, QA and review. Claude does the bulk building: modelling, places, engine, UI, tools, image work and fixes, and starts Codex jobs itself with `codex exec`, handing it the next one when a run ends. When in doubt, Claude builds and Codex reviews.
 
-Cost rule (Jørgen, 2026-09-30): "Reserve codex for more detail passes, review and creative writing, it is more expensive". Claude does the bulk building: modelling, places and trips integration, engine, UI, tools and fixes. Codex takes creative writing, detail passes on finished work, and reviews. When in doubt, Claude builds and Codex reviews.
+- Story, dialogue and characters: Codex writes. Claude reviews as a cold first-time reader: does it make sense, is anything unexplained, too long, or against the setting?
+- Engine, systems, performance, tools, UI, 3D modelling and the Blender pipeline: Claude leads. Codex reviews for bugs and implementation cost.
+- Concept images and portraits: both make separate attempts in one review round, and Jørgen picks.
+- Language content: Codex reviews the data and the audit tooling.
+- Reward scenes and private mode: Claude leads, in `collab/private.md`. Codex and Grok stay out unless Claude asks for a review.
+- QA playthroughs: whoever changed it runs the fast test, and the other team runs the cold-player pass.
 
-Codex covered engineering, tools and image work on 2026-10-15 while Claude was out of usage. Those lanes went back to Claude on 2026-10-16 (Jørgen: "you take those responsibilities back, codex goes back to qa and creative writing. You will need to spawn codex yourself"). Claude starts Codex runs with `codex exec` for QA and writing jobs and hands it the next one when a run ends.
+Codex's own standing duties:
 
-- Story, dialogue, characters (writing): Codex leads (Jørgen's pick after the day-2 contest, 2026-09-29). Claude reviews as a cold first-time reader: does it make sense, is anything unexplained, too long, or contradicting the setting?
-- Engine, systems, performance, tools: Claude leads; Codex reviews.
-- UI design (UI and UX): Claude leads; Codex reviews for implementation cost and bugs.
-- 3D modelling, rigging, Blender pipeline: Claude leads; Codex reviews.
-- Concept images and portraits: both lead, as separate attempts in one review round; Jørgen picks.
-- Language content (words, pacing, audit): who leads is decided after the competition; Codex reviews the data and the audit tooling.
-- Reward scenes and private mode: Claude leads (Jørgen, 2026-10-05: "take grok's work off his hands ... re-direct future private collab in collab/private.md"; before that Grok led, from 2026-10-01). Everything about them is discussed in `collab/private.md`, not in the other inboxes. Codex and Grok stay out of that area unless Claude asks for a review there.
-- QA playthroughs: whoever changed it runs the fast test; the other team runs the cold-player pass.
+- Quality control across code structure, plans, narratives and project processes. Write focused reports backed by evidence. Track defects as work issues, and put decisions for Jørgen in Review.
+- Help from Claude on Codex work doesn't move responsibility. Codex resolves blockers, verifies and lands its own work, and Jørgen should never have to chase it.
+- When Claude is out of usage, Codex picks up outstanding feedback work itself, up to four lanes, with separate Codex reviewers, without waiting for Claude.
 
-Every change of real size gets a review from the other team before it's called done: send a `review` entry with the commit and what to check. The reviewer answers with concrete findings (file:line, what breaks, how to see it), or "no findings".
+Every change of real size gets a review from the other team before it's called done: a `review` entry with the commit and what to check. The reviewer answers with concrete findings (file:line, what breaks, how to see it) or "no findings".
 
 ## Creative work in pairs
 
-For writing and design, try two independent drafts before merging: each team makes its own version of a scene, screen or model without seeing the other's, then both read both and one merged version goes forward (or both go to Jørgen's Review section if they differ in direction). Each draft notes the GUIDE rules it was checked against.
+For writing and design, try two independent drafts first, one per team. Then both read both and merge one version, or send both to Jørgen's Review if they differ in direction. Each draft notes the GUIDE rules it was checked against.
