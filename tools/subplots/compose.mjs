@@ -7,12 +7,13 @@
 //   node tools/subplots/compose.mjs <recipe.json> [--count N] [--seed S] [--dry-run] [--wait] [--out DIR] [--owner NAME]
 //        [--server URL] [--presets FILE] [--end-session] [--reward]
 //
-// Agent recipes are validated by agent-recipe.mjs before queueing. Whole prompt, style/exclusion and people
-// text overrides are refused. --presets is available only with --dry-run.
+// Agent recipes are validated by agent-recipe.mjs before queueing. Whole prompt, style/exclusion block and
+// appearance/clothing text overrides are refused. --presets is available only with --dry-run.
 // Recipe fields are the composition's (web/image-compose.js DEFAULT_COMPOSITION): characters, outfit, cameras,
 // framing, style, model, rating, hard, scene, pose, angle, environment, light, stage (who stands where, facing and
 // looking at what: web/image-stage.js), extra (more prompt words),
-// negatives (selected exclusion preset ids), reference/referenceOn/referenceStrength/referenceCutout (identity
+// negatives (selected exclusion preset ids), sectionNegatives (words to avoid per section: scene, pose, setting, light,
+// camera, details), negative (older free words to avoid), people[id].clothingNegative/appearanceNegative, reference/referenceOn/referenceStrength/referenceCutout (identity
 // reference), faceFix/faceStrength, width, height, steps, cfg, count, seed, and the picture tools start ({image,
 // denoise, mask}: img2img, or an inpaint with a mask), loras, control (an LLLite guide picture) and huefix. Also
 // `subplotId` (the scene the picture belongs to, full scene editor id) together with `imageSlot` (the exact shot id)

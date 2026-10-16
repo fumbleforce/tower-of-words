@@ -117,7 +117,7 @@ Prompts, models, settings, cast lines, rewards, 3D characters and video: [art/PR
 
 - World pieces: before building a bench, lamp, tree, kerb, window or roof, look in the bible's Asset library (http://127.0.0.1:8771/bible/#assets). Use the piece there or add a variant to it. Don't copy it into a scene.
 - Every image and video prompt starts with a staging note from the shot-staging skill. Prompt from it and check the render against it. The note stays out of the prompt.
-- Every still picture goes through the image service: Jørgen uses Image Gen or the Scene Editor, agents a recipe through compose.mjs ([art/PROMPTS.md](art/PROMPTS.md), How a picture is made). Keep the configured presets and exclusions. Don't patch pictures together or replace presets with custom prompts. Fix the setup and generate a coherent picture.
+- Every still picture goes through the image service: Jørgen uses Image Gen or the Scene Editor, agents a recipe through compose.mjs ([art/PROMPTS.md](art/PROMPTS.md), How a picture is made). Keep the configured presets. Rating exclusions are fixed; content exclusions are manual, per composer section. Don't patch pictures together or replace presets with custom prompts. Fix the setup and generate a coherent picture.
 - Marketing artwork: prefer Codex's built-in image generator, with the approved cast and branding, quiet backgrounds and no unexplained vocabulary labels.
 - Prompt style: describe only what is visible in the frame. Story context (destination, why he's there) stays out.
 - Don't overcorrect: fix one flaw by changing one thing. Check heights and scale, and compare each render with the approved style before showing it.

@@ -20,7 +20,7 @@ A recipe is the composer's composition as JSON. The header of tools/subplots/com
 - Picture tools: `start` (`{image, denoise, mask}`) is img2img from a picture; with a mask (white = repaint) it is an inpaint. `loras` is a list of `{file, weight}`. `control` (`{file, image, strength, end}`) is an Anima LLLite guide picture (lineart, depth, scribble, inpainting). `huefix` holds measured colour fixes applied after the render; tools/imagegen/huefix.py lists them.
 - `subplotId` and `imageSlot` attach the picture to a scene's shot; take both from the editor. `details` is a free note that is stored and shown with the picture but never sent.
 
-compose.mjs refuses typed exclusion words (`negative`), whole-prompt overrides, typed looks or clothes (`people`), and switched-off style or character exclusions (tools/subplots/agent-recipe.mjs). Looks, quality tags and exclusions come from presets.
+compose.mjs refuses whole-prompt overrides, typed looks or clothes (`appearance`, `clothing`), and switched-off style or character exclusions (tools/subplots/agent-recipe.mjs). Looks and quality tags come from presets. Rating exclusions are fixed: a reward always keeps the default negative presets and, when nonadult, the soft one. Content exclusions are manual, per section: `sectionNegatives` (`scene`, `pose`, `setting`, `light`, `camera`, `details`), a person's `clothingNegative` and `appearanceNegative` under `people` (added to the preset's words), more `negatives` presets, and the older free `negative`.
 
 ### Presets
 
