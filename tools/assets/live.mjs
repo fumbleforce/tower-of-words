@@ -394,9 +394,9 @@ export function promote(src, dest, { round, review = null, note = '', replace = 
   if (exists(dest)) {
     if (!replace) throw new Error(`${dest}: exists; pass --replace to retire it first`);
     if (!dryRun) {
-      const kept = reg.units[dest]; // the replaced file's unit (and its flags) stays for the new version
+      const kept = reg.units[dest]; // the replaced file's unit (and its flags) stays for the new version, with its note
       retire(dest, { by: dest, note: `replaced by ${src}`, reg });
-      if (kept) reg.units[dest] = kept;
+      if (kept) reg.units[dest] = note ? { ...kept, note } : kept;
     }
   }
   if (!dryRun) {

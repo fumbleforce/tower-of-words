@@ -12,7 +12,8 @@
   "**/check*.png",
   "**/check*.html",
   "**/*.md",
-  "game3d/audio/manifest.json"
+  "game3d/audio/manifest.json",
+  "game3d/audio/sfx/levels.json"
  ],
  "coarse": {
   "game3d/assets/**": "js/chibi.js playerBody: the protagonist's model folder, data/mc/<id>.json model.dir (each unit it can be names its loaded_by)",
@@ -265,10 +266,157 @@
    "refs": "game3d/audio/manifest.json",
    "note": "the voice clips: tools/voice/export.py writes them and the list; the story makes the manifest (game3d/tools/voice-manifest.mjs)"
   },
-  "game3d/audio/amb/": {},
+  "game3d/audio/amb/bed_birds.mp3": {
+   "note": "preset ambience/bed_birds@v1; synthesised (tools/feel/nature.py); licence: our own code"
+  },
+  "game3d/audio/amb/bed_harbour.mp3": {
+   "note": "preset ambience/bed_harbour@v1; Stable Audio 3 Medium, local (bed_harbour-5493, 0-30 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/amb/bed_insects.mp3": {
+   "note": "preset ambience/bed_insects@v1; synthesised (tools/feel/nature.py); licence: our own code"
+  },
+  "game3d/audio/amb/bed_lift.mp3": {
+   "note": "preset ambience/bed_lift@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/amb/bed_lobby.mp3": {
+   "note": "preset ambience/bed_lobby@v1; Stable Audio 3 Medium, local (bed_lobby-5493, 0-29.5 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/amb/bed_office.mp3": {
+   "note": "preset ambience/bed_office@v1; Stable Audio 3 Medium, local (bed_office-5100, 0-29.5 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/amb/bed_station.mp3": {
+   "note": "preset ambience/bed_station@v1; Stable Audio 3 Medium, local (bed_station-5231, 0-29.5 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/amb/bed_train.mp3": {
+   "note": "preset ambience/bed_train@v1; Stable Audio 3 Medium, local (bed_train-5231, 0-29.5 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
   "game3d/audio/index.json": {},
-  "game3d/audio/music/": {},
-  "game3d/audio/sfx/": {},
+  "game3d/audio/music/calm.mp3": {
+   "note": "Lyria 2 (google/lyria-2, Replicate; tools/spend.json 2026-09-24, art/music/calm.wav), loop cut with tools/audio/make_loop.py; licence: Google Lyria 2 through Replicate, output terms not settled (notes/licenses.md item 6)"
+  },
+  "game3d/audio/music/lively.mp3": {
+   "note": "Lyria 2 (google/lyria-2, Replicate; tools/spend.json 2026-09-24, art/music/lively.wav), loop cut with tools/audio/make_loop.py; licence: Google Lyria 2 through Replicate, output terms not settled (notes/licenses.md item 6)"
+  },
+  "game3d/audio/music/loops.json": {
+   "note": "the loop region of each music file; tools/audio/make.py promote writes it"
+  },
+  "game3d/audio/music/night.mp3": {
+   "note": "preset music/evening-yue2@v1 (yue2, seed 9911), round 6 take evening-1 (Review music-round-6), loop cut with tools/audio/make_loop.py; licence: YuE2, CC BY-NC 4.0, non-commercial: a paid release cannot ship it"
+  },
+  "game3d/audio/music/office.mp3": {
+   "note": "Lyria 2 (google/lyria-2, Replicate; tools/spend.json 2026-09-24, art/music/office.wav), loop cut with tools/audio/make_loop.py; licence: Google Lyria 2 through Replicate, output terms not settled (notes/licenses.md item 6)"
+  },
+  "game3d/audio/music/opening.mp3": {
+   "note": "the opening theme, YuE2 \"Mastered: softer\" (art/approved/music/opening.mp3), its first 70 s with a 4 s fade; licence: YuE2, CC BY-NC 4.0, non-commercial: a paid release cannot ship it"
+  },
+  "game3d/audio/sfx/bath_answer.mp3": {
+   "note": "preset sfx/bath_answer@v1; synthesised (tools/feel/hum.py); licence: our own code"
+  },
+  "game3d/audio/sfx/bath_first.mp3": {
+   "note": "preset sfx/bath_first@v1; synthesised (tools/feel/hum.py); licence: our own code"
+  },
+  "game3d/audio/sfx/beep.mp3": {
+   "note": "preset sfx/beep@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/bond.mp3": {
+   "note": "preset sfx/bond@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/brake.mp3": {
+   "note": "preset sfx/brake@v1; Stable Audio 3 Medium, local (brake-5362, 0-5.8 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/sfx/buzz.mp3": {
+   "note": "preset sfx/buzz@v1; synthesised (tools/feel/pluck.py); licence: our own code"
+  },
+  "game3d/audio/sfx/chime.mp3": {
+   "note": "preset sfx/chime@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/clack-1.mp3": {
+   "note": "preset sfx/clack-1@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/clack-2.mp3": {
+   "note": "preset sfx/clack-2@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/clack-3.mp3": {
+   "note": "preset sfx/clack-3@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/command.mp3": {
+   "note": "preset sfx/command@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/copier_run.mp3": {
+   "note": "preset sfx/copier_run@v1; Stable Audio 3 Medium, local (copier_run-5362, 0-5.8 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/sfx/crow_caw.mp3": {
+   "note": "preset sfx/crow_caw@v1; Stable Audio 3 Medium, local (crow_caw-5100, 0-4 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/sfx/door.mp3": {
+   "note": "preset sfx/door@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/doorslow.mp3": {
+   "note": "preset sfx/doorslow@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/flap_open.mp3": {
+   "note": "preset sfx/flap_open@v1; Stable Audio 3 Medium, local (flap_open-5231, 0-1.8 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/sfx/glass_doors.mp3": {
+   "note": "preset sfx/glass_doors@v1; Stable Audio 3 Medium, local (glass_doors-5231, 0-2.2 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/sfx/guitar_practice.mp3": {
+   "note": "preset sfx/guitar_practice@v1; synthesised (tools/feel/pluck.py); licence: our own code"
+  },
+  "game3d/audio/sfx/gull_call.mp3": {
+   "note": "preset sfx/gull_call@v1; Stable Audio 3 Medium, local (gull_call-5100, 0-4 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/sfx/kettle_pour.mp3": {
+   "note": "preset sfx/kettle_pour@v1; Stable Audio 3 Medium, local (kettle_pour-5362, 0-3.6 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/sfx/kotodama.mp3": {
+   "note": "preset sfx/kotodama@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/lift_doors.mp3": {
+   "note": "preset sfx/lift_doors@v1; Stable Audio 3 Medium, local (lift_doors-5231, 0-2.4 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/sfx/lift.mp3": {
+   "note": "preset sfx/lift@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/no.mp3": {
+   "note": "preset sfx/no@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/nope.mp3": {
+   "note": "preset sfx/nope@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/ok.mp3": {
+   "note": "preset sfx/ok@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/open.mp3": {
+   "note": "preset sfx/open@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/phone_far.mp3": {
+   "note": "preset sfx/phone_far@v1; Stable Audio 3 Medium, local (phone_far-5493, 0-5.8 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/sfx/printer.mp3": {
+   "note": "preset sfx/printer@v1; Stable Audio 3 Medium, local (printer-5493, 0-7.8 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/sfx/tap.mp3": {
+   "note": "preset sfx/tap@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/train_doors.mp3": {
+   "note": "preset sfx/train_doors@v1; Stable Audio 3 Medium, local (train_doors-5100, 0-2.7 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/sfx/typing.mp3": {
+   "note": "preset sfx/typing@v1; Stable Audio 3 Medium, local (typing-5362, 0-5.8 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/sfx/vending.mp3": {
+   "note": "preset sfx/vending@v1; Stable Audio 3 Medium, local (vending-5493, 0-1.8 s); licence: Stable Audio 3 Medium, Stability AI Community License"
+  },
+  "game3d/audio/sfx/wings_flap.mp3": {
+   "note": "preset sfx/wings_flap@v1; synthesised (tools/feel/nature.py); licence: our own code"
+  },
+  "game3d/audio/sfx/word.mp3": {
+   "note": "preset sfx/word@v1; synthesised (tools/feel/synth.py); licence: our own code"
+  },
+  "game3d/audio/sfx/zip.mp3": {
+   "note": "preset sfx/zip@v1; synthesised (tools/feel/pluck.py); licence: our own code"
+  },
   "game3d/audio/spans.json": {},
   "game3d/fonts/": {}
  },
@@ -1045,6 +1193,64 @@
    "action": "retire",
    "path": "game3d/audio/ln-z4jjfa.mp3",
    "to": "art/production/retired/2026-10-16/game3d/audio/ln-z4jjfa.mp3"
+  },
+  {
+   "date": "2026-10-16",
+   "action": "register",
+   "paths": [
+    "game3d/audio/amb/bed_birds.mp3",
+    "game3d/audio/amb/bed_harbour.mp3",
+    "game3d/audio/amb/bed_insects.mp3",
+    "game3d/audio/amb/bed_lift.mp3",
+    "game3d/audio/amb/bed_lobby.mp3",
+    "game3d/audio/amb/bed_office.mp3",
+    "game3d/audio/amb/bed_station.mp3",
+    "game3d/audio/amb/bed_train.mp3",
+    "game3d/audio/music/calm.mp3",
+    "game3d/audio/music/lively.mp3",
+    "game3d/audio/music/loops.json",
+    "game3d/audio/music/night.mp3",
+    "game3d/audio/music/office.mp3",
+    "game3d/audio/music/opening.mp3",
+    "game3d/audio/sfx/bath_answer.mp3",
+    "game3d/audio/sfx/bath_first.mp3",
+    "game3d/audio/sfx/beep.mp3",
+    "game3d/audio/sfx/bond.mp3",
+    "game3d/audio/sfx/brake.mp3",
+    "game3d/audio/sfx/buzz.mp3",
+    "game3d/audio/sfx/chime.mp3",
+    "game3d/audio/sfx/clack-1.mp3",
+    "game3d/audio/sfx/clack-2.mp3",
+    "game3d/audio/sfx/clack-3.mp3",
+    "game3d/audio/sfx/command.mp3",
+    "game3d/audio/sfx/copier_run.mp3",
+    "game3d/audio/sfx/crow_caw.mp3",
+    "game3d/audio/sfx/door.mp3",
+    "game3d/audio/sfx/doorslow.mp3",
+    "game3d/audio/sfx/flap_open.mp3",
+    "game3d/audio/sfx/glass_doors.mp3",
+    "game3d/audio/sfx/guitar_practice.mp3",
+    "game3d/audio/sfx/gull_call.mp3",
+    "game3d/audio/sfx/kettle_pour.mp3",
+    "game3d/audio/sfx/kotodama.mp3",
+    "game3d/audio/sfx/lift.mp3",
+    "game3d/audio/sfx/lift_doors.mp3",
+    "game3d/audio/sfx/no.mp3",
+    "game3d/audio/sfx/nope.mp3",
+    "game3d/audio/sfx/ok.mp3",
+    "game3d/audio/sfx/open.mp3",
+    "game3d/audio/sfx/phone_far.mp3",
+    "game3d/audio/sfx/printer.mp3",
+    "game3d/audio/sfx/tap.mp3",
+    "game3d/audio/sfx/train_doors.mp3",
+    "game3d/audio/sfx/typing.mp3",
+    "game3d/audio/sfx/vending.mp3",
+    "game3d/audio/sfx/wings_flap.mp3",
+    "game3d/audio/sfx/word.mp3",
+    "game3d/audio/sfx/zip.mp3"
+   ],
+   "round": "audio-route",
+   "note": "the audio folder units split into one unit per file, each naming its source and licence (#628); game3d/audio/sfx/levels.json is a build record (source)"
   }
  ]
 }

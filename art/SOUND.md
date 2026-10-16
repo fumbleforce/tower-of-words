@@ -20,7 +20,7 @@ tools/audio/make.py promote <round>/<take> <name>
   - Sound effects: offline synthesis first, then Stable Audio 3, or a CC0 pack sound with its pack, link and licence in the preset.
 - `--dry-run` prints exactly what would be sent and what it costs. Each take keeps its raw FLAC and a sidecar in ~/ai/audio-raw/<round>/, a record in the committed art/candidates/<round>/takes.json, and a line in the local log art/production/audio-log.jsonl.
 - Every take goes through the same post step: a vocal check (Demucs) and a CLAP screen, the loop cut and its seam check, and levelling to the preset's loudness. It writes review MP3s to art/candidates/<round>/, the game files to art/production/audio/<round>/, and reviews/<round>/review.json with every take, failed ones included. The numbers are a screen. No agent picks, and every card says it wasn't listened to by an agent.
-- `promote` installs a take Jørgen picked, through live.mjs promote with the review, and writes its loop region to loops.json or its levels to levels.json.
+- `promote` installs a take Jørgen picked, through live.mjs promote with the review, and writes its loop region to loops.json or its levels to levels.json. Every live sound file has its own unit in tools/assets/live.json that names its preset or source and its licence.
 - A new script that generates audio outside tools/audio fails npm run check (tools/audio/ratchet.py).
 
 ## Voices
