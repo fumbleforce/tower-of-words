@@ -30,6 +30,11 @@ if [[ -f tools/assets/scan.py ]]; then
   fi
 fi
 
+# Scratch output older than 14 days (tools/outputs.py): a dry run that prints one line. Nothing is deleted here.
+if [[ -f tools/outputs.py ]]; then
+  python3 tools/outputs.py prune --summary || echo "Scratch output check failed (nothing was deleted)."
+fi
+
 # A fresh build id, so the browser never runs cached modules from an older build.
 python3 game3d/tools/stamp.py >/dev/null || echo "Build stamp failed; the game may load cached files."
 

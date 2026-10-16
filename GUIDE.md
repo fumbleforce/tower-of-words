@@ -170,6 +170,6 @@ Where code goes, the checks and the commit gate: [ARCHITECTURE.md](ARCHITECTURE.
 - Full and vanilla builds: public game code gates optional local content on `__FULL__` ([notes/vanilla-flavor.md](notes/vanilla-flavor.md)).
 - Desktop release: [docs/desktop-release.md](docs/desktop-release.md). A separate Windows edition holds only day 1, with its output and saves kept apart from the full edition.
 - Save every ComfyUI workflow we use as loadable API JSON in tools/workflows/ and ~/ai/workflows/. Keep original PNGs, which embed their workflow.
-- Game captures go in game3d/shots/<job>/. Scratch files go in the shared scratchpad, with unique names.
+- Game captures go in game3d/shots/<job>/. Scratch files go in the shared scratchpad, with unique names. Scratch output untouched for 14 days is swept (Jørgen, 2026-10-16); the rules are in [ARCHITECTURE.md](ARCHITECTURE.md#tool-state-and-outputs).
 - World bible: http://127.0.0.1:8771/bible/. bible/facts.yaml keeps history, rejections and questions. After a decision changes, update it, run `python3 tools/bible/build.py`, then `node tools/bible/check.mjs`. Never link the private bible from the public one.
 - Repo layout: active work is in game3d/, bible/, art/, tools/, docs/ and notes/. Retired material goes to `../bk-jap` (notes/history/offline-archive.md). Approved art is in art/approved/<bible id>/, his references in art/refs/.

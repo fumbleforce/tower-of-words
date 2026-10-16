@@ -11,11 +11,16 @@ import sys
 ROOT_NAME = 'amakawa'
 
 
+def state_root():
+    """The folder all tool state lives under (~/.cache/amakawa). Not created here; cache_dir creates its own folder."""
+    return os.path.join(os.path.expanduser('~'), '.cache', ROOT_NAME)
+
+
 def cache_dir(name):
     """The folder for one kind of tool state, created on first use. The name is a plain folder name."""
     if not name or name in ('.', '..') or name.startswith('.') or os.sep in name or '/' in name:
         raise ValueError(f'cache folder name must be one plain name: {name!r}')
-    path = os.path.join(os.path.expanduser('~'), '.cache', ROOT_NAME, name)
+    path = os.path.join(state_root(), name)
     os.makedirs(path, exist_ok=True)
     return path
 

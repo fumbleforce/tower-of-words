@@ -126,3 +126,5 @@ land takes in, so a commit made with `--no-verify` cannot reach main.
 - Pictures and video under any `shots` folder are refused. Game captures go to
   `game3d/shots/<job>/`, which git ignores. Other scratch output goes to
   `~/.cache/amakawa/<name>/`.
+
+`python3 tools/outputs.py prune` deletes untracked scratch output (game captures, art candidates and renders, bible captures) that has not changed for 14 days, except anything a Review, Showcase, bible, asset library, spend ledger or game code path names. It is a dry run unless `--apply` is given, never touches the private folder, approved or live assets or retired files, and logs each deletion to `~/.cache/amakawa/outputs-prune.log`.
