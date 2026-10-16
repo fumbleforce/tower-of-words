@@ -13,6 +13,9 @@
 .image-section .two { align-items: start; }
 .image-section .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 14px; }
 .image-section .chips button { padding: 7px 10px; font-size: 12px; line-height: 1.35; white-space: normal; text-align: left; }
+/* a locked exclusion (the soft preset on a reward or a Mature or Adult shot) reads as on, not faded out */
+.image-exclude .chips button:disabled[aria-pressed=true] { opacity: 1; cursor: default; }
+.image-exclude .chips button:disabled[aria-pressed=true]::after { content: ' \00B7  always on'; color: var(--dim); }
 .image-section button[aria-pressed="true"] { border-color: rgba(111,208,198,.5); color: var(--ink); background: var(--accent-soft); }
 .image-cast { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 8px; }
 .image-cast > button { display: grid; grid-template-rows: 84px auto; gap: 0; padding: 0; min-width: 0; overflow: hidden; border-radius: 9px; }

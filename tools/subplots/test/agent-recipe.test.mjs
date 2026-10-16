@@ -171,6 +171,7 @@ test('a nonadult reward loads the soft negative preset; Adult mode never does, a
   for (const recipe of [{...base}, {...base, rating: 'nsfw'}, {...base, hard: false, rating: 'safe'}, {...base, negatives: ['clean']}, {...base, negatives: ['soft', 'clean']}]) {
     const body = prepareRewardGeneration(recipe, blocks, 'soft');
     assert.equal(body.compose.hard, false);
+    assert.equal(body.compose.reward, true);
     assert.deepEqual(body.presets.negatives, [{id: 'clean', v: 3}, {id: 'soft', v: 2}]);
     assert.match(body.negative, /^preset exclusions, soft exclusions, style exclusions,/);
   }
@@ -188,7 +189,7 @@ test('a nonadult reward loads the soft negative preset; Adult mode never does, a
 
 test('reward entry preserves exactly the configured exclusion selection and normal GUI output', () => {
   const recipe = {...base, hard: true, rating: 'nsfw', subplotId: 'local:sample:scene:steps', imageSlot: 'pic:scene.1'};
-  const expected = assembleComposition(applyDefaults(normalizeComposition(recipe), presets), presets, recipe.subplotId);
+  const expected = assembleComposition(applyDefaults(normalizeComposition({...recipe, reward: true}), presets), presets, recipe.subplotId);
   expected.compose.recipe = 'reward';
   assert.deepEqual(prepareRewardGeneration(recipe, presets, 'reward'), expected);
   const blocks = structuredClone(presets);

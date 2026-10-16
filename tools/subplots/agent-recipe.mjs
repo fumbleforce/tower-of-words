@@ -76,6 +76,8 @@ export function prepareAgentGeneration(recipe, presets, name = 'recipe') {
 // Reward calls use the same composition contract and assembler, with the configured exclusion selection intact.
 // Adult mode (hard: true) gets the default selection and nothing more. A nonadult reward (soft, CLAUDE.md "Reward
 // tiers by mode") also loads the negative preset marked `soft`; a recipe may name it or leave it to this function.
+// The composition is marked reward: true, so the shared assembler (web/image-compose.js) keeps that preset on, the same
+// as the browser composers do for a reward shot.
 const sameSet = (a, b) => a.length === b.length && b.every(id => a.includes(id));
 export function prepareRewardGeneration(recipe, presets, name = 'recipe') {
   if (!object(recipe)) fail('the composition must be an object.');
@@ -91,7 +93,7 @@ export function prepareRewardGeneration(recipe, presets, name = 'recipe') {
       + (adult ? '.' : ', plus the soft negative preset.'));
   const rest = {...recipe};
   delete rest.negs;
-  const body = prepareAgentGeneration({...rest, negatives: expected}, presets, name);
+  const body = prepareAgentGeneration({...rest, negatives: expected, reward: true}, presets, name);
   if (!sameSet(body.compose.negatives, expected)) fail('reward exclusions changed while assembling.');
   return body;
 }

@@ -34,6 +34,27 @@ test('an alias of the module, or a name imported from it, counts; other .run() c
   assert.equal(stillCalls('subprocess.run(["x"])\nother.run(wf)\n', 'a.py'), 0);
 });
 
+test('a parenthesized or backslash-continued import of a still function counts its calls', () => {
+  assert.equal(stillCalls('from comfy import (\n    run,\n    anima,\n)\nwf = anima(p, n)\nrun(wf, out)\n', 'a.py'), 2);
+  assert.equal(stillCalls('from comfy import (  # the stills\n    anima as make, run)\nmake(p, n)\nrun(wf, out)\n', 'a.py'), 2);
+  assert.equal(stillCalls('from comfy import run, \\\n    anima\nrun(wf, out)\nanima(p, n)\n', 'a.py'), 2);
+  assert.equal(stillCalls('from comfy import (\n    run_video,\n)\nrun_video(wf, out)\n', 'a.py'), 0);
+});
+
+test('a triple-quoted string is string contents: a call beside one counts, a call inside one does not', () => {
+  assert.equal(stillCalls('comfy.run(wf, """out""")\n', 'a.py'), 1);
+  assert.equal(stillCalls("comfy.run(wf, '''out''')\n", 'a.py'), 1);
+  assert.equal(stillCalls('s = """\ncomfy.run(wf, out)\n"""\ncomfy.run(wf, out)\n', 'a.py'), 1);
+  assert.equal(stillCalls('"""Doc.\n"""; comfy.run(wf, out)\n', 'a.py'), 1);
+  assert.equal(stillCalls('s = "comfy.run(wf, out)"\n', 'a.py'), 0);
+});
+
+test('an f-string expression is code; a hash inside a string is not a comment', () => {
+  assert.equal(stillCalls('img = f"{comfy.run(wf, out)}"\n', 'a.py'), 1);
+  assert.equal(stillCalls('x = "a # b"; comfy.run(wf, out)\n', 'a.py'), 1);
+  assert.equal(stillCalls('x = 1  # comfy.run(wf, out)\n', 'a.py'), 0);
+});
+
 test('a file not in the baseline fails, with the one-sentence instruction', () => {
   const { bad } = verdict({ 'tools/new.py': 2 }, { files: {}, exempt: {} });
   assert.equal(bad.length, 1);

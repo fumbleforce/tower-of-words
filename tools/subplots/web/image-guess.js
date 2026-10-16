@@ -1,7 +1,7 @@
 // "Fill from prompt": a best-effort guess at the blocks behind a picture made before the composer existed.
 // Pure and read-only. It returns a composition and never touches the old record; nothing is saved unless the
 // user generates from it. Whatever no block explains goes into the free text (scene) and the extra negative.
-import {normalizeComposition, SOFT_NEGATIVE} from './image-compose.js';
+import {normalizeComposition} from './image-compose.js';
 
 const tokens = text => String(text || '').split(',').map(s => s.trim()).filter(Boolean);
 const key = s => s.toLowerCase().replace(/\.$/, '');
@@ -58,13 +58,14 @@ export function guessComposition(job, presets) {
   // the rest of the positive prompt is the scene's free text
   c.scene = positive.filter(t => !used.has(key(t))).join(', ');
 
-  // negatives: whole presets that are contained, then the leftover as the extra negative
+  // negatives: whole presets that are contained, then the leftover as the extra negative. The soft preset is not a
+  // selection: the composer adds it by rule (CLAUDE.md, Reward tiers by mode), so its words count as covered here.
   const negTokens = tokens(job.negative);
   const negSet = new Set(negTokens.map(key));
   const negPresets = list('negative').filter(p => p.data.text && tokens(p.data.text).every(t => negSet.has(key(t))));
   const covered = new Set(negPresets.flatMap(p => tokens(p.data.text).map(key)));
-  c.negatives = negPresets.filter(p => p.id !== 'implied').map(p => p.id);
-  tokens(SOFT_NEGATIVE).forEach(t => covered.add(key(t)));
+  c.negatives = negPresets.filter(p => p.data.soft !== true).map(p => p.id);
+  list('negative').filter(p => p.data.soft === true).forEach(p => tokens(p.data.text).forEach(t => covered.add(key(t))));
   tokens('child, loli').forEach(t => covered.add(key(t)));
   const own = new Set(chars.flatMap(p => tokens(p.data.negative).map(key)).concat(tokens(style?.data.negative).map(key)));
   c.negative = negTokens.filter(t => !covered.has(key(t)) && !own.has(key(t))).join(', ');

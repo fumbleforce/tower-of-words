@@ -1,15 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeComposition, assembleComposition, portraitUrl, SOFT_NEGATIVE, promptParts} from '../web/image-compose.js';
+import {normalizeComposition, assembleComposition, portraitUrl, softExclusion, promptParts} from '../web/image-compose.js';
 
 const rec = (id, data) => ({id, v: 3, data});
+// the soft negative preset's words (the store's "implied" preset, marked soft); the composer never types them itself
+const SOFT = 'visible nipples, visible genitals, uncovered crotch, frontal explicit view, explicit sexual action, transparent unobstructed body';
 const presets = {
   character: [rec('alice', {name: 'Alice', age: 'adult woman', look: 'black hair', outfit: 'blue coat', gender: 'female', portrait: 'art/approved/alice.webp', rating_cap: 'safe'}), rec('extra', {name: 'Extra', generic: true, gender: 'male', look: 'brown hair'})],
   style: [rec('soft', {name: 'Soft', quality: 'high quality', anchors: 'painted illustration', suffix: 'soft edges', negative: 'blur'})],
   model: [rec('model', {name: 'Model', file: 'fixture.safetensors', steps: 25, cfg: 4, sampler: 'euler', scheduler: 'normal'})],
   framing: [rec('wide', {prompt: 'wide shot', w: 1200, h: 800})],
   camera: [rec('near', {prompt: 'close camera'}), rec('left', {prompt: 'from the left'})],
-  negative: [rec('clean', {name: 'Clean', default: true, text: 'blur, watermark'})],
+  negative: [rec('clean', {name: 'Clean', default: true, text: 'blur, watermark'}), rec('soft', {name: 'Soft (nonadult rewards)', default: false, text: SOFT, soft: true})],
   scene: [rec('office', {text: 'Reading a letter'})],
 };
 function composition(extra = {}) {
@@ -150,7 +152,52 @@ test('shot mode only changes standing exclusions and preserves copied prompts an
   assert.equal(copy.positive, c.override.positive);
   assert.equal(copy.negative, c.override.negative);
   assert.deepEqual(normalizeComposition(copy.compose).override, c.override);
-  assert.ok(SOFT_NEGATIVE.includes('visible genitals'));
+});
+
+test('the soft-scene exclusion comes only from the soft preset: a marker in its place is the only soft text', () => {
+  const marked = structuredClone(presets);
+  marked.negative.find(p => p.id === 'soft').data.text = 'MARKER';
+  const c = composition({characters: [], rating: 'sensitive', hard: false, reward: true, negatives: []});
+  const body = assembleComposition(c, marked);
+  assert.match(body.negative, /MARKER/);
+  assert.doesNotMatch(body.negative, /visible nipples|visible genitals/);
+  assert.equal(body.negative, 'blur, child, loli, MARKER');
+  assert.doesNotMatch(assembleComposition({...c, override: {negative: 'blur'}}, marked).negative, /visible nipples/);
+});
+
+test('a nonadult reward keeps the soft preset on at every content level, selected or not', () => {
+  for (const rating of ['safe', 'sensitive', 'nsfw']) for (const negatives of [null, ['clean'], ['soft', 'clean']]) {
+    const body = assembleComposition(composition({characters: [], rating, reward: true, negatives}), presets);
+    assert.match(body.negative, new RegExp(SOFT.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), `${rating} ${negatives}`);
+    assert.equal(body.presets.negatives.filter(p => p.id === 'soft').length, 1, `${rating} ${negatives}`);
+  }
+  assert.deepEqual(softExclusion(composition({characters: [], reward: true}), presets), {on: true, ids: ['soft']});
+});
+
+test('Adult (hard) rewards get only their configured exclusions, and a safe picture that is not a reward gets none', () => {
+  for (const rating of ['safe', 'sensitive', 'nsfw']) {
+    const adult = assembleComposition(composition({characters: [], rating, reward: true, hard: true, negatives: ['clean']}), presets);
+    assert.doesNotMatch(adult.negative, /visible/);
+    assert.deepEqual(adult.presets.negatives, [{id: 'clean', v: 3}]);
+    assert.deepEqual(softExclusion(composition({characters: [], rating, reward: true, hard: true}), presets), {on: false, ids: ['soft']});
+  }
+  assert.doesNotMatch(assembleComposition(composition({characters: [], rating: 'safe'}), presets).negative, /visible/);
+  assert.equal(softExclusion(composition({characters: [], rating: 'safe'}), presets).on, false);
+});
+
+test('a Mature or Adult picture gets the soft preset after its other words, even when it is not selected', () => {
+  const body = assembleComposition(composition({characters: [], rating: 'sensitive', negatives: ['clean'], negative: 'custom words'}), presets);
+  assert.equal(body.negative, `blur, watermark, custom words, child, loli, ${SOFT}`);
+  assert.deepEqual(body.presets.negatives, [{id: 'clean', v: 3}, {id: 'soft', v: 3}]);
+});
+
+test('without a soft preset (or with it archived) no soft words are added; a copied prompt is not changed', () => {
+  const none = {...presets, negative: presets.negative.filter(p => p.id !== 'soft')};
+  assert.doesNotMatch(assembleComposition(composition({characters: [], rating: 'nsfw', reward: true}), none).negative, /visible/);
+  const archived = {...presets, negative: presets.negative.map(p => p.id === 'soft' ? {...p, archived: true} : p)};
+  assert.doesNotMatch(assembleComposition(composition({characters: [], rating: 'nsfw'}), archived).negative, /visible/);
+  const copied = assembleComposition(composition({characters: [], rating: 'nsfw', reward: true, override: {positive: 'x', negative: 'original'}}), presets);
+  assert.equal(copied.negative, `original, ${SOFT}`);
 });
 
 test('reusing a recorded zero CFG does not replace it with model defaults', () => {

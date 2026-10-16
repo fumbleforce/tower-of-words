@@ -1,16 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {guessComposition} from '../web/image-guess.js';
-import {assembleComposition, normalizeComposition, applyDefaults, SOFT_NEGATIVE} from '../web/image-compose.js';
+import {assembleComposition, normalizeComposition, applyDefaults} from '../web/image-compose.js';
 
 const rec = (id, data) => ({id, v: 1, data});
+// the soft preset's words live in the versioned preset (here, the store's "implied" negative marked soft), not in code
+const SOFT = 'visible nipples, visible genitals, uncovered crotch, frontal explicit view, explicit sexual action, transparent unobstructed body';
 const presets = {
   character: [rec('tess', {name: 'Tess', age: 'adult woman', look: 'grey cloak', outfit: 'wool scarf', short: 'Tess, cloak', gender: 'female'})],
   style: [rec('reward', {name: 'R', quality: 'masterpiece, best quality', suffix: 'short fingernails.'})],
   model: [rec('rdbt', {name: 'RDBT', file: 'rdbt.safetensors'})],
   framing: [rec('portrait', {w: 896, h: 1152, prompt: ''})],
   camera: [rec('close', {prompt: 'close-up'}), rec('pov', {prompt: 'pov'})],
-  negative: [rec('base', {text: 'worst quality, blurry', default: true}), rec('implied', {text: SOFT_NEGATIVE})],
+  negative: [rec('base', {text: 'worst quality, blurry', default: true}), rec('implied', {text: SOFT, default: false, soft: true})],
 };
 test('guesses blocks from an old prompt and leaves the rest as free text', () => {
   const old = {positive: 'masterpiece, best quality, sensitive, 1girl, Tess, adult woman, grey cloak, close-up, sitting on a rug, holding a mug, short fingernails.',
@@ -30,4 +32,14 @@ test('soft negative is always added for Mature and Adult, unless hard', () => {
   assert.ok(!assembleComposition({...c, rating: 'nsfw', hard: true}, presets, 's').negative.includes('visible nipples'));
   const o = assembleComposition({...c, override: {positive: 'x', negative: 'blur'}}, presets, 's');
   assert.ok(o.negative.includes('transparent unobstructed body'));
+});
+
+test('soft words in an old negative are covered by the soft preset, and not guessed as free text', () => {
+  const job = {positive: 'masterpiece, best quality, sensitive, 1girl, Tess', negative: `worst quality, blurry, ${SOFT}`, model_file: 'rdbt.safetensors'};
+  const {composition: c} = guessComposition(job, presets);
+  assert.equal(c.negative, '');
+  assert.deepEqual(c.negatives, ['base']);
+  // with no soft preset configured the same words are kept as the leftover, not dropped by a list in the code
+  const {composition: bare} = guessComposition(job, {...presets, negative: presets.negative.filter(p => !p.data.soft)});
+  assert.match(bare.negative, /visible nipples/);
 });

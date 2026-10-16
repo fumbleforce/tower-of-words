@@ -7,9 +7,11 @@
 //   node tools/facts/direct-render.mjs --list       every script with a still call: counted, or exempt and its kind
 //   node tools/facts/direct-render.mjs --baseline   rewrite the counts of the old callers from today's tree (read the diff)
 //
-// Counted: every tracked .py, .mjs and .js file (not island/private, not node_modules), on its code lines (a "#" or "//"
-// comment and a Python docstring don't count). A call is comfy.<fn>( through the module's name, "comfy", or an alias from
-// "import comfy as x", and <fn>( for a name taken "from comfy import <fn>".
+// Counted: every tracked .py, .mjs and .js file (not island/private, not node_modules), on its code. A call is comfy.<fn>(
+// through the module's name, "comfy", or an alias from "import comfy as x", and <fn>( for a name taken "from comfy import
+// <fn>", in one line or in a parenthesized or backslash-continued import. In Python a comment and a string (a docstring or
+// a triple-quoted string included) don't count, a call written beside a string does, and the braces of an f-string are
+// code. In other scripts a "//" comment line doesn't count.
 // Not counted, and how they are recognised:
 //   video: comfy.run_video, comfy.wan22_i2v, comfy.causal_forcing_i2v (tools/video2.py, tools/video_test.py). They make no
 //          still call, so the count is zero. A video script that starts calling comfy.run or a still builder is counted.
@@ -34,30 +36,67 @@ const ABOUT = 'Scripts that still call tools/comfy.py for pictures, with their c
 const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const exemptPath = (f) => EXEMPT_PATHS.some((p) => (p.endsWith('/') ? f.startsWith(p) : f === p));
 
-// The still-picture calls on the code lines of one file.
+// The Python source with its comments and string contents blanked (line breaks kept), so calls are matched on code only.
+// A string's quotes stay; the braces of an f-string are code and stay with their expression.
+export function pythonCode(text) {
+  const blank = (s) => s.replace(/[^\n]/g, ' ');
+  let out = '';
+  let i = 0;
+  while (i < text.length) {
+    const ch = text[i];
+    if (ch === '#') {
+      const end = text.indexOf('\n', i);
+      const stop = end < 0 ? text.length : end;
+      out += blank(text.slice(i, stop));
+      i = stop;
+    } else if (ch === '"' || ch === "'") {
+      const prefix = (/(?:^|\W)([A-Za-z]{1,2})$/.exec(out.slice(-3)) || [])[1] || '';
+      const fstring = /^(f|rf|fr)$/i.test(prefix);
+      const delim = text.startsWith(ch.repeat(3), i) ? ch.repeat(3) : ch;
+      out += delim;
+      i += delim.length;
+      while (i < text.length) {
+        if (text[i] === '\\') { out += blank(text.slice(i, i + 2)); i += 2; }
+        else if (text.startsWith(delim, i)) { out += delim; i += delim.length; break; }
+        else if (delim.length === 1 && text[i] === '\n') break;   // an unclosed one-line string ends with its line
+        else if (fstring && text.startsWith('{{', i)) { out += '  '; i += 2; }
+        else if (fstring && text[i] === '{') {   // an expression inside an f-string: code, up to its closing brace
+          let depth = 0;
+          do {
+            if (text[i] === '{') depth++;
+            else if (text[i] === '}') depth--;
+            out += text[i];
+            i++;
+          } while (i < text.length && depth > 0);
+        } else { out += blank(text[i]); i++; }
+      }
+    } else { out += ch; i++; }
+  }
+  return out;
+}
+
+// The still-picture calls in one file. Python is matched on its pythonCode; other scripts line by line, not counting
+// their comment lines.
 export function stillCalls(text, file = '') {
-  const aliases = ['comfy', ...[...text.matchAll(/\bimport\s+comfy\s+as\s+(\w+)/g)].map((m) => m[1])];
+  const py = file.endsWith('.py');
+  const code = py ? pythonCode(text) : text;
+  const aliases = ['comfy', ...[...code.matchAll(/\bimport\s+comfy\s+as\s+(\w+)/g)].map((m) => m[1])];
   const bare = new Map();   // a name used in this file -> the comfy function it is
-  for (const m of text.matchAll(/\bfrom\s+comfy\s+import\s+([^\n;]+)/g)) {
-    for (const part of m[1].replace(/[()]/g, '').split(',')) {
+  // "from comfy import a, b as c": one line, parenthesized (over lines, with a trailing comma) or backslash-continued
+  for (const m of code.matchAll(/\bfrom\s+comfy\s+import\s+(\([^)]*\)|(?:[^\n;\\]|\\\n)+)/g)) {
+    for (const part of m[1].replace(/[()\\]/g, ' ').split(/[,\n]/)) {
       const [fn, as] = part.trim().split(/\s+as\s+/);
       if (STILL.includes(fn)) bare.set(as || fn, fn);
     }
   }
   const dotted = new RegExp(`\\b(?:${aliases.map(esc).join('|')})\\.(?:${STILL.join('|')})\\s*\\(`, 'g');
   const plain = bare.size ? new RegExp(`(?<![\\w.])(?:${[...bare.keys()].map(esc).join('|')})\\s*\\(`, 'g') : null;
-  const py = file.endsWith('.py');
-  let n = 0, inDoc = false;
+  const calls = (s) => [...s.matchAll(dotted)].length + (plain ? [...s.matchAll(plain)].length : 0);
+  if (py) return calls(code);
+  let n = 0;
   for (const line of text.split('\n')) {
     const t = line.trim();
-    if (py) {   // a triple-quoted block (a docstring) is prose: skip its lines and the lines that open or close it
-      const quotes = (t.match(/"""|'''/g) || []).length;
-      const wasDoc = inDoc;
-      if (quotes % 2) inDoc = !inDoc;
-      if (wasDoc || quotes) continue;
-    }
-    if (/^(#|\/\/|\*)/.test(t)) continue;
-    n += [...t.matchAll(dotted)].length + (plain ? [...t.matchAll(plain)].length : 0);
+    if (!/^(#|\/\/|\*)/.test(t)) n += calls(t);
   }
   return n;
 }

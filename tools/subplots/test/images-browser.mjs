@@ -11,7 +11,7 @@ if (await fetch(base + '/').then(() => true, () => false)) throw Error(`Port ${p
 const server = spawn('python3', ['tools/review_server.py', String(port)], {env: {...process.env, SUBPLOTS_ROOT: root, SUBPLOTS_PUBLIC_ONLY: '1'}, stdio: 'ignore'});
 const picture = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240"><rect width="400" height="240" fill="#dae4ed"/><circle cx="200" cy="80" r="30" fill="#86a5bd"/><path d="M150 210v-65q50-60 100 0v65" fill="#567c98"/></svg>');
 const fixture = {id:'fixture:scene',steps:[{say:'alice',text:'Hello.'}],images:[{id:'one',label:'First shot',url:picture},{id:'two',label:'Second shot',url:picture},{id:'three',label:'Third shot',url:picture,available:true}],metadata:{}};
-const presets = {character:[{id:'alice',v:1,data:{name:'Alice',gender:'female',outfit:'blue coat',portrait:'art/fixture.webp'}},{id:'bob',v:1,data:{name:'Bob',gender:'male',portrait:'art/fixture.webp'}}],model:[{id:'local',v:1,data:{name:'Local model',file:'fixture.safetensors'}}],style:[{id:'paint',v:1,data:{name:'Painted',quality:'illustration'}}],framing:[{id:'wide',v:1,data:{name:'Wide',w:1200,h:800}}],camera:[{id:'near',v:1,data:{name:'Close',prompt:'close camera'}},{id:'left',v:1,data:{name:'From left',prompt:'left camera'}},{id:'cowboy',v:1,data:{name:'Cowboy shot',prompt:'cowboy shot',group:'shot',diagram:'thighs'}},{id:'full',v:1,data:{name:'Full body',prompt:'full body',group:'shot',diagram:'full'}}],scene:[{id:'reading',v:1,data:{name:'Reading',text:'Reading a letter'}}],negative:[{id:'clean',v:1,data:{name:'Clean',text:'watermark',default:true}}],pose:[{id:'seated',v:1,data:{name:'Seated',text:'seated on a bench'}}],location:[{id:'bathhouse',v:1,data:{name:'Bathhouse',text:'in a bathhouse'}}],light:[{id:'night',v:1,data:{name:'Night lighting',text:'night lighting'}}],outfit:[]};
+const presets = {character:[{id:'alice',v:1,data:{name:'Alice',gender:'female',outfit:'blue coat',portrait:'art/fixture.webp'}},{id:'bob',v:1,data:{name:'Bob',gender:'male',portrait:'art/fixture.webp'}}],model:[{id:'local',v:1,data:{name:'Local model',file:'fixture.safetensors'}}],style:[{id:'paint',v:1,data:{name:'Painted',quality:'illustration'}}],framing:[{id:'wide',v:1,data:{name:'Wide',w:1200,h:800}}],camera:[{id:'near',v:1,data:{name:'Close',prompt:'close camera'}},{id:'left',v:1,data:{name:'From left',prompt:'left camera'}},{id:'cowboy',v:1,data:{name:'Cowboy shot',prompt:'cowboy shot',group:'shot',diagram:'thighs'}},{id:'full',v:1,data:{name:'Full body',prompt:'full body',group:'shot',diagram:'full'}}],scene:[{id:'reading',v:1,data:{name:'Reading',text:'Reading a letter'}}],negative:[{id:'clean',v:1,data:{name:'Clean',text:'watermark',default:true}},{id:'soft',v:1,data:{name:'Soft (nonadult rewards)',text:'visible nipples, visible genitals, uncovered crotch, frontal explicit view, explicit sexual action, transparent unobstructed body',default:false,soft:true}}],pose:[{id:'seated',v:1,data:{name:'Seated',text:'seated on a bench'}}],location:[{id:'bathhouse',v:1,data:{name:'Bathhouse',text:'in a bathhouse'}}],light:[{id:'night',v:1,data:{name:'Night lighting',text:'night lighting'}}],outfit:[]};
 const html = `<html><head><link rel="stylesheet" href="/tools/subplots/web/editor.css"><link rel="stylesheet" href="/tools/subplots/web/images.css"></head><body><script>window.AMAKAWA_NAV=true;</script><script src="/tools/nav/nav.js"></script><div id="notice" role="status" hidden></div><main style="max-width:450px;margin:auto;padding:16px"><button data-inspect="images">Images</button><section id="images" hidden><button id="loadPresets">Connect</button><p id="imageStatus"></p><div id="composition"></div><div id="renders"></div></section></main><script type="module">import {installImages} from '/tools/subplots/web/images.js';window.fixture=${JSON.stringify(fixture)};window.edits=0;globalThis.document.querySelector('[data-inspect]').onclick=()=>globalThis.document.querySelector('#images').hidden=false;window.editor=installImages(()=>window.fixture,()=>window.edits++);window.editor.render();</script></body></html>`;
 try {
   for (let i = 0; i < 60; i++) {try {if ((await fetch(base + '/tools/subplots/web/images.js')).ok) break;} catch {} await new Promise(resolve => setTimeout(resolve, 100));}
@@ -328,6 +328,27 @@ try {
     assert.equal(await page.locator('#assembledNegative').textContent(), 'visible nipples, original exclusions');
     assert.deepEqual(await page.context().cookies(), cookieBefore);
     assert.equal(page.url(), urlBefore);
+    // A picture of a private scene is a reward: its soft preset is on and locked in Exclude while the shot is Nonadult,
+    // at General as well, and Adult leaves it out (CLAUDE.md, Reward tiers by mode)
+    await page.evaluate(() => { fixture.metadata.compositions.three.override = null; fixture.audience = 'private'; globalThis.editor.render(); });
+    await page.locator('[data-compose=rating]').selectOption('safe');
+    await page.locator('[data-shot-mode=nonadult]').click();
+    const softChip = page.locator('[data-negative=soft]');
+    assert.equal(await softChip.getAttribute('aria-pressed'), 'true');
+    assert.notEqual(await softChip.getAttribute('disabled'), null);
+    assert.match(await page.locator('#assembledNegative').textContent(), /visible genitals/);
+    assert.match(await page.locator('.image-exclude p.hint', {hasText: 'Nonadult reward'}).textContent(), /always on/);
+    await page.locator('[data-shot-mode=adult]').click();
+    assert.equal(await softChip.getAttribute('disabled'), null);
+    assert.equal(await softChip.getAttribute('aria-pressed'), 'false');
+    assert.doesNotMatch(await page.locator('#assembledNegative').textContent(), /visible genitals/);
+    await page.locator('[data-shot-mode=nonadult]').click();
+    await page.evaluate(() => { fixture.audience = undefined; for (const c of Object.values(fixture.metadata.compositions || {})) delete c.reward; globalThis.editor.render(); });
+    assert.equal(await page.locator('[data-negative=soft]').getAttribute('disabled'), null);
+    assert.equal(await page.locator('[data-compose=rating]').inputValue(), 'safe');
+    await page.locator('[data-compose=rating]').selectOption('nsfw');
+    assert.match(await page.locator('#assembledNegative').textContent(), /visible genitals/);
+    await page.locator('[data-compose=rating]').selectOption('safe');
     // Background-only generated compositions keep their local words on history reuse.
     const background = structuredClone(adapted.compose); background.characters = []; background.chars = []; background.man = false;
     history.unshift({run_id:'blocks',at:'2026-10-14',characters:[],positive:adapted.positive,negative:adapted.negative,model_file:'fixture.safetensors',compose:background,renders:[{id:'blocks-1',file:'blocks.png',seed:10}]});
