@@ -510,6 +510,23 @@ def proposal_option(i):
     o = {'id': f'p{i["id"]}', 'label': f'#{i["id"]} {p.get("plain") or i["title"]}', 'note': note}
     if p.get('picture'):
         o['image'] = p['picture']
+    return shots_overlay(i['id'], o)
+
+
+def shots_overlay(num, o):
+    """reviews/proposed-work/shots.json: pictures and notes added after the issue was filed, keyed by issue number."""
+    path = os.path.join(REVIEWS, PROPOSAL_REVIEW, 'shots.json')
+    s = (json.load(open(path, encoding='utf-8')) if os.path.exists(path) else {}).get(str(num))
+    if not s:
+        return o
+    if s.get('image'):
+        o['image'] = s['image']
+    note = re.sub(r' No picture: .*$', '', o['note']) if (s.get('image') or s.get('shows')) else o['note']
+    if s.get('shows'):
+        note += ' ' + s['shows']
+    elif s.get('no_picture'):
+        note = re.sub(r'No picture: .*$', 'No picture: ' + s['no_picture'] + '.', note)
+    o['note'] = note
     return o
 
 

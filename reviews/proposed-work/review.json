@@ -3,7 +3,7 @@
  "date": "2026-10-16",
  "by": "claude-main",
  "status": "open",
- "updated": "2026-10-16T17:00:21+0200",
+ "updated": "2026-10-16T18:20:55+0200",
  "multi": true,
  "options": [
   {
@@ -14,7 +14,8 @@
   {
    "id": "p295",
    "label": "#295 Fill the dorm commons and the canteen with people who stay",
-   "note": "Today: In the dorm commons and the canteen at lunch, people mostly walk around with no purpose. Nobody sits, and you cannot talk to them. Found: Codex, from a review of the world on 6 Oct. Why it matters: Places feel empty or random when everyone only walks. A few people who sit and chat make a place feel lived in. Fix idea: Seat a few people, give each one a line to talk to, and thin out the walkers. One place at a time. (world, medium, issue #295.) No picture: it is about movement over time, a still shows nothing."
+   "note": "Today: In the dorm commons and the canteen at lunch, people mostly walk around with no purpose. Nobody sits, and you cannot talk to them. Found: Codex, from a review of the world on 6 Oct. Why it matters: Places feel empty or random when everyone only walks. A few people who sit and chat make a place feel lived in. Fix idea: Seat a few people, give each one a line to talk to, and thin out the walkers. One place at a time. (world, medium, issue #295.) Partly not reproduced on 6694372d: at lunch about five people sit in the canteen and have a Talk icon. The dorm common room is empty on day 1 afternoon, so nobody is there to talk to.",
+   "image": "reviews/proposed-work/p295-canteen-lunch-and-commons-desktop.webp"
   },
   {
    "id": "p363",
@@ -24,7 +25,8 @@
   {
    "id": "p407",
    "label": "#407 Build the campus canteen outside properly",
-   "note": "Today: Seen from far away, the north campus canteen is still a plain flat box. The station building also has odd shading on its walls. Found: Claude, at the end of the campus polish on 10 Oct. Why it matters: The campus is part of day 2 and 3. A box next to finished buildings stands out. Fix idea: Model the canteen exterior with windows and a roof, and rebuild the station mesh so its walls shade correctly. (world, medium, issue #407.) No picture: the earlier campus before-and-after pictures are in the Showcase entry campus-pass-20261010; none for this one."
+   "note": "Today: Seen from far away, the north campus canteen is still a plain flat box. The station building also has odd shading on its walls. Found: Claude, at the end of the campus polish on 10 Oct. Why it matters: The campus is part of day 2 and 3. A box next to finished buildings stands out. Fix idea: Model the canteen exterior with windows and a roof, and rebuild the station mesh so its walls shade correctly. (world, medium, issue #407.) Picture (desktop): the canteen from outside is a flat box with rows of windows, a plain roof and no door or entrance. The station wall shading was not captured.",
+   "image": "reviews/proposed-work/p407-canteen-box-desktop.webp"
   },
   {
    "id": "p413",
@@ -34,12 +36,13 @@
   {
    "id": "p414",
    "label": "#414 Give five more outdoor places the same polish as the campus",
-   "note": "Today: The sports ground and campus got a polish pass. East lane, shop street, harbour, plaza and dorm court did not, and look plainer next to them. Found: Claude, after the sports and campus passes on 10 Oct. Why it matters: You walk through these places every day. Mixed quality is easy to notice. Fix idea: One place at a time, same method as before: fix the ground, planting and light. (world, large, issue #414.) No picture: five places, no single picture shows it."
+   "note": "Today: The sports ground and campus got a polish pass. East lane, shop street, harbour, plaza and dorm court did not, and look plainer next to them. Found: Claude, after the sports and campus passes on 10 Oct. Why it matters: You walk through these places every day. Mixed quality is easy to notice. Fix idea: One place at a time, same method as before: fix the ground, planting and light. (world, large, issue #414.) Not clearly reproduced on 6694372d: at this size the east lane, shop street and harbour look close in quality to the campus and sports ground (desktop, default views).",
+   "image": "reviews/proposed-work/p414-outdoor-places-compare-desktop.webp"
   },
   {
    "id": "p415",
    "label": "#415 Light the sports ground at evening like the rest of the island",
-   "note": "Today: At evening the sports ground uses its own light switch, so it can look different from the campus and plaza at the same hour. Found: Claude, after the campus got the shared light on 10 Oct. Why it matters: Evening is when the clubs run, so people see this place most then. Fix idea: Switch it to the shared light setup and look at it at evening on phone and desktop. (world, small, issue #415.) No picture: the difference is slight and only shows side by side."
+   "note": "Today: At evening the sports ground uses its own light switch, so it can look different from the campus and plaza at the same hour. Found: Claude, after the campus got the shared light on 10 Oct. Why it matters: Evening is when the clubs run, so people see this place most then. Fix idea: Switch it to the shared light setup and look at it at evening on phone and desktop. (world, small, issue #415.) No picture: tried on 6694372d: the sports ground and the plaza at evening differ only a little in tint, and no still makes it clear."
   },
   {
    "id": "p416",
@@ -64,18 +67,20 @@
   {
    "id": "p498",
    "label": "#498 Fix the forecourt direction sign that cuts off its own words",
-   "note": "Today: At the station exit, the sign pointing to Head office and Plaza shows \"za · Dorms\" instead of \"Plaza · Dorms\". The picture is a close-up of the sign. Found: Claude, in the full set of screenshots on 11 Oct. Why it matters: It is one of the first signs a new player sees after leaving the station. Fix idea: Make the text row shorter or wrap it so it fits the sign. (world, small, issue #498.)",
+   "note": "Today: At the station exit, the sign pointing to Head office and Plaza shows \"za · Dorms\" instead of \"Plaza · Dorms\". The picture is a close-up of the sign. Found: Claude, in the full set of screenshots on 11 Oct. Why it matters: It is one of the first signs a new player sees after leaving the station. Fix idea: Make the text row shorter or wrap it so it fits the sign. (world, small, issue #498.) Reproduced on 6694372d (desktop close-up): the post hides the start of \"Plaza\", so the sign reads \"za · Dorms\".",
    "image": "reviews/proposed-work/p498-forecourt-sign-closeup-desktop.webp"
   },
   {
    "id": "p499",
    "label": "#499 Stop two commuters overlapping at the station gate",
-   "note": "Today: On day 1 morning at the station gate two commuters can stand in the same spot and walk into each other. Found: Claude, in the screenshots on 11 Oct. Why it matters: People clipping through each other looks broken right at the start. Fix idea: Check the gate queue at both sizes, and give each queue place its own spot if they overlap. (world, small, issue #499.) No picture: depends on where the crowd stands in a given run; no still kept."
+   "note": "Today: On day 1 morning at the station gate two commuters can stand in the same spot and walk into each other. Found: Claude, in the screenshots on 11 Oct. Why it matters: People clipping through each other looks broken right at the start. Fix idea: Check the gate queue at both sizes, and give each queue place its own spot if they overlap. (world, small, issue #499.) Seen on 6694372d (desktop, day 1 morning): two commuters walk touching, one arm through the other. They do not share one spot in this run.",
+   "image": "reviews/proposed-work/p499-gate-commuters-overlap-desktop.webp"
   },
   {
    "id": "p500",
    "label": "#500 Make Mio visible on the dorm bench at night",
-   "note": "Today: On day 1 evening on the dorm courtyard bench, Mio's body looks almost black. Found: Claude, in the screenshots on 11 Oct. Why it matters: A key evening scene with Mio would look wrong. Fix idea: Light the bench from the courtyard lamp or raise her body brightness there. (world, small, issue #500.) No picture: needs a played evening to reproduce; no still kept."
+   "note": "Today: On day 1 evening on the dorm courtyard bench, Mio's body looks almost black. Found: Claude, in the screenshots on 11 Oct. Why it matters: A key evening scene with Mio would look wrong. Fix idea: Light the bench from the courtyard lamp or raise her body brightness there. (world, small, issue #500.) Reproduced on 6694372d (desktop, evening, Mio placed on the bench): her body reads as a black silhouette.",
+   "image": "reviews/proposed-work/p500-mio-dark-on-bench-desktop.webp"
   },
   {
    "id": "p501",
@@ -92,12 +97,13 @@
   {
    "id": "p544",
    "label": "#544 Keep the camera above the fountain bowl",
-   "note": "Today: If you jump into the middle of the plaza fountain, the camera can end up below the edge of the bowl and you look at the wall. Found: An agent profiling jumps on 12 Oct. Why it matters: The plaza is on the first day. A camera under the bowl looks like a bug. Fix idea: Find how the camera follows into the fountain and keep it above the rim. (world, small, issue #544.) No picture: needs a jump into the fountain; the matched captures do not show it clearly."
+   "note": "Today: If you jump into the middle of the plaza fountain, the camera can end up below the edge of the bowl and you look at the wall. Found: An agent profiling jumps on 12 Oct. Why it matters: The plaza is on the first day. A camera under the bowl looks like a bug. Fix idea: Find how the camera follows into the fountain and keep it above the rim. (world, small, issue #544.) No picture: tried on 6694372d: the capture tools cannot make the jump into the bowl, so the camera under the rim could not be shown."
   },
   {
    "id": "p550",
    "label": "#550 Stop gulls landing on rocks at the harbour",
-   "note": "Today: At the harbour some gulls land on rocks and foam instead of the water, at four spots. Found: An agent surveying the harbour surfaces on 12 Oct. Why it matters: A small thing, but it spoils the harbour view for anyone who looks. Fix idea: Move the four spots onto the sea and check the landings. (world, small, issue #550.) No picture: four spots in a data file; gulls move, so a still would not show it."
+   "note": "Today: At the harbour some gulls land on rocks and foam instead of the water, at four spots. Found: An agent surveying the harbour surfaces on 12 Oct. Why it matters: A small thing, but it spoils the harbour view for anyone who looks. Fix idea: Move the four spots onto the sea and check the landings. (world, small, issue #550.) Picture (desktop): red discs are the gull water spots from the survey. They sit on the quay edge, not on open water. Only three of the four are in this view.",
+   "image": "reviews/proposed-work/p550-harbour-gull-spots-desktop.webp"
   },
   {
    "id": "p553",
@@ -108,7 +114,8 @@
   {
    "id": "p567",
    "label": "#567 Fix the walk from the shop street to Kenji clipping a shop corner",
-   "note": "Today: When someone walks straight from the lunch spot to Kenji on the shop street, they stop at a shop corner and do not get through. Found: An agent testing walking routes on 13 Oct. Why it matters: People stuck at corners break scenes that depend on walking to a person. Fix idea: Make the walking path go around the corner, without weakening collisions. (world, small, issue #567.) No picture: a walking path, only visible while walking."
+   "note": "Today: When someone walks straight from the lunch spot to Kenji on the shop street, they stop at a shop corner and do not get through. Found: An agent testing walking routes on 13 Oct. Why it matters: People stuck at corners break scenes that depend on walking to a person. Fix idea: Make the walking path go around the corner, without weakening collisions. (world, small, issue #567.) Picture (desktop): blue is the lunch start, red is where the walk stops, green is Kenji under the glass roof. Marked from the numbers in the issue; the walk itself was not run again.",
+   "image": "reviews/proposed-work/p567-shop-corner-stop-desktop.webp"
   },
   {
    "id": "p581",
@@ -127,6 +134,11 @@
    "image": "reviews/proposed-work/p588-typed-word-phone.webp"
   },
   {
+   "id": "p611",
+   "label": "#611 Opening browser check fails at desktop size: Mio's pin is hidden while the bun scene runs",
+   "note": "Today: Opening browser check fails at desktop size: Mio's pin is hidden while the bun scene runs Found: by claude-main Why it matters: not said Fix idea: Find out whether the check should wait for the scene to end, or the desktop bun scene hides Mio's marker; fix the one that is wrong (other, small, issue #611.) No picture: none given."
+  },
+  {
    "id": "p612",
    "label": "#612 Keep Mio's glasses without gluing a frame on the picture",
    "note": "Today: The way we add Mio's glasses still pastes a frame over the picture, which the rules forbid. Found: Claude, finishing the picture docs on 16 Oct. Why it matters: The pasted frame can look wrong and breaks our own rule. Fix idea: Find a settings-only way to keep the glasses on. (art, small, issue #612.) No picture: a picture recipe; no still."
@@ -139,12 +151,14 @@
   {
    "id": "p646",
    "label": "#646 Let a walk reach its spot inside the B2 machine room",
-   "note": "Today: A character walking into the B2 machine room stops about 40 cm short of the target spot. Found: An agent testing walks on 16 Oct. Why it matters: Scenes that need a person at an exact spot would look slightly off. Fix idea: Trace why the walker gives up and fix that rule. (world, small, issue #646.) No picture: a path stopping short, only visible while walking."
+   "note": "Today: A character walking into the B2 machine room stops about 40 cm short of the target spot. Found: An agent testing walks on 16 Oct. Why it matters: Scenes that need a person at an exact spot would look slightly off. Fix idea: Trace why the walker gives up and fix that rule. (world, small, issue #646.) Picture (desktop): the green dot is the point inside the machine room the walk should reach. The 40 cm stop does not show in a still.",
+   "image": "reviews/proposed-work/p646-machine-room-target-desktop.webp"
   },
   {
    "id": "p650",
    "label": "#650 Remove an invisible wall at the station door",
-   "note": "Today: While the station fades away, an invisible block still stops you walking out of the station door. Found: An agent surveying doorways on 16 Oct. Why it matters: It could block the very first exit on day 1. Fix idea: Let hidden solid parts stop blocking movement. (world, small, issue #650.) No picture: an invisible wall; nothing to see in a still."
+   "note": "Today: While the station fades away, an invisible block still stops you walking out of the station door. Found: An agent surveying doorways on 16 Oct. Why it matters: It could block the very first exit on day 1. Fix idea: Let hidden solid parts stop blocking movement. (world, small, issue #650.) Picture (desktop): the red box marks where the invisible block sits, drawn from the numbers in the issue, just outside the station door.",
+   "image": "reviews/proposed-work/p650-invisible-block-station-door-desktop.webp"
   },
   {
    "id": "p657",
@@ -221,11 +235,6 @@
    "id": "p610",
    "label": "#610 Fix the failing subplots round-trip test",
    "note": "Today: Nothing a player sees. A test fails on a duplicate entry for the campus route. Found: An agent landing another change on 16 Oct. Why it matters: A failing test hides new failures. Fix idea: Find where the duplicate comes from and remove it. (tooling, small, issue #610.) No picture: test failure."
-  },
-  {
-   "id": "p611",
-   "label": "#611 Fix the opening check that can't see Mio's marker at desktop size",
-   "note": "Today: Nothing a player sees today. At desktop size the test says Mio's marker is hidden while the bun scene runs. Found: An agent running checks on 16 Oct. Why it matters: It might also hide the marker from real players during that scene. Fix idea: Find out if the test is wrong or the marker is hidden, and fix the wrong one. (tooling, small, issue #611.) No picture: test failure."
   },
   {
    "id": "p613",
