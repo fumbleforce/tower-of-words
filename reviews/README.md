@@ -43,7 +43,7 @@ To post a review item, write `reviews/<id>/review.json` as in Adding an item bel
 | `multi` | no | `true` (default) lets him pick several; `false` means one. |
 | `media` | no | Context shown above the options (sheets, references, before/after). Each is `{image}` or `{audio}` with a `caption`. |
 | `links` | no | Pages to open (a game URL with flags, a review page). |
-| `viewer_files` | no | For a live viewer committed in the item's own folder (reviews/crowd-pilot-1/viewer.html): every model, texture and clip it loads (.glb, .webp, .json). They go to the public site with the item, so the viewer works there too. |
+| `viewer_files` | no | For a live viewer committed in the item's own folder (reviews/crowd-pilot-1/viewer.html): every model, texture and clip it loads (.glb, .webp, .json). They go to the public site while the item is open, so the viewer works there too. |
 | `decided` | when decided | The option ids that won. |
 | `decision` | when decided | One line: what was decided, in his words where possible. |
 | `decided_at`, `issue` | set by review.py | When it was decided, and the GitHub issue that holds the work on it (tools/work.py). |
@@ -69,7 +69,7 @@ python3 tools/review.py set-status <id> decided --decision "b, with the city-pop
 
 ## Answering from the public site
 
-Review and Showcase are also on GitHub Pages, https://fumbleforce.github.io/tower-of-words/bible/#review, so he can answer away from home. `sh game3d/tools/deploy-pages.sh --push` publishes them with every deploy (tools/bible/pages.py: the committed items, the images and audio they show, nothing from island/private/ or any reward path). The rest of the bible stays local.
+Review and Showcase are also on GitHub Pages, https://fumbleforce.github.io/tower-of-words/bible/#review, so he can answer away from home. `sh game3d/tools/deploy-pages.sh --push` publishes them with every deploy: the text of every item, and the pictures of open Review items and of the newest Showcase entries (tools/bible/pages.py decides which). A closed item says its pictures are on the local server. Nothing from island/private/ or any reward path goes up, and the rest of the bible stays local.
 
 Pages has no server, so Send there opens a prefilled GitHub issue on fumbleforce/tower-of-words: label `review-feedback`, title `Review answer: <id>` (or `Showcase answer: <id>`), and the same JSON the local page would post, in a fenced block. He presses Submit new issue. An answer too long for a link is copied to his clipboard, and the issue opens with a note to paste it.
 

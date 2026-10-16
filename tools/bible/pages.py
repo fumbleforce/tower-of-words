@@ -6,20 +6,24 @@
     python3 tools/bible/pages.py media           write bible/pages-media.json, the media list tools/assets/sync.py pushes
     python3 tools/bible/pages.py push            media, then tools/assets/sync.py push; commit the list and the lock file
 
-The site gets bible/ (index, app.js, live.js, work.js, app.css) in remote mode, every committed file under reviews/
-and showcase/, the images and audio those items show, and the files listed in an item's "viewer_files" (the models,
-textures and clips a live 3D viewer committed in that item's folder loads; staged at their own paths, unconverted). Nothing else of the bible goes up: the character, rules,
-art and prompt pages stay local, so no reward-look prompt, reward rule or private page is ever on the public site.
+The site gets bible/ (index, app.js, live.js, work.js, app.css) in remote mode and every committed file under reviews/
+and showcase/: the text of every item, with Jørgen's feedback. Pictures, audio, 3D models and live viewers go up only for
+open Review items (status "open") and for the newest Showcase entries, as many as SHOWCASE_PICTURES, in the order the
+bible shows them (bible/showcase-order.js). Any other item keeps its text, loses its pictures and gets pictures_local,
+so its page says its pictures are on the local server. A picture that is not in the asset store stays off the site, and
+its item gets the same note. Those files stay on disk, and the local review server still serves them. Nothing else of the bible goes up: the character, rules, art and prompt pages stay local, so no
+reward-look prompt, reward rule or private page is ever on the public site.
 
 Text comes from HEAD. Media come from this disk, each checked against HEAD's tools/assets/assets.lock.json, like the
 game's assets; a file that is not in the lock file, is missing here or differs is left out with a warning (run
-`python3 tools/bible/pages.py push` and commit). Big PNG and JPEG files go up as WebP at full size (cached by
+`python3 tools/bible/pages.py push` and commit). Big PNG and JPEG files go up as WebP, 1024 px at most (cached by
 sha256 in the git folder), and the staged review.json and entry.json point at the WebP copy. Media on a private or
 reward path are left out of the staged JSON, whatever the item says.
 
 Answers: on the public site Send opens a prefilled GitHub issue (label review-feedback); `python3 tools/review.py pull`
 imports them (reviews/README.md, "Answering from the public site").
 """
+import datetime
 import io
 import json
 import os
@@ -31,7 +35,7 @@ import sys
 import tarfile
 import time
 
-from showcase_dates import write_dates
+from showcase_dates import showcase_dates, write_dates
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.insert(0, os.path.join(ROOT, 'tools', 'lib'))
@@ -51,6 +55,10 @@ SITE_MAX, SITE_QUALITY = 1024, 72
 DENY_RE = re.compile(r'(^|/)island/private(/|$)|(^|/)private/|reward|manifest\.user\.json', re.I)
 # Media also left out of a public page when the name says private (a settings tab screenshot of private mode).
 DENY_MEDIA_RE = re.compile(r'private|reward|skimpy|nsfw', re.I)
+# Pictures go up for open Review items and for this many of the newest Showcase entries.
+SHOWCASE_PICTURES = 20
+# What an item that is not published keeps: its text and data. Its pictures, models, audio and live viewers (html, js) go.
+TEXT_RE = re.compile(r'\.(json|md|txt|log)$', re.I)
 
 sys.path.insert(0, os.path.join(ROOT, 'tools', 'assets'))
 
@@ -115,13 +123,115 @@ def item_files(base):
     return out
 
 
-def referenced(base):
-    """Every media path the items under base show, not denied: {path: [item, ...]}."""
+def read_item(base, folder, rid, name):
+    """The item's JSON, or None when it cannot be read."""
+    try:
+        with open(os.path.join(base, folder, rid, name), encoding='utf-8') as f:
+            return json.load(f)
+    except ValueError:
+        return None
+
+
+# ------------------------------------------------------------------ which items publish pictures
+def stamp(value):
+    """A date or ISO 8601 time as milliseconds since 1970, read the way the bible reads it (Date.parse); 0 for none."""
+    try:
+        t = datetime.datetime.fromisoformat(str(value).replace('Z', '+00:00'))
+    except (TypeError, ValueError):
+        return 0
+    if t.tzinfo is None:
+        t = t.replace(tzinfo=datetime.timezone.utc)
+    return int(t.timestamp() * 1000)
+
+
+def showcase_time(entry, rid, dates):
+    """The time the bible sorts a Showcase entry by (bible/showcase-order.js): the later of its updated time and its
+    commit time, else its date."""
+    return max(stamp(entry.get('updated')), stamp(dates.get(rid))) or stamp(entry.get('date'))
+
+
+def published(base, dates):
+    """(folder, id) of the items whose pictures go to the public site: the open Review items, and the newest Showcase
+    entries. dates is the bible's showcase-dates.json."""
+    out, entries = set(), []
+    for folder, rid, name in item_files(base):
+        item = read_item(base, folder, rid, name)
+        if item is None:
+            continue
+        if folder == 'reviews':
+            if (item.get('status') or 'open') == 'open':
+                out.add((folder, rid))
+        else:
+            entries.append((showcase_time(item, rid, dates), rid))
+    entries.sort(key=lambda e: (-e[0], e[1]))
+    out.update(('showcase', rid) for _, rid in entries[:SHOWCASE_PICTURES])
+    return out
+
+
+def strip_pictures(item):
+    """Take every picture, audio clip and viewer file out of an item and keep its text. Returns whether it had any."""
+    had = bool(media_fields(item) or item.get('viewer_files'))
+    item.pop('media', None)
+    item.pop('viewer_files', None)
+    for o in item.get('options') or []:
+        for k in ('image', 'audio', 'images'):
+            o.pop(k, None)
+    for s in [item] + list(item.get('sections') or []):
+        s.pop('images', None)
+    return had
+
+
+def keep_pictures(item, staged):
+    """Point a published item's pictures at the staged copies. The ones that did not go up are dropped, and this
+    returns whether any did (they stay on the local server)."""
+    drop = []
+    for c, k, i in media_fields(item):
+        p = norm(c[k][i] if i is not None else c[k])
+        if p in staged:
+            if i is None:
+                c[k] = staged[p]
+            else:
+                c[k][i] = staged[p]
+        else:
+            drop.append((c, k, i))
+    for c, k, i in sorted(drop, key=lambda x: -(x[2] or 0)):
+        if i is None:
+            c.pop(k, None)
+        else:
+            c[k].pop(i)
+    item['media'] = [m for m in item.get('media') or [] if m.get('image') or m.get('audio')]
+    for s in [item] + list(item.get('sections') or []):
+        if 'images' in s and all(isinstance(x, dict) for x in s['images']):
+            s['images'] = [im for im in s['images'] if im.get('image')]
+    return bool(drop)
+
+
+def drop_unpublished(site, pub, kept):
+    """Delete the files of the items that are not published, except their text and data, and any file a published item
+    shows (kept). Returns what it deleted, as paths in the site."""
+    gone = set()
+    for folder, rid, _ in item_files(site):
+        if (folder, rid) in pub:
+            continue
+        for dp, _dns, fns in os.walk(os.path.join(site, folder, rid)):
+            for fn in fns:
+                rel = os.path.relpath(os.path.join(dp, fn), site).replace(os.sep, '/')
+                if rel in kept or TEXT_RE.search(fn):
+                    continue
+                os.remove(os.path.join(dp, fn))
+                gone.add(rel)
+    return gone
+
+
+# ------------------------------------------------------------------ media list for tools/assets/sync.py
+def referenced(base, pub):
+    """Every media path the published items under base show, not denied: {path: [item, ...]}."""
     refs = {}
     for folder, rid, name in item_files(base):
-        try:
-            item = json.load(open(os.path.join(base, folder, rid, name), encoding='utf-8'))
-        except ValueError:
+        if (folder, rid) not in pub:
+            continue
+        item = read_item(base, folder, rid, name)
+        if item is None:
             continue
         for c, k, i in media_fields(item):
             p = norm(c[k][i] if i is not None else c[k])
@@ -139,13 +249,13 @@ def referenced(base):
     return refs
 
 
-# ------------------------------------------------------------------ media list for tools/assets/sync.py
 def cmd_media():
-    refs = referenced(ROOT)
+    pub = published(ROOT, showcase_dates(ROOT))
+    refs = referenced(ROOT, pub)
     have = sorted(p for p in refs if os.path.isfile(os.path.join(ROOT, p)))
     missing = sorted(set(refs) - set(have))
-    data = {'about': 'Images and audio the public bible\'s Review and Showcase show (tools/bible/pages.py media writes '
-                     'this; tools/assets/sync.py pushes every file listed). Do not edit by hand.',
+    data = {'about': 'Images and audio the public bible shows: open Review items and the newest Showcase entries '
+                     '(tools/bible/pages.py media writes this; tools/assets/sync.py pushes every file listed). Do not edit by hand.',
             'data': have}
     with open(os.path.join(ROOT, LIST), 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=0)
@@ -205,6 +315,7 @@ def cmd_stage(site):
     with tarfile.open(fileobj=io.BytesIO(tar)) as t:
         t.extractall(site, filter='data')
     write_dates(os.path.join(site, 'bible', 'showcase-dates.json'))
+    dates = json.load(open(os.path.join(site, 'bible', 'showcase-dates.json'), encoding='utf-8'))  # the bible's own order
     idx = os.path.join(site, 'bible', 'index.html')
     html = open(idx, encoding='utf-8').read()
     html = html.replace("<script>window.BIBLE_ROOT = '../';", "<script>window.BIBLE_REMOTE = true; window.BIBLE_ROOT = '../';", 1)
@@ -212,8 +323,9 @@ def cmd_stage(site):
         sys.exit('bible pages: bible/index.html no longer has the BIBLE_ROOT line to mark remote mode')
     open(idx, 'w', encoding='utf-8').write(html)
 
-    # 2. the media every item shows, sha-checked against HEAD's lock file; images over 60 KB as WebP at most 1024 px
-    refs = referenced(site)
+    # 2. the pictures of the published items, sha-checked against HEAD's lock file; images over 60 KB as WebP at most 1024 px
+    pub = published(site, dates)
+    refs = referenced(site, pub)
     have = sync.local_state(sorted(p for p in refs if p in lock), cache := sync.load_cache())
     sync.save_cache(cache)
     wcache = cache_dir()
@@ -240,7 +352,11 @@ def cmd_stage(site):
         shutil.copyfile(src, os.path.join(site, dest))
         staged[p] = dest
 
-    # 3. point the staged items at what went up; drop media that did not; links outside the site go to GitHub
+    # 3. the items that are not published keep their text: their pictures, models and live viewers are removed from the
+    # site, except a file a published item shows
+    gone = drop_unpublished(site, pub, set(staged.values()))
+
+    # 4. point the staged items at what went up; drop media that did not; links outside the site go to GitHub
     committed = set(git('ls-files', '-z').split('\0'))
     committed_dirs = {d for f in committed for d in ancestors(f)}
 
@@ -252,59 +368,50 @@ def cmd_stage(site):
             return REPO_TREE + p, True
         return REPO_TREE + next((d for d in ancestors(p) if d in committed_dirs), ''), False
 
-    def relink(ln, p, line=None):
+    def relink(ln, p, line=None, local=False):
         ln['href'], ok = on_github(p, line)
-        if not ok:
+        if not ok or local:
             ln['label'] = f"{ln.get('label', p)} (only on the local bible)"
 
+    noted = []  # the items whose pictures stay on the local server
     for folder, rid, name in item_files(site):
         path = os.path.join(site, folder, rid, name)
         try:
             item = json.load(open(path, encoding='utf-8'))
         except ValueError:
             continue
-        drop = []
-        for c, k, i in media_fields(item):
-            p = norm(c[k][i] if i is not None else c[k])
-            if p in staged:
-                if i is None:
-                    c[k] = staged[p]
-                else:
-                    c[k][i] = staged[p]
-            else:
-                drop.append((c, k, i))
-        for c, k, i in sorted(drop, key=lambda x: -(x[2] or 0)):
-            if i is None:
-                c.pop(k, None)
-            else:
-                c[k].pop(i)
-        item['media'] = [m for m in item.get('media') or [] if m.get('image') or m.get('audio')]
-        for s in [item] + list(item.get('sections') or []):
-            if 'images' in s and all(isinstance(x, dict) for x in s['images']):
-                s['images'] = [im for im in s['images'] if im.get('image')]
+        if (folder, rid) in pub:
+            local = keep_pictures(item, staged)
+        else:
+            local = strip_pictures(item) or any(g.startswith(f'{folder}/{rid}/') for g in gone)
+        if local:
+            item['pictures_local'] = True
+            noted.append(f'{folder}/{rid}')
+        else:
+            item.pop('pictures_local', None)
         for ln in item.get('links') or []:
             h = str(ln.get('href', ''))
             m = re.match(r'^(?:bible/)?#(doc|src)/([^:]+)(?::(\d+))?$', h)
             if m:  # a bible page of a file: the site has only reviews/ and showcase/, the rest is on GitHub
                 p = m.group(2)
-                if re.match(r'^(reviews|showcase)/', p) and p in committed:
+                if re.match(r'^(reviews|showcase)/', p) and p in committed and p not in gone:
                     ln['href'] = f'#{m.group(1)}/{p}'
                 else:
-                    relink(ln, p, m.group(3))
+                    relink(ln, p, m.group(3), local=p in gone)
             elif h.startswith('bible/#'):
                 ln['href'] = h[len('bible/'):]  # #review/..., #showcase/...: on this site
             elif re.match(r'^(https?:|#)', h):
                 pass
             elif (p := norm(h) or '') in staged:
                 ln['href'] = staged[p]
-            elif p and (os.path.isfile(os.path.join(site, p)) or os.path.isfile(os.path.join(site, p, 'index.html'))):
+            elif p and p not in gone and (os.path.isfile(os.path.join(site, p)) or os.path.isfile(os.path.join(site, p, 'index.html'))):
                 pass  # on the site already (the game, the creator)
             else:
-                relink(ln, p)
+                relink(ln, p, local=p in gone)
         with open(path, 'w', encoding='utf-8') as f:
             json.dump(item, f, ensure_ascii=False, indent=1)
 
-    # 4. folder lists (Pages lists no folders) and the remote data file: no characters, rules or prompts
+    # 5. folder lists (Pages lists no folders) and the remote data file: no characters, rules or prompts
     ids = {}
     for folder, rid, _ in item_files(site):
         ids.setdefault(folder, []).append(rid)
@@ -317,9 +424,25 @@ def cmd_stage(site):
     with open(os.path.join(site, 'bible', 'data.json'), 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=1)
 
-    size = sum(os.path.getsize(os.path.join(site, d)) for d in staged.values())
-    print(f'bible: {len(ids.get("reviews", []))} review items, {len(ids.get("showcase", []))} showcase entries, '
-          f'{len(staged)} images and audio ({size / 1e6:.0f} MB, {sum(1 for p, d in staged.items() if p != d)} as WebP), '
+    report(site, pub, staged, refs, left, noted, t0)
+
+
+def report(site, pub, staged, refs, left, noted, t0):
+    """Print what the public bible shows: the Review items, the Showcase entries with pictures, and what was left out."""
+    reviews = [rid for folder, rid, _ in item_files(site) if folder == 'reviews']
+    shows = [rid for folder, rid, _ in item_files(site) if folder == 'showcase']
+    shown = [rid for rid in shows if ('showcase', rid) in pub]
+    with_pictures = [rid for rid in shown if any(f'showcase/{rid}' in refs[p] for p in staged)]
+
+    def size(kind):  # the staged pictures that published items of one folder show
+        return sum(os.path.getsize(os.path.join(site, staged[p])) for p in staged if any(r.startswith(kind + '/') for r in refs[p]))
+
+    print(f'bible: {len(reviews)} review items, {sum(1 for rid in reviews if ("reviews", rid) in pub)} open, '
+          f'their pictures {size("reviews") / 1e6:.1f} MB')
+    print(f'bible: {len(shows)} showcase entries: {len(shown)} published, {len(with_pictures)} of them with pictures '
+          f'({size("showcase") / 1e6:.1f} MB), {len(shows) - len(shown)} text only; '
+          f'{len(noted)} items say their pictures are on the local server')
+    print(f'bible: {len(staged)} pictures and audio, {sum(1 for p, d in staged.items() if p != d)} as WebP, '
           f'{time.time() - t0:.0f} s')
     if left:
         why = {}
@@ -344,6 +467,8 @@ def deny(site):
             v = str(c[k][i] if i is not None else c[k])
             if denied(v) or DENY_MEDIA_RE.search(v):
                 bad.append(f'{folder}/{rid}/{name} shows {v}')
+        if item.get('pictures_local') and (media_fields(item) or item.get('viewer_files')):
+            bad.append(f'{folder}/{rid}/{name} is marked pictures_local but still shows pictures')
     if bad:
         print('\n'.join(f'  {b}' for b in bad[:30]), file=sys.stderr)
         sys.exit(f'deploy: REFUSED: {len(bad)} private or reward paths in the site (tools/bible/pages.py deny)')

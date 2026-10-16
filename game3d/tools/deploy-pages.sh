@@ -15,14 +15,15 @@
 # Pages must serve gh-pages (one GitHub setting, see notes/PERF.md, "Deploy"):
 #   Settings > Pages > Build and deployment > Source: "Deploy from a branch", Branch: gh-pages, folder / (root).
 #
-# The bible: /bible/ is the world bible's Review and Showcase in remote mode, with every committed file under reviews/ and
-# showcase/ and the images and audio they show (tools/bible/pages.py stage: text from HEAD, media sha-checked against
-# HEAD's lock file, images over 60 KB as WebP, 1024 px at most, to stay under the 2 GB push limit). Send there opens a GitHub issue; tools/review.py pull imports it.
+# The bible: /bible/ is the world bible's Review and Showcase in remote mode, with the text of every item under reviews/ and
+# showcase/, and only the pictures tools/bible/pages.py picks (open Review items and the newest Showcase entries; any other
+# pictures stay on the local server, and their items say so). Pictures are sha-checked against HEAD's lock file, and images over
+# 60 KB go up as WebP, 1024 px at most, to stay under the 2 GB push limit. Send there opens a GitHub issue; tools/review.py pull imports it.
 # Deny check (tools/bible/pages.py deny): the build stops if any file in the site is under island/private/, in a
 # private/ folder or on a reward path.
 #
 # The site (vanilla flavor, see below): /game3d/ with index.html, build.json (stamped here), css, js, story (.js), fonts, vendor, audio (mp3, json) and the
-# assets the game loads. Left out: tools, design, ref, shots, notes (*.md) and contact sheets. Only committed files
+# assets the game loads. Left out: tools, design, ref, notes (*.md), contact sheets and the shots, except the pictures the bible shows. Only committed files
 # and files in the committed lock file go up, so nothing local, private or git-ignored beyond those can leak.
 set -e
 ROOT=$(git rev-parse --show-toplevel)

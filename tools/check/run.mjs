@@ -37,6 +37,7 @@ const checks = [
   ['audio scripts', ['tools/audio/ratchet.py'], 'python3'],
   ['audio presets and refusals', ['tools/audio/test_audio.py'], 'python3'],
   ['story map', ['tools/bible/story-map-check.mjs']],
+  ['public bible pictures', ['tools/bible/pages_test.py'], 'python3'],
   ['nav registry', ['tools/check/nav-registry.mjs']],
 ];
 let failures = 0;

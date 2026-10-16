@@ -7,14 +7,15 @@ name: Deploy Pages
 # Repository secrets (Settings > Secrets and variables > Actions), read-only access to the bucket is enough:
 #   R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET
 #
-# Runs on a push to main that changes the game or the asset lock file, and by hand (Actions > Deploy Pages > Run
-# workflow, on any branch: it deploys the branch you pick).
+# Runs on a push to main that changes the game, the public bible (bible/ and tools/bible/) or the asset lock file, and by
+# hand (Actions > Deploy Pages > Run workflow, on any branch: it deploys the branch you pick).
 
 on:
   push:
     branches: [main]
     paths:
       - 'game3d/**'
+      - 'bible/**'
       - 'tools/assets/assets.lock.json'
       - 'tools/bible/**'
       - 'reviews/**'

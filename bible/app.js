@@ -759,7 +759,7 @@ function reviewRow(r) {
   const thumb = (r.media || []).concat(opt).find((m) => m.image);
   const fb = r.feedback;
   return `<a class="rrow" href="#review/${esc(r.id)}">
-    <div class="rth">${thumb && !(L.missing && L.missing.has(thumb.image)) ? `<img src="${esc(url(thumb.image))}" alt="" loading="lazy" decoding="async">` : `<span class="raud" aria-hidden="true">♪</span>`}</div>
+    <div class="rth">${thumb && !(L.missing && L.missing.has(thumb.image)) ? `<img src="${esc(url(thumb.image))}" alt="" loading="lazy" decoding="async">` : r.pictures_local ? '' : `<span class="raud" aria-hidden="true">♪</span>`}</div>
     <div class="rbody"><b>${esc(r.title)}</b>
       <span class="muted small">${esc(r.date || '')} · ${esc(r.by || '')} · ${opt.length} options</span>
       ${st === 'decided' ? `<span class="small">Decided: <b>${esc(pickedText(r))}</b>${r.decision ? ` · <span class="muted">${inline(r.decision)}</span>` : ''}</span>` : `<span class="small">${esc(r.question || '')}</span>`}
@@ -810,6 +810,7 @@ function pageReviewItem(id) {
     <p class="rq">${inline(r.question || '')}</p>
     ${(r.links || []).length ? `<p class="small">${r.links.map((l) => `<a href="${esc(/^https?:|^#/.test(l.href) ? l.href : ROOT + l.href)}">${esc(l.label)}</a>`).join(' · ')}</p>` : ''}
     ${(r.media || []).length ? `<div class="rmedia" data-lbg>${r.media.map((m) => media(m)).join('')}</div>` : ''}
+    ${r.pictures_local ? '<p class="muted small">Its pictures are on the local server.</p>' : ''}
     <h2>Options</h2>
     <div class="ropts" data-lbg>${opts}</div>
     <h2>Overall</h2>
@@ -901,7 +902,8 @@ function showcaseEntry(e, solo) {
         <${H} class="sctitle">${solo ? esc(e.title) : `<a href="#showcase/${esc(e.id)}">${esc(e.title)}</a>`}</${H}>
         <div class="pill-row"><span class="pill"${activity ? ` title="Latest entry update: ${esc(activity)}"` : ''}>${esc(e.date || '')}</span></div>
         ${e.caption ? `<p class="rq sccaption">${inline(e.caption)}</p>` : ''}
-        <button type="button" class="sctoggle" data-act="expand" aria-expanded="${!!solo}" aria-controls="${esc(details)}">${solo ? 'Hide' : 'Show'} details · ${count}</button>
+        ${e.pictures_local ? '<p class="muted small">Its pictures are on the local server.</p>' : ''}
+        <button type="button" class="sctoggle" data-act="expand" aria-expanded="${!!solo}" aria-controls="${esc(details)}">${solo ? 'Hide' : 'Show'} details${e.pictures_local ? '' : ` · ${count}`}</button>
       </div>
     </div>
     <div class="scdetails" id="${esc(details)}"${solo ? '' : ' hidden'}>
