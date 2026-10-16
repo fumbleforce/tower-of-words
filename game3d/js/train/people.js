@@ -144,6 +144,9 @@ export function book() {
 }
 
 // ---------- the passengers of the carriage ----------
+// Reading: the head bows over the book or phone held at chest height. The prop's face is tipped up toward the eyes
+// (a small negative x tilt), so from the aisle you see its back or edge, not the screen or the pages.
+const READ_HEAD = 0.45; // radians: how far the head bows toward the book or phone
 // Each passenger is a stand-in in their seat with their act and props; places/train.js puts Hamada and Aoi in the
 // first two seats (cast3d.js inSeat), and crowd/passengers.js gives the rest their crowd bodies, moving the props over.
 export function buildPassengers(LZ) {
@@ -196,15 +199,15 @@ export function buildPassengers(LZ) {
   add(reader, 1.32, near);
   const bk = book();
   bk.position.set(0, 0.05, 0.2);
-  bk.rotation.x = 0.75;
+  bk.rotation.x = -0.12;
   reader.torso.add(bk);
-  reader.head.rotation.x = -0.14;
+  reader.head.rotation.x = READ_HEAD;
   reader.act = (t, r) => {
     const c = (t + 1.0) % 6.5;
     const k = c < 0.7 ? c / 0.7 : 0; // page flips over the spine
     bk.userData.page.rotation.z = k > 0 ? Math.PI * (k * k * (3 - 2 * k)) : 0;
     bk.userData.page.visible = k > 0;
-    r.head.rotation.x = -0.14 + Math.sin(t * 0.5) * 0.02;
+    r.head.rotation.x = READ_HEAD + Math.sin(t * 0.5) * 0.02;
   };
 
   // 4. someone in headphones, nodding to music
@@ -231,11 +234,11 @@ export function buildPassengers(LZ) {
   music.headK.add(band);
   const ph2 = phone();
   ph2.position.set(0, 0.02, 0.21);
-  ph2.rotation.x = 0.6;
+  ph2.rotation.x = -0.12;
   music.torso.add(ph2);
   music.act = (t, r) => {
     const b = Math.max(0, Math.sin(t * Math.PI * 2 * 1.05));
-    r.head.rotation.x = -0.3 + b * b * 0.1;
+    r.head.rotation.x = READ_HEAD + b * b * 0.1;
     r.torso.rotation.z = Math.sin(t * Math.PI * 1.05) * 0.015;
   };
 
@@ -268,11 +271,11 @@ export function buildPassengers(LZ) {
   add(bunW, -0.75, near);
   const ph3 = phone();
   ph3.position.set(0, 0.07, 0.2);
-  ph3.rotation.x = 0.9;
+  ph3.rotation.x = -0.12;
   bunW.torso.add(ph3);
-  bunW.head.rotation.x = 0.12;
   bunW.act = (t, r) => {
-    r.head.rotation.y = -0.8 + Math.sin(t * 0.21 + 1) * 0.15;
+    r.head.rotation.x = READ_HEAD;
+    r.head.rotation.y = -0.25 + Math.sin(t * 0.21 + 1) * 0.1; // her phone, a little to one side
   };
 
   for (const r of list) r.breath = 0.012;

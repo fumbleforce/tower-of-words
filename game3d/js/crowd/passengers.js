@@ -20,7 +20,9 @@ const POSE = {
   bun: { arms: [-1.1, 0.5] },
   stander: { stand: true }, // his arms as the idle has them, the bag in his hand
 };
-const IN_HAND = new THREE.Vector3(0, 0.03, 0.05); // the stand-ins' units (train/people.js S), on the torso
+// the stand-ins' units (train/people.js S), on the torso. Level with the hands, so a book or phone sits a reading
+// distance under the eyes
+const IN_HAND = new THREE.Vector3(0, 0.03, 0);
 
 export const prepareTrainPassengers = () => preparePlacePeople('train');
 
