@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeComposition, assembleComposition, portraitUrl, softExclusion, promptParts} from '../web/image-compose.js';
+import {normalizeComposition, assembleComposition, portraitUrl, lockedExclusions, promptParts} from '../web/image-compose.js';
 
 const rec = (id, data) => ({id, v: 3, data});
 // the soft negative preset's words (the store's "implied" preset, marked soft); the composer never types them itself
@@ -161,7 +161,7 @@ test('the soft-scene exclusion comes only from the soft preset: a marker in its 
   const body = assembleComposition(c, marked);
   assert.match(body.negative, /MARKER/);
   assert.doesNotMatch(body.negative, /visible nipples|visible genitals/);
-  assert.equal(body.negative, 'blur, child, loli, MARKER');
+  assert.equal(body.negative, 'blur, child, loli, watermark, MARKER');
   assert.doesNotMatch(assembleComposition({...c, override: {negative: 'blur'}}, marked).negative, /visible nipples/);
 });
 
@@ -171,7 +171,7 @@ test('a nonadult reward keeps the soft preset on at every content level, selecte
     assert.match(body.negative, new RegExp(SOFT.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), `${rating} ${negatives}`);
     assert.equal(body.presets.negatives.filter(p => p.id === 'soft').length, 1, `${rating} ${negatives}`);
   }
-  assert.deepEqual(softExclusion(composition({characters: [], reward: true}), presets), {on: true, ids: ['soft']});
+  assert.deepEqual(lockedExclusions(composition({characters: [], reward: true}), presets), {soft: true, ids: ['clean', 'soft']});
 });
 
 test('Adult (hard) rewards get only their configured exclusions, and a safe picture that is not a reward gets none', () => {
@@ -179,10 +179,14 @@ test('Adult (hard) rewards get only their configured exclusions, and a safe pict
     const adult = assembleComposition(composition({characters: [], rating, reward: true, hard: true, negatives: ['clean']}), presets);
     assert.doesNotMatch(adult.negative, /visible/);
     assert.deepEqual(adult.presets.negatives, [{id: 'clean', v: 3}]);
-    assert.deepEqual(softExclusion(composition({characters: [], rating, reward: true, hard: true}), presets), {on: false, ids: ['soft']});
+    assert.deepEqual(lockedExclusions(composition({characters: [], rating, reward: true, hard: true}), presets), {soft: false, ids: ['clean']});
+    // the configured default selection stays on for an Adult reward even when the shot leaves it out
+    const bare = assembleComposition(composition({characters: [], rating, reward: true, hard: true, negatives: []}), presets);
+    assert.deepEqual(bare.presets.negatives, [{id: 'clean', v: 3}]);
+    assert.equal(bare.negative, 'blur, child, loli, watermark');
   }
   assert.doesNotMatch(assembleComposition(composition({characters: [], rating: 'safe'}), presets).negative, /visible/);
-  assert.equal(softExclusion(composition({characters: [], rating: 'safe'}), presets).on, false);
+  assert.deepEqual(lockedExclusions(composition({characters: [], rating: 'safe'}), presets), {soft: false, ids: []});
 });
 
 test('a Mature or Adult picture gets the soft preset after its other words, even when it is not selected', () => {
@@ -197,7 +201,7 @@ test('without a soft preset (or with it archived) no soft words are added; a cop
   const archived = {...presets, negative: presets.negative.map(p => p.id === 'soft' ? {...p, archived: true} : p)};
   assert.doesNotMatch(assembleComposition(composition({characters: [], rating: 'nsfw'}), archived).negative, /visible/);
   const copied = assembleComposition(composition({characters: [], rating: 'nsfw', reward: true, override: {positive: 'x', negative: 'original'}}), presets);
-  assert.equal(copied.negative, `original, ${SOFT}`);
+  assert.equal(copied.negative, `original, blur, watermark, ${SOFT}`);
 });
 
 test('reusing a recorded zero CFG does not replace it with model defaults', () => {
@@ -206,4 +210,21 @@ test('reusing a recorded zero CFG does not replace it with model defaults', () =
   assert.equal(body.cfg, 0);
   assert.equal(body.sampler, 'dpmpp_2m');
   assert.equal(body.scheduler, 'karras');
+});
+
+test('section exclusions join the negative in section order, after the people and before the older free words (#616)', () => {
+  const ps = structuredClone(presets);
+  ps.outfit = [rec('coat', {text: 'blue coat', negative: 'red coat'})];
+  const c = composition({characters: ['alice'], outfit: {alice: 'coat'}, negatives: ['clean'], negative: 'older words',
+    sectionNegatives: {details: 'details words', camera: 'dutch angle', light: 'harsh shadows', setting: 'crowd, signs', pose: 'crossed arms', scene: 'running'}});
+  assert.equal(assembleComposition(c, ps).negative,
+    'blur, watermark, red coat, running, crossed arms, crowd, signs, harsh shadows, dutch angle, details words, older words, child, loli');
+  assert.equal(assembleComposition(composition({negative: 'older words'}), ps).negative, 'blur, watermark, older words, child, loli');
+});
+
+test('nothing typed in a section removes the rating exclusions of a reward', () => {
+  const c = composition({characters: [], rating: 'nsfw', reward: true, negatives: [], sectionNegatives: {setting: SOFT}, negative: 'blur'});
+  const body = assembleComposition(c, presets);
+  assert.equal(body.negative, `blur, ${SOFT}, child, loli, watermark`);
+  assert.deepEqual(body.presets.negatives, [{id: 'clean', v: 3}, {id: 'soft', v: 3}]);
 });

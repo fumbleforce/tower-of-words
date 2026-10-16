@@ -392,6 +392,11 @@
 .details-line { display: grid !important; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 8px !important; }
 .details-line textarea { min-height: 0; height: 32px; resize: vertical; }
 
+/* Avoid: one line of words to keep out of that section, under it (image-section-negatives.js) */
+.section-avoid { display: grid !important; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 8px !important; margin: 6px 0 0; min-width: 0; }
+.section-avoid > span { font-size: 12px; color: var(--dim); }
+.section-avoid input { min-height: 0; height: 30px; font-size: 13px; }
+
 /* the camera: Shot, Angle and Lens tabs, each naming its choice, over one row of tiles */
 .cam-tabs { display: flex; align-items: stretch; gap: 4px; margin: 6px 0 3px; }
 .cam-tabs > button { display: grid; justify-items: start; gap: 0; min-height: 0; padding: 3px 10px; line-height: 1.25; font-size: 12px; max-width: 34%; }

@@ -1,9 +1,13 @@
 // Agent recipes use the editor's assembler, but cannot rewrite its preset blocks.
 // The browser editor remains free to edit shot words; this policy applies to compose.mjs only.
+// Exclusion words are manual per section (sectionNegatives, a person's clothingNegative/appearanceNegative, and the
+// older free `negative`); they only add to the presets' exclusions, never replace them (#616).
 import {applyDefaults, normalizeComposition, assembleComposition, COMPOSITION_SCHEMA} from './web/image-compose.js';
 import {validateCompositionShape, SCENE_ID_PATTERN, IMAGE_SLOT_PATTERN} from './web/image-composition-schema.js';
 import {blockId} from '../imagegen/web/blocks.js';
+import {personWords} from './web/image-people.js';
 
+const PERSON_NEGATIVES = ['clothingNegative', 'appearanceNegative'];
 const fail = message => { throw new Error('Agent recipe refused: ' + message); };
 const object = value => value && typeof value === 'object' && !Array.isArray(value);
 const keys = value => object(value) ? Object.keys(value) : [];
@@ -27,10 +31,10 @@ export function prepareAgentGeneration(recipe, presets, name = 'recipe') {
   if (!object(recipe)) fail('the composition must be an object.');
   try { validateCompositionShape(recipe, COMPOSITION_SCHEMA); } catch (error) { fail(error.message); }
   if (recipe.override != null) fail('whole prompt overrides bypass selected presets.');
-  if (recipe.negative != null && recipe.negative !== '') fail('exclusion words must come from selected negative presets.');
   if (recipe.styleNegOff) fail('style exclusions cannot be disabled.');
   if (Object.values(recipe.charNegOff || {}).some(Boolean)) fail('character exclusions cannot be disabled.');
-  if (Object.values(recipe.people || {}).some(person => keys(person).length)) fail('appearance and clothing words must come from character and outfit presets.');
+  if (Object.values(recipe.people || {}).some(person => keys(person).some(key => !PERSON_NEGATIVES.includes(key))))
+    fail('appearance and clothing words must come from character and outfit presets; a person takes only clothingNegative and appearanceNegative.');
   if (recipe.example || recipe.placePreview) fail('block examples and place previews are reserved for editor tools.');
   attachment(recipe);
   const c = applyDefaults(normalizeComposition(recipe), presets);
@@ -50,6 +54,13 @@ export function prepareAgentGeneration(recipe, presets, name = 'recipe') {
     if (!cast.includes(id)) fail('outfit selection names a character absent from the shot.');
     if (typeof selected === 'string') preset(presets, 'outfit', selected);
     else if (typeof selected !== 'boolean') fail('outfit must be a preset id or the default outfit toggle.');
+  }
+  // a person's exclusion words add to the template's and the outfit's, as if typed after them in the editor
+  for (const [id, words] of Object.entries(c.people || {})) {
+    if (!keys(words).length) continue;
+    if (!cast.includes(id)) fail('person exclusions name a character absent from the shot.');
+    const template = personWords({...c, people: {}}, preset(presets, 'character', id), presets);
+    for (const key of keys(words)) words[key] = [template[key], words[key]].map(s => s.trim()).filter(Boolean).join(', ');
   }
   // Pose/place/light retain the editor's documented literal staging words as well as preset ids.
   for (const [field, type] of [['pose', 'pose'], ['environment', 'location'], ['light', 'light']]) {
@@ -73,11 +84,11 @@ export function prepareAgentGeneration(recipe, presets, name = 'recipe') {
   return body;
 }
 
-// Reward calls use the same composition contract and assembler, with the configured exclusion selection intact.
-// Adult mode (hard: true) gets the default selection and nothing more. A nonadult reward (soft, CLAUDE.md "Reward
-// tiers by mode") also loads the negative preset marked `soft`; a recipe may name it or leave it to this function.
-// The composition is marked reward: true, so the shared assembler (web/image-compose.js) keeps that preset on, the same
-// as the browser composers do for a reward shot.
+// Reward calls use the same composition contract and assembler. The rating exclusions are fixed: Adult mode (hard:
+// true) keeps the configured default selection, and a nonadult reward (soft, CLAUDE.md "Reward tiers by mode") also
+// the negative preset marked `soft`. A recipe may add other negative presets and section words, never remove these.
+// The composition is marked reward: true, so the shared assembler (web/image-compose.js) keeps them on, the same as
+// the browser composers do for a reward shot.
 const sameSet = (a, b) => a.length === b.length && b.every(id => a.includes(id));
 export function prepareRewardGeneration(recipe, presets, name = 'recipe') {
   if (!object(recipe)) fail('the composition must be an object.');
@@ -86,15 +97,17 @@ export function prepareRewardGeneration(recipe, presets, name = 'recipe') {
   const defaults = applyDefaults(normalizeComposition({}), presets).negatives;
   const soft = adult ? [] : (presets.negative || []).filter(p => !p.archived && p.data?.soft === true).map(p => p.id);
   if (!adult && !soft.length) fail('nonadult (soft) reward pictures need the soft negative preset; none is configured.');
-  const expected = [...defaults, ...soft.filter(id => !defaults.includes(id))];
+  const locked = [...defaults, ...soft.filter(id => !defaults.includes(id))];
   const given = recipe.negatives ?? recipe.negs;
-  if (given != null && !(Array.isArray(given) && (sameSet(given, expected) || (!adult && sameSet(given, defaults)))))
-    fail('reward exclusions must match the configured default selection without additions or removals'
-      + (adult ? '.' : ', plus the soft negative preset.'));
+  if (given != null && !Array.isArray(given)) fail('negatives must be a list of preset ids.');
+  const removed = given ? defaults.filter(id => !given.includes(id)) : [];
+  if (removed.length) fail(`reward exclusions keep the configured default selection; add presets, never remove them (missing ${removed.join(', ')}).`);
+  const negatives = [...new Set([...locked, ...given || []])];
   const rest = {...recipe};
   delete rest.negs;
-  const body = prepareAgentGeneration({...rest, negatives: expected, reward: true}, presets, name);
-  if (!sameSet(body.compose.negatives, expected)) fail('reward exclusions changed while assembling.');
+  const body = prepareAgentGeneration({...rest, negatives, reward: true}, presets, name);
+  if (!sameSet(body.compose.negatives, negatives) || locked.some(id => !body.presets.negatives.some(p => p.id === id)))
+    fail('reward exclusions changed while assembling.');
   return body;
 }
 

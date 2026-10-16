@@ -1,5 +1,6 @@
 // Shape of the shared editor composition, including supported legacy aliases and editor metadata.
 // Prompt semantics stay in image-compose.js. Agent policy is a separate constraint layer.
+import {SECTION_NEGATIVES} from './image-section-negatives.js';
 const string = {type: 'string'}, number = {type: 'number'}, boolean = {type: 'boolean'};
 const anyObject = {type: 'object'};
 const array = items => ({type: 'array', items});
@@ -31,6 +32,7 @@ export function compositionSchema(defaults) {
     negatives: nullable(strings), negs: nullable(strings), outfit: record(either(boolean, string)),
     seed: numeric, seedMode: {enum: ['fixed', 'random']}, rating: {enum: ['safe', 'sensitive', 'nsfw']},
     model: string, style: string, framing: string, negative: string,
+    sectionNegatives: object(Object.fromEntries(SECTION_NEGATIVES.map(([key]) => [key, string]))),
     width: numeric, height: numeric, steps: numeric, cfg: numeric, count: numeric, referenceStrength: numeric, faceStrength: numeric, sampler: string, scheduler: string,
     man: boolean, stage: object({people: record(place), contact: string, lightFrom: string, mood: string}),
     start: nullable(start), loras: array(lora), control: nullable(control), huefix: array(hue),

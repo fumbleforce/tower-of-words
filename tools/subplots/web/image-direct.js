@@ -7,6 +7,7 @@
 // composition's `stage` (image-stage.js), which image-compose.js turns into prompt words.
 const {structuredClone, CSS} = globalThis;
 import {localBlockHtml} from './image-block-words.js';
+import {sectionNegativeHtml} from './image-section-negatives.js';
 import {esc} from './common.js';
 import {stageCast as stagePeople, stageOf, placeOf, FACING, GAZE, HEIGHTS, LIGHT_FROM, MOODS, EXPRESSIONS, CAMERA_ROWS, DIAGRAMS, cameraKind, cameraSetup, stageSummary} from './image-stage.js';
 import {stageSvg, bindStage, diagramSvg, PERSON_COLOURS} from './stage-view.js';
@@ -68,10 +69,10 @@ export function directHtml(c, ctx) {
     <div class="stage-wrap"><div class="stage-box" data-stage style="aspect-ratio:${w} / ${h}">${stageSvg(c, ctx.presets, people, {aspect: w / h, selected: who?.id})}</div>
       <div class="stage-side">${personControls(c, people, who)}</div></div>
     ${say ? `<p class="stage-say hint">${esc(say)}${who && placeOf(stage, who.id, people.indexOf(who), people.length).placed ? ` <button type="button" class="link" data-unplace>Forget ${esc(who.name)}’s place</button>` : ''}</p>` : ''}
-    ${cameraRows(c, ctx)}
+    ${cameraRows(c, ctx)}${sectionNegativeHtml(c, 'camera')}
     ${c.angle ? `<p class="hint">Older camera angle kept: ${esc(c.angle)} <button type="button" class="link" data-clear-angle>Remove</button></p>` : ''}
     <div class="direct-more direct-line">${ctx.picker('pose', 'pose', 'Pose', ctx.blockItems('pose', ctx.blockValue('pose', c.pose)), ctx.blockValue('pose', c.pose))}
-      <label>Touching<input data-stage-field="contact" value="${esc(stage.contact)}" placeholder="her hand on his shoulder"></label></div>
+      <label>Touching<input data-stage-field="contact" value="${esc(stage.contact)}" placeholder="her hand on his shoulder"></label></div>${sectionNegativeHtml(c, 'pose')}
     ${localBlockHtml(c, ctx.presets, 'pose', c.pose, 'Pose')}
     <datalist id="stageExpressions">${EXPRESSIONS.map(x => `<option value="${esc(x)}">`).join('')}</datalist></section>`;
 }
@@ -103,9 +104,9 @@ export function placeHtml(c, ctx) {
     ? `${tile({attrs: `data-unfold="lightFrom" data-chosen="lightFrom" aria-expanded="false"`, pressed: true, label: from[1], title: from[2], art: diagramSvg('light', from[0]), cls: 'tile-mini'})}<button type="button" class="small" data-unfold="lightFrom" aria-expanded="false">Change</button>`
     : LIGHT_FROM.map(([k, label, words]) => tile({attrs: `data-light-from="${k}"`, pressed: stage.lightFrom === k, label, title: words, art: diagramSvg('light', k), cls: 'tile-mini'})).join('');
   return `<section class="image-section image-place"><h3>Place and light</h3>
-    ${blockRow('location', 'environment', 'Setting')}${blockRow('light', 'light', 'Light')}
+    ${blockRow('location', 'environment', 'Setting')}${sectionNegativeHtml(c, 'setting')}${blockRow('light', 'light', 'Light')}
     <div class="place-more"><div class="ctl"><span class="ctl-label">Light from</span><div class="facing">${fromTiles}</div></div>
-      <label class="ctl">Mood<input data-stage-field="mood" list="stageMoods" value="${esc(stage.mood)}" placeholder="calm, tense, romantic…"></label></div>
+      <label class="ctl">Mood<input data-stage-field="mood" list="stageMoods" value="${esc(stage.mood)}" placeholder="calm, tense, romantic…"></label></div>${sectionNegativeHtml(c, 'light')}
     <datalist id="stageMoods">${MOODS.map(x => `<option value="${esc(x)}">`).join('')}</datalist></section>`;
 }
 

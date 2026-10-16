@@ -338,7 +338,13 @@ try {
     assert.notEqual(await softChip.getAttribute('disabled'), null);
     assert.match(await page.locator('#assembledNegative').textContent(), /visible genitals/);
     assert.match(await page.locator('.image-exclude p.hint', {hasText: 'Nonadult reward'}).textContent(), /always on/);
+    // the reward's configured defaults are locked too, and section words never take them out (#616)
+    assert.notEqual(await page.locator('[data-negative=clean]').getAttribute('disabled'), null);
+    await page.locator('[data-section-negative=details]').fill('visible genitals');
+    assert.equal((await page.locator('#assembledNegative').textContent()).split(', ').filter(t => t === 'visible genitals').length, 1);
+    await page.locator('[data-section-negative=details]').fill('');
     await page.locator('[data-shot-mode=adult]').click();
+    assert.notEqual(await page.locator('[data-negative=clean]').getAttribute('disabled'), null);
     assert.equal(await softChip.getAttribute('disabled'), null);
     assert.equal(await softChip.getAttribute('aria-pressed'), 'false');
     assert.doesNotMatch(await page.locator('#assembledNegative').textContent(), /visible genitals/);
@@ -349,6 +355,17 @@ try {
     await page.locator('[data-compose=rating]').selectOption('nsfw');
     assert.match(await page.locator('#assembledNegative').textContent(), /visible genitals/);
     await page.locator('[data-compose=rating]').selectOption('safe');
+    // Each section has its own words to avoid, under it; they join the exclusions in section order and are kept (#616)
+    await page.locator('[data-section-negative=setting]').fill('crowd, street signs');
+    await page.locator('[data-section-negative=pose]').fill('crossed arms');
+    await page.locator('[data-section-negative=scene]').fill('phone');
+    assert.match(await page.locator('#assembledNegative').textContent(), /phone, crossed arms, crowd, street signs, bad hands, child, loli$/);
+    assert.match(await page.locator('.image-exclude-peek, .exclude-peek').first().textContent(), /words by section/);
+    await page.locator('#generate').click();
+    assert.deepEqual(generated.at(-1).compose.sectionNegatives, {setting: 'crowd, street signs', pose: 'crossed arms', scene: 'phone'});
+    assert.equal(generated.at(-1).negative, await page.locator('#assembledNegative').textContent());
+    await page.locator('[data-section-negative=scene]').fill('');
+    await page.locator('[data-section-negative=pose]').fill('');
     // Background-only generated compositions keep their local words on history reuse.
     const background = structuredClone(adapted.compose); background.characters = []; background.chars = []; background.man = false;
     history.unshift({run_id:'blocks',at:'2026-10-14',characters:[],positive:adapted.positive,negative:adapted.negative,model_file:'fixture.safetensors',compose:background,renders:[{id:'blocks-1',file:'blocks.png',seed:10}]});
@@ -382,11 +399,13 @@ try {
     await page.keyboard.press('ArrowRight');
     assert.match(await page.locator('#libLightbox .pic img').getAttribute('src'), /order-later.png/);
     await page.keyboard.press('Escape');
+    await page.locator('[data-section-negative=setting]').fill('crowd, street signs');
     for (const width of [2560, 1366, 390]) {
       await page.setViewportSize({width,height:844});
       await page.locator('[data-person=alice]').screenshot({path:`/tmp/codex-subplot-shot-blocks/people-${width}.png`});
       for (const section of ['place', 'look', 'direction']) await page.locator('.image-' + section).screenshot({path:`/tmp/codex-subplot-shot-blocks/${section}-${width}.png`});
       await page.locator('[data-local-block=pose]').screenshot({path:`/tmp/codex-subplot-shot-blocks/pose-${width}.png`});
+      await page.locator('.section-avoid', {has: page.locator('[data-section-negative=setting]')}).screenshot({path:`/tmp/codex-subplot-shot-blocks/setting-avoid-${width}.png`});
       await page.locator('.image-direction').evaluate(el => el.scrollIntoView({block:'start'}));
       await page.evaluate(() => { globalThis.document.querySelector('#composeDialog').scrollTop = 0; globalThis.scrollTo(0,0); });
       await page.screenshot({path:`/tmp/codex-subplot-shot-blocks/direction-screen-${width}.png`});

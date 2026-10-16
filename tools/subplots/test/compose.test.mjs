@@ -133,7 +133,7 @@ test('--end-session cancels only its own jobs and leaves a busy session running'
 
 test('strict validation is automatic and never posts a refused agent recipe', async () => {
   for (const recipe of [
-    {override: {negative: 'replacement'}}, {negative: 'custom exclusions'},
+    {override: {negative: 'replacement'}}, {sectionNegatives: {clothing: 'custom exclusions'}},
     {style: 'soft', blockOverrides: {style: {soft: {quality: ''}}}},
     {people: {alice: {appearance: 'replacement'}}},
     {subplotId: 'local:sample:scene:steps'},
@@ -163,8 +163,8 @@ test('reward paths and their symlinks take the reward rules without an opt-in fl
   }
 });
 
-test('reward CLI rejects additional preset exclusions and supports explicit mode elsewhere', async () => {
-  const extra = await run({rewardPath: true, recipe: {hard: true, negatives: ['clean', 'optional']}});
+test('reward CLI refuses removing the configured exclusions and supports explicit mode elsewhere', async () => {
+  const extra = await run({rewardPath: true, recipe: {hard: true, negatives: ['optional']}});
   assert.notEqual(extra.code, 0); assert.match(extra.stderr, /configured default selection/);
   assert.deepEqual(extra.seen.posts, []); fs.rmSync(extra.dir, {recursive: true});
   const missing = await run({}, ['--reward']);

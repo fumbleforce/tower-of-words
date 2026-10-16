@@ -49,12 +49,23 @@ for (const [kind, id, data] of [
 ]) test('refuses rewriting ' + kind + ' preset ' + JSON.stringify(data), () => {
   assert.throws(() => build({blockOverrides: {[kind]: {[id]: data}}}), /block words must come from the selected preset/);
 });
-for (const key of ['appearance', 'clothing', 'appearanceNegative', 'clothingNegative'])
+for (const key of ['appearance', 'clothing'])
   test('refuses manual person ' + key + ', including empty words', () => {
     for (const text of ['replacement', '']) assert.throws(() => build({people: {alice: {[key]: text}}}), /appearance and clothing words/);
   });
-test('refuses ad hoc additive exclusion words', () => {
-  assert.throws(() => build({negative: 'custom tags'}), /selected negative presets/);
+test('section, person and older free exclusion words add to the preset exclusions in a fixed order (#616)', () => {
+  const body = build({negative: 'general words', sectionNegatives: {details: 'details words', setting: 'crowd, signs', scene: 'scene words'},
+    people: {alice: {clothingNegative: 'hat', appearanceNegative: ''}}});
+  assert.equal(body.negative, 'preset exclusions, style exclusions, wrong eye colour, wrong coat, hat, scene words, crowd, signs, details words, general words, child, loli');
+  assert.equal(body.compose.people.alice.clothingNegative, 'wrong coat, hat');
+  assert.deepEqual(body.presets.negatives, [{id: 'clean', v: 3}]);
+  assert.throws(() => build({people: {bob: {clothingNegative: 'hat'}}}), /absent from the shot/);
+  assert.throws(() => build({sectionNegatives: {clothing: 'hat'}}), /unsupported field clothing/);
+  assert.throws(() => build({sectionNegatives: {setting: 3}}), /Agent recipe refused/);
+});
+test('an older recipe with one free negative still assembles it after the section words', () => {
+  const old = build({negative: 'custom tags'});
+  assert.equal(old.negative, 'preset exclusions, style exclusions, wrong eye colour, wrong coat, custom tags, child, loli');
 });
 test('refuses exclusion-disable switches', () => {
   assert.throws(() => build({styleNegOff: true}), /style exclusions/);
@@ -180,9 +191,10 @@ test('a nonadult reward loads the soft negative preset; Adult mode never does, a
     assert.deepEqual(adult.presets.negatives, [{id: 'clean', v: 3}]);
     assert.doesNotMatch(adult.negative, /soft exclusions/);
   }
-  assert.throws(() => prepareRewardGeneration({...base, hard: true, negatives: ['clean', 'soft']}, blocks), /configured default selection/);
-  for (const negatives of [[], ['soft'], ['clean', 'soft', 'soft']])
-    assert.throws(() => prepareRewardGeneration({...base, negatives}, blocks), /plus the soft negative preset/);
+  assert.deepEqual(prepareRewardGeneration({...base, hard: true, negatives: ['clean', 'soft']}, blocks).presets.negatives, [{id: 'clean', v: 3}, {id: 'soft', v: 2}]);
+  assert.deepEqual(prepareRewardGeneration({...base, negatives: ['clean', 'soft', 'soft']}, blocks).presets.negatives, [{id: 'clean', v: 3}, {id: 'soft', v: 2}]);
+  for (const negatives of [[], ['soft']])
+    assert.throws(() => prepareRewardGeneration({...base, negatives}, blocks), /configured default selection; add presets, never remove them \(missing clean\)/);
   assert.throws(() => prepareRewardGeneration({...base}, presets), /need the soft negative preset/);
   assert.throws(() => prepareRewardGeneration({...base, hard: 'yes'}, blocks), /hard must be true/);
 });
@@ -194,9 +206,12 @@ test('reward entry preserves exactly the configured exclusion selection and norm
   assert.deepEqual(prepareRewardGeneration(recipe, presets, 'reward'), expected);
   const blocks = structuredClone(presets);
   blocks.negative.push(rec('optional', {text: 'optional exclusions', default: false}));
-  for (const negatives of [[], ['clean', 'optional'], ['optional'], ['clean', 'clean']])
+  for (const negatives of [[], ['optional']])
     assert.throws(() => prepareRewardGeneration({...recipe, negatives}, blocks), /configured default selection/);
-  assert.throws(() => prepareRewardGeneration({...recipe, negative: 'extra words'}, blocks), /selected negative presets/);
+  assert.deepEqual(prepareRewardGeneration({...recipe, negatives: ['clean', 'clean']}, blocks).presets.negatives, [{id: 'clean', v: 3}]);
+  const added = prepareRewardGeneration({...recipe, negatives: ['optional', 'clean'], negative: 'extra words', sectionNegatives: {setting: 'crowd'}}, blocks);
+  assert.deepEqual(added.presets.negatives, [{id: 'clean', v: 3}, {id: 'optional', v: 1}]);
+  assert.match(added.negative, /^preset exclusions, optional exclusions, .*crowd, extra words, child, loli$/);
   blocks.negative[1].data.default = true;
   const updated = prepareRewardGeneration(recipe, blocks);
   assert.deepEqual(updated.presets.negatives, [{id: 'clean', v: 3}, {id: 'optional', v: 1}]);
@@ -208,4 +223,14 @@ test('reward path detection follows the established directory, without matching 
     assert.equal(isRewardRecipePath(file), true, file);
   for (const file of ['/tmp/rewards/example.json', '/tmp/public/rewards-copy/example.json'])
     assert.equal(isRewardRecipePath(file), false, file);
+});
+
+test('reward rating exclusions stay on whatever the section words say, and cannot be switched off (#616)', () => {
+  const blocks = structuredClone(presets);
+  blocks.negative.push(rec('soft', {text: 'soft exclusions', default: false, soft: true}, 2));
+  const body = prepareRewardGeneration({...base, rating: 'nsfw', negative: '', sectionNegatives: {scene: 'soft exclusions'}}, blocks);
+  assert.equal(body.negative.split(', ').filter(t => t === 'soft exclusions').length, 1);
+  assert.match(body.negative, /^preset exclusions, soft exclusions,/);
+  for (const changes of [{styleNegOff: true}, {override: {negative: ''}}, {blockOverrides: {negative: {soft: {text: ''}}}}, {charNegOff: {alice: true}}])
+    assert.throws(() => prepareRewardGeneration({...base, ...changes}, blocks), /Agent recipe refused/);
 });

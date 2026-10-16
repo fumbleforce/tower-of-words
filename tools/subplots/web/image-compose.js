@@ -7,6 +7,7 @@ import {blockData, directionText} from './image-block-words.js';
 import {personWords} from './image-people.js';
 import {stageWords, personOf} from './image-stage.js';
 import {compositionSchema} from './image-composition-schema.js';
+import {sectionNegativeWords} from './image-section-negatives.js';
 export const DIRECTION_KINDS = [['pose', 'pose', 'Pose'], ['environment', 'location', 'Setting'], ['light', 'light', 'Light']];
 export const DEFAULT_COMPOSITION = {
   characters: [], outfit: {}, useShort: true, cameras: [], sceneRefs: [], negatives: null,
@@ -84,16 +85,19 @@ function build(c, presets, subplotId) {
     ...blocks.map((text, i) => ['person', chars[i].data.generic ? 'The other person' : chars[i].data.name || chars[i].id, text]), ...directionParts,
     ['camera', 'Camera', cameraWords], ['camera', 'Picture shape', blockData(c, presets, 'framing', c.framing).prompt], ['details', 'More details', c.extra], ['style', 'Style', style.suffix]]
     .map(([kind, label, text]) => ({kind, label, text: String(text || '').trim()})).filter(x => x.text);
-  // The soft-scene exclusion is the negative preset marked soft, never typed words (CLAUDE.md, Reward tiers by mode). It is
-  // on for every nonadult reward and for a nonadult Mature or Adult picture, whatever the selection; Adult (hard) gets none.
+  // The negative, in this order: the selected exclusion presets, the style's, each person's appearance and clothing
+  // exclusions, the section exclusions (image-section-negatives.js) and the older free words, the always-on base, then
+  // the locked rating exclusions not already in. Content exclusions are manual; rating exclusions are fixed (#616):
+  // the soft-scene exclusion is the negative preset marked soft, never typed words (CLAUDE.md, Reward tiers by mode),
+  // on for every nonadult reward and for a nonadult Mature or Adult picture; a reward (nonadult or Adult) also keeps
+  // the configured default presets. Nothing typed removes them.
   const negatives = c.negatives || (presets.negative || []).filter(p => !p.archived && p.data.default).map(p => p.id);
-  const softIds = (presets.negative || []).filter(p => !p.archived && p.data?.soft === true).map(p => p.id);
-  const softOn = !c.hard && (c.reward === true || rating !== 'safe');
-  const softAdded = softOn ? softIds.filter(id => !negatives.includes(id)) : [];
-  const softTexts = softOn ? softIds.map(id => blockData(c, presets, 'negative', id).text) : [];
+  const lockedIds = lockedIdsOf(c, presets, rating);
+  const lockedAdded = lockedIds.filter(id => !negatives.includes(id));
+  const lockedTexts = lockedIds.map(id => blockData(c, presets, 'negative', id).text);
   const negative = dedupe([...negatives.map(id => blockData(c, presets, 'negative', id).text), c.blockOverrides?.style?.[c.style]?.negative ?? (c.styleNegOff ? '' : style.negative),
-    ...people.map(p => p.appearanceNegative), ...people.map(p => p.clothingNegative), c.negative, 'child, loli',
-    ...softAdded.map(id => blockData(c, presets, 'negative', id).text)]);
+    ...people.map(p => p.appearanceNegative), ...people.map(p => p.clothingNegative), ...sectionNegativeWords(c), c.negative, 'child, loli',
+    ...lockedAdded.map(id => blockData(c, presets, 'negative', id).text)]);
   const md = byId('model', c.model)?.data || {};
   const fr = byId('framing', c.framing)?.data || {};
   const ref = (type, id) => { const p = byId(type, id); return p ? {id: p.id, v: p.v} : null; };
@@ -104,7 +108,7 @@ function build(c, presets, subplotId) {
   const repaintPrompt = smartJoin([style.quality, rating, 'Two panels side by side showing the same person, a close-up of their head.', 'Both panels show the same face, hairstyle, hair colour and eyes.', own]);
   return {parts, body: {
     positive: (typeof c.override === 'string' ? c.override : c.override?.positive)?.trim() || positive,
-    negative: c.override?.negative != null ? (softOn ? dedupe([c.override.negative, ...softTexts]) : c.override.negative) : negative, overridden: !!c.override,
+    negative: c.override?.negative != null ? (lockedIds.length ? dedupe([c.override.negative, ...lockedTexts]) : c.override.negative) : negative, overridden: !!c.override,
     model_file: md.file, steps: +c.steps || md.steps || 30, cfg: c.cfg != null && c.cfg !== '' ? +c.cfg : (md.cfg ?? 5),
     sampler: c.sampler || md.sampler || 'euler_ancestral', scheduler: c.scheduler || md.scheduler || 'normal',
     w: +c.width || fr.w || 1152, h: +c.height || fr.h || 896, count: Math.min(8, Math.max(1, +c.count || 1)),
@@ -115,18 +119,25 @@ function build(c, presets, subplotId) {
     huefix: (c.huefix || []).map(h => ({...h})),
     presets: {characters: c.characters.map(id => ref('character', id)).filter(Boolean), man: generic ? ref('character', generic.id) : null,
       model: ref('model', c.model), style: ref('style', c.style), framing: ref('framing', c.framing),
-      cameras: c.cameras.map(id => ref('camera', id)).filter(Boolean), scenes: c.sceneRefs.map(id => ref('scene', id)).filter(Boolean), negatives: [...negatives, ...softAdded].map(id => ref('negative', id)).filter(Boolean),
+      cameras: c.cameras.map(id => ref('camera', id)).filter(Boolean), scenes: c.sceneRefs.map(id => ref('scene', id)).filter(Boolean), negatives: [...negatives, ...lockedAdded].map(id => ref('negative', id)).filter(Boolean),
       pose: ref('pose', blockId(presets, 'pose', c.pose)), location: ref('location', blockId(presets, 'location', c.environment)), light: ref('light', blockId(presets, 'light', c.light)),
       outfits: Object.values(c.outfit).filter(v => typeof v === 'string').map(id => ref('outfit', id)).filter(Boolean)},
     ipa: canReference && c.referenceOn ? {ref: portrait, strength: +c.referenceStrength, cutout: !!c.referenceCutout} : null,
     repaint: canReference && c.faceFix ? {ref: portrait, denoise: +c.faceStrength, prompt: repaintPrompt} : null,
     autostart: true,
-  }, soft: {on: softOn, ids: softIds}};
+  }, locked: {soft: softOn(c, rating), ids: lockedIds}};
 }
 export const assembleComposition = (c, presets, subplotId) => build(c, presets, subplotId).body;
-// Whether the soft-scene exclusion applies to this shot, and which negative presets are the soft ones. The composer
-// shows those on and locked while it applies (images.js).
-export const softExclusion = (c, presets, subplotId) => build(c, presets, subplotId).soft;
+// The rating exclusions for this shot: the soft preset where it applies (soft: true) and, for a reward, the configured
+// default presets. ids are the presets kept on whatever is selected; the composer shows them on and locked (images.js).
+const softOn = (c, rating) => !c.hard && (c.reward === true || rating !== 'safe');
+function lockedIdsOf(c, presets, rating) {
+  const live = (presets.negative || []).filter(p => !p.archived);
+  const defaults = c.reward === true ? live.filter(p => p.data?.default).map(p => p.id) : [];
+  const soft = softOn(c, rating) ? live.filter(p => p.data?.soft === true).map(p => p.id) : [];
+  return [...defaults, ...soft.filter(id => !defaults.includes(id))];
+}
+export const lockedExclusions = (c, presets, subplotId) => build(c, presets, subplotId).locked;
 // The built prompt cut into the stretches each block wrote, for display only: [{kind, label, text}] with the plain
 // separators between them as {text}. A prompt copied from history (override) is one plain stretch.
 export function promptParts(c, presets, subplotId) {

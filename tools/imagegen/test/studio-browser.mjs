@@ -85,7 +85,7 @@ await withBrowserJob('codex-image-studio', async browser => {
     if (width <= 720 && !await page.locator('.studio-controls').evaluate(el => el.open)) await page.locator('.studio-controls-toggle').click();
     const containment = await page.locator('.studio-controls').evaluate(sidebar => {
       const bounds = sidebar.getBoundingClientRect();
-      const controls = [...sidebar.querySelectorAll('.place-more button, .place-more input')].map(el => {
+      const controls = [...sidebar.querySelectorAll('.place-more button, .place-more input, .image-place .section-avoid input')].map(el => {
         const box = el.getBoundingClientRect();
         return {label: el.getAttribute('data-stage-field') || el.textContent.trim(), left: box.left, right: box.right, width: box.width};
       });
@@ -94,6 +94,20 @@ await withBrowserJob('codex-image-studio', async browser => {
     assert.ok(containment.controls.every(c => c.left >= containment.left && c.right <= containment.right), 'Place controls fit sidebar at ' + width + ': ' + JSON.stringify(containment));
     assert.ok(containment.controls.find(c => c.label === 'mood').width >= 100, 'Mood is usable at ' + width);
   }
+  // Words to avoid sit under their section and join the exclusions after the presets (#616)
+  for (const width of [1366, 390]) {
+    await page.setViewportSize({width, height: width > 720 ? 900 : 844});
+    if (width <= 720) {
+      await page.waitForFunction(() => !globalThis.document.querySelector('.studio-controls').open);
+      await page.locator('.studio-controls-toggle').click();
+    }
+    await page.locator('[data-section-negative=setting]').fill('crowd, posters');
+    assert.equal(await negative.inputValue(), 'watermark, blurry, crowd, posters, child, loli');
+    await page.locator('.image-place').screenshot({path: path.join(output, `place-avoid-${width}.png`)});
+    await page.locator('.image-what').screenshot({path: path.join(output, `what-avoid-${width}.png`)});
+  }
+  await page.locator('[data-section-negative=setting]').fill('');
+  assert.equal(await negative.inputValue(), 'watermark, blurry, child, loli');
   await page.setViewportSize({width: 1440, height: 1000});
   await page.screenshot({path: path.join(output, 'desktop.png')});
   await page.setViewportSize({width: 2560, height: 1440});

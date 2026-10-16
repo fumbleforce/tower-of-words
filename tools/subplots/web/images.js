@@ -1,6 +1,7 @@
 const {setInterval, clearInterval, document, URLSearchParams, CustomEvent} = globalThis;
 import {$, esc, api, guarded, notice} from './common.js';
 import {localBlockHtml, bindBlockWords} from './image-block-words.js';
+import {sectionNegativeHtml, bindSectionNegatives} from './image-section-negatives.js';
 import {newestPictureFirst} from './image-order.js';
 import {clearPendingPicture, picturePick, picturePath} from './picture-selection.js';
 import {draftPictureUrl, madeByAgent} from '../../imagegen/web/gallery.js';
@@ -8,7 +9,7 @@ import {isExternal, externalReplayNotice, provenanceHtml, originalGeneration, ex
 import {standaloneComposition, standaloneJob, standalonePromptHtml} from './image-standalone.js';
 import {personWords} from './image-people.js';
 import {guessComposition} from './image-guess.js';
-import {applyDefaults, normalizeComposition, assembleComposition, softExclusion, promptParts, portraitUrl} from './image-compose.js';
+import {applyDefaults, normalizeComposition, assembleComposition, lockedExclusions, promptParts, portraitUrl} from './image-compose.js';
 import {blockId} from '../../imagegen/web/blocks.js';
 import {openBlockEditor} from './block-editor.js';
 import {createLibrary} from './library.js';
@@ -329,22 +330,23 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     const current = standalone ? '' : shotHtml(c);
     const look = `<section class="image-section image-look"><div class="two">${pickerHtml('style', 'style', 'Art style', presetOptions('style'), c.style, null)}${field('rating', 'Content level', [{id: 'safe', label: 'General'}, {id: 'sensitive', label: 'Mature'}, {id: 'nsfw', label: 'Adult'}], c.rating, null)}</div><p id="imageRatingNote" class="hint"></p>${localBlockHtml(c, presets || {}, 'style', c.style, 'Art style')}</section>`;
     const happens = `<section class="image-section image-what"><div class="section-head"><h3>What happens</h3>${pickerHtml('scenePreset', 'scene', 'Scene template', presetOptions('scene'), c.sceneRefs?.[0] || '', 'Choose a saved direction…')}</div>
-      <label><span class="visually-hidden">What happens in this shot</span><textarea data-compose="scene" rows="2" placeholder="Choose a saved direction above, or describe the action in your own words.">${esc(c.scene)}</textarea></label>${c.sceneRefs?.[0] ? '<button type="button" class="small" data-reset-scene>Reset to template</button>' : ''}</section>`;
-    // the soft-scene exclusion (image-compose.js softExclusion): its preset is on and locked while it applies
-    const softRule = softExclusion(c, presets || {}, getScene()?.id);
-    const lockedOn = id => softRule.on && softRule.ids.includes(id);
+      <label><span class="visually-hidden">What happens in this shot</span><textarea data-compose="scene" rows="2" placeholder="Choose a saved direction above, or describe the action in your own words.">${esc(c.scene)}</textarea></label>${c.sceneRefs?.[0] ? '<button type="button" class="small" data-reset-scene>Reset to template</button>' : ''}${sectionNegativeHtml(c, 'scene')}</section>`;
+    // the rating exclusions (image-compose.js lockedExclusions): their presets are on and locked while they apply
+    const locked = lockedExclusions(c, presets || {}, getScene()?.id);
+    const lockedOn = id => locked.ids.includes(id);
     // Exclude folds to one line, like the generation settings: the negative blocks in use and anything else
     const negNames = active('negative').filter(p => c.negatives?.includes(p.id) || lockedOn(p.id)).map(p => p.data.name);
-    const excludePeek = [...negNames, c.negative ? 'more words' : '', softRule.on ? 'soft-scene limits' : ''].filter(Boolean).join(', ') || 'nothing';
-    const details = `<section class="image-section image-details"><label class="details-line">More details<textarea data-compose="extra" rows="1" placeholder="Props, clothes, anything the blocks don't say">${esc(c.extra || '')}</textarea></label></section>`;
+    const sectionWords = Object.values(c.sectionNegatives || {}).some(Boolean) || (c.people && Object.values(c.people).some(p => p.appearanceNegative || p.clothingNegative));
+    const excludePeek = [...negNames, sectionWords ? 'words by section' : '', c.negative ? 'more words' : '', locked.soft ? 'soft-scene limits' : ''].filter(Boolean).join(', ') || 'nothing';
+    const details = `<section class="image-section image-details"><label class="details-line">More details<textarea data-compose="extra" rows="1" placeholder="Props, clothes, anything the blocks don't say">${esc(c.extra || '')}</textarea></label>${sectionNegativeHtml(c, 'details')}</section>`;
     const exclude = `<details class="image-section image-exclude" data-exclude-open ${excludeOpen ? 'open' : ''}><summary><span class="settings-title">Exclude</span><span class="hint exclude-peek">${esc(excludePeek)}</span></summary><div class="chips">${active('negative').map(p => lockedOn(p.id)
       ? chip(p.data.name, true, `data-negative="${esc(p.id)}" disabled title="${esc('On for this shot: ' + (p.data.text || ''))}"`)
       : chip(p.data.name, c.negatives?.includes(p.id), `data-negative="${esc(p.id)}" title="${esc(p.data.text)}"`)).join('')}<button type="button" data-new-block="negative">+ New</button><button type="button" data-edit-block="negative" data-edit-list="negatives">Edit shared template…</button></div>
       ${(c.negatives || []).map(id => localBlockHtml(c, presets || {}, 'negative', id)).join('')}
       <p class="hint">Generated exclusion prompt:</p><p id="assembledNegative" class="hint prompt-box exclude-prompt"></p>
-      <div class="two"><label>Anything else to avoid?<textarea data-compose="negative" rows="1">${esc(c.negative || '')}</textarea></label>
+      <div class="two"><label>Anything else to avoid, in any section<textarea data-compose="negative" rows="1">${esc(c.negative || '')}</textarea></label>
       <label>Notes for steps outside the prompt<textarea data-compose="details" rows="1" placeholder="Inpaint, colour fix, LoRA weights. Kept with the picture, not sent to the model.">${esc(c.details || '')}</textarea></label></div>
-      <p class="hint">${c.hard ? 'Adult: standing soft-scene exclusions are off.' : c.reward ? 'Nonadult reward: the soft-scene exclusion is always on, at every content level.' : 'Nonadult: standing soft-scene exclusions apply to Mature and Adult content levels.'} Other exclusion words stay as written.</p></details>`;
+      <p class="hint">${c.hard ? (c.reward ? 'Adult reward: the default exclusions are always on; the soft-scene exclusion is off.' : 'Adult: standing soft-scene exclusions are off.') : c.reward ? 'Nonadult reward: the default exclusions and the soft-scene exclusion are always on, at every content level.' : 'Nonadult: standing soft-scene exclusions apply to Mature and Adult content levels.'} Words to avoid in each section, and these presets, are yours to choose.</p></details>`;
     const dctx = directCtx();
     const o = c.original;
     const smallChanges = o?.start ? '<button data-small-changes title="Start from this shot’s picture with the same seed and change it a little (img2img, low strength).">Small changes to this picture</button>' : '';
@@ -480,6 +482,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     const xd = host.querySelector('[data-exclude-open]');
     if (xd) xd.ontoggle = () => { excludeOpen = xd.open; };
     bindBlockWords(host, (change, repaint) => { edit(change, repaint); if (repaint === false) renderShot(); });
+    bindSectionNegatives(host, edit);
     bindDirect(host, directCtx());
     // Seed Auto or Fixed, as in the dashboard: Fixed with no seed yet picks one to repeat
     host.querySelectorAll('[data-seed-mode]').forEach(b => b.onclick = () => edit(c => {
