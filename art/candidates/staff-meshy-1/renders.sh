@@ -1,6 +1,6 @@
 #!/bin/sh
 # Renders for reviews/<id>-meshy-1, from the textured (not yet rigged) model, with the scripts, camera and light of
-# Kuro's, Aoi's and Emi's rounds (tools/characters/parts/render.py; aoi-emi-meshy-1/chin_bl.py;
+# Kuro's, Aoi's and Emi's rounds (tools/characters/steps/render_bl.py; aoi-emi-meshy-1/chin_bl.py;
 # kuro-meshy-orig-3/front_bl.py, grid.py, uvstats.py), into the main checkout's art/parts/<id>-meshy-1/:
 # renders/<name>/ (turnaround and face), renders/measure/<name>.png (straight-on, for the head share),
 # renders/chin-<name>/ (from below, texture colours only), diag/uv-<name>.png and atlas-<name>.png.
@@ -13,7 +13,7 @@ A=/home/jorgen/repo/japanese/art/parts/$C-meshy-1
 K=$HERE/../kuro-meshy-orig-3
 PY=~/ai/sd/venv/bin/python
 mkdir -p "$A/diag" "$A/renders/measure" "$A/renders/chin-$NAME"
-blender -b -t 8 --python-exit-code 1 -P "$ROOT/tools/characters/parts/render.py" -- \
+blender -b -t 8 --python-exit-code 1 -P "$ROOT/tools/characters/steps/render_bl.py" -- \
   "$TEX" "$A/renders/$NAME" size=768 face_z=1.15 face_dist=1.5 2>&1 | grep -E "RENDERED|rror"
 blender -b -P "$K/front_bl.py" -- "$TEX" "$A/renders/measure/$NAME.png" 2>&1 | grep -E "HEIGHT|rror"
 $PY "$K/grid.py" "$A/renders/measure/$NAME.png" "$A/renders/measure/$NAME-grid.png"

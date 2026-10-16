@@ -1,6 +1,6 @@
 """Close-ups of one part of Carina's model, for the carina-2 round 2 fixes (reviews/carina-meshy-1): the waist seam,
 the head and the trousers, before and after. Blender, Cycles on the CPU (run through the GPU queue, as GUIDE requires for Blender), the parts round's
-light (tools/characters/parts/render.py: sky plus a sun from above her right, image left), Standard view transform.
+light (tools/characters/steps/render_bl.py: sky plus a sun from above her right, image left), Standard view transform.
 The model is not rescaled unless fit= is given: metres as in the file (her feet at y = 0, about 1.1 tall), front
 +z in glTF (-y here). fit: stand her at that height first, as the game and viewers do.
 

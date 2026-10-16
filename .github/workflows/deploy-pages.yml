@@ -17,7 +17,6 @@ on:
       - 'game3d/**'
       - 'tools/assets/assets.lock.json'
       - 'tools/bible/**'
-      - 'tools/creator/**'
       - 'reviews/**'
       - 'showcase/**'
   workflow_dispatch:

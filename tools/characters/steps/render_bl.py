@@ -1,6 +1,6 @@
-"""Turnaround stills for the parts round (reviews/char-mio-parts-1). Blender, run with -t 8:
+"""Turnaround stills, first made for the parts round (reviews/char-mio-parts-1), now the sheets step's (sheets.py). Blender, run with -t 8:
 
-  blender -b -t 8 -P tools/characters/parts/render.py -- <model.glb|.blend> <outdir> [size=1024] [face_z=1.38] [face_dist=0.9] [engine=cycles]
+  blender -b -t 8 -P tools/characters/steps/render_bl.py -- <model.glb|.blend> <outdir> [size=1024] [face_z=1.38] [face_dist=0.9] [engine=cycles]
 
 Same camera and light for every attempt and for meshy-single, so they compare: a 50 mm camera at chest height,
 front, her left three-quarter (image right side turned to us), her left side, back, and a face close-up (front and

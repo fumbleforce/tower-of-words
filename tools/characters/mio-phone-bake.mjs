@@ -22,7 +22,7 @@ const clip = await withBrowserJob('mio-phone-bake', async (browser) => {
     return await page.evaluate(async (url) => {
       const T = await import('three');
       const { GLTFLoader } = await import(url + 'game3d/vendor/loaders/GLTFLoader.js');
-      const R = await import(url + 'tools/characters/parts/retarget.js');
+      const R = await import(url + 'tools/characters/idle/retarget-clips.js');
       const loader = new GLTFLoader();
       const [source, target, json] = await Promise.all([
         loader.loadAsync(url + 'game3d/assets/mio/walk.glb'),

@@ -1,6 +1,6 @@
 // Retarget a playing clip from one rig onto another by bone name: each source bone's change in world direction since
-// its rest pose is copied onto the target bone (aligned once at rest). Used by the parts viewer (live) and by
-// tools/characters/chibi-bake.mjs (baked into game clips). Mixamo names, and Meshy's auto-rig names (its spine is
+// its rest pose is copied onto the target bone (aligned once at rest). Used by tools/characters/mio-phone-bake.mjs and
+// art/candidates/pool-swimwear-1/bake-rest-clips.mjs (baked into game clips). Mixamo names, and Meshy's auto-rig names (its spine is
 // numbered the other way round: Hips > Spine02 > Spine01 > Spine > neck), map to one set.
 import * as THREE from 'three';
 

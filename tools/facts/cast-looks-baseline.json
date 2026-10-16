@@ -1,7 +1,6 @@
 {
  "about": "Old round scripts that keep their own cast looks, as the record of what ran; nothing new goes here (tools/facts/cast-looks.mjs).",
  "files": {
-  "tools/creator/base/build_review.py": 1,
   "tools/days25_assets.py": 4,
   "tools/emi2.py": 1,
   "tools/imgqa_scene.py": 1,

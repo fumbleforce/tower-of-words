@@ -25,7 +25,7 @@ const results = await withBrowserJob(
     const result = await page.evaluate(async (ids) => {
       const T = await import('three'),
         { GLTFLoader } = await import('/game3d/vendor/loaders/GLTFLoader.js'),
-        R = await import('/tools/characters/parts/retarget.js');
+        R = await import('/tools/characters/idle/retarget-clips.js');
       const loader = new GLTFLoader(),
         out = {};
       for (const candidate of ids) {

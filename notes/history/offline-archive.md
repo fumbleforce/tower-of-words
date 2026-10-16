@@ -21,3 +21,7 @@ On 2026-10-16 thirty-one loose files in `tools/` moved out of the checkout to `.
 ## Audio scripts
 
 On 2026-10-16 the old audio scripts that tools/audio/make.py replaced moved out of the checkout to `../bk-jap/2026-10-16-audio-scripts/`, each under its original repository path, with a `SHA256SUMS` manifest. The song generators the sound route still uses (tools/island_audio/song_gen2.py, and song_gen.py which it imports), the voice scripts in tools/island_audio/ and the committed round reports stayed in place, and the notes and presets keep the old paths.
+
+## Chibi kit, old bodies and character tools
+
+On 2026-10-16 (#643) the Meshy chibi kit, the old Mio, the VRM preview, every code-built body, tools/creator, tools/characters/parts and tools/characters/work moved out of the checkout to `../bk-jap/2026-10-16-characters/`, each under its original repository path, with a `SHA256SUMS` manifest (the retired model folders are also in `art/production/retired/2026-10-16/`). The parts renderer and clip retargeter the character build still uses stayed, as tools/characters/steps/render_bl.py and tools/characters/idle/retarget-clips.js.

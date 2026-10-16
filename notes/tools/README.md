@@ -56,4 +56,4 @@ The retired private pages are kept in the private backups (island/PRIVATE.md).
 
 ## Not tools (no bar, kept as records)
 
-Pages that belong to one art or review round and that Review items link to: tools/style-concepts/*-viewer.html, tools/characters/parts/viewer.html, tools/creator/ (the chibi creator, dropped 2026-10-04; its dress page is still published as /creator/), art/concept/, game3d/design/mock-*.html, game3d/showcase.html, game3d/minigames/*.html, game3d/tools/*-sheet.html, game3d/tools/speech/, game3d/vrm-test.html, tools/assets/render.html (thumbnail renderer) and each round's own index.html under reviews/ and the private rounds.
+Pages that belong to one art or review round and that Review items link to: tools/style-concepts/*-viewer.html, art/concept/, game3d/design/mock-*.html, game3d/showcase.html, game3d/minigames/*.html, game3d/tools/*-sheet.html, game3d/tools/speech/, tools/assets/render.html (thumbnail renderer) and each round's own index.html under reviews/ and the private rounds.

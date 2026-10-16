@@ -1,5 +1,5 @@
-// The shared skeleton the idle bake runs on (tools/characters/export-approved-idle.mjs; moved here from
-// tools/creator/recipe.js, which re-exports it). A source is a Meshy character put on one shared skeleton: the bone
+// The shared skeleton the idle bake runs on (tools/characters/export-approved-idle.mjs; it came from the archived
+// tools/creator/recipe.js). A source is a Meshy character put on one shared skeleton: the bone
 // names and bone axes of the Meshy API rig (Eric's), with the joints where that source has them, so one set of clips
 // (Eric's from the API library, the approved relaxed idle) drives every body.
 //

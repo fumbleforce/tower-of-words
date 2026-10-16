@@ -1,5 +1,5 @@
 """sheets: the pictures a Review of the model needs, as the staff rounds made them (art/candidates/staff-meshy-1/
-renders.sh and sheets.sh): a turnaround and face close-ups in Blender (tools/characters/parts/render.py, the same
+renders.sh and sheets.sh): a turnaround and face close-ups in Blender (tools/characters/steps/render_bl.py, the same
 camera and light for every model), close-ups from below the chin in the texture's own colours to look for marks
 (chin_bl.py), and contact sheets of both (sheet(), lifted from kuro-meshy-orig-2/sheet.py). Holds the GPU lock.
 
@@ -43,7 +43,7 @@ def run(ctx, o):
     r = ctx.path('build', 'renders')
     os.makedirs(r, exist_ok=True)
     name = f'character-build-{ctx.id}'
-    blender(os.path.join(ROOT, 'tools/characters/parts/render.py'),
+    blender(os.path.join(ROOT, 'tools/characters/steps/render_bl.py'),
             [model, r, 'size=768', f'face_z={o.get("face_z", 1.15)}', f'face_dist={o.get("face_dist", 1.5)}'], name)
     blender(os.path.join(HERE, 'chin_bl.py'), [model, os.path.join(r, 'chin'), f'chin={o.get("chin", 0.57)}'], name)
     s = ctx.path('build', 'sheets')
