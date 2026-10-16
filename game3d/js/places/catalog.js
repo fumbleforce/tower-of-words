@@ -183,6 +183,7 @@ export const PLACE_DETAILS = {
       'liftOpen',
       'liftClose',
       'monitorRepair',
+      'sendBack',
     ],
   },
   forecourt: {

@@ -21,6 +21,7 @@ import { lobbyCommuters } from './lobby-commuters.js';
 import { gateBackground } from './background-people.js';
 import { lobbyDay2 } from './lobby-day2.js';
 import { stationMonitor } from './day3/monitor.js';
+import { gateJump } from './gate-jump.js';
 import { addOfficeWorker, prepareOfficeWorkers } from '../crowd/office-workers.js';
 
 export const withList = (slot) =>
@@ -168,6 +169,7 @@ export async function lobbyPlace(game) {
   const bg = gateBackground(extras, commuters); // background people to talk to too (#106)
   const day2 = lobbyDay2(game, { Z, st, setGate, commuters, cam }); // day 2's ways out and open gate
   const monitor = stationMonitor(game, w.monitorObj); // day 3's repair: the monitor turned to a visitor
+  const jump = gateJump(game, { st, BZ, cam, setGate, sfx, gateOpenFlag: ENGINE_KEYS.gateOpen }); // day 1: jumped, or back in
   const things = {
     guard: { ...PLACE_DETAILS.gate.things.guard, anchor: rigAnchor(w.guard), ...at(2.1, BZ + 0.72, 2.35, BZ - 0.6) },
     kuroda: {
@@ -585,6 +587,7 @@ export async function lobbyPlace(game) {
         w.lifts[0].want = 0;
       },
       monitorRepair: monitor.hook,
+      sendBack: jump.sendBack,
     },
     onDay3: () => monitor.restore(), // day 3's arrivals: the monitor on its desk as the story has it
     // the lift's landing doors here (places/lift.js hides them while the wall is cut away and waits on k)
@@ -679,6 +682,8 @@ export async function lobbyPlace(game) {
     },
   };
   day2.install(P);
+  const onDay = P.onDay;
+  P.onDay = (day) => (jump.reopen(day), onDay?.(day));
   // Aoi isn't in today's gate story: she stays on the right bench, hidden, unless the story shows her
   w.aoi.root.visible = false;
   w.aoiBlob.visible = false;

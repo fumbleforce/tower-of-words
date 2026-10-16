@@ -29,8 +29,10 @@ export default {
     'idle:commuter_2': { if: 'jammed && !gate_through_way', node: 'idle_commuter_2' },
     'idle:commuter_3': { if: 'jammed && !gate_through_way', node: 'idle_commuter_3' },
     'event:card_red': [{ if: '!guard_asked', node: 'card_red' }, 'card_red_again'],
-    'zone:past_gate': { node: 'past_gate', once: true },
-    'zone:lift_front': { if: 'gate_through', node: 'to_lift', once: true },
+    // over the closed gate without going through it (a jump): the guard calls him back to the readers
+    'zone:past_gate': [{ if: '!gate_through_way', node: 'gate_jumped' }, { node: 'past_gate', once: true }],
+    // every time he leaves: he can walk back in from the forecourt (story/forecourt.js) and out again
+    'zone:lift_front': { if: 'gate_through', node: 'to_lift' },
 
     'talk:guard': [
       { if: 'jammed && !gate_through_way', node: 'guard_busy' },
@@ -107,13 +109,19 @@ export default {
       { say: 'commuter_3', voice: 'gate-commuter-3-wait', overheard: true, emo: 'low', text: 'ゲート、まだみたいですね…', clear: ['ゲート'] },
     ],
     // ------------------------------------------------------------------ in the door: the guard greets people, so Eric sees how it's done
+    // back in from the forecourt, already through: the room as he left it, and the way out again
     lobby_in: [
-      { do: 'goal', text: 'Say good morning to the guard in Japanese.' },
-      { do: 'hint', what: 'say-here' },
-      { do: 'face', who: 'guard', to: 'gate' },
-      { say: 'guard', voice: 'guard-greeting-ohayo', overheard: true, emo: 'polite', text: '{ohayo}。' },
-      { do: 'face', who: 'guard', to: 'desk' },
-      { do: 'typing', who: 'guard', ms: 3000 },
+      { if: 'gate_through', then: [
+        { if: 'going_home', then: [{ do: 'goal', text: 'Head home: walk east along the lane to the dorms.' }],
+          else: [{ do: 'goal', text: 'Leave the station and walk to head office.' }] },
+      ], else: [
+        { do: 'goal', text: 'Say good morning to the guard in Japanese.' },
+        { do: 'hint', what: 'say-here' },
+        { do: 'face', who: 'guard', to: 'gate' },
+        { say: 'guard', voice: 'guard-greeting-ohayo', overheard: true, emo: 'polite', text: '{ohayo}。' },
+        { do: 'face', who: 'guard', to: 'desk' },
+        { do: 'typing', who: 'guard', ms: 3000 },
+      ] },
     ],
 
     // talking to him in English gets nothing; he doesn't look up
@@ -377,6 +385,20 @@ export default {
 
     past_gate: [
       { set: 'gate_through' },
+    ],
+    // he jumped the gate: the guard calls him back, lets him through to the readers' side and points at them
+    gate_jumped: [
+      { do: 'emote', who: 'guard', kind: '!' },
+      { do: 'face', who: 'guard', to: 'eric' },
+      { do: 'cam', on: 'guard', zoom: 1.6 },
+      { say: 'guard', face: 'stern', overheard: true, emo: 'stern', text: 'ちょっと！ゲートは、だめです。カードを、どうぞ。', clear: ['ゲート', 'カード'] },
+      { do: 'gesture', who: 'guard', kind: 'beckon' },
+      { do: 'cam', back: true },
+      { do: 'sendBack' },
+      { do: 'face', who: 'eric', to: 'guard' },
+      { say: 'eric', emo: 'sheepish', text: 'Okay, okay. Sorry.' },
+      { do: 'gesture', who: 'guard', kind: 'point' },
+      { do: 'face', who: 'guard', to: 'desk' },
     ],
     to_lift: [
       { do: 'liftOpen' },

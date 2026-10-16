@@ -175,6 +175,7 @@ Events: `start`, `card_red` (a card reader tapped before it works), `card_ok`, `
 - `newsletter` `state: 'down'|'up'`: Aoi's newsletter on the bench.
 - `catTo` `to`: Tama moves (crossing the barrier flashes the gate red).
 - `liftOpen` / `liftClose`: one of the lifts opens.
+- `sendBack`: Eric, past the shut gate after a jump, goes back to the readers' side: the flaps open and he walks back through the arch, or, while the gate is jammed, the frame crossfades to him standing there.
 
 ### Lift
 

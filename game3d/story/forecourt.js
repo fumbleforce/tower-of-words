@@ -17,6 +17,8 @@ export default {
     'zone:lift_front': { if: '!going_home', node: 'to_b2', once: true },
     'talk:plaza_lane': 'to_plaza',
     'zone:plaza_lane': 'to_plaza',
+    // back in at the station's door (walking into it would otherwise leave him in the station's outside model)
+    'talk:station_exit': 'to_station', 'zone:station_exit': 'to_station',
   },
   show: { office_entrance: '!going_home', lift: '!going_home', garden_bench: 'going_home', fallen_bicycle: 'going_home && !evening_bikes_upright' },
   goal: { lift: '!going_home', plaza_lane: 'going_home' },
@@ -53,6 +55,7 @@ export default {
     head_office: [{ do: 'goal', text: 'Take the lift inside head office down to B2.' }],
     to_b2: [{ do: 'next' }],
     to_plaza: [{ do: 'trip', to: 'plaza' }],
+    to_station: [{ do: 'trip', to: 'gate' }],
     // Day 1 at the counter. In English he gets the visitor treatment; she warms only once he greets her in Japanese.
     kuro_intro: [
       { do: 'face', who: 'kuro', to: 'eric' },

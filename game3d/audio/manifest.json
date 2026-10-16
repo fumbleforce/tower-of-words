@@ -2004,6 +2004,29 @@
   "emo": "surprised"
  },
  {
+  "key": "oh-133elk2",
+  "speaker": "guard",
+  "text": "ちょっと！ゲートは、だめです。カードを、どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "ゲート",
+   "カード"
+  ],
+  "emo": "stern"
+ },
+ {
+  "key": "ln-1yt0x0t",
+  "speaker": "eric",
+  "text": "Okay, okay. Sorry.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
   "key": "oh-18qexd9",
   "speaker": "gatev",
   "text": "おはようございます！カードをタッチしてください！",
@@ -17213,6 +17236,16 @@
   "words": [],
   "clear": [],
   "emo": "tired"
+ },
+ {
+  "key": "ln-1yt0x0t-carina",
+  "speaker": "carina",
+  "text": "Okay, okay. Sorry.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
  },
  {
   "key": "ln-1qad83b-carina",

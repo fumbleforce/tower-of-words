@@ -38,6 +38,7 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 
 - `train` → `gate`, walk: Eric steps off onto the platform, follows the covered walkway and enters Honsha station's security room through its glass doors. Their open centre has 1.75 m clear height, above the standing cast; the glass leaves, frame and follow-view header share that opening.
 - `gate` → `forecourt`, walk: Eric walks north out of the security room's back exit. The camera stays close and keeps its angle, then crossfades to him stepping out of the station's north door onto the court; on a phone the camera then turns to look east-north-east up the court at head office.
+- `forecourt` → `gate`, walk, on every day: back to the station door and in; the camera closes in at the door and crossfades to him walking in at the security room's north exit, past the open gate.
 - `forecourt` → `lift`, walk: east across the court and north to the head office door, through the lobby past the reception, and into the lift.
 - `lift` → `office`, lift: the car comes up from B1 to meet him (the display over the lobby's lift doors counts, a ding), and its doors open on the two from Sales already aboard. The camera stays inside the car for the whole ride. Once the car leaves floor 1 the lobby goes dark and out of view, so only the car in its shaft and the people in it are seen. The floor display counts from 1; someone has pressed 5, where the doors open on a lit landing of that floor and the two from Sales walk out; then down to B2. The doors open on the B2 lift landing.
 - `office` → `lift`, walk: after work, Eric walks from B2 into the same lift, the camera easing in on the car as in the morning; the near wall drops and the lights outside go down. He rides alone; once the car leaves B2 the office goes dark and out of view.
@@ -84,7 +85,6 @@ On day 2 the ways are the day-2 set's (game3d/story/day2/index.js `TRIPS`), the 
 - `dorms` → `dorm_court`, walk then stairs: from the 2F landing (he has come out of his flat onto the corridor first, Eric's dorm room) Eric steps onto the flight down; the camera is close on it, then crossfades to him coming out of the passage at the back of the hall and walking to just inside the doors.
 - `dorm_court` → `east_lane`, walk: out of the court's gate onto the lane; the camera closes in and crossfades to him walking west onto the dorm street from the gate leg.
 - `shotengai` → `east_lane`, walk: out of the shop walk onto the dorm street; the camera closes in and crossfades to him walking north up the dorm street.
-- `forecourt` → `gate`, walk: back to the station door and in; the camera closes in at the door and crossfades to him walking in at the security room's north exit, past the open gate.
 - `gate` → `train`, walk: out through the glass doors; the camera closes in and crossfades to him coming off the covered walkway onto the platform, walking up it toward the standing car's left-hand doors.
 
 The dialogue slots for each trip are in game3d/story/transitions.js (format: FORMAT.md, Transitions).
@@ -295,7 +295,7 @@ The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/
 
 ### Zones
 
-`arch` (walking into the closed gate), `past_gate`, `lift_front`, `platform_way` and `forecourt_way` (day 2: at the glass doors, and at the exit)
+`arch` (walking into the closed gate), `past_gate` (anywhere beyond the barrier: after a jump over it, the guard's call-back in [gate-morning](stories/gate-morning.md)), `lift_front`, `platform_way` and `forecourt_way` (day 2: at the glass doors, and at the exit)
 
 ### Who's there when
 
@@ -381,7 +381,7 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 
 ### Zones
 
-`lift_front`, `station_exit` (day 2: at the station's door, back into the security room), `plaza_lane` (the lane's east end along the tower's south face: walking into it starts the walk to the plaza), `shop_exit` (south end of the bicycle aisle), `reception_office` (inside the receptionist's office; nothing starts there yet)
+`lift_front`, `station_exit` (at the station's door on every day, back into the security room), `plaza_lane` (the lane's east end along the tower's south face: walking into it starts the walk to the plaza), `shop_exit` (south end of the bicycle aisle), `reception_office` (inside the receptionist's office; nothing starts there yet)
 
 ### Who's there when
 
@@ -419,6 +419,7 @@ The crowd ([systems.md](systems.md), The crowd):
 | `head_office` | Use the head-office entrance | Eric walks in to the lift; the goal points to the B2 lift. |
 | `to_b2` | Reach or use the lift | Eric boards the existing watched lift ride. |
 | `to_plaza` | Reach or use the east lane | Eric walks on to the fountain plaza. |
+| `to_station` | Walk into the station's door | Day 1: Eric walks back into the security room ([gate-morning](stories/gate-morning.md)). |
 | `kuro_intro`, `kuro_intro_ohayo`, `kuro`, `ohayo_kuro`, `yoroshiku_kuro` | Talk to Kuro, or greet her | The first morning Talk gets the visitor treatment: her おはようございます, Eric asks for B2 in English, she points at the lift with "Lift, there." and goes back to her label printer. Greeting her with ohayo first instead gets her warm: she says it back with a nod, points him to the lift in slow Japanese with エレベーター clear, and sees him off with いってらっしゃい. A later ohayo that morning gets the same warm reply and a nod. `kuro_reception_seen` saves that exchange as finished; repeats and Continue keep the short welcome. No task, bond point or word lesson. After work, お疲れさまです and a bow; よろしく gets a polite reply at either time. |
 
 ### Creatures

@@ -16,6 +16,8 @@ test('shared literals and complete place registrations match the pre-extraction 
   delete expected.places.campus.things.forecourt;
   expected.places.forecourt.zones = expected.places.forecourt.zones.filter(id => id !== 'campus_exit');
   expected.places.campus.zones = expected.places.campus.zones.filter(id => id !== 'forecourt_exit');
+  // #575 the guard sends a player who jumped the shut gate back to the readers.
+  expected.places.gate.hooks.push('sendBack');
   assert.deepEqual({ DEFAULT_SPEAKERS, PORTRAITS, ITEMS, places: PLACE_DETAILS }, expected);
 });
 
@@ -89,6 +91,15 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   expected.engine.exact.research_state = ['game3d/js/reading-room/state.js'];
   expected.engine.exact.research_weather_seen = ['game3d/js/places/research-room/activity.js'];
   for (const flag of ['research_action_ok', 'research_has_book', 'research_office_ok', 'research_mori_available', 'research_mori_understood', 'research_notes_recognized', 'research_mori_return_ready']) expected.engine.exact[flag] = ['game3d/js/reading-room/hook.js'];
+  // #575: the guard's call-back after a jump over the gate, which only the story's two ways through skip, and the
+  // day-1 walk back into the station from the forecourt.
+  const after = (list, find, item) => list.splice(list.findIndex(find) + 1, 0, item);
+  after(expected.nodes, id => id === 'gate:past_gate', 'gate:gate_jumped');
+  after(expected.nodes, id => id === 'forecourt:to_plaza', 'forecourt:to_station');
+  after(expected.edges, e => e.from === 'forecourt:to_plaza' && e.kind === 'trip', { from: 'forecourt:to_station', to: 'gate:lobby_in', kind: 'trip', labels: [] });
+  const through = from => ({ from, to: 'gate:past_gate', kind: 'unlock', labels: ['gate_through_way'], cross: false });
+  after(expected.edges, e => e.from === 'train:arrival' && e.to === 'gate:way_social', through('gate:word_say'));
+  after(expected.edges, e => e.from === 'gate:word_say' && e.to === 'gate:past_gate', through('gate:way_social'));
   assert.deepEqual(plain, expected);
 });
 test('missing and unexpected runtime registrations fail before play', () => {

@@ -12,6 +12,8 @@ The station security room before nine. Mr. Ishibashi, the guard, is strict about
 2. おはようございます (or よろしくおねがいします, which amuses him) gets a greeting and card request in one line, a bow back, and a point toward the card reader.
 3. The card is red. The gate's voice asks him to see staff. The guard beckons him over: it's a new card, registration starts at nine (politely, with an apology, if Eric greeted him first; sternly if not). He holds up nine fingers and points at the bench. Eric: "Right, Mio did say nine." Eric waits on the bench, and the jam starts.
 4. Once through, the station exit. Eric crosses the forecourt to the separate head-office lift ([places.md](../places.md), Getting between places).
+5. A jump over the shut barrier, before either way through has opened it, gets him called back (Jørgen, 2026-10-14: "I can just jump over the security gate and security guard does nothing, there should be some consequence", #575). The guard looks up with a "!" and says ちょっと！ゲートは、だめです。カードを、どうぞ。 with only ゲート and カード clear, and beckons. The flaps open for Eric and he walks back through the arch to the readers' side; while the man from the train is jammed in the gate, the frame crossfades to him standing there instead. Eric says "Okay, okay. Sorry." and the guard points at the readers. It happens on every jump, and nothing else changes: no flag, bond or goal.
+6. Back from the forecourt the same morning (or after work) by walking into the station's door, Eric walks in at the north exit as on day 2 ([places.md](../places.md), Getting between places). The gate stays open, the greeting doesn't replay, the goal points at the exit again, and the exit takes him back out.
 
 The two stationary office workers answer optional Talk with a greeting or a brief apology. The three commuters can answer only while stopped by the jam; they glance at the gate and comment that it is still blocked. Their replies teach no words and change no story flags.
 
@@ -23,7 +25,7 @@ Skipping the greeting doesn't block anything; it changes the guard's tone and wh
 |---|---|---|
 | `greeted_guard` | Greeted him | His tone at the reader and in the mime |
 | `guard_asked` | The card was red once | The reader, the guard |
-| `gate_through` | Walked past the gate | The station exit |
+| `gate_through` | Walked past the gate after one of the two ways through | The station exit, the room on coming back in |
 
 ## Words taught
 
@@ -33,5 +35,5 @@ None.
 
 | File | Nodes |
 |---|---|
-| `forecourt.js` | `outside`, `head_office`, `to_b2` |
-| `gate.js` | `lobby_in`, `guard_look`, `ohayo_guard`, `yoroshiku_guard`, `guard_points_reader`, `greet_again_guard`, `card_red`, `card_red_again`, `guard_again`, `bench`, `past_gate`, `to_lift`, `idle_worker_a`, `idle_worker_b`, `idle_commuter_1`, `idle_commuter_2`, `idle_commuter_3` |
+| `forecourt.js` | `outside`, `head_office`, `to_b2`, `to_station` |
+| `gate.js` | `lobby_in`, `guard_look`, `ohayo_guard`, `yoroshiku_guard`, `guard_points_reader`, `greet_again_guard`, `card_red`, `card_red_again`, `guard_again`, `bench`, `past_gate`, `gate_jumped`, `to_lift`, `idle_worker_a`, `idle_worker_b`, `idle_commuter_1`, `idle_commuter_2`, `idle_commuter_3` |
