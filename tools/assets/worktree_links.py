@@ -3,6 +3,7 @@
 
     python3 tools/assets/worktree_links.py <main checkout> <worktree> < paths (NUL-separated, relative)
     python3 tools/assets/worktree_links.py prune <main checkout> [--min-age MINUTES] [--dry-run]
+    python3 tools/assets/worktree_links.py drop-stale <main checkout> <worktree>
 
 A link straight to main's file let a script in the worktree write through it into main (#148: twice on
 2026-10-01, Aoi's portrait and the cast-faces-1 images). So each link points at a copy in a shared store,
@@ -22,8 +23,14 @@ script (a worktree branched before the lock) doesn't take it, so prune also keep
 
 For each path: skipped if main has no file there or the worktree already has something there, except a link an
 earlier setup made (to main's same path, or into the store), which is pointed at main's current version.
+
+drop-stale (setup runs it after linking) removes the links an earlier setup made into the store that the branch no
+longer wants: a link whose store copy is gone, or whose file main no longer has when neither the branch's lock file
+nor its live.json names the path. It prints each one, and then each folder those links left empty (a folder with
+anything else in it stays). Only symlinks are removed, and only the ones pointing into the store.
 """
 import fcntl
+import json
 import os
 import shutil
 import subprocess
@@ -147,9 +154,137 @@ def prune(args):
           f'{len(used & set(entries))} linked and {recent} unlinked but changed in the last {min_age:g} min')
 
 
+LOCK = os.path.join('tools', 'assets', 'assets.lock.json')
+LIVE = os.path.join('tools', 'assets', 'live.json')
+SKIP_NAMES = ('.git', 'node_modules', 'private')  # never linked into, and never enumerated (GUIDE: user-owned content)
+
+
+def read_json(path):
+    """The JSON in path, or None when it is missing or unreadable."""
+    try:
+        with open(path, encoding='utf-8') as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return None
+
+
+def list_keys(path, wt, main_root):
+    """The keys of a list unit: the JSON array in its list file (the worktree's copy, else main's), or None."""
+    for root in (wt, main_root):
+        keys = read_json(os.path.join(root, path))
+        if isinstance(keys, list):
+            return set(keys)
+    return None
+
+
+def branch_expects(wt, main_root):
+    """(the lock file's paths, a test for a path live.json registers) as live.mjs reads them: a file unit, a folder
+    unit's files, a list unit's entries. None when the worktree has no readable lock file or registry."""
+    lock = read_json(os.path.join(wt, LOCK))
+    live = read_json(os.path.join(wt, LIVE))
+    if not isinstance(lock, dict) or not isinstance(lock.get('files'), dict) or not isinstance(live, dict):
+        return None
+    files, folders, lists = set(), [], []
+    for key, unit in (live.get('units') or {}).items():
+        if isinstance(unit, dict) and unit.get('list') and isinstance(unit.get('each'), str):
+            pre, _, post = unit['each'].partition('{}')
+            lists.append((pre, post, list_keys(unit['list'], wt, main_root)))
+        elif key.endswith('/'):
+            folders.append(key)
+        else:
+            files.add(key)
+
+    def registered(rel):
+        if rel in files or any(rel.startswith(f) for f in folders):
+            return True
+        for pre, post, keys in lists:
+            if len(rel) > len(pre) + len(post) and rel.startswith(pre) and rel.endswith(post):
+                if keys is None or rel[len(pre):len(rel) - len(post)] in keys:  # no list file to check: keep it
+                    return True
+        return False
+
+    return set(lock['files']), registered
+
+
+def drop_stale(main_root, wt):
+    """Remove this worktree's links into the store that the branch no longer expects, and the folders they left empty.
+    A link into the store is one setup made. It is stale when its store copy is gone, or when main no longer has the
+    file and the branch's lock file and live.json don't name it (the chibi kit, removed from main). Returns
+    ([(rel, copy_gone)], [folder rel]). Nothing is removed when the branch has no readable lock file or live.json."""
+    expects = branch_expects(wt, main_root)
+    if expects is None:
+        return [], []
+    locked, registered = expects
+    store = os.path.join(main_root, STORE) + os.sep
+    stale = []  # (path, rel, copy_gone)
+    stack = [wt]
+    while stack:
+        d = stack.pop()
+        try:
+            it = os.scandir(d)
+        except OSError:
+            continue
+        with it:
+            for e in it:
+                if e.name in SKIP_NAMES:
+                    continue
+                if e.is_symlink():
+                    try:
+                        target = os.path.normpath(os.path.join(d, os.readlink(e.path)))
+                    except OSError:
+                        continue
+                    if not target.startswith(store):
+                        continue  # not a link into the store: not one setup made
+                    rel = os.path.relpath(e.path, wt)
+                    if not os.path.exists(target):
+                        stale.append((e.path, rel, True))
+                    elif not (rel in locked or registered(rel) or os.path.lexists(os.path.join(main_root, rel))):
+                        stale.append((e.path, rel, False))  # neither the branch nor main has it any more
+                elif e.is_dir(follow_symlinks=False):
+                    stack.append(e.path)
+    removed, folders, parents = [], [], set()
+    for path, rel, copy_gone in stale:
+        if not os.path.islink(path):
+            continue  # changed since the scan: only a symlink is ever removed
+        os.unlink(path)
+        removed.append((rel, copy_gone))
+        parents.add(os.path.dirname(path))
+    for d in sorted(parents, key=len, reverse=True):  # deepest first: a folder can empty its parent
+        while d.startswith(wt + os.sep):
+            try:
+                os.rmdir(d)  # only an empty folder goes
+            except FileNotFoundError:
+                pass  # already gone: a folder inside it went first
+            except OSError:
+                break  # something else is in it: it and its parents stay
+            else:
+                folders.append(os.path.relpath(d, wt))
+            d = os.path.dirname(d)
+    return removed, folders
+
+
+def drop_stale_cli(args):
+    main_root, wt = (os.path.abspath(p) for p in args[:2])
+    if os.path.realpath(wt) == os.path.realpath(main_root):
+        sys.exit('drop-stale: the main checkout is never trimmed; give a worktree')
+    with lock_store(os.path.join(main_root, STORE), fcntl.LOCK_SH):
+        removed, folders = drop_stale(main_root, wt)
+    if removed:
+        print(f'worktree setup: removed {len(removed)} link(s) to files main no longer has, '
+              f"which the branch's lock file and live.json don't name:")
+        for rel, copy_gone in removed:
+            print(f'  {rel}' + ('  (store copy missing)' if copy_gone else ''))
+    if folders:
+        print(f'worktree setup: removed {len(folders)} folder(s) those links left empty:')
+        for rel in folders:
+            print(f'  {rel}/')
+
+
 def main():
     if sys.argv[1:2] == ['prune']:
         return prune(sys.argv[2:])
+    if sys.argv[1:2] == ['drop-stale']:
+        return drop_stale_cli(sys.argv[2:])
     main_root, wt = (os.path.abspath(p) for p in sys.argv[1:3])
     store = os.path.join(main_root, STORE)
     with lock_store(store, fcntl.LOCK_SH):

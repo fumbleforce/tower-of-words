@@ -27,6 +27,9 @@
 #     denied" and can't change main's file (#148). Rerunning setup points the links at main's current versions.
 #     Old versions stay in the store until prune-assets (or gone --remove) deletes the ones nothing links to; it
 #     keeps any changed in the last 10 minutes and waits for a running setup (worktree_links.py says how).
+# setup also drops the links an earlier setup made into the store to files main has since removed (the chibi kit,
+# after its removal), when the branch's lock file and live.json don't name them: each one, and each folder they left
+# empty, is printed. Only symlinks go, and only folders that are empty (worktree_links.py drop-stale says how).
 # To change an asset in a worktree, delete its link first and write a new file; tools/land.sh then keeps the
 # worktree and lists the new file instead of deleting it.
 set -euo pipefail
@@ -121,6 +124,10 @@ sys.stdout.write("".join(p + "\0" for p in sorted(have) if have[p][1] != lock[p]
   read -r new_links relinked stored <<<"$counts"
   echo "worktree setup: $wt; $((linked + new_links - relinked)) new links, $relinked repointed to main's current version;" \
     "$stored new read-only copies in $store"
+  # the links an earlier setup made to files main has since removed, which this branch's lock file and live.json don't name.
+  # The script beside this one runs it (an older worktree's copy of worktree_links.py has no drop-stale).
+  python3 "$(dirname "$(readlink -f "$0")")/assets/worktree_links.py" drop-stale "$main" "$wt" \
+    || echo "worktree setup: could not drop the stale links (worktree_links.py drop-stale shows why)"
 
   # The changed ones this worktree lacks: fetch the locked version from R2. Only files this worktree's .gitignore
   # ignores, so a fetched copy never shows up as a file to commit; the others (a locked JSON in a tracked folder)

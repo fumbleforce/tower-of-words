@@ -11,6 +11,7 @@ const checks = [
   ['robots', ['tools/check/robots.py'], 'python3'],
   ['private layout', ['tools/private_layout.py'], 'python3'],
   ['outputs prune', ['tools/outputs_test.py'], 'python3'],
+  ['worktree links', ['-m', 'unittest', 'discover', '-s', 'tools/assets', '-p', 'test_worktree_links.py'], 'python3'],
   ['character recipes', ['tools/characters/check_recipes.py'], 'python3'],
   ['syntax', ['tools/check/syntax.mjs']],
   ['lint', ['tools/check/lint.mjs']],
