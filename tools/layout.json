@@ -49,14 +49,6 @@
     "layout.json",
     "locations1.py",
     "matte_refine.py",
-    "music_inst.py",
-    "music_round2.py",
-    "music_round3.py",
-    "music_round3_post.py",
-    "music_round4.py",
-    "music_round4_post.py",
-    "music_round5.py",
-    "music_round6.py",
     "outputs.py",
     "outputs_test.py",
     "portrait_candidates.py",
@@ -83,7 +75,6 @@
     "usage.py",
     "verdict.py",
     "work.py",
-    "worktree.sh",
-    "yue2_music.py"
+    "worktree.sh"
   ]
 }

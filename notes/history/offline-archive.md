@@ -17,3 +17,7 @@ On 2026-10-16 the dead one-off image render scripts moved out of the checkout to
 ## Loose tools scripts
 
 On 2026-10-16 thirty-one loose files in `tools/` moved out of the checkout to `../bk-jap/2026-10-16-tools/`, each under its original repository path, with a `SHA256SUMS` manifest. Nothing live ran or imported them, and none had changed since 2026-10-02. They were the prompt-lab batch with its monorail page, the Replicate voice slicer and its helpers, the video test scripts, and several one-off page builders. The top of `tools/` and `game3d/tools/` is listed in each folder's `layout.json`, and `npm run check` refuses a new loose file there. Notes and bible citations keep the old paths.
+
+## Audio scripts
+
+On 2026-10-16 the old audio scripts that tools/audio/make.py replaced moved out of the checkout to `../bk-jap/2026-10-16-audio-scripts/`, each under its original repository path, with a `SHA256SUMS` manifest. The song generators the sound route still uses (tools/island_audio/song_gen2.py, and song_gen.py which it imports), the voice scripts in tools/island_audio/ and the committed round reports stayed in place, and the notes and presets keep the old paths.

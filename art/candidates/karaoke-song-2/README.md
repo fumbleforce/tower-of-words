@@ -6,4 +6,4 @@ All six attempts appear in `reviews/karaoke-song-2/details.html`. A2–A4 were s
 
 A6 is the closest automated lyric result: the full transcript matches the first five lines and includes the final question, but both passes misrecognize part of 同じ時間. A5 loses earlier words; A7 has several transcription differences and four samples at the clipping threshold. No listening, phrasing, musical-quality or singing-voice approval is claimed. Nothing is installed. Every MP3 is a full LAME quality-2 export without splicing, stretching or pitch shifting.
 
-`generate.py a2` through `a7` reproduce the candidate requests with the local GPU queue. `check-audio.py a5` through `a7` run CPU-only Whisper and sample checks in the existing tts-bench environment. The original generator accepts an optional round name; its default remains `karaoke-song-1`.
+`generate.py a2` through `a7` (archived: notes/history/offline-archive.md) reproduce the candidate requests with the local GPU queue. `check-audio.py a5` through `a7` run CPU-only Whisper and sample checks in the existing tts-bench environment. The original generator accepts an optional round name; its default remains `karaoke-song-1`.
