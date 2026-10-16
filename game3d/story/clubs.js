@@ -134,7 +134,7 @@ export default {
       { say: 'emi', emo: 'slow', slow: true, text: '{puru}。' },
       { do: 'type', word: 'puru', from: 'emi', prompt: 'Try the word for the pool you’re visiting: puru.' },
       { say: 'eric', emo: 'warm', text: '{puru}. I think I can remember that one.' },
-      { say: 'emi', emo: 'warm', text: 'Yes. So, are you coming in?' },
+      { say: 'emi', emo: 'warm', text: 'That’s the one. Right, are you coming in? I am, once I’ve put these bags somewhere.' },
       { go: 'club_swimming_choose' },
     ],
     club_swimming_word: [
