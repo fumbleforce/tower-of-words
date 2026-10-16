@@ -27,6 +27,18 @@ export function createRenderer(canvas) {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.shadowMap.autoUpdate = false;
+  // Opaque draws nearest first (by their bounds' centre), so what lies behind is rejected by the depth test before it
+  // is shaded. three's own order puts the material first, and the draw-call pass leaves almost one material per
+  // batch, so that order was arbitrary in depth. At 2560x1440 on an RTX 3080 the east coast's frame took 7.0 ms of
+  // GPU before and 5.3 after, the train's 6.2 and 5.5, with the same pictures (#630, notes/PERF.md).
+  renderer.setOpaqueSort(
+    (a, b) =>
+      a.groupOrder - b.groupOrder ||
+      a.renderOrder - b.renderOrder ||
+      a.z - b.z ||
+      a.material.id - b.material.id ||
+      a.id - b.id,
+  );
   const gl = renderer.getContext();
   const dbg = gl.getExtension('WEBGL_debug_renderer_info');
   const gpu = dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : 'unknown';

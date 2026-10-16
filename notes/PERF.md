@@ -765,6 +765,18 @@ Frame times on 2026-10-16 (main 36f2c1e3, RTX 3080, two runs, the lower of a ret
 
 To change a budget or add an exception, edit place-budgets.json in the same commit as the change that needs it, and say why in the commit message. An exception needs an issue (the unit test checks it).
 
+### Bringing the 120hz tier under (#630)
+
+How a frame is timed there matters: with vsync off, Chrome's renderer fills its command buffer and waits for the GPU process (`CommandBufferHelper::WaitForAvailableEntries` in a trace), and now and then one frame waits for two, so the p95 runs at about twice the median once the GPU takes 5 ms or more a frame. Measured with timer queries around each pass (median, 2560x1440): the AO was 2 to 4 ms (its own normal pass of the whole scene, 16 samples a pixel, a 16-sample denoise, then a copy of the frame and a blend), the scene pass 1 to 4 ms, everything else under 1 ms together. With the frame drawn at a quarter of the pixels, the GPU-bound places fell to 1 to 2.5 ms, so pixels, not draw calls, were the cost. The office and the forecourt are the exceptions: their medians stay at about 6 ms at any size, so their cost is on the CPU.
+
+Changes, none of them in the look of a frame at 1920x1080 or smaller:
+
+- Opaque draws nearest first (engine.js `setOpaqueSort`). three sorts by material before depth, and the draw-call pass leaves almost one material per batch, so the old order was arbitrary in depth and far surfaces were shaded and then covered. The same pictures, frozen frames compared pixel by pixel.
+- The AO multiplies onto the frame in place (perf/gtao.js): one full-screen pass and one multisample resolve fewer, the same picture.
+- The AO works on at most a 1920x1080 frame's pixels (perf/gtao.js `aoScale`): at 2560x1440 it is drawn at 0.75 each way and filtered up. Side by side at 2x zoom, its thinnest contact lines (carpet-tile edges, floor grout, under an office chair) are a touch lighter; at 1x the difference is hard to find. Half size saved more but put a stair-step along thin ledges; a depth-aware upsample made that worse than plain filtering.
+
+Two runs of the 120hz tier afterwards (ms, median / p95), the places that had exceptions: title 4.7 / 8.5 and 4.5 / 7.8, train 4.5 / 8.5 and 4.5 / 8.0, east coast 4.0 / 7.0, east lane 3.8 / 6.7, works 3.9 / 7.5, campus 3.3 / 5.7, dorms 3.0 / 5.8, sports 3.6 / 7.4, gate 3.1 / 5.9, dorm court 4.2 / 6.9, research lab 3.4 / 6.6, harbour 3.1 / 5.8, office quarter 3.2 / 6.1 (second run). Their exceptions are gone; the office, forecourt, title and train keep theirs while the CPU side is looked at.
+
 Measured on 2026-10-09 on main e47b108e (with the new planting) plus this tool, on the RTX 3080. The load times are from a quiet run just before the planting landed; the run with the planting had a load average of 32, which stretched every load. The desktop calls and triangles are the worst of nine views; the last column is the overview camera alone. `*` marks a number over budget that has a known exception.
 
 | place | phone calls | phone tris | phone geo MB | phone tex MB | phone load s | desktop calls | desktop tris | desktop overview calls |

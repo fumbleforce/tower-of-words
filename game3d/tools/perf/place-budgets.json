@@ -32,9 +32,6 @@
     "east_coast": {
       "desktop": {
         "texMB": { "max": 230, "issue": 373, "reason": "the everyday crowd bodies (#353): the casual-1 and older-1 skins at 1024, measured 225.6 against main's 214.4" }
-      },
-      "120hz": {
-        "p95Ms": { "max": 15.5, "issue": 630, "reason": "p95 11.9 and 12.3 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
       }
     },
     "forecourt": {
@@ -76,56 +73,6 @@
     "train": {
       "120hz": {
         "p95Ms": { "max": 37, "issue": 630, "reason": "p95 29.5 and 9.4 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
-      }
-    },
-    "gate": {
-      "120hz": {
-        "p95Ms": { "max": 11.5, "issue": 630, "reason": "p95 9.1 and 8.4 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
-      }
-    },
-    "campus": {
-      "120hz": {
-        "p95Ms": { "max": 12.5, "issue": 630, "reason": "p95 8.3 and 9.8 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
-      }
-    },
-    "dorm_court": {
-      "120hz": {
-        "p95Ms": { "max": 11.5, "issue": 630, "reason": "p95 9.1 and 8.5 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
-      }
-    },
-    "dorms": {
-      "120hz": {
-        "p95Ms": { "max": 12, "issue": 630, "reason": "p95 9.6 and 9.6 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
-      }
-    },
-    "east_lane": {
-      "120hz": {
-        "p95Ms": { "max": 15, "issue": 630, "reason": "p95 10 and 11.9 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
-      }
-    },
-    "sports": {
-      "120hz": {
-        "p95Ms": { "max": 12, "issue": 630, "reason": "p95 9.5 and 9.5 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
-      }
-    },
-    "office_quarter": {
-      "120hz": {
-        "p95Ms": { "max": 11, "issue": 630, "reason": "p95 8.7 and 8.3 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
-      }
-    },
-    "harbour": {
-      "120hz": {
-        "p95Ms": { "max": 11, "issue": 630, "reason": "p95 8.3 and 8.8 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
-      }
-    },
-    "works": {
-      "120hz": {
-        "p95Ms": { "max": 14, "issue": 630, "reason": "p95 10.9 and 9.7 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
-      }
-    },
-    "research_lab": {
-      "120hz": {
-        "p95Ms": { "max": 11.5, "issue": 630, "reason": "p95 9 and 9 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
       }
     }
   }
