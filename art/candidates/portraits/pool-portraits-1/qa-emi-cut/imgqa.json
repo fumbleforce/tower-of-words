@@ -1,0 +1,192 @@
+{
+ "character": "emi",
+ "ref": "game3d/assets/portraits/emi-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   217,
+   168,
+   383,
+   337
+  ]
+ ],
+ "ref_face_detected": [
+  216.0,
+  167.0,
+  383.0,
+  337.0
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/e-emi-neutral-r261016-210829-0a6-3-s3-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    238.0,
+    591.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.5,
+     364.5
+    ],
+    [
+     511.0,
+     339.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1639
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/pool-portraits-1/e-emi-neutral-r261016-210829-0a6-3-s3.webp",
+    "holes": 0,
+    "holes_px": 250,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.073,
+    "zoom": 0.892,
+    "top": 0.033,
+    "bottom_short": 0.075,
+    "hair_top_game": 75,
+    "hair_top_ref": 76,
+    "crop": [
+     -52.9,
+     -43.0,
+     951.5,
+     1249.1
+    ],
+    "eyes": 0.006,
+    "tilt": -0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.637
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/f-emi-neutral-r261016-215602-335-4-s4-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    312.0,
+    238.0,
+    590.0,
+    523.0
+   ],
+   "eyes": [
+    [
+     378.0,
+     364.5
+    ],
+    [
+     511.0,
+     339.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.2128
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/pool-portraits-1/f-emi-neutral-r261016-215602-335-4-s4.webp",
+    "holes": 0,
+    "holes_px": 241,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.073,
+    "zoom": 0.895,
+    "top": 0.033,
+    "bottom_short": 0.073,
+    "hair_top_game": 75,
+    "hair_top_ref": 76,
+    "crop": [
+     -51.1,
+     -42.0,
+     949.8,
+     1245.6
+    ],
+    "eyes": 0.007,
+    "tilt": -0.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.012,
+    "ssim": 0.541
+   },
+   "status": "fail"
+  }
+ ]
+}

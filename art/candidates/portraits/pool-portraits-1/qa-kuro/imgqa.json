@@ -1,0 +1,1412 @@
+{
+ "character": "kuro",
+ "ref": "game3d/assets/portraits/kuro-neutral.webp",
+ "face_box_game": [
+  630,
+  1048,
+  [
+   254,
+   325,
+   452,
+   525
+  ]
+ ],
+ "ref_face_detected": [
+  257.0,
+  322.0,
+  450.0,
+  526.0
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/a-kuro-neutral-r261016-203138-b40-1-s1.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    314.0,
+    393.0,
+    548.0,
+    641.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     477.0
+    ],
+    [
+     498.0,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0707
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     1.3,
+     1.5,
+     767.1,
+     1275.6
+    ],
+    "eyes": 0.002,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.828
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/a-kuro-neutral-r261016-203138-b40-2-s2.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    315.0,
+    393.0,
+    548.0,
+    641.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     476.5
+    ],
+    [
+     498.0,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1022
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     1.8,
+     1.5,
+     767.6,
+     1275.6
+    ],
+    "eyes": 0.001,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.014,
+    "ssim": 0.793
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/a-kuro-neutral-r261016-203138-b40-3-s3.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    315.0,
+    393.0,
+    548.0,
+    640.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     477.0
+    ],
+    [
+     498.5,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0868
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.009,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 134,
+    "hair_top_ref": 138,
+    "crop": [
+     3.5,
+     3.1,
+     766.3,
+     1272.0
+    ],
+    "eyes": 0.003,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.737
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/a-kuro-neutral-r261016-203138-b40-4-s4.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    316.0,
+    393.0,
+    548.0,
+    640.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     477.0
+    ],
+    [
+     498.0,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1488
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.009,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 134,
+    "hair_top_ref": 138,
+    "crop": [
+     4.0,
+     3.1,
+     766.8,
+     1272.0
+    ],
+    "eyes": 0.003,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.012,
+    "ssim": 0.689
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/b-kuro-neutral-r261016-204312-8b4-1-s1.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    314.0,
+    388.0,
+    550.0,
+    640.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     477.0
+    ],
+    [
+     498.0,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0024
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.005,
+    "zoom": 0.989,
+    "top": 0.008,
+    "bottom_short": 0.004,
+    "hair_top_game": 12,
+    "hair_top_ref": 138,
+    "crop": [
+     -4.7,
+     -9.8,
+     773.6,
+     1284.8
+    ],
+    "eyes": 0.016,
+    "tilt": -0.4,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.397
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/b-kuro-neutral-r261016-204312-8b4-2-s2.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    314.0,
+    391.0,
+    550.0,
+    641.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     476.5
+    ],
+    [
+     499.0,
+     494.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.061,
+    "zoom": 0.997,
+    "top": 0.003,
+    "bottom_short": 0.001,
+    "hair_top_game": 66,
+    "hair_top_ref": 138,
+    "crop": [
+     -1.2,
+     -3.6,
+     770.8,
+     1280.7
+    ],
+    "eyes": 0.007,
+    "tilt": 0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.584
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/b-kuro-neutral-r261016-204312-8b4-3-s3.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    313.0,
+    388.0,
+    550.0,
+    641.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     476.5
+    ],
+    [
+     498.0,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0001
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.014,
+    "zoom": 0.985,
+    "top": 0.009,
+    "bottom_short": 0.006,
+    "hair_top_game": 23,
+    "hair_top_ref": 138,
+    "crop": [
+     -6.9,
+     -11.3,
+     774.4,
+     1288.4
+    ],
+    "eyes": 0.013,
+    "tilt": -0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.019,
+    "ssim": 0.432
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/b-kuro-neutral-r261016-204312-8b4-4-s4.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    315.0,
+    392.0,
+    549.0,
+    641.0
+   ],
+   "eyes": [
+    [
+     399.5,
+     476.5
+    ],
+    [
+     499.0,
+     495.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.09,
+    "zoom": 1.001,
+    "top": 0.001,
+    "bottom_short": 0.0,
+    "hair_top_game": 95,
+    "hair_top_ref": 138,
+    "crop": [
+     0.5,
+     -1.0,
+     769.5,
+     1278.1
+    ],
+    "eyes": 0.005,
+    "tilt": 0.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.014,
+    "ssim": 0.658
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/c-kuro-neutral-r261016-205113-cf0-1-s1.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    315.0,
+    392.0,
+    548.0,
+    640.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     476.5
+    ],
+    [
+     498.0,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0048
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.012,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 11,
+    "hair_top_ref": 138,
+    "crop": [
+     1.8,
+     0.5,
+     767.6,
+     1274.6
+    ],
+    "eyes": 0.005,
+    "tilt": -0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.701
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/c-kuro-neutral-r261016-205113-cf0-2-s2.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    316.0,
+    393.0,
+    548.0,
+    641.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     476.5
+    ],
+    [
+     498.0,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     2.3,
+     1.5,
+     768.1,
+     1275.6
+    ],
+    "eyes": 0.001,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.707
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/c-kuro-neutral-r261016-205113-cf0-3-s3.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    314.0,
+    390.0,
+    549.0,
+    640.0
+   ],
+   "eyes": [
+    [
+     399.5,
+     477.0
+    ],
+    [
+     498.0,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0128
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.002,
+    "zoom": 0.997,
+    "top": 0.004,
+    "bottom_short": 0.0,
+    "hair_top_game": 6,
+    "hair_top_ref": 138,
+    "crop": [
+     -1.7,
+     -4.6,
+     770.3,
+     1279.7
+    ],
+    "eyes": 0.011,
+    "tilt": -0.4,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.624
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/c-kuro-neutral-r261016-205113-cf0-4-s4.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    316.0,
+    393.0,
+    548.0,
+    640.0
+   ],
+   "eyes": [
+    [
+     399.5,
+     476.5
+    ],
+    [
+     498.5,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.101,
+    "zoom": 1.009,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 103,
+    "hair_top_ref": 138,
+    "crop": [
+     4.0,
+     3.1,
+     766.8,
+     1272.0
+    ],
+    "eyes": 0.002,
+    "tilt": -0.2,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.014,
+    "ssim": 0.677
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/d-kuro-neutral-r261016-205905-461-1-s1.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    315.0,
+    393.0,
+    548.0,
+    640.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     477.0
+    ],
+    [
+     498.5,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0738
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.009,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 134,
+    "hair_top_ref": 138,
+    "crop": [
+     3.5,
+     3.1,
+     766.3,
+     1272.0
+    ],
+    "eyes": 0.003,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.011,
+    "ssim": 0.727
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/d-kuro-neutral-r261016-205905-461-2-s2.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    316.0,
+    393.0,
+    548.0,
+    641.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     476.5
+    ],
+    [
+     498.0,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1053
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     2.3,
+     1.5,
+     768.1,
+     1275.6
+    ],
+    "eyes": 0.001,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.014,
+    "ssim": 0.704
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/d-kuro-neutral-r261016-205905-461-3-s3.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    315.0,
+    393.0,
+    548.0,
+    640.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     477.0
+    ],
+    [
+     498.0,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1104
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.009,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 134,
+    "hair_top_ref": 138,
+    "crop": [
+     3.5,
+     3.1,
+     766.3,
+     1272.0
+    ],
+    "eyes": 0.003,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.014,
+    "ssim": 0.722
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/d-kuro-neutral-r261016-205905-461-4-s4.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    316.0,
+    393.0,
+    548.0,
+    640.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     476.5
+    ],
+    [
+     498.0,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1464
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.009,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 134,
+    "hair_top_ref": 138,
+    "crop": [
+     4.0,
+     3.1,
+     766.8,
+     1272.0
+    ],
+    "eyes": 0.002,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.677
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/e-kuro-neutral-r261016-210652-2e7-1-s1.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    315.0,
+    393.0,
+    548.0,
+    640.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     477.0
+    ],
+    [
+     498.5,
+     494.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0748
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.009,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 134,
+    "hair_top_ref": 138,
+    "crop": [
+     3.5,
+     3.1,
+     766.3,
+     1272.0
+    ],
+    "eyes": 0.004,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.012,
+    "ssim": 0.728
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/e-kuro-neutral-r261016-210652-2e7-2-s2.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    316.0,
+    393.0,
+    548.0,
+    641.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     476.5
+    ],
+    [
+     498.0,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1099
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     2.3,
+     1.5,
+     768.1,
+     1275.6
+    ],
+    "eyes": 0.001,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.708
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/e-kuro-neutral-r261016-210652-2e7-3-s3.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    315.0,
+    393.0,
+    549.0,
+    641.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     477.0
+    ],
+    [
+     498.0,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0761
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     2.3,
+     1.5,
+     768.1,
+     1275.6
+    ],
+    "eyes": 0.002,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.701
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/e-kuro-neutral-r261016-210652-2e7-4-s4.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    316.0,
+    394.0,
+    548.0,
+    640.0
+   ],
+   "eyes": [
+    [
+     400.0,
+     476.5
+    ],
+    [
+     498.0,
+     494.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0841
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.013,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 132,
+    "hair_top_ref": 138,
+    "crop": [
+     5.7,
+     5.7,
+     765.4,
+     1269.5
+    ],
+    "eyes": -0.0,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.658
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/x-kuro-flirtatious-r261016-212706-795-1-s2.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    316.0,
+    395.0,
+    548.0,
+    640.0
+   ],
+   "eyes": [
+    [
+     398.5,
+     477.5
+    ],
+    [
+     499.0,
+     497.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0871
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.017,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 131,
+    "hair_top_ref": 138,
+    "crop": [
+     7.5,
+     8.3,
+     764.1,
+     1266.9
+    ],
+    "eyes": 0.005,
+    "tilt": 0.8,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.031,
+    "ssim": 0.534
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/x-kuro-pleased-r261016-212800-561-1-s2.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    316.0,
+    395.0,
+    548.0,
+    640.0
+   ],
+   "eyes": [
+    [
+     399.5,
+     476.5
+    ],
+    [
+     498.5,
+     494.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0942
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.017,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 131,
+    "hair_top_ref": 138,
+    "crop": [
+     7.5,
+     8.3,
+     764.1,
+     1266.9
+    ],
+    "eyes": -0.002,
+    "tilt": 0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.027,
+    "ssim": 0.549
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/x-kuro-polite-r261016-212828-5dc-1-s2.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    316.0,
+    396.0,
+    547.0,
+    640.0
+   ],
+   "eyes": [
+    [
+     400.5,
+     476.0
+    ],
+    [
+     499.0,
+     495.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0756
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.021,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 129,
+    "hair_top_ref": 138,
+    "crop": [
+     8.7,
+     10.9,
+     762.2,
+     1264.4
+    ],
+    "eyes": -0.005,
+    "tilt": 0.7,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.033,
+    "ssim": 0.536
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/x-kuro-teasing-r261016-212733-42c-1-s2.webp",
+   "kind": "render",
+   "size": [
+    768,
+    1280
+   ],
+   "face": [
+    316.0,
+    395.0,
+    548.0,
+    641.0
+   ],
+   "eyes": [
+    [
+     399.5,
+     476.5
+    ],
+    [
+     498.5,
+     497.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0842
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "framing": {
+    "headroom": 0.13,
+    "zoom": 1.013,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 132,
+    "hair_top_ref": 138,
+    "crop": [
+     5.7,
+     6.7,
+     765.4,
+     1270.5
+    ],
+    "eyes": 0.002,
+    "tilt": 1.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.034,
+    "ssim": 0.607
+   },
+   "status": "fail"
+  }
+ ]
+}

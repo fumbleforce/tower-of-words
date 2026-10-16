@@ -1,0 +1,1412 @@
+{
+ "character": "emi",
+ "ref": "game3d/assets/portraits/emi-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   217,
+   168,
+   383,
+   337
+  ]
+ ],
+ "ref_face_detected": [
+  216.0,
+  167.0,
+  383.0,
+  337.0
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/a-emi-neutral-r261016-203515-794-1-s1.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    312.0,
+    238.0,
+    589.0,
+    523.0
+   ],
+   "eyes": [
+    [
+     378.5,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0416
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.895,
+    "top": 0.033,
+    "bottom_short": 0.073,
+    "hair_top_game": 71,
+    "hair_top_ref": 76,
+    "crop": [
+     -51.6,
+     -42.0,
+     949.2,
+     1245.6
+    ],
+    "eyes": 0.006,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.017,
+    "ssim": 0.576
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/a-emi-neutral-r261016-203515-794-2-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    238.0,
+    590.0,
+    523.0
+   ],
+   "eyes": [
+    [
+     378.5,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0528
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.895,
+    "top": 0.033,
+    "bottom_short": 0.073,
+    "hair_top_game": 71,
+    "hair_top_ref": 76,
+    "crop": [
+     -51.6,
+     -42.0,
+     949.2,
+     1245.6
+    ],
+    "eyes": 0.006,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.02,
+    "ssim": 0.58
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/a-emi-neutral-r261016-203515-794-3-s3.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    310.0,
+    238.0,
+    590.0,
+    523.0
+   ],
+   "eyes": [
+    [
+     378.5,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0477
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.895,
+    "top": 0.033,
+    "bottom_short": 0.073,
+    "hair_top_game": 71,
+    "hair_top_ref": 76,
+    "crop": [
+     -52.1,
+     -42.0,
+     948.8,
+     1245.6
+    ],
+    "eyes": 0.006,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.022,
+    "ssim": 0.582
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/a-emi-neutral-r261016-203515-794-4-s4.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    312.0,
+    238.0,
+    590.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.0,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0396
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.892,
+    "top": 0.033,
+    "bottom_short": 0.075,
+    "hair_top_game": 71,
+    "hair_top_ref": 76,
+    "crop": [
+     -52.9,
+     -43.0,
+     951.5,
+     1249.1
+    ],
+    "eyes": 0.005,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.02,
+    "ssim": 0.611
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/b-emi-neutral-r261016-204452-4a2-1-s1.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    310.0,
+    234.0,
+    591.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.0,
+     364.5
+    ],
+    [
+     511.0,
+     339.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0633
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.009,
+    "zoom": 0.879,
+    "top": 0.039,
+    "bottom_short": 0.082,
+    "hair_top_game": 35,
+    "hair_top_ref": 76,
+    "crop": [
+     -60.4,
+     -50.9,
+     958.0,
+     1259.2
+    ],
+    "eyes": 0.014,
+    "tilt": -0.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.023,
+    "ssim": 0.554
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/b-emi-neutral-r261016-204452-4a2-2-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    233.0,
+    591.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     378.0,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0254
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.011,
+    "zoom": 0.873,
+    "top": 0.041,
+    "bottom_short": 0.086,
+    "hair_top_game": 38,
+    "hair_top_ref": 76,
+    "crop": [
+     -63.4,
+     -53.8,
+     962.0,
+     1265.3
+    ],
+    "eyes": 0.014,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.028,
+    "ssim": 0.487
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/b-emi-neutral-r261016-204452-4a2-3-s3.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    235.0,
+    591.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.0,
+     364.5
+    ],
+    [
+     511.0,
+     339.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.074
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.016,
+    "zoom": 0.882,
+    "top": 0.037,
+    "bottom_short": 0.08,
+    "hair_top_game": 39,
+    "hair_top_ref": 76,
+    "crop": [
+     -58.1,
+     -48.9,
+     956.8,
+     1256.7
+    ],
+    "eyes": 0.012,
+    "tilt": -0.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.021,
+    "ssim": 0.543
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/b-emi-neutral-r261016-204452-4a2-4-s4.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    310.0,
+    238.0,
+    590.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.0,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0354
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.045,
+    "zoom": 0.892,
+    "top": 0.033,
+    "bottom_short": 0.075,
+    "hair_top_game": 56,
+    "hair_top_ref": 76,
+    "crop": [
+     -53.9,
+     -43.0,
+     950.5,
+     1249.1
+    ],
+    "eyes": 0.005,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.033,
+    "ssim": 0.667
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/c-emi-neutral-r261016-205252-816-1-s1.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    237.0,
+    589.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.0,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0494
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.016,
+    "zoom": 0.889,
+    "top": 0.035,
+    "bottom_short": 0.077,
+    "hair_top_game": 37,
+    "hair_top_ref": 76,
+    "crop": [
+     -55.6,
+     -44.9,
+     952.2,
+     1251.6
+    ],
+    "eyes": 0.007,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.021,
+    "ssim": 0.696
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/c-emi-neutral-r261016-205252-816-2-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    236.0,
+    590.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.0,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0414
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.009,
+    "zoom": 0.885,
+    "top": 0.036,
+    "bottom_short": 0.079,
+    "hair_top_game": 33,
+    "hair_top_ref": 76,
+    "crop": [
+     -56.9,
+     -46.9,
+     954.5,
+     1254.2
+    ],
+    "eyes": 0.009,
+    "tilt": -0.3,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.022,
+    "ssim": 0.624
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/c-emi-neutral-r261016-205252-816-3-s3.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    237.0,
+    590.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.5,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0387
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.012,
+    "zoom": 0.889,
+    "top": 0.035,
+    "bottom_short": 0.077,
+    "hair_top_game": 34,
+    "hair_top_ref": 76,
+    "crop": [
+     -55.1,
+     -44.9,
+     952.8,
+     1251.6
+    ],
+    "eyes": 0.007,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.021,
+    "ssim": 0.648
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/c-emi-neutral-r261016-205252-816-4-s4.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    238.0,
+    590.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.0,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0432
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.892,
+    "top": 0.033,
+    "bottom_short": 0.075,
+    "hair_top_game": 71,
+    "hair_top_ref": 76,
+    "crop": [
+     -53.4,
+     -43.0,
+     951.0,
+     1249.1
+    ],
+    "eyes": 0.005,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.023,
+    "ssim": 0.682
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/d-emi-neutral-r261016-210041-450-1-s1.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    312.0,
+    238.0,
+    589.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.5,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0433
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.892,
+    "top": 0.033,
+    "bottom_short": 0.075,
+    "hair_top_game": 71,
+    "hair_top_ref": 76,
+    "crop": [
+     -53.4,
+     -43.0,
+     951.0,
+     1249.1
+    ],
+    "eyes": 0.005,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.017,
+    "ssim": 0.689
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/d-emi-neutral-r261016-210041-450-2-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    237.0,
+    590.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.0,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0479
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.889,
+    "top": 0.035,
+    "bottom_short": 0.077,
+    "hair_top_game": 72,
+    "hair_top_ref": 76,
+    "crop": [
+     -55.1,
+     -44.9,
+     952.8,
+     1251.6
+    ],
+    "eyes": 0.007,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.021,
+    "ssim": 0.651
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/d-emi-neutral-r261016-210041-450-3-s3.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    238.0,
+    590.0,
+    523.0
+   ],
+   "eyes": [
+    [
+     378.5,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0438
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.895,
+    "top": 0.033,
+    "bottom_short": 0.073,
+    "hair_top_game": 71,
+    "hair_top_ref": 76,
+    "crop": [
+     -51.6,
+     -42.0,
+     949.2,
+     1245.6
+    ],
+    "eyes": 0.006,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.021,
+    "ssim": 0.587
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/d-emi-neutral-r261016-210041-450-4-s4.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    238.0,
+    590.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.0,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0397
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.892,
+    "top": 0.033,
+    "bottom_short": 0.075,
+    "hair_top_game": 71,
+    "hair_top_ref": 76,
+    "crop": [
+     -53.4,
+     -43.0,
+     951.0,
+     1249.1
+    ],
+    "eyes": 0.005,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.02,
+    "ssim": 0.686
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/e-emi-neutral-r261016-210829-0a6-1-s1.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    312.0,
+    238.0,
+    589.0,
+    523.0
+   ],
+   "eyes": [
+    [
+     378.5,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0449
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.895,
+    "top": 0.033,
+    "bottom_short": 0.073,
+    "hair_top_game": 71,
+    "hair_top_ref": 76,
+    "crop": [
+     -51.6,
+     -42.0,
+     949.2,
+     1245.6
+    ],
+    "eyes": 0.006,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.017,
+    "ssim": 0.585
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/e-emi-neutral-r261016-210829-0a6-2-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    238.0,
+    590.0,
+    523.0
+   ],
+   "eyes": [
+    [
+     378.5,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0388
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.895,
+    "top": 0.033,
+    "bottom_short": 0.073,
+    "hair_top_game": 71,
+    "hair_top_ref": 76,
+    "crop": [
+     -51.6,
+     -42.0,
+     949.2,
+     1245.6
+    ],
+    "eyes": 0.006,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.019,
+    "ssim": 0.574
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/e-emi-neutral-r261016-210829-0a6-3-s3.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    238.0,
+    590.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.5,
+     364.5
+    ],
+    [
+     511.0,
+     339.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0429
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.892,
+    "top": 0.033,
+    "bottom_short": 0.075,
+    "hair_top_game": 71,
+    "hair_top_ref": 76,
+    "crop": [
+     -53.4,
+     -43.0,
+     951.0,
+     1249.1
+    ],
+    "eyes": 0.006,
+    "tilt": -0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.019,
+    "ssim": 0.695
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/e-emi-neutral-r261016-210829-0a6-4-s4.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    312.0,
+    238.0,
+    589.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.0,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0537
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.892,
+    "top": 0.033,
+    "bottom_short": 0.075,
+    "hair_top_game": 71,
+    "hair_top_ref": 76,
+    "crop": [
+     -53.4,
+     -43.0,
+     951.0,
+     1249.1
+    ],
+    "eyes": 0.005,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.016,
+    "ssim": 0.69
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/f-emi-neutral-r261016-215602-335-1-s1.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    312.0,
+    238.0,
+    589.0,
+    523.0
+   ],
+   "eyes": [
+    [
+     378.5,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0462
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.895,
+    "top": 0.033,
+    "bottom_short": 0.073,
+    "hair_top_game": 71,
+    "hair_top_ref": 76,
+    "crop": [
+     -51.6,
+     -42.0,
+     949.2,
+     1245.6
+    ],
+    "eyes": 0.006,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.016,
+    "ssim": 0.59
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/f-emi-neutral-r261016-215602-335-2-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    241.0,
+    592.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.0,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0396
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.901,
+    "top": 0.029,
+    "bottom_short": 0.07,
+    "hair_top_game": 69,
+    "hair_top_ref": 76,
+    "crop": [
+     -47.1,
+     -37.0,
+     946.8,
+     1241.5
+    ],
+    "eyes": -0.001,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.513
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/f-emi-neutral-r261016-215602-335-3-s3.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    238.0,
+    590.0,
+    524.0
+   ],
+   "eyes": [
+    [
+     378.5,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0422
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.892,
+    "top": 0.033,
+    "bottom_short": 0.075,
+    "hair_top_game": 71,
+    "hair_top_ref": 76,
+    "crop": [
+     -53.4,
+     -43.0,
+     951.0,
+     1249.1
+    ],
+    "eyes": 0.005,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.017,
+    "ssim": 0.695
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/f-emi-neutral-r261016-215602-335-4-s4.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    311.0,
+    238.0,
+    590.0,
+    523.0
+   ],
+   "eyes": [
+    [
+     378.0,
+     364.5
+    ],
+    [
+     511.0,
+     339.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0556
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.895,
+    "top": 0.033,
+    "bottom_short": 0.073,
+    "hair_top_game": 71,
+    "hair_top_ref": 76,
+    "crop": [
+     -51.6,
+     -42.0,
+     949.2,
+     1245.6
+    ],
+    "eyes": 0.006,
+    "tilt": -0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.014,
+    "ssim": 0.582
+   },
+   "status": "warn"
+  }
+ ]
+}

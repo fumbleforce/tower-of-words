@@ -1,0 +1,25 @@
+{
+ "details": "pool-portraits-1 pass a (#633). Swimwear on carina's approved carina-neutral portrait: inpaint of the clothes region only (mask start/mask-a-carina-neutral.png, from spec.json), face, hair and framing untouched. Outfit preset carina-swimwear matches the approved 3D swimwear body (reviews/pool-swimwear-1). Denoise 0.9, seeds 1-4. Staging: staging.md.",
+ "characters": [
+  "carina"
+ ],
+ "outfit": {
+  "carina": "carina-swimwear"
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "arms relaxed at her sides, three-quarter view, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ],
+ "width": 896,
+ "height": 1152,
+ "start": {
+  "image": "art/candidates/portraits/pool-portraits-1/start/carina-neutral.png",
+  "denoise": 0.9,
+  "mask": "art/candidates/portraits/pool-portraits-1/start/mask-a-carina-neutral.png"
+ }
+}

@@ -1,0 +1,25 @@
+{
+ "details": "pool-portraits-1 faces (#633): kuro's approved flirtatious portrait with the settings of e-kuro-neutral (its kept seeds [2]): same outfit preset, scene, mask method @d, denoise. Only the start picture and its mask change (start/kuro-flirtatious.png, start/mask-d-kuro-flirtatious.png). Staging: staging.md.",
+ "characters": [
+  "kuro"
+ ],
+ "outfit": {
+  "kuro": "kuro-swimwear"
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "arms relaxed at her sides, slender waist, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ],
+ "width": 768,
+ "height": 1280,
+ "start": {
+  "image": "art/candidates/portraits/pool-portraits-1/start/kuro-flirtatious.png",
+  "denoise": 0.9,
+  "mask": "art/candidates/portraits/pool-portraits-1/start/mask-d-kuro-flirtatious.png"
+ }
+}

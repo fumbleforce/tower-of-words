@@ -1,0 +1,1403 @@
+{
+ "character": "carina",
+ "ref": "game3d/assets/portraits/carina-neutral.webp",
+ "face_box_game": null,
+ "ref_face_detected": [
+  185.0,
+  182.0,
+  404.0,
+  421.0
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/a-carina-neutral-r261016-203852-11b-1-s1.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    361.0,
+    169.0,
+    674.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0965
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.083,
+    "top": 0.078,
+    "bottom_short": 0.0,
+    "hair_top_game": 65,
+    "hair_top_ref": 71,
+    "crop": [
+     109.6,
+     -83.1,
+     1007.1,
+     980.6
+    ],
+    "eyes": -0.01,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.011,
+    "ssim": 0.099
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/a-carina-neutral-r261016-203852-11b-2-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    360.0,
+    170.0,
+    675.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0106
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.086,
+    "top": 0.077,
+    "bottom_short": 0.0,
+    "hair_top_game": 63,
+    "hair_top_ref": 71,
+    "crop": [
+     110.9,
+     -81.3,
+     1005.6,
+     979.1
+    ],
+    "eyes": -0.012,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.098
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/a-carina-neutral-r261016-203852-11b-3-s3.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    361.0,
+    168.0,
+    675.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0631
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.08,
+    "top": 0.08,
+    "bottom_short": 0.0,
+    "hair_top_game": 66,
+    "hair_top_ref": 71,
+    "crop": [
+     108.9,
+     -84.8,
+     1009.1,
+     982.0
+    ],
+    "eyes": -0.008,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.009,
+    "ssim": 0.105
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/a-carina-neutral-r261016-203852-11b-4-s4.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    362.0,
+    170.0,
+    674.0,
+    499.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0076
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.09,
+    "top": 0.076,
+    "bottom_short": 0.0,
+    "hair_top_game": 63,
+    "hair_top_ref": 71,
+    "crop": [
+     112.6,
+     -80.5,
+     1004.6,
+     976.7
+    ],
+    "eyes": -0.011,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.097
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/b-carina-neutral-r261016-204827-b2f-1-s1.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    361.0,
+    168.0,
+    675.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     314.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0001
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.08,
+    "top": 0.08,
+    "bottom_short": 0.0,
+    "hair_top_game": 66,
+    "hair_top_ref": 71,
+    "crop": [
+     108.9,
+     -84.8,
+     1009.1,
+     982.0
+    ],
+    "eyes": -0.009,
+    "tilt": 37.8,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.01,
+    "ssim": 0.1
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/b-carina-neutral-r261016-204827-b2f-2-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    360.0,
+    168.0,
+    676.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0276
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.08,
+    "top": 0.08,
+    "bottom_short": 0.0,
+    "hair_top_game": 66,
+    "hair_top_ref": 71,
+    "crop": [
+     108.9,
+     -84.8,
+     1009.1,
+     982.0
+    ],
+    "eyes": -0.008,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.102
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/b-carina-neutral-r261016-204827-b2f-3-s3.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    361.0,
+    169.0,
+    675.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0008
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.083,
+    "top": 0.078,
+    "bottom_short": 0.0,
+    "hair_top_game": 65,
+    "hair_top_ref": 71,
+    "crop": [
+     110.1,
+     -83.1,
+     1007.6,
+     980.6
+    ],
+    "eyes": -0.01,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.01,
+    "ssim": 0.101
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/b-carina-neutral-r261016-204827-b2f-4-s4.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    361.0,
+    168.0,
+    675.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0006
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.08,
+    "top": 0.08,
+    "bottom_short": 0.0,
+    "hair_top_game": 66,
+    "hair_top_ref": 71,
+    "crop": [
+     108.9,
+     -84.8,
+     1009.1,
+     982.0
+    ],
+    "eyes": -0.008,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.101
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/c-carina-neutral-r261016-205630-ece-1-s1.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    361.0,
+    168.0,
+    675.0,
+    499.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0238
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.083,
+    "top": 0.079,
+    "bottom_short": 0.0,
+    "hair_top_game": 65,
+    "hair_top_ref": 71,
+    "crop": [
+     110.1,
+     -84.1,
+     1007.6,
+     979.6
+    ],
+    "eyes": -0.007,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.012,
+    "ssim": 0.103
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/c-carina-neutral-r261016-205630-ece-2-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    360.0,
+    168.0,
+    675.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0012
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.08,
+    "top": 0.08,
+    "bottom_short": 0.0,
+    "hair_top_game": 66,
+    "hair_top_ref": 71,
+    "crop": [
+     108.4,
+     -84.8,
+     1008.6,
+     982.0
+    ],
+    "eyes": -0.008,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.103
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/c-carina-neutral-r261016-205630-ece-3-s3.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    361.0,
+    168.0,
+    675.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0301
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.08,
+    "top": 0.08,
+    "bottom_short": 0.0,
+    "hair_top_game": 66,
+    "hair_top_ref": 71,
+    "crop": [
+     108.9,
+     -84.8,
+     1009.1,
+     982.0
+    ],
+    "eyes": -0.008,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.01,
+    "ssim": 0.105
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/c-carina-neutral-r261016-205630-ece-4-s4.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    361.0,
+    169.0,
+    675.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0001
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.083,
+    "top": 0.078,
+    "bottom_short": 0.0,
+    "hair_top_game": 65,
+    "hair_top_ref": 71,
+    "crop": [
+     110.1,
+     -83.1,
+     1007.6,
+     980.6
+    ],
+    "eyes": -0.01,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.102
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/d-carina-neutral-r261016-210419-037-1-s1.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    361.0,
+    169.0,
+    674.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0267
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.083,
+    "top": 0.078,
+    "bottom_short": 0.0,
+    "hair_top_game": 65,
+    "hair_top_ref": 71,
+    "crop": [
+     109.6,
+     -83.1,
+     1007.1,
+     980.6
+    ],
+    "eyes": -0.01,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.011,
+    "ssim": 0.101
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/d-carina-neutral-r261016-210419-037-2-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    360.0,
+    168.0,
+    676.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0062
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.08,
+    "top": 0.08,
+    "bottom_short": 0.0,
+    "hair_top_game": 66,
+    "hair_top_ref": 71,
+    "crop": [
+     108.9,
+     -84.8,
+     1009.1,
+     982.0
+    ],
+    "eyes": -0.008,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.105
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/d-carina-neutral-r261016-210419-037-3-s3.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    361.0,
+    169.0,
+    675.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0613
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.083,
+    "top": 0.078,
+    "bottom_short": 0.0,
+    "hair_top_game": 65,
+    "hair_top_ref": 71,
+    "crop": [
+     110.1,
+     -83.1,
+     1007.6,
+     980.6
+    ],
+    "eyes": -0.009,
+    "tilt": 38.2,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.01,
+    "ssim": 0.102
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/d-carina-neutral-r261016-210419-037-4-s4.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    361.0,
+    170.0,
+    675.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0368
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.086,
+    "top": 0.077,
+    "bottom_short": 0.0,
+    "hair_top_game": 63,
+    "hair_top_ref": 71,
+    "crop": [
+     111.4,
+     -81.3,
+     1006.1,
+     979.1
+    ],
+    "eyes": -0.012,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.011,
+    "ssim": 0.1
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/e-carina-neutral-r261016-211207-007-1-s1.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    362.0,
+    170.0,
+    674.0,
+    499.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0063
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.09,
+    "top": 0.076,
+    "bottom_short": 0.0,
+    "hair_top_game": 63,
+    "hair_top_ref": 71,
+    "crop": [
+     112.6,
+     -80.5,
+     1004.6,
+     976.7
+    ],
+    "eyes": -0.01,
+    "tilt": 38.2,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.006,
+    "ssim": 0.097
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/e-carina-neutral-r261016-211207-007-2-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    361.0,
+    169.0,
+    675.0,
+    499.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.007
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.086,
+    "top": 0.078,
+    "bottom_short": 0.0,
+    "hair_top_game": 64,
+    "hair_top_ref": 71,
+    "crop": [
+     111.4,
+     -82.3,
+     1006.1,
+     978.1
+    ],
+    "eyes": -0.009,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.012,
+    "ssim": 0.101
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/e-carina-neutral-r261016-211207-007-3-s3.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    361.0,
+    168.0,
+    675.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0581
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.08,
+    "top": 0.08,
+    "bottom_short": 0.0,
+    "hair_top_game": 66,
+    "hair_top_ref": 71,
+    "crop": [
+     108.9,
+     -84.8,
+     1009.1,
+     982.0
+    ],
+    "eyes": -0.008,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.009,
+    "ssim": 0.106
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/e-carina-neutral-r261016-211207-007-4-s4.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    361.0,
+    169.0,
+    675.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0069
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 1.083,
+    "top": 0.078,
+    "bottom_short": 0.0,
+    "hair_top_game": 65,
+    "hair_top_ref": 71,
+    "crop": [
+     110.1,
+     -83.1,
+     1007.6,
+     980.6
+    ],
+    "eyes": -0.01,
+    "tilt": 38.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.102
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/x-carina-surprised-r261016-213056-d59-1-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    270.0,
+    160.0,
+    582.0,
+    502.0
+   ],
+   "eyes": [
+    [
+     335.0,
+     300.0
+    ],
+    [
+     462.5,
+     276.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0024
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.008,
+    "zoom": 1.048,
+    "top": 0.091,
+    "bottom_short": 0.0,
+    "hair_top_game": 76,
+    "hair_top_ref": 71,
+    "crop": [
+     4.6,
+     -100.4,
+     931.8,
+     998.5
+    ],
+    "eyes": -0.014,
+    "tilt": 8.6,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.014,
+    "ssim": 0.256
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/x-carina-surprised-r261016-213056-d59-2-s3.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    267.0,
+    161.0,
+    584.0,
+    503.0
+   ],
+   "eyes": [
+    [
+     335.0,
+     300.0
+    ],
+    [
+     462.0,
+     276.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0447
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.008,
+    "zoom": 1.048,
+    "top": 0.09,
+    "bottom_short": 0.0,
+    "hair_top_game": 75,
+    "hair_top_ref": 71,
+    "crop": [
+     4.1,
+     -99.4,
+     931.3,
+     999.5
+    ],
+    "eyes": -0.017,
+    "tilt": 8.6,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.011,
+    "ssim": 0.256
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/x-carina-tired-r261016-213147-31c-1-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    269.0,
+    168.0,
+    588.0,
+    515.0
+   ],
+   "eyes": [
+    [
+     342.5,
+     319.5
+    ],
+    [
+     475.0,
+     298.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0005
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.007,
+    "zoom": 1.033,
+    "top": 0.086,
+    "bottom_short": 0.0,
+    "hair_top_game": 71,
+    "hair_top_ref": 71,
+    "crop": [
+     0.9,
+     -96.2,
+     941.7,
+     1018.8
+    ],
+    "eyes": 0.016,
+    "tilt": 9.8,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.017,
+    "ssim": 0.255
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/pool-portraits-1/x-carina-tired-r261016-213147-31c-2-s3.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    269.0,
+    168.0,
+    589.0,
+    516.0
+   ],
+   "eyes": [
+    [
+     342.5,
+     319.5
+    ],
+    [
+     475.0,
+     298.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "framing": {
+    "headroom": 0.007,
+    "zoom": 1.03,
+    "top": 0.087,
+    "bottom_short": 0.0,
+    "hair_top_game": 72,
+    "hair_top_ref": 71,
+    "crop": [
+     0.2,
+     -97.0,
+     943.7,
+     1021.3
+    ],
+    "eyes": 0.015,
+    "tilt": 9.8,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.014,
+    "ssim": 0.254
+   },
+   "status": "fail"
+  }
+ ]
+}

@@ -1,0 +1,26 @@
+{
+ "details": "pool-portraits-1 pass a (#633). Swimwear on eric's approved eric-neutral portrait: inpaint of the clothes region only (mask start/mask-a-eric-neutral.png, from spec.json), face, hair and framing untouched. Outfit preset eric-swimwear matches the approved 3D swimwear body (reviews/pool-swimwear-1). Denoise 0.9, seeds 1-4. Staging: staging.md.",
+ "characters": [
+  "eric"
+ ],
+ "outfit": {
+  "eric": "eric-swimwear"
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "slight three-quarter turn, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props",
+  "muscle"
+ ],
+ "width": 976,
+ "height": 1152,
+ "start": {
+  "image": "art/candidates/portraits/pool-portraits-1/start/eric-neutral.png",
+  "denoise": 0.9,
+  "mask": "art/candidates/portraits/pool-portraits-1/start/mask-a-eric-neutral.png"
+ }
+}

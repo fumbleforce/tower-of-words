@@ -1,0 +1,25 @@
+{
+ "details": "pool-portraits-1 pass e (#633). One change from pass d: outfit preset emi-swimwear v2. Pass a-d drew necklines with cleavage the 3D suit doesn't have (outfit, the most repeated fault); v2 asks for a school-style one-piece with a high rounded neckline that covers the chest and excludes cleavage and low necklines. Mask @d, scene, denoise 0.9 and seeds 1-4 as pass d. Staging: staging.md.",
+ "characters": [
+  "emi"
+ ],
+ "outfit": {
+  "emi": "emi-swimwear"
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "hands clasped behind her back, leaning forward slightly, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ],
+ "width": 896,
+ "height": 1152,
+ "start": {
+  "image": "art/candidates/portraits/pool-portraits-1/start/emi-neutral.png",
+  "denoise": 0.9,
+  "mask": "art/candidates/portraits/pool-portraits-1/start/mask-d-emi-neutral.png"
+ }
+}

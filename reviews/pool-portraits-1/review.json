@@ -1,0 +1,992 @@
+{
+ "title": "Pool swimwear dialogue portraits, round 1",
+ "date": "2026-10-16",
+ "by": "claude-main/art-round",
+ "status": "open",
+ "question": "Which swimwear set should each of Kuro, Emi, Eric and Carina use for the pool dialogue, if any?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/candidates/portraits/pool-portraits-1/lineup.webp",
+   "caption": "Pictures for the day 3 pool dialogue (#633), so the portraits wear the swimwear the 3D bodies wear. Each is the approved portrait with only the clothes repainted (face, hair, glasses and framing kept), the suit matched to the picked 3D body: Kuro dark navy, Emi muted teal, Carina burgundy one-pieces, Eric bare chest and navy shorts. No caps or wet hair, as the models have none. At the size the game shows portraits (1080p desktop: every face the same height, chins level, cut at the waist, Kuro at her 0.85 size). For each person: the portraits now, then the swimwear sets I kept, each row ending with the approved 3D swimwear body from reviews/pool-swimwear-1 for comparison."
+  },
+  {
+   "image": "art/candidates/portraits/pool-portraits-1/sheet-kuro.webp",
+   "caption": "Kuro: every attempt in order, framed as the game crops it, after her approved portrait. Passes a to e on her neutral, then her four other faces with the e2 settings."
+  },
+  {
+   "image": "art/candidates/portraits/pool-portraits-1/sheet-emi.webp",
+   "caption": "Emi: every attempt in order (passes a to f)."
+  },
+  {
+   "image": "art/candidates/portraits/pool-portraits-1/sheet-eric.webp",
+   "caption": "Eric: every attempt in order (passes a to j), then his surprised and tired faces with the j1 and j4 settings."
+  },
+  {
+   "image": "art/candidates/portraits/pool-portraits-1/sheet-carina.webp",
+   "caption": "Carina: every attempt in order (passes a to e), then her surprised and tired faces with the e2 and e3 settings."
+  }
+ ],
+ "options": [
+  {
+   "id": "kuro-e2",
+   "label": "kuro-e2 (kuro, pick)",
+   "image": "art/candidates/portraits/pool-portraits-1/e-kuro-neutral-r261016-210652-2e7-2-s2-game.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/x-kuro-flirtatious-r261016-212706-795-1-s2-game.webp",
+    "art/candidates/portraits/pool-portraits-1/x-kuro-teasing-r261016-212733-42c-1-s2-game.webp",
+    "art/candidates/portraits/pool-portraits-1/x-kuro-pleased-r261016-212800-561-1-s2-game.webp",
+    "art/candidates/portraits/pool-portraits-1/x-kuro-polite-r261016-212828-5dc-1-s2-game.webp",
+    "art/candidates/portraits/pool-portraits-1/e-kuro-neutral-r261016-210652-2e7-2-s2.webp",
+    "art/candidates/portraits/pool-portraits-1/x-kuro-flirtatious-r261016-212706-795-1-s2.webp",
+    "art/candidates/portraits/pool-portraits-1/x-kuro-teasing-r261016-212733-42c-1-s2.webp",
+    "art/candidates/portraits/pool-portraits-1/x-kuro-pleased-r261016-212800-561-1-s2.webp",
+    "art/candidates/portraits/pool-portraits-1/x-kuro-polite-r261016-212828-5dc-1-s2.webp"
+   ],
+   "note": "Kuro swimwear set kuro-e2, the cut-outs on the game canvas first (as they'd be installed), then the raw renders. pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-kuro-neutral.json, seed 2, dashboard #2506. Red rim 11.0% (imgqa: redrim fail). My verdict, kept: plain navy tank one-piece with a high neckline like the 3D suit; neck, hair and bun clean. Her five faces: neutral, flirtatious, teasing, pleased, polite, each the approved face with this body; the cut-outs on the game canvas follow. Red rim of the game cut-outs: 2.80%, 3.01%, 3.61%, 3.44%, 2.65% (the approved kuro-neutral: 1.72%; the raw render's number above includes its backdrop edge)."
+  },
+  {
+   "id": "emi-f4",
+   "label": "emi-f4 (emi, pick)",
+   "image": "art/candidates/portraits/pool-portraits-1/f-emi-neutral-r261016-215602-335-4-s4-game.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/f-emi-neutral-r261016-215602-335-4-s4.webp"
+   ],
+   "note": "Emi swimwear set emi-f4, the cut-outs on the game canvas first (as they'd be installed), then the raw renders. pass f (Emi): one change, outfit preset emi-swimwear v3, matte fabric. Recipe art/candidates/portraits/pool-portraits-1/recipes/f-emi-neutral.json, seed 4, dashboard #2556. Red rim 5.6% (imgqa: redrim warn). My verdict, kept: matte teal one-piece with no point highlights; hands behind her back as approved; a short cleavage line at the scoop. Matte suit; a short cleavage line shows at the scoop, which the 3D suit does not have. Red rim of the game cut-outs: 20.03% (the approved emi-neutral: 14.13%; the raw render's number above includes its backdrop edge)."
+  },
+  {
+   "id": "eric-j1",
+   "label": "eric-j1 (eric, pick)",
+   "image": "art/candidates/portraits/pool-portraits-1/j-eric-neutral-r261016-212442-e0d-1-s1-game.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/x-eric-surprised-r261016-212855-368-1-s1-game.webp",
+    "art/candidates/portraits/pool-portraits-1/x-eric-tired-r261016-212955-d49-1-s1-game.webp",
+    "art/candidates/portraits/pool-portraits-1/j-eric-neutral-r261016-212442-e0d-1-s1.webp",
+    "art/candidates/portraits/pool-portraits-1/x-eric-surprised-r261016-212855-368-1-s1.webp",
+    "art/candidates/portraits/pool-portraits-1/x-eric-tired-r261016-212955-d49-1-s1.webp"
+   ],
+   "note": "Eric swimwear set eric-j1, the cut-outs on the game canvas first (as they'd be installed), then the raw renders. pass j (Eric): one change, outfit preset eric-swimwear v3 (\"plain solid navy blue swim shorts\", no stripe word in the positive). Recipe art/candidates/portraits/pool-portraits-1/recipes/j-eric-neutral.json, seed 1, dashboard #2537. Red rim 0.0%. My verdict, kept: slim plain chest, plain navy shorts as on the 3D body; a faint soft patch left of the chin. His three faces. The body is slimmer than earlier passes but still shows defined abs and chest at game size, more than the soft 3D body. Tired cut-out: imgqa flags see-through on the glasses frame line at her right lens (image left) where it crosses the backdrop (frame 1.00); it shows only on the matte check. Red rim of the game cut-outs: 0.60%, 0.10%, 0.13% (the approved eric-neutral: 0.0%; the raw render's number above includes its backdrop edge)."
+  },
+  {
+   "id": "eric-j4",
+   "label": "eric-j4 (eric, pick)",
+   "image": "art/candidates/portraits/pool-portraits-1/j-eric-neutral-r261016-212442-e0d-4-s4-game.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/x-eric-surprised-r261016-212925-0c2-1-s4-game.webp",
+    "art/candidates/portraits/pool-portraits-1/x-eric-tired-r261016-213026-2ac-1-s4-game.webp",
+    "art/candidates/portraits/pool-portraits-1/j-eric-neutral-r261016-212442-e0d-4-s4.webp",
+    "art/candidates/portraits/pool-portraits-1/x-eric-surprised-r261016-212925-0c2-1-s4.webp",
+    "art/candidates/portraits/pool-portraits-1/x-eric-tired-r261016-213026-2ac-1-s4.webp"
+   ],
+   "note": "Eric swimwear set eric-j4, the cut-outs on the game canvas first (as they'd be installed), then the raw renders. pass j (Eric): one change, outfit preset eric-swimwear v3 (\"plain solid navy blue swim shorts\", no stripe word in the positive). Recipe art/candidates/portraits/pool-portraits-1/recipes/j-eric-neutral.json, seed 4, dashboard #2540. Red rim 0.2%. My verdict, kept: slim, plain navy shorts; a faint soft patch left of the chin and at the near shoulder. His three faces. Same body notes as eric-j1; a faint soft patch left of his chin and at the near shoulder. Red rim of the game cut-outs: 0.63%, 0.39%, 0.25% (the approved eric-neutral: 0.0%; the raw render's number above includes its backdrop edge)."
+  },
+  {
+   "id": "carina-e2",
+   "label": "carina-e2 (carina, pick)",
+   "image": "art/candidates/portraits/pool-portraits-1/e-carina-neutral-r261016-211207-007-2-s2-game.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/x-carina-surprised-r261016-213056-d59-1-s2-game.webp",
+    "art/candidates/portraits/pool-portraits-1/x-carina-tired-r261016-213147-31c-1-s2-game.webp",
+    "art/candidates/portraits/pool-portraits-1/e-carina-neutral-r261016-211207-007-2-s2.webp",
+    "art/candidates/portraits/pool-portraits-1/x-carina-surprised-r261016-213056-d59-1-s2.webp",
+    "art/candidates/portraits/pool-portraits-1/x-carina-tired-r261016-213147-31c-1-s2.webp"
+   ],
+   "note": "Carina swimwear set carina-e2, the cut-outs on the game canvas first (as they'd be installed), then the raw renders. pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-carina-neutral.json, seed 2, dashboard #2518. Red rim 0.7%. My verdict, kept: plain burgundy one-piece, clean neck; a small 'w'-like mark near her right strap (image left). Her three faces. The approved tired face has the brow piercing, kept as is. Surprised has a small white blob right of her neck (image right) on the cut-out. Red rim of the game cut-outs: 10.93%, 4.66%, 0.24% (the approved carina-neutral: 5.18%; the raw render's number above includes its backdrop edge)."
+  },
+  {
+   "id": "carina-e3",
+   "label": "carina-e3 (carina, pick)",
+   "image": "art/candidates/portraits/pool-portraits-1/e-carina-neutral-r261016-211207-007-3-s3-game.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/x-carina-surprised-r261016-213056-d59-2-s3-game.webp",
+    "art/candidates/portraits/pool-portraits-1/x-carina-tired-r261016-213147-31c-2-s3-game.webp",
+    "art/candidates/portraits/pool-portraits-1/e-carina-neutral-r261016-211207-007-3-s3.webp",
+    "art/candidates/portraits/pool-portraits-1/x-carina-surprised-r261016-213056-d59-2-s3.webp",
+    "art/candidates/portraits/pool-portraits-1/x-carina-tired-r261016-213147-31c-2-s3.webp"
+   ],
+   "note": "Carina swimwear set carina-e3, the cut-outs on the game canvas first (as they'd be installed), then the raw renders. pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-carina-neutral.json, seed 3, dashboard #2519. Red rim 5.8% (imgqa: redrim warn). My verdict, kept: plain burgundy one-piece, high neckline, clean neck and shoulders. Her three faces. Cleanest neck of the Carina sets. Red rim of the game cut-outs: 10.57%, 1.16%, 1.33% (the approved carina-neutral: 5.18%; the raw render's number above includes its backdrop edge)."
+  },
+  {
+   "id": "a-kuro-s1",
+   "label": "a-kuro-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/a-kuro-neutral-r261016-203138-b40-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-kuro-neutral-r261016-203138-b40-1-s1.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-kuro-neutral.json, seed 1, dashboard #2441. Red rim 7.1% (imgqa: redrim warn). My verdict, rejected: a strip of the old jacket collar kept at the neck reads as a choker; jacket shading shapes left on the belly; neckline lower than the 3D suit's."
+  },
+  {
+   "id": "a-kuro-s2",
+   "label": "a-kuro-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/a-kuro-neutral-r261016-203138-b40-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-kuro-neutral-r261016-203138-b40-2-s2.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-kuro-neutral.json, seed 2, dashboard #2442. Red rim 10.2% (imgqa: redrim fail). My verdict, rejected: collar strip at the neck reads as a choker; neckline lower than the 3D suit's."
+  },
+  {
+   "id": "a-kuro-s3",
+   "label": "a-kuro-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/a-kuro-neutral-r261016-203138-b40-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-kuro-neutral-r261016-203138-b40-3-s3.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-kuro-neutral.json, seed 3, dashboard #2443. Red rim 8.7% (imgqa: redrim fail). My verdict, rejected: collar strip choker; flat blurred block where the right shoulder meets the mask edge."
+  },
+  {
+   "id": "a-kuro-s4",
+   "label": "a-kuro-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/a-kuro-neutral-r261016-203138-b40-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-kuro-neutral-r261016-203138-b40-4-s4.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-kuro-neutral.json, seed 4, dashboard #2444. Red rim 14.9% (imgqa: redrim fail). My verdict, rejected: collar strip choker at the neck; neckline shows cleavage the 3D suit doesn't."
+  },
+  {
+   "id": "b-kuro-s1",
+   "label": "b-kuro-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/b-kuro-neutral-r261016-204312-8b4-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-kuro-neutral-r261016-204312-8b4-1-s1.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-kuro-neutral.json, seed 1, dashboard #2457. Red rim 0.2%. My verdict, rejected: a second ghost bun and a third hair stick painted into the repainted backdrop above her head; jacket shapes on the belly."
+  },
+  {
+   "id": "b-kuro-s2",
+   "label": "b-kuro-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/b-kuro-neutral-r261016-204312-8b4-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-kuro-neutral-r261016-204312-8b4-2-s2.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-kuro-neutral.json, seed 2, dashboard #2458. Red rim 0.0%. My verdict, rejected: extra bun and hair sticks painted beside her head in the backdrop; neck and shoulders clean."
+  },
+  {
+   "id": "b-kuro-s3",
+   "label": "b-kuro-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/b-kuro-neutral-r261016-204312-8b4-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-kuro-neutral-r261016-204312-8b4-3-s3.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-kuro-neutral.json, seed 3, dashboard #2459. Red rim 0.0%. My verdict, rejected: a second bun with crossed sticks on top of her head; grey hair halo on her left (image right)."
+  },
+  {
+   "id": "b-kuro-s4",
+   "label": "b-kuro-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/b-kuro-neutral-r261016-204312-8b4-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-kuro-neutral-r261016-204312-8b4-4-s4.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-kuro-neutral.json, seed 4, dashboard #2460. Red rim 0.0%. My verdict, rejected: extra bun lobe and sticks on top; light halo along the hair; neckline lower than the 3D suit."
+  },
+  {
+   "id": "c-kuro-s1",
+   "label": "c-kuro-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/c-kuro-neutral-r261016-205113-cf0-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-kuro-neutral-r261016-205113-cf0-1-s1.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-kuro-neutral.json, seed 1, dashboard #2473. Red rim 0.5%. My verdict, rejected: a floating second bun and stick drawn in the backdrop above her head; jacket shapes on the suit."
+  },
+  {
+   "id": "c-kuro-s2",
+   "label": "c-kuro-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/c-kuro-neutral-r261016-205113-cf0-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-kuro-neutral-r261016-205113-cf0-2-s2.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-kuro-neutral.json, seed 2, dashboard #2474. Red rim 0.0%. My verdict, rejected: jacket shading shapes left on the belly of the suit; light halo round the hair."
+  },
+  {
+   "id": "c-kuro-s3",
+   "label": "c-kuro-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/c-kuro-neutral-r261016-205113-cf0-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-kuro-neutral-r261016-205113-cf0-3-s3.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-kuro-neutral.json, seed 3, dashboard #2475. Red rim 1.3%. My verdict, rejected: a floating bun with two pins above her head."
+  },
+  {
+   "id": "c-kuro-s4",
+   "label": "c-kuro-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/c-kuro-neutral-r261016-205113-cf0-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-kuro-neutral-r261016-205113-cf0-4-s4.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-kuro-neutral.json, seed 4, dashboard #2476. Red rim 0.0%. My verdict, rejected: black splashes in the backdrop above her bun; cleavage below the 3D suit's neckline."
+  },
+  {
+   "id": "d-kuro-s1",
+   "label": "d-kuro-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/d-kuro-neutral-r261016-205905-461-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-kuro-neutral-r261016-205905-461-1-s1.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-kuro-neutral.json, seed 1, dashboard #2489. Red rim 7.4% (imgqa: redrim warn). My verdict, rejected: clean neck and head, but jacket shading shapes left on the suit's belly."
+  },
+  {
+   "id": "d-kuro-s2",
+   "label": "d-kuro-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/d-kuro-neutral-r261016-205905-461-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-kuro-neutral-r261016-205905-461-2-s2.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-kuro-neutral.json, seed 2, dashboard #2490. Red rim 10.5% (imgqa: redrim fail). My verdict, rejected: clean head and neck; jacket arrow shapes on the belly; some cleavage."
+  },
+  {
+   "id": "d-kuro-s3",
+   "label": "d-kuro-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/d-kuro-neutral-r261016-205905-461-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-kuro-neutral-r261016-205905-461-3-s3.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-kuro-neutral.json, seed 3, dashboard #2491. Red rim 11.0% (imgqa: redrim fail). My verdict, rejected: jacket shapes on the suit; cleavage below the 3D suit's neckline."
+  },
+  {
+   "id": "d-kuro-s4",
+   "label": "d-kuro-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/d-kuro-neutral-r261016-205905-461-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-kuro-neutral-r261016-205905-461-4-s4.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-kuro-neutral.json, seed 4, dashboard #2492. Red rim 14.6% (imgqa: redrim fail). My verdict, rejected: cleanest suit and neck so far, but the neckline shows cleavage the 3D suit doesn't."
+  },
+  {
+   "id": "e-kuro-s1",
+   "label": "e-kuro-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/e-kuro-neutral-r261016-210652-2e7-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/e-kuro-neutral-r261016-210652-2e7-1-s1.webp"
+   ],
+   "note": "pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-kuro-neutral.json, seed 1, dashboard #2505. Red rim 7.5% (imgqa: redrim warn). My verdict, rejected: jacket shading shapes left on the suit's belly and chest."
+  },
+  {
+   "id": "e-kuro-s3",
+   "label": "e-kuro-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/e-kuro-neutral-r261016-210652-2e7-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/e-kuro-neutral-r261016-210652-2e7-3-s3.webp"
+   ],
+   "note": "pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-kuro-neutral.json, seed 3, dashboard #2507. Red rim 7.6% (imgqa: redrim warn). My verdict, rejected: jacket shapes on the chest; bust larger than her slender approved body."
+  },
+  {
+   "id": "e-kuro-s4",
+   "label": "e-kuro-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/e-kuro-neutral-r261016-210652-2e7-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/e-kuro-neutral-r261016-210652-2e7-4-s4.webp"
+   ],
+   "note": "pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-kuro-neutral.json, seed 4, dashboard #2508. Red rim 8.4% (imgqa: redrim fail). My verdict, rejected: grey jacket shapes on the chest of the suit."
+  },
+  {
+   "id": "a-emi-s1",
+   "label": "a-emi-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/a-emi-neutral-r261016-203515-794-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-emi-neutral-r261016-203515-794-1-s1.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-emi-neutral.json, seed 1, dashboard #2445. Red rim 4.2% (imgqa: redrim warn). My verdict, rejected: deep scoop with large cleavage, far more revealing than the 3D teal suit."
+  },
+  {
+   "id": "a-emi-s2",
+   "label": "a-emi-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/a-emi-neutral-r261016-203515-794-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-emi-neutral-r261016-203515-794-2-s2.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-emi-neutral.json, seed 2, dashboard #2446. Red rim 5.3% (imgqa: redrim warn). My verdict, rejected: deep cleavage; leaning pose shows hips and thighs."
+  },
+  {
+   "id": "a-emi-s3",
+   "label": "a-emi-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/a-emi-neutral-r261016-203515-794-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-emi-neutral-r261016-203515-794-3-s3.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-emi-neutral.json, seed 3, dashboard #2447. Red rim 4.8% (imgqa: redrim warn). My verdict, rejected: deep cleavage, more revealing than the 3D suit."
+  },
+  {
+   "id": "a-emi-s4",
+   "label": "a-emi-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/a-emi-neutral-r261016-203515-794-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-emi-neutral-r261016-203515-794-4-s4.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-emi-neutral.json, seed 4, dashboard #2448. Red rim 4.0% (imgqa: redrim warn). My verdict, rejected: deep cleavage; pale smudge on the hair at her right (image left) mask edge."
+  },
+  {
+   "id": "b-emi-s1",
+   "label": "b-emi-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/b-emi-neutral-r261016-204452-4a2-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-emi-neutral-r261016-204452-4a2-1-s1.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-emi-neutral.json, seed 1, dashboard #2461. Red rim 6.3% (imgqa: redrim warn). My verdict, rejected: grey ghost hair painted beside her bob; deep cleavage."
+  },
+  {
+   "id": "b-emi-s2",
+   "label": "b-emi-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/b-emi-neutral-r261016-204452-4a2-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-emi-neutral-r261016-204452-4a2-2-s2.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-emi-neutral.json, seed 2, dashboard #2462. Red rim 2.5% (imgqa: redrim warn). My verdict, rejected: deep cleavage; leaning pose shows hips and thighs."
+  },
+  {
+   "id": "b-emi-s3",
+   "label": "b-emi-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/b-emi-neutral-r261016-204452-4a2-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-emi-neutral-r261016-204452-4a2-3-s3.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-emi-neutral.json, seed 3, dashboard #2463. Red rim 7.4% (imgqa: redrim warn). My verdict, rejected: grey ghost hair beside her bob on the left; deep cleavage."
+  },
+  {
+   "id": "b-emi-s4",
+   "label": "b-emi-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/b-emi-neutral-r261016-204452-4a2-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-emi-neutral-r261016-204452-4a2-4-s4.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-emi-neutral.json, seed 4, dashboard #2464. Red rim 3.5% (imgqa: redrim warn). My verdict, rejected: white ghost hair layer on both sides of the bob; deep cleavage."
+  },
+  {
+   "id": "c-emi-s1",
+   "label": "c-emi-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/c-emi-neutral-r261016-205252-816-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-emi-neutral-r261016-205252-816-1-s1.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-emi-neutral.json, seed 1, dashboard #2477. Red rim 4.9% (imgqa: redrim warn). My verdict, rejected: grey ghost hair outline beside her bob; deep cleavage."
+  },
+  {
+   "id": "c-emi-s2",
+   "label": "c-emi-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/c-emi-neutral-r261016-205252-816-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-emi-neutral-r261016-205252-816-2-s2.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-emi-neutral.json, seed 2, dashboard #2478. Red rim 4.1% (imgqa: redrim warn). My verdict, rejected: ghost hair outline above her head; deep cleavage; hips and thighs shown."
+  },
+  {
+   "id": "c-emi-s3",
+   "label": "c-emi-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/c-emi-neutral-r261016-205252-816-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-emi-neutral-r261016-205252-816-3-s3.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-emi-neutral.json, seed 3, dashboard #2479. Red rim 3.9% (imgqa: redrim warn). My verdict, rejected: ghost hair outline; deep cleavage."
+  },
+  {
+   "id": "c-emi-s4",
+   "label": "c-emi-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/c-emi-neutral-r261016-205252-816-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-emi-neutral-r261016-205252-816-4-s4.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-emi-neutral.json, seed 4, dashboard #2480. Red rim 4.3% (imgqa: redrim warn). My verdict, rejected: deep cleavage, more revealing than the 3D suit."
+  },
+  {
+   "id": "d-emi-s1",
+   "label": "d-emi-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/d-emi-neutral-r261016-210041-450-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-emi-neutral-r261016-210041-450-1-s1.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-emi-neutral.json, seed 1, dashboard #2493. Red rim 4.3% (imgqa: redrim warn). My verdict, rejected: deep cleavage, more revealing than the 3D suit."
+  },
+  {
+   "id": "d-emi-s2",
+   "label": "d-emi-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/d-emi-neutral-r261016-210041-450-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-emi-neutral-r261016-210041-450-2-s2.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-emi-neutral.json, seed 2, dashboard #2494. Red rim 4.8% (imgqa: redrim warn). My verdict, rejected: deep cleavage; hips and thighs shown."
+  },
+  {
+   "id": "d-emi-s3",
+   "label": "d-emi-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/d-emi-neutral-r261016-210041-450-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-emi-neutral-r261016-210041-450-3-s3.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-emi-neutral.json, seed 3, dashboard #2495. Red rim 4.4% (imgqa: redrim warn). My verdict, rejected: deep cleavage."
+  },
+  {
+   "id": "d-emi-s4",
+   "label": "d-emi-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/d-emi-neutral-r261016-210041-450-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-emi-neutral-r261016-210041-450-4-s4.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-emi-neutral.json, seed 4, dashboard #2496. Red rim 4.0% (imgqa: redrim warn). My verdict, rejected: deep cleavage; smudge beside the hair at her left (image right)."
+  },
+  {
+   "id": "e-emi-s1",
+   "label": "e-emi-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/e-emi-neutral-r261016-210829-0a6-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/e-emi-neutral-r261016-210829-0a6-1-s1.webp"
+   ],
+   "note": "pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-emi-neutral.json, seed 1, dashboard #2509. Red rim 4.5% (imgqa: redrim warn). My verdict, rejected: neckline still shows cleavage."
+  },
+  {
+   "id": "e-emi-s2",
+   "label": "e-emi-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/e-emi-neutral-r261016-210829-0a6-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/e-emi-neutral-r261016-210829-0a6-2-s2.webp"
+   ],
+   "note": "pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-emi-neutral.json, seed 2, dashboard #2510. Red rim 3.9% (imgqa: redrim warn). My verdict, rejected: leaning pose shows hips and thighs; hands off her back."
+  },
+  {
+   "id": "e-emi-s3",
+   "label": "e-emi-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/e-emi-neutral-r261016-210829-0a6-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/e-emi-neutral-r261016-210829-0a6-3-s3.webp"
+   ],
+   "note": "pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-emi-neutral.json, seed 3, dashboard #2511. Red rim 4.3% (imgqa: redrim warn). My verdict, rejected: high neckline and pose right, but two glossy diamond highlights sit on the bust like points showing through; too suggestive for a public portrait."
+  },
+  {
+   "id": "e-emi-s4",
+   "label": "e-emi-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/e-emi-neutral-r261016-210829-0a6-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/e-emi-neutral-r261016-210829-0a6-4-s4.webp"
+   ],
+   "note": "pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-emi-neutral.json, seed 4, dashboard #2512. Red rim 5.4% (imgqa: redrim warn). My verdict, rejected: neckline shows cleavage; grey smudge beside the hair at her left (image right)."
+  },
+  {
+   "id": "f-emi-s1",
+   "label": "f-emi-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/f-emi-neutral-r261016-215602-335-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/f-emi-neutral-r261016-215602-335-1-s1.webp"
+   ],
+   "note": "pass f (Emi): one change, outfit preset emi-swimwear v3, matte fabric. Recipe art/candidates/portraits/pool-portraits-1/recipes/f-emi-neutral.json, seed 1, dashboard #2553. Red rim 4.6% (imgqa: redrim warn). My verdict, rejected: faint diamond highlights still on the bust; some cleavage."
+  },
+  {
+   "id": "f-emi-s2",
+   "label": "f-emi-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/f-emi-neutral-r261016-215602-335-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/f-emi-neutral-r261016-215602-335-2-s2.webp"
+   ],
+   "note": "pass f (Emi): one change, outfit preset emi-swimwear v3, matte fabric. Recipe art/candidates/portraits/pool-portraits-1/recipes/f-emi-neutral.json, seed 2, dashboard #2554. Red rim 4.0% (imgqa: redrim warn). My verdict, rejected: leaning pose with hips out; diamond highlights on the bust."
+  },
+  {
+   "id": "f-emi-s3",
+   "label": "f-emi-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/f-emi-neutral-r261016-215602-335-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/f-emi-neutral-r261016-215602-335-3-s3.webp"
+   ],
+   "note": "pass f (Emi): one change, outfit preset emi-swimwear v3, matte fabric. Recipe art/candidates/portraits/pool-portraits-1/recipes/f-emi-neutral.json, seed 3, dashboard #2555. Red rim 4.2% (imgqa: redrim warn). My verdict, rejected: diamond highlights on the bust."
+  },
+  {
+   "id": "a-eric-s1",
+   "label": "a-eric-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/a-eric-neutral-r261016-203657-7de-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-eric-neutral-r261016-203657-7de-1-s1.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-eric-neutral.json, seed 1, dashboard #2449. Red rim 0.1%. My verdict, rejected: square skin patch beside the neck at the mask edge; ripped abs and chest hair, not his slim build."
+  },
+  {
+   "id": "a-eric-s2",
+   "label": "a-eric-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/a-eric-neutral-r261016-203657-7de-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-eric-neutral-r261016-203657-7de-2-s2.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-eric-neutral.json, seed 2, dashboard #2450. Red rim 0.0%. My verdict, rejected: grey block left of the chin at the mask edge; leaning back pose; ripped abs."
+  },
+  {
+   "id": "a-eric-s3",
+   "label": "a-eric-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/a-eric-neutral-r261016-203657-7de-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-eric-neutral-r261016-203657-7de-3-s3.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-eric-neutral.json, seed 3, dashboard #2451. Red rim 0.0%. My verdict, rejected: turned his back to the viewer; white side stripe on the shorts the 3D shorts don't have."
+  },
+  {
+   "id": "a-eric-s4",
+   "label": "a-eric-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/a-eric-neutral-r261016-203657-7de-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-eric-neutral-r261016-203657-7de-4-s4.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-eric-neutral.json, seed 4, dashboard #2452. Red rim 0.0%. My verdict, rejected: bodybuilder chest and shoulders, not his slim average build."
+  },
+  {
+   "id": "b-eric-s1",
+   "label": "b-eric-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/b-eric-neutral-r261016-204632-40a-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-eric-neutral-r261016-204632-40a-1-s1.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-eric-neutral.json, seed 1, dashboard #2465. Red rim 0.0%. My verdict, rejected: diagonal backdrop shapes; ripped abs and chest hair, not his slim build."
+  },
+  {
+   "id": "b-eric-s2",
+   "label": "b-eric-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/b-eric-neutral-r261016-204632-40a-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-eric-neutral-r261016-204632-40a-2-s2.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-eric-neutral.json, seed 2, dashboard #2466. Red rim 0.0%. My verdict, rejected: diagonal light shapes in the backdrop; ripped abs and chest hair."
+  },
+  {
+   "id": "b-eric-s3",
+   "label": "b-eric-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/b-eric-neutral-r261016-204632-40a-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-eric-neutral-r261016-204632-40a-3-s3.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-eric-neutral.json, seed 3, dashboard #2467. Red rim 0.0%. My verdict, rejected: a second ponytail painted above his head; turned his back; striped shorts."
+  },
+  {
+   "id": "b-eric-s4",
+   "label": "b-eric-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/b-eric-neutral-r261016-204632-40a-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-eric-neutral-r261016-204632-40a-4-s4.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-eric-neutral.json, seed 4, dashboard #2468. Red rim 0.0%. My verdict, rejected: bodybuilder chest; ghost hair and a head shadow in the backdrop."
+  },
+  {
+   "id": "c-eric-s1",
+   "label": "c-eric-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/c-eric-neutral-r261016-205435-69f-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-eric-neutral-r261016-205435-69f-1-s1.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-eric-neutral.json, seed 1, dashboard #2481. Red rim 0.0%. My verdict, rejected: flat skin block beside the beard; ripped abs and chest hair."
+  },
+  {
+   "id": "c-eric-s2",
+   "label": "c-eric-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/c-eric-neutral-r261016-205435-69f-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-eric-neutral-r261016-205435-69f-2-s2.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-eric-neutral.json, seed 2, dashboard #2482. Red rim 0.0%. My verdict, rejected: skin wedge cut off at the beard line; diagonal backdrop shapes; ripped abs."
+  },
+  {
+   "id": "c-eric-s3",
+   "label": "c-eric-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/c-eric-neutral-r261016-205435-69f-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-eric-neutral-r261016-205435-69f-3-s3.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-eric-neutral.json, seed 3, dashboard #2483. Red rim 0.0%. My verdict, rejected: turned his back; striped shorts."
+  },
+  {
+   "id": "c-eric-s4",
+   "label": "c-eric-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/c-eric-neutral-r261016-205435-69f-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-eric-neutral-r261016-205435-69f-4-s4.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-eric-neutral.json, seed 4, dashboard #2484. Red rim 0.0%. My verdict, rejected: bodybuilder chest; head-shaped shadow in the backdrop."
+  },
+  {
+   "id": "d-eric-s1",
+   "label": "d-eric-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/d-eric-neutral-r261016-210224-d1f-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-eric-neutral-r261016-210224-d1f-1-s1.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-eric-neutral.json, seed 1, dashboard #2497. Red rim 0.6%. My verdict, rejected: flat skin block beside the beard; ripped abs and chest hair."
+  },
+  {
+   "id": "d-eric-s2",
+   "label": "d-eric-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/d-eric-neutral-r261016-210224-d1f-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-eric-neutral-r261016-210224-d1f-2-s2.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-eric-neutral.json, seed 2, dashboard #2498. Red rim 0.0%. My verdict, rejected: skin wedge at the beard line; leaning back; ripped abs."
+  },
+  {
+   "id": "d-eric-s3",
+   "label": "d-eric-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/d-eric-neutral-r261016-210224-d1f-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-eric-neutral-r261016-210224-d1f-3-s3.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-eric-neutral.json, seed 3, dashboard #2499. Red rim 0.0%. My verdict, rejected: a second silhouette of him in the backdrop; turned his back; striped shorts."
+  },
+  {
+   "id": "d-eric-s4",
+   "label": "d-eric-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/d-eric-neutral-r261016-210224-d1f-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-eric-neutral-r261016-210224-d1f-4-s4.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-eric-neutral.json, seed 4, dashboard #2500. Red rim 0.0%. My verdict, rejected: bodybuilder chest with chest hair."
+  },
+  {
+   "id": "e-eric-s1",
+   "label": "e-eric-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/e-eric-neutral-r261016-211012-72a-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/e-eric-neutral-r261016-211012-72a-1-s1.webp"
+   ],
+   "note": "pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-eric-neutral.json, seed 1, dashboard #2513. Red rim 0.2%. My verdict, rejected: flat skin block beside the beard; ripped abs; striped shorts."
+  },
+  {
+   "id": "e-eric-s2",
+   "label": "e-eric-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/e-eric-neutral-r261016-211012-72a-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/e-eric-neutral-r261016-211012-72a-2-s2.webp"
+   ],
+   "note": "pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-eric-neutral.json, seed 2, dashboard #2514. Red rim 0.0%. My verdict, rejected: skin wedge at the beard line; visible ribs and abs; striped shorts."
+  },
+  {
+   "id": "e-eric-s3",
+   "label": "e-eric-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/e-eric-neutral-r261016-211012-72a-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/e-eric-neutral-r261016-211012-72a-3-s3.webp"
+   ],
+   "note": "pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-eric-neutral.json, seed 3, dashboard #2515. Red rim 0.0%. My verdict, rejected: turned his back; striped shorts."
+  },
+  {
+   "id": "e-eric-s4",
+   "label": "e-eric-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/e-eric-neutral-r261016-211012-72a-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/e-eric-neutral-r261016-211012-72a-4-s4.webp"
+   ],
+   "note": "pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-eric-neutral.json, seed 4, dashboard #2516. Red rim 0.0%. My verdict, rejected: bodybuilder chest."
+  },
+  {
+   "id": "f-eric-s1",
+   "label": "f-eric-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/f-eric-neutral-r261016-211446-a5f-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/f-eric-neutral-r261016-211446-a5f-1-s1.webp"
+   ],
+   "note": "pass f (Eric): one change, backdrop margin round his head 10 px (mask @f). Recipe art/candidates/portraits/pool-portraits-1/recipes/f-eric-neutral.json, seed 1, dashboard #2521. Red rim 0.2%. My verdict, rejected: blurred white blob left of the beard where the old white outline was kept; ripped ribs and abs; striped shorts."
+  },
+  {
+   "id": "f-eric-s2",
+   "label": "f-eric-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/f-eric-neutral-r261016-211446-a5f-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/f-eric-neutral-r261016-211446-a5f-2-s2.webp"
+   ],
+   "note": "pass f (Eric): one change, backdrop margin round his head 10 px (mask @f). Recipe art/candidates/portraits/pool-portraits-1/recipes/f-eric-neutral.json, seed 2, dashboard #2522. Red rim 0.0%. My verdict, rejected: blurred patch left of the beard; ribs and abs; striped shorts."
+  },
+  {
+   "id": "f-eric-s3",
+   "label": "f-eric-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/f-eric-neutral-r261016-211446-a5f-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/f-eric-neutral-r261016-211446-a5f-3-s3.webp"
+   ],
+   "note": "pass f (Eric): one change, backdrop margin round his head 10 px (mask @f). Recipe art/candidates/portraits/pool-portraits-1/recipes/f-eric-neutral.json, seed 3, dashboard #2523. Red rim 0.0%. My verdict, rejected: turned his back; striped shorts."
+  },
+  {
+   "id": "f-eric-s4",
+   "label": "f-eric-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/f-eric-neutral-r261016-211446-a5f-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/f-eric-neutral-r261016-211446-a5f-4-s4.webp"
+   ],
+   "note": "pass f (Eric): one change, backdrop margin round his head 10 px (mask @f). Recipe art/candidates/portraits/pool-portraits-1/recipes/f-eric-neutral.json, seed 4, dashboard #2524. Red rim 0.0%. My verdict, rejected: bodybuilder chest and shoulders."
+  },
+  {
+   "id": "g-eric-s1",
+   "label": "g-eric-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/g-eric-neutral-r261016-211719-8b1-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/g-eric-neutral-r261016-211719-8b1-1-s1.webp"
+   ],
+   "note": "pass g (Eric): one change, scene adds \"(slim soft untoned body, smooth flat chest and stomach:1.3)\". Recipe art/candidates/portraits/pool-portraits-1/recipes/g-eric-neutral.json, seed 1, dashboard #2525. Red rim 0.0%. My verdict, rejected: slim body now, but a blurred blob left of the beard (kept white outline); striped shorts."
+  },
+  {
+   "id": "g-eric-s2",
+   "label": "g-eric-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/g-eric-neutral-r261016-211719-8b1-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/g-eric-neutral-r261016-211719-8b1-2-s2.webp"
+   ],
+   "note": "pass g (Eric): one change, scene adds \"(slim soft untoned body, smooth flat chest and stomach:1.3)\". Recipe art/candidates/portraits/pool-portraits-1/recipes/g-eric-neutral.json, seed 2, dashboard #2526. Red rim 0.0%. My verdict, kept: slim plain chest close to the 3D body, clean neck; only fault: thin side stripes on the shorts at the bottom edge."
+  },
+  {
+   "id": "g-eric-s3",
+   "label": "g-eric-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/g-eric-neutral-r261016-211719-8b1-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/g-eric-neutral-r261016-211719-8b1-3-s3.webp"
+   ],
+   "note": "pass g (Eric): one change, scene adds \"(slim soft untoned body, smooth flat chest and stomach:1.3)\". Recipe art/candidates/portraits/pool-portraits-1/recipes/g-eric-neutral.json, seed 3, dashboard #2527. Red rim 0.1%. My verdict, rejected: body far too small for the head; seam right of the neck; striped shorts."
+  },
+  {
+   "id": "g-eric-s4",
+   "label": "g-eric-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/g-eric-neutral-r261016-211719-8b1-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/g-eric-neutral-r261016-211719-8b1-4-s4.webp"
+   ],
+   "note": "pass g (Eric): one change, scene adds \"(slim soft untoned body, smooth flat chest and stomach:1.3)\". Recipe art/candidates/portraits/pool-portraits-1/recipes/g-eric-neutral.json, seed 4, dashboard #2528. Red rim 0.0%. My verdict, rejected: slim body, but a blurred blob left of the beard and at the shoulder; striped shorts."
+  },
+  {
+   "id": "h-eric-s1",
+   "label": "h-eric-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/h-eric-neutral-r261016-211957-d61-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/h-eric-neutral-r261016-211957-d61-1-s1.webp"
+   ],
+   "note": "pass h (Eric): one change, mask line hugs the beard so the old outline under his chin is repainted (mask @h). Recipe art/candidates/portraits/pool-portraits-1/recipes/h-eric-neutral.json, seed 1, dashboard #2529. Red rim 0.1%. My verdict, rejected: grey blurred hood remnant painted under the chin inside the mask; striped shorts."
+  },
+  {
+   "id": "h-eric-s2",
+   "label": "h-eric-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/h-eric-neutral-r261016-211957-d61-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/h-eric-neutral-r261016-211957-d61-2-s2.webp"
+   ],
+   "note": "pass h (Eric): one change, mask line hugs the beard so the old outline under his chin is repainted (mask @h). Recipe art/candidates/portraits/pool-portraits-1/recipes/h-eric-neutral.json, seed 2, dashboard #2530. Red rim 0.0%. My verdict, kept: same as g s2 with the tighter chin mask; clean neck; thin side stripes on the shorts at the bottom edge."
+  },
+  {
+   "id": "h-eric-s3",
+   "label": "h-eric-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/h-eric-neutral-r261016-211957-d61-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/h-eric-neutral-r261016-211957-d61-3-s3.webp"
+   ],
+   "note": "pass h (Eric): one change, mask line hugs the beard so the old outline under his chin is repainted (mask @h). Recipe art/candidates/portraits/pool-portraits-1/recipes/h-eric-neutral.json, seed 3, dashboard #2531. Red rim 0.0%. My verdict, rejected: body too small for the head; seam right of the neck."
+  },
+  {
+   "id": "h-eric-s4",
+   "label": "h-eric-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/h-eric-neutral-r261016-211957-d61-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/h-eric-neutral-r261016-211957-d61-4-s4.webp"
+   ],
+   "note": "pass h (Eric): one change, mask line hugs the beard so the old outline under his chin is repainted (mask @h). Recipe art/candidates/portraits/pool-portraits-1/recipes/h-eric-neutral.json, seed 4, dashboard #2532. Red rim 0.1%. My verdict, rejected: blurred hood remnant under the chin; striped shorts."
+  },
+  {
+   "id": "i-eric-s1",
+   "label": "i-eric-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/i-eric-neutral-r261016-212214-aa6-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/i-eric-neutral-r261016-212214-aa6-1-s1.webp"
+   ],
+   "note": "pass i (Eric): one change, denoise 1.0. Recipe art/candidates/portraits/pool-portraits-1/recipes/i-eric-neutral.json, seed 1, dashboard #2533. Red rim 0.4%. My verdict, rejected: shoulder cut flat under the ponytail; scrawny; a head shadow in the backdrop."
+  },
+  {
+   "id": "i-eric-s2",
+   "label": "i-eric-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/i-eric-neutral-r261016-212214-aa6-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/i-eric-neutral-r261016-212214-aa6-2-s2.webp"
+   ],
+   "note": "pass i (Eric): one change, denoise 1.0. Recipe art/candidates/portraits/pool-portraits-1/recipes/i-eric-neutral.json, seed 2, dashboard #2534. Red rim 0.1%. My verdict, rejected: narrower than his approved shoulders; striped shorts."
+  },
+  {
+   "id": "i-eric-s3",
+   "label": "i-eric-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/i-eric-neutral-r261016-212214-aa6-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/i-eric-neutral-r261016-212214-aa6-3-s3.webp"
+   ],
+   "note": "pass i (Eric): one change, denoise 1.0. Recipe art/candidates/portraits/pool-portraits-1/recipes/i-eric-neutral.json, seed 3, dashboard #2535. Red rim 0.2%. My verdict, rejected: shoulder cut flat under the ponytail; striped shorts."
+  },
+  {
+   "id": "i-eric-s4",
+   "label": "i-eric-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/i-eric-neutral-r261016-212214-aa6-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/i-eric-neutral-r261016-212214-aa6-4-s4.webp"
+   ],
+   "note": "pass i (Eric): one change, denoise 1.0. Recipe art/candidates/portraits/pool-portraits-1/recipes/i-eric-neutral.json, seed 4, dashboard #2536. Red rim 0.1%. My verdict, rejected: blurred near shoulder; ribs showing; striped shorts."
+  },
+  {
+   "id": "j-eric-s2",
+   "label": "j-eric-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/j-eric-neutral-r261016-212442-e0d-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/j-eric-neutral-r261016-212442-e0d-2-s2.webp"
+   ],
+   "note": "pass j (Eric): one change, outfit preset eric-swimwear v3 (\"plain solid navy blue swim shorts\", no stripe word in the positive). Recipe art/candidates/portraits/pool-portraits-1/recipes/j-eric-neutral.json, seed 2, dashboard #2538. Red rim 0.3%. My verdict, rejected: leaning back with a leg raised; ribs."
+  },
+  {
+   "id": "j-eric-s3",
+   "label": "j-eric-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/j-eric-neutral-r261016-212442-e0d-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/j-eric-neutral-r261016-212442-e0d-3-s3.webp"
+   ],
+   "note": "pass j (Eric): one change, outfit preset eric-swimwear v3 (\"plain solid navy blue swim shorts\", no stripe word in the positive). Recipe art/candidates/portraits/pool-portraits-1/recipes/j-eric-neutral.json, seed 3, dashboard #2539. Red rim 0.0%. My verdict, rejected: body too small for the head; striped shorts."
+  },
+  {
+   "id": "a-carina-s1",
+   "label": "a-carina-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/a-carina-neutral-r261016-203852-11b-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-carina-neutral-r261016-203852-11b-1-s1.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-carina-neutral.json, seed 1, dashboard #2453. Red rim 9.7% (imgqa: redrim fail). My verdict, rejected: blurred flat patch at her left shoulder (image right) where the mask edge cuts it; cleavage."
+  },
+  {
+   "id": "a-carina-s2",
+   "label": "a-carina-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/a-carina-neutral-r261016-203852-11b-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-carina-neutral-r261016-203852-11b-2-s2.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-carina-neutral.json, seed 2, dashboard #2454. Red rim 1.1%. My verdict, rejected: ribbed sweater texture left in the suit; blurred block on her right shoulder (image left)."
+  },
+  {
+   "id": "a-carina-s3",
+   "label": "a-carina-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/a-carina-neutral-r261016-203852-11b-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-carina-neutral-r261016-203852-11b-3-s3.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-carina-neutral.json, seed 3, dashboard #2455. Red rim 6.3% (imgqa: redrim warn). My verdict, rejected: v-shaped plunging neckline with cleavage, not the 3D suit's scoop."
+  },
+  {
+   "id": "a-carina-s4",
+   "label": "a-carina-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/a-carina-neutral-r261016-203852-11b-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/a-carina-neutral-r261016-203852-11b-4-s4.webp"
+   ],
+   "note": "pass a: clothes region repainted below a line under the chin (backdrop kept), outfit preset v1, denoise 0.9. Recipe art/candidates/portraits/pool-portraits-1/recipes/a-carina-neutral.json, seed 4, dashboard #2456. Red rim 0.8%. My verdict, rejected: blurred shoulder edge at the mask line; cleavage."
+  },
+  {
+   "id": "b-carina-s1",
+   "label": "b-carina-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/b-carina-neutral-r261016-204827-b2f-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-carina-neutral-r261016-204827-b2f-1-s1.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-carina-neutral.json, seed 1, dashboard #2469. Red rim 0.0%. My verdict, rejected: blurred patch at the neck under her chin; cleavage."
+  },
+  {
+   "id": "b-carina-s2",
+   "label": "b-carina-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/b-carina-neutral-r261016-204827-b2f-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-carina-neutral-r261016-204827-b2f-2-s2.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-carina-neutral.json, seed 2, dashboard #2470. Red rim 2.8% (imgqa: redrim warn). My verdict, rejected: ribbed texture on the suit (sweater remnant); cleavage deeper than the 3D suit."
+  },
+  {
+   "id": "b-carina-s3",
+   "label": "b-carina-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/b-carina-neutral-r261016-204827-b2f-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-carina-neutral-r261016-204827-b2f-3-s3.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-carina-neutral.json, seed 3, dashboard #2471. Red rim 0.1%. My verdict, rejected: clean seam, but the neckline shows cleavage the 3D suit doesn't."
+  },
+  {
+   "id": "b-carina-s4",
+   "label": "b-carina-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/b-carina-neutral-r261016-204827-b2f-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/b-carina-neutral-r261016-204827-b2f-4-s4.webp"
+   ],
+   "note": "pass b: one change, the whole backdrop repainted too (mask @b). Recipe art/candidates/portraits/pool-portraits-1/recipes/b-carina-neutral.json, seed 4, dashboard #2472. Red rim 0.1%. My verdict, rejected: v-neck with cleavage, not the 3D suit's scoop."
+  },
+  {
+   "id": "c-carina-s1",
+   "label": "c-carina-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/c-carina-neutral-r261016-205630-ece-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-carina-neutral-r261016-205630-ece-1-s1.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-carina-neutral.json, seed 1, dashboard #2485. Red rim 2.4% (imgqa: redrim warn). My verdict, rejected: blurred patch at the neck and right of the chin."
+  },
+  {
+   "id": "c-carina-s2",
+   "label": "c-carina-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/c-carina-neutral-r261016-205630-ece-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-carina-neutral-r261016-205630-ece-2-s2.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-carina-neutral.json, seed 2, dashboard #2486. Red rim 0.1%. My verdict, rejected: ribbed sweater texture on the suit; cleavage."
+  },
+  {
+   "id": "c-carina-s3",
+   "label": "c-carina-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/c-carina-neutral-r261016-205630-ece-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-carina-neutral-r261016-205630-ece-3-s3.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-carina-neutral.json, seed 3, dashboard #2487. Red rim 3.0% (imgqa: redrim warn). My verdict, rejected: cleavage the 3D suit doesn't show."
+  },
+  {
+   "id": "c-carina-s4",
+   "label": "c-carina-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/c-carina-neutral-r261016-205630-ece-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/c-carina-neutral-r261016-205630-ece-4-s4.webp"
+   ],
+   "note": "pass c: one change, backdrop within 40 px of the head kept (mask @c). Recipe art/candidates/portraits/pool-portraits-1/recipes/c-carina-neutral.json, seed 4, dashboard #2488. Red rim 0.0%. My verdict, rejected: v-neck with cleavage; soft patch at the neck."
+  },
+  {
+   "id": "d-carina-s1",
+   "label": "d-carina-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/d-carina-neutral-r261016-210419-037-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-carina-neutral-r261016-210419-037-1-s1.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-carina-neutral.json, seed 1, dashboard #2501. Red rim 2.7% (imgqa: redrim warn). My verdict, rejected: blurred patch at the neck right of the chin."
+  },
+  {
+   "id": "d-carina-s2",
+   "label": "d-carina-s2",
+   "image": "art/candidates/portraits/pool-portraits-1/d-carina-neutral-r261016-210419-037-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-carina-neutral-r261016-210419-037-2-s2.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-carina-neutral.json, seed 2, dashboard #2502. Red rim 0.6%. My verdict, rejected: ribbed sweater texture on the suit; cleavage."
+  },
+  {
+   "id": "d-carina-s3",
+   "label": "d-carina-s3",
+   "image": "art/candidates/portraits/pool-portraits-1/d-carina-neutral-r261016-210419-037-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-carina-neutral-r261016-210419-037-3-s3.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-carina-neutral.json, seed 3, dashboard #2503. Red rim 6.1% (imgqa: redrim warn). My verdict, rejected: cleavage the 3D suit doesn't show; otherwise clean."
+  },
+  {
+   "id": "d-carina-s4",
+   "label": "d-carina-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/d-carina-neutral-r261016-210419-037-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/d-carina-neutral-r261016-210419-037-4-s4.webp"
+   ],
+   "note": "pass d: one change, backdrop above chin height kept (mask @d). Recipe art/candidates/portraits/pool-portraits-1/recipes/d-carina-neutral.json, seed 4, dashboard #2504. Red rim 3.7% (imgqa: redrim warn). My verdict, rejected: v-neck with cleavage."
+  },
+  {
+   "id": "e-carina-s1",
+   "label": "e-carina-s1",
+   "image": "art/candidates/portraits/pool-portraits-1/e-carina-neutral-r261016-211207-007-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/e-carina-neutral-r261016-211207-007-1-s1.webp"
+   ],
+   "note": "pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-carina-neutral.json, seed 1, dashboard #2517. Red rim 0.6%. My verdict, rejected: blurred patch at the neck and a white strap remnant on her right shoulder (image left)."
+  },
+  {
+   "id": "e-carina-s4",
+   "label": "e-carina-s4",
+   "image": "art/candidates/portraits/pool-portraits-1/e-carina-neutral-r261016-211207-007-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/pool-portraits-1/e-carina-neutral-r261016-211207-007-4-s4.webp"
+   ],
+   "note": "pass e: one change, outfit preset v2 (high rounded neckline for the women; plain shorts, no abs or body hair for Eric). Recipe art/candidates/portraits/pool-portraits-1/recipes/e-carina-neutral.json, seed 4, dashboard #2520. Red rim 0.7%. My verdict, rejected: dark shading shapes on the suit; strap edges uneven."
+  }
+ ]
+}

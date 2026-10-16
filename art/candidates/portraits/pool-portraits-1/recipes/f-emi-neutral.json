@@ -1,0 +1,25 @@
+{
+ "details": "pool-portraits-1 pass f (#633), Emi only. One change from pass e: outfit preset emi-swimwear v3, a matte suit ('plain matte ...', with shiny fabric, glossy, latex and specular highlights excluded). Pass e fixed the neckline, but every Emi render put two glossy diamond highlights on the bust that read as points through the fabric. Mask @d, scene, denoise 0.9 and seeds 1-4 as pass e. Staging: staging.md.",
+ "characters": [
+  "emi"
+ ],
+ "outfit": {
+  "emi": "emi-swimwear"
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "hands clasped behind her back, leaning forward slightly, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ],
+ "width": 896,
+ "height": 1152,
+ "start": {
+  "image": "art/candidates/portraits/pool-portraits-1/start/emi-neutral.png",
+  "denoise": 0.9,
+  "mask": "art/candidates/portraits/pool-portraits-1/start/mask-d-emi-neutral.png"
+ }
+}

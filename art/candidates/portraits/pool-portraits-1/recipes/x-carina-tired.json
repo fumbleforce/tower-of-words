@@ -1,0 +1,25 @@
+{
+ "details": "pool-portraits-1 faces (#633): carina's approved tired portrait with the settings of e-carina-neutral (its kept seeds [2, 3]): same outfit preset, scene, mask method @d, denoise. Only the start picture and its mask change (start/carina-tired.png, start/mask-d-carina-tired.png). Staging: staging.md.",
+ "characters": [
+  "carina"
+ ],
+ "outfit": {
+  "carina": "carina-swimwear"
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "arms relaxed at her sides, three-quarter view, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ],
+ "width": 896,
+ "height": 1152,
+ "start": {
+  "image": "art/candidates/portraits/pool-portraits-1/start/carina-tired.png",
+  "denoise": 0.9,
+  "mask": "art/candidates/portraits/pool-portraits-1/start/mask-d-carina-tired.png"
+ }
+}
