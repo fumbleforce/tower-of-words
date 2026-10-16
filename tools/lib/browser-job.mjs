@@ -188,6 +188,8 @@ export async function withBrowserJob(name, run, {
         ? ['--use-angle=gl', '--ignore-gpu-blocklist', '--enable-gpu']
         : ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gpu-blocklist', '--enable-gpu']
       : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'];
+    // CHROME_ARGS: extra Chromium switches, space separated (a frame-rate tool unpins headless Chrome's 60 Hz)
+    if (process.env.CHROME_ARGS) args.push(...process.env.CHROME_ARGS.split(/\s+/).filter(Boolean));
     console.log(`${name}: ${!gpu ? 'software GL (explicit GL=soft)' : gpuSlot ? `GPU slot ${gpuSlot.slot + 1}` : `exclusive GPU lock as ${gpuLock}`}`);
     safeToRelease = false;
     const before = new Set(childPids(process.pid));

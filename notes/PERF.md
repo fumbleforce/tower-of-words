@@ -848,7 +848,7 @@ Changes:
 - 'auto' quality picks medium on an integrated GPU (settings.js `qualityTier`), and medium there drops AO the same
   way it does on phones (perf/phone.js `phoneTier`): GTAO draws the scene again for its normals.
 - A frame cap (Settings > Graphics > Frame rate limit; `settings.frameCap`, `frameCap()`): 'auto' is 60, or 30 at
-  low; 30, 60 and None can be picked. A 120 or 144 Hz screen no longer draws (and steps the world) at its full rate.
+  low (changed 2026-10-16 for desktop graphics cards, "Auto at the screen's refresh rate" below); 30, 60 and None can be picked. A 120 or 144 Hz screen no longer draws (and steps the world) at its full rate.
   The title stays at 30 at most, and a paused world now draws at most 20 a second (it drew every refresh).
   `?fps=N` overrides (0 = no cap); `?cap` stills draw every frame. The gate is `view.due` (perf/view.js), run by
   `guardedLoop` (perf/gl-guard.js) before the tick, so a skipped frame costs nothing and its time goes to the next.
@@ -915,3 +915,33 @@ What was behind them, and the fixes:
 Left (each once a session, or small): the sky's cube material and its panorama-to-cube conversion on the first
 frame outdoors, the reflection prefilter's two programs, four shadow depth programs the warm-up's stand-ins
 don't match, and the new place's geometry uploads (0.3 to 1 s of bufferData in software GL).
+
+## Auto at the screen's refresh rate (#568, #571, 2026-10-16)
+
+Jørgen, RTX 3080, 2560x1440 at 120 Hz: "No reason a 3080 should only get 60 on this tiny game, why not 120 like my
+screen?" Caps found: Auto was 60 in play (settings.js `frameCap`), 30 at the title and 20 in any paused menu
+(perf/view.js `activeCap`); a fullscreen picture ran at the play cap (60). Now:
+
+- Auto has no limit on a desktop graphics card: every display refresh, at the title, in menus, under a picture and in
+  play. `autoSavesPower()` (settings.js: software GL, a phone or integrated graphics) keeps the old power saving
+  there: 60 in play (30 with software GL) and 30 at the title. Explicit 30, 60 and None apply everywhere.
+- A paused world is drawn once and then held (`view.render(true)`, called from main.js's paused tick): the canvas
+  keeps its last frame and nothing is drawn under the menus until the camera, size, quality or a setting changes or
+  a frame grab asks for a fresh frame. This replaces the 20 fps pause cap on every device.
+
+`game3d/tools/perf/refresh-rate.mjs` measures it on the real GPU (exclusive lock): title, B2 standing still, the
+pause menu over B2, and a neutral fullscreen picture with a typing prompt, 5 s each, with headless Chrome's 60 Hz
+unpinned (`CHROME_ARGS`, tools/lib/browser-job.mjs) so a scene without a cap runs as fast as the GPU allows. Default
+settings (Auto quality = high, Auto limit), 2560x1440, DPR 1, RTX 3080 (Vulkan):
+
+| scene | before: limit, fps, median / p95 ms | after: limit, fps, median / p95 ms |
+| --- | --- | --- |
+| title | 30, 29.2, 33.5 / 49.0 | none, 167, 5.7 / 11.5 |
+| B2 office, standing | 60, 59.9, 16.7 / 17.0 | none, 217, 3.9 / 7.8 |
+| pause menu over B2 | 20, 20.0, 50.0 / 53.7 | none, 0 world draws (frame held) |
+| fullscreen picture | 60, 60.0, 16.7 / 16.8 | none, 0 world draws (DOM only) |
+
+The title is light enough uncapped (median 5.7 ms, about 4.9 ms of it CPU submitting about 660 draw calls; AO is
+about 1.5 ms of the frame), so it was not made cheaper. Its p95 is the one number above a 120 Hz frame (8.3 ms) in
+the unpinned run, where frames queue back to back; at a real 120 Hz vsync the median leaves 2.6 ms spare.
+

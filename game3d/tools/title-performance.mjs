@@ -59,7 +59,9 @@ await withBrowserJob(
         }, cap),
       );
       const result = results.at(-1);
-      assert.equal(result.limit, cap === 'off' ? 0 : cap === 'auto' ? 30 : +cap);
+      // Auto: the screen's own rate on a desktop graphics card, 30 at the title where Auto saves power (#568)
+      const saves = await page.evaluate(async () => (await import('./js/settings.js')).autoSavesPower());
+      assert.equal(result.limit, cap === 'off' ? 0 : cap === 'auto' ? (saves ? 30 : 0) : +cap);
       assert.equal(result.jumpCalls, 0, 'title must not update player physics');
       await page.screenshot({
         path: `${out}-${cap}.png`,

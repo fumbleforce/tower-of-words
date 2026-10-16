@@ -7,7 +7,8 @@ const modules = {
     export const voiceThenBeat = async () => {}; export const unlockAudio = () => {};
     export const pauseAudio = () => {}; export const keyLabel = () => '';`,
   'settings.js': `export const settings = {}; export const setSetting = () => {};
-    export const onSettings = () => {}; export const qualityTier = () => 'low'; export const frameCap = () => 30;`,
+    export const onSettings = () => {}; export const qualityTier = () => 'low'; export const frameCap = () => 30;
+    export const autoSavesPower = () => true;`,
   'onboard.js': 'export const startOnboarding = () => {}; export const resetOnboarding = () => {};',
   'speech.js': 'export const browserSpeechAvailable = () => false; export const prepareVoice = () => {};',
 };

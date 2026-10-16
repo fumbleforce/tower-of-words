@@ -369,8 +369,11 @@ export function settingsView({ openLayer, closeLayer, trap }) {
       settings.quality === 'auto' ? `Auto picks ${qualityTier()} on this device` : 'Changes at once';
     const cap = frameCap();
     help('frameCap').textContent =
-      (settings.frameCap === 'auto' ? `Auto: ${cap} fps in play, 30 at the title. ` : '') +
-      'A lower limit keeps a laptop cooler and its battery longer';
+      (settings.frameCap !== 'auto'
+        ? ''
+        : cap
+          ? `Auto: ${cap} fps in play, 30 at the title, to save power. `
+          : 'Auto: every refresh of your screen. ') + 'A lower limit keeps a laptop cooler and its battery longer';
   }
   onSettings(sync);
 

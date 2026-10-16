@@ -122,15 +122,23 @@ export function qualityTier() {
   if (r && r.userData && r.userData.software) return 'low';
   return isPhone() || r?.userData?.integrated ? 'medium' : 'high';
 }
-// The most frames a second the game draws. 'auto': 30 at low quality, 60 otherwise; a 120 or 144 Hz screen at its
-// full rate made the GPU draw two or more times the frames for no visible gain. ?fps=N overrides (0: no cap).
+// Whether 'auto' saves power: software GL, a phone or integrated graphics, where every frame costs battery and heat
+// (a laptop without a graphics card ran hot, notes/PERF.md). A desktop graphics card draws at the screen's own rate.
+export function autoSavesPower() {
+  const r = window.__game && window.__game.renderer;
+  return !!(r?.userData?.software || r?.userData?.integrated || isPhone());
+}
+// The most frames a second the game draws in play. 'auto': no limit on a desktop graphics card, so a 120 or 144 Hz
+// screen gets every refresh (Jørgen, RTX 3080 at 120 Hz: "why not 120 like my screen?"); where Auto saves power, 30
+// with software GL and 60 otherwise. ?fps=N overrides (0: no cap). The title and pause on Auto: perf/view.js.
 export function frameCap() {
   const q = new URLSearchParams(location.search);
   if (q.has('fps')) return +q.get('fps') || 0;
   const s = settings.frameCap;
   if (s === 'off') return 0;
   if (s !== 'auto') return +s || 60;
-  return qualityTier() === 'low' ? 30 : 60;
+  if (!autoSavesPower()) return 0;
+  return window.__game?.renderer?.userData?.software ? 30 : 60;
 }
 // the phone layout (body.phone) or a phone-sized screen: the tier above and the lighter phone places (perf/phone.js)
 export const isPhone = () => document.body.classList.contains('phone') || Math.min(innerWidth, innerHeight) < 600;

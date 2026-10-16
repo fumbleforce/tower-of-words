@@ -359,10 +359,10 @@ const frame = guardedLoop(tick, view.due); // an error never stops it; due: the 
 function tick() {
   followCamera.refresh();
   const now = performance.now();
-  if (game.mapOpen) return void (lastT = now); // The map covers the screen.
+  if (game.mapOpen) return void (lastT = now); // the map covers it
   if (game.paused) {
     lastT = now;
-    render();
+    render(true);
     return;
   }
   let dt = frameDt(now - lastT, movementClockScale(game, TS, HURRY));
