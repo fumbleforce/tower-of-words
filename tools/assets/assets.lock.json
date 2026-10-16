@@ -16048,6 +16048,8 @@
   "game3d/shots/title-performance-20261014/title-performance-phone-started.png": {"size": 1515701, "sha256": "eeccb99c9b77a50cec729fc610eaef6e7e2d4699aafa7aa85b0e52acbfc68d02", "type": "image/png"},
   "game3d/shots/title-performance/cold/desktop-graphics.png": {"size": 1491021, "sha256": "cb00ce6d4cc8c1af71c99e3cadb09c3bd6c5dc6877b5e8006be5dcdc84d36fb2", "type": "image/png"},
   "game3d/shots/title-performance/cold/phone-graphics-settled.png": {"size": 142601, "sha256": "723e7e4152100915e51e584d1a4112f8e1b1c17b4ddf481ddbfbdd46133eefd5", "type": "image/png"},
+  "game3d/shots/train-passengers-665/opening-desktop.png": {"size": 1079075, "sha256": "67c83da887e7d661d4a8185badef892526238652e27531ff5e0ebe720475f369", "type": "image/png"},
+  "game3d/shots/train-passengers-665/opening-phone.png": {"size": 332829, "sha256": "0d0222fb3b49c9088e287b85402a776a54608a13e020ded13ca9d150b5f35269", "type": "image/png"},
   "reviews/minigames-3/shots/desktop-1-combo-built.webp": {"size": 48484, "sha256": "f6c94d682bb11d01721a76cc7b811c5c0250fc427c7655fa1b5390be40225261", "type": "image/webp"},
   "reviews/minigames-3/shots/desktop-2-combo.webp": {"size": 38424, "sha256": "7f648d5b6d73d5b15934d83ad9017f6d3a0cbdbea4f40406900bd6da8f9b4fb1", "type": "image/webp"},
   "reviews/minigames-3/shots/desktop-3-shift3.webp": {"size": 41138, "sha256": "f45e89c2dbd4d7c807ce3b683327948d3c13debf77256ee80007bcdc121f0204", "type": "image/webp"},
