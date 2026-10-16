@@ -2,19 +2,49 @@
  "title": "Dorm quarter: park and second block",
  "date": "2026-10-16",
  "by": "claude-main (dorm-quarter-sketch)",
- "status": "open",
+ "status": "superseded",
  "issue": 661,
  "question": "Pick one from A (how the park joins the courtyard) and one from B (where the second block goes).",
  "multi": true,
  "media": [
-  {"image": "art/candidates/dorm-quarter-1/0-today.webp", "caption": "Top-down sketches, drawn to scale from the island layout in the code (1 unit = 1.5 m). Nothing is built yet. This is today: the courtyard is about 15 × 10 m, the east lane's pocket park 11 × 16 m, and the field north of Eric's block (about 37 × 52 m) is empty."},
-  {"image": "art/candidates/dorm-quarter-1/mood-south.webp", "caption": "Blockout mood view, eye level: walking in from the courtyard through the gap between Eric's block and dorm 5, into the park's south gate. Wisteria shelter on the left, play corner on the right, a cherry with a ring seat in the middle. Plain boxes only."},
-  {"image": "art/candidates/dorm-quarter-1/mood-west.webp", "caption": "Blockout mood view, eye level: from the play corner looking west across the cherry square to dorm 5's new door on the park (B1)."}
+  {
+   "image": "art/candidates/dorm-quarter-1/0-today.webp",
+   "caption": "Top-down sketches, drawn to scale from the island layout in the code (1 unit = 1.5 m). Nothing is built yet. This is today: the courtyard is about 15 × 10 m, the east lane's pocket park 11 × 16 m, and the field north of Eric's block (about 37 × 52 m) is empty."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-1/mood-south.webp",
+   "caption": "Blockout mood view, eye level: walking in from the courtyard through the gap between Eric's block and dorm 5, into the park's south gate. Wisteria shelter on the left, play corner on the right, a cherry with a ring seat in the middle. Plain boxes only."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-1/mood-west.webp",
+   "caption": "Blockout mood view, eye level: from the play corner looking west across the cherry square to dorm 5's new door on the park (B1)."
+  }
  ],
  "options": [
-  {"id": "a1", "label": "a1. Full merge: one dorm quarter", "image": "art/candidates/dorm-quarter-1/a1-full-merge.webp", "note": "Courtyard, east lane, park, dorm row and inner court become one walkable place (about 86 × 78 m). The loop goes dorm street, courtyard, park, inner court, dorm row and back with no fade. Measured cost: phone load about 6.3 to 7 s against the 6 s limit, so it needs trimming before it ships."},
-  {"id": "a2", "label": "a2. Park only: the courtyard grows north", "image": "art/candidates/dorm-quarter-1/a2-park-only.webp", "note": "The courtyard and the park are one place (about 43 × 57 m); the east lane stays separate and the gate fade stays. The same loop is there on the ground but crosses three fades. Lighter on the phone than a1."},
-  {"id": "b1", "label": "b1. Dorm 5 becomes the new hires' dorm", "image": "art/candidates/dorm-quarter-1/b1-dorm5.webp", "note": "Dorm 5 already stands here as scenery. It gets a ground floor and a door on the park's east-west axis. Its rooms face east over the park, which fits Aoi's bio (single room in the new hires' dorm, facing east)."},
-  {"id": "b2", "label": "b2. A new block north of the park", "image": "art/candidates/dorm-quarter-1/b2-new-block.webp", "note": "A new three-storey block (about 21 × 8 m) on the park's north side, its door on the park's north-south axis. Its rooms face south, so only an end room would face east for Aoi. One more building to model and load."}
- ]
+  {
+   "id": "a1",
+   "label": "a1. Full merge: one dorm quarter",
+   "image": "art/candidates/dorm-quarter-1/a1-full-merge.webp",
+   "note": "Courtyard, east lane, park, dorm row and inner court become one walkable place (about 86 × 78 m). The loop goes dorm street, courtyard, park, inner court, dorm row and back with no fade. Measured cost: phone load about 6.3 to 7 s against the 6 s limit, so it needs trimming before it ships."
+  },
+  {
+   "id": "a2",
+   "label": "a2. Park only: the courtyard grows north",
+   "image": "art/candidates/dorm-quarter-1/a2-park-only.webp",
+   "note": "The courtyard and the park are one place (about 43 × 57 m); the east lane stays separate and the gate fade stays. The same loop is there on the ground but crosses three fades. Lighter on the phone than a1."
+  },
+  {
+   "id": "b1",
+   "label": "b1. Dorm 5 becomes the new hires' dorm",
+   "image": "art/candidates/dorm-quarter-1/b1-dorm5.webp",
+   "note": "Dorm 5 already stands here as scenery. It gets a ground floor and a door on the park's east-west axis. Its rooms face east over the park, which fits Aoi's bio (single room in the new hires' dorm, facing east)."
+  },
+  {
+   "id": "b2",
+   "label": "b2. A new block north of the park",
+   "image": "art/candidates/dorm-quarter-1/b2-new-block.webp",
+   "note": "A new three-storey block (about 21 × 8 m) on the park's north side, its door on the park's north-south axis. Its rooms face south, so only an end room would face east for Aoi. One more building to model and load."
+  }
+ ],
+ "decision": "Superseded by dorm-quarter-2. Jørgen: \"the layout is completely nonsensical, 2 blocks that are close to each other, facing each other, you'd be looking straight into the neighbour's apartment out of your window. The layout don't make sense as is, and you have not changed the position of eric's apartment to be a natural part of a larger area.\""
 }
