@@ -78,10 +78,20 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 ### Mr. Mori (`mori`)
 
-- Age 58. Used to be a manager; now on the B2 team. Formal and kind.
-- Routine: makes the tea; has corn soup from a can every afternoon. Opened the B2 copier's repair request when he was new ([stories/copier.md](stories/copier.md)) and has said 動いて to it every morning since. Went to the Lillehammer Olympics in 1994 and does the ski jump with his hands.
-- Speaks polite Japanese only. His warmth shows in what he does: bows, tea, making room.
-- Knows: Mio (likes her; corrects her 外人 gently, the only time he interrupts).
+- Age 58.
+
+Mori works on B2. He is formal and kind, and enjoys having someone beside him over tea. He remembers what people take in their cups and gives them time to answer. He also has trouble letting someone finish a job in a way he would not have chosen.
+
+He grew up on the mainland and joined Amakawa in 1996, handling equipment orders on B2. He learned which suppliers would answer the phone and kept the repair records when equipment failed. Later he managed a small purchasing team upstairs. He was good at getting people what they needed, but kept agreeing to deadlines and then staying late to spare his staff. When the team was reorganised, he asked to return to B2. He likes knowing the people who use the things he orders, though he misses being asked to make decisions.
+
+Mori lives alone in a one-bedroom staff flat on the island. His dining table is also where he draws, with a board he can lift away when someone comes over. He sketches from photographs and belongs to the art club. He went to the Lillehammer Olympics in 1994, and still demonstrates the ski jump with his hands when he talks about it. He would like to go back in summer and take his time. He has saved enough for the trip, but keeps postponing the leave request because there is always something to hand over.
+
+He makes the team's tea and drinks canned corn soup every afternoon. He opened the copier's repair request when he was new and has said 動いて to it every morning since. He knows exactly how long his workarounds have lasted. He dislikes being told a request is finished when somebody else will have to pull the paper out again tomorrow.
+
+Eric's experience interests him. Mori wants to hear what he thinks before giving advice, although he sometimes corrects Eric's notes without asking. If challenged, he stays courteous and takes too long to admit he overstepped. He speaks only polite Japanese. He likes Mio and gently corrects her 外人 to 外国の方.
+
+Mori wants someone to have dinner with after the others leave, and he is open to romance. He can make an invitation sound like a favour he is offering, then leave the other person unsure whether he wanted a date. He enjoys dry jokes and shared silences. He likes being looked after, although he often insists he can manage before accepting an offer. If Eric stays to talk, he leaves the washing up until later.
+
 - Look: approved portrait mori-new-713 (reviews/npc-base-1): neatly combed grey hair, dark grey suit, navy tie, empty hands. Copies in art/approved/mori/. In the 3D world, the Meshy model mori-1 (reviews/mori-meshy-1, picked 2026-10-05), in the game ([art-and-sound.md](art-and-sound.md#people-in-the-world)).
 
 ### Kenji (`kenji`)

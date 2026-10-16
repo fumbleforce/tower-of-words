@@ -128,10 +128,12 @@ export default place(
           { say: 'eric', emo: 'warm', text: 'It’s frozen for you too? I’m looking at it.' },
         ] },
         { if: 'club_art', then: [
-          { say: 'mori', overheard: true, emo: 'warm', text: '火曜日、楽しみにしています。' },
-          { say: 'eric', emo: 'warm', text: 'Tuesday’s the art club. I think he’s glad I signed up.' },
+          { say: 'mori', overheard: true, emo: 'warm', text: '火曜日、隣に座ってもいいですか。' },
+          { say: 'emi', emo: 'warm', text: 'He’s asking if he can sit beside you at the art club on Tuesday.' },
+          { do: 'gesture', who: 'eric', kind: 'nod', to: 'mori' },
         ], else: [
-          { say: 'mori', overheard: true, emo: 'warm', text: 'よかったら、美術部にもどうぞ。' },
+          { say: 'mori', overheard: true, emo: 'warm', text: '火曜日は美術部で描いています。よかったら、ご一緒に。' },
+          { say: 'emi', emo: 'warm', text: 'He’s inviting you to the art club. He goes on Tuesdays.' },
         ] },
       ],
       d3_emi: [...emiHello,

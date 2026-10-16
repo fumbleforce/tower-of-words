@@ -1,6 +1,6 @@
 # Welcome to B2
 
-Eric's arrival in IT support on B2. Mr. Mori meets him at the lift with a formal introduction and waits for a proper answer. Kenji, in broken English, confesses he borrowed Eric's chair, which is now in the machine room with the cat on it, and Mio won't let Kenji in there. Built.
+Eric's arrival in IT support on B2. Mr. Mori meets him at the lift with a formal introduction and welcomes either greeting. Kenji, in broken English, confesses he borrowed Eric's chair, which is now in the machine room with the cat on it, and Mio won't let Kenji in there. Built.
 
 ## Cast
 
@@ -9,12 +9,12 @@ Eric's arrival in IT support on B2. Mr. Mori meets him at the lift with a formal
 ## Beats
 
 1. The lift opens on B2 and Mori is waiting: おはようございます。森と申します。ITサポートへ、ようこそ。 A deep bow, and he waits. Eric stays with him until he answers (the story holds him there).
-2. よろしくおねがいします is what Mori was hoping for: こちらこそ, an even deeper bow and a happy note. おはようございます gets a polite answer, a pause and a smaller bow. Either way he shows Eric into the office and goes to his desk.
+2. よろしくおねがいします gets こちらこそ, a deep bow and a happy note. おはようございます gets a warm greeting, よろしく, a nod and a bow. Either way he shows Eric into the office and goes to his desk.
 3. Kenji, at his desk: 新しい人！ He's glad not to be the newest any more (two months). He borrowed Eric's chair because his broke, and it's in the machine room with the cat. Norway has the big forest cats, right? He saw them on YouTube... but Mio says he can't go in the machine room any more. Eric goes.
 4. The machine room door: knocking gets Mio shouting "one minute!"; she comes to the door, opens it and lets him in (he's the hardware person, but he asks her before he touches anything), and he walks in. If he knows 開けて from the gate, it opens the door with the kotodama effect, Mio: "...That door has a card reader, you know.", and he walks in. Once it's open, the door takes him in, and 開けて to it gets "The door is already open."
 5. Inside, the chair, with Tama asleep on it. Petting her (she is the goal) or the chair's Push sends it home: Eric pushes it back to his desk, walking behind it, cat and all. Mio walks over beside his desk; they face each other and the camera moves in before her "She comes with it, I think." She stays there to give him his first repair request in the same conversation ([`copier`](copier.md)), without another Talk action. The camera returns for the walk to the copy room.
 6. Later, Kenji asks if the chair is okay and offers help (cables, printer, the good tape). Eric can say his Japanese is worse than Kenji's English (a laugh and a high five: "we practise together") or pat the chair (Kenji pats his desk, very seriously).
-7. Greetings to the team: Kenji answers おはようございます with his own and a bow deeper than Eric's, and よろしく with よろしくお願いします and a bow. Eric is his senpai. Mio finds おはようございます too polite ("I'm not your boss"). In the afternoon Kenji asks Mori quietly how the new guy is; Mori: 礼儀正しい人ですよ.
+7. Greetings to the team: Kenji answers おはようございます with his own and a bow deeper than Eric's, and よろしく with よろしくお願いします and a bow. Eric is his senpai. Mio finds おはようございます too polite ("I'm not your boss"). In the afternoon Kenji asks Mori quietly how the new guy is; Mori says Eric listens until people have finished speaking.
 
 ## Choices and flags
 

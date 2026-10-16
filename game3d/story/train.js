@@ -175,7 +175,7 @@ export default {
       { do: 'look', who: 'mio', at: 'eric' },
       { say: 'mio', emo: 'surprised', name: 'Woman with a laptop', face: 'surprised', text: "Eh... B2? You're going to B2?" },
       { say: 'eric', emo: 'tired', face: 'tired', text: "Yeah, IT support. I'm the contractor, it's my first day." },
-      { say: 'mio', emo: 'dry', face: 'deadpan', text: "Ahh, you're the support contract? Mori-san said a {gaijin} is coming to help with the old machines. Amakawa never replaces anything, so, um... some of them are older than me." },
+      { say: 'mio', emo: 'dry', face: 'deadpan', text: "Ahh, you're the support contract? Mori-san said we’re getting someone who knows the old machines. So you’re the {gaijin}. Amakawa never replaces anything, so, um... some of them are older than me." },
       { say: 'eric', emo: 'tired', text: 'A what?' },
       { do: 'type', word: 'gaijin', from: 'mio', prompt: 'mio: Gaijin. Um, foreigner? So... you, obviously.' },
       { say: 'mio', emo: 'teasing', face: 'neutral', text: "Mm, like that. Don't worry, it's not mean, it's like saying “the {mc.new_person}”. Only, you stay {mc.new_person} for, um, maybe ten years." },
@@ -225,7 +225,7 @@ export default {
     jp_none: [{ say: 'mio', emo: 'deadpan', face: 'deadpan', text: "Ah... okay. Wow." }, { go: 'lesson2' }],
     lesson2: [
       { say: 'mio', emo: 'dry', text: "You know it's all Amakawa people on the island, right? Nobody speaks English. Even at the supermarket." },
-      { say: 'mio', emo: 'amused', face: 'smile', text: "And Mori-san is going to be so polite with you, and you'll just stand there." },
+      { say: 'mio', emo: 'amused', face: 'smile', text: "And Mori-san only speaks Japanese. He’s been asking about you all week, so..." },
       { say: 'mio', emo: 'casual', face: 'neutral', text: "えっと, okay. First one, {ohayo}. You say it to everybody in the morning. The guard at the gate is really strict about it." },
       '> She lifts two fingers off her laptop in a lazy wave, and nods.',
       { say: 'mio', emo: 'slow', slow: true, text: '{ohayo}...' },
@@ -263,7 +263,7 @@ export default {
       '> She dips her head about two centimetres. It is the smallest bow you have ever seen.',
       { say: 'mio', emo: 'slow', slow: true, text: '{yoroshiku}...' },
       { do: 'type', word: 'yoroshiku', from: 'mio', prompt: 'mio: We just met, so... say it to me.' },
-      { say: 'mio', emo: 'casual', text: "{yoroshiku}. Mm, good. Bow a little with Mori-san, he likes that." },
+      { say: 'mio', emo: 'casual', text: "{yoroshiku}. Mm, good. Mori-san will give you time to say it, so don’t rush." },
       { if: 'mio_warm >= 2', then: [
         { say: 'mio', emo: 'embarrassed', face: 'embarrassed', text: "Here, take a pickle. My mother made, like, way too many." },
       ] },

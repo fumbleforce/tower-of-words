@@ -1218,6 +1218,34 @@
    ],
    "to": "art/production/retired/2026-10-16/",
    "note": "Replaced day-3 bench and Mori shopping callbacks for #631 and #637."
+  },
+  {
+   "date": "2026-10-16",
+   "action": "retire",
+   "paths": [
+    "game3d/audio/ln-1c5vpuj.mp3",
+    "game3d/audio/ln-1eodupo.mp3",
+    "game3d/audio/ln-1hidfwu.mp3",
+    "game3d/audio/ln-1rdnqdo.mp3",
+    "game3d/audio/ln-1smowy6.mp3",
+    "game3d/audio/ln-1xv1l4m.mp3",
+    "game3d/audio/ln-215lc5.mp3",
+    "game3d/audio/ln-53akh9.mp3",
+    "game3d/audio/ln-53akh9-carina.mp3",
+    "game3d/audio/ln-9xhyu8.mp3",
+    "game3d/audio/ln-dmvjy7.mp3",
+    "game3d/audio/ln-mr4c5a.mp3",
+    "game3d/audio/ln-yj7446.mp3",
+    "game3d/audio/oh-19jgh3x.mp3",
+    "game3d/audio/oh-1c4p8ez.mp3",
+    "game3d/audio/oh-1f4btv8.mp3",
+    "game3d/audio/oh-1g9orgd.mp3",
+    "game3d/audio/oh-1h03b93.mp3",
+    "game3d/audio/oh-1uyd3jp.mp3",
+    "game3d/audio/oh-jkza60.mp3"
+   ],
+   "to": "art/production/retired/2026-10-16/",
+   "note": "Refs #662: superseded Mori depth dialogue; replacement speech queued for voicing."
   }
  ]
 }

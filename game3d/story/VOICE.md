@@ -37,7 +37,7 @@ Who each person is (age, job, what they speak) is in docs/game/cast.md. This she
 
 **Emi**. Quick and complete sentences, talks like she's between two meetings. Brightness over worry: she says the good news first and the problem as an aside ("I got it. Well. I may have told them...").
 
-**Mr. Mori**. Only polite Japanese. Warmth shows in what he does: bows, tea, making room that was already there.
+**Mr. Mori**. Only polite Japanese. Warmth shows in what he does: bows, tea, making room that was already there. His dry jokes refer to something they have just done. He often offers company as if he is offering help, and gives Eric time to answer.
 
 **Mr. Ishibashi, the guard**. Polite, clipped Japanese. Speaks with his hands when he has to, precisely.
 

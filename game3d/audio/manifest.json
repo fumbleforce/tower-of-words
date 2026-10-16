@@ -947,9 +947,9 @@
   "emo": "tired"
  },
  {
-  "key": "ln-1smowy6",
+  "key": "ln-1v1b6ju",
   "speaker": "mio",
-  "text": "Ahh, you're the support contract? Mori-san said a 外人 is coming to help with the old machines. Amakawa never replaces anything, so, um... some of them are older than me.",
+  "text": "Ahh, you're the support contract? Mori-san said we’re getting someone who knows the old machines. So you’re the 外人. Amakawa never replaces anything, so, um... some of them are older than me.",
   "lang": "en",
   "overheard": false,
   "words": [
@@ -1072,9 +1072,9 @@
   "emo": "dry"
  },
  {
-  "key": "ln-mr4c5a",
+  "key": "ln-qn75jg",
   "speaker": "mio",
-  "text": "And Mori-san is going to be so polite with you, and you'll just stand there.",
+  "text": "And Mori-san only speaks Japanese. He’s been asking about you all week, so...",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -1209,9 +1209,9 @@
   "slow": true
  },
  {
-  "key": "ln-dmvjy7",
+  "key": "ln-1rnmvae",
   "speaker": "mio",
-  "text": "よろしくおねがいします. Mm, good. Bow a little with Mori-san, he likes that.",
+  "text": "よろしくおねがいします. Mm, good. Mori-san will give you time to say it, so don’t rush.",
   "lang": "en",
   "overheard": false,
   "words": [
@@ -2821,15 +2821,19 @@
   "emo": "warm"
  },
  {
-  "key": "oh-1c4p8ez",
+  "key": "oh-x09654",
   "speaker": "mori",
-  "text": "はい、おはようございます。",
+  "text": "はい、おはようございます。よろしくおねがいします。",
   "lang": "ja",
   "overheard": true,
   "words": [
    [
     "ohayo",
     "おはようございます"
+   ],
+   [
+    "yoroshiku",
+    "よろしくおねがいします"
    ]
   ],
   "clear": [],
@@ -3172,9 +3176,9 @@
   "emo": "surprised"
  },
  {
-  "key": "ln-1xv1l4m",
+  "key": "ln-phuwmv",
   "speaker": "mio",
-  "text": "Yeah. Mori-san opened it when he was new here, I think. Nobody closes it, it's like... tradition. He can show you.",
+  "text": "Yeah. Mori-san opened it when he was new here. He can show you where it jams.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -3217,9 +3221,9 @@
   "emo": "embarrassed"
  },
  {
-  "key": "ln-1rdnqdo",
+  "key": "ln-1wtxdr1",
   "speaker": "mio",
-  "text": "Copy room is across the corridor. Mori-san went ahead... probably bowing to the copier again.",
+  "text": "Copy room is across the corridor. Mori-san went ahead. He can get paper out of that thing faster than I can.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -3276,14 +3280,14 @@
   "emo": "tired"
  },
  {
-  "key": "oh-1h03b93",
+  "key": "oh-auh6lm",
   "speaker": "mori",
-  "text": "また食べられました…",
+  "text": "今日も、一枚目で詰まりました。",
   "lang": "ja",
   "overheard": true,
   "words": [],
   "clear": [],
-  "emo": "sheepish"
+  "emo": "dry"
  },
  {
   "key": "ln-w0p3h",
@@ -3317,14 +3321,14 @@
   "slow": true
  },
  {
-  "key": "oh-19jgh3x",
+  "key": "oh-3vtn3m",
   "speaker": "mori",
-  "text": "…三十年。",
+  "text": "本当に直ったんですね。ありがとうございます。",
   "lang": "ja",
   "overheard": true,
   "words": [],
   "clear": [],
-  "emo": "whisper"
+  "emo": "warm"
  },
  {
   "key": "ln-1y5timr",
@@ -3523,6 +3527,41 @@
    "リレハンメル"
   ],
   "emo": "bright"
+ },
+ {
+  "key": "ln-aumsg4",
+  "speaker": "eric",
+  "text": "That’s as close as I’m getting to the real thing.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "oh-18qzo2l",
+  "speaker": "mori",
+  "text": "実は、私も見ていただけなんですよ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "watashi",
+    "私"
+   ]
+  ],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "oh-kovttb",
+  "speaker": "mori",
+  "text": "あ、ありがとうございます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
  },
  {
   "key": "ln-1a6ceiv",
@@ -3737,9 +3776,9 @@
   "emo": "hesitant"
  },
  {
-  "key": "ln-1hidfwu",
+  "key": "ln-14ic1qb",
   "speaker": "mio",
-  "text": "On the train you said 待って and the doors just stopped. And Mori-san says 動いて to that copier every morning for thirty years, and today it works for you.",
+  "text": "On the train you said 待って and the doors just stopped. And Mori-san says 動いて to that copier every morning, and today it works for you.",
   "lang": "en",
   "overheard": false,
   "words": [
@@ -5912,9 +5951,9 @@
   "emo": "quiet"
  },
  {
-  "key": "ln-1c5vpuj",
+  "key": "ln-2681qw",
   "speaker": "mio",
-  "text": "Some of it is. Ask him before you close anything.",
+  "text": "Some of it is. Ask him before you close anything. He used to run purchasing upstairs, so he remembers who bought what.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -6302,9 +6341,9 @@
   "emo": "bright"
  },
  {
-  "key": "oh-1f4btv8",
+  "key": "oh-18cy64r",
   "speaker": "mori",
-  "text": "少し多かったですかね。",
+  "text": "つい、いつものを頼んでしまいました。",
   "lang": "ja",
   "overheard": true,
   "words": [],
@@ -6312,9 +6351,9 @@
   "emo": "sheepish"
  },
  {
-  "key": "ln-1eodupo",
+  "key": "ln-19x7vvs",
   "speaker": "mio",
-  "text": "He’s asking if he ordered too much. We haven’t even started yet.",
+  "text": "He ordered his usual. I think he comes here more than he admits.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -6588,9 +6627,9 @@
   "emo": "curious"
  },
  {
-  "key": "oh-clo595",
+  "key": "oh-9inj0b",
   "speaker": "mori",
-  "text": "寒かったですが、また行きたいですね。",
+  "text": "寒かったですが、また行きたいですね。今度は、もう少しゆっくり。",
   "lang": "ja",
   "overheard": true,
   "words": [
@@ -6603,9 +6642,9 @@
   "emo": "fond"
  },
  {
-  "key": "ln-yj7446",
+  "key": "ln-1s42ake",
   "speaker": "emi",
-  "text": "He wants to go again, even after that cold. Would summer be better?",
+  "text": "He’d like to go back and take his time. Would summer be better?",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -6879,9 +6918,9 @@
   "emo": "casual"
  },
  {
-  "key": "oh-1uyd3jp",
+  "key": "oh-s5umt2",
   "speaker": "mori",
-  "text": "ありがとうございます。写真も持ってきますね。リレハンメルの。",
+  "text": "ありがとうございます。リレハンメルの写真も持ってきます。お茶の時に、ご覧になりますか。",
   "lang": "ja",
   "overheard": true,
   "words": [],
@@ -6889,9 +6928,9 @@
   "emo": "warm"
  },
  {
-  "key": "ln-215lc5",
+  "key": "ln-3pbyfp",
   "speaker": "emi",
-  "text": "He says he’ll bring his photos from Norway. You might need to clear a bit of your desk.",
+  "text": "He’ll bring his Norway photos. He wants to show you over tea, if you have time.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -6929,9 +6968,9 @@
   "emo": "fond"
  },
  {
-  "key": "ln-9xhyu8",
+  "key": "ln-1snu3kk",
   "speaker": "emi",
-  "text": "He’d like to go back. I told him you might have some suggestions.",
+  "text": "He’s been talking about going back since I started here. I told him you might have some suggestions.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -8786,9 +8825,9 @@
   "emo": "warm"
  },
  {
-  "key": "oh-jkza60",
+  "key": "oh-imc39l",
   "speaker": "mori",
-  "text": "火曜日、楽しみにしています。",
+  "text": "火曜日、隣に座ってもいいですか。",
   "lang": "ja",
   "overheard": true,
   "words": [],
@@ -8796,9 +8835,9 @@
   "emo": "warm"
  },
  {
-  "key": "ln-53akh9",
-  "speaker": "eric",
-  "text": "Tuesday’s the art club. I think he’s glad I signed up.",
+  "key": "ln-pauab2",
+  "speaker": "emi",
+  "text": "He’s asking if he can sit beside you at the art club on Tuesday.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -8806,11 +8845,21 @@
   "emo": "warm"
  },
  {
-  "key": "oh-1g9orgd",
+  "key": "oh-1sbpdsu",
   "speaker": "mori",
-  "text": "よかったら、美術部にもどうぞ。",
+  "text": "火曜日は美術部で描いています。よかったら、ご一緒に。",
   "lang": "ja",
   "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-ssu50n",
+  "speaker": "emi",
+  "text": "He’s inviting you to the art club. He goes on Tuesdays.",
+  "lang": "en",
+  "overheard": false,
   "words": [],
   "clear": [],
   "emo": "warm"
@@ -13780,6 +13829,21 @@
   "emo": "curious"
  },
  {
+  "key": "oh-clo595",
+  "speaker": "mori",
+  "text": "寒かったですが、また行きたいですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "ikitai",
+    "行きたい"
+   ]
+  ],
+  "clear": [],
+  "emo": "fond"
+ },
+ {
   "key": "ln-d2r4du",
   "speaker": "eric",
   "text": "ノルウェー……行きたい？",
@@ -17598,6 +17662,16 @@
   "emo": "dry"
  },
  {
+  "key": "ln-aumsg4-carina",
+  "speaker": "carina",
+  "text": "That’s as close as I’m getting to the real thing.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
   "key": "ln-1pxzwm1-carina",
   "speaker": "kenji",
   "text": "Melon soda! Thank you, Carina-san.",
@@ -19448,16 +19522,6 @@
   "key": "ln-1tj8cfq-carina",
   "speaker": "carina",
   "text": "It’s frozen for you too? I’m looking at it.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "warm"
- },
- {
-  "key": "ln-53akh9-carina",
-  "speaker": "carina",
-  "text": "Tuesday’s the art club. I think he’s glad I signed up.",
   "lang": "en",
   "overheard": false,
   "words": [],
