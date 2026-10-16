@@ -1,0 +1,68 @@
+{
+ "title": "Sounds, round music-7",
+ "date": "2026-10-16",
+ "by": "claude-main/music-7",
+ "status": "open",
+ "context": [
+  "Every take of round music-7 (music), made by tools/audio/make.py, failed ones included. Nobody has listened to them: the numbers on each card are a screen, not a verdict.",
+  "A loop plays once and then its first seconds again, so you can hear the join."
+ ],
+ "question": "Which of these takes fit? Pick the ones you want, reject the others, and say what is wrong with any you reject.",
+ "multi": true,
+ "options": [
+  {
+   "id": "day-lyria-1",
+   "label": "day-lyria-1",
+   "audio": "art/candidates/music-7/day-lyria-1.mp3",
+   "note": "Outdoors during the day: the forecourt, the plaza and the other outdoor places. music/day-lyria@v2, lyria-2, seed 7811. Prompt: \"Warm acoustic guitar with a light marimba and soft brushed percussion, 100 BPM, sunny and easy. The melody and chord progression keep changing: several different short themes passed between guitar and marimba, no riff or phrase repeated more than twice, a gentle new idea every few bars. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.\". Measured: 21.6 s; level -20.6 LUFS (integrated, target -20); key D minor; tempo 99.4 BPM; CLAP good 0.18, vocals -0.093, noise -0.051, cheap 0.094; vocal stem -42.2 dB of the mix; loops every 21.6 s, loop point match 0.339; level change at the loop point 4.1 dB (15.59 dB elsewhere). Not listened to by an agent."
+  },
+  {
+   "id": "day-lyria-2",
+   "label": "day-lyria-2",
+   "audio": "art/candidates/music-7/day-lyria-2.mp3",
+   "note": "Outdoors during the day: the forecourt, the plaza and the other outdoor places. music/day-lyria@v2, lyria-2, seed 7812. Prompt: \"Warm acoustic guitar with a light marimba and soft brushed percussion, 100 BPM, sunny and easy. The melody and chord progression keep changing: several different short themes passed between guitar and marimba, no riff or phrase repeated more than twice, a gentle new idea every few bars. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.\". Measured: 21.6 s; level -22.8 LUFS (integrated, target -20); key D minor; tempo 198.8 BPM; CLAP good 0.142, vocals -0.099, noise -0.061, cheap 0.09; vocal stem -39.7 dB of the mix; loops every 21.6 s, loop point match 0.378; level change at the loop point 14.85 dB (18.56 dB elsewhere). Flags: Demucs hears singing: vocal stem -39.7 dB of the mix in 0.0% of it. Not listened to by an agent."
+  },
+  {
+   "id": "day-lyria-3",
+   "label": "day-lyria-3",
+   "audio": "art/candidates/music-7/day-lyria-3.mp3",
+   "note": "Outdoors during the day: the forecourt, the plaza and the other outdoor places. music/day-lyria@v2, lyria-2, seed 7813. Prompt: \"Warm acoustic guitar with a light marimba and soft brushed percussion, 100 BPM, sunny and easy. The melody and chord progression keep changing: several different short themes passed between guitar and marimba, no riff or phrase repeated more than twice, a gentle new idea every few bars. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.\". Measured: 29.41 s; level -19.9 LUFS (integrated, target -20); key G major; tempo 99.4 BPM; CLAP good 0.243, vocals -0.052, noise -0.025, cheap 0.081; vocal stem -42.3 dB of the mix; loops every 29.41 s, loop point match 0.615; level change at the loop point 6.34 dB (14.01 dB elsewhere). Flags: loop point match 0.615 (lower is better; music repeating itself is about 0.1). Not listened to by an agent."
+  },
+  {
+   "id": "dorms-lyria-1",
+   "label": "dorms-lyria-1",
+   "audio": "art/candidates/music-7/dorms-lyria-1.mp3",
+   "note": "The dorm courtyard and the east lane. music/dorms-lyria@v1, lyria-2, seed 7911. Prompt: \"Quiet residential feel for a dorm courtyard and a small lane: clean electric piano, nylon guitar, soft bass and a muted drum loop, a little lo-fi warmth, 88 BPM. Homely and relaxed, a melody that wanders and changes. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.\". Measured: 21.82 s; level -20.0 LUFS (integrated, target -20); key E minor; tempo 89.1 BPM; CLAP good 0.13, vocals -0.055, noise -0.072, cheap 0.057; vocal stem -34.8 dB of the mix; loops every 21.82 s, loop point match 0.252; level change at the loop point 0.96 dB (8.02 dB elsewhere). Flags: Demucs hears singing: vocal stem -34.8 dB of the mix in 0.0% of it. Not listened to by an agent."
+  },
+  {
+   "id": "dorms-lyria-2",
+   "label": "dorms-lyria-2",
+   "audio": "art/candidates/music-7/dorms-lyria-2.mp3",
+   "note": "The dorm courtyard and the east lane. music/dorms-lyria@v1, lyria-2, seed 7912. Prompt: \"Quiet residential feel for a dorm courtyard and a small lane: clean electric piano, nylon guitar, soft bass and a muted drum loop, a little lo-fi warmth, 88 BPM. Homely and relaxed, a melody that wanders and changes. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.\". Measured: 24.55 s; level -20.0 LUFS (integrated, target -20); key F# major; tempo 89.1 BPM; CLAP good 0.137, vocals -0.058, noise -0.07, cheap 0.029; vocal stem -38.7 dB of the mix; loops every 24.55 s, loop point match 0.451; level change at the loop point 1.39 dB (9.64 dB elsewhere). Flags: Demucs hears singing: vocal stem -38.7 dB of the mix in 0.0% of it; loop point match 0.451 (lower is better; music repeating itself is about 0.1). Not listened to by an agent."
+  },
+  {
+   "id": "dorms-lyria-3",
+   "label": "dorms-lyria-3",
+   "audio": "art/candidates/music-7/dorms-lyria-3.mp3",
+   "note": "The dorm courtyard and the east lane. music/dorms-lyria@v1, lyria-2, seed 7913. Prompt: \"Quiet residential feel for a dorm courtyard and a small lane: clean electric piano, nylon guitar, soft bass and a muted drum loop, a little lo-fi warmth, 88 BPM. Homely and relaxed, a melody that wanders and changes. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.\". Measured: 21.57 s; level -19.8 LUFS (integrated, target -20); key B minor; tempo 89.1 BPM; CLAP good 0.178, vocals -0.035, noise -0.057, cheap 0.072; vocal stem -40.3 dB of the mix; loops every 21.57 s, loop point match 0.169; level change at the loop point 6.82 dB (14.78 dB elsewhere). Not listened to by an agent."
+  },
+  {
+   "id": "title-lyria-1",
+   "label": "title-lyria-1",
+   "audio": "art/candidates/music-7/title-lyria-1.mp3",
+   "note": "Title menu. music/title-lyria@v2, lyria-2, seed 7711. Prompt: \"Slow, gentle solo piano with a soft warm pad and a little music-box, 62 BPM. A tender melody that keeps developing: each phrase differs from the last, with new notes and a different ending, never one motif repeated. It begins softly and already in motion, with no sharp opening note, and stays at one calm level. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.\". Measured: 29.27 s; level -20.2 LUFS (integrated, target -20); key A minor; tempo 136.0 BPM; CLAP good 0.26, vocals -0.073, noise -0.066, cheap 0.13; vocal stem -60.4 dB of the mix; loops every 29.27 s, loop point match 0.915; level change at the loop point 0.69 dB (15.93 dB elsewhere). Flags: loop point match 0.915 (lower is better; music repeating itself is about 0.1). Not listened to by an agent."
+  },
+  {
+   "id": "title-lyria-2",
+   "label": "title-lyria-2",
+   "audio": "art/candidates/music-7/title-lyria-2.mp3",
+   "note": "Title menu. music/title-lyria@v2, lyria-2, seed 7712. Prompt: \"Slow, gentle solo piano with a soft warm pad and a little music-box, 62 BPM. A tender melody that keeps developing: each phrase differs from the last, with new notes and a different ending, never one motif repeated. It begins softly and already in motion, with no sharp opening note, and stays at one calm level. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.\". Measured: 29.14 s; level -19.8 LUFS (integrated, target -20); key G minor; tempo 117.5 BPM; CLAP good 0.215, vocals -0.086, noise -0.126, cheap 0.062; vocal stem -54.5 dB of the mix; loops every 29.14 s, loop point match 0.114; level change at the loop point 19.57 dB (10.9 dB elsewhere). Flags: a 19.57 dB level jump at the loop point (10.9 dB elsewhere). Not listened to by an agent."
+  },
+  {
+   "id": "title-lyria-3",
+   "label": "title-lyria-3",
+   "audio": "art/candidates/music-7/title-lyria-3.mp3",
+   "note": "Title menu. music/title-lyria@v2, lyria-2, seed 7713. Prompt: \"Slow, gentle solo piano with a soft warm pad and a little music-box, 62 BPM. A tender melody that keeps developing: each phrase differs from the last, with new notes and a different ending, never one motif repeated. It begins softly and already in motion, with no sharp opening note, and stays at one calm level. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.\". Measured: 29.51 s; level -19.9 LUFS (integrated, target -20); key C major; tempo 172.3 BPM; CLAP good 0.219, vocals -0.116, noise -0.158, cheap 0.109; vocal stem -53.1 dB of the mix; loops every 29.51 s, loop point match 1.015; level change at the loop point 5.53 dB (8.6 dB elsewhere). Flags: loop point match 1.015 (lower is better; music repeating itself is about 0.1). Not listened to by an agent."
+  }
+ ]
+}

@@ -1,0 +1,798 @@
+{
+ "round": "music-7",
+ "about": "Every take of this round (tools/audio/make.py). Raw files: ~/ai/audio-raw/<round>/.",
+ "takes": {
+  "day-lyria-1": {
+   "take": "day-lyria-1",
+   "round": "music-7",
+   "kind": "music",
+   "preset": "day-lyria",
+   "version": 2,
+   "n": 1,
+   "generator": "lyria-2",
+   "seed": 7811,
+   "owner": "claude-main/music-7",
+   "made": "2026-10-16T23:14:05+02:00",
+   "raw": "/home/jorgen/ai/audio-raw/music-7/day-lyria-1",
+   "licence": "Google Lyria 2 through Replicate: output terms not settled (notes/licenses.md, item 6); SynthID watermark",
+   "use": "Outdoors during the day: the forecourt, the plaza and the other outdoor places.",
+   "model": "google/lyria-2 (Replicate)",
+   "input": {
+    "prompt": "Warm acoustic guitar with a light marimba and soft brushed percussion, 100 BPM, sunny and easy. The melody and chord progression keep changing: several different short themes passed between guitar and marimba, no riff or phrase repeated more than twice, a gentle new idea every few bars. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.",
+    "seed": 7811
+   },
+   "cost_usd": 0.12,
+   "status": "posted",
+   "seconds_to_make": 47.7,
+   "post": {
+    "seconds_raw": 32.77,
+    "screen": {
+     "key": "D minor",
+     "key_fit": 0.66,
+     "tempo": 99.4,
+     "quiet_s": 0,
+     "level_spread_db": 2.3,
+     "hiss": 0.1989,
+     "peak": 0.761,
+     "good": 0.18,
+     "vocals": -0.093,
+     "noise": -0.051,
+     "cheap": 0.094,
+     "odd": 0.044,
+     "like_refs": 0.676,
+     "worst_vocals": [
+      -0.075,
+      0
+     ],
+     "worst_noise": [
+      -0.026,
+      0
+     ],
+     "worst_cheap": [
+      0.1,
+      10
+     ],
+     "worst_odd": [
+      0.046,
+      10
+     ]
+    },
+    "vocal": {
+     "vocal_db": -42.2,
+     "vocal_windows_pct": 0.0
+    },
+    "loop": {
+     "how": "cut where it repeats, 1.5 s crossfade",
+     "from_s": 3.39,
+     "to_s": 24.99,
+     "loop_s": 21.6,
+     "seam_dist": 0.339,
+     "loop_start": 1.0,
+     "loop_end": 22.59875
+    },
+    "seam": {
+     "level_jump_db": 4.1,
+     "level_jump_p99_elsewhere": 15.59,
+     "flux_at_seam": 24.0,
+     "flux_p99_elsewhere": 458.0,
+     "flux_median": 25.0,
+     "sample_step_at_seam": 0.0011,
+     "sample_step_p999_elsewhere": 0.054
+    },
+    "target_lufs": -20,
+    "measure": "integrated",
+    "encoded_integrated": -20.6,
+    "encoded_momentary_max": -17.5,
+    "peak_dbfs": -1.0,
+    "seconds": 21.6,
+    "kb": 701,
+    "game_file": "art/production/audio/music-7/day-lyria-1.mp3",
+    "review_file": "art/candidates/music-7/day-lyria-1.mp3"
+   }
+  },
+  "day-lyria-2": {
+   "take": "day-lyria-2",
+   "round": "music-7",
+   "kind": "music",
+   "preset": "day-lyria",
+   "version": 2,
+   "n": 2,
+   "generator": "lyria-2",
+   "seed": 7812,
+   "owner": "claude-main/music-7",
+   "made": "2026-10-16T23:14:53+02:00",
+   "raw": "/home/jorgen/ai/audio-raw/music-7/day-lyria-2",
+   "licence": "Google Lyria 2 through Replicate: output terms not settled (notes/licenses.md, item 6); SynthID watermark",
+   "use": "Outdoors during the day: the forecourt, the plaza and the other outdoor places.",
+   "model": "google/lyria-2 (Replicate)",
+   "input": {
+    "prompt": "Warm acoustic guitar with a light marimba and soft brushed percussion, 100 BPM, sunny and easy. The melody and chord progression keep changing: several different short themes passed between guitar and marimba, no riff or phrase repeated more than twice, a gentle new idea every few bars. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.",
+    "seed": 7812
+   },
+   "cost_usd": 0.12,
+   "status": "posted",
+   "seconds_to_make": 27.1,
+   "post": {
+    "seconds_raw": 32.77,
+    "screen": {
+     "key": "D minor",
+     "key_fit": 0.59,
+     "tempo": 198.8,
+     "quiet_s": 0,
+     "level_spread_db": 7.9,
+     "hiss": 0.1209,
+     "peak": 0.889,
+     "good": 0.142,
+     "vocals": -0.099,
+     "noise": -0.061,
+     "cheap": 0.09,
+     "odd": 0.026,
+     "like_refs": 0.657,
+     "worst_vocals": [
+      -0.097,
+      20
+     ],
+     "worst_noise": [
+      -0.036,
+      20
+     ],
+     "worst_cheap": [
+      0.109,
+      20
+     ],
+     "worst_odd": [
+      0.057,
+      20
+     ]
+    },
+    "vocal": {
+     "vocal_db": -39.7,
+     "vocal_windows_pct": 0.0
+    },
+    "loop": {
+     "how": "cut where it repeats, 1.5 s crossfade",
+     "from_s": 7.95,
+     "to_s": 29.55,
+     "loop_s": 21.6,
+     "seam_dist": 0.378,
+     "loop_start": 1.0,
+     "loop_end": 22.6
+    },
+    "seam": {
+     "level_jump_db": 14.85,
+     "level_jump_p99_elsewhere": 18.56,
+     "flux_at_seam": 1476.0,
+     "flux_p99_elsewhere": 1014.4,
+     "flux_median": 31.2,
+     "sample_step_at_seam": 0.0008,
+     "sample_step_p999_elsewhere": 0.2168
+    },
+    "target_lufs": -20,
+    "measure": "integrated",
+    "encoded_integrated": -22.8,
+    "encoded_momentary_max": -17.4,
+    "peak_dbfs": -0.9,
+    "seconds": 21.6,
+    "kb": 723,
+    "game_file": "art/production/audio/music-7/day-lyria-2.mp3",
+    "review_file": "art/candidates/music-7/day-lyria-2.mp3"
+   }
+  },
+  "day-lyria-3": {
+   "take": "day-lyria-3",
+   "round": "music-7",
+   "kind": "music",
+   "preset": "day-lyria",
+   "version": 2,
+   "n": 3,
+   "generator": "lyria-2",
+   "seed": 7813,
+   "owner": "claude-main/music-7",
+   "made": "2026-10-16T23:15:20+02:00",
+   "raw": "/home/jorgen/ai/audio-raw/music-7/day-lyria-3",
+   "licence": "Google Lyria 2 through Replicate: output terms not settled (notes/licenses.md, item 6); SynthID watermark",
+   "use": "Outdoors during the day: the forecourt, the plaza and the other outdoor places.",
+   "model": "google/lyria-2 (Replicate)",
+   "input": {
+    "prompt": "Warm acoustic guitar with a light marimba and soft brushed percussion, 100 BPM, sunny and easy. The melody and chord progression keep changing: several different short themes passed between guitar and marimba, no riff or phrase repeated more than twice, a gentle new idea every few bars. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.",
+    "seed": 7813
+   },
+   "cost_usd": 0.12,
+   "status": "posted",
+   "seconds_to_make": 26.6,
+   "post": {
+    "seconds_raw": 32.77,
+    "screen": {
+     "key": "G major",
+     "key_fit": 0.8,
+     "tempo": 99.4,
+     "quiet_s": 0,
+     "level_spread_db": 3.6,
+     "hiss": 0.2406,
+     "peak": 0.761,
+     "good": 0.243,
+     "vocals": -0.052,
+     "noise": -0.025,
+     "cheap": 0.081,
+     "odd": 0.094,
+     "like_refs": 0.705,
+     "worst_vocals": [
+      -0.044,
+      0
+     ],
+     "worst_noise": [
+      -0.022,
+      10
+     ],
+     "worst_cheap": [
+      0.09,
+      20
+     ],
+     "worst_odd": [
+      0.093,
+      20
+     ]
+    },
+    "vocal": {
+     "vocal_db": -42.3,
+     "vocal_windows_pct": 0.0
+    },
+    "loop": {
+     "how": "cut where it repeats, 1.5 s crossfade",
+     "from_s": 0.35,
+     "to_s": 29.76,
+     "loop_s": 29.41,
+     "seam_dist": 0.615,
+     "loop_start": 1.0,
+     "loop_end": 30.407771
+    },
+    "seam": {
+     "level_jump_db": 6.34,
+     "level_jump_p99_elsewhere": 14.01,
+     "flux_at_seam": 9.4,
+     "flux_p99_elsewhere": 577.6,
+     "flux_median": 20.0,
+     "sample_step_at_seam": 0.002,
+     "sample_step_p999_elsewhere": 0.0649
+    },
+    "target_lufs": -20,
+    "measure": "integrated",
+    "encoded_integrated": -19.9,
+    "encoded_momentary_max": -16.8,
+    "peak_dbfs": -5.1,
+    "seconds": 29.41,
+    "kb": 977,
+    "game_file": "art/production/audio/music-7/day-lyria-3.mp3",
+    "review_file": "art/candidates/music-7/day-lyria-3.mp3"
+   }
+  },
+  "dorms-lyria-1": {
+   "take": "dorms-lyria-1",
+   "round": "music-7",
+   "kind": "music",
+   "preset": "dorms-lyria",
+   "version": 1,
+   "n": 1,
+   "generator": "lyria-2",
+   "seed": 7911,
+   "owner": "claude-main/music-7",
+   "made": "2026-10-16T23:15:47+02:00",
+   "raw": "/home/jorgen/ai/audio-raw/music-7/dorms-lyria-1",
+   "licence": "Google Lyria 2 through Replicate: output terms not settled (notes/licenses.md, item 6); SynthID watermark",
+   "use": "The dorm courtyard and the east lane.",
+   "model": "google/lyria-2 (Replicate)",
+   "input": {
+    "prompt": "Quiet residential feel for a dorm courtyard and a small lane: clean electric piano, nylon guitar, soft bass and a muted drum loop, a little lo-fi warmth, 88 BPM. Homely and relaxed, a melody that wanders and changes. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.",
+    "seed": 7911
+   },
+   "cost_usd": 0.12,
+   "status": "posted",
+   "seconds_to_make": 26.2,
+   "post": {
+    "seconds_raw": 32.77,
+    "screen": {
+     "key": "E minor",
+     "key_fit": 0.67,
+     "tempo": 89.1,
+     "quiet_s": 0,
+     "level_spread_db": 2.7,
+     "hiss": 0.177,
+     "peak": 0.761,
+     "good": 0.13,
+     "vocals": -0.055,
+     "noise": -0.072,
+     "cheap": 0.057,
+     "odd": 0.075,
+     "like_refs": 0.654,
+     "worst_vocals": [
+      -0.016,
+      20
+     ],
+     "worst_noise": [
+      -0.049,
+      20
+     ],
+     "worst_cheap": [
+      0.08,
+      0
+     ],
+     "worst_odd": [
+      0.089,
+      20
+     ]
+    },
+    "vocal": {
+     "vocal_db": -34.8,
+     "vocal_windows_pct": 0.0
+    },
+    "loop": {
+     "how": "cut where it repeats, 1.5 s crossfade",
+     "from_s": 7.9,
+     "to_s": 29.72,
+     "loop_s": 21.82,
+     "seam_dist": 0.252,
+     "loop_start": 1.0,
+     "loop_end": 22.820271
+    },
+    "seam": {
+     "level_jump_db": 0.96,
+     "level_jump_p99_elsewhere": 8.02,
+     "flux_at_seam": 50.4,
+     "flux_p99_elsewhere": 416.2,
+     "flux_median": 43.1,
+     "sample_step_at_seam": 0.0027,
+     "sample_step_p999_elsewhere": 0.054
+    },
+    "target_lufs": -20,
+    "measure": "integrated",
+    "encoded_integrated": -20.0,
+    "encoded_momentary_max": -17.6,
+    "peak_dbfs": -8.2,
+    "seconds": 21.82,
+    "kb": 731,
+    "game_file": "art/production/audio/music-7/dorms-lyria-1.mp3",
+    "review_file": "art/candidates/music-7/dorms-lyria-1.mp3"
+   }
+  },
+  "dorms-lyria-2": {
+   "take": "dorms-lyria-2",
+   "round": "music-7",
+   "kind": "music",
+   "preset": "dorms-lyria",
+   "version": 1,
+   "n": 2,
+   "generator": "lyria-2",
+   "seed": 7912,
+   "owner": "claude-main/music-7",
+   "made": "2026-10-16T23:16:13+02:00",
+   "raw": "/home/jorgen/ai/audio-raw/music-7/dorms-lyria-2",
+   "licence": "Google Lyria 2 through Replicate: output terms not settled (notes/licenses.md, item 6); SynthID watermark",
+   "use": "The dorm courtyard and the east lane.",
+   "model": "google/lyria-2 (Replicate)",
+   "input": {
+    "prompt": "Quiet residential feel for a dorm courtyard and a small lane: clean electric piano, nylon guitar, soft bass and a muted drum loop, a little lo-fi warmth, 88 BPM. Homely and relaxed, a melody that wanders and changes. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.",
+    "seed": 7912
+   },
+   "cost_usd": 0.12,
+   "status": "posted",
+   "seconds_to_make": 25.5,
+   "post": {
+    "seconds_raw": 32.77,
+    "screen": {
+     "key": "F# major",
+     "key_fit": 0.82,
+     "tempo": 89.1,
+     "quiet_s": 0,
+     "level_spread_db": 3.2,
+     "hiss": 0.2375,
+     "peak": 0.761,
+     "good": 0.137,
+     "vocals": -0.058,
+     "noise": -0.07,
+     "cheap": 0.029,
+     "odd": 0.012,
+     "like_refs": 0.685,
+     "worst_vocals": [
+      -0.056,
+      10
+     ],
+     "worst_noise": [
+      -0.019,
+      0
+     ],
+     "worst_cheap": [
+      0.037,
+      0
+     ],
+     "worst_odd": [
+      0.037,
+      0
+     ]
+    },
+    "vocal": {
+     "vocal_db": -38.7,
+     "vocal_windows_pct": 0.0
+    },
+    "loop": {
+     "how": "cut where it repeats, 1.5 s crossfade",
+     "from_s": 2.78,
+     "to_s": 27.33,
+     "loop_s": 24.55,
+     "seam_dist": 0.451,
+     "loop_start": 1.0,
+     "loop_end": 25.545771
+    },
+    "seam": {
+     "level_jump_db": 1.39,
+     "level_jump_p99_elsewhere": 9.64,
+     "flux_at_seam": 25.2,
+     "flux_p99_elsewhere": 540.8,
+     "flux_median": 26.4,
+     "sample_step_at_seam": 0.0074,
+     "sample_step_p999_elsewhere": 0.0792
+    },
+    "target_lufs": -20,
+    "measure": "integrated",
+    "encoded_integrated": -20.0,
+    "encoded_momentary_max": -17.5,
+    "peak_dbfs": -6.4,
+    "seconds": 24.55,
+    "kb": 806,
+    "game_file": "art/production/audio/music-7/dorms-lyria-2.mp3",
+    "review_file": "art/candidates/music-7/dorms-lyria-2.mp3"
+   }
+  },
+  "dorms-lyria-3": {
+   "take": "dorms-lyria-3",
+   "round": "music-7",
+   "kind": "music",
+   "preset": "dorms-lyria",
+   "version": 1,
+   "n": 3,
+   "generator": "lyria-2",
+   "seed": 7913,
+   "owner": "claude-main/music-7",
+   "made": "2026-10-16T23:16:39+02:00",
+   "raw": "/home/jorgen/ai/audio-raw/music-7/dorms-lyria-3",
+   "licence": "Google Lyria 2 through Replicate: output terms not settled (notes/licenses.md, item 6); SynthID watermark",
+   "use": "The dorm courtyard and the east lane.",
+   "model": "google/lyria-2 (Replicate)",
+   "input": {
+    "prompt": "Quiet residential feel for a dorm courtyard and a small lane: clean electric piano, nylon guitar, soft bass and a muted drum loop, a little lo-fi warmth, 88 BPM. Homely and relaxed, a melody that wanders and changes. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.",
+    "seed": 7913
+   },
+   "cost_usd": 0.12,
+   "status": "posted",
+   "seconds_to_make": 25.8,
+   "post": {
+    "seconds_raw": 32.77,
+    "screen": {
+     "key": "B minor",
+     "key_fit": 0.76,
+     "tempo": 89.1,
+     "quiet_s": 0,
+     "level_spread_db": 3.2,
+     "hiss": 0.2132,
+     "peak": 0.761,
+     "good": 0.178,
+     "vocals": -0.035,
+     "noise": -0.057,
+     "cheap": 0.072,
+     "odd": 0.064,
+     "like_refs": 0.689,
+     "worst_vocals": [
+      -0.022,
+      20
+     ],
+     "worst_noise": [
+      -0.036,
+      0
+     ],
+     "worst_cheap": [
+      0.088,
+      20
+     ],
+     "worst_odd": [
+      0.064,
+      20
+     ]
+    },
+    "vocal": {
+     "vocal_db": -40.3,
+     "vocal_windows_pct": 0.0
+    },
+    "loop": {
+     "how": "cut where it repeats, 1.5 s crossfade",
+     "from_s": 1.96,
+     "to_s": 23.54,
+     "loop_s": 21.57,
+     "seam_dist": 0.169,
+     "loop_start": 1.0,
+     "loop_end": 22.573208
+    },
+    "seam": {
+     "level_jump_db": 6.82,
+     "level_jump_p99_elsewhere": 14.78,
+     "flux_at_seam": 102.9,
+     "flux_p99_elsewhere": 1021.4,
+     "flux_median": 29.7,
+     "sample_step_at_seam": 0.0102,
+     "sample_step_p999_elsewhere": 0.1787
+    },
+    "target_lufs": -20,
+    "measure": "integrated",
+    "encoded_integrated": -19.8,
+    "encoded_momentary_max": -15.9,
+    "peak_dbfs": -1.5,
+    "seconds": 21.57,
+    "kb": 718,
+    "game_file": "art/production/audio/music-7/dorms-lyria-3.mp3",
+    "review_file": "art/candidates/music-7/dorms-lyria-3.mp3"
+   }
+  },
+  "title-lyria-1": {
+   "take": "title-lyria-1",
+   "round": "music-7",
+   "kind": "music",
+   "preset": "title-lyria",
+   "version": 2,
+   "n": 1,
+   "generator": "lyria-2",
+   "seed": 7711,
+   "owner": "claude-main/music-7",
+   "made": "2026-10-16T23:12:40+02:00",
+   "raw": "/home/jorgen/ai/audio-raw/music-7/title-lyria-1",
+   "licence": "Google Lyria 2 through Replicate: output terms not settled (notes/licenses.md, item 6); SynthID watermark",
+   "use": "Title menu.",
+   "model": "google/lyria-2 (Replicate)",
+   "input": {
+    "prompt": "Slow, gentle solo piano with a soft warm pad and a little music-box, 62 BPM. A tender melody that keeps developing: each phrase differs from the last, with new notes and a different ending, never one motif repeated. It begins softly and already in motion, with no sharp opening note, and stays at one calm level. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.",
+    "seed": 7711
+   },
+   "cost_usd": 0.12,
+   "status": "posted",
+   "seconds_to_make": 27.1,
+   "post": {
+    "seconds_raw": 32.77,
+    "screen": {
+     "key": "A minor",
+     "key_fit": 0.9,
+     "tempo": 136.0,
+     "quiet_s": 0,
+     "level_spread_db": 13.7,
+     "hiss": 0.2695,
+     "peak": 0.761,
+     "good": 0.26,
+     "vocals": -0.073,
+     "noise": -0.066,
+     "cheap": 0.13,
+     "odd": 0.056,
+     "like_refs": 0.63,
+     "worst_vocals": [
+      -0.057,
+      0
+     ],
+     "worst_noise": [
+      0.005,
+      0
+     ],
+     "worst_cheap": [
+      0.143,
+      0
+     ],
+     "worst_odd": [
+      0.085,
+      0
+     ]
+    },
+    "vocal": {
+     "vocal_db": -60.4,
+     "vocal_windows_pct": 0.0
+    },
+    "loop": {
+     "how": "cut where it repeats, 1.5 s crossfade",
+     "from_s": 0.34,
+     "to_s": 29.61,
+     "loop_s": 29.27,
+     "seam_dist": 0.915,
+     "loop_start": 1.0,
+     "loop_end": 30.269333
+    },
+    "seam": {
+     "level_jump_db": 0.69,
+     "level_jump_p99_elsewhere": 15.93,
+     "flux_at_seam": 21.2,
+     "flux_p99_elsewhere": 93.2,
+     "flux_median": 18.9,
+     "sample_step_at_seam": 0.0015,
+     "sample_step_p999_elsewhere": 0.0381
+    },
+    "target_lufs": -20,
+    "measure": "integrated",
+    "encoded_integrated": -20.2,
+    "encoded_momentary_max": -14.0,
+    "peak_dbfs": -3.6,
+    "seconds": 29.27,
+    "kb": 913,
+    "game_file": "art/production/audio/music-7/title-lyria-1.mp3",
+    "review_file": "art/candidates/music-7/title-lyria-1.mp3"
+   }
+  },
+  "title-lyria-2": {
+   "take": "title-lyria-2",
+   "round": "music-7",
+   "kind": "music",
+   "preset": "title-lyria",
+   "version": 2,
+   "n": 2,
+   "generator": "lyria-2",
+   "seed": 7712,
+   "owner": "claude-main/music-7",
+   "made": "2026-10-16T23:13:07+02:00",
+   "raw": "/home/jorgen/ai/audio-raw/music-7/title-lyria-2",
+   "licence": "Google Lyria 2 through Replicate: output terms not settled (notes/licenses.md, item 6); SynthID watermark",
+   "use": "Title menu.",
+   "model": "google/lyria-2 (Replicate)",
+   "input": {
+    "prompt": "Slow, gentle solo piano with a soft warm pad and a little music-box, 62 BPM. A tender melody that keeps developing: each phrase differs from the last, with new notes and a different ending, never one motif repeated. It begins softly and already in motion, with no sharp opening note, and stays at one calm level. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.",
+    "seed": 7712
+   },
+   "cost_usd": 0.12,
+   "status": "posted",
+   "seconds_to_make": 27.0,
+   "post": {
+    "seconds_raw": 32.77,
+    "screen": {
+     "key": "G minor",
+     "key_fit": 0.81,
+     "tempo": 117.5,
+     "quiet_s": 0,
+     "level_spread_db": 6.3,
+     "hiss": 0.3123,
+     "peak": 0.761,
+     "good": 0.215,
+     "vocals": -0.086,
+     "noise": -0.126,
+     "cheap": 0.062,
+     "odd": 0.014,
+     "like_refs": 0.687,
+     "worst_vocals": [
+      -0.056,
+      10
+     ],
+     "worst_noise": [
+      -0.09,
+      10
+     ],
+     "worst_cheap": [
+      0.067,
+      20
+     ],
+     "worst_odd": [
+      0.041,
+      10
+     ]
+    },
+    "vocal": {
+     "vocal_db": -54.5,
+     "vocal_windows_pct": 0.0
+    },
+    "loop": {
+     "how": "cut where it repeats, 1.5 s crossfade",
+     "from_s": 0.42,
+     "to_s": 29.56,
+     "loop_s": 29.14,
+     "seam_dist": 0.114,
+     "loop_start": 1.0,
+     "loop_end": 30.140917
+    },
+    "seam": {
+     "level_jump_db": 19.57,
+     "level_jump_p99_elsewhere": 10.9,
+     "flux_at_seam": 22.4,
+     "flux_p99_elsewhere": 79.2,
+     "flux_median": 17.9,
+     "sample_step_at_seam": 0.0099,
+     "sample_step_p999_elsewhere": 0.0201
+    },
+    "target_lufs": -20,
+    "measure": "integrated",
+    "encoded_integrated": -19.8,
+    "encoded_momentary_max": -16.2,
+    "peak_dbfs": -8.3,
+    "seconds": 29.14,
+    "kb": 932,
+    "game_file": "art/production/audio/music-7/title-lyria-2.mp3",
+    "review_file": "art/candidates/music-7/title-lyria-2.mp3"
+   }
+  },
+  "title-lyria-3": {
+   "take": "title-lyria-3",
+   "round": "music-7",
+   "kind": "music",
+   "preset": "title-lyria",
+   "version": 2,
+   "n": 3,
+   "generator": "lyria-2",
+   "seed": 7713,
+   "owner": "claude-main/music-7",
+   "made": "2026-10-16T23:13:34+02:00",
+   "raw": "/home/jorgen/ai/audio-raw/music-7/title-lyria-3",
+   "licence": "Google Lyria 2 through Replicate: output terms not settled (notes/licenses.md, item 6); SynthID watermark",
+   "use": "Title menu.",
+   "model": "google/lyria-2 (Replicate)",
+   "input": {
+    "prompt": "Slow, gentle solo piano with a soft warm pad and a little music-box, 62 BPM. A tender melody that keeps developing: each phrase differs from the last, with new notes and a different ending, never one motif repeated. It begins softly and already in motion, with no sharp opening note, and stays at one calm level. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.",
+    "seed": 7713
+   },
+   "cost_usd": 0.12,
+   "status": "posted",
+   "seconds_to_make": 30.5,
+   "post": {
+    "seconds_raw": 32.77,
+    "screen": {
+     "key": "C major",
+     "key_fit": 0.9,
+     "tempo": 172.3,
+     "quiet_s": 0,
+     "level_spread_db": 9.2,
+     "hiss": 0.2388,
+     "peak": 0.761,
+     "good": 0.219,
+     "vocals": -0.116,
+     "noise": -0.158,
+     "cheap": 0.109,
+     "odd": -0.01,
+     "like_refs": 0.664,
+     "worst_vocals": [
+      -0.087,
+      0
+     ],
+     "worst_noise": [
+      -0.134,
+      0
+     ],
+     "worst_cheap": [
+      0.121,
+      20
+     ],
+     "worst_odd": [
+      0.011,
+      20
+     ]
+    },
+    "vocal": {
+     "vocal_db": -53.1,
+     "vocal_windows_pct": 0.0
+    },
+    "loop": {
+     "how": "cut where it repeats, 1.5 s crossfade",
+     "from_s": 0.02,
+     "to_s": 29.53,
+     "loop_s": 29.51,
+     "seam_dist": 1.015,
+     "loop_start": 1.0,
+     "loop_end": 30.505667
+    },
+    "seam": {
+     "level_jump_db": 5.53,
+     "level_jump_p99_elsewhere": 8.6,
+     "flux_at_seam": 34.4,
+     "flux_p99_elsewhere": 100.1,
+     "flux_median": 21.0,
+     "sample_step_at_seam": 0.0032,
+     "sample_step_p999_elsewhere": 0.03
+    },
+    "target_lufs": -20,
+    "measure": "integrated",
+    "encoded_integrated": -19.9,
+    "encoded_momentary_max": -16.4,
+    "peak_dbfs": -7.2,
+    "seconds": 29.51,
+    "kb": 941,
+    "game_file": "art/production/audio/music-7/title-lyria-3.mp3",
+    "review_file": "art/candidates/music-7/title-lyria-3.mp3"
+   }
+  }
+ }
+}

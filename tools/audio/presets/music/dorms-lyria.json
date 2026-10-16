@@ -1,0 +1,26 @@
+{
+ "id": "dorms-lyria",
+ "kind": "music",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-16",
+   "by": "claude-main/music-7",
+   "note": "New for round 7: the dorm courtyard and east lane, where day 1 spends its outdoor time without a track of its own",
+   "generator": "lyria-2",
+   "prompt": "Quiet residential feel for a dorm courtyard and a small lane: clean electric piano, nylon guitar, soft bass and a muted drum loop, a little lo-fi warmth, 88 BPM. Homely and relaxed, a melody that wanders and changes. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.",
+   "settings": {
+    "seed": 7911,
+    "seed_step": 1
+   },
+   "length": null,
+   "loop": {
+    "min": 20,
+    "max": 30,
+    "fade": 1.5
+   },
+   "loudness": -20,
+   "use": "The dorm courtyard and the east lane."
+  }
+ ]
+}

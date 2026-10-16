@@ -1,5 +1,5 @@
 {
- "total": 49.4638,
+ "total": 50.5438,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -8415,6 +8415,69 @@
    "est": 0.08,
    "out": "../../../../../ai/music-raw/r5/shops-1.mp3",
    "prompt": "Small jazz combo: brushed snare, upright bass and a light piano or vibraphone, a friendly easy swing, like a café on a s"
+  },
+  {
+   "t": "2026-10-16T21:13:06.984Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../../../../ai/audio-raw/music-7/title-lyria-1.wav",
+   "prompt": "Slow, gentle solo piano with a soft warm pad and a little music-box, 62 BPM. A tender melody that keeps developing: each"
+  },
+  {
+   "t": "2026-10-16T21:13:34.285Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../../../../ai/audio-raw/music-7/title-lyria-2.wav",
+   "prompt": "Slow, gentle solo piano with a soft warm pad and a little music-box, 62 BPM. A tender melody that keeps developing: each"
+  },
+  {
+   "t": "2026-10-16T21:14:04.681Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../../../../ai/audio-raw/music-7/title-lyria-3.wav",
+   "prompt": "Slow, gentle solo piano with a soft warm pad and a little music-box, 62 BPM. A tender melody that keeps developing: each"
+  },
+  {
+   "t": "2026-10-16T21:14:52.922Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../../../../ai/audio-raw/music-7/day-lyria-1.wav",
+   "prompt": "Warm acoustic guitar with a light marimba and soft brushed percussion, 100 BPM, sunny and easy. The melody and chord pro"
+  },
+  {
+   "t": "2026-10-16T21:15:19.652Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../../../../ai/audio-raw/music-7/day-lyria-2.wav",
+   "prompt": "Warm acoustic guitar with a light marimba and soft brushed percussion, 100 BPM, sunny and easy. The melody and chord pro"
+  },
+  {
+   "t": "2026-10-16T21:15:46.540Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../../../../ai/audio-raw/music-7/day-lyria-3.wav",
+   "prompt": "Warm acoustic guitar with a light marimba and soft brushed percussion, 100 BPM, sunny and easy. The melody and chord pro"
+  },
+  {
+   "t": "2026-10-16T21:16:12.790Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../../../../ai/audio-raw/music-7/dorms-lyria-1.wav",
+   "prompt": "Quiet residential feel for a dorm courtyard and a small lane: clean electric piano, nylon guitar, soft bass and a muted "
+  },
+  {
+   "t": "2026-10-16T21:16:38.407Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../../../../ai/audio-raw/music-7/dorms-lyria-2.wav",
+   "prompt": "Quiet residential feel for a dorm courtyard and a small lane: clean electric piano, nylon guitar, soft bass and a muted "
+  },
+  {
+   "t": "2026-10-16T21:17:04.560Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../../../../ai/audio-raw/music-7/dorms-lyria-3.wav",
+   "prompt": "Quiet residential feel for a dorm courtyard and a small lane: clean electric piano, nylon guitar, soft bass and a muted "
   }
  ]
 }
