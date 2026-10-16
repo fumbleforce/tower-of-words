@@ -40,8 +40,8 @@
         "tris": { "max": 330000, "issue": 374, "reason": "street style on phone, within 5% (coordinator, 2026-10-09)" }
       },
       "desktop": {
-        "calls": { "max": 547, "issue": 374, "reason": "street style detail for the desktop follow camera (coordinator, 2026-10-09)" },
-        "tris": { "max": 978000, "issue": 374, "reason": "full forecourt vegetation on desktop (Jørgen 2026-10-09; 5f4c2b4d's leaf cards round the forecourt's edge): measured 931k, within 5%" }
+        "calls": { "max": 580, "issue": 374, "reason": "street style detail for the desktop follow camera (coordinator, 2026-10-09); the fountain plaza at the lane's end (#658), seen from the station door looking east: measured 552, within 5%" },
+        "tris": { "max": 1085000, "issue": 374, "reason": "full forecourt vegetation on desktop (Jørgen 2026-10-09; 5f4c2b4d's leaf cards round the forecourt's edge); the fountain plaza at the lane's end (#658), with its outlines: measured 1036k, within 5%; p95 frame time 5.3 to 5.9 ms at 1440p" }
       },
       "120hz": {
         "p95Ms": { "max": 12, "issue": 630, "reason": "p95 9.5 and 9.2 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }

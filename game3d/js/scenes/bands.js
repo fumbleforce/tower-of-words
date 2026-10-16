@@ -210,6 +210,7 @@ const BUILD = {
     const uplit = buildLamps(clip.lights(lights), parts, nav, pf);
     q.build(pf);
     const water = fountain(pf, F[0], F[1], BASIN, { far: true });
+    pf.traverse((o) => o.isMesh && (o.castShadow = false)); // a distant band casts no shadows (header)
     out.glows.push(...uplit, ...water.glows);
     out.update.push(() => water.update(performance.now() / 1000));
   },
