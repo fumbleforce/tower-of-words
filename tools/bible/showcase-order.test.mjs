@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import fs from 'node:fs';
 import { orderShowcase } from '../../bible/showcase-order.js';
+import { ensureGenerated } from '../lib/generated.mjs';
 
 test('precise activity wins day ties, offsets compare by instant, feedback is ignored', () => {
   const entries = [
@@ -34,6 +35,7 @@ test('date-only UTC midnight never overrides precise overnight Oslo activity', (
 
 test('real entry history puts pool before bakery without dropping entries', () => {
   const root = new URL('../../', import.meta.url);
+  ensureGenerated(['bible/showcase-dates.json']);
   const dates = JSON.parse(fs.readFileSync(new URL('bible/showcase-dates.json', root)));
   const entries = fs.readdirSync(new URL('showcase/', root)).flatMap(id => {
     const file = new URL(`showcase/${id}/entry.json`, root);

@@ -14,6 +14,7 @@
 #
 # setup links, from the main checkout:
 #   - node_modules (the folder) and .env, straight to main's
+#   - the generated files this worktree lacks (tools/generated.json), built here by tools/lib/generated.mjs
 #   - every file in this worktree's asset lock file (tools/assets/assets.lock.json) that it lacks, binary or not,
 #     if main's copy is the locked version (same sha256; sync.py's hash cache keeps this fast). A locked file main
 #     has changed (another task's round in progress) is fetched from R2 into the worktree instead (sync.py pull),
@@ -53,6 +54,10 @@ setup() {
   }
   link node_modules
   link .env
+  # the files the tools write and git doesn't track: any that are missing are built in this checkout, not copied from main
+  if [[ -f "$wt/tools/lib/generated.mjs" ]]; then
+    node "$wt/tools/lib/generated.mjs" || echo "worktree setup: a generated file could not be built (node tools/lib/generated.mjs shows why)"
+  fi
 
   local roots=()
   if [[ -f "$wt/tools/assets/sync.json" ]]; then

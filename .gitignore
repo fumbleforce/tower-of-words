@@ -29,6 +29,12 @@ __pycache__/
 .ruff_cache/
 *.json.lock
 
+# Generated outputs: tools/generated.json names each one and its builder. The tools rebuild them when missing, and git
+# must not track them (npm run check fails on a tracked one).
+/bible/data.json
+/bible/showcase-dates.json
+/tools/assets/assets.json
+
 # Capture and output folders: one folder per run, kept on this machine
 /game3d/shots/
 /bible/shots/

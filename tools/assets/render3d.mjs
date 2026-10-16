@@ -10,9 +10,11 @@ import { chromium } from '/home/jorgen/ai/opening/node_modules/playwright/index.
 import { spawn, execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { ensureGenerated } from '../lib/generated.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
 const ALL = process.argv.includes('--all');
+ensureGenerated(['tools/assets/assets.json']);
 const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/assets/assets.json'), 'utf8'));
 const mtime = (p) => { try { return fs.statSync(path.join(ROOT, p)).mtimeMs; } catch { return 0; } };
 const ONLY = (process.argv.find((a) => a.startsWith('--only=')) || '').slice(7);

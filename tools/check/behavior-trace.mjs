@@ -30,8 +30,10 @@ const harnessFiles = ['tools/check/behavior-trace.mjs', 'tools/lib/browser-job.m
   'game3d/test/support/trace-clock.mjs',
   'package.json', 'package-lock.json'];
 const harnessHashes = () => Object.fromEntries(harnessFiles.map(file => [file, hash(fs.readFileSync(path.join(root, file)))]));
+// the asset lock (tracked, so the same in every checkout of one commit), not the catalog, which follows each checkout's disk
+const manifestFile = 'tools/assets/assets.lock.json';
 const metadata = { version: 1, settings, commit: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(),
-  manifest: hash(fs.readFileSync(path.join(root, 'tools/assets/assets.json'))), sources: sourceHashes(),
+  manifest: hash(fs.readFileSync(path.join(root, manifestFile))), sources: sourceHashes(),
   harness: harnessHashes(), randomAlgorithm: 'mulberry32', build: ensureBuild() };
 const responses = {}, pending = [], errors = [];
 let capture, clock;
@@ -92,7 +94,7 @@ try {
   });
   assert.deepEqual(sourceHashes(), metadata.sources, 'Runtime source changed during capture');
   assert.deepEqual(harnessHashes(), metadata.harness, 'Trace harness changed during capture');
-  assert.equal(hash(fs.readFileSync(path.join(root, 'tools/assets/assets.json'))), metadata.manifest, 'Asset manifest changed during capture');
+  assert.equal(hash(fs.readFileSync(path.join(root, manifestFile))), metadata.manifest, 'Asset manifest changed during capture');
   fs.writeFileSync(output, JSON.stringify({ ...metadata, responses, ...capture }, null, 2) + '\n');
   console.log(`PASS behavior trace ${width}x${height} ${route}: ${capture.trace.events.length} events; ${output}`);
 } catch (error) {

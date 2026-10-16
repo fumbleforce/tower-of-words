@@ -13,9 +13,11 @@
 // The public site on GitHub Pages (remote mode: only Review, Showcase and Work):
 //   BIBLE_BASE=https://fumbleforce.github.io/tower-of-words/ node tools/bible/check.mjs --public-only
 import { withBrowserJob } from '../lib/browser-job.mjs';
+import { ensureGenerated } from '../lib/generated.mjs';
 import { blockedSource, scopedFetch, scopedRoute } from './check-scope.mjs';
 
 const publicOnly = process.argv.includes('--public-only');
+if (!publicOnly) ensureGenerated(['bible/data.json']);  // a local server serves this checkout's bible data: build it when missing
 
 const BASE = process.env.BIBLE_BASE || 'http://127.0.0.1:8771/';
 const SITES = [

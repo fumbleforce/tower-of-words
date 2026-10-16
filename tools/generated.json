@@ -1,0 +1,9 @@
+{
+  "about": "Files that a tool writes and git does not track. Each output names the builder that writes it. A consumer that reads an output builds it when it is missing (tools/lib/generated.mjs, ensureGenerated), and ./start rebuilds every one on each serve. The unit test game3d/test/unit/generated-outputs.test.mjs fails when git tracks one.",
+  "outputs": [
+    { "path": "bible/data.json", "builder": ["python3", "tools/bible/build.py"] },
+    { "path": "bible/showcase-dates.json", "builder": ["python3", "tools/bible/showcase_dates.py", "--local"] },
+    { "path": "tools/assets/assets.json", "builder": ["python3", "tools/assets/scan.py"] },
+    { "path": "tools/assets/kit-library.json", "builder": ["python3", "tools/assets/scan.py"] }
+  ]
+}
