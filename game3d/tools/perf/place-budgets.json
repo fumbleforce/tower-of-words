@@ -64,16 +64,6 @@
       "desktop": {
         "texMB": { "max": 266, "issue": 373, "reason": "the everyday crowd bodies (#353): the casual-1 and older-1 skins at 1024, measured 260.0 against main's 248.8" }
       }
-    },
-    "title": {
-      "120hz": {
-        "p95Ms": { "max": 15, "issue": 630, "reason": "p95 11.6 and 11.9 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
-      }
-    },
-    "train": {
-      "120hz": {
-        "p95Ms": { "max": 37, "issue": 630, "reason": "p95 29.5 and 9.4 ms in two runs on 2026-10-16 (RTX 3080, 2560x1440); a quarter over the higher for run-to-run noise" }
-      }
     }
   }
 }
