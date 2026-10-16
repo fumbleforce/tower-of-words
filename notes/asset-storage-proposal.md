@@ -107,13 +107,12 @@ Used (synced to R2; another machine gets these with `pull`). These are the roots
 | art/refs/ | Jørgen's reference images | image tools |
 | bible/shots/ | pictures the bible shows | the bible |
 | tools/voice-refs/ | voice clone clips | TTS tools |
-| tools/assets/thumbs/ | the asset library's thumbnails (the 3D ones need a browser run to remake) | the asset library page |
 
 On top of the roots, any file that the asset library (`tools/assets/scan.py`) marks approved or provisional is used, wherever it is. Today that covers 26 files outside the roots: 9 in portrait-candidates, the 5 round-9 world-look shots in game3d/shots/round-9, game3d/design/style/rough/style-0.jpg, legacy/proto2/gallery/M-02-it-guy-601.webp, 4 chibi refs in tools/characters/ref, and 6 Mio Meshy files in legacy/side/flat/meshy2 that are copies of art/approved/mio/meshy. So a picked file is backed up even if nobody moves it.
 
 Showcase and Review pictures are the exception: only the ones the public bible shows go up (the 20 newest Showcase entries and the open Review items), and when one leaves that feed the next `sync.py push` deletes it from R2 while it stays on this disk.
 
-Excluded from the roots: game3d/assets/portrait-candidates/, game3d/assets/portraits-v2/ and portraits-v2-sheet.png (all move out in stage 2), and *.blend1.
+Excluded from the roots: game3d/assets/portrait-candidates/, game3d/assets/portraits-v2/ and portraits-v2-sheet.png (all move out in stage 2), and *.blend1. tools/assets/thumbs/ is excluded too. scan.py and render3d.mjs make the asset library's thumbnails on each machine (the 3D ones need a browser run), so they are never uploaded or locked.
 
 Measured today, 1,358 files and 214 MB are used. R2 stores each file once by content, and copies such as eric-meshy share a blob, so that comes to 1,326 blobs and 148 MB.
 

@@ -7,15 +7,15 @@
     "art/approved/",
     "art/refs/",
     "bible/shots/",
-    "tools/voice-refs/",
-    "tools/assets/thumbs/"
+    "tools/voice-refs/"
   ],
   "lists": [
     "bible/pages-media.json",
     "tools/assets/research-references.json"
   ],
   "exclude": [
-    "*.blend1"
+    "*.blend1",
+    "tools/assets/thumbs/"
   ],
   "library_statuses": ["approved", "provisional"],
   "never": [

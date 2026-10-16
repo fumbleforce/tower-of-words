@@ -39,10 +39,13 @@ def entry(n, size):
 class Paths(unittest.TestCase):
     def test_a_library_root_is_a_game_path(self):
         self.assertTrue(sync.is_game_path(GAME))
-        self.assertTrue(sync.is_game_path(THUMB))
         self.assertTrue(sync.is_game_path(SHOWCASE_COPY))  # under the bible/shots root, so never deleted
         self.assertFalse(sync.is_game_path(SHOW))
         self.assertFalse(sync.is_game_path(OUTSIDE))
+        self.assertFalse(sync.is_game_path(THUMB))  # a generated thumbnail is not under a root
+
+    def test_generated_thumbnails_are_never_used(self):
+        self.assertTrue(sync.matches(THUMB, sync.CONF['exclude']))
 
     def test_removable_says_why_a_blob_stays(self):
         published = {SHOW, REVIEW}
@@ -51,6 +54,7 @@ class Paths(unittest.TestCase):
         self.assertEqual(sync.removable([SHOW, GAME], published), 'a game file')
         self.assertEqual(sync.removable([OUTSIDE], published), 'never a Showcase or Review picture')
         self.assertEqual(sync.removable([OUTSIDE, SHOW], published), '')  # one published path is enough
+        self.assertEqual(sync.removable([THUMB], published), 'never a Showcase or Review picture')  # generated, kept
 
 
 class Histories(unittest.TestCase):
