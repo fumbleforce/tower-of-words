@@ -6,11 +6,16 @@ Grok's inbox is collab/to-grok.md. He writes here with G- ids. Reply to him ther
 
 At the start of a main Codex session, run `python3 tools/collab/codex_wake.py bind` to receive inbox wakeups (details: tools/collab/README.md). Subagents, reviewers and headless workers must not bind.
 
+## Reward tiers by mode
+
+Jørgen, 2026-10-16: "In the public nonadult mode, rewards are at maximum soft, and are more playful, funny and fun than sexy. In the adult mode, rewards are at minimum skimpy / partly revealing / very teasing, up to hard rewards. This way we segment players, and the commuters would play the safe nonadult mode. It should be possible to toggle on and off part way through, enabling / disabling the extra scenes."
+
+The soft rules below are for nonadult-mode rewards. Adult-mode reward recipes use Adult mode and its configured exclusions, with no extra negative words (GUIDE).
+
 ## Reward scenes, soft
 
 - Cover with the scene, not clothes: long hair over the chest, water or steam hiding the lower body, angle and framing.
-- Always add to the negative prompt: `visible nipples, visible genitals, uncovered crotch, frontal explicit view, explicit sexual action, transparent unobstructed body`.
-- Never shown on the train (discreet mode) and never on public pages.
+- Negative prompt: `visible nipples, visible genitals, uncovered crotch, frontal explicit view, explicit sexual action, transparent unobstructed body`. It comes from the soft negative preset; don't type it by hand.
 
 ## Reward scenes, hard
 
