@@ -74,13 +74,25 @@ export function prepareAgentGeneration(recipe, presets, name = 'recipe') {
 }
 
 // Reward calls use the same composition contract and assembler, with the configured exclusion selection intact.
+// Adult mode (hard: true) gets the default selection and nothing more. A nonadult reward (soft, CLAUDE.md "Reward
+// tiers by mode") also loads the negative preset marked `soft`; a recipe may name it or leave it to this function.
+const sameSet = (a, b) => a.length === b.length && b.every(id => a.includes(id));
 export function prepareRewardGeneration(recipe, presets, name = 'recipe') {
-  const body = prepareAgentGeneration(recipe, presets, name);
-  if (body.compose.hard !== true) fail('reward pictures require Adult mode (hard: true); content rating is separate.');
+  if (!object(recipe)) fail('the composition must be an object.');
+  if (recipe.hard != null && typeof recipe.hard !== 'boolean') fail('hard must be true (Adult mode) or false (nonadult, soft).');
+  const adult = recipe.hard === true;
   const defaults = applyDefaults(normalizeComposition({}), presets).negatives;
-  const selected = body.compose.negatives;
-  if (selected.length !== defaults.length || defaults.some(id => !selected.includes(id)))
-    fail('reward exclusions must match the configured default selection without additions or removals.');
+  const soft = adult ? [] : (presets.negative || []).filter(p => !p.archived && p.data?.soft === true).map(p => p.id);
+  if (!adult && !soft.length) fail('nonadult (soft) reward pictures need the soft negative preset; none is configured.');
+  const expected = [...defaults, ...soft.filter(id => !defaults.includes(id))];
+  const given = recipe.negatives ?? recipe.negs;
+  if (given != null && !(Array.isArray(given) && (sameSet(given, expected) || (!adult && sameSet(given, defaults)))))
+    fail('reward exclusions must match the configured default selection without additions or removals'
+      + (adult ? '.' : ', plus the soft negative preset.'));
+  const rest = {...recipe};
+  delete rest.negs;
+  const body = prepareAgentGeneration({...rest, negatives: expected}, presets, name);
+  if (!sameSet(body.compose.negatives, expected)) fail('reward exclusions changed while assembling.');
   return body;
 }
 

@@ -30,7 +30,8 @@ export const FIELDS = {
   style: [['name', 'Name'], ['quality', 'Quality tags', 2], ['anchors', 'Style anchors', 2], ['suffix', 'Ends with', 1], ['negative', 'Extra negative', 2],
     ['defaults.rating', 'Default rating', 'select', ['', ...RATINGS]], ['defaults.framing', 'Default framing', 'ref', 'framing'],
     ['defaults.model', 'Default model', 'ref', 'model'], ['defaults.negatives', 'Default negative sets', 'negs'], ['notes', 'Notes', 3]],
-  negative: [['name', 'Name'], ['text', 'Negative text', 3], ['default', 'On by default', 'check'], ['notes', 'Notes', 2]],
+  negative: [['name', 'Name'], ['text', 'Negative text', 3], ['default', 'On by default', 'check'],
+    ['soft', 'On for every nonadult reward', 'check'], ['notes', 'Notes', 2]],
   framing: [['name', 'Name'], ['w', 'Width', 'num'], ['h', 'Height', 'num'], ['prompt', 'Added to the prompt (optional)', 2], ['notes', 'Notes', 2]],
   // group and diagram place a camera block in the scene editor's composer: its row (shot size, angle, lens; empty is
   // the other camera words) and the small drawing on its tile (tools/subplots/web/image-stage.js DIAGRAMS)

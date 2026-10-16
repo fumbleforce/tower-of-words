@@ -165,10 +165,25 @@ test('normal reset metadata and generic cast outfits preserve canonical GUI asse
 });
 
 
-test('reward entry requires Adult mode independently of rating', () => {
-  for (const recipe of [{...base}, {...base, rating: 'nsfw'}, {...base, hard: false, rating: 'nsfw'}])
-    assert.throws(() => prepareRewardGeneration(recipe, presets), /require Adult mode/);
-  assert.equal(prepareRewardGeneration({...base, hard: true, rating: 'safe'}, presets).compose.hard, true);
+test('a nonadult reward loads the soft negative preset; Adult mode never does, at any rating', () => {
+  const blocks = structuredClone(presets);
+  blocks.negative.push(rec('soft', {text: 'soft exclusions', default: false, soft: true}, 2));
+  for (const recipe of [{...base}, {...base, rating: 'nsfw'}, {...base, hard: false, rating: 'safe'}, {...base, negatives: ['clean']}, {...base, negatives: ['soft', 'clean']}]) {
+    const body = prepareRewardGeneration(recipe, blocks, 'soft');
+    assert.equal(body.compose.hard, false);
+    assert.deepEqual(body.presets.negatives, [{id: 'clean', v: 3}, {id: 'soft', v: 2}]);
+    assert.match(body.negative, /^preset exclusions, soft exclusions, style exclusions,/);
+  }
+  for (const rating of ['safe', 'nsfw']) {
+    const adult = prepareRewardGeneration({...base, hard: true, rating}, blocks);
+    assert.deepEqual(adult.presets.negatives, [{id: 'clean', v: 3}]);
+    assert.doesNotMatch(adult.negative, /soft exclusions/);
+  }
+  assert.throws(() => prepareRewardGeneration({...base, hard: true, negatives: ['clean', 'soft']}, blocks), /configured default selection/);
+  for (const negatives of [[], ['soft'], ['clean', 'soft', 'soft']])
+    assert.throws(() => prepareRewardGeneration({...base, negatives}, blocks), /plus the soft negative preset/);
+  assert.throws(() => prepareRewardGeneration({...base}, presets), /need the soft negative preset/);
+  assert.throws(() => prepareRewardGeneration({...base, hard: 'yes'}, blocks), /hard must be true/);
 });
 
 test('reward entry preserves exactly the configured exclusion selection and normal GUI output', () => {

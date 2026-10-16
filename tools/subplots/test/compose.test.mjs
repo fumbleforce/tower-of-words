@@ -117,10 +117,11 @@ test('local presets cannot replace canonical queue presets; dry-run fixtures rem
 });
 
 
-test('reward paths and their symlinks require Adult mode without an opt-in flag', async () => {
+test('reward paths and their symlinks take the reward rules without an opt-in flag', async () => {
+  // a nonadult (soft) reward needs the soft negative preset, which these stub presets lack
   for (const rewardSymlink of [false, true]) {
     const r = await run({rewardPath: true, rewardSymlink});
-    assert.notEqual(r.code, 0); assert.match(r.stderr, /require Adult mode/);
+    assert.notEqual(r.code, 0); assert.match(r.stderr, /need the soft negative preset/);
     assert.deepEqual(r.seen.posts, []); fs.rmSync(r.dir, {recursive: true});
   }
 });
@@ -130,7 +131,7 @@ test('reward CLI rejects additional preset exclusions and supports explicit mode
   assert.notEqual(extra.code, 0); assert.match(extra.stderr, /configured default selection/);
   assert.deepEqual(extra.seen.posts, []); fs.rmSync(extra.dir, {recursive: true});
   const missing = await run({}, ['--reward']);
-  assert.notEqual(missing.code, 0); assert.match(missing.stderr, /require Adult mode/);
+  assert.notEqual(missing.code, 0); assert.match(missing.stderr, /need the soft negative preset/);
   assert.deepEqual(missing.seen.posts, []); fs.rmSync(missing.dir, {recursive: true});
   const correct = await run({recipe: {hard: true}}, ['--reward', '--dry-run']);
   assert.equal(correct.code, 0, correct.stderr); assert.deepEqual(correct.seen.posts, []);

@@ -161,7 +161,7 @@ Droplets on skin, a ribbon around one wrist, nail colour, an anklet: one or two 
 
 `worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, child, loli`
 
-Base portraits never hold props (Jørgen, 2026-09-30, on Kenji's screwdriver: "base portraits should NEVER have props, props are only for specific states and actions"). A prop goes in only when the picture is of that state or action. On every base portrait, add `holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book` to the negative.
+Base portraits never hold props (Jørgen, 2026-09-30, on Kenji's screwdriver: "base portraits should NEVER have props, props are only for specific states and actions"). A prop goes in only when the picture is of that state or action. On every base portrait, select the negative preset "Base portrait, no props" (`no-props`), which holds the words.
 
 ## Settings
 
@@ -221,6 +221,7 @@ Every attempt an agent rejects gets a one-line reason in the image gen dashboard
 
 ### Portraits, expressions and cutouts
 
+- Portrait recipe as presets (#603): the style preset "Cast portrait, house style" (`portrait`) is tools/production.py's portrait recipe (Q, safe, 1girl/1boy, solo, the look, the expression, FRAME; N plus the weighted red-rim line). With the RDBT model, the Portrait framing, the character and its default outfit, the expression as scene text and the `heavy` negative, compose.mjs builds the same prompt.
 - Portrait framing (2026-09-25): the head, hair and raised hands must sit inside the frame with some room above. Most approved portraits had hair touching or cut by the top edge because "waist-up portrait" on 896×1152 makes the model fill the canvas, and img2img repaints (Kiyoko's outfits) keep the source crop. The portrait prompt now asks for space above the head, and tools/framecheck.py (rembg figure mask) warns after every portrait render in production.py and decide2.py. To fix an existing image, tools/reframe.py outpaints headroom with RDBT and pastes the original back, so face and outfit stay pixel-identical.
 - Cutouts: local rembg ISNet anime. Check for see-through holes in hair and glasses.
 - Red rim light (2026-09-28, Eric's portrait): RDBT sometimes draws a red rim light along the outline (Jørgen: "he's getting some red light shone on him"). Fix: add `rim light, red rim light, backlighting` to the negative. The old approved Eric portrait has it too. Unweighted, those words still left it on 5 of 24 renders in round eric-portrait-anime-2; weighted as `(rim light, red rim light, red outline, backlighting:1.4)` they removed it on the same seeds. tools/redrim.py measures it (old A set 18 to 40% of the outline band, clean renders under 2%).
