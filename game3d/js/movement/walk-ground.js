@@ -83,7 +83,13 @@ export function walkGround({ walk, backdrop = [], indoor = [], cut = [], barrier
   backdrop = backdrop.filter(real);
   const shown = [...walk, ...backdrop];
   const uncut = (x, z) => !cut.some((r) => inside(x, z, r));
-  const contains = (x, z) => inside(x, z, bounds) && walk.some((r) => inside(x, z, r)) && uncut(x, z);
+  // walkable: inside a walk rectangle, or on the line where two of them touch (walkable on every side of it), so
+  // touching rectangles join on the walk grid as they do in the drawn outline; a grid cell centred exactly on that
+  // line (the court and the lane at x = LE, #644) would otherwise wall the two apart with nothing drawn there
+  const onWalk = (x, z) => walk.some((r) => inside(x, z, r));
+  const joined = (x, z) =>
+    onWalk(x - EPS, z - EPS) && onWalk(x + EPS, z - EPS) && onWalk(x - EPS, z + EPS) && onWalk(x + EPS, z + EPS);
+  const contains = (x, z) => inside(x, z, bounds) && (onWalk(x, z) || joined(x, z)) && uncut(x, z);
   const drawn = (x, z) => shown.some((r) => inside(x, z, r)) && uncut(x, z);
   // what stops him at a line: the wall of a building he is inside, or the barrier beyond it
   const barrierAt = ([x, z], [ix, iz]) =>

@@ -86,6 +86,22 @@ test('a T junction joins with no edge across the path mouth', () => {
   );
 });
 
+test('two walks that only touch join on the walk grid too, even on the line between them (#644)', () => {
+  const g = walkGround({
+    walk: [
+      [0, 4, 0, 2],
+      [4, 9, 0.5, 1.5],
+    ],
+    bounds: B,
+  });
+  assert.ok(g.contains(4, 1), 'the line where they meet is walkable');
+  assert.ok(!g.contains(4, 0.25) && !g.contains(4, 1.75) && !g.contains(0, 1), 'outer edges stay closed');
+  // a grid whose cell centres fall on x = 4 still has a way across
+  const nav = applyGround(new Nav(-0.05, 9.05, -1, 3, 0.1), g);
+  nav.R = 0.1;
+  assert.ok(nav.path(1, 1, 8, 1)?.length);
+});
+
 test('a cut makes a hole whose outline is the barrier named over it', () => {
   const g = walkGround({
     walk: [[0, 10, 0, 10]],
@@ -350,6 +366,11 @@ test('forecourt: the ground reaches the garden court, the bench bays, the shed s
     assert.ok(nav.free(...p), `${id} blocked ${p}`);
     assert.ok(nav.path(...from, ...p)?.length, `${id} unreachable ${p}`);
   }
+  // a tap on the lane reaches the court and the station door across the court's east edge, not round through the
+  // tower (the head office blocks its inside in the scene) (#644)
+  nav.block(...FG.TOWER);
+  assert.ok(nav.path(29.4, FP.LANE_Z, ...from)?.length, 'lane to the station door');
+  assert.ok(nav.path(29.4, FP.LANE_Z, FP.HO_X, FP.HZ + 0.4)?.length, 'lane to the head office door');
   // lawn beside the gravel court and past the court's east edge stays off limits
   assert.equal(nav.free(FP.GARDEN_COURT[1] + 0.3, FP.GARDEN_COURT[2] + 1), false);
   assert.equal(nav.free(FP.LE + 0.3, 1.5), false);
