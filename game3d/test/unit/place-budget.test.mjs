@@ -50,7 +50,7 @@ test('a retry keeps the lower number of the two runs', () => {
 test('a frame time over its budget fails like any other number; a table shows only what a tier measured', () => {
   const frame = { budgets: { '120hz': { p95Ms: 8.3 } }, places: { title: { '120hz': { p95Ms: { max: 13, issue: 625 } } } } };
   const over = overBudget(frame, { '120hz': { office: { medianMs: 8.5, p95Ms: 10.7 }, title: { medianMs: 5.6, p95Ms: 11.7 } } });
-  assert.deepEqual(over.map(describe), ['office (120hz): 10.7 ms p95 frame, over the 120hz budget 8.3']);
+  assert.deepEqual(over.map(describe), ['office (120hz): 10.7 p95 frame ms, over the 120hz budget 8.3']);
   const lines = table(frame, { '120hz': { office: { medianMs: 8.5, p95Ms: 10.7 }, title: { medianMs: 5.6, p95Ms: 11.7 } } }).split('\n');
   assert.match(lines[0], /^place\s+120hz medianMs\s+120hz p95Ms$/);
   assert.match(lines[1], /^office\s+8\.5\s+10\.7!$/);

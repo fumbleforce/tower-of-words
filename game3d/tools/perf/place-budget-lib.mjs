@@ -9,8 +9,8 @@ export const METRICS = {
   geoMB: { label: 'geometry MB', show: v => v.toFixed(1) },
   texMB: { label: 'texture MB', show: v => v.toFixed(1) },
   loadMs: { label: 'load ms', show: v => String(Math.round(v)), timing: true },
-  medianMs: { label: 'ms median frame', show: v => v.toFixed(1), timing: true },
-  p95Ms: { label: 'ms p95 frame', show: v => v.toFixed(1), timing: true },
+  medianMs: { label: 'median frame ms', show: v => v.toFixed(1), timing: true },
+  p95Ms: { label: 'p95 frame ms', show: v => v.toFixed(1), timing: true },
 };
 // timing: a number a busy machine stretches (place-budget.mjs only warns about it past its load limit)
 

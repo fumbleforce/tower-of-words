@@ -27,7 +27,7 @@
     "desktop": { "calls": 500, "tris": 800000, "geoMB": 128, "texMB": 192, "loadMs": 4000 },
     "120hz": { "p95Ms": 8.3 }
   },
-  "allowance": { "loadMs": 0.15 },
+  "allowance": { "loadMs": 0.15, "p95Ms": 0.1 },
   "places": {
     "east_coast": {
       "desktop": {
