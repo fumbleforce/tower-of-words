@@ -43,6 +43,8 @@ Codex's primary role after finishing its existing work is QC across code structu
 
 Cost rule (Jørgen, 2026-09-30): "Reserve codex for more detail passes, review and creative writing, it is more expensive". Claude does the bulk building: modelling, places and trips integration, engine, UI, tools and fixes. Codex takes creative writing, detail passes on finished work, and reviews. When in doubt, Claude builds and Codex reviews.
 
+Codex covered engineering, tools and image work on 2026-10-15 while Claude was out of usage. Those lanes went back to Claude on 2026-10-16 (Jørgen: "you take those responsibilities back, codex goes back to qa and creative writing. You will need to spawn codex yourself"). Claude starts Codex runs with `codex exec` for QA and writing jobs and hands it the next one when a run ends.
+
 - Story, dialogue, characters (writing): Codex leads (Jørgen's pick after the day-2 contest, 2026-09-29). Claude reviews as a cold first-time reader: does it make sense, is anything unexplained, too long, or contradicting the setting?
 - Engine, systems, performance, tools: Claude leads; Codex reviews.
 - UI design (UI and UX): Claude leads; Codex reviews for implementation cost and bugs.
