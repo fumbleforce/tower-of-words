@@ -9,7 +9,7 @@ You make the pictures for one private scene. Everything private follows island/P
 ## Each shot
 
 1. **Staging note** in the round folder: positions, heights, who touches what, camera height and angle, and an **In frame** list (people, body parts, face yes or no, clothes, what of the room).
-2. **Short, terse tags**: positive under 1,400 characters; give up exact detailing ("leaning on park bench, seductive pose,"). **Close shots** with shallow focus by default (wide shots lose detail). Angle, framing and pose go in their own fields (`cameras`, `framing`, `pose`), never in the scene text. No negative may contradict the prompt (a "towel on head" prompt with a "towel" negative fails).
+2. **Short, terse tags**: positive under 1,400 characters; give up exact detailing ("leaning on park bench, seductive pose,"). **Close shots** with shallow focus by default (wide shots lose detail). Angle, framing and pose go in their own fields (`cameras`, `framing`, `pose`), never in the scene text. No negative may contradict the prompt (a "towel on head" prompt with a "towel" negative fails). Fix his notes with careful positive wording, not new negatives (he: "you very annoyingly overcorrect ... and place them directly as negatives"). Keep spice subtle: never "nipples visible through clothes" (they poke through).
 3. **Looks from the character presets**, never from memory. When a shot needs only part of a look, use or add a preset for that framing (art/PROMPTS.md, Changing a preset). Mio: never "pressed lips" (duckface); "thin lips, small mouth". Aoi: small B-cup, not flat; judge only clearly wrong sizes.
 4. **Identity reference** (`referenceOn`) at `referenceStrength` 0.35 to 0.4, only when the face is in frame; higher flattens the picture.
 5. **Style** `reward-r2`, matched to the encounter pictures he picked. No flat-anime words in the scene text.
@@ -24,10 +24,9 @@ Each shot is `<round>/recipes/<shot>.json`, run with `node tools/subplots/compos
 
 - The last recipe gets `--end-session`. One headless browser at a time, nothing big in /tmp.
 - At most 6 renders per setting change, one change at a time.
-- The same fault twice means change the method or stop: sample the approved portrait's colours and propose a preset version citing the #n renders; or fix it in the recipe (a masked inpaint, or `huefix`: Mio's underlayer is hue about 167, mint-jade #1ACC98, while the words land near 175 to 193); or report what you tried.
+- The same fault twice: diagnose the cause and change that (a preset version citing the #n renders, a measured `huefix`, or the setup), or stop.
 - Verdict, fault type and tally on every attempt (art/PROMPTS.md, Verdicts).
 - Check every candidate at full size beside the approved portraits. Reject only what is clearly off.
-- The private voice tool reuses old takes under the same line id (~/ai/private-voice/work/raw/<id>/); move them out before re-voicing changed text.
 
 ## Done
 
