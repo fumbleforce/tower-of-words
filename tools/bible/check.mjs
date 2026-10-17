@@ -115,6 +115,7 @@ for (const site of SITES) {
       document.querySelectorAll('img').forEach(i => out.push(['img', i.getAttribute('src'), i.src]));
       document.querySelectorAll('[data-lb]').forEach(i => out.push(['lb', i.dataset.lb, new URL(i.dataset.lb, location.href).href]));
       document.querySelectorAll('audio[src]').forEach(a => out.push(['audio', a.getAttribute('src'), a.src]));
+      document.querySelectorAll('video[src]').forEach(a => out.push(['video', a.getAttribute('src'), a.src]));
       const missingQuotes = [...document.querySelectorAll('.missing-q')].map(e => e.textContent);
       return { out, text: document.querySelector('#main').innerText, missingQuotes };
     });
