@@ -46,7 +46,8 @@ Video (the animate-still skill), audio, Blender blockout control renders (tools/
 Stage the shot first (GUIDE: Art, shot staging); the note is for checking and stays out of the prompt.
 
 - Describe only what is visible. Direction of travel, destinations and story never help. Anything behind the camera stays out; naming it pulls it in.
-- Place things in frame terms ("in the lower right corner"), never relative to a character ("over his left shoulder").
+- Place things in frame terms ("lower right corner"), never relative to a character ("over his shoulder").
+- One area per shot (showers or lockers), never several rooms.
 - A few plain sentences, one idea each, then light and time, then the palette, then one plain "No ..." line. Long staging prompts and stacked fix sentences do worse. Naming a thing in the "No" line can pull it in; describe what you want instead.
 - Palette as a hierarchy: `dominant <main>, broad <secondary>, sparse <accent> accents`. Light as source and direction (`cool rim`, `reflected water glow`).
 - Camera in photography terms (`medium full shot`, `low angle over the table`). Anima needs weights of 1.3 to 2.0 for words it tends to drop.
@@ -77,7 +78,7 @@ Some layouts never come from words (an aisle toward a front window, desk islands
 - Headroom fix: outpaint, the padded picture as `start` and the new strip as `mask`.
 - Expressions repaint only the face of the approved source (`start` with a face `mask`).
 - No cut and paste ("horror show", "3 hands"): never repaint a body under a kept head, or a room around a kept figure. A new outfit, room or framing is a new generation. Masks touch only small details.
-- No swimwear portraits or poolside pictures until he asks again (changing rooms are a separate request).
+- No swimwear portraits or poolside pictures until he asks again.
 - Red rim: tools/redrim.py (clean is under 2%). Cutouts: rembg ISNet anime; check hair and glasses for holes.
 
 ### Eric (mc) portrait
