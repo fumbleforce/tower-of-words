@@ -2,7 +2,7 @@
  "title": "Dorm quarter, round 2: three layouts for the residential area",
  "date": "2026-10-16",
  "by": "claude-main (dorm-quarter-sketch)",
- "status": "decided",
+ "status": "superseded",
  "issue": 661,
  "question": "Which layout should the dorm quarter be built on (A rows, B park, C street), or what should change?",
  "multi": true,
@@ -53,6 +53,6 @@
  "decided": [
   "b"
  ],
- "decision": "b, but the eastern blocks would want to face out to sea for the view, not inwards. North residence area should be more classy / expensive, not a housing block",
+ "decision": "Superseded by dorm-quarter-3. Jørgen picked b: \"good but the eastern blocks would want to face out to sea for the view, not intwards. North residence area should be more classy / expensive not a housing block\"",
  "decided_at": "2026-10-17T11:01:28+0200"
 }

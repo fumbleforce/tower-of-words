@@ -1,0 +1,49 @@
+{
+ "title": "Dorm quarter, round 4: sea-facing east blocks, two villas for dorm 2, gardens in the north",
+ "date": "2026-10-17",
+ "by": "claude-agent:dorm-quarter-3",
+ "status": "open",
+ "issue": 661,
+ "question": "Is this the dorm quarter's layout, or what should change?",
+ "multi": false,
+ "media": [
+  {
+   "image": "art/candidates/dorm-quarter-3/b2-sea-garden-residence.webp",
+   "caption": "Round 3's b2, for comparison. Your answer to round 3: \"you can tell this would be awful place to live, their balconies get zero interesting view, in the shadow of a giant block. They should be facintg the sea. Just dont put buildings in parallel like this\", and \"dorm 2-5 could be two villas side by side for high level people. N-W 5 at least has a view over the park which is fine.\" Round 4 has one layout: the north residence goes, dorm 2 becomes two villas by the sea, and the east blocks keep round 3's turn to the sea. Plans drawn to scale over b's plan, north up. Nothing is built, and the pictures are plain blockout boxes."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-4/mood-whole-b.webp",
+   "caption": "Air view from over the sea to the south-east: b as you picked it in round 2."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-4/mood-whole-round3-b2.webp",
+   "caption": "The same air view: round 3's b2, with the villas behind N-W."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-3/mood-east-coast.webp",
+   "caption": "Unchanged from round 3: S-E from the coast walk, its balconies toward the sea."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-3/mood-east-balcony.webp",
+   "caption": "Unchanged from round 3: the view east from a third-floor balcony of S-E."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-4/mood-b-dorm2.webp",
+   "caption": "b and round 3, eye level from the coast walk's corner by the sea terrace, looking west: dorm 2, five storeys."
+  }
+ ],
+ "options": [
+  {
+   "id": "4",
+   "label": "4. Sea fronts, gardens and two villas",
+   "image": "art/candidates/dorm-quarter-4/4-sea-gardens-villas.webp",
+   "images": [
+    "art/candidates/dorm-quarter-4/mood-whole-4.webp",
+    "art/candidates/dorm-quarter-4/mood-4-villas.webp",
+    "art/candidates/dorm-quarter-4/mood-4-villa-terrace.webp",
+    "art/candidates/dorm-quarter-4/mood-4-gardens.webp"
+   ],
+   "note": "East: N-E and S-E as in round 3, running north-south with balconies and main windows east over open lawn to the sea, 20 m and 28 m away, and nothing built in front of them. South: dorm 2 becomes two villas side by side for senior staff, each about 12 × 9 m, two storeys with a small roof pavilion and a roof terrace (about 245 m² each). Their doors face the dorm row on short paths, and their terraces and walled gardens face south over the lawn to the sea, about 15 m away. Eric's window in 203 looks south at the villas' door side 13 m away instead of dorm 2's corridor side, and the villas are lower than dorm 2, so more sky shows over them. North: the north residence goes. Its ground becomes residents' gardens, thirteen allotment plots with a tool shed and an orchard of plums and persimmons, reached only from N-W's door path, with a hedge along the courts walk. N-W keeps its view over the park and now looks north over the gardens from its corridors. The rest is b as it was. The north residence's 1,560 m² and dorm 2's 565 m² of floor become about 490 m² in the two villas, so the quarter houses fewer people than b. The concierge desk the island facts give the north residence has no place here. Pictures: the plan, the air view, the villas from the coast walk's corner, the sea from a villa's upper-floor terrace, and the gardens from N-W's door path. Phone cost not measured. There are fewer buildings than in b."
+  }
+ ]
+}
