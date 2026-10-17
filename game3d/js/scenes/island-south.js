@@ -39,6 +39,22 @@ export const STAIRS = [
   BEACH_ENTRY,
 ].sort((a, b) => a[0] - b[0]);
 export const ALLEYS = BAYS.alleys.map((i) => [bayMid(i) - 1, ROWS_Z.south, bayMid(i) + 1, ROWS_Z.back]);
+// The clothes and alterations shop's side door (SHOPS, tailor): in its east end wall, on the middle alley's west side,
+// toward the back of the shop, facing east across the alley; a paved landing through the alley's bed to it, and the
+// workroom behind it (scenes/shotengai/tailor.js builds the door, the room and what is in it; plaza-buildings.js
+// shopStreet carves the room out of the shop's mass). x: the wall's line; z: the door's middle; landing: [z0, z1].
+const SIDE_X = bayMid(BAYS.alleys[1]) - BAYS.w / 2,
+  SIDE_LANDING = [24.65, 26.05];
+export const SIDE_DOOR = {
+  shop: 'tailor',
+  x: SIDE_X,
+  z: (SIDE_LANDING[0] + SIDE_LANDING[1]) / 2,
+  w: 0.82, // the opening, as the kit's service door (kit/building/door.js)
+  h: 1.52,
+  landing: [SIDE_X, SIDE_LANDING[0], bayMid(BAYS.alleys[1]) - 1, SIDE_LANDING[1]], // [x0, z0, x1, z1]
+  room: [SIDE_X - 0.15 - 2.82, ROWS_Z.south + 0.55, SIDE_X - 0.15, ROWS_Z.back - 0.2], // [x0, z0, x1, z1], inside
+  ceiling: 1.95, // under the ground floor's band (a storey is 2)
+};
 // the footpath along the north row's backs, as the plaza lays it (plaza/plan.js FOOTPATH), for the forecourt's tile
 export const BACK_WALK = [ROW_W - 2.5, ROWS_Z.north - 1.7, 17.5, ROWS_Z.north];
 export const OFFICE_SOUTH_LINK = { rect: [-5.5, 9.95, -3, 11.7], x: -4.25, seam: 11.75 };
@@ -164,12 +180,16 @@ export const SOUTH_TREES = [
   // zelkovas every 4 down the west walk's lawn side
   ...[15, 19, 23].map((z) => ['keyaki', LINKS.west[0] - 1.4, z, 1.0]),
 ];
+// (the middle alley's west bed is cut for the clothes shop's side door: its landing, SIDE_DOOR below, keeps clear of
+// shrubs, with one smaller clump between it and the promenade instead)
 export const SOUTH_SHRUBS = ALLEYS.flatMap(([x0, z0, x1]) =>
   [z0 + 0.9, z0 + 2.3, z0 + 3.7].flatMap((z) => [
     [x0 - 0.65, z],
     [x1 + 0.65, z],
   ]),
-);
+)
+  .filter(([x, z]) => !(Math.abs(x - SIDE_X - 0.6) < 0.7 && z > SIDE_LANDING[0] - 0.45 && z < SIDE_LANDING[1] + 0.45))
+  .concat([[SIDE_X + 0.6, (SIDE_LANDING[1] + ROWS_Z.back) / 2 + 0.05, 0.85]]);
 
 // On the beach, [x, z] each: beach umbrellas in pairs between the flights and one by the huts, and three beach huts
 // against the wall's west return (their doors face the sea)
@@ -223,4 +243,13 @@ export const SHOPS = [
     tag: 'ゲーム',
   },
   { id: 'karaoke', row: 'south', bays: [13, 14], door: 14, sign: ['カラオケ', 'KARAOKE', '#6b4f68'], tag: 'カラオケ' },
+  // the clothes and alterations shop on the middle alley's west corner; its workroom's side door is SIDE_DOOR
+  {
+    id: 'tailor',
+    row: 'south',
+    bays: [4, 5],
+    door: 4,
+    sign: ['ようふく', 'CLOTHES · ALTERATIONS', '#7a4f56'],
+    tag: 'ようふく',
+  },
 ];

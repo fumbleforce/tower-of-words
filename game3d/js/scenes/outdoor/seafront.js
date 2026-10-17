@@ -18,11 +18,12 @@ import { bed, cluster, grass } from './planting.js';
 import { coastSteps, rail } from './coast.js';
 import { SAND } from '../skyline.js';
 import * as S from '../island-south.js';
+import { alleyWalks, alleyBeds } from './alley-beds.js';
 
 // the gap in the lookout's east rail, island z [from, to] (shotengai/plan.js NOOKS walks through it)
 export const LOOKOUT_GAP = [28.55, 30.35];
 
-const { PROMENADE: P, WALL_Z, BAND, STAIRS, ALLEYS, LINKS, BEACH_E, BAYS } = S;
+const { PROMENADE: P, WALL_Z, BAND, STAIRS, LINKS, BEACH_E, BAYS } = S;
 const BW = 0.25; // soldier borders
 const STONE = { cheek: '#8d9194', nosing: '#6c7177', tread: '#9a9a96' };
 const WET = new THREE.Color(SAND).multiplyScalar(0.9).getStyle();
@@ -217,30 +218,12 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false, westJ
       tones: GRANITE.mid,
       origin: at(S.BACK_WALK[0], 0),
     });
-  // the walks down the arcade's mouths and through the alleys: pale slabs between soldier borders on their long
-  // sides
-  for (const w of [LINKS.west, LINKS.east, ...ALLEYS]) {
-    const [x0, x1, z0, z1] = R(w);
-    pv.field([x0, x1, z0, z1], { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.pale, origin: [x0, z0] });
-    for (const x of [x0, x1 - BW]) course([x, x + BW, z0, z1], [BW, 0.15], GRANITE.edge);
-  }
+  alleyWalks(pv, course, R, BW);
   yield;
   pv.build(group); // the paving is the bulk: built on its own step
   yield;
 
-  // the alleys' beds, between the walk and the next building, kerbed on the walk's side
-  for (const [k, w] of ALLEYS.entries()) {
-    const [x0, x1, z0, z1] = R(w),
-      gap = BAYS.w / 2 - 1;
-    bed(p, [x0 - gap + 0.05, x0 - 0.05, z0 + 0.1, z1 - 0.1], { y: 0.08 });
-    bed(p, [x1 + 0.05, x1 + gap - 0.05, z0 + 0.1, z1 - 0.1], { y: 0.08 });
-    for (const x of [x0, x1]) kerb(p, [x, z0], [x, z1], { w: 0.14 });
-    S.SOUTH_SHRUBS.slice(k * 6, k * 6 + 6).forEach(([sx, sz], i) => {
-      const [lx, lz] = at(sx, sz);
-      cluster(p, lx, lz, { n: 3, r: 0.3, spread: 0.4, seed: 30 + k * 6 + i, y: 0.08 });
-    });
-    yield;
-  }
+  yield* alleyBeds(p, R, at);
   // kerbs where paving meets lawn: the promenade's west end and its north edge west and east of the rows, the west
   // walk's outer sides, the east walk's east side
   const kerbs = [

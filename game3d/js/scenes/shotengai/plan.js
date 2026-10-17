@@ -99,6 +99,9 @@ export const NOOKS = [
     face: Math.PI,
     back: MID[3] - MID[2] - 0.8,
     len: MID[1] - MID[0] - 0.4,
+    // (u runs toward the promenade from the alley's middle) the outdoor unit and the crates toward the arcade, the
+    // bucket and the pot past the clothes shop's side door, its landing kept clear; no bike
+    layout: { ac: -1.6, crates: [-1.0, -0.55], bucket: 1.62, pot: 1.93, bike: null },
   },
   {
     id: 'shotengai_pine_bench',
@@ -116,8 +119,26 @@ export const NOOKS = [
     pads: [[GX0 + 0.05, GX1 + 1.8, END_Z + 0.05, END_Z + 2.9]],
   },
 ];
+// the clothes shop's side door off the middle alley (island-south.js SIDE_DOOR): its landing is walked up to the door's
+// step (Eric's middle stays a body's width off it); where he stands at it, facing it
+export const SIDE_DOOR = S.SIDE_DOOR;
+const [, lz0, lx1, lz1] = SIDE_DOOR.landing;
+export const SIDE_LANDING = [SIDE_DOOR.x + 0.5, lz0 + 0.02, lx1, lz1 - 0.02]; // (off the door's step)
+export const SIDE_STEP = [SIDE_DOOR.x + 0.62, SIDE_DOOR.z]; // where he stands at the shut door
+export const DOOR_VIEW = [SIDE_DOOR.x, lz0 - 1.4, lx1 + 1.05, lz1 + 0.85]; // the alley's west half by the door
 export const WALKS = [
-  ...[ARCADE, SHOP_WALK, WEST_WALK, EAST_WALK, ...ALLEYS, PROM, MARKET_WALK, BEACH_WALK, BEACH_ACCESS].map(rect),
+  ...[
+    ARCADE,
+    SHOP_WALK,
+    WEST_WALK,
+    EAST_WALK,
+    ...ALLEYS,
+    PROM,
+    MARKET_WALK,
+    BEACH_WALK,
+    BEACH_ACCESS,
+    SIDE_LANDING,
+  ].map(rect),
   ...nookWalks(NOOKS),
   ...WALKS_LOCAL,
   ...SOUTHWEST_WALKS,

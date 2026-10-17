@@ -15,6 +15,8 @@ import { shopWindow, shopShell } from './shotengai/facades.js';
 import { rearFacade } from './shotengai/rear-facades.js';
 import { FRONT_IDS, displayCenters } from './shotengai/shopfront-plan.js';
 import { recessedShopWall, shopfront } from './shotengai/shopfronts.js';
+import { sideRoom, sideRoomWall } from './shotengai/side-room.js';
+import { ROWS_Z } from './island-south.js';
 import { MARKET_ROUTE as M, splitMarketBays } from './market-route.js';
 
 // parts merged into one mesh of one material (the parts are disposed)
@@ -175,7 +177,7 @@ export function* canteenSteps(root, [x0, z0, x1, z1], floorH, doorX = (x0 + x1) 
 export const shopStreet = (...a) => drain(shopStreetSteps(...a));
 export function* shopStreetSteps(
   root,
-  { a, dir, depth, storeyH, bays, from = 0, to = Infinity, shops = [], farLayer = null },
+  { a, dir, depth, storeyH, bays, from = 0, to = Infinity, shops = [], farLayer = null, rooms = [] },
 ) {
   const g = new THREE.Group();
   g.position.set(a[0], 0, a[1]);
@@ -221,18 +223,31 @@ export function* shopStreetSteps(
           f = row.front + row.dirF * 0.03,
           b = row.back - row.dirF * 0.03;
         const fronts = shops.filter((s) => s.row === name && FRONT_IDS.includes(s.id) && s.door >= i0 && s.door <= i1);
+        // a room behind a side door in the building's east end (island-south.js SIDE_DOOR), in this frame
+        const side = rooms
+          .filter((r) => name === 'south' && Math.abs(islandX(ub) - r.x) < 0.02)
+          .map((r) =>
+            sideRoom(
+              r,
+              (x) => x - bays.x0 + bays.u0,
+              (z) => z - ROWS_Z.south + row.v0,
+            ),
+          )[0];
         walls[(bi * 3 + ri) % 4].push(
-          ...recessedShopWall(box, {
-            ua,
-            ub,
-            h,
-            depth,
-            v0: row.v0,
-            n: row.dirF,
-            centers: fronts.flatMap((s) => displayCenters(uOf(s.door) + bayW / 2)),
-          }),
+          ...(side
+            ? sideRoomWall(box, { ua, ub, h, depth, v0: row.v0, room: side })
+            : recessedShopWall(box, {
+                ua,
+                ub,
+                h,
+                depth,
+                v0: row.v0,
+                n: row.dirF,
+                centers: fronts.flatMap((s) => displayCenters(uOf(s.door) + bayW / 2)),
+              })),
         );
         shopShell(fittings, {
+          endGap: side && [ub, side.dv0, side.dv1],
           ua,
           ub,
           v0: row.v0,

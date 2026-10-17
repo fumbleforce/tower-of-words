@@ -19,7 +19,8 @@ export function shopWindow(p, x, y, z, w, h, { side = false, n = 1 } = {}) {
   put(FRAME, w, 0.025, 0.08, 0, h * 0.7, 0.035);
 }
 
-export function shopShell(p, { ua, ub, v0, depth, h, floorH, front, back, n }) {
+// endGap: [u of an end, v0, v1], a door in that end wall the plinth stops either side of
+export function shopShell(p, { ua, ub, v0, depth, h, floorH, front, back, n, endGap = null }) {
   const uc = (ua + ub) / 2,
     vc = v0 + depth / 2,
     w = ub - ua;
@@ -40,6 +41,13 @@ export function shopShell(p, { ua, ub, v0, depth, h, floorH, front, back, n }) {
     p.box('#a1a8ab', 0.09, 0.085, depth, u, floorH - 0.06, vc, {
       surf: 'concrete',
     });
-    p.box('#656d72', 0.08, 0.18, depth, u, 0, vc, { surf: 'stone' });
+    const gap = endGap && Math.abs(endGap[0] - u) < 0.1 ? endGap : null;
+    const runs = gap
+      ? [
+          [v0, gap[1]],
+          [gap[2], v0 + depth],
+        ]
+      : [[v0, v0 + depth]];
+    for (const [a, b] of runs) p.box('#656d72', 0.08, 0.18, b - a, u, 0, (a + b) / 2, { surf: 'stone' });
   }
 }

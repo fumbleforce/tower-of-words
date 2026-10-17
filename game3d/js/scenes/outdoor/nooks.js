@@ -26,7 +26,7 @@
 //   bench     a bench behind a clipped hedge on three sides, a tree over it, a stone lantern
 //   lookout   a low rail at the edge, a coin telescope, a bench beside it
 //   yard      a building's back: beer crates, the air-conditioner units, buckets, pots, a hose reel, a bike
-//   alley     a back alley's clutter in a line along one wall (v = back): an air conditioner, crates of empties,
+//   alley     a back alley's clutter in a line along one wall (v = back; layout: where each stands): an air conditioner, crates of empties,
 //             buckets, a pot, a bike parked along the wall, leaving the rest of the alley clear
 //   gate      by a staff gate: a bike against one side, pots and an umbrella stand on the other
 //   bins      the sorted bins (bins: false for none) and a potted plant, for a bench bay that has its bench

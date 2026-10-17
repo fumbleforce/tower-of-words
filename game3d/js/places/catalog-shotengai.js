@@ -44,6 +44,7 @@ export const SHOTENGAI_DETAILS = {
     'shotengai_shrine',
     'shotengai_back_alley',
     'shotengai_pine_bench',
+    'tailor_door',
     'party_group',
     'party_kenji',
     'party_mio',
@@ -73,7 +74,7 @@ export const SHOTENGAI_DETAILS = {
   ],
   zones: ['office_exit', 'plaza_exit', 'dorm_exit'],
   people: ['station_worker', 'mori', 'kenji', 'kuroda', 'aoi', 'kuro', 'rei'],
-  hooks: ['gardenWorker', 'partySetup', 'partyFood'],
+  hooks: ['gardenWorker', 'partySetup', 'partyFood', 'tailorDoor'],
 };
 
 // The karaoke box's (places/karaoke.js, karaoke-booth.js): the front desk downstairs, through its door off the

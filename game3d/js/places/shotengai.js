@@ -23,6 +23,7 @@ import { MARKET_ROUTE } from '../scenes/market-route.js';
 // The shop street and seafront are reached directly south from the fountain plaza. The east arcade mouth
 // still connects to the dorm street. The central crossing runs through both shop rows to the beach.
 const STEEP = (84 * Math.PI) / 180; // the camera's elevation in the alleys and down the rows' west end
+const DOOR = (66 * Math.PI) / 180; // by the clothes shop's side door: low enough to see the door, steep enough for the rows
 export async function shotengaiPlace(game) {
   const w = await sliced(shotengaiSteps()); // in slices between frames: it's built while the plaza is played
   const cam = new RoomCam(w.camera);
@@ -39,7 +40,7 @@ export async function shotengaiPlace(game) {
     return {
       yaw: (-Math.PI / 2) * blend,
       elev:
-        (w.steep(x, z) ? STEEP : flat) * (1 - blend) +
+        (w.doorView(x, z) ? DOOR : w.steep(x, z) ? STEEP : flat) * (1 - blend) +
         (Math.abs(z - routeZ) > MARKET_ROUTE.w / 2 - 0.3 ? STEEP : THREE.MathUtils.degToRad(68)) * blend,
     };
   });
@@ -164,7 +165,7 @@ export async function shotengaiPlace(game) {
     cam,
     space: w.root,
     nav: w.nav,
-    meadowExclude: [rect(building('station').rect)],
+    meadowExclude: [rect(building('station').rect), rect(w.tailorDoor.room)], // (the workroom's floor too)
     sun: w.sun,
     light: w.light, // the light for every period (scenes/shotengai.js, kit/light/)
     charScale: K,
@@ -188,6 +189,7 @@ export async function shotengaiPlace(game) {
       shotengai_shrine: w.nooks.shotengai_shrine,
       shotengai_back_alley: w.nooks.shotengai_back_alley,
       shotengai_pine_bench: w.nooks.shotengai_pine_bench,
+      tailor_door: w.tailorDoor.step,
       party_group: party.spots.party_group,
       party_kenji: party.spots.party_kenji,
       party_mio: party.spots.party_mio,
@@ -222,6 +224,9 @@ export async function shotengaiPlace(game) {
       gardenWorker: garden.hooks.gardenWorker,
       partySetup: party.hooks.partySetup,
       partyFood: party.hooks.partyFood,
+      // the clothes shop's side door off the middle alley: { do: 'tailorDoor', open: true } swings it open onto the
+      // evening's delivery, the lit workroom behind it; open: false shuts it again. Shut whenever the place is built.
+      tailorDoor: (s = {}) => w.tailorDoor.set(s.open !== false),
     },
     day3: (a) => d3.setup(P, a),
     fit(aspect) {

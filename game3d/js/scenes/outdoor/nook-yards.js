@@ -48,33 +48,59 @@ export function yard(T, { back = 1.2, side = 1, seed = 5, bike = true }) {
   if (bike) bicycle(T, side * 0.45, back - 1.75, side);
 }
 // a back alley's clutter along the wall at v = back, from u = -len / 2 to len / 2
-export function alley(T, { back = 0.9, len = 3.6, seed = 8 }) {
+// layout: where each thing stands along the wall (u, the nook's frame), for an alley with a door to keep clear: ac, crates
+// (one u a stack), bucket, pot, bike (null for none); the default lines them up from the nook's left end
+export function alley(T, { back = 0.9, len = 3.6, seed = 8, layout = null }) {
   const r = rng(seed),
     u0 = -len / 2;
+  const { ac, crates, bucket, pot, bike } = layout || {
+    ac: u0 + 0.45,
+    crates: [u0 + 1.15, u0 + 1.6],
+    bucket: u0 + 2.1,
+    pot: u0 + 2.45,
+    bike: u0 + 3.2,
+  };
   // the outdoor unit, its fan toward Eric, on a low stand
-  T.box('#d6d8d4', 0.78, 0.56, 0.3, u0 + 0.45, 0.06, back - 0.17);
-  T.box(STEEL.dark, 0.7, 0.06, 0.26, u0 + 0.45, 0, back - 0.17);
+  T.box('#d6d8d4', 0.78, 0.56, 0.3, ac, 0.06, back - 0.17);
+  T.box(STEEL.dark, 0.7, 0.06, 0.26, ac, 0, back - 0.17);
   T.geo(
     '#3a3f47',
-    new THREE.CylinderGeometry(0.19, 0.19, 0.02, 12).rotateX(Math.PI / 2).translate(u0 + 0.37, 0.36, back - 0.33),
+    new THREE.CylinderGeometry(0.19, 0.19, 0.02, 12).rotateX(Math.PI / 2).translate(ac - 0.08, 0.36, back - 0.33),
   );
-  // crates of empties, two stacks
-  for (const [u, n] of [
-    [u0 + 1.15, 3],
-    [u0 + 1.6, 2],
-  ])
+  T.block([ac - 0.4, ac + 0.4, back - 0.45, back]);
+  // crates of empties, a stack each
+  // (each an open plastic crate: a base, its walls with a hand hole cut in each end and slots along the sides; the
+  // top one shows its brown bottles, eight in two rows)
+  for (const [u, n] of crates.map((u, i) => [u, 3 - (i % 2)])) {
+    const v = back - 0.19;
     for (let k = 0; k < n; k++) {
-      T.box(r() < 0.5 ? '#d9b43a' : RED, 0.42, 0.28, 0.34, u, k * 0.28, back - 0.19, { turn: (r() - 0.5) * 0.14 });
-      for (let b = 0; b < 4; b++)
-        T.box('#5c3b28', 0.06, 0.08, 0.06, u - 0.12 + b * 0.08, k * 0.28 + 0.28, back - 0.19, { cast: false });
+      const c = r() < 0.5 ? '#d9b43a' : RED,
+        y = k * 0.28;
+      T.box(c, 0.42, 0.04, 0.34, u, y, v);
+      for (const s of [-1, 1]) {
+        T.box(c, 0.42, 0.24, 0.025, u, y + 0.04, v + s * 0.1575);
+        T.box(c, 0.025, 0.24, 0.29, u + s * 0.1975, y + 0.04, v);
+        T.box('#2e2a26', 0.03, 0.05, 0.12, u + s * 0.1975, y + 0.19, v, { cast: false }); // the hand hole
+        for (const du of [-0.12, 0, 0.12])
+          T.box('#2e2a26', 0.08, 0.1, 0.03, u + du, y + 0.08, v + s * 0.1575, { cast: false }); // a slot
+      }
+      if (k < n - 1) continue;
+      for (let b = 0; b < 8; b++) {
+        const bu = u - 0.15 + (b % 4) * 0.1,
+          bv = v + (b < 4 ? -0.07 : 0.07);
+        T.cyl('#5c3b28', 0.035, 0.035, 0.2, bu, y + 0.04, bv, 8);
+        T.cyl('#5c3b28', 0.014, 0.022, 0.07, bu, y + 0.24, bv, 6);
+      }
     }
-  // buckets, a pot with a shrub
-  T.cyl('#3f6f9e', 0.15, 0.12, 0.3, u0 + 2.1, 0, back - 0.2, 10);
-  T.cyl('#8d6a52', 0.17, 0.13, 0.26, u0 + 2.45, 0, back - 0.2, 8);
-  mound(T.p, ...T.P(u0 + 2.45, back - 0.2), 0.2, LEAF.fresh, { y: 0.24 });
-  T.block([u0 + 0.05, u0 + 2.7, back - 0.45, back]);
+    T.block([u - 0.23, u + 0.23, back - 0.4, back]);
+  }
+  // a bucket, a pot with a shrub
+  T.cyl('#3f6f9e', 0.15, 0.12, 0.3, bucket, 0, back - 0.2, 10);
+  T.cyl('#8d6a52', 0.17, 0.13, 0.26, pot, 0, back - 0.2, 8);
+  mound(T.p, ...T.P(pot, back - 0.2), 0.2, LEAF.fresh, { y: 0.24 });
+  for (const u of [bucket, pot]) T.block([u - 0.18, u + 0.18, back - 0.4, back]);
   // a bike along the wall, past the pot
-  bikeAlong(T, u0 + 3.2, back - 0.25);
+  if (bike != null) bikeAlong(T, bike, back - 0.25);
 }
 // a bike parked along u (beside a wall), at (u, v)
 function bikeAlong(T, u, v) {

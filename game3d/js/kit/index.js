@@ -12,12 +12,46 @@ import { bikeRack } from './street/bike-rack.js';
 import { sign } from './street/sign.js';
 import { planter } from './planting/planter.js';
 import { treePit } from './planting/tree-pit.js';
+import { delivery } from './street/delivery.js';
+import { garmentRail, dressForm, workTable, fabricShelf } from './interior/workroom.js';
 
 export { piece, kitBag } from './core/piece.js';
 export { buildKit, GLASS } from './core/build.js';
 export { LEVELS, LEVEL_ABOUT, FIDELITY, levelFor } from './core/detail.js';
-export { windowBay, doorway, fence, lamp, bin, bollard, bikeRack, sign, planter, treePit };
+export {
+  windowBay,
+  doorway,
+  fence,
+  lamp,
+  bin,
+  bollard,
+  bikeRack,
+  sign,
+  planter,
+  treePit,
+  delivery,
+  garmentRail,
+  dressForm,
+  workTable,
+  fabricShelf,
+};
 
-export const PIECES = [windowBay, doorway, fence, lamp, bin, bollard, bikeRack, sign, planter, treePit];
+export const PIECES = [
+  windowBay,
+  doorway,
+  fence,
+  lamp,
+  bin,
+  bollard,
+  bikeRack,
+  sign,
+  planter,
+  treePit,
+  delivery,
+  garmentRail,
+  dressForm,
+  workTable,
+  fabricShelf,
+];
 
 export const pieceById = (id) => PIECES.find((p) => p.id === id) || null;

@@ -35,7 +35,7 @@ test('every piece is declared fully and registered once', () => {
     const d = piece.decl;
     assert.ok(d.id && !ids.has(d.id), d.id);
     ids.add(d.id);
-    assert.ok(['building', 'street', 'planting', 'lighting'].includes(d.family), d.id);
+    assert.ok(['building', 'street', 'planting', 'lighting', 'interior'].includes(d.family), d.id);
     assert.ok(d.label && d.use && fidelity.includes(d.fidelity), d.id);
     assert.ok(Object.keys(d.variants).length >= 3 || d.id === 'street/bike-rack', d.id);
     assert.equal(kit.pieceById(d.id), piece);

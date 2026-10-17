@@ -18,6 +18,10 @@ test('shared literals and complete place registrations match the pre-extraction 
   expected.places.campus.zones = expected.places.campus.zones.filter(id => id !== 'forecourt_exit');
   // #575 the guard sends a player who jumped the shut gate back to the readers.
   expected.places.gate.hooks.push('sendBack');
+  // the clothes shop's side door off the shop street's middle alley: a spot at it, a hook a plugin opens it with
+  const sh = expected.places.shotengai;
+  sh.spots.splice(sh.spots.indexOf('shotengai_pine_bench') + 1, 0, 'tailor_door');
+  sh.hooks.push('tailorDoor');
   assert.deepEqual({ DEFAULT_SPEAKERS, PORTRAITS, ITEMS, places: PLACE_DETAILS }, expected);
 });
 

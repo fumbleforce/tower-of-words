@@ -27,7 +27,8 @@ import { coastalSea } from './outdoor/sea.js';
 import { placeIn } from './dorm-court/cluster.js';
 import { coastLand } from './island-west.js';
 import { signSet } from './shop-signs.js';
-import { BAYS, SHOPS, WALL_Z } from './island-south.js';
+import { BAYS, SHOPS, WALL_Z, SIDE_DOOR } from './island-south.js';
+import { tailorSteps } from './shotengai/tailor.js';
 import { streetSteps } from './shotengai/street.js';
 import { plazaContextSteps } from './shotengai/plaza-context.js';
 import * as P from './shotengai/plan.js';
@@ -67,7 +68,13 @@ export function* shotengaiSteps() {
     wz1 + 2.1,
     0.1,
   );
-  nav.extra = (x, z) => P.WALKS.some((r) => inRect(x, z, r, -0.02)) || inRect(x, z, P.STREET_END);
+  // (the clothes shop's side door, open, fills its landing: kept off it here rather than with a nav block, so opening
+  // it doesn't rebuild the walk grid; nobody's path goes up that landing)
+  let doorOpen = false,
+    doorBlocks = [];
+  nav.extra = (x, z) =>
+    (P.WALKS.some((r) => inRect(x, z, r, -0.02)) || inRect(x, z, P.STREET_END)) &&
+    !(doorOpen && doorBlocks.some((r) => inRect(x, z, r)));
   for (const r of P.FURNITURE) nav.block(...r);
 
   // the island frame for the builders that work in it; the plaza's, for the east lane's blocks
@@ -93,6 +100,13 @@ export function* shotengaiSteps() {
   const st = yield* streetSteps(isl, p, lights, cards);
   for (const r of st.keep) nav.block(...rect(r));
   yield;
+  // the clothes shop's side door off the middle alley and its workroom (shotengai/tailor.js), shut
+  const tailor = tailorSteps(isl, cards);
+  doorBlocks = tailor.blocks.map((r) => {
+    const [x0, x1, z0, z1] = rect(r);
+    return [x0 - nav.R, x1 + nav.R, z0 - nav.R, z1 + nav.R];
+  });
+  yield;
   const rows = P.building('shops_north');
   const street = yield* shopStreetSteps(isl, {
     a: [rows.rect[0], rows.rect[1]],
@@ -101,6 +115,7 @@ export function* shotengaiSteps() {
     storeyH: rows.floorH,
     bays: { ...BAYS, u0: BAYS.x0 - rows.rect[0] },
     shops: SHOPS,
+    rooms: [SIDE_DOOR],
   });
   yield;
   // the izakaya at the shop walk and the ramen shop across the street, as the plaza builds them
@@ -165,12 +180,14 @@ export function* shotengaiSteps() {
     eastLit.glows,
     front.glows,
     fronts.glows,
+    tailor.glows,
     street.glows,
     doorCards.glows,
     curtainCard.glows,
     sky.glows,
   );
   const edgeZ = local(P.EDGE)[1];
+  const doorView = rect(P.DOOR_VIEW);
   const alleys = P.ALLEYS.map(rect);
   return {
     update: (t) => {
@@ -210,5 +227,21 @@ export function* shotengaiSteps() {
       bands.cards(day, period);
     },
     skyline: sky.stats,
+    // the clothes shop's side door: shut by default; open(true) swings it out onto the delivery that holds it, with
+    // the lit workroom behind and its landing filled (places/shotengai.js hook tailorDoor)
+    tailorDoor: {
+      get open() {
+        return doorOpen;
+      },
+      set(open) {
+        doorOpen = !!open;
+        tailor.set(doorOpen);
+      },
+      step: local(P.SIDE_STEP), // on the landing, at the shut door
+      at: local([SIDE_DOOR.x, SIDE_DOOR.z]),
+      room: SIDE_DOOR.room, // island [x0, z0, x1, z1]
+    },
+    // the alley's west half by the side door, where the camera eases off its steepness to show the door
+    doorView: (x, z) => inRect(x, z, doorView),
   };
 }
