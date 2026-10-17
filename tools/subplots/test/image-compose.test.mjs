@@ -225,8 +225,12 @@ test('the composed negative per rating and mode: nipples only leave in Adult Mat
   assert.deepEqual(applyDefaults(composition({characters: [], rating: 'safe'}), limited).negatives, ['clean', 'limits']);
   assert.deepEqual(applyDefaults(composition({characters: [], rating: 'nsfw', hard: true}), limited).negatives, ['clean']);
   assert.deepEqual(applyDefaults(composition({characters: [], rating: 'sensitive', hard: true}), limited).negatives, ['clean', 'limits-skimpy']);
-  // a character's rating cap sets the tier: an Adult nsfw shot of a safe-capped character keeps limits
-  assert.equal(lockedExclusions(composition({characters: ['alice'], rating: 'nsfw', hard: true, reward: true}), limited).tier, 'safe');
+  // a character's rating cap holds for a nonadult shot and never lowers an Adult-mode one
+  assert.equal(lockedExclusions(composition({characters: ['alice'], rating: 'nsfw', hard: true, reward: true}), limited).tier, 'hard');
+  const adult = assembleComposition(composition({characters: ['alice'], rating: 'nsfw', hard: true, reward: true}), limited);
+  assert.equal(adult.rating, 'nsfw');
+  assert.match(adult.positive, /^high quality, nsfw, 1girl/);
+  assert.equal(assembleComposition(composition({characters: ['alice'], rating: 'nsfw', reward: true}), limited).rating, 'safe');
 });
 test('switching the tier in the composer moves the limit presets and leaves every other pick alone (#700)', () => {
   const c = composition({characters: [], rating: 'safe', negatives: ['clean', 'limits', 'soft']});

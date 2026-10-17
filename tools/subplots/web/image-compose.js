@@ -40,10 +40,11 @@ function castOf(c, presets) {
   const generic = c.man && (presets.character || []).find(p => p.data.generic && !p.archived);
   return {chars: generic && !selected.includes(generic) ? [...selected, generic] : selected, generic};
 }
-// the content level asked for, capped by any character preset's rating cap
+// the content level asked for, capped by any character preset's rating cap; an Adult-mode shot (hard) is not capped,
+// so a capped character still gets the Adult level there (#700); the cap holds for nonadult and public shots
 function ratingOf(c, chars) {
   let i = Math.max(0, RATINGS.indexOf(c.rating));
-  chars.forEach(p => { const cap = RATINGS.indexOf(p.data.rating_cap); if (cap >= 0) i = Math.min(i, cap); });
+  if (!c.hard) chars.forEach(p => { const cap = RATINGS.indexOf(p.data.rating_cap); if (cap >= 0) i = Math.min(i, cap); });
   return RATINGS[i];
 }
 export const tierOf = (c, presets) => ratingTier(c, ratingOf(c, castOf(c, presets || {}).chars));
