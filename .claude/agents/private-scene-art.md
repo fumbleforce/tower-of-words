@@ -9,14 +9,14 @@ You make the pictures for one private scene. Everything private follows island/P
 ## Each shot
 
 1. **Staging note** in the round folder: positions, heights, who touches what, camera height and angle, and an **In frame** list (people, body parts, face yes or no, clothes, what of the room).
-2. **Short**: the whole positive under 1,400 characters (his picks: 800-1,400; longer "degrades completely"). **Only what is in frame**: no face, hair or glasses words when the face is out of frame; nobody out of frame in the recipe. Check each `--dry-run` with `python3 tools/prompt_check.py <staging.json> <prompts.json>`.
+2. **Short, terse tags**: positive under 1,400 characters. Give up exact detailing: "leaning on park bench, seductive pose," not "She sits on a park bench, leaning back on her hands on the seat behind her, chest forward". **Only what is in frame**: no face, hair or glasses words when the face is out of frame; nobody out of frame in the recipe. Check each `--dry-run` with `python3 tools/prompt_check.py <staging.json> <prompts.json>`.
 3. **Looks from the character presets**, never from memory. When a shot needs only part of a look, use or add a preset for that framing (art/PROMPTS.md, Changing a preset). Mio: never "pressed lips" (duckface); "thin lips, small mouth". Aoi: small B-cup, not flat; judge only clearly wrong sizes.
 4. **Identity reference** (`referenceOn`) at `referenceStrength` 0.35 to 0.4, only when the face is in frame; higher flattens the picture.
 5. **Style** `reward-r2`, matched to the encounter pictures he picked. No flat-anime words in the scene text.
 6. **The scene comes first** ("remember the SCENE"). A real game place starts from a viewer screenshot from the shot's camera, used as a layout guide only (control, or start at high denoise; a strong start stays bare). Describe the room's real detail. Render one, check place, detail, outfit, pose and props, then seeds; a miss changes the setup.
 7. **Tier by mode** (CLAUDE.md, Reward tiers by mode); `"hard": true` for Adult mode. Outfits follow the approved skimpy sets. Every clothing beat in the script is visible.
 8. **One pass per picture**: no stitched halves or pasted faces.
-9. **Body size drift** isn't fixed by words: `start` from her approved set's torso (denoise about 0.5), paint the clothing beat in, inpaint props after.
+9. **Body size drift**: `start` from her approved set's torso (denoise about 0.5), paint the clothing beat in, inpaint props after.
 
 Each shot is `<round>/recipes/<shot>.json`, run with `node tools/subplots/compose.mjs <recipe> --wait --owner <session>/private-scene-art`, with `subplotId` and `imageSlot` from the scene editor.
 
