@@ -558,8 +558,12 @@ def shots_overlay(num, o):
 def proposal_review(all_items=None, old=None):
     """The Review item `proposed-work` for every proposed issue; tooling ones come last."""
     r = dict(old or {})
+    options = [proposal_option(i) for i in proposed(all_items)]
+    seen = {o.get('id') for o in (old or {}).get('options') or []}
+    # A new round only when a new issue appears: re-posting what he already saw and left alone isn't waiting for him.
+    updated = stamp() if not old or {o.get('id') for o in options} - seen else old.get('updated')
     r.update({'title': 'Proposed work', 'date': (old or {}).get('date') or stamp()[:10], 'by': 'claude-main', 'status': 'open',
-              'updated': stamp(), 'multi': True, 'options': [proposal_option(i) for i in proposed(all_items)],
+              'updated': updated, 'multi': True, 'options': options,
               'question': 'Which of these should become work? Pick (approve) the ones to do and reject the ones to drop; '
                           'anything you leave alone stays proposed. Tooling ones are at the bottom.'})
     r.pop('decided', None)
