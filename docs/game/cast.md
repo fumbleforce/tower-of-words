@@ -412,11 +412,11 @@ The faces each person can show beside the text box: `game3d/assets/portraits/<id
 |---|---|
 | `eric` | neutral, surprised, tired |
 | `mio` | neutral, smile, deadpan, surprised, embarrassed, tired, phone, annoyed |
-| `mori` | neutral |
-| `kenji` | neutral |
+| `mori` | neutral, smile, flustered |
+| `kenji` | neutral, grin, sheepish |
 | `emi` | neutral |
 | `guard` | neutral, stern, amused |
-| `kuroda` | neutral |
+| `kuroda` | neutral, sleepy, panicked |
 | `kuro` | neutral, flirtatious, teasing, pleased, polite |
 | `aoi` | neutral |
 | `rei` | neutral, scolding, cold, smug, offguard |

@@ -35,8 +35,11 @@ One folder per bible id. Each file here is a copy of one that bible/facts.yaml m
   - ishibashi/guard-guard-ink-2001-{neutral,stern,amused}.webp: Ishibashi, the guard.
   - mori/mori-mori-new-713-{neutral,smile,flustered}.webp: Mr. Mori until 2026-10-17, now history.
 - mori/mori-m3-s2-neutral.webp: Mr. Mori's portrait since 2026-10-17, m3-s2 from reviews/mori-2, a copy of game3d/assets/portraits/mori-neutral.webp. Bible: characters › mori, images.
+- mori/mori-smile-p2-s1.webp, mori/mori-flustered-p1-s3.webp: Mr. Mori's smile and flustered faces since 2026-10-17, face-only repaints of m3-s2 from reviews/expressions-men-1, copies of game3d/assets/portraits/mori-{smile,flustered}.webp. Bible: characters › mori, images.
 - kenji/kenji-n2-s2-neutral.webp: Kenji's portrait since 2026-10-17, n2-s2 from reviews/kenji-2 (k3-s2 without the lanyard), a copy of game3d/assets/portraits/kenji-neutral.webp. Bible: characters › kenji, images.
+- kenji/kenji-grin-p1-s3.webp, kenji/kenji-sheepish-p1-s1.webp: Kenji's grin and sheepish faces since 2026-10-17, face-only repaints of n2-s2 from reviews/expressions-men-1, copies of game3d/assets/portraits/kenji-{grin,sheepish}.webp. Bible: characters › kenji, images.
 - hamada/kuroda-h2-s1-neutral.webp: Mr. Hamada's portrait since 2026-10-17, h2-s1 from reviews/hamada-2, a copy of game3d/assets/portraits/kuroda-neutral.webp. Bible: characters › hamada, images.
+- hamada/kuroda-sleepy-p3-s3.webp, hamada/kuroda-panicked-p1-s3.webp: Mr. Hamada's sleepy and panicked faces since 2026-10-17, face-only repaints of h2-s1 from reviews/expressions-men-1, copies of game3d/assets/portraits/kuroda-{sleepy,panicked}.webp. Bible: characters › hamada, images.
   - hamada/kuroda-hamada-new-743-{neutral,sleepy,panicked}.webp: Mr. Hamada until 2026-10-17, now history.
 - kuro/kuro-after.webp: Kuro, A-luna-s101 with headroom. Bible: characters › kuro, portrait.
 - goro/goro-after.webp: Goro, goro-a-202 with headroom. Bible: characters › goro, portrait.

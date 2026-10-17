@@ -147,8 +147,14 @@
   "game3d/assets/portraits/guard-amused.webp": {},
   "game3d/assets/portraits/guard-neutral.webp": {},
   "game3d/assets/portraits/guard-stern.webp": {},
+  "game3d/assets/portraits/kenji-grin.webp": {
+   "note": "Kenji's grin p1-s3, a face-only repaint of his base n2-s2 (picked by Jørgen 2026-10-17, #693)"
+  },
   "game3d/assets/portraits/kenji-neutral.webp": {
    "note": "Kenji's base portrait n2-s2, k3-s2 without the lanyard; cut out with BiRefNet-HR + matte_refine, framed to 597x768 on his face box (picked by Jørgen 2026-10-17, #680)"
+  },
+  "game3d/assets/portraits/kenji-sheepish.webp": {
+   "note": "Kenji's sheepish p1-s1, a face-only repaint of his base n2-s2 (picked by Jørgen 2026-10-17, #693)"
   },
   "game3d/assets/portraits/kuro-flirtatious.webp": {},
   "game3d/assets/portraits/kuro-neutral.webp": {},
@@ -157,6 +163,12 @@
   "game3d/assets/portraits/kuro-teasing.webp": {},
   "game3d/assets/portraits/kuroda-neutral.webp": {
    "note": "Hamada's base portrait h2-s1 (collar-length waves); cut out with BiRefNet-HR + matte_refine, framed to 597x768 on his face box (picked by Jørgen 2026-10-17, #662)"
+  },
+  "game3d/assets/portraits/kuroda-panicked.webp": {
+   "note": "Hamada's panicked p1-s3, a face-only repaint of his base h2-s1 (picked by Jørgen 2026-10-17, #693)"
+  },
+  "game3d/assets/portraits/kuroda-sleepy.webp": {
+   "note": "Hamada's sleepy p3-s3 (eyes closed), a face-only repaint of his base h2-s1 (picked by Jørgen 2026-10-17, #693)"
   },
   "game3d/assets/portraits/mio-annoyed.webp": {},
   "game3d/assets/portraits/mio-deadpan.webp": {},
@@ -168,8 +180,14 @@
    "note": "Mio's surprised face, su1-s2 (picked by Jørgen 2026-10-17, #576)"
   },
   "game3d/assets/portraits/mio-tired.webp": {},
+  "game3d/assets/portraits/mori-flustered.webp": {
+   "note": "Mori's flustered p1-s3, a face-only repaint of his base m3-s2 (picked by Jørgen 2026-10-17, #693)"
+  },
   "game3d/assets/portraits/mori-neutral.webp": {
    "note": "Mori's base portrait m3-s2, cut out with BiRefNet-HR + matte_refine, framed to 597x768 on his face box (picked by Jørgen 2026-10-17, #679)"
+  },
+  "game3d/assets/portraits/mori-smile.webp": {
+   "note": "Mori's smile p2-s1, a face-only repaint of his base m3-s2 (picked by Jørgen 2026-10-17, #693)"
   },
   "game3d/assets/portraits/rei-cold.webp": {},
   "game3d/assets/portraits/rei-neutral.webp": {},
@@ -1377,6 +1395,60 @@
    "to": "art/production/retired/2026-10-17/",
    "by": "game3d/assets/portraits/kuroda-neutral.webp",
    "note": "repaints of the old base hamada-new-743; they no longer match the new base h2-s1 (#662). New faces wait for their own round."
+  },
+  {
+   "date": "2026-10-17",
+   "action": "promote",
+   "path": "game3d/assets/portraits/mori-smile.webp",
+   "from": "art/candidates/portraits/expressions-men-1/mori2-smile-r261017-155524-aa3-1-s1-cut.webp",
+   "round": "expressions-men-1",
+   "review": "expressions-men-1",
+   "note": "Mori's smile p2-s1, a face-only repaint of his base m3-s2 (picked by Jørgen 2026-10-17, #693)"
+  },
+  {
+   "date": "2026-10-17",
+   "action": "promote",
+   "path": "game3d/assets/portraits/mori-flustered.webp",
+   "from": "art/candidates/portraits/expressions-men-1/mori-flustered-r261017-153845-895-3-s3-cut.webp",
+   "round": "expressions-men-1",
+   "review": "expressions-men-1",
+   "note": "Mori's flustered p1-s3, a face-only repaint of his base m3-s2 (picked by Jørgen 2026-10-17, #693)"
+  },
+  {
+   "date": "2026-10-17",
+   "action": "promote",
+   "path": "game3d/assets/portraits/kenji-grin.webp",
+   "from": "art/candidates/portraits/expressions-men-1/kenji-grin-r261017-154328-475-3-s3-cut.webp",
+   "round": "expressions-men-1",
+   "review": "expressions-men-1",
+   "note": "Kenji's grin p1-s3, a face-only repaint of his base n2-s2 (picked by Jørgen 2026-10-17, #693)"
+  },
+  {
+   "date": "2026-10-17",
+   "action": "promote",
+   "path": "game3d/assets/portraits/kenji-sheepish.webp",
+   "from": "art/candidates/portraits/expressions-men-1/kenji-sheepish-r261017-154544-492-1-s1-cut.webp",
+   "round": "expressions-men-1",
+   "review": "expressions-men-1",
+   "note": "Kenji's sheepish p1-s1, a face-only repaint of his base n2-s2 (picked by Jørgen 2026-10-17, #693)"
+  },
+  {
+   "date": "2026-10-17",
+   "action": "promote",
+   "path": "game3d/assets/portraits/kuroda-sleepy.webp",
+   "from": "art/candidates/portraits/expressions-men-1/hamada3-sleepy-r261017-160424-1ba-3-s3-cut.webp",
+   "round": "expressions-men-1",
+   "review": "expressions-men-1",
+   "note": "Hamada's sleepy p3-s3 (eyes closed), a face-only repaint of his base h2-s1 (picked by Jørgen 2026-10-17, #693)"
+  },
+  {
+   "date": "2026-10-17",
+   "action": "promote",
+   "path": "game3d/assets/portraits/kuroda-panicked.webp",
+   "from": "art/candidates/portraits/expressions-men-1/hamada-panicked-r261017-155025-624-3-s3-cut.webp",
+   "round": "expressions-men-1",
+   "review": "expressions-men-1",
+   "note": "Hamada's panicked p1-s3, a face-only repaint of his base h2-s1 (picked by Jørgen 2026-10-17, #693)"
   }
  ]
 }

@@ -363,7 +363,7 @@ export default {
       ], else: [
         { do: "cam", on: "kuroda", zoom: 1.7 },
         { do: "phone", who: "kuroda", state: "buzz" },
-        { say: "kuroda", emo: "sleepy", text: "すみません……あと五分。", overheard: true, voice: "ln-181z3kl" },
+        { say: "kuroda", face: "sleepy", emo: "sleepy", text: "すみません……あと五分。", overheard: true, voice: "ln-181z3kl" },
         { do: "phone", who: "kuroda", state: "tap" },
         { do: "cam", back: true },
         { set: "train_hamada_seen" },

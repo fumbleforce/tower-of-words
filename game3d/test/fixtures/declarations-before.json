@@ -138,13 +138,19 @@
       "tired"
     ],
     "mori": [
-      "neutral"
+      "neutral",
+      "smile",
+      "flustered"
     ],
     "kenji": [
-      "neutral"
+      "neutral",
+      "grin",
+      "sheepish"
     ],
     "kuroda": [
-      "neutral"
+      "neutral",
+      "sleepy",
+      "panicked"
     ],
     "guard": [
       "neutral",

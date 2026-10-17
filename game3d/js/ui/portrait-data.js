@@ -6,9 +6,9 @@ export const PORTRAITS = {
   aoi: ['neutral'],
   kuro: ['neutral', 'flirtatious', 'teasing', 'pleased', 'polite'],
   [MC.portrait.set]: MC.portrait.faces, // the protagonist's (data/mc/<id>.json)
-  mori: ['neutral'], // his smile and flustered faces were repaints of the old base (mori-new-713); new ones wait for a round (#679)
-  kenji: ['neutral'], // his grin and sheepish faces were repaints of the old base (kenji-ink-2001); new ones wait for a round (#680)
-  kuroda: ['neutral'], // his sleepy and panicked faces were repaints of the old base (hamada-new-743); new ones wait for a round (#662)
+  mori: ['neutral', 'smile', 'flustered'],
+  kenji: ['neutral', 'grin', 'sheepish'],
+  kuroda: ['neutral', 'sleepy', 'panicked'],
   guard: ['neutral', 'stern', 'amused'],
   emi: ['neutral'],
   rei: ['neutral', 'scolding', 'cold', 'smug', 'offguard'],

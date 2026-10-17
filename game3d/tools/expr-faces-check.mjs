@@ -1,6 +1,7 @@
-// The new Kuro and Mio faces (reviews/expressions-kuro-mio-1) show in real story nodes: runs each node, holds on the
-// first line that names the face, and saves the frame.
+// The newer expression faces (reviews/expressions-kuro-mio-1, expressions-men-1) show in real story nodes: runs each
+// node, holds on the first line that names the face, and saves the frame.
 //   node game3d/tools/expr-faces-check.mjs [w] [h]      writes game3d/shots/expr-faces/<w>x<h>/<face>.png
+//   WHO=mori,kenji,kuroda in front runs only those people's cases
 import fs from 'node:fs';
 import path from 'node:path';
 import { withBrowserJob, gpuWaitOptions } from '../../tools/lib/browser-job.mjs';
@@ -22,16 +23,24 @@ const CASES = [
   ['kuro', 'pleased', 'day5/reception.js', 'd5_label'], // the "all in" branch: the ticket is done
   ['mio', 'annoyed', 'day2/office.js', 'd2_mio_work', ['d2_mio_job_talked', 'd2_mio_weekend_talked']],
   ['kuro', 'flirtatious', null, null], // no scene: shown straight through the dialogue box
+  ['mori', 'smile', 'office.js', 'office_in'],
+  ['mori', 'flustered', null, null], // no line names it; the sweat emote picks it
+  ['kenji', 'grin', 'office.js', 'kenji_first'],
+  ['kenji', 'sheepish', 'office.js', 'kenji_first'],
+  ['kuroda', 'sleepy', 'train.js', 'hamada'], // asleep on the morning train
+  ['kuroda', 'panicked', 'gate.js', 'bench_wait'],
 ];
+const NAMES = { kuro: ['Kuro', '#c3a7d6'], mori: ['Mr. Mori', '#9aa4b0'] };
 const res = [];
 await withBrowserJob('expr-faces-check', async (b) => {
-  for (const [who, face, file, node, flagList = []] of CASES) {
+  const only = process.env.WHO?.split(',');
+  for (const [who, face, file, node, flagList = []] of CASES.filter((c) => !only || only.includes(c[0]))) {
     const p = await b.newPage({ viewport: { width: +W, height: +H }, isMobile: phone, hasTouch: phone });
     const errs = [];
     p.on('pageerror', (e) => errs.push(e.message));
     await p.goto(`${base}/index.html?shell=talk&place=gate&skip&q=0`);
     await p.waitForFunction(() => globalThis.__shellReady, null, { timeout: 120000 });
-    const r = await p.evaluate(async ([who, face, file, node, root, flagList]) => {
+    const r = await p.evaluate(async ([who, face, file, node, root, flagList, names]) => {
       const g = globalThis.__game;
       g.runner.trigger = () => false;
       globalThis.__seen = [];
@@ -56,11 +65,11 @@ await withBrowserJob('expr-faces-check', async (b) => {
         }
         g.runner.run(id);
       } else {
-        say({ name: 'Kuro', color: '#c3a7d6' }, 'Come here a moment.', { whoId: who, face });
+        say({ name: names[who][0], color: names[who][1] }, 'Come here a moment.', { whoId: who, face });
         globalThis.__hold(true);
       }
       return Promise.race([hold, new Promise((ok) => setTimeout(() => ok(false), 15000))]);
-    }, [who, face, file, node, base, flagList]);
+    }, [who, face, file, node, base, flagList, NAMES]);
     await p.waitForTimeout(1500);
     const por = await p.evaluate(() => [...globalThis.document.querySelectorAll('#stage .por')].filter((e) => !e.hidden).map((e) => `${e.dataset.who}:${e.dataset.face}`));
     const shot = path.join(out, `${who}-${face}${node ? '-' + node : ''}.png`);
@@ -70,7 +79,7 @@ await withBrowserJob('expr-faces-check', async (b) => {
     console.log(JSON.stringify(row));
     await p.close();
   }
-}, gpuWaitOptions(900, 200000));
+}, gpuWaitOptions(900, 300000));
 const bad = res.filter((r) => !r.reached || !r.shown.includes(`${r.who}:${r.face}`) || r.errs.length);
 console.log(bad.length ? 'FAIL ' + bad.length : 'PASS all faces shown');
 process.exit(bad.length ? 1 : 0);
