@@ -160,6 +160,16 @@ He speaks casual Japanese with peers. With his senpai he stays polite (です/�
 - A calico cat who rides the monorail and gets off wherever she likes. Turns up on the train, by the guard's desk and asleep on Eric's chair in the B2 machine room. Her story: [`tama`](stories/tama.md).
 - Look and movement: a small faceted cat, white with orange and black patches and a black tail tip, rigged in code (game3d/js/creatures/cat.js). She washes, eats from her bowl, sits, and sleeps curled with her head on her paws and her tail round her; she breathes, sways her tail, flicks an ear and blinks. She walks on four legs in a cat's walk, tail up, her steps keeping to the ground she covers; she steps round when she turns on the spot, gets up before she sets off, sits down when she stops, and hops on and off seats.
 
+### Swimming club and the east lane (designed, not placed)
+
+Not in the game yet. These five have a name, age, job and look here, but no body, voice or place on the map.
+
+- **Ms. Hori** (堀), 31, swimming club member. Job: not decided. Short deep navy-blue pixie cut swept to one side, warm brown eyes, a swimmer's build. Friendly and brisk, a little tired after a swim.
+- **Kotone Yagi** (八木琴音), 27, weather observer at the Research building, and a swimming club member. Shoulder-length lilac spiral curls, big knit sweaters, pale jeans. She reads the instruments in the garden behind the Research building at nine and three. Quick and outspoken, and she says yes to plans and people without hesitating.
+- **Yōsuke Sena** (瀬名陽介), 29, the company's health coach and the swimming club's self-appointed session planner. Short warm brown hair with a soft quiff, a denim shirt over a white T-shirt on days off. He runs the health sessions after the yearly check-up, and he writes the Saturday session plan with times and numbers.
+- **Shingo Ōtsuki** (大槻慎吾), 34, runs the company's workboat out of the harbour, and swims in the Saturday club. Lean, with a messy crop of pale silver-blond hair and a weathered face. Olive chore jacket over a black T-shirt ashore. He says little and decides alone.
+- **Tōru Shiga** (志賀透), 36, runs the liquor and rice shop on the east lane, and is not in the swimming club. Tall, with straight pale silver-blond hair to his shoulders, grey-brown eyes, an olive chore jacket over a black T-shirt and an indigo shop apron. He sells rice to the family flats by day, and after six the end of his counter becomes a standing bar among the crates.
+
 ### The others
 
 The passengers, the office workers, the two from Sales, the announcer and the gate's voice are people with a day of their own; none of them know they're in Eric's story. They speak Japanese, which Eric hears as overheard speech ([systems.md](systems.md)).
