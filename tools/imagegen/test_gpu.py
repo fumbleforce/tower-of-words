@@ -1,13 +1,14 @@
 """The image service's GPU session (tools/imagegen/gpu.py, #687): gpu.priority only for Jørgen's own renders, the
 lock owner names the agent it renders for, and an idle session lets the GPU go.
 Run: python3 tools/imagegen/test_gpu.py  (a temporary lock folder; no ComfyUI, no GPU, never the real /tmp lock)."""
-import os, subprocess, sys, tempfile, time, unittest
+import json, os, shutil, subprocess, sys, tempfile, time, unittest
 from unittest.mock import patch
 
 TMP = tempfile.TemporaryDirectory()
 os.environ['IMAGEGEN_LOCK'] = os.path.join(TMP.name, 'gpu.lock')
 os.environ['GPU_ROOT'] = TMP.name
 HERE = os.path.dirname(os.path.abspath(__file__))
+TOOLS = os.path.dirname(HERE)
 sys.path.insert(0, os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 import gpu_priority  # noqa: E402
@@ -122,6 +123,76 @@ class SessionTest(unittest.TestCase):
         os.rmdir(os.path.join(ROOT, 'gpu.lock'))  # the holder stopped
         self.assertTrue(wait_for(lambda: self.s.s['state'] == 'on'))
         self.assertIsNone(gpu_priority.yield_request(ROOT))
+
+    def test_a_new_holder_is_asked_too(self):
+        lock = os.path.join(ROOT, 'gpu.lock')
+        os.mkdir(lock)
+        with open(os.path.join(lock, 'owner'), 'w') as f:
+            f.write('club-member-1\n')
+        self.jobs.append(('', time.time()))
+        self.s.start('')
+        self.assertTrue(wait_for(lambda: (gpu_priority.yield_request(ROOT) or {}).get('owner') == 'club-member-1'))
+        with open(os.path.join(lock, 'owner'), 'w') as f:
+            f.write('club-member-2\n')  # the lock changed hands meanwhile
+        self.assertTrue(wait_for(lambda: (gpu_priority.yield_request(ROOT) or {}).get('owner') == 'club-member-2'))
+        shutil.rmtree(lock)
+        self.assertTrue(wait_for(lambda: self.s.s['state'] == 'on'))
+
+    def holder(self, mode, kept):
+        """An exclusive GPU holder like withBrowserJob's gpuLock (place-budget-frame-<pid>): it takes gpu.lock through
+        the queue, then works in steps, keeping each one in `kept`. 'checks' stops between steps; 'stuck' never
+        checks, so the watcher's grace stops it. Either way it releases and exits 75 (exitDeferred)."""
+        script = f"""
+import fs from 'node:fs';
+import {{ execFileSync }} from 'node:child_process';
+import {{ watchGpuYield, YIELD_GRACE_MS }} from {json.dumps(os.path.join(TOOLS, 'lib/browser-gpu-slots.mjs'))};
+import {{ exitDeferred }} from {json.dumps(os.path.join(TOOLS, 'lib/browser-job.mjs'))};
+const lock = `place-budget-frame-${{process.pid}}`, py = {json.dumps(os.path.join(TOOLS, 'gpu_priority.py'))};
+execFileSync('python3', [py, 'acquire', lock, '--pid', String(process.pid)], {{ stdio: 'ignore' }});
+console.log(JSON.stringify({{ lock, grace: YIELD_GRACE_MS }}));
+const watch = watchGpuYield(lock, {{ root: process.env.GPU_ROOT, pollMs: 50, graceMs: {mode == 'stuck' and 1500 or 'YIELD_GRACE_MS'}, log: () => {{}} }});
+const steps = [];
+const work = async () => {{
+  for (let i = 0; i < 600; i++) {{
+    if ({json.dumps(mode)} === 'checks') watch.checkpoint();
+    await new Promise(r => setTimeout(r, 100));
+    steps.push(i); fs.writeFileSync({json.dumps(kept)}, JSON.stringify(steps));
+  }}
+}};
+await Promise.race([work(), watch.stopped]).catch(error => {{
+  watch.close();
+  execFileSync('python3', [py, 'release', lock], {{ stdio: 'ignore' }});
+  exitDeferred(error);
+}});
+"""
+        proc = subprocess.Popen(['node', '--input-type=module', '-e', script], stdout=subprocess.PIPE, text=True,
+                                env={**os.environ, 'GPU_ROOT': ROOT})
+        self.addCleanup(lambda: proc.poll() is None and proc.kill())
+        info = json.loads(proc.stdout.readline())
+        self.assertEqual(self.owner(), info['lock'])
+        return proc, info
+
+    def test_an_exclusive_holder_stops_for_his_render_and_keeps_what_it_did(self):
+        for mode in ('checks', 'stuck'):
+            with self.subTest(mode):
+                kept = os.path.join(ROOT, f'kept-{mode}.json')
+                proc, info = self.holder(mode, kept)
+                self.assertLess(info['grace'], gpu.YIELD_GRACE * 1000)  # it lets go before the dashboard interrupts
+                time.sleep(0.5)  # a few steps done
+                logs = []
+                self.s.log = logs.append
+                self.jobs.append(('', time.time()))
+                asked = time.time()
+                self.s.start('')
+                self.assertEqual(proc.wait(timeout=gpu.YIELD_GRACE), 75)  # deferred, within the grace period
+                self.assertLess(time.time() - asked, gpu.YIELD_GRACE)
+                self.assertTrue(wait_for(lambda: self.s.s['state'] == 'on'))
+                self.assertIn("Jørgen's image gen dashboard", self.owner())
+                self.assertTrue(any(f"GPU held by {info['lock']}: asked it to stop" in m for m in logs), logs)
+                self.assertGreater(len(json.load(open(kept))), 0)  # the steps it finished are kept
+                self.s.end('test over')
+                self.jobs.clear()
+                self.s.sync_priority()
 
     def test_his_render_during_an_agent_session_claims_the_priority(self):
         self.jobs.append((AGENT, time.time()))

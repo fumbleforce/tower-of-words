@@ -4,10 +4,10 @@
 // Video mode holds the exclusive GPU lock as opening-video-production for the whole render (Jørgen 2026-10-09)
 // and stops (exit 75) when his image gen dashboard asks for the GPU. Width with W=1280 (default 1920); extra page options with Q (Q=win=small). Output defaults to
 // game3d/shots/opening-film/<time>/.
-import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
+import { withBrowserJob, exitDeferred } from '../../tools/lib/browser-job.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
-import { execFileSync, spawn } from 'node:child_process';
+import { spawn } from 'node:child_process';
 
 const [mode = 'stills', a1, a2, a3, a4] = process.argv.slice(2);
 const G = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
@@ -53,12 +53,8 @@ if (mode === 'stills') {
   const mp4 = path.join(out, `opening-${RW}.mp4`);
   const n = Math.round((to - from) * fps);
   const LOCK = 'opening-video-production';
-  const mustYield = () => {
-    try { execFileSync('python3', [path.join(G, '../tools/gpu_priority.py'), 'stop', LOCK], { stdio: 'ignore' }); return true; }
-    catch { return false; }
-  };
   let yielded = false;
-  await withBrowserJob('opening-video', async (browser) => {
+  await withBrowserJob('opening-video', async (browser, job) => {
     const { page, errs } = await openPage(browser);
     // frames go straight into ffmpeg as PNGs; the music is cut to the same span
     const ff = spawn('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-f', 'image2pipe', '-framerate', String(fps), '-i', '-',
@@ -71,13 +67,13 @@ if (mode === 'stills') {
       if (!ff.stdin.write(buf)) await new Promise((r) => ff.stdin.once('drain', r));
       if (i % (fps * 5) === 0) {
         console.log(`frame ${i}/${n}  T=${T.toFixed(2)}  ${((Date.now() - t0) / 1000).toFixed(0)}s`);
-        if (i && mustYield()) { yielded = true; break; }
       }
+      if (job.shouldYield()) { yielded = true; break; }
     }
     ff.stdin.end();
     await new Promise((r) => ff.on('close', r));
     if (errs.length) console.log('PAGE ERRORS:\n' + [...new Set(errs)].join('\n'));
-  }, { timeoutMs: 3600000, gpuWaitMs: 900000, loadWaitMs: 1800000, gpuLock: LOCK });
+  }, { timeoutMs: 3600000, gpuWaitMs: 900000, loadWaitMs: 1800000, gpuLock: LOCK }).catch(exitDeferred);
   if (yielded) {
     console.log('opening-video: stopped for the image gen dashboard; the video is incomplete, run it again later');
     process.exit(75);

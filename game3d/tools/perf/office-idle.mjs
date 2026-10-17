@@ -3,7 +3,7 @@
 import fs from "node:fs";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { withBrowserJob, gpuWaitOptions } from "../../../tools/lib/browser-job.mjs";
+import { withBrowserJob, gpuWaitOptions, exitDeferred } from "../../../tools/lib/browser-job.mjs";
 import { scopedRoute } from "../../../tools/bible/check-scope.mjs";
 const out = process.env.OUT || "/tmp/office-idle";
 const at = (process.env.AT || "").split(",").filter(Boolean).map(Number);
@@ -292,4 +292,4 @@ await withBrowserJob(
     gpuLock: `office-idle-${process.pid}`,
     ...gpuWaitOptions(900, 120000),
   },
-);
+).catch(exitDeferred);

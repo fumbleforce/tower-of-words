@@ -2,7 +2,7 @@
 // BASE=.claude/worktrees/<name>/game3d node game3d/tools/title-performance.mjs [phone]
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
+import { withBrowserJob, exitDeferred } from '../../tools/lib/browser-job.mjs';
 import { scopedRoute } from '../../tools/bible/check-scope.mjs';
 const phone = process.argv.includes('phone');
 const out = `/tmp/title-performance-${phone ? 'phone' : 'desktop'}-${Date.now()}`;
@@ -94,4 +94,4 @@ await withBrowserJob(
     gpuWaitMs: 300000,
     timeoutMs: 120000,
   },
-);
+).catch(exitDeferred);

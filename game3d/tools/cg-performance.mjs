@@ -4,7 +4,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
+import { withBrowserJob, exitDeferred } from '../../tools/lib/browser-job.mjs';
 import { scopedRoute } from '../../tools/bible/check-scope.mjs';
 const phone = process.argv.includes('phone');
 const functional = process.env.FUNCTIONAL === '1';
@@ -109,4 +109,4 @@ await withBrowserJob('cg-performance', async browser => {
   console.log(output, JSON.stringify(results, null, 2));
   await context.close();
   }
-}, { gpuLock: functional ? null : `cg-performance-${process.pid}`, gpuWaitMs: 900000, timeoutMs: 180000 });
+}, { gpuLock: functional ? null : `cg-performance-${process.pid}`, gpuWaitMs: 900000, timeoutMs: 180000 }).catch(exitDeferred);

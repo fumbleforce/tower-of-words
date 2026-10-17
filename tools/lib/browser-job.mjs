@@ -5,13 +5,17 @@
 // its Chromium (browser-gpu-slots.mjs).
 // A long GPU job (the opening video) passes gpuLock: '<name>' to hold the exclusive
 // gpu.lock under that name (tools/gpu_priority.py, rank render) instead of a slot.
+// While it holds it, Jørgen's image gen dashboard comes first (#701): run(browser, job) gets job.shouldYield() and
+// job.checkpoint() to stop between its items, and a job still running YIELD_GRACE_MS after the dashboard asked is
+// stopped where it stands. Either way withBrowserJob rejects with code GPU_DEFERRED (yielded: true); exitDeferred
+// turns that into exit 75.
 import fs from 'node:fs';
 import os from 'node:os';
 import { randomUUID } from 'node:crypto';
 import { execFileSync, spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
-import { enqueueGpuTicket, processStart, tryAcquireBrowserGpuSlot } from './browser-gpu-slots.mjs';
+import { enqueueGpuTicket, processStart, tryAcquireBrowserGpuSlot, watchGpuYield } from './browser-gpu-slots.mjs';
 
 const ROOT = '/tmp/claude-1000';
 const CLOSE_GRACE_MS = 10000;
@@ -49,6 +53,16 @@ export function gpuWaitOptions(defaultSeconds, jobMs) {
   return { gpuWaitMs: seconds * 1000, timeoutMs: jobMs };
 }
 
+// .catch(exitDeferred) after withBrowserJob: a job deferred (machine or GPU busy) or stopped for the dashboard exits 75.
+export function exitDeferred(error) {
+  if (!['GPU_DEFERRED', 'LOAD_DEFERRED'].includes(error?.code)) throw error;
+  console.log(`DEFERRED: ${error.message.split('\n')[0]}`);
+  process.exit(75);
+}
+
+// The job handle run() gets: a job without the exclusive lock never has to yield.
+const NO_YIELD = Object.freeze({ shouldYield: () => false, checkpoint() {} });
+
 export async function withBrowserJob(name, run, {
   timeoutMs = 285000, loadWaitMs = 60000, loadPollMs = 5000, gpuWaitMs = 60000, gpuLock = null,
 } = {}) {
@@ -58,7 +72,7 @@ export async function withBrowserJob(name, run, {
   const queued = Date.now();
   let started = queued; // the run deadline counts from admission (the GPU is ours), not from the queue
   const owner = `${name} pid=${process.pid} ${randomUUID()}`, locks = [];
-  let safeToRelease = true, gpuSlot, browserPid = null, gpuTicket = null, lockWaiter = null, lockHeld = false;
+  let safeToRelease = true, gpuSlot, browserPid = null, gpuTicket = null, lockWaiter = null, lockHeld = false, yieldWatch = null;
   // Kill Chromium's process group (Playwright starts it detached) when a close hangs
   // or the process is going away; after that the locks are safe to drop.
   const killBrowser = () => {
@@ -161,6 +175,7 @@ export async function withBrowserJob(name, run, {
         waiter.on('exit', resolve);
       })]);
       if (code !== 0) throw Object.assign(new Error(`${name}: render deferred; the exclusive GPU lock stayed busy (python3 tools/gpu_priority.py queue)`), { code: 'GPU_DEFERRED' });
+      yieldWatch = watchGpuYield(gpuLock, { root: process.env.GPU_ROOT || ROOT, log: message => console.log(`${name}: ${message}`) });
     } else if (gpu) {
       const gpuUntil = Date.now() + gpuWaitMs;
       let waitingForGpu = false;
@@ -206,9 +221,11 @@ export async function withBrowserJob(name, run, {
     if (browserPid && gpuSlot) gpuSlot.track(browserPid);
     if (cancelledError) throw cancelledError;
     if (deadlineError) throw deadlineError;
-    return await Promise.race([deadline, cancelled, Promise.resolve().then(() => run(browser))]);
+    const job = yieldWatch ? { shouldYield: yieldWatch.shouldYield, checkpoint: yieldWatch.checkpoint } : NO_YIELD;
+    yieldWatch?.checkpoint();
+    return await Promise.race([deadline, cancelled, ...(yieldWatch ? [yieldWatch.stopped] : []), Promise.resolve().then(() => run(browser, job))]);
   } finally {
-    clearTimeout(timer); clearTimeout(pollTimer);
+    clearTimeout(timer); clearTimeout(pollTimer); yieldWatch?.close();
     // Software GL sometimes needs several seconds to release a large room. A close
     // that takes longer than the grace is hung: kill Chromium and go on releasing.
     let closeLimit;

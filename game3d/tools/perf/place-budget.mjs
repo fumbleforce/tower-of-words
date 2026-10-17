@@ -7,10 +7,12 @@
 // eight ways at its lowest pitch (the worst facing counts), and the geometry and texture memory its scene holds.
 // A frame tier (frame: true; #625) stands each place and screen (title, B2, pause, a picture; frame-measure.mjs) still
 // at its viewport for a few seconds on default settings, uncapped, and times its frames: median and p95. It holds the
-// exclusive GPU lock (other jobs would skew the times), waiting its turn for up to GPU_WAIT s (default 1200).
+// exclusive GPU lock (other jobs would skew the times), waiting its turn for up to GPU_WAIT s (default 1200). When
+// Jørgen's image gen dashboard asks for the GPU it stops between places (#701; browser-job.mjs stops it where it stands
+// after a short grace) and keeps what it measured; the rest of the tier is unmeasured.
 // A place over budget is measured once more and the lower numbers count, so moving crowds don't fail a landing.
 // Exit 0 within budget, 1 over budget or a place failed to open, 75 deferred (machine or GPU busy): nothing measured,
-// or the frame tier alone (the JSON's `unmeasured` names what wasn't, and why).
+// or the frame tier alone, whole or in part (the JSON's `unmeasured` names what wasn't, and why).
 // tools/land.sh runs it before main moves when game3d/ changed. Budgets and exceptions: notes/PERF.md, "Place budgets".
 import fs from 'node:fs';
 import os from 'node:os';
@@ -94,20 +96,22 @@ async function measure(page, cdp, tier, place, base) {
 // One place at a time, each in its own browser context, closed before the next opens: a place's page holds a few
 // hundred MB, and the machine's memory is shared with other jobs (one headless page at a time).
 // A frame tier also measures the screens in the list, in one context after the places.
-async function runTier(browser, tier, list, base) {
+// Each result goes to put(name, result) as soon as it is measured, so a run stopped for the dashboard keeps them.
+async function runTier(browser, job, tier, list, base, put) {
   const t = budgets.tiers[tier];
-  const out = {};
   const contextFor = () => browser.newContext({ viewport: { width: t.viewport[0], height: t.viewport[1] }, deviceScaleFactor: 1,
     isMobile: !!t.touch, hasTouch: !!t.touch, serviceWorkers: 'block' });
   const shown = list.filter(n => allScreens.includes(n));
   if (t.frame && shown.length) {
+    job.checkpoint();
     const context = await contextFor();
     try {
       await context.addInitScript(() => globalThis.localStorage.setItem('amakawa-settings', JSON.stringify({ v: 99, privateMode: false, voiceOn: false })));
-      Object.assign(out, await measureScreens(await context.newPage(), `${base}/game3d/index.html`, shown, t.seconds));
+      for (const [name, r] of Object.entries(await measureScreens(await context.newPage(), `${base}/game3d/index.html`, shown, t.seconds))) put(name, r);
     } finally { await context.close(); }
   }
   for (const place of list.filter(n => !allScreens.includes(n))) {
+    job.checkpoint();
     const context = await contextFor();
     try {
       await context.addInitScript(lookSource => {
@@ -117,10 +121,9 @@ async function runTier(browser, tier, list, base) {
         globalThis.localStorage.setItem('amakawa-settings', JSON.stringify({ v: 99, privateMode: false, voiceOn: false, textSpeed: 'instant' }));
       }, look.toString());
       const page = await context.newPage();
-      out[place] = await measure(page, await context.newCDPSession(page), tier, place, base);
+      put(place, await measure(page, await context.newCDPSession(page), tier, place, base));
     } finally { await context.close(); }
   }
-  return out;
 }
 
 let status = 0, results = {}, busiest = 0;
@@ -131,27 +134,41 @@ const began = Date.now();
 const BUSY = 16, sampleLoad = () => { busiest = Math.max(busiest, os.loadavg()[0]); };
 const loadTimer = setInterval(sampleLoad, 5000);
 const server = await serveFolder(root);
-// The tiers, then one more measurement of every place over budget in them; the lower numbers count.
-async function measureTiers(browser, list) {
-  for (const tier of list) results[tier] = await runTier(browser, tier, names, server.url);
-  const again = {};
-  for (const o of overBudget(budgets, Object.fromEntries(list.map(t => [t, results[t]])))) (again[o.tier] ||= new Set()).add(o.place);
-  for (const [tier, set] of Object.entries(again)) for (const [place, second] of Object.entries(await runTier(browser, tier, [...set], server.url))) results[tier][place] = lower(results[tier][place], second);
+// The tiers, then one more measurement of every place over budget in them; the lower numbers count. retrying: the
+// places over budget still waiting for that second measurement, which don't count if the run stops before it.
+// Nothing measured after the dashboard asked for the GPU is kept (a closing browser fails whatever was running).
+const retrying = {};
+async function measureTiers(browser, job, list) {
+  const keep = (tier, again) => (place, r) => {
+    if (job.shouldYield()) return;
+    results[tier][place] = again ? lower(results[tier][place], r) : r;
+    if (again) retrying[tier].delete(place);
+  };
+  for (const tier of list) { results[tier] = {}; await runTier(browser, job, tier, names, server.url, keep(tier)); }
+  for (const o of overBudget(budgets, Object.fromEntries(list.map(t => [t, results[t]])))) (retrying[o.tier] ||= new Set()).add(o.place);
+  for (const tier of list) if (retrying[tier]?.size) await runTier(browser, job, tier, [...retrying[tier]], server.url, keep(tier, true));
 }
 try {
   ensureBuild();
   const slotTiers = tiers.filter(t => !isFrame(t)), frameTiers = tiers.filter(isFrame);
-  if (slotTiers.length && places.length) await withBrowserJob('place-budget', browser => measureTiers(browser, slotTiers), { timeoutMs: 600000, loadWaitMs: 120000, gpuWaitMs: 240000 });
+  if (slotTiers.length && places.length) await withBrowserJob('place-budget', (browser, job) => measureTiers(browser, job, slotTiers), { timeoutMs: 600000, loadWaitMs: 120000, gpuWaitMs: 240000 });
   if (frameTiers.length) {
     // the exclusive GPU lock, uncapped: frame times with nothing else drawing on the card
     const before = process.env.CHROME_ARGS;
     process.env.CHROME_ARGS = [before, UNCAPPED].filter(Boolean).join(' ');
     try {
-      await withBrowserJob('place-budget-frame', browser => measureTiers(browser, frameTiers),
+      await withBrowserJob('place-budget-frame', (browser, job) => measureTiers(browser, job, frameTiers),
         { gpuLock: `place-budget-frame-${process.pid}`, loadWaitMs: 120000, ...gpuWaitOptions(1200, 900000) });
     } catch (error) {
-      if (!['LOAD_DEFERRED', 'GPU_DEFERRED'].includes(error.code) || !Object.keys(results).length) throw error;
-      for (const tier of frameTiers) { unmeasured[tier] = error.message.split('\n')[0]; delete results[tier]; }
+      if (!['LOAD_DEFERRED', 'GPU_DEFERRED'].includes(error.code)) throw error;
+      // stopped part way (the dashboard asked for the GPU): the places it finished count, the rest is unmeasured
+      for (const tier of frameTiers) {
+        for (const place of retrying[tier] || []) delete results[tier]?.[place];
+        const left = names.filter(n => !results[tier]?.[n]);
+        if (results[tier] && !Object.keys(results[tier]).length) delete results[tier];
+        if (left.length) unmeasured[tier] = error.message.split('\n')[0] + (results[tier] ? `; not measured: ${left.join(', ')}` : '');
+      }
+      if (!Object.keys(results).length) throw error;
     } finally {
       if (before === undefined) delete process.env.CHROME_ARGS; else process.env.CHROME_ARGS = before;
     }

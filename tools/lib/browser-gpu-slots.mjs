@@ -76,6 +76,55 @@ export function gpuPriority({ root = DEFAULT_ROOT } = {}) {
   return data && Number.isInteger(data.pid) && alive(data.pid, data.start) ? data : null;
 }
 
+// The dashboard's live request that the gpu.lock holder stop ({owner, pid, start, at}), or null (gpu_priority.py
+// request_yield).
+export function gpuYield({ root = DEFAULT_ROOT } = {}) {
+  let data;
+  try { data = JSON.parse(fs.readFileSync(path.join(root, 'gpu.yield'), 'utf8')); }
+  catch { return null; }
+  return data && Number.isInteger(data.pid) && alive(data.pid, data.start) ? data : null;
+}
+
+// Seconds an exclusive holder gets, after it sees the request, to stop at a safe point before it is stopped where it
+// stands: shorter than the dashboard's own grace (YIELD_GRACE in tools/imagegen/gpu.py).
+export const YIELD_GRACE_MS = 10000;
+
+// Why the job holding gpu.lock as `lock` must stop for Jørgen's image gen dashboard, or null: the same rule as
+// should_stop() in tools/gpu_priority.py (a live gpu.priority, or a gpu.yield naming the lock).
+export function yieldReason(lock, { root = DEFAULT_ROOT } = {}) {
+  const priority = gpuPriority({ root });
+  if (priority && priority.pid !== process.pid) return `Jørgen's image gen dashboard has priority (gpu.priority, since ${priority.at || '?'})`;
+  const asked = gpuYield({ root });
+  if (asked && asked.pid !== process.pid && String(asked.owner || '').includes(lock)) return `Jørgen's image gen dashboard asked ${lock} to stop (gpu.yield, ${asked.at || '?'})`;
+  return null;
+}
+
+// Watches for the dashboard while a job holds gpu.lock as `lock` (#701). shouldYield() is true from the first request
+// on (it stays true); a job checks it between items and stops. `stopped` rejects graceMs after the request, so a job
+// that doesn't stop in time is stopped where it stands. Both carry the same error: code GPU_DEFERRED, yielded true
+// (exit 75). close() when the lock goes.
+export function watchGpuYield(lock, { root = DEFAULT_ROOT, pollMs = 1000, graceMs = YIELD_GRACE_MS, log = console.log } = {}) {
+  let error = null, grace, rejectStopped;
+  const stopped = new Promise((_, reject) => { rejectStopped = reject; });
+  stopped.catch(() => {});
+  const shouldYield = () => {
+    if (error) return true;
+    const reason = yieldReason(lock, { root });
+    if (!reason) return false;
+    error = Object.assign(new Error(`${lock}: stopped for the image gen dashboard: ${reason}; run it again later`), { code: 'GPU_DEFERRED', yielded: true });
+    log(`${lock}: ${reason}; stopping at the next safe point (at most ${graceMs / 1000} s)`);
+    grace = setTimeout(() => rejectStopped(error), graceMs);
+    return true;
+  };
+  const poll = setInterval(shouldYield, pollMs);
+  return {
+    shouldYield, stopped,
+    error: () => error,
+    checkpoint() { if (shouldYield()) throw error; },
+    close() { clearInterval(poll); clearTimeout(grace); },
+  };
+}
+
 // ---------------------------------------------------------------- the GPU queue
 // Same ranks and order as tools/gpu_priority.py (RANKS, order_key).
 export const GPU_RANKS = { dashboard: 1, 'carina-image': 2, 'carina-voice': 3, voice: 4, browser: 4.5, render: 5 };

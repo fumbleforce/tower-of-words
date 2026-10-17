@@ -7,7 +7,7 @@
 // frames (ms); the screens and the sampling are in frame-measure.mjs, shared with the place budget check's frame tier.
 // Settings are the defaults (quality and frame limit Auto); FRAMECAP=60 etc. measures an explicit choice.
 import fs from 'node:fs';
-import { withBrowserJob } from '../../../tools/lib/browser-job.mjs';
+import { withBrowserJob, exitDeferred } from '../../../tools/lib/browser-job.mjs';
 import { scopedRoute } from '../../../tools/bible/check-scope.mjs';
 import { UNCAPPED, SCREENS, measureScreens } from './frame-measure.mjs';
 
@@ -38,7 +38,7 @@ await withBrowserJob(
     await context.close();
   },
   { gpuLock: `refresh-rate-${process.pid}`, gpuWaitMs: 1800000, timeoutMs: 240000 },
-);
+).catch(exitDeferred);
 console.log(`\n${W}x${H}  scene        limit  fps     median  p95 (ms)`);
 for (const [k, r] of Object.entries(results))
   console.log(r.error ? `  ${k.padEnd(12)} ${r.error}` : `  ${k.padEnd(12)} ${String(r.limit || 'none').padEnd(6)} ${String(r.fps).padEnd(7)} ${String(r.medianMs).padEnd(7)} ${r.p95Ms}`);

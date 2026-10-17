@@ -6,8 +6,9 @@ the owner file still names the service. The worker checks the owner before every
 Priority (Jørgen, 2026-10-05: "let my tools/imagegen page have priority"; #687: only for his own renders): while a job
 without an owner (a render from his own UI) is queued or running, or his own session start waits for the GPU, the
 session keeps gpu.priority live (tools/gpu_priority.py), so no agent job takes the lock or a browser GPU slot. If
-another job holds the lock, the session writes gpu.yield naming it, waits YIELD_GRACE, interrupts ComfyUI and takes
-the lock as soon as it is released (a lock left by dead browser jobs is freed at once). It waits in gpu.queue with a
+another job holds the lock, whoever it is, the session writes gpu.yield naming it (again if the holder changes), waits
+YIELD_GRACE, interrupts ComfyUI and takes the lock as soon as it is released (a lock left by dead browser jobs is freed
+at once). An exclusive browser job (withBrowserJob's gpuLock) stops sooner, within YIELD_GRACE_MS (#701). It waits in gpu.queue with a
 rank-1 ticket. The priority goes when his jobs are done.
 Agents: a job with an owner waits its turn in gpu.queue at render rank, from the time it was queued, like any other
 render. The lock's owner then names it ("imagegen-service (image service: <owner>, ...)"). Before each of its jobs the
@@ -291,7 +292,7 @@ class Session:
         """Wait for the lock. For his renders: ask the holder to stop, after YIELD_GRACE interrupt ComfyUI (and drop its
         queue), then take the lock the moment it is free. For an agent's: wait for its turn in the queue. Ends quietly
         if the session is ended meanwhile."""
-        asked, interrupted, said = None, False, None
+        asked, asked_owner, interrupted, said = None, None, False, None
         while True:
             with self.lock:
                 if self.s['state'] != 'starting':
@@ -303,16 +304,17 @@ class Session:
                     self._set(message='Starting ComfyUI...', last_activity=time.time())
                     break
                 if self.his_wanted():
-                    if asked is None:
-                        info = lock_info()
+                    info = lock_info()
+                    if info.get('held') and info.get('owner') != asked_owner:
+                        # any holder, and a new one if the lock changed hands meanwhile: it gets its own grace
                         gpu_priority.request_yield(info.get('owner', ''), ROOT)
-                        asked = time.time()
+                        asked, asked_owner, interrupted = time.time(), info.get('owner'), False
                         self._set(message=f"Asked {info.get('owner')} to stop (it has had the GPU since {info.get('since')}).")
                         self.log(f"GPU held by {info.get('owner')}: asked it to stop")
                 else:
                     if asked is not None:
                         gpu_priority.clear_yield(ROOT)
-                        asked, interrupted = None, False
+                        asked, asked_owner, interrupted = None, None, False
                     why = gpu_priority.waiting_reason(self.ticket, ROOT)
                     if why != said:
                         said = why
