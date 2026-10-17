@@ -2,7 +2,7 @@
  "title": "Hamada as an attractive mature man, round 1 (Mori's part superseded by mori-2)",
  "date": "2026-10-16",
  "by": "claude-main/art-round",
- "status": "open",
+ "status": "decided",
  "question": "Which of these, if any, should become Hamada's new base portrait? If you prefer, the current portrait can stay as the non-adult version and a pick here would be the Adult-mode look. Mori's renders here are superseded by round mori-2.",
  "multi": true,
  "media": [
@@ -283,5 +283,8 @@
    "href": "art/candidates/portraits/mori-hamada-1/staging.md"
   }
  ],
- "updated": "2026-10-16T17:40:00+0200"
+ "updated": "2026-10-16T17:40:00+0200",
+ "decision": "close this, no shaved side, and dont make the same hairstyle again and again",
+ "decided_at": "2026-10-17T10:59:59+0200",
+ "issue": 662
 }
