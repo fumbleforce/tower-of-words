@@ -4,12 +4,17 @@ import * as D from '../../scenes/sports/deck-plan.js';
 import { glide } from '../../move.js';
 
 export function poolChanging(game, { action, outfit, active, stepsTop, lane, waterEnd, steps, climbOut, inWater }) {
+  // A stop on the protagonist's own route: at the locker or the shower, on the way in ('enter') or out ('exit'). A
+  // local plugin may play something there (place.hooks.routeStop, plugins.js) and the route waits for it. The public
+  // game sets no such hook.
+  const stop = (at, way) => action.wait(Promise.resolve(game.place.hooks?.routeStop?.({ at, way })));
   // Change at the actual locker, then use the existing shower and steps route.
   async function enter() {
     const door = MC.gender === 'woman' ? D.EXIT_W : D.EXIT;
     const changing = game.place.changing;
     if (changing) {
       await action.wait(game.walkTo(...changing.locker));
+      await stop('locker', 'enter');
       await action.wait(game.wait(400));
       outfit('eric', true);
     } else await action.wait(game.walkTo(door.lane[0], door.lane[1]));
@@ -20,6 +25,7 @@ export function poolChanging(game, { action, outfit, active, stepsTop, lane, wat
     game.place.cam.snap?.(e.root.position);
     if (changing) {
       await action.wait(game.walkTo(...changing.shower));
+      await stop('shower', 'enter');
       await action.wait(game.wait(350));
       await action.wait(game.walkTo(...changing.deck));
       await action.wait(game.walkTo(...stepsTop));
@@ -37,8 +43,10 @@ export function poolChanging(game, { action, outfit, active, stepsTop, lane, wat
     game.walker.sync?.();
     if (active('eric') && game.place.changing) {
       await action.wait(game.walkTo(...game.place.changing.shower));
+      await stop('shower', 'exit');
       await action.wait(game.wait(350));
       await action.wait(game.walkTo(...game.place.changing.locker));
+      await stop('locker', 'exit');
       await action.wait(game.wait(400));
       outfit('eric', false);
     }

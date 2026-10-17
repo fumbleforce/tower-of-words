@@ -40,6 +40,38 @@ function load(id) {
   }
   return pending.get(id);
 }
+// one actor's swimwear slot, from the loaded parts of body bodyId (the protagonists also get their ground contact)
+function slotFor(actor, bodyId, parts, grounding, key) {
+  const [walk, ...rest] = parts;
+  return poolOutfitSlot(
+    actor,
+    (root) => {
+      const model = clone(walk.scene);
+      model.traverse((o) => {
+        if (o.isMesh) o.material = o.material.clone();
+      });
+      const body = meshyFrom(`swimwear-${bodyId}`, [{ ...walk, scene: model }, ...rest, null], {
+        height: HEIGHTS[bodyId],
+        size: parts.size,
+        root,
+      });
+      if (grounding && (bodyId === 'eric' || bodyId === 'carina')) grounding[key] = poolOutfitGround(body);
+      return body;
+    },
+    key === 'eric' ? null : meshyPerson,
+  );
+}
+// Emi's or Kuro's swimwear on another body of theirs (a stand-in a local plugin places in the pavilion): the slot
+// ({ active, set(on), dispose() }), or null when there is none or it won't load.
+export async function swimwearFor(id, actor) {
+  if (!['emi', 'kuro'].includes(id) || !actor?.root) return null;
+  try {
+    return slotFor(actor, id, await load(id), null, id);
+  } catch (error) {
+    console.warn('Pool swimwear unavailable', id, error);
+    return null;
+  }
+}
 export async function poolOutfits(game, cast) {
   const people = {
     eric: game.player,
@@ -51,26 +83,7 @@ export async function poolOutfits(game, cast) {
   try {
     const files = await Promise.all(Object.keys(people).map((id) => load(id === 'eric' ? MC.id : id)));
     Object.entries(people).forEach(([id, actor], i) => {
-      const bodyId = id === 'eric' ? MC.id : id,
-        parts = files[i],
-        [walk, ...rest] = parts;
-      slots[id] = poolOutfitSlot(
-        actor,
-        (root) => {
-          const model = clone(walk.scene);
-          model.traverse((o) => {
-            if (o.isMesh) o.material = o.material.clone();
-          });
-          const body = meshyFrom(`swimwear-${bodyId}`, [{ ...walk, scene: model }, ...rest, null], {
-            height: HEIGHTS[bodyId],
-            size: parts.size,
-            root,
-          });
-          if (bodyId === 'eric' || bodyId === 'carina') grounding[id] = poolOutfitGround(body);
-          return body;
-        },
-        id === 'eric' ? null : meshyPerson,
-      );
+      slots[id] = slotFor(actor, id === 'eric' ? MC.id : id, files[i], grounding, id);
     });
   } catch (error) {
     for (const slot of Object.values(slots)) slot.dispose();
