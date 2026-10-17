@@ -32,6 +32,10 @@ export function* terraceSteps(pv, p, lights, root) {
   for (const x of [TR[0] + 1.1, TR[1] - 1.3]) bench(p, x, TR[3] - 0.7, 0, { len: 1.3 });
   const vx = TR[0] + 0.6,
     vz = TR[2] + 0.55;
+  // the slatted screen behind it, as on the beach plaza, so it stands against something
+  for (let x = vx - 0.5; x < vx + 0.55; x += 0.16)
+    p.box('#7a654f', 0.1, 1.9, 0.06, x, 0, TR[2] + 0.04, { surf: 'wood' });
+  p.box('#6d5a47', 1.15, 0.08, 0.1, vx, 1.9, TR[2] + 0.04, { surf: 'wood' });
   terraceVending(root, p, vx, vz);
   lights.lit.push([vx, vz + 0.9, 0.9]);
   // in the terrace's north half a raised bed with a big black pine, seen from up the row

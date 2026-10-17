@@ -318,7 +318,13 @@ function roofTerrace(p, k, H, wall, box) {
       const [mx, mz] = faceAt(E, u - fw * 0.3 + m * fw * 0.3, -0.45);
       mound(p, mx, mz, 0.2 + ((i + m) % 3) * 0.04, [LEAF.mid, LEAF.fresh, LEAF.deep][(i + m) % 3], { y: y + 0.4 });
     }
-    if (i) onFace(box('#c9c3b6', false), E, fw * i, y, -(x1 - x0) / 2 + 0.05, 0.06, 1.0, x1 - x0 - 0.3);
+    if (i) {
+      // a frosted screen in a dark frame, its post at the sea end
+      const d = x1 - x0 - 0.3;
+      onFace(box('#a9b4b8', false), E, fw * i, y + 0.1, -(x1 - x0) / 2 + 0.05, 0.04, 1.1, d);
+      onFace(box(FRAME, false), E, fw * i, y + 1.2, -(x1 - x0) / 2 + 0.05, 0.07, 0.06, d + 0.04);
+      onFace(box(FRAME, false), E, fw * i, y, -0.2, 0.08, 1.26, 0.08);
+    }
     if (hash2(i, k.rect[2], 7) < 0.55) {
       const [tx, tz] = faceAt(E, u, -(x1 - x0) / 2);
       p.box('#c9cdd0', 0.42, 0.04, 0.42, tx, y + 0.42, tz);
