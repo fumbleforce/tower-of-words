@@ -97,6 +97,7 @@ export const PLANTERS = [
 ];
 export const PARK_FURNITURE = [
   ...PLANTERS,
+  [Q.NS_X[0] - 0.6, Q.NS_X[0] - 0.3, Q.PROM[2] - 0.7, Q.PROM[2] - 0.4], // the finger sign's post
   ...LOOP_BENCHES.map(([x, z, f]) =>
     Math.abs(Math.sin(f)) > 0.5 ? [x - 0.3, x + 0.3, z - 0.85, z + 0.85] : [x - 0.85, x + 0.85, z - 0.3, z + 0.3],
   ),
@@ -113,6 +114,7 @@ export const PARK_FURNITURE = [
 export const WALL_GAPS = [[Q.DECK[2], Q.DECK[3]], ...Q.STEPS.map((s) => [s[2], s[3]])];
 // what stands on the walks, for the walk grid: the benches, the lamps, the machines, the tap, the bars
 export const PROM_FURNITURE = [
+  [Q.COURTS_EAST[1] - 0.8, Q.COURTS_EAST[1] - 0.2, Q.COURTS_EAST[2] + 0.15, Q.COURTS_EAST[3] - 0.15], // the courts walk's end bench
   ...Q.SEA_BENCHES.map((z) => [Q.BEACH_PROM[1] - 0.75, Q.BEACH_PROM[1] - 0.15, z - 0.85, z + 0.85]),
   ...Q.PROM_LAMPS.map((z) => [Q.BEACH_PROM[0] - 0.35, Q.BEACH_PROM[0] + 0.05, z - 0.18, z + 0.18]),
   [125.85, 127.75, Q.PLAZA[2], Q.PLAZA[2] + 0.75],

@@ -12,7 +12,7 @@
 import * as THREE from 'three';
 import { verge } from '../outdoor/lane.js';
 import { hedge, keyaki, sakura, maple, ginkgo, mound, grass, LEAF } from '../outdoor/planting.js';
-import { lamps, bench, bins, bikeRack } from '../outdoor/furniture.js';
+import { lamps, bench, bins, bikeRack, fingerSign } from '../outdoor/furniture.js';
 import { hash2 } from '../outdoor/parts.js';
 import { planter } from '../../kit/planting/planter.js';
 import { pergola, boards, ringSeat, swingFrame, slide, springRider, WOOD as TIMBER } from '../outdoor/park-kit.js';
@@ -267,6 +267,11 @@ export function* parkSteps(pv, p, lights, group, { far = false } = {}) {
   bins(p, Q.LOOP[0] - 0.45, -16.6, Math.PI / 2);
   bins(p, 99.2, Q.LOOP[3] + 0.45, Math.PI);
   lamps(lights, p, PARK_LAMPS, { pool: 1.3 });
+  // a finger sign where the north-south walk crosses the promenade: the beach east, the station back west
+  fingerSign(group, p, Q.NS_X[0] - 0.45, Q.PROM[2] - 0.55, [
+    { text: 'Beach', sub: '海', dir: 1 },
+    { text: 'Station', sub: '駅', dir: -1 },
+  ]);
   lamps(lights, p, PROM_PARK_LAMPS, { pool: 1.4, poolShift: [0, 0.8] });
   yield;
   // the common room's apron: a bike rack along its west end, a planter either side of its door

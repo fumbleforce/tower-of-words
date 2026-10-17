@@ -241,6 +241,8 @@ export function* gardensSteps(pv, p, lights, { far = false } = {}) {
     yield;
   }
   bins(p, Q.GATE_X - 2.0, Q.NORTH[3] + 0.4, Math.PI);
+  // the bench at the courts walk's end, looking out over the water
+  bench(p, Q.COURTS_EAST[1] - 0.5, (Q.COURTS_EAST[2] + Q.COURTS_EAST[3]) / 2, Math.PI / 2, { len: 1.6 });
   lamps(lights, p, QUARTER_LAMPS, { pool: 1.3 });
   yield;
 }
