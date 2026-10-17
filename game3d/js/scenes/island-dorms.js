@@ -97,8 +97,14 @@ export const DORM_PATHS = [
     Q.GARDEN_PATH,
     'From the north path into the residents’ allotments, on the courts gate’s axis.',
   ),
-  ...Q.PLOT_WALKS.map((r, i) => p(`plot_walk_${i}`, 'walk', r, 'A gravel walk along the allotment plots.')),
+  ...Q.PLOT_WALKS.map((r, i) => p(`plot_walk_${i}`, 'walk', r, 'A walk of square flags along the allotment plots.')),
   p('pergola_walk', 'walk', Q.PERGOLA_WALK, 'From the north path to N-E’s pergola in the sea garden.'),
+  p(
+    'sea_garden_walk',
+    'walk',
+    Q.SEA_WALK,
+    'On north from N-E’s pergola through the sea garden to the courts walk’s end.',
+  ),
   p('pergola_pad', 'court', Q.PERGOLA, 'Under the pergola: two picnic tables.'),
   p(
     'beach_promenade',
@@ -112,7 +118,12 @@ export const DORM_PATHS = [
     Q.PLAZA,
     'Where the promenade meets the beach: two drinks machines, a bench, a beach tap, wide steps down.',
   ),
-  p('fitness_corner', 'court', Q.FITNESS, 'Three bars beside the beach promenade.'),
+  p(
+    'fitness_corner',
+    'court',
+    Q.FITNESS,
+    'Pull-up bars on a mat, a sit-up bench and push-up bars beside the beach promenade.',
+  ),
   p('lookout_deck', 'court', Q.DECK, 'A timber deck over the water at the north path’s end.'),
   ...[...COAST_GARDEN_RECTS()].map((r, i) =>
     p(

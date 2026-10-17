@@ -19,6 +19,7 @@ import { planter } from '../../kit/planting/planter.js';
 import { boulder, shoreRibbon, WET, SURF } from '../outdoor/seafront.js';
 import * as Q from './plan.js';
 import { WALL_GAPS } from './fittings.js';
+import { BATH_COAST } from '../island-baths.js';
 
 const STONE = { tread: '#9a9893', nosing: '#6f7175', cheek: '#8c8e8f' };
 const PILE = '#5d5249';
@@ -52,6 +53,11 @@ export function* promenadeSteps(pv, p, lights, root, { far = false } = {}) {
     if (g0 - z > 0.5) rail(p, [RAIL_X, z + 0.1], [RAIL_X, g0 - 0.1], { y: COPING_Y, mid: true });
     z = g1;
   }
+  // and on round the sea garden's wall to the courts walk's end, so the lawn's edge at the water reads as closed
+  const [c0, c1] = BATH_COAST,
+    t = (c0[1] - Q.COURTS_EAST[2]) / (c0[1] - c1[1]);
+  const north = [[RAIL_X, BZ0], ...Q.COAST_LINE.slice(4), c0, [c0[0] + (c1[0] - c0[0]) * t, Q.COURTS_EAST[2]]];
+  for (let i = 0; i + 1 < north.length; i++) rail(p, north[i], north[i + 1], { y: COPING_Y, mid: true });
   yield;
   // the benches looking out, a bin beside every other
   Q.SEA_BENCHES.forEach((bz, i) => {
@@ -129,8 +135,10 @@ function beach(p, far) {
       boulder(p, x + Math.cos(a) * 0.45 * Math.sqrt(j), z + Math.sin(a) * 0.4 * Math.sqrt(j), r, -0.16);
     }
   if (far) return;
-  for (let z = Q.BEACH[2] + 2; z < Q.BEACH[3] - 1.5; z += 1.7 + hash2(z, 1, 9) * 1.4)
+  for (let z = Q.BEACH[2] + 2; z < Q.BEACH[3] - 1.5; z += 1.7 + hash2(z, 1, 9) * 1.4) {
+    if (Q.STEPS.some(([, , z0, z1]) => z > z0 - 0.8 && z < z1 + 0.8)) continue; // the steps and their landings clear
     grass(p, Q.WALL[1] + 0.35 + hash2(z, 2, 5) * 0.4, z, { h: 0.34, color: '#8a8f66', seed: Math.round(z * 7) });
+  }
 }
 
 function deck(p) {
@@ -158,12 +166,18 @@ function steps(p, [x0, x1, z0, z1]) {
     p.box(STONE.nosing, 0.07, 0.045, z1 - z0 - 0.4, x + td - 0.035, y, cz, { cast: false });
   }
   for (const z of [z0 + 0.1, z1 - 0.1]) p.box(STONE.cheek, x1 - x0, 0.25, 0.22, (x0 + x1) / 2, -0.05, z);
-  p.box(STONE.tread, 1.2, 0.03, z1 - z0 + 0.6, x1 + 0.6, -0.16, cz, { cast: false });
+  // the landing: a slab with its edge standing a little proud of the sand, a dark nosing along its sea side
+  p.box(STONE.cheek, 1.24, 0.1, z1 - z0 + 0.64, x1 + 0.6, -0.23, cz, { cast: false });
+  p.box(STONE.tread, 1.2, 0.03, z1 - z0 + 0.6, x1 + 0.6, -0.15, cz, { cast: false });
+  p.box(STONE.nosing, 0.08, 0.035, z1 - z0 + 0.6, x1 + 1.16, -0.15, cz, { cast: false });
 }
 
 // the beach plaza: two drinks machines lit on its north side, a bench looking out, the beach tap by the steps
 function plaza(root, p, lights) {
   const [x0, , z0] = Q.PLAZA;
+  // a slatted timber screen behind them, so they stand against something, not the lawn
+  for (let x = x0 + 0.2; x < x0 + 2.05; x += 0.16) p.box('#7a654f', 0.1, 1.9, 0.06, x, 0, z0 - 0.04, { surf: 'wood' });
+  p.box('#6d5a47', 1.95, 0.08, 0.1, x0 + 1.12, 1.9, z0 - 0.04, { surf: 'wood' });
   terraceVending(root, p, x0 + 0.7, z0 + 0.4, { color: '#b8463f', seed: 3 });
   terraceVending(root, p, x0 + 1.55, z0 + 0.4, { color: '#3f6f9e', seed: 4 });
   lights.lit.push([x0 + 1.1, z0 + 1.3, 1.0]);
@@ -183,10 +197,22 @@ function plaza(root, p, lights) {
 // the fitness corner: three bars of three heights, a sit-up bench, a board with the exercises
 function fitness(p) {
   const [x0, x1, z0, z1] = Q.FITNESS,
-    zc = (z0 + z1) / 2;
-  fitnessBars(p, x0 + 0.5, zc);
-  p.geo('#4d6b8a', new THREE.BoxGeometry(0.45, 0.06, 1.3).rotateX(0.22).translate(x1 - 0.5, 0.36, z1 - 0.85), PAINTED);
-  p.box(STEEL.dark, 0.08, 0.32, 0.08, x1 - 0.5, 0, z1 - 0.35, PAINTED);
-  p.box(STEEL.dark, 0.06, 1.2, 0.06, x1 - 0.4, 0, z0 + 0.3, PAINTED);
-  p.box('#e4e6e3', 0.04, 0.4, 0.5, x1 - 0.42, 0.9, z0 + 0.3, { cast: false });
+    zb = z0 + 1.15, // the bars' middle
+    zs = (z0 + z1) / 2 + 0.55; // the sit-up bench's and the board's
+  // a soft mat under the bars, the bars of three heights on it
+  p.box('#6f7f8f', 1.7, 0.025, 1.5, x0 + 1.4, 0, zb, { cast: false });
+  fitnessBars(p, x0 + 0.8, zb); // out toward the promenade, clear of the block's balconies
+  // the sit-up bench, tilted, its foot bar
+  p.geo('#4d6b8a', new THREE.BoxGeometry(0.45, 0.06, 1.3).rotateX(0.22).translate(x1 - 0.5, 0.36, zs), PAINTED);
+  p.box(STEEL.dark, 0.08, 0.32, 0.08, x1 - 0.5, 0, zs + 0.62, PAINTED);
+  // low push-up bars at the far end
+  for (const dz of [-0.22, 0.22]) {
+    for (const dx of [-0.3, 0.3]) p.box(STEEL.mid, 0.05, 0.3, 0.05, x1 - 0.55 + dx, 0, z1 - 0.6 + dz, PAINTED);
+    p.box(STEEL.pale, 0.66, 0.04, 0.04, x1 - 0.55, 0.3, z1 - 0.6 + dz, PAINTED);
+  }
+  // the board against the garden's hedge, facing the promenade: how to use them, a blue head over three drawings
+  p.box(STEEL.dark, 0.06, 1.2, 0.06, x0 + 0.25, 0, zs, PAINTED);
+  p.box('#e4e6e3', 0.04, 0.42, 0.5, x0 + 0.29, 0.9, zs, { cast: false });
+  p.box('#3f6f9e', 0.045, 0.1, 0.5, x0 + 0.29, 1.22, zs, { cast: false });
+  for (const dz of [-0.15, 0, 0.15]) p.box('#5b616b', 0.046, 0.16, 0.08, x0 + 0.29, 0.98, zs + dz, { cast: false });
 }

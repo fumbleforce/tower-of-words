@@ -67,7 +67,7 @@ export function* standIn(pv, p, lights) {
   const tones = [LEAF.mid, LEAF.fresh, LEAF.deep, LEAF.light];
   const zm = (bz0 + bz1) / 2;
   let k = 0;
-  for (let x = gx0 + 0.35; x < bx1 - 0.3; x += 0.38 + ((k * 7) % 4) * 0.08, k++) {
+  for (let x = gx0 + 0.35; x < bx1 - 0.3; x += 0.46 + ((k * 7) % 4) * 0.08, k++) {
     if (x > P.GATE[0] - 0.3 && x < P.GATE[1] + 0.3) continue;
     mound(L, x, zm - 0.15, 0.22 + ((k * 3) % 4) * 0.02, tones[k % 4], { y: 0.3 });
     if (k % 2) mound(L, x + 0.15, zm + 0.2, 0.2 + ((k * 5) % 3) * 0.03, tones[(k + 2) % 4], { y: 0.3 });

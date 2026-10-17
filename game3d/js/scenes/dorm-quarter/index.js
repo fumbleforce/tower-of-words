@@ -17,7 +17,7 @@ import { lightSet } from '../outdoor/furniture.js';
 import { CHUNKS } from '../island-layout.js';
 import { ericBlock } from '../dorm-court/block.js';
 import { lightUp } from '../../kit/light/glow.js';
-import { groundSteps, lawn } from './ground.js';
+import { groundSteps, lawn, TOP_MOUTH } from './ground.js';
 import { blocksSteps } from './blocks.js';
 import { parkSteps } from './park.js';
 import { promenadeSteps } from './promenade.js';
@@ -32,15 +32,15 @@ export { placeIn } from '../place-frame.js';
 // the layout's buildings the quarter builds, for the places' skyline skip lists
 export const QUARTER_IDS = [...BLOCKS.map((k) => k.id), 'dorm_commons_hall', 'garden_shed'];
 
-// what throws a shadow where the quarter is walked: the blocks' walls, the trees, hedges and shrubs (their lighter
-// stand-ins), not the kerbs, paving, furniture and small things
-const CASTS = (o) => !!(o.shadow || o.shade || o.surf === 'plaster');
+// what throws a shadow where the quarter is walked: the blocks' walls and the trees (their lighter stand-ins), the
+// tall things whose shadows read on the paths; not the hedges, shrubs, kerbs, paving, furniture and small things
+const CASTS = (o, top) => top > 1.6 && !!(o.shadow || o.shade || o.surf === 'plaster' || o.surf === 'bark');
 const XCUTS = [86, 98, 110, 122],
   ZCUTS = [-44, -30, -12, 2];
 // the dorm courtyard's own ground, which it lays itself: its street (the promenade in front of it) and the court
 const COURT_OWN = [
   [74, 106, Q.PROM[2], Q.PROM[3]],
-  [79.7, 105.8, Q.PROM[3], 3.75],
+  [Q.COURT_FRONT_X, 105.8, Q.PROM[3], 3.75],
 ];
 
 // How much each place builds of it: 'full', 'far' (a lighter build for what it sees from a distance: fewer small
@@ -69,7 +69,8 @@ export function* quarterSteps(group, { host = 'east_coast' } = {}) {
       : host === 'east_lane' || host === 'plaza'
         ? [[Q.DORM_STREET[1], Q.DORM_STREET[1] + 3, Q.PROM[2], Q.PROM[3]]]
         : [];
-  yield* groundSteps(pv, p, { own, flat: D.ground === 'flat' });
+  const theirs = host === 'east_lane' || host === 'plaza' ? [Q.DORM_STREET, TOP_MOUTH] : [];
+  yield* groundSteps(pv, p, { own, theirs, flat: D.ground === 'flat' });
   lawn(group, { own: host === 'dorm_court' ? COURT_OWN : [] });
   yield;
   const blocks = yield* blocksSteps(p, lights, { far: host === 'plaza' });

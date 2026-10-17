@@ -55,19 +55,24 @@ function pond(p, group, far) {
   // the stones round its edge, rounded and of mixed size, sitting a little into the water; none under the bridge
   const ring = [];
   const per = 2 * (x1 - x0 + z1 - z0);
-  for (let u = 0; u < per; u += 0.42 + hash2(u, 3, 9) * 0.2) {
+  for (let u = 0; u < per; u += 0.3 + hash2(u, 3, 9) * 0.45) {
     let x, z;
     if (u < x1 - x0) [x, z] = [x0 + u, z0];
     else if (u < x1 - x0 + z1 - z0) [x, z] = [x1, z0 + u - (x1 - x0)];
     else if (u < 2 * (x1 - x0) + z1 - z0) [x, z] = [x1 - (u - (x1 - x0) - (z1 - z0)), z1];
     else [x, z] = [x0, z1 - (u - 2 * (x1 - x0) - (z1 - z0))];
-    if (x > Q.BRIDGE[0] - 0.25 && x < Q.BRIDGE[1] + 0.25) continue;
-    if (Math.abs(x - x1) < 0.01 && z > Q.BOARDWALK[2] - 0.2 && z < Q.BOARDWALK[3] + 0.2) continue;
-    ring.push([x, z]);
+    if (x > Q.BRIDGE[0] - 0.5 && x < Q.BRIDGE[1] + 0.3) continue;
+    if (Math.abs(x - x1) < 0.01 && z > Q.BOARDWALK[2] - 0.55 && z < Q.BOARDWALK[3] + 0.45) continue;
+    // a little in or out of the line, and now and then a small one tucked against it
+    const j = (hash2(z, u, 17) - 0.5) * 0.22;
+    const [ox, oz] = Math.abs(z - z0) < 0.01 || Math.abs(z - z1) < 0.01 ? [0, j] : [j, 0];
+    ring.push([x + ox, z + oz, 0.14 + hash2(x, z, 11) ** 1.6 * 0.3]);
+    if (hash2(u, x, 19) < 0.3) ring.push([x + ox + 0.22, z + oz - 0.18, 0.1 + hash2(z, x, 21) * 0.06]);
   }
-  for (const [x, z] of ring) {
-    const r = 0.18 + hash2(x, z, 11) * 0.16;
-    const g = new THREE.DodecahedronGeometry(r, far ? 0 : 1).scale(1.25, 0.55, 1.05).rotateY(hash2(z, x, 13) * 6);
+  for (const [x, z, r] of ring) {
+    const g = new THREE.DodecahedronGeometry(r, 0)
+      .scale(1.1 + hash2(z, x, 23) * 0.4, 0.5 + hash2(x, z, 25) * 0.2, 0.9 + hash2(x, z, 27) * 0.3)
+      .rotateY(hash2(z, x, 13) * 6);
     p.geo(STONES[Math.floor(hash2(x, z, 15) * 4)], g.translate(x, r * 0.25, z), { surf: 'stone' });
   }
   // lily pads in two drifts, a few with a flower; reeds and an iris clump at its ends
@@ -86,11 +91,27 @@ function pond(p, group, far) {
       });
       if (i % 3 === 1) p.geo('#e8d7e0', new THREE.ConeGeometry(0.04, 0.05, 5).translate(x, 0.1, z), { cast: false });
     }
+  // a big stone and a smaller one at each corner, into the water, so the corners read round
+  for (const [cx, cz, sx, sz] of [
+    [x0, z0, 1, 1],
+    [x1, z0, -1, 1],
+    [x0, z1, 1, -1],
+    [x1, z1, -1, -1],
+  ]) {
+    const big = new THREE.DodecahedronGeometry(0.46, far ? 0 : 1).scale(1.2, 0.55, 1.0).rotateY(cx + cz);
+    p.geo(STONES[1], big.translate(cx + sx * 0.3, 0.1, cz + sz * 0.3), { surf: 'stone' });
+    const small = new THREE.DodecahedronGeometry(0.24, 0).scale(1.2, 0.6, 1).rotateY(cx);
+    p.geo(STONES[3], small.translate(cx + sx * 0.75, 0.05, cz + sz * 0.2), { surf: 'stone' });
+  }
+  // reeds and an iris clump at its corners, and along the bridge's sides where they meet the water
   for (const [x, z, s] of [
     [104.4, -24.1, 4],
     [109.2, -24.0, 6],
     [104.4, -16.1, 8],
     [109.1, -16.3, 9],
+    [Q.BRIDGE[0] - 0.3, -22.4, 12],
+    [Q.BRIDGE[1] + 0.3, -18.2, 13],
+    [Q.BRIDGE[0] - 0.3, -17.6, 14],
   ]) {
     grass(p, x, z, { h: 0.55, color: '#6f7d4f', seed: s });
     grass(p, x + 0.18, z + 0.12, { h: 0.45, color: '#7c8a5a', seed: s + 1 });
@@ -134,14 +155,16 @@ function bridge(p) {
       p.box(TIMBER.mid, 0.05, 0.05, b - a, x, y + 0.45, (a + b) / 2, { cast: false });
     }
   }
-  // the boardwalk
-  const [bx0, , bz0, bz1] = Q.BOARDWALK,
-    by = 0.08;
-  boards(p, Q.BOARDWALK, { y: by, along: 'x' });
-  const wx = Q.POND[1] + 0.2;
+  // the boardwalk, flush with the bridge and in its planks, its rails as the bridge's from the bridge to the round
+  const [bx0, bx1, bz0, bz1] = Q.BOARDWALK;
+  boards(p, Q.BOARDWALK, { y, along: 'x' });
   for (const z of [bz0 + 0.06, bz1 - 0.06]) {
-    for (const x of [bx0 + 0.3, (bx0 + wx) / 2, wx]) p.box(TIMBER.dark, 0.08, 0.6, 0.08, x, by, z, { surf: 'wood' });
-    p.box(TIMBER.pale, wx - bx0 - 0.2, 0.05, 0.08, (bx0 + 0.3 + wx) / 2, by + 0.6, z, { surf: 'wood' });
+    const a = bx0 + 0.15,
+      b = bx1 - 0.1;
+    for (let x = a; x <= b + 0.01; x += (b - a) / Math.max(1, Math.round((b - a) / 1.3)))
+      p.box(TIMBER.dark, 0.09, 0.85, 0.09, x, y, z, { surf: 'wood' });
+    p.box(TIMBER.pale, b - a + 0.1, 0.06, 0.1, (a + b) / 2, y + 0.85, z, { surf: 'wood' });
+    p.box(TIMBER.mid, b - a, 0.05, 0.05, (a + b) / 2, y + 0.45, z, { cast: false });
   }
 }
 
@@ -152,32 +175,53 @@ function cherry(p) {
   ringSeat(p, x, z, seat);
 }
 
-// the wisteria shelter: posts, beams along it, rafters across, and the vine over it with its flowers hanging
+// the wisteria shelter: posts, beams along it, rafters across, the vine over it and hanging through, a trunk a post
 function wisteria(p) {
   const [x0, x1, z0, z1] = Q.WISTERIA,
     h = 2.3;
   pergola(p, Q.WISTERIA, { h, along: 'x', slat: 0.5 });
-  // the vine: low flattened leaf blobs over the rafters, a few long shoots hanging down from them (it flowered in
-  // May; in October it is all leaf)
-  for (let x = x0 + 0.4; x < x1; x += 0.95)
-    for (let z = z0 + 0.45; z < z1; z += 0.95) {
-      mound(p, x + hash2(x, z, 3) * 0.3, z, 0.5, hash2(z, x, 5) < 0.5 ? LEAF.mid : LEAF.fresh, {
-        y: h + 0.1,
-        squash: 0.35,
+  // the vine: one mat of leaf over the slats, big flat masses overlapping, ragged at the edges; clusters of leaf
+  // hanging below the beams all along both sides and here and there between them (it flowered in May; in October it
+  // is all leaf)
+  for (let x = x0 + 0.5; x < x1 - 0.2; x += 1.0)
+    for (const z of [z0 + 0.6, (z0 + z1) / 2, z1 - 0.6])
+      mound(
+        p,
+        x + (hash2(x, z, 3) - 0.5) * 0.4,
+        z + (hash2(z, x, 8) - 0.5) * 0.3,
+        0.72 + hash2(z, x, 2) * 0.2,
+        [LEAF.mid, LEAF.fresh, LEAF.deep][Math.floor(hash2(z, x, 5) * 3)],
+        {
+          y: h + 0.06,
+          squash: 0.26,
+        },
+      );
+  for (let x = x0 + 0.3; x < x1 - 0.1; x += 0.42 + hash2(x, 2, 7) * 0.25)
+    for (const z of [z0 + 0.15, z1 - 0.15, (z0 + z1) / 2]) {
+      if (z === (z0 + z1) / 2 && hash2(x, z, 9) < 0.6) continue;
+      const L = 0.3 + hash2(x, z, 7) * 0.4;
+      mound(p, x + (hash2(z, x, 1) - 0.5) * 0.2, z, 0.14, hash2(x, z, 4) < 0.5 ? LEAF.deep : LEAF.mid, {
+        y: h - L,
+        squash: (L / 0.14) * 0.62,
       });
-      if (hash2(x, z, 9) < 0.45) {
-        const fx = x + (hash2(x, z, 1) - 0.5) * 0.6,
-          fz = z + (hash2(z, x, 1) - 0.5) * 0.6,
-          L = 0.3 + hash2(fx, fz, 7) * 0.35;
-        p.geo(LEAF.deep, new THREE.ConeGeometry(0.06, L, 4).rotateX(Math.PI).translate(fx, h - L / 2 + 0.05, fz), {
-          cast: false,
-        });
-      }
     }
-  // its trunk at a corner post, twisting up
-  p.geo('#6a5a4c', new THREE.CylinderGeometry(0.06, 0.09, h, 6).translate(x0 + 0.35, h / 2, z1 - 0.3), {
-    surf: 'bark',
-  });
+  // a twisted trunk up each corner post
+  for (const [x, z] of [
+    [x0 + 0.32, z0 + 0.3],
+    [x0 + 0.32, z1 - 0.3],
+    [x1 - 0.32, z0 + 0.3],
+    [x1 - 0.32, z1 - 0.3],
+  ])
+    p.geo(
+      '#4a3f35',
+      new THREE.CylinderGeometry(0.05, 0.1, h, 6)
+        .rotateZ(0.07)
+        .rotateY(x)
+        .translate(x, h / 2, z),
+      {
+        surf: 'bark',
+      },
+    );
   // the benches under it, either side of the walk, looking out over the lawn
   for (const x of [Q.GATE_X - 1.75, Q.GATE_X + 1.75]) bench(p, x, (z0 + z1) / 2 - 0.2, Math.PI, { len: 1.6 });
 }
@@ -205,7 +249,6 @@ function play(p) {
 // trees between the loop and the park's edges, and in its east part; the big lawn stays open
 const PARK_TREES = [
   [keyaki, 81.2, -27.3, 1.05, 101],
-  [maple, 81.3, -14.1, 0.8, 102],
   [keyaki, 102.9, -27.3, 1.0, 103],
   [maple, 104.4, -27.4, 0.8, 104], // the two that stood on the walk at the north edge, now at its sides
   [maple, 109.2, -27.4, 0.85, 105],
@@ -213,6 +256,8 @@ const PARK_TREES = [
   [keyaki, 124.6, -26.3, 1.1, 107],
   [ginkgo, 124.8, -21.4, 0.95, 108],
   [maple, 112.4, -16.0, 0.85, 109],
+  [sakura, 85.8, -20.9, 1.1, 110], // the big lawn's two cherries, for hanami, at its ends
+  [sakura, 98.2, -20.9, 1.05, 111],
 ];
 // the cherries behind the verge on the promenade, none in front of the courtyard's gate (the wisteria is there)
 const VERGE_CHERRIES = [81.8, 95.6, 99.8, 103.3, 110.8];
@@ -274,8 +319,8 @@ export function* parkSteps(pv, p, lights, group, { far = false } = {}) {
   ]);
   lamps(lights, p, PROM_PARK_LAMPS, { pool: 1.4, poolShift: [0, 0.8] });
   yield;
-  // the common room's apron: a bike rack along its west end, a planter either side of its door
-  bikeRack(p, [Q.COMMONS[0] - 0.6, Q.COMMONS[3] - 3.0], [Q.COMMONS[0] - 0.6, Q.COMMONS[3] - 0.6], { n: 3 });
+  // the common room's apron: a bike rack on its west part under the canopy, a planter either side of its door
+  bikeRack(p, [Q.COMMONS[0] + 0.4, Q.COMMONS[3] + 0.55], [Q.COMMONS[0] + 2.0, Q.COMMONS[3] + 0.55], { n: 3 });
   for (const s of [-1, 1])
     planter(p, { at: [Q.COMMONS_DOOR[0] + s * 1.5, Q.COMMONS[3] + 0.45], variant: 'box', seed: 7 + s });
   // flowering troughs at the apron's ends on the promenade, and either side of the park's way in on the gate's axis
@@ -285,7 +330,7 @@ export function* parkSteps(pv, p, lights, group, { far = false } = {}) {
     planter(p, { at: [Q.GATE_X + s * 1.9, Q.PARK_N[3] + 1.05], variant: 'flowering', seed: 11 + s });
   // drifts of low planting along the common room's ends and back, against its walls
   for (const [x0, x1, z0, z1] of [
-    [Q.COMMONS[0] - 0.9, Q.COMMONS[0], Q.COMMONS[2], Q.COMMONS[3] - 3.4],
+    [Q.COMMONS[0] - 0.9, Q.COMMONS[0], Q.COMMONS[2], Q.COMMONS[3]],
     [Q.COMMONS[1], Q.COMMONS[1] + 0.9, Q.COMMONS[2], Q.COMMONS[3]],
     [Q.COMMONS[0], Q.COMMONS[1], Q.COMMONS[2] - 0.8, Q.COMMONS[2]],
   ])

@@ -1,7 +1,7 @@
 // The dorm quarter's ground (the plan is dorm-quarter/plan.js), in the island frame:
 //   the promenade and the dorm row: the lane's brick between pale borders, as the plaza lane they carry on
 //   the walks: pale slabs between soldier borders; the park's loop walk and its links in a warmer, smaller stone;
-//   the allotments' walks in gravel; the beach promenade in long pale slabs in bond, a band of mid stone along the
+//   the allotments' walks in square flags; the beach promenade in long pale slabs in bond, a band of mid stone along the
 //   sea wall; the plaza, the fitness corner and the pergola's floor in mid stone; the cherry's round in a pale square
 //   the edges: one granite kerb wherever paving meets lawn (movement/walk-ground.js, outdoor/walk-edges.js), none
 //   where it meets a wall, a building, the pond, the sea or the next place's paving
@@ -11,10 +11,12 @@
 import { GRANITE } from '../outdoor/paving.js';
 import { laneField } from '../outdoor/lane.js';
 import { walk } from '../plaza/east-lane.js';
-import { gravel } from '../outdoor/planting.js';
 import { walkGround } from '../../movement/walk-ground.js';
 import { walkEdges } from '../outdoor/walk-edges.js';
+import * as THREE from 'three';
 import { groundPatches, TOWN } from '../town.js';
+import { mat } from '../../props.js';
+import { BATH_COAST } from '../island-baths.js';
 import * as Q from './plan.js';
 import { LAID_WALKS, GRAVEL, PARK_WALKS, PADS, RING_PAD, PAVED } from './fittings.js';
 
@@ -31,18 +33,21 @@ export const BARRIERS = [
   ...Q.BLOCKS.map((k) => k.rect).map(barrier('building')),
   barrier('building')(Q.COMMONS),
   barrier('building')(Q.SHED),
-  barrier('wall')([79.7, 105.8, Q.PROM[3], 3.75]), // the courtyard's front bed and garden wall, Eric's block
+  barrier('wall')([Q.COURT_FRONT_X, 105.8, Q.PROM[3], 3.75]), // the courtyard's front bed and garden wall, Eric's block
   barrier('wall')(Q.POND),
   barrier('wall')([Q.WALL[0], 140, -60, 20]), // the sea wall and the sea
   ...Q.GARDENS.map((g) => g.rect).map(barrier('wall')), // the flats' gardens behind their hedges
 ];
 // the next places' paving the quarter's walks run into: no kerb across the joins
-const NEIGHBOURS = [Q.DORM_STREET, Q.COURTS, [102, 104, -80, -58.5]];
+const BOUNDS = [70, 140, -62, 32];
+export const TOP_MOUTH = [70, Q.DORM_STREET[0], Q.PROM[2], Q.PROM[3]]; // the east lane's top leg, into the dorm street
+const NEIGHBOURS = [Q.DORM_STREET, TOP_MOUTH, Q.COURTS, [102, 104, -80, -58.5]];
 
 const dropIn = (rects) => (x, z) => rects.some(([x0, x1, z0, z1]) => x > x0 && x < x1 && z > z0 && z < z1);
 
-// pv, p: the paver and the Parts collector (dorm-court/cells.js cells); own: the rects the host lays itself
-export function* groundSteps(pv, p, { own = [], flat = false } = {}) {
+// pv, p: the paver and the Parts collector (dorm-court/cells.js cells); own: the rects the host lays itself; theirs:
+// the neighbours' paving (NEIGHBOURS) the host lays and kerbs itself (the east lane's dorm street)
+export function* groundSteps(pv, p, { own = [], theirs = [], flat = false } = {}) {
   const mine = dropIn(own);
   if (flat) {
     // seen from far off: each path a plain pale strip, no stones or kerbs (a hair over the lawn)
@@ -112,16 +117,27 @@ export function* groundSteps(pv, p, { own = [], flat = false } = {}) {
       h: 0.009,
     });
   yield;
-  // the allotments' walks: gravel
-  for (const r of GRAVEL) gravel(p, r);
+  // the allotments' walks: square flags of mid stone, no borders, a lesser path than the gardens' own
+  for (const r of GRAVEL)
+    pv.field(r, { pattern: 'grid', module: [0.8, 0.8], tones: GRANITE.mid, vary: 0.04, origin: [r[0], r[2]] });
   // the edges, from the one outline of everything paved
   const ground = walkGround({
     walk: PAVED,
     backdrop: NEIGHBOURS,
     barriers: BARRIERS,
-    bounds: [70, 140, -62, 32],
+    bounds: BOUNDS,
   });
-  ground.edges = ground.edges.filter((e) => !mine((e.a[0] + e.b[0]) / 2, (e.a[1] + e.b[1]) / 2));
+  // none inside the host's own ground, nor along the outline of a neighbour's paving the host kerbs itself
+  const onEdge = (x, z) =>
+    theirs.some(
+      ([x0, x1, z0, z1]) =>
+        ((Math.abs(x - x0) < 0.01 || Math.abs(x - x1) < 0.01) && z >= z0 && z <= z1) ||
+        ((Math.abs(z - z0) < 0.01 || Math.abs(z - z1) < 0.01) && x >= x0 && x <= x1),
+    );
+  ground.edges = ground.edges.filter((e) => {
+    const [x, z] = [(e.a[0] + e.b[0]) / 2, (e.a[1] + e.b[1]) / 2];
+    return !mine(x, z) && !onEdge(x, z) && x > BOUNDS[0] + 0.01; // and none across the lane where the quarter's ground ends
+  });
   walkEdges(p, ground);
   yield;
 }
@@ -133,16 +149,13 @@ export function lawn(group, { own = [] } = {}) {
     W = Q.DORM_STREET[1],
     E = Q.EDGE[1]; // the beach promenade's land side: past it the promenade and the wall lay their own
   const rects = [
-    [W, E, -56.3, pz0],
+    [W, E, Q.SEA_GARDEN[3], pz0],
+    [W, Q.SEA_GARDEN[0] + 3.8, -56.3, Q.SEA_GARDEN[3]],
     [W, px0, pz0, pz1],
     [px1, E, pz0, pz1],
     [W, E, pz1, 19.4],
     [W, 117, 19.4, 27], // short of the coast as it runs in south-west (plan.js COAST_LINE)
     [W, 110, 27, 31],
-    // the sea garden north of the deck, stepping in with its low stone edge
-    [E, 131.6, -43.6, -38.5],
-    [E, 130.4, -47.8, -43.6],
-    [E, 128, -56.3, -47.8],
   ];
   const cut = [];
   for (const r of rects) {
@@ -164,4 +177,35 @@ export function lawn(group, { own = [] } = {}) {
     cut.map(([x0, x1, z0, z1]) => [x0, x1, z0, z1, TOWN.grass]),
     -0.012,
   );
+  // the sea garden's east part, out along the wall's line and in under its coping, so no lawn shows past the rail
+  const x0 = Q.SEA_GARDEN[0] + 3.8,
+    [, , zN, zS] = Q.SEA_GARDEN,
+    inset = 0.15,
+    wall = [[Q.SEA_X, zS], ...Q.COAST_LINE.slice(4), BATH_COAST[0], BATH_COAST[1]];
+  const at = (z) => {
+    for (let i = 0; i + 1 < wall.length; i++) {
+      const [[ax, az], [bx, bz]] = [wall[i], wall[i + 1]];
+      if (z <= az && z >= bz) return ax + ((bx - ax) * (az - z)) / (az - bz) - inset;
+    }
+    return wall[wall.length - 1][0];
+  };
+  const shape = new THREE.Shape();
+  shape.moveTo(x0, -zS);
+  for (const z of [
+    zS,
+    ...wall
+      .slice(1, -1)
+      .map(([, wz]) => wz)
+      .filter((wz) => wz > zN),
+    zN,
+  ])
+    shape.lineTo(at(z), -z);
+  shape.lineTo(x0, -zN);
+  const sea = new THREE.Mesh(
+    new THREE.ShapeGeometry(shape).rotateX(-Math.PI / 2).translate(0, -0.002, 0),
+    mat(TOWN.grass, { roughness: 0.9 }),
+  );
+  sea.receiveShadow = true;
+  sea.userData.surf = 'grass';
+  group.add(sea);
 }

@@ -19,10 +19,10 @@ function* cellSteps(list, root) {
   return out;
 }
 
-// cast: which pieces keep the shadow they ask for (o => bool; a place that walks the cells' ground: the dorm quarter
+// cast: which pieces keep the shadow they ask for ((o, top) => bool, top the piece's highest point; a place that walks the cells' ground: the dorm quarter
 // in the east coast keeps its walls' and its planting's, not every kerb's and paving stone's)
 export function cells(xcuts, zcuts, { cast = null } = {}) {
-  const keep = (o) => (cast && (o?.cast ?? true) && cast(o || {}) ? o : { ...o, cast: false });
+  const keep = (o, top) => (cast && (o?.cast ?? true) && cast(o || {}, top) ? o : { ...o, cast: false });
   const nz = zcuts.length + 1,
     n = (xcuts.length + 1) * nz;
   const at = (x, z) => xcuts.filter((c) => x >= c).length * nz + zcuts.filter((c) => z >= c).length;
@@ -32,11 +32,11 @@ export function cells(xcuts, zcuts, { cast = null } = {}) {
     geo(color, g, o) {
       g.computeBoundingBox();
       const { min, max } = g.boundingBox;
-      ps[at((min.x + max.x) / 2, (min.z + max.z) / 2)].geo(color, g, keep(o));
+      ps[at((min.x + max.x) / 2, (min.z + max.z) / 2)].geo(color, g, keep(o, max.y));
       return parts;
     },
     box(color, w, h, d, x, y, z, o) {
-      ps[at(x, z)].box(color, w, h, d, x, y, z, keep(o));
+      ps[at(x, z)].box(color, w, h, d, x, y, z, keep(o, y + h));
       return parts;
     },
     build: (root) => {

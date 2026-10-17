@@ -2,7 +2,7 @@
 //   the sea terrace at the dorm row's east end: mid stone in bond in a pale border, a low wall on its sea side, a
 //   bench at each end looking out, a drinks machine lit on its north side, a raised bed with a big black pine, a lamp
 //   the dorm row: the verge with its zelkovas and lamps on its south side, along the ramen corner's lawn and the
-//   villas' doors; a verge along its north side under S-E's gardens
+//   villas' doors; a verge along its north side under S-E's gardens; a line of trees on the lawn along the dorm street
 //   the garden south of the row between the ramen shop and the villas: a walk in from the row to a pergola, drifts
 //   with a cherry in each (and on south, the coastal garden's loop, east-coast/coast-garden.js)
 import { GRANITE } from '../outdoor/paving.js';
@@ -68,6 +68,16 @@ export function* rowSteps(p, lights) {
     ROW_LAMPS.map((x) => [x, ROW[3] - 0.25]),
     { pool: 1.4, poolShift: [0, -0.6] },
   );
+  yield;
+  // the lawn between the dorm street and Eric's block: a line of trees along the street, a drift under them
+  const sx = (Q.DORM_STREET[1] + Q.COURT_FRONT_X) / 2;
+  for (const [k, z, s, seed] of [
+    [keyaki, -5.4, 1.0, 51],
+    [sakura, -1.2, 0.95, 52],
+    [keyaki, 3.0, 1.05, 53],
+  ])
+    k(p, sx, z, s, seed);
+  drift(p, [sx - 1.2, sx + 1.2, 4.6, 7.6], { back: 'n', seed: 57 });
   yield;
 }
 

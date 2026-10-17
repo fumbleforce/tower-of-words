@@ -34,6 +34,9 @@ const PLINTH = '#6c7178',
   DECK = '#8d7b67',
   RAIL_GLASS = '#a9c0c9',
   PLANTER = '#7d8288';
+const POT = '#9a6f55',
+  LEAVES = ['#5f7f45', '#6f8f4f'],
+  FUTONS = ['#e9e4d8', '#c9d4e0', '#e6c9c0'];
 const FH = Q.STOREY;
 
 // a box on a face: u along it (centre), y up (bottom), o out from it (centre); w along, h up, t out
@@ -188,8 +191,16 @@ function galleries(p, F, side, k, cov, { box, pane, lights }) {
         fw = L / flats;
       for (let i = 0; i < flats; i++) {
         const c = t0 + fw * (i + 0.5);
+        // a fin on the parapet between flats, so the long front reads as homes
+        if (i) onFace(box(FRAME, false), F, t0 + fw * i, y - 0.05, D - 0.045, 0.07, 0.68, 0.12);
         if (c > stair[0] - 0.5 && c < stair[1] + 0.5) continue;
         onFace(box(DOOR, false), F, c, y + 0.01, 0.012, 0.56, 1.26, 0.02);
+        // a pot plant outside some doors
+        const h = hash2(c, s, k.rect[2] + 5);
+        if (h < 0.35) {
+          onFace(box(POT, false), F, c - 0.95, y, 0.22, 0.24, 0.24, 0.24);
+          mound(p, ...faceAt(F, c - 0.95, 0.22), 0.2, LEAVES[s % 2], { y: y + 0.22 });
+        }
         onFace(box(FRAME, false), F, c, y + 1.27, 0.02, 0.64, 0.05, 0.04);
         onFace(box(METER, false), F, c + 0.5, y + 0.9, 0.025, 0.15, 0.22, 0.05);
         onFace(pane(hash2(c + y, s, k.rect[0]) < 0.35), F, c - 0.62, y + 0.72, 0.01, 0.3, 0.36, 0.01);
@@ -255,6 +266,11 @@ function balconyFace(p, F, k, cov, { box, pane }) {
       continue;
     }
     balconyRow(F, y, { box, pane, seed: k.rect[0] + k.rect[2] + s });
+    // now and then a futon out over the rail to air
+    const rooms = Math.max(1, Math.round(F.L / 2.4));
+    for (let r = 0; r < rooms; r++)
+      if (hash2(k.rect[1] + s, r, 13) < 0.16)
+        onFace(box(FUTONS[r % 3], false), F, (F.L / rooms) * (r + 0.5), y + 0.4, 0.8, 1.0, 0.55, 0.05);
     if (s === n - 1) onFace(box(SLAB), F, F.L / 2, n * FH - 0.02, 0.4, F.L + 0.1, 0.16, 0.8);
   }
 }

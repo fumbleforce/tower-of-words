@@ -23,6 +23,7 @@ export const STOREY = 1.75; // the dorm blocks' floor-to-floor height, as Eric's
 
 // --- the walks ---------------------------------------------------------------------------------------------------
 export const DORM_STREET = [73.04, 76.04, -11.5, 22.4]; // the east lane's (island-east.js), for the joins
+export const COURT_FRONT_X = 79.7; // where the dorm courtyard's front bed and garden wall start, east of the street
 export const PROM = [76.04, 125.6, -11.5, -8.5]; // the promenade, 3 wide, the lane's brick
 export const NS_X = [105.8, 107.8]; // the north-south walk, 2 wide
 export const AXIS_X = (NS_X[0] + NS_X[1]) / 2;
@@ -52,11 +53,12 @@ export const LOOP_LINKS = [
 // the wisteria shelter on the court gate's axis between the big lawn and the promenade's verge, a bench either side
 // under it looking over the lawn
 export const WISTERIA = [GATE_X - 3.0, GATE_X + 3.0, -15.5, -13.0]; // off the loop's south side
+export const WISTERIA_PAD = [WISTERIA[0] + 0.1, WISTERIA[1] - 0.1, LOOP[3], WISTERIA[3] - 0.15]; // paved under it, off the loop
 // the pond, the north-south walk crossing it on a bridge; a boardwalk east off the bridge to the cherry's ring
 export const POND = [104, 109.6, -24.6, -15.6];
 export const BRIDGE = [NS_X[0], NS_X[1], POND[2] - 0.4, POND[3] + 0.4];
 export const RING = { x: 112.4, z: -21.2, seat: 1.3, pad: 2.0 }; // the cherry, its ring seat and paved round
-export const BOARDWALK = [NS_X[1], RING.x - RING.pad + 0.2, RING.z - 0.5, RING.z + 0.5];
+export const BOARDWALK = [NS_X[1], RING.x - RING.pad, RING.z - 0.5, RING.z + 0.5];
 export const PLAY = [115.6, 122.4, -27.4, -22.2]; // the play corner, on sand, off the park's north walk
 export const PLAY_LINK = [118.5, 119.5, PARK_N[3], PLAY[2]];
 // the common room: a one-storey pavilion on the promenade (the dorm_commons chunk is its floor), its glazed door on
@@ -143,12 +145,13 @@ export function doorOf(k) {
   return { x, z, n, along: n[0] ? [0, 1] : [1, 0] };
 }
 // the short walks to the doors off the walks they face
+export const NW_DOOR = [GATE_X - 1.0, GATE_X + 1.0, NORTH[3], block('dorm_nw')[2]]; // the apron off the north path
 export const NE_DOOR = [NS_X[1], NE[0], -45.3, -44.1];
 export const SE_DOOR = [NS_X[1], SE[0], -1.7, -0.5];
 export const VILLA_DOORS = BLOCKS.filter((k) => k.villa).map((k) => [k.at - 0.5, k.at + 0.5, ROW[3], k.rect[2]]);
 
 // --- gardens -------------------------------------------------------------------------------------------------------
-// the ground-floor flats' gardens: a hedge round each run, a low hedge between flats, a gate onto the lawn beyond
+// the ground-floor flats' gardens: a hedge round each run, a low fence between flats, a gate onto the lawn beyond
 export const GARDENS = [
   { rect: [NE3[1], NE3[1] + 2.4, NE[2], NE[3]], open: 'e', pitch: NE[3] - NE[2] }, // N-E, east
   { rect: [SE[1], SE[1] + 1.7, SE[2], 7.9], open: 'e' }, // S-E's east wing
@@ -156,9 +159,12 @@ export const GARDENS = [
   { rect: [96, 104.2, 19.3, 22.9], open: 's', walled: true }, // the villas'
   { rect: [105.9, 114.1, 19.3, 22.9], open: 's', walled: true },
 ];
-// N-E's sea garden: the pergola over two picnic tables, on a walk off the north path; pines in groups, a cherry
+// N-E's sea garden: the pergola over two picnic tables, on a walk from the north path on to the courts walk; pines
+// either side of it, a cherry
 export const PERGOLA = [123.4, 126.8, -43.6, -40.9];
 export const PERGOLA_WALK = [124.6, 125.6, PERGOLA[3], NORTH[2]];
+export const SEA_GARDEN = [122.2, 134, -56.4, -38.5]; // its ground, out to the wall
+export const SEA_WALK = [124.6, 125.6, COURTS_EAST[3], PERGOLA[2]]; // on north from the pergola to the courts walk
 // S-E's court in the angle: the door walk across it, a play spot with a bench, trees
 export const SE_COURT = [NS_X[1], SE[0], PROM[3] + 1.0, SES[2]];
 export const SE_PLAY = [112.4, 115.6, -5.4, -2.6];
@@ -167,7 +173,7 @@ export const SE_PLAY = [112.4, 115.6, -5.4, -2.6];
 export const NW_SHELTER = [81.0, 86.4, -40.5, NORTH[2]];
 export const SE_SHELTER = [115.9, 118.6, -3.5, SE_DOOR[2]];
 // the residents' allotments north of N-W's path: two rows of plots either side of the gardens' path (on the courts
-// gate's axis), a gravel walk along their north side and between the rows, the tool shed in the first plot's place,
+// gate's axis), a flagged walk along their north side and between the rows, the tool shed in the first plot's place,
 // the orchard of plums and persimmons beyond, a hedge along the courts walk
 export const GARDEN_PATH = [GATE_X - 0.85, GATE_X + 0.85, -49.6, NORTH[2]];
 export const PLOT_WALKS = [
@@ -187,7 +193,7 @@ export const PLOT_XS = [
   [96.7, 99.5],
   [99.8, 102.6],
 ];
-export const SHED = [90.6, 93.2, -48.5, -46.0]; // in the north row's first plot east of the path
+export const SHED = [90.6, 92.6, -48.5, -46.0]; // in the north row's first plot east of the path, its tank beside it
 export const PLOTS = PLOT_ROWS.flatMap(([z0, z1], r) =>
   PLOT_XS.filter((x, i) => !(r === 0 && i === 3)).map(([x0, x1]) => [x0, x1, z0, z1]),
 );
@@ -227,7 +233,7 @@ export const STEPS = [
   [BEACH_PROM[1], 134.6, -11.3, -8.6], // wide, off the plaza
 ];
 export const PLAZA = [125.6, BEACH_PROM[0], -11.7, -7.8]; // where the promenade comes in: drinks machines, a bench
-export const FITNESS = [126.9, BEACH_PROM[0], 2.4, 5.8]; // three bars off the promenade by S-E's garden
+export const FITNESS = [126.9, BEACH_PROM[0], 1.8, 6.6]; // bars, a sit-up bench, push-up bars, off the promenade by S-E's garden
 // benches on the seaward edge facing the sea, z of each; the lamps on the land side
 export const SEA_BENCHES = [-31.6, -25.4, -15.4, -4.6, -0.6, 7.2];
 export const PROM_LAMPS = [-33.5, -25.4 + 2.6, -16.8, -6.4, 1.2, 9.5];

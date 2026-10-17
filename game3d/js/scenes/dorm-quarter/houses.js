@@ -196,5 +196,4 @@ export function shed(p) {
   p.geo('#5f646b', new THREE.BoxGeometry(w + 0.4, 0.06, d + 0.4).rotateX(-0.12).translate(cx, 1.72, cz), {});
   p.box('#5a4a3b', 0.8, 1.35, 0.04, cx, 0, z1 + 0.02);
   p.box(STEEL.dark, 0.06, 0.1, 0.03, cx + 0.3, 0.8, z1 + 0.05, { cast: false });
-  p.geo('#4d6a5b', new THREE.CylinderGeometry(0.24, 0.22, 0.65, 10).translate(x1 + 0.3, 0.33, z1 - 0.3));
 }

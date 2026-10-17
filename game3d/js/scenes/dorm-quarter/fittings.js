@@ -23,11 +23,13 @@ export const WALKS = [
   Q.NORTH,
   Q.PARK_N,
   Q.COURTS_EAST,
+  Q.NW_DOOR,
   Q.NE_DOOR,
   Q.SE_DOOR,
   ...Q.VILLA_DOORS,
   Q.GARDEN_PATH,
   Q.PERGOLA_WALK,
+  Q.SEA_WALK,
   Q.PLAY_LINK,
 ];
 // the same walks as they are laid in stone: never two fields over one spot (the north-south walk stops at the north
@@ -40,12 +42,12 @@ export const LAID_WALKS = [
   [nx0, nx1, Q.BRIDGE[3], Q.NS_PARK[3]],
   ...WALKS.filter((r) => r !== Q.NS_N && r !== Q.NS_PARK),
 ];
-// the allotments' gravel walks, either side of the gardens' path (laid in stone across them)
+// the allotments' flagged walks, either side of the gardens' path (laid in stone across them)
 export const GRAVEL = Q.PLOT_WALKS.flatMap(([x0, x1, z0, z1]) => [
   [x0, Q.GARDEN_PATH[0], z0, z1],
   [Q.GARDEN_PATH[1], x1, z0, z1],
 ]);
-export const PARK_WALKS = [...LOOP_RECTS, ...Q.LOOP_LINKS];
+export const PARK_WALKS = [...LOOP_RECTS, ...Q.LOOP_LINKS, Q.WISTERIA_PAD];
 export const PADS = [Q.PLAZA, Q.FITNESS, Q.PERGOLA, Q.COMMONS_APRON, Q.NW_SHELTER, Q.SE_SHELTER];
 export const RING_PAD = [Q.RING.x - Q.RING.pad, Q.RING.x + Q.RING.pad, Q.RING.z - Q.RING.pad, Q.RING.z + Q.RING.pad];
 // timber (the bridge, the boardwalk, the deck: park.js and promenade.js lay their boards) and the play corner's sand
@@ -129,6 +131,7 @@ export const QUARTER_LAMPS = [
   [Q.NS_X[1] + 0.3, 4.6],
   [Q.PARK_N[0] + 0.4, Q.PARK_N[2] - 0.3],
   [Q.PERGOLA_WALK[1] + 0.3, -39.0],
+  [Q.SEA_WALK[1] + 0.3, -50.4],
   [Q.SE_DOOR[0] + 1.2, Q.SE_DOOR[2] - 0.3],
 ];
 

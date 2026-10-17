@@ -31,7 +31,8 @@
   "places": {
     "east_coast": {
       "desktop": {
-        "texMB": { "max": 230, "issue": 373, "reason": "the everyday crowd bodies (#353): the casual-1 and older-1 skins at 1024, measured 225.6 against main's 214.4" }
+        "texMB": { "max": 230, "issue": 373, "reason": "the everyday crowd bodies (#353): the casual-1 and older-1 skins at 1024, measured 225.6 against main's 214.4" },
+        "tris": { "max": 845000, "issue": 696, "reason": "the dorm quarter on layout 5 (#661) seen whole from the dorm row's start: measured 799k to 804k against main's 740k" }
       }
     },
     "forecourt": {

@@ -113,7 +113,13 @@ export function* eastCoastSteps() {
   // the coast's wall, rocks and surf, and the walks' kerbs
   yield* coastSteps(isl, {
     at: (x, z) => [x, z],
-    data: { coast: coastRuns(), walks: kerbWalks(), paved: [Q.BEACH_PROM, Q.TERRACE] },
+    data: {
+      coast: coastRuns(),
+      walks: kerbWalks(),
+      // the strip of ground cover behind the coping stops at the paving and round the sea garden, which plants along
+      // its rail itself (dorm-quarter/gardens.js)
+      paved: [Q.BEACH_PROM, Q.TERRACE, Q.DECK, Q.SEA_GARDEN].map(([x0, x1, z0, z1]) => [x0, z0, x1, z1]),
+    },
   });
   const sea = coastalSea(root, sun.position.clone().normalize());
   yield;
