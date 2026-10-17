@@ -11,6 +11,7 @@ One folder per bible id. Each file here is a copy of one that bible/facts.yaml m
 - mc/meshy/: Eric's Meshy 3D model (task 01a0e731-1faf-70a7-98e4-c0f2d163c246): model.glb, eric-rigged.glb, the idle, walk, run, sit and to-sit animation GLBs, rig.json, task.json, textures and preview, and check.html with its two check shots (a headless rig check). The game loads slimmed copies from game3d/assets/eric/. Bible: characters › mc, model.
 - emi/emi-after.webp: Emi, round-3 RDBT seed 41 with headroom. Bible: characters › emi, portrait.
 - mio/mio-after.webp: Mio, gallery B-mio (RDBT) with headroom. Bible: characters › mio, portrait.
+- mio/mio-su1-s2-surprised.webp: Mio's surprised face, su1-s2 from reviews/mio-surprised-2 (2026-10-17), a copy of game3d/assets/portraits/mio-surprised.webp. Bible: characters › mio, images.
 - mio/meshy/: Mio's Meshy 3D model (Neon Bun Guardian biped): the six animation GLBs, base-clean.png and base-clean.json. Copied from legacy/side/flat/meshy2/. Game colours: hair #13292f, lighter green #20a081, hoodie #09232a. Bible: characters › mio, model.
 - rei/rei-after.webp: Rei, gallery B-rei (RDBT) with headroom. Bible: characters › rei, portrait.
 - aoi/aoi-after.webp: Aoi, gallery B-aoi (RDBT) with headroom. Bible: characters › aoi, portrait.
@@ -32,7 +33,8 @@ One folder per bible id. Each file here is a copy of one that bible/facts.yaml m
   - kenji/kenji-kenji-ink-2001-{neutral,grin,sheepish}.webp: Kenji. They replace the h4 faces above in the game.
   - emi/emi-emi-base-2001-neutral.webp, aoi/aoi-aoi-base-2001-neutral.webp: Emi and Aoi. Aoi's is fill-d65-s1 since 2026-10-01, the cream edge on her left side redrawn (reviews/aoi-edge-2).
   - ishibashi/guard-guard-ink-2001-{neutral,stern,amused}.webp: Ishibashi, the guard.
-  - mori/mori-mori-new-713-{neutral,smile,flustered}.webp: Mr. Mori.
+  - mori/mori-mori-new-713-{neutral,smile,flustered}.webp: Mr. Mori until 2026-10-17, now history.
+- mori/mori-m3-s2-neutral.webp: Mr. Mori's portrait since 2026-10-17, m3-s2 from reviews/mori-2, a copy of game3d/assets/portraits/mori-neutral.webp. Bible: characters › mori, images.
   - hamada/kuroda-hamada-new-743-{neutral,sleepy,panicked}.webp: Mr. Hamada.
 - kuro/kuro-after.webp: Kuro, A-luna-s101 with headroom. Bible: characters › kuro, portrait.
 - goro/goro-after.webp: Goro, goro-a-202 with headroom. Bible: characters › goro, portrait.

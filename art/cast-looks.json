@@ -29,11 +29,11 @@
    "portrait": "art/approved/mio/mio-after.webp"
   },
   {
-   "id": "mori", "checked": "26671c54", "cast_md": "mori", "name": "Mr. Mori", "gender": "male", "age": 58, "who": "Japanese man", "skin": "",
+   "id": "mori", "checked": "eec7f4bd", "cast_md": "mori", "name": "Mr. Mori", "gender": "male", "age": 58, "who": "Japanese man", "skin": "",
    "hair": "neatly combed grey hair", "eyes": "", "glasses": "", "extra": "a lined, kind face",
-   "build": "slim", "signature": "", "outfit": "a dark grey suit, a white shirt and a navy tie",
-   "short": "Mr. Mori, 58, neatly combed grey hair, dark grey suit",
-   "negative": "", "portrait": "art/approved/mori/mori-mori-new-713-neutral.webp", "aliases": ["Mori"]
+   "build": "slim", "signature": "", "outfit": "a grey cardigan over a white shirt and a navy tie",
+   "short": "Mr. Mori, 58, neatly combed grey hair, grey cardigan",
+   "negative": "", "portrait": "art/approved/mori/mori-m3-s2-neutral.webp", "aliases": ["Mori"]
   },
   {
    "id": "kenji", "checked": "768278b0", "cast_md": "kenji", "name": "Kenji", "gender": "male", "age": 21, "who": "young Japanese man", "skin": "",

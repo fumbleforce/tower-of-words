@@ -92,6 +92,7 @@ characters:
     images:
       - [art/approved/mio/mio-after.webp, "gallery B-mio (RDBT) with headroom, the portrait her game cut-outs come from", approved]
       - [art/candidates/portraits/mio-expressions-v3-sheet.png, "Expression sheet v3 (the six faces in the game)", approved]
+      - [art/approved/mio/mio-su1-s2-surprised.webp, "Surprised, su1-s2 (reviews/mio-surprised-2, picked by Jørgen 2026-10-17); replaces the v3 surprised face", approved]
     model: {dir: art/approved/mio/meshy, preview: art/approved/mio/meshy/base-clean.png, status: approved, src: "docs/game/art-and-sound.md ~ Eric and Mio are Meshy models", note: "Meshy Neon Bun Guardian biped: six animation GLBs, base-clean.png and base-clean.json. The game loads its own copy. Only colour tweaks allowed."}
     facts:
       - ["Portrait details: light tan eyes (about #dbcdb6) and thin taupe-grey glasses frames (about #574b49). Face repaints keep her original frames pixel for pixel and colour-match the irises (tools/portrait_candidates.py).", approved, "art/approved/mio/mio-after.webp"]
@@ -126,11 +127,15 @@ characters:
     portrait_status: approved
     decisions:
       - {q: "docs/game/cast.md ~ The B2 team is Eric, Mio, Mori and Kenji #1", s: approved}
-      - {q: "docs/game/cast.md ~ Look: approved portrait mori-new-713", s: approved}
+      - {q: "docs/game/cast.md ~ Look: approved portrait m3-s2", s: approved}
+      - {q: "docs/game/art-and-sound.md ~ Approved (2026-10-17): m3-s2 from reviews/mori-2", s: approved}
     images:
-      - [art/approved/mori/mori-mori-new-713-neutral.webp, "Mr. Mori: neutral (reviews/style-align-1 or npc-base-1 pick mori-new-713; faces from art/candidates/portraits/cast-faces-1)", approved]
-      - [art/approved/mori/mori-mori-new-713-smile.webp, "Mr. Mori: smile (reviews/style-align-1 or npc-base-1 pick mori-new-713; faces from art/candidates/portraits/cast-faces-1)", approved]
-      - [art/approved/mori/mori-mori-new-713-flustered.webp, "Mr. Mori: flustered (reviews/style-align-1 or npc-base-1 pick mori-new-713; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/mori/mori-m3-s2-neutral.webp, "Mr. Mori: neutral, m3-s2 (reviews/mori-2, picked by Jørgen 2026-10-17), cut out and framed as the game shows it", approved]
+      - [art/approved/mori/mori-mori-new-713-neutral.webp, "Neutral mori-new-713 (reviews/npc-base-1); replaced 2026-10-17 by m3-s2", legacy]
+      - [art/approved/mori/mori-mori-new-713-smile.webp, "Smile, a repaint of mori-new-713 (cast-faces-1); out of the game since 2026-10-17, it no longer matches his portrait", legacy]
+      - [art/approved/mori/mori-mori-new-713-flustered.webp, "Flustered, a repaint of mori-new-713 (cast-faces-1); out of the game since 2026-10-17, it no longer matches his portrait", legacy]
+    rejected:
+      - ["Round 1 of the new Mori (reviews/mori-hamada-1): \"mori looks jacked, not the mild mannered grandpa type\" (Jørgen, 2026-10-16).", rejected, "docs/game/art-and-sound.md ~ mori looks jacked"]
       - [art/candidates/portraits/mori-sheet.png, "Portrait candidates (713 in use)", draft]
       - [game3d/assets/characters/mori/base.webp, "3D test through the Meshy workflow: the chibi picture it started from", draft]
     model3d: {id: mori, dir: game3d/assets/characters/mori, note: "Meshy test (commit b01e6b0). Loads only with ?cast3d=mori until approved."}

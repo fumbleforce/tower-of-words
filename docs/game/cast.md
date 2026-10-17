@@ -92,7 +92,7 @@ Eric's experience interests him. Mori wants to hear what he thinks before giving
 
 Mori wants someone to have dinner with after the others leave, and he is open to romance. He can make an invitation sound like a favour he is offering, then leave the other person unsure whether he wanted a date. He enjoys dry jokes and shared silences. He likes being looked after, although he often insists he can manage before accepting an offer. If Eric stays to talk, he leaves the washing up until later.
 
-- Look: approved portrait mori-new-713 (reviews/npc-base-1): neatly combed grey hair, dark grey suit, navy tie, empty hands. Copies in art/approved/mori/. In the 3D world, the Meshy model mori-1 (reviews/mori-meshy-1, picked 2026-10-05), in the game ([art-and-sound.md](art-and-sound.md#people-in-the-world)).
+- Look: approved portrait m3-s2 (reviews/mori-2): slim and mild, neatly combed grey hair, a grey cardigan over a white shirt and navy tie, empty hands. Copies in art/approved/mori/. In the 3D world, the Meshy model mori-1 (reviews/mori-meshy-1, picked 2026-10-05), in the game ([art-and-sound.md](art-and-sound.md#people-in-the-world)).
 
 ### Kenji (`kenji`)
 
@@ -412,7 +412,7 @@ The faces each person can show beside the text box: `game3d/assets/portraits/<id
 |---|---|
 | `eric` | neutral, surprised, tired |
 | `mio` | neutral, smile, deadpan, surprised, embarrassed, tired, phone, annoyed |
-| `mori` | neutral, smile, flustered |
+| `mori` | neutral |
 | `kenji` | neutral, grin, sheepish |
 | `emi` | neutral |
 | `guard` | neutral, stern, amused |
