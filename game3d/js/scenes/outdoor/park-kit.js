@@ -62,11 +62,12 @@ export function picnicTable(p, x, z, { ry = 0 } = {}) {
   );
 }
 
-export function ringSeat(p, x, z, r, { n = 16 } = {}) {
+export function ringSeat(p, x, z, r, { n = 24 } = {}) {
+  // slats as wide as the ring's outer edge, so no gaps show there; every other one a hair higher where they overlap
+  const w = (2 * Math.PI * (r + 0.21)) / n;
   for (let i = 0; i < n; i++) {
     const a = (i / n) * Math.PI * 2;
-    const w = (2 * Math.PI * r) / n + 0.02;
-    p.box(WOOD.pale, w, 0.05, 0.42, x + Math.cos(a) * r, 0.28, z + Math.sin(a) * r, {
+    p.box(WOOD.pale, w, 0.05, 0.42, x + Math.cos(a) * r, 0.28 + (i % 2) * 0.004, z + Math.sin(a) * r, {
       ry: -a + Math.PI / 2,
       surf: 'wood',
     });

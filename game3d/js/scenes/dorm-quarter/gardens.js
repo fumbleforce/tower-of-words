@@ -117,7 +117,6 @@ function allotments(p, lights, far) {
   hedge(p, [Q.GARDEN_PATH[1] + 0.1, hz], [Q.ORCHARD[1], hz], { w: 0.45, h: 0.55, seed: 142 });
   // a border of perennials and grasses inside the hedge, between the plots and the path
   const bz = [Q.PLOT_ROWS[1][1] + 0.45, hz - 0.35];
-  drift(p, [Q.NW_SHELTER[1] + 0.4, Q.GARDEN_PATH[0] - 0.3, ...bz], { back: 's', seed: 147 });
   drift(p, [Q.GARDEN_PATH[1] + 0.3, Q.GARDEN_PATH[1] + 6.3, ...bz], { back: 's', seed: 149 });
   hedge(p, [Q.ORCHARD[0] - 0.3, -55.9], [Q.ORCHARD[0] - 0.3, hz], { w: 0.45, h: 0.55, seed: 143 });
   hedge(p, [Q.ORCHARD[1] + 0.3, -55.9], [Q.ORCHARD[1] + 0.3, hz], { w: 0.45, h: 0.55, seed: 144 });
@@ -185,8 +184,8 @@ function* orchard(p, far) {
     }
 }
 
-// N-E's sea garden: the pergola on its pad, two picnic tables under it, pines in groups, a cherry; drifts of planting
-// along the north path and in front of the pines; along the rail at the water a band of salt-tolerant shrubs and
+// N-E's sea garden: the pergola on its pad, two picnic tables under it, pines either side of the walk, a cherry;
+// drifts of planting along the north path; along the rail at the water a band of salt-tolerant shrubs and
 // grasses straight on the lawn (the coast kit lays no strip of ground cover here: east-coast.js)
 function seaGarden(p, lights) {
   const [x0, x1, z0, z1] = Q.PERGOLA;
@@ -205,9 +204,6 @@ function seaGarden(p, lights) {
   const wz = Q.PERGOLA_WALK;
   drift(p, [Q.GARDENS[0].rect[1] + 0.3, wz[0] - 0.3, Q.NORTH[2] - 1.3, Q.NORTH[2] - 0.2], { back: 'n', seed: 61 });
   drift(p, [wz[1] + 0.3, Q.EDGE[1] - 0.2, Q.NORTH[2] - 1.3, Q.NORTH[2] - 0.2], { back: 'n', seed: 67 });
-  // in front of the pines either side of the walk north
-  drift(p, [Q.GARDENS[0].rect[1] + 0.4, Q.SEA_WALK[0] - 0.3, -47.8, -46.2], { back: 'n', seed: 71 });
-  drift(p, [Q.SEA_WALK[1] + 0.3, 128.6, -47.6, -46.0], { back: 'n', seed: 73 });
   // the band along the rail: shrubs in twos and threes, grasses between, a hair inland of the coping
   const line = [[Q.SEA_X, Q.BEACH_PROM[2]], ...Q.COAST_LINE.slice(4), BATH_COAST[0]];
   for (let i = 0; i + 1 < line.length; i++) {
