@@ -1,0 +1,222 @@
+{
+  "title": "The dorm quarter, built on layout 5",
+  "date": "2026-10-17",
+  "by": "claude-agent:dorm-quarter-build",
+  "caption": "The quarter you picked is in the game: the park with its pond and bridge round the big cherry, the blocks, the villas, the allotments and orchard, the sea garden and the beach promenade. Walk east from the dorm street along the promenade.",
+  "commit": [
+    "601c69c6",
+    "6ca74369",
+    "ba9ddc13",
+    "88f7d3cb",
+    "46cebae8",
+    "1e46a0e8",
+    "621fde27",
+    "eaa419dc",
+    "b1507cf8",
+    "d951bc8e"
+  ],
+  "result": [
+    "aerial-desk",
+    "prom-desk",
+    "seagarden-desk",
+    "gardens-desk"
+  ],
+  "sections": [
+    {
+      "title": "The park and the blocks",
+      "caption": "The promenade past the park, the pond and its bridge, the wisteria shelter, N-W's north side and S-E's court.",
+      "images": [
+        {
+          "id": "aerial-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/aerial-desk.webp",
+          "caption": "From high over the quarter, desktop"
+        },
+        {
+          "id": "prom-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/prom-desk.webp",
+          "caption": "The promenade at the park's crossing, morning"
+        },
+        {
+          "id": "bridge-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/bridge-desk.webp",
+          "caption": "On the bridge, the boardwalk to the cherry's ring seat"
+        },
+        {
+          "id": "eveprom-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/eveprom-desk.webp",
+          "caption": "The crossing after work"
+        },
+        {
+          "id": "courtstreet-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/courtstreet-desk.webp",
+          "caption": "The wisteria shelter and the courtyard behind it, after work"
+        },
+        {
+          "id": "north-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/north-desk.webp",
+          "caption": "N-W's door on the north path"
+        },
+        {
+          "id": "secourt-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/secourt-desk.webp",
+          "caption": "S-E's court and its play spot"
+        }
+      ]
+    },
+    {
+      "title": "Gardens",
+      "caption": "The allotments with the shed, tunnels and orchard; N-E's sea garden with its walk and pergola.",
+      "images": [
+        {
+          "id": "gardens-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/gardens-desk.webp",
+          "caption": "The allotments by the shed"
+        },
+        {
+          "id": "courts-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/courts-desk.webp",
+          "caption": "The orchard from the courts walk"
+        },
+        {
+          "id": "seagarden-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/seagarden-desk.webp",
+          "caption": "The sea garden's walk to the courts walk"
+        },
+        {
+          "id": "pergola-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/pergola-desk.webp",
+          "caption": "The pergola off the north path"
+        },
+        {
+          "id": "neeast-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/neeast-desk.webp",
+          "caption": "N-E from the sea"
+        }
+      ]
+    },
+    {
+      "title": "The beach promenade",
+      "caption": "The sea wall and railing, the steps to the sand, the drinks plaza and the fitness corner.",
+      "images": [
+        {
+          "id": "beach-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/beach-desk.webp",
+          "caption": "Above the beach steps"
+        },
+        {
+          "id": "fitness-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/fitness-desk.webp",
+          "caption": "The fitness corner"
+        }
+      ]
+    },
+    {
+      "title": "Day 1's walk home",
+      "caption": "The courtyard looks as before; the dorm street's junction now runs on east as the promenade.",
+      "images": [
+        {
+          "id": "court-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/court-desk.webp",
+          "caption": "Eric's courtyard after work"
+        },
+        {
+          "id": "lane-desk",
+          "image": "bible/shots/showcase/dorm-quarter-1/lane-desk.webp",
+          "caption": "Where the dorm street meets the promenade"
+        }
+      ]
+    },
+    {
+      "title": "Phone",
+      "caption": "The same places at phone size.",
+      "images": [
+        {
+          "id": "aerial-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/aerial-phone.webp",
+          "caption": "From high over the quarter"
+        },
+        {
+          "id": "prom-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/prom-phone.webp",
+          "caption": "The promenade"
+        },
+        {
+          "id": "bridge-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/bridge-phone.webp",
+          "caption": "The bridge"
+        },
+        {
+          "id": "gardens-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/gardens-phone.webp",
+          "caption": "The allotments"
+        },
+        {
+          "id": "seagarden-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/seagarden-phone.webp",
+          "caption": "The sea garden"
+        },
+        {
+          "id": "beach-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/beach-phone.webp",
+          "caption": "The beach steps"
+        },
+        {
+          "id": "fitness-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/fitness-phone.webp",
+          "caption": "The fitness corner"
+        },
+        {
+          "id": "court-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/court-phone.webp",
+          "caption": "Eric's courtyard"
+        },
+        {
+          "id": "lane-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/lane-phone.webp",
+          "caption": "The junction"
+        },
+        {
+          "id": "north-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/north-phone.webp",
+          "caption": "N-W's door"
+        },
+        {
+          "id": "secourt-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/secourt-phone.webp",
+          "caption": "S-E's court"
+        },
+        {
+          "id": "courtstreet-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/courtstreet-phone.webp",
+          "caption": "The wisteria shelter"
+        },
+        {
+          "id": "eveprom-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/eveprom-phone.webp",
+          "caption": "The crossing after work"
+        },
+        {
+          "id": "pergola-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/pergola-phone.webp",
+          "caption": "The pergola"
+        },
+        {
+          "id": "courts-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/courts-phone.webp",
+          "caption": "The orchard"
+        },
+        {
+          "id": "neeast-phone",
+          "image": "bible/shots/showcase/dorm-quarter-1/neeast-phone.webp",
+          "caption": "N-E from the sea"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play it",
+      "href": "game3d/"
+    }
+  ]
+}
