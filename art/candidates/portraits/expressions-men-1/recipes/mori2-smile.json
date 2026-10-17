@@ -1,0 +1,35 @@
+{
+ "details": "mori smile, Review expressions-men-1 (#688) pass 2. One change from pass 1 (mori-smile): stronger smile words (a broad smile with lips parted and a little of the upper teeth, eyes narrowed), and 'open mouth, teeth, grin' out of the exclusions, because all four pass 1 smiles read as his neutral at dialogue size (the base already smiles). Start, mask, denoise 0.7 and seeds 1-4 as pass 1. Staging: ../staging.md.",
+ "characters": [
+  "mori-mature"
+ ],
+ "outfit": {
+  "mori-mature": "mori-cardigan"
+ },
+ "people": {
+  "mori-mature": {
+   "appearanceNegative": "spiky hair, messy hair, hair standing up"
+  }
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "(happy warm smile:1.4), a broad smile with lips parted showing a little of his upper teeth, cheeks lifted, eyes narrowed and creased with smile lines at the corners, looking at the viewer",
+ "extra": "close-up of his face, plain light grey background, soft even studio light",
+ "sectionNegatives": {
+  "scene": "frown, furrowed brow, angry, laughing, wide open mouth, tongue, blush, glasses"
+ },
+ "width": 1024,
+ "height": 1024,
+ "start": {
+  "image": "art/candidates/portraits/expressions-men-1/start/mori-crop.png",
+  "denoise": 0.7,
+  "mask": "art/candidates/portraits/expressions-men-1/start/mori-mask.png"
+ },
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props",
+  "muscle"
+ ]
+}

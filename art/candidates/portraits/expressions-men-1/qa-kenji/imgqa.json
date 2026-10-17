@@ -1,0 +1,564 @@
+{
+ "character": "kenji",
+ "ref": "game3d/assets/portraits/kenji-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   218,
+   166,
+   385,
+   336
+  ]
+ ],
+ "ref_face_detected": [
+  218.0,
+  166.0,
+  385.0,
+  336.0
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/expressions-men-1/kenji-grin-r261017-154328-475-1-s1-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    215.0,
+    167.0,
+    385.0,
+    336.0
+   ],
+   "eyes": [
+    [
+     259.0,
+     229.0
+    ],
+    [
+     321.0,
+     221.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0201
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "note": "kenji-grin-r261017-154328-475-1-s1.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.105,
+    "zoom": 1.006,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 79,
+    "hair_top_ref": 81,
+    "crop": [
+     0.3,
+     2.0,
+     593.8,
+     765.5
+    ],
+    "eyes": 0.001,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.007,
+    "ssim": 0.733
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/kenji-grin-r261017-154328-475-2-s2-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    216.0,
+    167.0,
+    381.0,
+    336.0
+   ],
+   "eyes": [
+    [
+     256.5,
+     229.0
+    ],
+    [
+     316.0,
+     222.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0201
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "note": "kenji-grin-r261017-154328-475-2-s2.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.105,
+    "zoom": 1.006,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 79,
+    "hair_top_ref": 81,
+    "crop": [
+     -1.2,
+     2.0,
+     592.3,
+     765.5
+    ],
+    "eyes": 0.004,
+    "tilt": 0.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.006,
+    "ssim": 0.414
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/kenji-grin-r261017-154328-475-3-s3-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    219.0,
+    168.0,
+    386.0,
+    336.0
+   ],
+   "eyes": [
+    [
+     262.0,
+     229.5
+    ],
+    [
+     324.5,
+     222.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0201
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "note": "kenji-grin-r261017-154328-475-3-s3.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.105,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 77,
+    "hair_top_ref": 81,
+    "crop": [
+     4.5,
+     4.0,
+     594.5,
+     762.9
+    ],
+    "eyes": 0.001,
+    "tilt": 0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.004,
+    "ssim": 0.655
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/kenji-grin-r261017-154328-475-4-s4-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    216.0,
+    167.0,
+    385.0,
+    337.0
+   ],
+   "eyes": [
+    [
+     259.0,
+     231.5
+    ],
+    [
+     322.5,
+     221.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0201
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "note": "kenji-grin-r261017-154328-475-4-s4.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.105,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.001,
+    "hair_top_game": 80,
+    "hair_top_ref": 81,
+    "crop": [
+     -1.0,
+     1.0,
+     596.0,
+     769.0
+    ],
+    "eyes": 0.004,
+    "tilt": -2.9,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.004,
+    "ssim": 0.654
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/kenji-sheepish-r261017-154544-492-1-s1-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    215.0,
+    165.0,
+    387.0,
+    338.0
+   ],
+   "eyes": [
+    [
+     259.0,
+     228.5
+    ],
+    [
+     320.5,
+     221.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0201
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "note": "kenji-sheepish-r261017-154544-492-1-s1.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.105,
+    "zoom": 0.983,
+    "top": 0.005,
+    "bottom_short": 0.012,
+    "hair_top_game": 83,
+    "hair_top_ref": 81,
+    "crop": [
+     -5.8,
+     -3.9,
+     601.7,
+     777.6
+    ],
+    "eyes": 0.001,
+    "tilt": -0.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.008,
+    "ssim": 0.634
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/kenji-sheepish-r261017-154544-492-2-s2-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    216.0,
+    167.0,
+    384.0,
+    337.0
+   ],
+   "eyes": [
+    [
+     258.5,
+     230.0
+    ],
+    [
+     321.5,
+     224.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0201
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "note": "kenji-sheepish-r261017-154544-492-2-s2.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.105,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.001,
+    "hair_top_game": 80,
+    "hair_top_ref": 81,
+    "crop": [
+     -1.5,
+     1.0,
+     595.5,
+     769.0
+    ],
+    "eyes": 0.009,
+    "tilt": 1.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.009,
+    "ssim": 0.693
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/kenji-sheepish-r261017-154544-492-3-s3-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    217.0,
+    167.0,
+    388.0,
+    337.0
+   ],
+   "eyes": [
+    [
+     261.0,
+     230.0
+    ],
+    [
+     323.5,
+     222.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0201
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "note": "kenji-sheepish-r261017-154544-492-3-s3.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.105,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.001,
+    "hair_top_game": 80,
+    "hair_top_ref": 81,
+    "crop": [
+     1.0,
+     1.0,
+     598.0,
+     769.0
+    ],
+    "eyes": 0.003,
+    "tilt": -0.8,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.007,
+    "ssim": 0.714
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/kenji-sheepish-r261017-154544-492-4-s4-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    216.0,
+    166.0,
+    386.0,
+    339.0
+   ],
+   "eyes": [
+    [
+     259.5,
+     232.0
+    ],
+    [
+     321.0,
+     221.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0201
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "note": "kenji-sheepish-r261017-154544-492-4-s4.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.105,
+    "zoom": 0.983,
+    "top": 0.004,
+    "bottom_short": 0.014,
+    "hair_top_game": 82,
+    "hair_top_ref": 81,
+    "crop": [
+     -5.8,
+     -2.9,
+     601.7,
+     778.6
+    ],
+    "eyes": 0.007,
+    "tilt": -3.2,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.009,
+    "ssim": 0.614
+   },
+   "status": "warn"
+  }
+ ]
+}

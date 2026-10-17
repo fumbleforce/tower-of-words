@@ -1,0 +1,78 @@
+{
+ "about": "mori's expression faces, Review expressions-men-1 (#688): face-only repaints of the approved base m3-s2 (reviews/mori-2, dashboard #2418), by tools/characters/steps/face_expr.py. The source is the base's master PNG from the image service; place is the scale and offset the installed neutral was framed with (measured by registering the source on the neutral, mean error about 2/255).",
+ "name": "mori",
+ "source": "art/production/expressions-men-1/mori-m3-s2.png",
+ "game": "game3d/assets/portraits/mori-neutral.webp",
+ "who": "mori",
+ "place": [
+  0.7375,
+  -27,
+  93
+ ],
+ "crop": [
+  300,
+  90,
+  620,
+  410
+ ],
+ "poly": [
+  [
+   374,
+   138
+  ],
+  [
+   420,
+   126
+  ],
+  [
+   470,
+   124
+  ],
+  [
+   518,
+   130
+  ],
+  [
+   522,
+   150
+  ],
+  [
+   520,
+   200
+  ],
+  [
+   512,
+   240
+  ],
+  [
+   495,
+   268
+  ],
+  [
+   470,
+   290
+  ],
+  [
+   445,
+   294
+  ],
+  [
+   420,
+   283
+  ],
+  [
+   400,
+   262
+  ],
+  [
+   390,
+   235
+  ],
+  [
+   382,
+   200
+  ]
+ ],
+ "frame": null,
+ "blur": 10
+}

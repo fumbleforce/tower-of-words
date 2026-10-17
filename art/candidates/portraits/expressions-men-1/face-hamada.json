@@ -1,0 +1,86 @@
+{
+ "about": "hamada's expression faces, Review expressions-men-1 (#688): face-only repaints of the approved base h2-s1 (reviews/hamada-2, dashboard #2583), by tools/characters/steps/face_expr.py. The source is the base's master PNG from the image service; place is the scale and offset the installed neutral was framed with (measured by registering the source on the neutral, mean error about 2/255).",
+ "name": "hamada",
+ "source": "art/production/expressions-men-1/hamada-h2-s1.png",
+ "game": "game3d/assets/portraits/kuroda-neutral.webp",
+ "who": "kuroda",
+ "place": [
+  0.625,
+  3,
+  73
+ ],
+ "crop": [
+  312,
+  140,
+  632,
+  460
+ ],
+ "poly": [
+  [
+   397,
+   215
+  ],
+  [
+   440,
+   200
+  ],
+  [
+   500,
+   200
+  ],
+  [
+   545,
+   215
+  ],
+  [
+   552,
+   245
+  ],
+  [
+   542,
+   280
+  ],
+  [
+   536,
+   320
+  ],
+  [
+   527,
+   350
+  ],
+  [
+   510,
+   372
+  ],
+  [
+   480,
+   383
+  ],
+  [
+   445,
+   383
+  ],
+  [
+   418,
+   368
+  ],
+  [
+   408,
+   345
+  ],
+  [
+   402,
+   310
+  ],
+  [
+   398,
+   270
+  ],
+  [
+   400,
+   232
+  ]
+ ],
+ "frame": null,
+ "blur": 10
+}

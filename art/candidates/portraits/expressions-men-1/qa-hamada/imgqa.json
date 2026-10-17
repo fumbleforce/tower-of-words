@@ -1,0 +1,1290 @@
+{
+ "character": "kuroda",
+ "ref": "game3d/assets/portraits/kuroda-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   224,
+   162,
+   374,
+   338
+  ]
+ ],
+ "ref_face_detected": [
+  224.0,
+  162.0,
+  374.0,
+  338.0
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada-panicked-r261017-155025-624-1-s1-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    225.0,
+    166.0,
+    372.0,
+    339.0
+   ],
+   "eyes": [
+    [
+     270.0,
+     227.5
+    ],
+    [
+     332.5,
+     227.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada-panicked-r261017-155025-624-1-s1.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 1.017,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 81,
+    "hair_top_ref": 87,
+    "crop": [
+     4.6,
+     6.8,
+     591.4,
+     761.7
+    ],
+    "eyes": -0.005,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.026,
+    "ssim": 0.526
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada-panicked-r261017-155025-624-2-s2-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    226.0,
+    167.0,
+    372.0,
+    336.0
+   ],
+   "eyes": [
+    [
+     270.5,
+     224.5
+    ],
+    [
+     333.0,
+     226.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada-panicked-r261017-155025-624-2-s2.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 1.041,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 78,
+    "hair_top_ref": 87,
+    "crop": [
+     11.9,
+     11.4,
+     585.1,
+     748.9
+    ],
+    "eyes": -0.016,
+    "tilt": 1.4,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.03,
+    "ssim": 0.377
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada-panicked-r261017-155025-624-3-s3-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    225.0,
+    165.0,
+    372.0,
+    338.0
+   ],
+   "eyes": [
+    [
+     268.5,
+     224.5
+    ],
+    [
+     332.0,
+     225.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada-panicked-r261017-155025-624-3-s3.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 1.017,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 82,
+    "hair_top_ref": 87,
+    "crop": [
+     4.6,
+     5.8,
+     591.4,
+     760.7
+    ],
+    "eyes": -0.015,
+    "tilt": 0.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.035,
+    "ssim": 0.592
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada-panicked-r261017-155025-624-4-s4-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    225.0,
+    164.0,
+    372.0,
+    341.0
+   ],
+   "eyes": [
+    [
+     269.5,
+     225.5
+    ],
+    [
+     332.0,
+     225.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada-panicked-r261017-155025-624-4-s4.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 0.994,
+    "top": 0.0,
+    "bottom_short": 0.007,
+    "hair_top_game": 85,
+    "hair_top_ref": 87,
+    "crop": [
+     -2.2,
+     1.1,
+     598.2,
+     773.4
+    ],
+    "eyes": -0.015,
+    "tilt": -0.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.03,
+    "ssim": 0.565
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada-sleepy-r261017-154806-50f-1-s1-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    225.0,
+    161.0,
+    373.0,
+    339.0
+   ],
+   "eyes": [
+    [
+     334.0,
+     228.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada-sleepy-r261017-154806-50f-1-s1.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 0.989,
+    "top": 0.004,
+    "bottom_short": 0.008,
+    "hair_top_game": 88,
+    "hair_top_ref": 87,
+    "crop": [
+     -3.4,
+     -2.8,
+     600.4,
+     773.9
+    ],
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.012,
+    "ssim": 0.776
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada-sleepy-r261017-154806-50f-2-s2-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    224.0,
+    159.0,
+    372.0,
+    339.0
+   ],
+   "eyes": [
+    [
+     268.0,
+     225.5
+    ],
+    [
+     335.5,
+     224.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada-sleepy-r261017-154806-50f-2-s2.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 0.978,
+    "top": 0.009,
+    "bottom_short": 0.014,
+    "hair_top_game": 91,
+    "hair_top_ref": 87,
+    "crop": [
+     -7.8,
+     -6.7,
+     602.8,
+     778.8
+    ],
+    "eyes": 0.006,
+    "tilt": -0.8,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.012,
+    "ssim": 0.505
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada-sleepy-r261017-154806-50f-3-s3-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    225.0,
+    160.0,
+    372.0,
+    339.0
+   ],
+   "eyes": [
+    [
+     269.5,
+     227.5
+    ],
+    [
+     333.5,
+     227.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada-sleepy-r261017-154806-50f-3-s3.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 0.983,
+    "top": 0.006,
+    "bottom_short": 0.011,
+    "hair_top_game": 90,
+    "hair_top_ref": 87,
+    "crop": [
+     -5.6,
+     -4.8,
+     601.6,
+     776.3
+    ],
+    "eyes": 0.015,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.014,
+    "ssim": 0.665
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada-sleepy-r261017-154806-50f-4-s4-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    223.0,
+    160.0,
+    374.0,
+    340.0
+   ],
+   "eyes": [
+    [
+     267.0,
+     226.0
+    ],
+    [
+     334.0,
+     225.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada-sleepy-r261017-154806-50f-4-s4.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 0.978,
+    "top": 0.007,
+    "bottom_short": 0.015,
+    "hair_top_game": 90,
+    "hair_top_ref": 87,
+    "crop": [
+     -7.3,
+     -5.7,
+     603.3,
+     779.8
+    ],
+    "eyes": 0.004,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.017,
+    "ssim": 0.549
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada2-panicked-r261017-160123-74f-1-s1-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    225.0,
+    166.0,
+    372.0,
+    339.0
+   ],
+   "eyes": [
+    [
+     270.0,
+     227.5
+    ],
+    [
+     333.0,
+     227.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada2-panicked-r261017-160123-74f-1-s1.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 1.017,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 81,
+    "hair_top_ref": 87,
+    "crop": [
+     4.6,
+     6.8,
+     591.4,
+     761.7
+    ],
+    "eyes": -0.005,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.027,
+    "ssim": 0.522
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada2-panicked-r261017-160123-74f-2-s2-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    227.0,
+    167.0,
+    372.0,
+    336.0
+   ],
+   "eyes": [
+    [
+     271.0,
+     224.5
+    ],
+    [
+     333.0,
+     226.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada2-panicked-r261017-160123-74f-2-s2.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 1.041,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 78,
+    "hair_top_ref": 87,
+    "crop": [
+     12.4,
+     11.4,
+     585.6,
+     748.9
+    ],
+    "eyes": -0.016,
+    "tilt": 1.4,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.031,
+    "ssim": 0.361
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada2-panicked-r261017-160123-74f-3-s3-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    225.0,
+    165.0,
+    372.0,
+    337.0
+   ],
+   "eyes": [
+    [
+     268.0,
+     224.5
+    ],
+    [
+     332.0,
+     225.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada2-panicked-r261017-160123-74f-3-s3.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 1.023,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 82,
+    "hair_top_ref": 87,
+    "crop": [
+     6.3,
+     6.7,
+     589.7,
+     757.2
+    ],
+    "eyes": -0.013,
+    "tilt": 0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.034,
+    "ssim": 0.528
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada2-panicked-r261017-160123-74f-4-s4-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    225.0,
+    164.0,
+    373.0,
+    341.0
+   ],
+   "eyes": [
+    [
+     269.5,
+     225.5
+    ],
+    [
+     332.0,
+     225.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada2-panicked-r261017-160123-74f-4-s4.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 0.994,
+    "top": 0.0,
+    "bottom_short": 0.007,
+    "hair_top_game": 85,
+    "hair_top_ref": 87,
+    "crop": [
+     -1.7,
+     1.1,
+     598.7,
+     773.4
+    ],
+    "eyes": -0.015,
+    "tilt": -0.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.03,
+    "ssim": 0.572
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada2-sleepy-r261017-155804-2cf-1-s1-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    225.0,
+    161.0,
+    374.0,
+    339.0
+   ],
+   "eyes": [
+    [
+     334.5,
+     228.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada2-sleepy-r261017-155804-2cf-1-s1.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 0.989,
+    "top": 0.004,
+    "bottom_short": 0.008,
+    "hair_top_game": 88,
+    "hair_top_ref": 87,
+    "crop": [
+     -2.9,
+     -2.8,
+     600.9,
+     773.9
+    ],
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.011,
+    "ssim": 0.715
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada2-sleepy-r261017-155804-2cf-2-s2-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    224.0,
+    159.0,
+    373.0,
+    340.0
+   ],
+   "eyes": [
+    [
+     268.5,
+     225.0
+    ],
+    [
+     335.5,
+     224.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada2-sleepy-r261017-155804-2cf-2-s2.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 0.972,
+    "top": 0.01,
+    "bottom_short": 0.018,
+    "hair_top_game": 91,
+    "hair_top_ref": 87,
+    "crop": [
+     -9.0,
+     -7.6,
+     605.0,
+     782.2
+    ],
+    "eyes": 0.002,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.014,
+    "ssim": 0.418
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada2-sleepy-r261017-155804-2cf-3-s3-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    225.0,
+    160.0,
+    372.0,
+    338.0
+   ],
+   "eyes": [
+    [
+     269.0,
+     227.5
+    ],
+    [
+     333.5,
+     227.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada2-sleepy-r261017-155804-2cf-3-s3.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 0.989,
+    "top": 0.005,
+    "bottom_short": 0.006,
+    "hair_top_game": 89,
+    "hair_top_ref": 87,
+    "crop": [
+     -3.9,
+     -3.8,
+     599.9,
+     772.9
+    ],
+    "eyes": 0.017,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.014,
+    "ssim": 0.655
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada2-sleepy-r261017-155804-2cf-4-s4-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    224.0,
+    161.0,
+    374.0,
+    339.0
+   ],
+   "eyes": [
+    [
+     267.0,
+     226.5
+    ],
+    [
+     334.0,
+     225.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada2-sleepy-r261017-155804-2cf-4-s4.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 0.989,
+    "top": 0.004,
+    "bottom_short": 0.008,
+    "hair_top_game": 88,
+    "hair_top_ref": 87,
+    "crop": [
+     -3.4,
+     -2.8,
+     600.4,
+     773.9
+    ],
+    "eyes": 0.004,
+    "tilt": -0.9,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.016,
+    "ssim": 0.804
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada3-sleepy-r261017-160424-1ba-1-s1-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    225.0,
+    160.0,
+    373.0,
+    339.0
+   ],
+   "eyes": [
+    [
+     334.5,
+     229.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada3-sleepy-r261017-160424-1ba-1-s1.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 0.983,
+    "top": 0.006,
+    "bottom_short": 0.011,
+    "hair_top_game": 90,
+    "hair_top_ref": 87,
+    "crop": [
+     -5.1,
+     -4.8,
+     602.1,
+     776.3
+    ],
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.012,
+    "ssim": 0.611
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada3-sleepy-r261017-160424-1ba-2-s2-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    226.0,
+    161.0,
+    371.0,
+    338.0
+   ],
+   "eyes": [
+    [
+     269.5,
+     225.0
+    ],
+    [
+     336.0,
+     225.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada3-sleepy-r261017-160424-1ba-2-s2.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 0.994,
+    "top": 0.002,
+    "bottom_short": 0.003,
+    "hair_top_game": 88,
+    "hair_top_ref": 87,
+    "crop": [
+     -2.2,
+     -1.9,
+     598.2,
+     770.4
+    ],
+    "eyes": 0.001,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.017,
+    "ssim": 0.76
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada3-sleepy-r261017-160424-1ba-3-s3-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    225.0,
+    160.0,
+    372.0,
+    337.0
+   ],
+   "eyes": [
+    [
+     269.5,
+     227.5
+    ],
+    [
+     333.5,
+     227.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada3-sleepy-r261017-160424-1ba-3-s3.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 0.994,
+    "top": 0.004,
+    "bottom_short": 0.002,
+    "hair_top_game": 89,
+    "hair_top_ref": 87,
+    "crop": [
+     -2.2,
+     -2.9,
+     598.2,
+     769.4
+    ],
+    "eyes": 0.021,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.014,
+    "ssim": 0.673
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/hamada3-sleepy-r261017-160424-1ba-4-s4-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    224.0,
+    159.0,
+    373.0,
+    339.0
+   ],
+   "eyes": [
+    [
+     267.5,
+     227.0
+    ],
+    [
+     334.5,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "note": "hamada3-sleepy-r261017-160424-1ba-4-s4.webp is framed differently from the cut-out; holes not graded",
+    "holes": 1,
+    "holes_px": 713,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 0.978,
+    "top": 0.009,
+    "bottom_short": 0.014,
+    "hair_top_game": 91,
+    "hair_top_ref": 87,
+    "crop": [
+     -7.3,
+     -6.7,
+     603.3,
+     778.8
+    ],
+    "eyes": 0.016,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.53
+   },
+   "status": "pass"
+  }
+ ]
+}

@@ -1,0 +1,564 @@
+{
+ "character": "mori",
+ "ref": "game3d/assets/portraits/mori-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   229,
+   172,
+   367,
+   334
+  ]
+ ],
+ "ref_face_detected": [
+  229.0,
+  172.0,
+  367.0,
+  334.0
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/expressions-men-1/mori-flustered-r261017-153845-895-1-s1-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    230.0,
+    174.0,
+    366.0,
+    332.0
+   ],
+   "eyes": [
+    [
+     266.5,
+     227.5
+    ],
+    [
+     324.0,
+     223.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0223
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "matte": {
+    "note": "mori-flustered-r261017-153845-895-1-s1.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.142,
+    "zoom": 1.025,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 105,
+    "hair_top_ref": 109,
+    "crop": [
+     7.4,
+     6.2,
+     589.6,
+     755.3
+    ],
+    "eyes": 0.005,
+    "tilt": -0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.005,
+    "ssim": 0.455
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/mori-flustered-r261017-153845-895-2-s2-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    230.0,
+    173.0,
+    367.0,
+    333.0
+   ],
+   "eyes": [
+    [
+     267.0,
+     226.5
+    ],
+    [
+     325.0,
+     222.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0223
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "matte": {
+    "note": "mori-flustered-r261017-153845-895-2-s2.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.142,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 107,
+    "hair_top_ref": 109,
+    "crop": [
+     4.2,
+     3.1,
+     593.8,
+     761.6
+    ],
+    "eyes": 0.001,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.003,
+    "ssim": 0.643
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/mori-flustered-r261017-153845-895-3-s3-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    230.0,
+    173.0,
+    366.0,
+    333.0
+   ],
+   "eyes": [
+    [
+     267.0,
+     225.5
+    ],
+    [
+     324.0,
+     222.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0223
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "matte": {
+    "note": "mori-flustered-r261017-153845-895-3-s3.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.142,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 107,
+    "hair_top_ref": 109,
+    "crop": [
+     3.7,
+     3.1,
+     593.3,
+     761.6
+    ],
+    "eyes": -0.002,
+    "tilt": 0.9,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.002,
+    "ssim": 0.664
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/mori-flustered-r261017-153845-895-4-s4-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    229.0,
+    173.0,
+    367.0,
+    333.0
+   ],
+   "eyes": [
+    [
+     267.5,
+     225.5
+    ],
+    [
+     325.0,
+     223.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0223
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "matte": {
+    "note": "mori-flustered-r261017-153845-895-4-s4.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.142,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 107,
+    "hair_top_ref": 109,
+    "crop": [
+     3.7,
+     3.1,
+     593.3,
+     761.6
+    ],
+    "eyes": -0.001,
+    "tilt": 1.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.002,
+    "ssim": 0.653
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/mori-smile-r261017-153635-49e-1-s1-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    230.0,
+    174.0,
+    366.0,
+    332.0
+   ],
+   "eyes": [
+    [
+     267.0,
+     227.0
+    ],
+    [
+     323.5,
+     223.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0223
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "matte": {
+    "note": "mori-smile-r261017-153635-49e-1-s1.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.142,
+    "zoom": 1.025,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 105,
+    "hair_top_ref": 109,
+    "crop": [
+     7.4,
+     6.2,
+     589.6,
+     755.3
+    ],
+    "eyes": 0.002,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.004,
+    "ssim": 0.459
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/mori-smile-r261017-153635-49e-2-s2-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    230.0,
+    173.0,
+    367.0,
+    332.0
+   ],
+   "eyes": [
+    [
+     267.0,
+     225.0
+    ],
+    [
+     324.5,
+     221.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0223
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "matte": {
+    "note": "mori-smile-r261017-153635-49e-2-s2.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.142,
+    "zoom": 1.019,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 106,
+    "hair_top_ref": 109,
+    "crop": [
+     6.0,
+     4.2,
+     592.0,
+     758.0
+    ],
+    "eyes": -0.007,
+    "tilt": -0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.004,
+    "ssim": 0.5
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/mori-smile-r261017-153635-49e-3-s3-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    230.0,
+    173.0,
+    366.0,
+    333.0
+   ],
+   "eyes": [
+    [
+     266.5,
+     226.5
+    ],
+    [
+     323.5,
+     223.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0223
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "matte": {
+    "note": "mori-smile-r261017-153635-49e-3-s3.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.142,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 107,
+    "hair_top_ref": 109,
+    "crop": [
+     3.7,
+     3.1,
+     593.3,
+     761.6
+    ],
+    "eyes": 0.004,
+    "tilt": 0.9,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.002,
+    "ssim": 0.67
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-men-1/mori-smile-r261017-153635-49e-4-s4-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    229.0,
+    173.0,
+    367.0,
+    333.0
+   ],
+   "eyes": [
+    [
+     267.5,
+     225.5
+    ],
+    [
+     325.0,
+     222.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0223
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "matte": {
+    "note": "mori-smile-r261017-153635-49e-4-s4.webp is framed differently from the cut-out; holes not graded",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.142,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 107,
+    "hair_top_ref": 109,
+    "crop": [
+     3.7,
+     3.1,
+     593.3,
+     761.6
+    ],
+    "eyes": -0.004,
+    "tilt": 0.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.004,
+    "ssim": 0.644
+   },
+   "status": "warn"
+  }
+ ]
+}

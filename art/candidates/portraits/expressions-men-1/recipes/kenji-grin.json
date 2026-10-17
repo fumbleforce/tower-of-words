@@ -1,0 +1,34 @@
+{
+ "details": "kenji grin, Review expressions-men-1 (#688) pass 1. Face-only repaint of the approved base n2-s2: start = the face square of its master PNG upscaled to 1024 (face-kenji.json crop), mask = the face polygon below the hairline and inside the jaw line, feathered (white = repaint), denoise 0.8; pasted back through the same polygon by tools/characters/steps/face_expr.py, so hair, outfit and cut-out stay the neutral's. Scene words: the ones picked for his old grin face in cast-faces-1, weighted up. Character, outfit and exclusions as the base's recipe. Seeds 1-4. Staging: ../staging.md.",
+ "characters": [
+  "kenji-real"
+ ],
+ "outfit": {
+  "kenji-real": true
+ },
+ "people": {
+  "kenji-real": {
+   "clothingNegative": "lanyard, id badge, id card, name tag"
+  }
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "(big happy grin:1.3) showing his teeth, cheeks pushed up, bright eyes, looking at the viewer",
+ "extra": "close-up of his face, plain light grey background, soft even studio light",
+ "sectionNegatives": {
+  "scene": "closed eyes, blush, frown, furrowed brow, angry, laughing, tongue"
+ },
+ "width": 1024,
+ "height": 1024,
+ "start": {
+  "image": "art/candidates/portraits/expressions-men-1/start/kenji-crop.png",
+  "denoise": 0.8,
+  "mask": "art/candidates/portraits/expressions-men-1/start/kenji-mask.png"
+ },
+ "negatives": [
+  "base",
+  "limits",
+  "no-props",
+  "muscle"
+ ]
+}

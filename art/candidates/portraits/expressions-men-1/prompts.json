@@ -1,0 +1,172 @@
+{
+ "mori-smile": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old middle-aged Japanese man, mature male, neatly combed grey hair and a handsome, well-kept face with a few fine lines and warm, expressive dark eyes, slender, slightly soft build, narrow sloping shoulders, slim neck, wearing a neat charcoal grey knit cardigan over a white shirt and a navy tie, dark grey trousers, (warm polite smile:1.3), a kind closed-mouth smile, cheeks lifted, eyes creased with smile lines at the corners, looking at the viewer, close-up of his face, plain light grey background, soft even studio light, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, muscular, bodybuilder, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), spiky hair, messy hair, hair standing up, frown, furrowed brow, angry, open mouth, teeth, grin, blush, glasses, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 1024,
+  "h": 1024,
+  "count": 4,
+  "seed": 1,
+  "start": {
+   "image": "art/candidates/portraits/expressions-men-1/start/mori-crop.png",
+   "denoise": 0.7,
+   "mask": "art/candidates/portraits/expressions-men-1/start/mori-mask.png"
+  }
+ },
+ "mori-flustered": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old middle-aged Japanese man, mature male, neatly combed grey hair and a handsome, well-kept face with a few fine lines and warm, expressive dark eyes, slender, slightly soft build, narrow sloping shoulders, slim neck, wearing a neat charcoal grey knit cardigan over a white shirt and a navy tie, dark grey trousers, (flustered:1.3), embarrassed, eyebrows raised, a small awkward smile, faint sweat drop, looking at the viewer, close-up of his face, plain light grey background, soft even studio light, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, muscular, bodybuilder, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), spiky hair, messy hair, hair standing up, angry, frown, open mouth, teeth, crying, tears, blush, glasses, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 1024,
+  "h": 1024,
+  "count": 4,
+  "seed": 1,
+  "start": {
+   "image": "art/candidates/portraits/expressions-men-1/start/mori-crop.png",
+   "denoise": 0.7,
+   "mask": "art/candidates/portraits/expressions-men-1/start/mori-mask.png"
+  }
+ },
+ "kenji-grin": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young Japanese man, short messy black bedhead hair, dark eyes and a soft, friendly face with full cheeks, realistic adult proportions, overweight, soft out-of-shape build with a round belly and soft, fleshy arms, wearing a white short-sleeved shirt and a dark tie, (big happy grin:1.3) showing his teeth, cheeks pushed up, bright eyes, looking at the viewer, close-up of his face, plain light grey background, soft even studio light, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, muscular, bodybuilder, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), lanyard, id badge, id card, name tag, closed eyes, blush, frown, furrowed brow, angry, laughing, tongue, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 1024,
+  "h": 1024,
+  "count": 4,
+  "seed": 1,
+  "start": {
+   "image": "art/candidates/portraits/expressions-men-1/start/kenji-crop.png",
+   "denoise": 0.8,
+   "mask": "art/candidates/portraits/expressions-men-1/start/kenji-mask.png"
+  }
+ },
+ "kenji-sheepish": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young Japanese man, short messy black bedhead hair, dark eyes and a soft, friendly face with full cheeks, realistic adult proportions, overweight, soft out-of-shape build with a round belly and soft, fleshy arms, wearing a white short-sleeved shirt and a dark tie, (sheepish nervous smile:1.3), (worried eyebrows:1.3), small sweat drop, looking at the viewer, close-up of his face, plain light grey background, soft even studio light, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, muscular, bodybuilder, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), lanyard, id badge, id card, name tag, crying, tears, blush, frown, angry, closed eyes, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 1024,
+  "h": 1024,
+  "count": 4,
+  "seed": 1,
+  "start": {
+   "image": "art/candidates/portraits/expressions-men-1/start/kenji-crop.png",
+   "denoise": 0.8,
+   "mask": "art/candidates/portraits/expressions-men-1/start/kenji-mask.png"
+  }
+ },
+ "hamada-sleepy": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old middle-aged Japanese man, mature male, collar-length soft wavy black hair with a side part, loose waves falling over his ears to the collar, going grey at the temples, and a handsome, lean face with expressive dark eyes, thin, wearing a navy suit and tie, (asleep:1.3), dozing, (eyes closed:1.4), relaxed eyebrows, slack relaxed mouth slightly open, no smile, close-up of his face, plain light grey background, soft even studio light, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), brown hair, light brown hair, open eyes, looking at viewer, smile, smirk, grin, frown, furrowed brow, angry, blush, drool, tears, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 1024,
+  "h": 1024,
+  "count": 4,
+  "seed": 1,
+  "start": {
+   "image": "art/candidates/portraits/expressions-men-1/start/hamada-crop.png",
+   "denoise": 0.7,
+   "mask": "art/candidates/portraits/expressions-men-1/start/hamada-mask.png"
+  }
+ },
+ "hamada-panicked": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old middle-aged Japanese man, mature male, collar-length soft wavy black hair with a side part, loose waves falling over his ears to the collar, going grey at the temples, and a handsome, lean face with expressive dark eyes, thin, wearing a navy suit and tie, (panicked:1.2), alarmed, eyes wide open, eyebrows raised and drawn together, mouth open mid-word, a sweat drop at the temple, looking at the viewer, close-up of his face, plain light grey background, soft even studio light, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), brown hair, light brown hair, smile, smirk, grin, screaming, crying, tears, angry, small pupils, constricted pupils, blush, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 1024,
+  "h": 1024,
+  "count": 4,
+  "seed": 1,
+  "start": {
+   "image": "art/candidates/portraits/expressions-men-1/start/hamada-crop.png",
+   "denoise": 0.7,
+   "mask": "art/candidates/portraits/expressions-men-1/start/hamada-mask.png"
+  }
+ },
+ "mori2-smile": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old middle-aged Japanese man, mature male, neatly combed grey hair and a handsome, well-kept face with a few fine lines and warm, expressive dark eyes, slender, slightly soft build, narrow sloping shoulders, slim neck, wearing a neat charcoal grey knit cardigan over a white shirt and a navy tie, dark grey trousers, (happy warm smile:1.4), a broad smile with lips parted showing a little of his upper teeth, cheeks lifted, eyes narrowed and creased with smile lines at the corners, looking at the viewer, close-up of his face, plain light grey background, soft even studio light, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, muscular, bodybuilder, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), spiky hair, messy hair, hair standing up, frown, furrowed brow, angry, laughing, wide open mouth, tongue, blush, glasses, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 1024,
+  "h": 1024,
+  "count": 4,
+  "seed": 1,
+  "start": {
+   "image": "art/candidates/portraits/expressions-men-1/start/mori-crop.png",
+   "denoise": 0.7,
+   "mask": "art/candidates/portraits/expressions-men-1/start/mori-mask.png"
+  }
+ },
+ "hamada2-sleepy": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old middle-aged Japanese man, mature male, collar-length soft wavy black hair with a side part, loose waves falling over his ears to the collar, going grey at the temples, and a handsome, lean face with expressive dark eyes, thin, wearing a navy suit and tie, (asleep:1.3), dozing, (eyes closed:1.4), relaxed eyebrows, slack relaxed mouth slightly open, no smile, close-up of his face, plain light grey background, soft even studio light, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), brown hair, light brown hair, open eyes, looking at viewer, smile, smirk, grin, frown, furrowed brow, angry, blush, drool, tears, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 1024,
+  "h": 1024,
+  "count": 4,
+  "seed": 1,
+  "start": {
+   "image": "art/candidates/portraits/expressions-men-1/start/hamada2-crop.png",
+   "denoise": 0.7,
+   "mask": "art/candidates/portraits/expressions-men-1/start/hamada2-mask.png"
+  }
+ },
+ "hamada2-panicked": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old middle-aged Japanese man, mature male, collar-length soft wavy black hair with a side part, loose waves falling over his ears to the collar, going grey at the temples, and a handsome, lean face with expressive dark eyes, thin, wearing a navy suit and tie, (panicked:1.2), alarmed, eyes wide open, eyebrows raised and drawn together, mouth open mid-word, a sweat drop at the temple, looking at the viewer, close-up of his face, plain light grey background, soft even studio light, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), brown hair, light brown hair, smile, smirk, grin, screaming, crying, tears, angry, small pupils, constricted pupils, blush, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 1024,
+  "h": 1024,
+  "count": 4,
+  "seed": 1,
+  "start": {
+   "image": "art/candidates/portraits/expressions-men-1/start/hamada2-crop.png",
+   "denoise": 0.7,
+   "mask": "art/candidates/portraits/expressions-men-1/start/hamada2-mask.png"
+  }
+ },
+ "hamada3-sleepy": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old middle-aged Japanese man, mature male, collar-length soft wavy black hair with a side part, loose waves falling over his ears to the collar, going grey at the temples, and a handsome, lean face with expressive dark eyes, thin, wearing a navy suit and tie, (asleep:1.3), dozing, (eyes closed:1.4), relaxed eyebrows, a calm peaceful sleeping face, lips slightly parted, close-up of his face, plain light grey background, soft even studio light, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), brown hair, light brown hair, open eyes, looking at viewer, smile, smirk, grin, frown, furrowed brow, angry, blush, drool, tears, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 1024,
+  "h": 1024,
+  "count": 4,
+  "seed": 1,
+  "start": {
+   "image": "art/candidates/portraits/expressions-men-1/start/hamada2-crop.png",
+   "denoise": 0.7,
+   "mask": "art/candidates/portraits/expressions-men-1/start/hamada2-mask.png"
+  }
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "details": "hamada sleepy, Review expressions-men-1 (#688) pass 3. One change from pass 2 (hamada2-sleepy): the mouth words, 'slack relaxed mouth slightly open, no smile' replaced by 'a calm peaceful sleeping face, lips slightly parted', because all eight sleepy renders so far turned the mouth down and read glum rather than dozing. Mask face-hamada2.json, exclusions, denoise 0.7 and seeds 1-4 as pass 2. Staging: ../staging.md.",
+ "characters": [
+  "hamada-wavy"
+ ],
+ "outfit": {
+  "hamada-wavy": true
+ },
+ "people": {
+  "hamada-wavy": {
+   "appearanceNegative": "brown hair, light brown hair"
+  }
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "(asleep:1.3), dozing, (eyes closed:1.4), relaxed eyebrows, a calm peaceful sleeping face, lips slightly parted",
+ "extra": "close-up of his face, plain light grey background, soft even studio light",
+ "sectionNegatives": {
+  "scene": "open eyes, looking at viewer, smile, smirk, grin, frown, furrowed brow, angry, blush, drool, tears"
+ },
+ "width": 1024,
+ "height": 1024,
+ "start": {
+  "image": "art/candidates/portraits/expressions-men-1/start/hamada2-crop.png",
+  "denoise": 0.7,
+  "mask": "art/candidates/portraits/expressions-men-1/start/hamada2-mask.png"
+ },
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ]
+}

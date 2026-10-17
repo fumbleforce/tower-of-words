@@ -15,6 +15,11 @@ Settings, a JSON file in the round folder (face.json):
   frame    "mio" to keep her glasses frame (tools/portrait_candidates.py mio_frame_mask), or null
   grow     px the kept frame is grown by (9 for Mio: smaller left a second rim inside the frame)
   blur     the mask feather at 1024 (10)
+  name     optional: the start files become start/<name>-crop.png and start/<name>-mask.png, so one round can hold
+           several characters' settings (face-mori.json, face-kenji.json, ...)
+  place    optional [s, dx, dy]: the installed neutral is the source scaled by s and placed at (dx, dy) on its canvas
+           (tools/portrait_fit.py framing), not the whole source resized; without it the source is resized to the canvas
+  who      the FACE id in game3d/js/ui/portraits.js the gamesize sheet places the cut-outs by (default mio)
 
   ~/ai/sd/venv/bin/python tools/characters/steps/face_expr.py prep <round>/face.json
       writes <round>/start/crop.png and <round>/start/mask.png (white = repaint) for the recipes
@@ -43,6 +48,23 @@ def load(cfg):
     return s
 
 
+def start_paths(s):
+    pre = s['name'] + '-' if s.get('name') else ''
+    out = os.path.join(s['round'], 'start')
+    return out, os.path.join(out, pre + 'crop.png'), os.path.join(out, pre + 'mask.png')
+
+
+def to_game(s, im, size):
+    """A picture at source size moved onto the installed neutral's canvas (size), as the neutral was framed."""
+    if not s.get('place'):
+        return im.resize(size, Image.LANCZOS)
+    k, dx, dy = s['place']
+    small = im.resize((round(im.width * k), round(im.height * k)), Image.LANCZOS)
+    canvas = Image.new(im.mode, size, 0)
+    canvas.paste(small, (int(dx), int(dy)))
+    return canvas
+
+
 def keep_mask(s):
     """The pixels that stay the source's exactly (the glasses frame), as an L image at source size, or None."""
     if not s.get('frame'):
@@ -69,9 +91,9 @@ def prep(cfg):
     s = load(cfg)
     C = s['crop']
     k = UP / (C[2] - C[0])
-    out = os.path.join(s['round'], 'start')
+    out, crop_p, mask_p = start_paths(s)
     os.makedirs(out, exist_ok=True)
-    s['src'].crop(C).resize((UP, UP), Image.LANCZOS).save(os.path.join(out, 'crop.png'))
+    s['src'].crop(C).resize((UP, UP), Image.LANCZOS).save(crop_p)
     m = Image.new('L', (UP, UP), 0)
     for poly in polys(s):
         ImageDraw.Draw(m).polygon([((x - C[0]) * k, (y - C[1]) * k) for x, y in poly], fill=255)
@@ -80,8 +102,8 @@ def prep(cfg):
     if keep is not None:
         km = keep.crop(C).resize((UP, UP), Image.NEAREST)
         m = Image.composite(Image.new('L', (UP, UP), 0), m, km)
-    m.convert('RGB').save(os.path.join(out, 'mask.png'))
-    print(os.path.join(out, 'crop.png'), os.path.join(out, 'mask.png'))
+    m.convert('RGB').save(mask_p)
+    print(crop_p, mask_p)
 
 
 def paste(cfg, renders):
@@ -100,10 +122,10 @@ def paste(cfg, renders):
         base = os.path.splitext(r)[0]
         res.save(base + '-full.webp', 'WEBP', quality=92)
         # game size: the installed neutral, with the colour inside the polygon from the new face, and its alpha
-        gm = pm.resize(game.size, Image.LANCZOS)
-        rgb = Image.composite(res.resize(game.size, Image.LANCZOS), game.convert('RGB'), gm)
+        gm = to_game(s, pm, game.size)
+        rgb = Image.composite(to_game(s, res, game.size), game.convert('RGB'), gm)
         if keep is not None:
-            rgb = Image.composite(game.convert('RGB'), rgb, keep.filter(ImageFilter.GaussianBlur(0.8)).resize(game.size, Image.LANCZOS))
+            rgb = Image.composite(game.convert('RGB'), rgb, to_game(s, keep.filter(ImageFilter.GaussianBlur(0.8)), game.size))
         out = rgb.convert('RGBA')
         out.putalpha(game.getchannel('A'))
         out.save(base + '-cut.webp', 'WEBP', lossless=True)
@@ -113,7 +135,7 @@ def paste(cfg, renders):
 def patch(cfg, cut, out):
     s = load(cfg)
     game = Image.open(os.path.join(ROOT, s['game'])).convert('RGBA')
-    m = face_mask(s).resize(game.size, Image.LANCZOS).filter(ImageFilter.GaussianBlur(2))
+    m = to_game(s, face_mask(s), game.size).filter(ImageFilter.GaussianBlur(2))
     from PIL import ImageChops
     im = Image.open(cut).convert('RGBA')
     im.putalpha(ImageChops.multiply(m, game.getchannel('A')))
@@ -132,6 +154,9 @@ def sheet(cfg, out, cells):
         bg = Image.new('RGBA', im.size, 'white'); bg.alpha_composite(im); im = bg.convert('RGB')
         k = im.width / sw  # pictures at source size, game size or crop size: the same face box
         box = [round(v * k) for v in (C[0] - 20, C[1] - 20, C[2] + 20, C[3] + 20)]
+        if s.get('place') and im.width != sw and im.size != (UP, UP):  # a game-size cut-out framed by place
+            pk, dx, dy = s['place']
+            box = [round(v * pk + (dx if i % 2 == 0 else dy)) for i, v in enumerate((C[0] - 20, C[1] - 20, C[2] + 20, C[3] + 20))]
         if im.size == (UP, UP):  # a raw 1024 crop
             box = [0, 0, UP, UP]
         t = im.crop(box).resize((400, 400), Image.LANCZOS)
@@ -153,13 +178,13 @@ def sheet(cfg, out, cells):
     print(out, sh_.size)
 
 
-# game3d/js/ui/portraits.js: FACE box heights and layoutStage's face height F and chin-to-cut cutK
-FACE_BOX = {'mio': (214, 383)}
+# layoutStage's face height F and chin-to-cut cutK (game3d/js/ui/portraits.js); face boxes from its FACE table
 STAGE = [('phone 390x844', min(58, 844 * 0.068), 1.55), ('desktop 1366x860', min(124, 860 * 0.13), 2.25)]
 
 
-def gamesize(cfg, out, cells, who='mio'):
-    f0, f1 = FACE_BOX[who]
+def gamesize(cfg, out, cells):
+    from portrait_sheet import faces
+    f0, f1 = (lambda f: (f[1], f[3]))(faces()[load(cfg).get('who', 'mio')][2])
     try:
         font = ImageFont.truetype('/usr/share/fonts/TTF/DejaVuSans.ttf', 13)
     except OSError:

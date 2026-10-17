@@ -1,0 +1,94 @@
+{
+ "about": "hamada's expression faces, Review expressions-men-1 (#688): face-only repaints of the approved base h2-s1 (reviews/hamada-2, dashboard #2583), by tools/characters/steps/face_expr.py. The source is the base's master PNG from the image service; place is the scale and offset the installed neutral was framed with (measured by registering the source on the neutral, mean error about 2/255). Pass 2: the polygon widened at both moustache tips and the lower cheeks (pass 1 left the old moustache tip, image right, standing beside the new mouth).",
+ "name": "hamada2",
+ "source": "art/production/expressions-men-1/hamada-h2-s1.png",
+ "game": "game3d/assets/portraits/kuroda-neutral.webp",
+ "who": "kuroda",
+ "place": [
+  0.625,
+  3,
+  73
+ ],
+ "crop": [
+  312,
+  140,
+  632,
+  460
+ ],
+ "poly": [
+  [
+   397,
+   215
+  ],
+  [
+   440,
+   200
+  ],
+  [
+   500,
+   200
+  ],
+  [
+   545,
+   215
+  ],
+  [
+   552,
+   245
+  ],
+  [
+   546,
+   280
+  ],
+  [
+   542,
+   320
+  ],
+  [
+   541,
+   345
+  ],
+  [
+   528,
+   366
+  ],
+  [
+   510,
+   378
+  ],
+  [
+   480,
+   385
+  ],
+  [
+   445,
+   385
+  ],
+  [
+   412,
+   366
+  ],
+  [
+   404,
+   350
+  ],
+  [
+   402,
+   325
+  ],
+  [
+   400,
+   300
+  ],
+  [
+   398,
+   270
+  ],
+  [
+   400,
+   232
+  ]
+ ],
+ "frame": null,
+ "blur": 10
+}

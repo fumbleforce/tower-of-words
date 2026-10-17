@@ -1,0 +1,82 @@
+{
+ "about": "kenji's expression faces, Review expressions-men-1 (#688): face-only repaints of the approved base n2-s2 (reviews/kenji-2, dashboard #2582), by tools/characters/steps/face_expr.py. The source is the base's master PNG from the image service; place is the scale and offset the installed neutral was framed with (measured by registering the source on the neutral, mean error about 2/255).",
+ "name": "kenji",
+ "source": "art/production/expressions-men-1/kenji-n2-s2.png",
+ "game": "game3d/assets/portraits/kenji-neutral.webp",
+ "who": "kenji",
+ "place": [
+  0.723,
+  -10,
+  65
+ ],
+ "crop": [
+  285,
+  110,
+  605,
+  430
+ ],
+ "poly": [
+  [
+   344,
+   200
+  ],
+  [
+   380,
+   185
+  ],
+  [
+   440,
+   180
+  ],
+  [
+   500,
+   185
+  ],
+  [
+   536,
+   205
+  ],
+  [
+   540,
+   240
+  ],
+  [
+   540,
+   280
+  ],
+  [
+   530,
+   310
+  ],
+  [
+   512,
+   333
+  ],
+  [
+   470,
+   348
+  ],
+  [
+   420,
+   348
+  ],
+  [
+   382,
+   333
+  ],
+  [
+   358,
+   305
+  ],
+  [
+   348,
+   265
+  ],
+  [
+   344,
+   230
+  ]
+ ],
+ "frame": null,
+ "blur": 10
+}

@@ -1,0 +1,34 @@
+{
+ "details": "hamada panicked, Review expressions-men-1 (#688) pass 1. Face-only repaint of the approved base h2-s1: start = the face square of its master PNG upscaled to 1024 (face-hamada.json crop), mask = the face polygon below the hairline and inside the jaw line, feathered (white = repaint), denoise 0.7; pasted back through the same polygon by tools/characters/steps/face_expr.py, so hair, outfit and cut-out stay the neutral's. Scene words: the ones picked for his old panicked face in cast-faces-1, weighted up. Character, outfit and exclusions as the base's recipe. Seeds 1-4. Staging: ../staging.md.",
+ "characters": [
+  "hamada-wavy"
+ ],
+ "outfit": {
+  "hamada-wavy": true
+ },
+ "people": {
+  "hamada-wavy": {
+   "appearanceNegative": "brown hair, light brown hair"
+  }
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "(panicked:1.2), alarmed, eyes wide open, eyebrows raised and drawn together, mouth open mid-word, a sweat drop at the temple, looking at the viewer",
+ "extra": "close-up of his face, plain light grey background, soft even studio light",
+ "sectionNegatives": {
+  "scene": "smile, smirk, grin, screaming, crying, tears, angry, small pupils, constricted pupils, blush"
+ },
+ "width": 1024,
+ "height": 1024,
+ "start": {
+  "image": "art/candidates/portraits/expressions-men-1/start/hamada-crop.png",
+  "denoise": 0.7,
+  "mask": "art/candidates/portraits/expressions-men-1/start/hamada-mask.png"
+ },
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ]
+}

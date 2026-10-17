@@ -1,0 +1,35 @@
+{
+ "details": "mori smile, Review expressions-men-1 (#688) pass 1. Face-only repaint of the approved base m3-s2: start = the face square of its master PNG upscaled to 1024 (face-mori.json crop), mask = the face polygon below the hairline and inside the jaw line, feathered (white = repaint), denoise 0.7; pasted back through the same polygon by tools/characters/steps/face_expr.py, so hair, outfit and cut-out stay the neutral's. Scene words: the ones picked for his old smile face in cast-faces-1, weighted up. Character, outfit and exclusions as the base's recipe. Seeds 1-4. Staging: ../staging.md.",
+ "characters": [
+  "mori-mature"
+ ],
+ "outfit": {
+  "mori-mature": "mori-cardigan"
+ },
+ "people": {
+  "mori-mature": {
+   "appearanceNegative": "spiky hair, messy hair, hair standing up"
+  }
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "(warm polite smile:1.3), a kind closed-mouth smile, cheeks lifted, eyes creased with smile lines at the corners, looking at the viewer",
+ "extra": "close-up of his face, plain light grey background, soft even studio light",
+ "sectionNegatives": {
+  "scene": "frown, furrowed brow, angry, open mouth, teeth, grin, blush, glasses"
+ },
+ "width": 1024,
+ "height": 1024,
+ "start": {
+  "image": "art/candidates/portraits/expressions-men-1/start/mori-crop.png",
+  "denoise": 0.7,
+  "mask": "art/candidates/portraits/expressions-men-1/start/mori-mask.png"
+ },
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props",
+  "muscle"
+ ]
+}
