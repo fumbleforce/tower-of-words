@@ -1,16 +1,6 @@
 {
 "about": "Images and audio the public bible shows: open Review items and the newest Showcase entries (tools/bible/pages.py media writes this; tools/assets/sync.py pushes every file listed). Do not edit by hand.",
 "data": [
-"art/candidates/dorm-quarter-2/0-today.webp",
-"art/candidates/dorm-quarter-2/a-rows.webp",
-"art/candidates/dorm-quarter-2/b-park.webp",
-"art/candidates/dorm-quarter-2/c-street.webp",
-"art/candidates/dorm-quarter-2/mood-0-today-window.webp",
-"art/candidates/dorm-quarter-2/mood-a-rows-door.webp",
-"art/candidates/dorm-quarter-2/mood-a-rows-window.webp",
-"art/candidates/dorm-quarter-2/mood-b-park-door.webp",
-"art/candidates/dorm-quarter-2/mood-c-street-door.webp",
-"art/candidates/dorm-quarter-2/mood-c-street-window.webp",
 "art/candidates/music-7/day-lyria-1.mp3",
 "art/candidates/music-7/day-lyria-2.mp3",
 "art/candidates/music-7/day-lyria-3.mp3",

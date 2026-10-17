@@ -2,7 +2,7 @@
  "title": "Dorm quarter, round 2: three layouts for the residential area",
  "date": "2026-10-16",
  "by": "claude-main (dorm-quarter-sketch)",
- "status": "open",
+ "status": "decided",
  "issue": 661,
  "question": "Which layout should the dorm quarter be built on (A rows, B park, C street), or what should change?",
  "multi": true,
@@ -49,5 +49,10 @@
    ],
    "note": "One straight street, the plaza lane carried on east, ends in a sea park on the coast with a lookout. The sento, coin laundry and common room share one building at the gate, so everyone passes it. Eric's block is next to it, with a smaller court in front of just the hall. The north blocks are offset from each other so none stands straight in front of another, and a seven-storey sea block closes the park's north end. Pictures: eye level from the hall doors (street trees, the stepped blocks), then from 203's window, where dorm 2 stands 14 m in front. Floor space is about 67% of today's. What moves: everything in A, plus the laundry and sento come off Eric's block into the new shared building, so the court is rebuilt (its laundry and sento fronts, the bath doorway and the private bath scene's spot all move). Size: the largest. Phone, a rough estimate that I have not measured: court about 4.8 to 5.2 s; the sea park adds to whichever place walks it."
   }
- ]
+ ],
+ "decided": [
+  "b"
+ ],
+ "decision": "b, but the eastern blocks would want to face out to sea for the view, not inwards. North residence area should be more classy / expensive, not a housing block",
+ "decided_at": "2026-10-17T11:01:28+0200"
 }
