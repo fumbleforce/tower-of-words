@@ -1,0 +1,149 @@
+{
+ "title": "Animated dialogue portraits: Mio and Kuro, two ways",
+ "date": "2026-10-17",
+ "updated": "2026-10-17T15:00:00+0200",
+ "by": "claude-main/art-round",
+ "status": "open",
+ "question": "Do animated portraits like these belong in the game, and which way of making them?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/candidates/portraits/animated-portraits-1/driver-mio-v1-sheet.webp",
+   "caption": "The moving pictures are in the live viewer (link below): the dialogue stage at its real size, desktop or phone, the still the game shows today beside each attempt. These sheets are stills from it. Video route: the skeleton driver over Mio's picture, frames 0, 20, 34 (blink), 40, 60. One slow breath, a head tilt under a degree, one blink; the picture is the first and the last frame."
+  },
+  {
+   "image": "art/candidates/portraits/animated-portraits-1/driver-kuro-v1-sheet.webp",
+   "caption": "The same driver over Kuro's picture."
+  },
+  {
+   "image": "art/candidates/portraits/animated-portraits-1/blink-mio-sheet.webp",
+   "caption": "Puppet route, Mio's blink drawing: 4 inpaints of the eye areas only (glasses frame kept), recipe recipes/blink-mio.json, seeds 1-4, #2675-#2678. s1 kept."
+  },
+  {
+   "image": "art/candidates/portraits/animated-portraits-1/blink-kuro-sheet.webp",
+   "caption": "Kuro's blink drawing: pass 1 (recipes/blink-kuro.json, denoise 0.75, #2680-#2683) left her eyes open; pass 2 changed denoise to 0.9 (recipes/blink-kuro-2.json, #2688-#2691), s2 kept. #2688 drew hair over her eye and is left off this sheet."
+  }
+ ],
+ "options": [
+  {
+   "id": "mio-vm1",
+   "label": "mio-vm1 (video)",
+   "image": "art/candidates/portraits/animated-portraits-1/vm1-stage.webp",
+   "images": [
+    "art/candidates/portraits/animated-portraits-1/vm1-face-1to1.webp"
+   ],
+   "note": "KEPT: best of Mio's two videos: she breathes, blinks at frame 36 and her hair moves; faults: her eyes half close and look down around frame 16, line widths and iris shapes flicker frame to frame, colours drift from the still (frame 0 differs by 6/255 on average), the straight loop pops at the loop point (4.4x a normal step); the ping-pong loop has no pop. Settings: baseline: Mio's neutral source render at game size (padded to 608x768), driver v1 (breath 4 px, head tilt 0.8 deg lagging, blink at frame 34), the picture as frame 0 and frame 80 (mask 0) and as reference, 81 frames at 16 fps, 6 steps (3 high + 3 low), shift 5, cfg 1, seed 1. Wan 2.2 Fun VACE fp8 + lightx2v, 608x768, 81 frames at 16 fps, 6 steps, shift 5, cfg 1, seed 1, 405 s on the GPU. Loop check: loop point 4.41x a normal frame step; frame 0 against the still 6.0963/255. Recipe: art/candidates/portraits/animated-portraits-1/vace/attempts.json (vm1)."
+  },
+  {
+   "id": "mio-vm2",
+   "label": "mio-vm2 (video)",
+   "image": "art/candidates/portraits/animated-portraits-1/vm2-stage.webp",
+   "images": [
+    "art/candidates/portraits/animated-portraits-1/vm2-face-1to1.webp"
+   ],
+   "note": "REJECTED: her head dips and her eyes look down from frame 24, extra blinks at 36 and 60, frame 0 further from the still (9.4/255). Settings: from vm1: seed 2 (vm1 half-closed her eyes around frame 16 and drew an extra blink; is that the seed?). Wan 2.2 Fun VACE fp8 + lightx2v, 608x768, 81 frames at 16 fps, 6 steps, shift 5, cfg 1, seed 2, 414 s on the GPU. Loop check: loop point 4.42x a normal frame step; frame 0 against the still 9.4496/255. Recipe: art/candidates/portraits/animated-portraits-1/vace/attempts.json (vm2)."
+  },
+  {
+   "id": "mio-pm1",
+   "label": "mio-pm1 (puppet)",
+   "image": "art/candidates/portraits/animated-portraits-1/puppet-mio-1-stage.webp",
+   "images": [
+    "art/candidates/portraits/animated-portraits-1/puppet-mio-1-face-1to1.webp"
+   ],
+   "note": "KEPT: the picture's own pixels, so face, glasses and hoodie stay exactly as approved (imgqa face drift 0.001, glasses cover 1.00). Breathing 3 px, head tilt 0.6 deg riding it, four hair regions swaying after the head, blink drawing blink-mio #2675 for 0.17 s at 2.1 s and 6.3 s, 9 s loop drawn on twos. Limits: nothing turns in depth, the mouth never moves. Rig: art/candidates/portraits/animated-portraits-1/rig/mio/rig.json; blink recipe art/candidates/portraits/animated-portraits-1/recipes/blink-mio.json, seed 1. Loop point 0.65x a normal step (no pop)."
+  },
+  {
+   "id": "kuro-vk1",
+   "label": "kuro-vk1 (video)",
+   "image": "art/candidates/portraits/animated-portraits-1/vk1-stage.webp",
+   "images": [
+    "art/candidates/portraits/animated-portraits-1/vk1-face-1to1.webp"
+   ],
+   "note": "REJECTED: the background turns mid grey with a vignette from frame 1 and her colours darken a little; the red outline is stronger (12-14% against 9.3% in the still); the long side lock thins around frame 48; the pinned last frame comes out with closed eyes; loop pops 2.8x. Settings: baseline: Kuro's neutral source render scaled to 538x896 (padded to 544x896), driver v1 (breath 4 px, head tilt 0.8 deg lagging, blink at frame 34), the picture as frame 0 and frame 80 (mask 0) and as reference, 81 frames at 16 fps, 6 steps (3 high + 3 low), shift 5, cfg 1, seed 1. Wan 2.2 Fun VACE fp8 + lightx2v, 544x896, 81 frames at 16 fps, 6 steps, shift 5, cfg 1, seed 1, 443 s on the GPU. Loop check: loop point 2.83x a normal frame step; frame 0 against the still 7.3817/255. Recipe: art/candidates/portraits/animated-portraits-1/vace/attempts.json (vk1)."
+  },
+  {
+   "id": "kuro-vk2",
+   "label": "kuro-vk2 (video)",
+   "image": "art/candidates/portraits/animated-portraits-1/vk2-stage.webp",
+   "images": [
+    "art/candidates/portraits/animated-portraits-1/vk2-face-1to1.webp"
+   ],
+   "note": "KEPT: best of Kuro's three, but the background words changed nothing: same faults as vk1 (side lock shortens around frame 48, red outline 11-16%, loop pops 3.1x). Settings: from vk1: the background words match her picture, 'plain pale grey-green background' for 'plain light grey background' (vk1 turned the background mid grey with a vignette from frame 1, and her colours darkened with it). Wan 2.2 Fun VACE fp8 + lightx2v, 544x896, 81 frames at 16 fps, 6 steps, shift 5, cfg 1, seed 1, 436 s on the GPU. Loop check: loop point 3.09x a normal frame step; frame 0 against the still 7.4618/255. Recipe: art/candidates/portraits/animated-portraits-1/vace/attempts.json (vk2)."
+  },
+  {
+   "id": "kuro-vk3",
+   "label": "kuro-vk3 (video)",
+   "image": "art/candidates/portraits/animated-portraits-1/vk3-stage.webp",
+   "images": [
+    "art/candidates/portraits/animated-portraits-1/vk3-face-1to1.webp"
+   ],
+   "note": "REJECTED: the background stays flat grey now, but the cut-out leaves a grey haze by her side lock and collar in every frame (the grey input is too close to her shading). Settings: from vk1 (vk2's background words changed nothing): the input picture is her game cut-out on flat mid grey (128) instead of her source render's pale grey-green, since the model turned the background mid grey with a vignette in vk1 and vk2. Wan 2.2 Fun VACE fp8 + lightx2v, 544x896, 81 frames at 16 fps, 6 steps, shift 5, cfg 1, seed 1, 428 s on the GPU. Loop check: loop point 4.91x a normal frame step; frame 0 against the still 9.5252/255. Recipe: art/candidates/portraits/animated-portraits-1/vace/attempts.json (vk3)."
+  },
+  {
+   "id": "kuro-pk1",
+   "label": "kuro-pk1 (puppet)",
+   "image": "art/candidates/portraits/animated-portraits-1/puppet-kuro-1-stage.webp",
+   "images": [
+    "art/candidates/portraits/animated-portraits-1/puppet-kuro-1-face-1to1.webp"
+   ],
+   "note": "KEPT: the picture's own pixels (imgqa face drift 0.001-0.002; red rim 9.4%, the approved picture itself measures 9.3%). Breathing 3.4 px, head tilt 0.6 deg, her long side lock, the bun's ends and the strands by her neck sway after the head, blink drawing blink-kuro-2 #2689 for 0.17 s at 2.1 s and 6.3 s, 9 s loop on twos. Shown mirrored on the right, as the game does. Rig: art/candidates/portraits/animated-portraits-1/rig/kuro/rig.json; blink recipe art/candidates/portraits/animated-portraits-1/recipes/blink-kuro-2.json, seed 2. Loop point 0.66x a normal step."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live viewer: the loops in the dialogue frame, desktop and phone, with a straight or ping-pong video loop and the puppet on twos or smooth",
+   "href": "reviews/animated-portraits-1/viewer.html"
+  },
+  {
+   "label": "vm1 straight loop (webm with alpha)",
+   "href": "art/candidates/portraits/animated-portraits-1/vace/vm1-loop.webm"
+  },
+  {
+   "label": "vm1 ping-pong loop",
+   "href": "art/candidates/portraits/animated-portraits-1/vace/vm1-pingpong.webm"
+  },
+  {
+   "label": "vm2 straight loop (webm with alpha)",
+   "href": "art/candidates/portraits/animated-portraits-1/vace/vm2-loop.webm"
+  },
+  {
+   "label": "vm2 ping-pong loop",
+   "href": "art/candidates/portraits/animated-portraits-1/vace/vm2-pingpong.webm"
+  },
+  {
+   "label": "vk1 straight loop (webm with alpha)",
+   "href": "art/candidates/portraits/animated-portraits-1/vace/vk1-loop.webm"
+  },
+  {
+   "label": "vk1 ping-pong loop",
+   "href": "art/candidates/portraits/animated-portraits-1/vace/vk1-pingpong.webm"
+  },
+  {
+   "label": "vk2 straight loop (webm with alpha)",
+   "href": "art/candidates/portraits/animated-portraits-1/vace/vk2-loop.webm"
+  },
+  {
+   "label": "vk2 ping-pong loop",
+   "href": "art/candidates/portraits/animated-portraits-1/vace/vk2-pingpong.webm"
+  },
+  {
+   "label": "vk3 straight loop (webm with alpha)",
+   "href": "art/candidates/portraits/animated-portraits-1/vace/vk3-loop.webm"
+  },
+  {
+   "label": "vk3 ping-pong loop",
+   "href": "art/candidates/portraits/animated-portraits-1/vace/vk3-pingpong.webm"
+  }
+ ],
+ "viewer_files": [
+  "reviews/animated-portraits-1/clips.json",
+  "art/candidates/portraits/animated-portraits-1/rig/mio/rig.json",
+  "art/candidates/portraits/animated-portraits-1/rig/kuro/rig.json",
+  "art/candidates/portraits/animated-portraits-1/rig/mio/blink.webp",
+  "art/candidates/portraits/animated-portraits-1/rig/kuro/blink.webp",
+  "art/candidates/portraits/animated-portraits-1/bg-train-desk.webp",
+  "art/candidates/portraits/animated-portraits-1/bg-train-phone.webp",
+  "art/candidates/portraits/animated-portraits-1/bg-office-desk.webp",
+  "art/candidates/portraits/animated-portraits-1/bg-office-phone.webp"
+ ]
+}

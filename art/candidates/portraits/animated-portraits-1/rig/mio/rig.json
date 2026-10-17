@@ -1,0 +1,18 @@
+{
+ "about": "Mio's puppet idle (animated-portraits-1): one mesh over the installed neutral cut-out, image pixels, y down. Breathing lifts the chest, the head rides it and tilts about the neck, hair regions sway lagging the head, a blink patch shows for two drawings. Played by reviews/animated-portraits-1/puppet.js.",
+ "who": "mio",
+ "texture": "game3d/assets/portraits/mio-neutral.webp",
+ "blink": "art/candidates/portraits/animated-portraits-1/rig/mio/blink.webp",
+ "W": 597, "H": 768, "cell": 6,
+ "loop": 9.0, "breaths": 2, "breath_px": 3.0,
+ "chest": {"full": 440, "zero": 768},
+ "head": {"pivot": [287, 398], "boundary": [[0, 408], [212, 408], [236, 370], [350, 364], [382, 336], [597, 336]], "band": 30,
+          "tilt_deg": 0.6, "slow_share": 0.6, "lag_s": 0.6},
+ "hair": [
+  {"name": "flyaways top left", "c": [150, 200], "r": [75, 55], "root": [215, 190], "reach": 95, "amp": [1.8, 0.5], "lag_s": 0.35},
+  {"name": "hanging lock, her right (image left)", "c": [188, 380], "r": [42, 60], "root": [205, 300], "reach": 115, "amp": [1.6, 0.2], "lag_s": 0.45},
+  {"name": "bun ends (image right)", "c": [450, 200], "r": [50, 85], "root": [405, 200], "reach": 80, "amp": [1.5, -0.4], "lag_s": 0.3},
+  {"name": "green ends by the ear", "c": [400, 305], "r": [30, 32], "root": [380, 260], "reach": 70, "amp": [1.1, 0.2], "lag_s": 0.4}
+ ],
+ "blinks": [2.1, 6.3], "blink_s": 0.17
+}

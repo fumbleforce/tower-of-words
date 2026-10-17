@@ -11,6 +11,7 @@ Settings, a JSON file in the round folder (face.json):
   game     the installed neutral (game3d/assets/portraits/mio-neutral.webp): its size and alpha make the game file
   crop     [x0, y0, x1, y1], a square on the source
   poly     the face polygon on the source (below the fringe, inside the jaw line)
+  polys    instead of poly, several polygons (a blink: one inside each lens, so a thick frame stays out of the mask)
   frame    "mio" to keep her glasses frame (tools/portrait_candidates.py mio_frame_mask), or null
   grow     px the kept frame is grown by (9 for Mio: smaller left a second rim inside the frame)
   blur     the mask feather at 1024 (10)
@@ -19,6 +20,9 @@ Settings, a JSON file in the round folder (face.json):
       writes <round>/start/crop.png and <round>/start/mask.png (white = repaint) for the recipes
   ~/ai/sd/venv/bin/python tools/characters/steps/face_expr.py paste <round>/face.json <render.webp...>
       writes <render>-full.webp (the source with the new face) and <render>-cut.webp (game size, the neutral's alpha)
+  ~/ai/sd/venv/bin/python tools/characters/steps/face_expr.py patch <round>/face.json <render-cut.webp> <out.webp>
+      only the repainted area of a game-size cut-out, as a layer over the neutral (a blink for a puppet): the colour of
+      the cut-out, opaque inside the polygons (feathered 2 px at game size) and the neutral's alpha, transparent elsewhere
   ~/ai/sd/venv/bin/python tools/characters/steps/face_expr.py sheet <round>/face.json <out.webp> <label=picture ...>
       a contact sheet of the face area of each picture, labelled, in the order given
   ~/ai/sd/venv/bin/python tools/characters/steps/face_expr.py gamesize <round>/face.json <out.webp> <label=cut-out ...>
@@ -50,9 +54,14 @@ def keep_mask(s):
     return Image.fromarray((k * 255).astype('uint8'))
 
 
+def polys(s):
+    return s['polys'] if s.get('polys') else [s['poly']]
+
+
 def face_mask(s):
     m = Image.new('L', s['src'].size, 0)
-    ImageDraw.Draw(m).polygon([tuple(p) for p in s['poly']], fill=255)
+    for poly in polys(s):
+        ImageDraw.Draw(m).polygon([tuple(p) for p in poly], fill=255)
     return m
 
 
@@ -64,7 +73,8 @@ def prep(cfg):
     os.makedirs(out, exist_ok=True)
     s['src'].crop(C).resize((UP, UP), Image.LANCZOS).save(os.path.join(out, 'crop.png'))
     m = Image.new('L', (UP, UP), 0)
-    ImageDraw.Draw(m).polygon([((x - C[0]) * k, (y - C[1]) * k) for x, y in s['poly']], fill=255)
+    for poly in polys(s):
+        ImageDraw.Draw(m).polygon([((x - C[0]) * k, (y - C[1]) * k) for x, y in poly], fill=255)
     m = m.filter(ImageFilter.GaussianBlur(s.get('blur', 10)))
     keep = keep_mask(s)
     if keep is not None:
@@ -98,6 +108,17 @@ def paste(cfg, renders):
         out.putalpha(game.getchannel('A'))
         out.save(base + '-cut.webp', 'WEBP', lossless=True)
         print(base + '-full.webp', base + '-cut.webp')
+
+
+def patch(cfg, cut, out):
+    s = load(cfg)
+    game = Image.open(os.path.join(ROOT, s['game'])).convert('RGBA')
+    m = face_mask(s).resize(game.size, Image.LANCZOS).filter(ImageFilter.GaussianBlur(2))
+    from PIL import ImageChops
+    im = Image.open(cut).convert('RGBA')
+    im.putalpha(ImageChops.multiply(m, game.getchannel('A')))
+    im.save(out, 'WEBP', lossless=True)
+    print(out)
 
 
 def sheet(cfg, out, cells):
@@ -179,6 +200,8 @@ if __name__ == '__main__':
         prep(cfg)
     elif cmd == 'paste':
         paste(cfg, rest)
+    elif cmd == 'patch':
+        patch(cfg, rest[0], rest[1])
     elif cmd == 'sheet':
         sheet(cfg, rest[0], rest[1:])
     elif cmd == 'gamesize':

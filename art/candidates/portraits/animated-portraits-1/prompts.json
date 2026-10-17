@@ -1,0 +1,395 @@
+{
+ "vace": {
+  "vm1": {
+   "picture": "raw/mio-wan.png",
+   "driver": "raw/driver-mio-v1",
+   "seed": 1,
+   "prompt": "anime screenshot, 2d anime, cel shading, clean lineart, flat colors. Static camera, a still head-and-shoulders portrait on a plain light grey background. A young woman with dark green-black hair in a messy bun with mint green underneath, light tan eyes behind taupe-grey rounded glasses, pale skin, a dark green hoodie, headphones round her neck and a teal lanyard with a white badge. She stands still and breathes calmly: her shoulders rise and fall a little, she blinks once, a few loose strands of hair sway slightly. Her face, glasses, hair and clothes stay exactly the same.",
+   "change": "baseline: Mio's neutral source render at game size (padded to 608x768), driver v1 (breath 4 px, head tilt 0.8 deg lagging, blink at frame 34), the picture as frame 0 and frame 80 (mask 0) and as reference, 81 frames at 16 fps, 6 steps (3 high + 3 low), shift 5, cfg 1, seed 1",
+   "size": "608x768",
+   "fps": 16,
+   "negative": "色调艳丽，过曝，静态，细节模糊不清，字幕，风格，作品，画作，画面，静止，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走, realistic, 3d, photorealistic, style change, morphing, realistic, photorealistic, 3d, morphing, melting, face change, different person, clothes change, camera movement, zoom, pan, camera shake, talking, mouth moving",
+   "model": "Wan 2.2 Fun VACE A14B fp8 + t2v lightx2v v1.1",
+   "steps": 6,
+   "split": 3,
+   "shift": 5.0,
+   "cfg": 1.0,
+   "strength": 1.0,
+   "last_frame": true,
+   "file": "vace/vm1.mp4",
+   "frames": 81,
+   "generation_s": 405,
+   "gpu_mb_before": 1795,
+   "gpu_mb_peak": 9692,
+   "ram_gb_free_min": 3.1,
+   "time": "2026-10-17 13:58",
+   "verdict": "kept",
+   "reason": "best of Mio's two videos: she breathes, blinks at frame 36 and her hair moves; faults: her eyes half close and look down around frame 16, line widths and iris shapes flicker frame to frame, colours drift from the still (frame 0 differs by 6/255 on average), the straight loop pops at the loop point (4.4x a normal step); the ping-pong loop has no pop",
+   "faults": [],
+   "loop_check": {
+    "frames": 80,
+    "size": [
+     597,
+     768
+    ],
+    "seam_change": 9.616,
+    "median_step_change": 2.181,
+    "seam_vs_step": 4.41,
+    "drift_mean_max": 20.002,
+    "drift_changed_share_max": 0.279,
+    "drift_worst_frame": 39,
+    "alpha_flips_max_px": 8912,
+    "alpha_flips_share_max": 0.0416,
+    "box_shift_px": [
+     4,
+     5,
+     4,
+     0
+    ],
+    "frame0_vs_source": [
+     6.0963,
+     0.0344
+    ]
+   }
+  },
+  "vk1": {
+   "picture": "raw/kuro-wan.png",
+   "driver": "raw/driver-kuro-v1",
+   "seed": 1,
+   "prompt": "anime screenshot, 2d anime, cel shading, clean lineart, flat colors. Static camera, a still portrait from the waist up on a plain light grey background. A woman with black hair in a high bun with two hair sticks, a blunt fringe and long black side locks, grey eyes behind black-framed glasses, pale skin and black lipstick, a dark teal suit jacket over a black shirt. She stands still and breathes calmly: her shoulders rise and fall a little, she blinks once, the long side lock of hair sways slightly. Her face, glasses, hair and clothes stay exactly the same.",
+   "change": "baseline: Kuro's neutral source render scaled to 538x896 (padded to 544x896), driver v1 (breath 4 px, head tilt 0.8 deg lagging, blink at frame 34), the picture as frame 0 and frame 80 (mask 0) and as reference, 81 frames at 16 fps, 6 steps (3 high + 3 low), shift 5, cfg 1, seed 1",
+   "size": "544x896",
+   "fps": 16,
+   "negative": "色调艳丽，过曝，静态，细节模糊不清，字幕，风格，作品，画作，画面，静止，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走, realistic, 3d, photorealistic, style change, morphing, realistic, photorealistic, 3d, morphing, melting, face change, different person, clothes change, camera movement, zoom, pan, camera shake, talking, mouth moving",
+   "model": "Wan 2.2 Fun VACE A14B fp8 + t2v lightx2v v1.1",
+   "steps": 6,
+   "split": 3,
+   "shift": 5.0,
+   "cfg": 1.0,
+   "strength": 1.0,
+   "last_frame": true,
+   "file": "vace/vk1.mp4",
+   "frames": 81,
+   "generation_s": 443,
+   "gpu_mb_before": 1976,
+   "gpu_mb_peak": 9490,
+   "ram_gb_free_min": 3.1,
+   "time": "2026-10-17 14:10",
+   "verdict": "rejected",
+   "reason": "the background turns mid grey with a vignette from frame 1 and her colours darken a little; the red outline is stronger (12-14% against 9.3% in the still); the long side lock thins around frame 48; the pinned last frame comes out with closed eyes; loop pops 2.8x",
+   "faults": [
+    "background",
+    "identity"
+   ],
+   "loop_check": {
+    "frames": 80,
+    "size": [
+     630,
+     1048
+    ],
+    "seam_change": 9.031,
+    "median_step_change": 3.186,
+    "seam_vs_step": 2.83,
+    "drift_mean_max": 27.219,
+    "drift_changed_share_max": 0.2955,
+    "drift_worst_frame": 43,
+    "alpha_flips_max_px": 17864,
+    "alpha_flips_share_max": 0.0682,
+    "box_shift_px": [
+     3,
+     17,
+     2,
+     0
+    ],
+    "frame0_vs_source": [
+     7.3817,
+     0.0609
+    ]
+   }
+  },
+  "vk2": {
+   "picture": "raw/kuro-wan.png",
+   "driver": "raw/driver-kuro-v1",
+   "seed": 1,
+   "prompt": "anime screenshot, 2d anime, cel shading, clean lineart, flat colors. Static camera, a still portrait from the waist up on a plain pale grey-green background. A woman with black hair in a high bun with two hair sticks, a blunt fringe and long black side locks, grey eyes behind black-framed glasses, pale skin and black lipstick, a dark teal suit jacket over a black shirt. She stands still and breathes calmly: her shoulders rise and fall a little, she blinks once, the long side lock of hair sways slightly. Her face, glasses, hair and clothes stay exactly the same.",
+   "change": "from vk1: the background words match her picture, 'plain pale grey-green background' for 'plain light grey background' (vk1 turned the background mid grey with a vignette from frame 1, and her colours darkened with it)",
+   "size": "544x896",
+   "fps": 16,
+   "negative": "色调艳丽，过曝，静态，细节模糊不清，字幕，风格，作品，画作，画面，静止，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走, realistic, 3d, photorealistic, style change, morphing, realistic, photorealistic, 3d, morphing, melting, face change, different person, clothes change, camera movement, zoom, pan, camera shake, talking, mouth moving",
+   "model": "Wan 2.2 Fun VACE A14B fp8 + t2v lightx2v v1.1",
+   "steps": 6,
+   "split": 3,
+   "shift": 5.0,
+   "cfg": 1.0,
+   "strength": 1.0,
+   "last_frame": true,
+   "file": "vace/vk2.mp4",
+   "frames": 81,
+   "generation_s": 436,
+   "gpu_mb_before": 1804,
+   "gpu_mb_peak": 9692,
+   "ram_gb_free_min": 2.3,
+   "time": "2026-10-17 14:26",
+   "verdict": "kept",
+   "reason": "best of Kuro's three, but the background words changed nothing: same faults as vk1 (side lock shortens around frame 48, red outline 11-16%, loop pops 3.1x)",
+   "faults": [
+    "background"
+   ],
+   "loop_check": {
+    "frames": 80,
+    "size": [
+     630,
+     1048
+    ],
+    "seam_change": 8.902,
+    "median_step_change": 2.883,
+    "seam_vs_step": 3.09,
+    "drift_mean_max": 24.87,
+    "drift_changed_share_max": 0.2825,
+    "drift_worst_frame": 35,
+    "alpha_flips_max_px": 16018,
+    "alpha_flips_share_max": 0.0612,
+    "box_shift_px": [
+     3,
+     16,
+     2,
+     0
+    ],
+    "frame0_vs_source": [
+     7.4618,
+     0.061
+    ]
+   }
+  },
+  "vm2": {
+   "picture": "raw/mio-wan.png",
+   "driver": "raw/driver-mio-v1",
+   "seed": 2,
+   "prompt": "anime screenshot, 2d anime, cel shading, clean lineart, flat colors. Static camera, a still head-and-shoulders portrait on a plain light grey background. A young woman with dark green-black hair in a messy bun with mint green underneath, light tan eyes behind taupe-grey rounded glasses, pale skin, a dark green hoodie, headphones round her neck and a teal lanyard with a white badge. She stands still and breathes calmly: her shoulders rise and fall a little, she blinks once, a few loose strands of hair sway slightly. Her face, glasses, hair and clothes stay exactly the same.",
+   "change": "from vm1: seed 2 (vm1 half-closed her eyes around frame 16 and drew an extra blink; is that the seed?)",
+   "size": "608x768",
+   "fps": 16,
+   "negative": "色调艳丽，过曝，静态，细节模糊不清，字幕，风格，作品，画作，画面，静止，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走, realistic, 3d, photorealistic, style change, morphing, realistic, photorealistic, 3d, morphing, melting, face change, different person, clothes change, camera movement, zoom, pan, camera shake, talking, mouth moving",
+   "model": "Wan 2.2 Fun VACE A14B fp8 + t2v lightx2v v1.1",
+   "steps": 6,
+   "split": 3,
+   "shift": 5.0,
+   "cfg": 1.0,
+   "strength": 1.0,
+   "last_frame": true,
+   "file": "vace/vm2.mp4",
+   "frames": 81,
+   "generation_s": 414,
+   "gpu_mb_before": 1955,
+   "gpu_mb_peak": 9677,
+   "ram_gb_free_min": 2.7,
+   "time": "2026-10-17 14:39",
+   "verdict": "rejected",
+   "reason": "her head dips and her eyes look down from frame 24, extra blinks at 36 and 60, frame 0 further from the still (9.4/255)",
+   "faults": [
+    "expression"
+   ],
+   "loop_check": {
+    "frames": 80,
+    "size": [
+     597,
+     768
+    ],
+    "seam_change": 10.322,
+    "median_step_change": 2.336,
+    "seam_vs_step": 4.42,
+    "drift_mean_max": 30.064,
+    "drift_changed_share_max": 0.4516,
+    "drift_worst_frame": 38,
+    "alpha_flips_max_px": 9645,
+    "alpha_flips_share_max": 0.0452,
+    "box_shift_px": [
+     5,
+     6,
+     4,
+     0
+    ],
+    "frame0_vs_source": [
+     9.4496,
+     0.0366
+    ]
+   }
+  },
+  "vk3": {
+   "picture": "raw/kuro-wan-grey.png",
+   "driver": "raw/driver-kuro-v1",
+   "seed": 1,
+   "prompt": "anime screenshot, 2d anime, cel shading, clean lineart, flat colors. Static camera, a still portrait from the waist up on a plain light grey background. A woman with black hair in a high bun with two hair sticks, a blunt fringe and long black side locks, grey eyes behind black-framed glasses, pale skin and black lipstick, a dark teal suit jacket over a black shirt. She stands still and breathes calmly: her shoulders rise and fall a little, she blinks once, the long side lock of hair sways slightly. Her face, glasses, hair and clothes stay exactly the same.",
+   "change": "from vk1 (vk2's background words changed nothing): the input picture is her game cut-out on flat mid grey (128) instead of her source render's pale grey-green, since the model turned the background mid grey with a vignette in vk1 and vk2",
+   "size": "544x896",
+   "fps": 16,
+   "negative": "色调艳丽，过曝，静态，细节模糊不清，字幕，风格，作品，画作，画面，静止，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走, realistic, 3d, photorealistic, style change, morphing, realistic, photorealistic, 3d, morphing, melting, face change, different person, clothes change, camera movement, zoom, pan, camera shake, talking, mouth moving",
+   "model": "Wan 2.2 Fun VACE A14B fp8 + t2v lightx2v v1.1",
+   "steps": 6,
+   "split": 3,
+   "shift": 5.0,
+   "cfg": 1.0,
+   "strength": 1.0,
+   "last_frame": true,
+   "file": "vace/vk3.mp4",
+   "frames": 81,
+   "generation_s": 428,
+   "gpu_mb_before": 1801,
+   "gpu_mb_peak": 9699,
+   "ram_gb_free_min": 2.6,
+   "time": "2026-10-17 14:50",
+   "verdict": "rejected",
+   "reason": "the background stays flat grey now, but the cut-out leaves a grey haze by her side lock and collar in every frame (the grey input is too close to her shading)",
+   "faults": [
+    "background",
+    "other"
+   ],
+   "loop_check": {
+    "frames": 80,
+    "size": [
+     630,
+     1048
+    ],
+    "seam_change": 13.817,
+    "median_step_change": 2.815,
+    "seam_vs_step": 4.91,
+    "drift_mean_max": 28.082,
+    "drift_changed_share_max": 0.3018,
+    "drift_worst_frame": 47,
+    "alpha_flips_max_px": 20514,
+    "alpha_flips_share_max": 0.0777,
+    "box_shift_px": [
+     2,
+     18,
+     4,
+     0
+    ],
+    "frame0_vs_source": [
+     9.5252,
+     0.0787
+    ]
+   }
+  }
+ },
+ "about": "animated-portraits-1 log: every attempt in order with its settings and verdict. Stills (the puppet's blink drawings) are recipes in recipes/ run through compose.mjs; their verdicts are in the dashboard (#n). Video attempts: vace/attempts.json via tools/characters/steps/vace_loop.py; puppet: rig/<who>/rig.json played by reviews/animated-portraits-1/puppet.js.",
+ "blink": {
+  "blink-mio": {
+   "recipe": "recipes/blink-mio.json",
+   "renders": {
+    "#2675 s1": "kept: both eyes closed, clean lash lines, frame identical",
+    "#2676 s2": "rejected (expression): a sliver of iris under the lashes of her right eye (image left)",
+    "#2677 s3": "rejected (expression): her right eye half open, doubled lash line",
+    "#2678 s4": "rejected (expression): lash line of her right eye ragged into the frame"
+   },
+   "gpu_s_each": 30
+  },
+  "blink-kuro": {
+   "recipe": "recipes/blink-kuro.json",
+   "renders": {
+    "#2680 s1": "rejected (expression): eyes not closed",
+    "#2681 s2": "rejected (expression): eyes not closed",
+    "#2682 s3": "rejected (expression): eyes half open, pale blue streak on the lens",
+    "#2683 s4": "rejected (expression): eyes not closed"
+   },
+   "gpu_s_each": 30
+  },
+  "blink-kuro-2": {
+   "recipe": "recipes/blink-kuro-2.json",
+   "change": "from blink-kuro: denoise 0.75 -> 0.9",
+   "renders": {
+    "#2688 s1": "rejected (expression, hair-colour): black hair strands drawn over her right eye inside the lens; screened out of the review as a broken face",
+    "#2689 s2": "kept: both eyes closed in her style, eye shadow and frame unchanged",
+    "#2690 s3": "rejected (expression): her right eye half open, pale streak on the lens",
+    "#2691 s4": "rejected (other): a new white glare streak on her right lens"
+   },
+   "gpu_s_each": 30
+  }
+ },
+ "puppet": {
+  "pm1": {
+   "rig": "rig/mio/rig.json",
+   "blink": "blink-mio #2675 s1 via rig/mio/face.json (face_expr.py paste, patch)",
+   "loop_s": 9.0,
+   "breaths": 2,
+   "breath_px": 3.0,
+   "tilt_deg": 0.6,
+   "hair_regions": 4,
+   "blinks_s": [
+    2.1,
+    6.3
+   ],
+   "drawing": "on twos (12 a second), smooth toggle",
+   "mesh": "100x128 cells of 6 px, 13,029 vertices",
+   "checks": "raw/puppet-mio-1-stats.json, raw/qa-puppet-mio (imgqa ccip 0.001, glasses cover 1.00, red rim 0.0%)",
+   "loop_check": {
+    "frames": 108,
+    "size": [
+     597,
+     768
+    ],
+    "seam_change": 0.484,
+    "median_step_change": 0.743,
+    "seam_vs_step": 0.65,
+    "drift_mean_max": 10.831,
+    "drift_changed_share_max": 0.1327,
+    "drift_worst_frame": 26,
+    "alpha_flips_max_px": 5292,
+    "alpha_flips_share_max": 0.0248,
+    "box_shift_px": [
+     0,
+     3,
+     0,
+     0
+    ],
+    "frame0_vs_source": [
+     2.106,
+     0.0219
+    ]
+   },
+   "verdict": "kept: face, glasses and body stay the picture's own pixels; the motion is small (3 px breath, under a degree of tilt); limits: nothing turns in depth and the mouth never moves"
+  },
+  "pk1": {
+   "rig": "rig/kuro/rig.json",
+   "blink": "blink-kuro-2 #2689 s2 via rig/kuro/face.json",
+   "loop_s": 9.0,
+   "breaths": 2,
+   "breath_px": 3.4,
+   "tilt_deg": 0.6,
+   "hair_regions": 3,
+   "blinks_s": [
+    2.1,
+    6.3
+   ],
+   "drawing": "on twos (12 a second), smooth toggle",
+   "mesh": "90x150 cells of 7 px, 13,741 vertices",
+   "checks": "raw/puppet-kuro-1-stats.json, raw/qa-puppet-kuro (imgqa ccip 0.001-0.002; red rim 9.4%, the approved picture itself measures 9.3%)",
+   "loop_check": {
+    "frames": 108,
+    "size": [
+     630,
+     1048
+    ],
+    "seam_change": 0.698,
+    "median_step_change": 1.051,
+    "seam_vs_step": 0.66,
+    "drift_mean_max": 15.789,
+    "drift_changed_share_max": 0.1719,
+    "drift_worst_frame": 26,
+    "alpha_flips_max_px": 6523,
+    "alpha_flips_share_max": 0.025,
+    "box_shift_px": [
+     0,
+     4,
+     0,
+     0
+    ],
+    "frame0_vs_source": [
+     2.8201,
+     0.036
+    ]
+   },
+   "verdict": "kept: as pm1; her long side lock sways after the head"
+  }
+ },
+ "tally_note": "blink renders: expression rejected 9 times over two passes (Kuro's half-lidded eyes); the method changed once (denoise 0.75 -> 0.9) and a clean blink came out in pass 2. VACE: background fault twice for Kuro (vk1, vk2); vk3 changed the method (input background), which moved the fault into the cut-out."
+}

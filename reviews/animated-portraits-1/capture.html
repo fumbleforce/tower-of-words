@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><title>puppet capture</title>
+<style>body{margin:0;background:transparent}canvas{display:block}</style></head>
+<body><canvas id="c"></canvas>
+<script type="module">
+// One puppet at the picture's own size, for tools/characters/steps/puppet_frames.mjs (frames, 1:1 crops, timing).
+import { createPuppet } from './puppet.js';
+const who = new URLSearchParams(location.search).get('who') || 'mio';
+const cfg = await (await fetch(`../../art/candidates/portraits/animated-portraits-1/rig/${who}/rig.json`)).json();
+window.rig = await createPuppet(cfg, { canvas: document.getElementById('c'), capture: true });
+window.rig.renderAt(0, false);
+</script></body></html>

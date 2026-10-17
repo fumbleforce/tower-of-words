@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Animated portraits 1</title>
+<style>
+  :root { --bg: #101318; --panel: #181c23; --line: #2a303a; --text: #e6e9ef; --dim: #9aa2af; --accent: #4fc3d9; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding: 14px 18px 4px; }
+  h1 { font-size: 16px; font-weight: 600; margin: 0 0 4px; }
+  header p { margin: 0; color: var(--dim); max-width: 1100px; }
+  .bar { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; padding: 10px 18px; }
+  .grp { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+  .grp > span { color: var(--dim); margin-right: 4px; }
+  button { background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 6px 11px; font: inherit; cursor: pointer; }
+  button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  button:disabled { opacity: .4; cursor: default; }
+  .wrap { padding: 4px 18px 18px; overflow-x: auto; }
+  /* the game's screen at its CSS size: the dialogue stage of game3d/css/style.css ("Stage light") */
+  .screen { position: relative; overflow: hidden; background: #0e121c center / cover no-repeat; border-radius: 6px; outline: 1px solid var(--line); }
+  .screen .focus { position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(to top, rgba(14,18,28,.94) 0, rgba(14,18,28,.82) 120px, rgba(14,18,28,.35) 250px, rgba(14,18,28,0) 360px),
+                radial-gradient(120% 90% at 50% 30%, transparent 55%, rgba(14,18,28,.45) 100%); }
+  .screen.phone .focus { background: radial-gradient(120% 90% at 50% 30%, transparent 55%, rgba(14,18,28,.45) 100%); }
+  .screen .band { position: absolute; left: 0; right: 0; bottom: 0; background: #1d222b; display: none; }
+  .screen.phone .band { display: block; }
+  .por { position: absolute; transform-origin: 50% 100%; }
+  .por canvas, .por img { display: block; width: 100%; height: 100%; }
+  .por.listen { filter: brightness(.4) saturate(.5); transform: scale(.94); }
+  .por.breathe canvas { animation: breathe 4.2s ease-in-out infinite; transform-origin: 50% 100%; }
+  @keyframes breathe { 50% { transform: scaleY(1.006); } }
+  .line { position: absolute; color: #e8ebf1; font-size: 17px; line-height: 1.5; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+  .line .nm { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 7px; background: rgba(255,255,255,.06); font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .line .jp { color: #f3b48d; font-weight: 600; }
+  .screen.phone .line { font-size: 15px; }
+  .row { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end; padding: 6px 18px 18px; }
+  .cell { background: #2b3342; border-radius: 6px; padding: 8px 8px 0; position: relative; }
+  .cell b { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .cell small { color: var(--dim); display: block; margin-bottom: 6px; }
+  .cell .clip { position: relative; overflow: hidden; }
+  .notes { padding: 0 18px 24px; color: var(--dim); max-width: 1100px; }
+  .notes td, .notes th { padding: 3px 10px 3px 0; text-align: left; vertical-align: top; }
+  .notes th { color: var(--text); font-weight: 600; }
+  #perf { font-variant-numeric: tabular-nums; color: var(--dim); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Animated dialogue portraits: Mio and Kuro</h1>
+  <p>A small idle loop on the approved neutral portrait, shown where the game shows it: the dialogue stage at its real size, desktop 1366x860 or phone 390x844, over a game capture (the train for Mio, the office for Kuro). "Still" is the game today (the picture with its CSS breathing). "Video" is Wan 2.2 VACE driven by a skeleton, cut out frame by frame. "Puppet" moves the picture's own pixels in Three.js. Nothing here is in the game.</p>
+</header>
+<div class="bar">
+  <div class="grp" id="who"><span>Person</span></div>
+  <div class="grp" id="route"><span>Picture</span></div>
+  <div class="grp" id="screenSel"><span>Screen</span></div>
+  <div class="grp"><span>Video</span><button id="pp" aria-pressed="false">Straight loop</button></div>
+  <div class="grp"><span>Puppet</span><button id="twos" aria-pressed="true">On twos (12 fps)</button><button id="wire" aria-pressed="false">Show mesh</button></div>
+  <div class="grp"><button id="play" aria-pressed="true">Pause</button><button id="cmp" aria-pressed="true">Side by side</button></div>
+  <span id="perf"></span>
+</div>
+<div class="wrap"><div class="screen" id="screen"><div class="focus"></div><div class="band" id="band"></div></div></div>
+<div class="row" id="compare"></div>
+<div class="notes" id="notes"></div>
+<script type="module">
+import { createPuppet } from './puppet.js';
+const BASE = '../../';
+const R = 'art/candidates/portraits/animated-portraits-1/';
+const data = await (await fetch('clips.json')).json();
+// game3d/js/ui/portraits.js FACE and FACING; css tint for the office (style.css body[data-place="office"])
+const FACE = {
+  mio: { W: 597, H: 768, f: [192, 214, 361, 383], facing: 'left' },
+  kuro: { W: 630, H: 1048, f: [254, 325, 452, 525], size: 0.85, facing: 'right' },
+  eric: { W: 648, H: 768, f: data.eric.f, facing: 'left' },
+};
+const TINTS = { office: [[205, 226, 255], [22, 30, 44]], train: [[255, 186, 128], [28, 40, 60]] };
+let TINT_TOP = TINTS.office[0], TINT_LOW = TINTS.office[1];
+const SCREENS = { desktop: { w: 1366, h: 860 }, phone: { w: 390, h: 844, band: 190 } };
+const $ = (id) => document.getElementById(id);
+const state = { who: 'mio', route: 'still', screen: innerWidth < 700 ? 'phone' : 'desktop', playing: true, t: 0, twos: true, wire: false, compare: innerWidth >= 700, pp: false };
+
+// ---- sources: a still, a video or a puppet, each drawn into the portrait's own canvas every frame ----
+const imgCache = {};
+const loadImg = (src) => imgCache[src] ||= new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = BASE + src; });
+const videos = {};
+function video(file) {
+  if (!videos[file]) { const v = document.createElement('video'); v.src = BASE + file; v.loop = true; v.muted = true; v.playsInline = true; v.preload = 'auto'; v.play().catch(() => {}); videos[file] = v; }
+  return videos[file];
+}
+const puppets = {};
+async function puppet(who) {
+  if (!puppets[who]) {
+    const cfg = await (await fetch(BASE + R + `rig/${who}/rig.json`)).json();
+    puppets[who] = createPuppet(cfg, { base: BASE });
+  }
+  return puppets[who];
+}
+function routes(who) {
+  return [{ id: 'still', label: 'Still (game today)' }, ...data[who].videos.map((v) => ({ id: v.id, label: `Video ${v.id}`, file: state.pp ? v.pingpong : v.file, note: v.note })),
+    { id: 'puppet', label: 'Puppet' }];
+}
+async function source(who, route) {
+  if (route === 'still') return { kind: 'img', el: await loadImg(`game3d/assets/portraits/${who}-neutral.webp`) };
+  if (route === 'puppet') { const p = await puppet(who); return { kind: 'puppet', p, el: p.canvas }; }
+  const r = routes(who).find((x) => x.id === route);
+  return { kind: 'video', el: video(r.file) };
+}
+
+// ---- one portrait on a stage: placement as layoutStage, grade and rim as the stage css, drawn on a canvas ----
+function place(d, scr, left, k = 1) {
+  const phone = scr === 'phone', S = SCREENS[scr];
+  const band = phone ? S.band : 0, F0 = phone ? Math.min(58, S.h * 0.068) : Math.min(124, S.h * 0.13);
+  const cutK = phone ? 1.55 : 2.25, base = S.h - band, F = F0 * k;
+  const mirror = d.facing === (left ? 'left' : 'right');
+  const s = (F * (d.size || 1)) / (d.f[3] - d.f[1]);
+  const cx = mirror ? d.W - (d.f[0] + d.f[2]) / 2 : (d.f[0] + d.f[2]) / 2;
+  let top = base - cutK * F - d.f[3] * s;
+  const gap = base - (top + d.H * s); if (gap > 0 && gap <= 6) top += gap;
+  const fx = phone ? S.w * (left ? 0.2 : 0.8) : S.w * (left ? 0.14 : 0.84);
+  const x = phone ? Math.max(0, Math.min(S.w - d.W * s, fx - cx * s)) : fx - cx * s;
+  return { s, x, top, base, mirror, w: d.W * s, h: d.H * s };
+}
+class Por {
+  constructor(parent, opts) {
+    this.el = document.createElement('div'); this.el.className = 'por' + (opts.listen ? ' listen' : '');
+    this.cv = document.createElement('canvas'); this.el.appendChild(this.cv); parent.appendChild(this.el);
+    this.ctx = this.cv.getContext('2d'); this.left = !!opts.left; this.tmp = document.createElement('canvas');
+  }
+  layout(L, dpr) {
+    Object.assign(this.el.style, { left: L.x + 'px', top: L.top + 'px', width: L.w + 'px', height: L.h + 'px' });
+    // cut exactly at the base, as layoutStage: the screen edge on desktop, the top of the band on a phone
+    this.el.style.clipPath = `inset(0 -40px ${Math.max(0, L.top + L.h - L.base)}px -40px)`;
+    this.cv.width = Math.round(L.w * dpr); this.cv.height = Math.round(L.h * dpr); this.L = L;
+    this.tmp.width = this.cv.width; this.tmp.height = this.cv.height;
+  }
+  draw(src) {
+    const { ctx, cv, L } = this, w = cv.width, h = cv.height;
+    ctx.save(); ctx.clearRect(0, 0, w, h);
+    if (L.mirror) { ctx.translate(w, 0); ctx.scale(-1, 1); }
+    ctx.filter = 'saturate(.88) brightness(.96)';
+    if (src.el && (src.kind !== 'video' || src.el.readyState >= 2)) ctx.drawImage(src.el, 0, 0, w, h);
+    ctx.restore();
+    // grade (multiply) and rim (screen), masked to the figure, as #stage .por .grade / .rim
+    const t = this.tmp.getContext('2d');
+    t.globalCompositeOperation = 'source-over'; t.clearRect(0, 0, w, h);
+    const g = t.createLinearGradient(0, 0, 0, h), c = (rgb, a) => `rgba(${rgb.join(',')},${a})`;
+    g.addColorStop(0, c(TINT_TOP, .16)); g.addColorStop(.30, c(TINT_TOP, 0)); g.addColorStop(.46, c(TINT_LOW, 0)); g.addColorStop(.88, c(TINT_LOW, .8)); g.addColorStop(1, c(TINT_LOW, .8));
+    t.fillStyle = g; t.fillRect(0, 0, w, h);
+    t.globalCompositeOperation = 'destination-in'; t.drawImage(cv, 0, 0);
+    ctx.globalCompositeOperation = 'multiply'; ctx.drawImage(this.tmp, 0, 0);
+    t.globalCompositeOperation = 'source-over'; t.clearRect(0, 0, w, h);
+    const outer = this.left ? 0 : w, rg = t.createLinearGradient(outer, 0, this.left ? w * 0.22 : w * 0.78, 0);
+    rg.addColorStop(0, c(TINT_TOP, this.left ? .22 : .2)); rg.addColorStop(1, c(TINT_TOP, 0));
+    t.fillStyle = rg; t.fillRect(0, 0, w, h);
+    t.globalCompositeOperation = 'destination-in'; t.drawImage(cv, 0, 0);
+    ctx.globalCompositeOperation = 'screen'; ctx.drawImage(this.tmp, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+  }
+}
+
+// ---- the stage ----
+let stage = null, compare = [];
+async function build() {
+  render();
+  const scr = state.screen, S = SCREENS[scr], who = state.who;
+  [TINT_TOP, TINT_LOW] = TINTS[data[who].bg];
+  const screen = $('screen');
+  screen.className = 'screen ' + scr;
+  screen.style.width = S.w + 'px'; screen.style.height = S.h + 'px';
+  screen.style.backgroundImage = `url("${BASE + R}bg-${data[who].bg}-${scr === "phone" ? "phone" : "desk"}.webp")`;
+  $('band').style.height = (S.band || 0) + 'px';
+  screen.querySelectorAll('.por, .line').forEach((e) => e.remove());
+  const dpr = window.devicePixelRatio || 1;
+  let listener = null;
+  if (scr === 'desktop') {
+    listener = new Por(screen, { left: true, listen: true });
+    listener.layout(place(FACE.eric, scr, true), dpr);
+    listener.src = { kind: 'img', el: await loadImg('game3d/assets/portraits/eric-neutral.webp') };
+  }
+  const speaker = new Por(screen, { left: false });
+  speaker.layout(place(FACE[who], scr, false), dpr);
+  speaker.src = await source(who, state.route);
+  speaker.el.classList.toggle('breathe', state.route === 'still');
+  const line = document.createElement('div'); line.className = 'line';
+  const l = data[who].line;
+  line.innerHTML = `<div class="nm">${l.name}</div><div>${l.html}</div>`;
+  if (scr === 'desktop') Object.assign(line.style, { left: '370px', right: '480px', bottom: '58px' });
+  else Object.assign(line.style, { left: '16px', right: '16px', bottom: (S.band - 118) + 'px' });
+  screen.appendChild(line);
+  stage = { listener, speaker };
+  // compare: the three ways side by side at the same size, cut at the stage's cut
+  const row = $('compare'); row.innerHTML = '';
+  compare = [];
+  $('cmp').setAttribute('aria-pressed', state.compare);
+  for (const r of state.compare ? routes(who) : []) {
+    const cell = document.createElement('div'); cell.className = 'cell';
+    cell.innerHTML = `<b>${r.label}</b><small>${scr} size</small>`;
+    const L = place(FACE[who], scr, false);
+    const clip = document.createElement('div'); clip.className = 'clip';
+    clip.style.width = L.w + 'px'; clip.style.height = Math.min(L.h, L.base - L.top) + 'px';
+    cell.appendChild(clip); row.appendChild(cell);
+    const p = new Por(clip, { left: false }); p.layout({ ...L, x: 0, top: 0, base: L.base - L.top }, dpr);
+    p.src = r.id === state.route ? speaker.src : await source(who, r.id);
+    p.el.classList.toggle('breathe', r.id === 'still');
+    compare.push(p);
+  }
+  if (speaker.src.kind === 'puppet') { const pp = speaker.src.p; pp.setSize(speaker.cv.width, speaker.cv.height); }
+  notes();
+}
+
+// ---- controls ----
+function buttons(id, items, key) {
+  const g = $(id); g.querySelectorAll('button').forEach((b) => b.remove());
+  for (const it of items) {
+    const b = document.createElement('button'); b.textContent = it.label; b.setAttribute('aria-pressed', state[key] === it.id);
+    b.onclick = async () => { state[key] = it.id; if (key === 'who' && !routes(it.id).some((r) => r.id === state.route)) state.route = 'still'; await build(); };
+    g.appendChild(b);
+  }
+}
+function render() {
+  buttons('who', [{ id: 'mio', label: 'Mio' }, { id: 'kuro', label: 'Kuro' }], 'who');
+  buttons('route', routes(state.who), 'route');
+  buttons('screenSel', [{ id: 'desktop', label: 'Desktop 1366x860' }, { id: 'phone', label: 'Phone 390x844' }], 'screen');
+}
+$('play').onclick = () => { state.playing = !state.playing; $('play').textContent = state.playing ? 'Pause' : 'Play'; for (const v of Object.values(videos)) state.playing ? v.play() : v.pause(); };
+$('pp').onclick = async () => { state.pp = !state.pp; $('pp').setAttribute('aria-pressed', state.pp); $('pp').textContent = state.pp ? 'Ping-pong loop' : 'Straight loop'; await build(); };
+$('cmp').onclick = async () => { state.compare = !state.compare; await build(); };
+$('twos').onclick = () => { state.twos = !state.twos; $('twos').setAttribute('aria-pressed', state.twos); $('twos').textContent = state.twos ? 'On twos (12 fps)' : 'Smooth'; };
+$('wire').onclick = () => { state.wire = !state.wire; $('wire').setAttribute('aria-pressed', state.wire); Object.values(puppets).forEach(async (p) => (await p).setWire(state.wire)); };
+function notes() {
+  const d = data[state.who];
+  $('notes').innerHTML = `<table><tr><th>Picture</th><th>How it was made</th><th>Cost</th></tr>` +
+    d.rows.map((r) => `<tr><td>${r.id}</td><td>${r.how}</td><td>${r.cost}</td></tr>`).join('') + `</table>`;
+}
+
+// ---- loop ----
+let last = performance.now(), frames = 0, acc = 0, work = 0;
+function tick(now) {
+  const dt = (now - last) / 1000; last = now;
+  if (state.playing) state.t += Math.min(dt, 0.1);
+  if (stage) {
+    const t0 = performance.now();
+    const pups = new Set();
+    for (const p of [stage.listener, stage.speaker, ...compare]) {
+      if (!p) continue;
+      if (p.src.kind === 'puppet') {
+        // one puppet renders once per frame at the stage's size; the compare cell copies it scaled
+        if (!pups.has(p.src.p)) { p.src.p.renderAt(state.t, state.twos); pups.add(p.src.p); }
+      }
+      p.draw(p.src);
+    }
+    work += performance.now() - t0;
+  }
+  frames++; acc += dt;
+  if (acc > 1) { $('perf').textContent = `${Math.round(frames / acc)} fps, ${(work / frames).toFixed(2)} ms of drawing work a frame on this device` + (state.compare ? ' (with the side-by-side row; turn it off to time one portrait)' : ''); frames = 0; acc = 0; work = 0; }
+  requestAnimationFrame(tick);
+}
+await build(); requestAnimationFrame(tick);
+window.viewer = { state, build, puppets, videos };
+</script>
+</body>
+</html>

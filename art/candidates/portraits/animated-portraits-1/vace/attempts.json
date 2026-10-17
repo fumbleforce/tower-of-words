@@ -1,0 +1,37 @@
+{
+ "vm1": {
+  "picture": "raw/mio-wan.png",
+  "driver": "raw/driver-mio-v1",
+  "seed": 1,
+  "prompt": "anime screenshot, 2d anime, cel shading, clean lineart, flat colors. Static camera, a still head-and-shoulders portrait on a plain light grey background. A young woman with dark green-black hair in a messy bun with mint green underneath, light tan eyes behind taupe-grey rounded glasses, pale skin, a dark green hoodie, headphones round her neck and a teal lanyard with a white badge. She stands still and breathes calmly: her shoulders rise and fall a little, she blinks once, a few loose strands of hair sway slightly. Her face, glasses, hair and clothes stay exactly the same.",
+  "change": "baseline: Mio's neutral source render at game size (padded to 608x768), driver v1 (breath 4 px, head tilt 0.8 deg lagging, blink at frame 34), the picture as frame 0 and frame 80 (mask 0) and as reference, 81 frames at 16 fps, 6 steps (3 high + 3 low), shift 5, cfg 1, seed 1"
+ },
+ "vk1": {
+  "picture": "raw/kuro-wan.png",
+  "driver": "raw/driver-kuro-v1",
+  "seed": 1,
+  "prompt": "anime screenshot, 2d anime, cel shading, clean lineart, flat colors. Static camera, a still portrait from the waist up on a plain light grey background. A woman with black hair in a high bun with two hair sticks, a blunt fringe and long black side locks, grey eyes behind black-framed glasses, pale skin and black lipstick, a dark teal suit jacket over a black shirt. She stands still and breathes calmly: her shoulders rise and fall a little, she blinks once, the long side lock of hair sways slightly. Her face, glasses, hair and clothes stay exactly the same.",
+  "change": "baseline: Kuro's neutral source render scaled to 538x896 (padded to 544x896), driver v1 (breath 4 px, head tilt 0.8 deg lagging, blink at frame 34), the picture as frame 0 and frame 80 (mask 0) and as reference, 81 frames at 16 fps, 6 steps (3 high + 3 low), shift 5, cfg 1, seed 1"
+ },
+ "vm2": {
+  "picture": "raw/mio-wan.png",
+  "driver": "raw/driver-mio-v1",
+  "seed": 2,
+  "prompt": "anime screenshot, 2d anime, cel shading, clean lineart, flat colors. Static camera, a still head-and-shoulders portrait on a plain light grey background. A young woman with dark green-black hair in a messy bun with mint green underneath, light tan eyes behind taupe-grey rounded glasses, pale skin, a dark green hoodie, headphones round her neck and a teal lanyard with a white badge. She stands still and breathes calmly: her shoulders rise and fall a little, she blinks once, a few loose strands of hair sway slightly. Her face, glasses, hair and clothes stay exactly the same.",
+  "change": "from vm1: seed 2 (vm1 half-closed her eyes around frame 16 and drew an extra blink; is that the seed?)"
+ },
+ "vk2": {
+  "picture": "raw/kuro-wan.png",
+  "driver": "raw/driver-kuro-v1",
+  "seed": 1,
+  "prompt": "anime screenshot, 2d anime, cel shading, clean lineart, flat colors. Static camera, a still portrait from the waist up on a plain pale grey-green background. A woman with black hair in a high bun with two hair sticks, a blunt fringe and long black side locks, grey eyes behind black-framed glasses, pale skin and black lipstick, a dark teal suit jacket over a black shirt. She stands still and breathes calmly: her shoulders rise and fall a little, she blinks once, the long side lock of hair sways slightly. Her face, glasses, hair and clothes stay exactly the same.",
+  "change": "from vk1: the background words match her picture, 'plain pale grey-green background' for 'plain light grey background' (vk1 turned the background mid grey with a vignette from frame 1, and her colours darkened with it)"
+ },
+ "vk3": {
+  "picture": "raw/kuro-wan-grey.png",
+  "driver": "raw/driver-kuro-v1",
+  "seed": 1,
+  "prompt": "anime screenshot, 2d anime, cel shading, clean lineart, flat colors. Static camera, a still portrait from the waist up on a plain light grey background. A woman with black hair in a high bun with two hair sticks, a blunt fringe and long black side locks, grey eyes behind black-framed glasses, pale skin and black lipstick, a dark teal suit jacket over a black shirt. She stands still and breathes calmly: her shoulders rise and fall a little, she blinks once, the long side lock of hair sways slightly. Her face, glasses, hair and clothes stay exactly the same.",
+  "change": "from vk1 (vk2's background words changed nothing): the input picture is her game cut-out on flat mid grey (128) instead of her source render's pale grey-green, since the model turned the background mid grey with a vignette in vk1 and vk2"
+ }
+}

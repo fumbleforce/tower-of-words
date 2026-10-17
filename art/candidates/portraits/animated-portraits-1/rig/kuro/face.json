@@ -1,0 +1,12 @@
+{
+ "about": "Kuro's blink for the puppet (animated-portraits-1): closed eyes inpainted inside each lens of the installed neutral's source render (one polygon per lens, so the black frame stays out of the mask). tools/characters/steps/face_expr.py prep/paste.",
+ "source": "art/production/KB/c-s11.png",
+ "game": "game3d/assets/portraits/kuro-neutral.webp",
+ "crop": [470, 610, 770, 910],
+ "polys": [
+  [[522, 662], [560, 657], [610, 660], [640, 671], [640, 700], [610, 709], [560, 706], [525, 696]],
+  [[668, 702], [700, 693], [732, 692], [746, 702], [746, 722], [728, 732], [695, 731], [670, 719]]
+ ],
+ "frame": null,
+ "blur": 6
+}

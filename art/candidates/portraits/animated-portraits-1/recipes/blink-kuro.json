@@ -1,0 +1,21 @@
+{
+ "details": "animated-portraits-1, puppet route: Kuro's blink drawing. Inpaint of the eye areas only on a 300 px crop of her installed neutral's source render (c-s11), upscaled to 1024; one polygon inside each lens so the black frame stays out of the mask (rig/kuro/face.json, tools/characters/steps/face_expr.py). Shown for two drawings of the loop.",
+ "characters": ["kuro"],
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "(closed eyes:1.3), blinking, eyelids shut, calm neutral expression, closed mouth",
+ "extra": "close-up of her face, plain light grey background, soft even studio light",
+ "sectionNegatives": {
+  "scene": "open eyes, looking at viewer, irises, smile, tears, crying, blush, wink, wide eyes, one eye open"
+ },
+ "width": 1024,
+ "height": 1024,
+ "start": {
+  "image": "art/candidates/portraits/animated-portraits-1/rig/kuro/start/crop.png",
+  "denoise": 0.75,
+  "mask": "art/candidates/portraits/animated-portraits-1/rig/kuro/start/mask.png"
+ },
+ "negatives": ["base", "limits", "heavy", "no-props"],
+ "seed": 1,
+ "count": 4
+}

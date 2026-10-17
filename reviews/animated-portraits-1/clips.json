@@ -1,0 +1,108 @@
+{
+ "about": "What viewer.html shows: per person the video attempts (cut-out VP9 alpha webm at the game file's size), the line under the portrait, the background capture and the notes table. Written by hand for this round.",
+ "eric": {
+  "f": [
+   116,
+   203,
+   340,
+   394
+  ]
+ },
+ "mio": {
+  "bg": "train",
+  "line": {
+   "name": "Mio",
+   "html": "Ugh, the Wi-Fi dies on the bridge every time... come on, come on."
+  },
+  "videos": [
+   {
+    "id": "vm1",
+    "file": "art/candidates/portraits/animated-portraits-1/vace/vm1-loop.webm",
+    "pingpong": "art/candidates/portraits/animated-portraits-1/vace/vm1-pingpong.webm",
+    "note": "seed 1"
+   },
+   {
+    "id": "vm2",
+    "file": "art/candidates/portraits/animated-portraits-1/vace/vm2-loop.webm",
+    "pingpong": "art/candidates/portraits/animated-portraits-1/vace/vm2-pingpong.webm",
+    "note": "seed 2"
+   }
+  ],
+  "rows": [
+   {
+    "id": "Still",
+    "how": "The approved neutral as the game shows it now, with the stage's CSS breathing (scaleY 1.006 over 4.2 s)",
+    "cost": "79 KB, nothing at run time"
+   },
+   {
+    "id": "vm1",
+    "how": "Wan 2.2 Fun VACE, skeleton driver (breath 4 px, head tilt 0.8 deg, blink at frame 34), the picture as first and last frame, 608x768, 81 frames at 16 fps, 6 steps, seed 1; baseline: Mio's neutral source render at game size (padded to 608x768), driver v1 (breath 4 px, head tilt 0.8 deg lagging, blink at frame 34), the picture as frame 0 and frame 80 (mask 0) and as reference, 81 frames at 16 fps, 6 steps (3 high + 3 low), shift 5, cfg 1, seed 1. Cut out frame by frame (ISNet + matte_refine).",
+    "cost": "405 s on the 3080 (peak 9692 MB on the card), about 85 s of CPU for the cut-outs; straight loop 523 KB for 5 s, ping-pong 1008 KB for 9.9 s (VP9 with alpha); plays as one video per portrait"
+   },
+   {
+    "id": "vm2",
+    "how": "Wan 2.2 Fun VACE, skeleton driver (breath 4 px, head tilt 0.8 deg, blink at frame 34), the picture as first and last frame, 608x768, 81 frames at 16 fps, 6 steps, seed 2; from vm1: seed 2 (vm1 half-closed her eyes around frame 16 and drew an extra blink; is that the seed?). Cut out frame by frame (ISNet + matte_refine).",
+    "cost": "414 s on the 3080 (peak 9677 MB on the card), about 85 s of CPU for the cut-outs; straight loop 604 KB for 5 s, ping-pong 1171 KB for 9.9 s (VP9 with alpha); plays as one video per portrait"
+   },
+   {
+    "id": "Puppet pm1",
+    "how": "The approved picture's own pixels on one mesh (13,029 vertices): breathing 3 px, head tilt 0.6 deg riding it, four hair regions swaying after the head, a closed-eye drawing (blink-mio #2675, eyes only, glasses kept) for 0.17 s at 2.1 s and 6.3 s; 9 s loop, on twos",
+    "cost": "4 inpaints of 30 s on the 3080 for the blink (1 kept); blink layer 11 KB + rig 1.4 KB + 7 KB code on top of the existing portrait; 0.1-0.2 ms of CPU a drawing on this desktop, about 1 ms (p95 4.7 ms) at 6x CPU slowdown, 12 drawings a second; two portrait-size textures (about 5 MB of GPU memory)"
+   }
+  ]
+ },
+ "kuro": {
+  "bg": "office",
+  "line": {
+   "name": "Receptionist",
+   "html": "<span class=\"jp\">おはようございます。</span> (ohayō gozaimasu, good morning)"
+  },
+  "videos": [
+   {
+    "id": "vk1",
+    "file": "art/candidates/portraits/animated-portraits-1/vace/vk1-loop.webm",
+    "pingpong": "art/candidates/portraits/animated-portraits-1/vace/vk1-pingpong.webm",
+    "note": "seed 1"
+   },
+   {
+    "id": "vk2",
+    "file": "art/candidates/portraits/animated-portraits-1/vace/vk2-loop.webm",
+    "pingpong": "art/candidates/portraits/animated-portraits-1/vace/vk2-pingpong.webm",
+    "note": "background words"
+   },
+   {
+    "id": "vk3",
+    "file": "art/candidates/portraits/animated-portraits-1/vace/vk3-loop.webm",
+    "pingpong": "art/candidates/portraits/animated-portraits-1/vace/vk3-pingpong.webm",
+    "note": "grey input"
+   }
+  ],
+  "rows": [
+   {
+    "id": "Still",
+    "how": "The approved neutral as the game shows it now, with the stage's CSS breathing (scaleY 1.006 over 4.2 s)",
+    "cost": "85 KB, nothing at run time"
+   },
+   {
+    "id": "vk1",
+    "how": "Wan 2.2 Fun VACE, skeleton driver (breath 4 px, head tilt 0.8 deg, blink at frame 34), the picture as first and last frame, 544x896, 81 frames at 16 fps, 6 steps, seed 1; baseline: Kuro's neutral source render scaled to 538x896 (padded to 544x896), driver v1 (breath 4 px, head tilt 0.8 deg lagging, blink at frame 34), the picture as frame 0 and frame 80 (mask 0) and as reference, 81 frames at 16 fps, 6 steps (3 high + 3 low), shift 5, cfg 1, seed 1. Cut out frame by frame (ISNet + matte_refine).",
+    "cost": "443 s on the 3080 (peak 9490 MB on the card), about 85 s of CPU for the cut-outs; straight loop 991 KB for 5 s, ping-pong 1933 KB for 9.9 s (VP9 with alpha); plays as one video per portrait"
+   },
+   {
+    "id": "vk2",
+    "how": "Wan 2.2 Fun VACE, skeleton driver (breath 4 px, head tilt 0.8 deg, blink at frame 34), the picture as first and last frame, 544x896, 81 frames at 16 fps, 6 steps, seed 1; from vk1: the background words match her picture, 'plain pale grey-green background' for 'plain light grey background' (vk1 turned the background mid grey with a vignette from frame 1, and her colours darkened with it). Cut out frame by frame (ISNet + matte_refine).",
+    "cost": "436 s on the 3080 (peak 9692 MB on the card), about 85 s of CPU for the cut-outs; straight loop 965 KB for 5 s, ping-pong 1882 KB for 9.9 s (VP9 with alpha); plays as one video per portrait"
+   },
+   {
+    "id": "vk3",
+    "how": "Wan 2.2 Fun VACE, skeleton driver (breath 4 px, head tilt 0.8 deg, blink at frame 34), the picture as first and last frame, 544x896, 81 frames at 16 fps, 6 steps, seed 1; from vk1 (vk2's background words changed nothing): the input picture is her game cut-out on flat mid grey (128) instead of her source render's pale grey-green, since the model turned the background mid grey with a vignette in vk1 and vk2. Cut out frame by frame (ISNet + matte_refine).",
+    "cost": "428 s on the 3080 (peak 9699 MB on the card), about 85 s of CPU for the cut-outs; straight loop 837 KB for 5 s, ping-pong 1625 KB for 9.9 s (VP9 with alpha); plays as one video per portrait"
+   },
+   {
+    "id": "Puppet pk1",
+    "how": "The approved picture's own pixels on one mesh (13,741 vertices): breathing 3.4 px, head tilt 0.6 deg riding it, three hair regions (the long side lock, the bun's ends, the strands by her neck) swaying after the head, a closed-eye drawing (blink-kuro-2 #2689, inside the lenses only) for 0.17 s at 2.1 s and 6.3 s; 9 s loop, on twos",
+    "cost": "12 inpaints of 30 s on the 3080 for the blink over two passes (1 kept); blink layer 9 KB + rig 1.3 KB + 7 KB code on top of the existing portrait; 0.1-0.2 ms of CPU a drawing on this desktop, about 0.7 ms (p95 1.8 ms) at 6x CPU slowdown; two portrait-size textures (about 7 MB of GPU memory)"
+   }
+  ]
+ }
+}

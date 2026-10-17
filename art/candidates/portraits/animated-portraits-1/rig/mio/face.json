@@ -1,0 +1,13 @@
+{
+ "about": "Mio's blink for the puppet (animated-portraits-1): closed eyes inpainted inside each eye area of the installed neutral's source render, the glasses frame kept identical. tools/characters/steps/face_expr.py prep/paste.",
+ "source": "art/production/PC/mio/mio-v3-neutral-823.png",
+ "game": "game3d/assets/portraits/mio-neutral.webp",
+ "crop": [300, 380, 600, 680],
+ "polys": [
+  [[462, 438], [490, 427], [530, 424], [552, 432], [556, 452], [554, 478], [536, 489], [500, 489], [470, 481], [458, 462]],
+  [[350, 463], [380, 453], [420, 455], [440, 468], [443, 492], [426, 506], [390, 509], [360, 501], [348, 483]]
+ ],
+ "frame": "mio",
+ "grow": 9,
+ "blur": 8
+}

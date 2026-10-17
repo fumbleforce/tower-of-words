@@ -1,0 +1,17 @@
+{
+ "about": "Kuro's puppet idle (animated-portraits-1): one mesh over the installed neutral cut-out, image pixels, y down. Breathing lifts the chest, the head rides it and tilts about the neck, hair regions sway lagging the head, a blink patch shows for two drawings. Played by reviews/animated-portraits-1/puppet.js.",
+ "who": "kuro",
+ "texture": "game3d/assets/portraits/kuro-neutral.webp",
+ "blink": "art/candidates/portraits/animated-portraits-1/rig/kuro/blink.webp",
+ "W": 630, "H": 1048, "cell": 7,
+ "loop": 9.0, "breaths": 2, "breath_px": 3.4,
+ "chest": {"full": 600, "zero": 1048},
+ "head": {"pivot": [318, 522], "boundary": [[0, 478], [232, 474], [262, 455], [300, 505], [372, 522], [398, 522], [470, 588], [630, 588]], "band": 32,
+          "tilt_deg": 0.6, "slow_share": 0.6, "lag_s": 0.6},
+ "hair": [
+  {"name": "long side lock, her left (image right)", "c": [430, 520], "r": [45, 75], "root": [425, 420], "reach": 150, "amp": [1.8, 0.2], "lag_s": 0.45},
+  {"name": "bun loose ends (image left)", "c": [158, 250], "r": [35, 85], "root": [215, 250], "reach": 70, "amp": [1.4, 0.3], "lag_s": 0.3},
+  {"name": "strands by the neck (image left)", "c": [232, 458], "r": [28, 28], "root": [250, 420], "reach": 55, "amp": [1.0, 0.1], "lag_s": 0.4}
+ ],
+ "blinks": [2.1, 6.3], "blink_s": 0.17
+}
