@@ -2,7 +2,7 @@
  "title": "Kenji with a little more realism, round 1",
  "date": "2026-10-16",
  "by": "claude-main/art-round",
- "status": "open",
+ "status": "decided",
  "question": "Which of these, if any, should become Kenji's new base portrait?",
  "multi": true,
  "media": [
@@ -196,5 +196,11 @@
    ],
    "note": "Kenji, pass 5: as pass 4 at denoise 0.7. Recipe art/candidates/portraits/kenji-1/recipes/k5.json, seed 4, RDBT, portrait style, no-props. Red rim 0.3%. Dashboard #2440. My verdict, rejected: at 0.7 the arm turns into a bodybuilder bicep"
   }
- ]
+ ],
+ "decided": [
+  "k3-s2"
+ ],
+ "decision": "k3-s2, without the lanyard though, issue we have with lanyards is how they distort in every picture",
+ "decided_at": "2026-10-17T10:58:35+0200",
+ "issue": 680
 }
