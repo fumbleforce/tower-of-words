@@ -110,7 +110,7 @@ He sees the player, Eric or Carina, as his senpai and would be surprised if they
 
 He speaks casual Japanese with peers. With his senpai he stays polite (です/ます) until invited to relax, and keeps {mc.name_jp}さん either way. He bows a little too deeply and makes small, respectful jokes, then checks that they know he is kidding. His English is a few school words. He points or uses his hands when words fail him. His approved voice sheet is [Kenji's voice](../../notes/characters/kenji/voice.md).
 
-- Look: about 21, inexperienced, eager, easily distracted; varied looks but grounded, a junior IT support guy in work clothes (Jørgen, 2026-09-28). Approved portrait: h4, black bedhead hair with an open smile (reviews/kenji-concept-3), redrawn toward Mio and Kuro as kenji-ink-2001 (reviews/style-align-1): soft pudgy build, white short-sleeved shirt, dark tie, empty hands. Round 1 (hobby costumes) was rejected as "way out of whacko land... he is at work".
+- Look: about 21, inexperienced, eager, easily distracted; varied looks but grounded, a junior IT support guy in work clothes (Jørgen, 2026-09-28). Approved portrait: n2-s2 (reviews/kenji-2), a little more realistic than the earlier kenji-ink-2001: messy black bedhead hair, light stubble, an open smile, a heavy build, white short-sleeved shirt, dark tie, no lanyard, empty hands. Round 1 (hobby costumes) was rejected as "way out of whacko land... he is at work".
 
 ### Emi (`emi`)
 
@@ -413,7 +413,7 @@ The faces each person can show beside the text box: `game3d/assets/portraits/<id
 | `eric` | neutral, surprised, tired |
 | `mio` | neutral, smile, deadpan, surprised, embarrassed, tired, phone, annoyed |
 | `mori` | neutral |
-| `kenji` | neutral, grin, sheepish |
+| `kenji` | neutral |
 | `emi` | neutral |
 | `guard` | neutral, stern, amused |
 | `kuroda` | neutral, sleepy, panicked |

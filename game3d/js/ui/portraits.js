@@ -15,7 +15,7 @@ export const FACE = {
   // the protagonist's, with why it is cut that way (data/mc/<id>.json portrait.crop and its note)
   [MC.portrait.set]: MC.portrait.crop,
   guard: { W: 597, H: 768, f: [222, 167, 378, 334] },
-  kenji: { W: 597, H: 768, f: [219, 166, 383, 335] },
+  kenji: { W: 597, H: 768, f: [218, 166, 385, 336] },
   // Kuro: extended down to the waist (reviews/kuro-body-1, c-s11), and shown 15% smaller than the others (size 0.85):
   // Jørgen, "she is 15% too large / zoomed in compared to the others"
   kuro: { W: 630, H: 1048, f: [254, 325, 452, 525], size: 0.85 },

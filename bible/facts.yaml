@@ -152,11 +152,13 @@ characters:
     portrait_status: approved
     decisions:
       - {q: "docs/game/cast.md ~ Look: about 21, inexperienced", s: approved}
-      - {q: "docs/game/cast.md ~ Approved portrait: h4, bedhead", s: approved}
+      - {q: "docs/game/cast.md ~ Approved portrait: n2-s2", s: approved}
+      - {q: "docs/game/art-and-sound.md ~ Approved (2026-10-17): n2-s2 from reviews/kenji-2", s: approved}
     images:
-      - [art/approved/kenji/kenji-kenji-ink-2001-neutral.webp, "Kenji: neutral (reviews/style-align-1 or npc-base-1 pick kenji-ink-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
-      - [art/approved/kenji/kenji-kenji-ink-2001-grin.webp, "Kenji: grin (reviews/style-align-1 or npc-base-1 pick kenji-ink-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
-      - [art/approved/kenji/kenji-kenji-ink-2001-sheepish.webp, "Kenji: sheepish (reviews/style-align-1 or npc-base-1 pick kenji-ink-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/kenji/kenji-n2-s2-neutral.webp, "Kenji: neutral, n2-s2 (reviews/kenji-2, picked by Jørgen 2026-10-17): k3-s2 of reviews/kenji-1 without the lanyard, cut out and framed as the game shows it", approved]
+      - [art/approved/kenji/kenji-kenji-ink-2001-neutral.webp, "Neutral kenji-ink-2001 (reviews/style-align-1); replaced 2026-10-17 by n2-s2", legacy]
+      - [art/approved/kenji/kenji-kenji-ink-2001-grin.webp, "Grin, a repaint of kenji-ink-2001 (cast-faces-1); out of the game since 2026-10-17, it no longer matches his portrait", legacy]
+      - [art/approved/kenji/kenji-kenji-ink-2001-sheepish.webp, "Sheepish, a repaint of kenji-ink-2001 (cast-faces-1); out of the game since 2026-10-17, it no longer matches his portrait", legacy]
       - [art/approved/kenji/kenji-nk-d80-1.webp, "Neutral (nk-d80-1), a face-only repaint of concept h4 (reviews/kenji-expressions-1); replaced 2026-09-30 by kenji-ink-2001", legacy]
       - [art/approved/kenji/kenji-g0-h4.webp, "Grin: concept h4 itself (g0-h4); replaced 2026-09-30", legacy]
       - [art/approved/kenji/kenji-s3k-d80-1.webp, "Sheepish (s3k-d80-1); replaced 2026-09-30", legacy]

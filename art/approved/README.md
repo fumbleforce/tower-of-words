@@ -30,11 +30,12 @@ One folder per bible id. Each file here is a copy of one that bible/facts.yaml m
 - kenji/kenji-s3k-d80-1.webp: Kenji's sheepish face, a framed 597x768 cut-out from reviews/kenji-expressions-1, screwdriver taken out in kenji-noprop-1; the game's kenji-sheepish until 2026-09-30. Bible: characters › kenji, images.
 - The cast redrawn toward Mio and Kuro (2026-09-30, picks in reviews/style-align-1 and reviews/npc-base-1; made in art/candidates/portraits/cast-faces-1). Each file is the game's framed cut-out, <game id>-<base pick>-<face>.webp, a copy of game3d/assets/portraits/<game id>-<face>.webp:
   - mc/eric-eric-ink-2001-{neutral,surprised,tired}.webp: Eric.
-  - kenji/kenji-kenji-ink-2001-{neutral,grin,sheepish}.webp: Kenji. They replace the h4 faces above in the game.
+  - kenji/kenji-kenji-ink-2001-{neutral,grin,sheepish}.webp: Kenji until 2026-10-17. They replaced the h4 faces above in the game.
   - emi/emi-emi-base-2001-neutral.webp, aoi/aoi-aoi-base-2001-neutral.webp: Emi and Aoi. Aoi's is fill-d65-s1 since 2026-10-01, the cream edge on her left side redrawn (reviews/aoi-edge-2).
   - ishibashi/guard-guard-ink-2001-{neutral,stern,amused}.webp: Ishibashi, the guard.
   - mori/mori-mori-new-713-{neutral,smile,flustered}.webp: Mr. Mori until 2026-10-17, now history.
 - mori/mori-m3-s2-neutral.webp: Mr. Mori's portrait since 2026-10-17, m3-s2 from reviews/mori-2, a copy of game3d/assets/portraits/mori-neutral.webp. Bible: characters › mori, images.
+- kenji/kenji-n2-s2-neutral.webp: Kenji's portrait since 2026-10-17, n2-s2 from reviews/kenji-2 (k3-s2 without the lanyard), a copy of game3d/assets/portraits/kenji-neutral.webp. Bible: characters › kenji, images.
   - hamada/kuroda-hamada-new-743-{neutral,sleepy,panicked}.webp: Mr. Hamada.
 - kuro/kuro-after.webp: Kuro, A-luna-s101 with headroom. Bible: characters › kuro, portrait.
 - goro/goro-after.webp: Goro, goro-a-202 with headroom. Bible: characters › goro, portrait.

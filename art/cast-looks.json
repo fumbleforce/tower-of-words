@@ -36,11 +36,11 @@
    "negative": "", "portrait": "art/approved/mori/mori-m3-s2-neutral.webp", "aliases": ["Mori"]
   },
   {
-   "id": "kenji", "checked": "768278b0", "cast_md": "kenji", "name": "Kenji", "gender": "male", "age": 21, "who": "young Japanese man", "skin": "",
+   "id": "kenji", "checked": "ba69e52a", "cast_md": "kenji", "name": "Kenji", "gender": "male", "age": 21, "who": "young Japanese man", "skin": "",
    "hair": "short messy black bedhead hair", "eyes": "dark eyes", "glasses": "", "extra": "a round, friendly face",
-   "build": "soft pudgy build", "signature": "", "outfit": "a white short-sleeved shirt, a dark tie and a lanyard",
+   "build": "heavy build", "signature": "", "outfit": "a white short-sleeved shirt and a dark tie",
    "short": "Kenji, 21, black bedhead hair, round face, white shirt and tie",
-   "negative": "", "portrait": "art/approved/kenji/kenji-kenji-ink-2001-neutral.webp"
+   "negative": "", "portrait": "art/approved/kenji/kenji-n2-s2-neutral.webp"
   },
   {
    "id": "emi", "checked": "b7717cfa", "cast_md": "emi", "name": "Emi", "gender": "female", "age": 35, "who": "woman", "skin": "fair skin",
