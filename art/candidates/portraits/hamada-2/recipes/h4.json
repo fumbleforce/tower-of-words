@@ -1,0 +1,23 @@
+{
+ "details": "Hamada base portrait, round 2 candidate h4 (#662). The one change from round 1 (mori-hamada-1 ha3): the hairstyle, after Jørgen's \"close this, no shaved side, and dont make the same hairstyle again and again\". Candidate preset hamada-slicked v1 = hamada-mature v2 with the hair words changed to glossy hair slicked straight back, no parting. Face, age, suit, scene words, brown hair exclusion, style and seeds as ha3. Staging: ../staging.md.",
+ "characters": [
+  "hamada-slicked"
+ ],
+ "outfit": {
+  "hamada-slicked": true
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "calm, warm expression with a slight smile, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ],
+ "people": {
+  "hamada-slicked": {
+   "appearanceNegative": "brown hair, light brown hair"
+  }
+ }
+}

@@ -1,0 +1,168 @@
+{
+ "title": "Hamada as an attractive mature man, round 2: four new hairstyles",
+ "date": "2026-10-17",
+ "by": "claude-main/art-round",
+ "status": "open",
+ "question": "Which of these, if any, should become Hamada's new base portrait? The current portrait can stay as the non-adult version and a pick here would be the Adult-mode look, if you prefer.",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/approved/hamada/kuroda-hamada-new-743-neutral.webp",
+   "caption": "Hamada now (hamada-new-743, npc-base-1)"
+  },
+  {
+   "image": "art/candidates/portraits/hamada-2/sheet.webp",
+   "caption": "Pictures: the current portrait, then all 16 renders in order, framed at the game's portrait scale. Round 1 drew the same short spiky hair with grey shaved-looking sides 12 times; this round changes only the hair, one hairstyle per prompt, each one nobody in the cast has: h1 centre part to the jaw, h2 collar-length waves, h3 soft permed curls, h4 slicked straight back. Face, age, suit, scene words and seeds 1 to 4 are as round 1, and shaved sides are excluded on every render. None of the 16 shows grey at the temples. Seed 4 still draws a teal suit."
+  },
+  {
+   "image": "art/candidates/portraits/hamada-2/lineup.webp",
+   "caption": "The 12 renders from seeds 1 to 3 beside Mio, Kenji, Mori and Hamada's current game portraits, at the size the game shows them on a 1080p desktop. Hairstyles already in the cast: Eric's short ponytail, Mori's combed-back side part, Kenji's short messy hair, the guard's bald head, Goro's swept-up white hair, Jun's side-swept fringe."
+  }
+ ],
+ "options": [
+  {
+   "id": "h1-s1",
+   "label": "h1-s1",
+   "image": "art/candidates/portraits/hamada-2/h1-r261017-110319-789-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h1-r261017-110319-789-1-s1.webp"
+   ],
+   "note": "Hamada, h1: straight black hair parted in the middle, to the jaw, covering the ears (candidate preset hamada-centre-part v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h1.json, seed 1, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.0%. Framing: headroom 2%, 11% missing above the game crop and 12% below (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.079 (a new face is the point). Dashboard #2578. My verdict, rejected: centre part to the jaw as asked, but the face slides back to the tired caricature (heavy eye bags, drooping brows). No grey at the temples."
+  },
+  {
+   "id": "h1-s2",
+   "label": "h1-s2",
+   "image": "art/candidates/portraits/hamada-2/h1-r261017-110319-789-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h1-r261017-110319-789-2-s2.webp"
+   ],
+   "note": "Hamada, h1: straight black hair parted in the middle, to the jaw, covering the ears (candidate preset hamada-centre-part v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h1.json, seed 2, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.1%. Framing: headroom 1%, 10% missing above the game crop and 19% below (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.081 (a new face is the point). Dashboard #2579. My verdict, kept: centre part, hair swept over the ears; handsome, reads about 48; framed chest-up, so a pick needs an outpaint below too. No grey at the temples."
+  },
+  {
+   "id": "h1-s3",
+   "label": "h1-s3",
+   "image": "art/candidates/portraits/hamada-2/h1-r261017-110319-789-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h1-r261017-110319-789-3-s3.webp"
+   ],
+   "note": "Hamada, h1: straight black hair parted in the middle, to the jaw, covering the ears (candidate preset hamada-centre-part v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h1.json, seed 3, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.0%. Framing: headroom 4%, 9% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.098 (a new face is the point). Dashboard #2580. My verdict, kept: centre part, hair over the ears to the jaw; warm smile, reads about 52. No grey at the temples."
+  },
+  {
+   "id": "h1-s4",
+   "label": "h1-s4",
+   "image": "art/candidates/portraits/hamada-2/h1-r261017-110319-789-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h1-r261017-110319-789-4-s4.webp"
+   ],
+   "note": "Hamada, h1: straight black hair parted in the middle, to the jaw, covering the ears (candidate preset hamada-centre-part v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h1.json, seed 4, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.0%. Framing: headroom 2%, 9% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.096 (a new face is the point). Dashboard #2581. My verdict, rejected: hair reads as a side-swept fringe more than a centre part, and the suit drifts to teal blue, not navy (seed 4, as in every round 1 pass). No grey at the temples."
+  },
+  {
+   "id": "h2-s1",
+   "label": "h2-s1",
+   "image": "art/candidates/portraits/hamada-2/h2-r261017-110505-a50-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h2-r261017-110505-a50-1-s1.webp"
+   ],
+   "note": "Hamada, h2: collar-length soft wavy black hair with a side part (candidate preset hamada-wavy v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h2.json, seed 1, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.1%. Framing: headroom 2%, 10% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.138 (a new face is the point). Dashboard #2583. My verdict, rejected: collar-length waves as asked, but a goatee he doesn't have. No grey at the temples."
+  },
+  {
+   "id": "h2-s2",
+   "label": "h2-s2",
+   "image": "art/candidates/portraits/hamada-2/h2-r261017-110505-a50-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h2-r261017-110505-a50-2-s2.webp"
+   ],
+   "note": "Hamada, h2: collar-length soft wavy black hair with a side part (candidate preset hamada-wavy v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h2.json, seed 2, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.0%. Framing: headroom 1%, 12% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.129 (a new face is the point). Dashboard #2584. My verdict, kept: collar-length soft waves, one lock over his right eye (image left); handsome, reads about 45. No grey at the temples."
+  },
+  {
+   "id": "h2-s3",
+   "label": "h2-s3",
+   "image": "art/candidates/portraits/hamada-2/h2-r261017-110505-a50-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h2-r261017-110505-a50-3-s3.webp"
+   ],
+   "note": "Hamada, h2: collar-length soft wavy black hair with a side part (candidate preset hamada-wavy v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h2.json, seed 3, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.3%. Framing: headroom 4%, 8% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.108 (a new face is the point). Dashboard #2585. My verdict, kept: collar-length soft waves with a side part; warm, reads about 50. No grey at the temples."
+  },
+  {
+   "id": "h2-s4",
+   "label": "h2-s4",
+   "image": "art/candidates/portraits/hamada-2/h2-r261017-110505-a50-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h2-r261017-110505-a50-4-s4.webp"
+   ],
+   "note": "Hamada, h2: collar-length soft wavy black hair with a side part (candidate preset hamada-wavy v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h2.json, seed 4, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.1%. Framing: headroom 2%, 9% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.104 (a new face is the point). Dashboard #2586. My verdict, rejected: waves as asked, but the suit drifts to teal blue, not navy (seed 4). No grey at the temples."
+  },
+  {
+   "id": "h3-s1",
+   "label": "h3-s1",
+   "image": "art/candidates/portraits/hamada-2/h3-r261017-110717-d7f-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h3-r261017-110717-d7f-1-s1.webp"
+   ],
+   "note": "Hamada, h3: short soft permed curls (candidate preset hamada-perm v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h3.json, seed 1, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.0%. Framing: headroom 2%, 9% missing above the game crop and 6% below (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.132 (a new face is the point). Dashboard #2587. My verdict, kept: soft permed curls; warm, reads about 55; deep cheek lines. No grey at the temples."
+  },
+  {
+   "id": "h3-s2",
+   "label": "h3-s2",
+   "image": "art/candidates/portraits/hamada-2/h3-r261017-110717-d7f-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h3-r261017-110717-d7f-2-s2.webp"
+   ],
+   "note": "Hamada, h3: short soft permed curls (candidate preset hamada-perm v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h3.json, seed 2, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.2%. Framing: headroom 1%, 9% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.126 (a new face is the point). Dashboard #2588. My verdict, kept: soft permed curls; handsome, reads about 45. No grey at the temples."
+  },
+  {
+   "id": "h3-s3",
+   "label": "h3-s3",
+   "image": "art/candidates/portraits/hamada-2/h3-r261017-110717-d7f-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h3-r261017-110717-d7f-3-s3.webp"
+   ],
+   "note": "Hamada, h3: short soft permed curls (candidate preset hamada-perm v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h3.json, seed 3, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.0%. Framing: headroom 3%, 8% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.112 (a new face is the point). Dashboard #2589. My verdict, kept: soft permed curls; warm smile, reads about 50; suit a shade teal. No grey at the temples."
+  },
+  {
+   "id": "h3-s4",
+   "label": "h3-s4",
+   "image": "art/candidates/portraits/hamada-2/h3-r261017-110717-d7f-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h3-r261017-110717-d7f-4-s4.webp"
+   ],
+   "note": "Hamada, h3: short soft permed curls (candidate preset hamada-perm v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h3.json, seed 4, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.0%. Framing: headroom 2%, 10% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.140 (a new face is the point). Dashboard #2590. My verdict, rejected: curls as asked, but the suit drifts to teal blue, not navy (seed 4). No grey at the temples."
+  },
+  {
+   "id": "h4-s1",
+   "label": "h4-s1",
+   "image": "art/candidates/portraits/hamada-2/h4-r261017-110903-a78-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h4-r261017-110903-a78-1-s1.webp"
+   ],
+   "note": "Hamada, h4: glossy black hair slicked straight back, no parting (candidate preset hamada-slicked v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h4.json, seed 1, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.0%. Framing: headroom 3%, 7% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.099 (a new face is the point). Dashboard #2591. My verdict, kept: glossy slicked-back hair, no parting; calm, reads about 50. No grey at the temples."
+  },
+  {
+   "id": "h4-s2",
+   "label": "h4-s2",
+   "image": "art/candidates/portraits/hamada-2/h4-r261017-110903-a78-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h4-r261017-110903-a78-2-s2.webp"
+   ],
+   "note": "Hamada, h4: glossy black hair slicked straight back, no parting (candidate preset hamada-slicked v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h4.json, seed 2, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.1%. Framing: headroom 1%, 10% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.086 (a new face is the point). Dashboard #2592. My verdict, rejected: slicked back as asked, but a narrow-eyed sly smirk that reads villainous, not warm. No grey at the temples."
+  },
+  {
+   "id": "h4-s3",
+   "label": "h4-s3",
+   "image": "art/candidates/portraits/hamada-2/h4-r261017-110903-a78-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h4-r261017-110903-a78-3-s3.webp"
+   ],
+   "note": "Hamada, h4: glossy black hair slicked straight back, no parting (candidate preset hamada-slicked v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h4.json, seed 3, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.0%. Framing: headroom 5%, 6% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.097 (a new face is the point). Dashboard #2593. My verdict, kept: glossy slicked-back hair; warm smile, reads about 52. No grey at the temples."
+  },
+  {
+   "id": "h4-s4",
+   "label": "h4-s4",
+   "image": "art/candidates/portraits/hamada-2/h4-r261017-110903-a78-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/hamada-2/h4-r261017-110903-a78-4-s4.webp"
+   ],
+   "note": "Hamada, h4: glossy black hair slicked straight back, no parting (candidate preset hamada-slicked v1, hamada-mature v2 with only the hair words changed). Recipe art/candidates/portraits/hamada-2/recipes/h4.json, seed 4, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.0%. Framing: headroom 4%, 8% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from the current portrait ccip 0.102 (a new face is the point). Dashboard #2594. My verdict, rejected: slicked back as asked, but the suit drifts to teal blue, not navy (seed 4). No grey at the temples."
+  }
+ ]
+}

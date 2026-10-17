@@ -1,0 +1,50 @@
+{
+ "h1": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old middle-aged Japanese man, mature male, straight black hair parted in the middle, falling to his jawline on both sides and covering his ears, going grey at the temples, and a handsome, lean face with expressive dark eyes, thin, wearing a navy suit and tie, calm, warm expression with a slight smile, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), brown hair, light brown hair, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "count": 4,
+  "seed": 1
+ },
+ "h2": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old middle-aged Japanese man, mature male, collar-length soft wavy black hair with a side part, loose waves falling over his ears to the collar, going grey at the temples, and a handsome, lean face with expressive dark eyes, thin, wearing a navy suit and tie, calm, warm expression with a slight smile, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), brown hair, light brown hair, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "count": 4,
+  "seed": 1
+ },
+ "h3": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old middle-aged Japanese man, mature male, short, soft curly black hair, loose permed curls all over the head and over his ears, going grey at the temples, and a handsome, lean face with expressive dark eyes, thin, wearing a navy suit and tie, calm, warm expression with a slight smile, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), brown hair, light brown hair, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "count": 4,
+  "seed": 1
+ },
+ "h4": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old middle-aged Japanese man, mature male, glossy black hair slicked straight back from the forehead with no parting, smooth and flat against the head, going grey at the temples, and a handsome, lean face with expressive dark eyes, thin, wearing a navy suit and tie, calm, warm expression with a slight smile, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), brown hair, light brown hair, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "count": 4,
+  "seed": 1
+ }
+}
