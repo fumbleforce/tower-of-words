@@ -2,7 +2,7 @@
  "title": "Proposed work",
  "date": "2026-10-16",
  "by": "claude-main",
- "status": "open",
+ "status": "decided",
  "updated": "2026-10-16T23:44:02+0200",
  "multi": true,
  "options": [
@@ -311,5 +311,43 @@
    "note": "Today: Nothing a player sees. The route test rejects some correct menus as unexpected, such as a story row beside a topic. On day 2, 20 of 35 routes pass. The rest of the failures are old fixtures that time out. Found: Codex, in the #662 Mori writing QA, running the route tests on days 1 to 3. Why it matters: The day 2 route test fails on menus that work, so it cannot show real breaks there. Fix idea: Teach the route test to accept story rows that come with a topic or a stand-up option. Then update the old day 2 and day 3 fixtures and cover the menu options they skip. (tooling, medium, issue #670.) No picture: test tooling."
   }
  ],
- "question": "Which of these should become work? Pick (approve) the ones to do and reject the ones to drop; anything you leave alone stays proposed. Tooling ones are at the bottom."
+ "question": "Which of these should become work? Pick (approve) the ones to do and reject the ones to drop; anything you leave alone stays proposed. Tooling ones are at the bottom.",
+ "decided": [
+  "p295",
+  "p363",
+  "p414",
+  "p415",
+  "p465",
+  "p466",
+  "p494",
+  "p498",
+  "p500",
+  "p550",
+  "p553",
+  "p567",
+  "p581",
+  "p588",
+  "p612",
+  "p630",
+  "p646",
+  "p666",
+  "p669",
+  "p675",
+  "p429",
+  "p495",
+  "p497",
+  "p556",
+  "p570",
+  "p594",
+  "p613",
+  "p622",
+  "p623",
+  "p639",
+  "p642",
+  "p643",
+  "p653",
+  "p670"
+ ],
+ "decision": "his picks and rejects, applied per option",
+ "decided_at": "2026-10-17T11:48:57+0200"
 }

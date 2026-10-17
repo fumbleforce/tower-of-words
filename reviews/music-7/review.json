@@ -2,7 +2,7 @@
  "title": "Sounds, round music-7",
  "date": "2026-10-16",
  "by": "claude-main/music-7",
- "status": "open",
+ "status": "decided",
  "context": [
   "Every take of round music-7 (music), made by tools/audio/make.py, failed ones included. Nobody has listened to them: the numbers on each card are a screen, not a verdict.",
   "A loop plays once and then its first seconds again, so you can hear the join."
@@ -64,5 +64,11 @@
    "audio": "art/candidates/music-7/title-lyria-3.mp3",
    "note": "Title menu. music/title-lyria@v2, lyria-2, seed 7713. Prompt: \"Slow, gentle solo piano with a soft warm pad and a little music-box, 62 BPM. A tender melody that keeps developing: each phrase differs from the last, with new notes and a different ending, never one motif repeated. It begins softly and already in motion, with no sharp opening note, and stays at one calm level. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.\". Measured: 29.51 s; level -19.9 LUFS (integrated, target -20); key C major; tempo 172.3 BPM; CLAP good 0.219, vocals -0.116, noise -0.158, cheap 0.109; vocal stem -53.1 dB of the mix; loops every 29.51 s, loop point match 1.015; level change at the loop point 5.53 dB (8.6 dB elsewhere). Flags: loop point match 1.015 (lower is better; music repeating itself is about 0.1). Not listened to by an agent."
   }
- ]
+ ],
+ "decided": [
+  "dorms-lyria-2"
+ ],
+ "decision": "none picked; dorms-lyria-2 not bad, very close, the electric piano takes too much attention, one for refinement; all title and day takes rejected",
+ "decided_at": "2026-10-17T11:52:55+0200",
+ "issue": 371
 }
