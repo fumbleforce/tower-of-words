@@ -113,6 +113,8 @@ export function* eastCoastSteps() {
   // the coast's wall, rocks and surf, and the walks' kerbs
   yield* coastSteps(isl, {
     at: (x, z) => [x, z],
+    // nothing of the wall's foot on the steps down to the beach or their landings
+    clip: (x, z) => !Q.STEPS.some(([x0, x1, z0, z1]) => x > x0 + 0.1 && x < x1 + 1.6 && z > z0 - 0.5 && z < z1 + 0.5),
     data: {
       coast: coastRuns(),
       walks: kerbWalks(),

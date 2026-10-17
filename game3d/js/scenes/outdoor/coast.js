@@ -183,7 +183,8 @@ function* wall(stone, green, surf, at, sea, clip, { line: pts, beach = false, pl
         if (hash2(u, z, 57) < 0.35) {
           const [rx, rz] = P(u + 0.9, 0.7 + hash2(u, i, 59) * 0.5),
             g = new THREE.DodecahedronGeometry(0.3 + hash2(rx, rz, 61) * 0.2, 0).scale(1.15, 0.6, 1);
-          stone.geo(STONE.rocks[Math.floor(hash2(rz, rx, 63) * 4)], g.translate(rx, sea + 0.08, rz), NO_CAST);
+          if (clip(rx, rz))
+            stone.geo(STONE.rocks[Math.floor(hash2(rz, rx, 63) * 4)], g.translate(rx, sea + 0.08, rz), NO_CAST);
         }
       }
       yield;

@@ -222,6 +222,8 @@ export const TURNS = {
   seNorth: rect([112, Q.EDGE[0], Q.PROM[2] - 1.5, Q.PROM[3] + 0.2]),
   nwPath: rect([Q.NORTH[0] - 2, Q.NS_X[1] + 0.5, Q.NORTH[2] - 1.5, Q.block('dorm_nw')[2] + 0.4]),
   south: rect([82, 124, 12.5, 33]), // the villas' gardens, the coastal loop and the sea beyond
+  // the fitness corner, from the south-east over the promenade, so S-E's east wing stands behind it, not over it
+  fitness: rect([Q.FITNESS[0] - 0.5, Q.WALL[1], Q.FITNESS[2] - 0.8, Q.FITNESS[3] + 0.8]),
   beach: rect([Q.EDGE[0] - 0.4, 140, -40, Q.TERRACE[3] + 1]),
   park: rect([Q.PARK_W - 3, Q.EDGE[0] - 0.4, Q.PARK_N[2] - 0.2, Q.ROW[2] - 0.6]),
   north: rect([70, Q.EDGE[0] - 0.4, -120, Q.PARK_N[2] - 0.2]),

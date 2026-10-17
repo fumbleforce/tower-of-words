@@ -226,12 +226,23 @@ function seaGarden(p, lights) {
   }
 }
 
-// S-E's court: a soft pad with two spring riders and a bench by it, its trees
+// S-E's court: a soft pad with two spring riders, a see-saw and a bench by it, its trees
 function seCourt(p) {
   const [x0, x1, z0, z1] = Q.SE_PLAY;
   p.box('#8a6f62', x1 - x0, 0.03, z1 - z0, (x0 + x1) / 2, 0, (z0 + z1) / 2, { cast: false });
   springRider(p, x0 + 0.9, z0 + 1.0, '#4f8a6a');
   springRider(p, x1 - 0.9, z0 + 1.4, '#d9a73e');
+  // a see-saw along the pad's far side: a beam tilted on its pivot, a handle and a seat at each end
+  const sz = z1 - 0.6,
+    sx = (x0 + x1) / 2;
+  p.box(STEEL.dark, 0.18, 0.3, 0.3, sx, 0, sz, PAINTED);
+  p.geo('#c0533f', new THREE.BoxGeometry(2.3, 0.07, 0.22).rotateZ(0.16).translate(sx, 0.36, sz), PAINTED);
+  for (const s of [-1, 1]) {
+    const ex = sx + s * 1.0,
+      ey = 0.36 + s * 0.16;
+    p.box('#3f6f9e', 0.3, 0.05, 0.3, ex, ey + 0.03, sz, PAINTED);
+    p.box(STEEL.mid, 0.04, 0.26, 0.26, ex + s * -0.2, ey + 0.05, sz, PAINTED);
+  }
   bench(p, (x0 + x1) / 2, z1 + 0.5, Math.PI, { len: 1.6 });
   for (const [k, x, z, s] of [
     [keyaki, 110.3, -6.0, 1.0],
