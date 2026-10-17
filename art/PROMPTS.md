@@ -102,7 +102,7 @@ Tiers by mode: CLAUDE.md. Exclusions: How a picture is made.
 - Perspective is not an anatomy fault; reject only real errors (extra or missing limbs, fused fingers, a joint bending the wrong way).
 - Limit test for soft pictures: reject only when a nipple, areola or genitals are clearly drawn and visible. Hints, shading and show-through don't count; points showing through a braless top are fine and wanted, so never negative-prompt them away. Anyone not clearly an adult is rejected. Critics use the same tests.
 - Everything spicy stays in island/private/rewards/ until he picks, never on a public page or in the public repo.
-- A short scene text about her, a rating that fits (`nsfw` for implied nudity), close or portrait framing, not wide room shots.
+- A short scene text about her, a rating that fits, `landscape` framing (the reward format, desktop first), never vertical.
 - Hard scenes: a dramatic angle per image and detail close-ups, not one frame showing everything (island/private/rewards/SHOTS.md).
 - Colour words misfire at night; fix hair colour with a measured `huefix`.
 
