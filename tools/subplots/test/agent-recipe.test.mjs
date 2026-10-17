@@ -196,7 +196,7 @@ test('a nonadult reward loads the soft negative preset; Adult mode never does, a
   assert.deepEqual(prepareRewardGeneration({...base, hard: true, negatives: ['clean', 'soft']}, blocks).presets.negatives, [{id: 'clean', v: 3}, {id: 'soft', v: 2}]);
   assert.deepEqual(prepareRewardGeneration({...base, negatives: ['clean', 'soft', 'soft']}, blocks).presets.negatives, [{id: 'clean', v: 3}, {id: 'soft', v: 2}]);
   for (const negatives of [[], ['soft']])
-    assert.throws(() => prepareRewardGeneration({...base, negatives}, blocks), /configured default selection; add presets, never remove them \(missing clean\)/);
+    assert.throws(() => prepareRewardGeneration({...base, negatives}, blocks), /configured default selection for nonadult; add presets, never remove them \(missing clean\)/);
   assert.throws(() => prepareRewardGeneration({...base}, presets), /need the soft negative preset/);
   assert.throws(() => prepareRewardGeneration({...base, hard: 'yes'}, blocks), /hard must be true/);
 });
@@ -218,6 +218,27 @@ test('reward entry preserves exactly the configured exclusion selection and norm
   const updated = prepareRewardGeneration(recipe, blocks);
   assert.deepEqual(updated.presets.negatives, [{id: 'clean', v: 3}, {id: 'optional', v: 1}]);
   assert.throws(() => prepareRewardGeneration({...recipe, negatives: ['clean']}, blocks), /configured default selection/);
+});
+
+test('an Adult hard reward recipe has no limits fixed, Adult Mature only the skimpy ones, and the base exclusions stay (#700)', () => {
+  const blocks = structuredClone(presets);
+  blocks.negative.push(rec('soft', {text: 'soft exclusions', default: false, soft: true}, 2),
+    rec('limits', {text: 'nipples, areolae, genitals, pussy, penis, sex, explicit', default: true, limit: 'full'}),
+    rec('limits-skimpy', {text: 'genitals, pussy, penis, sex, explicit', default: false, limit: 'skimpy'}));
+  const ids = recipe => prepareRewardGeneration({...base, characters: [], outfit: {}, ...recipe}, blocks).presets.negatives.map(p => p.id);
+  assert.deepEqual(ids({hard: true, rating: 'nsfw'}), ['clean']);
+  assert.deepEqual(ids({hard: true, rating: 'nsfw', negatives: ['clean']}), ['clean']);
+  assert.deepEqual(ids({hard: true, rating: 'nsfw', negatives: ['clean', 'limits']}), ['clean', 'limits']);
+  assert.deepEqual(ids({hard: true, rating: 'sensitive'}), ['clean', 'limits-skimpy']);
+  assert.deepEqual(ids({hard: true, rating: 'safe'}), ['clean', 'limits']);
+  assert.deepEqual(ids({rating: 'nsfw'}), ['clean', 'limits', 'soft']);
+  const hard = prepareRewardGeneration({...base, characters: [], outfit: {}, hard: true, rating: 'nsfw'}, blocks);
+  assert.doesNotMatch(hard.negative, /nipples|genitals/);
+  assert.match(hard.negative, /preset exclusions/);
+  assert.match(hard.negative, new RegExp(`${ALWAYS}$`));
+  assert.throws(() => ids({hard: true, rating: 'nsfw', negatives: ['limits']}), /Adult mode at Adult, hard; add presets, never remove them \(missing clean\)/);
+  assert.throws(() => ids({hard: true, rating: 'sensitive', negatives: ['clean']}), /missing limits-skimpy/);
+  assert.throws(() => ids({hard: true, rating: 'safe', negatives: ['clean']}), /missing limits/);
 });
 
 test('reward path detection follows the established directory, without matching unrelated names', () => {

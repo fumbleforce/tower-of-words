@@ -32,7 +32,10 @@ export const FIELDS = {
     ['defaults.model', 'Default model', 'ref', 'model'], ['defaults.negatives', 'Default negative sets', 'negs'],
     ['loras', 'LoRAs it adds (file:weight, comma separated)', 1], ['notes', 'Notes', 3]],
   negative: [['name', 'Name'], ['text', 'Negative text', 3], ['default', 'On by default', 'check'],
-    ['soft', 'On for every nonadult reward', 'check'], ['notes', 'Notes', 2]],
+    ['soft', 'On for every nonadult reward', 'check'],
+    // a rating limit follows the tier, not "On by default" (tools/subplots/web/image-compose.js, #700): full is kept in
+    // nonadult and Adult General shots, skimpy in Adult Mature, neither in Adult hard
+    ['limit', 'Rating limit, kept by tier: full (nonadult, Adult General) or skimpy (Adult Mature)', 'select', ['', 'full', 'skimpy']], ['notes', 'Notes', 2]],
   framing: [['name', 'Name'], ['w', 'Width', 'num'], ['h', 'Height', 'num'], ['prompt', 'Added to the prompt (optional)', 2], ['notes', 'Notes', 2]],
   // group and diagram place a camera block in the scene editor's composer: its row (shot size, angle, lens; empty is
   // the other camera words) and the small drawing on its tile (tools/subplots/web/image-stage.js DIAGRAMS)

@@ -9,7 +9,7 @@ import {isExternal, externalReplayNotice, provenanceHtml, originalGeneration, ex
 import {standaloneComposition, standaloneJob, standalonePromptHtml} from './image-standalone.js';
 import {personWords} from './image-people.js';
 import {guessComposition} from './image-guess.js';
-import {applyDefaults, normalizeComposition, assembleComposition, lockedExclusions, promptParts, portraitUrl} from './image-compose.js';
+import {applyDefaults, normalizeComposition, assembleComposition, lockedExclusions, followTier, tierOf, TIER_NAMES, promptParts, portraitUrl} from './image-compose.js';
 import {blockId} from '../../imagegen/web/blocks.js';
 import {openBlockEditor} from './block-editor.js';
 import {createLibrary} from './library.js';
@@ -333,21 +333,21 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     const happens = `<section class="image-section image-what"><div class="section-head"><h3>What happens</h3>${pickerHtml('scenePreset', 'scene', 'Scene template', presetOptions('scene'), c.sceneRefs?.[0] || '', 'Choose a saved direction…')}</div>
       <label><span class="visually-hidden">What happens in this shot</span><textarea data-compose="scene" rows="2" placeholder="Choose a saved direction above, or describe the action in your own words.">${esc(c.scene)}</textarea></label>${c.sceneRefs?.[0] ? '<button type="button" class="small" data-reset-scene>Reset to template</button>' : ''}${sectionNegativeHtml(c, 'scene')}</section>`;
     // the rating exclusions (image-compose.js lockedExclusions): their presets are on and locked while they apply
-    const locked = lockedExclusions(c, presets || {}, getScene()?.id);
+    const locked = lockedExclusions(c, presets || {});
     const lockedOn = id => locked.ids.includes(id);
     // Exclude folds to one line, like the generation settings: the negative blocks in use and anything else
     const negNames = active('negative').filter(p => c.negatives?.includes(p.id) || lockedOn(p.id)).map(p => p.data.name);
     const sectionWords = Object.values(c.sectionNegatives || {}).some(Boolean) || (c.people && Object.values(c.people).some(p => p.appearanceNegative || p.clothingNegative));
     const excludePeek = [...negNames, sectionWords ? 'words by section' : '', c.negative ? 'more words' : '', locked.soft ? 'soft-scene limits' : ''].filter(Boolean).join(', ') || 'nothing';
     const details = `<section class="image-section image-details"><label class="details-line">More details<textarea data-compose="extra" rows="1" placeholder="Props, clothes, anything the blocks don't say">${esc(c.extra || '')}</textarea></label>${sectionNegativeHtml(c, 'details')}</section>`;
-    const exclude = `<details class="image-section image-exclude" data-exclude-open ${excludeOpen ? 'open' : ''}><summary><span class="settings-title">Exclude</span><span class="hint exclude-peek">${esc(excludePeek)}</span></summary><p class="hint always-on">Always on for every picture: ${ALWAYS_NEGATIVE.map(w => esc(w).replace(/ /g, '&nbsp;')).join(', ')}.</p><div class="chips">${active('negative').map(p => lockedOn(p.id)
+    const exclude = `<details class="image-section image-exclude" data-exclude-open ${excludeOpen ? 'open' : ''}><summary><span class="settings-title">Exclude</span><span class="hint exclude-peek">${esc(excludePeek)}</span></summary><p class="hint always-on">Always on for every picture: ${ALWAYS_NEGATIVE.map(w => esc(w).replace(/ /g, '&nbsp;')).join(', ')}.</p><p class="hint fixed-exclusions">${esc(fixedLine(locked))}</p><div class="chips">${active('negative').map(p => lockedOn(p.id)
       ? chip(p.data.name, true, `data-negative="${esc(p.id)}" disabled title="${esc('On for this shot: ' + (p.data.text || ''))}"`)
       : chip(p.data.name, c.negatives?.includes(p.id), `data-negative="${esc(p.id)}" title="${esc(p.data.text)}"`)).join('')}<button type="button" data-new-block="negative">+ New</button><button type="button" data-edit-block="negative" data-edit-list="negatives">Edit shared template…</button></div>
       ${(c.negatives || []).map(id => localBlockHtml(c, presets || {}, 'negative', id)).join('')}
       <p class="hint">Generated exclusion prompt:</p><p id="assembledNegative" class="hint prompt-box exclude-prompt"></p>
       <div class="two"><label>Anything else to avoid, in any section<textarea data-compose="negative" rows="1">${esc(c.negative || '')}</textarea></label>
       <label>Notes for steps outside the prompt<textarea data-compose="details" rows="1" placeholder="Inpaint, colour fix, LoRA weights. Kept with the picture, not sent to the model.">${esc(c.details || '')}</textarea></label></div>
-      <p class="hint">${c.hard ? (c.reward ? 'Adult reward: the default exclusions are always on; the soft-scene exclusion is off.' : 'Adult: standing soft-scene exclusions are off.') : c.reward ? 'Nonadult reward: the default exclusions and the soft-scene exclusion are always on, at every content level.' : 'Nonadult: standing soft-scene exclusions apply to Mature and Adult content levels.'} Words to avoid in each section, and these presets, are yours to choose.</p></details>`;
+      <p class="hint">${c.hard ? (c.reward ? 'Adult reward: the content level sets the limits (General keeps them all, Mature keeps genitals and sex out, Adult drops them); the soft-scene exclusion is off.' : 'Adult: standing soft-scene exclusions are off, and the limit presets follow the content level.') : c.reward ? 'Nonadult reward: the default exclusions and the soft-scene exclusion are always on, at every content level.' : 'Nonadult: standing soft-scene exclusions apply to Mature and Adult content levels.'} Words to avoid in each section, and the other presets, are yours to choose.</p></details>`;
     const dctx = directCtx();
     const o = c.original;
     const smallChanges = o?.start ? '<button data-small-changes title="Start from this shot’s picture with the same seed and change it a little (img2img, low strength).">Small changes to this picture</button>' : '';
@@ -366,7 +366,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     if (composerHead) {
       let mode = composerHead.querySelector('[data-composer-mode]');
       if (!mode) { mode = document.createElement('div'); mode.dataset.composerMode = ''; mode.className = 'shot-mode'; composerHead.insertBefore(mode, composerHead.querySelector('#closeCompose')); }
-      mode.innerHTML = `<span>Shot</span>${['Nonadult', 'Adult'].map((label, i) => `<button type="button" data-shot-mode="${i ? 'adult' : 'nonadult'}" aria-pressed="${!!c.hard === !!i}" title="${i ? 'Leave out' : 'Apply'} standing soft-scene exclusions for this shot">${label}</button>`).join('')}`;
+      mode.innerHTML = `<span>Shot</span>${['Nonadult', 'Adult'].map((label, i) => `<button type="button" data-shot-mode="${i ? 'adult' : 'nonadult'}" aria-pressed="${!!c.hard === !!i}" title="${i ? 'Adult mode: no soft-scene exclusions, and the limits follow the content level' : 'Apply standing soft-scene exclusions for this shot'}">${label}</button>`).join('')}`;
       mode.querySelectorAll('[data-shot-mode]').forEach(b => b.onclick = () => edit(c => { c.hard = b.dataset.shotMode === 'adult'; }));
     }
     const direct = directHtml(c, dctx), place = placeHtml(c, dctx);
@@ -393,9 +393,16 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
       if (setting) loadPlace(api, setting, blockValue('light', c.light), paintExamples, c, presets);
     }
   }
+  // the rating exclusions this shot can't switch off, by name, under the tier they come from
+  function fixedLine(locked) {
+    const names = locked.ids.map(id => preset('negative', id)?.data.name || id);
+    return `Fixed for this rating (${TIER_NAMES[locked.tier]}): ${[...names, 'the always-on words'].join('; ')}.`;
+  }
   function edit(mutator, repaint = true) {
     const c = compose(); if (!c) return;
-    mutator(c); c.edited = true; changed();
+    // a change of tier (Shot mode, content level, a rating cap) moves the limit presets with it (image-compose.js)
+    const tier = tierOf(c, presets || {});
+    mutator(c); followTier(c, presets || {}, tier); c.edited = true; changed();
     if (repaint) render(); else updatePrompt();
   }
   function toggleList(c, key, id) { c[key] = c[key].includes(id) ? c[key].filter(x => x !== id) : [...c[key], id]; }

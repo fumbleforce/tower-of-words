@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeComposition, assembleComposition, portraitUrl, lockedExclusions, promptParts, withStyleLoras} from '../web/image-compose.js';
+import {normalizeComposition, assembleComposition, applyDefaults, portraitUrl, lockedExclusions, followTier, ratingTier, promptParts, withStyleLoras} from '../web/image-compose.js';
 import ALWAYS_NEGATIVE from '../../imagegen/web/always-negative.json' with {type: 'json'};
 
 const rec = (id, data) => ({id, v: 3, data});
@@ -177,7 +177,7 @@ test('a nonadult reward keeps the soft preset on at every content level, selecte
     assert.match(body.negative, new RegExp(SOFT.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), `${rating} ${negatives}`);
     assert.equal(body.presets.negatives.filter(p => p.id === 'soft').length, 1, `${rating} ${negatives}`);
   }
-  assert.deepEqual(lockedExclusions(composition({characters: [], reward: true}), presets), {soft: true, ids: ['clean', 'soft']});
+  assert.deepEqual(lockedExclusions(composition({characters: [], reward: true}), presets), {tier: 'nonadult', soft: true, defaults: ['clean'], ids: ['clean', 'soft']});
 });
 
 test('Adult (hard) rewards get only their configured exclusions, and a safe picture that is not a reward gets none', () => {
@@ -185,14 +185,57 @@ test('Adult (hard) rewards get only their configured exclusions, and a safe pict
     const adult = assembleComposition(composition({characters: [], rating, reward: true, hard: true, negatives: ['clean']}), presets);
     assert.doesNotMatch(adult.negative, /visible/);
     assert.deepEqual(adult.presets.negatives, [{id: 'clean', v: 3}]);
-    assert.deepEqual(lockedExclusions(composition({characters: [], rating, reward: true, hard: true}), presets), {soft: false, ids: ['clean']});
+    assert.deepEqual(lockedExclusions(composition({characters: [], rating, reward: true, hard: true}), presets), {tier: ratingTier({hard: true}, rating), soft: false, defaults: ['clean'], ids: ['clean']});
     // the configured default selection stays on for an Adult reward even when the shot leaves it out
     const bare = assembleComposition(composition({characters: [], rating, reward: true, hard: true, negatives: []}), presets);
     assert.deepEqual(bare.presets.negatives, [{id: 'clean', v: 3}]);
     assert.equal(bare.negative, `blur, ${ALWAYS}, watermark`);
   }
   assert.doesNotMatch(assembleComposition(composition({characters: [], rating: 'safe'}), presets).negative, /visible/);
-  assert.deepEqual(lockedExclusions(composition({characters: [], rating: 'safe'}), presets), {soft: false, ids: []});
+  assert.deepEqual(lockedExclusions(composition({characters: [], rating: 'safe'}), presets), {tier: 'nonadult', soft: false, defaults: [], ids: []});
+});
+
+// #700: the limit presets follow the tier. The store's `limits` (full) and a skimpy one without the nipple words.
+const LIMITS = 'nipples, areolae, genitals, pussy, penis, sex, explicit';
+const SKIMPY = 'genitals, pussy, penis, sex, explicit';
+const limited = structuredClone(presets);
+limited.negative.push(rec('limits', {name: 'Limits', default: true, limit: 'full', text: LIMITS}), rec('limits-skimpy', {name: 'Limits, skimpy', default: false, limit: 'skimpy', text: SKIMPY}));
+const words = negative => negative.split(', ');
+test('the fixed rating exclusions of a reward follow its tier: limits for nonadult and Adult General, the skimpy limits for Adult Mature, none for Adult hard (#700)', () => {
+  const fixed = (rating, hard) => lockedExclusions(composition({characters: [], rating, hard, reward: true}), limited);
+  for (const rating of ['safe', 'sensitive', 'nsfw']) assert.deepEqual(fixed(rating, false), {tier: 'nonadult', soft: true, defaults: ['clean', 'limits'], ids: ['clean', 'limits', 'soft']});
+  assert.deepEqual(fixed('safe', true), {tier: 'safe', soft: false, defaults: ['clean', 'limits'], ids: ['clean', 'limits']});
+  assert.deepEqual(fixed('sensitive', true), {tier: 'skimpy', soft: false, defaults: ['clean', 'limits-skimpy'], ids: ['clean', 'limits-skimpy']});
+  assert.deepEqual(fixed('nsfw', true), {tier: 'hard', soft: false, defaults: ['clean'], ids: ['clean']});
+});
+test('the composed negative per rating and mode: nipples only leave in Adult Mature, genitals and sex only in Adult hard; child and loli never (#700)', () => {
+  const negative = (rating, hard, negatives = null) => assembleComposition(composition({characters: [], rating, hard, reward: true, negatives}), limited).negative;
+  for (const rating of ['safe', 'sensitive', 'nsfw']) assert.equal(negative(rating, false), `blur, watermark, ${LIMITS}, ${ALWAYS}, ${SOFT}`);
+  assert.equal(negative('safe', true), `blur, watermark, ${LIMITS}, ${ALWAYS}`);
+  assert.equal(negative('sensitive', true), `blur, watermark, ${SKIMPY}, ${ALWAYS}`);
+  assert.equal(negative('nsfw', true), `blur, watermark, ${ALWAYS}`);
+  // a shot that leaves the limits out gets them back where its tier keeps them, and an Adult hard one may still add them by hand
+  assert.equal(negative('safe', true, ['clean']), `blur, watermark, ${ALWAYS}, ${LIMITS}`);
+  assert.equal(negative('nsfw', true, ['clean', 'limits']), `blur, watermark, ${LIMITS}, ${ALWAYS}`);
+  for (const rating of ['safe', 'sensitive', 'nsfw']) for (const hard of [false, true])
+    for (const word of ['child', 'loli', 'blur']) assert.ok(words(negative(rating, hard)).includes(word), `${rating} ${hard} ${word}`);
+  assert.ok(!words(negative('sensitive', true)).includes('nipples'));
+  assert.ok(!['nipples', 'genitals', 'sex', 'explicit'].some(w => words(negative('nsfw', true)).includes(w)));
+  // a picture that is not a reward starts from the same tier's default selection, and a nonadult safe one still gets limits
+  assert.deepEqual(applyDefaults(composition({characters: [], rating: 'safe'}), limited).negatives, ['clean', 'limits']);
+  assert.deepEqual(applyDefaults(composition({characters: [], rating: 'nsfw', hard: true}), limited).negatives, ['clean']);
+  assert.deepEqual(applyDefaults(composition({characters: [], rating: 'sensitive', hard: true}), limited).negatives, ['clean', 'limits-skimpy']);
+  // a character's rating cap sets the tier: an Adult nsfw shot of a safe-capped character keeps limits
+  assert.equal(lockedExclusions(composition({characters: ['alice'], rating: 'nsfw', hard: true, reward: true}), limited).tier, 'safe');
+});
+test('switching the tier in the composer moves the limit presets and leaves every other pick alone (#700)', () => {
+  const c = composition({characters: [], rating: 'safe', negatives: ['clean', 'limits', 'soft']});
+  const step = change => { const before = lockedExclusions(c, limited).tier; Object.assign(c, change); followTier(c, limited, before); return [...c.negatives]; };
+  assert.deepEqual(step({hard: true, rating: 'nsfw'}), ['clean', 'soft']);
+  assert.deepEqual(step({rating: 'sensitive'}), ['clean', 'soft', 'limits-skimpy']);
+  assert.deepEqual(step({rating: 'safe'}), ['clean', 'soft', 'limits']);
+  assert.deepEqual(step({extra: 'no tier change'}), ['clean', 'soft', 'limits']);
+  assert.deepEqual(step({hard: false, rating: 'nsfw'}), ['clean', 'soft', 'limits']);
 });
 
 test('a Mature or Adult picture gets the soft preset after its other words, even when it is not selected', () => {

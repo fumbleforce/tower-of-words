@@ -13,7 +13,7 @@
 ## What Jørgen asked for
 
 - Prompt fields (clothing, appearance, setting, light) are editable for one shot without changing shared templates. Presets are starting points, and template editing is explicit.
-- The composer's Adult / Nonadult switch controls its exclusion setting. Browsing adult content is a separate library setting.
+- The composer's Adult / Nonadult switch controls its exclusion setting. In Adult mode the content level picks the rating limit (General `limits`, Mature `limits-skimpy`, Adult none, #700), and Exclude names the set under "Fixed for this rating". Browsing adult content is a separate library setting.
 - Pictures below Generate a picture appear in strict reverse time order, including pictures within one batch.
 - Standalone Image gen uses the scene editor's image framework without a scene attachment, with Prompt and Negative side by side and image rows below. Both flows stay at feature parity, including recording, showing and restoring each image's settings.
 - External tool outputs are registered in the same history with their exact request and references. Settings the tool doesn't expose are marked unavailable.

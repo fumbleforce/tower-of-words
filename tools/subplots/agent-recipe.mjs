@@ -2,7 +2,7 @@
 // The browser editor remains free to edit shot words; this policy applies to compose.mjs only.
 // Exclusion words are manual per section (sectionNegatives, a person's clothingNegative/appearanceNegative, and the
 // older free `negative`); they only add to the presets' exclusions, never replace them (#616).
-import {applyDefaults, normalizeComposition, assembleComposition, COMPOSITION_SCHEMA} from './web/image-compose.js';
+import {applyDefaults, normalizeComposition, assembleComposition, lockedExclusions, TIER_NAMES, COMPOSITION_SCHEMA} from './web/image-compose.js';
 import {validateCompositionShape, SCENE_ID_PATTERN, IMAGE_SLOT_PATTERN} from './web/image-composition-schema.js';
 import {blockId} from '../imagegen/web/blocks.js';
 import {personWords} from './web/image-people.js';
@@ -84,9 +84,11 @@ export function prepareAgentGeneration(recipe, presets, name = 'recipe') {
   return body;
 }
 
-// Reward calls use the same composition contract and assembler. The rating exclusions are fixed: Adult mode (hard:
-// true) keeps the configured default selection, and a nonadult reward (soft, CLAUDE.md "Reward tiers by mode") also
-// the negative preset marked `soft`. A recipe may add other negative presets and section words, never remove these.
+// Reward calls use the same composition contract and assembler. The rating exclusions are fixed per tier
+// (lockedExclusions in web/image-compose.js): the default selection, whose limit presets follow the tier (Adult hard
+// keeps none, Adult Mature only the skimpy one, #700), and for a nonadult reward (soft, CLAUDE.md "Reward tiers by
+// mode") also the negative preset marked `soft`. A recipe may add other negative presets and section words, never
+// remove these.
 // The composition is marked reward: true, so the shared assembler (web/image-compose.js) keeps them on, the same as
 // the browser composers do for a reward shot.
 const sameSet = (a, b) => a.length === b.length && b.every(id => a.includes(id));
@@ -94,14 +96,14 @@ export function prepareRewardGeneration(recipe, presets, name = 'recipe') {
   if (!object(recipe)) fail('the composition must be an object.');
   if (recipe.hard != null && typeof recipe.hard !== 'boolean') fail('hard must be true (Adult mode) or false (nonadult, soft).');
   const adult = recipe.hard === true;
-  const defaults = applyDefaults(normalizeComposition({}), presets).negatives;
   const soft = adult ? [] : (presets.negative || []).filter(p => !p.archived && p.data?.soft === true).map(p => p.id);
   if (!adult && !soft.length) fail('nonadult (soft) reward pictures need the soft negative preset; none is configured.');
-  const locked = [...defaults, ...soft.filter(id => !defaults.includes(id))];
+  const fixed = lockedExclusions(normalizeComposition({...recipe, negatives: [], reward: true}), presets);
+  const {defaults, ids: locked} = fixed;
   const given = recipe.negatives ?? recipe.negs;
   if (given != null && !Array.isArray(given)) fail('negatives must be a list of preset ids.');
   const removed = given ? defaults.filter(id => !given.includes(id)) : [];
-  if (removed.length) fail(`reward exclusions keep the configured default selection; add presets, never remove them (missing ${removed.join(', ')}).`);
+  if (removed.length) fail(`reward exclusions keep the configured default selection for ${TIER_NAMES[fixed.tier]}; add presets, never remove them (missing ${removed.join(', ')}).`);
   const negatives = [...new Set([...locked, ...given || []])];
   const rest = {...recipe};
   delete rest.negs;

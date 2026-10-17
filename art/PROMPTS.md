@@ -28,7 +28,7 @@ Reusable prompt words live only in versioned presets in the dashboard. They are 
 
 - Characters: one per cast member, holding the look and its own negative from art/cast-looks.json (Cast, below).
 - Styles: `portrait` for cast portraits, `background` for rooms and scenes next to the approved places, `scenery` for open scenery on One Obsession, and `reward-r2` for reward pictures. A style holds the quality tags, the style words, the ending and its own negative. It also sets the default model, framing and negatives.
-- Negatives: `base` (quality), `heavy` (body) and `limits` are on by default. The others are `drift` (style drift), `text`, `muscle`, `clothed`, `no-props` for base portraits, and `implied`, the soft preset.
+- Negatives: `base`, `heavy` are default; the tier sets the limit (#700): `limits` to Adult General, `limits-skimpy` at Mature, none at nsfw. Also `drift`, `text`, `muscle`, `clothed`, `no-props`, `implied` (soft).
 - Models: `rdbt`, `oneobsession` and the rest, each with its sampler, steps and CFG (RDBT: Euler A, 30 steps, CFG 5). Framings: `portrait` (896×1152), `landscape` (1216×832), `landscape-r` (1152×896) and `square`.
 
 A recipe under island/private/rewards/, or run with `--reward`, is a reward recipe. `"hard": true` marks an Adult-mode reward; leave it out for a nonadult one (tiers: CLAUDE.md, Reward tiers by mode). The rating exclusions are fixed defaults a recipe can't remove or edit: the soft negative preset for a nonadult reward, Adult mode's set for a hard one. Content exclusions (a clothing or background negative, `window` for a windowless room) stay manual and become per-section blocks (#616).

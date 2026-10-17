@@ -26,7 +26,41 @@ export const COMPOSITION_FIELDS = Object.freeze(Object.keys(COMPOSITION_SCHEMA.p
 export function applyDefaults(c, presets) {
   const active = type => (presets?.[type] || []).filter(p => !p.archived);
   for (const type of ['model', 'style', 'framing']) if (!c[type]) c[type] = active(type)[0]?.id || '';
-  if (c.negatives === null) c.negatives = active('negative').filter(p => p.data.default).map(p => p.id);
+  if (c.negatives === null) c.negatives = defaultNegatives(presets, tierOf(c, presets));
+  return c;
+}
+// The rating tier of a shot (CLAUDE.md, Reward tiers by mode): a nonadult shot is 'nonadult' at every content level;
+// an Adult-mode shot (hard) is 'safe' at General, 'skimpy' at Mature and 'hard' at Adult.
+export const TIER_NAMES = {nonadult: 'nonadult', safe: 'Adult mode at General', skimpy: 'Adult mode at Mature, skimpy', hard: 'Adult mode at Adult, hard'};
+export const ratingTier = (c, rating) => !c.hard ? 'nonadult' : rating === 'nsfw' ? 'hard' : rating === 'sensitive' ? 'skimpy' : 'safe';
+const RATINGS = ['safe', 'sensitive', 'nsfw'];
+// who is in the shot: the picked characters and, when asked for, the generic man
+function castOf(c, presets) {
+  const selected = (Array.isArray(c.characters) ? c.characters : []).map(id => (presets.character || []).find(p => p.id === id)).filter(Boolean);
+  const generic = c.man && (presets.character || []).find(p => p.data.generic && !p.archived);
+  return {chars: generic && !selected.includes(generic) ? [...selected, generic] : selected, generic};
+}
+// the content level asked for, capped by any character preset's rating cap
+function ratingOf(c, chars) {
+  let i = Math.max(0, RATINGS.indexOf(c.rating));
+  chars.forEach(p => { const cap = RATINGS.indexOf(p.data.rating_cap); if (cap >= 0) i = Math.min(i, cap); });
+  return RATINGS[i];
+}
+export const tierOf = (c, presets) => ratingTier(c, ratingOf(c, castOf(c, presets || {}).chars));
+// A negative preset marked `limit` is a rating exclusion that follows the tier instead of its default switch (#700):
+// 'full' (nipples, genitals, sex) for nonadult shots and Adult General ones, 'skimpy' (genitals and sex, nipples
+// allowed) for Adult Mature; Adult hard keeps neither. The always-on words (always-negative.json) stay in every tier.
+const TIER_LIMITS = {nonadult: ['full'], safe: ['full'], skimpy: ['skimpy'], hard: []};
+const tierKeeps = (p, tier) => p.data?.limit ? TIER_LIMITS[tier].includes(p.data.limit) : !!p.data?.default;
+const liveNegatives = presets => (presets?.negative || []).filter(p => !p.archived);
+const defaultNegatives = (presets, tier) => liveNegatives(presets).filter(p => tierKeeps(p, tier)).map(p => p.id);
+// When a shot's tier changes (the Shot mode, the content level, a rating cap), its limit presets follow: the ones the
+// new tier drops come off the selection and the ones it keeps go on. Every other pick stays as it was.
+export function followTier(c, presets, before) {
+  const tier = tierOf(c, presets);
+  if (tier === before || !Array.isArray(c.negatives)) return c;
+  const limits = liveNegatives(presets).filter(p => p.data?.limit);
+  c.negatives = [...c.negatives.filter(id => !limits.some(p => p.id === id)), ...limits.filter(p => tierKeeps(p, tier)).map(p => p.id)];
   return c;
 }
 export function normalizeComposition(value = {}) {
@@ -57,14 +91,9 @@ export function portraitUrl(path) {
 // The prompt and the job, and which block wrote each stretch of the prompt (parts).
 function build(c, presets, subplotId) {
   const byId = (type, id) => (presets[type] || []).find(p => p.id === id);
-  const selected = c.characters.map(id => byId('character', id)).filter(Boolean);
-  const generic = c.man && (presets.character || []).find(p => p.data.generic && !p.archived);
-  const chars = generic && !selected.includes(generic) ? [...selected, generic] : selected;
+  const {chars, generic} = castOf(c, presets);
   const style = blockData(c, presets, 'style', c.style);
-  const ratings = ['safe', 'sensitive', 'nsfw'];
-  let ratingIndex = Math.max(0, ratings.indexOf(c.rating));
-  chars.forEach(p => { const cap = ratings.indexOf(p.data.rating_cap); if (cap >= 0) ratingIndex = Math.min(ratingIndex, cap); });
-  const rating = ratings[ratingIndex];
+  const rating = ratingOf(c, chars);
   const countGender = gender => chars.filter(p => (p.data.gender || 'female') === gender).length;
   const countTag = (n, single) => n ? n + single + (n > 1 ? 's' : '') : '';
   const cast = [countTag(countGender('female'), 'girl'), countTag(countGender('male'), 'boy')].filter(Boolean).join(', ');
@@ -91,9 +120,10 @@ function build(c, presets, subplotId) {
   // the locked rating exclusions not already in. Content exclusions are manual; rating exclusions are fixed (#616):
   // the soft-scene exclusion is the negative preset marked soft, never typed words (CLAUDE.md, Reward tiers by mode),
   // on for every nonadult reward and for a nonadult Mature or Adult picture; a reward (nonadult or Adult) also keeps
-  // the configured default presets. Nothing typed removes them.
-  const negatives = c.negatives || (presets.negative || []).filter(p => !p.archived && p.data.default).map(p => p.id);
-  const lockedIds = lockedIdsOf(c, presets, rating);
+  // the tier's default presets (fixedFor). Nothing typed removes them.
+  const fixed = fixedFor(c, presets, rating);
+  const negatives = c.negatives || defaultNegatives(presets, fixed.tier);
+  const lockedIds = fixed.ids;
   const lockedAdded = lockedIds.filter(id => !negatives.includes(id));
   const lockedTexts = lockedIds.map(id => blockData(c, presets, 'negative', id).text);
   const negative = dedupe([...negatives.map(id => blockData(c, presets, 'negative', id).text), c.blockOverrides?.style?.[c.style]?.negative ?? (c.styleNegOff ? '' : style.negative),
@@ -127,7 +157,7 @@ function build(c, presets, subplotId) {
     ipa: canReference && c.referenceOn ? {ref: portrait, strength: +c.referenceStrength, cutout: !!c.referenceCutout} : null,
     repaint: canReference && c.faceFix ? {ref: portrait, denoise: +c.faceStrength, prompt: repaintPrompt} : null,
     autostart: true,
-  }, locked: {soft: softOn(c, rating), ids: lockedIds}};
+  }, locked: fixed};
 }
 // The style's LoRAs ("file:weight, file:weight") first, then the composition's own; a file the composition also picks
 // keeps the composition's weight.
@@ -140,16 +170,17 @@ export function withStyleLoras(text, own) {
   return [...fromStyle, ...mine];
 }
 export const assembleComposition = (c, presets, subplotId) => build(c, presets, subplotId).body;
-// The rating exclusions for this shot: the soft preset where it applies (soft: true) and, for a reward, the configured
-// default presets. ids are the presets kept on whatever is selected; the composer shows them on and locked (images.js).
-const softOn = (c, rating) => !c.hard && (c.reward === true || rating !== 'safe');
-function lockedIdsOf(c, presets, rating) {
-  const live = (presets.negative || []).filter(p => !p.archived);
-  const defaults = c.reward === true ? live.filter(p => p.data?.default).map(p => p.id) : [];
-  const soft = softOn(c, rating) ? live.filter(p => p.data?.soft === true).map(p => p.id) : [];
-  return [...defaults, ...soft.filter(id => !defaults.includes(id))];
+// The rating exclusions for this shot: the soft preset where it applies (soft: true) and, for a reward, the tier's
+// default presets (defaults: the default switch, with the limit presets the tier keeps). ids are the presets kept on
+// whatever is selected; the composer shows them on and locked, and names them (images.js).
+function fixedFor(c, presets, rating) {
+  const tier = ratingTier(c, rating);
+  const soft = tier === 'nonadult' && (c.reward === true || rating !== 'safe');
+  const defaults = c.reward === true ? defaultNegatives(presets, tier) : [];
+  const softIds = soft ? liveNegatives(presets).filter(p => p.data?.soft === true).map(p => p.id) : [];
+  return {tier, soft, defaults, ids: [...defaults, ...softIds.filter(id => !defaults.includes(id))]};
 }
-export const lockedExclusions = (c, presets, subplotId) => build(c, presets, subplotId).locked;
+export const lockedExclusions = (c, presets) => fixedFor(c, presets || {}, ratingOf(c, castOf(c, presets || {}).chars));
 // The built prompt cut into the stretches each block wrote, for display only: [{kind, label, text}] with the plain
 // separators between them as {text}. A prompt copied from history (override) is one plain stretch.
 export function promptParts(c, presets, subplotId) {
