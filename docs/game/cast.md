@@ -133,7 +133,7 @@ He speaks casual Japanese with peers. With his senpai he stays polite (です/�
 - Lives on the island. Falls asleep on the monorail every time he comes back from the mainland, and is late through every gate. Apologises constantly and talks to machines like animals.
 - Speaks Japanese only.
 - Knows: the guard (owes him; the guard gets him through every morning).
-- Look: approved portrait hamada-new-743 (reviews/npc-base-1): thin, tired face, black hair going grey at the temples, navy suit, hands in his pockets. In the 3D world, the Meshy model kuroda-1 (reviews/kuroda-meshy-1, picked 2026-10-05), in the game ([art-and-sound.md](art-and-sound.md#people-in-the-world)). "Hamada is fine" (Jørgen).
+- Look: approved portrait h2-s1 (reviews/hamada-2): an attractive mature man, collar-length soft black waves in a side part, a lined face with stubble and a short goatee, navy suit, white shirt and navy tie, empty hands. In the 3D world, the Meshy model kuroda-1 (reviews/kuroda-meshy-1, picked 2026-10-05), in the game ([art-and-sound.md](art-and-sound.md#people-in-the-world)). "Hamada is fine" (Jørgen).
 
 ### Kuro (`kuro`)
 
@@ -416,7 +416,7 @@ The faces each person can show beside the text box: `game3d/assets/portraits/<id
 | `kenji` | neutral |
 | `emi` | neutral |
 | `guard` | neutral, stern, amused |
-| `kuroda` | neutral, sleepy, panicked |
+| `kuroda` | neutral |
 | `kuro` | neutral, flirtatious, teasing, pleased, polite |
 | `aoi` | neutral |
 | `rei` | neutral, scolding, cold, smug, offguard |

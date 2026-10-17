@@ -8,7 +8,7 @@ export const PORTRAITS = {
   [MC.portrait.set]: MC.portrait.faces, // the protagonist's (data/mc/<id>.json)
   mori: ['neutral'], // his smile and flustered faces were repaints of the old base (mori-new-713); new ones wait for a round (#679)
   kenji: ['neutral'], // his grin and sheepish faces were repaints of the old base (kenji-ink-2001); new ones wait for a round (#680)
-  kuroda: ['neutral', 'sleepy', 'panicked'],
+  kuroda: ['neutral'], // his sleepy and panicked faces were repaints of the old base (hamada-new-743); new ones wait for a round (#662)
   guard: ['neutral', 'stern', 'amused'],
   emi: ['neutral'],
   rei: ['neutral', 'scolding', 'cold', 'smug', 'offguard'],

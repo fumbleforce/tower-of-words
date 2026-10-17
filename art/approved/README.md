@@ -36,7 +36,8 @@ One folder per bible id. Each file here is a copy of one that bible/facts.yaml m
   - mori/mori-mori-new-713-{neutral,smile,flustered}.webp: Mr. Mori until 2026-10-17, now history.
 - mori/mori-m3-s2-neutral.webp: Mr. Mori's portrait since 2026-10-17, m3-s2 from reviews/mori-2, a copy of game3d/assets/portraits/mori-neutral.webp. Bible: characters › mori, images.
 - kenji/kenji-n2-s2-neutral.webp: Kenji's portrait since 2026-10-17, n2-s2 from reviews/kenji-2 (k3-s2 without the lanyard), a copy of game3d/assets/portraits/kenji-neutral.webp. Bible: characters › kenji, images.
-  - hamada/kuroda-hamada-new-743-{neutral,sleepy,panicked}.webp: Mr. Hamada.
+- hamada/kuroda-h2-s1-neutral.webp: Mr. Hamada's portrait since 2026-10-17, h2-s1 from reviews/hamada-2, a copy of game3d/assets/portraits/kuroda-neutral.webp. Bible: characters › hamada, images.
+  - hamada/kuroda-hamada-new-743-{neutral,sleepy,panicked}.webp: Mr. Hamada until 2026-10-17, now history.
 - kuro/kuro-after.webp: Kuro, A-luna-s101 with headroom. Bible: characters › kuro, portrait.
 - goro/goro-after.webp: Goro, goro-a-202 with headroom. Bible: characters › goro, portrait.
 - jun/jun-after.webp: Jun, jun-a-202 with headroom. Bible: characters › jun, portrait.

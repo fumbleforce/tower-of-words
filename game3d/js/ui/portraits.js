@@ -19,7 +19,7 @@ export const FACE = {
   // Kuro: extended down to the waist (reviews/kuro-body-1, c-s11), and shown 15% smaller than the others (size 0.85):
   // Jørgen, "she is 15% too large / zoomed in compared to the others"
   kuro: { W: 630, H: 1048, f: [254, 325, 452, 525], size: 0.85 },
-  kuroda: { W: 597, H: 768, f: [237, 167, 362, 338] },
+  kuroda: { W: 597, H: 768, f: [224, 162, 374, 338] },
   mio: { W: 597, H: 768, f: [192, 214, 361, 383] },
   emi: { W: 597, H: 768, f: [217, 168, 383, 337] },
   mori: { W: 597, H: 768, f: [229, 172, 367, 334] },

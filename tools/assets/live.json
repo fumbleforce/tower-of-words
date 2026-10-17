@@ -155,9 +155,9 @@
   "game3d/assets/portraits/kuro-pleased.webp": {},
   "game3d/assets/portraits/kuro-polite.webp": {},
   "game3d/assets/portraits/kuro-teasing.webp": {},
-  "game3d/assets/portraits/kuroda-neutral.webp": {},
-  "game3d/assets/portraits/kuroda-panicked.webp": {},
-  "game3d/assets/portraits/kuroda-sleepy.webp": {},
+  "game3d/assets/portraits/kuroda-neutral.webp": {
+   "note": "Hamada's base portrait h2-s1 (collar-length waves); cut out with BiRefNet-HR + matte_refine, framed to 597x768 on his face box (picked by Jørgen 2026-10-17, #662)"
+  },
   "game3d/assets/portraits/mio-annoyed.webp": {},
   "game3d/assets/portraits/mio-deadpan.webp": {},
   "game3d/assets/portraits/mio-embarrassed.webp": {},
@@ -1349,6 +1349,34 @@
    "to": "art/production/retired/2026-10-17/",
    "by": "game3d/assets/portraits/kenji-neutral.webp",
    "note": "repaints of the old base kenji-ink-2001; they no longer match the new base n2-s2 (#680). New faces wait for their own round."
+  },
+  {
+   "date": "2026-10-17",
+   "action": "retire",
+   "path": "game3d/assets/portraits/kuroda-neutral.webp",
+   "to": "art/production/retired/2026-10-17/game3d/assets/portraits/kuroda-neutral.webp",
+   "by": "game3d/assets/portraits/kuroda-neutral.webp",
+   "note": "replaced by art/candidates/portraits/hamada-2/h2-r261017-110505-a50-1-s1-cut.webp"
+  },
+  {
+   "date": "2026-10-17",
+   "action": "promote",
+   "path": "game3d/assets/portraits/kuroda-neutral.webp",
+   "from": "art/candidates/portraits/hamada-2/h2-r261017-110505-a50-1-s1-cut.webp",
+   "round": "hamada-2",
+   "review": "hamada-2",
+   "note": "Hamada's base portrait h2-s1 (collar-length waves); cut out with BiRefNet-HR + matte_refine, framed to 597x768 on his face box (picked by Jørgen 2026-10-17, #662)"
+  },
+  {
+   "date": "2026-10-17",
+   "action": "retire",
+   "paths": [
+    "game3d/assets/portraits/kuroda-sleepy.webp",
+    "game3d/assets/portraits/kuroda-panicked.webp"
+   ],
+   "to": "art/production/retired/2026-10-17/",
+   "by": "game3d/assets/portraits/kuroda-neutral.webp",
+   "note": "repaints of the old base hamada-new-743; they no longer match the new base h2-s1 (#662). New faces wait for their own round."
   }
  ]
 }

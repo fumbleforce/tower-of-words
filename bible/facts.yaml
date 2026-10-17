@@ -201,11 +201,13 @@ characters:
     approved_art: hamada
     portrait_status: approved
     decisions:
-      - {q: "docs/game/cast.md ~ Look: approved portrait hamada-new-743", s: approved}
+      - {q: "docs/game/cast.md ~ Look: approved portrait h2-s1", s: approved}
+      - {q: "docs/game/art-and-sound.md ~ Approved (2026-10-17): h2-s1 from reviews/hamada-2", s: approved}
     images:
-      - [art/approved/hamada/kuroda-hamada-new-743-neutral.webp, "Mr. Hamada: neutral (reviews/style-align-1 or npc-base-1 pick hamada-new-743; faces from art/candidates/portraits/cast-faces-1)", approved]
-      - [art/approved/hamada/kuroda-hamada-new-743-sleepy.webp, "Mr. Hamada: sleepy (reviews/style-align-1 or npc-base-1 pick hamada-new-743; faces from art/candidates/portraits/cast-faces-1)", approved]
-      - [art/approved/hamada/kuroda-hamada-new-743-panicked.webp, "Mr. Hamada: panicked (reviews/style-align-1 or npc-base-1 pick hamada-new-743; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/hamada/kuroda-h2-s1-neutral.webp, "Mr. Hamada: neutral, h2-s1 (reviews/hamada-2, picked by Jørgen 2026-10-17), cut out and framed as the game shows it", approved]
+      - [art/approved/hamada/kuroda-hamada-new-743-neutral.webp, "Neutral hamada-new-743 (reviews/npc-base-1); replaced 2026-10-17 by h2-s1", legacy]
+      - [art/approved/hamada/kuroda-hamada-new-743-sleepy.webp, "Sleepy, a repaint of hamada-new-743 (cast-faces-1); out of the game since 2026-10-17, it no longer matches his portrait", legacy]
+      - [art/approved/hamada/kuroda-hamada-new-743-panicked.webp, "Panicked, a repaint of hamada-new-743 (cast-faces-1); out of the game since 2026-10-17, it no longer matches his portrait", legacy]
       - [art/candidates/portraits/hamada-sheet.png, "Portrait candidates (721 in use)", draft]
     facts:
       - ["His speaker id in the story files is kuroda (an older name); the game shows him as Mr. Hamada.", approved, "docs/game/cast.md ~ The id `kuroda` is Mr. Hamada"]

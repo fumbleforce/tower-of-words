@@ -58,11 +58,11 @@
    "negative": "text, letters", "portrait": "art/approved/ishibashi/guard-guard-ink-2001-neutral.webp", "aliases": ["Ishibashi"]
   },
   {
-   "id": "hamada", "checked": "04e632be", "cast_md": "kuroda", "name": "Mr. Hamada", "gender": "male", "age": 54, "who": "Japanese man", "skin": "",
-   "hair": "short black hair going grey at the temples", "eyes": "", "glasses": "", "extra": "a thin, tired face",
-   "build": "thin", "signature": "", "outfit": "a navy suit and tie",
-   "short": "Mr. Hamada, 54, thin tired face, black hair grey at the temples, navy suit",
-   "negative": "", "portrait": "art/approved/hamada/kuroda-hamada-new-743-neutral.webp", "aliases": ["Hamada"]
+   "id": "hamada", "checked": "f5431139", "cast_md": "kuroda", "name": "Mr. Hamada", "gender": "male", "age": 54, "who": "Japanese man", "skin": "",
+   "hair": "collar-length soft black waves with a side part", "eyes": "", "glasses": "", "extra": "a lined face with stubble and a short goatee",
+   "build": "lean", "signature": "", "outfit": "a navy suit, a white shirt and a navy tie",
+   "short": "Mr. Hamada, 54, collar-length black waves, short goatee, navy suit",
+   "negative": "", "portrait": "art/approved/hamada/kuroda-h2-s1-neutral.webp", "aliases": ["Hamada"]
   },
   {
    "id": "kuro", "checked": "121234d3", "cast_md": "kuro", "name": "Kuro", "gender": "female", "age": 38, "who": "woman", "skin": "pale skin",
