@@ -458,6 +458,19 @@ characters:
     rejected:
       - ["jun-b (former jazz drummer) and jun-c (a woman bartender).", rejected, legacy/proto2/decide2/index.html]
 
+  - id: exec-cfo
+    name: CFO-type executive, provisionally exec-cfo
+    group: Executives
+    idea: true
+    approved_art: exec-cfo
+    portrait: art/approved/exec-cfo/exec-cfo-p1-s2.webp
+    pick: cfo-2 p1-s2
+    decisions:
+      - {q: "docs/game/art-and-sound.md ~ a new CFO-type executive with no name or story yet", s: approved}
+    history:
+      - ["Concept round 1 (cfo-1), from hamada-2 h4-s2", reviews/cfo-1/review.json, review]
+      - ["Round 2 (cfo-2), pinstripe suit: p1-s2 picked", reviews/cfo-2/review.json, approved]
+
   - id: cctv
     name: Night CCTV operator (idea)
     group: Security

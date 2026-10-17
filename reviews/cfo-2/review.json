@@ -2,7 +2,7 @@
  "title": "CFO-type executive, round 2: pinstripe suit",
  "date": "2026-10-17",
  "by": "claude-main/art-round",
- "status": "open",
+ "status": "decided",
  "question": "Which of these should the CFO-type executive look like, or what should change?",
  "multi": true,
  "media": [
@@ -92,5 +92,11 @@
    ],
    "note": "p2, suit colour only: dark navy pinstripe three-piece, in place of c4's bottle green (preset cfo-pin-navy v1 = cfo-green v2 with only the colour words changed). Parent cfo-1 c4-s4. Recipe art/candidates/portraits/cfo-2/recipes/p2.json, seed 4, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair and necktie excluded, c4's smirk words. Red rim 0.3%. Framing: headroom 3%, 9% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Dashboard #2648. My verdict, kept: c4-s4's seed: navy pinstripe with a pocket square, closed smirk; nearest c4-s4 in pose and face."
   }
- ]
+ ],
+ "decided": [
+  "p1-s2"
+ ],
+ "decision": "p1-s2",
+ "decided_at": "2026-10-17T12:59:46+0200",
+ "issue": 684
 }

@@ -37,6 +37,7 @@ One folder per bible id. Each file here is a copy of one that bible/facts.yaml m
 - kuro/kuro-after.webp: Kuro, A-luna-s101 with headroom. Bible: characters › kuro, portrait.
 - goro/goro-after.webp: Goro, goro-a-202 with headroom. Bible: characters › goro, portrait.
 - jun/jun-after.webp: Jun, jun-a-202 with headroom. Bible: characters › jun, portrait.
+- exec-cfo/exec-cfo-p1-s2.webp and exec-cfo-p1-s2-cut.webp: the CFO-type executive (provisional id, no name yet), p1-s2 from reviews/cfo-2, the raw render and its BiRefNet-HR cut-out (tools/matte_refine.py). Bible: characters › exec-cfo, portrait (the render).
 - ishibashi/ishibashi-after.webp: Ishibashi, ishibashi-b-201 with headroom. Bible: characters › ishibashi, portrait.
 
 ## Music
