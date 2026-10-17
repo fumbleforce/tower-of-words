@@ -20,12 +20,13 @@ export function alleyWalks(pv, course, R, BW) {
   }
   // the landing through the middle alley's west bed to the side door, in the alley's slabs, a border along each
   // side; it stops a hair short of the wall
-  const [lx0, lx1, lz0, lz1] = R(SIDE_DOOR.landing);
+  const [lx0, lx1, lz0, lz1] = R(SIDE_DOOR.landing),
+    [ax0, , az0] = R(ALLEYS[1]); // (on the alley's own slab grid)
   pv.field([lx0 + 0.03, lx1, lz0, lz1], {
     pattern: 'grid',
     module: [0.6, 0.6],
     tones: GRANITE.pale,
-    origin: [lx0, lz0],
+    origin: [ax0, az0],
   });
   // (the borders start past the door's step, which stands on the slabs)
   for (const z of [lz0, lz1 - BW]) course([lx0 + STEP, lx1, z, z + BW], [0.15, BW], GRANITE.edge);

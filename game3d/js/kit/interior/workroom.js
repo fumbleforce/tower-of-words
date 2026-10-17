@@ -13,7 +13,7 @@
 //   workTable: cutting (a long cutting table with a cutting mat, cloth laid out, a paper pattern, shears and a rule,
 //     rolls of cloth on the shelf under it), sewing (a sewing machine, thread spools and a lamp on a smaller table),
 //     pressing (a padded pressing top, a steam iron on its rest, folded garments)
-//   fabricShelf: bolts (bolts of cloth on their ends and laid flat), spools (rows of thread), boxes (boxes of
+//   fabricShelf: bolts (rolls of cloth, ends out, and folded cloth laid flat), spools (rows of thread), boxes (boxes of
 //     notions); boxes of notions on top of each
 // Each reports its footprint; nothing here glows.
 import * as THREE from 'three';
@@ -278,14 +278,17 @@ export const fabricShelf = piece({
         continue;
       }
       if (i % 2 === 0) {
-        let u = -w / 2 + 0.06;
-        while (u < w / 2 - 0.07) {
-          const t = 0.04 + r() * 0.025;
-          k.box(CLOTH[Math.floor(r() * CLOTH.length)], t, gap - 0.06, d - 0.04, u + t / 2, y, 0.005, {
-            surf: 'fabric',
-          });
-          u += t + 0.008;
-        }
+        // rolls of cloth laid front to back, their round ends out, two layers
+        const rr = Math.min(0.045, (gap - 0.07) / 4);
+        for (let layer = 0; layer < 2; layer++)
+          for (let u = -w / 2 + 0.05 + rr + layer * rr; u < w / 2 - 0.05 - rr; u += rr * 2 + 0.006)
+            k.geo(
+              CLOTH[Math.floor(r() * CLOTH.length)],
+              new THREE.CylinderGeometry(rr, rr, d - 0.04, k.seg(10, 6))
+                .rotateX(Math.PI / 2)
+                .translate(u, y + rr + layer * rr * 1.75, 0.005),
+              { surf: 'fabric' },
+            );
       } else
         for (let j = 0; j < 4; j++)
           k.box(

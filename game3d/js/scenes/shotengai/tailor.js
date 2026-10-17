@@ -6,8 +6,8 @@
 //   from the room on the landing
 //   the room: a workroom lit from a ceiling fitting, seen only through the doorway: a cutting table with cloth and a
 //   pattern on it, a dress form with a jacket being fitted, a rail of finished alterations in clear covers along the
-//   far wall and one of garments along the north wall, shelves of cloth, a sewing table by the door, a pegboard of
-//   tools, a clock, the back window; scenery, not walked into (kit/interior/workroom.js)
+//   far wall and one of garments along the north wall, shelves of cloth, a sewing table by the door, a board of
+//   order slips, a pegboard of tools, a clock, the back window; scenery, not walked into (kit/interior/workroom.js)
 //
 //   const t = tailorSteps(group, signs)   group: island-aligned; signs: the place's signSet (the plate goes in it)
 //   t.set(open)                            shut or open the door, with what comes with it
@@ -89,25 +89,25 @@ function lining(p, signs) {
   // a fitting mirror on the back wall by the door, in a pale frame
   box('#c9c4b8', 23.4, 23.8, 0.12, 1.5, RZ1 - t - 0.025, RZ1 - t, { surf: 'timber' });
   box('#9fb4c0', 23.44, 23.76, 0.16, 1.46, RZ1 - t - 0.03, RZ1 - t - 0.02, { cast: false });
-  // the far wall: a pegboard of tools over the cutting table, a clock over the shelves
+  // the far wall: the order slips pinned on a board over the cutting table, a ticket on each, a clock over the shelves
   const fx = RX0 + t;
-  box(C.board, fx, fx + 0.015, 0.9, 1.45, 24.5, 25.4, { surf: 'timber' });
-  for (const [z, y, h, c] of [
-    [24.62, 1.05, 0.32, '#3a3e44'], // shears
-    [24.75, 1.1, 0.28, '#b9bdc2'], // a set square
-    [24.95, 0.98, 0.4, '#b9bdc2'], // the long rule
-    [25.1, 1.12, 0.22, '#d8b84a'], // a tape measure
-    [25.25, 1.08, 0.26, '#7a4a52'], // a pin roll
-  ])
-    box(c, fx + 0.015, fx + 0.03, y, y + h, z - 0.03, z + 0.03, { cast: false });
-  signs.drawn(clock, 0.2, 0.2, [fx + 0.012, 1.64, 25.95], EAST); // over the shelves, straight through the door
-  // the order slips pinned on a board on the back wall, west of the window, a ticket on each
-  box(C.board, 21.25, 21.95, 1.0, 1.4, RZ1 - t - 0.015, RZ1 - t, { surf: 'timber' });
+  box(C.board, fx, fx + 0.015, 1.0, 1.4, 24.55, 25.35, { surf: 'timber' });
   for (let i = 0; i < 5; i++) {
-    const x = 21.32 + i * 0.13,
+    const z = 24.62 + i * 0.14,
       y = 1.12 + (i % 2) * 0.1;
-    box('#f1efe8', x, x + 0.1, y, y + 0.14, RZ1 - t - 0.02, RZ1 - t - 0.015, { cast: false });
+    box('#f1efe8', fx + 0.015, fx + 0.02, y, y + 0.14, z, z + 0.1, { cast: false });
   }
+  signs.drawn(clock, 0.2, 0.2, [fx + 0.012, 1.64, 25.95], EAST); // over the shelves, straight through the door
+  // the back wall, west of the window, seen past the door's jamb: a pegboard of the tailor's tools
+  box(C.board, 21.2, 22.0, 0.85, 1.45, RZ1 - t - 0.015, RZ1 - t, { surf: 'timber' });
+  for (const [x, y, w, h, c] of [
+    [21.3, 1.0, 0.1, 0.34, '#3a3e44'], // shears
+    [21.48, 1.08, 0.16, 0.24, '#b9bdc2'], // a set square
+    [21.66, 0.94, 0.05, 0.44, '#b9bdc2'], // the long rule
+    [21.78, 1.14, 0.1, 0.12, '#d8b84a'], // a tape measure
+    [21.9, 1.04, 0.07, 0.3, '#7a4a52'], // a pin roll
+  ])
+    box(c, x - w / 2, x + w / 2, y, y + h, RZ1 - t - 0.03, RZ1 - t - 0.015, { cast: false });
 }
 
 function clock(ctx, W, H) {
@@ -140,7 +140,7 @@ function clock(ctx, W, H) {
 // the room's furniture (kit pieces), placed to be seen through the doorway: the far wall straight ahead, the dress
 // form just inside on the left, the table across the middle
 function furnish(p) {
-  workTable(p, { at: [22.3, 25.22], face: EAST, variant: 'cutting' });
+  workTable(p, { at: [22.3, 25.42], face: EAST, variant: 'cutting' });
   dressForm(p, { at: [23.2, 25.95], face: EAST, variant: 'pinned' });
   garmentRail(p, { at: [RX0 + 0.24, 24.75], face: EAST, variant: 'covered' });
   fabricShelf(p, { at: [RX0 + 0.16, 25.95], face: EAST, variant: 'bolts' });
@@ -191,7 +191,7 @@ export function tailorSteps(group, signs) {
   );
   // (one pool on the landing, one on the step's top, which would hide the first where it starts)
   const spill = pools([[WALL + 0.8, D.z, 1]], 1.2, { k: 0.12, color: '#ffe2b8' }),
-    sill = pools([[WALL + 0.17, D.z, 1]], 0.45, { k: 0.2, color: '#ffe2b8', y: 0.085 });
+    sill = lightPool(WALL + 0.17, D.z, 0.45, { k: 0.2, color: '#ffe2b8', sx: 0.36, sz: 1.3, y: 0.085 }); // the step's top only
   spill.name = 'tailor:spill';
   sill.name = 'tailor:spill';
   // the lantern's light washing the wall round it after work
@@ -239,7 +239,7 @@ export function tailorSteps(group, signs) {
         night = n;
         uRoom.value = ROOM[n ? 1 : 0];
         spill.userData.set(n ? 0.42 : 0.12);
-        sill.userData.set(n ? 0.5 : 0.2);
+        sill.material.color.set('#ffe2b8').multiplyScalar(n ? 0.5 : 0.2);
         uSpill.value = SPILL[n ? 1 : 0];
         wash.visible = n;
       },
