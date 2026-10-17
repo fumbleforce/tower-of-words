@@ -40,7 +40,7 @@ export function externalSourceExplanationHtml(t) {
 
 export function localSettingsHtml(t) {
   if (isExternal(t)) return '';
-  const keys = ['positive', 'negative', 'model_file', 'seed', 'steps', 'cfg', 'sampler', 'scheduler', 'w', 'h', 'rating', 'overridden', 'compose', 'presets', 'start', 'ipa', 'repaint', 'loras', 'control', 'huefix'];
+  const keys = ['positive', 'negative', 'model_file', 'seed', 'steps', 'cfg', 'sampler', 'scheduler', 'w', 'h', 'rating', 'overridden', 'free_text', 'compose', 'presets', 'start', 'ipa', 'repaint', 'loras', 'control', 'huefix'];
   const settings = Object.fromEntries(keys.filter(k => Object.hasOwn(t, k)).map(k => [k, t[k]]));
   return `<details class="adv generation-settings"><summary>Recorded generation settings</summary>${json(settings)}</details>`;
 }

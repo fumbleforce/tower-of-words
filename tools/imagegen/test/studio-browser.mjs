@@ -15,7 +15,7 @@ const presets = {
   style: [record('paint', {name: 'Painted', quality: 'illustration', anchors: 'painted anime'})],
   framing: [record('wide', {name: 'Wide', w: 1152, h: 896, prompt: 'wide frame'}), record('tall', {name: 'Portrait', w: 896, h: 1152})],
   camera: [record('cowboy', {name: 'Cowboy shot', prompt: 'cowboy shot', group: 'shot', diagram: 'thighs'}), record('full', {name: 'Full body', prompt: 'full body', group: 'shot', diagram: 'full'})],
-  negative: [record('clean', {name: 'Clean', text: 'watermark, blurry', default: true})],
+  negative: [record('clean', {name: 'Clean', text: 'watermark, blurry', default: true}), record('soft', {name: 'Soft', text: 'soft limit words', default: false, soft: true})],
   location: [record('room', {name: 'Station waiting room', text: 'inside a station waiting room'})],
   light: [record('day', {name: 'Window light', text: 'soft light from a window'})],
   pose: [record('sit', {name: 'Sitting', text: 'sitting on a bench'})], outfit: [], scene: [],
@@ -27,6 +27,10 @@ const jobs = Array.from({length: 6}, (_, i) => ({id: 'picture-' + (i + 1), run_i
 // Picture #6 was itself repainted from an older picture: Load prompt and settings must not carry that start over (#702).
 Object.assign(jobs[5], {start: {image: 'art/older-start.webp', denoise: 0.6, mask: 'art/older-mask.webp'}});
 jobs[5].compose.start = {...jobs[5].start};
+// Picture #5 was made with Use my text exactly, picture #4 is a reward picture (#704).
+Object.assign(jobs[4], {free_text: true, overridden: true, positive: 'Typed free words.', negative: 'typed neg, ' + ALWAYS});
+Object.assign(jobs[4].compose, {freeText: true, override: {positive: 'Typed free words.', negative: 'typed neg'}});
+jobs[3].compose.reward = true;
 delete jobs[0].file;
 Object.assign(jobs[0], {source: 'agent', out_path: 'art/fixture.webp'});
 const picture = '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect width="800" height="600" fill="#4d6872"/><rect x="54" y="38" width="470" height="305" fill="#b5cbd1"/><path d="M54 245h470M290 38v305" stroke="#34515d" stroke-width="15"/><path d="M0 470L800 365V600H0Z" fill="#263d48"/><rect x="230" y="430" width="475" height="40" fill="#9b8268"/><rect x="248" y="470" width="22" height="90" fill="#88745f"/><rect x="659" y="470" width="22" height="80" fill="#88745f"/></svg>';
@@ -239,6 +243,62 @@ await withBrowserJob('codex-image-studio', async browser => {
   await page.locator('.studio-controls-toggle').click();
   const overflow = await page.evaluate(() => [...globalThis.document.querySelectorAll('body *')].filter(e => !e.closest('[hidden], dialog:not([open])') && e.getBoundingClientRect().right > globalThis.innerWidth + 1).map(e => ({tag: e.tagName, cls: e.className, right: e.getBoundingClientRect().right})));
   assert.equal(await page.evaluate(() => globalThis.document.documentElement.scrollWidth <= globalThis.innerWidth), true, JSON.stringify({overflow, widths: await page.evaluate(() => [...globalThis.document.querySelectorAll('body *')].filter(e => e.scrollWidth > e.clientWidth && globalThis.getComputedStyle(e).overflowX === 'visible').map(e => ({tag:e.tagName, cls:e.className, id:e.id, scroll:e.scrollWidth, client:e.clientWidth})))}));
+  // #704: a box edited by hand is coloured with a Reset; plain defaults switch off even on a reward; Use my text exactly
+  // sends the boxes as typed with only the fixed rating exclusions, and a picture made that way loads that way again.
+  await page.setViewportSize({width: 1366, height: 900});
+  const lastJob = () => writes.filter(x => x.path.endsWith('/generate')).at(-1).body;
+  const prompts = page.locator('.studio-prompts'), posBox = page.locator('[data-prompt-box=positive]'), negBox = page.locator('[data-prompt-box=negative]');
+  await page.locator('[data-lib=reuse]').nth(1).click();
+  assert.equal(await page.locator('[data-free-text]').isChecked(), true, 'a free-text picture loads with Use my text exactly on');
+  assert.equal(await positive.inputValue(), 'Typed free words.');
+  assert.equal(await negative.inputValue(), 'typed neg', 'the Negative box holds only the typed words');
+  assert.equal((await draft()).start ?? null, null, 'loading a free-text picture sets no start image (#702)');
+  assert.match(await page.locator('#generate').textContent(), /Generate from my text/);
+  await page.locator('#generate').click();
+  assert.equal(lastJob().positive, 'Typed free words.'); assert.equal(lastJob().negative, 'typed neg'); assert.equal(lastJob().free_text, true);
+  // a control change leaves the typed words alone; a rating that fixes the soft preset adds it, named under Negative
+  await page.locator('[data-shot-mode=nonadult]').click();
+  await page.locator('[data-compose=rating]').selectOption('sensitive');
+  assert.equal(await positive.inputValue(), 'Typed free words.');
+  assert.match(await negBox.locator('.fixed-note').textContent(), /Fixed for this rating \(nonadult\): Soft; always child, loli/);
+  await prompts.screenshot({path: path.join(output, 'free-text-1366.png')});
+  await page.locator('#generate').click();
+  assert.equal(lastJob().negative, 'typed neg, soft limit words');
+  assert.deepEqual(lastJob().presets.negatives, [{id: 'soft', v: 1}], 'free text records only the fixed presets');
+  assert.equal(lastJob().compose.freeText, true); assert.deepEqual(lastJob().compose.override, {positive: 'Typed free words.', negative: 'typed neg'});
+  // Reset in free mode puts back what the controls make; switching free text off builds from the controls again
+  await negBox.locator('[data-prompt-reset]').click();
+  assert.equal(await negative.inputValue(), 'watermark, blurry', 'reset puts back the composed words, less the fixed ones');
+  await page.locator('[data-free-text]').uncheck();
+  assert.equal(await prompts.evaluate(el => el.classList.contains('is-free')), false);
+  await page.locator('[data-compose=rating]').selectOption('safe');
+  assert.equal(await posBox.evaluate(el => el.classList.contains('is-edited')), false, 'with free text off a control builds the prompt again');
+  // body heavy, low quality and the like are only defaults, also on a reward picture: they switch off
+  await page.locator('[data-lib=reuse]').nth(2).click();
+  assert.equal(await page.locator('[data-negative=clean]').first().isDisabled(), false, 'a plain default is never locked');
+  assert.equal(await posBox.locator('.edited-tag').textContent(), 'As recorded with picture #4', 'a loaded prompt that differs from the controls says where it came from');
+  await page.locator('.image-exclude > summary').click();
+  await page.locator('[data-negative=clean]').first().click();
+  assert.equal(await negative.inputValue(), `${ALWAYS}, soft limit words`);
+  await page.locator('[data-negative=clean]').first().click();
+  // a hand edit colours its box only, with a tag and Reset; Reset puts the composed words back
+  await positive.fill('A hand-written prompt.');
+  assert.equal(await posBox.evaluate(el => el.classList.contains('is-edited')), true);
+  assert.equal(await negBox.evaluate(el => el.classList.contains('is-edited')), false);
+  assert.equal(await posBox.locator('.edited-tag').textContent(), 'Edited by hand');
+  await prompts.screenshot({path: path.join(output, 'edited-1366.png')});
+  await page.setViewportSize({width: 390, height: 844});
+  await prompts.scrollIntoViewIfNeeded();
+  await prompts.screenshot({path: path.join(output, 'edited-390.png')});
+  await page.locator('[data-free-text]').check();
+  await prompts.screenshot({path: path.join(output, 'free-text-390.png')});
+  assert.equal(await positive.inputValue(), 'A hand-written prompt.', 'turning free text on keeps what the box shows');
+  await page.locator('[data-free-text]').uncheck();
+  await page.setViewportSize({width: 1366, height: 900});
+  await posBox.locator('[data-prompt-reset]').click();
+  assert.equal(await posBox.evaluate(el => el.classList.contains('is-edited')), false);
+  assert.match(await positive.inputValue(), /^illustration, safe, 1girl/);
+  assert.equal(await posBox.locator('[data-prompt-reset]').isHidden(), true);
   // Private draft can be changed independently and is never restored in public mode.
   await page.setViewportSize({width: 1440, height: 1000});
   privateMode = true; await page.reload(); await positive.waitFor();

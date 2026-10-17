@@ -6,10 +6,10 @@ import {newestPictureFirst} from './image-order.js';
 import {clearPendingPicture, picturePick, picturePath} from './picture-selection.js';
 import {draftPictureUrl, madeByAgent} from '../../imagegen/web/gallery.js';
 import {isExternal, externalReplayNotice, provenanceHtml, originalGeneration, externalSourceExplanationHtml, localOriginalPromptHtml} from '../../imagegen/web/provenance.js';
-import {standaloneComposition, standaloneJob, standalonePromptHtml} from './image-standalone.js';
+import {standaloneComposition, standaloneJob, standalonePromptHtml, paintPromptBoxes} from './image-standalone.js';
 import {personWords} from './image-people.js';
 import {guessComposition} from './image-guess.js';
-import {applyDefaults, normalizeComposition, assembleComposition, lockedExclusions, followTier, tierOf, TIER_NAMES, promptParts, portraitUrl} from './image-compose.js';
+import {applyDefaults, normalizeComposition, assembleComposition, lockedExclusions, followTier, tierOf, TIER_NAMES, promptParts, portraitUrl, promptBoxes, setFreeText, resetPromptBox} from './image-compose.js';
 import {blockId} from '../../imagegen/web/blocks.js';
 import {openBlockEditor} from './block-editor.js';
 import {createLibrary} from './library.js';
@@ -109,10 +109,11 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
   const selectedImage = slot => standalone ? standaloneSelection : getScene()?.metadata.images?.[slot] || (getScene()?.metadata.image?.slot === slot ? getScene().metadata.image : null);
   const currentSource = (picked, slot) => standalone && picked?.out_path && !picked.file ? picked.out_path
     : picturePath({chosen: picked, url: picked && !picked.applied ? picked.url : slot?.available !== false ? slot?.url : ''});
+  // the two prompt boxes of the image workspace, what they show and whether each was edited by hand (#704)
+  const boxes = () => promptBoxes(compose() || normalizeComposition(), presets || {}, getScene()?.id);
   function updatePrompt() {
     const body = assemble();
-    for (const el of document.querySelectorAll('[data-studio-prompt]')) if (el !== document.activeElement) el.value = body[el.dataset.studioPrompt];
-    const reset = $('[data-studio-reset]'); if (reset) reset.hidden = !compose()?.override;
+    if ($('#studioPrompt')) paintPromptBoxes($('#studioPrompt'), compose() || normalizeComposition(), boxes(), fixedLine(lockedExclusions(compose() || normalizeComposition(), presets || {}), true));
     if ($('#assembledNegative')) $('#assembledNegative').textContent = body.negative;
     // each block's words on a tint of their own, named on hover (Jørgen, 2026-10-11: "add colored background to
     // separate the different blocks of the prompts visually"); the prompt sent is the same text
@@ -347,7 +348,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
       <p class="hint">Generated exclusion prompt:</p><p id="assembledNegative" class="hint prompt-box exclude-prompt"></p>
       <div class="two"><label>Anything else to avoid, in any section<textarea data-compose="negative" rows="1">${esc(c.negative || '')}</textarea></label>
       <label>Notes for steps outside the prompt<textarea data-compose="details" rows="1" placeholder="Inpaint, colour fix, LoRA weights. Kept with the picture, not sent to the model.">${esc(c.details || '')}</textarea></label></div>
-      <p class="hint">${c.hard ? (c.reward ? 'Adult reward: the content level sets the limits (General keeps them all, Mature keeps genitals and sex out, Adult drops them); the soft-scene exclusion is off.' : 'Adult: standing soft-scene exclusions are off, and the limit presets follow the content level.') : c.reward ? 'Nonadult reward: the default exclusions and the soft-scene exclusion are always on, at every content level.' : 'Nonadult: standing soft-scene exclusions apply to Mature and Adult content levels.'} Words to avoid in each section, and the other presets, are yours to choose.</p></details>`;
+      <p class="hint">${c.hard ? (c.reward ? 'Adult reward: the content level sets the limits (General keeps them all, Mature keeps genitals and sex out, Adult drops them); the soft-scene exclusion is off.' : 'Adult: standing soft-scene exclusions are off, and the limit presets follow the content level.') : c.reward ? 'Nonadult reward: the limits and the soft-scene exclusion are always on, at every content level.' : 'Nonadult: standing soft-scene exclusions apply to Mature and Adult content levels.'} Words to avoid in each section, and the other presets, are yours to choose.</p></details>`;
     const dctx = directCtx();
     const o = c.original;
     const smallChanges = o?.start ? '<button data-small-changes title="Start from this shot’s picture with the same seed and change it a little (img2img, low strength).">Small changes to this picture</button>' : '';
@@ -355,7 +356,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
       : o ? localOriginalPromptHtml(c, {readOnly: !!standalone, tools: smallChanges}) : '';
     const currentPicture = currentSource(picked, slot);
     const tools = toolsHtml(c, {loras: loraFiles, controls: controlFiles, current: currentPicture});
-    const prompt = `<section class="image-section image-prompt"><div class="section-head"><h3>Current prompt</h3>${c.override ? '<button data-reset-prompt>Build the prompt from these controls</button>' : ''}${c.source ? '<button data-fill-prompt title="Guesses the character, camera, shape, style and model blocks from the old prompt and puts the rest in the free text. Nothing is saved until you generate.">Fill from prompt</button>' : ''}</div>${c.override && !c.original ? '<p class="hint">This picture uses a prompt copied from history.</p>' : ''}<p id="assembled" class="hint prompt-box"></p></section>`;
+    const prompt = `<section class="image-section image-prompt"><div class="section-head"><h3>Current prompt</h3>${c.freeText ? '<button data-free-off title="This shot sends the typed prompt exactly, with only the fixed rating exclusions added. Switch it off to build the prompt from these controls again.">Use my text exactly: on</button>' : c.override ? '<button data-reset-prompt>Build the prompt from these controls</button>' : ''}${c.source ? '<button data-fill-prompt title="Guesses the character, camera, shape, style and model blocks from the old prompt and puts the rest in the free text. Nothing is saved until you generate.">Fill from prompt</button>' : ''}</div>${c.override && !c.original ? '<p class="hint">This picture uses a prompt copied from history.</p>' : ''}<p id="assembled" class="hint prompt-box"></p></section>`;
     // The full-screen composer (index.html) reads left to right as a director works: the cast and the place (people
     // with how each keeps their face, setting, light, mood, style; the excludes, generation settings and Picture tools
     // folded), then the shot (What happens, the stage, shot size, angle, lens, pose, the prompt), then the picture with
@@ -373,7 +374,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     if (standalone) {
       host.innerHTML = peopleHtml(c, cast) + happens + place + look + details + original + exclude + settingsHtml(c) + tools;
       stage.innerHTML = `<details class="studio-direction" data-studio-direction ${c.directionOpen ? 'open' : ''}><summary>Camera and staging<span class="hint">Position people, choose the angle and lens</span></summary>${direct}</details>`;
-      $('#studioPrompt').innerHTML = standalonePromptHtml(c, assemble(), !!presets);
+      $('#studioPrompt').innerHTML = standalonePromptHtml(c, boxes(), !!presets);
     } else if (stage && shot) {
       // Jørgen, 2026-10-11: "put the camera direction and preview on top of the middle lane, moving the orig prompt
       // down together with the other prompt related stuff"; the generated prompt takes what is left
@@ -393,16 +394,23 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
       if (setting) loadPlace(api, setting, blockValue('light', c.light), paintExamples, c, presets);
     }
   }
-  // the rating exclusions this shot can't switch off, by name, under the tier they come from
-  function fixedLine(locked) {
+  // the rating exclusions this shot can't switch off, by name, under the tier they come from; words spells out the
+  // always-on words, for the prompt boxes
+  function fixedLine(locked, words = false) {
     const names = locked.ids.map(id => preset('negative', id)?.data.name || id);
-    return `Fixed for this rating (${TIER_NAMES[locked.tier]}): ${[...names, 'the always-on words'].join('; ')}.`;
+    const always = words ? 'always ' + ALWAYS_NEGATIVE.join(', ') : 'the always-on words';
+    return `Fixed for this rating (${TIER_NAMES[locked.tier]}): ${[...names, always].join('; ')}.`;
   }
   function edit(mutator, repaint = true) {
     const c = compose(); if (!c) return;
     // a change of tier (Shot mode, content level, a rating cap) moves the limit presets with it (image-compose.js)
     const tier = tierOf(c, presets || {});
-    mutator(c); followTier(c, presets || {}, tier); c.edited = true; changed();
+    // with Use my text exactly the typed prompt stays when a control changes (#704); only Reset or switching it off
+    // brings back what the controls make
+    const typed = c.freeText ? c.override : null;
+    mutator(c); followTier(c, presets || {}, tier); c.edited = true;
+    if (c.freeText && typed && !c.override) c.override = typed;
+    changed();
     if (repaint) render(); else updatePrompt();
   }
   function toggleList(c, key, id) { c[key] = c[key].includes(id) ? c[key].filter(x => x !== id) : [...c[key], id]; }
@@ -410,10 +418,12 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     const host = standalone ? $('#images') : $('#composePreview') ? $('#composition').parentElement : $('#composition');
     const direction = host.querySelector('[data-studio-direction]');
     if (direction) direction.ontoggle = () => edit(c => { c.directionOpen = direction.open; }, false);
+    // a box typed in is that box's own text; the other keeps following the controls (#704)
     host.querySelectorAll('[data-studio-prompt]').forEach(el => el.oninput = () => edit(c => {
-      c.override = {positive: $('[data-studio-prompt=positive]', host).value, negative: $('[data-studio-prompt=negative]', host).value};
+      c.override = {...(typeof c.override === 'string' ? {positive: c.override} : c.override || {}), [el.dataset.studioPrompt]: el.value};
     }, false));
-    const reset = host.querySelector('[data-studio-reset]'); if (reset) reset.onclick = () => edit(c => { c.override = null; });
+    host.querySelectorAll('[data-prompt-reset]').forEach(b => b.onclick = () => edit(c => { resetPromptBox(c, presets || {}, b.dataset.promptReset, getScene()?.id); }));
+    host.querySelectorAll('[data-free-text]').forEach(el => el.onchange = () => edit(c => { setFreeText(c, presets || {}, el.checked, getScene()?.id); }));
     host.querySelectorAll('[data-compose]').forEach(el => {
       el.oninput = () => {
         const name = el.dataset.compose;
@@ -515,6 +525,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
       notice('Guessed ' + (found.join(', ') || 'nothing') + ' from the prompt; the rest is in the free text.');
     }));
     bind('[data-reset-prompt]', () => edit(c => { c.override = null; }));
+    bind('[data-free-off]', () => edit(c => { c.freeText = false; c.override = null; }));
     bind('[data-reset-scene]', () => edit(c => { c.scene = preset('scene', c.sceneRefs?.[0])?.data.text || ''; c.override = null; }));
     host.querySelectorAll('[data-original]').forEach(el => el.oninput = () => edit(c => {
       c.override = {positive: $('[data-original="positive"]', host).value, negative: $('[data-original="negative"]', host).value};
@@ -700,6 +711,11 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
       castInitialized: true, sourceChecked: true, edited: false,
       original: originalGeneration(j, {how: how || (j.n ? 'picture #' + j.n : 'the picture'), start: start || picturePathOf(j), blocks}),
       override: {positive: j.positive || '', negative: j.negative || ''}});
+    // a picture made with Use my text exactly loads that way again, with the words as typed (#704); the fixed rating
+    // exclusions in its recorded negative are added again when sent
+    const free = j.free_text || j.compose?.freeText === true;
+    c.freeText = !!free;
+    if (free && j.compose?.override && typeof j.compose.override === 'object') c.override = {positive: j.compose.override.positive ?? j.positive ?? '', negative: j.compose.override.negative ?? j.negative ?? ''};
     if (j.ipa) Object.assign(c, {reference: j.ipa.ref, referenceOn: true, referenceStrength: j.ipa.strength, referenceCutout: j.ipa.cutout});
     if (j.repaint) Object.assign(c, {reference: j.repaint.ref, faceFix: true, faceStrength: j.repaint.denoise});
     if (!keepStart) c.start = null;

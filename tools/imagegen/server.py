@@ -224,7 +224,7 @@ def run_job(j):
 
 def log_entry(j):
     keep = ('id', 'n', 'run_id', 'idx', 'status', 'error', 'file', 'thumb', 'seed', 'model_file', 'arch', 'clip_skip', 'vae', 'w', 'h', 'steps', 'cfg', 'sampler',
-            'scheduler', 'positive', 'negative', 'overridden', 'presets', 'rating', 'scene_text', 'characters', 'compose', 'elapsed',
+            'scheduler', 'positive', 'negative', 'overridden', 'free_text', 'presets', 'rating', 'scene_text', 'characters', 'compose', 'elapsed',
             'ipa', 'repaint', 'raw_file', 'start', 'loras', 'control', 'huefix')
     e = {k: j.get(k) for k in keep}
     e.update({k: j[k] for k in ('owner', 'round') if k in j})  # only an agent's render has them
@@ -398,6 +398,7 @@ def new_run(body, private=False):
         jobs.append(dict(
             id=f'{run_id}-{i + 1}', run_id=run_id, idx=i + 1, tag=tag, status='queued', progress=0, seed=s,
             positive=body['positive'].strip(), negative=ensure_negative(body['negative']), overridden=bool(body.get('overridden')),
+            free_text=bool(body.get('free_text')),  # Use my text exactly (#704): sent as typed, plus the fixed rating exclusions
             model_file=model_file, arch=arch, **sdxl, w=int(body['w']), h=int(body['h']), steps=int(body.get('steps', 30)), cfg=float(body.get('cfg', 5)),
             sampler=body.get('sampler', 'euler_ancestral'), scheduler=body.get('scheduler', 'normal'),
             presets=body.get('presets', {}), rating=body.get('rating'), scene_text=body.get('scene_text', ''),
@@ -414,7 +415,7 @@ def new_run(body, private=False):
 
 def public_job(j):
     out = {k: j.get(k) for k in ('id', 'n', 'run_id', 'idx', 'status', 'progress', 'seed', 'file', 'thumb', 'error', 'w', 'h', 'elapsed',
-                                  'positive', 'negative', 'overridden', 'compose', 'model_file', 'arch', 'clip_skip', 'vae', 'steps', 'cfg', 'sampler', 'scheduler', 'star', 'fav', 'reject', 'reject_reason', 'note',
+                                  'positive', 'negative', 'overridden', 'free_text', 'compose', 'model_file', 'arch', 'clip_skip', 'vae', 'steps', 'cfg', 'sampler', 'scheduler', 'star', 'fav', 'reject', 'reject_reason', 'note',
                                   'presets', 'characters', 'rating', 'deleted', 'ipa', 'repaint', 'raw_file', 'phase', 'start', 'loras', 'control', 'huefix',
                                   'owner', 'round')}
     if j.get('created') is not None:

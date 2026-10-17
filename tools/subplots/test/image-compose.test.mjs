@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeComposition, assembleComposition, applyDefaults, portraitUrl, lockedExclusions, followTier, ratingTier, promptParts, withStyleLoras} from '../web/image-compose.js';
+import {normalizeComposition, assembleComposition, applyDefaults, portraitUrl, lockedExclusions, followTier, ratingTier, promptParts, withStyleLoras, promptBoxes, setFreeText, resetPromptBox} from '../web/image-compose.js';
 import ALWAYS_NEGATIVE from '../../imagegen/web/always-negative.json' with {type: 'json'};
 
 const rec = (id, data) => ({id, v: 3, data});
@@ -167,7 +167,7 @@ test('the soft-scene exclusion comes only from the soft preset: a marker in its 
   const body = assembleComposition(c, marked);
   assert.match(body.negative, /MARKER/);
   assert.doesNotMatch(body.negative, /visible nipples|visible genitals/);
-  assert.equal(body.negative, `blur, ${ALWAYS}, watermark, MARKER`);
+  assert.equal(body.negative, `blur, ${ALWAYS}, MARKER`);
   assert.doesNotMatch(assembleComposition({...c, override: {negative: 'blur'}}, marked).negative, /visible nipples/);
 });
 
@@ -177,19 +177,20 @@ test('a nonadult reward keeps the soft preset on at every content level, selecte
     assert.match(body.negative, new RegExp(SOFT.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), `${rating} ${negatives}`);
     assert.equal(body.presets.negatives.filter(p => p.id === 'soft').length, 1, `${rating} ${negatives}`);
   }
-  assert.deepEqual(lockedExclusions(composition({characters: [], reward: true}), presets), {tier: 'nonadult', soft: true, defaults: ['clean'], ids: ['clean', 'soft']});
+  assert.deepEqual(lockedExclusions(composition({characters: [], reward: true}), presets), {tier: 'nonadult', soft: true, defaults: ['clean'], ids: ['soft']});
 });
 
-test('Adult (hard) rewards get only their configured exclusions, and a safe picture that is not a reward gets none', () => {
+test('Adult (hard) rewards lock no plain default, and a safe picture that is not a reward gets none', () => {
   for (const rating of ['safe', 'sensitive', 'nsfw']) {
     const adult = assembleComposition(composition({characters: [], rating, reward: true, hard: true, negatives: ['clean']}), presets);
     assert.doesNotMatch(adult.negative, /visible/);
     assert.deepEqual(adult.presets.negatives, [{id: 'clean', v: 3}]);
-    assert.deepEqual(lockedExclusions(composition({characters: [], rating, reward: true, hard: true}), presets), {tier: ratingTier({hard: true}, rating), soft: false, defaults: ['clean'], ids: ['clean']});
-    // the configured default selection stays on for an Adult reward even when the shot leaves it out
+    assert.deepEqual(lockedExclusions(composition({characters: [], rating, reward: true, hard: true}), presets), {tier: ratingTier({hard: true}, rating), soft: false, defaults: ['clean'], ids: []});
+    // a plain default (body heavy, low quality) is only a default: a shot that switches it off goes without (#704);
+    // an agent's reward recipe still can't (agent-recipe.mjs)
     const bare = assembleComposition(composition({characters: [], rating, reward: true, hard: true, negatives: []}), presets);
-    assert.deepEqual(bare.presets.negatives, [{id: 'clean', v: 3}]);
-    assert.equal(bare.negative, `blur, ${ALWAYS}, watermark`);
+    assert.deepEqual(bare.presets.negatives, []);
+    assert.equal(bare.negative, `blur, ${ALWAYS}`);
   }
   assert.doesNotMatch(assembleComposition(composition({characters: [], rating: 'safe'}), presets).negative, /visible/);
   assert.deepEqual(lockedExclusions(composition({characters: [], rating: 'safe'}), presets), {tier: 'nonadult', soft: false, defaults: [], ids: []});
@@ -203,10 +204,10 @@ limited.negative.push(rec('limits', {name: 'Limits', default: true, limit: 'full
 const words = negative => negative.split(', ');
 test('the fixed rating exclusions of a reward follow its tier: limits for nonadult and Adult General, the skimpy limits for Adult Mature, none for Adult hard (#700)', () => {
   const fixed = (rating, hard) => lockedExclusions(composition({characters: [], rating, hard, reward: true}), limited);
-  for (const rating of ['safe', 'sensitive', 'nsfw']) assert.deepEqual(fixed(rating, false), {tier: 'nonadult', soft: true, defaults: ['clean', 'limits'], ids: ['clean', 'limits', 'soft']});
-  assert.deepEqual(fixed('safe', true), {tier: 'safe', soft: false, defaults: ['clean', 'limits'], ids: ['clean', 'limits']});
-  assert.deepEqual(fixed('sensitive', true), {tier: 'skimpy', soft: false, defaults: ['clean', 'limits-skimpy'], ids: ['clean', 'limits-skimpy']});
-  assert.deepEqual(fixed('nsfw', true), {tier: 'hard', soft: false, defaults: ['clean'], ids: ['clean']});
+  for (const rating of ['safe', 'sensitive', 'nsfw']) assert.deepEqual(fixed(rating, false), {tier: 'nonadult', soft: true, defaults: ['clean', 'limits'], ids: ['limits', 'soft']});
+  assert.deepEqual(fixed('safe', true), {tier: 'safe', soft: false, defaults: ['clean', 'limits'], ids: ['limits']});
+  assert.deepEqual(fixed('sensitive', true), {tier: 'skimpy', soft: false, defaults: ['clean', 'limits-skimpy'], ids: ['limits-skimpy']});
+  assert.deepEqual(fixed('nsfw', true), {tier: 'hard', soft: false, defaults: ['clean'], ids: []});
 });
 test('the composed negative per rating and mode: nipples only leave in Adult Mature, genitals and sex only in Adult hard; child and loli never (#700)', () => {
   const negative = (rating, hard, negatives = null) => assembleComposition(composition({characters: [], rating, hard, reward: true, negatives}), limited).negative;
@@ -254,7 +255,7 @@ test('without a soft preset (or with it archived) no soft words are added; a cop
   const archived = {...presets, negative: presets.negative.map(p => p.id === 'soft' ? {...p, archived: true} : p)};
   assert.doesNotMatch(assembleComposition(composition({characters: [], rating: 'nsfw'}), archived).negative, /visible/);
   const copied = assembleComposition(composition({characters: [], rating: 'nsfw', reward: true, override: {positive: 'x', negative: 'original'}}), presets);
-  assert.equal(copied.negative, `original, blur, watermark, ${SOFT}`);
+  assert.equal(copied.negative, `original, ${SOFT}`);
 });
 
 test('reusing a recorded zero CFG does not replace it with model defaults', () => {
@@ -278,11 +279,87 @@ test('section exclusions join the negative in section order, after the people an
 test('nothing typed in a section removes the rating exclusions of a reward', () => {
   const c = composition({characters: [], rating: 'nsfw', reward: true, negatives: [], sectionNegatives: {setting: SOFT}, negative: 'blur'});
   const body = assembleComposition(c, presets);
-  assert.equal(body.negative, `blur, ${SOFT}, ${ALWAYS}, watermark`);
-  assert.deepEqual(body.presets.negatives, [{id: 'clean', v: 3}, {id: 'soft', v: 3}]);
+  assert.equal(body.negative, `blur, ${SOFT}, ${ALWAYS}`);
+  assert.deepEqual(body.presets.negatives, [{id: 'soft', v: 3}]);
 });
 test("a style's LoRAs come first and the composition's own pick of the same file keeps its weight", () => {
   assert.deepEqual(withStyleLoras('booster.safetensors:0.5, slider.safetensors:-1.1, eyes.safetensors', [{file: 'slider.safetensors', weight: '-0.5'}]),
     [{file: 'booster.safetensors', weight: 0.5}, {file: 'eyes.safetensors', weight: 1}, {file: 'slider.safetensors', weight: -0.5}]);
   assert.deepEqual(withStyleLoras('', null), []);
+});
+
+// #704: plain defaults switch off, a box typed by hand is its own text, and Use my text exactly sends the boxes as typed
+const heavy = structuredClone(limited);
+heavy.negative.push(rec('heavy', {name: 'Body: heavy', default: true, text: 'fat, obese'}));
+heavy.style[0].data.loras = 'style-lora.safetensors:0.7';
+test('body heavy and low quality are defaults a shot can switch off, also on a reward; only the rating exclusions stay (#704)', () => {
+  for (const [rating, hard] of [['safe', false], ['nsfw', false], ['safe', true], ['sensitive', true], ['nsfw', true]]) {
+    const body = assembleComposition(composition({characters: [], rating, hard, reward: true, negatives: []}), heavy);
+    assert.ok(!words(body.negative).includes('fat') && !words(body.negative).includes('watermark'), `${rating} ${hard}`);
+    assert.deepEqual(body.presets.negatives.map(p => p.id), lockedExclusions(composition({characters: [], rating, hard, reward: true}), heavy).ids);
+  }
+  assert.deepEqual(applyDefaults(composition({characters: [], rating: 'safe'}), heavy).negatives, ['clean', 'limits', 'heavy']);
+});
+test('a box typed by hand is sent as typed with the fixed rating exclusions; the other box follows the controls (#704)', () => {
+  const c = composition({characters: [], rating: 'safe', reward: true, negatives: ['clean', 'heavy'], override: {positive: 'my words'}});
+  const body = assembleComposition(c, heavy);
+  assert.equal(body.positive, 'my words');
+  assert.equal(body.negative, `blur, watermark, fat, obese, ${ALWAYS}, ${LIMITS}, ${SOFT}`);
+  assert.equal(body.free_text, false);
+  const neg = assembleComposition({...c, override: {negative: 'only mine'}}, heavy);
+  assert.match(neg.positive, /^high quality, safe/);
+  assert.equal(neg.negative, `only mine, ${LIMITS}, ${SOFT}`);
+  const boxes = promptBoxes({...c, override: {negative: 'only mine'}}, heavy);
+  assert.deepEqual(boxes.edited, {positive: false, negative: true});
+  assert.equal(boxes.text.negative, 'only mine');
+  // Reset drops the hand edit; with none left the prompt is built from the controls again
+  assert.equal(resetPromptBox({...c, override: {negative: 'only mine'}}, heavy, 'negative').override, null);
+  assert.deepEqual(resetPromptBox({...c, override: {positive: 'a', negative: 'b'}}, heavy, 'negative').override, {positive: 'a'});
+  // typing the composed words back is not an edit
+  assert.deepEqual(promptBoxes({...c, override: {positive: assembleComposition({...c, override: null}, heavy).positive}}, heavy).edited, {positive: false, negative: false});
+});
+test('Use my text exactly sends the typed words with only the fixed rating exclusions, per mode and tier (#704)', () => {
+  const free = (extra = {}) => composition({characters: ['alice'], negatives: ['clean', 'heavy'], loras: [{file: 'mine.safetensors', weight: 0.5}], freeText: true, override: {positive: 'typed prompt', negative: 'typed neg'}, ...extra});
+  for (const [rating, hard, reward, fixed] of [['safe', false, false, ''], ['sensitive', false, false, ''], ['safe', false, true, `${LIMITS}, ${SOFT}`],
+    ['safe', true, true, LIMITS], ['sensitive', true, true, SKIMPY], ['nsfw', true, true, ''], ['nsfw', true, false, '']]) {
+    const body = assembleComposition(free({rating, hard, reward}), heavy);
+    const at = `${rating} ${hard} ${reward}`;
+    assert.equal(body.positive, 'typed prompt', at);
+    assert.equal(body.negative, ['typed neg', fixed].filter(Boolean).join(', '), at);
+    assert.equal(body.free_text, true);
+    assert.equal(body.overridden, true);
+    assert.deepEqual(body.loras, [{file: 'mine.safetensors', weight: 0.5}], 'no style LoRAs');
+    assert.equal(body.presets.style, null);
+    assert.deepEqual(body.presets.negatives.map(p => p.id), lockedExclusions(free({rating, hard, reward}), heavy).ids, at);
+    assert.equal(body.compose.freeText, true);
+    assert.deepEqual(body.compose.override, {positive: 'typed prompt', negative: 'typed neg'});
+  }
+  // a nonadult Mature shot with no character cap keeps the soft preset
+  assert.equal(assembleComposition(free({characters: [], rating: 'sensitive'}), heavy).negative, `typed neg, ${SOFT}`);
+  // an empty typed prompt stays empty: nothing from the controls fills it
+  assert.equal(assembleComposition(free({override: {positive: '', negative: ''}}), heavy).positive, '');
+  // the free Negative box holds only typed words; Reset puts back the composed words less the fixed and always-on ones
+  const c = free({characters: [], rating: 'safe', reward: true});
+  const boxes = promptBoxes(c, heavy);
+  assert.equal(boxes.text.negative, 'typed neg');
+  assert.equal(boxes.fromControls.negative, 'blur, watermark, fat, obese');
+  assert.deepEqual(resetPromptBox(structuredClone(c), heavy, 'negative').override, {positive: 'typed prompt', negative: 'blur, watermark, fat, obese'});
+  assert.ok(resetPromptBox(structuredClone(c), heavy, 'positive').override.positive.startsWith('high quality, safe'));
+});
+test('turning Use my text exactly on keeps what the boxes show, less the fixed words; off keeps them as hand edits (#704)', () => {
+  const c = composition({characters: [], rating: 'safe', reward: true, negatives: ['clean', 'heavy']});
+  const shown = assembleComposition(c, heavy);
+  setFreeText(c, heavy, true);
+  assert.equal(c.freeText, true);
+  assert.deepEqual(c.override, {positive: shown.positive, negative: 'blur, watermark, fat, obese'});
+  assert.equal(assembleComposition(c, heavy).negative, `blur, watermark, fat, obese, ${LIMITS}, ${SOFT}`);
+  c.override.negative = 'blur';
+  setFreeText(c, heavy, false);
+  assert.equal(c.freeText, false);
+  assert.equal(assembleComposition(c, heavy).negative, `blur, ${LIMITS}, ${SOFT}`);
+  // a hand-edited negative that still has the fixed and always-on words loses them on the way in, as they are added anyway
+  const typed = composition({characters: [], rating: 'sensitive', negatives: [], override: {negative: `mine, ${SOFT}, child, loli`}});
+  setFreeText(typed, heavy, true);
+  assert.equal(typed.override.negative, 'mine');
+  assert.ok(normalizeComposition(JSON.parse(JSON.stringify(typed))).freeText);
 });

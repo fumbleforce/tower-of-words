@@ -43,7 +43,7 @@ export function createLibrary(hooks) {
   function copy(text, what) { navigator.clipboard?.writeText(text); hooks.notice(what + ' copied.'); }
   function newSeeds(t) {
     if (isExternal(t)) { hooks.notice(externalReplayNotice, true); return Promise.resolve(); }
-    const body = {positive: t.positive, negative: t.negative || '', overridden: !!t.overridden, model_file: t.model_file, w: t.w, h: t.h,
+    const body = {positive: t.positive, negative: t.negative || '', overridden: !!t.overridden, free_text: !!t.free_text, model_file: t.model_file, w: t.w, h: t.h,
       steps: t.steps, cfg: t.cfg, sampler: t.sampler, scheduler: t.scheduler, count: hooks.count(), seed_mode: 'random',
       compose: t.compose || {}, presets: t.presets || {}, characters: t.characters || [], rating: t.rating, scene_text: t.compose?.scene || '',
       ipa: t.ipa || null, repaint: t.repaint ? {ref: t.repaint.ref, denoise: t.repaint.denoise, prompt: t.repaint.prompt} : null,

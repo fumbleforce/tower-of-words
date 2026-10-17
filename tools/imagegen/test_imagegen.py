@@ -202,7 +202,7 @@ class MadeBy(unittest.TestCase):
         self.assertEqual((job['owner'], job['round'], job['status']), ('claude-main/x', 'island/private/rounds/a', 'queued'))
 
     def logged(self, **extra):
-        body = dict(positive='a reader by a window', negative='', model_file='fixture.safetensors', w=64, h=64, seed_mode='fixed', seed=7, **extra)
+        body = dict(dict(positive='a reader by a window', negative='', model_file='fixture.safetensors', w=64, h=64, seed_mode='fixed', seed=7), **extra)
         _, (job,) = server.new_run(body)
         store.log_append(server.log_entry(job))
         return store.log_read()[-1]
@@ -211,6 +211,16 @@ class MadeBy(unittest.TestCase):
         row = self.logged(owner='claude-main/imagegen-owner-round', round='island/private/rewards/skimpy/aoi-3/round-1')
         self.assertEqual((row['owner'], row['round']), ('claude-main/imagegen-owner-round', 'island/private/rewards/skimpy/aoi-3/round-1'))
         self.assertNotIn('source', row)  # the pipeline stays the dashboard's: tools/verdict.py reads that
+
+    def test_use_my_text_exactly_is_kept_on_the_row_with_the_typed_words(self):
+        # #704: the row says it was sent as typed, and its compose keeps the typed words for Load prompt and settings
+        typed = dict(freeText=True, override=dict(positive='a reader by a window', negative='typed neg'))
+        row = self.logged(free_text=True, overridden=True, compose=typed, negative='typed neg')
+        self.assertTrue(row['free_text'])
+        self.assertEqual(row['compose'], typed)
+        self.assertEqual(row['positive'], 'a reader by a window')
+        self.assertTrue(row['negative'].startswith('typed neg, child, loli'))  # the always-on words still go in
+        self.assertFalse(self.logged()['free_text'])
 
     def test_dashboard_render_row_has_no_owner_or_round(self):
         row = self.logged()

@@ -52,6 +52,23 @@ body.image-studio { display: flex; flex-direction: column; overflow: hidden; }
 .studio-prompt-heading h2 { margin: 0; font-size: 15px; }
 .studio-prompt-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .studio-prompt-pair textarea { min-height: 170px; height: 20vh; font: 12.5px/1.65 ui-monospace, SFMono-Regular, Menlo, monospace; background: #0f1217; }
+/* #704: a box edited by hand is tinted with its tag and Reset; Use my text exactly outlines the whole pair */
+.studio-prompts { --edited: #ffc9a8; --edited-soft: rgba(255, 201, 168, .09); --free: #b9a6ff; --free-soft: rgba(185, 166, 255, .1); }
+.studio-prompt-box { display: grid; gap: 5px; align-content: start; min-width: 0; }
+.studio-prompt-label { display: flex; align-items: center; gap: 8px; min-height: 26px; font-size: 12.5px; color: var(--dim); }
+.studio-prompt-label label { flex: 0 0 auto; }
+.studio-prompt-label button { margin-left: auto; }
+.edited-tag { overflow: hidden; padding: 1px 7px; border-radius: 4px; background: var(--edited-soft); color: var(--edited); font-size: 11.5px; white-space: nowrap; text-overflow: ellipsis; }
+.studio-prompt-box.is-edited textarea { border-color: var(--edited); background: #1a1513; box-shadow: inset 3px 0 0 var(--edited); }
+.studio-prompt-box .fixed-note { margin: 0; font-size: 11.5px; }
+.studio-prompt-box .fixed-note:empty { display: none; }
+.studio-workspace .free-toggle { display: inline-flex; flex: none; flex-direction: row; white-space: nowrap; align-items: center; gap: 7px; min-height: 30px; padding: 0 11px; border: 1px solid var(--line2); border-radius: 999px; font-size: 12.5px; color: var(--dim); cursor: pointer; }
+.free-toggle input { margin: 0; accent-color: var(--free); }
+.studio-prompts.is-free { margin: 6px 0; padding: 14px 14px 16px; border: 1px solid var(--free); border-radius: var(--r); background: var(--free-soft); }
+.studio-prompts.is-free .free-toggle { border-color: var(--free); color: var(--free); background: rgba(185, 166, 255, .14); }
+.studio-prompts.is-free .fixed-note { color: var(--free); }
+.free-note { margin: 0 0 10px; font-size: 12.5px; color: var(--ink); }
+.studio-prompts.is-free #generate { background: var(--free); border-color: var(--free); color: #1b1530; }
 .studio-generate { display: flex; align-items: center; gap: 16px; margin-top: 12px; }
 .studio-generate > span { flex: 1; }
 .studio-workspace #generate { min-width: 190px; padding: 10px 20px; }

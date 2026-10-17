@@ -68,7 +68,7 @@ export function lightboxHtml(t, ctx) {
         ${t.ipa || t.repaint ? `<span>Reference</span><span class="mono" style="word-break:break-all">${esc((t.ipa || t.repaint).ref)}</span>` : ''}`}</div>${localSettingsHtml(t)}`}
       ${t.raw_file ? `<div class="row gap8"><button class="btn sm" data-lbraw="1">${ctx.raw ? 'Show the result' : 'Show before the fix'}</button></div>` : ''}
       ${t.repaint && !t.repaint.skipped ? `<details class="adv"><summary>Repaint prompt</summary><div class="ptext mt4">${esc(t.repaint.prompt)}</div></details>` : ''}
-      <div><div class="lbl">Positive${t.overridden ? ' <span class="badge">edited by hand</span>' : ''}</div><div class="ptext">${esc(t.positive || '')}</div></div>
+      <div><div class="lbl">Positive${t.free_text ? ' <span class="badge">your text exactly</span>' : t.overridden ? ' <span class="badge">edited by hand</span>' : ''}</div><div class="ptext">${esc(t.positive || '')}</div></div>
       ${external ? '' : `<div><div class="lbl">Negative</div><div class="ptext">${esc(t.negative || '')}</div></div>`}
     </div></div>`;
 }

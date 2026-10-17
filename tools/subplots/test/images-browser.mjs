@@ -342,16 +342,16 @@ try {
     assert.equal(await softChip.getAttribute('aria-pressed'), 'true');
     assert.notEqual(await softChip.getAttribute('disabled'), null);
     assert.match(await page.locator('#assembledNegative').textContent(), /visible genitals/);
-    assert.match(await page.locator('.image-exclude p.hint', {hasText: 'Nonadult reward'}).textContent(), /always on/);
+    assert.match(await page.locator('.image-exclude p.hint', {hasText: /^Nonadult reward/}).textContent(), /always on/);
     // the permanent words are listed first in Exclude, for every picture (#667)
     assert.equal((await page.locator('.image-exclude .always-on').textContent()).replace(/\u00a0/g, ' '), `Always on for every picture: ${ALWAYS}.`);
-    // the reward's configured defaults are locked too, and section words never take them out (#616)
-    assert.notEqual(await page.locator('[data-negative=clean]').getAttribute('disabled'), null);
+    // the reward's plain defaults are not locked: he can switch them off (#704); section words never take the soft preset out (#616)
+    assert.equal(await page.locator('[data-negative=clean]').getAttribute('disabled'), null);
     await page.locator('[data-section-negative=details]').fill('visible genitals');
     assert.equal((await page.locator('#assembledNegative').textContent()).split(', ').filter(t => t === 'visible genitals').length, 1);
     await page.locator('[data-section-negative=details]').fill('');
     await page.locator('[data-shot-mode=adult]').click();
-    assert.notEqual(await page.locator('[data-negative=clean]').getAttribute('disabled'), null);
+    assert.equal(await page.locator('[data-negative=clean]').getAttribute('disabled'), null);
     assert.equal(await softChip.getAttribute('disabled'), null);
     assert.equal(await softChip.getAttribute('aria-pressed'), 'false');
     assert.doesNotMatch(await page.locator('#assembledNegative').textContent(), /visible genitals/);

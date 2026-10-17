@@ -27,10 +27,34 @@ function attachment(recipe) {
     fail('an attached picture needs the full scene editor subplotId and its exact imageSlot; standalone recipes omit both.');
 }
 
+// A limit preset (`limit` in its data, #700) follows the shot's tier. An Adult-mode (hard) recipe never lists one by
+// hand, since a hand-listed preset is honoured and would put back a limit the tier drops; the tier's own limits are
+// added to whatever it lists.
+const isLimit = (presets, id) => !!(presets.negative || []).find(p => p.id === id)?.data?.limit;
+const listedNegatives = recipe => recipe.negatives ?? recipe.negs;
+function refuseHandLimits(recipe, presets) {
+  const given = listedNegatives(recipe);
+  if (recipe?.hard !== true || !Array.isArray(given)) return;
+  const listed = given.filter(id => isLimit(presets, id));
+  if (listed.length) fail(`Adult-mode recipes never list a limit preset (${listed.join(', ')}); the tier sets the limit.`);
+}
+const tierLimits = (recipe, presets) => lockedExclusions(normalizeComposition({...recipe, negatives: [], reward: true}), presets).defaults.filter(id => isLimit(presets, id));
+
 export function prepareAgentGeneration(recipe, presets, name = 'recipe') {
   if (!object(recipe)) fail('the composition must be an object.');
+  refuseHandLimits(recipe, presets);
+  const given = listedNegatives(recipe);
+  if (recipe.hard === true && Array.isArray(given)) {
+    const rest = {...recipe};
+    delete rest.negs;
+    return assemble({...rest, negatives: [...new Set([...given, ...tierLimits(recipe, presets)])]}, presets, name);
+  }
+  return assemble(recipe, presets, name);
+}
+function assemble(recipe, presets, name) {
   try { validateCompositionShape(recipe, COMPOSITION_SCHEMA); } catch (error) { fail(error.message); }
   if (recipe.override != null) fail('whole prompt overrides bypass selected presets.');
+  if (recipe.freeText) fail('Use my text exactly is for Jørgen\'s own renders; recipes build the prompt from presets.');
   if (recipe.styleNegOff) fail('style exclusions cannot be disabled.');
   if (Object.values(recipe.charNegOff || {}).some(Boolean)) fail('character exclusions cannot be disabled.');
   if (Object.values(recipe.people || {}).some(person => keys(person).some(key => !PERSON_NEGATIVES.includes(key))))
@@ -84,11 +108,12 @@ export function prepareAgentGeneration(recipe, presets, name = 'recipe') {
   return body;
 }
 
-// Reward calls use the same composition contract and assembler. The rating exclusions are fixed per tier
-// (lockedExclusions in web/image-compose.js): the default selection, whose limit presets follow the tier (Adult hard
-// keeps none, Adult Mature only the skimpy one, #700), and for a nonadult reward (soft, CLAUDE.md "Reward tiers by
-// mode") also the negative preset marked `soft`. A recipe may add other negative presets and section words, never
-// remove these.
+// Reward calls use the same composition contract and assembler. A reward recipe keeps the tier's default selection
+// (lockedExclusions(...).defaults in web/image-compose.js: body heavy, low quality and the limit presets the tier keeps;
+// Adult hard keeps no limit, Adult Mature only the skimpy one, #700), and for a nonadult reward (soft, CLAUDE.md
+// "Reward tiers by mode") also the negative preset marked `soft`. A recipe may add other negative presets and section
+// words, never remove these. In the composer only the rating exclusions (ids) are locked; body heavy and low quality
+// are defaults Jørgen can switch off for his own renders (#704).
 // The composition is marked reward: true, so the shared assembler (web/image-compose.js) keeps them on, the same as
 // the browser composers do for a reward shot.
 const sameSet = (a, b) => a.length === b.length && b.every(id => a.includes(id));
@@ -98,16 +123,18 @@ export function prepareRewardGeneration(recipe, presets, name = 'recipe') {
   const adult = recipe.hard === true;
   const soft = adult ? [] : (presets.negative || []).filter(p => !p.archived && p.data?.soft === true).map(p => p.id);
   if (!adult && !soft.length) fail('nonadult (soft) reward pictures need the soft negative preset; none is configured.');
+  refuseHandLimits(recipe, presets);
   const fixed = lockedExclusions(normalizeComposition({...recipe, negatives: [], reward: true}), presets);
   const {defaults, ids: locked} = fixed;
   const given = recipe.negatives ?? recipe.negs;
   if (given != null && !Array.isArray(given)) fail('negatives must be a list of preset ids.');
-  const removed = given ? defaults.filter(id => !given.includes(id)) : [];
+  // an Adult-mode recipe can't list its tier's limit, so it never misses it either; it is added below
+  const removed = given ? defaults.filter(id => !given.includes(id) && !(adult && isLimit(presets, id))) : [];
   if (removed.length) fail(`reward exclusions keep the configured default selection for ${TIER_NAMES[fixed.tier]}; add presets, never remove them (missing ${removed.join(', ')}).`);
-  const negatives = [...new Set([...locked, ...given || []])];
+  const negatives = [...new Set([...defaults, ...locked, ...given || []])];
   const rest = {...recipe};
   delete rest.negs;
-  const body = prepareAgentGeneration({...rest, negatives, reward: true}, presets, name);
+  const body = assemble({...rest, negatives, reward: true}, presets, name);
   if (!sameSet(body.compose.negatives, negatives) || locked.some(id => !body.presets.negatives.some(p => p.id === id)))
     fail('reward exclusions changed while assembling.');
   return body;

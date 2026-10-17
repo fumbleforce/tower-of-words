@@ -228,7 +228,7 @@ test('an Adult hard reward recipe has no limits fixed, Adult Mature only the ski
   const ids = recipe => prepareRewardGeneration({...base, characters: [], outfit: {}, ...recipe}, blocks).presets.negatives.map(p => p.id);
   assert.deepEqual(ids({hard: true, rating: 'nsfw'}), ['clean']);
   assert.deepEqual(ids({hard: true, rating: 'nsfw', negatives: ['clean']}), ['clean']);
-  assert.deepEqual(ids({hard: true, rating: 'nsfw', negatives: ['clean', 'limits']}), ['clean', 'limits']);
+  assert.deepEqual(ids({hard: true, rating: 'nsfw', negatives: ['clean']}), ['clean']);
   assert.deepEqual(ids({hard: true, rating: 'sensitive'}), ['clean', 'limits-skimpy']);
   assert.deepEqual(ids({hard: true, rating: 'safe'}), ['clean', 'limits']);
   assert.deepEqual(ids({rating: 'nsfw'}), ['clean', 'limits', 'soft']);
@@ -236,9 +236,34 @@ test('an Adult hard reward recipe has no limits fixed, Adult Mature only the ski
   assert.doesNotMatch(hard.negative, /nipples|genitals/);
   assert.match(hard.negative, /preset exclusions/);
   assert.match(hard.negative, new RegExp(`${ALWAYS}$`));
-  assert.throws(() => ids({hard: true, rating: 'nsfw', negatives: ['limits']}), /Adult mode at Adult, hard; add presets, never remove them \(missing clean\)/);
-  assert.throws(() => ids({hard: true, rating: 'sensitive', negatives: ['clean']}), /missing limits-skimpy/);
-  assert.throws(() => ids({hard: true, rating: 'safe', negatives: ['clean']}), /missing limits/);
+  assert.throws(() => ids({hard: true, rating: 'nsfw', negatives: []}), /Adult mode at Adult, hard; add presets, never remove them \(missing clean\)/);
+  // the tier adds its own limit to what an Adult-mode recipe lists
+  assert.deepEqual(ids({hard: true, rating: 'sensitive', negatives: ['clean']}), ['clean', 'limits-skimpy']);
+  assert.deepEqual(ids({hard: true, rating: 'safe', negatives: ['clean']}), ['clean', 'limits']);
+});
+
+test('an Adult-mode recipe that lists a limit preset by hand is refused: the tier sets the limit (#700)', () => {
+  const blocks = structuredClone(presets);
+  blocks.negative.push(rec('soft', {text: 'soft exclusions', default: false, soft: true}, 2),
+    rec('limits', {text: 'nipples, genitals, sex', default: true, limit: 'full'}), rec('limits-skimpy', {text: 'genitals, sex', default: false, limit: 'skimpy'}));
+  const recipe = extra => ({...base, characters: [], outfit: {}, hard: true, ...extra});
+  for (const rating of ['safe', 'sensitive', 'nsfw']) for (const negatives of [['clean', 'limits'], ['limits-skimpy', 'clean']]) for (const negs of [false, true]) {
+    const r = recipe(negs ? {rating, negs: negatives} : {rating, negatives});
+    for (const prepare of [prepareRewardGeneration, prepareAgentGeneration])
+      assert.throws(() => prepare(r, blocks), /Adult-mode recipes never list a limit preset \(limits(-skimpy)?\); the tier sets the limit/, `${prepare.name} ${rating} ${negatives}`);
+  }
+  // a nonadult recipe may still list limits, and an Adult-mode one that lists other presets gets its tier's limit
+  assert.deepEqual(prepareRewardGeneration({...base, characters: [], outfit: {}, negatives: ['clean', 'limits']}, blocks).presets.negatives.map(p => p.id), ['clean', 'limits', 'soft']);
+  assert.deepEqual(prepareAgentGeneration(recipe({rating: 'sensitive', negatives: ['clean']}), blocks).presets.negatives.map(p => p.id), ['clean', 'limits-skimpy']);
+  assert.deepEqual(prepareAgentGeneration(recipe({rating: 'nsfw', negatives: ['clean']}), blocks).presets.negatives.map(p => p.id), ['clean']);
+  assert.deepEqual(prepareAgentGeneration(recipe({rating: 'nsfw'}), blocks).presets.negatives.map(p => p.id), ['clean']);
+});
+test('agent recipes can\'t use Use my text exactly, and a reward recipe keeps body heavy and low quality by default (#704)', () => {
+  assert.throws(() => prepareAgentGeneration({...base, freeText: true}, presets), /Use my text exactly is for/);
+  const blocks = structuredClone(presets);
+  blocks.negative.push(rec('heavy', {text: 'fat, obese', default: true}), rec('soft', {text: 'soft exclusions', default: false, soft: true}, 2));
+  assert.deepEqual(prepareRewardGeneration({...base, hard: true, rating: 'nsfw'}, blocks).presets.negatives.map(p => p.id), ['clean', 'heavy']);
+  assert.throws(() => prepareRewardGeneration({...base, hard: true, rating: 'nsfw', negatives: ['clean']}, blocks), /missing heavy/);
 });
 
 test('reward path detection follows the established directory, without matching unrelated names', () => {
