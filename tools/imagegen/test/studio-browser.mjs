@@ -24,6 +24,9 @@ const jobs = Array.from({length: 6}, (_, i) => ({id: 'picture-' + (i + 1), run_i
   positive: 'An adult woman reading beside a station window.', negative: 'watermark', model_file: 'fixture.safetensors', w: 1152, h: 896, steps: 30, cfg: 5, rating: 'safe', characters: ['alice'],
   compose: {subplotId: 'scene:old', imageSlot: 'old-shot', characters: ['alice'], scene: 'Reading beside a window', environment: 'room', light: 'day', people: {alice: {appearance: 'short black hair', clothing: 'linen jacket'}}, stage: {contact: ''}},
 }));
+// Picture #6 was itself repainted from an older picture: Load prompt and settings must not carry that start over (#702).
+Object.assign(jobs[5], {start: {image: 'art/older-start.webp', denoise: 0.6, mask: 'art/older-mask.webp'}});
+jobs[5].compose.start = {...jobs[5].start};
 delete jobs[0].file;
 Object.assign(jobs[0], {source: 'agent', out_path: 'art/fixture.webp'});
 const picture = '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect width="800" height="600" fill="#4d6872"/><rect x="54" y="38" width="470" height="305" fill="#b5cbd1"/><path d="M54 245h470M290 38v305" stroke="#34515d" stroke-width="15"/><path d="M0 470L800 365V600H0Z" fill="#263d48"/><rect x="230" y="430" width="475" height="40" fill="#9b8268"/><rect x="248" y="470" width="22" height="90" fill="#88745f"/><rect x="659" y="470" width="22" height="80" fill="#88745f"/></svg>';
@@ -135,6 +138,11 @@ await withBrowserJob('codex-image-studio', async browser => {
   assert.equal(await positive.inputValue(), 'A quiet station platform.');
   await page.locator('[data-lib=reuse]').first().click();
   assert.equal(await page.locator('[data-shot-person-field=clothing]').inputValue(), 'linen jacket');
+  // Load prompt and settings loads only those: the start image stays empty (#702).
+  const draft = () => page.evaluate(() => JSON.parse(globalThis.localStorage.getItem('imagegen.studio.compose.v1.public')));
+  assert.equal((await draft()).start ?? null, null, 'Load prompt and settings leaves the start image empty');
+  assert.equal((await draft()).seed, 128);
+  assert.equal(await page.locator('img[alt="Start picture"]').count(), 0);
   await page.locator('[data-studio-direction] > summary').click();
   await page.locator('[data-stage]').waitFor();
   await page.locator('[data-shot-person-field=clothing]').fill('green coat');
@@ -143,6 +151,17 @@ await withBrowserJob('codex-image-studio', async browser => {
   const reused = writes.filter(x => x.path.endsWith('/generate')).at(-1).body;
   assert.ok(!('subplotId' in reused.compose)); assert.ok(!('imageSlot' in reused.compose));
   assert.equal(reused.seed, 128);
+  assert.equal(reused.start ?? null, null, 'no start image after Load prompt and settings');
+  // Use as start image is its own button: it sets only the start picture and keeps the prompt and settings.
+  assert.equal(await page.locator('[data-lib=startimage]').first().textContent(), 'Use as start image');
+  await page.locator('[data-lib=startimage]').first().click();
+  await page.locator('img[alt="Start picture"]').waitFor();
+  await page.locator('#generate').click();
+  const started = writes.filter(x => x.path.endsWith('/generate')).at(-1).body;
+  assert.deepEqual(started.start, {image: 'island/private/imagegen/outputs/fixture-5.png', denoise: 0.35});
+  assert.equal(started.seed, 128); assert.match(started.positive, /green coat/);
+  await page.locator('[data-tool-clear=start]').click();
+  assert.equal((await draft()).start ?? null, null);
   if (!await page.locator('[data-settings-open]').evaluate(el => el.open)) await page.locator('[data-settings-open] > summary').click();
   await page.locator('[data-compose=steps]').fill('42');
   await page.locator('[data-compose=cfg]').fill('7');
@@ -187,6 +206,7 @@ await withBrowserJob('codex-image-studio', async browser => {
   await page.locator('#libLightbox .pic img').evaluate(img => img.decode());
   await page.screenshot({path: path.join(output, 'preview-params.png')});
   assert.equal(await page.locator('#libLightbox [data-a=sameseed]').textContent(), 'Load prompt and settings');
+  assert.equal(await page.locator('#libLightbox [data-a=startimage]').textContent(), 'Use as start image');
   await page.keyboard.press('Escape');
   await page.locator('[data-lib=use]').last().click();
   assert.match(await page.locator('#studioSelection img').getAttribute('src'), /agentsrc\/picture-1$/);

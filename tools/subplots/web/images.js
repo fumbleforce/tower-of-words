@@ -601,7 +601,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     catch (e) { if (sceneRunsFor === id) sceneRuns = []; notice(e.message, true); }
     renderJobs();
   }
-  const library = createLibrary({api, notice, actions: standalone?.actions, reuseLabel: standalone ? 'Load prompt and settings' : null, useLabel: standalone ? 'Select image' : 'Use for this shot', selected: () => standaloneSelection?.id, select: standalone ? j => useImage(j) : null, changed: () => renderJobs(), use: j => useImage(j), reuse: j => reuseImage(j),
+  const library = createLibrary({api, notice, actions: standalone?.actions, reuseLabel: standalone ? 'Load prompt and settings' : null, useLabel: standalone ? 'Select image' : 'Use for this shot', selected: () => standaloneSelection?.id, select: standalone ? j => useImage(j) : null, changed: () => renderJobs(), use: j => useImage(j), reuse: j => reuseImage(j), startImage: j => startFromImage(j),
     generate: body => api('image/api/generate', standalone ? standaloneJob(body) : body).then(refresh), styleName: id => preset('style', id)?.data.name, count: () => +compose()?.count || 1,
     rated: (t, fields) => { edits.set(t.id, {...edits.get(t.id), ...fields}); if (standalone && fields.deleted && standaloneSelection?.id === t.id) { standaloneSelection = null; standalone.onSelect?.(null); } }, restored: t => { edits.set(t.id, {...edits.get(t.id), deleted: false}); sceneRunsFor = ''; loadHistory(); }});
   function renderJobs() {
@@ -668,7 +668,9 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
   const hasBlocks = compose => !!compose && ['characters', 'chars', 'cameras', 'cams'].some(k => compose[k]?.length) || !!compose?.scene || !!compose?.man || !!Object.keys(compose?.people || {}).length || !!Object.keys(compose?.blockOverrides || {}).length || ['environment', 'light', 'style', 'framing', 'pose'].some(k => !!compose?.[k]);
   // One way to open a picture's settings, for "Reuse settings" and for a shot's own picture: its blocks when it has
   // them, else Fill from prompt; the original prompt and settings ride along either way.
-  function fillFromJob(j, {how = '', start = '', slot = activeSlot, quiet = false} = {}) {
+  // keepStart: a shot's own picture reopens with the start picture it was made from; Load prompt and settings never
+  // sets one (#702), and Use as start image (startFromImage) is its own button.
+  function fillFromJob(j, {how = '', start = '', slot = activeSlot, quiet = false, keepStart = true} = {}) {
     const s = getScene(); if (!s && !standalone) return;
     if (isExternal(j)) {
       const c = normalizeComposition({imageSlot: slot, castInitialized: true, sourceChecked: true,
@@ -689,11 +691,12 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     Object.assign(c, {imageSlot: slot, seedMode: 'fixed', seed: j.seed, count: 1, width: j.w, height: j.h,
       steps: j.steps ?? c.steps, cfg: j.cfg ?? c.cfg, sampler: j.sampler || undefined, scheduler: j.scheduler || undefined,
       castInitialized: true, sourceChecked: true, edited: false,
-      original: originalGeneration(j, {how: how || (j.n ? 'picture #' + j.n : 'the picture'), start: start || draftPictureUrl(j.url) || (j.file ? 'island/private/imagegen/outputs/' + j.file : j.out_path || ''), blocks}),
+      original: originalGeneration(j, {how: how || (j.n ? 'picture #' + j.n : 'the picture'), start: start || picturePathOf(j), blocks}),
       override: {positive: j.positive || '', negative: j.negative || ''}});
     if (j.ipa) Object.assign(c, {reference: j.ipa.ref, referenceOn: true, referenceStrength: j.ipa.strength, referenceCutout: j.ipa.cutout});
     if (j.repaint) Object.assign(c, {reference: j.repaint.ref, faceFix: true, faceStrength: j.repaint.denoise});
-    if (j.start?.image) c.start = {image: j.start.image, denoise: j.start.denoise, ...(j.start.mask ? {mask: j.start.mask} : {})};
+    if (!keepStart) c.start = null;
+    else if (j.start?.image) c.start = {image: j.start.image, denoise: j.start.denoise, ...(j.start.mask ? {mask: j.start.mask} : {})};
     if (j.loras?.length) c.loras = j.loras.map(l => ({...l}));
     if (j.control) c.control = {...j.control};
     if (j.huefix?.length) c.huefix = j.huefix.map(h => ({...h}));
@@ -706,8 +709,16 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
   }
   function reuseImage(j) {
     if (isExternal(j)) { notice(externalReplayNotice, true); return; }
-    fillFromJob(j);
-    notice('Picture settings loaded. Change the direction or generate another version.');
+    fillFromJob(j, {keepStart: false});
+    notice('Prompt and settings loaded. Change the direction or generate another version.');
+  }
+  function picturePathOf(j) { return draftPictureUrl(j.url) || (j.file ? 'island/private/imagegen/outputs/' + j.file : j.out_path || ''); }
+  // Use as start image: the next picture starts from this one (img2img); the prompt and settings stay as they are.
+  function startFromImage(j) {
+    const image = picturePathOf(j);
+    if (!image || !compose()) { notice('Open a shot first, then pick its start picture.', true); return; }
+    edit(c => { c.start = {image, denoise: 0.35}; c.toolsOpen = true; });
+    notice(`Starts from ${j.n ? 'picture #' + j.n : 'this picture'}. 0.2 to 0.4 is a small change; set it under Picture tools.`);
   }
   // The shot's own settings as a queue job, for New version and Repaint a part on the beat (versions.js): the
   // composition the composer keeps for the shot, filled from the picture's source the first time. null when nothing

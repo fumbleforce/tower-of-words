@@ -33,7 +33,7 @@ try {
       if (u.pathname.endsWith('/presets')) body = presets;
       if (u.pathname.endsWith('/jobs')) body = jobsNow;
       if (u.pathname.endsWith('/history')) historyQueries.push(Object.fromEntries(u.searchParams));
-      if (u.pathname.endsWith('/history')) body = u.searchParams.has('before') ? [] : u.searchParams.get('preset') ? examples.filter(r => r.example === u.searchParams.get('preset')).map(r => r.run) : history.length ? history : [{run_id:'old',at:'2026-10-01',characters:['alice'],positive:'A previous picture.',model_file:'fixture.safetensors',renders:[{id:'old-picture',file:'fixture.png',thumb:'fixture.webp',seed:8}]}];
+      if (u.pathname.endsWith('/history')) body = u.searchParams.has('before') ? [] : u.searchParams.get('preset') ? examples.filter(r => r.example === u.searchParams.get('preset')).map(r => r.run) : history.length ? history : [{run_id:'old',at:'2026-10-01',characters:['alice'],positive:'A previous picture.',model_file:'fixture.safetensors',renders:[{id:'old-picture',file:'fixture.png',thumb:'fixture.webp',seed:8,start:{image:'art/older-start.webp',denoise:0.6}}]}];
       if (u.pathname.endsWith('/portraits')) body = [{path:'art/fixture.webp',group:'Portrait'}];
       if (u.pathname.endsWith('/generate')) { generated.push(route.request().postDataJSON()); body = {run_id:'new'}; }
       if (u.pathname.endsWith('/mode')) body = {private: false};
@@ -93,6 +93,9 @@ try {
     assert.deepEqual(await page.evaluate(()=>Object.keys(fixture.metadata.images)),['one','two']);
     await page.locator('[data-lib=reuse]').click();
     assert.equal(await page.locator('[data-compose=seed]').inputValue(),'8');
+    // reusing a picture's prompt and settings never sets a start image, even one the picture was made from (#702)
+    assert.equal(await page.evaluate(()=>fixture.metadata.compositions.two.start ?? null),null);
+    assert.equal(await page.locator('img[alt="Start picture"]').count(),0);
     // no blocks on that picture: Fill from prompt puts its words in the free text, and the original prompt stays as is
     assert.equal(await page.locator('[data-compose=scene]').inputValue(),'A previous picture.');
     assert.equal(await page.locator('[data-original=positive]').inputValue(),'A previous picture.');

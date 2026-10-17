@@ -9,7 +9,8 @@ import {isExternal, externalReplayNotice, providerLabel} from '../../imagegen/we
 
 const BASE = '/api/subplots/image';
 
-// hooks: {api(action, body), notice(text, error), changed() (repaint the library), use(j), reuse(j), generate(body),
+// hooks: {api(action, body), notice(text, error), changed() (repaint the library), use(j), reuse(j) (prompt and settings,
+//         never a start picture, #702), startImage(j), generate(body),
 //         styleName(id), count() (pictures per run)}
 export function createLibrary(hooks) {
   let pins = [], lb = {list: [], i: 0, raw: false}, trash = null;
@@ -71,6 +72,7 @@ export function createLibrary(hooks) {
     if (action === 'scene' || action === 'character') { closeLightbox(); hooks.select?.(t); return Promise.resolve(hooks.actions?.[action]?.(t)).catch(e => hooks.notice(e.message, true)); }
     if (action === 'use') { if (hooks.select) closeLightbox(); return hooks.use(t); }
     if (action === 'reuse') return hooks.reuse(t);
+    if (action === 'startimage') { closeLightbox(); return hooks.startImage?.(t); }
     void btn;
   }
 
@@ -94,7 +96,7 @@ export function createLibrary(hooks) {
       isExternal(j) ? `<span title="${esc(j.provenance.engine)}">${esc(providerLabel(j))}</span>` : isAgent(j) ? `<span title="${esc(j.owner || '')}">agent</span>` : '', marks ? `<span class="lib-marks">${marks}</span>` : ''].filter(Boolean).join(' · ');
     return `<article class="render-card${hooks.selected?.() === j.id ? ' selected' : ''}${j.reject ? ' rejected' : ''}">${done ? `<button type="button" class="lib-shot" data-lib="open" data-i="${i}" title="Open (arrows, s, f, x, Delete)"><img loading="lazy" src="${esc(thumbUrl(j, BASE) || fullUrl(j, BASE))}" alt="Picture ${j.n ? '#' + j.n : i + 1}"></button>` : ''}
       <small>${meta}</small>${j.error ? `<small>${esc(j.error)}</small>` : ''}${j.reject && j.reject_reason ? `<small>Rejected: ${esc(j.reject_reason)}</small>` : ''}${j.note ? `<small>Note: ${esc(j.note)}</small>` : ''}
-      ${tools}${canUse ? `<button data-lib="use" data-i="${i}">${esc(hooks.useLabel || 'Use for this shot')}</button>` : ''}${canUse && hooks.actions ? `<div class="lib-create">${createButtons(kind => `data-lib="${kind}" data-i="${i}"`)}</div>` : ''}${isExternal(j) ? `<button data-lib="open" data-i="${i}">View original settings</button>` : j.positive ? `<button data-lib="reuse" data-i="${i}">${esc(hooks.reuseLabel || 'Use in Compose')}</button>` : ''}</article>`;
+      ${tools}${canUse ? `<button data-lib="use" data-i="${i}">${esc(hooks.useLabel || 'Use for this shot')}</button>` : ''}${canUse && hooks.actions ? `<div class="lib-create">${createButtons(kind => `data-lib="${kind}" data-i="${i}"`)}</div>` : ''}${isExternal(j) ? `<button data-lib="open" data-i="${i}">View original settings</button>` : j.positive ? `<button data-lib="reuse" data-i="${i}">${esc(hooks.reuseLabel || 'Use in Compose')}</button>` : ''}${canUse && hooks.startImage ? `<button data-lib="startimage" data-i="${i}" title="The next picture starts from this one. The prompt and settings stay as they are.">Use as start image</button>` : ''}</article>`;
   }
   function bind(host, list) {
     lb.all = list;
@@ -119,6 +121,7 @@ export function createLibrary(hooks) {
     const t = lb.list[lb.i], el = overlay('libLightbox'); if (!t) return closeLightbox();
     el.innerHTML = lightboxHtml(t, {i: lb.i, n: lb.list.length, pinned: pins.some(p => p.id === t.id), raw: lb.raw, styleName: hooks.styleName(t.compose?.style),
       base: BASE, useLabel: hooks.reuseLabel || 'Use in Compose (same seed)', agentNewSeeds: true});
+    if ((t.file || draftPictureUrl(t.url) || isAgent(t)) && hooks.startImage) el.querySelector('[data-a=sameseed]')?.insertAdjacentHTML('afterend', '<button class="btn sm" data-a="startimage" title="The next picture starts from this one. The prompt and settings stay as they are.">Use as start image</button>');
     if ((t.file || isAgent(t)) && hooks.actions) el.querySelector('.side').insertAdjacentHTML('beforeend', `<div class="lib-create"><button type="button" data-a="use">${esc(hooks.useLabel || 'Select image')}</button>${createButtons(kind => `data-a="${kind}"`)}</div>`);
     const save = () => {
       const note = el.querySelector('#lbNote').value.trim(), reason = el.querySelector('#lbReason').value.trim();
