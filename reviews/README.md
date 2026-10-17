@@ -40,6 +40,9 @@ To post a review item, write `reviews/<id>/review.json` as in Adding an item bel
 | `updated` | when a new round is added | ISO time of the new round (e.g. `2026-10-05T23:30:00+0200`). An open item counts as waiting for him only while it has no answer sent after `updated` (or no answer at all), so a new round in an answered item must set it. |
 | `question` | yes | One plain question. No exposition. |
 | `options` | yes | What he can pick. `id` is what feedback refers to; `label` is shown on the card (use the pick id he'd name, e.g. `kenji-a-751`). Each has an `image`, extra `images`, or an `audio`, and an optional `note`. |
+| `settings` | no | Per option: a list of `[name, value]` pairs shown as a small table under the label (model, length, aspect). |
+| `prompts` | no | Per option: a list of `{label, text}`, each shown as a copy-ready block with a Copy button, for text he pastes into another tool. |
+| `downloads` | no | Per option: a list of `{label, href, name}`, each a download link to a repo file (`name` is the saved file name). Local only: the public site drops them. |
 | `multi` | no | `true` (default) lets him pick several; `false` means one. |
 | `media` | no | Context shown above the options (sheets, references, before/after). Each is `{image}` or `{audio}` with a `caption`. |
 | `links` | no | Pages to open (a game URL with flags, a review page). |

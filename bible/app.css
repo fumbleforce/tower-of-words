@@ -377,6 +377,14 @@ a.rrow:hover { text-decoration: none; border-color: var(--accent); }
 .racts .rstar { font-size: 20px; min-width: 48px; }
 .racts .rstar[aria-pressed="true"] { color: #c98a00; border-color: currentColor; }
 .racts .rrej[aria-pressed="true"] { background: var(--no-bg); color: var(--no); border-color: var(--no); }
+.rset { display: grid; grid-template-columns: max-content 1fr; gap: 2px 12px; margin: 0; font-size: 13.5px; }
+.rset dt { color: var(--ink-2); }
+.rset dd { margin: 0; }
+.rprompt { border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.rprompt-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 6px 4px 10px; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink-2); }
+.rprompt-head .rcopy { min-height: 36px; border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 0 12px; cursor: pointer; font-size: 13px; color: var(--ink); }
+.rprompt pre { margin: 0; padding: 8px 10px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13px; max-height: 260px; overflow: auto; }
+.rdl a { font-weight: 600; }
 .rcom { width: 100%; font: inherit; font-size: 14px; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: var(--bg); color: var(--ink); resize: vertical; }
 .rcom:focus { outline: 2px solid var(--accent); outline-offset: 0; }
 .rsend { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin: 14px 0 0; position: sticky; bottom: 0; background: var(--bg); padding: 10px 0; border-top: 1px solid var(--line); }

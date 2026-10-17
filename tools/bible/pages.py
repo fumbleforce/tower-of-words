@@ -475,6 +475,8 @@ def cmd_stage(site):
             item = json.load(open(path, encoding='utf-8'))
         except ValueError:
             continue
+        for o in item.get('options') or []:
+            o.pop('downloads', None)  # download links point at local files the site never carries
         if (folder, rid) in pub:
             local = keep_pictures(item, staged)
         else:

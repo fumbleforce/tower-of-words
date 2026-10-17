@@ -795,6 +795,9 @@ function pageReviewItem(id) {
       ${(o.images || []).length ? `<div class="rmore">${o.images.map((p) => img(p, `${o.label}: ${p.split('/').pop()}`)).join('')}</div>` : ''}
       ${o.audio ? `<audio controls preload="none" src="${esc(url(o.audio))}"></audio>` : ''}
       <div class="rlab"><b>${esc(o.label)}</b>${won ? ` ${chip('decided')}` : ''}${o.note ? `<span class="muted small">${inline(o.note)}</span>` : ''}</div>
+      ${(o.settings || []).length ? `<dl class="rset">${o.settings.map(([k, val]) => `<dt>${esc(k)}</dt><dd>${inline(String(val))}</dd>`).join('')}</dl>` : ''}
+      ${(o.prompts || []).map((p) => `<div class="rprompt"><div class="rprompt-head"><span>${esc(p.label || 'Prompt')}</span><button type="button" class="rcopy">Copy</button></div><pre>${esc(p.text)}</pre></div>`).join('')}
+      ${(o.downloads || []).length ? `<p class="rdl small">${o.downloads.map((x) => `<a href="${esc(url(x.href))}" download="${esc(x.name || x.href.split('/').pop())}">${esc(x.label)}</a>`).join(' · ')}</p>` : ''}
       <div class="racts">
         <button type="button" class="rpick" data-act="pick" aria-pressed="${on}">${on ? (multi ? '✓ Picked' : '● Picked') : (multi ? 'Pick' : 'Pick this')}</button>
         <button type="button" class="rstar" data-act="star" aria-pressed="${!!v.star}" aria-label="Star">${v.star ? '★' : '☆'}</button>
@@ -833,6 +836,12 @@ function reviewDraftFromDom(page) {
 }
 function reviewClick(e) {
   const page = e.target.closest('.page.review'); if (!page) return false;
+  const cp = e.target.closest('button.rcopy');
+  if (cp) {
+    const text = cp.closest('.rprompt').querySelector('pre').textContent;
+    navigator.clipboard.writeText(text).then(() => { cp.textContent = 'Copied'; setTimeout(() => { cp.textContent = 'Copy'; }, 1500); }, () => { cp.textContent = 'Select and copy'; });
+    return true;
+  }
   const btn = e.target.closest('button[data-act]');
   const id = page.dataset.review, r = L.reviews.find((x) => x.id === id);
   if (btn) {
