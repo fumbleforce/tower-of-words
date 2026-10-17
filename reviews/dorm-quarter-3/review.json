@@ -1,0 +1,57 @@
+{
+ "title": "Dorm quarter, round 3: layout b with sea-facing east blocks and a classier north residence",
+ "date": "2026-10-17",
+ "by": "claude-agent:dorm-quarter-3",
+ "status": "open",
+ "issue": 661,
+ "question": "Which north residence goes with the sea-facing east blocks, b1 townhouses or b2 garden villas, or what should change?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/candidates/dorm-quarter-2/b-park.webp",
+   "caption": "Layout b as you picked it in round 2, for comparison. Top-down plans drawn to scale from the island layout in the code (1 unit = 1.5 m), north up. Nothing is built. Your note on b: \"good but the eastern blocks would want to face out to sea for the view, not intwards. North residence area should be more classy / expensive not a housing block\". Round 3 makes only those two changes and keeps the rest of b. Both options turn the east blocks the same way. They differ only in the north residence, because \"more classy / expensive\" can mean houses of their own or a small residence with a concierge. The pictures are plain blockout boxes."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-3/mood-b-coast.webp",
+   "caption": "b as it was, eye level from the coast walk east of S-E, looking west: S-E's end wall faces the sea and its balconies face south."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-3/mood-east-coast.webp",
+   "caption": "b1 and b2 from the same spot: S-E now runs north-south with its balconies and windows toward you and the sea, across a lawn with a few pines."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-3/mood-east-balcony.webp",
+   "caption": "b1 and b2, from a third-floor balcony of S-E looking east: the sea lawn, the coast walk and its pines, and the water about 28 m out. N-E's balconies are about 20 m from the water."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-3/mood-b-north-air.webp",
+   "caption": "b as it was: the north residence, a four-storey block of about 1,560 m² of floor, seen from above the sports walk looking north-west. N-W is on the left."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-3/mood-b-courts.webp",
+   "caption": "b as it was, eye level on the courts walk looking west: the north residence on the left, the tennis courts' fence on the right."
+  }
+ ],
+ "options": [
+  {
+   "id": "b1",
+   "label": "b1. Sea fronts and townhouses",
+   "image": "art/candidates/dorm-quarter-3/b1-sea-townhouses.webp",
+   "images": [
+    "art/candidates/dorm-quarter-3/mood-b1-north-air.webp",
+    "art/candidates/dorm-quarter-3/mood-b1-courts.webp"
+   ],
+   "note": "East: N-E and S-E turn a quarter to run north-south, about 10 × 19 m and five storeys each (about 7% less floor than in b). Balconies and main windows face east to the sea, and the open corridors and doors face west onto a short path off the sports walk, with planting along that side. Between the balconies and the water there is lawn and a few pines and no path. N-E moves north into the open ground below the courts walk, and the strip where it stood in b becomes lawn with three trees. The north blocks' door path now runs straight on to the coast walk. b's leg south from the courts walk's corner ended at the edge of the quarter, so it goes, and the courts walk runs on east to a bench by the sea. North: five three-storey townhouses for senior staff in one terrace on the courts walk, each about 7 × 10 m with its own front door, gate and front garden, and a private south garden about 7 × 10 m behind a hedge. The middle house sits on the tennis gate's axis, and a belt of trees screens the gardens from N-W's door path. About 1,070 m² of floor for five households, against b's 1,560 m² block. The concierge desk that the island facts give the residence today has no place here, so its polite Japanese would need a new home. Pictures: the plan, the same air view as b, and eye level from the courts walk. Phone cost not measured. The buildings are fewer and smaller than in b, so it should not be heavier."
+  },
+  {
+   "id": "b2",
+   "label": "b2. Sea fronts and a garden residence",
+   "image": "art/candidates/dorm-quarter-3/b2-sea-garden-residence.webp",
+   "images": [
+    "art/candidates/dorm-quarter-3/mood-b2-north-air.webp",
+    "art/candidates/dorm-quarter-3/mood-b2-courts.webp"
+   ],
+   "note": "East: the same as b1. North: two three-storey garden villas for senior staff, about 14 × 11 m each, joined by a glazed one-storey lobby with the concierge desk, its door on the tennis gate's axis. Six large flats, one per floor and about 140 m² each. The top floor is set back behind a roof terrace and the lower floors have deep terraces facing south. The ground-floor flats have hedged gardens, and beyond them lies a shared garden with a pond, then the belt of trees along N-W's door path. A paved forecourt on the courts walk with two pines and low name walls. About 860 m² of floor. Pictures: the plan, the same air view as b, and eye level from the courts walk. Phone cost not measured, but the buildings are fewer and smaller than in b."
+  }
+ ]
+}
