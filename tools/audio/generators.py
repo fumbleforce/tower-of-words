@@ -140,6 +140,27 @@ def cc0_make(job):
     return {'model': 'CC0 pack', **cc0_describe(job)}
 
 
+# ---------- a track Jørgen made himself and supplied (Suno) ----------
+SUPPLIED = ('file', 'made_by', 'made_with', 'title', 'licence')
+
+
+def supplied_describe(job):
+    s = job['v']['settings']
+    return {k: s.get(k) for k in SUPPLIED}
+
+
+def supplied_make(job):
+    s = job['v']['settings']
+    missing = [k for k in SUPPLIED if not s.get(k)]
+    if missing:
+        raise RuntimeError('a supplied track needs settings ' + ', '.join(missing))
+    src = os.path.join(ROOT, s['file'])
+    if not s['file'].startswith('art/approved/') or not os.path.exists(src):
+        raise RuntimeError(f'{s["file"]}: the original goes in art/approved/ (synced with tools/assets/sync.py)')
+    flac_from(src, job['raw'] + '.flac')
+    return {'model': f'supplied by {s["made_by"]} ({s["made_with"]})', **supplied_describe(job), 'licence': s['licence']}
+
+
 GENERATORS = {
     'lyria-2': {'kinds': ('music',), 'gpu': False, 'cost': 0.12, 'deterministic': False, 'make': lyria_make,
                 'describe': lambda job: {'model': 'google/lyria-2', 'input': lyria_input(job), 'length': 'about 33 s, fixed'},
@@ -152,5 +173,7 @@ GENERATORS = {
               'licence': 'our own code (offline synthesis), no third-party licence'},
     'cc0': {'kinds': ('sfx',), 'gpu': False, 'cost': 0, 'deterministic': True, 'make': cc0_make, 'describe': cc0_describe,
             'licence': 'CC0 1.0, pack and url in the preset'},
+    'supplied': {'kinds': ('music',), 'gpu': False, 'cost': 0, 'deterministic': True, 'make': supplied_make, 'describe': supplied_describe,
+                 'licence': 'a track Jørgen made and supplied; its tool and terms in the preset (settings.licence)'},
 }
 KINDS_OF = {k: g['kinds'] for k, g in GENERATORS.items()}

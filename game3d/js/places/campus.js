@@ -62,7 +62,7 @@ export async function campusPlace(game) {
     charScale: K,
     start: w.start,
     startFacing: Math.PI,
-    music: 'calm',
+    music: 'day',
     things,
     spots: { campus_in: w.start, print_door: PRINT_STEP },
     seats: { campus_bench: w.seats.campus_bench },

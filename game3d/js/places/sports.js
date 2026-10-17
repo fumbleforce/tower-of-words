@@ -145,7 +145,7 @@ export async function sportsPlace(game) {
     charScale: K,
     start: w.in,
     startFacing: Math.PI,
-    music: 'calm',
+    music: 'day',
     grade: MORNING_GRADE,
     things,
     spots: {

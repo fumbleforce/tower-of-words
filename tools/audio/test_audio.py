@@ -22,11 +22,11 @@ class Presets(unittest.TestCase):
         self.assertTrue(presets.problems('music', preset('music', generator='musicgen'), 'x.json', KINDS_OF))
 
     def test_generator_not_allowed_for_the_kind_is_refused(self):
-        for kind, gen in (('music', 'sa3'), ('song', 'lyria-2'), ('ambience', 'yue2'), ('sfx', 'lyria-2'), ('ambience', 'cc0')):
+        for kind, gen in (('music', 'sa3'), ('song', 'lyria-2'), ('ambience', 'yue2'), ('sfx', 'lyria-2'), ('ambience', 'cc0'), ('sfx', 'supplied')):
             self.assertTrue(presets.problems(kind, preset(kind, generator=gen), 'x.json', KINDS_OF), (kind, gen))
 
     def test_allowed_pairs_pass(self):
-        for kind, gen in (('music', 'lyria-2'), ('music', 'yue2'), ('song', 'yue2'), ('ambience', 'sa3'), ('ambience', 'synth'),
+        for kind, gen in (('music', 'lyria-2'), ('music', 'yue2'), ('music', 'supplied'), ('song', 'yue2'), ('ambience', 'sa3'), ('ambience', 'synth'),
                           ('sfx', 'synth'), ('sfx', 'sa3'), ('sfx', 'cc0')):
             extra = {'context': 'Hamada, karaoke box, evening'} if kind == 'song' else {}
             self.assertEqual(presets.problems(kind, preset(kind, generator=gen, **extra), 'x.json', KINDS_OF), [], (kind, gen))

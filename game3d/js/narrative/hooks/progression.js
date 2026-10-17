@@ -55,7 +55,7 @@ export function installProgressionHooks(game, { travel }) {
     if (sim.day === 5) game.place?.day5Period?.();
     if (sim.day > 5) game.place?.ongoingPeriod?.();
   };
-  // a story can change the loop: { hook: 'music', name: 'calm' | 'office' | 'lively' | 'night' | null }
+  // a story can change the loop: { hook: 'music', name: 'calm' | 'day' | 'office' | 'lively' | 'night' | null }
   H.music = ({ name }) => playMusic(name || null);
   H.meet = ({ who }) => {
     meet(game, who);

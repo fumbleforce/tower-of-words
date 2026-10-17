@@ -87,7 +87,7 @@ export async function harbourPlace(game) {
     charScale: K,
     start: w.in,
     startFacing: -Math.PI / 2,
-    music: 'calm',
+    music: 'day',
     grade: MORNING_GRADE,
     things,
     spots: {

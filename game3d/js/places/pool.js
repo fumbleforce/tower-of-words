@@ -89,7 +89,7 @@ export async function poolPlace(game) {
     changing: changing,
     creatureExclusions: [changing.bounds],
     startFacing: 0,
-    music: 'calm',
+    music: 'day',
     grade: MORNING_GRADE,
     things,
     spots: {

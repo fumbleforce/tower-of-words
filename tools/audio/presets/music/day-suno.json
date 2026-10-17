@@ -1,0 +1,30 @@
+{
+ "id": "day-suno",
+ "kind": "music",
+ "versions": [
+  {
+   "v": 1,
+   "date": "2026-10-17",
+   "by": "claude-main/suno-day-music",
+   "note": "Jørgen made this track with Suno and supplied it on 2026-10-17 (\"this is a fine day outdoor song\"); his pick is the approval. The loop is the whole song from its top to bar 44 (about 107 s), where the outro starts on the opening's chords, so the outro is replaced by the start.",
+   "generator": "supplied",
+   "prompt": "穏やかな日常 (\"Calm everyday life\"): a calm, sunny instrumental at about 99 BPM, 120 s as supplied, with a short fade at the end.",
+   "settings": {
+    "file": "art/approved/music/odayakana-nichijou.mp3",
+    "title": "穏やかな日常",
+    "made_by": "Jørgen",
+    "made_with": "Suno",
+    "licence": "Suno, made on Jørgen's own account. Under Suno's terms a song made on a paid plan (Pro or Premier) belongs to him and may be used commercially; on the free plan Suno keeps it and only non-commercial use is allowed. Which plan he used is not recorded (notes/licenses.md, Music and sound)."
+   },
+   "length": null,
+   "loop": {
+    "min": 60,
+    "max": 110,
+    "fade": 1.5
+   },
+   "loudness": -20,
+   "use": "Outdoors during the day: the forecourt, the plaza, the dorm courtyard, the campus grounds and the other outdoor places.",
+   "live": "day"
+  }
+ ]
+}

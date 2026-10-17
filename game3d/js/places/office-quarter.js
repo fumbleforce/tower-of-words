@@ -121,7 +121,7 @@ export async function officeQuarterPlace(game) {
     charScale: K,
     start: w.in,
     startFacing: -Math.PI / 2,
-    music: 'calm',
+    music: 'day',
     grade: MORNING_GRADE,
     things,
     spots: { street_entry: w.in, office_smokers: w.nooks.office_smokers, office_vending: w.nooks.office_vending },

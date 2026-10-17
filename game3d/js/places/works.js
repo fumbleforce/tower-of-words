@@ -110,7 +110,7 @@ export async function worksPlace(game) {
     charScale: K,
     start: w.in,
     startFacing: NORTH,
-    music: 'calm',
+    music: 'day',
     preserveGoalFrom: ['research_lab'],
     grade: MORNING_GRADE,
     things,

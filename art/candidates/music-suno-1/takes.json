@@ -1,0 +1,98 @@
+{
+ "round": "music-suno-1",
+ "about": "Every take of this round (tools/audio/make.py). Raw files: ~/ai/audio-raw/<round>/.",
+ "takes": {
+  "day-suno-1": {
+   "take": "day-suno-1",
+   "round": "music-suno-1",
+   "kind": "music",
+   "preset": "day-suno",
+   "version": 1,
+   "n": 1,
+   "generator": "supplied",
+   "seed": null,
+   "owner": "claude-main/suno-day-music",
+   "made": "2026-10-17T12:45:02+02:00",
+   "raw": "/home/jorgen/ai/audio-raw/music-suno-1/day-suno-1",
+   "licence": "Suno, made on Jørgen's own account. Under Suno's terms a song made on a paid plan (Pro or Premier) belongs to him and may be used commercially; on the free plan Suno keeps it and only non-commercial use is allowed. Which plan he used is not recorded (notes/licenses.md, Music and sound).",
+   "use": "Outdoors during the day: the forecourt, the plaza, the dorm courtyard, the campus grounds and the other outdoor places.",
+   "model": "supplied by Jørgen (Suno)",
+   "file": "art/approved/music/odayakana-nichijou.mp3",
+   "made_by": "Jørgen",
+   "made_with": "Suno",
+   "title": "穏やかな日常",
+   "status": "posted",
+   "seconds_to_make": 0.4,
+   "post": {
+    "seconds_raw": 119.85,
+    "screen": {
+     "key": "C major",
+     "key_fit": 0.9,
+     "tempo": 99.4,
+     "quiet_s": 1,
+     "level_spread_db": 2.0,
+     "hiss": 0.2291,
+     "peak": 0.931,
+     "good": 0.171,
+     "vocals": -0.147,
+     "noise": -0.096,
+     "cheap": 0.159,
+     "odd": -0.021,
+     "like_refs": 0.652,
+     "worst_vocals": [
+      -0.043,
+      100
+     ],
+     "worst_noise": [
+      0.029,
+      0
+     ],
+     "worst_cheap": [
+      0.245,
+      10
+     ],
+     "worst_odd": [
+      0.044,
+      100
+     ]
+    },
+    "vocal": {
+     "vocal_db": -73.1,
+     "vocal_windows_pct": 0.0
+    },
+    "loop": {
+     "how": "cut where it repeats, 1.5 s crossfade",
+     "from_s": 0.43,
+     "to_s": 107.09,
+     "loop_s": 106.66,
+     "seam_dist": 0.501,
+     "loop_start": 1.0,
+     "loop_end": 107.659312
+    },
+    "seam": {
+     "level_jump_db": 0.71,
+     "level_jump_p99_elsewhere": 12.58,
+     "flux_at_seam": 50.7,
+     "flux_p99_elsewhere": 404.6,
+     "flux_median": 27.1,
+     "sample_step_at_seam": 0.0016,
+     "sample_step_p999_elsewhere": 0.0332
+    },
+    "target_lufs": -20,
+    "measure": "integrated",
+    "encoded_integrated": -20.0,
+    "encoded_momentary_max": -16.8,
+    "peak_dbfs": -6.5,
+    "seconds": 106.66,
+    "kb": 3254,
+    "game_file": "art/production/audio/music-suno-1/day-suno-1.mp3",
+    "review_file": "art/candidates/music-suno-1/day-suno-1.mp3"
+   },
+   "promoted": {
+    "as": "game3d/audio/music/day.mp3",
+    "at": "2026-10-17T12:47:40+02:00",
+    "picked": "by Jørgen, who made it with Suno and supplied it on 2026-10-17 (#371)"
+   }
+  }
+ }
+}

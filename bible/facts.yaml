@@ -665,6 +665,7 @@ audio:
     - [art/approved/music/calm.mp3, "Calm loop (Lyria)", approved]
     - [art/approved/music/lively.mp3, "Lively loop (Lyria)", approved]
     - [art/approved/music/night.mp3, "Night loop (Lyria)", approved]
+    - [art/approved/music/odayakana-nichijou.mp3, "穏やかな日常, the outdoor day loop (Jørgen's Suno track)", approved]
     - [art/approved/music/opening.mp3, "Opening theme (VN era)", legacy]
     - [art/approved/music/opening-tv.mp3, "Opening, TV edit (VN era)", legacy]
   quotes:

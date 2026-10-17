@@ -108,7 +108,7 @@ export async function dormCourtPlace(game) {
     start: w.start,
     startFacing: Math.PI, // north, up the door axis from the gate
     defaultPeriod: 'evening',
-    music: 'night',
+    music: 'day', // after work the night loop, as everywhere (places/lifecycle.js)
     things,
     findProps: { bakery_flyer: mb.flyer }, // what taking the flyer hides (finds/index.js)
     spots,

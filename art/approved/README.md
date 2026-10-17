@@ -45,8 +45,9 @@ One folder per bible id. Each file here is a copy of one that bible/facts.yaml m
 - music/opening.mp3: opening theme (Mastered: softer).
 - music/opening-tv.mp3: opening, TV edit (89.6 s).
 - music/office.mp3, calm.mp3, lively.mp3, night.mp3: the Lyria background loops.
+- music/odayakana-nichijou.mp3: 穏やかな日常 ("Calm everyday life"), Jørgen's own Suno track as he supplied it (120 s); the game's `day` loop is cut from it (tools/audio/presets/music/day-suno.json).
 
-All copied from legacy/game/audio/music/. Bible: audio › tracks.
+The others were copied from legacy/game/audio/music/. Bible: audio › tracks.
 
 ## Places
 

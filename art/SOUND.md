@@ -29,6 +29,7 @@ tools/audio/make.py promote <round>/<take> <name>
 
 ## Music
 - Music: one loop per mood, crossfading into itself. Which generators may make it: How a sound is made.
+- Suno tracks Jørgen makes himself are a source now (2026-10-17), and Lyria rounds are stopped: the original goes in art/approved/music/, a `supplied` preset names it, its tool and its licence, and make.py cuts, levels and promotes it like any take.
 - Music verdict (2026-09-25): YuE2 round-1 loops had great fidelity but came out with vocals and sounded like theme songs; Lyria loops are bland but work as background. The YuE2 opening theme is great but a little too sharp.
 - Music round 2 verdict (2026-09-25): Lyria wins background music by far. YuE2 loops, even vocal-free, are simple and repeat within the track and lose variety; the best YuE2 was round 1 with the voice removed by Demucs, still not as good. Stable Audio 3 is terrible. Opening theme = "Mastered: softer" (legacy/game/audio/music/opening.mp3). Don't process vocals further: heavier EQ made them crackly and low quality. The softer-tags regeneration was not interesting.
 - Karaoke and voice lessons (2026-09-26, legacy/island/godot/assets/audio/README.md):

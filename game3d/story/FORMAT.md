@@ -362,4 +362,4 @@ export default {
 
 ## Music
 
-Each place has its own loop (docs/game/art-and-sound.md). To change it in a scene: `{ hook: 'music', name: 'night' }` (`calm`, `office`, `lively`, `night`, or `null` for silence).
+Each place has its own loop (docs/game/art-and-sound.md). To change it in a scene: `{ hook: 'music', name: 'night' }` (`calm`, `day`, `office`, `lively`, `night`, or `null` for silence).

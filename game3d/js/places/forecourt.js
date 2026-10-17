@@ -185,7 +185,7 @@ export async function forecourtPlace(game) {
     charScale: K,
     start: w.start,
     startFacing: Math.PI,
-    music: 'calm',
+    music: 'day',
     things,
     spots,
     seats: { garden_bench: garden.seat },

@@ -114,7 +114,7 @@ export async function eastLanePlace(game) {
     start: w.in,
     outingExit: { lane: w.in, edge: w.arriveEdge },
     startFacing: Math.PI / 2,
-    music: 'calm',
+    music: 'day',
     things,
     spots: {
       plaza_entry: w.in,

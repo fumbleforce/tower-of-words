@@ -124,7 +124,7 @@ export async function plazaPlace(game) {
     start: w.arriveIn,
     outingExit: { lane: w.shopWalk, edge: w.shopEdge },
     startFacing: w.arriveFace,
-    music: 'calm',
+    music: 'day',
     things,
     spots,
     seats: {},

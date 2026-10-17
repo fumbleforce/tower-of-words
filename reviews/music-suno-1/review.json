@@ -1,0 +1,27 @@
+{
+ "title": "Sounds, round music-suno-1",
+ "date": "2026-10-17",
+ "by": "claude-main/suno-day-music",
+ "status": "decided",
+ "context": [
+  "Not a question: Jørgen supplied this track himself on 2026-10-17 and his pick is the approval. The card records the cut and the numbers for it.",
+  "Every take of round music-suno-1 (music), made by tools/audio/make.py, failed ones included. Nobody has listened to them: the numbers on each card are a screen, not a verdict.",
+  "A loop plays once and then its first seconds again, so you can hear the join."
+ ],
+ "question": "Which of these takes fit? Pick the ones you want, reject the others, and say what is wrong with any you reject.",
+ "multi": true,
+ "options": [
+  {
+   "id": "day-suno-1",
+   "label": "day-suno-1",
+   "audio": "art/candidates/music-suno-1/day-suno-1.mp3",
+   "note": "Outdoors during the day: the forecourt, the plaza, the dorm courtyard, the campus grounds and the other outdoor places. music/day-suno@v1, supplied. Prompt: \"穏やかな日常 (\"Calm everyday life\"): a calm, sunny instrumental at about 99 BPM, 120 s as supplied, with a short fade at the end.\". Measured: 106.66 s; level -20.0 LUFS (integrated, target -20); key C major; tempo 99.4 BPM; CLAP good 0.171, vocals -0.147, noise -0.096, cheap 0.159; vocal stem -73.1 dB of the mix; loops every 106.66 s, loop point match 0.501; level change at the loop point 0.71 dB (12.58 dB elsewhere). Flags: loop point match 0.501 (lower is better; music repeating itself is about 0.1). Not listened to by an agent."
+  }
+ ],
+ "decided": [
+  "day-suno-1"
+ ],
+ "decision": "Jørgen made this track with Suno and supplied it himself (\"this is a fine day outdoor song\"); it is the outdoor day loop.",
+ "decided_at": "2026-10-17",
+ "issue": 371
+}

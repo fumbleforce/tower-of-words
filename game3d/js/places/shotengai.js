@@ -172,7 +172,7 @@ export async function shotengaiPlace(game) {
     start: w.in,
     outingExit: { lane: [w.edge[0], w.edge[1] - 1.6], edge: w.edge },
     startFacing: w.face,
-    music: 'calm',
+    music: 'day',
     things,
     spots: {
       southwest_corner: SOUTHWEST_SPOTS.southwest_corner,

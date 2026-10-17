@@ -119,7 +119,7 @@ export async function eastCoastPlace(game) {
     start: w.in,
     outingExit: { lane: w.in, edge: w.arriveEdge },
     startFacing: Math.PI / 2,
-    music: 'calm',
+    music: 'day',
     grade: MORNING_GRADE,
     things,
     spots: {

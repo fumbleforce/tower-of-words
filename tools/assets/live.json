@@ -214,6 +214,9 @@
   "game3d/audio/music/calm.mp3": {
    "note": "Lyria 2 (google/lyria-2, Replicate; tools/spend.json 2026-09-24, art/music/calm.wav), loop cut with tools/audio/make_loop.py; licence: Google Lyria 2 through Replicate, output terms not settled (notes/licenses.md item 6)"
   },
+  "game3d/audio/music/day.mp3": {
+   "note": "music/day-suno@v1 (supplied), take music-suno-1/day-suno-1, picked by Jørgen, who made it with Suno and supplied it on 2026-10-17 (#371); licence: Suno, made on Jørgen's own account. Under Suno's terms a song made on a paid plan (Pro or Premier) belongs to him and may be used commercially; on the free plan Suno keeps it and only non-commercial use is allowed. Which plan he used is not recorded (notes/licenses.md, Music and sound)."
+  },
   "game3d/audio/music/lively.mp3": {
    "note": "Lyria 2 (google/lyria-2, Replicate; tools/spend.json 2026-09-24, art/music/lively.wav), loop cut with tools/audio/make_loop.py; licence: Google Lyria 2 through Replicate, output terms not settled (notes/licenses.md item 6)"
   },
@@ -1262,6 +1265,15 @@
    ],
    "to": "art/production/retired/2026-10-16/",
    "note": "#665: remove contrived train passenger exchanges"
+  },
+  {
+   "date": "2026-10-17",
+   "action": "promote",
+   "path": "game3d/audio/music/day.mp3",
+   "from": "art/production/audio/music-suno-1/day-suno-1.mp3",
+   "round": "music-suno-1",
+   "review": "music-suno-1",
+   "note": "music/day-suno@v1 (supplied), take music-suno-1/day-suno-1, picked by Jørgen, who made it with Suno and supplied it on 2026-10-17 (#371); licence: Suno, made on Jørgen's own account. Under Suno's terms a song made on a paid plan (Pro or Premier) belongs to him and may be used commercially; on the free plan Suno keeps it and only non-commercial use is allowed. Which plan he used is not recorded (notes/licenses.md, Music and sound)."
   }
  ]
 }
