@@ -22,16 +22,18 @@ import { day3Place } from './day3/place.js';
 // sports ground (the gym, the pool and the courts walk, scenes/sports.js); the common room's door opens on the
 // promenade.
 //
-// The camera turns by where he is (plan.js TURNS): east down the row; north over the park from the promenade and in
-// the park, so the blocks behind it face it; north-east along the beach promenade, the sea on the right; north in the
-// north, to the gardens and up the onsen path; south over the coastal garden to the sea. It eases between them as he
-// walks, and snaps on a jump (a trip, a restored save).
+// The camera turns by where he is (plan.js TURNS): east down the row and round S-E's court; north over the park from
+// the promenade and in the park, so the blocks behind it face it (steeper beside S-E's east wing and N-W, whose five
+// storeys stand close); north-east along the beach promenade, the sea on the right; north in the north, to the
+// gardens and up the onsen path; south over the coastal garden to the sea. It eases between them as he walks, and
+// snaps on a jump (a trip, a restored save).
 const deg = THREE.MathUtils.degToRad;
 const POSE = {
   row: { yaw: -Math.PI / 2 - 0.25, elev: deg(58) }, // a little from the north, steep: the row's trees are on its south side
   park: { yaw: 0.25, elev: deg(56) }, // from the south over the promenade, a little from the east
   beach: { yaw: -0.55, elev: deg(56) }, // from the south-west, along the sea
-  north: { yaw: 0.1, elev: deg(54) },
+  north: { yaw: 0.1, elev: deg(58) },
+  steep: { yaw: 0.2, elev: deg(76) }, // close by a five-storey block that would stand between him and the camera
   south: { yaw: Math.PI - 0.18, elev: deg(56) }, // the villas' gardens and the sea beyond
 };
 export async function eastCoastPlace(game) {
@@ -40,9 +42,10 @@ export async function eastCoastPlace(game) {
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const T = w.turns;
   const turn = turningCam(cam, (x, z) => {
-    if (inRect(x, z, T.row)) return POSE.row;
+    if (inRect(x, z, T.row) || inRect(x, z, T.court)) return POSE.row;
     if (inRect(x, z, T.beach)) return POSE.beach;
     if (inRect(x, z, T.south)) return POSE.south;
+    if (inRect(x, z, T.seNorth) || inRect(x, z, T.nwPath)) return POSE.steep;
     if (inRect(x, z, T.park)) return POSE.park;
     return POSE.north;
   });

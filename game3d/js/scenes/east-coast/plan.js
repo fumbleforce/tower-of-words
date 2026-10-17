@@ -181,7 +181,7 @@ const ROW_WAY = {
 const PROM_WAY = {
   edge: pt([PROM_WEST - 0.4, PZ]),
   lane: pt([PROM_WEST + 1.2, PZ]),
-  zone: rect([PROM_WEST - 3, PROM_WEST + 0.6, Q.PROM[2] - 0.5, Q.PROM[3] + 0.5]),
+  zone: rect([Q.DORM_STREET[0], PROM_WEST + 0.6, Q.PROM[2] - 0.5, Q.PROM[3] + 0.5]), // all the way west: a jump over the verge lands in it too
   in: pt([PROM_WEST + 2.6, PZ]),
 };
 export const EXITS = {
@@ -208,13 +208,21 @@ export const BOUNDS = (() => {
   return b;
 })();
 
-// where the camera turns (places/east-coast.js), all in the chunk's frame: along the row it looks east down it; in
-// the park and on the promenade it looks north over the park, the blocks behind; on the beach promenade north-east
-// along the sea; in the north it looks north to the gardens and the onsen; on the coastal garden south over the sea
+// where the camera turns (places/east-coast.js), all in the chunk's frame: along the row, and south of the promenade
+// round S-E's court, it looks east; in the park and on the promenade it looks north over the park, the blocks behind;
+// on the beach promenade north-east along the sea; in the north it looks north to the gardens and the onsen; on the
+// coastal garden south over the sea
 export const TURNS = {
   row: rect([Q.ROW[0] - 2, Q.TERRACE[0], Q.ROW[2] - 0.6, Q.ROW[3] + 3.2]),
+  // south of the promenade (S-E's court, the north-south walk, the courtyard's garden) it looks east as on the row,
+  // so S-E's wings stand beyond him and not between him and the camera
+  court: rect([PROM_WEST, Q.block('dorm_se')[0], Q.PROM[3] + 0.2, Q.ROW[2] - 0.6]),
+  // on the promenade by S-E's east wing, and on the north path by N-W, the five storeys stand close behind him:
+  // the camera goes steeper there, over their roofs
+  seNorth: rect([112, Q.EDGE[0], Q.PROM[2] - 1.5, Q.PROM[3] + 0.2]),
+  nwPath: rect([Q.NORTH[0] - 2, Q.NS_X[1] + 0.5, Q.NORTH[2] - 1.5, Q.block('dorm_nw')[2] + 0.4]),
   south: rect([82, 124, 12.5, 33]), // the villas' gardens, the coastal loop and the sea beyond
   beach: rect([Q.EDGE[0] - 0.4, 140, -40, Q.TERRACE[3] + 1]),
-  park: rect([Q.WEST[0] - 1, Q.EDGE[0] - 0.4, Q.PARK_N[2] - 0.2, Q.ROW[2] - 0.6]),
+  park: rect([Q.PARK_W - 3, Q.EDGE[0] - 0.4, Q.PARK_N[2] - 0.2, Q.ROW[2] - 0.6]),
   north: rect([70, Q.EDGE[0] - 0.4, -120, Q.PARK_N[2] - 0.2]),
 };

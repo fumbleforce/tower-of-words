@@ -65,7 +65,6 @@ export const DORM_PATHS = [
   p('ns_walk_park', 'walk', Q.NS_PARK, 'The north-south walk through the park, over the pond on a wooden bridge.'),
   p('ns_walk_s', 'walk', Q.NS_S, 'The north-south walk from the promenade past S-E’s court to the dorm row.'),
   p('north_path', 'walk', Q.NORTH, 'Behind N-W, past the gardens’ gate and N-E’s south end, east to the lookout deck.'),
-  p('park_west_walk', 'walk', Q.WEST, 'Along the park’s west side, from the north path to the promenade.'),
   p(
     'park_north_walk',
     'walk',
@@ -146,7 +145,7 @@ export const DORM_GREEN = [
   ),
   g(
     'quarter_lawns',
-    [Q.WEST[0], Q.EDGE[0], Q.PROM[3], Q.ROW[2]],
+    [Q.PARK_W, Q.EDGE[0], Q.PROM[3], Q.ROW[2]],
     'The lawns round the dorm courtyard, Eric’s block and S-E.',
   ),
   g(

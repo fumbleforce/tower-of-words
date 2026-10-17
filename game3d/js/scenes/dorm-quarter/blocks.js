@@ -19,6 +19,7 @@ import { apartmentDeck, apartmentServices, flatRoof } from '../dorm-court/roofs.
 import { merged } from '../plaza-buildings.js';
 import { hash2 } from '../outdoor/parts.js';
 import { mound, LEAF } from '../outdoor/planting.js';
+import { boards } from '../outdoor/park-kit.js';
 import { villa, commons, shed } from './houses.js';
 import { lightUp } from '../../kit/light/glow.js';
 import * as Q from './plan.js';
@@ -279,11 +280,7 @@ function roofTerrace(p, k, H, wall, box) {
     y = H + 0.14;
   flatRoof(p, k.rect, y, { edges: '' });
   // the decking in boards along x, a hair over the membrane
-  for (let x = x0 + 0.1; x < x1 - 0.1; x += 0.3)
-    p.box(hash2(x, z0, 3) < 0.5 ? DECK : '#86735f', 0.26, 0.03, z1 - z0 - 0.3, x + 0.13, y, (z0 + z1) / 2, {
-      cast: false,
-      surf: 'wood',
-    });
+  boards(p, [x0 + 0.1, x1 - 0.1, z0 + 0.15, z1 - 0.15], { y: y + 0.06, along: 'x', w: 0.3, tones: [DECK, '#86735f'] });
   // the parapet on the open sides (not the one against the taller part), with the glass on it
   const F = faces(k.rect),
     open = ['n', 's', 'e', 'w'].filter((s) => !covers(k, F[s]).some(([, , m]) => m > k.storeys));

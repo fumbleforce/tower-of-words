@@ -16,7 +16,7 @@ import { walkGround } from '../../movement/walk-ground.js';
 import { walkEdges } from '../outdoor/walk-edges.js';
 import { groundPatches, TOWN } from '../town.js';
 import * as Q from './plan.js';
-import { WALKS, PARK_WALKS, PADS, RING_PAD, PAVED } from './fittings.js';
+import { LAID_WALKS, GRAVEL, PARK_WALKS, PADS, RING_PAD, PAVED } from './fittings.js';
 
 export { PAVED };
 
@@ -70,7 +70,7 @@ export function* groundSteps(pv, p, { own = [], flat = false } = {}) {
   field(Q.ROW, (r) => laneField(pv, r, { origin: [Q.DORM_STREET[0], Q.ROW[2]] }));
   yield;
   // the walks; where one crosses the promenade or the row it stops at the lane's edge
-  for (const r of WALKS) if (!mine((r[0] + r[1]) / 2, (r[2] + r[3]) / 2)) walk(pv, r);
+  for (const r of LAID_WALKS) if (!mine((r[0] + r[1]) / 2, (r[2] + r[3]) / 2)) walk(pv, r);
   yield;
   // the park's walks: small warm-grey setts in bond, no borders, so the loop reads as a garden path
   for (const r of PARK_WALKS)
@@ -113,7 +113,7 @@ export function* groundSteps(pv, p, { own = [], flat = false } = {}) {
     });
   yield;
   // the allotments' walks: gravel
-  for (const r of Q.PLOT_WALKS) gravel(p, r);
+  for (const r of GRAVEL) gravel(p, r);
   // the edges, from the one outline of everything paved
   const ground = walkGround({
     walk: PAVED,

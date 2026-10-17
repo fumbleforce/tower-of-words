@@ -14,14 +14,15 @@ import { hedge, keyaki, sakura, pine, maple, ginkgo, mound, grass, LEAF } from '
 import { lamps, bench, bins, STEEL, PAINTED } from '../outdoor/furniture.js';
 import { lowWall } from '../outdoor/edges.js';
 import { shelter } from '../dorm-court/cluster-yards.js';
+import { pergola, picnicTable, springRider } from '../outdoor/park-kit.js';
+import { planter } from '../../kit/planting/planter.js';
 import { hash2 } from '../outdoor/parts.js';
 import * as Q from './plan.js';
 import { QUARTER_LAMPS } from './fittings.js';
 
 const SOIL = '#5a4a3c',
   EDGING = '#8a7560',
-  CROPS = ['#5f7f45', '#6f8f4f', '#4f6f3f', '#7f9a55'],
-  WOOD = '#9a846c';
+  CROPS = ['#5f7f45', '#6f8f4f', '#4f6f3f', '#7f9a55'];
 
 // a plot: soil in a timber edging, rows of crops along it (or canes with beans, or a net over cabbages)
 function plot(p, [x0, x1, z0, z1], i, far) {
@@ -165,15 +166,9 @@ function gardens(p, { rect, open, walled }, far, seed) {
 
 // N-E's sea garden: the pergola on its pad, two picnic tables under it, pines in groups, a cherry
 function seaGarden(p, lights) {
-  const [x0, x1, z0, z1] = Q.PERGOLA,
-    h = 2.25;
-  for (const x of [x0 + 0.15, x1 - 0.15])
-    for (const z of [z0 + 0.15, z1 - 0.15]) p.box('#7a654f', 0.14, h, 0.14, x, 0, z, { surf: 'wood' });
-  for (const x of [x0 + 0.15, x1 - 0.15])
-    p.box('#6f5c49', 0.12, 0.16, z1 - z0 + 0.4, x, h, (z0 + z1) / 2, { surf: 'wood' });
-  for (let z = z0 - 0.1; z <= z1 + 0.11; z += 0.4)
-    p.box(WOOD, x1 - x0 + 0.5, 0.08, 0.07, (x0 + x1) / 2, h + 0.16, z, { surf: 'wood' });
-  for (const tz of [z0 + 0.85, z1 - 0.85]) picnic(p, (x0 + x1) / 2, tz);
+  const [x0, x1, z0, z1] = Q.PERGOLA;
+  pergola(p, Q.PERGOLA, { along: 'z' });
+  for (const tz of [z0 + 0.85, z1 - 0.85]) picnicTable(p, (x0 + x1) / 2, tz);
   lights.lit.push([(x0 + x1) / 2, (z0 + z1) / 2, 1.4]);
   for (const [x, z, s, k] of [
     [123.4, -48.9, 0.95, pine],
@@ -187,26 +182,13 @@ function seaGarden(p, lights) {
   ])
     k(p, x, z, s, Math.round(x * 7 + z));
 }
-// a picnic table: a timber top and two benches on A-legs, all one piece
-function picnic(p, x, z) {
-  p.box(WOOD, 1.4, 0.05, 0.6, x, 0.5, z, { surf: 'wood' });
-  for (const s of [-1, 1]) p.box(WOOD, 1.4, 0.04, 0.24, x, 0.3, z + s * 0.5, { surf: 'wood' });
-  for (const dx of [-0.55, 0.55]) p.box('#6f5c49', 0.06, 0.5, 1.2, x + dx, 0, z, { surf: 'wood' });
-  (p.seats ||= []).push({ x, z: z + 0.5, facing: Math.PI, len: 1.3 }, { x, z: z - 0.5, facing: 0, len: 1.3 });
-}
 
 // S-E's court: a soft pad with two spring riders and a bench by it, its trees
 function seCourt(p) {
   const [x0, x1, z0, z1] = Q.SE_PLAY;
   p.box('#8a6f62', x1 - x0, 0.03, z1 - z0, (x0 + x1) / 2, 0, (z0 + z1) / 2, { cast: false });
-  for (const [x, z, c] of [
-    [x0 + 0.9, z0 + 1.0, '#4f8a6a'],
-    [x1 - 0.9, z0 + 1.4, '#d9a73e'],
-  ]) {
-    p.geo(STEEL.mid, new THREE.CylinderGeometry(0.08, 0.08, 0.35, 8).translate(x, 0.2, z), { cast: false });
-    p.box(c, 0.22, 0.24, 0.55, x, 0.37, z, PAINTED);
-    p.box(c, 0.2, 0.22, 0.18, x, 0.57, z - 0.22, PAINTED);
-  }
+  springRider(p, x0 + 0.9, z0 + 1.0, '#4f8a6a');
+  springRider(p, x1 - 0.9, z0 + 1.4, '#d9a73e');
   bench(p, (x0 + x1) / 2, z1 + 0.5, Math.PI, { len: 1.6 });
   for (const [k, x, z, s] of [
     [keyaki, 110.3, -6.0, 1.0],
@@ -251,6 +233,8 @@ export function* gardensSteps(pv, p, lights, { far = false } = {}) {
   // bike shelters by N-W's door and S-E's
   shelter(p, lights, Q.NW_SHELTER, 's', 3);
   shelter(p, lights, Q.SE_SHELTER, 's', 6);
+  // a flowering trough on the court by S-E's door walk
+  planter(p, { at: [Q.SE_DOOR[0] + 2.2, Q.SE_DOOR[3] + 0.35], variant: 'flowering', seed: 21 });
   yield;
   for (const [k, x, z, s] of LAWN_TREES) {
     k(p, x, z, s, Math.round(x * 3 + z * 5));

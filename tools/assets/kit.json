@@ -14,6 +14,7 @@
     "scenes/outdoor/furniture.js": "street",
     "scenes/outdoor/nook-kits.js": "street",
     "scenes/outdoor/nook-yards.js": "street",
+    "scenes/outdoor/park-kit.js": "street",
     "scenes/outdoor/vending-face.js": "street",
     "scenes/shop-signs.js": "street",
     "scenes/outdoor/planting.js": "planting",

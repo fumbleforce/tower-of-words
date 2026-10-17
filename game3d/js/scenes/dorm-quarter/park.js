@@ -3,7 +3,7 @@
 //   walks come in, cherries behind it; a low hedge on its other sides, open at the walks
 //   the big lawn inside the loop walk, open for ball games and hanami: two cherries at its ends, benches round the
 //   loop looking in, lamps at its corners; zelkovas and maples between the loop and the edges
-//   the wisteria shelter on the court gate's axis, the walk in through it, a bench either side under it
+//   the wisteria shelter on the court gate's axis behind the verge, a bench either side under it
 //   the pond: a ring of rounded stones, dark still water with lily pads and koi, reeds at its ends; the north-south
 //   walk over it on a timber bridge with a rail each side, and a boardwalk east off the bridge to the cherry's ring
 //   the cherry: a big one in its paved round, a ring seat about its trunk
@@ -12,15 +12,14 @@
 import * as THREE from 'three';
 import { verge } from '../outdoor/lane.js';
 import { hedge, keyaki, sakura, maple, ginkgo, mound, grass, LEAF } from '../outdoor/planting.js';
-import { lamps, bench, bins, bikeRack, STEEL, PAINTED } from '../outdoor/furniture.js';
+import { lamps, bench, bins, bikeRack } from '../outdoor/furniture.js';
 import { hash2 } from '../outdoor/parts.js';
+import { planter } from '../../kit/planting/planter.js';
+import { pergola, boards, ringSeat, swingFrame, slide, springRider, WOOD as TIMBER } from '../outdoor/park-kit.js';
 import * as Q from './plan.js';
 import { LOOP_BENCHES, PARK_LAMPS, PROM_PARK_LAMPS } from './fittings.js';
 
-const WOOD = '#9a846c',
-  WOOD_DARK = '#7a654f',
-  POST = '#6d5a47',
-  STONES = ['#8d8f8b', '#9a9a94', '#7f817f', '#a3a29b'],
+const STONES = ['#8d8f8b', '#9a9a94', '#7f817f', '#a3a29b'],
   SAND = '#d4c49d';
 const [PX0, PX1, PZ0, PZ1] = Q.PARK;
 
@@ -113,11 +112,10 @@ function pond(p, group, far) {
 function bridge(p) {
   const [x0, x1, z0, z1] = Q.BRIDGE,
     y = 0.1;
-  for (let z = z0 + 0.12; z < z1; z += 0.26)
-    p.box(hash2(z, 1, 3) < 0.5 ? WOOD : '#a08b72', x1 - x0, 0.06, 0.23, (x0 + x1) / 2, y - 0.06, z, { surf: 'wood' });
+  boards(p, Q.BRIDGE, { y, along: 'z' });
   // stringers under it, and the posts of its rails
   for (const x of [x0 + 0.15, x1 - 0.15])
-    p.box(WOOD_DARK, 0.12, 0.12, z1 - z0, x, -0.02, (z0 + z1) / 2, { cast: false });
+    p.box(TIMBER.mid, 0.12, 0.12, z1 - z0, x, -0.02, (z0 + z1) / 2, { cast: false });
   const bw = [Q.BOARDWALK[2], Q.BOARDWALK[3]];
   for (const [x, gap] of [
     [x0 + 0.06, null],
@@ -131,55 +129,34 @@ function bridge(p) {
       : [[z0 + 0.4, z1 - 0.4]];
     for (const [a, b] of runs) {
       for (let z = a; z <= b + 0.01; z += (b - a) / Math.max(1, Math.round((b - a) / 1.3)))
-        p.box(POST, 0.09, 0.85, 0.09, x, y, z, { surf: 'wood' });
-      p.box(WOOD, 0.1, 0.06, b - a + 0.1, x, y + 0.85, (a + b) / 2, { surf: 'wood' });
-      p.box(WOOD_DARK, 0.05, 0.05, b - a, x, y + 0.45, (a + b) / 2, { cast: false });
+        p.box(TIMBER.dark, 0.09, 0.85, 0.09, x, y, z, { surf: 'wood' });
+      p.box(TIMBER.pale, 0.1, 0.06, b - a + 0.1, x, y + 0.85, (a + b) / 2, { surf: 'wood' });
+      p.box(TIMBER.mid, 0.05, 0.05, b - a, x, y + 0.45, (a + b) / 2, { cast: false });
     }
   }
   // the boardwalk
-  const [bx0, bx1, bz0, bz1] = Q.BOARDWALK,
+  const [bx0, , bz0, bz1] = Q.BOARDWALK,
     by = 0.08;
-  for (let x = bx0 + 0.13; x < bx1; x += 0.26)
-    p.box(hash2(x, 2, 5) < 0.5 ? WOOD : '#a08b72', 0.23, 0.05, bz1 - bz0, x, by - 0.05, (bz0 + bz1) / 2, {
-      surf: 'wood',
-    });
+  boards(p, Q.BOARDWALK, { y: by, along: 'x' });
   const wx = Q.POND[1] + 0.2;
   for (const z of [bz0 + 0.06, bz1 - 0.06]) {
-    for (const x of [bx0 + 0.3, (bx0 + wx) / 2, wx]) p.box(POST, 0.08, 0.6, 0.08, x, by, z, { surf: 'wood' });
-    p.box(WOOD, wx - bx0 - 0.2, 0.05, 0.08, (bx0 + 0.3 + wx) / 2, by + 0.6, z, { surf: 'wood' });
+    for (const x of [bx0 + 0.3, (bx0 + wx) / 2, wx]) p.box(TIMBER.dark, 0.08, 0.6, 0.08, x, by, z, { surf: 'wood' });
+    p.box(TIMBER.pale, wx - bx0 - 0.2, 0.05, 0.08, (bx0 + 0.3 + wx) / 2, by + 0.6, z, { surf: 'wood' });
   }
 }
 
-// the cherry and its ring seat: slats on a ring of short legs round the trunk, the seat 0.3 up
+// the cherry and its ring seat round its trunk
 function cherry(p) {
   const { x, z, seat } = Q.RING;
   sakura(p, x, z, 1.45, 91);
-  const n = 16;
-  for (let i = 0; i < n; i++) {
-    const a = (i / n) * Math.PI * 2,
-      ca = Math.cos(a),
-      sa = Math.sin(a);
-    const w = (2 * Math.PI * seat) / n + 0.02;
-    p.box(WOOD, w, 0.05, 0.42, x + ca * seat, 0.28, z + sa * seat, { ry: -a + Math.PI / 2, surf: 'wood' });
-    if (i % 2 === 0)
-      p.box(STEEL.dark, 0.06, 0.28, 0.3, x + ca * seat, 0, z + sa * seat, { ry: -a + Math.PI / 2, ...PAINTED });
-  }
-  (p.seats ||= []).push(
-    { x: x, z: z + seat + 0.1, facing: 0, len: 1.0 },
-    { x: x, z: z - seat - 0.1, facing: Math.PI, len: 1.0 },
-  );
+  ringSeat(p, x, z, seat);
 }
 
 // the wisteria shelter: posts, beams along it, rafters across, and the vine over it with its flowers hanging
 function wisteria(p) {
   const [x0, x1, z0, z1] = Q.WISTERIA,
     h = 2.3;
-  for (const x of [x0 + 0.15, (x0 + x1) / 2 - 1.1, (x0 + x1) / 2 + 1.1, x1 - 0.15])
-    for (const z of [z0 + 0.15, z1 - 0.15]) p.box(POST, 0.14, h, 0.14, x, 0, z, { surf: 'wood' });
-  for (const z of [z0 + 0.15, z1 - 0.15])
-    p.box(WOOD_DARK, x1 - x0 + 0.3, 0.14, 0.12, (x0 + x1) / 2, h, z, { surf: 'wood' });
-  for (let x = x0; x <= x1 + 0.01; x += 0.5)
-    p.box(WOOD, 0.08, 0.08, z1 - z0 + 0.5, x, h + 0.14, (z0 + z1) / 2, { surf: 'wood' });
+  pergola(p, Q.WISTERIA, { h, along: 'x', slat: 0.5 });
   // the vine: low flattened leaf blobs over the rafters, a few long shoots hanging down from them (it flowered in
   // May; in October it is all leaf)
   for (let x = x0 + 0.3; x < x1; x += 0.7)
@@ -205,7 +182,7 @@ function wisteria(p) {
   for (const x of [Q.GATE_X - 1.75, Q.GATE_X + 1.75]) bench(p, x, (z0 + z1) / 2 - 0.2, Math.PI, { len: 1.6 });
 }
 
-// the play corner: sand in a timber edge, a swing frame, a slide on a platform, two spring riders
+// the play corner: sand in a timber edge, a swing frame, a slide, two spring riders, a bench for the grown-ups
 function play(p) {
   const [x0, x1, z0, z1] = Q.PLAY,
     cx = (x0 + x1) / 2;
@@ -216,53 +193,11 @@ function play(p) {
     [0.14, z1 - z0, x0 + 0.07, (z0 + z1) / 2],
     [0.14, z1 - z0, x1 - 0.07, (z0 + z1) / 2],
   ])
-    p.box(WOOD, w, 0.12, d, x, 0, z, { surf: 'wood' });
-  // the swing frame: two A-frames, the beam, two seats on chains
-  const sz = z0 + 1.4,
-    sx0 = x0 + 0.8,
-    sx1 = x0 + 3.4;
-  for (const x of [sx0, sx1])
-    for (const s of [-1, 1])
-      p.geo(
-        '#4d6b8a',
-        new THREE.CylinderGeometry(0.04, 0.04, 2.1, 6).rotateX(s * 0.28).translate(x, 1.0, sz + s * 0.28),
-        PAINTED,
-      );
-  p.geo(
-    '#4d6b8a',
-    new THREE.CylinderGeometry(0.05, 0.05, sx1 - sx0, 8).rotateZ(Math.PI / 2).translate((sx0 + sx1) / 2, 2.0, sz),
-    PAINTED,
-  );
-  for (const x of [sx0 + 0.75, sx1 - 0.75]) {
-    for (const d of [-0.18, 0.18]) p.box(STEEL.pale, 0.015, 1.5, 0.015, x + d, 0.48, sz, { cast: false });
-    p.box('#c0533f', 0.45, 0.05, 0.2, x, 0.46, sz);
-  }
-  // the slide: a platform on four posts with a rail, a ladder up its back, the chute down to the sand
-  const tx = x1 - 1.5,
-    tz = z0 + 1.2;
-  for (const [dx, dz] of [
-    [-0.4, -0.4],
-    [0.4, -0.4],
-    [-0.4, 0.4],
-    [0.4, 0.4],
-  ])
-    p.box('#d9a73e', 0.08, 1.5, 0.08, tx + dx, 0, tz + dz, PAINTED);
-  p.box(WOOD, 0.9, 0.06, 0.9, tx, 0.95, tz, { surf: 'wood' });
-  p.box('#d9a73e', 0.9, 0.05, 0.05, tx, 1.45, tz - 0.42, PAINTED);
-  for (let i = 0; i < 4; i++) p.box(STEEL.pale, 0.5, 0.04, 0.04, tx, 0.22 + i * 0.22, tz - 0.55, { cast: false });
-  p.geo('#4f8a6a', new THREE.BoxGeometry(0.6, 0.05, 1.9).rotateX(0.5).translate(tx, 0.52, tz + 1.22), PAINTED);
-  p.geo('#4f8a6a', new THREE.BoxGeometry(0.06, 0.18, 1.9).rotateX(0.5).translate(tx - 0.3, 0.6, tz + 1.22), PAINTED);
-  p.geo('#4f8a6a', new THREE.BoxGeometry(0.06, 0.18, 1.9).rotateX(0.5).translate(tx + 0.3, 0.6, tz + 1.22), PAINTED);
-  // two spring riders: a coil on a pad, a little animal seat on it
-  for (const [x, z, c] of [
-    [cx - 0.6, z1 - 1.2, '#c0533f'],
-    [cx + 0.6, z1 - 1.0, '#e0b33b'],
-  ]) {
-    p.geo(STEEL.mid, new THREE.CylinderGeometry(0.08, 0.08, 0.35, 8).translate(x, 0.18, z), { cast: false });
-    p.box(c, 0.22, 0.24, 0.55, x, 0.35, z, PAINTED);
-    p.box(c, 0.2, 0.22, 0.18, x, 0.55, z - 0.22, PAINTED);
-  }
-  // a bench for the grown-ups on the lawn by its west side, looking in; a bin
+    p.box(TIMBER.pale, w, 0.12, d, x, 0, z, { surf: 'wood' });
+  swingFrame(p, x0 + 2.1, z0 + 1.4);
+  slide(p, x1 - 1.5, z0 + 1.2);
+  springRider(p, cx - 0.6, z1 - 1.2, '#c0533f');
+  springRider(p, cx + 0.6, z1 - 1.0, '#e0b33b');
   bench(p, x0 - 0.7, (z0 + z1) / 2, Math.PI / 2, { len: 1.6 });
   bins(p, x0 - 0.7, z1 - 0.6, Math.PI / 2);
 }
@@ -285,7 +220,7 @@ export function* parkSteps(pv, p, lights, group, { far = false } = {}) {
   // the verge on the promenade, open at the walks in; a low hedge round the rest
   const ns = [Q.NS_X[0], Q.NS_X[1]];
   verge(p, [PX0, PZ1], [PX1, PZ1], 'n', {
-    crossings: [[Q.GATE_X - 0.5, Q.GATE_X + 0.5], ns, [Q.COMMONS[0], Q.COMMONS[1]]],
+    crossings: [ns, [Q.COMMONS[0], Q.COMMONS[1]]],
     seed: 61,
     ground: true,
   });
@@ -307,7 +242,7 @@ export function* parkSteps(pv, p, lights, group, { far = false } = {}) {
     [[Q.GATE_X - 0.5, Q.GATE_X + 0.5], ns, [Q.PLAY_LINK[0], Q.PLAY_LINK[1]]],
     62,
   );
-  run(PZ0 + 0.3, PZ1 - 1.4, 'z', PX0 + 0.35, [[Q.LOOP_LINKS[2][2], Q.LOOP_LINKS[2][3]]], 66);
+  run(PZ0 + 0.3, PZ1 - 1.4, 'z', PX0 + 0.35, [], 66);
   run(PZ0 + 0.3, PZ1 - 1.4, 'z', PX1 - 0.35, [], 69);
   yield;
   for (const x of VERGE_CHERRIES) sakura(p, x, PZ1 - 2.1, 1.0 + hash2(x, 1, 2) * 0.15, Math.round(x));
@@ -336,11 +271,13 @@ export function* parkSteps(pv, p, lights, group, { far = false } = {}) {
   yield;
   // the common room's apron: a bike rack along its west end, a planter either side of its door
   bikeRack(p, [Q.COMMONS[0] - 0.6, Q.COMMONS[3] - 3.0], [Q.COMMONS[0] - 0.6, Q.COMMONS[3] - 0.6], { n: 3 });
-  for (const s of [-1, 1]) {
-    const x = Q.COMMONS_DOOR[0] + s * 1.4;
-    p.box('#8d9298', 0.7, 0.45, 0.5, x, 0, Q.COMMONS[3] + 0.5);
-    mound(p, x, Q.COMMONS[3] + 0.5, 0.3, LEAF.mid, { y: 0.45 });
-  }
+  for (const s of [-1, 1])
+    planter(p, { at: [Q.COMMONS_DOOR[0] + s * 1.5, Q.COMMONS[3] + 0.45], variant: 'box', seed: 7 + s });
+  // flowering troughs at the apron's ends on the promenade, and either side of the park's way in on the gate's axis
+  for (const x of [Q.COMMONS[0] + 1.4, Q.COMMONS[1] - 1.4])
+    planter(p, { at: [x, Q.PROM[2] - 0.35], variant: 'flowering', seed: Math.round(x) });
+  for (const s of [-1, 1])
+    planter(p, { at: [Q.GATE_X + s * 1.9, Q.PARK_N[3] + 1.05], variant: 'flowering', seed: 11 + s });
   // drifts of low planting along the common room's ends and back, against its walls
   for (const [x0, x1, z0, z1] of [
     [Q.COMMONS[0] - 0.9, Q.COMMONS[0], Q.COMMONS[2], Q.COMMONS[3] - 3.4],

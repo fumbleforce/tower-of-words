@@ -65,7 +65,7 @@ const LEGS = [
     'east_lane',
   ],
   ['east_lane', 'dorm_row', 'east_coast'],
-  // north off the row onto the inner court, into the common room and back
+  // up the north-south walk to the promenade, into the common room and back
   ['east_coast', { use: 'commons' }, 'dorm_commons'],
   ['dorm_commons', { use: 'commons_door' }, 'east_coast'],
   ['east_coast', 'dorm_street', 'east_lane'],

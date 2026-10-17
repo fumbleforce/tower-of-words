@@ -12,6 +12,7 @@ import { groundFloor } from '../plaza/east-fronts.js';
 import { apartmentDeck, flatRoof } from '../dorm-court/roofs.js';
 import { hash2 } from '../outdoor/parts.js';
 import { mound, LEAF } from '../outdoor/planting.js';
+import { boards } from '../outdoor/park-kit.js';
 import * as Q from './plan.js';
 
 const PLINTH = '#6c7178',
@@ -59,8 +60,7 @@ export function villa(p, k, { box, pane, lights }) {
   onFace(box(SLAB), S, w / 2, fh - 0.12, 0.7, w + 0.3, 0.14, 1.4);
   onFace(box(RAIL_GLASS, false), S, w / 2, fh + 0.02, 1.36, w + 0.2, 0.62, 0.03);
   onFace(box(STEEL.mid), S, w / 2, fh + 0.64, 1.36, w + 0.24, 0.035, 0.06);
-  for (let x = x0 + 0.3; x < x1; x += 0.28)
-    p.box('#9a846c', 0.24, 0.05, 1.35, x, 0, z1 + 0.68, { cast: false, surf: 'wood' });
+  boards(p, [x0 + 0.2, x1, z1, z1 + 1.35], { y: 0.05, along: 'x', w: 0.28 });
   for (let i = 0; i < 14; i++)
     onFace(box(TIMBER, false), S, 0.4 + i * ((w - 0.8) / 13), fh + 1.15, 0.12, 0.06, 0.75, 0.1);
   // the roof: a coped parapet, the pavilion set back to the north with its own flat roof, a terrace before it
@@ -79,8 +79,12 @@ export function villa(p, k, { box, pane, lights }) {
     1.45,
     0.05,
   );
-  for (let x = pv[0] + 0.2; x < pv[1] + 1.8; x += 0.3)
-    p.box(DECK, 0.26, 0.03, z1 - pv[3] - 0.5, x + 0.13, Hr, (pv[3] + z1 - 0.3) / 2, { cast: false, surf: 'wood' });
+  boards(p, [pv[0] + 0.2, pv[1] + 1.8, pv[3], z1 - 0.3], {
+    y: Hr + 0.06,
+    along: 'x',
+    w: 0.3,
+    tones: [DECK, '#86735f'],
+  });
   // two chairs and a low table on the roof terrace, a pot either side of the pavilion's glass
   const tx = (pv[0] + pv[1]) / 2,
     tz = pv[3] + 1.3;

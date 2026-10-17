@@ -21,7 +21,6 @@ export const WALKS = [
   Q.NS_PARK,
   Q.NS_S,
   Q.NORTH,
-  Q.WEST,
   Q.PARK_N,
   Q.COURTS_EAST,
   Q.NE_DOOR,
@@ -31,6 +30,21 @@ export const WALKS = [
   Q.PERGOLA_WALK,
   Q.PLAY_LINK,
 ];
+// the same walks as they are laid in stone: never two fields over one spot (the north-south walk stops at the north
+// path, which runs on across it, and leaves the bridge's span to its boards)
+const [nx0, nx1] = Q.NS_X;
+export const LAID_WALKS = [
+  [nx0, nx1, Q.NS_N[2], Q.NORTH[2]],
+  [nx0, nx1, Q.NORTH[3], Q.NS_N[3]],
+  [nx0, nx1, Q.NS_PARK[2], Q.BRIDGE[2]],
+  [nx0, nx1, Q.BRIDGE[3], Q.NS_PARK[3]],
+  ...WALKS.filter((r) => r !== Q.NS_N && r !== Q.NS_PARK),
+];
+// the allotments' gravel walks, either side of the gardens' path (laid in stone across them)
+export const GRAVEL = Q.PLOT_WALKS.flatMap(([x0, x1, z0, z1]) => [
+  [x0, Q.GARDEN_PATH[0], z0, z1],
+  [Q.GARDEN_PATH[1], x1, z0, z1],
+]);
 export const PARK_WALKS = [...LOOP_RECTS, ...Q.LOOP_LINKS];
 export const PADS = [Q.PLAZA, Q.FITNESS, Q.PERGOLA, Q.COMMONS_APRON, Q.NW_SHELTER, Q.SE_SHELTER];
 export const RING_PAD = [Q.RING.x - Q.RING.pad, Q.RING.x + Q.RING.pad, Q.RING.z - Q.RING.pad, Q.RING.z + Q.RING.pad];
@@ -71,12 +85,22 @@ export const PARK_LAMPS = [
 ];
 // the promenade's lamps on the park's verge, every 8 or so, none before the gate
 export const PROM_PARK_LAMPS = [83.4, 96.6, 104.4, 112.8, 125.0].map((x) => [x, Q.PROM[2] - 0.3]);
-// what stands where Eric walks or sits, for the walk grid (east-coast/plan.js)
+// what stands where Eric walks or sits, for the walk grid (east-coast/plan.js); the wisteria's benches' line
+const WZ = (Q.WISTERIA[2] + Q.WISTERIA[3]) / 2 - 0.2;
+// the planters at the park's gateways and the common room's apron
+const trough = ([x, z], w = 1.25, d = 0.3) => [x - w, x + w, z - d, z + d];
+export const PLANTERS = [
+  ...[Q.COMMONS[0] + 1.4, Q.COMMONS[1] - 1.4].map((x) => trough([x, Q.PROM[2] - 0.35])),
+  ...[-1, 1].map((s) => trough([Q.GATE_X + s * 1.9, Q.PARK_N[3] + 1.05])),
+  ...[-1, 1].map((s) => trough([Q.COMMONS_DOOR[0] + s * 1.5, Q.COMMONS[3] + 0.45], 0.65)),
+  trough([Q.SE_DOOR[0] + 2.2, Q.SE_DOOR[3] + 0.35]),
+];
 export const PARK_FURNITURE = [
+  ...PLANTERS,
   ...LOOP_BENCHES.map(([x, z, f]) =>
     Math.abs(Math.sin(f)) > 0.5 ? [x - 0.3, x + 0.3, z - 0.85, z + 0.85] : [x - 0.85, x + 0.85, z - 0.3, z + 0.3],
   ),
-  ...[Q.GATE_X - 1.75, Q.GATE_X + 1.75].map((x) => [x - 0.85, x + 0.85, -13.9, -13.3]),
+  ...[Q.GATE_X - 1.75, Q.GATE_X + 1.75].map((x) => [x - 0.85, x + 0.85, WZ - 0.5, WZ + 0.1]),
   [
     Q.RING.x - Q.RING.seat - 0.2,
     Q.RING.x + Q.RING.seat + 0.2,
@@ -101,8 +125,7 @@ export const QUARTER_LAMPS = [
   ...[84, 94, 100.8, 112.2, 120.4].map((x) => [x, Q.NORTH[2] - 0.3]),
   ...[-52, -44].map((z) => [Q.NS_X[1] + 0.3, z]),
   [Q.NS_X[1] + 0.3, 4.6],
-  [Q.WEST[0] - 0.3, -32.4],
-  [Q.WEST[0] - 0.3, -16.2],
+  [Q.PARK_N[0] + 0.4, Q.PARK_N[2] - 0.3],
   [Q.PERGOLA_WALK[1] + 0.3, -39.0],
   [Q.SE_DOOR[0] + 1.2, Q.SE_DOOR[2] - 0.3],
 ];

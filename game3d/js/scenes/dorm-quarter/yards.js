@@ -15,6 +15,7 @@ import { terraceDetails, terraceVending } from '../east-coast/terrace-details.js
 import { coastGardenSteps } from '../east-coast/coast-garden.js';
 import { COAST_GARDEN as G } from '../island-dorms.js';
 import { pale } from '../dorm-court/cluster-yards.js';
+import { pergola } from '../outdoor/park-kit.js';
 import * as Q from './plan.js';
 import { ROW_TREES, ROW_LAMPS } from './fittings.js';
 
@@ -82,13 +83,13 @@ export function* gardenSteps(pv, p) {
   for (const z of [pad[2], pad[3] - BW]) edge(pv, [pad[0], pad[1], z, z + BW], [0.15, BW]);
   kerbRect(p, [w0, w1, ROW[3] + 1.1, pad[2]], { sides: 'we' });
   kerbRect(p, pad, { gaps: { n: [[w0, w1]], e: [[17, 18.8]] } });
-  // the pergola: four posts, two beams along it, slats across
-  for (const x of [pad[0] + 0.3, pad[1] - 0.3])
-    for (const z of [pad[2] + 0.3, pad[3] - 0.3]) p.box('#8f969e', 0.14, 2.3, 0.14, x, 0, z);
-  for (const z of [pad[2] + 0.3, pad[3] - 0.3])
-    p.box('#7d858e', pad[1] - pad[0] - 0.2, 0.12, 0.12, (pad[0] + pad[1]) / 2, 2.3, z);
-  for (let x = pad[0] + 0.4; x < pad[1] - 0.3; x += 0.45)
-    p.box('#9aa0a6', 0.06, 0.06, pad[3] - pad[2] - 0.2, x, 2.42, (pad[2] + pad[3]) / 2, { cast: false });
+  // the pergola in grey steel
+  pergola(p, [pad[0] + 0.15, pad[1] - 0.15, pad[2] + 0.15, pad[3] - 0.15], {
+    h: 2.3,
+    along: 'x',
+    slat: 0.45,
+    wood: { dark: '#8f969e', mid: '#7d858e', pale: '#9aa0a6' },
+  });
   bench(p, pad[0] + 0.7, (pad[2] + pad[3]) / 2, Math.PI / 2, { len: 1.6 });
   bench(p, 90.4, pad[3] - 0.5, Math.PI, { len: 1.6 });
   yield;

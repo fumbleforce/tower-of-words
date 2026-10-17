@@ -14,13 +14,14 @@ import { pine, mound, grass, bed, LEAF } from '../outdoor/planting.js';
 import { lamps, bench, bins, STEEL, PAINTED } from '../outdoor/furniture.js';
 import { terraceVending } from '../east-coast/terrace-details.js';
 import { hash2 } from '../outdoor/parts.js';
+import { boards, fitnessBars } from '../outdoor/park-kit.js';
+import { planter } from '../../kit/planting/planter.js';
 import { boulder, shoreRibbon, WET, SURF } from '../outdoor/seafront.js';
 import * as Q from './plan.js';
 import { WALL_GAPS } from './fittings.js';
 
 const STONE = { tread: '#9a9893', nosing: '#6f7175', cheek: '#8c8e8f' };
-const DECK = '#9a846c',
-  PILE = '#5d5249';
+const PILE = '#5d5249';
 const [BX0, BX1, BZ0, BZ1] = Q.BEACH_PROM;
 const RAIL_X = Q.SEA_X; // on the coping's middle
 const COPING_Y = 0.2;
@@ -143,8 +144,7 @@ function beach(p, far) {
 function deck(p) {
   const [x0, x1, z0, z1] = Q.DECK,
     y = 0.04;
-  for (let x = x0 + 0.13; x < x1; x += 0.26)
-    p.box(hash2(x, 4, 1) < 0.5 ? DECK : '#a08b72', 0.23, 0.06, z1 - z0, x, y - 0.06, (z0 + z1) / 2, { surf: 'wood' });
+  boards(p, Q.DECK, { y, along: 'x' });
   for (const x of [x0 + 0.5, (x0 + x1) / 2, x1 - 0.3])
     for (const z of [z0 + 0.3, z1 - 0.3])
       p.geo(PILE, new THREE.CylinderGeometry(0.11, 0.12, 0.9, 8).translate(x, -0.45, z), { cast: false });
@@ -177,6 +177,9 @@ function plaza(root, p, lights) {
   lights.lit.push([x0 + 1.1, z0 + 1.3, 1.0]);
   bins(p, x0 + 2.5, z0 + 0.35, 0);
   bench(p, x0 + 1.2, Q.PLAZA[3] - 0.45, Math.PI, { len: 1.6 });
+  // a bowl of flowers at each of its corners on the beach promenade's side
+  for (const z of [Q.PLAZA[2] + 0.45, Q.PLAZA[3] - 0.45])
+    planter(p, { at: [Q.PLAZA[1] - 0.5, z], variant: 'round', seed: Math.round(z) });
   // the tap: a stone post with a steel tap and a grate in the paving under it
   const tx = BX1 - 0.4,
     tz = -11.6;
@@ -189,16 +192,7 @@ function plaza(root, p, lights) {
 function fitness(p) {
   const [x0, x1, z0, z1] = Q.FITNESS,
     zc = (z0 + z1) / 2;
-  [1.2, 1.55, 1.9].forEach((h, i) => {
-    const x = x0 + 0.5 + i * 0.6;
-    for (const s of [-1, 1])
-      p.geo(STEEL.mid, new THREE.CylinderGeometry(0.045, 0.05, h, 8).translate(x, h / 2, zc + s * 0.55), PAINTED);
-    p.geo(
-      STEEL.pale,
-      new THREE.CylinderGeometry(0.025, 0.025, 1.1, 8).rotateX(Math.PI / 2).translate(x, h - 0.06, zc),
-      PAINTED,
-    );
-  });
+  fitnessBars(p, x0 + 0.5, zc);
   p.geo('#4d6b8a', new THREE.BoxGeometry(0.45, 0.06, 1.3).rotateX(0.22).translate(x1 - 0.5, 0.36, z1 - 0.85), PAINTED);
   p.box(STEEL.dark, 0.08, 0.32, 0.08, x1 - 0.5, 0, z1 - 0.35, PAINTED);
   p.box(STEEL.dark, 0.06, 1.2, 0.06, x1 - 0.4, 0, z0 + 0.3, PAINTED);

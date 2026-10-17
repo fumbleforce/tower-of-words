@@ -27,7 +27,7 @@ export const PROM = [76.04, 125.6, -11.5, -8.5]; // the promenade, 3 wide, the l
 export const NS_X = [105.8, 107.8]; // the north-south walk, 2 wide
 export const AXIS_X = (NS_X[0] + NS_X[1]) / 2;
 export const NORTH = [80, 129.2, -38, -36]; // the north path: N-W's door, the gardens' gate, N-E, on to the sea
-export const WEST = [78.2, 80, -38, -11.5]; // along the park's west side, the north path to the promenade
+export const PARK_W = 78.2; // the park's ground runs out west to here (the lawn along the dorm street beyond)
 export const PARK_N = [80, 129.2, -29.9, -28.4]; // along the park's north side under N-W's balconies, to the sea
 export const COURTS = [59.2, 104, -58.5, -56.5]; // the courts walk (island-sports.js), for the joins
 export const COURTS_EAST = [104, 127.6, -58.5, -56.5]; // the courts walk on east to a bench at the water
@@ -39,19 +39,19 @@ export const TERRACE = [124, 129.2, 8, 13]; // the sea terrace at the row's end,
 
 // --- the park ------------------------------------------------------------------------------------------------------
 export const PARK = [80, 126, PARK_N[3], PROM[2]];
-// the loop walk round the big lawn, 1 wide: its outer edge, and the walks off it on the gate's axis (north to the
-// park's north walk, south under the wisteria to the promenade) and west to the west walk
+// the loop walk round the big lawn, 1 wide: its outer edge, and the walks off it: north on the court gate's axis to the
+// park's north walk, and east along the pond's north end to the north-south walk
 export const GATE_X = 89.5; // the dorm courtyard's gate and hall doors (dorm_court's DOOR_X), the gardens' path
 export const LOOP = [82.4, 101.6, -26.2, -15.6];
 export const LOOP_W = 1.0;
 export const LAWN = [LOOP[0] + LOOP_W, LOOP[1] - LOOP_W, LOOP[2] + LOOP_W, LOOP[3] - LOOP_W]; // the big lawn
 export const LOOP_LINKS = [
   [GATE_X - 0.5, GATE_X + 0.5, PARK_N[3], LOOP[2]],
-  [GATE_X - 0.5, GATE_X + 0.5, LOOP[3], PROM[2]],
-  [WEST[1], LOOP[0], -21.4, -20.4],
+  [LOOP[1], NS_X[0], LOOP[2], LOOP[2] + LOOP_W],
 ];
-// the wisteria shelter over the south link, a bench either side of the walk under it
-export const WISTERIA = [GATE_X - 3.0, GATE_X + 3.0, -14.9, -12.3];
+// the wisteria shelter on the court gate's axis between the big lawn and the promenade's verge, a bench either side
+// under it looking over the lawn
+export const WISTERIA = [GATE_X - 3.0, GATE_X + 3.0, -15.5, -13.0]; // off the loop's south side
 // the pond, the north-south walk crossing it on a bridge; a boardwalk east off the bridge to the cherry's ring
 export const POND = [104, 109.6, -24.6, -15.6];
 export const BRIDGE = [NS_X[0], NS_X[1], POND[2] - 0.4, POND[3] + 0.4];
