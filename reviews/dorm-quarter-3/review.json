@@ -2,7 +2,7 @@
  "title": "Dorm quarter, round 3: layout b with sea-facing east blocks and a classier north residence",
  "date": "2026-10-17",
  "by": "claude-agent:dorm-quarter-3",
- "status": "open",
+ "status": "superseded",
  "issue": 661,
  "question": "Which north residence goes with the sea-facing east blocks, b1 townhouses or b2 garden villas, or what should change?",
  "multi": true,
@@ -53,5 +53,7 @@
    ],
    "note": "East: the same as b1. North: two three-storey garden villas for senior staff, about 14 × 11 m each, joined by a glazed one-storey lobby with the concierge desk, its door on the tennis gate's axis. Six large flats, one per floor and about 140 m² each. The top floor is set back behind a roof terrace and the lower floors have deep terraces facing south. The ground-floor flats have hedged gardens, and beyond them lies a shared garden with a pond, then the belt of trees along N-W's door path. A paved forecourt on the courts walk with two pines and low name walls. About 860 m² of floor. Pictures: the plan, the same air view as b, and eye level from the courts walk. Phone cost not measured, but the buildings are fewer and smaller than in b."
   }
- ]
+ ],
+ "decision": "Superseded by dorm-quarter-4. Jørgen rejected b1 and b2: \"you can tell this would be awful place to live, their balconies get zero interesting view, in the shadow of a giant block. They should be facintg the sea. Just dont put buildings in parallel like this\". Overall: \"dorm 2-5 could be two villas side by side for high level people. N-W 5 at least has a view over the park which is fine.\"",
+ "decided_at": "2026-10-17T11:53:05+0200"
 }
