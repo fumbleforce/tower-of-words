@@ -15,9 +15,10 @@ Anything Jørgen picks or judges goes to the Review queue, never into chat (GUID
    - every attempt in order, rejected ones too (GUIDE: Show every attempt), each with a `note` giving the recipe or settings, the seed and any measured numbers;
    - a live viewer under `links` for animations and 3D models;
    - a `question` in one plain sentence, the way you'd ask it out loud.
-4. `node tools/bible/check.mjs` (every path must resolve); view http://127.0.0.1:8771/bible/#review/<id> headless if needed, never on his screen.
-5. Commit only the item's files, `Facts: none` unless it changed what the game is.
-6. Tell the caller the id in one line.
+4. Never touch `updated` on an item he has answered unless you add a new round to it: a later `updated` makes his answer look missing and the item waits for him again.
+5. `node tools/bible/check.mjs` (every path must resolve); view http://127.0.0.1:8771/bible/#review/<id> headless if needed, never on his screen.
+6. Commit only the item's files, `Facts: none` unless it changed what the game is.
+7. Tell the caller the id in one line.
 
 ## Read answers
 
