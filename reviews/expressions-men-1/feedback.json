@@ -1,0 +1,26 @@
+{
+ "sent": "2026-10-17T16:25:58+0200",
+ "picked": [
+  "mori-smile-p2-s1",
+  "mori-flustered-p1-s3",
+  "kenji-grin-p1-s3",
+  "kenji-sheepish-p1-s1",
+  "hamada-sleepy-p3-s3",
+  "hamada-panicked-p1-s3"
+ ],
+ "options": {
+  "kenji-grin-p1-s4": {
+   "star": false,
+   "reject": true,
+   "comment": ""
+  },
+  "kenji-grin-p1-s2": {
+   "star": false,
+   "reject": true,
+   "comment": ""
+  }
+ },
+ "comment": "",
+ "read": false,
+ "history": []
+}
