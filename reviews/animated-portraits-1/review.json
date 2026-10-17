@@ -3,7 +3,7 @@
  "date": "2026-10-17",
  "updated": "2026-10-17T15:00:00+0200",
  "by": "claude-main/art-round",
- "status": "open",
+ "status": "decided",
  "question": "Do animated portraits like these belong in the game, and which way of making them?",
  "multi": true,
  "media": [
@@ -145,5 +145,8 @@
   "art/candidates/portraits/animated-portraits-1/bg-train-phone.webp",
   "art/candidates/portraits/animated-portraits-1/bg-office-desk.webp",
   "art/candidates/portraits/animated-portraits-1/bg-office-phone.webp"
- ]
+ ],
+ "decision": "no these dont work, the video options have a whole lot of flickering and poor cutouts, you cant iterate away from that. The puppet is too slow moving and blinking is unnatural with very short frames for it.",
+ "decided_at": "2026-10-17T15:43:35+0200",
+ "issue": 686
 }
