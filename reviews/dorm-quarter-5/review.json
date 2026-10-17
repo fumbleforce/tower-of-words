@@ -1,0 +1,46 @@
+{
+ "title": "Dorm quarter, round 5: beach promenade, new shapes for N-E and S-E, a park pond",
+ "date": "2026-10-17",
+ "by": "claude-agent:dorm-quarter-3",
+ "status": "open",
+ "issue": 661,
+ "question": "Is this the dorm quarter's layout now, or what should change?",
+ "multi": false,
+ "media": [
+  {
+   "image": "art/candidates/dorm-quarter-4/4-sea-gardens-villas.webp",
+   "caption": "Round 4, for comparison. Your answer: \"yes absolutely much better, though the beach promenade to the east is too boring and the ea in front of the blocks are just empty? seems to be a tree in the middle of the path in the central park. the blocks are also too boring, maybe the bottom right one has a V shape, one side facing east the other south. top right block could be more interesting too, either by shape or type. garden was a good idea keep it. maybe a pond in the middle of the park\". Round 5 keeps round 4 and changes only those things. The plan is drawn to scale over b's plan, north up. Nothing is built, and the views are plain blockout boxes."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-4/mood-whole-4.webp",
+   "caption": "Round 4, air view from over the sea to the south-east."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-5/mood-4-coast-walk.webp",
+   "caption": "Round 4, eye level on the coast walk looking north: a plain path, a row of pines, lamps."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-5/mood-4-park-centre.webp",
+   "caption": "Round 4, the park's centre from the big lawn: the cherry and its ring seat stand on the north-south walk."
+  },
+  {
+   "image": "art/candidates/dorm-quarter-5/mood-4-east-air.webp",
+   "caption": "Round 4, low air view of S-E and the coast from the south-east."
+  }
+ ],
+ "options": [
+  {
+   "id": "5",
+   "label": "5. Beach promenade, new east blocks, park pond",
+   "image": "art/candidates/dorm-quarter-5/5-beach-promenade.webp",
+   "images": [
+    "art/candidates/dorm-quarter-5/mood-whole-5.webp",
+    "art/candidates/dorm-quarter-5/mood-5-promenade.webp",
+    "art/candidates/dorm-quarter-5/mood-5-beach.webp",
+    "art/candidates/dorm-quarter-5/mood-5-east-air.webp",
+    "art/candidates/dorm-quarter-5/mood-5-pond.webp"
+   ],
+   "note": "Promenade: the coast walk becomes a paved promenade about 5 m wide, with a sea wall and railing on its sea side and a planted edge, lamps and groups of pines on the land side. The planting opens wherever a path comes in. Along it are benches facing the sea, a wooden lookout deck where the north path ends, steps down to a sand beach about 6 × 44 m on the straight stretch of coast, and a fitness corner with three bars. Where the park's promenade meets it there is a small paved plaza with two drinks machines, a bench, a beach tap and wide steps to the sand. In front of the blocks: the ground-floor flats get hedged gardens. N-E's sea garden has a timber pergola with two picnic tables, reached by a short walk off the north path, and pines in groups. North of the promenade the garden meets the water at a low stone edge. N-E steps down toward the sea, five storeys at the back, then four, then three, so every flat has a terrace facing east, with planters on each step (about 1,040 m² of floor against 950). S-E is a V on the quarter's grid: an east wing facing the sea and a south wing facing south, at right angles, with the door in the angle and a court with a play spot and trees behind (about 1,600 m² against 950). The south wing looks over the villas' roofs, about 10 m away, toward the sea. Park: the cherry and its ring seat move off the north-south walk onto the lawn between the play corner and the common room. A pond about 9 × 14 m fills the centre, with the walk crossing it on a wooden bridge and a boardwalk off the bridge to the cherry. The two trees that stood on the walk at the park's north edge move to its sides. The residents' gardens, the villas, N-W and the rest stay as in round 4. Pictures: the plan, the air view, the promenade from the same spot as round 4, the blocks from the beach, a low air view of S-E and the promenade, and the pond from the big lawn. Phone cost not measured."
+  }
+ ]
+}

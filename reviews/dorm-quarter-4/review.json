@@ -2,7 +2,7 @@
  "title": "Dorm quarter, round 4: sea-facing east blocks, two villas for dorm 2, gardens in the north",
  "date": "2026-10-17",
  "by": "claude-agent:dorm-quarter-3",
- "status": "open",
+ "status": "superseded",
  "issue": 661,
  "question": "Is this the dorm quarter's layout, or what should change?",
  "multi": false,
@@ -45,5 +45,6 @@
    ],
    "note": "East: N-E and S-E as in round 3, running north-south with balconies and main windows east over open lawn to the sea, 20 m and 28 m away, and nothing built in front of them. South: dorm 2 becomes two villas side by side for senior staff, each about 12 × 9 m, two storeys with a small roof pavilion and a roof terrace (about 245 m² each). Their doors face the dorm row on short paths, and their terraces and walled gardens face south over the lawn to the sea, about 15 m away. Eric's window in 203 looks south at the villas' door side 13 m away instead of dorm 2's corridor side, and the villas are lower than dorm 2, so more sky shows over them. North: the north residence goes. Its ground becomes residents' gardens, thirteen allotment plots with a tool shed and an orchard of plums and persimmons, reached only from N-W's door path, with a hedge along the courts walk. N-W keeps its view over the park and now looks north over the gardens from its corridors. The rest is b as it was. The north residence's 1,560 m² and dorm 2's 565 m² of floor become about 490 m² in the two villas, so the quarter houses fewer people than b. The concierge desk the island facts give the north residence has no place here. Pictures: the plan, the air view, the villas from the coast walk's corner, the sea from a villa's upper-floor terrace, and the gardens from N-W's door path. Phone cost not measured. There are fewer buildings than in b."
   }
- ]
+ ],
+ "decision": "Superseded by dorm-quarter-5. Jørgen: \"yes absolutely much better, though the beach promenade to the east is too boring and the ea in front of the blocks are just empty? seems to be a tree in the middle of the path in the central park. the blocks are also too boring, maybe the bottom right one has a V shape, one side facing east the other south. top right block could be more interesting too, either by shape or type. garden was a good idea keep it. maybe a pond in the middle of the park\""
 }
