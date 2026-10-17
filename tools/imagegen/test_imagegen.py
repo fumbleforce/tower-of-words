@@ -380,5 +380,49 @@ class AlwaysOnNegatives(unittest.TestCase):
         self.assertEqual(job['negative'], f'watermark, {always}')
 
 
+class SdxlModels(unittest.TestCase):
+    """A model file in the SDXL folder gets the SDXL workflow: its own LoRA folder, clip skip, embeddings named bare, BREAK
+    chunks; the Anima-only tools are refused instead of failing in ComfyUI."""
+    def setUp(self):
+        reset()
+        dirs = {k: tempfile.TemporaryDirectory() for k in ('MODELS_DIR', 'LORAS_DIR', 'SDXL_DIR', 'SDXL_LORAS_DIR', 'EMBEDDINGS_DIR', 'VAE_DIR')}
+        for k, d in dirs.items():
+            self.addCleanup(d.cleanup)
+            p = patch.object(server, k, d.name)
+            p.start()
+            self.addCleanup(p.stop)
+        for k, f in (('MODELS_DIR', 'anima.safetensors'), ('LORAS_DIR', 'anima-lora.safetensors'), ('SDXL_DIR', 'wai.safetensors'),
+                     ('SDXL_LORAS_DIR', 'booster.safetensors'), ('EMBEDDINGS_DIR', 'lazypos.safetensors')):
+            open(os.path.join(dirs[k].name, f), 'w').close()
+        p = patch.object(server, 'log', lambda msg: None)
+        p.start()
+        self.addCleanup(p.stop)
+        self.addCleanup(server.JOBS.clear)
+
+    def run_of(self, **extra):
+        body = dict(positive='lazypos, 1girl BREAK a quiet room', negative='worst quality', model_file='wai.safetensors', w=64, h=64,
+                    seed_mode='fixed', seed=7, **extra)
+        return server.new_run(body)[1][0]
+
+    def test_sdxl_job_gets_the_checkpoint_workflow(self):
+        job = self.run_of(loras=[dict(file='booster.safetensors', weight=0.5)])
+        self.assertEqual((job['arch'], job['clip_skip'], job['vae']), ('sdxl', 2, None))
+        wf = server.build_workflow(job)
+        self.assertEqual(wf['1']['class_type'], 'CheckpointLoaderSimple')
+        self.assertEqual(wf['L0']['inputs']['lora_name'], 'booster.safetensors')
+        self.assertEqual(wf['CS']['inputs']['stop_at_clip_layer'], -2)
+        self.assertEqual(wf['4']['inputs']['text'], 'embedding:lazypos, 1girl')
+        self.assertEqual(wf['7']['inputs']['positive'], ['4c1', 0])
+
+    def test_loras_and_anima_tools_follow_the_model(self):
+        with self.assertRaises(ValueError):
+            self.run_of(loras=[dict(file='anima-lora.safetensors', weight=1)])
+        with self.assertRaises(ValueError):
+            self.run_of(ipa=dict(ref='x.png', strength=0.5))
+        anima = server.new_run(dict(positive='a', negative='', model_file='anima.safetensors', w=64, h=64))[1][0]
+        self.assertEqual(anima['arch'], 'anima')
+        self.assertEqual(server.build_workflow(anima)['1']['class_type'], 'UNETLoader')
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -1,7 +1,7 @@
 """Minimal client for the local ComfyUI server (http://127.0.0.1:8188).
 Builds workflows for Anima-family models and SDXL (optionally with a style LoRA), queues them and saves the output.
 """
-import json, time, urllib.request, urllib.parse, os, random, sys
+import json, time, urllib.request, urllib.parse, os, random, re, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gpu_priority  # noqa: E402
@@ -64,22 +64,56 @@ def anima(prompt, negative, model='novaAnimeAM_v5.safetensors', w=1024, h=1344, 
 
 def sdxl(prompt, negative, ckpt, lora=None, lora_weight=0.8, w=832, h=1216, steps=28, cfg=5.5,
          sampler='euler_ancestral', scheduler='normal', seed=None):
-    wf = {
-        '1': {'class_type': 'CheckpointLoaderSimple', 'inputs': {'ckpt_name': ckpt}},
-        '4': {'class_type': 'CLIPTextEncode', 'inputs': {'text': prompt, 'clip': ['1', 1]}},
-        '5': {'class_type': 'CLIPTextEncode', 'inputs': {'text': negative, 'clip': ['1', 1]}},
-        '6': {'class_type': 'EmptyLatentImage', 'inputs': {'width': w, 'height': h, 'batch_size': 1}},
-        '7': {'class_type': 'KSampler', 'inputs': {'model': ['1', 0], 'positive': ['4', 0], 'negative': ['5', 0], 'latent_image': ['6', 0],
-                                                   'seed': seed if seed is not None else random.randint(0, 2**32), 'steps': steps, 'cfg': cfg,
-                                                   'sampler_name': sampler, 'scheduler': scheduler, 'denoise': 1.0}},
-        '8': {'class_type': 'VAEDecode', 'inputs': {'samples': ['7', 0], 'vae': ['1', 2]}},
-        '9': {'class_type': 'SaveImage', 'inputs': {'images': ['8', 0], 'filename_prefix': 'kotodama'}},
-    }
-    if lora:
-        wf['2'] = {'class_type': 'LoraLoader', 'inputs': {'model': ['1', 0], 'clip': ['1', 1], 'lora_name': lora,
-                                                         'strength_model': lora_weight, 'strength_clip': lora_weight}}
-        wf['4']['inputs']['clip'] = wf['5']['inputs']['clip'] = ['2', 1]
-        wf['7']['inputs']['model'] = ['2', 0]
+    return sdxl_image(prompt, negative, ckpt, w=w, h=h, steps=steps, cfg=cfg, sampler=sampler, scheduler=scheduler, seed=seed,
+                      loras=[(lora, lora_weight)] if lora else ())
+
+
+def embedding_words(text, names):
+    """A1111 writes a textual inversion as its bare name (lazypos); ComfyUI needs embedding:lazypos. names: the file stems."""
+    for n in sorted(names, key=len, reverse=True):
+        text = re.sub(r'(?<![\w:.-])' + re.escape(n) + r'(?![\w.-])', 'embedding:' + n, text)
+    return text
+
+
+def _encode(wf, key, text, clip):
+    """One CLIPTextEncode, or one per BREAK-separated chunk joined by ConditioningConcat (A1111's BREAK: each chunk is
+    encoded on its own and the results are put one after the other). Returns the node to sample with."""
+    chunks = [c.strip(' ,\n') for c in re.split(r'\s*\bBREAK\b\s*', text)]
+    chunks = [c for c in chunks if c] or ['']
+    wf[key] = {'class_type': 'CLIPTextEncode', 'inputs': {'text': chunks[0], 'clip': clip}}
+    out = [key, 0]
+    for i, c in enumerate(chunks[1:], 1):
+        wf[f'{key}b{i}'] = {'class_type': 'CLIPTextEncode', 'inputs': {'text': c, 'clip': clip}}
+        wf[f'{key}c{i}'] = {'class_type': 'ConditioningConcat', 'inputs': {'conditioning_to': out, 'conditioning_from': [f'{key}b{i}', 0]}}
+        out = [f'{key}c{i}', 0]
+    return out
+
+
+def sdxl_image(prompt, negative, ckpt, w=832, h=1216, steps=28, cfg=5.5, sampler='euler_ancestral', scheduler='normal', seed=None,
+               loras=(), clip_skip=None, vae=None, embeddings=()):
+    """An SDXL (Illustrious, NoobAI ...) checkpoint. loras: (filename, weight) on model and text encoder; clip_skip 2 is
+    A1111's "Clip skip: 2"; vae: a separate VAE file, else the checkpoint's own; embeddings: textual inversion names
+    written bare in the prompts. BREAK splits a prompt into separately encoded chunks. Node ids match anima() ('6' latent,
+    '7' sampler, '8' decode, '9' save), so the img2img helpers work on both."""
+    wf = {'1': {'class_type': 'CheckpointLoaderSimple', 'inputs': {'ckpt_name': ckpt}}}
+    model, clip = ['1', 0], ['1', 1]
+    for i, (name, weight) in enumerate(loras):
+        wf[f'L{i}'] = {'class_type': 'LoraLoader', 'inputs': {'model': model, 'clip': clip, 'lora_name': name,
+                                                             'strength_model': weight, 'strength_clip': weight}}
+        model, clip = [f'L{i}', 0], [f'L{i}', 1]
+    if clip_skip:
+        wf['CS'] = {'class_type': 'CLIPSetLastLayer', 'inputs': {'clip': clip, 'stop_at_clip_layer': -int(clip_skip)}}
+        clip = ['CS', 0]
+    if vae:
+        wf['3'] = {'class_type': 'VAELoader', 'inputs': {'vae_name': vae}}
+    pos = _encode(wf, '4', embedding_words(prompt, embeddings), clip)
+    neg = _encode(wf, '5', embedding_words(negative, embeddings), clip)
+    wf['6'] = {'class_type': 'EmptyLatentImage', 'inputs': {'width': w, 'height': h, 'batch_size': 1}}
+    wf['7'] = {'class_type': 'KSampler', 'inputs': {'model': model, 'positive': pos, 'negative': neg, 'latent_image': ['6', 0],
+                                                    'seed': seed if seed is not None else random.randint(0, 2**32), 'steps': steps, 'cfg': cfg,
+                                                    'sampler_name': sampler, 'scheduler': scheduler, 'denoise': 1.0}}
+    wf['8'] = {'class_type': 'VAEDecode', 'inputs': {'samples': ['7', 0], 'vae': ['3', 0] if vae else ['1', 2]}}
+    wf['9'] = {'class_type': 'SaveImage', 'inputs': {'images': ['8', 0], 'filename_prefix': 'kotodama'}}
     return wf
 
 

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeComposition, assembleComposition, portraitUrl, lockedExclusions, promptParts} from '../web/image-compose.js';
+import {normalizeComposition, assembleComposition, portraitUrl, lockedExclusions, promptParts, withStyleLoras} from '../web/image-compose.js';
 import ALWAYS_NEGATIVE from '../../imagegen/web/always-negative.json' with {type: 'json'};
 
 const rec = (id, data) => ({id, v: 3, data});
@@ -233,4 +233,9 @@ test('nothing typed in a section removes the rating exclusions of a reward', () 
   const body = assembleComposition(c, presets);
   assert.equal(body.negative, `blur, ${SOFT}, ${ALWAYS}, watermark`);
   assert.deepEqual(body.presets.negatives, [{id: 'clean', v: 3}, {id: 'soft', v: 3}]);
+});
+test("a style's LoRAs come first and the composition's own pick of the same file keeps its weight", () => {
+  assert.deepEqual(withStyleLoras('booster.safetensors:0.5, slider.safetensors:-1.1, eyes.safetensors', [{file: 'slider.safetensors', weight: '-0.5'}]),
+    [{file: 'booster.safetensors', weight: 0.5}, {file: 'eyes.safetensors', weight: 1}, {file: 'slider.safetensors', weight: -0.5}]);
+  assert.deepEqual(withStyleLoras('', null), []);
 });

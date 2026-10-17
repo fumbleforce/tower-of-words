@@ -112,11 +112,12 @@ function build(c, presets, subplotId) {
     negative: c.override?.negative != null ? (lockedIds.length ? dedupe([c.override.negative, ...lockedTexts]) : c.override.negative) : negative, overridden: !!c.override,
     model_file: md.file, steps: +c.steps || md.steps || 30, cfg: c.cfg != null && c.cfg !== '' ? +c.cfg : (md.cfg ?? 5),
     sampler: c.sampler || md.sampler || 'euler_ancestral', scheduler: c.scheduler || md.scheduler || 'normal',
+    ...(md.clip_skip ? {clip_skip: +md.clip_skip} : {}), ...(md.vae ? {vae: md.vae} : {}),
     w: +c.width || fr.w || 1152, h: +c.height || fr.h || 896, count: Math.min(8, Math.max(1, +c.count || 1)),
     seed_mode: c.seedMode, seed: +c.seed || 0, rating, characters: chars.map(p => p.id), scene_text: direction,
     compose: {...structuredClone({...c, original: undefined}), chars: c.characters, cams: c.cameras, subplotId},
     start: c.start?.image ? {image: c.start.image, denoise: +c.start.denoise || 0.35, ...(c.start.mask ? {mask: c.start.mask} : {})} : null,
-    loras: (c.loras || []).map(l => ({file: l.file, weight: +l.weight})), control: c.control?.file && c.control.image ? {...c.control} : null,
+    loras: withStyleLoras(style.loras, c.loras), control: c.control?.file && c.control.image ? {...c.control} : null,
     huefix: (c.huefix || []).map(h => ({...h})),
     presets: {characters: c.characters.map(id => ref('character', id)).filter(Boolean), man: generic ? ref('character', generic.id) : null,
       model: ref('model', c.model), style: ref('style', c.style), framing: ref('framing', c.framing),
@@ -127,6 +128,16 @@ function build(c, presets, subplotId) {
     repaint: canReference && c.faceFix ? {ref: portrait, denoise: +c.faceStrength, prompt: repaintPrompt} : null,
     autostart: true,
   }, locked: {soft: softOn(c, rating), ids: lockedIds}};
+}
+// The style's LoRAs ("file:weight, file:weight") first, then the composition's own; a file the composition also picks
+// keeps the composition's weight.
+export function withStyleLoras(text, own) {
+  const mine = (own || []).map(l => ({file: l.file, weight: +l.weight}));
+  const fromStyle = String(text || '').split(',').map(x => x.trim()).filter(Boolean).map(x => {
+    const i = x.lastIndexOf(':');
+    return i > 0 && x.slice(i + 1).trim() !== '' && !isNaN(+x.slice(i + 1)) ? {file: x.slice(0, i).trim(), weight: +x.slice(i + 1)} : {file: x, weight: 1};
+  }).filter(l => !mine.some(m => m.file === l.file));
+  return [...fromStyle, ...mine];
 }
 export const assembleComposition = (c, presets, subplotId) => build(c, presets, subplotId).body;
 // The rating exclusions for this shot: the soft preset where it applies (soft: true) and, for a reward, the configured

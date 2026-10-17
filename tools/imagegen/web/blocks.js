@@ -29,7 +29,8 @@ export const FIELDS = {
   outfit: [['name', 'Name'], ['character', 'For', 'ref', 'character'], ['text', 'What she wears (after "wearing")', 3], ['negative', 'Extra negative', 1], ['notes', 'Notes', 2]],
   style: [['name', 'Name'], ['quality', 'Quality tags', 2], ['anchors', 'Style anchors', 2], ['suffix', 'Ends with', 1], ['negative', 'Extra negative', 2],
     ['defaults.rating', 'Default rating', 'select', ['', ...RATINGS]], ['defaults.framing', 'Default framing', 'ref', 'framing'],
-    ['defaults.model', 'Default model', 'ref', 'model'], ['defaults.negatives', 'Default negative sets', 'negs'], ['notes', 'Notes', 3]],
+    ['defaults.model', 'Default model', 'ref', 'model'], ['defaults.negatives', 'Default negative sets', 'negs'],
+    ['loras', 'LoRAs it adds (file:weight, comma separated)', 1], ['notes', 'Notes', 3]],
   negative: [['name', 'Name'], ['text', 'Negative text', 3], ['default', 'On by default', 'check'],
     ['soft', 'On for every nonadult reward', 'check'], ['notes', 'Notes', 2]],
   framing: [['name', 'Name'], ['w', 'Width', 'num'], ['h', 'Height', 'num'], ['prompt', 'Added to the prompt (optional)', 2], ['notes', 'Notes', 2]],
@@ -42,9 +43,10 @@ export const FIELDS = {
   pose: [['name', 'Name'], ['text', 'Added to the prompt', 3], ['notes', 'Notes', 2]],
   light: [['name', 'Name'], ['text', 'Added to the prompt', 2], ['notes', 'Notes', 2]],
   scene: [['name', 'Name'], ['text', 'Scene text', 5], ['rating', 'Rating it sets', 'select', ['', ...RATINGS]], ['notes', 'Notes', 2]],
-  model: [['name', 'Name'], ['file', 'File', 'file'], ['steps', 'Steps', 'num'], ['cfg', 'CFG', 'num'], ['sampler', 'Sampler', 1], ['scheduler', 'Scheduler', 1], ['notes', 'Notes', 3]],
+  model: [['name', 'Name'], ['file', 'File', 'file'], ['steps', 'Steps', 'num'], ['cfg', 'CFG', 'num'], ['sampler', 'Sampler', 1], ['scheduler', 'Scheduler', 1],
+    ['clip_skip', 'Clip skip (SDXL only; 2 is the usual)', 'num'], ['vae', 'VAE file (SDXL only; empty is the checkpoint\'s own)', 1], ['notes', 'Notes', 3]],
 };
-export const PAIRS = { character: [['name', 'gender'], ['build', 'rating_cap']], framing: [['w', 'h']], camera: [['group', 'diagram']], model: [['steps', 'cfg'], ['sampler', 'scheduler']],
+export const PAIRS = { character: [['name', 'gender'], ['build', 'rating_cap']], framing: [['w', 'h']], camera: [['group', 'diagram']], model: [['steps', 'cfg'], ['sampler', 'scheduler'], ['clip_skip', 'vae']],
   style: [['defaults.rating', 'defaults.framing']], scene: [['name', 'rating']] };
 
 export const getp = (o, path) => path.split('.').reduce((a, k) => (a == null ? a : a[k]), o);

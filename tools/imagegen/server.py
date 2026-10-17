@@ -22,6 +22,13 @@ TEST_COPY = PORT != 8772
 WEB = os.path.join(HERE, 'web')
 MODELS_DIR = os.path.expanduser('~/ai/ComfyUI/models/diffusion_models')
 LORAS_DIR = os.path.expanduser('~/ai/ComfyUI/models/loras')
+# SDXL checkpoints (Illustrious, NoobAI ...) and their LoRAs: ComfyUI's extra_model_paths.yaml points at these; the
+# model file's folder says which workflow a job gets. Embeddings are named bare in prompts, as in A1111.
+SDXL_DIR = os.path.expanduser('~/ai/sd/models')
+SDXL_LORAS_DIR = os.path.expanduser('~/ai/sd/loras')
+EMBEDDINGS_DIR = os.path.expanduser('~/ai/ComfyUI/models/embeddings')
+VAE_DIR = os.path.expanduser('~/ai/ComfyUI/models/vae')
+SDXL_ONLY = 'is for Anima models only; this job uses an SDXL checkpoint'
 CONTROL_DIR = os.path.expanduser('~/ai/ComfyUI/models/controlnet')
 NOT_ANIMA_LORA = ('wan', 'yue', 'lightx2v')
 MASKS = os.path.join(store.ROOT, 'masks')
@@ -124,7 +131,7 @@ def start_image(wf, start):
     w, h = wf['6']['inputs']['width'], wf['6']['inputs']['height']
     wf['S1'] = {'class_type': 'LoadImage', 'inputs': {'image': name}}
     wf['S2'] = {'class_type': 'ImageScale', 'inputs': {'image': ['S1', 0], 'upscale_method': 'lanczos', 'width': w, 'height': h, 'crop': 'center'}}
-    wf['6'] = {'class_type': 'VAEEncode', 'inputs': {'pixels': ['S2', 0], 'vae': ['3', 0]}}
+    wf['6'] = {'class_type': 'VAEEncode', 'inputs': {'pixels': ['S2', 0], 'vae': wf['8']['inputs']['vae']}}
     wf['7']['inputs']['denoise'] = start['denoise']
     if start.get('mask'):
         wf['M1'] = {'class_type': 'LoadImage', 'inputs': {'image': comfy.upload(consist.as_png(consist.resolve(start['mask'])))}}
@@ -148,9 +155,17 @@ def control_image(wf, control):
     return wf
 
 
+def build_workflow(j):
+    loras = [(x['file'], x['weight']) for x in j.get('loras') or []]
+    common = dict(w=j['w'], h=j['h'], steps=j['steps'], cfg=j['cfg'], sampler=j['sampler'], scheduler=j['scheduler'], seed=j['seed'], loras=loras)
+    if j.get('arch') == 'sdxl':
+        return comfy.sdxl_image(j['positive'], j['negative'], j['model_file'], clip_skip=j.get('clip_skip'), vae=j.get('vae') or None,
+                                embeddings=embedding_names(), **common)
+    return comfy.anima(j['positive'], j['negative'], model=j['model_file'], **common)
+
+
 def run_job(j):
-    wf = comfy.anima(j['positive'], j['negative'], model=j['model_file'], w=j['w'], h=j['h'], steps=j['steps'], cfg=j['cfg'],
-                     sampler=j['sampler'], scheduler=j['scheduler'], seed=j['seed'], loras=[(x['file'], x['weight']) for x in j.get('loras') or []])
+    wf = build_workflow(j)
     if j.get('start'):
         start_image(wf, j['start'])
     if j.get('control'):
@@ -208,7 +223,7 @@ def run_job(j):
 
 
 def log_entry(j):
-    keep = ('id', 'n', 'run_id', 'idx', 'status', 'error', 'file', 'thumb', 'seed', 'model_file', 'w', 'h', 'steps', 'cfg', 'sampler',
+    keep = ('id', 'n', 'run_id', 'idx', 'status', 'error', 'file', 'thumb', 'seed', 'model_file', 'arch', 'clip_skip', 'vae', 'w', 'h', 'steps', 'cfg', 'sampler',
             'scheduler', 'positive', 'negative', 'overridden', 'presets', 'rating', 'scene_text', 'characters', 'compose', 'elapsed',
             'ipa', 'repaint', 'raw_file', 'start', 'loras', 'control', 'huefix')
     e = {k: j.get(k) for k in keep}
@@ -327,12 +342,12 @@ def _clean_start(x, private, run_id=''):
     return out
 
 
-def _clean_loras(xs):
-    have = set(lora_files())
+def _clean_loras(xs, arch='anima'):
+    have = set(lora_files(arch))
     out = []
     for x in xs or []:
         if x.get('file') not in have:
-            raise ValueError(f"LoRA not found: {x.get('file')}")
+            raise ValueError(f"LoRA not found for this {'SDXL' if arch == 'sdxl' else 'Anima'} model: {x.get('file')}")
         out.append(dict(file=x['file'], weight=max(-2.0, min(2.0, float(x.get('weight', 0.8))))))
     return out[:4]
 
@@ -363,21 +378,27 @@ def new_run(body, private=False):
     else:
         seeds = [random.randint(1, 2**31 - 1) for _ in range(count)]
     model_file = body['model_file']
-    if not os.path.exists(os.path.join(MODELS_DIR, model_file)):
+    arch = model_arch(model_file)
+    if not arch:
         raise ValueError(f'model file not found: {model_file}')
+    sdxl = dict(clip_skip=max(1, min(12, int(body.get('clip_skip') or 2))), vae=_clean_vae(body.get('vae'))) if arch == 'sdxl' else {}
+    if arch == 'sdxl':
+        for k, what in (('ipa', 'The identity reference'), ('repaint', 'Face fix'), ('control', 'A guide picture (LLLite)')):
+            if body.get(k):
+                raise ValueError(f'{what} {SDXL_ONLY}')
     chars = body.get('characters') or []
     tag = '-'.join(c for c in chars)[:40] or 'scene'
     start = _clean_start(body.get('start'), private, run_id)
     if start and start.get('mask') and isinstance(body.get('compose'), dict) and isinstance(body['compose'].get('start'), dict):
         body['compose']['start'] = dict(body['compose']['start'], mask=start['mask'])  # the record keeps the path, not the drawing
-    loras, control, fixes = _clean_loras(body.get('loras')), _clean_control(body.get('control'), private), huefix.clean(body.get('huefix'))
+    loras, control, fixes = _clean_loras(body.get('loras'), arch), _clean_control(body.get('control'), private), huefix.clean(body.get('huefix'))
     who = made_by(body)
     jobs = []
     for i, s in enumerate(seeds):
         jobs.append(dict(
             id=f'{run_id}-{i + 1}', run_id=run_id, idx=i + 1, tag=tag, status='queued', progress=0, seed=s,
             positive=body['positive'].strip(), negative=ensure_negative(body['negative']), overridden=bool(body.get('overridden')),
-            model_file=model_file, w=int(body['w']), h=int(body['h']), steps=int(body.get('steps', 30)), cfg=float(body.get('cfg', 5)),
+            model_file=model_file, arch=arch, **sdxl, w=int(body['w']), h=int(body['h']), steps=int(body.get('steps', 30)), cfg=float(body.get('cfg', 5)),
             sampler=body.get('sampler', 'euler_ancestral'), scheduler=body.get('scheduler', 'normal'),
             presets=body.get('presets', {}), rating=body.get('rating'), scene_text=body.get('scene_text', ''),
             characters=chars, compose=body.get('compose', {}), created=time.time(),
@@ -393,7 +414,7 @@ def new_run(body, private=False):
 
 def public_job(j):
     out = {k: j.get(k) for k in ('id', 'n', 'run_id', 'idx', 'status', 'progress', 'seed', 'file', 'thumb', 'error', 'w', 'h', 'elapsed',
-                                  'positive', 'negative', 'overridden', 'compose', 'model_file', 'steps', 'cfg', 'sampler', 'scheduler', 'star', 'fav', 'reject', 'reject_reason', 'note',
+                                  'positive', 'negative', 'overridden', 'compose', 'model_file', 'arch', 'clip_skip', 'vae', 'steps', 'cfg', 'sampler', 'scheduler', 'star', 'fav', 'reject', 'reject_reason', 'note',
                                   'presets', 'characters', 'rating', 'deleted', 'ipa', 'repaint', 'raw_file', 'phase', 'start', 'loras', 'control', 'huefix',
                                   'owner', 'round')}
     if j.get('created') is not None:
@@ -654,11 +675,34 @@ def tuning(typ, pid, private=False):
     return out
 
 
-def lora_files():
+def _safetensors(folder):
     try:
-        return sorted(f for f in os.listdir(LORAS_DIR) if f.endswith('.safetensors') and not f.lower().startswith(NOT_ANIMA_LORA))
+        return sorted(f for f in os.listdir(folder) if f.endswith('.safetensors'))
     except OSError:
         return []
+
+
+def lora_files(arch=None):
+    """The LoRAs for an Anima model, for an SDXL one, or (arch None, the pickers' list) both, Anima first."""
+    anima = [f for f in _safetensors(LORAS_DIR) if not f.lower().startswith(NOT_ANIMA_LORA)]
+    return anima if arch == 'anima' else _safetensors(SDXL_LORAS_DIR) if arch == 'sdxl' else anima + _safetensors(SDXL_LORAS_DIR)
+
+
+def embedding_names():
+    return [f[:-len('.safetensors')] for f in _safetensors(EMBEDDINGS_DIR)]
+
+
+def _clean_vae(name):
+    if not name:
+        return None
+    if name not in _safetensors(VAE_DIR):
+        raise ValueError(f'VAE not found: {name}')
+    return name
+
+
+def model_arch(name):
+    """'anima' for a diffusion model in MODELS_DIR, 'sdxl' for a checkpoint in SDXL_DIR, None when it is in neither."""
+    return 'anima' if name in model_files('anima') else 'sdxl' if name in model_files('sdxl') else None
 
 
 def control_files():
@@ -670,11 +714,10 @@ def control_files():
     return [dict(file=f, kind=re.sub(r'-(v?\d+)$', '', f[len('anima-lllite-'):-len('.safetensors')])) for f in names]
 
 
-def model_files():
-    try:
-        return sorted(f for f in os.listdir(MODELS_DIR) if f.endswith('.safetensors') and not f.lower().startswith(NOT_ANIMA))
-    except OSError:
-        return []
+def model_files(arch=None):
+    """The model files a model block can name: Anima diffusion models, then SDXL checkpoints."""
+    anima = [f for f in _safetensors(MODELS_DIR) if not f.lower().startswith(NOT_ANIMA)]
+    return anima if arch == 'anima' else _safetensors(SDXL_DIR) if arch == 'sdxl' else anima + _safetensors(SDXL_DIR)
 
 
 # ---------------------------------------------------------------- HTTP

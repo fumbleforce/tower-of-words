@@ -20,6 +20,8 @@
 - A selected image can start a scene draft or a reusable image-tool character.
 - Keep code checkpoints and local data backups before changing the editing suite (Backups, below).
 
+Models: an Anima diffusion model in `~/ai/ComfyUI/models/diffusion_models`, or an SDXL checkpoint (Illustrious, NoobAI) in `~/ai/sd/models`; the file's folder picks the workflow. An SDXL job takes its LoRAs from `~/ai/sd/loras`, the model block's clip skip (2 when empty) and VAE (empty is the checkpoint's own), names textual inversions in `~/ai/ComfyUI/models/embeddings` bare as A1111 does (`lazypos`), and encodes each `BREAK` chunk on its own. The identity reference, face fix and LLLite guides are Anima only and are refused on SDXL. A style block can add LoRAs (`file:weight, ...`) ahead of the composition's own.
+
 ComfyUI started by the dashboard leaves 2 GB of VRAM alone (`--reserve-vram`, `IMAGEGEN_RESERVE_VRAM` in gpu.py), so the browser keeps headroom while a render runs. A ComfyUI that was already running keeps whatever it was started with.
 
 ## Image workspace
