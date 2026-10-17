@@ -1,0 +1,96 @@
+{
+ "title": "CFO-type executive, round 2: pinstripe suit",
+ "date": "2026-10-17",
+ "by": "claude-main/art-round",
+ "status": "open",
+ "question": "Which of these should the CFO-type executive look like, or what should change?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/candidates/portraits/cfo-1/c4-r261017-120324-295-4-s4.webp",
+   "caption": "The starting point: cfo-1 c4-s4, where you wrote \"yeah but maype pinstripe suit, the color is too festive\". Recipe art/candidates/portraits/cfo-1/recipes/c4.json, seed 4."
+  },
+  {
+   "image": "art/candidates/portraits/cfo-2/sheet.webp",
+   "caption": "Pictures: c4-s4, then all 8 new renders in order, framed at the game's portrait scale. The one change is the suit colour, from bottle green to a pinstripe: p1 charcoal, p2 dark navy. Cut (three-piece, waistcoat, open collar, no tie), hair, face, age, smirk and seeds 1 to 4 are as c4; seed 4 is c4-s4's. Every render is a new generation, nothing pasted. No broken anatomy, so none were screened out. The charcoal comes out close to black on seeds 1 and 2."
+  },
+  {
+   "image": "art/candidates/portraits/cfo-2/lineup.webp",
+   "caption": "The male cast's game portraits (Kenji, Mori, the guard, Hamada now), your Hamada pick h2-s1, c4-s4, then seed 4 of p1 and p2, at the size the game shows them on a 1080p desktop. Mori wears plain dark grey with a tie and Hamada plain navy with a tie; the pinstripe, waistcoat and open collar are what set this man apart."
+  }
+ ],
+ "options": [
+  {
+   "id": "p1-s1",
+   "label": "p1-s1",
+   "image": "art/candidates/portraits/cfo-2/p1-r261017-123543-8e8-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-2/p1-r261017-123543-8e8-1-s1.webp"
+   ],
+   "note": "p1, suit colour only: charcoal pinstripe three-piece, in place of c4's bottle green (preset cfo-pin-charcoal v1 = cfo-green v2 with only the colour words changed). Parent cfo-1 c4-s4. Recipe art/candidates/portraits/cfo-2/recipes/p1.json, seed 1, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair and necktie excluded, c4's smirk words. Red rim 0.0%. Framing: headroom 2%, 9% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Dashboard #2638. My verdict, kept: charcoal pinstripe three-piece, stripes follow the folds; the charcoal reads near black; toothy smirk."
+  },
+  {
+   "id": "p1-s2",
+   "label": "p1-s2",
+   "image": "art/candidates/portraits/cfo-2/p1-r261017-123543-8e8-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-2/p1-r261017-123543-8e8-2-s2.webp"
+   ],
+   "note": "p1, suit colour only: charcoal pinstripe three-piece, in place of c4's bottle green (preset cfo-pin-charcoal v1 = cfo-green v2 with only the colour words changed). Parent cfo-1 c4-s4. Recipe art/candidates/portraits/cfo-2/recipes/p1.json, seed 2, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair and necktie excluded, c4's smirk words. Red rim 0.0%. Framing: headroom 2%, 10% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Dashboard #2639. My verdict, kept: near-black pinstripe, head turned, toothy grin; one loose strand falls by his left temple (image right)."
+  },
+  {
+   "id": "p1-s3",
+   "label": "p1-s3",
+   "image": "art/candidates/portraits/cfo-2/p1-r261017-123543-8e8-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-2/p1-r261017-123543-8e8-3-s3.webp"
+   ],
+   "note": "p1, suit colour only: charcoal pinstripe three-piece, in place of c4's bottle green (preset cfo-pin-charcoal v1 = cfo-green v2 with only the colour words changed). Parent cfo-1 c4-s4. Recipe art/candidates/portraits/cfo-2/recipes/p1.json, seed 3, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair and necktie excluded, c4's smirk words. Red rim 0.0%. Framing: headroom 2%, 9% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Dashboard #2640. My verdict, kept: charcoal pinstripe a shade lighter than s1 and s2, slight turn, toothy smirk."
+  },
+  {
+   "id": "p1-s4",
+   "label": "p1-s4",
+   "image": "art/candidates/portraits/cfo-2/p1-r261017-123543-8e8-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-2/p1-r261017-123543-8e8-4-s4.webp"
+   ],
+   "note": "p1, suit colour only: charcoal pinstripe three-piece, in place of c4's bottle green (preset cfo-pin-charcoal v1 = cfo-green v2 with only the colour words changed). Parent cfo-1 c4-s4. Recipe art/candidates/portraits/cfo-2/recipes/p1.json, seed 4, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair and necktie excluded, c4's smirk words. Red rim 0.0%. Framing: headroom 3%, 8% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Dashboard #2641. My verdict, kept: c4-s4's seed: the lightest charcoal of the four, pinstripes clear; the smirk closes its mouth this time."
+  },
+  {
+   "id": "p2-s1",
+   "label": "p2-s1",
+   "image": "art/candidates/portraits/cfo-2/p2-r261017-124206-df5-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-2/p2-r261017-124206-df5-1-s1.webp"
+   ],
+   "note": "p2, suit colour only: dark navy pinstripe three-piece, in place of c4's bottle green (preset cfo-pin-navy v1 = cfo-green v2 with only the colour words changed). Parent cfo-1 c4-s4. Recipe art/candidates/portraits/cfo-2/recipes/p2.json, seed 1, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair and necktie excluded, c4's smirk words. Red rim 0.3%. Framing: headroom 2%, 9% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Dashboard #2645. My verdict, kept: dark navy pinstripe three-piece, stripes visible; narrow-eyed closed smirk."
+  },
+  {
+   "id": "p2-s2",
+   "label": "p2-s2",
+   "image": "art/candidates/portraits/cfo-2/p2-r261017-124206-df5-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-2/p2-r261017-124206-df5-2-s2.webp"
+   ],
+   "note": "p2, suit colour only: dark navy pinstripe three-piece, in place of c4's bottle green (preset cfo-pin-navy v1 = cfo-green v2 with only the colour words changed). Parent cfo-1 c4-s4. Recipe art/candidates/portraits/cfo-2/recipes/p2.json, seed 2, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair and necktie excluded, c4's smirk words. Red rim 0.4%. Framing: headroom 1%, 11% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Dashboard #2646. My verdict, kept: dark navy pinstripe, heavy-lidded smirk, chin up."
+  },
+  {
+   "id": "p2-s3",
+   "label": "p2-s3",
+   "image": "art/candidates/portraits/cfo-2/p2-r261017-124206-df5-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-2/p2-r261017-124206-df5-3-s3.webp"
+   ],
+   "note": "p2, suit colour only: dark navy pinstripe three-piece, in place of c4's bottle green (preset cfo-pin-navy v1 = cfo-green v2 with only the colour words changed). Parent cfo-1 c4-s4. Recipe art/candidates/portraits/cfo-2/recipes/p2.json, seed 3, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair and necktie excluded, c4's smirk words. Red rim 0.3%. Framing: headroom 2%, 9% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Dashboard #2647. My verdict, kept: dark navy pinstripe, slight turn, toothy smirk."
+  },
+  {
+   "id": "p2-s4",
+   "label": "p2-s4",
+   "image": "art/candidates/portraits/cfo-2/p2-r261017-124206-df5-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-2/p2-r261017-124206-df5-4-s4.webp"
+   ],
+   "note": "p2, suit colour only: dark navy pinstripe three-piece, in place of c4's bottle green (preset cfo-pin-navy v1 = cfo-green v2 with only the colour words changed). Parent cfo-1 c4-s4. Recipe art/candidates/portraits/cfo-2/recipes/p2.json, seed 4, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair and necktie excluded, c4's smirk words. Red rim 0.3%. Framing: headroom 3%, 9% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Dashboard #2648. My verdict, kept: c4-s4's seed: navy pinstripe with a pocket square, closed smirk; nearest c4-s4 in pose and face."
+  }
+ ]
+}

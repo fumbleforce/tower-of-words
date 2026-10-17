@@ -2,7 +2,7 @@
  "title": "CFO-type executive, new character concept round 1",
  "date": "2026-10-17",
  "by": "claude-main/art-round",
- "status": "open",
+ "status": "decided",
  "question": "Which of these should the CFO-type executive look like, or what should change?",
  "multi": true,
  "media": [
@@ -164,5 +164,8 @@
    ],
    "note": "c4, expression only: 'self-assured, a confident smirk with his chin slightly raised' in place of 'calm, warm expression with a slight smile' (preset cfo-green v2). Parent c2. Recipe art/candidates/portraits/cfo-1/recipes/c4.json, seed 4, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.3%. Framing: headroom 3%, 9% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.097 (a different man, so a fail there is expected). Dashboard #2623. My verdict, kept: toothy smirk; tips toward villain more than executive. No grey at the temples."
   }
- ]
+ ],
+ "decision": "c4-s4: yeah but maype pinstripe suit, the color is too festive (round 2: cfo-2)",
+ "decided_at": "2026-10-17T12:47:00+0200",
+ "issue": 683
 }

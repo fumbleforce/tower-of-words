@@ -1,0 +1,26 @@
+{
+ "details": "CFO-type executive concept, round cfo-2 candidate p1. Parent cfo-1 c4-s4 (recipe ../cfo-1/recipes/c4.json, preset cfo-green v2, seed 4). Jørgen: \"yeah but maype pinstripe suit, the color is too festive\". The one change: the suit colour, preset cfo-pin-charcoal v1 = cfo-green v2 with bottle green -> charcoal pinstripe. Cut (three-piece, waistcoat, open collar, necktie excluded), smirk scene words, negatives, style and seeds 1-4 as c4. Staging: ../staging.md.",
+ "characters": [
+  "cfo-pin-charcoal"
+ ],
+ "outfit": {
+  "cfo-pin-charcoal": true
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "self-assured, a confident smirk with his chin slightly raised, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ],
+ "people": {
+  "cfo-pin-charcoal": {
+   "appearanceNegative": "brown hair, light brown hair",
+   "clothingNegative": "necktie, tie"
+  }
+ },
+ "seed": 1,
+ "count": 4
+}
