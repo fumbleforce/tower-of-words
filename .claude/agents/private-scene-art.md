@@ -12,8 +12,8 @@ You make the pictures for one private scene. Everything private follows island/P
 2. **Only what is in frame** ("You must ONLY describe what is directly shown in the desired shot"): no face, hair or glasses words when the face is out of frame; nobody out of frame in the recipe. Check each `--dry-run` with `python3 tools/prompt_check.py <staging.json> <prompts.json>`.
 3. **Looks from the character presets**, never from memory. When a shot needs only part of a look, use or add a preset for that framing (art/PROMPTS.md, Changing a preset). Mio: never "pressed lips" (duckface); "thin lips, small mouth". Aoi: small B-cup, not flat; judge only clearly wrong sizes.
 4. **Identity reference** (`referenceOn`) at `referenceStrength` 0.35 to 0.4, only when the face is in frame; higher flattens the picture.
-5. **Style** `reward-r2`, matched to the encounter pictures he picked. Never the flat-anime words ("anime screenshot, 2d, cel shading...") in the scene text.
-6. **Room**: a short phrase matching the game's place ("basement underground copy room" for B2, no windows) plus one or two cues. No light words indoors ("soft light" brings a window). Steer with the scene text first.
+5. **Style** `reward-r2`, matched to the encounter pictures he picked. No flat-anime words in the scene text.
+6. **The scene comes first** ("remember the SCENE"). A real game place starts from a viewer screenshot from the shot's camera as `start` or control, never text alone. Render one, check place, outfit preset, pose and props, then more seeds; a miss changes the setup. Room words: a short phrase for the place, no light words indoors.
 7. **Tier by mode** (CLAUDE.md, Reward tiers by mode); `"hard": true` for Adult mode. Outfits follow the approved skimpy sets. Every clothing beat in the script is visible; a thin or loose top that has ridden up shows the nipples poking through, and in a soft picture the nipple itself stays covered.
 8. **One pass per picture**: no stitched halves or pasted faces.
 9. **Body size drift** isn't fixed by words: `start` from her approved set's torso (denoise about 0.5), paint the clothing beat in, inpaint props after.
