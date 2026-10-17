@@ -1,6 +1,7 @@
-"""Jørgen's image gen dashboard (tools/imagegen) has priority on the GPU over every agent job (GUIDE: GPU lock).
+"""Jørgen's own renders in the image gen dashboard (tools/imagegen) have priority on the GPU over every agent job.
 
-While a dashboard session runs (also while it waits for the lock), the dashboard keeps <root>/gpu.priority:
+While one of his renders (a job without an owner) is queued or running, or his own session start waits for the lock,
+the image service keeps <root>/gpu.priority:
 JSON {by, pid, start, time}. It is live while that pid runs with the same start time, so a crashed dashboard's
 file is ignored. While it is live no agent job takes gpu.lock or a browser GPU slot (the JavaScript side is
 gpuPriority() in tools/lib/browser-gpu-slots.mjs, which reads the same file).
@@ -13,11 +14,12 @@ The queue (<root>/gpu.queue/): every job waiting for gpu.lock or a browser GPU s
 file {rank, time, owner, pid, start, kind}. A waiter takes the lock only when its ticket is first among the live
 tickets, by rank and then by time. A ticket whose process is gone, or whose pid now belongs to another process (the
 start time differs), is dropped. A ticket goes when its job takes the lock, gives up or releases. Ranks (CP-0035):
-  1 dashboard     Jørgen's image gen dashboard (it also keeps gpu.priority and can make the holder yield)
+  1 dashboard     Jørgen's own renders in the image service (they also keep gpu.priority and make the holder yield)
   2 carina-image  Carina image jobs
   3 carina-voice  Carina voice
   4 voice         voices
-  5 render        scene renders and every other image or model job (the default)
+  5 render        scene renders and every other image or model job (the default), agents' renders in the image
+                  service too (the lock owner is then "imagegen-service (image service: <owner>, ...)")
   browser         headless browser GPU slots (tools/lib/browser-gpu-slots.mjs keeps the same rules in JavaScript).
                   They take turns with renders in queue order (a browser ticket counts as a render), after voices; a
                   new browser job joins the running pool only if no render has waited longer. So a waiting exclusive job
@@ -44,7 +46,8 @@ Python: with gpu_priority.hold('carina-faces-3', 'carina-image'): ...   (or acqu
 import contextlib, json, os, shutil, subprocess, sys, time, uuid
 
 ROOT = os.environ.get('GPU_ROOT') or f'/tmp/claude-{os.getuid()}'  # GPU_ROOT: tests only
-DASHBOARD = 'imagegen-dashboard'
+DASHBOARD = 'imagegen-dashboard'  # the lock owner while the image service renders for Jørgen himself
+IMAGE_SERVICE = 'imagegen-service'  # the lock owner while it renders for an agent (tools/imagegen/gpu.py owner_text)
 POOL_PREFIX = 'browser-gpu-pool-v1 '  # tools/lib/browser-gpu-slots.mjs
 YIELDED = 75  # exit code of a job that stopped for the dashboard
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -191,14 +194,15 @@ def _queue_dir(root):
     return _path('gpu.queue', root)
 
 
-def enqueue(owner, rank='render', pid=None, root=None):
-    """Write a ticket and return its path. pid: the process the ticket lives and dies with (default this one)."""
+def enqueue(owner, rank='render', pid=None, root=None, since=None):
+    """Write a ticket and return its path. pid: the process the ticket lives and dies with (default this one). since:
+    when the work it stands for was asked for (default now): the image service queues an agent's render from then."""
     r = rank_of(rank)
     pid = int(pid or os.getpid())
     start = process_start(pid)
     if start is None:
         raise ValueError(f'no process {pid} to queue for')
-    rec = dict(rank=r, time=time.time(), owner=owner, pid=pid, start=start,
+    rec = dict(rank=r, time=since or time.time(), owner=owner, pid=pid, start=start,
                kind='browser' if r == RANKS['browser'] else 'exclusive', at=time.strftime('%H:%M:%S'))
     path = os.path.join(_queue_dir(root), f'{pid}-{start}-{uuid.uuid4().hex[:8]}.json')
     _write(path, rec)
@@ -441,11 +445,11 @@ def show_queue(root=None, out=print):
     held = (owner or '').startswith(POOL_PREFIX)
     live = sorted((t for t in tickets if t['live']), key=lambda t: order_key(t, held))
     dead = [t for t in tickets if not t['live']]
-    out(f'{"#":>2}  {"rank":<14} {"owner":<36} {"waiting":>8}  state')
+    out(f'{"#":>2}  {"rank":<14} {"owner":<50} {"waiting":>8}  state')
     for i, t in enumerate(live + dead, 1):
         rank = f'{t["rank"]} {RANK_NAMES.get(t["rank"], "?")}'.replace('4.5 ', '')
         state = 'live' if t['live'] else 'dead, dropped'
-        out(f'{i if t["live"] else "-":>2}  {rank:<14} {str(t.get("owner"))[:36]:<36} '
+        out(f'{i if t["live"] else "-":>2}  {rank:<14} {str(t.get("owner"))[:50]:<50} '
             f'{_ago(now - t["time"]):>8}  {state} (pid {t.get("pid")})')
         if not t['live']:
             dequeue(t['path'])

@@ -43,7 +43,8 @@ async function refreshSession() {
     const {session, queued, running} = await request('state');
     const s = session || {}, lock = s.lock || {};
     const active = ['on', 'starting', 'lost'].includes(s.state);
-    const label = {on: 'GPU session on', starting: 'Starting GPU session', ending: 'Ending GPU session', lost: 'GPU session lost', error: s.message || 'GPU error'}[s.state]
+    const label = (s.who && {on: 'Rendering for ' + s.who, starting: 'Waiting for the GPU: ' + s.who}[s.state])
+      || {on: 'GPU session on', starting: 'Starting GPU session', ending: 'Ending GPU session', lost: 'GPU session lost', error: s.message || 'GPU error'}[s.state]
       || (lock.held && !lock.mine ? 'GPU in use: ' + lock.owner : 'GPU ready');
     const detail = [s.state === 'on' ? Math.ceil((s.idle_left || 0) / 60) + ' idle min left' : '', s.vram ? (s.vram.used / 1024).toFixed(1) + ' / ' + Math.round(s.vram.total / 1024) + ' GB' : ''].filter(Boolean).join(' · ');
     $('#gpu').innerHTML = `<span class="gpu-dot" data-state="${esc(s.state)}"></span><div><strong>${esc(label)}</strong>${detail ? `<span>${esc(detail)}</span>` : ''}</div><button type="button" class="small" data-session ${s.state === 'ending' ? 'disabled' : ''}>${active ? 'End session' : 'Start session'}</button>`;

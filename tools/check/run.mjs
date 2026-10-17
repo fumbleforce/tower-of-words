@@ -38,6 +38,7 @@ const checks = [
   ['art scripts test', ['--test', 'tools/facts/art-scripts.test.mjs']],
   ['audio scripts', ['tools/audio/ratchet.py'], 'python3'],
   ['audio presets and refusals', ['tools/audio/test_audio.py'], 'python3'],
+  ['image service GPU session', ['-W', 'ignore', 'tools/imagegen/test_gpu.py'], 'python3'],
   ['story map', ['tools/bible/story-map-check.mjs']],
   ['public bible pictures', ['tools/bible/pages_test.py'], 'python3'],
   ['nav registry', ['tools/check/nav-registry.mjs']],

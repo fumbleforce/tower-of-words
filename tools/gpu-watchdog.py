@@ -6,8 +6,8 @@ nothing alive can be holding it:
   - owner browser-gpu-pool-v1: the slots of browser jobs that died are reclaimed (gpu.lock/slot.<n> record each
     job's pid; their leftover Chromium is killed) and the lock goes with the last one (tools/gpu_priority.py reclaim,
     the pool's own code in tools/lib/browser-gpu-slots.mjs).
-  - imagegen-dashboard: never. Jørgen's dashboard has priority and releases its own lock (a restarted server picks
-    its session up or closes it).
+  - imagegen-dashboard or imagegen-service: never. The image service releases its own lock after a short idle time (a
+    restarted server picks its session up or closes it).
   - any other owner (a script, an agent): stale when the lock is older than STALE_MIN minutes AND ComfyUI has nothing
     running or queued AND no process other than ComfyUI is computing on the GPU.
 Run once (`python3 tools/gpu-watchdog.py`) or every minute from the systemd user timer gpu-watchdog.timer.
@@ -77,7 +77,7 @@ def main():
         if not dry:
             gpu_priority.reclaim(BASE, log=lambda m: log('browser pool: ' + m) if not m.startswith('reclaimed 0 ') else None)
         return
-    if owner.startswith(gpu_priority.DASHBOARD):
+    if owner.startswith((gpu_priority.DASHBOARD, gpu_priority.IMAGE_SERVICE)):
         return
     if age >= STALE_MIN and not comfy_busy() and not other_gpu_compute():
         stale, why = True, f'owner "{owner[:60]}" idle for {age:.0f} min: ComfyUI idle, nothing else computing'

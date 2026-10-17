@@ -71,6 +71,8 @@ await withBrowserJob('codex-image-studio', async browser => {
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('http://studio.test/');
   await page.waitForFunction(() => !globalThis.document.querySelector('#generate')?.disabled && globalThis.document.querySelectorAll('.render-card').length === 6);
+  await page.waitForTimeout(4500);  // past the first session poll
+  assert.deepEqual(writes, [], 'opening the page only observes: no session start, render or other write (#687)');
   assert.deepEqual(errors, []);
   assert.deepEqual(unexpected, []);
   const positive = page.locator('#posOut'), negative = page.locator('#negOut');

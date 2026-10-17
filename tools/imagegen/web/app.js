@@ -359,7 +359,7 @@ function renderGpu() {
   const L = S.lock || {}; const v = S.vram ? `VRAM ${(S.vram.used / 1024).toFixed(1)} / ${(S.vram.total / 1024).toFixed(0)} GB` : '';
   let cls = '', b = '', sub = '', btn = '';
   if (S.state === 'on') {
-    cls = 'on'; b = 'GPU session on'; sub = `${Math.ceil((S.idle_left || 0) / 60)} idle min left · ${v}`;
+    cls = 'on'; b = S.who ? `Rendering for ${S.who}` : 'GPU session on'; sub = `${Math.ceil((S.idle_left || 0) / 60)} idle min left · ${v}`;
     btn = `<button class="btn sm" id="endBtn"><i class="ph ph-stop"></i> End session</button>`;
   } else if (S.state === 'starting') {
     const taking = L.held && !L.mine;

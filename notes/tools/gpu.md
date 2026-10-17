@@ -16,7 +16,7 @@ Image and model jobs (ComfyUI, TTS, LLM, Blender) hold the GPU alone.
 
 ## Jørgen's image gen dashboard comes first
 
-Agents wait while /tmp/claude-1000/gpu.priority is live. A long job asked to stop through gpu.yield exits 75 and later resumes from what is on disk. When the lock owner is `imagegen-dashboard`, he is using the GPU, so wait. The dashboard's own rules are in [tools/imagegen/README.md](../../tools/imagegen/README.md).
+Agents wait while /tmp/claude-1000/gpu.priority is live, which is only while one of his own renders is queued or running in the image service. A long job asked to stop through gpu.yield exits 75 and later resumes from what is on disk. The service holds the lock as `imagegen-dashboard` for his renders and as `imagegen-service (image service: <owner>)` for an agent's, which wait their turn at render rank. The dashboard's own rules are in [tools/imagegen/README.md](../../tools/imagegen/README.md).
 
 ## Headless browser runs
 

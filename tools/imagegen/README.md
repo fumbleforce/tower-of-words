@@ -4,7 +4,7 @@
 
 ## Rules for agents
 
-- Its GPU session holds the lock as `imagegen-dashboard` and ends after 20 idle minutes. While it holds the lock, Jørgen is using the GPU, so wait ([notes/tools/gpu.md](../../notes/tools/gpu.md)).
+- Jørgen's own renders (no owner) hold the lock as `imagegen-dashboard` and keep gpu.priority live until they are done. An agent's render (send `owner`, also to `/api/session/start`) waits its turn at render rank and holds the lock as `imagegen-service (image service: <owner>)`. An idle session ends after 2 minutes, or after 20 for his own while nobody else waits ([notes/tools/gpu.md](../../notes/tools/gpu.md)).
 - Load new code with `tools/imagegen/run.sh --restart`. It waits for the queue and keeps his session. Never stop the server with SIGTERM or Ctrl+C while he is using it.
 - The code is committed. The presets ("blocks", each with its "note to Claude") are local configuration and never committed (the table below).
 - The render log (island/private/imagegen/log.jsonl, with his stars, rejects and notes) and the outputs are in island/private/imagegen/. Every render is in the History tab with its full prompt, negative and settings.

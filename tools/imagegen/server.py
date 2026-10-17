@@ -13,6 +13,7 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, '..'))
 import comfy  # noqa: E402  (tools/comfy.py)
 import store, gpu, consist, privacy, huefix, image_actions  # noqa: E402
+import gpu_priority  # noqa: E402  (tools/gpu_priority.py)
 
 PORT = int(os.environ.get('IMAGEGEN_PORT', 8772))
 # Another port is a test copy: it never takes, ends or frees the GPU (the lock's owner name is the dashboard's, so a
@@ -49,12 +50,14 @@ JOBS_LOCK = threading.RLock()
 BY_PROMPT = {}     # ComfyUI prompt_id -> job
 
 
-def busy():
+def pending():
+    """(owner, created) of every queued or running job; owner '' for Jørgen's own (gpu.Session's priority and queue)."""
     with JOBS_LOCK:
-        return any(j['status'] in ('queued', 'running') for j in JOBS)
+        return [(j.get('owner') or '', j.get('created')) for j in JOBS if j['status'] in ('queued', 'running')]
 
 
-session.busy = busy
+session.pending = pending
+session.enabled = not TEST_COPY
 
 
 def on_progress(pid, value, mx):
@@ -215,17 +218,33 @@ def log_entry(j):
     return e
 
 
+def next_job():
+    """The next queued job: Jørgen's own first (they have priority on the GPU), then in the order they came."""
+    with JOBS_LOCK:
+        queued = [x for x in JOBS if x['status'] == 'queued']
+    return next((x for x in queued if not x.get('owner')), queued[0] if queued else None)
+
+
 def worker():
     while True:
         try:
-            with JOBS_LOCK:
-                j = next((x for x in JOBS if x['status'] == 'queued'), None)
+            session.sync_priority()
+            j = next_job()
+            if j is not None and session.s['state'] == 'off' and not TEST_COPY:
+                session.start(j.get('owner') or '')  # an agent's job waits its turn in the GPU queue
             if j is None or session.s['state'] != 'on':
                 time.sleep(0.5)
                 continue
             if not gpu.owner_is_me():  # GUIDE: check the owner before every job, not only at the start
                 session.lost()
                 continue
+            first = session.ahead_of(j['created']) if j.get('owner') else []
+            if first:
+                # an agent's render is a render-rank job: a job that has waited longer, or ranks higher, goes first
+                t = min(first, key=lambda t: gpu_priority.order_key(t, False))
+                session.end(f"Let {t.get('owner')} have the GPU: it was waiting before {j['owner']}'s next render.")
+                continue
+            session.serve(j.get('owner') or '')
             j['status'], j['started'] = 'running', time.time()
             session.touch()
             try:
@@ -787,8 +806,8 @@ class H(BaseHTTPRequestHandler):
                 return self._create_scene(b)
             if TEST_COPY and (p == '/api/session/start' or (p == '/api/generate' and b.get('autostart'))):
                 return self._send(409, {'ok': False, 'error': 'a test copy of the dashboard does not use the GPU'})
-            if p == '/api/session/start':
-                return self._send(200, session.start())
+            if p == '/api/session/start':  # an agent sends its owner; without one it is Jørgen's own start
+                return self._send(200, session.start(made_by(b).get('owner', '')))
             if p == '/api/session/end':
                 with JOBS_LOCK:
                     if b.get('if_idle') and any(j['status'] in ('queued', 'running') for j in JOBS):
@@ -803,7 +822,7 @@ class H(BaseHTTPRequestHandler):
                 return self._send(200, {'ok': True})
             if p == '/api/generate':
                 if b.get('autostart') and session.s['state'] not in ('on', 'starting'):
-                    r = session.start()
+                    r = session.start(made_by(b).get('owner', ''))
                     if not r.get('ok'):
                         return self._send(409, r)
                 run_id, jobs = new_run(b, self._private())
