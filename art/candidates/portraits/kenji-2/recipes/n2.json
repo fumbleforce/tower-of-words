@@ -1,0 +1,28 @@
+{
+ "details": "Kenji base portrait, round 2 pass 2 (#680). Method change after n1 (#n1 drew brown tufts into his hair): inpaint from the picked render itself. Start = kenji-1 k3-s2 (#2430), mask start/n2-mask.png over only the lanyard straps, clip and badge (white = repaint), denoise 0.9; everything outside the mask is k3-s2's own pixels. Words, clothing negative and seed 2 as n1. Staging: ../staging.md.",
+ "characters": [
+  "kenji-real"
+ ],
+ "outfit": {
+  "kenji-real": true
+ },
+ "people": {
+  "kenji-real": {
+   "clothingNegative": "lanyard, id badge, id card, name tag"
+  }
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "an open, friendly smile, standing at ease, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "no-props",
+  "muscle"
+ ],
+ "start": {
+  "image": "art/candidates/portraits/kenji-1/k3-r261016-200345-19c-2-s2.webp",
+  "denoise": 0.9,
+  "mask": "art/candidates/portraits/kenji-2/start/n2-mask.png"
+ }
+}

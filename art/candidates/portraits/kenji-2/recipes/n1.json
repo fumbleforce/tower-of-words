@@ -1,0 +1,23 @@
+{
+ "details": "Kenji base portrait, round 2 pass 1 (#680). The one change from kenji-1 k3 (#2430, k3-s2): no lanyard. Candidate preset kenji-real v3 drops \"and a lanyard\" from the outfit words (v2: \"a white short-sleeved shirt, a dark tie and a lanyard\"), and the clothing negative adds lanyard and ID badge. Everything else as kenji-1/recipes/k3.json, seed 2. Staging: ../staging.md.",
+ "characters": [
+  "kenji-real"
+ ],
+ "outfit": {
+  "kenji-real": true
+ },
+ "people": {
+  "kenji-real": {
+   "clothingNegative": "lanyard, id badge, id card, name tag"
+  }
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "an open, friendly smile, standing at ease, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "no-props",
+  "muscle"
+ ]
+}

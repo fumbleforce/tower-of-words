@@ -1,0 +1,38 @@
+{
+ "title": "Kenji without the lanyard, round 2",
+ "date": "2026-10-17",
+ "by": "claude-main/art-round",
+ "status": "open",
+ "question": "Which of these should be Kenji's new base portrait?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/candidates/portraits/kenji-2/sheet.webp",
+   "caption": "Pictures, framed at the game's portrait scale: the approved portrait, your pick k3-s2 from kenji-1, then both attempts of this round in order. The one change is no lanyard and no ID badge, after your \"without the lanyard though, issue we have with lanyards is how they distort in every picture\". Both use k3's recipe and seed 2; the only difference in the words is the outfit (\"a white short-sleeved shirt and a dark tie\", was \"... and a lanyard\") and \"lanyard, id badge, id card, name tag\" in the clothing exclusion."
+  },
+  {
+   "image": "art/candidates/portraits/kenji-2/compare-chest.webp",
+   "caption": "Full size, chest to belt: k3-s2, n1-s2, n2-s2 side by side."
+  }
+ ],
+ "options": [
+  {
+   "id": "n1-s2",
+   "label": "n1-s2",
+   "image": "art/candidates/portraits/kenji-2/n1-r261017-110205-cce-1-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/kenji-2/n1-r261017-110205-cce-1-s2.webp"
+   ],
+   "note": "Pass 1, text-to-image, words only: k3's recipe with candidate preset kenji-real v3 (outfit \"a white short-sleeved shirt and a dark tie\") and clothing exclusion \"lanyard, id badge, id card, name tag\". Recipe art/candidates/portraits/kenji-2/recipes/n1.json, seed 2, RDBT, Euler A, 30 steps, CFG 5, 896x1152, portrait style, no-props and muscle exclusions. Red rim 0.9%. Face against k3-s2: CCIP 0.015 (pass). Framing: 8% missing above the game crop, the framed preview fills it flat. Dashboard #2577. My verdict, rejected (hair colour): lanyard and badge gone and the face held, but light brown tufts at the top right of his black hair; chin stubble gone; tie greener."
+  },
+  {
+   "id": "n2-s2",
+   "label": "n2-s2",
+   "image": "art/candidates/portraits/kenji-2/n2-r261017-110455-495-1-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/kenji-2/n2-r261017-110455-495-1-s2.webp"
+   ],
+   "note": "Pass 2, method change (n1 changed his hair): inpaint from k3-s2 itself. Start art/candidates/portraits/kenji-1/k3-r261016-200345-19c-2-s2.webp, mask art/candidates/portraits/kenji-2/start/n2-mask.png over only the straps, clip and badge, denoise 0.9; same words, exclusion and seed 2 as n1. Recipe art/candidates/portraits/kenji-2/recipes/n2.json, RDBT, Euler A, 30 steps, CFG 5. Red rim 0.4%. Framing: 8% missing above the game crop, as k3-s2; a pick gets a real outpaint. Dashboard #2582. My verdict, kept: face, hair, stubble, arms and belt are k3-s2's own pixels; tie and shirt front continue cleanly. Flaw: a pale shirt highlight runs down beside the top of the tie where the left strap was."
+  }
+ ]
+}

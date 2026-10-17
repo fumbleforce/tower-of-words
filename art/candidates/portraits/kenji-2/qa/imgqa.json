@@ -1,0 +1,180 @@
+{
+ "character": "kenji",
+ "ref": "game3d/assets/portraits/kenji-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   219,
+   166,
+   383,
+   335
+  ]
+ ],
+ "ref_face_detected": [
+  219.0,
+  166.0,
+  384.0,
+  336.0
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/kenji-2/n1-r261017-110205-cce-1-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    305.0,
+    143.0,
+    544.0,
+    375.0
+   ],
+   "eyes": [
+    [
+     363.5,
+     231.0
+    ],
+    [
+     448.0,
+     215.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0094
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.02,
+    "zoom": 1.099,
+    "top": 0.08,
+    "bottom_short": 0.0,
+    "hair_top_game": 78,
+    "hair_top_ref": 80,
+    "crop": [
+     13.0,
+     -83.5,
+     827.8,
+     964.6
+    ],
+    "eyes": -0.026,
+    "tilt": -1.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.072,
+    "ssim": 0.307
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-2/n2-r261017-110455-495-1-s2.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    314.0,
+    140.0,
+    547.0,
+    375.0
+   ],
+   "eyes": [
+    [
+     372.0,
+     226.0
+    ],
+    [
+     457.5,
+     215.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.02,
+    "zoom": 1.085,
+    "top": 0.084,
+    "bottom_short": 0.0,
+    "hair_top_game": 81,
+    "hair_top_ref": 80,
+    "crop": [
+     13.7,
+     -89.5,
+     839.0,
+     972.2
+    ],
+    "eyes": -0.027,
+    "tilt": 2.6,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.061,
+    "ssim": 0.342
+   },
+   "status": "warn"
+  }
+ ]
+}

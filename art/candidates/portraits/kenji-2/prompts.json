@@ -1,0 +1,31 @@
+{
+ "n1": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young Japanese man, short messy black bedhead hair, dark eyes and a soft, friendly face with full cheeks, realistic adult proportions, overweight, soft out-of-shape build with a round belly and soft, fleshy arms, wearing a white short-sleeved shirt and a dark tie, an open, friendly smile, standing at ease, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, muscular, bodybuilder, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), lanyard, id badge, id card, name tag, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "seed": 2,
+  "count": 1
+ },
+ "n2": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young Japanese man, short messy black bedhead hair, dark eyes and a soft, friendly face with full cheeks, realistic adult proportions, overweight, soft out-of-shape build with a round belly and soft, fleshy arms, wearing a white short-sleeved shirt and a dark tie, an open, friendly smile, standing at ease, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, muscular, bodybuilder, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), lanyard, id badge, id card, name tag, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "seed": 2,
+  "count": 1,
+  "start": {
+   "image": "art/candidates/portraits/kenji-1/k3-r261016-200345-19c-2-s2.webp",
+   "denoise": 0.9,
+   "mask": "art/candidates/portraits/kenji-2/start/n2-mask.png"
+  }
+ }
+}
