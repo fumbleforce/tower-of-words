@@ -1,0 +1,56 @@
+{
+ "sent": "2026-10-17T11:39:51+0200",
+ "picked": [
+  "dorms-lyria-2"
+ ],
+ "options": {
+  "day-lyria-1": {
+   "star": false,
+   "reject": true,
+   "comment": "sounds like a jungle song"
+  },
+  "day-lyria-2": {
+   "star": false,
+   "reject": true,
+   "comment": "percussion is too hard, and sounds like a weird fantasy song"
+  },
+  "day-lyria-3": {
+   "star": false,
+   "reject": true,
+   "comment": "just shit random noises"
+  },
+  "dorms-lyria-1": {
+   "star": false,
+   "reject": true,
+   "comment": "really alien weird"
+  },
+  "dorms-lyria-2": {
+   "star": false,
+   "reject": false,
+   "comment": "not bad, very close, think the electric piano takes too much attention in this, not a pick but one for refinement"
+  },
+  "dorms-lyria-3": {
+   "star": false,
+   "reject": true,
+   "comment": "melody is not great, has a lot of bad double tones"
+  },
+  "title-lyria-1": {
+   "star": false,
+   "reject": true,
+   "comment": "funeral"
+  },
+  "title-lyria-2": {
+   "star": false,
+   "reject": true,
+   "comment": "sounds like a funeral"
+  },
+  "title-lyria-3": {
+   "star": false,
+   "reject": true,
+   "comment": "random melody funeral"
+  }
+ },
+ "comment": "",
+ "read": true,
+ "history": []
+}

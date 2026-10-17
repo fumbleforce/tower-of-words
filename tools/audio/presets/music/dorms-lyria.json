@@ -21,6 +21,26 @@
    },
    "loudness": -20,
    "use": "The dorm courtyard and the east lane."
+  },
+  {
+   "v": 2,
+   "date": "2026-10-17",
+   "by": "claude-main/music-8",
+   "note": "Round 7 feedback on dorms-lyria-2 (\"not bad, very close, think the electric piano takes too much attention\"): one change, the electric piano pulled back to quiet supporting chords and the nylon guitar on the melody; the rest of v1 kept word for word. Seed 7912 first, the seed of dorms-lyria-2.",
+   "generator": "lyria-2",
+   "prompt": "Quiet residential feel for a dorm courtyard and a small lane: nylon guitar carrying the melody, soft bass and a muted drum loop, a quiet electric piano far in the background playing only soft supporting chords, a little lo-fi warmth, 88 BPM. Homely and relaxed, a melody that wanders and changes. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. No ending: it keeps the same calm level to the end so it can loop.",
+   "settings": {
+    "seed": 7912,
+    "seed_step": 1
+   },
+   "length": null,
+   "loop": {
+    "min": 20,
+    "max": 30,
+    "fade": 1.5
+   },
+   "loudness": -20,
+   "use": "The dorm courtyard and the east lane."
   }
  ]
 }

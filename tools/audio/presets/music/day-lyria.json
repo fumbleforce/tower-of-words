@@ -41,6 +41,27 @@
    },
    "loudness": -20,
    "use": "Outdoors during the day: the forecourt, the plaza and the other outdoor places."
+  },
+  {
+   "v": 3,
+   "date": "2026-10-17",
+   "by": "claude-main/music-8",
+   "note": "Round 7 feedback (jungle song; percussion too hard, weird fantasy; random noises): no marimba or hand percussion, quiet soft drums, one clear simple melody on piano over guitar chords, modern Japanese pop; the \"no\" words moved to the negative prompt.",
+   "generator": "lyria-2",
+   "prompt": "Easy, sunny daytime music for walking around a modern Japanese town: acoustic guitar strumming soft chords and a clear, simple piano melody that is easy to hum, with soft bass and gentle, quiet drums kept in the background. Major key, 96 BPM. Cheerful and calm everyday Japanese pop, like a slice-of-life anime. Instrumental background music for a video game. It stays at one relaxed level all the way through, with no ending, so it can loop.",
+   "settings": {
+    "seed": 8811,
+    "seed_step": 1,
+    "negative_prompt": "jungle, tribal, world music, marimba, bongos, congas, hand drums, fantasy, celtic, medieval, flute, loud drums, hard percussion, random noises, sound effects, experimental, dissonant, vocals, singing, orchestra, epic"
+   },
+   "length": null,
+   "loop": {
+    "min": 20,
+    "max": 30,
+    "fade": 1.5
+   },
+   "loudness": -20,
+   "use": "Outdoors during the day: the forecourt, the plaza and the other outdoor places."
   }
  ]
 }

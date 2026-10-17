@@ -2,7 +2,7 @@
  "title": "Sounds, round music-7",
  "date": "2026-10-16",
  "by": "claude-main/music-7",
- "status": "decided",
+ "status": "superseded",
  "context": [
   "Every take of round music-7 (music), made by tools/audio/make.py, failed ones included. Nobody has listened to them: the numbers on each card are a screen, not a verdict.",
   "A loop plays once and then its first seconds again, so you can hear the join."

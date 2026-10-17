@@ -1,5 +1,5 @@
 {
- "total": 50.5438,
+ "total": 51.6238,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -8478,6 +8478,69 @@
    "est": 0.12,
    "out": "../../../../../ai/audio-raw/music-7/dorms-lyria-3.wav",
    "prompt": "Quiet residential feel for a dorm courtyard and a small lane: clean electric piano, nylon guitar, soft bass and a muted "
+  },
+  {
+   "t": "2026-10-17T09:52:47.488Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/audio-raw/music-8/dorms-lyria-1.wav",
+   "prompt": "Quiet residential feel for a dorm courtyard and a small lane: nylon guitar carrying the melody, soft bass and a muted dr"
+  },
+  {
+   "t": "2026-10-17T09:53:12.984Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/audio-raw/music-8/dorms-lyria-2.wav",
+   "prompt": "Quiet residential feel for a dorm courtyard and a small lane: nylon guitar carrying the melody, soft bass and a muted dr"
+  },
+  {
+   "t": "2026-10-17T09:53:41.183Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/audio-raw/music-8/dorms-lyria-3.wav",
+   "prompt": "Quiet residential feel for a dorm courtyard and a small lane: nylon guitar carrying the melody, soft bass and a muted dr"
+  },
+  {
+   "t": "2026-10-17T09:54:07.658Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/audio-raw/music-8/title-lyria-1.wav",
+   "prompt": "Bright, hopeful slice-of-life anime title theme in a major key, 96 BPM: warm piano and clean electric guitar playing a c"
+  },
+  {
+   "t": "2026-10-17T09:54:34.973Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/audio-raw/music-8/title-lyria-2.wav",
+   "prompt": "Bright, hopeful slice-of-life anime title theme in a major key, 96 BPM: warm piano and clean electric guitar playing a c"
+  },
+  {
+   "t": "2026-10-17T09:55:01.434Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/audio-raw/music-8/title-lyria-3.wav",
+   "prompt": "Bright, hopeful slice-of-life anime title theme in a major key, 96 BPM: warm piano and clean electric guitar playing a c"
+  },
+  {
+   "t": "2026-10-17T09:55:29.476Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/audio-raw/music-8/day-lyria-1.wav",
+   "prompt": "Easy, sunny daytime music for walking around a modern Japanese town: acoustic guitar strumming soft chords and a clear, "
+  },
+  {
+   "t": "2026-10-17T09:55:58.546Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/audio-raw/music-8/day-lyria-2.wav",
+   "prompt": "Easy, sunny daytime music for walking around a modern Japanese town: acoustic guitar strumming soft chords and a clear, "
+  },
+  {
+   "t": "2026-10-17T09:56:28.683Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/audio-raw/music-8/day-lyria-3.wav",
+   "prompt": "Easy, sunny daytime music for walking around a modern Japanese town: acoustic guitar strumming soft chords and a clear, "
   }
  ]
 }

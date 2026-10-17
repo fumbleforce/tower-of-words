@@ -41,6 +41,27 @@
    },
    "loudness": -20,
    "use": "Title menu."
+  },
+  {
+   "v": 3,
+   "date": "2026-10-17",
+   "by": "claude-main/music-8",
+   "note": "Round 7 feedback (all three takes \"funeral\"): bright and hopeful in a major key at a medium tempo, a light band instead of slow solo piano; the \"no\" words moved to the negative prompt, so the prompt names only what is heard.",
+   "generator": "lyria-2",
+   "prompt": "Bright, hopeful slice-of-life anime title theme in a major key, 96 BPM: warm piano and clean electric guitar playing a clear, friendly melody, with soft bass and light pop drums. Cheerful and fresh, like a sunny morning on a small island where everyone works at the same company. Easygoing, not rushed. Instrumental background music for a video game menu. It stays at one level all the way through, with no ending, so it can loop.",
+   "settings": {
+    "seed": 8711,
+    "seed_step": 1,
+    "negative_prompt": "sad, melancholic, mournful, funeral, sombre, slow, dirge, minor key, solo piano ballad, vocals, singing, orchestra, epic, dramatic"
+   },
+   "length": null,
+   "loop": {
+    "min": 20,
+    "max": 30,
+    "fade": 1.5
+   },
+   "loudness": -20,
+   "use": "Title menu."
   }
  ]
 }
