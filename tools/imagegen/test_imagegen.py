@@ -411,7 +411,10 @@ class SdxlModels(unittest.TestCase):
         self.assertEqual(wf['1']['class_type'], 'CheckpointLoaderSimple')
         self.assertEqual(wf['L0']['inputs']['lora_name'], 'booster.safetensors')
         self.assertEqual(wf['CS']['inputs']['stop_at_clip_layer'], -2)
-        self.assertEqual(wf['4']['inputs']['text'], 'embedding:lazypos, 1girl')
+        self.assertEqual(wf['4']['inputs']['text'], 'embedding:lazypos , 1girl')
+        # two embeddings with no space between them stay two names for ComfyUI's tokenizer
+        self.assertEqual(server.comfy.embedding_words('lazypos,ZSA_IL_POS_V2,masterpiece', ['lazypos', 'ZSA_IL_POS_V2']),
+                         'embedding:lazypos , embedding:ZSA_IL_POS_V2 ,masterpiece')
         self.assertEqual(wf['7']['inputs']['positive'], ['4c1', 0])
 
     def test_loras_and_anima_tools_follow_the_model(self):

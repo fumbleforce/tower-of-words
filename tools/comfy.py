@@ -69,10 +69,12 @@ def sdxl(prompt, negative, ckpt, lora=None, lora_weight=0.8, w=832, h=1216, step
 
 
 def embedding_words(text, names):
-    """A1111 writes a textual inversion as its bare name (lazypos); ComfyUI needs embedding:lazypos. names: the file stems."""
+    """A1111 writes a textual inversion as its bare name (lazypos); ComfyUI needs embedding:lazypos with white space before
+    and after it (its tokenizer splits on white space before "embedding:", so "lazypos,ZSA_IL_POS_V2" would read as one
+    name and be dropped). names: the file stems."""
     for n in sorted(names, key=len, reverse=True):
-        text = re.sub(r'(?<![\w:.-])' + re.escape(n) + r'(?![\w.-])', 'embedding:' + n, text)
-    return text
+        text = re.sub(r'(?<![\w:.-])' + re.escape(n) + r'(?![\w.-])', ' embedding:' + n + ' ', text)
+    return re.sub(r' {2,}', ' ', text).strip()
 
 
 def _encode(wf, key, text, clip):
