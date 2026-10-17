@@ -33,7 +33,8 @@ const POSE = {
   park: { yaw: 0.25, elev: deg(56) }, // from the south over the promenade, a little from the east
   beach: { yaw: -0.55, elev: deg(56) }, // from the south-west, along the sea
   north: { yaw: 0.1, elev: deg(58) },
-  steep: { yaw: 0.2, elev: deg(76) }, // close by a five-storey block that would stand between him and the camera
+  steep: { yaw: 0.2, elev: deg(76) }, // close by S-E's east wing, which would stand between him and the camera
+  over: { yaw: 0.1, elev: deg(84) }, // on the north path, N-W's five storeys a step behind him: almost straight down
   south: { yaw: Math.PI - 0.18, elev: deg(56) }, // the villas' gardens and the sea beyond
 };
 export async function eastCoastPlace(game) {
@@ -45,7 +46,8 @@ export async function eastCoastPlace(game) {
     if (inRect(x, z, T.row) || inRect(x, z, T.court)) return POSE.row;
     if (inRect(x, z, T.beach)) return POSE.beach;
     if (inRect(x, z, T.south)) return POSE.south;
-    if (inRect(x, z, T.seNorth) || inRect(x, z, T.nwPath)) return POSE.steep;
+    if (inRect(x, z, T.seNorth)) return POSE.steep;
+    if (inRect(x, z, T.nwPath)) return POSE.over;
     if (inRect(x, z, T.park)) return POSE.park;
     return POSE.north;
   });
