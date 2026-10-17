@@ -193,6 +193,7 @@ export const SOUTH_SHRUBS = ALLEYS.flatMap(([x0, z0, x1]) =>
     [SIDE_X + 0.38, (SIDE_LANDING[1] + ROWS_Z.back) / 2 + 0.05, 0.8],
     [SIDE_X + 0.88, (SIDE_LANDING[1] + ROWS_Z.back) / 2 + 0.05, 0.75],
     [SIDE_X + 0.55, SIDE_LANDING[0] - 0.55, 0.7],
+    [SIDE_X + 0.5, ROWS_Z.south + 0.45, 0.75],
   ]);
 
 // On the beach, [x, z] each: beach umbrellas in pairs between the flights and one by the huts, and three beach huts

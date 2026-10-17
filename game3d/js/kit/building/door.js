@@ -66,7 +66,7 @@ export const doorway = piece({
       leaves: 1,
       leaf: '#6f8c86',
       canopy: 'hood',
-      out: 0.5,
+      out: 0.4,
       side: 0.16,
       lamp: 'wall',
       step: 0.08,

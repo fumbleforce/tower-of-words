@@ -34,8 +34,9 @@ const C = {
   board: '#c9b48f',
 };
 // how much of its own colour the room gives back as light (day, night): its fitting is on whenever the door is open
-const ROOM = [0.24, 0.42],
-  SPILL = [0.14, 0.24]; // and what the doorway's light gives the leaf and the delivery outside it
+const ROOM = [0.2, 0.34],
+  SPILL = [0.04, 0.22], // and what the doorway's light gives the delivery outside it
+  LEAF = [0.3, 0.26]; // and the open leaf
 
 // The room's light: each surface's own colour added back, warmed (as station-model.js's bounce), so the lit room
 // reads from the alley when the sun's shadow and the dusk would leave it dark
@@ -183,12 +184,14 @@ export function tailorSteps(group, signs) {
   delivery(load, { at: [WALL + 0.62, D.z + 0.06], face: EAST, variant: 'stack' });
   delivery(load, { at: [WALL + 0.42, D.z - 0.36], face: EAST, variant: 'roll' });
   delivery(load, { at: [WALL + 0.86, D.z + 0.36], face: Math.PI * 0.75, variant: 'trolley' }); // its wheels to the alley
-  // (what stands in the doorway's light: the open leaf and the delivery take a share of the room's light at night)
-  const uSpill = { value: SPILL[0] };
-  load.build(open);
-  open.traverse(
-    (m) => m.isMesh && m.material.vertexColors && !m.material.transparent && (m.material = roomLit(m.material, uSpill)),
-  );
+  // (what stands in the doorway's light takes a share of the room's light: the open leaf, out of the sun on its north
+  // side, enough by day to keep the shut door's green; the delivery at night)
+  const uSpill = { value: SPILL[0] },
+    uLeaf = { value: LEAF[0] };
+  const lit = (u) => (m) =>
+    m.isMesh && m.material.vertexColors && !m.material.transparent && (m.material = roomLit(m.material, u));
+  open.traverse(lit(uLeaf));
+  for (const m of load.build(open)) lit(uSpill)(m);
   // (one pool on the landing, one on the step's top, which would hide the first where it starts)
   const spill = pools([[WALL + 0.8, D.z, 1]], 1.2, { k: 0.12, color: '#ffe2b8' }),
     sill = lightPool(WALL + 0.17, D.z, 0.45, { k: 0.2, color: '#ffe2b8', sx: 0.36, sz: 1.3, y: 0.085 }); // the step's top only
@@ -241,6 +244,7 @@ export function tailorSteps(group, signs) {
         spill.userData.set(n ? 0.42 : 0.12);
         sill.material.color.set('#ffe2b8').multiplyScalar(n ? 0.5 : 0.2);
         uSpill.value = SPILL[n ? 1 : 0];
+        uLeaf.value = LEAF[n ? 1 : 0];
         wash.visible = n;
       },
     },
