@@ -15,7 +15,7 @@ import { installDoorCards } from '../ui/door-card.js';
 import { PLAYER_ID } from '../mc.js';
 import { travelOf } from './pin-kinds.js';
 import { registerReaction, registerDue } from './register-reactions.js';
-import { planInteract, runInteract, extraOptions } from './interact-menu.js';
+import { planInteract, runInteract, extraOptions, progresses } from './interact-menu.js';
 
 export function installInteractions(game) {
   const ui = game.ui;
@@ -209,9 +209,16 @@ export function installInteractions(game) {
       if (!introduction || flags[introduction]) meet(game, item.id);
       ui.refreshPeople(sim.met.size);
     }
-    // a thing whose only use now is a word (an empty talk node doesn't count), or a person the story wants a word
-    // for (its sayFirst, the guard's good morning): E opens the Say menu
-    if (item.sayOnly?.() || sayFirst(item)) return void say();
+    // a thing whose only use now is a word (an empty talk node doesn't count): E opens the Say menu
+    if (item.sayOnly?.()) return void say();
+    // a person the story wants a word from (its sayFirst: the guard's good morning, Mori waiting at the lift): the
+    // story row is that word, so it opens Say, and with nothing else on offer E opens Say straight away (#692: Mori's
+    // "Greet Mr. Mori." row ran his wait, a bow, and the story stayed where it was)
+    if (sayFirst(item)) {
+      if (plan?.story) plan.story.say = true;
+      if (!plan || !runInteract(game, item, plan)) say(item);
+      return;
+    }
     if (plan && runInteract(game, item, plan)) return;
     if (game.runner.trigger(trigger || 'talk:' + item.id)) return;
     if (item.act) {
@@ -260,12 +267,19 @@ export function installInteractions(game) {
   }
   game.canUse = canUse;
   game.useDefault = (item) => talk(item, null, { plain: true });
+  // a word Eric knows whose answer at this target moves the story now (sets a flag or a goal): Interact's Story row
+  // opens Say for it when the beat itself only shows something (interact-menu.js, #692)
+  game.wordMoves = (item) =>
+    SAYABLE.some(
+      (w) => known.has(w) && progresses(game.story.nodes, game.runner.resolve(`say:${w}:${item.id}`, { peek: true })),
+    );
   game.saysSomething = saysSomething;
   game.sayRow = sayRow;
-  async function say() {
+  // Say to the target in reach, or to the one Interact's Story row named (it runs before the next frame finds a target)
+  async function say(to) {
     // one Say at a time: no reopening while the last word's reaction is still coming (QA round 1: menu under the dialogue, the cat line twice)
     if (game.busy || !SAYABLE.some((w) => known.has(w)) || game.saying) return;
-    const target = game.sayTarget;
+    const target = to?.id ? (game.sayTarget = to) : game.sayTarget;
     const id = await ui.sayMenu(target ? target.label : null);
     if (!id) return;
     await sayWord(id, target);

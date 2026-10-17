@@ -110,6 +110,8 @@ export default {
     my_desk: 'afternoon_on && !evening_on',
     lift: 'going_home',
   },
+  // Mori waits at the lift for Eric's greeting: Interact on him, and its "Greet Mr. Mori." row, open Say (#692)
+  sayFirst: { mori: '!greeted_mori' },
   labels: { my_chair: 'Your chair', my_desk: 'Your desk', vending: 'Vending machine', covered: 'A covered desk' },
 
   nodes: {

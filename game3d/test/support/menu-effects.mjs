@@ -7,12 +7,18 @@
 // or Say: a word Eric knows with a say: entry for it (or for anything). A thing has no generic reply to a word any
 // more (Jørgen, 2026-10-10), so a thing with nothing of its own is a fault. Say counts only where the menu offers it
 // (during the first minutes, only at the goal).
-// Faults: selectable with no effect at all ("nothing"), or an E row whose use does nothing ("E does nothing").
+// Faults: selectable with no effect at all ("nothing"), an E row whose use does nothing ("E does nothing"), or a row
+// tagged Story in Interact's menu (two rows or more) that doesn't move the story ("Story row does nothing", #692): its
+// beat sets no flag to a new value and no goal (interact-menu.js progresses) and only shows something (onlyShows:
+// lines and staging, no trip, hook or choice), or, where the row opens Say, no word Eric knows gets an answer there
+// that sets a flag or a goal.
 export async function menuEffects() {
   const G = globalThis.__game;
   const at = (p) => new URL(p, globalThis.location.href).href;
   const { known, SAYABLE } = await import(at('js/lang.js'));
   const { isPerson } = await import(at('js/gameplay/idle-talk.js'));
+  const { planInteract, progresses, onlyShows } = await import(at('js/gameplay/interact-menu.js'));
+  const { cond } = await import(at('js/narrative/state.js'));
   const ob = globalThis.__onboard || {};
   const R = G.runner;
   const out = [];
@@ -35,6 +41,20 @@ export async function menuEffects() {
     const faults = [];
     if (!fx.length) faults.push('nothing');
     if (use && !(person || m.act || m.look || talkNode)) faults.push('E does nothing');
+    const plan = use ? planInteract(G, m, { person }) : null;
+    const rows = plan ? [plan.story, ...plan.topics, ...plan.extra, plan.plain, plan.gift].filter(Boolean).length : 0;
+    if (plan?.story && rows > 1) {
+      const nodes = G.story.nodes;
+      const waits = G.story.sayFirst?.[m.id];
+      const word = () =>
+        SAYABLE.some((w) => known.has(w) && progresses(nodes, R.resolve(`say:${w}:${m.id}`, { peek: true })));
+      const moves =
+        plan.story.say || (waits && cond(waits))
+          ? word()
+          : progresses(nodes, plan.story.node) || !onlyShows(nodes, plan.story.node);
+      fx.push('story:' + plan.story.node);
+      if (!moves) faults.push(`Story row "${plan.story.label}" does nothing`);
+    }
     out.push({ id: m.id, label: m.label, fx, faults, node });
   }
   return { place: G.place?.name, goal: G.ui.goalText || '', out };

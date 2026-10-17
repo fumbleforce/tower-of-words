@@ -1,9 +1,11 @@
 // Plays the fast day (?test=fast) and, at every moment no scene runs, checks that each selectable thing's menu has an
-// action that does something right now and that no E row does nothing (issue #128; the rule and the faults are in
-// test/support/menu-effects.mjs). Prints each fault once with the goal it was first seen under, then PASS or FAIL.
+// action that does something right now, that no E row does nothing (issue #128) and that no Story row in Interact's
+// menu leaves the story where it was (#692; the rules and the faults are in test/support/menu-effects.mjs). Prints
+// each fault once with the goal it was first seen under, then PASS or FAIL.
 //   node game3d/tools/menu-day-check.mjs [W H]      (BASE=.claude/worktrees/<name>/game3d; LIST=1 prints every thing;
-//   DAY=2 plays day 2 from a plain finished day 1, as fast.mjs does)
-import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
+//   DAY=2 or 3 plays that day from a plain finished day before, as fast.mjs does; ONLY=Story reports only Story rows;
+//   GPU_WAIT=seconds in the queue)
+import { withBrowserJob, gpuWaitOptions } from '../../tools/lib/browser-job.mjs';
 import { openGame } from '../test/support/open-game.mjs';
 import { menuEffects, sampleMenuEffects } from '../test/support/menu-effects.mjs';
 
@@ -31,9 +33,10 @@ await withBrowserJob(
     errors.push(...game.errors);
     await game.close();
   },
-  { timeoutMs: 295000 },
+  gpuWaitOptions(900, 295000),
 );
-const faults = Object.entries(log?.faults || {});
+// ONLY=<text> keeps the faults that contain it (ONLY=Story: the Story rows alone, #692)
+const faults = Object.entries(log?.faults || {}).filter(([k]) => !process.env.ONLY || k.includes(process.env.ONLY));
 if (process.env.LIST)
   for (const [place, things] of Object.entries(log?.selectable || {})) {
     console.log(`\n${place}`);

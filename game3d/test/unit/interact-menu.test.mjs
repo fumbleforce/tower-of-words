@@ -2,7 +2,7 @@
 // what runs.
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { addInteractOptions, planInteract, progresses, runInteract } from '../../js/gameplay/interact-menu.js';
+import { addInteractOptions, onlyShows, planInteract, progresses, runInteract } from '../../js/gameplay/interact-menu.js';
 import { flags } from '../../js/narrative/state.js';
 
 const nodes = {
@@ -11,7 +11,10 @@ const nodes = {
   kenji_again: [{ if: '!kenji_talked', then: [{ set: 'kenji_talked' }, { say: 'kenji', text: 'Tape.' }] }],
   hop: [{ choice: [{ text: 'a', go: 'sets_goal' }] }],
   sets_goal: [{ do: 'goal', text: 'Go home.' }],
-  machine_door: [{ say: 'mio', text: 'Mm, one minute!' }],
+  machine_door: [{ say: 'mio', text: 'Mm, one minute!' }, { set: 'qc_knocked' }],
+  mio_nudge: [{ say: 'mio', text: 'Hm?' }, { set: 'qc_nudged' }],
+  // a beat that only shows something: a bow and a look (Mori waiting at the lift, #692)
+  mori_wait: [{ do: 'bow', who: 'mori' }, { if: 'x', then: [{ do: 'face', who: 'mori', to: 'eric' }] }],
   // a taken branch that ends or jumps away: the set after it never runs
   early_end: [{ if: 'qc_stop', then: [{ end: true }] }, { set: 'qc_unreachable' }],
   early_go: [{ if: 'qc_stop', then: [{ go: 'mio_busy' }] }, { set: 'qc_unreachable' }],
@@ -69,7 +72,7 @@ test('the goal person gets the story row in the goal’s words, and the topic be
 test('the story row’s words: the entry’s label, else Eric’s opening line, else "Talk to"', () => {
   const a = fakeGame({ on: { 'talk:mio': { node: 'ticket_done', if: 'x' } } });
   assert.equal(planInteract(a.game, a.item, person).story.label, "The copier's fixed.");
-  const b = fakeGame({ on: { 'talk:mio': { node: 'mio_busy', if: 'x' } } });
+  const b = fakeGame({ on: { 'talk:mio': { node: 'mio_nudge', if: 'x' } } });
   assert.equal(planInteract(b.game, b.item, person).story.label, 'Talk to Mio');
   const c = fakeGame({ on: { 'talk:door': { node: 'machine_door', if: 'x', label: 'Knock' } }, id: 'door' });
   assert.equal(planInteract(c.game, c.item).story.label, 'Knock');
@@ -192,4 +195,59 @@ test('a person gets a Give row while the bag can give, last before Leave; other 
   const empty = fakeGame({ on: {} });
   empty.game.canGive = () => false;
   assert.equal(planInteract(empty.game, empty.item, person).gift, null, 'nothing to give, no row');
+});
+
+test('a beat that only shows something is no Story row: Say where a word moves it, else the plain use (#692)', async () => {
+  for (const k of Object.keys(flags)) delete flags[k];
+  assert.equal(onlyShows(nodes, 'mori_wait'), true);
+  assert.equal(onlyShows(nodes, 'mio_busy'), true);
+  assert.equal(onlyShows(nodes, 'machine_door'), false, 'a set');
+  assert.equal(onlyShows(nodes, 'hop'), false, 'a choice');
+  assert.equal(onlyShows(nodes, 'early_go'), false, 'a set after the branch');
+
+  // Mori waits for a greeting: in the menu (his travel topic beside it) the Story row opens Say
+  const m = fakeGame({ on: { 'talk:mori': { node: 'mori_wait', if: '!greeted_mori' } }, topic: TOPIC, goal: true, goalText: 'Greet Mr. Mori.', id: 'mori' });
+  m.game.wordMoves = () => true;
+  let said = 0;
+  m.game.ui.onSay = (to) => (said++, assert.equal(to, m.item));
+  let shown;
+  m.game.ui.choose = async (who, text, chips) => ((shown = chips), 0);
+  const plan = planInteract(m.game, m.item, person);
+  assert.deepEqual(plan.story, { node: 'mori_wait', label: 'Greet Mr. Mori.', say: 'menu' });
+  assert.equal(runInteract(m.game, m.item, plan), true);
+  await new Promise((r) => setTimeout(r, 0));
+  assert.deepEqual(
+    shown.map((c) => c.cls),
+    ['story', 'topic', 'leave'],
+  );
+  await m.game.after();
+  assert.equal(said, 1, 'the Story row opened Say');
+  assert.deepEqual(m.triggered, [], 'and did not run the bow');
+
+  // alone, the beat runs as before; with the story's sayFirst (say: true) Say opens straight away
+  const alone = fakeGame({ on: { 'talk:mori': { node: 'mori_wait', if: '!greeted_mori' } }, id: 'mori' });
+  alone.game.wordMoves = () => true;
+  let aloneSaid = 0;
+  alone.game.ui.onSay = () => aloneSaid++;
+  assert.equal(runInteract(alone.game, alone.item, planInteract(alone.game, alone.item, person)), false);
+  const p = planInteract(alone.game, alone.item, person);
+  p.story.say = true;
+  assert.equal(runInteract(alone.game, alone.item, p), true, 'sayFirst: Say straight away');
+  assert.equal(aloneSaid, 1);
+  assert.deepEqual(alone.triggered, []);
+
+  // no word moves it either: no Story row, and the line stays as the plain Talk beside the topic
+  const d = fakeGame({ on: { 'talk:mio': { node: 'mio_busy', if: 'x' } }, topic: TOPIC, goal: true, goalText: 'Go to the copy room.' });
+  const dp = planInteract(d.game, d.item, person);
+  assert.equal(dp.story, null);
+  assert.deepEqual(dp.plain, { label: 'Talk', use: true });
+  let dShown;
+  d.game.ui.choose = async (who, text, chips) => ((dShown = chips), 1);
+  runInteract(d.game, d.item, dp);
+  await new Promise((r) => setTimeout(r, 0));
+  assert.deepEqual(
+    dShown.map((c) => c.cls),
+    ['topic', 'plain', 'leave'],
+  );
+  assert.ok(!dShown.some((c) => /Story/.test(c.html)), 'no Story tag on a beat that moves nothing');
 });

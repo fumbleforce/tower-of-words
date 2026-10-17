@@ -6,6 +6,8 @@
 //   mori-gift  day 1 morning with a hot corn soup in the bag: E on Mori opens a menu with Give last before Leave (no
 //           brown Give button), Give lists the bag, and the soup goes to Mori (gift_mori_cornsoup runs)
 //   mori-day2-gift  day 2 afternoon with the soup: the topic and Give, the same menu (day 2 has no gift lines yet)
+//   mori-greet  day 1 at the lift, Mori not answered yet, with his travel topic: the Story row opens Say (#692)
+//   mio-copy    day 1, the copier job taken: Mio's direction line is a plain Talk row beside her topic, no Story tag
 //   guard   day 1 at the gate, not greeted yet, from Continue: the goal says Japanese, the how-to hint is up, the guard
 //           has no Chat, and E (or the menu's Interact) opens the Say menu (#394)
 // Usage: node game3d/tools/interact-menu-check.mjs [width] [scenarios,...]  (BASE=<worktree>/game3d for a worktree)
@@ -25,6 +27,12 @@ const SCENES = {
   copier: { day: 1, period: 'morning', met: ['mio', 'mori', 'kenji'], flags: { ...DAY1, got_ticket: true, copier_done: true }, who: 'mio', goal: 'Tell Mio the copier is fixed.' },
   kenji: { day: 1, period: 'morning', met: ['mio', 'mori'], flags: { greeted_mori: true, lead_done: true }, who: 'kenji' },
   guard: { day: 1, period: 'morning', place: 'gate', met: ['mio'], flags: {}, who: 'guard', goal: 'Say good morning to the guard in Japanese.' },
+  // day 1 at the lift on B2, Mori met and not answered yet: his travel topic joins the menu, and the Story row
+  // "Greet Mr. Mori." opens Say, where the greeting answers him (#692: it used to run his wait, a bow, and nothing moved)
+  'mori-greet': { day: 1, period: 'morning', met: ['mio', 'mori'], flags: {}, who: 'mori', goal: 'Greet Mr. Mori.' },
+  // day 1 with the copier job taken: Mio's "the copy room is across the corridor" only shows something, so beside her
+  // topic it is a plain Talk row with no Story tag (#692), and Talk still says it
+  'mio-copy': { day: 1, period: 'morning', met: ['mio', 'mori', 'kenji'], flags: { ...DAY1, got_ticket: true }, who: 'mio' },
   mori: {
     day: 2,
     period: 'afternoon',
@@ -60,7 +68,7 @@ await withBrowserJob('interact-menu-check', async (browser) => {
           if (sessionStorage.getItem('seeded')) return;
           localStorage.setItem('amakawa-day1-save', JSON.stringify(saved));
           sessionStorage.setItem('seeded', '1');
-          localStorage.setItem('amakawa-settings', JSON.stringify({ v: 2, textSpeed: 'instant', voiceOn: false, privateMode: false }));
+          localStorage.setItem('amakawa-settings', JSON.stringify({ v: 2, textSpeed: 'instant', voiceOn: false, privateMode: false, skipChecks: true }));
           localStorage.setItem('amakawa-onboard', JSON.stringify({ moved: true, talked: true, uses: 8, sayUsed: true }));
         }, saved);
       },
@@ -141,6 +149,23 @@ await withBrowserJob('interact-menu-check', async (browser) => {
         if (phone) await page.locator('#talk .chip.story').tap();
         else await page.keyboard.press('KeyE');
         await page.waitForFunction(() => window.__game.runner.trace?.includes('ticket_done'), null, { timeout: 15000 });
+      } else if (name === 'mori-greet') {
+        assert.equal(plan.story?.label, 'Greet Mr. Mori.');
+        assert.deepEqual(menu.rows.map((r) => r.cls.split(' ').find((c) => ['story', 'topic', 'leave'].includes(c))), ['story', 'topic', 'leave']);
+        if (phone) await page.locator('#talk .chip.story').tap();
+        else await page.keyboard.press('KeyE');
+        await page.waitForFunction(() => !document.querySelector('#sayMenu').hidden, null, { timeout: 8000 });
+        await page.screenshot({ path: `${out}${width}-${name}-say.png` });
+        const word = page.locator('#sayMenu .list button.cmd').first();
+        if (phone) await word.tap();
+        else await word.click();
+        await page.waitForFunction(() => window.__game.runner.trace?.includes('ohayo_mori'), null, { timeout: 15000 });
+      } else if (name === 'mio-copy') {
+        assert.equal(plan.story, null);
+        assert.deepEqual(menu.rows.map((r) => r.cls.split(' ').find((c) => ['story', 'topic', 'plain', 'leave'].includes(c))), ['topic', 'plain', 'leave']);
+        assert.ok(!menu.rows.some((r) => /Story/.test(r.text)), 'no Story tag');
+        await page.locator('#talk .chip.plain').click();
+        await page.waitForFunction(() => window.__game.runner.trace?.includes('mio_copy_room'), null, { timeout: 15000 });
       } else if (name === 'kenji') {
         assert.ok(plan.story && !plan.topics.length);
         assert.equal(menu.rows.length, 0, 'no menu for a story beat alone');

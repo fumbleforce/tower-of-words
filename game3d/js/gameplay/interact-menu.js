@@ -7,7 +7,9 @@
 //
 // What Interact offers a target now, in this order:
 //   1. the story beat its talk: trigger has now (highlighted, focused, tagged Story): an entry with its own condition
-//      or `once`, one that would set a flag or a goal, or any while the target is the goal
+//      or `once`, one that would set a flag or a goal, or any while the target is the goal. A beat that only shows
+//      something (lines, a bow, a look: onlyShows) moves nothing, so it is no Story row (#692): in a menu its row
+//      opens Say when a word Eric knows moves the story there (game.wordMoves), else it is the plain use (4)
 //   2. a person's conversation topics (conversations/index.js topicFor, gated by what Eric knows: needs.js)
 //   3. options other code adds (addInteractOptions below), such as a private scene's choice at a door
 //   4. the target's plain use (a thing's talk node, act or look when no story beat matches; a person's repeat line
@@ -100,6 +102,26 @@ export function progresses(nodes, node, seen = new Set()) {
   return walk(nodes?.[node]) === 'progress';
 }
 
+// what a beat only shows: its lines and staging, nothing that changes what comes next (no flag, goal, word, choice,
+// trip or hook of its own). Followed through branches and jumps; a step it doesn't know counts as doing something.
+const SHOWS = new Set(['cam', 'face', 'gesture', 'bow', 'emote', 'walk', 'look', 'expression', 'sound', 'chime']);
+export function onlyShows(nodes, node, seen = new Set()) {
+  if (!node || seen.has(node)) return true;
+  seen.add(node);
+  const all = (steps) =>
+    (steps || []).every((s) => {
+      if (!s || typeof s !== 'object') return true; // a narration line
+      if (s.set !== undefined || s.unset !== undefined || s.inc || s.learn || s.offer || s.choice || s.call)
+        return false;
+      if (s.say) return true;
+      if (s.if !== undefined && (s.then || s.else)) return all(s.then) && all(s.else);
+      if (s.go) return onlyShows(nodes, s.go, seen);
+      if (s.do) return SHOWS.has(s.do);
+      return !!(s.end || s.wait);
+    });
+  return all(nodes?.[node]);
+}
+
 // speaker() always answers, with the bare id for a thing that has no name of its own, so the label wins over an id
 const nameOf = (game, item) => {
   const n = game.runner.speaker?.(item.id)?.name;
@@ -124,24 +146,34 @@ function storyLabel(game, item, entry, steps, person) {
 }
 
 // What Interact offers this target now: { story, topics, extra, plain, gift }. Called before meet(), so a first meeting
-// (no topics yet) runs the story directly.
+// (no topics yet) runs the story directly. A story row with `say` opens Say: 'menu' (above), or true, which
+// interactions.js sets while the story's sayFirst holds for this target (Mori at the lift, the guard's good morning).
 export function planInteract(game, item, { person = false } = {}) {
   const key = 'talk:' + item.id;
   const entry = game.runner.entry?.(key, { peek: true });
   const node = entry?.node;
   const steps = node && game.story.nodes?.[node];
+  const nodes = game.story?.nodes;
   const isStory =
-    !!steps?.length && (item.goal?.() || entry.if !== undefined || !!entry.once || progresses(game.story.nodes, node));
-  const story = isStory ? { node, label: storyLabel(game, item, entry, steps, person) } : null;
+    !!steps?.length && (item.goal?.() || entry.if !== undefined || !!entry.once || progresses(nodes, node));
+  // a beat that only shows something: its row opens Say where a word moves the story ('menu': only in a menu, alone
+  // the beat runs as before), else it is the plain use, still there beside the topics
+  const shows = isStory && !progresses(nodes, node) && onlyShows(nodes, node);
+  const word = shows && !!game.wordMoves?.(item);
+  const story =
+    isStory && (!shows || word)
+      ? { node, label: storyLabel(game, item, entry, steps, person), ...(word ? { say: 'menu' } : {}) }
+      : null;
   const topic = person ? game.topicFor?.(item.id) : null;
   const topics = topic ? [topic] : [];
   const extra = extraOptions(game, item);
   const verb = verbOf(item);
   const plainLabel = game.place?.seating?.sittingAt(item.id) && /^Sit$/i.test(verb) ? 'At this seat' : verb;
   // the plain use, when no story beat matches (a talk: list's later entries assume the earlier conditions failed, so
-  // it is never offered beside the beat); a person's only when they have no topics either
+  // it is never offered beside the beat); a person's only when they have no topics either, or when it is the beat
+  // that only shows something
   const plain =
-    story || (person && topics.length) || (item.seatAction && extra.length)
+    story || (person && topics.length && !shows) || (item.seatAction && extra.length)
       ? null
       : { label: person ? 'Talk' : plainLabel || 'Look', use: true };
   // Give, last before Leave: a person, while the bag holds something to give (interactions.js sets game.canGive)
@@ -155,7 +187,9 @@ export function runInteract(game, item, plan) {
   const { person, story, topics, extra, plain, gift } = plan;
   const talkKey = 'talk:' + item.id;
   const rows = [
-    ...(story ? [{ label: story.label, story: true, trigger: talkKey, cls: 'story' }] : []),
+    ...(story
+      ? [{ label: story.label, story: true, ...(story.say ? { say: story.say } : { trigger: talkKey }), cls: 'story' }]
+      : []),
     ...topics.map((t) => ({
       label: t.label,
       trigger: t.trigger,
@@ -170,8 +204,8 @@ export function runInteract(game, item, plan) {
   if (!rows.length) return false;
   if (rows.length === 1) {
     const only = rows[0];
-    // the story beat alone, or the plain use alone: the usual use runs
-    if (only.use || only.trigger === talkKey) return false;
+    // the story beat alone, or the plain use alone: the usual use runs (a beat whose word opens Say only in a menu too)
+    if (only.use || only.trigger === talkKey || only.say === 'menu') return false;
     perform(game, item, only);
     return true;
   }
@@ -205,6 +239,7 @@ export function runInteract(game, item, plan) {
 
 function perform(game, item, row) {
   if (row.use) return game.useDefault?.(item);
+  if (row.say) return void game.ui.onSay?.(item); // the story waits for a word (interactions.js, sayFirst)
   if (row.gift) return void game.giveTo?.(item);
   if (row.trigger) return void game.runner.trigger(row.trigger);
   if (row.node) return void game.beat(() => game.runner.run(row.node, { trigger: 'talk:' + item.id }));
