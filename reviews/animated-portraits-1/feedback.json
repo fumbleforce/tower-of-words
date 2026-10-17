@@ -3,6 +3,6 @@
  "picked": [],
  "options": {},
  "comment": "no these dont work, the video options have a whole lot of flickering and poor cutouts, you cant iterate away from that. The puppet is too slow moving and blinking is unnatural with very short frames for it.",
- "read": false,
+ "read": true,
  "history": []
 }
