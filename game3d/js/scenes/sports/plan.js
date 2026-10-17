@@ -10,13 +10,14 @@
 //   by gym_link into the office street's east end (office-quarter/plan.js LINK_WALKS, laid by office-quarter/link.js,
 //   which the office quarter walks too); the gym's apron in front of its door
 //   the pool walk: north from the sports lane between the gym and the pool's fence to the shower pavilion's door
-//   the courts walk: east from the pool walk along the pool's and the courts' fences, behind the north residence, to
-//   the onsen path's foot (the east coast chunk's), with the short walks to the courts' gate and the residence's
-//   door on one axis across it
+//   the courts walk: east from the pool walk along the pool's and the courts' fences, past the dorm quarter's
+//   orchard behind its hedge, to the onsen path's foot (the east coast chunk's), with the short walk to the courts'
+//   gate
 import * as LAYOUT from '../island-layout.js';
 import * as E from '../plaza/east-plan.js';
 import * as O from '../office-quarter/plan.js';
 import { nookWalks } from '../outdoor/nook-walks.js';
+import { ORCHARD as ORCHARD_RECT, NORTH as QUARTER_NORTH } from '../dorm-quarter/plan.js';
 
 export const CHUNK = 'sports';
 const AT = LAYOUT.CHUNKS[CHUNK].at;
@@ -37,15 +38,17 @@ export const NS = path('north_street');
 export const BACK = path('back_lane');
 export const POOL_WALK = path('pool_walk');
 export const COURTS_WALK = path('courts_walk');
+const COURTS_WALK_SOUTH = COURTS_WALK[3],
+  GARDENS_SOUTH = QUARTER_NORTH[2];
 export const GATE_WALK = path('courts_gate_walk');
-export const RES_WALK = path('residence_walk');
 export const DECK = path('pool_deck');
 export const GYM = building('gym');
 export const PAVILION = building('pool_hall');
-export const RESIDENCE = building('housing_n');
+// the dorm quarter's orchard and gardens south of the courts walk (dorm-quarter/plan.js), behind the walk's hedge
+export const ORCHARD = [ORCHARD_RECT[0], ORCHARD_RECT[1], COURTS_WALK_SOUTH, GARDENS_SOUTH];
 export const R3 = building('r3');
 export const GX = mid(GYM[0], GYM[1]); // the gym's door axis
-export const DOOR_X = mid(GATE_WALK[0], GATE_WALK[1]); // the courts' gate and the residence's door
+export const DOOR_X = mid(GATE_WALK[0], GATE_WALK[1]); // the courts' gate, on the gardens' path's axis
 export const PAV_DOOR_Z = POOL_WALK[2] + 1.2; // the pavilion's door, on its west face at the pool walk's end
 const R3_Z = mid(R3[2], R3[3]);
 export const R3_SPUR = [NS[1], R3[0], R3_Z - 0.75, R3_Z + 0.75];
@@ -62,7 +65,6 @@ const I_WALKS = [
   [POOL_WALK[0], POOL_WALK[1], POOL_WALK[2], LANE[2] + 0.1],
   [POOL_WALK[1] - 0.1, COURTS_WALK[1] - 2.2, COURTS_WALK[2], COURTS_WALK[3]],
   [GATE_WALK[0], GATE_WALK[1], GATE_WALK[2] + 0.3, GATE_WALK[3] + 0.1],
-  [RES_WALK[0], RES_WALK[1], RES_WALK[2] - 0.1, RES_WALK[3] - 0.15],
 ];
 // the nooks (outdoor/nooks.js), in the chunk's frame: drinks machines in the gap between the pool deck's fence and
 // the courts, north off the courts walk through a gap in its hedge (COURTSIDE, island x); a bench on the grass
@@ -176,8 +178,8 @@ export const BOUNDS = boundsOf(WALKS);
 // where the camera turns (places/sports.js), in the chunk's frame: it looks a little east of north over the lane,
 // the north street and the pool walk, so the gym's front faces it; at the pool walk's north end, past the gym, it
 // turns north-east so the pavilion's door faces it ([z from, z to] it eases over); along the courts walk it looks
-// east from a little north of the walk, steeply, so the north residence south of the walk doesn't hide Eric ([x
-// from, x to] it eases over, north of [z from, z to], which only the courts walk and its two short walks are)
+// east from a little north of the walk, steeply, so the orchard's trees south of the walk don't hide Eric ([x
+// from, x to] it eases over, north of [z from, z to], which only the courts walk and its short walk are)
 // west of the gym's corner, on the office street's stub, it turns to the office street's look ([x from, x to]), as
 // the office quarter has it there (office-quarter/plan.js POSES)
 export const TURNS = {
@@ -185,6 +187,6 @@ export const TURNS = {
   pavilion: { z: [pt([0, GYM[2] - 1])[1], pt([0, GYM[2] - 6])[1]] },
   courts: {
     x: [pt([POOL_WALK[1] + 1.5, 0])[0], pt([POOL_WALK[1] + 5, 0])[0]],
-    z: [pt([0, RES_WALK[3] + 1])[1], pt([0, RES_WALK[3] - 1])[1]],
+    z: [pt([0, COURTS_WALK[3] + 3.3 + 1])[1], pt([0, COURTS_WALK[3] + 3.3 - 1])[1]],
   },
 };

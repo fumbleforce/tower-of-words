@@ -84,6 +84,7 @@ test('the bands table names real places, builders and blocks, and no band covers
       'officeStreet',
       'officeRow',
       'fountainPlaza',
+      'dormQuarter',
     ];
     for (const [chunk, list] of Object.entries(BANDS)) {
       assert.ok(CHUNKS[chunk], `${chunk} is a place`);

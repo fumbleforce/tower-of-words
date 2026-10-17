@@ -22,7 +22,7 @@ const { benchSit } = await import('../../js/crowd/motion.js');
 const { snapshotPeople } = await import('../../js/places/saved-people.js');
 const { Nav } = await import('../../js/movement/navigation.js');
 const coastPlan = await import('../../js/scenes/east-coast/plan.js');
-const { TERRACE } = await import('../../js/scenes/dorm-court/cluster-plan.js');
+const { TERRACE } = await import('../../js/scenes/dorm-quarter/plan.js');
 const { bench } = await import('../../js/scenes/outdoor/furniture.js');
 const { benchSeats, before } = await import('../../js/places/day3/seats.js');
 process.on('exit', () => hooks.deregister());
@@ -235,7 +235,7 @@ test('real coast terrace benches are reached from free ends when the coastal wal
   for (const child of [...P.space.children]) if (child.userData.seats) child.removeFromParent();
   const metadata = new THREE.Group(),
     collector = { box() {} };
-  for (const x of [TERRACE[0] + 1.1, TERRACE[1] - 1.1]) {
+  for (const x of [TERRACE[0] + 1.1, TERRACE[1] - 1.3]) {
     const local = coastPlan.pt([x, TERRACE[3] - 0.7]);
     bench(collector, ...local, 0, { len: 1.3 });
   }
@@ -245,7 +245,7 @@ test('real coast terrace benches are reached from free ends when the coastal wal
   P.nav = new Nav(x0 - 0.2, x1 + 0.2, z0 - 0.2, z1 + 0.2, 0.12);
   P.nav.extra = (x, z) => coastPlan.WALKS.some((r) => coastPlan.inRect(x, z, r, -0.02));
   for (const r of coastPlan.FURNITURE) P.nav.block(...r);
-  P.spots.terrace_bench = coastPlan.pt([TERRACE[1] - 1.1, TERRACE[3] - 1.35]);
+  P.spots.terrace_bench = coastPlan.pt([TERRACE[1] - 1.3, TERRACE[3] - 1.35]);
   f.player.root.position.set(-46.86, 0, 0);
   f.companion.root.position.set(-46.86, 0, 0.84);
   const built = benchSeats(P);

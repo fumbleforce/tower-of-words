@@ -5,8 +5,8 @@
 // east-lane/plan.js. It is the plaza's own backdrop of the same ground, built whole by the same builders in the
 // plaza's frame: the paving, park, planting and the small blocks with the named shops' signs and shut doors
 // (plaza/east-lane.js, plaza/east-shops.js), the back lane with the training centre and block_e2 (plaza/north-lane.js), the
-// lane's own stretch and verges (plaza/ground.js, plaza/green.js) and its lamps; the dorm courtyard and its cluster
-// (dorm-court/cluster.js), the shop street's east end (plaza-buildings.js), and the town round it from the layout
+// lane's own stretch and verges (plaza/ground.js, plaza/green.js) and its lamps; the dorm courtyard and the dorm
+// quarter (dorm-quarter/), the shop street's east end (plaza-buildings.js), and the town round it from the layout
 // (skyline.js). The camera turns: north-east over most of it, so the north street's fronts, the park and Amakawa
 // Travel face it, and south-east over the south walk, where the shops face north (places/east-lane.js eases it).
 // Evening: the shops' signs, the blocks' glass and the lamps light up.
@@ -31,7 +31,7 @@ import { lampPoints } from './plaza/furniture.js';
 import { BLOCK_IDS } from './plaza/east-plan.js';
 import { NORTH_IDS } from './plaza/north-plan.js';
 import { SHOPS as PLAZA_SHOPS, LZ, F, R } from './plaza/plan.js';
-import { clusterSteps, placeIn, CLUSTER_IDS } from './dorm-court/cluster.js';
+import { quarterSteps, placeIn, QUARTER_IDS } from './dorm-quarter/index.js';
 import { coastLand } from './island-west.js';
 import { BAYS, SHOPS } from './island-south.js';
 import * as P from './east-lane/plan.js';
@@ -96,17 +96,17 @@ export function* eastLaneChunkSteps() {
   const bands = yield* bandSteps(root, CHUNK); // the ground past the exits, as the neighbours build it (bands.js)
   const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
-    skip: ['shops_north', 'arcade', 'shops_south', ...BLOCK_IDS, ...NORTH_IDS, ...CLUSTER_IDS, 'dorm_1', ...bands.ids],
+    skip: ['shops_north', 'arcade', 'shops_south', ...BLOCK_IDS, ...NORTH_IDS, ...QUARTER_IDS, 'dorm_1', ...bands.ids],
     land: coastLand(LAYOUT.COAST.line),
     landColor: TOWN.grass,
   });
   const nooks = buildNooks(P.NOOKS, root); // outdoor/nooks.js: props round each nook, its spot named
   for (const r of nooks.blocks) nav.block(...r);
   yield* mergeStaticSteps(root);
-  // the dorm courtyard and its cluster east of the dorm street, in its own group so the merge leaves it out
+  // the dorm courtyard and the dorm quarter east of the dorm street, in its own group so the merge leaves it out
   const cluster = placeIn(new THREE.Group(), CHUNK);
   root.add(cluster);
-  const dorms = yield* clusterSteps(cluster, { plaza: true });
+  const dorms = yield* quarterSteps(cluster, { host: 'east_lane' });
   yield* nav.buildSteps();
   // what lights up after dark
   light.glow.add(bands.glows, nooks.glows, lit.glows, east.glows, north.glows, dorms.glows, street.glows, sky.glows);

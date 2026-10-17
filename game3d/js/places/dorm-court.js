@@ -75,7 +75,7 @@ export async function dormCourtPlace(game) {
       face: () => mb.at,
       enabled: () => game.runner.has('talk:mailboxes'),
     },
-    // day 2: out through the gate onto the lane, east to the east lane (its story's talk:street_gate)
+    // day 2: out through the gate onto the promenade, west to the east lane (its story's talk:street_gate)
     street_gate: {
       ...PLACE_DETAILS.dorm_court.things.street_gate,
       anchor: (v) => v.set(w.streetGate[0], 1.2, w.streetGate[1] - 1.3),
@@ -205,10 +205,10 @@ export async function dormCourtPlace(game) {
         cam.snap(game.player.root.position);
       }
     },
-    // in along the lane from the plaza, on the same close framing the plaza let go of (places/edge-walk.js), then
-    // left through the gate and up the door axis into the court
+    // in along the promenade from the plaza lane (it comes from the west: the frame's right), on the same close
+    // framing the plaza let go of (places/edge-walk.js), then left through the gate and up the door axis into the court
     async tripIn(g) {
-      await walkIn(g, cam, w.streetEdge, w.streetGate, Math.PI / 2, {
+      await walkIn(g, cam, w.streetEdge, w.streetGate, -Math.PI / 2, {
         release: false,
       });
       const eric = g.player;

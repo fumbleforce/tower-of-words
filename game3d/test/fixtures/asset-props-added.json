@@ -462,7 +462,7 @@
   {
     "id_": "prop/dorm_commons/commons_door",
     "kind": "prop",
-    "name": "To the inner court",
+    "name": "To the park",
     "paths": [
       "game3d/js/places/commons.js"
     ],
@@ -471,7 +471,7 @@
     "source": "commons.js things.commons_door",
     "place": "dorm_commons",
     "used": [
-      "Dorm common room: tap target 'To the inner court'"
+      "Dorm common room: tap target 'To the park'"
     ],
     "view": {
       "type": "room",

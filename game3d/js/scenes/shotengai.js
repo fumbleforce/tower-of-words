@@ -24,7 +24,7 @@ import { frontsSteps } from './plaza/east-fronts.js';
 import { BLOCKS as EAST_BLOCKS } from './plaza/east-plan.js';
 import { seafrontSteps } from './outdoor/seafront.js';
 import { coastalSea } from './outdoor/sea.js';
-import { placeIn } from './dorm-court/cluster.js';
+import { placeIn } from './place-frame.js';
 import { coastLand } from './island-west.js';
 import { signSet } from './shop-signs.js';
 import { BAYS, SHOPS, WALL_Z, SIDE_DOOR } from './island-south.js';

@@ -30,10 +30,10 @@ export const EAST_COAST_DETAILS = {
   hooks: ['coastVisit'],
 };
 
-// The dorm common room's (places/commons.js), through its glazed door on the inner court.
+// The dorm common room's (places/commons.js), through its glazed door on the promenade.
 export const DORM_COMMONS_DETAILS = {
   things: {
-    commons_door: { label: 'To the inner court', kind: 'thing', verb: 'Go' },
+    commons_door: { label: 'To the park', kind: 'thing', verb: 'Go' },
     commons_printer: { label: 'Printer', kind: 'thing small' },
     art_table: { label: 'Art materials', kind: 'thing small' },
     drying_rack: { label: 'Drying rack', kind: 'thing' },

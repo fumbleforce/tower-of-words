@@ -2,7 +2,7 @@
 // the walls, cabinets, trees and walking/seat anchors remain with their builders.
 import { plane } from '../../props.js';
 import { drinksFace } from '../outdoor/vending-face.js';
-import { mound, grass } from '../outdoor/planting.js';
+import { mound } from '../outdoor/planting.js';
 
 const STONE = ['#959b9d', '#a2a6a5', '#919799', '#9b9f9d'];
 const FINISH = { cast: false, surf: 'stone' };
@@ -53,10 +53,12 @@ export function drain(p, a, b, width = 0.16) {
   }
 }
 
-export function terraceVending(root, p, x, z) {
-  p.box('#3f6f9e', 0.75, 1.8, 0.65, x, 0, z);
+// a drinks machine facing +z: its housing in `color`, its lit front from the shared face (the beach plaza's pair
+// take a second colour, dorm-quarter/promenade.js)
+export function terraceVending(root, p, x, z, { color = '#3f6f9e', seed = 4 } = {}) {
+  p.box(color, 0.75, 1.8, 0.65, x, 0, z);
   p.box('#283d50', 0.65, 0.08, 0.61, x, 0, z, { cast: false });
-  const face = plane(0.69, 1.65, drinksFace('#3f6f9e', 4), { emissiveK: 0.42 });
+  const face = plane(0.69, 1.65, drinksFace(color, seed), { emissiveK: 0.42 });
   face.name = 'coast-vending-display';
   face.position.set(x, 0.92, z + 0.329);
   face.userData.noLook = true;
@@ -101,39 +103,4 @@ export function terraceDetails(p, [x0, x1, z0, z1], [bx0, bx1, bz0, bz1]) {
   ])
     mound(p, cx + dx, cz + dz, r, color, { y: 0.43, squash: 0.3 });
   drain(p, [x0 + 0.14, z0 + 0.28], [x1 - 0.25, z0 + 0.28]);
-}
-
-// Low planting occupies the already unwalkable verge; the coast path stays clear.
-export function promenadeDetails(p, [x0, x1, z0, z1], bays) {
-  const start = z0 + 2.6,
-    end = z1 - 2.6;
-  // Gravel margins meet each paved bench bay cleanly; they stop before either crossing.
-  let cursor = start;
-  for (const [a, b] of [...bays.map((r) => [r[2], r[3]]).sort((a, b) => a[0] - b[0]), [end, end]]) {
-    const next = Math.min(a, end);
-    if (next > cursor)
-      p.box('#959b87', 0.48, 0.014, next - cursor, x0 - 0.32, 0, (cursor + next) / 2, { cast: false, surf: 'soil' });
-    cursor = Math.max(cursor, b);
-  }
-  // Each existing lamp has a small salt-tolerant planting group behind it.
-  for (const [i, z] of [-30, -22, -14, -6, 2].entries()) {
-    if (z < start + 1 || z > end - 1 || bays.some((b) => z > b[2] - 1 && z < b[3] + 1)) continue;
-    for (const [dx, dz, r, color] of [
-      [-0.72, -0.38, 0.27, '#778564'],
-      [-0.9, 0.07, 0.32, '#6d805c'],
-      [-0.65, 0.42, 0.22, '#87916d'],
-    ])
-      mound(p, x0 + dx, z + dz, r, color, { squash: 0.38 });
-    for (const [dx, dz, h] of [
-      [-0.52, -0.2, 0.35],
-      [-0.6, 0.22, 0.31],
-      [-0.88, 0.49, 0.28],
-    ])
-      grass(p, x0 + dx, z + dz, {
-        h,
-        seed: i * 7 + Math.round(h * 100),
-        color: '#a1a482',
-      });
-  }
-  for (let z = start + 1; z < end - 1; z += 8.4) drain(p, [x1 - 0.14, z], [x1 - 0.14, z + 0.75], 0.17);
 }

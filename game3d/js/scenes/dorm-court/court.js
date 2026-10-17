@@ -3,14 +3,15 @@
 // in running bond with a pale soldier border), with legs up to the hall doors, between two kerbed beds, and to the
 // sento door, and the gate link down to the street on the door leg's axis; brick under the shelter. Round the court
 // on the west and south, raised beds with a low wall: the garden west of the laundry, and the front bed, opened only
-// for the gate. Past the front, the street: the lane home in the plaza's brick, with a verge and an avenue on its far
-// side. A tall lamp by the drinks machines and one where the walk ends in the garden; lanterns on the gate piers, a
+// for the gate. Past the front, the street: the lane home in the plaza's brick (the dorm quarter's promenade), the
+// park's verge on its far side (dorm-quarter/park.js). A tall lamp by the drinks machines and one where the walk ends
+// in the garden; lanterns on the gate piers, a
 // stone lantern in the front bed, bollard lights along its wall. Blocks what can't be walked.
 import * as THREE from 'three';
 import { Parts, pools } from '../outdoor/parts.js';
 import { paver, GRANITE } from '../outdoor/paving.js';
-import { kerb, kerbRect, lowWall, wallRect } from '../outdoor/edges.js';
-import { laneField, verge } from '../outdoor/lane.js';
+import { kerbRect, lowWall, wallRect } from '../outdoor/edges.js';
+import { laneField } from '../outdoor/lane.js';
 import { keyaki, sakura, maple, cluster, hedge, grass, bed, mound, gravel as rake, LEAF } from '../outdoor/planting.js';
 import { lamps, bench, bins, stoneLantern } from '../outdoor/furniture.js';
 import * as P from './plan.js';
@@ -230,16 +231,6 @@ function seBed(p, block) {
   block(r[0], r[1], r[2], P.NEAR + 0.2);
 }
 
-// the street's far side: a verge with a low hedge and the zelkova avenue, as along the lane in the plaza; where the
-// small building across the street comes up to it, just the kerb
-function farSide(p) {
-  const z = STREET[3];
-  verge(p, [STREET[0], z], [3.6, z], 's', { trees: [-13.5, -9.5], seed: 11 }); // none in front of the gate: from the
-  // camera they would stand over the lane where he walks in
-  kerb(p, [3.6, z], [6.5, z], { off: 0.08 });
-  verge(p, [6.5, z], [STREET[1], z], 's', { trees: [10.5, 14.5], seed: 13 });
-}
-
 // the bench beside the cherry, backed on the front bed's wall and facing the court; the sorted bins beside it
 function seats(p, block) {
   const [x, z] = P.BENCH;
@@ -265,8 +256,7 @@ export function* courtSteps(root, nav, set) {
   const p = new Parts();
   frontBed(p, set, block);
   yield;
-  gate(p, set, block);
-  farSide(p);
+  gate(p, set, block); // the street's far side is the park's verge (dorm-quarter/park.js)
   yield;
   garden(p, block);
   yield;

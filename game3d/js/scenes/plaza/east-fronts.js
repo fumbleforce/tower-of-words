@@ -182,8 +182,9 @@ export function* frontsSteps(p, lights, blocks, { caster = p, casts = () => fals
   };
 }
 
-// one storey of balconies along a face, floor at y: a room every 2.4 or so
-function balconyRow(F, y, { box, pane, seed }) {
+// one storey of balconies along a face, floor at y: a room every 2.4 or so (the dorm quarter's blocks too,
+// dorm-quarter/blocks.js)
+export function balconyRow(F, y, { box, pane, seed }) {
   const D = 0.75,
     rooms = Math.max(1, Math.round(F.L / 2.4)),
     w = F.L / rooms;
@@ -214,8 +215,8 @@ function balconyRow(F, y, { box, pane, seed }) {
   }
 }
 
-// the ground floor of the door's face
-function groundFloor(p, F, k, fh, { box, pane, lights }) {
+// the ground floor of the door's face (the dorm quarter's blocks too, dorm-quarter/blocks.js)
+export function groundFloor(p, F, k, fh, { box, pane, lights }) {
   // the door, along the face from its start (k.at is its x on a north or south face, its z on a west or east one)
   const at = tOf(F, k.at);
   const frame = box(FRAME, false),

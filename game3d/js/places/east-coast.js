@@ -9,51 +9,42 @@ import { sim } from '../sim.js';
 import { inRect } from '../scenes/east-coast/plan.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
-import { walkOut, walkIn } from './edge-walk.js';
+import { walkOut, walkIn, walkOutNearest } from './edge-walk.js';
 import { turningCam, followFit } from './turning-cam.js';
 import { roadClosure } from './closure.js';
 import { coastVisit } from './coast-visit.js';
 import { day3Place } from './day3/place.js';
 
-// The east coast (scenes/east-coast.js): the dorm row walked east from the east lane's dorm street, to the sea
-// terrace, the coast walk and the onsen's front; it also loads with ?place=east_coast. The onsen is shut for now
-// (its door says so). West along the row goes back to the dorm street; west along the courts walk from the onsen
-// path's foot goes on to the sports ground (the gym, the pool and the courts walk, scenes/sports.js).
+// The east coast (scenes/east-coast.js): the dorm quarter (Review dorm-quarter-5) walked from the east lane's dorm
+// street along the row and the promenade, through the park, along the beach promenade and the north path, on to the
+// onsen's front; it also loads with ?place=east_coast. The onsen is shut for now (its door says so). West along the row
+// or the promenade goes back to the east lane; west along the courts walk from the onsen path's foot goes on to the
+// sports ground (the gym, the pool and the courts walk, scenes/sports.js); the common room's door opens on the
+// promenade.
 //
-// The camera looks east down the row, toward the terrace and the sea, from a little north of it and steeply, so the
-// row's trees (on its south side) don't hide Eric; over the terrace it turns to look north-east up the coast, the
-// sea on the right;
-// off the coast walk onto the onsen path it turns to look due north, so the gate and the hall's front face it
-// (plan.js TURNS). It eases between them as he walks, and snaps on a jump (a trip, a restored save).
+// The camera turns by where he is (plan.js TURNS): east down the row; north over the park from the promenade and in
+// the park, so the blocks behind it face it; north-east along the beach promenade, the sea on the right; north in the
+// north, to the gardens and up the onsen path; south over the coastal garden to the sea. It eases between them as he
+// walks, and snaps on a jump (a trip, a restored save).
 const deg = THREE.MathUtils.degToRad;
 const POSE = {
   row: { yaw: -Math.PI / 2 - 0.25, elev: deg(58) }, // a little from the north, steep: the row's trees are on its south side
-  coast: { yaw: -0.6, elev: deg(56) },
-  onsen: { yaw: 0, elev: deg(52) },
-  inner: { yaw: 0.12, elev: deg(56) }, // on the inner court: north, the common room's door facing it
-  garden: { yaw: Math.PI - 0.18, elev: deg(56) }, // the southern lawn and the sea beyond it
-  shore: { yaw: 0.18, elev: deg(60) }, // from the sea side, clear of the tall blocks beside the loop
-  approach: { yaw: Math.PI / 2 + 0.25, elev: deg(62) }, // along the row from its clear eastern end
+  park: { yaw: 0.25, elev: deg(56) }, // from the south over the promenade, a little from the east
+  beach: { yaw: -0.55, elev: deg(56) }, // from the south-west, along the sea
+  north: { yaw: 0.1, elev: deg(54) },
+  south: { yaw: Math.PI - 0.18, elev: deg(56) }, // the villas' gardens and the sea beyond
 };
-const smooth = THREE.MathUtils.smoothstep,
-  lerp = THREE.MathUtils.lerp;
 export async function eastCoastPlace(game) {
   const w = await sliced(eastCoastSteps()); // in slices between frames: it's built while the east lane is played
-  const row = POSE.row;
-  const cam = new RoomCam({ ...w.camera, yaw: row.yaw });
+  const cam = new RoomCam({ ...w.camera, yaw: POSE.row.yaw });
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const T = w.turns;
   const turn = turningCam(cam, (x, z) => {
-    if (inRect(x, z, T.inner)) return POSE.inner;
-    if (inRect(x, z, T.approach)) return POSE.approach;
-    if (inRect(x, z, T.garden) || inRect(x, z, T.rest)) return POSE.garden;
-    if (inRect(x, z, T.shore)) return POSE.shore;
-    const r = (1 - smooth(x, T.row.x[0], T.row.x[1])) * smooth(z, T.row.z[0], T.row.z[1]),
-      o = 1 - smooth(z, T.onsen.z[0], T.onsen.z[1]);
-    return {
-      yaw: lerp(lerp(POSE.coast.yaw, POSE.onsen.yaw, o), row.yaw, r),
-      elev: lerp(lerp(POSE.coast.elev, POSE.onsen.elev, o), row.elev, r),
-    };
+    if (inRect(x, z, T.row)) return POSE.row;
+    if (inRect(x, z, T.beach)) return POSE.beach;
+    if (inRect(x, z, T.south)) return POSE.south;
+    if (inRect(x, z, T.park)) return POSE.park;
+    return POSE.north;
   });
   const door = w.doors[0],
     commons = w.doors[1],
@@ -144,14 +135,15 @@ export async function eastCoastPlace(game) {
       rei: d3.people.rei,
     },
     zones: {
-      row_exit: (x, z) => inRect(x, z, out.zone),
+      // west along the row or along the promenade, both to the east lane (EXITS.east_lane.ways)
+      row_exit: (x, z) => Object.values(out.ways).some((way) => inRect(x, z, way.zone)),
       courts_exit: (x, z) => inRect(x, z, west.zone),
     },
     hooks: { coastVisit: visit.hooks.coastVisit },
     day3: (a) => d3.setup(P, a),
     onDay: (day) => pool.sync(day),
     fit(aspect) {
-      followFit(cam, w.nav, aspect, POSE.coast); // fitted at the coast's look, kept through the turns
+      followFit(cam, w.nav, aspect, POSE.park); // fitted at the park's look, kept through the turns
     },
     pick(rc) {
       const point = new THREE.Vector3();
@@ -165,7 +157,8 @@ export async function eastCoastPlace(game) {
       turn.steer(p, dt);
       // heading for a way out: build the next place now, so the walk there needs no loading pause
       const near = ([x0, x1, z0, z1], d = 6) => p.x > x0 - d && p.x < x1 + d && p.z > z0 - d && p.z < z1 + d;
-      if (near(out.zone) && !game.prepared.east_lane) game.prepare?.('east_lane');
+      if (Object.values(out.ways).some((way) => near(way.zone)) && !game.prepared.east_lane)
+        game.prepare?.('east_lane');
       if (near(west.zone) && !game.prepared.sports && !pool.closed()) game.prepare?.('sports');
       const [cx, cz] = commons.step;
       if (Math.hypot(p.x - cx, p.z - cz) < 7 && !game.prepared.dorm_commons) game.prepare?.('dorm_commons');
@@ -190,16 +183,18 @@ export async function eastCoastPlace(game) {
       turn.reset();
       cam.snap(game.player.root.position);
     },
-    // in off the dorm street onto the row, walking east; out the same way; from the sports ground in along the
-    // courts walk to the onsen path's foot, walking east, and out the same way
+    // in off the dorm street onto the row, walking east; out the same way or west along the promenade; from the
+    // sports ground in along the courts walk to the onsen path's foot, walking east, and out the same way
     tripIn: (g) => walkIn(g, cam, w.arriveEdge, w.in, Math.PI / 2),
     tripInFrom: {
       sports: (g) => walkIn(g, cam, west.edge, west.in, Math.PI / 2),
-      // out of the common room's glazed door onto the inner court, walking south
+      // out of the common room's glazed door onto its apron on the promenade, walking south
       dorm_commons: (g) => walkIn(g, cam, commons.local, commons.step, 0),
     },
     tripOutTo: {
       ...Object.fromEntries(Object.entries(w.exits).map(([to, e]) => [to, (g) => walkOut(g, cam, e.lane, e.edge)])),
+      // the row or the promenade, whichever he is on; the east lane brings him in at its end of it
+      east_lane: (g) => walkOutNearest(g, cam, out.ways),
       dorm_commons: (g) => walkOut(g, cam, commons.step, commons.local),
     },
   };

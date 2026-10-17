@@ -15,7 +15,7 @@ export default {
   goal: { dorm_street: 'true' },
   nodes: {
     arrive: [
-      { if: 'going_home', then: [{ do: 'goal', text: 'The dorms are back along the row, through the gate off the street.' }],
+      { if: 'going_home', then: [{ do: 'goal', text: 'The dorm is west along the promenade, in through the gate on the left.' }],
         else: [{ do: 'goal', text: 'Head office is back west past the plaza. Take its lift down to B2.' }] },
     ],
     shut: ['> The door is shut. A card on the glass says 準備中: not open yet.'],

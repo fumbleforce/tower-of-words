@@ -1,7 +1,7 @@
 // The sports ground's walkable ground (movement/walk-ground.js; notes/grounds-system.md): the streets, the walks,
 // the bench bays, the nooks and the west tennis court from the plans (sports/plan.js, court-plan.js), in the chunk's
 // frame. The walk grid and the drawn kerbs both come from it. What already shows where walking ends: the buildings
-// (the gym, the pool pavilion, the north residence, r3), the courts' mesh fence, and the three trips' starts.
+// (the gym, the pool pavilion, r3), the courts' mesh fence, and the three trips' starts.
 import { walkGround } from '../../movement/walk-ground.js';
 import * as P from './plan.js';
 import * as CP from './court-plan.js';
@@ -13,7 +13,7 @@ export const WALK_AREA = (([x0, x1, z0, z1]) => [x0 - 0.3, x1 + 0.3, z0 - 0.3, z
 
 // a building's footprint and the strip of lawn or gravel between it and a walk that ends at its wall
 const grow = ([x0, x1, z0, z1], d = 0.3) => [x0 - d, x1 + d, z0 - d, z1 + d];
-export const BUILDINGS = [P.GYM, P.PAVILION, P.RESIDENCE, P.R3].map((r) => ({
+export const BUILDINGS = [P.GYM, P.PAVILION, P.R3].map((r) => ({
   kind: 'building',
   rect: grow(P.rect(r)),
 }));

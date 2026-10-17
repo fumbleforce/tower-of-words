@@ -6,14 +6,6 @@ const pairs = (f) => f.reduce((a, v, i) => (i % 2 ? a[a.length - 1].push(v) : a.
 
 export const BATH_PATHS = [
   {
-    id: 'east_coast_walk',
-    kind: 'walk',
-    w: 2,
-    line: pairs([129, 10.5, 131, 10.5, 131, -36, 120, -36, 120, -57.5, 104, -57.5]),
-    detail:
-      'From the dorms’ sea terrace north along the east coast behind dorm_4, west where the coast comes in, north past dorm_6, then west to the courts walk.',
-  },
-  {
     id: 'onsen_path',
     kind: 'walk',
     w: 2,

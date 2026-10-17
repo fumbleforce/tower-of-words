@@ -16,6 +16,8 @@
 //   officeRow     office-quarter/row.js: the office row's blocks in ids, their doors, signs, forecourts and walks
 //   officeStreet  office-quarter/grounds.js streetSteps: the office street's brick, its north beds, its south verge,
 //                 bench bays and lamps
+//   dormQuarter   dorm-quarter/ground.js and gardens.js: the quarter's walks and edges, its allotments, orchard and
+//                 gardens (its blocks are the skyline's)
 //   lawn          ground nobody builds, planted with the kit in the same style: belts [rect, kinds, pitch] of
 //                 trees over layered planting (dorm-court/cluster-yards.js belt), and walks [rect, kerb sides]
 //                 in the walks' pale slabs
@@ -36,8 +38,10 @@ import { TREES } from './outdoor/planting.js';
 import { coastSteps, WEST } from './outdoor/coast.js';
 import { band } from './outdoor/band.js';
 import { signSet } from './shop-signs.js';
-import { placeIn } from './dorm-court/cluster.js';
+import { placeIn } from './place-frame.js';
 import { belt } from './dorm-court/cluster-yards.js';
+import { groundSteps as quarterGround } from './dorm-quarter/ground.js';
+import { gardensSteps as quarterGardens } from './dorm-quarter/gardens.js';
 import { eastLaneSteps, walk } from './plaza/east-lane.js';
 import { yardGround, yardSteps } from './plaza/north-yard.js';
 import { blockSets, buildBlockSets } from './outdoor/block.js';
@@ -162,6 +166,12 @@ const BUILD = {
     const sets = blockSets();
     yield* officeRow(sets, s.pv, s.p, s.signs, s.lights, b.ids);
     out.glows.push(...buildBlockSets(sets, isl).glows);
+  },
+  *dormQuarter(b, isl, out, s) {
+    const clip = band(b.rects),
+      c = s.clipped(clip);
+    yield* quarterGround(c.paver, c.parts);
+    yield* quarterGardens(c.paver, c.parts, clip.lights(s.lights), { far: true });
   },
   *officeLawns(b, isl, out, s) {
     yield* officeLawns(band(b.rects).parts(s.p), spanX(b.rects));

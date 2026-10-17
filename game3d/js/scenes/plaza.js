@@ -42,7 +42,7 @@ import { buildNooks } from './outdoor/nooks.js';
 import { nookWalks } from './outdoor/nook-walks.js';
 import { northLaneSteps } from './plaza/north-lane.js';
 import { NORTH_IDS } from './plaza/north-plan.js';
-import { clusterSteps, placeIn, CLUSTER_IDS } from './dorm-court/cluster.js';
+import { quarterSteps, placeIn, QUARTER_IDS } from './dorm-quarter/index.js';
 import { seafrontSteps } from './outdoor/seafront.js';
 import { BAYS, SHOPS as NAMED_SHOPS } from './island-south.js';
 import { coastLand } from './island-west.js';
@@ -146,16 +146,16 @@ export function* plazaSteps() {
   const front = yield* seafrontSteps(root, { at: (x, z) => LAYOUT.toLocal(CHUNK, x, z), layer: MAP_LAYER });
   const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
-    skip: ['canteen', 'shops_north', 'arcade', 'shops_south', ...BLOCK_IDS, ...NORTH_IDS, ...CLUSTER_IDS, 'dorm_1'],
+    skip: ['canteen', 'shops_north', 'arcade', 'shops_south', ...BLOCK_IDS, ...NORTH_IDS, ...QUARTER_IDS, 'dorm_1'],
     land: coastLand(LAYOUT.COAST.line), // lawn to the coast, not sea, past the plaza's own ground
     landColor: TOWN.grass,
   });
   yield* mergeStaticSteps(root);
-  // backdrop past the dorm street: the dorm cluster and stand-ins for the courtyard and Eric's block, in its own
+  // backdrop past the dorm street: the dorm quarter and stand-ins for the courtyard and Eric's block, in its own
   // group so the merge above leaves it out (it is never near the camera)
   const cluster = placeIn(new THREE.Group(), CHUNK);
   root.add(cluster);
-  const dorms = yield* clusterSteps(cluster, { plaza: true });
+  const dorms = yield* quarterSteps(cluster, { host: 'plaza', far: true });
   // what lights up after dark
   light.glow.add(
     lit.glows,

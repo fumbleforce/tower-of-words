@@ -8,7 +8,7 @@ import { inRect } from '../scenes/east-lane/plan.js';
 import { sim } from '../sim.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
-import { walkOut, walkIn } from './edge-walk.js';
+import { walkOut, walkIn, viaOf } from './edge-walk.js';
 import { turningCam, followFit } from './turning-cam.js';
 import { canTravel } from './definitions.js';
 import { roadClosure } from './closure.js';
@@ -174,10 +174,14 @@ export async function eastLanePlace(game) {
     },
     // in from the plaza along the lane, the jog ahead; out the ways plan.js EXITS gives
     tripIn: (g) => walkIn(g, cam, w.arriveEdge, w.in, Math.PI / 2),
-    // back from the east coast: in off the dorm row onto the dorm street, walking west; back from the sports
-    // ground: in down the north street, walking south
+    // back from the east coast: in off the dorm row onto the dorm street, walking west, or (the way he left it, the
+    // promenade) along the promenade past the dorm courtyard's gate, as out of the gate; back from the sports ground:
+    // in down the north street, walking south
     tripInFrom: {
-      east_coast: (g) => walkIn(g, cam, w.exits.east_coast.edge, w.exits.east_coast.in, -Math.PI / 2),
+      east_coast: (g) =>
+        viaOf(g, 'row') === 'promenade'
+          ? walkIn(g, cam, w.exits.dorm_court.edge, w.exits.dorm_court.in, -Math.PI / 2)
+          : walkIn(g, cam, w.exits.east_coast.edge, w.exits.east_coast.in, -Math.PI / 2),
       sports: (g) => walkIn(g, cam, w.exits.sports.edge, w.exits.sports.in, 0),
       // day 2: out of the dorm courtyard's gate, walking west; back up from the shop street, walking north
       dorm_court: (g) => walkIn(g, cam, w.exits.dorm_court.edge, w.exits.dorm_court.in, -Math.PI / 2),

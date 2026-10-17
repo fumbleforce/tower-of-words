@@ -3,10 +3,12 @@
 // the fittings (dorm-court/fittings.js) and the walk grid all read these, so the kerbs, beds, lamps and the bike
 // shelter line up with each other and with the buildings.
 //
-// Two axes. North-south, the way in: the lane home (route_home, the plaza's brick lane) runs along the front as the
-// street, and turns in through the gateway in the front bed, on the hall doors' axis: through the gate, across the
-// walk and up the door leg to the doors, one straight line. East-west, the court's walk: from the garden at the west
-// end, past the drinks machines, the laundry, the hall and the sento, to the bike shelter.
+// The chunk is turned so the camera looks south at Eric's block (island-chunks.js): in this frame x runs along the
+// promenade (island west is +x) and z toward the camera (island north). Two axes. The way in: the lane home
+// (route_home, the plaza's brick lane carried on as the dorm quarter's promenade) runs along the front as the street,
+// and turns in through the gateway in the front bed, on the hall doors' axis: through the gate, across the walk and
+// up the door leg to the doors, one straight line. Along the front, the court's walk: from the garden at the west
+// end (island east), past the drinks machines, the laundry, the hall and the sento, to the bike shelter.
 //   the walk: dark granite, 1.6 wide, with a pale border; legs north to the hall doors (between two low beds) and
 //   to the sento door, and the gate link south to the street, as wide as the door leg and on its axis
 //   the aprons: pale stone between the walk and the fronts, and between the walk and the front bed
@@ -15,7 +17,7 @@
 //   the street: the lane, 3 wide, grey brick between pale borders; a verge on its far side
 //   the bike shelter: on the east side against the block's return, its roof out over the whole rack (tall things on
 //   the south side would stand between the camera and Eric, so the south side keeps to beds, benches and bollards)
-import { CHUNKS, PATHS } from '../island-layout.js';
+import { CHUNKS, toLocal } from '../island-layout.js';
 
 export const HALL = [-1.1, 2.5], // the entrance hall: x range
   FRONT_Z = -1.2, // its glass front (cut low), with the doors
@@ -57,9 +59,9 @@ export const RACK = [-1.0, 0.7]; // the rack's first and last places, north to s
 // south-east: a bay of the front bed, and the garbage point beside it
 export const SE_BED = [2.0, 4.1, 1.85, 2.7];
 export const GARBAGE = [4.4, 5.6, 1.98, 2.62];
-// the front bed, the street (the lane) past it, and the verge on the street's far side. The bed ends where the dorm
-// row (dorm-court/cluster.js) leaves the street, south of the block's return: the row's north edge in this frame
-export const ROW_X = PATHS.find((p) => p.id === 'dorm_row').rect[1] - CHUNKS.dorm_court.at[1];
+// the front bed, the street (the promenade, dorm-quarter/plan.js) past it, and the park's edge on the street's far
+// side. The bed ends a little past the block's return, where the lawn along the dorm street begins
+export const ROW_X = 10.3;
 export const SOUTH_BED = [GARDEN_X, ROW_X, 2.7, 3.8];
 export const STREET = [-16, 16, 3.8, 6.8];
 // the gate: the opening in the front bed on the door leg's axis, and the link paved through it
@@ -71,7 +73,7 @@ export const PIERS = [GATE[0] - 0.25, GATE[1] + 0.25]; // the gate piers' x, in 
 // in the trip to the east lane
 export const OUT_Z = STREET[2] + 1.1;
 // the garden: west of the laundry, from the block to the front bed, walled on the court side
-export const GARDEN = [-16, GARDEN_X, BLOCK_Z + 0.05, SOUTH_BED[3]];
+export const GARDEN = [-15.8, GARDEN_X, BLOCK_Z + 0.05, SOUTH_BED[3]]; // to the quarter's north-south walk
 // the bench beside the cherry, facing the court
 export const BENCH = [-2.9, 2.2];
 // the lamps: tall ones on the north side of the walk (so they never stand between the camera and Eric), by the
@@ -87,11 +89,8 @@ export const BOLLARDS = [
 ];
 // Eric's floor (the dorms scene) in the court's frame: where the dorms scene's origin sits (both chunks are turned
 // the same way, so only shifted; from their places in the island layout) and the height of its floor, 2F
-export const DORMS = {
-  x: CHUNKS.dorms.at[1] - CHUNKS.dorm_court.at[1],
-  z: CHUNKS.dorm_court.at[0] - CHUNKS.dorms.at[0],
-  y: 2.45,
-};
+const [DX, DZ] = toLocal('dorm_court', ...CHUNKS.dorms.at);
+export const DORMS = { x: DX, z: DZ, y: 2.45 };
 // the hall: the mailbox bank's middle on the back wall, and the manager's window beside the passage (x range)
 export const MAIL_X = -0.22,
   MANAGER = [0.66, 1.16];

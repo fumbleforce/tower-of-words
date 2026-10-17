@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { coastNavigation } from '../../js/scenes/east-coast/navigation.js';
-import { IN, DOORS, EXITS } from '../../js/scenes/east-coast/plan.js';
+import { IN, DOORS, EXITS, NOOKS, pt } from '../../js/scenes/east-coast/plan.js';
+import * as Q from '../../js/scenes/dorm-quarter/plan.js';
 
-// The larger garden formerly exhausted the global A* limit on the two original northern trips. Exercise the
-// runtime factory and the real search in both directions, including the farthest garden starts.
+// The dorm quarter is one large walk grid: exercise the runtime factory and the real search in both directions,
+// between the far ends of the row, the park, the gardens, the beach promenade and the onsen.
 test('every original coast destination and new garden remains connected in both directions', () => {
   const nav = coastNavigation();
   nav.build();
@@ -13,9 +14,15 @@ test('every original coast destination and new garden remains connected in both 
     onsen: DOORS[0].step,
     sports: EXITS.sports.lane,
     commons: DOORS[1].step,
-    lookout: [5.2, -46.5],
-    shrine: [-2.5, -44.1],
+    lookout: NOOKS[0].at,
+    shrine: [-2.5, -44.3],
     terrace: [0, 0.7],
+    promenade: EXITS.east_lane.ways.promenade.lane,
+    bridge: pt([Q.AXIS_X, -20]),
+    ring: pt([Q.RING.x - Q.RING.pad + 0.2, Q.RING.z + Q.RING.pad - 0.2]),
+    gardens: pt([Q.GATE_X, -47]),
+    ne_door: pt([Q.NE_DOOR[1] - 0.6, (Q.NE_DOOR[2] + Q.NE_DOOR[3]) / 2]),
+    beach: pt([130.6, -15]),
     pergola: [-37.05, 7.5],
     lawn: [-26.1, 14.7],
     rest: [-19, 16.5],

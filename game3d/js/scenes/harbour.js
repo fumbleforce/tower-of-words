@@ -24,7 +24,7 @@ import { Parts } from './outdoor/parts.js';
 import { lightSet } from './outdoor/furniture.js';
 import { blockSets, buildBlockSets } from './outdoor/block.js';
 import { signSet } from './shop-signs.js';
-import { placeIn } from './dorm-court/cluster.js';
+import { placeIn } from './place-frame.js';
 import { cells } from './dorm-court/cells.js';
 import { coastLand } from './island-west.js';
 import { rowSteps, frontSteps } from './office-quarter/row.js';

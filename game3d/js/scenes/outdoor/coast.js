@@ -263,13 +263,14 @@ function cuts(s, others) {
 }
 
 // a terrace's rail from A to B (in the place's frame): a painted steel top rail (kit/materials/) on posts about 1.2
-// apart
-export function rail(stone, A, B) {
+// apart; y: what it stands on (the sea wall's coping), mid: a second rail half way up
+export function rail(stone, A, B, { y = 0, mid = false } = {}) {
   const L = Math.hypot(B[0] - A[0], B[1] - A[1]),
     d = [(B[0] - A[0]) / L, (B[1] - A[1]) / L];
-  along(stone, STEEL.mid, [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2], d, L, 0.06, 0.88, 0.94, PAINTED);
-  for (let u = 0; u <= L + 0.01; u += L / Math.round(L / 1.2))
-    stone.box(STEEL.dark, 0.06, 0.94, 0.06, A[0] + d[0] * u, 0, A[1] + d[1] * u, PAINTED);
+  along(stone, STEEL.mid, [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2], d, L, 0.06, y + 0.88, y + 0.94, PAINTED);
+  if (mid) along(stone, STEEL.mid, [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2], d, L, 0.04, y + 0.47, y + 0.51, PAINTED);
+  for (let u = 0; u <= L + 0.01; u += L / Math.max(1, Math.round(L / 1.2)))
+    stone.box(STEEL.dark, 0.06, 0.94, 0.06, A[0] + d[0] * u, y, A[1] + d[1] * u, PAINTED);
 }
 
 const SLAB = 1.1;

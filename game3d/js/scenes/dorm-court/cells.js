@@ -1,5 +1,5 @@
-// Outdoor-kit collectors split into cells on a grid (for backdrop that spreads wide, like the dorm cluster,
-// dorm-court/cluster.js): each cell is its own Parts collector (outdoor/parts.js) and its own paver
+// Outdoor-kit collectors split into cells on a grid (for ground that spreads wide, like the dorm quarter,
+// dorm-quarter/index.js): each cell is its own Parts collector (outdoor/parts.js) and its own paver
 // (outdoor/paving.js), so a cell the camera can't see is culled whole instead of one merged mesh being drawn for all.
 // A geometry goes to the cell its middle is in; a paving field to the cell of its middle. Nothing in them casts a
 // shadow (backdrop), so each cell has as few meshes as its kinds of surface.
@@ -19,7 +19,8 @@ function* cellSteps(list, root) {
   return out;
 }
 
-export function cells(xcuts, zcuts) {
+// cast: keep the shadows the pieces ask for (a place that walks the cells' ground: the dorm quarter in the east coast)
+export function cells(xcuts, zcuts, { cast = false } = {}) {
   const nz = zcuts.length + 1,
     n = (xcuts.length + 1) * nz;
   const at = (x, z) => xcuts.filter((c) => x >= c).length * nz + zcuts.filter((c) => z >= c).length;
@@ -29,11 +30,11 @@ export function cells(xcuts, zcuts) {
     geo(color, g, o) {
       g.computeBoundingBox();
       const { min, max } = g.boundingBox;
-      ps[at((min.x + max.x) / 2, (min.z + max.z) / 2)].geo(color, g, { ...o, cast: false });
+      ps[at((min.x + max.x) / 2, (min.z + max.z) / 2)].geo(color, g, cast ? o : { ...o, cast: false });
       return parts;
     },
     box(color, w, h, d, x, y, z, o) {
-      ps[at(x, z)].box(color, w, h, d, x, y, z, { ...o, cast: false });
+      ps[at(x, z)].box(color, w, h, d, x, y, z, cast ? o : { ...o, cast: false });
       return parts;
     },
     build: (root) => {

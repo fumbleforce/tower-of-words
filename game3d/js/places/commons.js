@@ -12,9 +12,9 @@ import { day3Place } from './day3/place.js';
 import { createArtStage } from './ongoing/art-stage.js';
 import { sofaActivity } from './room-activity.js';
 
-// The dorm common room (scenes/rooms/commons.js): the ground floor of dorm_gallery on the inner court, the art
-// club's room. In through the glazed door off the inner court's north-south walk, out the same way (the east coast,
-// which walks the dorm row and the court). It also loads with ?place=dorm_commons, inside the door. The camera looks
+// The dorm common room (scenes/rooms/commons.js): the pavilion in the dorm quarter's park on the promenade, the art
+// club's room. In through the glazed door under its canopy, out the same way (the east coast, which walks the
+// quarter). It also loads with ?place=dorm_commons, inside the door. The camera looks
 // in from the south over the cut-down front wall: the whole room on a desktop, following Eric on a phone.
 export async function commonsPlace(game) {
   const photograph = await new THREE.TextureLoader()

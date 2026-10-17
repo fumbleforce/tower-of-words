@@ -43,37 +43,17 @@ export const BANDS = {
     {
       by: 'eastLane',
       rects: [
-        [70.6, 76, -2, 30],
+        [70.6, 76, -14, 30],
         [76, 84, 12, 30],
       ],
     },
-    // the courts walk on west past the courts' gate, the north residence's door and its hedges
-    { by: 'sportsGrounds', rects: [[84, 97.8, -62, -50]] },
-    // the field between the dorm cluster and the courts walk, round dorm_6; then the lawn north of the courts (its own
-    // band, so each is culled on its own)
-    {
-      by: 'lawn',
-      seed: 310,
-      belts: [
-        [[90, 106.5, -30, -24.5], 'keyaki,sakura,maple', 3.6],
-        [[92, 104, -44, -39.6], 'ginkgo,keyaki,sakura', 3.6],
-        [[116, 118.2, -49, -34], 'sakura,pine', 3.4],
-        [[106, 118, -55.4, -52.6], 'pine,maple,keyaki', 3.4],
-      ],
-    },
+    // the courts walk on west past the courts' gate, its hedges and the orchard's
+    { by: 'sportsGrounds', rects: [[79, 97.8, -62, -56.2]] },
+    // the lawn north of the courts
     {
       by: 'lawn',
       seed: 320,
       belts: [[[88, 100.8, -91, -86.4], 'pine,keyaki,maple', 3.6]],
-    },
-    // the boxes nearest the walks given ground floors and doors: the north residence's back on the field, dorm_6
-    // facing the coast walk
-    {
-      by: 'fronts',
-      blocks: [
-        { id: 'housing_n', face: 's', ground: 'dorm', balconies: 's' },
-        { id: 'dorm_6', face: 'e', ground: 'dorm', balconies: 'w' },
-      ],
     },
   ],
   shotengai: [
@@ -99,13 +79,6 @@ export const BANDS = {
     plazaView(-20, STOP, [PLAZA_LANE.e[0], STOP]),
     // the sports lane's corner with the north street and the lawns past it, past the north street's top
     { by: 'sportsGrounds', rects: [[56, 84, -62, -46.5]] },
-    {
-      by: 'fronts',
-      blocks: [
-        { id: 'dorm_5', face: 'e', ground: 'dorm', balconies: 'e' },
-        { id: 'housing_n', face: 's', ground: 'dorm', balconies: 's' },
-      ],
-    },
   ],
   sports: [
     // past the sports lane's west end: the office street's lawns south of it, as the office quarter plants them
@@ -128,13 +101,8 @@ export const BANDS = {
       seed: 350,
       belts: [[[50, 86, -99, -95.2], 'pine,keyaki,maple', 3.6]],
     },
-    {
-      by: 'fronts',
-      blocks: [
-        { id: 'dorm_5', face: 'e', ground: 'dorm', balconies: 'e' },
-        { id: 'housing_n', face: 's', ground: 'dorm', balconies: 's' },
-      ],
-    },
+    // the dorm quarter's orchard and allotments behind the courts walk's hedge
+    { by: 'dormQuarter', rects: [[79, 104, -56.3, -41.6]] },
   ],
   campus: [
     // past the service lane's closed gate: the canteen's loading yard, m6's walk, and the trees west of the yard on

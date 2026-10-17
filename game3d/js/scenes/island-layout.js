@@ -16,7 +16,9 @@ import { CAMPUS_PATHS } from './island-campus.js';
 import { EAST_PATHS, EAST_GREEN } from './island-east.js';
 import { WEST_PATHS, WEST_GREEN, WEST_MOWN, WEST_COAST } from './island-west.js';
 import { NORTH_PATHS, NORTH_GREEN } from './island-north.js';
-import { DORM_PATHS, DORM_GREEN } from './island-dorms.js';
+import { DORM_PATHS, DORM_GREEN, DORM_SAND } from './island-dorms.js';
+import { QUARTER_ROWS, QUARTER_DETAILS } from './dorm-quarter/rows.js';
+import { COAST_LINE as QUARTER_COAST } from './dorm-quarter/plan.js';
 import { SOUTH_PATHS, SOUTH_SAND, SHORE } from './island-south.js';
 import { BATH_PATHS, BATH_GREEN, BATH_COAST } from './island-baths.js';
 import { SPORT_PATHS } from './island-sports.js';
@@ -106,9 +108,8 @@ const ROWS = [
     1,
     DORM_ROOF,
     'dorm',
-    [84.14, -11.8, 88.29, -11.8, 88.29, 8.1, 78.84, 8.1, 78.84, 4.6, 84.14, 4.6],
+    [80.6, -5.7, 84.1, -5.7, 84.1, -0.4, 100.5, -0.4, 100.5, 3.75, 80.6, 3.75],
   ],
-  ['dorm_1e', 'dorm', 7, 1.75, 1, DORM_ROOF, 'dorm', [89.44, -7.8, 94.2, 7.1]],
   ['nw_old', 'low', 4, 2, 3, ROOF, 'flat', [-96, -118.6, -85.4, -109.8]],
   ['chimney', 'low', 8, 2, 1, ROOF, 'flat', [-82, -123.3, -79, -118.1]],
   ['factory', 'low', 3, 2, 0, ROOF, 'flat', [-76.7, -128.8, -52.4, -114.5]],
@@ -145,17 +146,9 @@ const ROWS = [
   ['onsen_main', 'office', 2, 2, 3, ROOF, 'flat', [117.6, -96.2, 128.6, -88.2]],
   ['block_e2', 'office', 4, 2, 0, ROOF, 'flat', [58.2, -38.5, 65.5, -35.2]],
   ['r3', 'office', 3, 2, 1, ROOF, 'flat', [72.9, -44.8, 78.3, -41.4]],
-  ['housing_n', 'dorm', 4, 1.75, 2, DORM_ROOF, 'dorm', [78.7, -53.2, 102.5, -46.5]],
-  ['dorm_5', 'dorm', 3, 1.75, 3, DORM_ROOF, 'dorm', [76.5, -37.2, 83.6, -18.4]],
   ['block_e3', 'office', 3, 2, 0, ROOF, 'flat', [71.6, -29.2, 76.4, -18]],
   ['block_e1', 'office', 2, 2, 1, ROOF, 'flat', [50.2, -19.6, 60.1, -12.6]],
-  ['dorm_6', 'dorm', 4, 1.75, 2, DORM_ROOF, 'dorm', [108.4, -50.7, 114.9, -32.8]],
-  ['dorm_2', 'dorm', 7, 1.75, 2, DORM_ROOF, 'dorm', [96.9, 13.4, 104.9, 19.7]],
-  ['dorm_entry', 'dorm', 3, 1.75, 3, DORM_ROOF, 'dorm', [97.2, -13.3, 101.3, -9.4]],
-  ['dorm_gallery', 'dorm', 2, 1.75, 1, DORM_ROOF, 'dorm', [96.8, -2.9, 105, 2.1]],
-  ['dorm_3', 'dorm', 9, 1.75, 3, DORM_ROOF, 'dorm', [109, 2.6, 119.5, 8.4]],
-  ['dorm_4', 'dorm', 9, 1.75, 0, DORM_ROOF, 'dorm', [116.3, -9.2, 125.4, -3.1]],
-  ['dorm_annex', 'dorm', 1, 1.75, 3, DORM_ROOF, 'dorm', [125.4, -7.5, 128.1, -3.6]],
+  ...QUARTER_ROWS, // the dorm quarter's blocks, villas, common room and shed (dorm-quarter/plan.js)
   ['r8', 'office', 2, 2, 2, ROOF, 'flat', [66.5, 3.4, 72.04, 7.6]],
   ['r9', 'office', 2, 2, 3, ROOF, 'flat', [71.6, -16.6, 76, -12.6]],
   ['m_e1', 'office', 2, 2, 2, ROOF, 'flat', [60.6, 3.4, 66, 8]],
@@ -182,16 +175,8 @@ const DETAILS = {
   izakaya: 'Izakaya at the east end of the shop street, by the way into the dorm court.',
   ramen: 'Ramen across the dorm street from the izakaya, its door on the street.',
   dorm_1:
-    'Eric’s block, five storeys: its long west face on the dorm entrance court, returning west at its south end (built by the dorm_court chunk, square to it). The map draws the dorm blocks turned 25 to 40° off the grid; here they are on it.',
-  dorm_1e: 'The block east of Eric’s, parallel to it; its west face is the wall outside Eric’s window, 1.3 out.',
-  housing_n: 'The more generous block on the cluster’s quieter north edge.',
-  // the dorm cluster round the inner court (scenes/dorm-court/cluster.js builds their fronts), on the dorm row's grid
-  dorm_2: 'Seven storeys on the dorm row’s south side, balconies to the sea; its door on the inner court’s axis.',
-  dorm_entry: 'Three storeys north of dorm_gallery; its door on the walk down to the back walk.',
-  dorm_gallery: 'The dorms’ two-storey common building on the inner court’s north side, its glazed door on the court.',
-  dorm_3: 'Nine storeys east of the inner court, balconies south; its door on the court’s east-west walk.',
-  dorm_4: 'Nine storeys north-east of the court, balconies south; its door at the back walk’s east end.',
-  dorm_annex: 'A one-storey annex on dorm_4’s east end, reached through it.',
+    'Eric’s block, five storeys: its long north face on the dorm entrance court off the promenade, returning north at its west end (built by the dorm_court chunk, square to it). The map draws the dorm blocks turned 25 to 40° off the grid; here they are on it.',
+  ...QUARTER_DETAILS,
   // the east lane's six small blocks (scenes/plaza/east-lane.js builds their fronts), squared onto its paths
   block_e1:
     'The island’s clinic (green cross), two storeys north of the lane past the plaza; its glass door in the middle of its south face, at the head of the cross path.',
@@ -256,9 +241,9 @@ export const PATHS = [
     id: 'route_home',
     kind: 'lane',
     w: 3,
-    line: pairs([-1.7, -2.75, 64, -2.75, 64, -10, 74.54, -10, 74.54, -0.8, 79.34, -0.8]),
+    line: pairs([-1.7, -2.75, 64, -2.75, 64, -10, 74.54, -10, 89.5, -10, 89.5, -5.2]),
     detail:
-      'From the head office door (the lane’s north edge), east along the tower’s south face and straight on through the fountain plaza (it meets the circle on the fountain’s east-west axis, in on the west, out on the east), on east past the plaza, a jog north beyond it, east to the dorms, then south as the street past the dorm entrance court, turning in through the court’s gate on the axis of the dorm’s hall doors.',
+      'From the head office door (the lane’s north edge), east along the tower’s south face and straight on through the fountain plaza (it meets the circle on the fountain’s east-west axis, in on the west, out on the east), on east past the plaza, a jog north beyond it, east past the dorm street as the dorm quarter’s promenade, turning south in through the dorm entrance court’s gate on the axis of the dorm’s hall doors.',
   },
   {
     id: 'fountain_plaza',
@@ -314,12 +299,13 @@ export const COAST = {
     ...HARBOUR_COAST, // the harbour's rocks and quays (island-harbour.js), down to the sea wall
     ...WEST_COAST.slice(0, -1), // the sea wall west and south of the station (island-west.js), up to the beach
     ...SHORE,
-    ...pairs([86, 38, 110.9, 31.1, 129.9, 19.4, 136.6, 2, 136.8, -26.1, 130.4, -47.8]),
+    ...pairs([86, 38]),
+    ...QUARTER_COAST, // the dorm quarter's sea wall and the sea garden's edge (dorm-quarter/plan.js)
     ...BATH_COAST, // on north past the onsen (island-baths.js)
   ],
   detail: 'Rocks, quays and a sea wall, with the sand beach south of the shop street.',
 };
-export const SAND = [...SOUTH_SAND];
+export const SAND = [...SOUTH_SAND, ...DORM_SAND];
 // Mown bands and longer grass over the green, each { rect | poly, color, y } (skyline.js lays them between the green
 // and the paths)
 export const MOWN = [...WEST_MOWN];

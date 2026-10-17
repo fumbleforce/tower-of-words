@@ -13,10 +13,9 @@ const ctx = new Proxy({}, { get: () => () => {} });
 globalThis.document = { createElement: () => ({ getContext: () => ctx }) };
 const THREE = await import('../../vendor/three/three.module.js');
 const { Parts } = await import('../../js/scenes/outdoor/parts.js');
-const { terraceDetails, terraceVending, promenadeDetails } =
+const { terraceDetails, terraceVending } =
   await import('../../js/scenes/east-coast/terrace-details.js');
-const C = await import('../../js/scenes/dorm-court/cluster-plan.js');
-const P = await import('../../js/scenes/east-coast/plan.js');
+const C = await import('../../js/scenes/dorm-quarter/plan.js');
 function recorder() {
   const parts = new Parts(),
     boxes = [];
@@ -48,23 +47,6 @@ test('terrace finish stays within existing solid walls or below walking clearanc
   r.parts.build(root);
   assert.ok(root.children.length <= 4, 'finishes retain material batching');
 });
-test('promenade planting does not enter a walk or a bench bay', () => {
-  const r = recorder();
-  promenadeDetails(r.parts, P.COAST_LEGS[1], P.BAYS);
-  for (const box of r.boxes) {
-    if (box.max.y < 0.03) continue;
-    for (const [x, z] of [
-      [box.min.x, box.min.z],
-      [box.min.x, box.max.z],
-      [box.max.x, box.min.z],
-      [box.max.x, box.max.z],
-    ]) {
-      const local = P.pt([x, z]);
-      assert.ok(!P.WALKS.some((w) => P.inRect(...local, w)), `plant in walking space: ${x},${z}`);
-      assert.ok(!P.BAYS.some((b) => P.inRect(x, z, b)), 'plant in authored bench bay');
-    }
-  }
-});
 test('vending display fits the existing cabinet and remains static scenery', () => {
   const root = new THREE.Group(),
     r = recorder();
@@ -78,18 +60,4 @@ test('vending display fits the existing cabinet and remains static scenery', () 
   assert.ok(face.position.z > 0.325 && face.position.z < 0.34);
   assert.equal(face.userData.interactive, undefined);
   assert.ok(root.children.length <= 3, 'one display and batched cabinet pieces');
-});
-
-test('real coast builder installs the promenade finishes', async () => {
-  const { walkSteps } = await import('../../js/scenes/east-coast/walk.js');
-  const actual = recorder(), expected = recorder();
-  const steps = walkSteps({ parts: actual.parts, paver: { field() {} } },
-    { lit: [], glowParts: [] }, new THREE.Group(), []);
-  steps.next(); // paving
-  steps.next(); // promenade, benches, lamps and signs
-  promenadeDetails(expected.parts, P.COAST_LEGS[1], P.BAYS);
-  assert.ok(expected.boxes.length > 30);
-  for (const box of expected.boxes) {
-    assert.ok(actual.boxes.some(b => b.equals(box)), 'fitted promenade geometry is present in the real build');
-  }
 });

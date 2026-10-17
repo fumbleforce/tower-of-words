@@ -26,8 +26,8 @@ export const LOOKOUT_GAP = [28.55, 30.35];
 const { PROMENADE: P, WALL_Z, BAND, STAIRS, LINKS, BEACH_E, BAYS } = S;
 const BW = 0.25; // soldier borders
 const STONE = { cheek: '#8d9194', nosing: '#6c7177', tread: '#9a9a96' };
-const WET = new THREE.Color(SAND).multiplyScalar(0.9).getStyle();
-const SURF = '#b9c6cc'; // as the west coast's (outdoor/coast.js)
+export const WET = new THREE.Color(SAND).multiplyScalar(0.9).getStyle();
+export const SURF = '#b9c6cc'; // as the west coast's (outdoor/coast.js)
 const FOAM = { cast: false, opts: { transparent: true, opacity: 0.3, depthWrite: false } };
 const ROCKS = ['#5f666e', '#6b7279', '#585e66', '#737a82'];
 const SHADE = new THREE.Color(SAND).multiplyScalar(0.8).getStyle();
@@ -106,8 +106,8 @@ function* beachThings(p, at, clear) {
   });
 }
 
-// a boulder half sunk at (x, z), r across
-function boulder(p, x, z, r, y) {
+// a boulder half sunk at (x, z), r across (the dorm quarter's beach too, dorm-quarter/promenade.js)
+export function boulder(p, x, z, r, y) {
   const g = new THREE.DodecahedronGeometry(r, 0)
     .rotateY(hash2(x, z, 83) * 6.3)
     .rotateX(hash2(z, x, 87) * 0.6)
@@ -117,8 +117,8 @@ function boulder(p, x, z, r, y) {
 }
 
 // Connected, softly fading bands follow the beach instead of overlapping rectangular
-// wet-sand and shallow-water tiles. Parts carries the opacity in each vertex.
-function shoreRibbon(p, shore, color, lanes, y) {
+// wet-sand and shallow-water tiles. Parts carries the opacity in each vertex. shore runs with the sea on its right.
+export function shoreRibbon(p, shore, color, lanes, y) {
   const points = [];
   for (let i = 0; i + 1 < shore.length; i++) {
     const a = shore[i],

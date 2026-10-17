@@ -1,6 +1,6 @@
 import { seatPoint, seatRow } from '../../kit/core/seats.js';
-// The dorm common room (dorm_commons; docs/game/places.md "Dorm common room"), the ground floor of dorm_gallery on
-// the inner court, looked into from the south over the cut-down front wall with its glazed door. In its own frame: x
+// The dorm common room (dorm_commons; docs/game/places.md "Dorm common room"), the pavilion in the dorm quarter's
+// park on the promenade, looked into from the south over the cut-down front wall with its glazed door. In its own frame: x
 // east, z toward the camera, the origin the glazed door's middle, inside.
 //
 //   west: the lounge, a sofa and a low table facing the TV on the west wall, a bookshelf beside it

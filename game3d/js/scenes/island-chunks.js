@@ -125,17 +125,17 @@ export const CHUNKS = {
     anchor: 'the fountain on the fountain as drawn',
   },
   dorm_court: {
-    at: [79.84, -1.3],
-    turn: 90,
+    at: [90, -4.7],
+    turn: 180,
     scale: 1,
     level: 0,
     walk: [-5.1, 5.2, -4.1, 2.45],
-    view: [-12.7, 21.8, -49.2, 4.0], // east over the dorm cluster round the inner court (dorm-court/cluster.js)
-    anchor: 'the open entrance court west of the dorm blocks as drawn, looking east at Eric’s block',
+    view: [-16, 16, -20, 8], // south over Eric's block to the villas, north over the promenade to the park's edge
+    anchor: 'the open entrance court off the dorm quarter’s promenade, looking south at Eric’s block',
   },
   dorms: {
-    at: [85.49, -1.79],
-    turn: 90,
+    at: [90.49, 0.95],
+    turn: 180,
     scale: 1,
     level: 1,
     walk: [-1.55, 8.1, -2.6, 2.1],
@@ -188,13 +188,13 @@ export const CHUNKS = {
     anchor: 'the middle of the dorms’ sea terrace, at the dorm row’s east end',
   },
   dorm_commons: {
-    at: [100.9, 2.1],
+    at: [119.7, -13.4],
     turn: 0, // an interior: the camera looks in from the south over the cut-down front wall (scenes/rooms/commons.js)
     scale: 1,
     level: 0,
     walk: [-4.0, 4.0, -4.7, 0],
     view: [-4.2, 4.2, -4.9, 0.4],
-    anchor: 'the common room’s glazed door in dorm_gallery’s south face, inside',
+    anchor: 'the common room pavilion’s glazed door on the promenade, inside',
   },
   sports: {
     at: [58.2, -57.5],
