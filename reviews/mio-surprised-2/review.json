@@ -2,7 +2,7 @@
  "title": "Mio's surprised face, round 2",
  "date": "2026-10-16",
  "by": "claude-main/art-round",
- "status": "open",
+ "status": "decided",
  "question": "Which of these, if any, should replace Mio's surprised face?",
  "multi": false,
  "media": [
@@ -52,5 +52,11 @@
    ],
    "note": "Kept: clear surprise, open mouth, eyes wide with normal irises, faint blush; a little more white shows round her left (image right) iris than in s3. Recipe art/candidates/portraits/mio-surprised-2/recipes/su1.json, seed 4, denoise 0.7, RDBT 30 steps CFG 5, 1024 face crop (face.json). Red rim 0.0%; glasses frame cover 1.00 (pasted back from the neutral); matte holes 12, as the neutral; face drift ccip 0.009-0.015 (pass). Iris hue 35/35, value 0.56/0.58 (her right/left eye). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 30-year-old woman with pale skin, very dark green hair in a messy loose bun with bangs, mint-jade green underneath showing at the ends and nape, very light brown eyes and thin-framed taupe-grey glasses with clear lenses, slim with soft curves, medium breasts, (surprised:1.3) and a little flustered, eyebrows raised, eyes opened wider than usual with round irises and highlights, small open mouth, :o, light blush, looking at the viewer, close-up of her face, plain light grey background, soft even studio light, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), teal hair, hair streaks, lime hair, yellow-green hair, neon green hair, tan, tanned skin, sunglasses, tinted glasses, duckface, pouting, puckered lips, shocked, horrified, scared, wide eyes, staring, small pupils, constricted pupils, shaded eyes, screaming, teeth, fang, smile, grin, crying, tears, brown eyes, amber eyes, orange eyes, dark eyes, glossy lips, shiny lips, lip gloss"
   }
- ]
+ ],
+ "decided": [
+  "mio-su1-s2"
+ ],
+ "decision": "mio-su1-s2",
+ "decided_at": "2026-10-17T10:55:43+0200",
+ "issue": 576
 }
