@@ -25,6 +25,10 @@ start time differs), is dropped. A ticket goes when its job takes the lock, give
                   new browser job joins the running pool only if no render has waited longer. So a waiting exclusive job
                   gets the GPU once the running tests end (each is capped at 5 minutes), and browser tests that are
                   waiting get in between two renders.
+Bounded render wait (#691): a render-rank ticket that has waited RENDER_BOUND seconds goes before every browser ticket,
+even ones that queued earlier, so the pool hands out no new slots, drains, and the render goes next. The ticket carries
+its bound ({"bound": 90}); a ticket without one (written by code from before #691) keeps the plain order, so a waiter
+still running old code is never stood aside for and never deadlocks a browser job.
 
 Shell:  python3 tools/gpu_priority.py queue         the queue: rank, owner, waiting time, live or dead, and the holder
         python3 tools/gpu_priority.py acquire <name> [--rank R] [--pid P] [--timeout S]
@@ -173,6 +177,10 @@ def reclaim(root=None, log=print):
 
 # ---------------------------------------------------------------- the queue
 RANKS = {'dashboard': 1, 'carina-image': 2, 'carina-voice': 3, 'voice': 4, 'browser': 4.5, 'render': 5}
+# Seconds a render-rank job waits before it goes ahead of browser tickets (#691). A burst of tests queued just before it
+# still starts, but a steady stream of them can't keep the GPU's main work (renders) out for minutes: after this the
+# pool stops growing, and the render waits only for the tests already running.
+RENDER_BOUND = 90
 RANK_NAMES = {v: k for k, v in RANKS.items()}
 POLL = 5  # seconds between looks; the tickets decide the order, not who looks most often
 
@@ -194,9 +202,10 @@ def _queue_dir(root):
     return _path('gpu.queue', root)
 
 
-def enqueue(owner, rank='render', pid=None, root=None, since=None):
+def enqueue(owner, rank='render', pid=None, root=None, since=None, bound=None):
     """Write a ticket and return its path. pid: the process the ticket lives and dies with (default this one). since:
-    when the work it stands for was asked for (default now): the image service queues an agent's render from then."""
+    when the work it stands for was asked for (default now): the image service queues an agent's render from then.
+    bound: for a render-rank ticket, the seconds after which it goes before browser tickets (default RENDER_BOUND)."""
     r = rank_of(rank)
     pid = int(pid or os.getpid())
     start = process_start(pid)
@@ -204,6 +213,8 @@ def enqueue(owner, rank='render', pid=None, root=None, since=None):
         raise ValueError(f'no process {pid} to queue for')
     rec = dict(rank=r, time=since or time.time(), owner=owner, pid=pid, start=start,
                kind='browser' if r == RANKS['browser'] else 'exclusive', at=time.strftime('%H:%M:%S'))
+    if r == RANKS['render']:
+        rec['bound'] = RENDER_BOUND if bound is None else bound
     path = os.path.join(_queue_dir(root), f'{pid}-{start}-{uuid.uuid4().hex[:8]}.json')
     _write(path, rec)
     return path
@@ -250,12 +261,22 @@ def lock_owner(root=None):
         return ''
 
 
-def order_key(ticket, pool_held):
+def overdue(ticket, now=None):
+    """True for a render-rank exclusive ticket that has waited its bound: it goes before browser tickets (#691)."""
+    bound = ticket.get('bound')
+    return (ticket.get('kind') != 'browser' and ticket['rank'] == RANKS['render'] and isinstance(bound, (int, float))
+            and (time.time() if now is None else now) - ticket['time'] >= bound)
+
+
+def order_key(ticket, pool_held, now=None):
     """The queue order, the same rule as orderKey() in tools/lib/browser-gpu-slots.mjs: rank, then time. A browser
-    ticket always counts as a render, so browser tests and renders take turns in queue order and neither starves."""
+    ticket always counts as a render, so browser tests and renders take turns in queue order and neither starves. A
+    render past its bound (overdue) takes the browser rank instead, so it goes before every browser ticket."""
     r = ticket['rank']
     if ticket.get('kind') == 'browser':
         r = RANKS['render']
+    elif overdue(ticket, now):
+        r = RANKS['browser']
     return (r, ticket['time'], os.path.basename(ticket.get('path', '')))
 
 
@@ -266,9 +287,9 @@ def ahead(path, root=None):
     me = next((t for t in tickets if t['path'] == path), None)
     if me is None:
         return []
-    held = (lock_owner(root) or '').startswith(POOL_PREFIX)
-    mine = order_key(me, held)
-    return [t for t in tickets if t is not me and order_key(t, held) < mine
+    held, now = (lock_owner(root) or '').startswith(POOL_PREFIX), time.time()
+    mine = order_key(me, held, now)
+    return [t for t in tickets if t is not me and order_key(t, held, now) < mine
             and not (me.get('kind') == 'browser' and t.get('kind') == 'browser')]
 
 
@@ -449,6 +470,8 @@ def show_queue(root=None, out=print):
     for i, t in enumerate(live + dead, 1):
         rank = f'{t["rank"]} {RANK_NAMES.get(t["rank"], "?")}'.replace('4.5 ', '')
         state = 'live' if t['live'] else 'dead, dropped'
+        if t['live'] and overdue(t, now):
+            state += ', past its bound: before browser tests'
         out(f'{i if t["live"] else "-":>2}  {rank:<14} {str(t.get("owner"))[:50]:<50} '
             f'{_ago(now - t["time"]):>8}  {state} (pid {t.get("pid")})')
         if not t['live']:

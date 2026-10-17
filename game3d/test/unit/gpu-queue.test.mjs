@@ -30,11 +30,12 @@ function otherProcess(t) {
   return child.pid;
 }
 // A ticket as a waiter writes it; time is seconds, so the order is explicit.
-function ticket(root, name, { rank, time, pid = process.pid, start = processStart(pid) }) {
+// bound: a render's wait bound (#691); left out, the ticket is in the format from before it.
+function ticket(root, name, { rank, time, pid = process.pid, start = processStart(pid), bound }) {
   const dir = path.join(root, 'gpu.queue');
   fs.mkdirSync(dir, { recursive: true });
   const file = path.join(dir, `${name}.json`);
-  fs.writeFileSync(file, JSON.stringify({ rank, time, owner: name, pid, start, kind: rank === 4.5 ? 'browser' : 'exclusive' }));
+  fs.writeFileSync(file, JSON.stringify({ rank, time, owner: name, pid, start, kind: rank === 4.5 ? 'browser' : 'exclusive', bound }));
   return file;
 }
 function py(root, code) {
@@ -161,6 +162,61 @@ test('browser slots and exclusive jobs cannot keep each other out', t => {
   const after = tryAcquireBrowserGpuSlot({ root, owner: 'late-test', ticket: late, ...quiet });
   assert.equal(after.slot, 0, 'then the browser test');
   late.remove(); after.release();
+});
+
+test('a render past its bound stops the pool growing, even for older tests, and goes next once it drains (#691)', t => {
+  const root = fixture(t), now = Date.now() / 1000;
+  const running = tryAcquireBrowserGpuSlot({ root, owner: 'running-test', ...quiet });
+  const early = { path: ticket(root, 'early-test', { rank: 4.5, time: now - 200 }) };
+  const render = ticket(root, 'render', { rank: 5, time: now - 100, bound: 90 });
+  assert.deepEqual(names(ticketsAhead(early, { root })), ['render'], 'JS: the overdue render is ahead of the older test');
+  assert.equal(py(root, `print([t["owner"] for t in g.ahead(${JSON.stringify(render)})])`).out, '[]', 'Python agrees');
+  assert.equal(tryAcquireBrowserGpuSlot({ root, owner: 'early-test', ticket: early, ...quiet }), null, 'no new slot, with two free');
+  assert.equal(take(root, 'render', render), 'False', 'the running test keeps its slot');
+  running.release();
+  assert.equal(take(root, 'render', render), 'True', 'the pool drained: the render goes before the older test');
+  assert.equal(tryAcquireBrowserGpuSlot({ root, owner: 'early-test', ticket: early, ...quiet }), null, 'which waits behind it');
+  py(root, 'g.release("render")');
+  const after = tryAcquireBrowserGpuSlot({ root, owner: 'early-test', ticket: early, ...quiet });
+  assert.equal(after.slot, 0, 'then the test');
+  after.release();
+});
+
+test('within its bound, or without one (a ticket from before #691), a render keeps the plain queue order', t => {
+  const root = fixture(t), now = Date.now() / 1000;
+  const early = { path: ticket(root, 'early-test', { rank: 4.5, time: now - 200 }) };
+  const fresh = ticket(root, 'fresh-render', { rank: 5, time: now - 30, bound: 90 });
+  const old = ticket(root, 'old-render', { rank: 5, time: now - 100 });
+  assert.deepEqual(names(ticketsAhead(early, { root })), [], 'the older test goes first');
+  assert.equal(py(root, `print(sorted(t["owner"] for t in g.ahead(${JSON.stringify(old)})))`).out, "['early-test']");
+  assert.equal(py(root, `print(sorted(t["owner"] for t in g.ahead(${JSON.stringify(fresh)})))`).out, "['early-test', 'old-render']");
+  const slot = tryAcquireBrowserGpuSlot({ root, owner: 'early-test', ticket: early, ...quiet });
+  assert.equal(slot.slot, 0);
+  slot.release();
+});
+
+test('the bound changes nothing above render: the dashboard and voices still go before an overdue render', t => {
+  const root = fixture(t), now = Date.now() / 1000;
+  const render = ticket(root, 'render', { rank: 5, time: now - 1000, bound: 90 });
+  ticket(root, 'voice', { rank: 4, time: now });
+  ticket(root, 'carina', { rank: 2, time: now });
+  assert.equal(py(root, `print(sorted(t["owner"] for t in g.ahead(${JSON.stringify(render)})))`).out, "['carina', 'voice']");
+  assert.deepEqual(names(ticketsAhead({ path: render }, { root })), ['carina', 'voice']);
+});
+
+test('new render tickets carry the bound, other ranks do not, and the queue shows an overdue render', t => {
+  const root = fixture(t);
+  const out = py(root, `import json, time
+for rank in ('render', 'voice', 'browser'):
+    print(rank, json.load(open(g.enqueue(rank, rank))).get('bound'))
+g.enqueue('vace', 'render', since=time.time() - 120)
+g.show_queue()`).out;
+  assert.match(out, /^render 90\nvoice None\nbrowser None\n/);
+  assert.match(out, /vace .* 2m0\ds +live, past its bound: before browser tests/);
+  const js = enqueueGpuTicket({ owner: 'js-render', rank: 'render', root });
+  assert.equal(JSON.parse(fs.readFileSync(js.path, 'utf8')).bound, 90);
+  const browser = enqueueGpuTicket({ owner: 'js-test', root });
+  assert.equal(JSON.parse(fs.readFileSync(browser.path, 'utf8')).bound, undefined);
 });
 
 // A long holder (a voice batch) gives waiting browser tests a turn between two items, then queues again at its own rank.

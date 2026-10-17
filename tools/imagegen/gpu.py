@@ -178,7 +178,8 @@ class Session:
 
     def ahead_of(self, created):
         """The other waiting jobs that go before a render queued at `created` (rank, then time: gpu_priority.order_key)."""
-        key = (gpu_priority.RANKS['render'], created)
+        me = dict(rank=gpu_priority.RANKS['render'], time=created, kind='exclusive', bound=gpu_priority.RENDER_BOUND)
+        key = gpu_priority.order_key(me, False)[:2]  # past its bound it goes before browser tests (#691)
         return [t for t in self.others() if gpu_priority.order_key(t, False)[:2] < key]
 
     def idle_limit(self):

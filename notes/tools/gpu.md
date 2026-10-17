@@ -9,6 +9,7 @@ Image and model jobs (ComfyUI, TTS, LLM, Blender) hold the GPU alone.
 - Take it through the GPU queue, never with a bare `mkdir` loop: `python3 tools/gpu_priority.py acquire <your name> --rank <rank> --pid $$`, or `run <name> --rank <rank> -- <command>`, or `with comfy.gpu(name, rank):` in Python. It waits until your ticket is first and writes your name to /tmp/claude-1000/gpu.lock/owner.
 - Release with `python3 tools/gpu_priority.py release <your name>` after you stop ComfyUI or your model server.
 - Ranks, highest first: dashboard, carina-image, carina-voice, voice, then render for everything else. Browser GPU slots sit between voice and render.
+- A render that has waited 90 s (`RENDER_BOUND`) goes before every browser test, older ones too: the pool hands out no new slots, the running tests finish, and the render goes next. `node tools/lib/gpu-render-wait.mjs [--old]` measures it.
 - `python3 tools/gpu_priority.py queue` shows who holds the lock and who waits.
 - Check nvidia-smi first, and free ComfyUI's VRAM before an LLM or TTS job.
 - A batch runner checks the owner file before every job and stops if its name is gone.

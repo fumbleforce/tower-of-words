@@ -17,7 +17,8 @@
 // tryAcquireBrowserGpuSlot, which hands out a slot only when no exclusive job's
 // ticket goes first. Browser tickets rank after voices and take turns with
 // renders in the order they queued (orderKey), so neither side can keep the
-// other out.
+// other out. A render that has waited its bound (RENDER_BOUND, #691) goes before
+// every browser ticket, so the pool stops growing and drains for it.
 import fs from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
@@ -78,6 +79,8 @@ export function gpuPriority({ root = DEFAULT_ROOT } = {}) {
 // ---------------------------------------------------------------- the GPU queue
 // Same ranks and order as tools/gpu_priority.py (RANKS, order_key).
 export const GPU_RANKS = { dashboard: 1, 'carina-image': 2, 'carina-voice': 3, voice: 4, browser: 4.5, render: 5 };
+// Seconds before a render-rank ticket goes ahead of browser tickets; the same as RENDER_BOUND in gpu_priority.py.
+export const RENDER_BOUND = 90;
 
 export function rankOf(rank) {
   const r = typeof rank === 'string' && rank in GPU_RANKS ? GPU_RANKS[rank] : Number(rank);
@@ -89,13 +92,25 @@ function poolHeld(root) {
   return readOwner(path.join(root, 'gpu.lock', 'owner'))?.startsWith(poolPrefix) ?? false;
 }
 
+// A render-rank exclusive ticket that has waited its own bound (the ticket's
+// "bound", written since #691). A ticket without one keeps the plain order, so a
+// waiter still running older code is never stood aside for (it would not take
+// the free lock, and both would wait).
+export function overdue(ticket, now = Date.now() / 1000) {
+  return ticket.kind !== 'browser' && ticket.rank === GPU_RANKS.render && typeof ticket.bound === 'number'
+    && now - ticket.time >= ticket.bound;
+}
+
 // Rank, then time. A browser ticket always counts as a render: browser tests and
 // renders take turns in the order they queued, so neither can starve the other.
 // (Browser tests used to go first whenever the lock changed hands, and a steady
-// stream of them kept renders waiting for over an hour, 2026-10-06.)
-export function orderKey(ticket, held) {
+// stream of them kept renders waiting for over an hour, 2026-10-06.) A render past
+// its bound takes the browser rank instead and goes before every browser ticket:
+// tests that queued just before it still ran first and, with three slots
+// overlapping, the pool never drained (#691).
+export function orderKey(ticket, held, now = Date.now() / 1000) {
   void held;
-  const rank = ticket.kind === 'browser' ? GPU_RANKS.render : ticket.rank;
+  const rank = ticket.kind === 'browser' ? GPU_RANKS.render : overdue(ticket, now) ? GPU_RANKS.browser : ticket.rank;
   return [rank, ticket.time, path.basename(ticket.path ?? '')];
 }
 const before = (a, b) => a[0] - b[0] || a[1] - b[1] || (a[2] < b[2] ? -1 : a[2] > b[2] ? 1 : 0);
@@ -121,7 +136,7 @@ export function readGpuQueue({ root = DEFAULT_ROOT, prune = true } = {}) {
 }
 
 // Write a ticket; returns {path, remove()}. pid: the process it lives with.
-export function enqueueGpuTicket({ owner, rank = 'browser', root = DEFAULT_ROOT, pid = process.pid }) {
+export function enqueueGpuTicket({ owner, rank = 'browser', root = DEFAULT_ROOT, pid = process.pid, bound = RENDER_BOUND }) {
   const r = rankOf(rank), start = processStart(pid);
   if (start === null) throw new Error(`no process ${pid} to queue for`);
   const dir = path.join(root, 'gpu.queue');
@@ -129,6 +144,7 @@ export function enqueueGpuTicket({ owner, rank = 'browser', root = DEFAULT_ROOT,
   const file = path.join(dir, `${pid}-${start}-${randomUUID().slice(0, 8)}.json`);
   const record = { rank: r, time: Date.now() / 1000, owner, pid, start, kind: r === GPU_RANKS.browser ? 'browser' : 'exclusive',
     at: new Date().toTimeString().slice(0, 8) };
+  if (r === GPU_RANKS.render) record.bound = bound;
   fs.writeFileSync(file + '.tmp', JSON.stringify(record));
   fs.renameSync(file + '.tmp', file);
   return { path: file, remove: () => { try { fs.unlinkSync(file); } catch { /* gone already */ } } };
@@ -140,8 +156,8 @@ export function ticketsAhead(ticket, { root = DEFAULT_ROOT } = {}) {
   const live = readGpuQueue({ root }).filter(t => t.live);
   const me = live.find(t => t.path === (ticket?.path ?? ticket));
   if (!me) return [];
-  const held = poolHeld(root), mine = orderKey(me, held);
-  return live.filter(t => t !== me && before(orderKey(t, held), mine) < 0 && !(me.kind === 'browser' && t.kind === 'browser'));
+  const held = poolHeld(root), now = Date.now() / 1000, mine = orderKey(me, held, now);
+  return live.filter(t => t !== me && before(orderKey(t, held, now), mine) < 0 && !(me.kind === 'browser' && t.kind === 'browser'));
 }
 
 function slotDead(data) {
