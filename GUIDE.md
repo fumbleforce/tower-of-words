@@ -124,7 +124,7 @@ Prompts, models, settings, cast lines, rewards, 3D characters and video: [art/PR
 - His images in art/refs/ are references only, never img2img sources or assets unless he says so.
 - Pictures make physical sense. Check every image for logic before it ships.
 - Expression sets repaint only the face of one approved base, and everything else stays identical.
-- Cast palette: characters differ in silhouette, hair colour and outfit colour. Not everyone in black, and no two women with similar hair.
+- Cast palette: characters differ in silhouette, hairstyle, hair colour and outfit colour. Not everyone in black, and no two women with similar hair.
 - The cast stays as designed. No LoRA training. Use training-free methods from the approved portrait.
 - Reward scenes: CLAUDE.md and [art/PROMPTS.md](art/PROMPTS.md#reward-scenes).
 - 3D characters: art/MESHY.md, the one route. Accessories stay off the model. Adapt models he supplies with the smallest changes that fit, and never alter the face, eyes or body he made or put props or overlays on the face. Don't shrink or recolour a broken generated mesh to simplify it. Low-poly Mio is paused until he asks.
