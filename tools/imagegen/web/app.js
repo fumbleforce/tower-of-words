@@ -657,7 +657,7 @@ async function loadMoreHistory() {
   if (HEND || HMORE || TRASHVIEW || !HQ || !HRAW.length) return;
   HMORE = true;
   try {
-    const q = new URLSearchParams(HQ); q.set('before', HRAW[HRAW.length - 1].at);
+    const last = HRAW[HRAW.length - 1], q = new URLSearchParams(HQ); q.set('before', last.at); q.set('before_n', last.last_n || 0); q.set('before_run', last.run_id);
     const more = await api('/api/history?' + q);
     HEND = more.length < 150;
     for (const r of more) r.renders.forEach(x => tileFrom(Object.assign({ run_id: r.run_id, status: 'done', compose: r.compose, overridden: r.overridden, presets: r.presets, characters: r.characters, rating: r.rating, ipa: r.ipa, repaint: r.repaint }, x)));

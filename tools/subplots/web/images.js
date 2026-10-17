@@ -564,7 +564,9 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     finally { if ($('#generate')) $('#generate').disabled = false;if($('#quickGenerate'))$('#quickGenerate').disabled=false; }
   }
   async function refresh() {
-    jobs = await api('image/api/jobs');
+    // The queue lists only its newest jobs: a picture that finished while the page was open stays in the library.
+    const latest = await api('image/api/jobs'), listed = new Set(latest.map(j => j.id));
+    jobs = [...latest, ...jobs.filter(j => j.status === 'done' && !listed.has(j.id))];
     // example pictures that finished since the tiles last looked (Make examples)
     // example pictures and place previews that finished since the last look go on their tiles and in the picture slot
     let fresh = false;
@@ -615,7 +617,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     }
     for (const [id, f] of edits) if (all.has(id)) Object.assign(all.get(id), f);
     const madeBy = j => historyWho === 'all' || madeByAgent(j) === (historyWho === 'agents');
-    selected = [...all.values()].filter(j => !j.deleted && madeBy(j) && !j.compose?.example && !j.compose?.placePreview
+    selected = [...all.values()].filter(j => !j.deleted && j.status !== 'cancelled' && madeBy(j) && !j.compose?.example && !j.compose?.placePreview
       && (!historyCharacter || j.characters?.includes(historyCharacter)) && (!historyStar || j.star || j.fav))
       .sort(newestPictureFirst);
     const empty = `<p class="hint">${sceneScope && !sceneRuns ? 'Finding this scene’s pictures…' : historyScope === 'scene' ? 'No pictures for this scene yet, from the editor or from its picture rounds. Browse all generated pictures to use an existing one.' : 'No pictures match these filters.'}</p>`;

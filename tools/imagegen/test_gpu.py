@@ -64,6 +64,17 @@ class SessionTest(unittest.TestCase):
         gpu_priority.show_queue(ROOT, out=lines.append)
         return '\n'.join(lines)
 
+    def test_a_test_copy_never_resumes_his_waiting_start(self):
+        path = os.path.join(ROOT, 'session-live.json')
+        with open(path, 'w') as f:
+            f.write('{"state": "starting", "who": "", "his_start": true}')
+        with patch.object(gpu.Session, 'start') as start:
+            copy = gpu.Session(os.path.join(ROOT, 'session-copy.json'), lambda m: None, enabled=False)
+            gpu.Session(path, lambda m: None)
+        self.assertEqual(start.call_count, 1)  # only the live server picks his start back up
+        self.assertEqual(copy.s['state'], 'off')
+        self.assertFalse(copy.sync_priority())
+
     # ---------------------------------------------------------------- 1. priority only for his own renders
     def test_an_agent_job_takes_the_lock_without_the_priority(self):
         self.jobs.append((AGENT, time.time()))

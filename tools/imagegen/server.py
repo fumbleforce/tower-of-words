@@ -42,7 +42,8 @@ def log(msg):
     print(line, flush=True)
 
 
-session = gpu.Session(os.path.join(store.ROOT, 'session.json'), log)
+# A test copy keeps its own session file and never resumes the live one: it would start a GPU session for Jørgen.
+session = gpu.Session(os.path.join(store.ROOT, 'session.json' if not TEST_COPY else f'session-test-{PORT}.json'), log, enabled=not TEST_COPY)
 
 # ---------------------------------------------------------------- job queue
 JOBS = []          # newest last; kept in memory for progress (the log has the permanent record)
@@ -57,7 +58,6 @@ def pending():
 
 
 session.pending = pending
-session.enabled = not TEST_COPY
 
 
 def on_progress(pid, value, mx):
@@ -218,11 +218,15 @@ def log_entry(j):
     return e
 
 
-def next_job():
-    """The next queued job: Jørgen's own first (they have priority on the GPU), then in the order they came."""
+def queue_order():
+    """Queued jobs in the order they will run: Jørgen's own first (they have priority on the GPU), then in the order they came."""
     with JOBS_LOCK:
-        queued = [x for x in JOBS if x['status'] == 'queued']
-    return next((x for x in queued if not x.get('owner')), queued[0] if queued else None)
+        return sorted((x for x in JOBS if x['status'] == 'queued'), key=lambda x: bool(x.get('owner')))
+
+
+def next_job():
+    queued = queue_order()
+    return queued[0] if queued else None
 
 
 def worker():
@@ -249,17 +253,20 @@ def worker():
             session.touch()
             try:
                 run_job(j)
-                j['status'] = 'done'
+                status = 'done'
             except InterruptedError:
-                j['status'] = 'cancelled'
+                status = 'cancelled'
             except Exception as e:
-                j['status'], j['error'] = 'error', str(e)[:600]
+                status, j['error'] = 'error', str(e)[:600]
                 log(f"job {j['id']} failed: {e}")
             j['progress'] = 1
-            session.touch()
-            if j['status'] in ('done', 'error'):
-                j['at'] = datetime.now().astimezone().isoformat(timespec='microseconds')
-                j['n'] = store.log_append(log_entry(j))['n']
+            try:
+                if status in ('done', 'error'):  # numbered before the queue shows it finished, so it lands in its place (#694)
+                    j['at'] = datetime.now().astimezone().isoformat(timespec='microseconds')
+                    j['n'] = store.log_append(log_entry({**j, 'status': status}))['n']
+            finally:
+                j['status'] = status
+                session.touch()
         except Exception:
             log('worker error: ' + traceback.format_exc())
             time.sleep(2)
@@ -570,7 +577,7 @@ def history(q, private=False):
     out = []
     for rs in runs.values():
         f = rs[0]
-        newest = max(rs, key=lambda r: (history_time(r.get('at')), r.get('n') or 0))
+        newest = max(rs, key=lambda r: (r.get('n') or 0, history_time(r.get('at'))))
         out.append(dict(run_id=f['run_id'], at=newest['at'], at_epoch=history_time(newest['at']), last_n=newest.get('n') or 0,
                         characters=f.get('characters'), scene_text=f.get('scene_text'), model_file=f.get('model_file'), rating=f.get('rating'),
                         presets=f.get('presets'), positive=f.get('positive'), negative=f.get('negative'), overridden=f.get('overridden'),
@@ -579,12 +586,13 @@ def history(q, private=False):
                         renders=[{**{k: r.get(k) for k in ('id', 'n', 'idx', 'file', 'thumb', 'seed', 'star', 'fav', 'reject', 'reject_reason', 'note',
                                                          'positive', 'negative', 'w', 'h', 'model_file', 'at', 'ipa', 'repaint', 'raw_file', 'start', 'loras', 'control', 'huefix', 'compose') + AGENT_FIELDS},
                                   'at_epoch': history_time(r.get('at'))} for r in rs]))
-    out.sort(key=lambda x: (x['at_epoch'], x['last_n'], x['run_id']), reverse=True)
+    # Newest first by #n, which the log gives each picture as it finishes, so every owner's renders share one order (#694)
+    out.sort(key=lambda x: (x['last_n'], x['at_epoch'], x['run_id']), reverse=True)
     if q.get('before'):  # paging for the History view's infinite scroll: only runs older than the last one shown
         before = history_time(q['before'])
-        if q.get('before_run'):
-            cursor = (before, int(q.get('before_n', 0)), q['before_run'])
-            out = [x for x in out if (x['at_epoch'], x['last_n'], x['run_id']) < cursor]
+        if q.get('before_n') is not None:
+            cursor = (int(q['before_n']), before, q.get('before_run', ''))
+            out = [x for x in out if (x['last_n'], x['at_epoch'], x['run_id']) < cursor]
         else:
             out = [x for x in out if x['at_epoch'] < before]
     lim = int(q.get('limit', 60))
@@ -755,7 +763,9 @@ class H(BaseHTTPRequestHandler):
             if p == '/api/jobs':
                 since = float(q.get('since', 0))
                 with JOBS_LOCK:
-                    return self._send(200, [public_job(j) for j in JOBS[-64:] if j['created'] >= since])
+                    pos = {j['id']: i for i, j in enumerate(queue_order(), 1)}  # the library shows waiting renders in run order
+                    return self._send(200, [{**public_job(j), **({'queue_pos': pos[j['id']]} if j['id'] in pos else {})}
+                                            for j in JOBS[-64:] if j['created'] >= since])
             if p == '/api/presets':
                 return self._send(200, store.all_presets(private=self._private()))
             if p.startswith('/api/preset/'):

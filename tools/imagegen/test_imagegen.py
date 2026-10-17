@@ -69,6 +69,14 @@ class Jobs(unittest.TestCase):
         self.post('/api/cancel', {})
         self.assertEqual(self.status(), dict(mine1='cancelled', mine2='cancelled', other='cancelled', run='running'))
 
+    def test_jobs_list_the_queue_position_of_waiting_renders(self):
+        server.JOBS[2]['owner'] = 'claude-main/art'
+        server.JOBS.append(dict(id='mine3', status='queued'))
+        for k, j in enumerate(server.JOBS):
+            j['created'] = k
+        jobs = json.load(urllib.request.urlopen(f'http://127.0.0.1:{self.srv.server_port}/api/jobs'))
+        self.assertEqual({j['id']: j.get('queue_pos') for j in jobs}, dict(mine1=1, mine2=2, other=4, run=None, mine3=3))
+
     def test_end_session_if_idle_does_nothing_while_jobs_wait(self):
         r = self.post('/api/session/end', {'if_idle': True})
         self.assertIs(r['ended'], False)
@@ -144,6 +152,29 @@ class HistoryOrder(unittest.TestCase):
         self.assertEqual(done['at'], job['at'])
         self.assertEqual(done['at_epoch'], server.history_time(job['at']))
         self.assertEqual(server.log_entry(job)['at'], job['at'])
+
+    def test_mixed_owners_page_by_picture_number_when_times_disagree(self):
+        # #694: an agent's row logged with an older time, and a backfill, still sit in #n order
+        rows = [dict(self.row('mine', '2026-10-11T10:05:00Z'), n=1), dict(self.row('agent', '2026-10-11T10:00:00Z'), n=2, owner='claude-main/art'),
+                dict(self.row('backfill', '2026-10-11T09:00:00Z'), n=3, source='agent', owner='backfill'),
+                dict(self.row('mine', '2026-10-11T10:06:00Z', 2), n=4)]
+        self.assertEqual([r['renders'][0]['id'] for r in self.history(rows, pictures='1')], ['mine-2', 'backfill-1', 'agent-1', 'mine-1'])
+        seen, cursor = [], {}
+        for _ in range(5):
+            page = self.history(rows, pictures='1', limit=1, **cursor)
+            if page:
+                seen.append(page[0]['renders'][0]['id'])
+                cursor = dict(before=page[0]['at'], before_n=page[0]['last_n'], before_run=page[0]['run_id'])
+        self.assertEqual(seen, ['mine-2', 'backfill-1', 'agent-1', 'mine-1'])
+        self.assertEqual([r['run_id'] for r in self.history(rows)], ['mine', 'backfill', 'agent'])
+
+    def test_queue_order_puts_jorgens_jobs_first_then_arrival(self):
+        server.JOBS[:] = [dict(id='a1', status='queued', owner='agent', created=1), dict(id='r', status='running', created=0),
+                          dict(id='m1', status='queued', created=3), dict(id='a2', status='queued', owner='other', created=2),
+                          dict(id='m2', status='queued', created=4), dict(id='x', status='done', created=0)]
+        self.addCleanup(server.JOBS.clear)
+        self.assertEqual([j['id'] for j in server.queue_order()], ['m1', 'm2', 'a1', 'a2'])
+        self.assertEqual(server.next_job()['id'], 'm1')
 
 
 class MadeBy(unittest.TestCase):

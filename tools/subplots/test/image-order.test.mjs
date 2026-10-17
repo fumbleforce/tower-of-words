@@ -4,33 +4,33 @@ import {newestPictureFirst} from '../web/image-order.js';
 
 const ids = rows => rows.sort(newestPictureFirst).map(r => r.id);
 
-test('pictures from different batches interleave by their own completion times', () => {
+test('finished pictures go by their #n, newest first, even when a recorded time disagrees', () => {
   assert.deepEqual(ids([
-    {id: 'a1', at: '2026-10-11T10:00:00Z'},
-    {id: 'a2', at: '2026-10-11T10:02:00Z'},
-    {id: 'b1', at: '2026-10-11T10:01:00Z'},
-  ]), ['a2', 'b1', 'a1']);
+    {id: 'a1', n: 1, at: '2026-10-11T10:00:00Z'},
+    {id: 'a2', n: 3, at: '2026-10-11T10:02:00Z'},
+    {id: 'b1', n: 2, at: '2026-10-11T10:01:00Z'},
+    {id: 'logged late', n: 4, at: '2026-10-11T09:00:00Z'},
+  ]), ['logged late', 'a2', 'b1', 'a1']);
 });
 
-test('same-second pictures use permanent render numbers, newest first', () => {
-  assert.deepEqual(ids([1, 3, 2].map(n => ({id: String(n), n, at: '2026-10-11T10:00:00Z'}))), ['3', '2', '1']);
+test('pictures without a number follow the numbered ones by time, then batch position', () => {
+  assert.deepEqual(ids([
+    {id: 'numbered', n: 1, at_epoch: 5},
+    {id: 'later', at: '2026-10-11T10:01:00Z'},
+    {id: 'earlier', at: '2026-10-11T12:00:00+02:00'},
+  ]), ['numbered', 'later', 'earlier']);
   assert.deepEqual(ids([2, 10, 1].map(idx => ({id: `batch-${idx}`, idx}))), ['batch-10', 'batch-2', 'batch-1']);
 });
 
-test('queue timestamps fall between completed pictures instead of floating to the top', () => {
+test('waiting renders sit above finished pictures, last to run on top, the running one lowest', () => {
   assert.deepEqual(ids([
-    {id: 'older queued', created: 10},
-    {id: 'old done', at_epoch: 5},
-    {id: 'new done', at_epoch: 20, created: 1},
-    {id: 'unknown'},
-  ]), ['new done', 'older queued', 'old done', 'unknown']);
-  assert.deepEqual(ids([{id: 'completed', at_epoch: 100.9, n: 2}, {id: 'queued', created: 100.5}]), ['completed', 'queued']);
+    {id: 'done', n: 9, at_epoch: 100},
+    {id: 'next', status: 'queued', queue_pos: 1, created: 50},
+    {id: 'running', status: 'running', created: 60},
+    {id: 'last', status: 'queued', queue_pos: 2, created: 40},
+  ]), ['last', 'next', 'running', 'done']);
 });
 
-test('timestamps compare as instants, with server time preferred over local text', () => {
-  assert.deepEqual(ids([
-    {id: 'earlier', at: '2026-10-11T12:00:00+02:00'},
-    {id: 'later', at: '2026-10-11T10:01:00Z'},
-  ]), ['later', 'earlier']);
-  assert.deepEqual(ids([{id: 'a', at_epoch: 20, at: '2000-01-01'}, {id: 'b', at_epoch: 10, at: '2026-01-01'}]), ['a', 'b']);
+test('without queue positions, waiting renders go by submission time', () => {
+  assert.deepEqual(ids([{id: 'first', status: 'queued', created: 1}, {id: 'second', status: 'queued', created: 2}]), ['second', 'first']);
 });

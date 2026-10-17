@@ -95,17 +95,17 @@ def _pid_alive(pid):
 class Session:
     POLL = 2  # seconds between looks at the lock while waiting
 
-    def __init__(self, state_path, log):
+    def __init__(self, state_path, log, enabled=True):
         self.path = state_path
         self.log = log
         self.lock = threading.RLock()
         self.s = dict(state='off', message='', started_at=None, pid=None, by_us=False, last_activity=time.time(), ended=None,
                       who='', his_start=False)
         self.pending = lambda: []  # set by the server: (owner, created) of each queued or running job, owner '' for his
-        self.enabled = True  # False in a test copy of the server: it never claims the priority
+        self.enabled = enabled  # False in a test copy of the server: it never claims the priority or picks up a session
         self.proc = None  # the Popen of the ComfyUI we started in this process
         self.ticket = self.ticket_rank = None  # our place in gpu.queue while waiting for the lock
-        waiting = self._recover()
+        waiting = self._recover() if enabled else False
         threading.Thread(target=self._watch, daemon=True).start()
         if waiting:
             self.start()
