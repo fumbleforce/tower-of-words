@@ -2,7 +2,7 @@
  "title": "Kenji without the lanyard, round 2",
  "date": "2026-10-17",
  "by": "claude-main/art-round",
- "status": "open",
+ "status": "decided",
  "question": "Which of these should be Kenji's new base portrait?",
  "multi": true,
  "media": [
@@ -34,5 +34,11 @@
    ],
    "note": "Pass 2, method change (n1 changed his hair): inpaint from k3-s2 itself. Start art/candidates/portraits/kenji-1/k3-r261016-200345-19c-2-s2.webp, mask art/candidates/portraits/kenji-2/start/n2-mask.png over only the straps, clip and badge, denoise 0.9; same words, exclusion and seed 2 as n1. Recipe art/candidates/portraits/kenji-2/recipes/n2.json, RDBT, Euler A, 30 steps, CFG 5. Red rim 0.4%. Framing: 8% missing above the game crop, as k3-s2; a pick gets a real outpaint. Dashboard #2582. My verdict, kept: face, hair, stubble, arms and belt are k3-s2's own pixels; tie and shirt front continue cleanly. Flaw: a pale shirt highlight runs down beside the top of the tie where the left strap was."
   }
- ]
+ ],
+ "decided": [
+  "n2-s2"
+ ],
+ "decision": "n2-s2",
+ "decided_at": "2026-10-17T11:28:39+0200",
+ "issue": 680
 }
