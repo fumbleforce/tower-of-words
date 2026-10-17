@@ -34,7 +34,7 @@ const POSE = {
   beach: { yaw: -0.55, elev: deg(56) }, // from the south-west, along the sea
   north: { yaw: 0.1, elev: deg(58) },
   steep: { yaw: 0.2, elev: deg(76) }, // close by S-E's east wing, which would stand between him and the camera
-  over: { yaw: 0.1, elev: deg(84) }, // on the north path, N-W's five storeys a step behind him: almost straight down
+  over: { yaw: Math.PI - 0.1, elev: deg(62) }, // on the north path by N-W, from over the gardens: N-W's five storeys face it
   south: { yaw: Math.PI - 0.18, elev: deg(56) }, // the villas' gardens and the sea beyond
 };
 export async function eastCoastPlace(game) {

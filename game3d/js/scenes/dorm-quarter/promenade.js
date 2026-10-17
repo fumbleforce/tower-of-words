@@ -40,12 +40,10 @@ function edgeRuns() {
 const PINES = [
   [127.4, -33.6, 0.95],
   [127.8, -31.0, 0.85],
-  [127.3, -26.4, 0.9],
-  [127.9, -24.0, 0.8],
+  [127.3, -24.6, 0.9],
   [127.5, -17.4, 0.9],
-  [127.7, -6.0, 0.85],
-  [127.6, -0.6, 0.9],
-  [127.2, 1.3, 0.8],
+  [127.7, -5.4, 0.85],
+  [127.4, 0.4, 0.9],
 ];
 export function* promenadeSteps(pv, p, lights, root, { far = false } = {}) {
   // the railing on the coping, in runs between the gaps
@@ -73,13 +71,7 @@ export function* promenadeSteps(pv, p, lights, root, { far = false } = {}) {
     for (let t = z0 + 0.3; t < z1 - 0.2; t += 0.55 + hash2(t, 1, 3) * 0.4) {
       const x = Q.EDGE[0] + 0.3 + hash2(t, 2, 5) * 0.45;
       if (hash2(t, x, 7) < 0.6)
-        mound(
-          p,
-          x,
-          t,
-          0.22 + hash2(x, t, 9) * 0.14,
-          [LEAF.deep, LEAF.mid, LEAF.fresh][Math.floor(hash2(t, 3, 11) * 3)],
-        );
+        mound(p, x, t, 0.2 + hash2(x, t, 9) * 0.08, [LEAF.deep, LEAF.mid, LEAF.fresh][Math.floor(hash2(t, 3, 11) * 3)]);
       else if (!far) grass(p, x, t, { h: 0.42, color: '#a1a482', seed: Math.round(t * 10) });
     }
     yield;

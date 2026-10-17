@@ -159,9 +159,9 @@ function wisteria(p) {
   pergola(p, Q.WISTERIA, { h, along: 'x', slat: 0.5 });
   // the vine: low flattened leaf blobs over the rafters, a few long shoots hanging down from them (it flowered in
   // May; in October it is all leaf)
-  for (let x = x0 + 0.3; x < x1; x += 0.7)
-    for (let z = z0 + 0.4; z < z1; z += 0.8) {
-      mound(p, x + hash2(x, z, 3) * 0.3, z, 0.42, hash2(z, x, 5) < 0.5 ? LEAF.mid : LEAF.fresh, {
+  for (let x = x0 + 0.4; x < x1; x += 0.95)
+    for (let z = z0 + 0.45; z < z1; z += 0.95) {
+      mound(p, x + hash2(x, z, 3) * 0.3, z, 0.5, hash2(z, x, 5) < 0.5 ? LEAF.mid : LEAF.fresh, {
         y: h + 0.1,
         squash: 0.35,
       });
@@ -293,7 +293,7 @@ export function* parkSteps(pv, p, lights, group, { far = false } = {}) {
       const t = (i + 0.5) / 6;
       const x = x1 - x0 > z1 - z0 ? x0 + (x1 - x0) * t : (x0 + x1) / 2,
         z = x1 - x0 > z1 - z0 ? (z0 + z1) / 2 : z0 + (z1 - z0) * t;
-      mound(p, x, z, 0.26 + (i % 3) * 0.05, [LEAF.deep, LEAF.mid, LEAF.fresh][i % 3]);
+      mound(p, x, z, 0.24 + (i % 3) * 0.02, [LEAF.deep, LEAF.mid, LEAF.fresh][i % 3]);
     }
   yield;
 }

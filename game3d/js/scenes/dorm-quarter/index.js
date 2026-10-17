@@ -32,6 +32,9 @@ export { placeIn } from '../place-frame.js';
 // the layout's buildings the quarter builds, for the places' skyline skip lists
 export const QUARTER_IDS = [...BLOCKS.map((k) => k.id), 'dorm_commons_hall', 'garden_shed'];
 
+// what throws a shadow where the quarter is walked: the blocks' walls, the trees, hedges and shrubs (their lighter
+// stand-ins), not the kerbs, paving, furniture and small things
+const CASTS = (o) => !!(o.shadow || o.shade || o.surf === 'plaster');
 const XCUTS = [86, 98, 110, 122],
   ZCUTS = [-44, -30, -12, 2];
 // the dorm courtyard's own ground, which it lays itself: its street (the promenade in front of it) and the court
@@ -47,7 +50,7 @@ const COURT_OWN = [
 const DETAIL = {
   east_coast: { ground: 'full', park: 'full', prom: 'full', gardens: 'full', south: 'full' },
   dorm_court: { ground: 'full', park: 'full', prom: 'far', gardens: 'none', south: 'full' },
-  east_lane: { ground: 'full', park: 'full', prom: 'far', gardens: 'far', south: 'full' },
+  east_lane: { ground: 'full', park: 'full', prom: 'none', gardens: 'none', south: 'full' },
   plaza: { ground: 'flat', park: 'far', prom: 'none', gardens: 'none', south: 'none' },
 };
 
@@ -58,7 +61,7 @@ export function* quarterSteps(group, { host = 'east_coast' } = {}) {
   const D = DETAIL[host],
     far = (k) => D[k] === 'far',
     walked = host === 'east_coast',
-    { parts: p, paver: pv } = cells(XCUTS, ZCUTS, { cast: walked }),
+    { parts: p, paver: pv } = cells(XCUTS, ZCUTS, { cast: walked ? CASTS : null }),
     lights = lightSet();
   const own =
     host === 'dorm_court'

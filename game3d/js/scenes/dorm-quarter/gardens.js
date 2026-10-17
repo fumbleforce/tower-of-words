@@ -51,7 +51,7 @@ function plot(p, [x0, x1, z0, z1], i, far) {
       continue;
     }
     if (far && r % 2) continue;
-    for (let x = x0 + 0.35; x < x1 - 0.25; x += (far ? 0.6 : 0.32) + hash2(x, z, i) * 0.12)
+    for (let x = x0 + 0.35; x < x1 - 0.25; x += (far ? 0.6 : 0.42) + hash2(x, z, i) * 0.12)
       mound(p, x, z, 0.12 + hash2(z, x, i) * 0.07, CROPS[(r + i + Math.round(x)) % 4], { y: 0.06, squash: 0.8 });
   }
   if (kind === 3 && !far) {
@@ -175,10 +175,8 @@ function seaGarden(p, lights) {
     [124.8, -50.0, 0.85, pine],
     [126.8, -49.2, 0.9, pine],
     [127.8, -40.4, 0.95, sakura],
-    [127.6, -53.4, 0.85, pine],
     [121.8, -54.6, 0.9, pine],
-    [113.4, -54.2, 1.0, keyaki],
-    [109.6, -52.8, 0.85, maple],
+    [111.4, -53.6, 1.0, keyaki],
   ])
     k(p, x, z, s, Math.round(x * 7 + z));
 }
@@ -204,16 +202,12 @@ function seCourt(p) {
 const LAWN_TREES = [
   [keyaki, 77.6, -6.2, 1.05],
   [sakura, 77.8, -1.2, 0.95],
-  [keyaki, 77.6, 4.2, 1.0],
   [maple, 84.0, 6.2, 0.8],
-  [keyaki, 90.2, 6.6, 1.0],
-  [sakura, 96.0, 6.2, 0.9],
-  [maple, 101.6, 6.6, 0.8],
+  [keyaki, 92.2, 6.6, 1.0],
+  [sakura, 101.6, 6.4, 0.9],
   [keyaki, 103.6, 1.4, 1.0],
   [ginkgo, 77.0, -33.0, 0.95],
-  [keyaki, 104.8, -33.4, 1.0],
   [sakura, 109.4, -33.2, 0.95],
-  [maple, 116.0, -33.6, 0.8],
 ];
 
 export function* gardensSteps(pv, p, lights, { far = false } = {}) {
