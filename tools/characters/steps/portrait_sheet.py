@@ -79,6 +79,7 @@ def main():
     ap.add_argument('out')
     ap.add_argument('items', nargs='+', help='label=render.webp, in order')
     ap.add_argument('--approved')
+    ap.add_argument('--approved-label', default='approved now', help='label of the first cell (a new concept shows its parent)')
     ap.add_argument('--lineup', metavar='WHO', help="a lineup at game size; framed previews sit on WHO's face box")
     ap.add_argument('--cast', default='', help='game portraits first in the lineup, comma separated')
     ap.add_argument('--qa', action='append', default=[])
@@ -94,7 +95,7 @@ def main():
     port = Image.open(a.approved).convert('RGBA')
     flat = Image.new('RGBA', port.size, (217, 220, 224, 255))
     flat.alpha_composite(port)
-    cells = [('approved now', flat.convert('RGB').resize((GW, GH), Image.LANCZOS))]
+    cells = [(a.approved_label, flat.convert('RGB').resize((GW, GH), Image.LANCZOS))]
     for item in a.items:
         label, path = item.split('=', 1)
         fr = framed(path, boxes[os.path.realpath(path)])

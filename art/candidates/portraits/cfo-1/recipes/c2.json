@@ -1,0 +1,26 @@
+{
+ "details": "CFO-type executive concept, round cfo-1 candidate c2. Parent hamada-2 h4-s2 (recipe ../hamada-2/recipes/h4.json, preset hamada-slicked v1, seed 2). The one change: the outfit, preset cfo-green v2 = hamada-slicked v1 with only the outfit (slim bottle green three-piece suit with waistcoat, white shirt open at the collar, no tie, as the clothing negative necktie) and the name word changed. Scene words, negatives, style and seeds 1-4 as h4. Staging: ../staging.md.",
+ "characters": [
+  "cfo-green"
+ ],
+ "outfit": {
+  "cfo-green": true
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "calm, warm expression with a slight smile, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ],
+ "people": {
+  "cfo-green": {
+   "appearanceNegative": "brown hair, light brown hair",
+   "clothingNegative": "necktie, tie"
+  }
+ },
+ "seed": 1,
+ "count": 4
+}

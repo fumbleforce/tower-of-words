@@ -1,0 +1,26 @@
+{
+ "details": "CFO-type executive concept, round cfo-1 candidate c3. Parent c2 (recipe c2.json, preset cfo-green v2). The one change: the age, preset cfo-green-42 v1 = cfo-green v2 with 'a 54-year-old middle-aged Japanese man' -> 'a 42-year-old Japanese man'. Everything else as c2, seeds 1-4. Staging: ../staging.md.",
+ "characters": [
+  "cfo-green-42"
+ ],
+ "outfit": {
+  "cfo-green-42": true
+ },
+ "style": "portrait",
+ "rating": "safe",
+ "scene": "calm, warm expression with a slight smile, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer",
+ "negatives": [
+  "base",
+  "limits",
+  "heavy",
+  "no-props"
+ ],
+ "people": {
+  "cfo-green-42": {
+   "appearanceNegative": "brown hair, light brown hair",
+   "clothingNegative": "necktie, tie"
+  }
+ },
+ "seed": 1,
+ "count": 4
+}

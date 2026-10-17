@@ -1,0 +1,168 @@
+{
+ "title": "CFO-type executive, new character concept round 1",
+ "date": "2026-10-17",
+ "by": "claude-main/art-round",
+ "status": "open",
+ "question": "Which of these should the CFO-type executive look like, or what should change?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/candidates/portraits/hamada-2/h4-r261017-110903-a78-2-s2.webp",
+   "caption": "The starting point: hamada-2 h4-s2, which you starred: \"this guy is interesting, with some more variation it could be a top level executive like a CFO type with the slick finance bro look, make a separate item for him\". Recipe art/candidates/portraits/hamada-2/recipes/h4.json, seed 2."
+  },
+  {
+   "image": "art/candidates/portraits/cfo-1/sheet.webp",
+   "caption": "Pictures: h4-s2, then all 16 renders in order, framed at the game's portrait scale. Every candidate keeps the slicked-back hair, face, build, scene words and seeds 1 to 4 (seed 2 is h4-s2's seed), and changes one thing. c1: the outfit, a slim double-breasted burgundy suit with a tie. c2: the outfit, a slim bottle green three-piece with the collar open and no tie. c3: c2 at 42 instead of 54. c4: c2 with a self-assured smirk, chin up. c3 and c4 build on c2 because the open collar and waistcoat set his silhouette apart from Hamada and Mori, who both wear suit and tie. No broken anatomy in the 16, so none were screened out. None draws grey at the temples."
+  },
+  {
+   "image": "art/candidates/portraits/cfo-1/lineup.webp",
+   "caption": "The male cast's game portraits (Kenji, Mori, the guard, Hamada now), your Hamada pick h2-s1, h4-s2, then seed 2 of each candidate, at the size the game shows them on a 1080p desktop. Suit colours already taken: navy (Hamada, Eric's blazer, the guard), dark grey (Mori), charcoal and black (Emi, Kuro), light grey (Rei). Nobody else in the cast has slicked-back hair."
+  }
+ ],
+ "options": [
+  {
+   "id": "c1-s1",
+   "label": "c1-s1",
+   "image": "art/candidates/portraits/cfo-1/c1-r261017-115256-6fb-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c1-r261017-115256-6fb-1-s1.webp"
+   ],
+   "note": "c1, outfit only: slim double-breasted burgundy suit, white shirt, dark silk tie (preset cfo-burgundy v1 = hamada-slicked v1 with only the outfit and the name word changed). Parent h4-s2. Recipe art/candidates/portraits/cfo-1/recipes/c1.json, seed 1, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.4%. Framing: headroom 4%, 8% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.101 (a different man, so a fail there is expected). Dashboard #2595. My verdict, kept: burgundy pinstripe double-breasted, six buttons in two even columns; sharp sly face, reads about 50; hands in pockets. No grey at the temples."
+  },
+  {
+   "id": "c1-s2",
+   "label": "c1-s2",
+   "image": "art/candidates/portraits/cfo-1/c1-r261017-115256-6fb-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c1-r261017-115256-6fb-2-s2.webp"
+   ],
+   "note": "c1, outfit only: slim double-breasted burgundy suit, white shirt, dark silk tie (preset cfo-burgundy v1 = hamada-slicked v1 with only the outfit and the name word changed). Parent h4-s2. Recipe art/candidates/portraits/cfo-1/recipes/c1.json, seed 2, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.2%. Framing: headroom 1%, 9% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.093 (a different man, so a fail there is expected). Dashboard #2596. My verdict, kept: closest to h4-s2 (same seed): same face and smirk, deep burgundy double-breasted, silk tie; sides shade to navy-black. No grey at the temples."
+  },
+  {
+   "id": "c1-s3",
+   "label": "c1-s3",
+   "image": "art/candidates/portraits/cfo-1/c1-r261017-115256-6fb-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c1-r261017-115256-6fb-3-s3.webp"
+   ],
+   "note": "c1, outfit only: slim double-breasted burgundy suit, white shirt, dark silk tie (preset cfo-burgundy v1 = hamada-slicked v1 with only the outfit and the name word changed). Parent h4-s2. Recipe art/candidates/portraits/cfo-1/recipes/c1.json, seed 3, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.0%. Framing: headroom 4%, 6% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.098 (a different man, so a fail there is expected). Dashboard #2597. My verdict, kept: darker wine double-breasted, longer face with more lines, reads about 55. No grey at the temples."
+  },
+  {
+   "id": "c1-s4",
+   "label": "c1-s4",
+   "image": "art/candidates/portraits/cfo-1/c1-r261017-115256-6fb-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c1-r261017-115256-6fb-4-s4.webp"
+   ],
+   "note": "c1, outfit only: slim double-breasted burgundy suit, white shirt, dark silk tie (preset cfo-burgundy v1 = hamada-slicked v1 with only the outfit and the name word changed). Parent h4-s2. Recipe art/candidates/portraits/cfo-1/recipes/c1.json, seed 4, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 1.2%. Framing: headroom 4%, 7% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.088 (a different man, so a fail there is expected). Dashboard #2598. My verdict, kept: burgundy double-breasted with a white pocket square; leaner younger face, reads about 48. No grey at the temples."
+  },
+  {
+   "id": "c2-s1",
+   "label": "c2-s1",
+   "image": "art/candidates/portraits/cfo-1/c2-r261017-115529-14f-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c2-r261017-115529-14f-1-s1.webp"
+   ],
+   "note": "c2, outfit only: slim bottle green three-piece suit with a waistcoat, white shirt open at the collar, necktie excluded (preset cfo-green v2 = hamada-slicked v1 with only the outfit and the name word changed). Parent h4-s2. Recipe art/candidates/portraits/cfo-1/recipes/c2.json, seed 1, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.4%. Framing: headroom 3%, 10% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.108 (a different man, so a fail there is expected). Dashboard #2603. My verdict, kept: bottle green three-piece, open collar, pocket square; the waistcoat and no tie change his silhouette from Hamada and Mori. No grey at the temples."
+  },
+  {
+   "id": "c2-s2",
+   "label": "c2-s2",
+   "image": "art/candidates/portraits/cfo-1/c2-r261017-115529-14f-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c2-r261017-115529-14f-2-s2.webp"
+   ],
+   "note": "c2, outfit only: slim bottle green three-piece suit with a waistcoat, white shirt open at the collar, necktie excluded (preset cfo-green v2 = hamada-slicked v1 with only the outfit and the name word changed). Parent h4-s2. Recipe art/candidates/portraits/cfo-1/recipes/c2.json, seed 2, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.5%. Framing: headroom 1%, 10% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.100 (a different man, so a fail there is expected). Dashboard #2604. My verdict, kept: brighter emerald three-piece, open collar; h4-s2's face and smirk carried over. No grey at the temples."
+  },
+  {
+   "id": "c2-s3",
+   "label": "c2-s3",
+   "image": "art/candidates/portraits/cfo-1/c2-r261017-115529-14f-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c2-r261017-115529-14f-3-s3.webp"
+   ],
+   "note": "c2, outfit only: slim bottle green three-piece suit with a waistcoat, white shirt open at the collar, necktie excluded (preset cfo-green v2 = hamada-slicked v1 with only the outfit and the name word changed). Parent h4-s2. Recipe art/candidates/portraits/cfo-1/recipes/c2.json, seed 3, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.9%. Framing: headroom 3%, 8% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.117 (a different man, so a fail there is expected). Dashboard #2605. My verdict, kept: teal-green three-piece, collar open wider, slight turn; relaxed self-assured smile. No grey at the temples."
+  },
+  {
+   "id": "c2-s4",
+   "label": "c2-s4",
+   "image": "art/candidates/portraits/cfo-1/c2-r261017-115529-14f-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c2-r261017-115529-14f-4-s4.webp"
+   ],
+   "note": "c2, outfit only: slim bottle green three-piece suit with a waistcoat, white shirt open at the collar, necktie excluded (preset cfo-green v2 = hamada-slicked v1 with only the outfit and the name word changed). Parent h4-s2. Recipe art/candidates/portraits/cfo-1/recipes/c2.json, seed 4, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.7%. Framing: headroom 4%, 8% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.101 (a different man, so a fail there is expected). Dashboard #2606. My verdict, kept: dark green three-piece, open collar; a belt buckle shows below the waistcoat (short waistcoat), minor. No grey at the temples."
+  },
+  {
+   "id": "c3-s1",
+   "label": "c3-s1",
+   "image": "art/candidates/portraits/cfo-1/c3-r261017-120126-d47-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c3-r261017-120126-d47-1-s1.webp"
+   ],
+   "note": "c3, age only: 42 in place of 54 (preset cfo-green-42 v1 = cfo-green v2 with only the age words changed). Parent c2. Recipe art/candidates/portraits/cfo-1/recipes/c3.json, seed 1, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.5%. Framing: headroom 2%, 10% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.100 (a different man, so a fail there is expected). Dashboard #2612. My verdict, kept: age 42: smoother face, fewer lines, reads about 42; dark green three-piece, open collar. No grey at the temples."
+  },
+  {
+   "id": "c3-s2",
+   "label": "c3-s2",
+   "image": "art/candidates/portraits/cfo-1/c3-r261017-120126-d47-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c3-r261017-120126-d47-2-s2.webp"
+   ],
+   "note": "c3, age only: 42 in place of 54 (preset cfo-green-42 v1 = cfo-green v2 with only the age words changed). Parent c2. Recipe art/candidates/portraits/cfo-1/recipes/c3.json, seed 2, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.3%. Framing: headroom 1%, 11% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.108 (a different man, so a fail there is expected). Dashboard #2613. My verdict, kept: age 42: same seed as h4-s2, younger version of that face, brighter green. No grey at the temples."
+  },
+  {
+   "id": "c3-s3",
+   "label": "c3-s3",
+   "image": "art/candidates/portraits/cfo-1/c3-r261017-120126-d47-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c3-r261017-120126-d47-3-s3.webp"
+   ],
+   "note": "c3, age only: 42 in place of 54 (preset cfo-green-42 v1 = cfo-green v2 with only the age words changed). Parent c2. Recipe art/candidates/portraits/cfo-1/recipes/c3.json, seed 3, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.9%. Framing: headroom 3%, 9% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.116 (a different man, so a fail there is expected). Dashboard #2614. My verdict, kept: age 42: youngest-looking of the set, slight turn, wry smile. No grey at the temples."
+  },
+  {
+   "id": "c3-s4",
+   "label": "c3-s4",
+   "image": "art/candidates/portraits/cfo-1/c3-r261017-120126-d47-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c3-r261017-120126-d47-4-s4.webp"
+   ],
+   "note": "c3, age only: 42 in place of 54 (preset cfo-green-42 v1 = cfo-green v2 with only the age words changed). Parent c2. Recipe art/candidates/portraits/cfo-1/recipes/c3.json, seed 4, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.6%. Framing: headroom 4%, 8% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.124 (a different man, so a fail there is expected). Dashboard #2615. My verdict, kept: age 42 asked, but forehead lines stay and he reads about 48; otherwise clean. No grey at the temples."
+  },
+  {
+   "id": "c4-s1",
+   "label": "c4-s1",
+   "image": "art/candidates/portraits/cfo-1/c4-r261017-120324-295-1-s1-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c4-r261017-120324-295-1-s1.webp"
+   ],
+   "note": "c4, expression only: 'self-assured, a confident smirk with his chin slightly raised' in place of 'calm, warm expression with a slight smile' (preset cfo-green v2). Parent c2. Recipe art/candidates/portraits/cfo-1/recipes/c4.json, seed 1, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.3%. Framing: headroom 2%, 10% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.093 (a different man, so a fail there is expected). Dashboard #2620. My verdict, kept: smirk: narrowed eyes, smug closed-mouth smile; reads self-assured. No grey at the temples."
+  },
+  {
+   "id": "c4-s2",
+   "label": "c4-s2",
+   "image": "art/candidates/portraits/cfo-1/c4-r261017-120324-295-2-s2-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c4-r261017-120324-295-2-s2.webp"
+   ],
+   "note": "c4, expression only: 'self-assured, a confident smirk with his chin slightly raised' in place of 'calm, warm expression with a slight smile' (preset cfo-green v2). Parent c2. Recipe art/candidates/portraits/cfo-1/recipes/c4.json, seed 2, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.6%. Framing: headroom 1%, 10% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.097 (a different man, so a fail there is expected). Dashboard #2621. My verdict, kept: smirk on h4-s2's seed: heavy-lidded, chin up, the most finance-bro of the set. No grey at the temples."
+  },
+  {
+   "id": "c4-s3",
+   "label": "c4-s3",
+   "image": "art/candidates/portraits/cfo-1/c4-r261017-120324-295-3-s3-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c4-r261017-120324-295-3-s3.webp"
+   ],
+   "note": "c4, expression only: 'self-assured, a confident smirk with his chin slightly raised' in place of 'calm, warm expression with a slight smile' (preset cfo-green v2). Parent c2. Recipe art/candidates/portraits/cfo-1/recipes/c4.json, seed 3, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.3%. Framing: headroom 2%, 9% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.095 (a different man, so a fail there is expected). Dashboard #2622. My verdict, kept: smirk with one brow raised, head tilted; cocky. No grey at the temples."
+  },
+  {
+   "id": "c4-s4",
+   "label": "c4-s4",
+   "image": "art/candidates/portraits/cfo-1/c4-r261017-120324-295-4-s4-framed.webp",
+   "images": [
+    "art/candidates/portraits/cfo-1/c4-r261017-120324-295-4-s4.webp"
+   ],
+   "note": "c4, expression only: 'self-assured, a confident smirk with his chin slightly raised' in place of 'calm, warm expression with a slight smile' (preset cfo-green v2). Parent c2. Recipe art/candidates/portraits/cfo-1/recipes/c4.json, seed 4, RDBT (Euler A, 30 steps, CFG 5, 896x1152), portrait style, no-props, brown hair excluded. Red rim 0.3%. Framing: headroom 3%, 9% missing above the game crop (the framed preview fills it flat; a pick gets a real outpaint). Face drift from Hamada's game portrait ccip 0.097 (a different man, so a fail there is expected). Dashboard #2623. My verdict, kept: toothy smirk; tips toward villain more than executive. No grey at the temples."
+  }
+ ]
+}

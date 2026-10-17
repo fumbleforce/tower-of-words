@@ -1,0 +1,50 @@
+{
+ "c1": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Executive, a 54-year-old middle-aged Japanese man, mature male, glossy black hair slicked straight back from the forehead with no parting, smooth and flat against the head, going grey at the temples, and a handsome, lean face with expressive dark eyes, thin, wearing a slim-fitted double-breasted burgundy suit, a crisp white shirt and a dark silk tie, calm, warm expression with a slight smile, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), brown hair, light brown hair, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "count": 4,
+  "seed": 1
+ },
+ "c2": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Executive, a 54-year-old middle-aged Japanese man, mature male, glossy black hair slicked straight back from the forehead with no parting, smooth and flat against the head, going grey at the temples, and a handsome, lean face with expressive dark eyes, thin, wearing a slim-fitted bottle green three-piece suit with a waistcoat and a crisp white shirt open at the collar, calm, warm expression with a slight smile, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), brown hair, light brown hair, necktie, tie, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "count": 4,
+  "seed": 1
+ },
+ "c3": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Executive, a 42-year-old Japanese man, mature male, glossy black hair slicked straight back from the forehead with no parting, smooth and flat against the head, going grey at the temples, and a handsome, lean face with expressive dark eyes, thin, wearing a slim-fitted bottle green three-piece suit with a waistcoat and a crisp white shirt open at the collar, calm, warm expression with a slight smile, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), brown hair, light brown hair, necktie, tie, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "count": 4,
+  "seed": 1
+ },
+ "c4": {
+  "positive": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Executive, a 54-year-old middle-aged Japanese man, mature male, glossy black hair slicked straight back from the forehead with no parting, smooth and flat against the head, going grey at the temples, and a handsome, lean face with expressive dark eyes, thin, wearing a slim-fitted bottle green three-piece suit with a waistcoat and a crisp white shirt open at the collar, self-assured, a confident smirk with his chin slightly raised, standing upright with relaxed shoulders, arms relaxed at his sides, looking at the viewer, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws, nipples, areolae, genitals, pussy, penis, sex, explicit, fat, obese, plump, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, jpeg artifacts, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), brown hair, light brown hair, necktie, tie, undercut, shaved sides, side shave, buzzed sides, sidecut",
+  "model_file": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral",
+  "w": 896,
+  "h": 1152,
+  "count": 4,
+  "seed": 1
+ }
+}
