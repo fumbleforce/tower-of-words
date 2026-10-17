@@ -73,9 +73,11 @@ Some layouts never come from words (an aisle toward a front window, desk islands
 
 ### Portraits, expressions and cutouts
 
-- The `portrait` style sets RDBT, the framing, `heavy`, `no-props`, the red-rim negative and headroom. Pick the character with its default outfit; the expression is the scene text. Base portraits never hold props ("props are only for specific states and actions"); only a state or action portrait leaves `no-props` off. No lanyards or ID badges in any portrait, because "they distort in every picture".
+- The `portrait` style sets RDBT, the framing, `heavy`, `no-props`, the red-rim negative and headroom. Pick the character with its default outfit; the expression is the scene text. Base portraits never hold props ("props are only for specific states and actions"); only a state or action portrait leaves `no-props` off. No lanyards or ID badges (they distort).
 - Headroom fix: outpaint, the padded picture as `start` and the new strip as `mask`.
 - Expressions repaint only the face of the approved source (`start` with a face `mask`).
+- No cut and paste ("horror show", "3 hands"): never repaint a body under a kept head, or a room around a kept figure. A new outfit, room or framing is a new generation. Masks touch only small details.
+- No swimwear portraits or poolside pictures until he asks again (changing rooms are a separate request).
 - Red rim: tools/redrim.py (clean is under 2%). Cutouts: rembg ISNet anime; check hair and glasses for holes.
 
 ### Eric (mc) portrait
