@@ -21,6 +21,7 @@ import { hash2 } from '../outdoor/parts.js';
 import * as Q from './plan.js';
 import { QUARTER_LAMPS } from './fittings.js';
 
+const LEAF_GREEN = '#5f7f45';
 const SOIL = '#5a4a3c',
   EDGING = '#8a7560',
   CROPS = ['#5f7f45', '#6f8f4f', '#4f6f3f', '#7f9a55'];
@@ -174,6 +175,13 @@ function* orchard(p, far) {
       p.geo('#9a846c', new THREE.BoxGeometry(0.03, 0.03, 0.34).translate(lx - 0.22 + i * 0.1, 0.18 + i * 0.32, lz), {
         cast: false,
       });
+  }
+  // a row of young trees on stakes along the orchard's far side, planted to fill it out (seen from the courts walk too)
+  for (const x of [82.2, 85.6, 89.6, 94.0, 97.6, 100.9]) {
+    const z = Q.ORCHARD[2] + 0.7;
+    p.box('#b9a77e', 0.035, 1.15, 0.035, x + 0.12, 0, z, { cast: false });
+    p.geo('#6a5a4c', new THREE.CylinderGeometry(0.025, 0.04, 0.85, 5).translate(x, 0.42, z), { surf: 'bark' });
+    mound(p, x, z, 0.3, x % 2 < 1 ? LEAF_GREEN : '#6f8f4f', { y: 0.62, squash: 1.0 });
   }
   // long grass under the trees
   if (!far)

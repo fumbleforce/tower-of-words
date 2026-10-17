@@ -236,7 +236,7 @@ export const PLAZA = [125.6, BEACH_PROM[0], -11.7, -7.8]; // where the promenade
 export const FITNESS = [126.9, BEACH_PROM[0], 1.8, 6.6]; // bars, a sit-up bench, push-up bars, off the promenade by S-E's garden
 // benches on the seaward edge facing the sea, z of each; the lamps on the land side
 export const SEA_BENCHES = [-31.6, -25.4, -15.4, -4.6, -0.6, 7.2];
-export const PROM_LAMPS = [-33.5, -25.4 + 2.6, -16.8, -6.4, 1.2, 9.5];
+export const PROM_LAMPS = [-33.5, -25.4 + 2.6, -16.8, -6.4, 1.2]; // the sea terrace has its own at the far end
 // where the walks open the planted edge
 export const EDGE_GAPS = [
   [NORTH[2], NORTH[3]],
