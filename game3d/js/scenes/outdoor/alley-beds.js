@@ -42,11 +42,11 @@ export function* alleyBeds(p, R, at) {
       cut = Math.abs(lx1 - x0) < 0.01;
     const spans = cut
       ? [
-          [z0 + 0.1, lz0 - K - 0.03],
-          [lz1 + K + 0.03, z1 - 0.1],
+          [z0 + 0.1, lz0 - K - 0.005],
+          [lz1 + K + 0.005, z1 - 0.1],
         ]
       : [[z0 + 0.1, z1 - 0.1]];
-    for (const [a, b] of spans) bed(p, [x0 - gap + 0.05, x0 - 0.05, a, b], { y: 0.08 });
+    for (const [a, b] of spans) bed(p, [x0 - gap + 0.05, x0 - 0.05, a, b], { y: 0.08, inset: cut ? 0.05 : null });
     bed(p, [x1 + 0.05, x1 + gap - 0.05, z0 + 0.1, z1 - 0.1], { y: 0.08 });
     kerb(p, [x0, z0], [x0, z1], { w: K, gaps: cut ? [[lz0 - K, lz1 + K]] : [] });
     kerb(p, [x1, z0], [x1, z1], { w: K });

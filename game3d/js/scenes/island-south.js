@@ -181,7 +181,7 @@ export const SOUTH_TREES = [
   ...[15, 19, 23].map((z) => ['keyaki', LINKS.west[0] - 1.4, z, 1.0]),
 ];
 // (the middle alley's west bed is cut for the clothes shop's side door: its landing, SIDE_DOOR below, keeps clear of
-// shrubs, with one smaller clump between it and the promenade instead)
+// shrubs, with a smaller clump either side of it instead)
 export const SOUTH_SHRUBS = ALLEYS.flatMap(([x0, z0, x1]) =>
   [z0 + 0.9, z0 + 2.3, z0 + 3.7].flatMap((z) => [
     [x0 - 0.65, z],
@@ -189,7 +189,11 @@ export const SOUTH_SHRUBS = ALLEYS.flatMap(([x0, z0, x1]) =>
   ]),
 )
   .filter(([x, z]) => !(Math.abs(x - SIDE_X - 0.6) < 0.7 && z > SIDE_LANDING[0] - 0.45 && z < SIDE_LANDING[1] + 0.45))
-  .concat([[SIDE_X + 0.6, (SIDE_LANDING[1] + ROWS_Z.back) / 2 + 0.05, 0.85]]);
+  .concat([
+    [SIDE_X + 0.38, (SIDE_LANDING[1] + ROWS_Z.back) / 2 + 0.05, 0.8],
+    [SIDE_X + 0.88, (SIDE_LANDING[1] + ROWS_Z.back) / 2 + 0.05, 0.75],
+    [SIDE_X + 0.55, SIDE_LANDING[0] - 0.55, 0.7],
+  ]);
 
 // On the beach, [x, z] each: beach umbrellas in pairs between the flights and one by the huts, and three beach huts
 // against the wall's west return (their doors face the sea)

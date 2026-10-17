@@ -314,13 +314,18 @@ export function grass(p, x, z, { h = 0.45, color = '#6d7a58', seed = 1 } = {}) {
 
 // ---------- beds ----------
 // the ground of a planted rectangle: soil or mulch, and ground cover (low evergreen planting) over most of it
-export function bed(p, [x0, x1, z0, z1], { y = 0.1, cover = true, soil = LEAF.mulch, coverTone = LEAF.cover } = {}) {
+// inset: the cover's margin inside the soil (a bed cut short by a kerb across it takes a narrower one)
+export function bed(
+  p,
+  [x0, x1, z0, z1],
+  { y = 0.1, cover = true, soil = LEAF.mulch, coverTone = LEAF.cover, inset = null } = {},
+) {
   p.box(soil, x1 - x0, 0.04, z1 - z0, (x0 + x1) / 2, y - 0.04, (z0 + z1) / 2, { cast: false, surf: 'soil' });
   if (cover) {
     // a bed flush with the lawn (outdoor/walk-edges.js BED_FLUSH) has a thin cover and no dark rim of soil, which both
     // read as a step or a gap in the lawn
     const flush = y < 0.02,
-      i = flush ? 0.03 : 0.12,
+      i = inset ?? (flush ? 0.03 : 0.12),
       h = flush ? 0.03 : 0.09;
     p.geo(
       coverTone,

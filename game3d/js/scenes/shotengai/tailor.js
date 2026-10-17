@@ -35,7 +35,7 @@ const C = {
 };
 // how much of its own colour the room gives back as light (day, night): its fitting is on whenever the door is open
 const ROOM = [0.24, 0.42],
-  SPILL = [0.04, 0.22]; // and what the doorway's light gives the leaf and the delivery outside it
+  SPILL = [0.14, 0.24]; // and what the doorway's light gives the leaf and the delivery outside it
 
 // The room's light: each surface's own colour added back, warmed (as station-model.js's bounce), so the lit room
 // reads from the alley when the sun's shadow and the dusk would leave it dark
@@ -87,8 +87,8 @@ function lining(p, signs) {
   box('#5c6f80', wx - 0.56, wx + 0.56, 1.25, 1.88, RZ1 - t - 0.035, RZ1 - t - 0.01, { cast: false });
   box('#b3b7b8', wx - 0.66, wx + 0.66, 1.17, 1.21, RZ1 - t - 0.1, RZ1 - t, { surf: 'stone' });
   // a fitting mirror on the back wall by the door, in a pale frame
-  box('#c9c4b8', 23.08, 23.62, 0.12, 1.5, RZ1 - t - 0.025, RZ1 - t, { surf: 'timber' });
-  box('#9fb4c0', 23.12, 23.58, 0.16, 1.46, RZ1 - t - 0.03, RZ1 - t - 0.02, { cast: false });
+  box('#c9c4b8', 23.4, 23.8, 0.12, 1.5, RZ1 - t - 0.025, RZ1 - t, { surf: 'timber' });
+  box('#9fb4c0', 23.44, 23.76, 0.16, 1.46, RZ1 - t - 0.03, RZ1 - t - 0.02, { cast: false });
   // the far wall: a pegboard of tools over the cutting table, a clock over the shelves
   const fx = RX0 + t;
   box(C.board, fx, fx + 0.015, 0.9, 1.45, 24.5, 25.4, { surf: 'timber' });
@@ -101,21 +101,13 @@ function lining(p, signs) {
   ])
     box(c, fx + 0.015, fx + 0.03, y, y + h, z - 0.03, z + 0.03, { cast: false });
   signs.drawn(clock, 0.2, 0.2, [fx + 0.012, 1.64, 25.95], EAST); // over the shelves, straight through the door
-  // the order slips pinned by the north rail, a ticket on each
-  box(C.board, RX0 + 0.4, RX0 + 1.1, 1.05, 1.45, RZ0 + t, RZ0 + t + 0.015, { surf: 'timber' });
-  for (let i = 0; i < 5; i++)
-    box(
-      '#f1efe8',
-      RX0 + 0.47 + i * 0.13,
-      RX0 + 0.57 + i * 0.13,
-      1.17 + (i % 2) * 0.1,
-      1.31 + (i % 2) * 0.1,
-      RZ0 + t + 0.015,
-      RZ0 + t + 0.02,
-      {
-        cast: false,
-      },
-    );
+  // the order slips pinned on a board on the back wall, west of the window, a ticket on each
+  box(C.board, 21.25, 21.95, 1.0, 1.4, RZ1 - t - 0.015, RZ1 - t, { surf: 'timber' });
+  for (let i = 0; i < 5; i++) {
+    const x = 21.32 + i * 0.13,
+      y = 1.12 + (i % 2) * 0.1;
+    box('#f1efe8', x, x + 0.1, y, y + 0.14, RZ1 - t - 0.02, RZ1 - t - 0.015, { cast: false });
+  }
 }
 
 function clock(ctx, W, H) {
@@ -148,8 +140,8 @@ function clock(ctx, W, H) {
 // the room's furniture (kit pieces), placed to be seen through the doorway: the far wall straight ahead, the dress
 // form just inside on the left, the table across the middle
 function furnish(p) {
-  workTable(p, { at: [22.25, 25.05], face: EAST, variant: 'cutting' });
-  dressForm(p, { at: [23.05, 25.72], face: EAST, variant: 'pinned' });
+  workTable(p, { at: [22.3, 25.22], face: EAST, variant: 'cutting' });
+  dressForm(p, { at: [23.2, 25.95], face: EAST, variant: 'pinned' });
   garmentRail(p, { at: [RX0 + 0.24, 24.75], face: EAST, variant: 'covered' });
   fabricShelf(p, { at: [RX0 + 0.16, 25.95], face: EAST, variant: 'bolts' });
   garmentRail(p, { at: [22.2, RZ0 + 0.26], face: 0, variant: 'garments' });
@@ -167,6 +159,8 @@ export function tailorSteps(group, signs) {
   const frame = new Parts();
   doorway(frame, { at, face: EAST, variant: 'service', hole: true, part: 'frame' });
   const fixed = buildKit(frame, group, { poolY: 0.03 });
+  // its lantern is off by day (the rig turns it up after work from this)
+  for (const m of fixed.meshes) if (m.name === 'kit:lamps') m.material.emissiveIntensity = 0.04;
   // the plate on the wall beside the door, under the lantern (clear of the leaf when it stands open)
   signs.board('ようふく', 'DELIVERIES', '#7a4f56', 0.44, 0.22, [WALL + 0.012, 1.08, D.z - D.w / 2 - 0.38], EAST);
 
@@ -188,7 +182,7 @@ export function tailorSteps(group, signs) {
   // over them; the hand truck parked past the leaf)
   delivery(load, { at: [WALL + 0.62, D.z + 0.06], face: EAST, variant: 'stack' });
   delivery(load, { at: [WALL + 0.42, D.z - 0.36], face: EAST, variant: 'roll' });
-  delivery(load, { at: [WALL + 0.78, D.z + 0.55], face: Math.PI * 0.75, variant: 'trolley' }); // its wheels to the alley
+  delivery(load, { at: [WALL + 0.86, D.z + 0.36], face: Math.PI * 0.75, variant: 'trolley' }); // its wheels to the alley
   // (what stands in the doorway's light: the open leaf and the delivery take a share of the room's light at night)
   const uSpill = { value: SPILL[0] };
   load.build(open);
@@ -196,7 +190,7 @@ export function tailorSteps(group, signs) {
     (m) => m.isMesh && m.material.vertexColors && !m.material.transparent && (m.material = roomLit(m.material, uSpill)),
   );
   // (one pool on the landing, one on the step's top, which would hide the first where it starts)
-  const spill = pools([[WALL + 0.8, D.z, 1]], 1.0, { k: 0.12, color: '#ffe2b8' }),
+  const spill = pools([[WALL + 0.8, D.z, 1]], 1.2, { k: 0.12, color: '#ffe2b8' }),
     sill = pools([[WALL + 0.17, D.z, 1]], 0.45, { k: 0.2, color: '#ffe2b8', y: 0.085 });
   spill.name = 'tailor:spill';
   sill.name = 'tailor:spill';

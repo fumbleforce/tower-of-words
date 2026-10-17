@@ -139,7 +139,7 @@ export const dressForm = piece({
     k.bar(o.jacket, [0.11, hip + 0.46, 0], [0.15, hip + 0.16, 0.02], 0.042, { n: 8, surf: 'fabric' });
     if (!k.phone)
       for (let y = 0.12; y < 0.42; y += 0.06)
-        k.box('#e9e4d8', 0.012, 0.012, 0.012, -0.124, hip + y, 0, { cast: false });
+        k.box(y % 0.12 < 0.06 ? '#d8524a' : '#f4f2ec', 0.014, 0.014, 0.014, -0.128, hip + y, 0.01, { cast: false });
     // the tape measure round its neck, the ends hanging down the front
     k.geo(
       TAPE,
@@ -148,7 +148,11 @@ export const dressForm = piece({
         cast: false,
       },
     );
-    for (const s of [-1, 1]) k.box(TAPE, 0.022, 0.2, 0.004, s * 0.035, hip + 0.34, 0.088, { worn: false, cast: false });
+    for (const [s, l] of [
+      [-1, 0.24],
+      [1, 0.15],
+    ])
+      k.box(TAPE, 0.014, l, 0.004, s * 0.03, hip + 0.52 - l, 0.09, { worn: false, cast: false });
   },
   footprint: () => [[-0.18, 0.18, -0.18, 0.18]],
 });

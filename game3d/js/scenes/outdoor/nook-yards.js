@@ -74,7 +74,7 @@ export function alley(T, { back = 0.9, len = 3.6, seed = 8, layout = null }) {
   for (const [u, n] of crates.map((u, i) => [u, 3 - (i % 2)])) {
     const v = back - 0.19;
     for (let k = 0; k < n; k++) {
-      const c = r() < 0.5 ? '#d9b43a' : RED,
+      const c = r() < 0.5 ? '#b99a45' : '#9c4f47', // (muted: weathered plastic)
         y = k * 0.28;
       T.box(c, 0.42, 0.04, 0.34, u, y, v);
       for (const s of [-1, 1]) {

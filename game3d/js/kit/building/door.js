@@ -71,6 +71,7 @@ export const doorway = piece({
       lamp: 'wall',
       step: 0.08,
       stepD: 0.32,
+      lift: 0.1, // the hood a little lower, clear of a shop's floor band
     },
   },
   vary: { tone: 0.03, wear: [0, 0.3] },
@@ -131,11 +132,12 @@ function swung(k, o, build) {
   if (!o.open || o.leaves !== 1) return build();
   const side = o.hinge ?? -1,
     u = (side * o.w) / 2,
+    // (lifted by the step's height, so its foot clears the step it swings over)
     turn = (g) =>
       g
         .translate(-u, 0, -0.035)
         .rotateY(side * o.open)
-        .translate(u, 0, 0.035);
+        .translate(u, o.step || 0, 0.035);
   const { geo, glass } = k;
   k.geo = (color, g, opts) => geo(color, turn(g), opts);
   k.glass = (g) => glass(turn(g));
@@ -167,8 +169,9 @@ function leavesOf(k, o, frame) {
         // a vision panel, at the same share of the leaf's height on a low door
         const vy = h * 0.707,
           vh = Math.min(0.5, h * 0.244);
-        k.glass(new THREE.BoxGeometry(0.22, vh, 0.02).translate(u, vy, 0.06));
-        k.box(TRIM.frame, 0.28, vh + 0.06, 0.02, u, vy - vh / 2 - 0.03, 0.055);
+        // (through the leaf, framed on both faces)
+        k.glass(new THREE.BoxGeometry(0.22, vh, 0.07).translate(u, vy, 0.035));
+        for (const v of [0.055, 0.012]) k.box(TRIM.frame, 0.28, vh + 0.06, 0.02, u, vy - vh / 2 - 0.03, v);
       } else if (!k.phone) {
         // two raised panels
         for (const [y0, hh] of [
@@ -189,7 +192,7 @@ function canopy(k, o, h, w, r) {
     c1 = w / 2 + o.side,
     cw = c1 - c0,
     out = o.out,
-    y = h + 0.2;
+    y = h + (o.lift ?? 0.2);
   if (o.canopy === 'deep') {
     // (the slab stops a centimetre inside its dark front and ends: in their planes it flickered)
     k.box(TRIM.canopy, cw - 0.02, 0.07, out - 0.01, 0, y, (out - 0.01) / 2, { surf: 'metal' });
@@ -219,7 +222,18 @@ function canopy(k, o, h, w, r) {
     const under = (v) => y + 0.14 - 0.025 / Math.cos(pitch) - (v - out / 2) * Math.tan(pitch);
     // its ledger on the wall, up against the roof, and the porch's beam stop a centimetre in from the roof's ends
     // (level with them they flickered)
-    k.box(TIMBER.pale, cw - 0.02, 0.06, 0.06, 0, under(0.06) - 0.063, 0.03, { round: 0.01 });
+    k.box(
+      o.leaf === TIMBER.dark || o.canopy === 'porch' ? TIMBER.pale : col,
+      cw - 0.02,
+      0.06,
+      0.06,
+      0,
+      under(0.06) - 0.063,
+      0.03,
+      {
+        round: 0.01,
+      },
+    );
     if (o.canopy === 'porch') {
       for (const s of [-1, 1]) k.box(TIMBER.mid, 0.12, y, 0.12, s * (cw / 2 - 0.08), 0, out - 0.08, { round: 0.01 });
       k.box(TIMBER.mid, cw - 0.02, 0.1, 0.1, 0, y - 0.06, out - 0.08, { round: 0.01 });

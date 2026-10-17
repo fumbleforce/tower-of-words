@@ -97,7 +97,7 @@ export const NOOKS = [
     kit: 'alley',
     at: [(MID[0] + MID[1]) / 2, MID[3] - 0.75],
     face: Math.PI,
-    back: MID[3] - MID[2] - 0.8,
+    back: MID[3] - MID[2] - 0.95, // (its crates clear of the bed's kerb)
     len: MID[1] - MID[0] - 0.4,
     // (u runs toward the promenade from the alley's middle) the outdoor unit and the crates toward the arcade, the
     // bucket and the pot past the clothes shop's side door, its landing kept clear; no bike
