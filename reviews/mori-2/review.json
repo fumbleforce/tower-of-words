@@ -2,7 +2,7 @@
  "title": "Mori as a mild, gentle older man, round 2",
  "date": "2026-10-16",
  "by": "claude-main/art-round",
- "status": "open",
+ "status": "decided",
  "question": "Which of these, if any, should become Mori's new base portrait?",
  "multi": true,
  "media": [
@@ -132,5 +132,11 @@
    ],
    "note": "Mori, pass 3, cardigan: as pass 2 in the cardigan outfit (mori-cardigan). Recipe art/candidates/portraits/mori-2/recipes/m3.json, seed 4, RDBT, portrait style, no-props. Red rim 0.0%. Framing: 11% missing above the game crop; the framed preview fills it flat, a pick gets a real outpaint. Dashboard #2420. My verdict, kept: slim, mild smile, reads mid-50s. Flaw: grey top over near-black sides, like a shaved undercut."
   }
- ]
+ ],
+ "decided": [
+  "m3-s2"
+ ],
+ "decision": "m3-s2",
+ "decided_at": "2026-10-17T10:57:09+0200",
+ "issue": 679
 }
