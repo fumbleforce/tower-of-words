@@ -122,6 +122,9 @@ export function signSet() {
         const px = it.kind === 'card' ? PX * 3 : it.kind === 'drawn' ? PX * 2 : PX; // the small cards at a finer grain, so they read up close
         it.W = Math.min(ATLAS_W, Math.round(it.w * px));
         it.H = Math.round(it.h * px);
+      }
+      // (tallest first, so each shelf holds signs of about its own height and the atlas stays short)
+      for (const it of [...items].sort((a, b) => b.H - a.H)) {
         if (x + it.W > ATLAS_W) [x, y, rowH] = [0, y + rowH + 2, 0];
         [it.x, it.y] = [x, y];
         x += it.W + 2;
