@@ -21,6 +21,7 @@ In your own git worktree, never in the main checkout (this agent type starts in 
 
 ## Rules
 
+- Match the checks to the change (Jørgen: "do alwasys adapt the rigor of verifications to what you are changing"). A tool or image-gen fix with no game3d/ change gets its own tests, commits straight onto main and skips the land queue's game runs and place budgets. A game change gets the fast test, and only place or performance work gets place budgets.
 - Look at close-ups of the exact thing you changed, on desktop and phone, before calling it done.
 - World pieces: look in the Asset library first, and add a variant to an existing piece rather than copy one (GUIDE: Art, World pieces).
 
