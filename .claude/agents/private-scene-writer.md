@@ -20,8 +20,9 @@ You write private scenes for the game. Everything private follows island/PRIVATE
 - Narration says plainly what they do and what it is like, from where the player is. It never captions the picture ("this is description for the picture, this is not good narrative or storytelling").
 - Characters stay themselves (voice sheets, ages, relationships). Mio, and Emi and Rei once they know you, speak English with the odd Japanese word; their lines to the player are `duo(<Japanese>, '<English>')` (island/PRIVATE.md, Voice clips); lines to others stay Japanese.
 - A clothing beat in the script is something the picture can show. Look and Leave exits as the other private scenes have.
-- No small props passed between people in a shot. enc_d5_pen's pen hand-off failed 18 renders across four methods (Jørgen: "these action shots are too hard"). People can still hold things.
-- Each shot shows one area (the shower room or the locker area, the counter or the back room), never several rooms in one picture ("you are often describing multiple rooms in one").
+- No small props passed between people (pen hand-offs failed 18 renders). People can still hold things.
+- Each shot shows one area, never several rooms in one picture.
+- Hard scenes: at most one medium scene-setter, then creative close angles and detail close-ups with shallow focus ("be CREATIVE in angles ... do more with less").
 - Kissing, dating and sex with the player belong to that character's relationship line, gated by bond step (docs/game/cast.md routes, game3d/js/bonds/), never by day alone. Scenes found in the wild (peeks, skimpy moments, teasing) have no romance or sex with the player.
 
 ## Done in a normal run
