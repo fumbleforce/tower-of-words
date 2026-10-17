@@ -16,7 +16,7 @@
 import * as THREE from 'three';
 import { Parts } from '../outdoor/parts.js';
 import { doorway, delivery, garmentRail, dressForm, workTable, fabricShelf, buildKit } from '../../kit/index.js';
-import { pools } from '../../kit/core/pool.js';
+import { pools, lightPool } from '../../kit/core/pool.js';
 import { STEEL } from '../../kit/core/palette.js';
 import { SIDE_DOOR as D } from '../island-south.js';
 
@@ -34,7 +34,8 @@ const C = {
   board: '#c9b48f',
 };
 // how much of its own colour the room gives back as light (day, night): its fitting is on whenever the door is open
-const ROOM = [0.24, 0.42];
+const ROOM = [0.24, 0.42],
+  SPILL = [0.04, 0.22]; // and what the doorway's light gives the leaf and the delivery outside it
 
 // The room's light: each surface's own colour added back, warmed (as station-model.js's bounce), so the lit room
 // reads from the alley when the sun's shadow and the dusk would leave it dark
@@ -85,6 +86,9 @@ function lining(p, signs) {
   box('#46545e', wx - 0.62, wx + 0.62, 1.2, 1.93, RZ1 - t - 0.03, RZ1 - t, { surf: 'metal' });
   box('#5c6f80', wx - 0.56, wx + 0.56, 1.25, 1.88, RZ1 - t - 0.035, RZ1 - t - 0.01, { cast: false });
   box('#b3b7b8', wx - 0.66, wx + 0.66, 1.17, 1.21, RZ1 - t - 0.1, RZ1 - t, { surf: 'stone' });
+  // a fitting mirror on the back wall by the door, in a pale frame
+  box('#c9c4b8', 23.08, 23.62, 0.12, 1.5, RZ1 - t - 0.025, RZ1 - t, { surf: 'timber' });
+  box('#9fb4c0', 23.12, 23.58, 0.16, 1.46, RZ1 - t - 0.03, RZ1 - t - 0.02, { cast: false });
   // the far wall: a pegboard of tools over the cutting table, a clock over the shelves
   const fx = RX0 + t;
   box(C.board, fx, fx + 0.015, 0.9, 1.45, 24.5, 25.4, { surf: 'timber' });
@@ -184,13 +188,25 @@ export function tailorSteps(group, signs) {
   // over them; the hand truck parked past the leaf)
   delivery(load, { at: [WALL + 0.62, D.z + 0.06], face: EAST, variant: 'stack' });
   delivery(load, { at: [WALL + 0.42, D.z - 0.36], face: EAST, variant: 'roll' });
-  delivery(load, { at: [WALL + 0.78, D.z + 0.53], face: EAST, variant: 'trolley' });
+  delivery(load, { at: [WALL + 0.78, D.z + 0.55], face: Math.PI * 0.75, variant: 'trolley' }); // its wheels to the alley
+  // (what stands in the doorway's light: the open leaf and the delivery take a share of the room's light at night)
+  const uSpill = { value: SPILL[0] };
   load.build(open);
+  open.traverse(
+    (m) => m.isMesh && m.material.vertexColors && !m.material.transparent && (m.material = roomLit(m.material, uSpill)),
+  );
   // (one pool on the landing, one on the step's top, which would hide the first where it starts)
   const spill = pools([[WALL + 0.8, D.z, 1]], 1.0, { k: 0.12, color: '#ffe2b8' }),
     sill = pools([[WALL + 0.17, D.z, 1]], 0.45, { k: 0.2, color: '#ffe2b8', y: 0.085 });
   spill.name = 'tailor:spill';
   sill.name = 'tailor:spill';
+  // the lantern's light washing the wall round it after work
+  const wash = lightPool(WALL + 0.012, D.z - D.w / 2 - 0.38, 0.85, { k: 0.3, color: '#ffd9a0', y: 0 });
+  wash.rotation.set(0, EAST, 0);
+  wash.position.set(WALL + 0.012, D.h + 0.05, D.z - D.w / 2 - 0.38);
+  wash.name = 'tailor:wash';
+  wash.visible = false;
+  group.add(wash);
   open.add(spill, sill);
   open.traverse((m) => m.isMesh && (m.name ||= 'tailor:open'));
   shut.traverse((m) => m.isMesh && (m.name ||= 'tailor:shut'));
@@ -230,6 +246,8 @@ export function tailorSteps(group, signs) {
         uRoom.value = ROOM[n ? 1 : 0];
         spill.userData.set(n ? 0.42 : 0.12);
         sill.userData.set(n ? 0.5 : 0.2);
+        uSpill.value = SPILL[n ? 1 : 0];
+        wash.visible = n;
       },
     },
   ];

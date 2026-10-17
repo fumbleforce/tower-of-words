@@ -9,7 +9,8 @@ import { bed, cluster } from './planting.js';
 import * as S from '../island-south.js';
 
 const { ALLEYS, LINKS, BAYS, SIDE_DOOR } = S;
-const K = 0.14; // the alleys' kerbs
+const K = 0.14, // the alleys' kerbs
+  STEP = 0.36; // the side door's step, out from the wall (kit/building/door.js, service)
 
 export function alleyWalks(pv, course, R, BW) {
   for (const w of [LINKS.west, LINKS.east, ...ALLEYS]) {
@@ -26,7 +27,8 @@ export function alleyWalks(pv, course, R, BW) {
     tones: GRANITE.pale,
     origin: [lx0, lz0],
   });
-  for (const z of [lz0, lz1 - BW]) course([lx0 + 0.03, lx1, z, z + BW], [0.15, BW], GRANITE.edge);
+  // (the borders start past the door's step, which stands on the slabs)
+  for (const z of [lz0, lz1 - BW]) course([lx0 + STEP, lx1, z, z + BW], [0.15, BW], GRANITE.edge);
 }
 
 // the beds between each alley's walk and the next building, kerbed on the walk's side; the middle alley's west bed in
